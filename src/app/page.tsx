@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LiveSignalFeed from "@/components/LiveSignalFeed";
 
 export default function HomePage() {
   return (
@@ -47,77 +48,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: Live Signal Feed */}
-            <div className="bg-gray-950 rounded-2xl overflow-hidden shadow-2xl">
-              {/* Terminal bar */}
-              <div className="flex items-center gap-2 px-5 py-3 border-b border-white/10">
-                <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <div className="w-3 h-3 rounded-full bg-green-500/60" />
-                <span className="ml-3 text-xs text-gray-500 font-mono">upstate-multiplier · live</span>
-                <div className="ml-auto flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs text-green-500 font-mono">SYNC ACTIVE</span>
-                </div>
-              </div>
-
-              {/* Feed rows */}
-              <div className="divide-y divide-white/5">
-                {[
-                  {
-                    time: "08:14",
-                    type: "PROPERTY TRANSFER",
-                    address: "7842 Augusta Rd, Greenville",
-                    detail: "4,200 sqft commercial · New owner · No service contract on file",
-                    tag: "HOT",
-                    tagColor: "text-green-400 bg-green-400/10",
-                  },
-                  {
-                    time: "08:09",
-                    type: "NEW BUSINESS FILING",
-                    address: "Greenville Logistics LLC",
-                    detail: "Industrial warehouse operator · HVAC & electrical contracts likely",
-                    tag: "HOT",
-                    tagColor: "text-green-400 bg-green-400/10",
-                  },
-                  {
-                    time: "07:51",
-                    type: "INDUSTRIAL PERMIT",
-                    address: "1204 Laurens Rd, Simpsonville",
-                    detail: "Phase 2 renovation permit · $280K project scope",
-                    tag: "WARM",
-                    tagColor: "text-yellow-400 bg-yellow-400/10",
-                  },
-                  {
-                    time: "07:33",
-                    type: "PROPERTY TRANSFER",
-                    address: "3310 Wade Hampton Blvd",
-                    detail: "Strip mall acquisition · 6 units · New management company",
-                    tag: "WARM",
-                    tagColor: "text-yellow-400 bg-yellow-400/10",
-                  },
-                ].map((row, i) => (
-                  <div key={i} className="px-5 py-4">
-                    <div className="flex items-start justify-between gap-3 mb-1">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-xs font-semibold text-green-500 font-mono tracking-wide">{row.type}</span>
-                      </div>
-                      <div className="flex items-center gap-2 flex-shrink-0">
-                        <span className={`text-xs font-bold px-2 py-0.5 rounded font-mono ${row.tagColor}`}>{row.tag}</span>
-                        <span className="text-xs text-gray-600 font-mono">{row.time}</span>
-                      </div>
-                    </div>
-                    <div className="text-sm font-semibold text-white ml-3.5 mb-0.5">{row.address}</div>
-                    <div className="text-xs text-gray-500 ml-3.5 leading-relaxed">{row.detail}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="px-5 py-3 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-gray-600 font-mono">23 signals processed today</span>
-                <span className="text-xs text-gray-600 font-mono">Next sync: 6h</span>
-              </div>
-            </div>
+            <LiveSignalFeed />
           </div>
         </div>
       </section>
