@@ -15,6 +15,8 @@ Required env vars:
 
 Optional env vars:
     DISCORD_WEBHOOK_URL     — Discord incoming webhook for "Review Needed" alerts
+    RESEND_API_KEY          — Resend.com API key for email notifications
+    NOTIFICATION_EMAIL      — address to send "Review Needed" emails to
 """
 
 import argparse
@@ -37,7 +39,7 @@ load_dotenv(ROOT / ".env.local")
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 log = logging.getLogger(__name__)
 
-GEMINI_MODEL = "gemini-1.5-pro"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 SYSTEM_PROMPT = """You are a sharp B2B content strategist writing for REBB Advisors,
 a proactive lead-intelligence agency serving Upstate SC service businesses
@@ -93,9 +95,10 @@ def extract_summary(body_md: str, max_chars: int = 280) -> str:
 def generate_with_gemini(topic: str) -> str:
     """Call the Gemini API and return the raw Markdown string."""
     try:
-        import google.generativeai as genai
+        from google import genai
+        from google.genai import types
     except ImportError:
-        log.error("google-generativeai is not installed. Run: pip install google-generativeai")
+        log.error("google-genai is not installed. Run: pip install google-genai")
         sys.exit(1)
 
     api_key = os.getenv("GEMINI_API_KEY")
@@ -103,14 +106,16 @@ def generate_with_gemini(topic: str) -> str:
         log.error("GEMINI_API_KEY not set in .env.local")
         sys.exit(1)
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(
-        model_name=GEMINI_MODEL,
-        system_instruction=SYSTEM_PROMPT,
-    )
+    client = genai.Client(api_key=api_key)
 
     log.info(f"Calling Gemini ({GEMINI_MODEL}) for topic: {topic!r}")
-    response = model.generate_content(topic)
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=topic,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT,
+        ),
+    )
     return response.text
 
 
@@ -129,6 +134,66 @@ def save_draft(supabase_client, title: str, slug: str, body_md: str,
     }
     result = supabase_client.table("blog_posts").insert(row).execute()
     return result.data[0]
+
+
+def send_email_notification(post_id: str, title: str, summary: str,
+                             body_md: str) -> None:
+    """Send a 'Review Needed' email via Resend (https://resend.com)."""
+    api_key = os.getenv("RESEND_API_KEY")
+    to_addr = os.getenv("NOTIFICATION_EMAIL")
+    if not api_key or not to_addr:
+        log.info("RESEND_API_KEY / NOTIFICATION_EMAIL not set — skipping email.")
+        return
+
+    approve_cmd = f"python approve_post.py --id {post_id} --status PUBLISHED"
+    edit_cmd    = f"python approve_post.py --id {post_id} --edit"
+    view_cmd    = f"python approve_post.py --id {post_id} --view"
+
+    # Plain-text preview of the first ~800 chars of body
+    preview = body_md[:800] + ("\n\n[… truncated]" if len(body_md) > 800 else "")
+
+    html = f"""
+<html><body style="font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;color:#0a0a0a">
+  <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#16a34a">
+    REBB Advisors · Market Insights
+  </p>
+  <h2 style="margin:8px 0 4px">{title}</h2>
+  <p style="color:#555;margin:0 0 24px">{summary or "(no summary)"}</p>
+
+  <table style="border-collapse:collapse;width:100%;margin-bottom:24px">
+    <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;white-space:nowrap">Post ID</td>
+        <td style="padding:6px 0;font-family:monospace;font-size:13px">{post_id}</td></tr>
+    <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px">Status</td>
+        <td style="padding:6px 0;font-size:13px">DRAFT</td></tr>
+  </table>
+
+  <p style="font-size:13px;font-weight:600;margin-bottom:6px">Terminal commands (run from scripts/):</p>
+  <pre style="background:#f4f4f5;padding:14px;border-radius:8px;font-size:12px;overflow-x:auto">{view_cmd}
+{edit_cmd}
+{approve_cmd}</pre>
+
+  <details style="margin-top:24px">
+    <summary style="cursor:pointer;font-size:13px;color:#555">Preview article body</summary>
+    <pre style="background:#fafafa;border:1px solid #e5e7eb;padding:14px;border-radius:8px;font-size:12px;white-space:pre-wrap;margin-top:8px">{preview}</pre>
+  </details>
+</body></html>"""
+
+    try:
+        resp = requests.post(
+            "https://api.resend.com/emails",
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json={
+                "from": "REBB Insights <onboarding@resend.dev>",
+                "to": [to_addr],
+                "subject": f"[Review Needed] {title}",
+                "html": html,
+            },
+            timeout=10,
+        )
+        resp.raise_for_status()
+        log.info(f"Email sent to {to_addr}.")
+    except requests.RequestException as exc:
+        log.warning(f"Email notification failed (non-fatal): {exc}")
 
 
 def send_discord_notification(webhook_url: str, post_id: str, title: str,
@@ -224,12 +289,11 @@ def main() -> None:
     print(f"    python approve_post.py --id {post_id} --status PUBLISHED")
     print(f"{separator}\n")
 
-    # 6. Optional Discord notification
+    # 6. Notifications (email + optional Discord — both non-fatal)
+    send_email_notification(post_id, title, summary, body_md)
+
     if args.discord_webhook:
         send_discord_notification(args.discord_webhook, post_id, title, summary)
-    else:
-        log.info("No DISCORD_WEBHOOK_URL set — skipping notification. "
-                 "Pass --discord-webhook or add it to .env.local.")
 
 
 if __name__ == "__main__":

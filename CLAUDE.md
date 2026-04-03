@@ -167,12 +167,16 @@ python generate_insights.py --topic "Why Greenville pool companies lose Q2 contr
 python generate_insights.py --topic "..." --dry-run            # preview only, no DB write
 python generate_insights.py --topic "..." --discord-webhook URL
 
-# Approve / publish / review
+# Review queue
 python approve_post.py --list-drafts                           # list all DRAFT/APPROVED posts
-python approve_post.py --id <uuid> --status APPROVED           # mark reviewed
-python approve_post.py --id <uuid> --status PUBLISHED          # push live
-python approve_post.py --id <uuid> --status DRAFT              # revert
+python approve_post.py --id <uuid> --view                      # print full article to terminal
+python approve_post.py --id <uuid> --edit                      # open in editor, save, optionally publish
+python approve_post.py --id <uuid> --status PUBLISHED          # publish without editing
+python approve_post.py --id <uuid> --status APPROVED           # mark reviewed, not yet live
+python approve_post.py --id <uuid> --status DRAFT              # revert to draft
 ```
+
+**Editor:** defaults to Notepad. Set `EDITOR=code --wait` in `.env.local` to use VS Code instead.
 
 ### blog_posts table columns
 
@@ -219,7 +223,10 @@ python approve_post.py --id <uuid> --status DRAFT              # revert
 | `SUPABASE_URL` | Python scripts only | Same value as above |
 | `SUPABASE_SERVICE_KEY` | Python scripts only | Secret — never commit or expose |
 | `GEMINI_API_KEY` | `generate_insights.py` | Google AI Studio key — secret |
-| `DISCORD_WEBHOOK_URL` | `generate_insights.py` | Optional — "Review Needed" alert |
+| `RESEND_API_KEY` | `generate_insights.py` | Optional — Resend.com key for email alerts |
+| `NOTIFICATION_EMAIL` | `generate_insights.py` | Optional — address to receive "Review Needed" emails |
+| `DISCORD_WEBHOOK_URL` | `generate_insights.py` | Optional — Discord webhook for "Review Needed" alert |
+| `EDITOR` | `approve_post.py` | Optional — editor for `--edit` flag (default: notepad / nano) |
 
 ## Deployment
 
