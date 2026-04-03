@@ -145,6 +145,11 @@ def send_email_notification(post_id: str, title: str, summary: str,
         log.info("RESEND_API_KEY / NOTIFICATION_EMAIL not set — skipping email.")
         return
 
+    # One-click publish button URL
+    site_url   = os.getenv("NEXT_PUBLIC_SITE_URL", "https://rebbadvisors.com").rstrip("/")
+    secret     = os.getenv("PUBLISH_SECRET", "")
+    publish_url = f"{site_url}/api/publish?id={post_id}&token={secret}" if secret else ""
+
     approve_cmd = f"python approve_post.py --id {post_id} --status PUBLISHED"
     edit_cmd    = f"python approve_post.py --id {post_id} --edit"
     view_cmd    = f"python approve_post.py --id {post_id} --view"
@@ -152,30 +157,39 @@ def send_email_notification(post_id: str, title: str, summary: str,
     # Plain-text preview of the first ~800 chars of body
     preview = body_md[:800] + ("\n\n[… truncated]" if len(body_md) > 800 else "")
 
-    html = f"""
-<html><body style="font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;color:#0a0a0a">
-  <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#16a34a">
+    publish_btn = (
+        f'<a href="{publish_url}" '
+        'style="display:inline-block;background:#22c55e;color:#000;font-weight:700;'
+        'font-size:15px;padding:14px 32px;border-radius:10px;text-decoration:none;'
+        'letter-spacing:-.01em">Publish Now →</a>'
+        if publish_url else
+        '<p style="font-size:12px;color:#aaa">'
+        '(Set PUBLISH_SECRET + NEXT_PUBLIC_SITE_URL in .env.local to enable one-click publish)</p>'
+    )
+
+    email_html = f"""
+<html><body style="font-family:system-ui,sans-serif;max-width:620px;margin:40px auto;color:#0a0a0a;padding:0 16px">
+  <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#16a34a;margin:0 0 12px">
     REBB Advisors · Market Insights
   </p>
-  <h2 style="margin:8px 0 4px">{title}</h2>
-  <p style="color:#555;margin:0 0 24px">{summary or "(no summary)"}</p>
+  <h2 style="margin:0 0 8px;font-size:22px;line-height:1.3">{title}</h2>
+  <p style="color:#555;margin:0 0 28px;font-size:15px;line-height:1.6">{summary or "(no summary)"}</p>
 
-  <table style="border-collapse:collapse;width:100%;margin-bottom:24px">
-    <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;white-space:nowrap">Post ID</td>
-        <td style="padding:6px 0;font-family:monospace;font-size:13px">{post_id}</td></tr>
-    <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px">Status</td>
-        <td style="padding:6px 0;font-size:13px">DRAFT</td></tr>
-  </table>
+  <div style="margin-bottom:32px">{publish_btn}</div>
 
-  <p style="font-size:13px;font-weight:600;margin-bottom:6px">Terminal commands (run from scripts/):</p>
-  <pre style="background:#f4f4f5;padding:14px;border-radius:8px;font-size:12px;overflow-x:auto">{view_cmd}
+  <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 24px" />
+
+  <p style="font-size:13px;font-weight:600;color:#555;margin:0 0 6px">Or use the terminal (from scripts/):</p>
+  <pre style="background:#f4f4f5;padding:14px;border-radius:8px;font-size:12px;overflow-x:auto;margin:0 0 24px">{view_cmd}
 {edit_cmd}
 {approve_cmd}</pre>
 
-  <details style="margin-top:24px">
-    <summary style="cursor:pointer;font-size:13px;color:#555">Preview article body</summary>
+  <details>
+    <summary style="cursor:pointer;font-size:13px;color:#888;margin-bottom:8px">Preview article ▾</summary>
     <pre style="background:#fafafa;border:1px solid #e5e7eb;padding:14px;border-radius:8px;font-size:12px;white-space:pre-wrap;margin-top:8px">{preview}</pre>
   </details>
+
+  <p style="margin-top:32px;font-size:11px;color:#aaa">Post ID: {post_id}</p>
 </body></html>"""
 
     try:
@@ -186,7 +200,7 @@ def send_email_notification(post_id: str, title: str, summary: str,
                 "from": "REBB Insights <onboarding@resend.dev>",
                 "to": [to_addr],
                 "subject": f"[Review Needed] {title}",
-                "html": html,
+                "html": email_html,
             },
             timeout=10,
         )

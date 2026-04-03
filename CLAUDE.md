@@ -225,6 +225,8 @@ python approve_post.py --id <uuid> --status DRAFT              # revert to draft
 | `GEMINI_API_KEY` | `generate_insights.py` | Google AI Studio key — secret |
 | `RESEND_API_KEY` | `generate_insights.py` | Optional — Resend.com key for email alerts |
 | `NOTIFICATION_EMAIL` | `generate_insights.py` | Optional — address to receive "Review Needed" emails |
+| `PUBLISH_SECRET` | API route + email script | Required for one-click publish button — any random string |
+| `NEXT_PUBLIC_SITE_URL` | `generate_insights.py` | Production URL for publish button link (default: https://rebbadvisors.com) |
 | `DISCORD_WEBHOOK_URL` | `generate_insights.py` | Optional — Discord webhook for "Review Needed" alert |
 | `EDITOR` | `approve_post.py` | Optional — editor for `--edit` flag (default: notepad / nano) |
 
