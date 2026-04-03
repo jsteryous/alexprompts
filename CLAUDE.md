@@ -148,6 +148,62 @@ python gvl_monitor.py --scrape all           # all sources
 - Fuzzy entity deduplication via `thefuzz`
 - Real scraper stubs in `scrape_greenville_deeds()` and `scrape_sc_sos_filings()` — fill in selectors after inspecting live pages
 
+## Market Insights Engine (Human-in-the-Loop)
+
+AI-generated SEO articles with a mandatory manual approval gate before anything goes live.
+
+### Workflow
+
+```
+generate_insights.py → DRAFT in Supabase → review terminal output (+ optional Discord alert)
+→ approve_post.py --status PUBLISHED → visible on /insights
+```
+
+### Scripts
+
+```bash
+# Generate a draft article with Gemini
+python generate_insights.py --topic "Why Greenville pool companies lose Q2 contracts"
+python generate_insights.py --topic "..." --dry-run            # preview only, no DB write
+python generate_insights.py --topic "..." --discord-webhook URL
+
+# Approve / publish / review
+python approve_post.py --list-drafts                           # list all DRAFT/APPROVED posts
+python approve_post.py --id <uuid> --status APPROVED           # mark reviewed
+python approve_post.py --id <uuid> --status PUBLISHED          # push live
+python approve_post.py --id <uuid> --status DRAFT              # revert
+```
+
+### blog_posts table columns
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | PK, auto-generated |
+| `created_at` | timestamptz | auto |
+| `updated_at` | timestamptz | auto-updated via trigger |
+| `title` | text | article title |
+| `slug` | text | unique URL slug |
+| `body_md` | text | full article in Markdown |
+| `summary` | text | one-paragraph excerpt for listing page |
+| `tags` | text[] | array of topic tags |
+| `status` | text | `DRAFT` / `APPROVED` / `PUBLISHED` |
+| `published_at` | timestamptz | set automatically when status → PUBLISHED |
+| `author` | text | defaults to `REBB Advisors` |
+| `topic` | text | the prompt passed to generate_insights |
+| `gemini_model` | text | e.g. `gemini-1.5-pro` |
+
+### RLS
+
+- Public SELECT allowed only for `status = 'PUBLISHED'`
+- Service key bypasses RLS for all writes
+
+### Required env vars (in addition to Supabase vars)
+
+| Variable | Used by | Notes |
+|---|---|---|
+| `GEMINI_API_KEY` | `generate_insights.py` | Google AI Studio key |
+| `DISCORD_WEBHOOK_URL` | `generate_insights.py` | Optional — "Review Needed" alert |
+
 ## Known Issues / Notes
 
 - `next.config.ts` sets `turbopack.root: __dirname` to suppress a lockfile warning caused by a `package-lock.json` existing one level up at `C:\Users\alexs\package-lock.json`
@@ -160,8 +216,10 @@ python gvl_monitor.py --scrape all           # all sources
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser + Vercel | Safe to expose |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser + Vercel | Safe to expose; RLS controls access |
-| `SUPABASE_URL` | Python scraper only | Same value as above |
-| `SUPABASE_SERVICE_KEY` | Python scraper only | Secret — never commit or expose |
+| `SUPABASE_URL` | Python scripts only | Same value as above |
+| `SUPABASE_SERVICE_KEY` | Python scripts only | Secret — never commit or expose |
+| `GEMINI_API_KEY` | `generate_insights.py` | Google AI Studio key — secret |
+| `DISCORD_WEBHOOK_URL` | `generate_insights.py` | Optional — "Review Needed" alert |
 
 ## Deployment
 
@@ -188,6 +246,8 @@ npx vercel --prod    # manual deploy to Vercel (if needed)
 |---|---|---|
 | `/` | Done | Hero (two-column with live signal feed), Problem, How We Do It, Multiplier deep dive, Sprint offer, CTA |
 | `/how-it-works` | Done | 5-step sprint process. Guarantee callout section. |
+| `/insights` | Done | Market Insights listing page — PUBLISHED posts only (ISR, 60s) |
+| `/insights/[slug]` | Not yet built | Individual article page |
 | `/case-study` | Placeholder | Awaiting real client data |
 | `/contact` | Done | Intake form + call explainer sidebar |
 

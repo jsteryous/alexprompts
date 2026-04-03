@@ -1,7 +1,4 @@
 supabase==2.9.0
-thefuzz==0.22.1
 python-dotenv==1.0.1
-playwright==1.44.0
 requests==2.32.3
-beautifulsoup4==4.12.3
 google-generativeai>=0.7.0
