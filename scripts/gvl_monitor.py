@@ -26,9 +26,11 @@ from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
 from typing import Optional
 
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env.local from project root regardless of where the script is run from
+load_dotenv(Path(__file__).parent.parent / '.env.local')
 
 # ── Supabase setup ──────────────────────────────────────────────────────────
 
@@ -57,7 +59,7 @@ class MarketSignal:
     location: str             # street address or entity name for filings
     entity_name: str          # cleaned/resolved company or owner name
     valuation: Optional[float]
-    detail: str               # human-readable context line
+    details: str              # human-readable context line
     score: int                # 0–100 lead priority
     tag: str                  # HOT | WARM | COLD
     source: str               # deeds | sos | permits | demo
@@ -332,7 +334,7 @@ def print_signals(signals: list[MarketSignal]) -> None:
         print(f"  {tag_marker} [{s.tag}] {s.event_type}  score={s.score}")
         print(f"      Location:  {s.location}")
         print(f"      Entity:    {s.entity_name}")
-        print(f"      Detail:    {s.detail}")
+        print(f"      Detail:    {s.details}")
         print(f"      Valuation: {val}")
         print()
 

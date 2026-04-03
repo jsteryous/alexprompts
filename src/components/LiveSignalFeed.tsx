@@ -14,7 +14,7 @@ type Signal = {
   location: string
   entity_name: string
   valuation: number | null
-  detail: string
+  details: string
   score: number
   tag: Tag
   source: string
@@ -30,7 +30,7 @@ const MOCK_SIGNALS: Signal[] = [
     location: '7842 Augusta Rd, Greenville',
     entity_name: 'Verdmont Properties LLC',
     valuation: 720_000,
-    detail: '4,200 sqft commercial · New owner · No service contract on file',
+    details: '4,200 sqft commercial · New owner · No service contract on file',
     score: 96,
     tag: 'HOT',
     source: 'demo',
@@ -42,7 +42,7 @@ const MOCK_SIGNALS: Signal[] = [
     location: 'Greenville Logistics LLC',
     entity_name: 'Greenville Logistics LLC',
     valuation: null,
-    detail: 'Industrial warehouse operator · HVAC & electrical contracts likely',
+    details: 'Industrial warehouse operator · HVAC & electrical contracts likely',
     score: 88,
     tag: 'HOT',
     source: 'demo',
@@ -54,7 +54,7 @@ const MOCK_SIGNALS: Signal[] = [
     location: '1204 Laurens Rd, Simpsonville',
     entity_name: 'City of Greenville',
     valuation: 280_000,
-    detail: 'Phase 2 renovation permit · $280K project scope',
+    details: 'Phase 2 renovation permit · $280K project scope',
     score: 78,
     tag: 'WARM',
     source: 'demo',
@@ -66,7 +66,7 @@ const MOCK_SIGNALS: Signal[] = [
     location: '3310 Wade Hampton Blvd, Taylors',
     entity_name: 'Upstate Realty Group LLC',
     valuation: 450_000,
-    detail: 'Strip mall acquisition · 6 units · New management company',
+    details: 'Strip mall acquisition · 6 units · New management company',
     score: 74,
     tag: 'WARM',
     source: 'demo',
@@ -248,7 +248,7 @@ export default function LiveSignalFeed() {
                 {signal.location}
               </div>
               <div className="text-xs text-gray-500 ml-3.5 leading-relaxed">
-                {signal.detail}
+                {signal.details}
               </div>
             </div>
           )
