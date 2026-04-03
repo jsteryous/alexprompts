@@ -84,6 +84,129 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
+      {/* How The Multiplier Works */}
+      <section className="bg-gray-50 py-20 md:py-28 border-y border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+            The Multiplier
+          </span>
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-5 leading-tight">
+                We watch three public data sources. Every day.
+              </h2>
+              <p className="text-gray-500 leading-relaxed mb-8">
+                When money changes hands or a business formally starts, it creates
+                a paper trail in public records before anyone ever Googles a
+                contractor. That&apos;s the window. We live in it.
+              </p>
+              <div className="space-y-5">
+                {[
+                  {
+                    label: "Greenville County Register of Deeds",
+                    body: "Every commercial property transfer filed in the county. New owner, new address, transaction value — recorded within 24–48 hours of closing.",
+                  },
+                  {
+                    label: "SC Secretary of State Filings",
+                    body: "Every new LLC and corporation registered in Greenville County. A new business filing almost always means a new location, new lease, and a fresh vendor slate.",
+                  },
+                  {
+                    label: "Municipal Permit Database",
+                    body: "Industrial and commercial construction permits. A permit means a building is about to change — and someone needs to do the work.",
+                  },
+                ].map((src) => (
+                  <div key={src.label} className="flex gap-4">
+                    <div className="mt-1 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-black mb-1">{src.label}</p>
+                      <p className="text-sm text-gray-500 leading-relaxed">{src.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {/* Example signal */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Example Signal</p>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <p className="text-sm font-semibold text-black">4401 Pelham Rd — Greenville Office Park</p>
+                    <p className="text-xs text-gray-400 mt-0.5">Property Transfer · 12,000 sq ft · $1.4M</p>
+                  </div>
+                  <span className="flex-shrink-0 text-xs font-bold bg-red-50 text-red-600 px-2.5 py-1 rounded-full">HOT</span>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-4">
+                  <span className="font-semibold text-black">What this means:</span> A new owner just took possession of a 12,000 sq ft commercial property. Previous vendor relationships are up for grabs. The new owner is in decision-making mode right now — before they&apos;ve talked to anyone.
+                </p>
+              </div>
+
+              {/* The call */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">The Play for a GC</p>
+                <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                  We resolve the LLC to a real decision-maker. You call them this week — not after they post a bid, not after they&apos;ve talked to five other contractors.
+                </p>
+                <div className="bg-gray-950 rounded-xl p-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Opening line</p>
+                  <p className="text-sm text-gray-200 leading-relaxed italic">
+                    &ldquo;I saw the transfer on 4401 Pelham — congratulations. I specialize in commercial buildouts in Greenville County. Are you planning any tenant improvements on that space?&rdquo;
+                  </p>
+                </div>
+              </div>
+
+              {/* Comparison */}
+              <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                <div className="grid grid-cols-2 divide-x divide-gray-100">
+                  <div className="p-5">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Traditional Lead Gen</p>
+                    <ul className="space-y-2 text-sm text-gray-500">
+                      <li>Prospect searches, you compete</li>
+                      <li>8–12 contractors get the same lead</li>
+                      <li>Race to the bottom on price</li>
+                      <li>Days to weeks of lag</li>
+                    </ul>
+                  </div>
+                  <div className="p-5 bg-green-50">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-3">The Multiplier</p>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>You call before they search</li>
+                      <li>Often the only call they get</li>
+                      <li>You set the price</li>
+                      <li>Signal fires within 24–48 hrs</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Monday Call List */}
+      <section className="bg-white py-16 md:py-20 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+              The Deliverable
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 leading-tight">
+              Every Monday morning: a ranked call list.
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              Each signal is scored 0–100 by lead quality — deal size, property type, recency,
+              and match to your trade. You don&apos;t analyze data. You don&apos;t log into a dashboard.
+              You answer one question: <span className="font-semibold text-black">who do I call this week to make money?</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Steps */}
       <section className="bg-white pb-24 md:pb-32">
         <div className="max-w-6xl mx-auto px-6">
