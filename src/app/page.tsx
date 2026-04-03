@@ -191,6 +191,70 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Services ── */}
+      <section className="bg-gray-50 py-20 md:py-28 border-y border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl mb-12">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+              Services
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black leading-tight">
+              Everything you need.
+              <br />
+              Nothing you don&apos;t.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                label: "Lead Intelligence",
+                title: "The Upstate Multiplier",
+                body: "Weekly ranked call list from Greenville County property transfers, business filings, and permits. Know who to call before they search.",
+                href: "/lead-intelligence",
+              },
+              {
+                label: "Outreach Automation",
+                title: "Automated Follow-Up Sequences",
+                body: "Missed call text-back, inbound lead sequences, and estimate follow-ups. Every lead gets an instant response — while you're on the job.",
+                href: "/outreach-automation",
+              },
+              {
+                label: "Local SEO",
+                title: "Audit & Local Search Optimization",
+                body: "Technical site audit, Google Business Profile optimization, and local pack rankings. When they do search, you need to win.",
+                href: "/seo",
+              },
+              {
+                label: "Web Development",
+                title: "High-Speed React Sites",
+                body: "100/100 Lighthouse. Live in 5 days. Built on Next.js — not WordPress. Fast by design, not fast for a contractor site.",
+                href: "/web-development",
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group block border border-gray-200 bg-white rounded-2xl p-8 hover:border-gray-300 hover:shadow-sm transition-all"
+              >
+                <div className="text-xs font-semibold uppercase tracking-widest text-green-600 mb-3">
+                  {item.label}
+                </div>
+                <h3 className="text-lg font-bold text-black mb-2 group-hover:text-green-700 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-5">{item.body}</p>
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-600 group-hover:gap-2.5 transition-all">
+                  Learn more
+                  <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Multiplier Deep Dive ── */}
       <section className="bg-gray-50 py-24 md:py-32 border-y border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
