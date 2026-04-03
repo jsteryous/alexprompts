@@ -3,9 +3,40 @@
 ## Business Context
 
 **Business:** REBB Advisors  
-**Positioning:** We install automated lead capture and follow-up systems for local service businesses so they never miss a lead again.  
-**Target customers:** Landscaping, pool services, pressure washing, and other local service businesses.  
-**Tone:** Confident, minimal, high-end. No fluff. No generic marketing language.
+**Market:** Upstate SC (Greenville County focus)  
+**Target customers:** Local service businesses — landscaping, pool services, pressure washing, HVAC, electrical, facilities management, and similar trades.  
+**Tone:** Confident, minimal, high-end. Blunt and specific. No fluff. No generic marketing language.
+
+### Core Positioning (use this language exactly)
+
+REBB is **proactive**, not reactive. Legacy agencies are all passive:
+- **The Creative Play** — branding, logos, storytelling
+- **The Inbound Play** — SEO, Google Ads, social media
+- **The Platform Play** — ServiceTitan, HubSpot, CRMs
+
+All three wait for a search event. By then the prospect is already talking to 10 competitors and you've lost the pricing war.
+
+**REBB's differentiator (exact copy):**  
+> "Most agencies wait for your customers to search. We don't. We programmatically sync Greenville County property transfers and new business filings to identify your next high-value contract before your competitors even know it exists."
+
+### The Three Pillars ("How We Do It")
+
+1. **The Signal** — Our Python-driven engine monitors municipal data daily to flag economic triggers (new leases, property sales, industrial permits).
+2. **The Resolution** — We match fragmented public records to find the specific decision-maker — not just a generic LLC name.
+3. **The Infrastructure** — We deploy lightning-fast React systems that capture and warm up those leads on autopilot.
+
+### The Upstate Multiplier
+
+The proprietary data product. Weekly Python-driven syncs of Greenville County property transfers + new business filings, cross-referenced to surface warm prospects with real contact info. Delivered as a ranked call list every Monday morning. The framing: **"Who do I call this week to make money?"**
+
+### The Offer
+
+**30-Day Risk-Free Revenue Sprint**  
+- High-speed site deployed in 5 days (pre-optimized React/Vite template)  
+- The Multiplier dashboard goes live (manually at first if needed)  
+- Automated lead capture + follow-up sequences installed  
+- Goal: one lead the client wouldn't have found otherwise within 30 days  
+- Full refund if not delivered. No questions.
 
 ## Tech Stack
 
@@ -82,7 +113,16 @@ npx vercel --prod    # manual deploy to Vercel (if needed)
 
 | Route | Status | Notes |
 |---|---|---|
-| `/` | Done | 6 sections: Hero, Problem, Solution, How It Works, Offer, CTA |
-| `/how-it-works` | Done | 5-step process with detail columns |
+| `/` | Done | Hero (two-column with live signal feed visual), Problem (3 legacy agency plays), How We Do It (3 pillars), Multiplier deep dive (ranked dashboard mock), Sprint offer, CTA |
+| `/how-it-works` | Done | 5-step sprint process: Kick-off → Site Build → Multiplier → Lead Engine → The Lead. Guarantee callout section. |
 | `/case-study` | Placeholder | Awaiting real client data |
 | `/contact` | Done | Intake form + call explainer sidebar |
+
+### Homepage Section Map
+
+1. **Hero** — Two-column. Left: headline + "Most agencies wait..." copy + CTAs. Right: dark terminal panel showing live Multiplier signal feed with HOT/WARM tags.
+2. **Problem** — Dark (`gray-950`). Three columns: The Creative Play / The Inbound Play / The Platform Play.
+3. **How We Do It** — White. Three pillar cards with SVG icons: The Signal / The Resolution / The Infrastructure.
+4. **Multiplier Deep Dive** — Gray-50. Left: "Who do I call this week" copy. Right: white dashboard card showing ranked decision-maker list with scores.
+5. **The Offer** — Dark (`gray-950`). Left: Sprint copy + CTA. Right: four feature cards.
+6. **Final CTA** — Black. "Stop competing. Start winning first."
