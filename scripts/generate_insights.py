@@ -193,7 +193,8 @@ def send_email_notification(post_id: str, title: str, summary: str,
         resp.raise_for_status()
         log.info(f"Email sent to {to_addr}.")
     except requests.RequestException as exc:
-        log.warning(f"Email notification failed (non-fatal): {exc}")
+        body = getattr(exc.response, "text", "") if hasattr(exc, "response") else ""
+        log.warning(f"Email notification failed (non-fatal): {exc} — {body}")
 
 
 def send_discord_notification(webhook_url: str, post_id: str, title: str,
@@ -230,12 +231,28 @@ def send_discord_notification(webhook_url: str, post_id: str, title: str,
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate a Market Insights draft with Gemini")
-    parser.add_argument("--topic", required=True, help="Article topic / prompt")
+    parser.add_argument("--topic", help="Article topic / prompt")
     parser.add_argument("--dry-run", action="store_true",
                         help="Generate and preview without saving to Supabase")
     parser.add_argument("--discord-webhook", default=os.getenv("DISCORD_WEBHOOK_URL"),
                         help="Discord webhook URL for 'Review Needed' alert")
+    parser.add_argument("--test-email", action="store_true",
+                        help="Send a test email via Resend and exit (no generation)")
     args = parser.parse_args()
+
+    # ── Test email mode ──────────────────────────────────────────────────────
+    if args.test_email:
+        log.info("Sending test email...")
+        send_email_notification(
+            post_id="00000000-test-0000-0000-000000000000",
+            title="Test: REBB Insights Email is Working",
+            summary="This is a test notification confirming your Resend integration is live.",
+            body_md="## Test Article\n\nIf you received this, email notifications are configured correctly.\n\nYou will receive one of these each time a new draft is generated.",
+        )
+        return
+
+    if not args.topic:
+        parser.error("--topic is required (or use --test-email)")
 
     # 1. Generate content
     raw_markdown = generate_with_gemini(args.topic)
