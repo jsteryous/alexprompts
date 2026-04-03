@@ -4,63 +4,63 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How It Works — REBB Advisors",
   description:
-    "A step-by-step look at how we install automated lead capture and follow-up systems for local service businesses.",
+    "The 30-Day Revenue Sprint: how we build your site, plug in The Multiplier, and get you a lead you wouldn't have found otherwise.",
 };
 
 const steps = [
   {
     step: "01",
-    title: "Discovery Call",
+    title: "Sprint Kick-Off Call",
     duration: "45 minutes",
-    body: "We map your entire lead flow from first contact to closed job. Where are leads coming from? Where are they falling off? What does your current follow-up look like? Most businesses are shocked to see how many leads are quietly slipping out.",
+    body: "We map your business, your market, and your existing lead flow. We identify the highest-value property types and business categories in your service area — the ones most likely to generate immediate revenue — and configure The Multiplier around them.",
     details: [
-      "Review inbound channels (calls, web, social)",
-      "Identify response time and follow-up gaps",
-      "Define your ideal booking journey",
+      "Define your ideal contract profile",
+      "Configure GVL data filters for your trade",
+      "Audit current site speed and lead response gaps",
     ],
   },
   {
     step: "02",
-    title: "System Design",
-    duration: "3–5 days",
-    body: "We design a custom automation system around your business. Every sequence is written for your services, your market, and your voice. Nothing generic. Nothing templated.",
+    title: "Site Build",
+    duration: "Days 1–5",
+    body: "We deploy your high-speed site in days, not weeks. Built on a pre-optimized Vite/React template, then tuned for 100/100 Lighthouse scores. Your digital presence stops being a liability and starts performing like infrastructure.",
     details: [
-      "Custom follow-up scripts and sequences",
-      "Integration plan for your existing tools",
-      "Pipeline stages and lead routing logic",
+      "Custom build on pre-optimized Vite/React stack",
+      "100/100 SEO, performance, and accessibility scores",
+      "Managed hosting, security, and zero-downtime deploys",
     ],
   },
   {
     step: "03",
-    title: "Build & Install",
-    duration: "7–10 days",
-    body: "We build and install everything. Missed-call text-back, lead capture forms, follow-up automations, booking links, review requests—all connected and tested before we hand it over.",
+    title: "The Multiplier Goes Live",
+    duration: "Days 3–7",
+    body: "We run the first sync: Greenville County property transfers cross-referenced with new business filings. You get a prioritized call list — real names, real addresses, real contracts that just came open. We do this manually at first to make sure the data is clean and relevant.",
     details: [
-      "Full system build and configuration",
-      "Integration with your phone, CRM, and calendar",
-      "End-to-end testing before launch",
+      "First Multiplier data pull, manually reviewed",
+      "Prioritized prospect list delivered",
+      "Weekly sync cadence established",
     ],
   },
   {
     step: "04",
-    title: "Go Live",
-    duration: "Day 10–14",
-    body: "Your system goes live. Every new lead now gets an instant response and a follow-up sequence that runs automatically. You focus on the job. The system handles the rest.",
+    title: "Lead Engine Installed",
+    duration: "Days 5–10",
+    body: "We build and install your automated follow-up sequences. Every inbound lead — call, form, referral — gets an instant response and a multi-step follow-up that runs on its own. You stay on the job. The system handles the outreach.",
     details: [
-      "Live walkthrough of your new system",
-      "Team training (30 minutes)",
-      "Monitoring for the first 7 days post-launch",
+      "Missed call text-back (under 60 seconds)",
+      "Logic-based email and SMS sequences",
+      "Automated booking and estimate scheduling",
     ],
   },
   {
     step: "05",
-    title: "Optimize",
-    duration: "Ongoing",
-    body: "Every month we review your lead data, conversion rates, and sequence performance. We adjust what isn't working and double down on what is.",
+    title: "The Lead",
+    duration: "Within 30 days",
+    body: "The goal of the sprint is concrete: one lead you wouldn't have found otherwise. A property that just changed hands. A business that just incorporated and needs your service. Something real, warm, and ahead of your competitors. If we don't deliver it, you don't pay.",
     details: [
-      "Monthly performance review",
-      "Sequence testing and optimization",
-      "New automations as your business grows",
+      "Sprint performance review at day 30",
+      "Full refund if no new lead surfaced",
+      "Ongoing Multiplier syncs and optimization if you continue",
     ],
   },
 ];
@@ -78,7 +78,8 @@ export default function HowItWorksPage() {
             How It Works
           </h1>
           <p className="text-xl text-gray-500 max-w-xl leading-relaxed">
-            From your first call to a fully running lead system in under two weeks.
+            The 30-Day Revenue Sprint — from kick-off call to a lead your
+            competitors don&apos;t know exists yet.
           </p>
         </div>
       </section>
@@ -119,15 +120,35 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
+      {/* Guarantee callout */}
+      <section className="bg-gray-50 py-16 md:py-20 border-y border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+              The Guarantee
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 leading-tight">
+              One lead. 30 days. Or you don&apos;t pay.
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              We don&apos;t charge retainers or lock you into 12-month contracts.
+              The sprint is risk-free: if the combination of your new site and
+              The Multiplier doesn&apos;t surface a lead you wouldn&apos;t have found
+              on your own, we refund everything. No case to make. No questions.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-gray-950 py-24">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              Ready to get started?
+              Ready to start your sprint?
             </h2>
             <p className="text-gray-400">
-              Book a free call and we&apos;ll walk you through your current lead flow.
+              30 minutes. We&apos;ll show you what&apos;s sitting in the GVL data right now.
             </p>
           </div>
           <Link

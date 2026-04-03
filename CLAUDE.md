@@ -59,12 +59,23 @@ src/
 - `next.config.ts` sets `turbopack.root: __dirname` to suppress a lockfile warning caused by a `package-lock.json` existing one level up at `C:\Users\alexs\package-lock.json`
 - Google Fonts cannot be used at build time in this environment (Turbopack http2 error) — use system fonts or self-hosted fonts
 
+## Deployment
+
+- **Platform:** Vercel (Hobby — free tier)
+- **GitHub repo:** https://github.com/jsteryous/rebbadvisors-website
+- **Vercel project:** jsteryous-projects/rebbadvisors-website
+- **Production URL:** https://rebbadvisors-website.vercel.app
+- **Custom domain:** rebbadvisors.com (DNS via Cloudflare — needs to be pointed to Vercel)
+- **Auto-deploy:** Every push to `main` triggers a Vercel production deploy
+- **Previous host:** Render (Static Site) — no longer used
+
 ## Commands
 
 ```bash
-npm run dev     # local dev server
-npm run build   # production build
-npm run lint    # eslint
+npm run dev          # local dev server
+npm run build        # production build
+npm run lint         # eslint
+npx vercel --prod    # manual deploy to Vercel (if needed)
 ```
 
 ## Pages
