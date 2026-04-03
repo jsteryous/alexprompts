@@ -57,10 +57,14 @@ src/
 ├── app/
 │   ├── globals.css                 — design tokens, base styles, @plugin typography
 │   ├── layout.tsx                  — root layout wrapping Nav + Footer
-│   ├── page.tsx                    — homepage
+│   ├── page.tsx                    — homepage (includes Services section linking all 4 service pages)
 │   ├── how-it-works/page.tsx
 │   ├── case-study/page.tsx
 │   ├── contact/page.tsx
+│   ├── lead-intelligence/page.tsx  — The Upstate Multiplier standalone page
+│   ├── seo/page.tsx                — Local SEO audits + GBP optimization
+│   ├── web-development/page.tsx    — React/Next.js site builds (5-day sprint)
+│   ├── outreach-automation/page.tsx — Email/SMS follow-up sequences
 │   ├── insights/
 │   │   ├── page.tsx                — listing page (PUBLISHED only, ISR 60s)
 │   │   └── [slug]/page.tsx         — individual article page (ISR 60s)
@@ -68,7 +72,7 @@ src/
 │   └── api/
 │       └── publish/route.ts        — GET ?id=&token= → flips status, revalidates /insights
 ├── components/
-│   ├── Nav.tsx                     — sticky header with mobile menu (client component)
+│   ├── Nav.tsx                     — sticky header with Services dropdown + mobile accordion (client component)
 │   ├── Footer.tsx
 │   └── LiveSignalFeed.tsx          — real-time Multiplier terminal (client component)
 └── lib/
@@ -309,19 +313,32 @@ npx vercel --prod    # manual deploy (if needed)
 
 | Route | Status | Notes |
 |---|---|---|
-| `/` | Done | Hero + live signal feed, Problem, How We Do It, Multiplier deep dive, Sprint offer, CTA |
+| `/` | Done | Hero + live signal feed, Problem, How We Do It, Services, Multiplier deep dive, Sprint offer, CTA |
 | `/how-it-works` | Done | 5-step sprint process, guarantee callout |
+| `/lead-intelligence` | Done | Upstate Multiplier deep dive — data sources, 48hr window, ranked call list deliverable |
+| `/seo` | Done | Technical audit, GBP optimization, local pack rankings — honest framing (reactive but necessary) |
+| `/web-development` | Done | React/Next.js builds, 5-day process, speed stats, no WordPress rationale |
+| `/outreach-automation` | Done | Missed call text-back, inbound sequence, estimate follow-up — sequence mockup with Multiplier example |
 | `/insights` | Done | PUBLISHED posts listing, ISR 60s, revalidated instantly on publish |
 | `/insights/[slug]` | Done | Full article page, ISR 60s, prose rendering via marked |
 | `/review` | Done | Token-gated draft review page — linked from email only |
 | `/case-study` | Placeholder | Awaiting real client data |
 | `/contact` | Done | Intake form + call explainer sidebar |
 
+### Nav Structure
+
+Desktop: logo · **Services ▾** (hover dropdown) · How It Works · Insights · Contact · [Get More Jobs CTA]
+
+Services dropdown links: Lead Intelligence / Outreach Automation / Local SEO / Web Development — each with a subtitle line.
+
+Mobile: hamburger → accordion with Services expanding inline.
+
 ### Homepage Section Map
 
 1. **Hero** — Two-column. Left: headline + copy + CTAs. Right: `LiveSignalFeed` — dark Bloomberg-style terminal pulling live data from Supabase, HOT/WARM tags, scrollable, 6 rows.
 2. **Problem** — Dark (`gray-950`). Three columns: The Creative Play / The Inbound Play / The Platform Play.
 3. **How We Do It** — White. Three pillar cards with SVG icons: The Signal / The Resolution / The Infrastructure.
-4. **Multiplier Deep Dive** — Gray-50. Left: "Who do I call this week" copy. Right: white dashboard card showing ranked decision-maker list with scores.
-5. **The Offer** — Dark (`gray-950`). Left: Sprint copy + CTA. Right: four feature cards.
-6. **Final CTA** — Black. "Stop competing. Start winning first."
+4. **Services** — Gray-50. Four cards linking to `/lead-intelligence`, `/outreach-automation`, `/seo`, `/web-development`.
+5. **Multiplier Deep Dive** — Gray-50. Left: "Who do I call this week" copy. Right: white dashboard card showing ranked decision-maker list with scores.
+6. **The Offer** — Dark (`gray-950`). Left: Sprint copy + CTA. Right: four feature cards.
+7. **Final CTA** — Black. "Stop competing. Start winning first."
