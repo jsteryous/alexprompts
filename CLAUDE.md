@@ -44,21 +44,33 @@ The proprietary data product. Weekly Python-driven syncs of Greenville County pr
 - **Styling:** Tailwind CSS v4 (config via CSS `@theme` in `globals.css`, not `tailwind.config.js`)
 - **Language:** TypeScript
 - **React:** 19
+- **Database:** Supabase (Postgres + Realtime)
+- **Supabase JS client:** `@supabase/supabase-js`
 
 ## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── globals.css          — design tokens and base styles
-│   ├── layout.tsx           — root layout wrapping Nav + Footer
-│   ├── page.tsx             — homepage
+│   ├── globals.css             — design tokens and base styles
+│   ├── layout.tsx              — root layout wrapping Nav + Footer
+│   ├── page.tsx                — homepage
 │   ├── how-it-works/page.tsx
 │   ├── case-study/page.tsx
 │   └── contact/page.tsx
-└── components/
-    ├── Nav.tsx              — sticky header with mobile menu (client component)
-    └── Footer.tsx
+├── components/
+│   ├── Nav.tsx                 — sticky header with mobile menu (client component)
+│   ├── Footer.tsx
+│   └── LiveSignalFeed.tsx      — real-time Multiplier terminal (client component)
+└── lib/
+    └── supabase.ts             — Supabase client singleton (null if env vars not set)
+
+scripts/
+├── gvl_monitor.py              — Python scraper + Supabase push
+└── requirements.txt            — Python dependencies
+
+supabase/
+└── schema.sql                  — market_signals table + RLS + realtime publication
 ```
 
 ## Design System
@@ -80,15 +92,76 @@ src/
 ## Key Conventions
 
 - Tailwind v4 uses `@theme {}` in `globals.css` for custom tokens — no `tailwind.config.js`
-- All pages are statically rendered (no `use client` except Nav)
+- All pages are statically rendered (no `use client` except Nav and LiveSignalFeed)
 - CTAs always link to `/contact`
 - Section labels use `text-xs font-semibold uppercase tracking-widest text-green-600`
 - Dark CTA sections use `bg-gray-950` or `bg-black` with `green-500` buttons
+
+## Supabase
+
+- **Project:** connected via `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Table:** `market_signals` — stores all Multiplier signals
+- **Realtime:** enabled on `market_signals` via `supabase_realtime` publication
+- **RLS:** public SELECT allowed (feed is visible on homepage); writes require service key
+- **Schema:** `supabase/schema.sql` — run this in the SQL editor on a new project
+
+### market_signals columns
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | PK, auto-generated |
+| `created_at` | timestamptz | auto |
+| `timestamp` | timestamptz | when the real-world event occurred |
+| `event_type` | text | `PROPERTY TRANSFER` / `NEW BUSINESS FILING` / `INDUSTRIAL PERMIT` |
+| `location` | text | street address or entity name |
+| `entity_name` | text | fuzzy-resolved company/owner name |
+| `valuation` | numeric | dollar amount if known |
+| `details` | text | one-line human-readable context |
+| `score` | integer | 0–100 lead priority |
+| `tag` | text | `HOT` / `WARM` / `COLD` |
+| `source` | text | `deeds` / `sos` / `permits` / `demo` |
+| `source_url` | text | source page URL (optional) |
+| `status` | text | lead status (optional) |
+
+### LiveSignalFeed component behavior
+
+- **No env vars set:** renders mock data, footer shows `DEMO MODE`
+- **Env vars set:** fetches last 6 signals on mount, subscribes to Postgres `INSERT` via Realtime
+- **New signal arrives:** border flashes green, header shows `NEW SIGNAL`, row slides in at top
+- Feed is capped at 6 visible rows (scrollable); new inserts push oldest off the list
+
+## Python Scraper
+
+```bash
+cd scripts
+pip install -r requirements.txt
+
+python gvl_monitor.py --demo --count 15      # seed realistic mock data
+python gvl_monitor.py --demo --dry-run       # preview without writing to DB
+python gvl_monitor.py --scrape deeds         # scrape GVL Register of Deeds (stub)
+python gvl_monitor.py --scrape sos           # scrape SC SOS filings (stub)
+python gvl_monitor.py --scrape all           # all sources
+```
+
+- Reads `.env.local` from project root automatically (no need to copy it to `scripts/`)
+- Uses `SUPABASE_URL` + `SUPABASE_SERVICE_KEY` (service role key, never exposed to browser)
+- Fuzzy entity deduplication via `thefuzz`
+- Real scraper stubs in `scrape_greenville_deeds()` and `scrape_sc_sos_filings()` — fill in selectors after inspecting live pages
 
 ## Known Issues / Notes
 
 - `next.config.ts` sets `turbopack.root: __dirname` to suppress a lockfile warning caused by a `package-lock.json` existing one level up at `C:\Users\alexs\package-lock.json`
 - Google Fonts cannot be used at build time in this environment (Turbopack http2 error) — use system fonts or self-hosted fonts
+- `python-levenshtein` removed from requirements (requires C compiler on Windows) — `thefuzz` works without it
+
+## Environment Variables
+
+| Variable | Used by | Notes |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Browser + Vercel | Safe to expose |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser + Vercel | Safe to expose; RLS controls access |
+| `SUPABASE_URL` | Python scraper only | Same value as above |
+| `SUPABASE_SERVICE_KEY` | Python scraper only | Secret — never commit or expose |
 
 ## Deployment
 
@@ -113,14 +186,14 @@ npx vercel --prod    # manual deploy to Vercel (if needed)
 
 | Route | Status | Notes |
 |---|---|---|
-| `/` | Done | Hero (two-column with live signal feed visual), Problem (3 legacy agency plays), How We Do It (3 pillars), Multiplier deep dive (ranked dashboard mock), Sprint offer, CTA |
-| `/how-it-works` | Done | 5-step sprint process: Kick-off → Site Build → Multiplier → Lead Engine → The Lead. Guarantee callout section. |
+| `/` | Done | Hero (two-column with live signal feed), Problem, How We Do It, Multiplier deep dive, Sprint offer, CTA |
+| `/how-it-works` | Done | 5-step sprint process. Guarantee callout section. |
 | `/case-study` | Placeholder | Awaiting real client data |
 | `/contact` | Done | Intake form + call explainer sidebar |
 
 ### Homepage Section Map
 
-1. **Hero** — Two-column. Left: headline + "Most agencies wait..." copy + CTAs. Right: dark terminal panel showing live Multiplier signal feed with HOT/WARM tags.
+1. **Hero** — Two-column. Left: headline + copy + CTAs. Right: `LiveSignalFeed` — dark Bloomberg-style terminal pulling live data from Supabase, HOT/WARM tags, scrollable, 6 rows.
 2. **Problem** — Dark (`gray-950`). Three columns: The Creative Play / The Inbound Play / The Platform Play.
 3. **How We Do It** — White. Three pillar cards with SVG icons: The Signal / The Resolution / The Infrastructure.
 4. **Multiplier Deep Dive** — Gray-50. Left: "Who do I call this week" copy. Right: white dashboard card showing ranked decision-maker list with scores.
