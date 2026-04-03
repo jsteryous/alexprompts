@@ -124,7 +124,7 @@ export default function LiveSignalFeed() {
         .from('market_signals')
         .select('*')
         .order('timestamp', { ascending: false })
-        .limit(10)
+        .limit(6)
 
       if (!error && data && data.length > 0) {
         setSignals(data as Signal[])
@@ -157,7 +157,7 @@ export default function LiveSignalFeed() {
               setNewSignalId(null)
             }, 3000)
 
-            setSignals((prev) => [incoming, ...prev].slice(0, 10))
+            setSignals((prev) => [incoming, ...prev].slice(0, 6))
             setTotalCount((n) => n + 1)
           }
         )
@@ -210,7 +210,7 @@ export default function LiveSignalFeed() {
       </div>
 
       {/* ── Signal rows ───────────────────────────────────────────────── */}
-      <div className="divide-y divide-white/5">
+      <div className="divide-y divide-white/5 max-h-[380px] overflow-y-auto scrollbar-none">
         {signals.map((signal) => {
           const isNew = signal.id === newSignalId
           const tag = (signal.tag as Tag) ?? 'WARM'
