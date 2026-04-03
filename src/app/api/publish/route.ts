@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET /api/publish?id=<uuid>&token=<secret>
@@ -59,6 +60,9 @@ export async function GET(req: NextRequest) {
   if (updateErr) {
     return html("Database error", updateErr.message, 500);
   }
+
+  // Bust the ISR cache so /insights shows the new post immediately
+  revalidatePath("/insights");
 
   return html(
     "Published",

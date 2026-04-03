@@ -145,27 +145,30 @@ def send_email_notification(post_id: str, title: str, summary: str,
         log.info("RESEND_API_KEY / NOTIFICATION_EMAIL not set — skipping email.")
         return
 
-    # One-click publish button URL
-    site_url   = os.getenv("NEXT_PUBLIC_SITE_URL", "https://rebbadvisors.com").rstrip("/")
-    secret     = os.getenv("PUBLISH_SECRET", "")
+    # Button URLs
+    site_url    = os.getenv("NEXT_PUBLIC_SITE_URL", "https://rebbadvisors.com").rstrip("/")
+    secret      = os.getenv("PUBLISH_SECRET", "")
+    review_url  = f"{site_url}/review?id={post_id}&token={secret}" if secret else ""
     publish_url = f"{site_url}/api/publish?id={post_id}&token={secret}" if secret else ""
 
     approve_cmd = f"python approve_post.py --id {post_id} --status PUBLISHED"
     edit_cmd    = f"python approve_post.py --id {post_id} --edit"
     view_cmd    = f"python approve_post.py --id {post_id} --view"
 
-    # Plain-text preview of the first ~800 chars of body
-    preview = body_md[:800] + ("\n\n[… truncated]" if len(body_md) > 800 else "")
+    # Plain-text preview of the first ~600 chars
+    preview = body_md[:600] + ("\n\n[… open Review link to read in full]" if len(body_md) > 600 else "")
 
-    publish_btn = (
-        f'<a href="{publish_url}" '
-        'style="display:inline-block;background:#22c55e;color:#000;font-weight:700;'
-        'font-size:15px;padding:14px 32px;border-radius:10px;text-decoration:none;'
-        'letter-spacing:-.01em">Publish Now →</a>'
-        if publish_url else
-        '<p style="font-size:12px;color:#aaa">'
-        '(Set PUBLISH_SECRET + NEXT_PUBLIC_SITE_URL in .env.local to enable one-click publish)</p>'
-    )
+    if review_url:
+        buttons = f"""
+<a href="{review_url}"
+   style="display:inline-block;background:#0a0a0a;color:#fff;font-weight:700;
+          font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;
+          margin-right:12px">Review Article →</a>
+<a href="{publish_url}"
+   style="display:inline-block;background:#22c55e;color:#000;font-weight:700;
+          font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none">Publish Now →</a>"""
+    else:
+        buttons = '<p style="font-size:12px;color:#aaa">(Set PUBLISH_SECRET + NEXT_PUBLIC_SITE_URL in .env.local to enable buttons)</p>'
 
     email_html = f"""
 <html><body style="font-family:system-ui,sans-serif;max-width:620px;margin:40px auto;color:#0a0a0a;padding:0 16px">
@@ -175,21 +178,23 @@ def send_email_notification(post_id: str, title: str, summary: str,
   <h2 style="margin:0 0 8px;font-size:22px;line-height:1.3">{title}</h2>
   <p style="color:#555;margin:0 0 28px;font-size:15px;line-height:1.6">{summary or "(no summary)"}</p>
 
-  <div style="margin-bottom:32px">{publish_btn}</div>
+  <div style="margin-bottom:32px">{buttons}</div>
 
-  <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 24px" />
-
-  <p style="font-size:13px;font-weight:600;color:#555;margin:0 0 6px">Or use the terminal (from scripts/):</p>
-  <pre style="background:#f4f4f5;padding:14px;border-radius:8px;font-size:12px;overflow-x:auto;margin:0 0 24px">{view_cmd}
-{edit_cmd}
-{approve_cmd}</pre>
+  <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 20px" />
 
   <details>
-    <summary style="cursor:pointer;font-size:13px;color:#888;margin-bottom:8px">Preview article ▾</summary>
+    <summary style="cursor:pointer;font-size:13px;color:#888;margin-bottom:8px">Quick preview ▾</summary>
     <pre style="background:#fafafa;border:1px solid #e5e7eb;padding:14px;border-radius:8px;font-size:12px;white-space:pre-wrap;margin-top:8px">{preview}</pre>
   </details>
 
-  <p style="margin-top:32px;font-size:11px;color:#aaa">Post ID: {post_id}</p>
+  <details style="margin-top:12px">
+    <summary style="cursor:pointer;font-size:13px;color:#888;margin-bottom:8px">Terminal commands ▾</summary>
+    <pre style="background:#f4f4f5;padding:14px;border-radius:8px;font-size:12px;overflow-x:auto;margin-top:8px">{view_cmd}
+{edit_cmd}
+{approve_cmd}</pre>
+  </details>
+
+  <p style="margin-top:28px;font-size:11px;color:#aaa">Post ID: {post_id}</p>
 </body></html>"""
 
     try:
