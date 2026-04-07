@@ -269,11 +269,15 @@ python approve_post.py --id <uuid> --status DRAFT
 
 **Editor for `--edit`:** defaults to Notepad. Set `EDITOR=code --wait` in `.env.local` for VS Code.
 
-### Topic rotation
+### Topic generation
 
-`weekly_insights.py` cycles through 12 Greenville-specific topics in `TOPICS[]`. Position tracked in `scripts/last_topic_index.txt`. Edit the list freely — add, remove, reorder anytime.
+`weekly_insights.py` generates topics autonomously — no fixed list, no state file. Each run:
+1. Queries Supabase for the last 20 article titles (avoids repeating angles)
+2. Calls Gemini with a meta-prompt defining 6 category buckets and good/bad examples
+3. Gemini generates 3 scored candidates from different categories and returns the winner
+4. That topic string is passed to `generate_insights.py`
 
-**Cloud note:** After each GitHub Actions run, the workflow commits the updated `last_topic_index.txt` back to `main` with `[skip ci]` to persist the counter between runs. Requires **Settings → Actions → General → Workflow permissions → Read and write permissions** to be enabled on the repo.
+To adjust the topic space, edit `CATEGORIES` in `weekly_insights.py`. To bias toward a category, list it more than once. No state file to manage, no commit-back step in CI needed.
 
 ### Daily Pipeline (run_daily.py)
 
@@ -312,12 +316,6 @@ python run_daily.py --no-alert       # skip email alert
 - Uses `requirements-insights.txt`, Python 3.12, no Playwright needed
 
 **Secrets required:** `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `GEMINI_API_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `PUBLISH_SECRET` · `NEXT_PUBLIC_SITE_URL`
-
-**Disable local Task Scheduler** (run once after confirming cloud works):
-```powershell
-Disable-ScheduledTask -TaskName "REBB Daily Pipeline"
-Disable-ScheduledTask -TaskName "REBB Weekly Insights"
-```
 
 ### /review page
 

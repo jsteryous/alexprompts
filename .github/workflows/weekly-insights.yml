@@ -41,10 +41,5 @@ jobs:
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
         run: python weekly_insights.py
 
-      - name: Commit updated topic index
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add scripts/last_topic_index.txt
-          git diff --staged --quiet || git commit -m "chore: advance weekly insights topic index [skip ci]"
-          git push
+      # No commit step needed — topic is generated dynamically via Gemini each run.
+      # last_topic_index.txt is no longer used.
