@@ -1,0 +1,50 @@
+name: Daily Leads Pipeline
+
+on:
+  schedule:
+    # 4:00 AM EST (UTC-5) = 09:00 UTC
+    # Note: shifts to 5:00 AM during EDT (Mar–Nov). Adjust to 0 8 * * * for 4am EDT.
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    # CountyWeb navigation + OCR can be slow — generous timeout
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: scripts/requirements-scraper.txt
+
+      - name: Install Tesseract OCR (system)
+        run: sudo apt-get install -y tesseract-ocr
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements-scraper.txt
+
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+
+      - name: Run daily pipeline (mortgages → enrich → alert)
+        working-directory: scripts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          ROD_PASSWORD: ${{ secrets.ROD_PASSWORD }}
+          ROD_VIEWER_USERNAME: ${{ secrets.ROD_VIEWER_USERNAME }}
+          # TESSERACT_CMD is intentionally omitted — pytesseract finds /usr/bin/tesseract
+          # automatically on Linux after apt-get install
+        run: python run_daily.py --no-deeds
+        # --no-deeds skips the GovOS deed scraper (fragile, requires GovOS account login).
+        # This runs: CountyWeb mortgages → LLC enrichment → high-confidence email alert.
+        # Run the deed scraper manually: python gvl_monitor.py --scrape deeds

@@ -1,0 +1,14 @@
+# Minimal dependencies for the daily leads pipeline (mortgages + enrichment)
+# Used by .github/workflows/daily-leads.yml
+# System deps required before pip install:
+#   sudo apt-get install -y tesseract-ocr
+#   playwright install chromium --with-deps
+
+supabase>=2.15.0
+python-dotenv==1.0.1
+requests==2.32.3
+beautifulsoup4>=4.12.0
+playwright>=1.40.0
+pytesseract>=0.3.13
+Pillow>=10.0.0
+thefuzz>=0.22.1
