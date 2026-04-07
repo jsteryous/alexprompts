@@ -25,3 +25,70 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* ── Night mode (dark green palette) ─────────────────────────── */
+html.dark {
+  --background: #0d1f16;
+  --foreground: #dff0e6;
+}
+
+html.dark body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Backgrounds */
+html.dark .bg-white       { background-color: #0d1f16 !important; }
+html.dark .bg-gray-50     { background-color: #0e2318 !important; }
+html.dark .bg-gray-100    { background-color: #132b1e !important; }
+html.dark .bg-gray-950,
+html.dark .bg-black       { background-color: #060f09 !important; }
+
+/* Nav header */
+html.dark header {
+  background-color: rgba(13, 31, 22, 0.92) !important;
+  border-color: #1a3525 !important;
+}
+
+/* Dropdown menu */
+html.dark .bg-white.border.border-gray-200 { background-color: #112119 !important; }
+
+/* Text */
+html.dark .text-black,
+html.dark .text-gray-900  { color: #dff0e6 !important; }
+html.dark .text-gray-700,
+html.dark .text-gray-800  { color: #b8d9c4 !important; }
+html.dark .text-gray-600  { color: #8db89c !important; }
+html.dark .text-gray-500  { color: #7aaa8a !important; }
+html.dark .text-gray-400  { color: #5a8a6a !important; }
+html.dark .text-gray-300  { color: #4a7a5a !important; }
+
+/* Borders */
+html.dark .border-gray-100 { border-color: #1a3525 !important; }
+html.dark .border-gray-200 { border-color: #204030 !important; }
+html.dark .border-gray-800 { border-color: #1a3525 !important; }
+
+/* Cards / panels */
+html.dark .rounded-xl.border { border-color: #1e3d2a !important; }
+html.dark .hover\:bg-gray-50:hover { background-color: #132b1e !important; }
+
+/* "Get More Jobs" button — invert to dark-green outline in dark mode */
+html.dark .bg-black.text-white:not(.bg-gray-950) {
+  background-color: #1a3525 !important;
+  border: 1px solid #2a5c3a !important;
+}
+
+/* Prose / article pages */
+html.dark .prose { color: #dff0e6 !important; }
+html.dark .prose h1,
+html.dark .prose h2,
+html.dark .prose h3,
+html.dark .prose h4 { color: #dff0e6 !important; }
+html.dark .prose p,
+html.dark .prose li  { color: #b8d9c4 !important; }
+html.dark .prose a   { color: #4ade80 !important; }
+html.dark .prose strong { color: #dff0e6 !important; }
+html.dark .prose code { background-color: #132b1e !important; color: #86efac !important; }
+html.dark .prose pre  { background-color: #0a1a10 !important; }
+html.dark .prose blockquote { border-color: #2a5c3a !important; color: #8db89c !important; }
+html.dark .prose hr   { border-color: #1e3d2a !important; }

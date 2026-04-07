@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ThemeProvider from "@/components/ThemeProvider";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 export const metadata: Metadata = {
   title: "REBB Advisors — Automated Lead Systems for Local Service Businesses",
@@ -21,11 +23,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Prevent flash of wrong theme on page load */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('rebb-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="antialiased">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+          <DarkModeToggle />
+        </ThemeProvider>
       </body>
     </html>
   );
