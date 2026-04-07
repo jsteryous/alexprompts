@@ -2,3 +2,8 @@ supabase>=2.15.0
 python-dotenv==1.0.1
 requests==2.32.3
 google-genai>=1.7.0
+beautifulsoup4>=4.12.0
+pytesseract>=0.3.13
+# OCR dep: pytesseract requires the Tesseract-OCR binary.
+# Windows: winget install tesseract-ocr.tesseract  (installs to C:\Program Files\Tesseract-OCR\)
+# Or set TESSERACT_CMD env var to override the binary path.

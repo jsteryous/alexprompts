@@ -10,16 +10,21 @@ Usage:
     python gvl_monitor.py --scrape deeds        # Scrape GVL Register of Deeds
     python gvl_monitor.py --scrape sos          # Scrape SC SOS business filings
     python gvl_monitor.py --scrape all          # Scrape all sources
+    python gvl_monitor.py --scrape all --days 14  # Look back 14 days (default: 7)
     python gvl_monitor.py --demo --dry-run      # Print without pushing to DB
+    python gvl_monitor.py --scrape deeds --debug  # Save raw HTML for selector tuning
 
 Setup:
     pip install -r requirements.txt
+    playwright install chromium   # one-time, ~130MB
     cp ../.env.local .env   # or set SUPABASE_URL + SUPABASE_SERVICE_KEY in shell
 """
 
 import os
+import re
 import sys
 import json
+import time
 import random
 import argparse
 from datetime import datetime, timezone, timedelta
@@ -36,6 +41,16 @@ load_dotenv(Path(__file__).parent.parent / '.env.local')
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")  # service key for server writes
+
+# ── GovOS credentials (deed scraper — greenville.sc.publicsearch.us) ──────────
+ROD_EMAIL    = os.environ.get("ROD_EMAIL")
+ROD_PASSWORD = os.environ.get("ROD_PASSWORD")
+
+# ── CountyWeb viewer credentials (mortgage monitor — viewer.greenvillecounty.org) ──
+# This is the standard county ROD viewer, NOT the Neumo/GovOS portal.
+# ROD_PASSWORD is shared between both portals.
+ROD_VIEWER_URL      = "https://viewer.greenvillecounty.org/countyweb"
+ROD_VIEWER_USERNAME = os.environ.get("ROD_VIEWER_USERNAME", "asteryous")
 
 _supabase = None
 
@@ -55,14 +70,18 @@ def get_supabase():
 @dataclass
 class MarketSignal:
     timestamp: str            # ISO 8601 with timezone
-    event_type: str           # PROPERTY TRANSFER | NEW BUSINESS FILING | INDUSTRIAL PERMIT
+    event_type: str           # PROPERTY TRANSFER | NEW BUSINESS FILING | INDUSTRIAL PERMIT | MORTGAGE_FILING
     location: str             # street address or entity name for filings
-    entity_name: str          # cleaned/resolved company or owner name
+    entity_name: str          # LLC or company name (raw — not yet unmasked)
     valuation: Optional[float]
     details: str              # human-readable context line
     score: int                # 0–100 lead priority
     tag: str                  # HOT | WARM | COLD
-    source: str               # deeds | sos | permits | demo
+    source: str               # deeds | sos | permits | demo | mortgages
+    source_url: Optional[str] = None   # URL to the source page
+    status: Optional[str]     = None   # lead workflow status (optional)
+    source_key: Optional[str] = None   # dedup key — unique per real-world event
+    signal_type: Optional[str] = None  # MORTGAGE_FILING | None — tells enrich.py to prioritise OCR
 
 
 # ── Fuzzy entity deduplication ───────────────────────────────────────────────
@@ -91,13 +110,28 @@ def normalize_entity(raw: str) -> str:
 
 # ── Scoring ──────────────────────────────────────────────────────────────────
 
-def score_signal(event_type: str, valuation: Optional[float]) -> tuple[int, str]:
-    """Return (score 0-100, tag HOT|WARM|COLD)."""
+def score_signal(
+    event_type: str,
+    valuation: Optional[float],
+    *,
+    is_construction: bool = False,
+) -> tuple[int, str]:
+    """Return (score 0-100, tag HOT|WARM|COLD).
+
+    MORTGAGE_FILING base scores:
+      MTG  = 82  (confirmed purchase financing — high intent)
+      CON  = 88  (active build site — service contracts imminent)
+    """
     base = {
         "PROPERTY TRANSFER":    78,
         "NEW BUSINESS FILING":  72,
         "INDUSTRIAL PERMIT":    68,
+        "MORTGAGE_FILING":      82,
     }.get(event_type, 55)
+
+    # Construction mortgages signal an active build — bump above standard MTG
+    if event_type == "MORTGAGE_FILING" and is_construction:
+        base = min(100, base + 6)   # → 88 base before valuation boost
 
     if valuation:
         if valuation >= 500_000:   base = min(100, base + 18)
@@ -217,68 +251,645 @@ def generate_demo_signals(count: int = 5) -> list[MarketSignal]:
     return sorted(signals, key=lambda s: s.timestamp, reverse=True)
 
 
-# ── Real scrapers — fill in selectors after inspecting the live pages ────────
+# ── Real scrapers ─────────────────────────────────────────────────────────────
 
-def scrape_greenville_deeds() -> list[MarketSignal]:
+# Shared browser headers for requests-based calls
+_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+_DEBUG_DIR = Path(__file__).parent / "debug"
+
+
+def _save_debug_html(name: str, html: str) -> None:
+    """Save raw HTML to scripts/debug/ for selector inspection."""
+    _DEBUG_DIR.mkdir(exist_ok=True)
+    out = _DEBUG_DIR / f"{name}.html"
+    out.write_text(html, encoding="utf-8")
+    print(f"  [debug] saved {out}")
+
+
+def _parse_govos_detail(html: str) -> tuple[Optional[float], Optional[str]]:
     """
-    Greenville County Register of Deeds — Recent Recordings
-    Homepage: https://www.greenvillecounty.org/rod/
+    Extract consideration (sale price) and property address from a GovOS deed detail page.
+    The search results table always returns N/A — the detail panel has the real numbers.
 
-    TODO:
-    1. Open the site in a browser and locate the "Recent Recordings" or
-       document search page.
-    2. Inspect the table/rows with DevTools to get the correct CSS selectors.
-    3. Replace the placeholder comments below with real selectors.
+    Returns (dollar_amount_or_None, property_address_or_None).
 
-    Expected fields per row:
-        grantor, grantee, legal description, book/page, recorded date, consideration
+    Example text: "Consideration: $494,500.00"
+    Example address labels: "Property Address:", "Situs Address:", "Site Address:"
+    """
+    try:
+        from bs4 import BeautifulSoup
+    except ImportError:
+        return None, None
+
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text(" ")
+
+    # ── Loan / consideration amount ────────────────────────────────────────────
+    # GovOS uses "Consideration" for deeds and may use "Loan Amount" /
+    # "Principal Amount" / "Original Principal Amount" for mortgage docs.
+    consideration: Optional[float] = None
+    _AMOUNT_LABELS = (
+        "consideration:",
+        "loan amount:",
+        "principal amount:",
+        "original principal amount:",
+        "amount:",
+    )
+    text_lower = text.lower()
+    for _lbl in _AMOUNT_LABELS:
+        idx = text_lower.find(_lbl)
+        if idx != -1:
+            snippet = text[idx + len(_lbl): idx + len(_lbl) + 60]
+            m = re.search(r"\$([\d,]+(?:\.\d{2})?)", snippet)
+            if m:
+                try:
+                    consideration = float(m.group(1).replace(",", ""))
+                    break
+                except ValueError:
+                    pass
+
+    # ── Property / situs address ───────────────────────────────────────────────
+    property_address: Optional[str] = None
+
+    # Try labeled fields first (most reliable)
+    for label in ("Property Address:", "Situs Address:", "Site Address:", "Property Location:"):
+        idx = text.find(label)
+        if idx != -1:
+            snippet = text[idx + len(label): idx + len(label) + 100].strip()
+            # Take the first non-empty chunk before a newline or next label keyword
+            addr = re.split(r"\n|(?=\b(?:Grantor|Grantee|Consideration|Book|Page)\b)", snippet)[0].strip()
+            if addr and len(addr) > 5:
+                property_address = addr
+                break
+
+    # Fallback: scan for a street-address pattern (number + street name + type)
+    if not property_address:
+        m = re.search(
+            r"\b(\d{2,5}\s+[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3}"
+            r"\s+(?:St|Ave|Rd|Dr|Blvd|Ln|Way|Ct|Pl|Hwy|Pkwy|Cir|Ter|Trl)\b[^,\n]{0,30})",
+            text,
+        )
+        if m:
+            property_address = m.group(1).strip()
+
+    return consideration, property_address
+
+
+def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[MarketSignal]:
+    """
+    Greenville County Register of Deeds — Recent Deed Recordings.
+
+    Uses the GovOS public portal (greenville.sc.publicsearch.us) — free,
+    no login required, Playwright needed because the HTMX app 403s raw requests.
+
+    Note: the legacy rod.greenvillecounty.org system requires a registered
+    account (free to create — store ROD_USERNAME / ROD_PASSWORD in .env.local
+    and switch to it if the GovOS portal becomes unreliable).
+
+    First-run tuning:
+      Run with --debug to save the raw HTML to scripts/debug/govos_*.html.
+      Inspect those files to verify or adjust selectors below.
     """
     try:
         from playwright.sync_api import sync_playwright
+        from bs4 import BeautifulSoup
     except ImportError:
-        print("  playwright not installed. Run: pip install playwright && playwright install chromium")
+        print("  playwright / beautifulsoup4 not installed.")
         return []
 
     signals: list[MarketSignal] = []
+    now        = datetime.now(timezone.utc)
+    start_date = (now - timedelta(days=days_back)).strftime("%m/%d/%Y")
+    end_date   = now.strftime("%m/%d/%Y")
+
+    GOVOS_URL = "https://greenville.sc.publicsearch.us"
+
+    if not ROD_EMAIL or not ROD_PASSWORD:
+        print(
+            "  ROD: ROD_EMAIL / ROD_PASSWORD not set in .env.local\n"
+            "       Register a free account at https://greenville.sc.publicsearch.us/register\n"
+            "       then add to .env.local:\n"
+            "         ROD_EMAIL=your@email.com\n"
+            "         ROD_PASSWORD=yourpassword"
+        )
+        return signals
+
+    GOVOS_SIGNIN = f"{GOVOS_URL}/signin"
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        pg = browser.new_page()
-        # ── TODO: Replace with real URL and selectors ──────────────────────
-        # pg.goto("https://www.greenvillecounty.org/rod/SearchResults.aspx?...")
-        # rows = pg.query_selector_all("tr.rod-row")  # adjust selector
-        # for row in rows:
-        #     grantee   = row.query_selector(".grantee-cell").inner_text().strip()
-        #     address   = row.query_selector(".address-cell").inner_text().strip()
-        #     consider  = row.query_selector(".consideration").inner_text().strip()
-        #     rec_date  = row.query_selector(".recorded-date").inner_text().strip()
-        #     valuation = float(consider.replace("$","").replace(",","")) if consider else None
-        #     score, tag = score_signal("PROPERTY TRANSFER", valuation)
-        #     signals.append(MarketSignal(
-        #         timestamp=datetime.now(timezone.utc).isoformat(),
-        #         event_type="PROPERTY TRANSFER",
-        #         location=address,
-        #         entity_name=normalize_entity(grantee),
-        #         valuation=valuation,
-        #         detail=f"Property transfer recorded {rec_date}",
-        #         score=score, tag=tag, source="deeds",
-        #     ))
-        # ────────────────────────────────────────────────────────────────────
+        page    = browser.new_page()
+        try:
+            # ── Step 1: Sign in ──────────────────────────────────────────
+            print(f"  ROD: signing in to GovOS portal...")
+            page.goto(GOVOS_SIGNIN, timeout=30_000)
+            page.wait_for_load_state("domcontentloaded", timeout=20_000)
+            page.wait_for_timeout(1_000)
+
+            if debug:
+                _save_debug_html("govos_signin", page.content())
+
+            # Fill email + password — field is type="text" not type="email"
+            page.fill("#email", ROD_EMAIL)
+            page.fill("#password", ROD_PASSWORD)
+
+            # Form uses hx-boost (HTMX) — submit triggers an AJAX POST + HX-Redirect header,
+            # NOT a standard browser navigation. Wait for URL to change away from /signin.
+            page.click("button.CallToAction[type='submit']")
+            try:
+                page.wait_for_url(lambda url: "/signin" not in url, timeout=15_000)
+            except Exception:
+                pass  # timeout — will check URL below
+            page.wait_for_load_state("domcontentloaded", timeout=10_000)
+            page.wait_for_timeout(1_000)
+
+            current_url = page.url
+            if "/signin" in current_url:
+                print(f"  ROD: sign-in failed — still on signin page. Check ROD_EMAIL/ROD_PASSWORD in .env.local")
+                if debug:
+                    _save_debug_html("govos_after_signin", page.content())
+                browser.close()
+                return signals
+
+            print(f"  ROD: signed in — {current_url}")
+            # React search app is already loaded on the landing page.
+            # Do NOT navigate — interacting with inputs that are already there.
+            page.wait_for_timeout(1_500)   # let React fully hydrate
+
+            if debug:
+                _save_debug_html("govos_after_signin", page.content())
+
+            # ── Step 2: Set start date ────────────────────────────────────
+            # React datepicker: triple-click to select all, then type new date.
+            start_input = page.locator("input[aria-label='Starting Recorded Date']")
+            start_input.click()
+            start_input.press("Control+a")
+            start_input.press_sequentially(start_date, delay=40)
+            start_input.press("Tab")
+            page.wait_for_timeout(500)
+
+            # ── Step 3: Submit search ─────────────────────────────────────
+            page.click("[data-testid='searchSubmitButton']")
+            page.wait_for_load_state("networkidle", timeout=20_000)
+            page.wait_for_timeout(1_500)
+
+            html = page.content()
+            if debug:
+                _save_debug_html("govos_results", html)
+
+            # ── Phase A: identify qualifying deed rows (static parse) ─────
+            # GovOS table columns (0-indexed):
+            #   0-2: checkbox/icons  3: doc#  4: book  5: page
+            #   6: recorded date  7: doc type  8: grantor  9: grantee
+            #   10: consideration  11: extra
+            soup = BeautifulSoup(html, "html.parser")
+            static_rows = soup.select("tr.is-uncertified, tr.is-certified")
+            print(f"  ROD: {len(static_rows)} result row(s) found...")
+
+            _DEED_TYPES = {"DEED", "DEED OF TRUST", "WARRANTY DEED", "QUIT CLAIM"}
+            deed_data = []   # (row_index, doc_type, grantor, grantee, rec_date, consid)
+            for i, row in enumerate(static_rows):
+                cells = [td.get_text(" ", strip=True) for td in row.find_all("td")]
+                if len(cells) < 10:
+                    continue
+                if cells[7] not in _DEED_TYPES:
+                    continue
+                if not cells[9]:
+                    continue
+                deed_data.append((i, cells[7], cells[8], cells[9], cells[6], cells[10]))
+
+            print(f"  ROD: {len(deed_data)} qualifying deed(s) — fetching property addresses...")
+
+            # ── Phase B: click each deed row to get consideration + address ──────
+            # The search results table always shows N/A for consideration —
+            # the individual deed detail page has the real sale price.
+            # Also attempt to parse a property/situs address from the detail page.
+            consid_map:  dict[int, Optional[float]] = {}
+            address_map: dict[int, Optional[str]]   = {}
+            rows_locator = page.locator("tr.is-uncertified, tr.is-certified")
+
+            for pos, (row_idx, doc_type, grantor, grantee, rec_date, _) in enumerate(deed_data):
+                try:
+                    rows_locator.nth(row_idx).click()
+                    page.wait_for_load_state("networkidle", timeout=8_000)
+                    page.wait_for_timeout(800)
+
+                    detail_html = page.content()
+                    if debug:
+                        _save_debug_html(f"govos_detail_{pos}", detail_html)
+
+                    amount, prop_addr = _parse_govos_detail(detail_html)
+                    consid_map[row_idx]  = amount
+                    address_map[row_idx] = prop_addr
+                    if amount:
+                        print(f"    ✓ {grantee[:30]}: ${amount:,.0f}" +
+                              (f"  @ {prop_addr}" if prop_addr else ""))
+                    else:
+                        print(f"    · {grantee[:30]}: consideration not disclosed" +
+                              (f"  @ {prop_addr}" if prop_addr else ""))
+
+                    # Try to dismiss detail pane; if SPA navigated away, go back
+                    try:
+                        page.keyboard.press("Escape")
+                        page.wait_for_timeout(400)
+                    except Exception:
+                        pass
+                    if rows_locator.count() == 0:
+                        page.go_back()
+                        page.wait_for_load_state("networkidle", timeout=10_000)
+                        page.wait_for_timeout(1_000)
+
+                except Exception as e:
+                    print(f"    ✗ row {row_idx}: {e}")
+                    consid_map[row_idx] = None
+
+                # Randomised delay — don't look like a bot
+                if pos < len(deed_data) - 1:
+                    page.wait_for_timeout(random.randint(3_000, 5_000))
+
+        except Exception as e:
+            print(f"  ROD: browser error — {e}")
+            try:
+                page.wait_for_timeout(500)
+            except Exception:
+                pass
+            browser.close()
+            return signals
         browser.close()
 
+    # ── Phase C: build signals (LLC/corporate grantees only) ─────────────────
+    _LLC_RE = re.compile(
+        r"\b(LLC|INC|CORP|LTD|LP|LLP|HOLDINGS|PARTNERS|PROPERTIES|ASSOCIATES|"
+        r"GROUP|DEVELOPMENT|ENTERPRISES|TRUST|FOUNDATION|VENTURES|CAPITAL|"
+        r"INVESTMENTS|REALTY|MANAGEMENT|SERVICES|SOLUTIONS)\b",
+        re.I,
+    )
+    skipped_individuals = 0
+    for row_idx, doc_type, grantor, grantee, rec_date, _ in deed_data:
+        # Skip individual homebuyers — only keep LLC/corporate grantees.
+        # Individual purchases are not the target market; commercial LLC buyers are.
+        if not _LLC_RE.search(grantee):
+            skipped_individuals += 1
+            continue
+
+        # Use consideration from detail page (real price) over the search table (always N/A)
+        valuation  = consid_map.get(row_idx)
+        # Use parsed property address when available; fall back to grantor name as context.
+        # enrich.py will further resolve the location via GIS if it's still a name.
+        prop_addr  = address_map.get(row_idx)
+        location   = prop_addr or grantor or grantee
+
+        score, tag = score_signal("PROPERTY TRANSFER", valuation)
+        signals.append(MarketSignal(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            event_type="PROPERTY TRANSFER",
+            location=location,
+            entity_name=normalize_entity(grantee),
+            valuation=valuation,
+            details=f"Deed recording · {doc_type} · recorded {rec_date}",
+            score=score,
+            tag=tag,
+            source="deeds",
+            source_url=GOVOS_URL,
+            source_key=f"deeds:{grantee.strip().upper()}:{rec_date}",
+        ))
+
+    print(f"  ROD: {len(signals)} LLC/commercial deed(s) kept · {skipped_individuals} individual(s) skipped")
     return signals
 
 
-def scrape_sc_sos_filings() -> list[MarketSignal]:
+def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list[MarketSignal]:
     """
-    South Carolina Secretary of State — New Business Filings
-    Portal: https://businessfilings.sc.gov/
+    Greenville County ROD CountyWeb viewer — Recent Mortgage Filings.
 
-    TODO:
-    1. Find the "search by county" or "recent filings" endpoint.
-    2. Filter to Greenville County, entity type = LLC/Corp.
-    3. Replace placeholder below with real request + selectors.
+    Portal: viewer.greenvillecounty.org (standard county ROD viewer)
+    NOT the GovOS/Neumo portal used by the deed scraper.
 
-    Expected fields: entity_name, registered_agent, filing_date, entity_type, county
+    Credentials:
+      ROD_VIEWER_USERNAME (env var, default: "asteryous")
+      ROD_PASSWORD        (env var, shared with GovOS deed scraper)
+
+    Navigation (nested iframe architecture):
+      login → bodyframe → disclaimer → searchMain.do
+      → dynSearchFrame → criteriaframe → executeSearch()
+      → resultListFrame
+
+    Search strategy: date-range only (no entity name) — returns all filings
+    in the window, then filters rows for MTG / CON doc types.
+
+    In CountyWeb results, for mortgage documents:
+      Grantor = BORROWER (the LLC pledging property — who we want)
+      Grantee = LENDER   (bank / financial institution)
+
+    Signals are inserted with:
+      event_type  = "MORTGAGE_FILING"
+      signal_type = "MORTGAGE_FILING"  ← tells enrich.py to prioritise OCR
+      source      = "mortgages"
+
+    Field numbers for Greenville CountyWeb datagrid (verified from mtg_cw_08_results.html):
+      field 3  = instrument number
+      field 4  = book   field 5 = page
+      field 6  = recording date   field 7 = doc type (confirmed)
+      field 9  = grantor (borrower)   field 11 = grantee (lender)
+      consideration is not present in the results table — always blank.
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+        from bs4 import BeautifulSoup
+    except ImportError:
+        print("  playwright / beautifulsoup4 not installed.")
+        return []
+
+    signals: list[MarketSignal] = []
+    now        = datetime.now(timezone.utc)
+    start_date = (now - timedelta(days=days_back)).strftime("%m/%d/%Y")
+    end_date   = now.strftime("%m/%d/%Y")
+
+    if not ROD_PASSWORD:
+        print("  MTG: ROD_PASSWORD not set in .env.local")
+        return signals
+
+    # CountyWeb may spell out or abbreviate doc types — match both
+    _MTG_TYPES_CW = {"MORTGAGE", "MTG", "CONSTRUCTION MORTGAGE", "CONSTRUCTION LOAN", "CON"}
+
+    _LLC_RE = re.compile(
+        r"\b(LLC|INC|CORP|LTD|LP|LLP|HOLDINGS|PARTNERS|PROPERTIES|ASSOCIATES|"
+        r"GROUP|DEVELOPMENT|ENTERPRISES|TRUST|FOUNDATION|VENTURES|CAPITAL|"
+        r"INVESTMENTS|REALTY|MANAGEMENT|SERVICES|SOLUTIONS)\b",
+        re.I,
+    )
+
+    # (row_idx, doc_type, borrower, lender, rec_date, consideration)
+    mtg_data: list[tuple] = []
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page    = browser.new_page()
+        try:
+            # ── Step 1: Log in ────────────────────────────────────────────
+            login_url = f"{ROD_VIEWER_URL}/loginDisplay.action?countyname=Greenville"
+            print(f"  MTG: logging in to CountyWeb ({ROD_VIEWER_URL})...")
+            page.goto(login_url, timeout=30_000)
+            page.wait_for_load_state("domcontentloaded", timeout=15_000)
+            page.wait_for_timeout(800)
+
+            if debug:
+                _save_debug_html("mtg_cw_01_login", page.content())
+
+            page.fill("input[name='username']", ROD_VIEWER_USERNAME)
+            page.fill("input[name='password']", ROD_PASSWORD)
+            # Login button has no type attribute — call doLogin() directly
+            # to avoid a selector timeout on button[type='submit'].
+            page.evaluate("doLogin()")
+            page.wait_for_load_state("domcontentloaded", timeout=15_000)
+            page.wait_for_timeout(2_000)
+
+            if "login" in page.url.lower():
+                print("  MTG: sign-in failed — check ROD_VIEWER_USERNAME/ROD_PASSWORD in .env.local")
+                if debug:
+                    _save_debug_html("mtg_cw_01b_login_fail", page.content())
+                browser.close()
+                return signals
+
+            print(f"  MTG: signed in → {page.url}")
+
+            if debug:
+                _save_debug_html("mtg_cw_02_after_login", page.content())
+
+            # ── Step 2: Accept disclaimer in bodyframe ────────────────────
+            # After login the bodyframe loads disclaimer.jsp.
+            page.wait_for_timeout(2_000)
+            frame = page.frame(name="bodyframe")
+            if frame is None:
+                print("  MTG: bodyframe not found after login")
+                browser.close()
+                return signals
+
+            if debug:
+                _save_debug_html("mtg_cw_03_bodyframe", frame.content())
+
+            if frame.locator("input[name='accept']").count() > 0:
+                frame.click("input[name='accept']")
+                page.wait_for_load_state("domcontentloaded", timeout=15_000)
+                page.wait_for_timeout(2_000)
+                frame = page.frame(name="bodyframe")
+                if frame is None:
+                    print("  MTG: bodyframe lost after disclaimer accept")
+                    browser.close()
+                    return signals
+
+            if debug:
+                _save_debug_html("mtg_cw_04_after_disclaimer", frame.content())
+            print(f"  MTG: bodyframe → {frame.url}")
+
+            # ── Step 3: Navigate bodyframe to search page ─────────────────
+            # frame.goto() returns 404 — must click the outer nav link
+            # (target="bodyframe") to keep the session bound correctly.
+            nav_link = page.locator("a[href*='searchMain.do']")
+            if nav_link.count() > 0:
+                nav_link.first.click()
+            else:
+                page.evaluate(
+                    "window.frames['bodyframe'].location = "
+                    "'/countyweb/search/searchMain.do?defaultType=Public'"
+                )
+
+            page.wait_for_timeout(3_000)
+            frame = page.frame(name="bodyframe")
+
+            if debug and frame:
+                _save_debug_html("mtg_cw_05_search_main", frame.content())
+
+            # ── Step 4: Wait for criteriaframe (nested inside dynSearchFrame) ──
+            # SearchMainView.jsp calls loadChildren() which navigates dynSearchFrame
+            # → DynSearchCriteriaViewEnhanced.jsp → easyUI criteria panel.
+            page.wait_for_timeout(2_500)
+            cf = page.frame(name="criteriaframe")
+            if cf is None:
+                print("  MTG: criteriaframe not found — run with --debug to inspect")
+                browser.close()
+                return signals
+
+            try:
+                cf.wait_for_selector("#FROMDATE", timeout=10_000)
+            except Exception:
+                pass  # may already be present
+
+            if debug:
+                _save_debug_html("mtg_cw_06_criteria", cf.content())
+            print(f"  MTG: criteriaframe ready → {cf.url}")
+
+            # ── Step 5: Set date range — no name filter (returns all filings) ──
+            cf.evaluate(f"$('#FROMDATE').datebox('setValue', '{start_date}')")
+            cf.evaluate(f"$('#TODATE').datebox('setValue', '{end_date}')")
+            print(f"  MTG: date range {start_date} → {end_date} (last {days_back} day(s))")
+
+            if debug:
+                _save_debug_html("mtg_cw_07_form_filled", cf.content())
+
+            # ── Step 6: Execute search ────────────────────────────────────
+            cf.evaluate("executeSearch()")
+            page.wait_for_timeout(5_000)
+
+            # ── Step 7: Parse results from resultListFrame ────────────────
+            results_frame = (
+                page.frame(name="resultListFrame")
+                or page.frame(name="resultFrame")
+                or page.frame(name="searchFrame")
+            )
+            if results_frame is None:
+                print("  MTG: results frame not found — run with --debug to inspect")
+                browser.close()
+                return signals
+
+            try:
+                results_frame.wait_for_load_state("domcontentloaded", timeout=15_000)
+            except Exception:
+                pass
+
+            results_html = results_frame.content()
+            if debug:
+                _save_debug_html("mtg_cw_08_results", results_html)
+            print(f"  MTG: results frame → {results_frame.url}")
+
+            results_text = BeautifulSoup(results_html, "html.parser").get_text(" ", strip=True)
+            if "no record" in results_text.lower() or "0 record" in results_text.lower():
+                print("  MTG: no records found for this date range")
+                browser.close()
+                return signals
+
+            results_soup = BeautifulSoup(results_html, "html.parser")
+            all_rows = results_soup.select("tr[datagrid-row-index]")
+            print(f"  MTG: {len(all_rows)} result row(s) in search output...")
+
+            for row in all_rows:
+                # Build a field-number → text dict from every <td field="N"> cell
+                cells: dict[str, str] = {
+                    td.get("field", ""): td.get_text(" ", strip=True)
+                    for td in row.find_all("td")
+                }
+                doc_type = cells.get("7", "").strip().upper()
+                if doc_type not in _MTG_TYPES_CW:
+                    continue
+
+                row_idx  = int(row.get("datagrid-row-index", -1))
+
+                # Verified field layout from mtg_cw_08_results.html:
+                #   field 3  = instrument number
+                #   field 4  = book   field 5 = page
+                #   field 6  = recording date   field 7 = doc type
+                #   field 9  = grantor (borrower)   field 11 = grantee (lender)
+                #   consideration not present in results table — always blank
+                borrower   = cells.get("9", "").strip()
+                lender     = cells.get("11", "").strip()
+                rec_date   = cells.get("6", "").strip()
+                consid_raw = ""  # not available in results; will be blank
+
+                # JS documentRowInfo fallback when cells are empty
+                if not borrower:
+                    m = re.search(
+                        rf"documentRowInfo\[{row_idx}\]\.grantorName\s*=\s*[\"']([^\"']+)",
+                        results_html,
+                    )
+                    if m:
+                        borrower = m.group(1).strip()
+                if not lender:
+                    m = re.search(
+                        rf"documentRowInfo\[{row_idx}\]\.granteeName\s*=\s*[\"']([^\"']+)",
+                        results_html,
+                    )
+                    if m:
+                        lender = m.group(1).strip()
+                if not rec_date:
+                    m = re.search(
+                        rf"documentRowInfo\[{row_idx}\]\.recDate\s*=\s*[\"']([^\"']+)",
+                        results_html,
+                    )
+                    if m:
+                        rec_date = m.group(1).strip()
+
+                # Parse consideration (may be "$500,000.00" or "500000.00" or blank)
+                consideration: Optional[float] = None
+                if consid_raw:
+                    cm = re.search(r"[\d,]+(?:\.\d{2})?", consid_raw.replace("$", "").replace(",", ""))
+                    if cm:
+                        try:
+                            consideration = float(cm.group(0))
+                        except ValueError:
+                            pass
+
+                if borrower:
+                    mtg_data.append((row_idx, doc_type, borrower, lender, rec_date, consideration))
+
+        except Exception as e:
+            print(f"  MTG: browser error — {e}")
+            try:
+                page.wait_for_timeout(500)
+            except Exception:
+                pass
+            browser.close()
+            return signals
+        browser.close()
+
+    print(f"  MTG: {len(mtg_data)} qualifying mortgage(s) found...")
+
+    # ── Build signals (LLC borrowers only) ────────────────────────────────────
+    skipped_individuals = 0
+    for row_idx, doc_type, borrower, lender, rec_date, consideration in mtg_data:
+        # Skip individual homeowners — commercial LLC borrowers are the target
+        if not _LLC_RE.search(borrower):
+            skipped_individuals += 1
+            continue
+
+        is_construction = "CON" in doc_type.upper()
+        score, tag = score_signal("MORTGAGE_FILING", consideration, is_construction=is_construction)
+
+        # Location defaults to borrower name — enrich.py will resolve via GIS
+        lender_label = lender[:40] if lender else "Unknown Lender"
+        kind = "CON" if is_construction else "MTG"
+
+        if consideration:
+            print(f"    ✓ [{kind}] {borrower[:35]}: ${consideration:,.0f} · Lender: {lender_label[:25]}")
+        else:
+            print(f"    · [{kind}] {borrower[:35]}: amount not disclosed · Lender: {lender_label[:25]}")
+
+        signals.append(MarketSignal(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            event_type="MORTGAGE_FILING",
+            signal_type="MORTGAGE_FILING",
+            location=borrower,    # enrich.py resolves to property address via GIS
+            entity_name=normalize_entity(borrower),
+            valuation=consideration,
+            details=f"Mortgage filing · {doc_type} · recorded {rec_date} · Lender: {lender_label}",
+            score=score,
+            tag=tag,
+            source="mortgages",
+            source_url=ROD_VIEWER_URL,
+            source_key=f"mtg:{borrower.strip().upper()}:{rec_date}",
+        ))
+
+    print(f"  MTG: {len(signals)} LLC mortgage(s) kept · {skipped_individuals} individual(s) skipped")
+    return signals
+
+
+def scrape_sc_sos_filings(days_back: int = 7, debug: bool = False) -> list[MarketSignal]:
+    """
+    SC Secretary of State — New Business Filings in Greenville County.
+
+    The SOS search form (businessfilings.sc.gov) has a CAPTCHA — direct
+    scraping is blocked.  Instead we use DuckDuckGo to surface recently-
+    indexed SC SOS entity detail pages for Greenville County LLCs, then
+    fetch each detail page directly (no CAPTCHA on detail URLs).
+
+    Detail URL pattern: businessfilings.sc.gov/BusinessFiling/Entity/Details/{id}
     """
     try:
         import requests
@@ -288,27 +899,122 @@ def scrape_sc_sos_filings() -> list[MarketSignal]:
         return []
 
     signals: list[MarketSignal] = []
-    # ── TODO: Replace with real URL and parsing logic ──────────────────────
-    # response = requests.get("https://businessfilings.sc.gov/search?county=Greenville&...")
-    # soup = BeautifulSoup(response.text, "html.parser")
-    # rows = soup.select("table.results-table tr")
-    # for row in rows[1:]:  # skip header
-    #     cols = row.find_all("td")
-    #     if len(cols) < 4: continue
-    #     entity_name  = cols[0].get_text(strip=True)
-    #     filing_date  = cols[1].get_text(strip=True)
-    #     entity_type  = cols[2].get_text(strip=True)
-    #     score, tag = score_signal("NEW BUSINESS FILING", None)
-    #     signals.append(MarketSignal(
-    #         timestamp=datetime.now(timezone.utc).isoformat(),
-    #         event_type="NEW BUSINESS FILING",
-    #         location=entity_name,
-    #         entity_name=normalize_entity(entity_name),
-    #         valuation=None,
-    #         detail=f"{entity_type} · Filed {filing_date} · Greenville County",
-    #         score=score, tag=tag, source="sos",
-    #     ))
-    # ────────────────────────────────────────────────────────────────────────
+    DDG_URL     = "https://html.duckduckgo.com/html/"
+    SOS_PATTERN = re.compile(
+        r"businessfilings\.sc\.gov/BusinessFiling/Entity/Details/(\w+)"
+    )
+
+    # Two queries — one broad, one county-specific
+    queries = [
+        'site:businessfilings.sc.gov "Greenville" LLC',
+        'site:businessfilings.sc.gov "Greenville County" South Carolina',
+    ]
+
+    seen_ids: set[str] = set()
+    entity_urls: list[str] = []
+
+    for query in queries:
+        try:
+            resp = requests.post(
+                DDG_URL,
+                data={"q": query, "b": "", "kl": "us-en"},
+                headers={**_HEADERS, "Content-Type": "application/x-www-form-urlencoded"},
+                timeout=15,
+            )
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "html.parser")
+
+            if debug:
+                _save_debug_html(f"sos_ddg_{query[:30].replace(' ','_')}", resp.text)
+
+            for result in soup.select(".result"):
+                url_el = result.select_one(".result__url, .result__a")
+                if not url_el:
+                    continue
+                url_text = url_el.get_text(strip=True)
+                m = SOS_PATTERN.search(url_text)
+                if m:
+                    eid = m.group(1)
+                    if eid not in seen_ids:
+                        seen_ids.add(eid)
+                        full = f"https://businessfilings.sc.gov/BusinessFiling/Entity/Details/{eid}"
+                        entity_urls.append(full)
+
+            time.sleep(1.5)
+        except Exception as e:
+            print(f"  SOS: DDG search failed — {e}")
+
+    print(f"  SOS: {len(entity_urls)} entity URL(s) found via DuckDuckGo")
+
+    for url in entity_urls[:25]:   # cap at 25 per run
+        try:
+            resp = requests.get(url, headers=_HEADERS, timeout=15)
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "html.parser")
+
+            if debug:
+                eid = url.split("/")[-1]
+                _save_debug_html(f"sos_entity_{eid}", resp.text)
+
+            # Entity name — try common heading patterns
+            name = ""
+            for sel in ["h1", ".entity-name", "h2", ".page-title"]:
+                el = soup.select_one(sel)
+                if el:
+                    name = el.get_text(strip=True)
+                    if name:
+                        break
+
+            if not name:
+                # Fall back: find the page title
+                title_el = soup.find("title")
+                if title_el:
+                    name = title_el.get_text(strip=True).split("|")[0].strip()
+
+            if not name:
+                continue
+
+            # Only keep Greenville County filings
+            page_text = soup.get_text(" ")
+            if "greenville" not in page_text.lower():
+                continue
+
+            # Try to find filing date
+            filing_date = ""
+            for keyword in ("Date of Formation", "Filing Date", "Effective Date", "Registration Date"):
+                idx = page_text.find(keyword)
+                if idx != -1:
+                    snippet = page_text[idx + len(keyword):idx + len(keyword) + 30].strip(" :·")
+                    # grab the first date-like string
+                    date_m = re.search(r"\d{1,2}/\d{1,2}/\d{4}", snippet)
+                    if date_m:
+                        filing_date = date_m.group(0)
+                        break
+
+            score, tag = score_signal("NEW BUSINESS FILING", None)
+            details = f"SC SOS filing · Greenville County"
+            if filing_date:
+                details += f" · filed {filing_date}"
+
+            signals.append(MarketSignal(
+                timestamp=datetime.now(timezone.utc).isoformat(),
+                event_type="NEW BUSINESS FILING",
+                location=name,
+                entity_name=normalize_entity(name),
+                valuation=None,
+                details=details,
+                score=score,
+                tag=tag,
+                source="sos",
+                source_url=url,
+                source_key=url,
+            ))
+            time.sleep(0.75)  # polite delay
+
+        except Exception as e:
+            print(f"  SOS: failed to fetch {url} — {e}")
+
+    print(f"  SOS: {len(signals)} Greenville filing(s) scraped")
     return signals
 
 
@@ -320,9 +1026,17 @@ def push_to_supabase(signals: list[MarketSignal]) -> None:
         print("  ⚠  Supabase not configured — set SUPABASE_URL + SUPABASE_SERVICE_KEY in .env")
         return
     rows = [asdict(s) for s in signals]
-    result = client.table("market_signals").insert(rows).execute()
+    # Upsert: signals with a source_key skip silently on conflict (same real-world event).
+    # Signals without a source_key (demo data) always insert — NULLs are not constrained.
+    result = (
+        client.table("market_signals")
+        .upsert(rows, on_conflict="source_key", ignore_duplicates=True)
+        .execute()
+    )
     pushed = len(result.data) if result.data else 0
-    print(f"  ✓  Pushed {pushed} signal(s) to market_signals")
+    skipped = len(signals) - pushed
+    print(f"  ✓  Pushed {pushed} signal(s) to market_signals" +
+          (f" ({skipped} duplicate(s) skipped)" if skipped else ""))
 
 
 # ── CLI ──────────────────────────────────────────────────────────────────────
@@ -331,7 +1045,8 @@ def print_signals(signals: list[MarketSignal]) -> None:
     for s in signals:
         val = f"${s.valuation:,.0f}" if s.valuation else "—"
         tag_marker = {"HOT": "🔴", "WARM": "🟡", "COLD": "⚪"}.get(s.tag, "·")
-        print(f"  {tag_marker} [{s.tag}] {s.event_type}  score={s.score}")
+        type_label = f"  [{s.signal_type}]" if s.signal_type else ""
+        print(f"  {tag_marker} [{s.tag}] {s.event_type}{type_label}  score={s.score}")
         print(f"      Location:  {s.location}")
         print(f"      Entity:    {s.entity_name}")
         print(f"      Detail:    {s.details}")
@@ -347,13 +1062,19 @@ def main() -> None:
                         help="Generate and push realistic mock signals")
     parser.add_argument("--scrape", choices=["deeds", "sos", "all"],
                         help="Scrape live municipal data sources")
+    parser.add_argument("--mode", choices=["mortgages"],
+                        help="Special scrape mode: 'mortgages' targets MTG/CON doc types on GovOS")
     parser.add_argument("--count", type=int, default=5,
                         help="Number of demo signals to generate (default: 5)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Print signals without writing to Supabase")
+    parser.add_argument("--days", type=int, default=7,
+                        help="How many days back to scrape (default: 7)")
+    parser.add_argument("--debug", action="store_true",
+                        help="Save raw HTML to scripts/debug/ for selector inspection")
     args = parser.parse_args()
 
-    if not args.demo and not args.scrape:
+    if not args.demo and not args.scrape and not args.mode:
         parser.print_help()
         return
 
@@ -366,10 +1087,14 @@ def main() -> None:
     if args.scrape:
         if args.scrape in ("deeds", "all"):
             print("Scraping Greenville County Register of Deeds...")
-            signals += scrape_greenville_deeds()
+            signals += scrape_greenville_deeds(days_back=args.days, debug=args.debug)
         if args.scrape in ("sos", "all"):
             print("Scraping SC Secretary of State filings...")
-            signals += scrape_sc_sos_filings()
+            signals += scrape_sc_sos_filings(days_back=args.days, debug=args.debug)
+
+    if args.mode == "mortgages":
+        print("Scraping Greenville County mortgage filings (MTG + CON)...")
+        signals += scrape_greenville_mortgages(days_back=args.days, debug=args.debug)
 
     if not signals:
         print("No signals produced. Check scraper stubs or use --demo.")
