@@ -74,7 +74,9 @@ src/
 ├── components/
 │   ├── Nav.tsx                     — sticky header with Services dropdown + mobile accordion (client component)
 │   ├── Footer.tsx
-│   └── LiveSignalFeed.tsx          — real-time Multiplier terminal (client component)
+│   ├── LiveSignalFeed.tsx          — real-time Multiplier terminal (client component)
+│   ├── ThemeProvider.tsx           — dark/light theme context; reads/writes localStorage; applies `dark` class to <html> (client component)
+│   └── DarkModeToggle.tsx          — fixed bottom-right floating moon/sun button; consumes ThemeProvider context (client component)
 └── lib/
     └── supabase.ts                 — Supabase client singleton (null if env vars not set)
 
@@ -121,7 +123,8 @@ supabase/
 
 - Tailwind v4 uses `@theme {}` in `globals.css` for custom tokens — no `tailwind.config.js`
 - Typography plugin added via `@plugin "@tailwindcss/typography"` in `globals.css`
-- All pages are server components (no `use client` except Nav and LiveSignalFeed)
+- All pages are server components (no `use client` except Nav, LiveSignalFeed, ThemeProvider, and DarkModeToggle)
+- Dark mode: class-based (`html.dark`). `ThemeProvider` manages state via localStorage. CSS overrides in `globals.css` under `html.dark`. Palette: bg `#0d1f16`, dark sections `#060f09`, text `#dff0e6`. `suppressHydrationWarning` on `<html>` + inline script in `<head>` prevent theme flash on reload.
 - CTAs always link to `/contact`
 - Section labels use `text-xs font-semibold uppercase tracking-widest text-green-600`
 - Dark CTA sections use `bg-gray-950` or `bg-black` with `green-500` buttons
