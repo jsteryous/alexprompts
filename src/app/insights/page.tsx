@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+
+export const metadata: Metadata = {
+  title: "Market Insights — Greenville SC Lead Generation & Marketing · REBB Advisors",
+  description:
+    "Tactical articles on lead generation, local SEO, and outreach automation for Greenville County service businesses — HVAC, landscaping, pool, pressure washing, and trades.",
+  alternates: { canonical: "https://rebbadvisors.com/insights" },
+};
 
 interface BlogPost {
   id: string;

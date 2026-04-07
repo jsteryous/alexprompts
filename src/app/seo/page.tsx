@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Local SEO & Audit Services — REBB Advisors",
+  title: "Local SEO for Greenville SC Service Businesses — REBB Advisors",
   description:
-    "Technical SEO audits, Google Business Profile optimization, and local search rankings for Greenville County service businesses. Stop waiting to be found.",
+    "Technical SEO audits, Google Business Profile optimization, and local pack rankings for Greenville County HVAC, landscaping, and trades businesses. Free audit on your first call.",
+  openGraph: {
+    title: "Local SEO for Greenville SC Service Businesses — REBB Advisors",
+    description:
+      "Technical SEO audits and GBP optimization for Greenville County trades. Free audit on your first call.",
+    type: "website",
+    url: "https://rebbadvisors.com/seo",
+  },
+  alternates: { canonical: "https://rebbadvisors.com/seo" },
 };
 
 export default function SeoPage() {

@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Custom Web Development — REBB Advisors",
+  title: "Web Development for Greenville SC Service Businesses — REBB Advisors",
   description:
-    "High-speed React and Next.js sites for Greenville County service businesses. 100/100 Lighthouse. Live in 5 days. Built to convert, not just look good.",
+    "High-speed React and Next.js sites for Greenville County HVAC, landscaping, and trades businesses. 100/100 Lighthouse. Live in 5 days. Built to convert, not just look good.",
+  openGraph: {
+    title: "Web Development for Greenville SC Service Businesses — REBB Advisors",
+    description:
+      "High-speed React sites for Upstate SC trades. 100/100 Lighthouse. Live in 5 days.",
+    type: "website",
+    url: "https://rebbadvisors.com/web-development",
+  },
+  alternates: { canonical: "https://rebbadvisors.com/web-development" },
 };
 
 export default function WebDevelopmentPage() {

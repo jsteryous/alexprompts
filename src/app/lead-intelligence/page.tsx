@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Lead Intelligence — The Upstate Multiplier · REBB Advisors",
+  title: "Lead Intelligence for Greenville SC — The Upstate Multiplier · REBB Advisors",
   description:
-    "Weekly Greenville County property transfers and business filings — cross-referenced to real decision-makers. Know who to call before your competitors do.",
+    "Daily Greenville County property transfers and new business filings — cross-referenced to real decision-makers. Know who to call before your competitors do. Built for Upstate SC service businesses.",
+  openGraph: {
+    title: "The Upstate Multiplier — Lead Intelligence for Greenville SC",
+    description:
+      "Daily Greenville County property and business filing data surfaced as ranked, actionable leads for local service businesses.",
+    type: "website",
+    url: "https://rebbadvisors.com/lead-intelligence",
+  },
+  alternates: { canonical: "https://rebbadvisors.com/lead-intelligence" },
 };
 
 export default function LeadIntelligencePage() {

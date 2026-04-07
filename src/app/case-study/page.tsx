@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Case Study — REBB Advisors",
   description: "How we helped a local service business stop losing leads and increase booked jobs.",
+  robots: { index: false, follow: false },
 };
 
 export default function CaseStudyPage() {

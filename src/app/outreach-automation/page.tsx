@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Outreach Automation — REBB Advisors",
+  title: "Outreach Automation for Greenville SC Service Businesses — REBB Advisors",
   description:
-    "Automated email and SMS follow-up sequences for Greenville County service businesses. Every inbound lead gets an instant response — while you're on the job site.",
+    "Automated email and SMS follow-up sequences for Greenville County HVAC, landscaping, and trades. Every inbound lead gets an instant response — while you're on the job site.",
+  openGraph: {
+    title: "Outreach Automation for Greenville SC Service Businesses — REBB Advisors",
+    description:
+      "Automated follow-up sequences for Upstate SC trades. Never miss a lead while you're on the job site.",
+    type: "website",
+    url: "https://rebbadvisors.com/outreach-automation",
+  },
+  alternates: { canonical: "https://rebbadvisors.com/outreach-automation" },
 };
 
 export default function OutreachAutomationPage() {

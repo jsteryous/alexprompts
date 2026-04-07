@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How It Works — REBB Advisors",
+  title: "How It Works — 30-Day Revenue Sprint · REBB Advisors",
   description:
-    "The 30-Day Revenue Sprint: how we build your site, plug in The Multiplier, and get you a lead you wouldn't have found otherwise.",
+    "The 30-Day Revenue Sprint for Greenville SC service businesses: site live in 5 days, Multiplier dashboard active, automated follow-up installed. One lead you wouldn't have found otherwise — or full refund.",
+  openGraph: {
+    title: "How It Works — 30-Day Revenue Sprint · REBB Advisors",
+    description:
+      "Site live in 5 days, Multiplier active, automated follow-up installed. One new lead in 30 days or full refund.",
+    type: "website",
+    url: "https://rebbadvisors.com/how-it-works",
+  },
+  alternates: { canonical: "https://rebbadvisors.com/how-it-works" },
 };
 
 const steps = [

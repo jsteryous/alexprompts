@@ -56,10 +56,13 @@ The proprietary data product. Daily Python-driven syncs of Greenville County pro
 src/
 ├── app/
 │   ├── globals.css                 — design tokens, base styles, @plugin typography
-│   ├── layout.tsx                  — root layout wrapping Nav + Footer
+│   ├── layout.tsx                  — root layout wrapping Nav + Footer; geo-qualified metadata + LocalBusiness JSON-LD
+│   ├── opengraph-image.tsx         — dynamic OG image (1200×630, edge runtime, Satori); auto-injected by Next.js
+│   ├── sitemap.ts                  — generates /sitemap.xml; static routes + published blog posts from Supabase
+│   ├── robots.ts                   — generates /robots.txt; blocks /review and /api/
 │   ├── page.tsx                    — homepage (includes Services section linking all 4 service pages)
 │   ├── how-it-works/page.tsx
-│   ├── case-study/page.tsx
+│   ├── case-study/page.tsx         — placeholder; noindexed (robots: index false)
 │   ├── contact/page.tsx
 │   ├── lead-intelligence/page.tsx  — The Upstate Multiplier standalone page
 │   ├── seo/page.tsx                — Local SEO audits + GBP optimization
@@ -118,6 +121,17 @@ supabase/
 **Spacing:** Generous — sections use `py-24 md:py-32`. Max content width `max-w-6xl`. Article pages use `max-w-2xl`.
 
 **Design direction:** Stripe / Linear aesthetic — lots of whitespace, strong type scale, minimal decoration.
+
+## SEO Architecture
+
+- **Sitemap:** `src/app/sitemap.ts` — Next.js generates `/sitemap.xml` at runtime; includes all static routes + published `blog_posts` rows
+- **Robots:** `src/app/robots.ts` — disallows `/review` and `/api/`; points to sitemap
+- **OG image:** `src/app/opengraph-image.tsx` — edge-runtime Satori component; auto-injected as `og:image` by Next.js; do NOT set `openGraph.images` in page metadata (it would conflict)
+- **Structured data:** LocalBusiness JSON-LD in `layout.tsx` `<head>` — `ProfessionalService` type, `areaServed: Greenville County SC`
+- **Metadata convention:** Every page sets `title` (geo-qualified, "Greenville SC" in the string), `description`, `openGraph` (title + description + url), and `alternates.canonical`
+- **`/case-study`** has `robots: { index: false, follow: false }` until real client data is available — do not remove this until the page has real content
+- **Google Fonts** cannot be used at build time (Turbopack http2 error) — also avoid in `opengraph-image.tsx`; Satori uses system-ui fallback
+- **Brand tagline:** "Lead Generation & Marketing for Greenville SC Trades" — used in root title tag and OG titles. "Proactive Lead Intelligence" lives on product pages as a differentiator, not in the brand line.
 
 ## Key Conventions
 
