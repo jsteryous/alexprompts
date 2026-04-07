@@ -12,6 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     # CountyWeb navigation + OCR can be slow — generous timeout
     timeout-minutes: 60
+    env:
+      PYTHONUNBUFFERED: "1"
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      ROD_PASSWORD: ${{ secrets.ROD_PASSWORD }}
+      ROD_VIEWER_USERNAME: ${{ secrets.ROD_VIEWER_USERNAME }}
 
     steps:
       - name: Checkout repository
@@ -33,18 +41,15 @@ jobs:
       - name: Install Playwright Chromium
         run: playwright install chromium --with-deps
 
-      - name: Run daily pipeline (mortgages → enrich → alert)
+      - name: Step 1 — Mortgage scraper (CountyWeb MTG/CON)
         working-directory: scripts
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-          ROD_PASSWORD: ${{ secrets.ROD_PASSWORD }}
-          ROD_VIEWER_USERNAME: ${{ secrets.ROD_VIEWER_USERNAME }}
-          # TESSERACT_CMD is intentionally omitted — pytesseract finds /usr/bin/tesseract
-          # automatically on Linux after apt-get install
-        run: python run_daily.py --no-deeds
-        # --no-deeds skips the GovOS deed scraper (fragile, requires GovOS account login).
-        # This runs: CountyWeb mortgages → LLC enrichment → high-confidence email alert.
-        # Run the deed scraper manually: python gvl_monitor.py --scrape deeds
+        run: python -u gvl_monitor.py --mode mortgages
+
+      - name: Step 2 — Lead enrichment (LLC → human)
+        working-directory: scripts
+        run: python -u enrich.py --run-pending
+
+      - name: Step 3 — High-confidence alert email
+        working-directory: scripts
+        # --no-deeds --no-mortgages --no-enrich = alert-only mode
+        run: python -u run_daily.py --no-deeds --no-mortgages --no-enrich
