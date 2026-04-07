@@ -1388,9 +1388,12 @@ def lookup_mortgage_borrower(
                         break
 
             if target_idx is None:
+                _doc_types = [
+                    r.select_one("td[field='7'] div") and r.select_one("td[field='7'] div").get_text(strip=True)
+                    for r in results_soup.select("tr[datagrid-row-index]")
+                ]
                 result.notes.append(
-                    f"Mortgage lookup: results found but no MORTGAGE/DEED OF TRUST row — "
-                    f"only: {[r.select_one(\"td[field='7'] div\") and r.select_one(\"td[field='7'] div\").get_text(strip=True) for r in results_soup.select('tr[datagrid-row-index]')]}"
+                    f"Mortgage lookup: results found but no MORTGAGE/DEED OF TRUST row — only: {_doc_types}"
                 )
                 _dbg("09b_no_mortgage_row", results_frame.content())
                 browser.close()
