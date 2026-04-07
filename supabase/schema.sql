@@ -26,6 +26,35 @@ CREATE POLICY "Public read"
   FOR SELECT
   USING (true);
 
+-- Fix: rename detail → details to match application code
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'market_signals' AND column_name = 'detail'
+  ) THEN
+    ALTER TABLE market_signals RENAME COLUMN detail TO details;
+  END IF;
+END $$;
+
+-- Add columns referenced in code but missing from original schema
+ALTER TABLE market_signals
+  ADD COLUMN IF NOT EXISTS source_url  text,
+  ADD COLUMN IF NOT EXISTS status      text,
+  ADD COLUMN IF NOT EXISTS source_key  text;  -- dedup key: "deeds:GRANTEE:MM/DD/YYYY" or SOS entity URL
+
+-- Unique constraint for deduplication — PostgREST requires a constraint (not just an index)
+-- for ON CONFLICT upsert. PostgreSQL allows multiple NULLs in a UNIQUE constraint
+-- (NULL != NULL), so demo signals with source_key=NULL always insert freely.
+ALTER TABLE market_signals
+  ADD CONSTRAINT IF NOT EXISTS market_signals_source_key_unique UNIQUE (source_key);
+
+-- signal_type: distinguishes mortgage filings from deed/SOS signals.
+-- enrich.py checks signal_type = 'MORTGAGE_FILING' to prioritise OCR signature extraction.
+-- NULL for all legacy / deed / SOS signals — backward-compatible.
+ALTER TABLE market_signals
+  ADD COLUMN IF NOT EXISTS signal_type text;  -- MORTGAGE_FILING | null
+
 -- Index for the live feed query
 CREATE INDEX IF NOT EXISTS market_signals_timestamp_idx
   ON market_signals (timestamp DESC);
@@ -79,3 +108,91 @@ CREATE TRIGGER blog_posts_updated_at
 CREATE INDEX IF NOT EXISTS blog_posts_published_at_idx
   ON blog_posts (published_at DESC NULLS LAST)
   WHERE status = 'PUBLISHED';
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Upstate Multiplier — Paying Clients
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Each row = one paying REBB client (e.g. "Greenville HVAC Co").
+-- The token is used for token-gated dashboard URLs: /dashboard?client=slug&token=xxx
+
+CREATE TABLE IF NOT EXISTS clients (
+  id            uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at    timestamptz NOT NULL    DEFAULT now(),
+  name          text        NOT NULL,                         -- "Greenville HVAC Co"
+  slug          text        NOT NULL UNIQUE,                  -- URL-safe identifier
+  token         text        NOT NULL,                         -- secret for dashboard access
+  trade_tags    text[]      NOT NULL    DEFAULT '{}',         -- hvac | landscaping | electrical | cleaning | security
+  contact_name  text,                                         -- owner/decision-maker at client company
+  contact_email text,
+  status        text        NOT NULL    DEFAULT 'trial',      -- trial | active | inactive
+  notes         text
+);
+
+-- No public access — service key only
+ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Upstate Multiplier — Enriched Leads (The Premium / Human Layer)
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Linked to market_signals. Stores the unmasked human behind the LLC.
+-- NOT publicly readable — the paid product.
+
+CREATE TABLE IF NOT EXISTS enriched_leads (
+  id                 uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at         timestamptz NOT NULL    DEFAULT now(),
+  updated_at         timestamptz NOT NULL    DEFAULT now(),
+
+  -- Link back to the raw trigger event
+  signal_id          uuid        REFERENCES market_signals(id) ON DELETE SET NULL,
+
+  -- Which paying client this lead is routed to (null = unassigned / in queue)
+  client_id          uuid        REFERENCES clients(id) ON DELETE SET NULL,
+
+  -- The unmasked human
+  principal_name     text,                   -- "Marcus Lee"
+  principal_role     text,                   -- "Manager" | "CEO" | "Registered Agent"
+  contact_email      text,
+  contact_phone      text,
+  linkedin_url       text,
+
+  -- Evidence trail — URL to the SC SOS filing, deed page, or Google result used
+  search_evidence    text,
+
+  -- Enrichment pipeline status
+  enrichment_status  text        NOT NULL    DEFAULT 'raw',   -- raw | pending | enriched
+
+  -- Trade relevance (drives client routing)
+  trade_tag          text,                   -- hvac | landscaping | electrical | cleaning | security
+
+  -- Copied from signal for convenience (avoids joins in most queries)
+  event_type         text,
+  location           text,
+  valuation          numeric,
+  score              integer,
+  tag                text,                   -- HOT | WARM | COLD
+
+  -- Freetext for manual research notes
+  notes              text
+);
+
+-- No public access — service key only
+ALTER TABLE enriched_leads ENABLE ROW LEVEL SECURITY;
+
+-- Auto-update updated_at
+CREATE TRIGGER enriched_leads_updated_at
+  BEFORE UPDATE ON enriched_leads
+  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS enriched_leads_client_id_idx
+  ON enriched_leads (client_id);
+
+CREATE INDEX IF NOT EXISTS enriched_leads_status_idx
+  ON enriched_leads (enrichment_status);
+
+CREATE INDEX IF NOT EXISTS enriched_leads_signal_id_idx
+  ON enriched_leads (signal_id);
+
+CREATE INDEX IF NOT EXISTS enriched_leads_tag_idx
+  ON enriched_leads (tag, score DESC)
+  WHERE enrichment_status = 'enriched';
