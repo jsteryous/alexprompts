@@ -61,6 +61,21 @@ def get_supabase():
     return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
+# ── principal_role constants ──────────────────────────────────────────────────
+# Stable string labels consumed by the /dashboard frontend to derive confidence
+# tiers. TypeScript maps on the prefix before " – " (e.g. startsWith("SC SOS")).
+# Format: "Source" or "Source – Detail"
+
+ROLE_MORTGAGE_SIG  = "Mortgage Signature"       # signed legal doc — highest confidence
+ROLE_TAX_CARE_OF   = "Tax Record – Care Of"     # county property detail, Care Of field
+ROLE_GIS_OWNER     = "Tax Record – GIS"         # GIS name search, human owner
+ROLE_GIS_MAIL_FLIP = "Tax Record – Mailing"     # mailing address GIS reverse lookup
+ROLE_SOS_INITIALS  = "SC SOS – Initials Match"  # SOS filing, name initials corroborated
+# Dynamic SOS roles: f"SC SOS – {filing_role}"  (e.g. "SC SOS – Registered Agent")
+ROLE_PRESS_UBJ     = "Business Press – UBJ"     # Upstate Business Journal mention
+ROLE_PRESS_GBIZ    = "Business Press – GSABiz"  # GSA BizWire press release
+ROLE_WEB_SEARCH    = "Web Search"               # generic DuckDuckGo extraction
+
 # ── Name normalization ────────────────────────────────────────────────────────
 
 # Deed records store names as "LASTNAME FIRSTNAME MIDDLE" in ALL CAPS.
@@ -385,7 +400,7 @@ def lookup_gis(entity_name: str, address: str = "", _retried: bool = False) -> E
             result.principal_name = owner_raw.title()
         else:
             result.principal_name = normalize_person_name(owner_raw)
-        result.principal_role   = "Property Owner (tax record)"
+        result.principal_role   = ROLE_GIS_OWNER
         result.search_evidence  = f"{TAX_QUERY_URL} → Name search: '{search_term}'"
         result.notes.append(
             f"GIS: tax record owner '{owner_raw}' → '{result.principal_name}'"
@@ -562,7 +577,7 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
                         f"Initials check: '{entity_name}' initials match "
                         f"'{sos_result.principal_name}' — high confidence"
                     )
-                    sos_result.principal_role = (sos_result.principal_role or "Registered Agent") + " (initials match)"
+                    sos_result.principal_role = ROLE_SOS_INITIALS
                 return sos_result
 
     # Look for LinkedIn URLs
@@ -608,13 +623,13 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
         ubj_urls  = [u for u in all_urls if "upstatebusinessjournal.com" in u]
         gbiz_urls = [u for u in all_urls if "gsabizwire.com" in u]
         if ubj_urls:
-            result.principal_role  = "Owner (Upstate Business Journal)"
+            result.principal_role  = ROLE_PRESS_UBJ
             result.search_evidence = result.search_evidence or ubj_urls[0]
         elif gbiz_urls:
-            result.principal_role  = "Owner (GSA BizWire)"
+            result.principal_role  = ROLE_PRESS_GBIZ
             result.search_evidence = result.search_evidence or gbiz_urls[0]
         else:
-            result.principal_role  = "Owner (web search)"
+            result.principal_role  = ROLE_WEB_SEARCH
             result.search_evidence = result.search_evidence or f"DuckDuckGo: {q1}"
         result.notes.append(f"DDG: extracted name '{top_name}' from search snippets")
 
@@ -662,7 +677,7 @@ def scrape_sos_entity_page(url: str) -> EnrichmentResult:
                 llc_terms = ("llc", "inc", "corp", "pa", "law", "firm", "group", "associates")
                 if not any(t in name.lower() for t in llc_terms) and len(name.split()) >= 2:
                     result.principal_name = name
-                    result.principal_role = cells[0].strip().title()
+                    result.principal_role = f"SC SOS – {cells[0].strip().title()}"
                     result.notes.append(f"SOS: found '{name}' as {result.principal_role}")
                     break
         if result.principal_name:
@@ -678,7 +693,7 @@ def scrape_sos_entity_page(url: str) -> EnrichmentResult:
                 names = _NAME_PATTERN.findall(snippet)
                 if names:
                     result.principal_name = names[0]
-                    result.principal_role = keyword.rstrip(":")
+                    result.principal_role = f"SC SOS – {keyword.rstrip(':')}"
                     result.notes.append(f"SOS: extracted '{names[0]}' near '{keyword}'")
                     break
 
@@ -1593,7 +1608,7 @@ def lookup_mortgage_borrower(
     # ── Step 7: Parse borrower from document text ─────────────────────────────
     name, title = _parse_borrower_from_text(doc_text)
     if name:
-        role = f"{title} (mortgage borrower signature)" if title else "Borrower (mortgage signature)"
+        role = f"{ROLE_MORTGAGE_SIG} – {title}" if title else ROLE_MORTGAGE_SIG
         result.principal_name    = name
         result.principal_role    = role
         result.search_evidence   = f"{ROD_VIEWER_URL} — MORTGAGE · {entity_name} · recorded {rec_date_str}"
@@ -1708,7 +1723,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
                 human_name = normalize_person_name(care_of)
                 print(f"   ✓ PIN pivot — Care Of: '{care_of}' → '{human_name}'")
                 result.principal_name    = human_name
-                result.principal_role    = "Care Of (property tax record)"
+                result.principal_role    = ROLE_TAX_CARE_OF
                 result.search_evidence   = result.detail_url
                 result.mailing_address   = mail_addr or None
                 result.notes.append(f"PIN pivot: Care Of = '{care_of}' → '{human_name}'")
@@ -1744,7 +1759,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
                 if flip_result.principal_name and flip_result.is_enriched():
                     print(f"   ✓ GIS flip found human: {flip_result.principal_name}")
                     result.principal_name    = flip_result.principal_name
-                    result.principal_role    = "Property Owner at LLC mailing address (GIS flip)"
+                    result.principal_role    = ROLE_GIS_MAIL_FLIP
                     result.search_evidence   = flip_result.search_evidence
                     result.notes.append(
                         f"PIN pivot → mailing: {first_line} → "
@@ -1773,7 +1788,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             if flip_result.principal_name and flip_result.is_enriched():
                 print(f"   ✓ GIS flip found human: {flip_result.principal_name}")
                 result.principal_name    = flip_result.principal_name
-                result.principal_role    = "Property Owner at LLC mailing address (GIS flip)"
+                result.principal_role    = ROLE_GIS_MAIL_FLIP
                 result.search_evidence   = flip_result.search_evidence
                 result.notes.append(
                     f"GIS flip: '{flip_result.principal_name}' owns parcel at {first_line}"

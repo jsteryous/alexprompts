@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/review", "/api/"],
+      disallow: ["/review", "/dashboard", "/api/"],
     },
     sitemap: "https://rebbadvisors.com/sitemap.xml",
   };

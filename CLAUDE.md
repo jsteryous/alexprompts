@@ -45,7 +45,8 @@ The proprietary data product. Daily Python-driven syncs of Greenville County pro
 - **Language:** TypeScript
 - **React:** 19
 - **Database:** Supabase (Postgres + Realtime)
-- **Supabase JS client:** `@supabase/supabase-js`
+- **Supabase JS client:** `@supabase/supabase-js` + `@supabase/ssr` (cookie-based auth for Next.js App Router)
+- **Auth:** Supabase Auth (email + password). Public signup disabled — users created manually in Supabase dashboard. No registration route exists in the app.
 - **Markdown rendering:** `marked` (server-side, used on `/insights/[slug]` and `/review`)
 - **Email:** Resend (`requests` POST — no SDK, already in Python deps)
 - **AI generation:** `google-genai` SDK (`from google import genai`), model `gemini-2.5-flash`
@@ -59,11 +60,13 @@ src/
 │   ├── layout.tsx                  — root layout wrapping Nav + Footer; geo-qualified metadata + LocalBusiness JSON-LD
 │   ├── opengraph-image.tsx         — dynamic OG image (1200×630, edge runtime, Satori); auto-injected by Next.js
 │   ├── sitemap.ts                  — generates /sitemap.xml; static routes + published blog posts from Supabase
-│   ├── robots.ts                   — generates /robots.txt; blocks /review and /api/
+│   ├── robots.ts                   — generates /robots.txt; blocks /review, /dashboard, and /api/
 │   ├── page.tsx                    — homepage (includes Services section linking all 4 service pages)
 │   ├── how-it-works/page.tsx
 │   ├── case-study/page.tsx         — placeholder; noindexed (robots: index false)
-│   ├── contact/page.tsx
+│   ├── contact/
+│   │   ├── layout.tsx              — metadata export (required since page.tsx is a client component)
+│   │   └── page.tsx                — client component; controlled form → POST /api/contact → Resend email
 │   ├── lead-intelligence/page.tsx  — The Upstate Multiplier standalone page
 │   ├── seo/page.tsx                — Local SEO audits + GBP optimization
 │   ├── web-development/page.tsx    — React/Next.js site builds (5-day sprint)
@@ -72,7 +75,13 @@ src/
 │   │   ├── page.tsx                — listing page (PUBLISHED only, ISR 60s)
 │   │   └── [slug]/page.tsx         — individual article page (ISR 60s)
 │   ├── review/page.tsx             — protected draft review page (token-gated)
+│   ├── dashboard/
+│   │   ├── page.tsx                — ranked call list (enriched_leads, sorted by score); auth-gated via proxy.ts
+│   │   └── login/
+│   │       ├── page.tsx            — email + password login form (server component with server action)
+│   │       └── actions.ts          — signIn / signOut server actions (Supabase Auth)
 │   └── api/
+│       ├── contact/route.ts        — POST; receives contact form JSON → sends email via Resend to alex@rebbadvisors.com
 │       └── publish/route.ts        — GET ?id=&token= → flips status, revalidates /insights
 ├── components/
 │   ├── Nav.tsx                     — sticky header with Services dropdown + mobile accordion (client component)
@@ -82,6 +91,8 @@ src/
 │   └── DarkModeToggle.tsx          — fixed bottom-right floating moon/sun button; consumes ThemeProvider context (client component)
 └── lib/
     └── supabase.ts                 — Supabase client singleton (null if env vars not set)
+
+proxy.ts                            — Next.js 16 route proxy (replaces middleware.ts); protects /dashboard/* → redirects to /dashboard/login if no Supabase session
 
 scripts/
 ├── generate_insights.py            — Gemini → DRAFT → email notification
@@ -137,7 +148,7 @@ supabase/
 
 - Tailwind v4 uses `@theme {}` in `globals.css` for custom tokens — no `tailwind.config.js`
 - Typography plugin added via `@plugin "@tailwindcss/typography"` in `globals.css`
-- All pages are server components (no `use client` except Nav, LiveSignalFeed, ThemeProvider, and DarkModeToggle)
+- All pages are server components (no `use client` except Nav, LiveSignalFeed, ThemeProvider, DarkModeToggle, and `/contact/page.tsx`)
 - Dark mode: class-based (`html.dark`). `ThemeProvider` manages state via localStorage. CSS overrides in `globals.css` under `html.dark`. Palette: bg `#0d1f16`, dark sections `#060f09`, text `#dff0e6`. `suppressHydrationWarning` on `<html>` + inline script in `<head>` prevent theme flash on reload.
 - CTAs always link to `/contact`
 - Section labels use `text-xs font-semibold uppercase tracking-widest text-green-600`
@@ -709,14 +720,33 @@ Scoring weights (additive):
 - If obtained: load locally, search by LLC name as enrichment lookup
 - UCC and business license target different LLC types — run both in parallel, not sequentially
 
-### Client delivery (planned)
+### principal_role constants (enrich.py)
 
-Each paying client (`clients` table) has a `slug` + `token`. Planned route:
-`/dashboard?client=<slug>&token=<token>` — server component, fetches `enriched_leads` filtered by `client_id`, no login system needed for MVP.
+`principal_role` in `enriched_leads` uses standardized string labels so the frontend can derive confidence tiers without a schema column. Constants defined at the top of `enrich.py`:
+
+| Constant | Value | Dashboard tier |
+|---|---|---|
+| `ROLE_MORTGAGE_SIG` | `"Mortgage Signature"` | Verified · Signature |
+| `ROLE_TAX_CARE_OF` | `"Tax Record – Care Of"` | Verified · Tax Record |
+| `ROLE_GIS_OWNER` | `"Tax Record – GIS"` | Verified · Tax Record |
+| `ROLE_GIS_MAIL_FLIP` | `"Tax Record – Mailing"` | Verified · Tax Record |
+| `ROLE_SOS_INITIALS` | `"SC SOS – Initials Match"` | Matched · SOS + Initials |
+| dynamic | `f"SC SOS – {filing_role}"` | Matched · SC SOS |
+| `ROLE_PRESS_UBJ` | `"Business Press – UBJ"` | Matched · Business Press |
+| `ROLE_PRESS_GBIZ` | `"Business Press – GSABiz"` | Matched · Business Press |
+| `ROLE_WEB_SEARCH` | `"Web Search"` | Inferred · Web Search |
+
+Mortgage role format: `f"Mortgage Signature – {title}"` (e.g. `"Mortgage Signature – Manager"`). TypeScript maps on prefix via `startsWith()`.
+
+### Client delivery
+
+Each paying client (`clients` table) has a `slug`. Planned: create a Supabase Auth user for each client, link `clients.contact_email` to their auth email, add RLS policy on `enriched_leads` so `auth.email() = clients.contact_email` filters by `client_id`. REBB admin (alex) sees all rows via service key. No client-facing dashboard route built yet — currently `/dashboard` shows all leads.
 
 ## Known Issues / Notes
 
 - `next.config.ts` sets `turbopack.root: __dirname` to suppress a lockfile warning from `package-lock.json` one level up at `C:\Users\alexs\package-lock.json`
+- Next.js 16 renamed `middleware.ts` → `proxy.ts` and `export function middleware` → `export function proxy`. The file lives at `src/proxy.ts`. Do not create `src/middleware.ts` — it will trigger a deprecation warning and be ignored.
+- `@supabase/ssr` is required for cookie-based Supabase Auth in Next.js App Router. Use `createServerClient` from `@supabase/ssr` (not `createClient` from `@supabase/supabase-js`) anywhere you need to read or refresh auth sessions from cookies.
 - Google Fonts cannot be used at build time (Turbopack http2 error) — use system fonts or self-hosted
 - `python-levenshtein` removed from requirements (requires C compiler on Windows) — `thefuzz` works without it
 - `playwright` in `requirements.txt` requires a C compiler; `enrich.py` also uses Playwright — run `playwright install chromium` once after install
@@ -754,7 +784,7 @@ All of these go in `.env.local` (local) and Vercel dashboard (production).
 | `SUPABASE_URL` | Python scripts | Same value as above |
 | `SUPABASE_SERVICE_KEY` | Python scripts + Vercel | Secret — never commit. Required by `/api/publish` and `/review` on Vercel |
 | `GEMINI_API_KEY` | Python scripts | Google AI Studio — secret |
-| `RESEND_API_KEY` | Python scripts | Resend.com — connected to alex@rebbadvisors.com |
+| `RESEND_API_KEY` | Python scripts + Vercel | Resend.com — used by `/api/contact` (contact form) and Python insight/alert scripts |
 | `NOTIFICATION_EMAIL` | Python scripts | `alex@rebbadvisors.com` |
 | `PUBLISH_SECRET` | Python scripts + Vercel | Shared secret for publish/review URLs — set in both places |
 | `NEXT_PUBLIC_SITE_URL` | Python scripts | `https://rebbadvisors.com` — used to build button URLs in emails |
@@ -795,8 +825,10 @@ npx vercel --prod    # manual deploy (if needed)
 | `/insights` | Done | PUBLISHED posts listing, ISR 60s, revalidated instantly on publish |
 | `/insights/[slug]` | Done | Full article page, ISR 60s, prose rendering via marked |
 | `/review` | Done | Token-gated draft review page — linked from email only |
+| `/dashboard` | Done | Ranked call list — enriched_leads sorted by score, confidence tier badges, auth-gated (Supabase Auth) |
+| `/dashboard/login` | Done | Email + password login — no public registration; users created manually in Supabase dashboard |
 | `/case-study` | Placeholder | Awaiting real client data |
-| `/contact` | Done | Intake form + call explainer sidebar |
+| `/contact` | Done | Intake form + call explainer sidebar; submits to `/api/contact` → Resend email to alex@rebbadvisors.com |
 
 ### Nav Structure
 
