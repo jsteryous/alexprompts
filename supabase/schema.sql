@@ -188,7 +188,7 @@ CREATE TRIGGER enriched_leads_updated_at
 --   DELETE FROM enriched_leads a USING enriched_leads b
 --   WHERE a.id > b.id AND a.signal_id = b.signal_id;
 ALTER TABLE enriched_leads
-  ADD CONSTRAINT IF NOT EXISTS enriched_leads_signal_id_unique UNIQUE (signal_id);
+  ADD CONSTRAINT enriched_leads_signal_id_unique UNIQUE (signal_id);
 
 -- Transfer classification — copied from market_signals.signal_type by enrich.py.
 -- NOMINAL_TRANSFER = deed with nominal consideration ($1–$999: family transfer, trust move, estate).

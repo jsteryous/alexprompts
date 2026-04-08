@@ -1,13 +1,39 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Book a Free Call — REBB Advisors · Greenville SC",
-  description:
-    "Book a free 30-minute call with REBB Advisors. We'll audit your lead flow and show you exactly where you're losing jobs to competitors in Greenville County.",
-  alternates: { canonical: "https://rebbadvisors.com/contact" },
-};
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    businessName: "",
+    businessType: "",
+    phone: "",
+    email: "",
+    leadVolume: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <>
       {/* Header */}
@@ -32,105 +58,153 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Contact form */}
             <div className="bg-gray-50 rounded-2xl p-8 md:p-10">
-              <form className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
+              {status === "success" ? (
+                <div className="text-center py-8">
+                  <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 13l4 4L19 7" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-bold text-black mb-2">You&apos;re on the list.</h2>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    We&apos;ll reach out within one business day to schedule your call.
+                  </p>
+                </div>
+              ) : (
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={form.firstName}
+                        onChange={handleChange}
+                        placeholder="John"
+                        required
+                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={form.lastName}
+                        onChange={handleChange}
+                        placeholder="Smith"
+                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      First Name
+                      Business Name
                     </label>
                     <input
                       type="text"
-                      placeholder="John"
+                      name="businessName"
+                      value={form.businessName}
+                      onChange={handleChange}
+                      placeholder="Smith Landscaping"
                       className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                     />
                   </div>
+
                   <div>
                     <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      Last Name
+                      What type of business?
+                    </label>
+                    <select
+                      name="businessType"
+                      value={form.businessType}
+                      onChange={handleChange}
+                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
+                    >
+                      <option value="">Select one...</option>
+                      <option>Landscaping</option>
+                      <option>Pool Service</option>
+                      <option>Pressure Washing</option>
+                      <option>HVAC</option>
+                      <option>Plumbing</option>
+                      <option>Electrical</option>
+                      <option>Roofing</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      Phone Number
                     </label>
                     <input
-                      type="text"
-                      placeholder="Smith"
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      placeholder="(555) 000-0000"
                       className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                    Business Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Smith Landscaping"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="john@smithlandscaping.com"
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                    What type of business?
-                  </label>
-                  <select className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none">
-                    <option value="">Select one...</option>
-                    <option>Landscaping</option>
-                    <option>Pool Service</option>
-                    <option>Pressure Washing</option>
-                    <option>HVAC</option>
-                    <option>Plumbing</option>
-                    <option>Electrical</option>
-                    <option>Roofing</option>
-                    <option>Other</option>
-                  </select>
-                </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      How many leads do you get per month? (estimate)
+                    </label>
+                    <select
+                      name="leadVolume"
+                      value={form.leadVolume}
+                      onChange={handleChange}
+                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
+                    >
+                      <option value="">Select one...</option>
+                      <option>Less than 10</option>
+                      <option>10–30</option>
+                      <option>30–60</option>
+                      <option>60–100</option>
+                      <option>100+</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="(555) 000-0000"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                  />
-                </div>
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 text-center">
+                      Something went wrong. Try again or email us directly at alex@rebbadvisors.com.
+                    </p>
+                  )}
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="john@smithlandscaping.com"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                  />
-                </div>
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="w-full bg-black text-white font-semibold text-sm py-4 rounded-xl hover:bg-gray-800 transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {status === "loading" ? "Sending…" : "Book My Free Call"}
+                  </button>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                    How many leads do you get per month? (estimate)
-                  </label>
-                  <select className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none">
-                    <option value="">Select one...</option>
-                    <option>Less than 10</option>
-                    <option>10–30</option>
-                    <option>30–60</option>
-                    <option>60–100</option>
-                    <option>100+</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white font-semibold text-sm py-4 rounded-xl hover:bg-gray-800 transition-colors mt-2"
-                >
-                  Book My Free Call
-                </button>
-
-                <p className="text-xs text-gray-400 text-center">
-                  No spam. No pushy sales calls. Just a straight conversation.
-                </p>
-              </form>
+                  <p className="text-xs text-gray-400 text-center">
+                    No spam. No pushy sales calls. Just a straight conversation.
+                  </p>
+                </form>
+              )}
             </div>
 
             {/* Side content */}

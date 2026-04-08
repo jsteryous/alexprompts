@@ -114,7 +114,30 @@ async function getLeads(clientSlug?: string): Promise<EnrichedLead[]> {
   }
 
   const { data } = await query.limit(200);
-  return (data as unknown as EnrichedLead[]) ?? [];
+  const leads = (data as unknown as EnrichedLead[]) ?? [];
+
+  // Deduplicate enriched leads by principal_name — same person can appear from
+  // multiple signals (deed + mortgage, two transfers). For the call list, keep
+  // the highest-scoring row per person. Pending leads (no name) are kept as-is.
+  const seen = new Map<string, EnrichedLead>();
+  const pending: EnrichedLead[] = [];
+
+  for (const lead of leads) {
+    if (!lead.principal_name) {
+      pending.push(lead);
+      continue;
+    }
+    const key = lead.principal_name.toLowerCase().trim();
+    const existing = seen.get(key);
+    if (!existing || (lead.score ?? 0) > (existing.score ?? 0)) {
+      seen.set(key, lead);
+    }
+  }
+
+  return [
+    ...Array.from(seen.values()),
+    ...pending,
+  ].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 }
 
 // ── Formatting helpers ────────────────────────────────────────────────────────
