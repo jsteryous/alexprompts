@@ -25,6 +25,7 @@ interface EnrichedLead {
   valuation: number | null;
   score: number | null;
   tag: string | null;
+  transfer_type: string | null;
   notes: string | null;
 }
 
@@ -95,7 +96,7 @@ async function getLeads(clientSlug?: string): Promise<EnrichedLead[]> {
     .from("enriched_leads")
     .select(
       "id, created_at, principal_name, principal_role, contact_email, contact_phone, " +
-      "search_evidence, enrichment_status, trade_tag, event_type, location, valuation, score, tag, notes"
+      "search_evidence, enrichment_status, trade_tag, event_type, location, valuation, score, tag, transfer_type, notes"
     )
     .in("enrichment_status", ["enriched", "pending"])
     .order("score", { ascending: false, nullsFirst: false });
@@ -159,6 +160,15 @@ function TierBadge({ tier, label }: TierDisplay) {
   return (
     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${map[tier]}`}>
       {label}
+    </span>
+  );
+}
+
+function TransferTypeBadge({ transferType }: { transferType: string | null }) {
+  if (transferType !== "NOMINAL_TRANSFER") return null;
+  return (
+    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-950/60 text-purple-300 border border-purple-800/50">
+      Trust / Family
     </span>
   );
 }
@@ -292,6 +302,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                           </span>
                           <TagBadge tag={lead.tag} />
                         </div>
+                        <TransferTypeBadge transferType={lead.transfer_type} />
                       </td>
 
                       {/* Contact */}
@@ -339,26 +350,31 @@ export default async function DashboardPage({ searchParams }: Props) {
 
                       {/* Valuation */}
                       <td className="px-4 py-4 text-gray-300 text-xs tabular-nums whitespace-nowrap">
-                        {formatValuation(lead.valuation)}
+                        {lead.transfer_type === "NOMINAL_TRANSFER" ? "—" : formatValuation(lead.valuation)}
                       </td>
 
                       {/* Evidence / confidence tier */}
                       <td className="px-4 py-4">
                         <div className="flex flex-col gap-1.5">
                           <TierBadge tier={tier} label={label} />
-                          {lead.search_evidence && !isPending && (
-                            <a
-                              href={lead.search_evidence.startsWith("http") ? lead.search_evidence : undefined}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[10px] text-gray-600 hover:text-gray-400 truncate max-w-[180px] block transition-colors"
-                              title={lead.search_evidence}
-                            >
-                              {lead.search_evidence.startsWith("http")
-                                ? new URL(lead.search_evidence).hostname
-                                : lead.search_evidence.slice(0, 40)}
-                            </a>
-                          )}
+                          {lead.search_evidence && !isPending && (() => {
+                            // Extract clean URL — search_evidence may contain annotations
+                            // like "https://foo.com/ → Name search: '...'"
+                            const rawUrl = lead.search_evidence.match(/^https?:\/\/[^\s]+/)?.[0];
+                            let hostname: string | null = null;
+                            try { hostname = rawUrl ? new URL(rawUrl).hostname : null; } catch { /* ignore */ }
+                            return (
+                              <a
+                                href={rawUrl ?? undefined}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] text-gray-600 hover:text-gray-400 truncate max-w-[180px] block transition-colors"
+                                title={lead.search_evidence}
+                              >
+                                {hostname ?? lead.search_evidence.slice(0, 40)}
+                              </a>
+                            );
+                          })()}
                         </div>
                       </td>
 

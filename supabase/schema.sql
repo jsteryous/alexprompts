@@ -183,6 +183,19 @@ CREATE TRIGGER enriched_leads_updated_at
   BEFORE UPDATE ON enriched_leads
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
+-- Deduplicate: one enriched_leads row per market_signals event.
+-- Run this AFTER cleaning up any existing duplicate signal_id rows:
+--   DELETE FROM enriched_leads a USING enriched_leads b
+--   WHERE a.id > b.id AND a.signal_id = b.signal_id;
+ALTER TABLE enriched_leads
+  ADD CONSTRAINT IF NOT EXISTS enriched_leads_signal_id_unique UNIQUE (signal_id);
+
+-- Transfer classification — copied from market_signals.signal_type by enrich.py.
+-- NOMINAL_TRANSFER = deed with nominal consideration ($1–$999: family transfer, trust move, estate).
+-- NULL for standard arm's-length sales and mortgage filings.
+ALTER TABLE enriched_leads
+  ADD COLUMN IF NOT EXISTS transfer_type text;  -- NOMINAL_TRANSFER | null
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS enriched_leads_client_id_idx
   ON enriched_leads (client_id);

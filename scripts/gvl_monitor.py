@@ -541,7 +541,14 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
             continue
 
         # Use consideration from detail page (real price) over the search table (always N/A)
-        valuation  = consid_map.get(row_idx)
+        raw_consideration = consid_map.get(row_idx)
+        # Nominal transfers ($1, $5, $10 etc.) record a legally-valid but non-market
+        # consideration — family transfers, trusts, estate restructuring. Null the
+        # valuation so score/dashboard aren't misled, but keep the raw amount in
+        # details and flag via signal_type so the dashboard can surface these separately.
+        is_nominal = raw_consideration is not None and raw_consideration < 1_000
+        valuation  = None if is_nominal else raw_consideration
+
         # Use parsed property address when available; fall back to grantor name as context.
         # enrich.py will further resolve the location via GIS if it's still a name.
         prop_addr  = address_map.get(row_idx)
@@ -554,12 +561,17 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
             location=location,
             entity_name=normalize_entity(grantee),
             valuation=valuation,
-            details=f"Deed recording · {doc_type} · recorded {rec_date}",
+            details=(
+                f"Nominal deed · ${raw_consideration:,.2f} consideration · {doc_type} · recorded {rec_date}"
+                if is_nominal else
+                f"Deed recording · {doc_type} · recorded {rec_date}"
+            ),
             score=score,
             tag=tag,
             source="deeds",
             source_url=GOVOS_URL,
             source_key=f"deeds:{grantee.strip().upper()}:{rec_date}",
+            signal_type="NOMINAL_TRANSFER" if is_nominal else None,
         ))
 
     print(f"  ROD: {len(signals)} LLC/commercial deed(s) kept · {skipped_individuals} individual(s) skipped")

@@ -401,7 +401,7 @@ def lookup_gis(entity_name: str, address: str = "", _retried: bool = False) -> E
         else:
             result.principal_name = normalize_person_name(owner_raw)
         result.principal_role   = ROLE_GIS_OWNER
-        result.search_evidence  = f"{TAX_QUERY_URL} → Name search: '{search_term}'"
+        result.search_evidence  = TAX_QUERY_URL
         result.notes.append(
             f"GIS: tax record owner '{owner_raw}' → '{result.principal_name}'"
             + (f" (Map # {result.pin})" if result.pin else "")
@@ -1611,7 +1611,7 @@ def lookup_mortgage_borrower(
         role = f"{ROLE_MORTGAGE_SIG} – {title}" if title else ROLE_MORTGAGE_SIG
         result.principal_name    = name
         result.principal_role    = role
-        result.search_evidence   = f"{ROD_VIEWER_URL} — MORTGAGE · {entity_name} · recorded {rec_date_str}"
+        result.search_evidence   = f"{ROD_VIEWER_URL}/loginDisplay.action?countyname=Greenville"
         result.enrichment_status = "enriched"
         result.notes.append(f"Mortgage lookup: borrower signature found — '{name}', {title or 'no title'}")
         print(f"   ✓ Mortgage borrower: {name}{', ' + title if title else ''}")
@@ -1871,8 +1871,14 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
     resolved_location = (
         result.property_address          # best: GIS-confirmed situs address
         or (signal_location if _is_street_address(signal_location) else None)
-        or signal_location               # fallback: whatever is in the signal
+        # no fallback to raw signal_location — it may be a grantor/seller name
     )
+
+    # Propagate nominal-transfer flag from the signal so the dashboard can surface
+    # these without a join. Only copy NOMINAL_TRANSFER — MORTGAGE_FILING is a
+    # pipeline hint for enrich.py, not a transfer classification.
+    sig_signal_type = signal.get("signal_type")
+    transfer_type = sig_signal_type if sig_signal_type == "NOMINAL_TRANSFER" else None
 
     row = {
         "signal_id":          signal["id"],
@@ -1881,6 +1887,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         "valuation":          signal.get("valuation"),
         "score":              signal.get("score"),
         "tag":                signal.get("tag"),
+        "transfer_type":      transfer_type,
         "principal_name":     result.principal_name,
         "principal_role":     result.principal_role,
         "search_evidence":    result.search_evidence,
@@ -1897,7 +1904,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
     client = get_supabase()
     if not client:
         return
-    client.table("enriched_leads").insert(row).execute()
+    client.table("enriched_leads").upsert(row, on_conflict="signal_id").execute()
     print(f"   ✓ Saved to enriched_leads (status: {result.enrichment_status})")
 
 
