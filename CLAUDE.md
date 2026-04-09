@@ -307,7 +307,6 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 
 **Python deps:**
 - `google-genai` requires `httpx>=0.28.1`. Do not downgrade `supabase` below 2.15.0.
-- `python-levenshtein` removed — requires C compiler. `thefuzz` works without it.
 - Tesseract: `pip install pytesseract` is Python-only wrapper. Install binary separately: `winget install tesseract-ocr.tesseract`. Default path: `C:\Program Files\Tesseract-OCR\tesseract.exe`. Override: `TESSERACT_CMD`.
 - `playwright install chromium` required after `pip install playwright` (~130MB).
 
@@ -331,7 +330,6 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 - `viewImagePNG.do` PNG fetch: jsessionid in URL path param (`; jsessionid=...`), not cookie. Playwright session must stay active during `requests` fetch.
 
 **Misc:**
-- `schema.sql` `detail` → `details` migration is idempotent (DO block), safe to re-run.
 - SOS DDG scraper may return 0 if DDG hasn't crawled recent filings.
 - `enrich.py --run-pending` fetches 500, filters enriched, returns first N. Increase pool limit in `fetch_pending_signals()` if >500 signals.
 - GovOS account required at `greenville.sc.publicsearch.us/register` — no guest login despite JS `doGuestLogin()` function.
@@ -369,7 +367,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero + LiveSignalFeed, Problem, How We Do It, Services, Multiplier, Sprint offer, CTA |
+| `/` | Hero + LiveSignalFeed, Problem, The Window (Day 0→21 timeline), How We Do It, Services, Multiplier, Offer (30-day guarantee), CTA |
 | `/how-it-works` | 5-step sprint process |
 | `/lead-intelligence` | Upstate Multiplier deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
