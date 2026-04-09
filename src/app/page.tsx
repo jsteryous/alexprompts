@@ -10,9 +10,12 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Left: Copy */}
             <div>
-              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-6">
+              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
                 Upstate SC · Proactive Lead Intelligence
               </span>
+              <p className="text-xs text-gray-400 mb-6 tracking-wide">
+                HVAC · Landscaping · Electrical · Plumbing · Roofing · Pressure Washing
+              </p>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black leading-[1.05] mb-6">
                 Your next big
                 <br />
@@ -28,12 +31,12 @@ export default function HomePage() {
                 and new business filings to identify your next high-value
                 contract before your competitors even know it exists.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-black text-white text-base font-medium px-7 py-3.5 rounded-xl hover:bg-gray-800 transition-colors"
                 >
-                  Start Your Sprint
+                  Get My First Lead List
                   <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -45,6 +48,9 @@ export default function HomePage() {
                   See How It Works
                 </Link>
               </div>
+              <p className="text-xs text-gray-400">
+                30-day money-back guarantee — one qualified lead or full refund.
+              </p>
             </div>
 
             {/* Right: Live Signal Feed */}
@@ -95,6 +101,95 @@ export default function HomePage() {
                 <p className="text-sm text-gray-400 leading-relaxed">{item.body}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── The Window ── */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+                The Window
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
+                There&apos;s a 48-hour gap
+                <br />
+                between a public filing
+                <br />
+                and a Google search.
+              </h2>
+              <p className="text-gray-500 leading-relaxed mb-4">
+                When a commercial property changes hands, the new owner spends the
+                first week making decisions — vendors, contractors, service
+                providers. They haven&apos;t put out a bid yet. They haven&apos;t
+                posted on Angi. They&apos;re still in their own head.
+              </p>
+              <p className="text-gray-500 leading-relaxed">
+                That window is exactly when you want to call. Not after they&apos;ve
+                talked to five competitors. Not after they&apos;ve posted an RFP.
+                Right now, while you&apos;re still the only voice in the room.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {[
+                {
+                  label: "Day 0",
+                  event: "Property transfer recorded at Register of Deeds",
+                  status: "You know. Competitors don't.",
+                  hot: true,
+                },
+                {
+                  label: "Day 2–3",
+                  event: "New owner starts calling vendors",
+                  status: "You're already in conversation.",
+                  hot: true,
+                },
+                {
+                  label: "Day 7–14",
+                  event: "Owner Googles \"commercial HVAC Greenville\"",
+                  status: "10 competitors. Bidding war.",
+                  hot: false,
+                },
+                {
+                  label: "Day 21+",
+                  event: "RFP posted to bid boards",
+                  status: "Race to the bottom on price.",
+                  hot: false,
+                },
+              ].map((row) => (
+                <div
+                  key={row.label}
+                  className={`border rounded-xl p-5 ${
+                    row.hot
+                      ? "border-green-200 bg-green-50"
+                      : "border-gray-100 bg-gray-50"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div
+                        className={`text-xs font-bold uppercase tracking-widest mb-1 ${
+                          row.hot ? "text-green-600" : "text-gray-400"
+                        }`}
+                      >
+                        {row.label}
+                      </div>
+                      <div className="text-sm font-semibold text-black mb-1">{row.event}</div>
+                      <div className={`text-xs ${row.hot ? "text-green-600" : "text-gray-400"}`}>
+                        {row.status}
+                      </div>
+                    </div>
+                    {row.hot && (
+                      <span className="flex-shrink-0 text-xs font-bold bg-green-500/20 text-green-700 px-2.5 py-1 rounded-full">
+                        ACT NOW
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -367,7 +462,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-green-500 text-black font-semibold px-7 py-3.5 rounded-xl hover:bg-green-400 transition-colors"
               >
-                Start Your Sprint
+                Start Free — 30-Day Guarantee
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

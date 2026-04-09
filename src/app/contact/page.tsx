@@ -6,11 +6,9 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    businessName: "",
     businessType: "",
     phone: "",
     email: "",
-    leadVolume: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -65,9 +63,9 @@ export default function ContactPage() {
                       <path d="M5 13l4 4L19 7" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h2 className="text-xl font-bold text-black mb-2">You&apos;re on the list.</h2>
+                  <h2 className="text-xl font-bold text-black mb-2">Expect a call within 1 business day.</h2>
                   <p className="text-sm text-gray-500 leading-relaxed">
-                    We&apos;ll reach out within one business day to schedule your call.
+                    We&apos;ll review your trade and service area, then walk you through what&apos;s live in the Greenville County data right now.
                   </p>
                 </div>
               ) : (
@@ -100,20 +98,6 @@ export default function ContactPage() {
                         className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                       />
                     </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      Business Name
-                    </label>
-                    <input
-                      type="text"
-                      name="businessName"
-                      value={form.businessName}
-                      onChange={handleChange}
-                      placeholder="Smith Landscaping"
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                    />
                   </div>
 
                   <div>
@@ -167,25 +151,6 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      How many leads do you get per month? (estimate)
-                    </label>
-                    <select
-                      name="leadVolume"
-                      value={form.leadVolume}
-                      onChange={handleChange}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
-                    >
-                      <option value="">Select one...</option>
-                      <option>Less than 10</option>
-                      <option>10–30</option>
-                      <option>30–60</option>
-                      <option>60–100</option>
-                      <option>100+</option>
-                    </select>
-                  </div>
-
                   {status === "error" && (
                     <p className="text-xs text-red-600 text-center">
                       Something went wrong. Try again or email us directly at alex@rebbadvisors.com.
@@ -201,7 +166,7 @@ export default function ContactPage() {
                   </button>
 
                   <p className="text-xs text-gray-400 text-center">
-                    No spam. No pushy sales calls. Just a straight conversation.
+                    30-day money-back guarantee — one qualified lead or full refund. No spam, no pressure.
                   </p>
                 </form>
               )}

@@ -40,7 +40,7 @@ src/
 │   ├── lead-intelligence / seo / web-development / outreach-automation / how-it-works / case-study
 │   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s
 │   ├── review/page.tsx          — token-gated draft review
-│   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated
+│   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; deduplicates by principal_name (highest score per person)
 │   ├── dashboard/login/page.tsx + actions.ts — Supabase Auth server action
 │   └── api/contact/route.ts + publish/route.ts
 ├── components/
