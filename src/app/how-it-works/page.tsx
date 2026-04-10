@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How It Works — 30-Day Revenue Sprint · REBB Advisors",
+  title: "How It Works — The Multiplier · REBB Advisors",
   description:
-    "The 30-Day Revenue Sprint for Greenville SC service businesses: site live in 5 days, Multiplier dashboard active, automated follow-up installed. One lead you wouldn't have found otherwise — or full refund.",
+    "We watch Greenville County public records every day, unmask the LLC, and put a ranked call list in your dashboard every Monday. One real lead in 30 days or full refund.",
   openGraph: {
-    title: "How It Works — 30-Day Revenue Sprint · REBB Advisors",
+    title: "How It Works — The Multiplier · REBB Advisors",
     description:
-      "Site live in 5 days, Multiplier active, automated follow-up installed. One new lead in 30 days or full refund.",
+      "Daily property and business filing data turned into a ranked call list. One new lead in 30 days or full refund.",
     type: "website",
     url: "https://rebbadvisors.com/how-it-works",
   },
@@ -18,57 +18,57 @@ export const metadata: Metadata = {
 const steps = [
   {
     step: "01",
-    title: "Sprint Kick-Off Call",
-    duration: "45 minutes",
-    body: "We map your business, your market, and your existing lead flow. We identify the highest-value property types and business categories in your service area — the ones most likely to generate immediate revenue — and configure The Multiplier around them.",
+    title: "We talk for 30 minutes",
+    duration: "Day 1",
+    body: "We go over your trade, your service area, and what a good job looks like for you. We use that to filter the data so your call list only shows the property types and deal sizes that actually matter to your business.",
     details: [
-      "Define your ideal contract profile",
-      "Configure GVL data filters for your trade",
-      "Audit current site speed and lead response gaps",
+      "Tell us your trade and ideal job size",
+      "We configure filters for your market",
+      "Dashboard access sent same day",
     ],
   },
   {
     step: "02",
-    title: "Site Build",
-    duration: "Days 1–5",
-    body: "We deploy your high-speed site in days, not weeks. Built on a pre-optimized Vite/React template, then tuned for 100/100 Lighthouse scores. Your digital presence stops being a liability and starts performing like infrastructure.",
+    title: "Your dashboard goes live",
+    duration: "Days 1–2",
+    body: "You get a login to your private dashboard showing live Greenville County data — property transfers, new business filings, and mortgages — already filtered and scored for your trade. You can see what happened this week before your first call list drops.",
     details: [
-      "Custom build on pre-optimized Vite/React stack",
-      "100/100 SEO, performance, and accessibility scores",
-      "Managed hosting, security, and zero-downtime deploys",
+      "Private login — your data, your view",
+      "Greenville County records, updated daily",
+      "Scored and ranked by revenue potential",
     ],
   },
   {
     step: "03",
-    title: "The Multiplier Goes Live",
+    title: "The Multiplier starts running",
     duration: "Days 3–7",
-    body: "We run the first sync: Greenville County property transfers cross-referenced with new business filings. You get a prioritized call list — real names, real addresses, real contracts that just came open. We do this manually at first to make sure the data is clean and relevant.",
+    body: "We run the first full data pull. Property transfers get cross-referenced with tax records, state filings, and public data to surface the actual decision-maker behind each LLC. Your first ranked call list lands Monday morning.",
     details: [
-      "First Multiplier data pull, manually reviewed",
-      "Prioritized prospect list delivered",
-      "Weekly sync cadence established",
+      "First call list delivered within the week",
+      "Real names, real contact info, real reasons to call",
+      "HOT signals trigger same-day alerts by email",
     ],
   },
   {
     step: "04",
-    title: "Lead Engine Installed",
-    duration: "Days 5–10",
-    body: "We build and install your automated follow-up sequences. Every inbound lead — call, form, referral — gets an instant response and a multi-step follow-up that runs on its own. You stay on the job. The system handles the outreach.",
+    title: "Monday mornings: you know who to call",
+    duration: "Every week",
+    body: "Every Monday you get a short, ranked list. Each entry: who the person is, what changed, why it matters for your trade, and how to reach them. You don't analyze anything. You just make the calls.",
     details: [
-      "Missed call text-back (under 60 seconds)",
-      "Logic-based email and SMS sequences",
-      "Automated booking and estimate scheduling",
+      "Scored 0–100 by deal size, recency, and trade match",
+      "Name, phone, email — or we flag it as manual review",
+      "Opening line included — not a generic script",
     ],
   },
   {
     step: "05",
-    title: "The Lead",
+    title: "The guarantee",
     duration: "Within 30 days",
-    body: "The goal of the sprint is concrete: one lead you wouldn't have found otherwise. A property that just changed hands. A business that just incorporated and needs your service. Something real, warm, and ahead of your competitors. If we don't deliver it, you don't pay.",
+    body: "One real lead you wouldn't have found otherwise. A property that just changed hands, a business that just started up, someone who hasn't talked to a single contractor yet. If we don't deliver it within 30 days, you get a full refund.",
     details: [
-      "Sprint performance review at day 30",
-      "Full refund if no new lead surfaced",
-      "Ongoing Multiplier syncs and optimization if you continue",
+      "Full refund if no new lead surfaced in 30 days",
+      "No questions. No case to make.",
+      "Keep going if it works — no long-term contract required",
     ],
   },
 ];
@@ -86,8 +86,8 @@ export default function HowItWorksPage() {
             How It Works
           </h1>
           <p className="text-xl text-gray-500 max-w-xl leading-relaxed">
-            The 30-Day Revenue Sprint — from kick-off call to a lead your
-            competitors don&apos;t know exists yet.
+            From a 30-minute call to a ranked list of people you can call this
+            week — before they&apos;ve talked to anyone.
           </p>
         </div>
       </section>
@@ -158,7 +158,7 @@ export default function HowItWorksPage() {
               <div className="bg-white border border-gray-200 rounded-2xl p-6">
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">The Play for a GC</p>
                 <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                  We resolve the LLC to a real decision-maker. You call them this week — not after they post a bid, not after they&apos;ve talked to five other contractors.
+                  We find the actual person behind the LLC. You call them this week — not after they post a bid, not after they&apos;ve talked to five other contractors.
                 </p>
                 <div className="bg-gray-950 rounded-xl p-4">
                   <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Opening line</p>
@@ -208,8 +208,8 @@ export default function HowItWorksPage() {
             </h2>
             <p className="text-gray-500 leading-relaxed">
               Each signal is scored 0–100 by lead quality — deal size, property type, recency,
-              and match to your trade. You don&apos;t analyze data. You don&apos;t log into a dashboard.
-              You answer one question: <span className="font-semibold text-black">who do I call this week to make money?</span>
+              and match to your trade. Your dashboard shows the full list. You answer one question:{" "}
+              <span className="font-semibold text-black">who do I call this week to make money?</span>
             </p>
           </div>
         </div>
@@ -262,10 +262,9 @@ export default function HowItWorksPage() {
               One lead. 30 days. Or you don&apos;t pay.
             </h2>
             <p className="text-gray-500 leading-relaxed">
-              We don&apos;t charge retainers or lock you into 12-month contracts.
-              The sprint is risk-free: if the combination of your new site and
-              The Multiplier doesn&apos;t surface a lead you wouldn&apos;t have found
-              on your own, we refund everything. No case to make. No questions.
+              We don&apos;t charge retainers or lock you into long-term contracts.
+              If The Multiplier doesn&apos;t surface a lead you wouldn&apos;t have found
+              on your own within 30 days, we refund everything. No case to make. No questions.
             </p>
           </div>
         </div>
@@ -276,10 +275,10 @@ export default function HowItWorksPage() {
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              Ready to start your sprint?
+              Ready to see what&apos;s in the data?
             </h2>
             <p className="text-gray-400">
-              30 minutes. We&apos;ll show you what&apos;s sitting in the GVL data right now.
+              30 minutes. We&apos;ll pull live GVL records on the call and show you exactly who&apos;s out there right now.
             </p>
           </div>
           <Link

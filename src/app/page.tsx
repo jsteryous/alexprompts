@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-16">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-500 mb-4">
-              What We Build For You
+              Two Services
             </span>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
               Two tools.
@@ -475,7 +475,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-green-500 text-black font-semibold px-7 py-3.5 rounded-xl hover:bg-green-400 transition-colors"
               >
-                Get Dashboard Access
+                Get It Set Up
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -496,7 +496,7 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
                 30-Day Risk-Free
                 <br />
-                Revenue Sprint
+                Dashboard Trial
               </h2>
               <p className="text-lg text-gray-500 leading-relaxed mb-4">
                 Get dashboard access. See live Greenville County data. Get your first ranked call list within the week.

@@ -160,9 +160,8 @@ export default function WebDevelopmentPage() {
                 for service businesses, tune it to your brand and trade, and ship.
               </p>
               <p className="text-gray-500 leading-relaxed mb-8">
-                The Sprint includes the full build. If you&apos;re coming in standalone
-                — not as part of the 30-day Sprint — we can scope the build on our
-                first call.
+                We can scope the build on our first call — standalone or bundled with
+                The Multiplier dashboard.
               </p>
               <Link
                 href="/contact"
