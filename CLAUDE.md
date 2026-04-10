@@ -273,7 +273,7 @@ Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `r
 
 **Step 2d — PDL company enrichment** (`enrich_contact.py`): last-resort fallback — fires when still no contact info after the full chain (owner unresolved or person lookup missed). Returns business phone/LinkedIn. Same credit rules apply.
 
-**Step 3 — Manual queue:** Log mailing address + Neumo link in notes, set `enrichment_status = 'pending'`.
+**Step 3 — Manual queue:** Log mailing address + ROD viewer link (`viewer.greenvillecounty.org/countyweb/disclaimer.do`) in notes, set `enrichment_status = 'pending'`.
 
 ### Enrichment versioning
 
@@ -281,7 +281,9 @@ Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `r
 
 ### Location resolution
 
-`save_enriched_lead()` sets `location` to: GIS-resolved property address → `signal.location` if it passes `_is_street_address()` (leading house number) → null. Dashboard renders null as "No address". Field may be null — never assume it contains a street address.
+`save_enriched_lead()` sets `enriched_leads.location` to: GIS-resolved property address → `signal.location` if it passes `_is_street_address()` (leading house number `\d{1,5}\s+[A-Za-z]`) → null. Legacy rows written before the filter may contain a grantor/borrower name instead of an address.
+
+Dashboard validates `location` with `isStreetAddress()` before rendering it as an address. It also joins `market_signals(entity_name, location)` — when `market_signals.location` is not itself a street address (i.e. it's the grantor/borrower name fallback), it's shown as a dimmed sub-label below the address field. Never assume `enriched_leads.location` contains a street address.
 
 ### Name normalization
 
