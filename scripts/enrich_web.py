@@ -22,6 +22,7 @@ from enrich_models import (
     ROLE_WEB_SEARCH,
     EnrichmentResult,
     _is_street_address,
+    choose_best_evidence_url,
     is_non_human_name,
     normalize_person_name,
 )
@@ -218,7 +219,7 @@ def scrape_sos_entity_page(url: str, expected_entity_name: str = "") -> Enrichme
         return result
 
     soup = BeautifulSoup(resp.text, "html.parser")
-    result.search_evidence = url
+    result.search_evidence = choose_best_evidence_url(url)
 
     page_entity_name = _extract_sos_entity_name(soup)
     if page_entity_name:
@@ -340,13 +341,16 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
     if best_sos_result:
         result.notes.extend(best_sos_result.notes)
         if best_sos_result.principal_name and best_sos_result.search_evidence:
-            result.search_evidence = best_sos_result.search_evidence
+            result.search_evidence = choose_best_evidence_url(
+                result.search_evidence,
+                best_sos_result.search_evidence,
+            )
 
     linkedin_urls = [u for u in all_urls if "linkedin.com/in/" in u]
     if linkedin_urls:
         result.notes.append(f"DDG: LinkedIn profile found - {linkedin_urls[0]}")
         if not result.search_evidence:
-            result.search_evidence = linkedin_urls[0]
+            result.search_evidence = choose_best_evidence_url(linkedin_urls[0])
 
     candidate_names = []
     for snippet in all_snippets:
@@ -380,13 +384,12 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
         gbiz_urls = [u for u in all_urls if "gsabizwire.com" in u]
         if ubj_urls:
             result.principal_role = ROLE_PRESS_UBJ
-            result.search_evidence = result.search_evidence or ubj_urls[0]
+            result.search_evidence = choose_best_evidence_url(result.search_evidence, ubj_urls[0])
         elif gbiz_urls:
             result.principal_role = ROLE_PRESS_GBIZ
-            result.search_evidence = result.search_evidence or gbiz_urls[0]
+            result.search_evidence = choose_best_evidence_url(result.search_evidence, gbiz_urls[0])
         else:
             result.principal_role = ROLE_WEB_SEARCH
-            result.search_evidence = result.search_evidence or f"DuckDuckGo: {q1}"
         result.notes.append(f"DDG: extracted name '{top_name}' from search snippets")
 
     # Run over all snippets regardless of whether we found a name - these fields

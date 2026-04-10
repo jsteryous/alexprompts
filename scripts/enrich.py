@@ -18,6 +18,7 @@ Usage:
     python enrich.py --list-pending
     python enrich.py --run-pending [--dry-run]
     python enrich.py --retry-pending [--dry-run]  # re-run full chain on stuck pending leads
+    python enrich.py --repair-stale [--dry-run]   # repair stale/bad rows already in enriched_leads
     python enrich.py --run-contact [--dry-run]    # retry PDL on enriched leads with no contact info
     ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run
 """
@@ -38,7 +39,9 @@ from enrich_models import (
     LLC_NAME_RE,
     _LLC_TERMS_RE,
     _is_street_address,
+    choose_best_evidence_url,
     is_non_human_name,
+    principal_name_quality_issue,
     normalize_person_name,
     EnrichmentResult,
     ENRICH_VERSION,
@@ -181,6 +184,33 @@ class ContactReuseCache:
 _contact_reuse_cache = ContactReuseCache()
 
 
+class ContactNegativeCache:
+    """Run-scoped memoization for principal/entity lookups that found nothing."""
+
+    def __init__(self) -> None:
+        self._principal: set[str] = set()
+        self._entity: set[str] = set()
+
+    def has_principal(self, principal_name: str) -> bool:
+        return _normalize_principal_key(principal_name) in self._principal
+
+    def has_entity(self, entity_name: str) -> bool:
+        return _normalize_entity_key(entity_name) in self._entity
+
+    def remember_principal(self, principal_name: str) -> None:
+        key = _normalize_principal_key(principal_name)
+        if key:
+            self._principal.add(key)
+
+    def remember_entity(self, entity_name: str) -> None:
+        key = _normalize_entity_key(entity_name)
+        if key:
+            self._entity.add(key)
+
+
+_contact_negative_cache = ContactNegativeCache()
+
+
 def _normalize_lookup_key(value: str) -> str:
     if not value:
         return ""
@@ -239,6 +269,62 @@ def _reuse_existing_contact_info(
         f"Contact reuse: copied {', '.join(reused_fields)} from enriched_leads {match_basis} match '{label}'"
     )
     return True
+
+
+def _enrich_contact_info(
+    result: EnrichmentResult,
+    entity_name: str = "",
+    location: str = "",
+    *,
+    principal_name: str = "",
+    current_signal_id: Optional[str] = None,
+) -> None:
+    _reuse_existing_contact_info(
+        result,
+        entity_name,
+        principal_name=principal_name,
+        current_signal_id=current_signal_id,
+    )
+
+    if result.contact_email or result.contact_phone:
+        return
+
+    resolved_principal = principal_name or result.principal_name or ""
+    principal_issue = principal_name_quality_issue(resolved_principal)
+    if principal_issue:
+        if resolved_principal:
+            result.notes.append(
+                f"Contact gating: skipped principal lookup for '{resolved_principal}' ({principal_issue})"
+            )
+    elif result.is_enriched():
+        if _contact_negative_cache.has_principal(resolved_principal):
+            result.notes.append(
+                f"Contact cache: skipped person lookup for '{resolved_principal}' after prior no-match/no-contact result"
+            )
+        else:
+            person_status = lookup_apollo_contact(result, entity_name, location)
+            if person_status in {"no_match", "no_contact"}:
+                _contact_negative_cache.remember_principal(resolved_principal)
+
+    if result.contact_email or result.contact_phone:
+        return
+
+    if entity_name:
+        if _contact_negative_cache.has_entity(entity_name):
+            result.notes.append(
+                f"Contact cache: skipped company lookup for '{entity_name}' after prior no-match/no-contact result"
+            )
+        else:
+            company_status = lookup_pdl_company(result, entity_name, location)
+            if company_status in {"no_match", "no_contact"}:
+                _contact_negative_cache.remember_entity(entity_name)
+
+    _contact_reuse_cache.remember(
+        principal_name=resolved_principal,
+        entity_name=entity_name,
+        result=result,
+        signal_id=current_signal_id,
+    )
 
 
 # ── Orchestrator ──────────────────────────────────────────────────────────────
@@ -510,7 +596,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         "contact_email":     result.contact_email,
         "contact_phone":     result.contact_phone,
         "linkedin_url":      result.linkedin_url,
-        "search_evidence":   result.search_evidence,
+        "search_evidence":   choose_best_evidence_url(result.search_evidence),
         "enrichment_status":  result.enrichment_status,
         "enrichment_version": ENRICH_VERSION,
         "notes":              "\n".join(result.notes),
@@ -541,6 +627,22 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
 
 # ── Batch runner (also imported by run_daily.py) ─────────────────────────────
 
+def _process_signal(signal: dict, dry_run: bool = False) -> None:
+    result = enrich(
+        entity_name=signal["entity_name"],
+        address=signal.get("location", ""),
+        dry_run=dry_run,
+        signal=signal,
+    )
+    _enrich_contact_info(
+        result,
+        signal["entity_name"],
+        signal.get("location", ""),
+        current_signal_id=signal.get("id"),
+    )
+    save_enriched_lead(signal, result, dry_run=dry_run)
+
+
 def run_pending(dry_run: bool = False) -> None:
     """Enrich all unenriched signals (max 10 per run). Exception-safe per signal."""
     signals = fetch_pending_signals(limit=10)
@@ -549,28 +651,7 @@ def run_pending(dry_run: bool = False) -> None:
         return
     for signal in signals:
         try:
-            result = enrich(
-                entity_name=signal["entity_name"],
-                address=signal.get("location", ""),
-                dry_run=dry_run,
-                signal=signal,
-            )
-            _reuse_existing_contact_info(
-                result,
-                signal["entity_name"],
-                current_signal_id=signal.get("id"),
-            )
-            if result.is_enriched() and not (result.contact_email or result.contact_phone):
-                lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
-            if not result.contact_email and not result.contact_phone:
-                lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
-            _contact_reuse_cache.remember(
-                principal_name=result.principal_name or "",
-                entity_name=signal["entity_name"],
-                result=result,
-                signal_id=signal.get("id"),
-            )
-            save_enriched_lead(signal, result, dry_run=dry_run)
+            _process_signal(signal, dry_run=dry_run)
         except Exception as e:
             _log.error(
                 "Unhandled error enriching signal %s ('%s'): %s",
@@ -617,32 +698,119 @@ def run_retry_pending(dry_run: bool = False) -> None:
             print(f"   Skipping {row['id']} — no linked signal")
             continue
         try:
-            result = enrich(
-                entity_name=sig["entity_name"],
-                address=sig.get("location", ""),
-                dry_run=dry_run,
-                signal=sig,
-            )
-            _reuse_existing_contact_info(
-                result,
-                sig["entity_name"],
-                current_signal_id=sig.get("id"),
-            )
-            if result.is_enriched() and not (result.contact_email or result.contact_phone):
-                lookup_apollo_contact(result, sig["entity_name"], sig.get("location", ""))
-            if not result.contact_email and not result.contact_phone:
-                lookup_pdl_company(result, sig["entity_name"], sig.get("location", ""))
-            _contact_reuse_cache.remember(
-                principal_name=result.principal_name or "",
-                entity_name=sig["entity_name"],
-                result=result,
-                signal_id=sig.get("id"),
-            )
-            save_enriched_lead(sig, result, dry_run=dry_run)
+            _process_signal(sig, dry_run=dry_run)
         except Exception as e:
             _log.error(
                 "Unhandled error retrying lead %s ('%s'): %s",
                 row.get("id"), sig.get("entity_name"), e,
+            )
+        time.sleep(2)
+
+
+def _stale_repair_reasons(row: dict) -> list[str]:
+    reasons: list[str] = []
+
+    version = row.get("enrichment_version")
+    if version is None:
+        reasons.append("legacy row with no enrichment_version")
+    elif version < ENRICH_VERSION:
+        reasons.append(f"enrichment_version {version} < {ENRICH_VERSION}")
+
+    principal_name = (row.get("principal_name") or "").strip()
+    status = (row.get("enrichment_status") or "").strip().lower()
+    if status == "enriched" and not principal_name:
+        reasons.append("enriched row missing principal_name")
+    elif principal_name:
+        issue = principal_name_quality_issue(principal_name)
+        if issue:
+            reasons.append(f"principal_name needs repair ({issue})")
+
+    return reasons
+
+
+def fetch_stale_repair_candidates(limit: int = 25, scan_limit: int = 500) -> list[dict]:
+    """
+    Return enriched_leads rows that should be repaired/backfilled.
+
+    Selection is intentionally local and conservative:
+    - legacy rows with no enrichment_version
+    - rows produced by an older enrichment version
+    - rows whose stored principal_name now fails quality checks
+    """
+    client = get_supabase()
+    if not client:
+        print("Supabase not configured.")
+        return []
+
+    candidates: list[dict] = []
+    page_size = min(max(limit * 3, 50), 200)
+    offset = 0
+
+    while offset < scan_limit and len(candidates) < limit:
+        resp = (
+            client.table("enriched_leads")
+            .select(
+                "id, signal_id, enrichment_status, enrichment_version, principal_name, "
+                "market_signals(id, entity_name, location, event_type, valuation, score, tag, source, details, signal_type)"
+            )
+            .order("updated_at", desc=False)
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+        rows = resp.data or []
+        if not rows:
+            break
+
+        for row in rows:
+            if not row.get("signal_id"):
+                continue
+            reasons = _stale_repair_reasons(row)
+            if not reasons:
+                continue
+
+            signal = row.get("market_signals")
+            if not signal:
+                continue
+
+            candidates.append(
+                {
+                    "lead_id": row.get("id"),
+                    "signal": signal,
+                    "reasons": reasons,
+                }
+            )
+            if len(candidates) >= limit:
+                break
+
+        if len(rows) < page_size:
+            break
+        offset += page_size
+
+    return candidates
+
+
+def run_repair_stale(dry_run: bool = False, limit: int = 25) -> None:
+    """
+    Re-run the current enrichment chain on stale or bad historical leads already
+    stored in enriched_leads, then overwrite the row via the normal upsert path.
+    """
+    rows = fetch_stale_repair_candidates(limit=limit)
+    if not rows:
+        print("No stale leads need repair.")
+        return
+
+    print(f"\n── Repairing {len(rows)} stale lead(s) ──\n")
+    for row in rows:
+        signal = row["signal"]
+        reasons = "; ".join(row["reasons"])
+        print(f"   {signal.get('entity_name')}  ({signal.get('id')})")
+        print(f"     Repair reason: {reasons}")
+        try:
+            _process_signal(signal, dry_run=dry_run)
+        except Exception as e:
+            _log.error(
+                "Unhandled error repairing lead %s / signal %s ('%s'): %s",
+                row.get("lead_id"), signal.get("id"), signal.get("entity_name"), e,
             )
         time.sleep(2)
 
@@ -690,21 +858,12 @@ def run_contact_only(dry_run: bool = False) -> None:
         result = EnrichmentResult()
         result.principal_name = name
 
-        _reuse_existing_contact_info(
+        _enrich_contact_info(
             result,
             entity_name,
+            location,
             principal_name=name,
             current_signal_id=row.get("signal_id"),
-        )
-        if not (result.contact_email or result.contact_phone):
-            lookup_apollo_contact(result, entity_name, location)
-        if not result.contact_email and not result.contact_phone:
-            lookup_pdl_company(result, entity_name, location)
-        _contact_reuse_cache.remember(
-            principal_name=name,
-            entity_name=entity_name,
-            result=result,
-            signal_id=row.get("signal_id"),
         )
 
         for note in result.notes:
@@ -746,6 +905,8 @@ def main():
                         help="Enrich all unenriched signals (oldest first, max 10)")
     parser.add_argument("--retry-pending",     action="store_true",
                         help="Re-run full enrichment on leads stuck in pending status (max 10)")
+    parser.add_argument("--repair-stale",      action="store_true",
+                        help="Re-run full enrichment on stale/bad enriched_leads rows (max 25)")
     parser.add_argument("--run-contact",       action="store_true",
                         help="Retry PDL contact lookup on enriched leads with no email/phone (up to 50)")
     parser.add_argument("--dry-run",      action="store_true",
@@ -774,6 +935,10 @@ def main():
         run_retry_pending(dry_run=args.dry_run)
         return
 
+    if args.repair_stale:
+        run_repair_stale(dry_run=args.dry_run)
+        return
+
     if args.run_contact:
         run_contact_only(dry_run=args.dry_run)
         return
@@ -793,20 +958,11 @@ def main():
         except Exception as e:
             _log.error("Enrichment failed for signal %s: %s", args.signal_id, e)
             return
-        _reuse_existing_contact_info(
+        _enrich_contact_info(
             result,
             signal["entity_name"],
+            signal.get("location", ""),
             current_signal_id=signal.get("id"),
-        )
-        if result.is_enriched() and not (result.contact_email or result.contact_phone):
-            lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
-        if not result.contact_email and not result.contact_phone:
-            lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
-        _contact_reuse_cache.remember(
-            principal_name=result.principal_name or "",
-            entity_name=signal["entity_name"],
-            result=result,
-            signal_id=signal.get("id"),
         )
         save_enriched_lead(signal, result, args.dry_run)
         return
@@ -829,15 +985,10 @@ def main():
             address=args.address or "",
             dry_run=args.dry_run,
         )
-        _reuse_existing_contact_info(result, args.entity or "")
-        if result.is_enriched() and not (result.contact_email or result.contact_phone):
-            lookup_apollo_contact(result, args.entity or "", args.address or "")
-        if not result.contact_email and not result.contact_phone:
-            lookup_pdl_company(result, args.entity or "", args.address or "")
-        _contact_reuse_cache.remember(
-            principal_name=result.principal_name or "",
-            entity_name=args.entity or "",
-            result=result,
+        _enrich_contact_info(
+            result,
+            args.entity or "",
+            args.address or "",
         )
         print(f"\n── Result ──")
         print(f"   principal_name:    {result.principal_name or '—'}")

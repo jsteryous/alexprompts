@@ -18,6 +18,7 @@ from enrich_models import (
     ROLE_GIS_OWNER,
     _LLC_TERMS_RE,
     _is_street_address,
+    choose_best_evidence_url,
     is_non_human_name,
     normalize_person_name,
     EnrichmentResult,
@@ -207,7 +208,7 @@ def lookup_gis(entity_name: str, address: str = "", _retried: bool = False) -> E
         else:
             result.principal_name = normalize_person_name(owner_raw)
         result.principal_role   = ROLE_GIS_OWNER
-        result.search_evidence  = TAX_QUERY_URL
+        result.search_evidence  = choose_best_evidence_url(detail_url, TAX_QUERY_URL)
         result.notes.append(
             f"GIS: tax record owner '{owner_raw}' → '{result.principal_name}'"
             + (f" (Map # {result.pin})" if result.pin else "")

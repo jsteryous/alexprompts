@@ -31,6 +31,8 @@ from enrich_models import (
     HEADERS, DEBUG_DIR,
     ROLE_MORTGAGE_SIG,
     LLC_NAME_RE,
+    choose_best_evidence_url,
+    extract_best_property_address,
     EnrichmentResult,
 )
 
@@ -404,6 +406,7 @@ def lookup_mortgage_borrower(
     Set ENRICH_DEBUG=1 to save HTML snapshots to scripts/debug/.
     """
     result = EnrichmentResult()
+    mortgage_evidence_url: Optional[str] = None
 
     if not ROD_PASSWORD:
         result.notes.append("Mortgage lookup: ROD_PASSWORD not set in .env.local — skipping")
@@ -666,6 +669,7 @@ def lookup_mortgage_borrower(
                 html5_url = img_viewer_m.group(0).replace("&amp;", "&").rstrip(";")
                 if not html5_url.startswith("http"):
                     html5_url = f"https://viewer.greenvillecounty.org/countyweb/search/{html5_url}"
+                mortgage_evidence_url = choose_best_evidence_url(html5_url, mortgage_evidence_url)
                 try:
                     doc_frame.evaluate(
                         f"if (window.frames['docImgViewFrame']) "
@@ -782,12 +786,16 @@ def lookup_mortgage_borrower(
         browser.close()
 
     # ── Step 9: Parse borrower from document text ─────────────────────────────
+    result.property_address = extract_best_property_address(doc_text)
+    if result.property_address:
+        result.notes.append(f"Mortgage lookup: property address found â€” '{result.property_address}'")
+
     name, title = _parse_borrower_from_text(doc_text)
     if name:
         role = f"{ROLE_MORTGAGE_SIG} – {title}" if title else ROLE_MORTGAGE_SIG
         result.principal_name    = name
         result.principal_role    = role
-        result.search_evidence   = f"{ROD_VIEWER_URL}/loginDisplay.action?countyname=Greenville"
+        result.search_evidence   = choose_best_evidence_url(mortgage_evidence_url)
         result.enrichment_status = "enriched"
         result.notes.append(f"Mortgage lookup: borrower signature found — '{name}', {title or 'no title'}")
         print(f"   ✓ Mortgage borrower: {name}{', ' + title if title else ''}")

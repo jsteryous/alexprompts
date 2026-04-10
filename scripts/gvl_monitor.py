@@ -36,6 +36,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential, before_sleep_log
 from lib.db_models import MarketSignalRow
+from enrich_models import extract_best_property_address
 
 logging.basicConfig(
     level=logging.INFO,
@@ -300,7 +301,8 @@ def _parse_govos_detail(html: str) -> tuple[Optional[float], Optional[str]]:
         return None, None
 
     soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text(" ")
+    text = soup.get_text(" ", strip=True)
+    structured_text = soup.get_text("\n", strip=True)
 
     # ── Loan / consideration amount ────────────────────────────────────────────
     # GovOS uses "Consideration" for deeds and may use "Loan Amount" /
@@ -327,28 +329,10 @@ def _parse_govos_detail(html: str) -> tuple[Optional[float], Optional[str]]:
                     pass
 
     # ── Property / situs address ───────────────────────────────────────────────
-    property_address: Optional[str] = None
-
-    # Try labeled fields first (most reliable)
-    for label in ("Property Address:", "Situs Address:", "Site Address:", "Property Location:"):
-        idx = text.find(label)
-        if idx != -1:
-            snippet = text[idx + len(label): idx + len(label) + 100].strip()
-            # Take the first non-empty chunk before a newline or next label keyword
-            addr = re.split(r"\n|(?=\b(?:Grantor|Grantee|Consideration|Book|Page)\b)", snippet)[0].strip()
-            if addr and len(addr) > 5:
-                property_address = addr
-                break
-
-    # Fallback: scan for a street-address pattern (number + street name + type)
-    if not property_address:
-        m = re.search(
-            r"\b(\d{2,5}\s+[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3}"
-            r"\s+(?:St|Ave|Rd|Dr|Blvd|Ln|Way|Ct|Pl|Hwy|Pkwy|Cir|Ter|Trl)\b[^,\n]{0,30})",
-            text,
-        )
-        if m:
-            property_address = m.group(1).strip()
+    property_address = (
+        extract_best_property_address(structured_text)
+        or extract_best_property_address(text)
+    )
 
     return consideration, property_address
 
