@@ -57,7 +57,7 @@ ROD_EMAIL    = os.environ.get("ROD_EMAIL")
 ROD_PASSWORD = os.environ.get("ROD_PASSWORD")
 
 # ── CountyWeb viewer credentials (mortgage monitor — viewer.greenvillecounty.org) ──
-# This is the standard county ROD viewer, NOT the Neumo/GovOS portal.
+# This is the standard county ROD viewer, NOT the GovOS deed portal.
 # ROD_PASSWORD is shared between both portals.
 ROD_VIEWER_URL      = "https://viewer.greenvillecounty.org/countyweb"
 ROD_VIEWER_USERNAME = os.environ.get("ROD_VIEWER_USERNAME", "asteryous")
@@ -605,7 +605,7 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
     Greenville County ROD CountyWeb viewer — Recent Mortgage Filings.
 
     Portal: viewer.greenvillecounty.org (standard county ROD viewer)
-    NOT the GovOS/Neumo portal used by the deed scraper.
+    NOT the GovOS portal used by the deed scraper.
 
     Credentials:
       ROD_VIEWER_USERNAME (env var, default: "asteryous")

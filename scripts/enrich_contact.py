@@ -209,10 +209,10 @@ def lookup_pdl_company(
 def _extract_email(data: dict) -> Optional[str]:
     """Return the best available email from a PDL person record."""
     work_email = data.get("work_email")
-    if work_email and "@" in work_email:
+    if isinstance(work_email, str) and "@" in work_email:
         return work_email
     for e in data.get("personal_emails") or []:
-        if e and "@" in e:
+        if isinstance(e, str) and "@" in e:
             return e
     return None
 
