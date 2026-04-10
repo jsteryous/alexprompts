@@ -5,15 +5,11 @@
 **Business:** REBB Advisors — Upstate SC (Greenville County), targeting local service trades.  
 **Tone:** Confident, minimal, blunt. No fluff.
 
-**REBB's differentiator (exact copy):**  
-> "Most agencies wait for your customers to search. We don't. We programmatically sync Greenville County property transfers and new business filings to identify your next high-value contract before your competitors even know it exists."
+**REBB's tagline:** "We find the owner. You make the sale."
 
-**The Three Pillars:**
-1. **The Signal** — Python engine monitors municipal data daily (deeds, mortgages, SOS filings)
-2. **The Resolution** — Match fragmented public records to the specific decision-maker
-3. **The Infrastructure** — React systems that capture and warm up those leads on autopilot
-
-**The Upstate Multiplier:** Daily syncs of GVL County property transfers + new business filings. Score > 80 triggers immediate email alert. Ranked call list every Monday. Framing: **"Who do I call this week to make money?"**
+**Two products:**
+1. **The Multiplier** — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Framing: **"Who do I call this week to make money?"**
+2. **Company Brain** — Private local AI (built on Rowboat, white-labeled) that ingests client emails, quotes, and project notes. Team members query it instead of interrupting the owner. Runs on the client's office computer; no data leaves their machine.
 
 ## Tech Stack
 
@@ -55,10 +51,16 @@ scripts/
 ├── generate_insights.py         — Gemini → DRAFT → email
 ├── approve_post.py              — CLI draft management
 ├── weekly_insights.py           — topic rotation (GH Actions Monday 8am EST)
-├── run_daily.py                 — pipeline orchestrator
+├── run_daily.py                 — pipeline orchestrator (subprocess-based)
 ├── gvl_monitor.py               — scraper: deeds (GovOS), SOS (DDG), mortgages (CountyWeb)
-├── enrich.py                    — LLC → human enrichment pipeline
+├── enrich.py                    — enrichment orchestrator
+├── enrich_gis.py                — GIS tax query + property detail lookup
+├── enrich_web.py                — DuckDuckGo + SC SOS entity pages
+├── enrich_mort.py               — CountyWeb mortgage OCR
+├── enrich_models.py             — shared types, constants, name normalization
 ├── weekly_leads_digest.py       — weekly email digest
+├── lib/db_models.py             — Pydantic row validators (extra="forbid")
+├── lib/email_format.py          — shared email formatting helpers
 └── requirements.txt / requirements-insights.txt / requirements-scraper.txt
 
 .github/workflows/weekly-insights.yml + daily-leads.yml
@@ -105,10 +107,10 @@ supabase/schema.sql
 | `id` | uuid | PK |
 | `timestamp` | timestamptz | event time |
 | `event_type` | text | `PROPERTY TRANSFER` / `NEW BUSINESS FILING` / `INDUSTRIAL PERMIT` / `MORTGAGE_FILING` |
-| `location` | text | address or entity name |
-| `entity_name` | text | company/owner |
+| `location` | text | property address, or grantor/borrower name when no address available |
+| `entity_name` | text | company/owner being enriched |
 | `valuation` | numeric | |
-| `details` | text | context line |
+| `details` | text | context line; for mortgages includes `Lender: {name}` |
 | `score` | integer | 0–100 |
 | `tag` | text | `HOT` / `WARM` / `COLD` |
 | `source` | text | `deeds` / `sos` / `permits` / `demo` / `mortgages` |
@@ -162,7 +164,7 @@ RLS: public SELECT only where `status = 'PUBLISHED'`.
 | `transfer_type` | text | `NOMINAL_TRANSFER` (copied from signal) or null — dashboard shows "Trust / Family" badge and hides dollar value |
 | `notes` | text | |
 
-Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_leads` row (`raw`) → lookup chain → `enriched` or `pending` (manual queue).
+Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_leads` row → lookup chain → `enriched` or `pending` (manual queue).
 
 ## Market Insights Engine
 
@@ -207,7 +209,7 @@ python gvl_monitor.py --mode mortgages [--days 14] [--debug] [--dry-run]
 - React SPA — after login, stay on `/`. Don't navigate away. Date: `aria-label="Starting Recorded Date"` + `press_sequentially()`. Submit: `data-testid="searchSubmitButton"`. Results: `tr.is-uncertified`.
 - Results columns: `cells[6]`=rec_date · `cells[7]`=doc_type · `cells[8]`=grantor · `cells[9]`=grantee. Consideration always `N/A` in results.
 - Click each qualifying row (Phase B) to get real consideration + property address. Direct `/document/{id}` URLs return 404 — must click from live Playwright session. `_parse_govos_detail()` checks `Consideration:`, `Loan Amount:`, `Principal Amount:`, `Situs Address:`.
-- Only DEED / WARRANTY DEED / DEED OF TRUST / QUIT CLAIM kept. `location` = property address → grantor name fallback.
+- Only DEED / WARRANTY DEED / DEED OF TRUST / QUIT CLAIM kept. `location` = property address → grantor name fallback (deed detail pages often have no situs address).
 - Dedup key: `deeds:{GRANTEE}:{rec_date}`
 
 **CountyWeb mortgage scraper:**
@@ -215,7 +217,7 @@ python gvl_monitor.py --mode mortgages [--days 14] [--debug] [--dry-run]
 - Nested iframes: `page.frame("bodyframe")` → `page.frame("dynSearchFrame")` → `page.frame("criteriaframe")`. Accept disclaimer, then click outer nav link (target="bodyframe") to reach `searchMain.do` — `frame.goto()` returns 404.
 - Datagrid field numbers (verified): `field 6`=rec_date · `field 7`=doc_type · `field 9`=grantor/borrower · `field 11`=grantee/lender.
 - Filter doc types by exact set membership (not substring) to exclude SATISFACTION OF MORTGAGE. Scan all rows; click MORTGAGE row specifically (ASSIGNMENT OF RENTS may appear first).
-- Grantor = borrower (who we want). Grantee = lender.
+- Grantor = borrower (who we want). Grantee = lender. `location` = borrower name; lender stored in `details`.
 - Signals: `event_type/signal_type = "MORTGAGE_FILING"`. MTG base 82 (WARM), CON base 88 (HOT).
 - Dedup key: `mtg:{BORROWER}:{rec_date}`
 
@@ -248,8 +250,8 @@ ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run   # saves HTML/PNG to s
 
 ### Enrichment chain
 
-**Step 0 — Mortgage OCR** (signals with `signal_type = MORTGAGE_FILING`):  
-CountyWeb viewer — match by entity name (LLC suffixes stripped) + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path param — NOT cookie; Playwright session must stay active). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic scorer fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Returns immediately on hit.
+**Step 0 — Mortgage OCR** (deed + mortgage signals with LLC entity names):  
+Triggered for `source in ("deeds", "mortgages")`. CountyWeb viewer — match by entity name (LLC suffixes stripped) + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path param — NOT cookie; Playwright session must stay active). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic scorer fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Returns immediately on hit.
 
 **Step 1 — GVL tax query (`votaxqry`):**  
 Form at `greenvillecounty.org/appsas400/votaxqry/` — name search only (`txt_Name = input[name="ctl00$bodyContent$txt_Name"]`). Must force `hdn_SearchCategory = "Real Estate"` via `page.evaluate()` — tab click alone unreliable. Strip LLC/INC/CORP and "AND ..." joint suffixes before searching. Results: `cells[0]`=name+href · `cells[1]`=Map#/PIN. No mailing address column. Skip rows with vehicle codes (CHEV, FORD, TOYT, BOAT, TRLR, etc.). Name-flip retry on 0 results: 2-word → reverse; 3-word ending in initial → strip initial; 3-word no initial → FIRST MIDDLE LAST → LAST FIRST MIDDLE.
@@ -264,11 +266,13 @@ Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `r
 
 **Step 3 — Manual queue:** Log mailing address + Neumo link in notes, set `enrichment_status = 'pending'`.
 
+### Location resolution
+
+`save_enriched_lead()` sets `location` to: GIS-resolved property address → raw `signal.location` fallback (may be grantor name for deeds, or borrower name for mortgages). Always populated; never filtered on whether it's a street address.
+
 ### Name normalization
 
 `normalize_person_name()`: ALL-CAPS deed format `LASTNAME FIRSTNAME MIDDLE` → `Firstname Lastname`. Drops middle names, preserves JR/SR/II/III. For simple deed grantees (≤3 words, no "AND"), deed `entity_name` preferred over GIS (GIS concatenates first+middle without spaces).
-
-Location priority: GIS property address → `signal.location` if street-like → raw `signal.location` fallback.
 
 ### principal_role constants
 
@@ -313,7 +317,7 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 **GovOS deed scraper:**
 - React SPA — do NOT navigate away after login. Direct `/document/{id}` URLs return 404; click row from live Playwright session.
 - Consideration always `N/A` in results table; real price only in detail panel (Phase B).
-- Deed detail pages have no property/situs address — "No legal description found". `location` falls back to grantor name for all deed signals.
+- Deed detail pages often have no situs address. `location` falls back to grantor name.
 
 **GVL tax query (`votaxqry`):**
 - `hdn_SearchCategory` defaults to "Car" — tab click unreliable; force via `page.evaluate()`.
@@ -331,7 +335,6 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 
 **Misc:**
 - SOS DDG scraper may return 0 if DDG hasn't crawled recent filings.
-- `enrich.py --run-pending` fetches 500, filters enriched, returns first N. Increase pool limit in `fetch_pending_signals()` if >500 signals.
 - GovOS account required at `greenville.sc.publicsearch.us/register` — no guest login despite JS `doGuestLogin()` function.
 
 ## Environment Variables
@@ -352,6 +355,7 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 | `TESSERACT_CMD` | Optional — path to `tesseract.exe` if not at default |
 | `DISCORD_WEBHOOK_URL` | Optional — new draft alert |
 | `EDITOR` | Optional — for `approve_post.py --edit` (default: notepad) |
+| `MAIL_FROM` | Optional — email `from` address for all pipeline emails (default: `REBB Advisors <noreply@rebbadvisors.com>` / `REBB Insights <onboarding@resend.dev>` for insights) |
 
 ## Deployment
 
@@ -367,7 +371,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero + LiveSignalFeed, Problem, The Window (Day 0→21 timeline), How We Do It, Services, Multiplier, Offer (30-day guarantee), CTA |
+| `/` | Hero + LiveSignalFeed, Two Products (Multiplier + Company Brain), How It Works (3-step), The Window (Day 0→21 timeline), Dashboard Preview mockup, Company Brain (chat mockup), Offer, CTA. All CTAs → "Get Dashboard Access" → `/contact` |
 | `/how-it-works` | 5-step sprint process |
 | `/lead-intelligence` | Upstate Multiplier deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
@@ -381,3 +385,9 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 | `/contact` | Form → `/api/contact` → Resend to alex@rebbadvisors.com |
 
 **Nav:** logo · Services ▾ (Lead Intelligence / Outreach Automation / Local SEO / Web Development) · How It Works · Insights · Contact · [Get More Jobs CTA]
+
+## Python Pipeline — Open Tech Debt
+
+- **`run_daily.py` subprocess orchestration** — Steps run as subprocesses; failures captured only by returncode. Structured exceptions and logging context from sub-scripts are lost. Fix: import and call functions directly with try/except.
+- **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage. Any refactor is unprotected.
+- **`fetch_pending_signals` NOT IN list** — PostgREST passes as URL query param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.
