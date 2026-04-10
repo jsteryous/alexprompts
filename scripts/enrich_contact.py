@@ -211,9 +211,12 @@ def _extract_email(data: dict) -> Optional[str]:
     work_email = data.get("work_email")
     if isinstance(work_email, str) and "@" in work_email:
         return work_email
-    for e in data.get("personal_emails") or []:
-        if isinstance(e, str) and "@" in e:
-            return e
+
+    personal_emails = data.get("personal_emails")
+    if isinstance(personal_emails, list):
+        for e in personal_emails:
+            if isinstance(e, str) and "@" in e:
+                return e
     return None
 
 
