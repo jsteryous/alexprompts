@@ -272,11 +272,11 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             "check county property records at that address to find the owner"
         )
     result.notes.append(
-        "Manual Assist: https://neumo.com/products/public-administration-solutions/search/ "
-        "— search deed signature to unmask the signing principal"
+        "Manual Assist: https://viewer.greenvillecounty.org/countyweb/disclaimer.do "
+        "— search the ROD viewer by entity name or rec date to find the document"
     )
     print("   ↳ Status: pending (manual research needed)")
-    print("   → Manual Assist: https://neumo.com/products/public-administration-solutions/search/")
+    print("   → Manual Assist: https://viewer.greenvillecounty.org/countyweb/disclaimer.do")
     result.enrichment_status = "pending"
     return result
 

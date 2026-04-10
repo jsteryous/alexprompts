@@ -168,7 +168,7 @@ def build_email_html(
 <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
            color:#d97706;margin:24px 0 12px">Pending Manual Review — {pending_count} unresolved</h3>
 <p style="font-size:12px;color:#6b7280;margin:0 0 12px">
-  LLC owner could not be auto-identified. Check notes for mailing address and Neumo link.
+  LLC owner could not be auto-identified. Check notes for mailing address and ROD viewer link.
 </p>
 {pending_cards}"""
 
