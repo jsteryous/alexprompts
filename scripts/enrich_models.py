@@ -25,7 +25,7 @@ DEBUG_DIR = Path(__file__).parent / "debug"
 # Bump this when the enrichment chain meaningfully improves (new source added,
 # major logic fix). Stored in enriched_leads.enrichment_version so stale rows
 # can be selected and re-processed with --re-enrich-stale.
-ENRICH_VERSION = 1
+ENRICH_VERSION = 2
 
 # ── principal_role constants ──────────────────────────────────────────────────
 # Stable string labels consumed by the /dashboard frontend to derive confidence
@@ -45,6 +45,18 @@ _SUFFIXES = {"JR", "SR", "II", "III", "IV", "ESQ", "MD", "PHD", "DDS"}
 # Shorter list — used in normalize_person_name and Care Of checks
 _LLC_TERMS_RE = re.compile(
     r"\b(LLC|INC|CORP|LTD|LP|LLP|HOLDINGS|PARTNERS|PROPERTIES|ASSOCIATES|GROUP|TRUST|FOUNDATION)\b",
+    re.I,
+)
+
+# Non-human owners that can appear in county records. These should never be
+# normalized as deed-style person names or treated as resolved decision-makers.
+_NON_PERSON_OWNER_RE = re.compile(
+    r"\b("
+    r"CITY\s+OF|COUNTY\s+OF|STATE\s+OF|TOWN\s+OF|VILLAGE\s+OF|"
+    r"BOARD\s+OF|SCHOOL\s+DISTRICT|HOUSING\s+AUTHORITY|REDEVELOPMENT\s+AUTHORITY|"
+    r"PUBLIC\s+WORKS|DEPARTMENT\s+OF|UNIVERSITY\s+OF|COLLEGE\s+OF|"
+    r"CHURCH|MINISTR(?:Y|IES)|DIOCESE|PARISH|FOUNDATION|AUTHORITY"
+    r")\b",
     re.I,
 )
 
@@ -82,6 +94,9 @@ def normalize_person_name(raw: str) -> str:
     if not raw:
         return raw
 
+    if _NON_PERSON_OWNER_RE.search(raw):
+        return raw.title()
+
     parts = raw.upper().split()
     if not parts:
         return raw
@@ -107,6 +122,13 @@ def normalize_person_name(raw: str) -> str:
     return result
 
 
+def is_non_human_name(raw: Optional[str]) -> bool:
+    """Return True for LLCs, governments, nonprofits, and other non-person owners."""
+    if not raw:
+        return False
+    return bool(_LLC_TERMS_RE.search(raw) or _NON_PERSON_OWNER_RE.search(raw))
+
+
 # ── Result model ──────────────────────────────────────────────────────────────
 
 @dataclass
@@ -128,4 +150,4 @@ class EnrichmentResult:
         """True if we found a human name (not just an LLC)."""
         if not self.principal_name:
             return False
-        return not _LLC_TERMS_RE.search(self.principal_name)
+        return not is_non_human_name(self.principal_name)
