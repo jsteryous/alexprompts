@@ -222,7 +222,12 @@ def _extract_phone(data: dict) -> Optional[str]:
     mobile = data.get("mobile_phone")
     if mobile:
         return mobile
-    for num in data.get("phone_numbers") or []:
-        if num:
-            return num
+    
+    # Explicitly check for a list to avoid 'bool' or other non-iterable types
+    phone_numbers = data.get("phone_numbers")
+    if isinstance(phone_numbers, list):
+        for num in phone_numbers:
+            if num:
+                return num
+                
     return None
