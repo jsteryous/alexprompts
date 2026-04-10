@@ -28,7 +28,7 @@ interface EnrichedLead {
   tag: string | null;
   transfer_type: string | null;
   notes: string | null;
-  market_signals: { entity_name: string | null } | null;
+  market_signals: { entity_name: string | null; location: string | null } | null;
 }
 
 interface Props {
@@ -99,7 +99,7 @@ async function getLeads(clientSlug?: string): Promise<EnrichedLead[]> {
     .select(
       "id, created_at, principal_name, principal_role, contact_email, contact_phone, linkedin_url, " +
       "search_evidence, enrichment_status, trade_tag, event_type, location, valuation, score, tag, transfer_type, notes, " +
-      "market_signals(entity_name)"
+      "market_signals(entity_name, location)"
     )
     .in("enrichment_status", ["enriched", "pending"])
     .order("score", { ascending: false, nullsFirst: false });
@@ -144,6 +144,10 @@ async function getLeads(clientSlug?: string): Promise<EnrichedLead[]> {
 }
 
 // ── Formatting helpers ────────────────────────────────────────────────────────
+
+function isStreetAddress(s: string | null | undefined): boolean {
+  return !!s && /^\d{1,5}\s+[A-Za-z]/.test(s.trim());
+}
 
 function formatValuation(v: number | null): string {
   if (!v) return "—";
@@ -380,9 +384,25 @@ export default async function DashboardPage({ searchParams }: Props) {
 
                       {/* Location / address */}
                       <td className="px-4 py-4 text-gray-300 text-xs max-w-[180px]">
-                        <p className="truncate" title={lead.location ?? ""}>
-                          {lead.location ?? <span className="text-gray-600 italic">No address</span>}
-                        </p>
+                        {(() => {
+                          const addr = isStreetAddress(lead.location) ? lead.location : null;
+                          const sigLoc = lead.market_signals?.location ?? null;
+                          const grantorName = sigLoc && !isStreetAddress(sigLoc) ? sigLoc : null;
+                          return (
+                            <>
+                              {addr ? (
+                                <p className="truncate" title={addr}>{addr}</p>
+                              ) : (
+                                <span className="text-gray-600 italic">No address</span>
+                              )}
+                              {grantorName && (
+                                <p className="text-gray-600 text-[10px] truncate mt-0.5" title={grantorName}>
+                                  {grantorName}
+                                </p>
+                              )}
+                            </>
+                          );
+                        })()}
                       </td>
 
                       {/* Event type */}
