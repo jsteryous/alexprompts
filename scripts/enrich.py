@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Upstate Multiplier — Lead Enrichment Orchestrator
-==================================================
+LLC Owner Finder — Lead Enrichment Orchestrator
+================================================
 Takes a raw market_signal (LLC name + address) and tries to unmask
 the real human decision-maker using free public sources only.
 
@@ -22,7 +22,6 @@ Usage:
 
 import os
 import re
-import sys
 import time
 import argparse
 import logging
@@ -30,7 +29,6 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from tenacity import retry, stop_after_attempt, wait_exponential, before_sleep_log
 
 from lib.db_models import EnrichedLeadRow
 from enrich_models import (
@@ -57,6 +55,11 @@ load_dotenv(Path(__file__).parent.parent / ".env.local")
 
 SUPABASE_URL         = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
+
+_COMMERCIAL_RE = re.compile(
+    r"\b(Ste|Suite|Apt|Apt\.|Apartment|Unit|#|Floor|Fl|Po Box|P\.?O\.? Box)\b",
+    re.I,
+)
 
 
 # ── Supabase ──────────────────────────────────────────────────────────────────
@@ -171,10 +174,6 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             result.notes.append(f"PIN pivot mailing address: {mail_addr}")
             print(f"         Mailing address: {mail_addr}")
 
-            _COMMERCIAL_RE = re.compile(
-                r"\b(Ste|Suite|Apt|Apt\.|Apartment|Unit|#|Floor|Fl|Po Box|P\.?O\.? Box)\b",
-                re.I,
-            )
             first_line = mail_addr.split("\n")[0].strip()
             is_residential = (
                 _is_street_address(first_line)
@@ -327,7 +326,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
     try:
         validated = EnrichedLeadRow(**row).model_dump()
     except Exception as e:
-        print(f"   ✗ Schema validation failed for signal {signal['id']}: {e}")
+        _log.error("Schema validation failed for signal %s: %s", signal['id'], e)
         return
 
     client = get_supabase()
@@ -336,7 +335,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
     try:
         client.table("enriched_leads").upsert(validated, on_conflict="signal_id").execute()
     except Exception as e:
-        print(f"   ✗ Supabase upsert failed for signal {signal['id']}: {e}")
+        _log.error("Supabase upsert failed for signal %s: %s", signal['id'], e)
         return
     print(f"   ✓ Saved to enriched_leads (status: {result.enrichment_status})")
 
@@ -344,7 +343,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="Upstate Multiplier — Lead Enrichment")
+    parser = argparse.ArgumentParser(description="REBB Advisors — LLC Owner Finder enrichment")
     parser.add_argument("--signal-id",    help="UUID of a market_signals row to enrich")
     parser.add_argument("--address",      help="Street address to look up")
     parser.add_argument("--entity",       help="LLC / entity name to unmask")

@@ -8,6 +8,7 @@ Sources:
 
 import re
 import time
+from collections import Counter
 from typing import Optional
 
 import requests
@@ -201,7 +202,6 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
                 candidate_names.append(name)
 
     if candidate_names:
-        from collections import Counter
         initials_hits = [n for n in candidate_names if initials_match(entity_name, n)]
         if initials_hits:
             top_name = Counter(initials_hits).most_common(1)[0][0]
