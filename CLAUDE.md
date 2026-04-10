@@ -59,6 +59,7 @@ scripts/
 ├── enrich_mort.py               — CountyWeb mortgage OCR
 ├── enrich_models.py             — shared types, constants, name normalization
 ├── weekly_leads_digest.py       — weekly email digest
+├── run_daily.bat                — local Windows pipeline runner
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
 ├── lib/email_format.py          — shared email formatting helpers
 └── requirements.txt / requirements-insights.txt / requirements-scraper.txt
@@ -295,6 +296,7 @@ TypeScript dashboard maps by `startsWith()` prefix for confidence tiers.
 | Tier | Source | Status |
 |---|---|---|
 | Primary | Mortgage OCR (CountyWeb) | Working |
+| Contact | Apollo.io free tier — `/v1/people/match` → phone/email/linkedin | Next (`enrich_contact.py`) |
 | Secondary | UCC (`ucconline.sc.gov`) | Not built |
 | Tertiary | City business license (FOIA to `businesslicense@greenvillesc.gov`) | Awaiting response |
 | Fallback | SOS via DDG + address clustering | Current |
@@ -375,7 +377,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 | `/how-it-works` | 5-step onboarding + process walkthrough |
 | `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
-| `/web-development` | React/Next.js builds, 5-day sprint |
+| `/web-development` | React/Next.js builds for trades |
 | `/outreach-automation` | Email/SMS sequences |
 | `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked` |
 | `/review` | Token-gated draft review (email only) |
