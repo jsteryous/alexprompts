@@ -141,9 +141,12 @@ def lookup_gis(entity_name: str, address: str = "", _retried: bool = False) -> E
             _save_debug("04_results", html)
         except Exception as e:
             result.notes.append(f"GIS: browser error — {e}")
-            _save_debug("99_error", page.content())
+            try:
+                _save_debug("99_error", page.content())
+            except Exception:
+                pass
             browser.close()
-            raise  # re-raise so @retry (in enrich.py) can attempt again
+            return result
         browser.close()
 
     soup = BeautifulSoup(html, "html.parser")

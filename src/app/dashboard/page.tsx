@@ -17,6 +17,7 @@ interface EnrichedLead {
   principal_role: string | null;
   contact_email: string | null;
   contact_phone: string | null;
+  linkedin_url: string | null;
   search_evidence: string | null;
   enrichment_status: string;
   trade_tag: string | null;
@@ -27,6 +28,7 @@ interface EnrichedLead {
   tag: string | null;
   transfer_type: string | null;
   notes: string | null;
+  market_signals: { entity_name: string | null } | null;
 }
 
 interface Props {
@@ -95,8 +97,9 @@ async function getLeads(clientSlug?: string): Promise<EnrichedLead[]> {
   let query = client
     .from("enriched_leads")
     .select(
-      "id, created_at, principal_name, principal_role, contact_email, contact_phone, " +
-      "search_evidence, enrichment_status, trade_tag, event_type, location, valuation, score, tag, transfer_type, notes"
+      "id, created_at, principal_name, principal_role, contact_email, contact_phone, linkedin_url, " +
+      "search_evidence, enrichment_status, trade_tag, event_type, location, valuation, score, tag, transfer_type, notes, " +
+      "market_signals(entity_name)"
     )
     .in("enrichment_status", ["enriched", "pending"])
     .order("score", { ascending: false, nullsFirst: false });
@@ -291,7 +294,8 @@ export default async function DashboardPage({ searchParams }: Props) {
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500 w-8">#</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Score</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Contact</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Location</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Source LLC</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Property</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Event</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Value</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Evidence</th>
@@ -348,20 +352,37 @@ export default async function DashboardPage({ searchParams }: Props) {
                             {lead.contact_phone && (
                               <p className="text-xs text-gray-400">{lead.contact_phone}</p>
                             )}
+                            {lead.linkedin_url && (
+                              <a
+                                href={lead.linkedin_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-blue-400 hover:text-blue-300 transition-colors mt-0.5 inline-block"
+                              >
+                                LinkedIn ↗
+                              </a>
+                            )}
                           </div>
                         )}
                       </td>
 
-                      {/* Location */}
-                      <td className="px-4 py-4 text-gray-300 text-xs max-w-[180px]">
-                        <p className="truncate" title={lead.location ?? ""}>
-                          {lead.location ?? "—"}
+                      {/* Source LLC */}
+                      <td className="px-4 py-4 text-gray-400 text-xs max-w-[160px]">
+                        <p className="truncate" title={lead.market_signals?.entity_name ?? ""}>
+                          {lead.market_signals?.entity_name ?? "—"}
                         </p>
                         {lead.trade_tag && (
                           <p className="text-gray-600 mt-0.5 uppercase tracking-wide text-[10px]">
                             {lead.trade_tag}
                           </p>
                         )}
+                      </td>
+
+                      {/* Property address */}
+                      <td className="px-4 py-4 text-gray-300 text-xs max-w-[180px]">
+                        <p className="truncate" title={lead.location ?? ""}>
+                          {lead.location ?? "—"}
+                        </p>
                       </td>
 
                       {/* Event type */}
@@ -379,7 +400,9 @@ export default async function DashboardPage({ searchParams }: Props) {
                       {/* Evidence / confidence tier */}
                       <td className="px-4 py-4">
                         <div className="flex flex-col gap-1.5">
-                          <TierBadge tier={tier} label={label} />
+                          <span title={lead.notes ?? undefined}>
+                            <TierBadge tier={tier} label={label} />
+                          </span>
                           {lead.search_evidence && !isPending && (() => {
                             // Extract clean URL — search_evidence may contain annotations
                             // like "https://foo.com/ → Name search: '...'"

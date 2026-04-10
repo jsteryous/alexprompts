@@ -20,6 +20,13 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+try:
+    import pytesseract
+    from PIL import Image as _PILImage
+    _TESSERACT_AVAILABLE = True
+except ImportError:
+    _TESSERACT_AVAILABLE = False
+
 from enrich_models import (
     HEADERS, DEBUG_DIR,
     ROLE_MORTGAGE_SIG,
@@ -331,13 +338,17 @@ def _heuristic_borrower_scan(text: str) -> tuple[Optional[str], Optional[str]]:
             best_by_name[key] = (score, title)
 
     ranked = sorted(best_by_name.items(), key=lambda x: x[1][0], reverse=True)
-    for normalised_name, (score, title) in ranked:
-        if score < 0:
-            break
-        for _, name, t in sorted(candidates, key=lambda x: -x[0]):
-            if re.sub(r"\s+", " ", name.lower().strip()) == normalised_name:
-                return name, title or t
-        break
+    if not ranked:
+        return None, None
+
+    top_name, (top_score, top_title) = ranked[0]
+    if top_score < 0:
+        return None, None
+
+    # Recover original casing from the candidates list (best_by_name stores lowercased keys).
+    for _, name, t in sorted(candidates, key=lambda x: -x[0]):
+        if re.sub(r"\s+", " ", name.lower().strip()) == top_name:
+            return name, top_title or t
 
     return None, None
 
@@ -730,9 +741,12 @@ def lookup_mortgage_borrower(
                             img_file.write_bytes(png_resp.content)
                             print(f"         Mortgage debug: saved {img_file.name}")
 
-                        try:
-                            import pytesseract
-                            from PIL import Image as _PILImage
+                        if not _TESSERACT_AVAILABLE:
+                            result.notes.append(
+                                f"Mortgage lookup: page {sig_page} image OK — "
+                                f"install pytesseract+pillow to enable OCR"
+                            )
+                        else:
                             _TESS_EXE = os.environ.get(
                                 "TESSERACT_CMD",
                                 r"C:\Program Files\Tesseract-OCR\tesseract.exe",
@@ -748,11 +762,6 @@ def lookup_mortgage_borrower(
                                     f"         Mortgage lookup: OCR page {sig_page} "
                                     f"({len(ocr_text)} chars)"
                                 )
-                        except ImportError:
-                            result.notes.append(
-                                f"Mortgage lookup: page {sig_page} image OK — "
-                                f"install pytesseract+pillow to enable OCR"
-                            )
 
                     except Exception as e_gp:
                         result.notes.append(
@@ -769,7 +778,7 @@ def lookup_mortgage_borrower(
             except Exception:
                 pass
             browser.close()
-            raise  # re-raise so @retry (in enrich.py) can attempt again
+            return result
         browser.close()
 
     # ── Step 9: Parse borrower from document text ─────────────────────────────

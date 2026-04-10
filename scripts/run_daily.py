@@ -3,9 +3,9 @@
 run_daily.py — REBB Advisors daily data pipeline orchestrator
 
 Sequence:
-  1. gvl_monitor.py --scrape all      (GovOS deeds + SC SOS)
-  2. gvl_monitor.py --mode mortgages  (CountyWeb MTG/CON filings)
-  3. enrich.py --run-pending          (LLC → human enrichment)
+  1. Deed scraper  — GovOS deeds + SC SOS filings
+  2. Mortgage scraper — CountyWeb MTG/CON filings
+  3. Enrichment    — LLC → human decision-maker
   4. Email alert for any enriched lead with score > HIGH_CONFIDENCE_THRESHOLD
      created during this run
 
@@ -28,9 +28,8 @@ Required env vars (in .env.local):
 import logging
 import os
 import sys
-import subprocess
 import argparse
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -54,26 +53,56 @@ SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 # Leads with score above this threshold trigger an immediate email alert.
 HIGH_CONFIDENCE_THRESHOLD = 80
 
-SCRIPTS_DIR = Path(__file__).parent
-PYTHON      = sys.executable
 
+# ── Step helpers ──────────────────────────────────────────────────────────────
 
-# ── Subprocess helpers ────────────────────────────────────────────────────────
-
-def run_step(label: str, cmd: list[str], dry_run: bool = False) -> bool:
-    """Run a subprocess step, stream output, return True on success."""
+def _step_header(label: str) -> None:
     print(f"\n{'─' * 60}")
     print(f"  STEP: {label}")
     print(f"{'─' * 60}")
-    if dry_run:
-        cmd = [c for c in cmd if c != "--dry-run"] + ["--dry-run"]
-    print(f"  $ {' '.join(cmd)}\n")
 
-    result = subprocess.run(cmd, cwd=SCRIPTS_DIR)
-    if result.returncode != 0:
-        log.error(f"{label} exited with code {result.returncode}")
+
+def run_deeds(days_back: int, dry_run: bool) -> bool:
+    """Scrape GovOS deeds + SC SOS filings and push to Supabase."""
+    _step_header("Deed scraper — GovOS + SC SOS")
+    try:
+        from gvl_monitor import scrape_greenville_deeds, scrape_sc_sos_filings, push_to_supabase
+        signals = scrape_greenville_deeds(days_back=days_back)
+        signals += scrape_sc_sos_filings(days_back=days_back)
+        print(f"\n  {len(signals)} signal(s) scraped")
+        if not dry_run:
+            push_to_supabase(signals)
+        return True
+    except Exception as e:
+        log.error("Deed scraper failed: %s", e)
         return False
-    return True
+
+
+def run_mortgages(days_back: int, dry_run: bool) -> bool:
+    """Scrape CountyWeb MTG/CON filings and push to Supabase."""
+    _step_header("Mortgage scraper — CountyWeb MTG/CON")
+    try:
+        from gvl_monitor import scrape_greenville_mortgages, push_to_supabase
+        signals = scrape_greenville_mortgages(days_back=days_back)
+        print(f"\n  {len(signals)} signal(s) scraped")
+        if not dry_run:
+            push_to_supabase(signals)
+        return True
+    except Exception as e:
+        log.error("Mortgage scraper failed: %s", e)
+        return False
+
+
+def run_enrich(dry_run: bool) -> bool:
+    """Run LLC → human enrichment over all pending signals."""
+    _step_header("Lead enrichment — LLC → human")
+    try:
+        from enrich import run_pending
+        run_pending(dry_run=dry_run)
+        return True
+    except Exception as e:
+        log.error("Enrichment failed: %s", e)
+        return False
 
 
 # ── High-confidence alert ─────────────────────────────────────────────────────
@@ -221,9 +250,9 @@ def send_alert(leads: list[dict], run_ts: str, dry_run: bool = False) -> None:
     )
 
     if resp.status_code in (200, 201):
-        log.info(f"Alert sent (id: {resp.json().get('id', '?')})")
+        log.info("Alert sent (id: %s)", resp.json().get("id", "?"))
     else:
-        log.error(f"Resend error {resp.status_code}: {resp.text}")
+        log.error("Resend error %s: %s", resp.status_code, resp.text)
 
 
 # ── Orchestrator ──────────────────────────────────────────────────────────────
@@ -251,27 +280,15 @@ def main() -> None:
 
     # ── Step 1: Deeds (GovOS + SC SOS) ───────────────────────────────────────
     if not args.no_deeds:
-        ok &= run_step(
-            "Deed scraper — GovOS + SC SOS",
-            [PYTHON, "gvl_monitor.py", "--scrape", "all", "--days", str(args.days)],
-            dry_run=args.dry_run,
-        )
+        ok &= run_deeds(days_back=args.days, dry_run=args.dry_run)
 
     # ── Step 2: Mortgages (CountyWeb) ─────────────────────────────────────────
     if not args.no_mortgages:
-        ok &= run_step(
-            "Mortgage scraper — CountyWeb MTG/CON",
-            [PYTHON, "gvl_monitor.py", "--mode", "mortgages", "--days", str(args.days)],
-            dry_run=args.dry_run,
-        )
+        ok &= run_mortgages(days_back=args.days, dry_run=args.dry_run)
 
     # ── Step 3: Enrichment ────────────────────────────────────────────────────
     if not args.no_enrich:
-        ok &= run_step(
-            "Lead enrichment — LLC → human",
-            [PYTHON, "enrich.py", "--run-pending"],
-            dry_run=args.dry_run,
-        )
+        ok &= run_enrich(dry_run=args.dry_run)
 
     # ── Step 4: High-confidence alert ─────────────────────────────────────────
     if not args.no_alert:

@@ -26,6 +26,12 @@ SOS_BASE = "https://businessfilings.sc.gov"
 
 _NAME_PATTERN    = re.compile(r"\b([A-Z][a-z]+ [A-Z][a-z]+)\b")
 _SOS_URL_PATTERN = re.compile(r"businessfilings\.sc\.gov/BusinessFiling/Entity/Details/\d+")
+_EMAIL_RE        = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
+_PHONE_RE        = re.compile(
+    r"(?<!\d)"                          # not preceded by digit
+    r"(\(?\d{3}\)?[\s.\-]{0,2}\d{3}[\s.\-]{0,2}\d{4})"
+    r"(?!\d)"                           # not followed by digit
+)
 
 # Initials-LLC pattern: "LS Partners", "JM Holdings", "DRT Group", etc.
 _INITIALS_LLC_RE = re.compile(
@@ -230,5 +236,36 @@ def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResu
             result.principal_role  = ROLE_WEB_SEARCH
             result.search_evidence = result.search_evidence or f"DuckDuckGo: {q1}"
         result.notes.append(f"DDG: extracted name '{top_name}' from search snippets")
+
+    # ── Contact extraction from snippets ──────────────────────────────────────
+    # Run over all snippets regardless of whether we found a name — these fields
+    # are passed back to the orchestrator and written to enriched_leads directly.
+    full_text = " ".join(all_snippets)
+
+    email_hits = _EMAIL_RE.findall(full_text)
+    _EMAIL_NOISE = {"@example.com", "@domain.com", "@email.com", "@yoursite.com"}
+    clean_emails = [
+        e for e in email_hits
+        if not any(e.lower().endswith(n) for n in _EMAIL_NOISE)
+        and not e.lower().startswith("noreply")
+        and not e.lower().startswith("support@")
+        and not e.lower().startswith("info@")
+    ]
+    if clean_emails:
+        result.contact_email = clean_emails[0]
+        result.notes.append(f"DDG: extracted email '{result.contact_email}' from snippets")
+
+    phone_hits = _PHONE_RE.findall(full_text)
+    _PHONE_NOISE = {"800", "888", "877", "866", "855", "844", "833"}
+    clean_phones = [
+        p for p in phone_hits
+        if re.sub(r"\D", "", p)[:3] not in _PHONE_NOISE
+    ]
+    if clean_phones:
+        result.contact_phone = clean_phones[0]
+        result.notes.append(f"DDG: extracted phone '{result.contact_phone}' from snippets")
+
+    if linkedin_urls and not result.linkedin_url:
+        result.linkedin_url = linkedin_urls[0]
 
     return result

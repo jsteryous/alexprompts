@@ -532,7 +532,7 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
                     page.wait_for_timeout(random.randint(3_000, 5_000))
 
         except Exception as e:
-            _log.error(f"ROD: browser error — {e}")
+            _log.error("ROD: browser error — %s", e)
             try:
                 page.wait_for_timeout(500)
             except Exception:
@@ -864,7 +864,7 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
                     mtg_data.append((row_idx, doc_type, borrower, lender, rec_date, consideration))
 
         except Exception as e:
-            _log.error(f"MTG: browser error — {e}")
+            _log.error("MTG: browser error — %s", e)
             try:
                 page.wait_for_timeout(500)
             except Exception:

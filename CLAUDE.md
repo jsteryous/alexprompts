@@ -55,9 +55,10 @@ scripts/
 ├── gvl_monitor.py               — scraper: deeds (GovOS), SOS (DDG), mortgages (CountyWeb)
 ├── enrich.py                    — enrichment orchestrator
 ├── enrich_gis.py                — GIS tax query + property detail lookup
-├── enrich_web.py                — DuckDuckGo + SC SOS entity pages
+├── enrich_web.py                — DuckDuckGo + SC SOS entity pages; email/phone regex extraction
 ├── enrich_mort.py               — CountyWeb mortgage OCR
 ├── enrich_models.py             — shared types, constants, name normalization
+├── enrich_contact.py            — PDL person + company contact enrichment (email/phone/LinkedIn)
 ├── weekly_leads_digest.py       — weekly email digest
 ├── run_daily.bat                — local Windows pipeline runner
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
@@ -252,18 +253,22 @@ ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run   # saves HTML/PNG to s
 ### Enrichment chain
 
 **Step 0 — Mortgage OCR** (deed + mortgage signals with LLC entity names):  
-Triggered for `source in ("deeds", "mortgages")`. CountyWeb viewer — match by entity name (LLC suffixes stripped) + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path param — NOT cookie; Playwright session must stay active). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic scorer fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Returns immediately on hit.
+Triggered for `source in ("deeds", "mortgages")`. CountyWeb viewer — match by entity name (LLC suffixes stripped) + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path param — NOT cookie; Playwright session must stay active). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic scorer fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Returns immediately on hit. Browser errors return a partial result (error in `notes`) — they do not raise.
 
 **Step 1 — GVL tax query (`votaxqry`):**  
-Form at `greenvillecounty.org/appsas400/votaxqry/` — name search only (`txt_Name = input[name="ctl00$bodyContent$txt_Name"]`). Must force `hdn_SearchCategory = "Real Estate"` via `page.evaluate()` — tab click alone unreliable. Strip LLC/INC/CORP and "AND ..." joint suffixes before searching. Results: `cells[0]`=name+href · `cells[1]`=Map#/PIN. No mailing address column. Skip rows with vehicle codes (CHEV, FORD, TOYT, BOAT, TRLR, etc.). Name-flip retry on 0 results: 2-word → reverse; 3-word ending in initial → strip initial; 3-word no initial → FIRST MIDDLE LAST → LAST FIRST MIDDLE.
+Form at `greenvillecounty.org/appsas400/votaxqry/` — name search only (`txt_Name = input[name="ctl00$bodyContent$txt_Name"]`). Must force `hdn_SearchCategory = "Real Estate"` via `page.evaluate()` — tab click alone unreliable. Strip LLC/INC/CORP and "AND ..." joint suffixes before searching. Results: `cells[0]`=name+href · `cells[1]`=Map#/PIN. No mailing address column. Skip rows with vehicle codes (CHEV, FORD, TOYT, BOAT, TRLR, etc.). Name-flip retry on 0 results: 2-word → reverse; 3-word ending in initial → strip initial; 3-word no initial → FIRST MIDDLE LAST → LAST FIRST MIDDLE. Browser errors return a partial result — they do not raise.
 
 **Step 1b — PIN Pivot:**  
 Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `requests`). Shows Owner/Care Of/Mailing Address. If Care Of = human → done. If mailing is residential → GIS name search at that address. If commercial → pass to DDG q5. Bug: Care Of regex can bleed "Mailing Address:..." when empty — trimmed at "Mailing Address:" and values >60 chars rejected.
 
 **Step 2 — DuckDuckGo (5 queries):**  
-`[entity] Greenville SC owner` · `site:businessfilings.sc.gov "[entity]"` · `site:upstatebusinessjournal.com "[entity]"` · `site:gsabizwire.com "[entity]"` · mailing address query (when PIN pivot found one). SC SOS detail pages have no CAPTCHA.
+`[entity] Greenville SC owner` · `site:businessfilings.sc.gov "[entity]"` · `site:upstatebusinessjournal.com "[entity]"` · `site:gsabizwire.com "[entity]"` · mailing address query (when PIN pivot found one). SC SOS detail pages have no CAPTCHA. Email + phone regex extracted from all snippets at no cost.
 
 **Step 2b — Initials logic:** If LLC = `[2-5 initials] + Partners/Group/etc.`, rank candidates whose initials match.
+
+**Step 2c — PDL person enrichment** (`enrich_contact.py`): fires after a human name is resolved, only if DDG didn't surface both email + phone. `PDL_API_KEY` required. 100 free credits/month; credits consumed only on successful matches.
+
+**Step 2d — PDL company enrichment** (`enrich_contact.py`): last-resort fallback — fires when still no contact info after the full chain (owner unresolved or person lookup missed). Returns business phone/LinkedIn. Same credit rules apply.
 
 **Step 3 — Manual queue:** Log mailing address + Neumo link in notes, set `enrichment_status = 'pending'`.
 
@@ -296,14 +301,15 @@ TypeScript dashboard maps by `startsWith()` prefix for confidence tiers.
 | Tier | Source | Status |
 |---|---|---|
 | Primary | Mortgage OCR (CountyWeb) | Working |
-| Contact | Apollo.io free tier — `/v1/people/match` → phone/email/linkedin | Next (`enrich_contact.py`) |
+| Contact (person) | DDG snippet regex → PDL `/v5/person/enrich` (if DDG misses) | Built |
+| Contact (company) | PDL `/v5/company/enrich` — last resort when person lookup fails | Built |
 | Secondary | UCC (`ucconline.sc.gov`) | Not built |
 | Tertiary | City business license (FOIA to `businesslicense@greenvillesc.gov`) | Awaiting response |
 | Fallback | SOS via DDG + address clustering | Current |
 
 Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = clients.contact_email` — no client-facing dashboard route yet; `/dashboard` shows all leads.
 
-## Known Issues / Scraping Gotchas
+## Known Issues / Gotchas
 
 **Next.js / Framework:**
 - Next.js 16: `middleware.ts` → `proxy.ts`, `export function proxy`. Do NOT create `middleware.ts` — deprecated.
@@ -313,27 +319,13 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 
 **Python deps:**
 - `google-genai` requires `httpx>=0.28.1`. Do not downgrade `supabase` below 2.15.0.
-- Tesseract: `pip install pytesseract` is Python-only wrapper. Install binary separately: `winget install tesseract-ocr.tesseract`. Default path: `C:\Program Files\Tesseract-OCR\tesseract.exe`. Override: `TESSERACT_CMD`.
+- Tesseract: `pip install pytesseract` is Python-only wrapper. Install binary separately: `winget install tesseract-ocr.tesseract`. Default path: `C:\Program Files\Tesseract-OCR\tesseract.exe`. Override: `TESSERACT_CMD`. `enrich_mort.py` imports at module level with `_TESSERACT_AVAILABLE` flag — missing binary degrades gracefully.
 - `playwright install chromium` required after `pip install playwright` (~130MB).
 
-**GovOS deed scraper:**
-- React SPA — do NOT navigate away after login. Direct `/document/{id}` URLs return 404; click row from live Playwright session.
-- Consideration always `N/A` in results table; real price only in detail panel (Phase B).
-- Deed detail pages often have no situs address. `location` falls back to grantor name.
-
 **GVL tax query (`votaxqry`):**
-- `hdn_SearchCategory` defaults to "Car" — tab click unreliable; force via `page.evaluate()`.
-- No mailing address in results table. VIN# and GVL account numbers appended to owner name in same cell — `enrich.py` strips both.
-- `gcgis.org` ArcGIS API times out for non-browser requests (IP-blocked).
+- `gcgis.org` ArcGIS API times out for non-browser requests (IP-blocked) — don't use.
 - `greenvillecounty.org/vRealPr24/` returns 500 — don't use.
 - New deed grantees may return 0 GIS results for weeks — county records lag behind filings.
-
-**CountyWeb:**
-- Login button has no `type` attribute — `button[type='submit']` times out. Use `page.evaluate("doLogin()")`.
-- `frame.goto(searchMain.do)` returns 404. Click outer nav link (target="bodyframe") instead.
-- Disclaimer must be accepted in `bodyframe` before `searchMain.do` is accessible.
-- `ASSIGNMENT OF RENTS` may appear before `MORTGAGE` for same LLC — scan all rows, click MORTGAGE specifically.
-- `viewImagePNG.do` PNG fetch: jsessionid in URL path param (`; jsessionid=...`), not cookie. Playwright session must stay active during `requests` fetch.
 
 **Misc:**
 - SOS DDG scraper may return 0 if DDG hasn't crawled recent filings.
@@ -354,6 +346,7 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 | `ROD_EMAIL` | GovOS deed scraper |
 | `ROD_PASSWORD` | GovOS + CountyWeb (shared) |
 | `ROD_VIEWER_USERNAME` | CountyWeb (default: `asteryous`) |
+| `PDL_API_KEY` | People Data Labs free tier (100 credits/month) — contact enrichment via `enrich_contact.py`. Falls back to `APOLLO_API_KEY` if set. |
 | `TESSERACT_CMD` | Optional — path to `tesseract.exe` if not at default |
 | `DISCORD_WEBHOOK_URL` | Optional — new draft alert |
 | `EDITOR` | Optional — for `approve_post.py --edit` (default: notepad) |
@@ -390,6 +383,6 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 ## Python Pipeline — Open Tech Debt
 
-- **`run_daily.py` subprocess orchestration** — Steps run as subprocesses; failures captured only by returncode. Structured exceptions and logging context from sub-scripts are lost. Fix: import and call functions directly with try/except.
+- **`run_daily.py` subprocess orchestration** — Steps run as subprocesses; failures captured only by returncode. Structured exceptions and logging context from sub-scripts are lost. Fix: import and call functions directly with try/except. Note: `enrich.py --run-pending` is already per-signal exception-safe; this issue is specific to `run_daily.py` calling scripts as subprocesses.
 - **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage. Any refactor is unprotected.
-- **`fetch_pending_signals` NOT IN list** — PostgREST passes as URL query param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.
+- **`fetch_pending_signals` NOT IN query** — uses `.filter("id", "not.in", ...)` which passes as a URL param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.

@@ -111,9 +111,12 @@ class EnrichmentResult:
     mailing_address:   Optional[str] = None   # owner's mailing address (from Details.aspx)
     search_evidence:   Optional[str] = None   # URL used as primary source
     enrichment_status: str           = "pending"
-    notes:             list          = field(default_factory=list)
+    notes:             list[str]     = field(default_factory=list)
     pin:               Optional[str] = None   # Greenville County Map # (parcel PIN)
     detail_url:        Optional[str] = None   # URL to RealProperty/Details.aspx for this parcel
+    contact_email:     Optional[str] = None   # from Apollo /v1/people/match
+    contact_phone:     Optional[str] = None   # from Apollo /v1/people/match
+    linkedin_url:      Optional[str] = None   # from Apollo /v1/people/match
 
     def is_enriched(self) -> bool:
         """True if we found a human name (not just an LLC)."""

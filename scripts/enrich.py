@@ -43,6 +43,7 @@ from enrich_models import (
 from enrich_gis import lookup_gis, lookup_property_detail
 from enrich_web import enrich_via_duckduckgo
 from enrich_mort import lookup_mortgage_borrower, _parse_recording_date
+from enrich_contact import lookup_apollo_contact, lookup_pdl_company
 
 logging.basicConfig(
     level=logging.INFO,
@@ -101,7 +102,12 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
         rec_date = _parse_recording_date(sig_details)
         if rec_date:
             print(f"   [0/3] Mortgage borrower lookup (ROD viewer)...")
-            mort_result = lookup_mortgage_borrower(entity_name, rec_date, debug=debug)
+            try:
+                mort_result = lookup_mortgage_borrower(entity_name, rec_date, debug=debug)
+            except Exception as e:
+                _log.error("Mortgage lookup browser error for '%s': %s", entity_name, e)
+                mort_result = EnrichmentResult()
+                mort_result.notes.append(f"Mortgage lookup: browser error — {e}")
             for note in mort_result.notes:
                 print(f"         {note}")
             if mort_result.is_enriched():
@@ -113,7 +119,12 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
 
     # Step 1: GIS parcel lookup
     print("   [1/3] Greenville County tax record lookup...")
-    gis_result = lookup_gis(entity_name, address)
+    try:
+        gis_result = lookup_gis(entity_name, address)
+    except Exception as e:
+        _log.error("GIS lookup browser error for '%s': %s", entity_name, e)
+        gis_result = EnrichmentResult()
+        gis_result.notes.append(f"GIS: browser error — {e}")
     for note in gis_result.notes:
         print(f"         {note}")
     if gis_result.principal_name:
@@ -235,11 +246,21 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
     if ddg_result.is_enriched():
         result.principal_name    = ddg_result.principal_name
         result.principal_role    = ddg_result.principal_role
+        result.contact_email     = ddg_result.contact_email
+        result.contact_phone     = ddg_result.contact_phone
+        result.linkedin_url      = ddg_result.linkedin_url
         result.search_evidence   = ddg_result.search_evidence
         result.notes            += ddg_result.notes
         result.enrichment_status = "enriched"
         print(f"   ✓ Found human: {result.principal_name}")
         return result
+
+    # DDG may surface contact info even without resolving a human name (e.g. LLC
+    # website lists a phone number). Carry those fields forward regardless.
+    result.contact_email = result.contact_email or ddg_result.contact_email
+    result.contact_phone = result.contact_phone or ddg_result.contact_phone
+    result.linkedin_url  = result.linkedin_url  or ddg_result.linkedin_url
+    result.notes        += ddg_result.notes
 
     # Step 3: Manual queue
     if result.mailing_address:
@@ -286,16 +307,20 @@ def fetch_pending_signals(limit: int = 20) -> list[dict]:
         .limit(limit)
     )
     if existing_ids:
-        query = query.not_("id", "in", f"({','.join(existing_ids)})")
+        query = query.filter("id", "not.in", f"({','.join(existing_ids)})")
 
     return query.execute().data or []
 
 
 def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = False) -> None:
     signal_location = signal.get("location", "")
+    # Only use signal_location as fallback if it looks like a real street address.
+    # market_signals.location falls back to grantor/borrower name when no situs
+    # address is found — we don't want a person's name in the location column.
+    signal_addr = signal_location if _is_street_address(signal_location or "") else None
     resolved_location = (
         result.property_address
-        or signal_location
+        or signal_addr
         or None
     )
 
@@ -312,6 +337,9 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         "transfer_type":     transfer_type,
         "principal_name":    result.principal_name,
         "principal_role":    result.principal_role,
+        "contact_email":     result.contact_email,
+        "contact_phone":     result.contact_phone,
+        "linkedin_url":      result.linkedin_url,
         "search_evidence":   result.search_evidence,
         "enrichment_status": result.enrichment_status,
         "notes":             "\n".join(result.notes),
@@ -338,6 +366,35 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         _log.error("Supabase upsert failed for signal %s: %s", signal['id'], e)
         return
     print(f"   ✓ Saved to enriched_leads (status: {result.enrichment_status})")
+
+
+# ── Batch runner (also imported by run_daily.py) ─────────────────────────────
+
+def run_pending(dry_run: bool = False) -> None:
+    """Enrich all unenriched signals (max 10 per run). Exception-safe per signal."""
+    signals = fetch_pending_signals(limit=10)
+    if not signals:
+        print("No unenriched signals.")
+        return
+    for signal in signals:
+        try:
+            result = enrich(
+                entity_name=signal["entity_name"],
+                address=signal.get("location", ""),
+                dry_run=dry_run,
+                signal=signal,
+            )
+            if result.is_enriched():
+                lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
+            if not result.contact_email and not result.contact_phone:
+                lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
+            save_enriched_lead(signal, result, dry_run=dry_run)
+        except Exception as e:
+            _log.error(
+                "Unhandled error enriching signal %s ('%s'): %s",
+                signal.get("id"), signal.get("entity_name"), e,
+            )
+        time.sleep(2)
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
@@ -371,19 +428,7 @@ def main():
         return
 
     if args.run_pending:
-        signals = fetch_pending_signals(limit=10)
-        if not signals:
-            print("No unenriched signals.")
-            return
-        for signal in signals:
-            result = enrich(
-                entity_name=signal["entity_name"],
-                address=signal.get("location", ""),
-                dry_run=args.dry_run,
-                signal=signal,
-            )
-            save_enriched_lead(signal, result, dry_run=args.dry_run)
-            time.sleep(2)
+        run_pending(dry_run=args.dry_run)
         return
 
     if args.signal_id:
@@ -396,7 +441,15 @@ def main():
         if not signal:
             print(f"Signal not found: {args.signal_id}")
             return
-        result = enrich(signal["entity_name"], signal.get("location", ""), args.dry_run, signal=signal)
+        try:
+            result = enrich(signal["entity_name"], signal.get("location", ""), args.dry_run, signal=signal)
+        except Exception as e:
+            _log.error("Enrichment failed for signal %s: %s", args.signal_id, e)
+            return
+        if result.is_enriched():
+            lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
+        if not result.contact_email and not result.contact_phone:
+            lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
         save_enriched_lead(signal, result, args.dry_run)
         return
 
@@ -418,9 +471,16 @@ def main():
             address=args.address or "",
             dry_run=args.dry_run,
         )
+        if result.is_enriched():
+            lookup_apollo_contact(result, args.entity or "", args.address or "")
+        if not result.contact_email and not result.contact_phone:
+            lookup_pdl_company(result, args.entity or "", args.address or "")
         print(f"\n── Result ──")
         print(f"   principal_name:    {result.principal_name or '—'}")
         print(f"   principal_role:    {result.principal_role or '—'}")
+        print(f"   contact_email:     {result.contact_email or '—'}")
+        print(f"   contact_phone:     {result.contact_phone or '—'}")
+        print(f"   linkedin_url:      {result.linkedin_url or '—'}")
         print(f"   mailing_address:   {result.mailing_address or '—'}")
         print(f"   search_evidence:   {result.search_evidence or '—'}")
         print(f"   enrichment_status: {result.enrichment_status}")
