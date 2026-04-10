@@ -25,6 +25,7 @@ Required env vars (in .env.local):
     ROD_EMAIL / ROD_PASSWORD / ROD_VIEWER_USERNAME
 """
 
+import logging
 import os
 import sys
 import subprocess
@@ -34,6 +35,14 @@ from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
+from lib.email_format import fmt_currency as _fmt_currency, tag_badge as _tag_badge
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)s  %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+log = logging.getLogger(__name__)
 
 load_dotenv(Path(__file__).parent.parent / ".env.local")
 
@@ -62,7 +71,7 @@ def run_step(label: str, cmd: list[str], dry_run: bool = False) -> bool:
 
     result = subprocess.run(cmd, cwd=SCRIPTS_DIR)
     if result.returncode != 0:
-        print(f"\n  ✗ {label} exited with code {result.returncode}")
+        log.error(f"{label} exited with code {result.returncode}")
         return False
     return True
 
@@ -96,29 +105,6 @@ def fetch_high_confidence_leads(since: datetime) -> list[dict]:
     )
     return resp.data or []
 
-
-def _fmt_currency(val) -> str:
-    if val is None:
-        return "not disclosed"
-    try:
-        return f"${float(val):,.0f}"
-    except (TypeError, ValueError):
-        return "not disclosed"
-
-
-def _tag_badge(tag: str) -> str:
-    colors = {
-        "HOT":  ("#fef2f2", "#dc2626"),
-        "WARM": ("#fffbeb", "#d97706"),
-        "COLD": ("#f9fafb", "#6b7280"),
-    }
-    tag = (tag or "WARM").upper()
-    bg, color = colors.get(tag, colors["WARM"])
-    return (
-        f'<span style="display:inline-block;background:{bg};color:{color};'
-        f'font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 8px;'
-        f'border-radius:4px">{tag}</span>'
-    )
 
 
 def build_alert_html(leads: list[dict], run_ts: str) -> str:
@@ -216,7 +202,7 @@ def send_alert(leads: list[dict], run_ts: str, dry_run: bool = False) -> None:
         return
 
     if not RESEND_API_KEY:
-        print("  ✗ RESEND_API_KEY not set — skipping alert email.")
+        log.warning("RESEND_API_KEY not set — skipping alert email.")
         return
 
     resp = requests.post(
@@ -226,7 +212,7 @@ def send_alert(leads: list[dict], run_ts: str, dry_run: bool = False) -> None:
             "Content-Type": "application/json",
         },
         json={
-            "from":    "REBB Advisors <noreply@rebbadvisors.com>",
+            "from":    os.getenv("MAIL_FROM", "REBB Advisors <noreply@rebbadvisors.com>"),
             "to":      [NOTIFICATION_EMAIL],
             "subject": subject,
             "html":    html,
@@ -235,9 +221,9 @@ def send_alert(leads: list[dict], run_ts: str, dry_run: bool = False) -> None:
     )
 
     if resp.status_code in (200, 201):
-        print(f"  ✓ Alert sent (id: {resp.json().get('id', '?')})")
+        log.info(f"Alert sent (id: {resp.json().get('id', '?')})")
     else:
-        print(f"  ✗ Resend error {resp.status_code}: {resp.text}")
+        log.error(f"Resend error {resp.status_code}: {resp.text}")
 
 
 # ── Orchestrator ──────────────────────────────────────────────────────────────

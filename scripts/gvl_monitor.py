@@ -20,6 +20,7 @@ Setup:
     cp ../.env.local .env   # or set SUPABASE_URL + SUPABASE_SERVICE_KEY in shell
 """
 
+import logging
 import os
 import re
 import sys
@@ -33,6 +34,15 @@ from typing import Optional
 
 from pathlib import Path
 from dotenv import load_dotenv
+from tenacity import retry, stop_after_attempt, wait_exponential, before_sleep_log
+from lib.db_models import MarketSignalRow
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)s  %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+_log = logging.getLogger(__name__)
 
 # Load .env.local from project root regardless of where the script is run from
 load_dotenv(Path(__file__).parent.parent / '.env.local')
@@ -343,6 +353,12 @@ def _parse_govos_detail(html: str) -> tuple[Optional[float], Optional[str]]:
     return consideration, property_address
 
 
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=15, max=120),
+    before_sleep=before_sleep_log(_log, logging.WARNING),
+    reraise=True,
+)
 def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[MarketSignal]:
     """
     Greenville County Register of Deeds — Recent Deed Recordings.
@@ -359,7 +375,7 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
       Inspect those files to verify or adjust selectors below.
     """
     try:
-        from playwright.sync_api import sync_playwright
+        from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
         from bs4 import BeautifulSoup
     except ImportError:
         print("  playwright / beautifulsoup4 not installed.")
@@ -406,7 +422,7 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
             page.click("button.CallToAction[type='submit']")
             try:
                 page.wait_for_url(lambda url: "/signin" not in url, timeout=15_000)
-            except Exception:
+            except PlaywrightTimeoutError:
                 pass  # timeout — will check URL below
             page.wait_for_load_state("domcontentloaded", timeout=10_000)
             page.wait_for_timeout(1_000)
@@ -500,8 +516,8 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
                     try:
                         page.keyboard.press("Escape")
                         page.wait_for_timeout(400)
-                    except Exception:
-                        pass
+                    except Exception as _e_esc:
+                        print(f"    · Escape key failed (non-fatal): {_e_esc}")
                     if rows_locator.count() == 0:
                         page.go_back()
                         page.wait_for_load_state("networkidle", timeout=10_000)
@@ -516,13 +532,13 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
                     page.wait_for_timeout(random.randint(3_000, 5_000))
 
         except Exception as e:
-            print(f"  ROD: browser error — {e}")
+            _log.error(f"ROD: browser error — {e}")
             try:
                 page.wait_for_timeout(500)
             except Exception:
                 pass
             browser.close()
-            return signals
+            raise  # re-raise so @retry can attempt again
         browser.close()
 
     # ── Phase C: build signals (LLC/corporate grantees only) ─────────────────
@@ -578,6 +594,12 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
     return signals
 
 
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=15, max=120),
+    before_sleep=before_sleep_log(_log, logging.WARNING),
+    reraise=True,
+)
 def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list[MarketSignal]:
     """
     Greenville County ROD CountyWeb viewer — Recent Mortgage Filings.
@@ -614,7 +636,7 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
       consideration is not present in the results table — always blank.
     """
     try:
-        from playwright.sync_api import sync_playwright
+        from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
         from bs4 import BeautifulSoup
     except ImportError:
         print("  playwright / beautifulsoup4 not installed.")
@@ -732,7 +754,7 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
 
             try:
                 cf.wait_for_selector("#FROMDATE", timeout=10_000)
-            except Exception:
+            except PlaywrightTimeoutError:
                 pass  # may already be present
 
             if debug:
@@ -764,7 +786,7 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
 
             try:
                 results_frame.wait_for_load_state("domcontentloaded", timeout=15_000)
-            except Exception:
+            except PlaywrightTimeoutError:
                 pass
 
             results_html = results_frame.content()
@@ -842,13 +864,13 @@ def scrape_greenville_mortgages(days_back: int = 7, debug: bool = False) -> list
                     mtg_data.append((row_idx, doc_type, borrower, lender, rec_date, consideration))
 
         except Exception as e:
-            print(f"  MTG: browser error — {e}")
+            _log.error(f"MTG: browser error — {e}")
             try:
                 page.wait_for_timeout(500)
             except Exception:
                 pass
             browser.close()
-            return signals
+            raise  # re-raise so @retry can attempt again
         browser.close()
 
     print(f"  MTG: {len(mtg_data)} qualifying mortgage(s) found...")
@@ -1037,14 +1059,28 @@ def push_to_supabase(signals: list[MarketSignal]) -> None:
     if not client:
         print("  ⚠  Supabase not configured — set SUPABASE_URL + SUPABASE_SERVICE_KEY in .env")
         return
-    rows = [asdict(s) for s in signals]
+
+    # Validate schema before writing — catches column renames before they silently write NULL
+    rows = []
+    for s in signals:
+        raw = asdict(s)
+        try:
+            rows.append(MarketSignalRow(**raw).model_dump())
+        except Exception as e:
+            print(f"  ✗  Schema validation failed for signal '{s.entity_name}': {e}")
+            return
+
     # Upsert: signals with a source_key skip silently on conflict (same real-world event).
     # Signals without a source_key (demo data) always insert — NULLs are not constrained.
-    result = (
-        client.table("market_signals")
-        .upsert(rows, on_conflict="source_key", ignore_duplicates=True)
-        .execute()
-    )
+    try:
+        result = (
+            client.table("market_signals")
+            .upsert(rows, on_conflict="source_key", ignore_duplicates=True)
+            .execute()
+        )
+    except Exception as e:
+        print(f"  ✗  Supabase upsert failed — {e}")
+        return
     pushed = len(result.data) if result.data else 0
     skipped = len(signals) - pushed
     print(f"  ✓  Pushed {pushed} signal(s) to market_signals" +

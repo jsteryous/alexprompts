@@ -56,7 +56,7 @@ export default function SeoPage() {
             </p>
             <p className="text-gray-400 leading-relaxed">
               But SEO is still infrastructure. Referrals Google you. Past
-              customers come back through search. Warm Multiplier prospects
+              customers come back through search. Warm LLC Owner Finder prospects
               verify you before they call back. If your local presence is broken,
               every other channel leaks.
             </p>

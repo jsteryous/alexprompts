@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How It Works — The Multiplier · REBB Advisors",
+  title: "How It Works — LLC Owner Finder · REBB Advisors",
   description:
     "We watch Greenville County public records every day, unmask the LLC, and put a ranked call list in your dashboard every Monday. One real lead in 30 days or full refund.",
   openGraph: {
-    title: "How It Works — The Multiplier · REBB Advisors",
+    title: "How It Works — LLC Owner Finder · REBB Advisors",
     description:
       "Daily property and business filing data turned into a ranked call list. One new lead in 30 days or full refund.",
     type: "website",
@@ -40,7 +40,7 @@ const steps = [
   },
   {
     step: "03",
-    title: "The Multiplier starts running",
+    title: "LLC Owner Finder starts running",
     duration: "Days 3–7",
     body: "We run the first full data pull. Property transfers get cross-referenced with tax records, state filings, and public data to surface the actual decision-maker behind each LLC. Your first ranked call list lands Monday morning.",
     details: [
@@ -92,11 +92,11 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* How The Multiplier Works */}
+      {/* How LLC Owner Finder Works */}
       <section className="bg-gray-50 py-20 md:py-28 border-y border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-            The Multiplier
+            LLC Owner Finder
           </span>
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
@@ -181,7 +181,7 @@ export default function HowItWorksPage() {
                     </ul>
                   </div>
                   <div className="p-5 bg-green-50">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-3">The Multiplier</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-3">LLC Owner Finder</p>
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li>You call before they search</li>
                       <li>Often the only call they get</li>
@@ -263,7 +263,7 @@ export default function HowItWorksPage() {
             </h2>
             <p className="text-gray-500 leading-relaxed">
               We don&apos;t charge retainers or lock you into long-term contracts.
-              If The Multiplier doesn&apos;t surface a lead you wouldn&apos;t have found
+              If LLC Owner Finder doesn&apos;t surface a lead you wouldn&apos;t have found
               on your own within 30 days, we refund everything. No case to make. No questions.
             </p>
           </div>

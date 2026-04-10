@@ -51,7 +51,7 @@ export default function WebDevelopmentPage() {
               losing you contracts.
             </h2>
             <p className="text-gray-400 leading-relaxed">
-              A prospect calls you off a Multiplier lead. First thing they do is
+              A prospect calls you off an LLC Owner Finder lead. First thing they do is
               Google you. If your site takes four seconds to load, looks like it
               was built in 2014, or sends them to a contact form with no response
               for 24 hours — you lost the deal you already had.
@@ -161,7 +161,7 @@ export default function WebDevelopmentPage() {
               </p>
               <p className="text-gray-500 leading-relaxed mb-8">
                 We can scope the build on our first call — standalone or bundled with
-                The Multiplier dashboard.
+                the LLC Owner Finder dashboard.
               </p>
               <Link
                 href="/contact"

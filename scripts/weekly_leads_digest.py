@@ -25,6 +25,7 @@ from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
+from lib.email_format import TAG_COLORS as _TAG_COLORS, fmt_currency as _fmt_currency, tag_badge as _tag_badge
 
 load_dotenv(Path(__file__).parent.parent / ".env.local")
 
@@ -68,32 +69,6 @@ def fetch_leads(days_back: int | None) -> tuple[list[dict], list[dict]]:
 
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
-
-_TAG_COLORS = {
-    "HOT":  ("#fef2f2", "#dc2626", "#dc2626"),  # bg, text, border
-    "WARM": ("#fffbeb", "#d97706", "#d97706"),
-    "COLD": ("#f9fafb", "#6b7280", "#d1d5db"),
-}
-
-
-def _tag_badge(tag: str) -> str:
-    tag = (tag or "WARM").upper()
-    bg, color, _ = _TAG_COLORS.get(tag, _TAG_COLORS["WARM"])
-    return (
-        f'<span style="display:inline-block;background:{bg};color:{color};'
-        f'font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 8px;'
-        f'border-radius:4px">{tag}</span>'
-    )
-
-
-def _fmt_currency(val) -> str:
-    if val is None:
-        return "—"
-    try:
-        return f"${float(val):,.0f}"
-    except (TypeError, ValueError):
-        return "—"
-
 
 def _lead_card(lead: dict, idx: int) -> str:
     name      = lead.get("principal_name") or "—"
@@ -247,7 +222,7 @@ def send_digest(html: str, enriched_count: int, pending_count: int, days_back: i
             "Content-Type": "application/json",
         },
         json={
-            "from": "REBB Advisors <noreply@rebbadvisors.com>",
+            "from": os.getenv("MAIL_FROM", "REBB Advisors <noreply@rebbadvisors.com>"),
             "to": [NOTIFICATION_EMAIL],
             "subject": subject,
             "html": html,

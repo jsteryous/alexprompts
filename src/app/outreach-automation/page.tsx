@@ -167,12 +167,12 @@ export default function OutreachAutomationPage() {
                 Outbound + Automation
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight mb-5">
-                The Multiplier surfaces the lead.
+                LLC Owner Finder surfaces the lead.
                 <br />
                 The sequence warms them up.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
-                When you cold-call a Multiplier prospect and they don&apos;t answer,
+                When you cold-call an LLC Owner Finder prospect and they don&apos;t answer,
                 most contractors give up. We don&apos;t. We install a short outbound
                 sequence — email or SMS — that runs automatically after your first
                 contact attempt.
@@ -187,7 +187,7 @@ export default function OutreachAutomationPage() {
                 href="/lead-intelligence"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-green-600 hover:text-green-700 transition-colors"
               >
-                Learn about The Upstate Multiplier
+                Learn about LLC Owner Finder
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

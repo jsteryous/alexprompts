@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const services = [
-  { href: "/lead-intelligence", label: "Lead Intelligence", sub: "The Upstate Multiplier" },
+  { href: "/lead-intelligence", label: "Lead Intelligence", sub: "LLC Owner Finder" },
   { href: "/outreach-automation", label: "Outreach Automation", sub: "Email & SMS sequences" },
   { href: "/seo", label: "Local SEO", sub: "Audits & GBP optimization" },
   { href: "/web-development", label: "Web Development", sub: "React sites in 5 days" },

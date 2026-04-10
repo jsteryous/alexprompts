@@ -240,7 +240,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                 REBB Advisors
               </span>
               <span className="text-xs text-gray-600">·</span>
-              <span className="text-xs text-gray-500">Upstate Multiplier</span>
+              <span className="text-xs text-gray-500">LLC Owner Finder</span>
             </div>
             <h1 className="text-2xl font-bold text-white">Ranked Call List</h1>
             <p className="text-sm text-gray-500 mt-1">

@@ -41,26 +41,41 @@ log = logging.getLogger(__name__)
 
 GEMINI_MODEL = "gemini-2.5-flash"
 
-SYSTEM_PROMPT = """You are a technical writer for REBB Advisors, a Greenville SC agency
-that builds data pipelines, web systems, and lead intelligence tools.
+SYSTEM_PROMPT = """You are a content writer for REBB Advisors, a Greenville SC company
+that helps local service businesses — HVAC, plumbing, landscaping, electrical,
+cleaning, security — find better leads and run smarter operations.
 
-Write for a technically-minded reader who builds things — developers, founders,
-technical operators. Someone who will stop reading the moment they sense generic
-marketing copy or vague advice.
+Write for a local service business owner or office manager: someone running a team,
+juggling multiple active jobs, and trying to grow without wasting time chasing
+dead-end leads. They are NOT developers. They are smart, practical, and allergic
+to fluff.
 
-Tone: direct, specific, opinionated. Write like someone who actually did the thing
-and is sharing what they learned, including where it broke or surprised them.
-No fluff. No "in today's digital landscape." No generic conclusions.
+Tone: plain, direct, and grounded. Write like a smart local who knows Greenville's
+market — not a generic marketing blog. No buzzwords. No "in today's competitive
+landscape." No conclusions that say nothing.
+
+Reading level: accessible. A 10th grader should follow the logic.
+A business owner should finish it thinking "I could actually use this."
 
 Format: Markdown. Use ## headers and bullet lists where they aid clarity.
 Length: 800–1200 words.
-Include at least one concrete example, specific tool name, command, or data format.
-Say something non-obvious — the insight a reader wouldn't get from the first
-three Google results on this topic.
 
-End with a single sentence connecting the topic to REBB Advisors' work
-(data pipelines, web systems, or lead intelligence for Upstate SC businesses).
-Keep it natural, not salesy.
+Include at least one concrete, specific example — a real workflow, a real scenario
+a Greenville trade contractor would recognize. Make it feel local and grounded.
+
+Product tie-ins (use naturally, at most once or twice, never as a pitch):
+- When the article is about finding property owners or the person behind an LLC,
+  reference REBB's LLC Owner Finder: it monitors Greenville County deed transfers,
+  SOS filings, and mortgage records daily — and unmasks the human decision-maker
+  behind each LLC automatically.
+- When the article is about managing a business with many active jobs or a team
+  that asks the same questions repeatedly, reference REBB's Company Brain: a
+  private local AI that learns from the company's own emails, quotes, and job
+  notes, so anyone on the team can get answers without interrupting the owner.
+  It runs on the office computer; nothing leaves the building.
+
+Say something useful the reader wouldn't get from a generic Google search.
+The best articles make the product feel like an obvious next step — not a sale.
 
 Do NOT include a YAML front matter block or a title at the top —
 the title will be extracted separately."""
@@ -132,7 +147,26 @@ def generate_with_gemini(topic: str) -> str:
 
 def save_draft(supabase_client, title: str, slug: str, body_md: str,
                summary: str, topic: str) -> dict:
-    """Insert a DRAFT blog post and return the row."""
+    """Insert a DRAFT blog post and return the row.
+
+    Idempotent: if a row with this slug already exists (e.g. script crashed
+    after Gemini call but before email send), return the existing row instead
+    of inserting a duplicate and burning another API call.
+    """
+    existing = (
+        supabase_client.table("blog_posts")
+        .select("id, title, slug, status, created_at")
+        .eq("slug", slug)
+        .execute()
+    )
+    if existing.data:
+        row = existing.data[0]
+        log.warning(
+            f"Draft with slug {slug!r} already exists "
+            f"(id={row['id']}, status={row['status']}) — skipping insert."
+        )
+        return row
+
     row = {
         "title": title,
         "slug": slug,
@@ -213,7 +247,7 @@ def send_email_notification(post_id: str, title: str, summary: str,
             "https://api.resend.com/emails",
             headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
             json={
-                "from": "REBB Insights <onboarding@resend.dev>",
+                "from": os.getenv("MAIL_FROM", "REBB Insights <onboarding@resend.dev>"),
                 "to": [to_addr],
                 "subject": f"[Review Needed] {title}",
                 "html": email_html,

@@ -145,7 +145,7 @@ def edit_post(client, post_id: str) -> None:
     print(f"  File: {tmp_path}\n")
 
     try:
-        subprocess.run(f'{editor} "{tmp_path}"', shell=True, check=True)
+        subprocess.run([editor, tmp_path], check=True)
     except subprocess.CalledProcessError:
         log.error(f"Editor exited with an error. Your file is still at: {tmp_path}")
         sys.exit(1)

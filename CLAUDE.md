@@ -8,7 +8,7 @@
 **REBB's tagline:** "We find the owner. You make the sale."
 
 **Two products:**
-1. **The Multiplier** — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Framing: **"Who do I call this week to make money?"**
+1. **LLC Owner Finder** — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Framing: **"Who do I call this week to make money?"**
 2. **Company Brain** — Private local AI (built on Rowboat, white-labeled) that ingests client emails, quotes, and project notes. Team members query it instead of interrupting the owner. Runs on the client's office computer; no data leaves their machine.
 
 ## Tech Stack
@@ -179,7 +179,7 @@ python approve_post.py --list-drafts
 python approve_post.py --id <uuid> --view / --edit / --status PUBLISHED
 ```
 
-**Topic generation:** `weekly_insights.py` queries last 20 titles → Gemini picks from 6 category buckets. No state file. Edit `CATEGORIES` to bias topics.
+**Topic generation:** `weekly_insights.py` queries last 20 titles → Gemini picks from 6 category buckets. No state file. Edit `CATEGORIES` in `weekly_insights.py` to bias topics. Categories are currently oriented toward: LLC Owner Finder (public records/lead intel), Company Brain (AI for multi-job service businesses), Greenville commercial real estate, trade business operations, reading public records, and digital tools for trades.
 
 **GH Actions — weekly-insights.yml:** Monday 13:00 UTC, Python 3.12, `requirements-insights.txt`.  
 Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `GEMINI_API_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `PUBLISH_SECRET` · `NEXT_PUBLIC_SITE_URL`
@@ -371,9 +371,9 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero + LiveSignalFeed, Two Products (Multiplier + Company Brain), How It Works (3-step), The Window (Day 0→21 timeline), Dashboard Preview mockup, Company Brain (chat mockup), Offer, CTA. All CTAs → "Get Dashboard Access" → `/contact` |
-| `/how-it-works` | 5-step sprint process |
-| `/lead-intelligence` | Upstate Multiplier deep dive |
+| `/` | Hero + LiveSignalFeed, Two Products (LLC Owner Finder + Company Brain), How It Works (3-step), The Window (Day 0→21 timeline), Dashboard Preview mockup, Company Brain (chat mockup), Offer, CTA. All CTAs → "Get More Jobs" → `/contact` |
+| `/how-it-works` | 5-step onboarding + process walkthrough |
+| `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
 | `/web-development` | React/Next.js builds, 5-day sprint |
 | `/outreach-automation` | Email/SMS sequences |

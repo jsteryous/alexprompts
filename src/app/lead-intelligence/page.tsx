@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Lead Intelligence for Greenville SC — The Upstate Multiplier · REBB Advisors",
+  title: "LLC Owner Finder — Lead Intelligence for Greenville SC · REBB Advisors",
   description:
     "Daily Greenville County property transfers and new business filings — cross-referenced to real decision-makers. Know who to call before your competitors do. Built for Upstate SC service businesses.",
   openGraph: {
-    title: "The Upstate Multiplier — Lead Intelligence for Greenville SC",
+    title: "LLC Owner Finder — Lead Intelligence for Greenville SC",
     description:
       "Daily Greenville County property and business filing data surfaced as ranked, actionable leads for local service businesses.",
     type: "website",
@@ -22,7 +22,7 @@ export default function LeadIntelligencePage() {
       <section className="bg-white pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6">
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-            The Upstate Multiplier
+            LLC Owner Finder
           </span>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black mb-5 leading-tight">
             Know who to call

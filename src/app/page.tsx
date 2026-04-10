@@ -72,7 +72,7 @@ export default function HomePage() {
                   <path d="M18 10l1.5 1.5L22 9" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <div className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-3">01 · The Multiplier</div>
+              <div className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-3">01 · LLC Owner Finder</div>
               <h3 className="text-2xl font-bold text-white mb-3">Get the cell behind the LLC</h3>
               <p className="text-gray-400 leading-relaxed mb-6">
                 That commercial building that just sold? It was bought by an LLC. We find the actual human behind it — name, cell, email — and put them on your call list. Every Monday, new targets.

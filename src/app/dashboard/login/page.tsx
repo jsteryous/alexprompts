@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: Props) {
           <p className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-2">
             REBB Advisors
           </p>
-          <h1 className="text-xl font-bold text-white">Upstate Multiplier</h1>
+          <h1 className="text-xl font-bold text-white">LLC Owner Finder</h1>
           <p className="text-sm text-gray-500 mt-1">Sign in to view the ranked call list</p>
         </div>
 

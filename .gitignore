@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# Python scraper debug output (may contain authenticated session HTML/screenshots)
+scripts/debug/
+scripts/__pycache__/
