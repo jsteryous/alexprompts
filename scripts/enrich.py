@@ -29,6 +29,7 @@ import argparse
 import logging
 from pathlib import Path
 from typing import Optional
+from dataclasses import dataclass
 
 from dotenv import load_dotenv
 
@@ -37,6 +38,7 @@ from enrich_models import (
     LLC_NAME_RE,
     _LLC_TERMS_RE,
     _is_street_address,
+    is_non_human_name,
     normalize_person_name,
     EnrichmentResult,
     ENRICH_VERSION,
@@ -79,6 +81,164 @@ def get_supabase():
         from supabase import create_client
         _supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     return _supabase
+
+
+@dataclass
+class ContactSnapshot:
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    principal_name: Optional[str] = None
+    entity_name: Optional[str] = None
+    signal_id: Optional[str] = None
+
+
+class ContactReuseCache:
+    """Lazy in-memory index of known contact info from enriched_leads."""
+
+    def __init__(self) -> None:
+        self._loaded = False
+        self._by_principal: dict[str, ContactSnapshot] = {}
+        self._by_entity: dict[str, ContactSnapshot] = {}
+
+    def load(self) -> None:
+        if self._loaded:
+            return
+
+        client = get_supabase()
+        self._loaded = True
+        if not client:
+            return
+
+        page_size = 1000
+        offset = 0
+        while True:
+            resp = (
+                client.table("enriched_leads")
+                .select(
+                    "signal_id, principal_name, contact_email, contact_phone, linkedin_url, "
+                    "market_signals(entity_name)"
+                )
+                .or_("contact_email.not.is.null,contact_phone.not.is.null,linkedin_url.not.is.null")
+                .range(offset, offset + page_size - 1)
+                .execute()
+            )
+            rows = resp.data or []
+            if not rows:
+                break
+            for row in rows:
+                snapshot = ContactSnapshot(
+                    email=row.get("contact_email"),
+                    phone=row.get("contact_phone"),
+                    linkedin_url=row.get("linkedin_url"),
+                    principal_name=row.get("principal_name"),
+                    entity_name=(row.get("market_signals") or {}).get("entity_name"),
+                    signal_id=row.get("signal_id"),
+                )
+                self._store(snapshot)
+            if len(rows) < page_size:
+                break
+            offset += page_size
+
+    def _store(self, snapshot: ContactSnapshot) -> None:
+        principal_key = _normalize_principal_key(snapshot.principal_name or "")
+        entity_key = _normalize_entity_key(snapshot.entity_name or "")
+        if principal_key and principal_key not in self._by_principal:
+            self._by_principal[principal_key] = snapshot
+        if entity_key and entity_key not in self._by_entity:
+            self._by_entity[entity_key] = snapshot
+
+    def lookup(self, principal_name: str = "", entity_name: str = "") -> Optional[ContactSnapshot]:
+        self.load()
+        principal_key = _normalize_principal_key(principal_name)
+        if principal_key and principal_key in self._by_principal:
+            return self._by_principal[principal_key]
+
+        entity_key = _normalize_entity_key(entity_name)
+        if entity_key and entity_key in self._by_entity:
+            return self._by_entity[entity_key]
+
+        return None
+
+    def remember(self, principal_name: str = "", entity_name: str = "", result: Optional[EnrichmentResult] = None,
+                 signal_id: Optional[str] = None) -> None:
+        if not result:
+            return
+        if not (result.contact_email or result.contact_phone or result.linkedin_url):
+            return
+        self._store(
+            ContactSnapshot(
+                email=result.contact_email,
+                phone=result.contact_phone,
+                linkedin_url=result.linkedin_url,
+                principal_name=principal_name or result.principal_name,
+                entity_name=entity_name,
+                signal_id=signal_id,
+            )
+        )
+
+
+_contact_reuse_cache = ContactReuseCache()
+
+
+def _normalize_lookup_key(value: str) -> str:
+    if not value:
+        return ""
+    key = value.strip().lower()
+    key = key.replace("&", " and ")
+    key = re.sub(r"[^a-z0-9\s]", " ", key)
+    key = re.sub(r"\s+", " ", key)
+    return key.strip()
+
+
+def _normalize_principal_key(value: str) -> str:
+    if not value:
+        return ""
+    normalized = normalize_person_name(value)
+    return _normalize_lookup_key(normalized)
+
+
+def _normalize_entity_key(value: str) -> str:
+    return _normalize_lookup_key(value)
+
+
+def _reuse_existing_contact_info(
+    result: EnrichmentResult,
+    entity_name: str = "",
+    *,
+    principal_name: str = "",
+    current_signal_id: Optional[str] = None,
+) -> bool:
+    snapshot = _contact_reuse_cache.lookup(
+        principal_name=principal_name or result.principal_name or "",
+        entity_name=entity_name,
+    )
+    if not snapshot:
+        return False
+
+    if current_signal_id and snapshot.signal_id == current_signal_id:
+        return False
+
+    reused_fields: list[str] = []
+    if snapshot.email and not result.contact_email:
+        result.contact_email = snapshot.email
+        reused_fields.append("email")
+    if snapshot.phone and not result.contact_phone:
+        result.contact_phone = snapshot.phone
+        reused_fields.append("phone")
+    if snapshot.linkedin_url and not result.linkedin_url:
+        result.linkedin_url = snapshot.linkedin_url
+        reused_fields.append("linkedin")
+
+    if not reused_fields:
+        return False
+
+    match_basis = "principal" if _normalize_principal_key(principal_name or result.principal_name or "") else "entity"
+    label = snapshot.principal_name or snapshot.entity_name or "existing lead"
+    result.notes.append(
+        f"Contact reuse: copied {', '.join(reused_fields)} from enriched_leads {match_basis} match '{label}'"
+    )
+    return True
 
 
 # ── Orchestrator ──────────────────────────────────────────────────────────────
@@ -155,8 +315,15 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             result.enrichment_status = "enriched"
             return result
         else:
-            print(f"   → Owner is still an LLC: {result.principal_name}")
-            if result.principal_name != entity_name:
+            if is_non_human_name(result.principal_name):
+                print(f"   → Owner is still a non-human entity: {result.principal_name}")
+            else:
+                print(f"   → Owner is still an LLC: {result.principal_name}")
+            if (
+                result.principal_name != entity_name
+                and result.principal_name
+                and not is_non_human_name(result.principal_name)
+            ):
                 entity_name = result.principal_name
 
     # Step 1b: PIN Pivot — fetch Real Property detail page to get Care Of + mailing address
@@ -388,10 +555,21 @@ def run_pending(dry_run: bool = False) -> None:
                 dry_run=dry_run,
                 signal=signal,
             )
-            if result.is_enriched():
+            _reuse_existing_contact_info(
+                result,
+                signal["entity_name"],
+                current_signal_id=signal.get("id"),
+            )
+            if result.is_enriched() and not (result.contact_email or result.contact_phone):
                 lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
             if not result.contact_email and not result.contact_phone:
                 lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
+            _contact_reuse_cache.remember(
+                principal_name=result.principal_name or "",
+                entity_name=signal["entity_name"],
+                result=result,
+                signal_id=signal.get("id"),
+            )
             save_enriched_lead(signal, result, dry_run=dry_run)
         except Exception as e:
             _log.error(
@@ -445,10 +623,21 @@ def run_retry_pending(dry_run: bool = False) -> None:
                 dry_run=dry_run,
                 signal=sig,
             )
-            if result.is_enriched():
+            _reuse_existing_contact_info(
+                result,
+                sig["entity_name"],
+                current_signal_id=sig.get("id"),
+            )
+            if result.is_enriched() and not (result.contact_email or result.contact_phone):
                 lookup_apollo_contact(result, sig["entity_name"], sig.get("location", ""))
             if not result.contact_email and not result.contact_phone:
                 lookup_pdl_company(result, sig["entity_name"], sig.get("location", ""))
+            _contact_reuse_cache.remember(
+                principal_name=result.principal_name or "",
+                entity_name=sig["entity_name"],
+                result=result,
+                signal_id=sig.get("id"),
+            )
             save_enriched_lead(sig, result, dry_run=dry_run)
         except Exception as e:
             _log.error(
@@ -475,7 +664,7 @@ def run_contact_only(dry_run: bool = False) -> None:
     resp = (
         client.table("enriched_leads")
         .select(
-            "id, principal_name, enrichment_status, notes, "
+            "id, signal_id, principal_name, enrichment_status, notes, "
             "market_signals(entity_name, location, signal_type)"
         )
         .eq("enrichment_status", "enriched")
@@ -501,9 +690,22 @@ def run_contact_only(dry_run: bool = False) -> None:
         result = EnrichmentResult()
         result.principal_name = name
 
-        lookup_apollo_contact(result, entity_name, location)
+        _reuse_existing_contact_info(
+            result,
+            entity_name,
+            principal_name=name,
+            current_signal_id=row.get("signal_id"),
+        )
+        if not (result.contact_email or result.contact_phone):
+            lookup_apollo_contact(result, entity_name, location)
         if not result.contact_email and not result.contact_phone:
             lookup_pdl_company(result, entity_name, location)
+        _contact_reuse_cache.remember(
+            principal_name=name,
+            entity_name=entity_name,
+            result=result,
+            signal_id=row.get("signal_id"),
+        )
 
         for note in result.notes:
             print(f"     {note}")
@@ -591,10 +793,21 @@ def main():
         except Exception as e:
             _log.error("Enrichment failed for signal %s: %s", args.signal_id, e)
             return
-        if result.is_enriched():
+        _reuse_existing_contact_info(
+            result,
+            signal["entity_name"],
+            current_signal_id=signal.get("id"),
+        )
+        if result.is_enriched() and not (result.contact_email or result.contact_phone):
             lookup_apollo_contact(result, signal["entity_name"], signal.get("location", ""))
         if not result.contact_email and not result.contact_phone:
             lookup_pdl_company(result, signal["entity_name"], signal.get("location", ""))
+        _contact_reuse_cache.remember(
+            principal_name=result.principal_name or "",
+            entity_name=signal["entity_name"],
+            result=result,
+            signal_id=signal.get("id"),
+        )
         save_enriched_lead(signal, result, args.dry_run)
         return
 
@@ -616,10 +829,16 @@ def main():
             address=args.address or "",
             dry_run=args.dry_run,
         )
-        if result.is_enriched():
+        _reuse_existing_contact_info(result, args.entity or "")
+        if result.is_enriched() and not (result.contact_email or result.contact_phone):
             lookup_apollo_contact(result, args.entity or "", args.address or "")
         if not result.contact_email and not result.contact_phone:
             lookup_pdl_company(result, args.entity or "", args.address or "")
+        _contact_reuse_cache.remember(
+            principal_name=result.principal_name or "",
+            entity_name=args.entity or "",
+            result=result,
+        )
         print(f"\n── Result ──")
         print(f"   principal_name:    {result.principal_name or '—'}")
         print(f"   principal_role:    {result.principal_role or '—'}")
