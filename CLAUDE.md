@@ -51,7 +51,7 @@ scripts/
 ├── generate_insights.py         — Gemini → DRAFT → email
 ├── approve_post.py              — CLI draft management
 ├── weekly_insights.py           — topic rotation (GH Actions Monday 8am EST)
-├── run_daily.py                 — pipeline orchestrator (subprocess-based)
+├── run_daily.py                 — pipeline orchestrator (direct imports from gvl_monitor + enrich)
 ├── gvl_monitor.py               — scraper: deeds (GovOS), SOS (DDG), mortgages (CountyWeb)
 ├── enrich.py                    — enrichment orchestrator
 ├── enrich_gis.py                — GIS tax query + property detail lookup
@@ -383,6 +383,5 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 ## Python Pipeline — Open Tech Debt
 
-- **`run_daily.py` subprocess orchestration** — Steps run as subprocesses; failures captured only by returncode. Structured exceptions and logging context from sub-scripts are lost. Fix: import and call functions directly with try/except. Note: `enrich.py --run-pending` is already per-signal exception-safe; this issue is specific to `run_daily.py` calling scripts as subprocesses.
 - **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage. Any refactor is unprotected.
 - **`fetch_pending_signals` NOT IN query** — uses `.filter("id", "not.in", ...)` which passes as a URL param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.
