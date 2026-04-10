@@ -294,8 +294,8 @@ export default async function DashboardPage({ searchParams }: Props) {
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500 w-8">#</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Score</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Contact</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Source LLC</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Property</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Grantee / Borrower</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Location</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Event</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Value</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Evidence</th>
@@ -378,10 +378,10 @@ export default async function DashboardPage({ searchParams }: Props) {
                         )}
                       </td>
 
-                      {/* Property address */}
+                      {/* Location / address */}
                       <td className="px-4 py-4 text-gray-300 text-xs max-w-[180px]">
                         <p className="truncate" title={lead.location ?? ""}>
-                          {lead.location ?? "—"}
+                          {lead.location ?? <span className="text-gray-600 italic">No address</span>}
                         </p>
                       </td>
 

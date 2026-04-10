@@ -17,6 +17,7 @@ Usage:
     python enrich.py --entity "Palmetto Industrial LLC" --rec-date "3/15/2024"
     python enrich.py --list-pending
     python enrich.py --run-pending [--dry-run]
+    python enrich.py --run-contact [--dry-run]   # retry PDL on enriched leads with no contact info
     ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run
 """
 
@@ -397,6 +398,78 @@ def run_pending(dry_run: bool = False) -> None:
         time.sleep(2)
 
 
+# ── Contact-only retry ───────────────────────────────────────────────────────
+
+def run_contact_only(dry_run: bool = False) -> None:
+    """
+    Retry PDL contact lookup for enriched leads that have a principal_name
+    but no email or phone. Useful after adding a PDL API key for the first time,
+    or after the monthly credit window resets.
+    """
+    client = get_supabase()
+    if not client:
+        print("Supabase not configured.")
+        return
+
+    # Fetch enriched leads with a resolved name but no contact info.
+    resp = (
+        client.table("enriched_leads")
+        .select(
+            "id, principal_name, enrichment_status, notes, "
+            "market_signals(entity_name, location, signal_type)"
+        )
+        .eq("enrichment_status", "enriched")
+        .is_("contact_email", "null")
+        .is_("contact_phone", "null")
+        .not_.is_("principal_name", "null")
+        .limit(50)
+        .execute()
+    )
+    rows = resp.data or []
+    if not rows:
+        print("No enriched leads need contact lookup.")
+        return
+
+    print(f"\n── {len(rows)} enriched lead(s) with no contact info ──\n")
+    for row in rows:
+        sig = row.get("market_signals") or {}
+        entity_name = sig.get("entity_name", "")
+        location    = sig.get("location", "") or ""
+        name        = row["principal_name"]
+        print(f"   {name}  ({entity_name})")
+
+        result = EnrichmentResult()
+        result.principal_name = name
+
+        lookup_apollo_contact(result, entity_name, location)
+        if not result.contact_email and not result.contact_phone:
+            lookup_pdl_company(result, entity_name, location)
+
+        for note in result.notes:
+            print(f"     {note}")
+
+        if dry_run:
+            continue
+
+        update: dict = {}
+        if result.contact_email:
+            update["contact_email"] = result.contact_email
+        if result.contact_phone:
+            update["contact_phone"] = result.contact_phone
+        if result.linkedin_url:
+            update["linkedin_url"] = result.linkedin_url
+        if result.notes:
+            existing_notes = row.get("notes") or ""
+            new_notes = (existing_notes + "\n" + "\n".join(result.notes)).strip()
+            update["notes"] = new_notes
+
+        if update:
+            client.table("enriched_leads").update(update).eq("id", row["id"]).execute()
+            print(f"     ✓ Updated")
+
+        time.sleep(1)
+
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -409,6 +482,8 @@ def main():
                         help="List market_signals not yet in enriched_leads")
     parser.add_argument("--run-pending",  action="store_true",
                         help="Enrich all unenriched signals (oldest first, max 10)")
+    parser.add_argument("--run-contact",  action="store_true",
+                        help="Retry PDL contact lookup on enriched leads with no email/phone (up to 50)")
     parser.add_argument("--dry-run",      action="store_true",
                         help="Print results without writing to Supabase")
     args = parser.parse_args()
@@ -429,6 +504,10 @@ def main():
 
     if args.run_pending:
         run_pending(dry_run=args.dry_run)
+        return
+
+    if args.run_contact:
+        run_contact_only(dry_run=args.dry_run)
         return
 
     if args.signal_id:
