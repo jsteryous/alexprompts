@@ -21,6 +21,12 @@ HEADERS = {
 
 DEBUG_DIR = Path(__file__).parent / "debug"
 
+# ── Enrichment version ───────────────────────────────────────────────────────
+# Bump this when the enrichment chain meaningfully improves (new source added,
+# major logic fix). Stored in enriched_leads.enrichment_version so stale rows
+# can be selected and re-processed with --re-enrich-stale.
+ENRICH_VERSION = 1
+
 # ── principal_role constants ──────────────────────────────────────────────────
 # Stable string labels consumed by the /dashboard frontend to derive confidence
 # tiers. TypeScript maps on the prefix before " – " (e.g. startsWith("SC SOS")).

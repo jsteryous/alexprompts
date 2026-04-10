@@ -196,6 +196,18 @@ ALTER TABLE enriched_leads
 ALTER TABLE enriched_leads
   ADD COLUMN IF NOT EXISTS transfer_type text;  -- NOMINAL_TRANSFER | null
 
+-- Enrichment version — tracks which iteration of the enrichment chain produced
+-- this row. Bump ENRICH_VERSION in enrich_models.py when the chain meaningfully
+-- improves (new source, major logic fix). Rows with a lower version than the
+-- current constant are candidates for re-processing with --re-enrich-stale.
+-- NULL on legacy rows (enriched before versioning was introduced).
+ALTER TABLE enriched_leads
+  ADD COLUMN IF NOT EXISTS enrichment_version integer;
+
+CREATE INDEX IF NOT EXISTS enriched_leads_version_idx
+  ON enriched_leads (enrichment_version)
+  WHERE enrichment_status = 'enriched';
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS enriched_leads_client_id_idx
   ON enriched_leads (client_id);

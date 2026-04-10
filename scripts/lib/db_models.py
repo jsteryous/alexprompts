@@ -50,3 +50,4 @@ class EnrichedLeadRow(BaseModel):
     notes:              Optional[str]   = None
     client_id:          Optional[str]   = None
     trade_tag:          Optional[str]   = None
+    enrichment_version: Optional[int]   = None

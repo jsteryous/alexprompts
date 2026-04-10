@@ -17,7 +17,8 @@ Usage:
     python enrich.py --entity "Palmetto Industrial LLC" --rec-date "3/15/2024"
     python enrich.py --list-pending
     python enrich.py --run-pending [--dry-run]
-    python enrich.py --run-contact [--dry-run]   # retry PDL on enriched leads with no contact info
+    python enrich.py --retry-pending [--dry-run]  # re-run full chain on stuck pending leads
+    python enrich.py --run-contact [--dry-run]    # retry PDL on enriched leads with no contact info
     ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run
 """
 
@@ -38,6 +39,7 @@ from enrich_models import (
     _is_street_address,
     normalize_person_name,
     EnrichmentResult,
+    ENRICH_VERSION,
     ROLE_TAX_CARE_OF,
     ROLE_GIS_MAIL_FLIP,
 )
@@ -342,8 +344,9 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         "contact_phone":     result.contact_phone,
         "linkedin_url":      result.linkedin_url,
         "search_evidence":   result.search_evidence,
-        "enrichment_status": result.enrichment_status,
-        "notes":             "\n".join(result.notes),
+        "enrichment_status":  result.enrichment_status,
+        "enrichment_version": ENRICH_VERSION,
+        "notes":              "\n".join(result.notes),
     }
     if dry_run:
         print("\n── Would insert to enriched_leads:")
@@ -394,6 +397,63 @@ def run_pending(dry_run: bool = False) -> None:
             _log.error(
                 "Unhandled error enriching signal %s ('%s'): %s",
                 signal.get("id"), signal.get("entity_name"), e,
+            )
+        time.sleep(2)
+
+
+# ── Retry stuck pending leads ─────────────────────────────────────────────────
+
+def run_retry_pending(dry_run: bool = False) -> None:
+    """
+    Re-run the full enrichment chain on leads that are already in enriched_leads
+    with enrichment_status = 'pending' (LLC owner was never resolved).
+
+    Safe to run repeatedly — save_enriched_lead upserts on signal_id so each
+    run overwrites the previous result. Useful after adding new data sources or
+    improving the enrichment logic.
+    """
+    client = get_supabase()
+    if not client:
+        print("Supabase not configured.")
+        return
+
+    resp = (
+        client.table("enriched_leads")
+        .select(
+            "id, signal_id, "
+            "market_signals(id, entity_name, location, event_type, valuation, score, tag, source, details, signal_type)"
+        )
+        .eq("enrichment_status", "pending")
+        .limit(10)
+        .execute()
+    )
+    rows = resp.data or []
+    if not rows:
+        print("No pending leads to retry.")
+        return
+
+    print(f"\n── Retrying {len(rows)} pending lead(s) ──\n")
+    for row in rows:
+        sig = row.get("market_signals")
+        if not sig:
+            print(f"   Skipping {row['id']} — no linked signal")
+            continue
+        try:
+            result = enrich(
+                entity_name=sig["entity_name"],
+                address=sig.get("location", ""),
+                dry_run=dry_run,
+                signal=sig,
+            )
+            if result.is_enriched():
+                lookup_apollo_contact(result, sig["entity_name"], sig.get("location", ""))
+            if not result.contact_email and not result.contact_phone:
+                lookup_pdl_company(result, sig["entity_name"], sig.get("location", ""))
+            save_enriched_lead(sig, result, dry_run=dry_run)
+        except Exception as e:
+            _log.error(
+                "Unhandled error retrying lead %s ('%s'): %s",
+                row.get("id"), sig.get("entity_name"), e,
             )
         time.sleep(2)
 
@@ -480,9 +540,11 @@ def main():
     parser.add_argument("--rec-date",     help="Recording date M/D/YYYY — runs mortgage lookup only (use with --entity)")
     parser.add_argument("--list-pending", action="store_true",
                         help="List market_signals not yet in enriched_leads")
-    parser.add_argument("--run-pending",  action="store_true",
+    parser.add_argument("--run-pending",       action="store_true",
                         help="Enrich all unenriched signals (oldest first, max 10)")
-    parser.add_argument("--run-contact",  action="store_true",
+    parser.add_argument("--retry-pending",     action="store_true",
+                        help="Re-run full enrichment on leads stuck in pending status (max 10)")
+    parser.add_argument("--run-contact",       action="store_true",
                         help="Retry PDL contact lookup on enriched leads with no email/phone (up to 50)")
     parser.add_argument("--dry-run",      action="store_true",
                         help="Print results without writing to Supabase")
@@ -504,6 +566,10 @@ def main():
 
     if args.run_pending:
         run_pending(dry_run=args.dry_run)
+        return
+
+    if args.retry_pending:
+        run_retry_pending(dry_run=args.dry_run)
         return
 
     if args.run_contact:
