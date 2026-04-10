@@ -57,7 +57,7 @@ scripts/
 ├── enrich_gis.py                — GIS tax query + property detail lookup
 ├── enrich_web.py                — DuckDuckGo + SC SOS entity pages; email/phone regex extraction
 ├── enrich_mort.py               — CountyWeb mortgage OCR
-├── enrich_models.py             — shared types, constants, name normalization
+├── enrich_models.py             — shared types, constants, name normalization; ENRICH_VERSION
 ├── enrich_contact.py            — PDL person + company contact enrichment (email/phone/LinkedIn)
 ├── weekly_leads_digest.py       — weekly email digest
 ├── run_daily.bat                — local Windows pipeline runner
@@ -164,6 +164,7 @@ RLS: public SELECT only where `status = 'PUBLISHED'`.
 | `trade_tag` | text | client routing |
 | `score` / `tag` / `event_type` / `location` / `valuation` | | copied from signal |
 | `transfer_type` | text | `NOMINAL_TRANSFER` (copied from signal) or null — dashboard shows "Trust / Family" badge and hides dollar value |
+| `enrichment_version` | integer | version of `ENRICH_VERSION` constant at write time; null on legacy rows |
 | `notes` | text | |
 
 Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_leads` row → lookup chain → `enriched` or `pending` (manual queue).
@@ -234,8 +235,8 @@ python run_daily.py [--dry-run] [--days 14] [--no-deeds] [--no-mortgages] [--no-
 python weekly_leads_digest.py [--days 14] [--all] [--dry-run]
 ```
 
-**GH Actions daily-leads.yml (4am EST):** CountyWeb mortgages → enrich pending → high-confidence alert. Deed scraper runs locally only (fragile GovOS login).  
-Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `ROD_PASSWORD` · `ROD_VIEWER_USERNAME`  
+**GH Actions daily-leads.yml (4am EST):** 5 steps: (1) CountyWeb mortgage scraper, (2) `--run-pending` enrich new signals, (3) `--retry-pending` re-run stuck leads, (4) `--run-contact` fill missing PDL contact info, (5) high-confidence alert email. Deed scraper runs locally only (fragile GovOS login).  
+Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `ROD_PASSWORD` · `ROD_VIEWER_USERNAME` · `PDL_API_KEY`  
 Python 3.12 required. Uses `requirements-scraper.txt` + `apt-get install tesseract-ocr`.
 
 ## Lead Enrichment Engine (enrich.py)
@@ -246,7 +247,9 @@ Unmasks LLC → human decision-maker. Writes to `enriched_leads`.
 python enrich.py --entity "Name LLC" [--rec-date "M/D/YYYY"] [--dry-run]
 python enrich.py --signal-id <uuid>
 python enrich.py --list-pending
-python enrich.py --run-pending [--dry-run]
+python enrich.py --run-pending [--dry-run]      # enrich new signals (no enriched_leads row yet)
+python enrich.py --retry-pending [--dry-run]    # re-run full chain on stuck pending leads (max 10)
+python enrich.py --run-contact [--dry-run]      # retry PDL on enriched leads with no contact info
 ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run   # saves HTML/PNG to scripts/debug/
 ```
 
@@ -272,9 +275,13 @@ Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `r
 
 **Step 3 — Manual queue:** Log mailing address + Neumo link in notes, set `enrichment_status = 'pending'`.
 
+### Enrichment versioning
+
+`ENRICH_VERSION` in `enrich_models.py` (currently `1`) is written to every row. Bump it when the chain meaningfully improves. To re-process stale rows: query `WHERE enrichment_version < <new_version>` and run `--retry-pending` or `--signal-id` per row. `--retry-pending` targets `enrichment_status = 'pending'`; future `--re-enrich-stale` flag would target old `enrichment_version`.
+
 ### Location resolution
 
-`save_enriched_lead()` sets `location` to: GIS-resolved property address → raw `signal.location` fallback (may be grantor name for deeds, or borrower name for mortgages). Always populated; never filtered on whether it's a street address.
+`save_enriched_lead()` sets `location` to: GIS-resolved property address → `signal.location` if it passes `_is_street_address()` (leading house number) → null. Dashboard renders null as "No address". Field may be null — never assume it contains a street address.
 
 ### Name normalization
 
