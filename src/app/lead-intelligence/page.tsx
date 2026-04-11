@@ -21,15 +21,18 @@ export default function LeadIntelligencePage() {
       <section className="bg-white pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6">
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
-            Early Access Beta
+            LLC Owner Finder — Early Access
           </span>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black mb-5 leading-tight">
-            LLC Owner Finder
+            We find the owner.
+            <br />
+            You make the sale.
           </h1>
           <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-            This is an experimental REBB initiative for turning Greenville-area
-            public records into usable contractor outreach signals before the
-            buyer starts shopping around.
+            Daily sync of Greenville County property transfers, SOS filings,
+            and mortgage records. We unmask the LLC to surface the
+            decision-maker — name, phone, email — before they start shopping
+            around.
           </p>
         </div>
       </section>
@@ -42,18 +45,21 @@ export default function LeadIntelligencePage() {
                 Why It Exists
               </span>
               <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-5">
-                There is still a compelling window
+                The window is open
                 <br />
-                before buyers start searching.
+                before they start
+                <br />
+                calling around.
               </h2>
               <p className="text-gray-400 leading-relaxed mb-6">
-                When commercial property changes hands, new LLCs file, or permits
-                appear, there is often a short period where owners are making
-                vendor decisions before they start calling around or posting work.
+                When commercial property changes hands, a new LLC files, or a
+                mortgage closes — there&apos;s a short window where vendor
+                decisions haven&apos;t been made yet. No one&apos;s been called.
+                No one&apos;s been hired.
               </p>
               <p className="text-gray-400 leading-relaxed">
-                LLC Owner Finder is an attempt to capture that moment and turn it
-                into a usable outreach list for trades and service businesses.
+                LLC Owner Finder surfaces that moment: the owner, their contact
+                info, and the signal — before the rest of the market catches up.
               </p>
             </div>
 
@@ -115,12 +121,12 @@ export default function LeadIntelligencePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
-              Current Reality
+              Where It Stands
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight">
-              The idea is strong.
+              Working pipeline.
               <br />
-              The product is still maturing.
+              Still sharpening the output.
             </h2>
           </div>
 

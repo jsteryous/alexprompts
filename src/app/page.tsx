@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LiveSignalFeed from "@/components/LiveSignalFeed";
+import CompanyBrainDemo from "@/components/CompanyBrainDemo";
 
 const painPoints = [
   "Your estimator asks if a quote was already sent.",
@@ -8,42 +9,16 @@ const painPoints = [
   "Everyone asks you because you're still the system.",
 ];
 
-const sources = [
-  "Email threads and attachments",
-  "Quotes, invoices, and job notes",
-  "Shared drives, SOPs, and vendor docs",
-  "Meeting notes and owner tribal knowledge",
-];
-
-const outcomes = [
-  {
-    title: "Fewer interruptions",
-    body: "The team gets answers without waiting on the owner or office manager.",
-  },
-  {
-    title: "Faster onboarding",
-    body: "New hires can search how the company actually works instead of chasing people.",
-  },
-  {
-    title: "Less knowledge loss",
-    body: "Important decisions and context stop disappearing across inboxes and texts.",
-  },
-  {
-    title: "Higher trust in execution",
-    body: "Jobs, estimates, and customer history are easier to verify before someone acts.",
-  },
-];
-
 const setupSteps = [
   {
     step: "01",
     title: "Map the knowledge mess",
-    body: "We find where answers live now across inboxes, folders, estimates, notes, vendor docs, and the owner's memory.",
+    body: "We find where answers live now — inboxes, folders, estimates, notes, vendor docs, and the owner's memory.",
   },
   {
     step: "02",
     title: "Build the first version",
-    body: "We structure a private Company Brain around the internal questions that matter first, not around generic AI demos.",
+    body: "We structure a private Company Brain around the internal questions that cause real drag, not around generic AI demos.",
   },
   {
     step: "03",
@@ -53,7 +28,7 @@ const setupSteps = [
 ];
 
 const fitPoints = [
-  "5-25 person HVAC, plumbing, electrical, roofing, GC, or similar service teams",
+  "5–25 person HVAC, plumbing, electrical, roofing, GC, or similar service teams",
   "Owner still answers routine operational questions most days",
   "Knowledge spread across email, notes, shared drives, and job folders",
   "Need faster onboarding, fewer interruptions, and more durable company memory",
@@ -62,12 +37,13 @@ const fitPoints = [
 export default function HomePage() {
   return (
     <>
+      {/* Hero */}
       <section className="bg-white pt-24 md:pt-32">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
           <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-14 items-start">
             <div>
               <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-5">
-                Greenville SC - Owner-Led Service Businesses
+                Greenville SC — Owner-Led Service Businesses
               </span>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black leading-[1.02] mb-6">
                 Stop being
@@ -77,13 +53,13 @@ export default function HomePage() {
                 search bar.
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-4 max-w-2xl">
-                REBB sets up a private Company Brain for service businesses whose
-                owner still carries the answers in their head, inbox, and notes.
+                Every quote you sent, every promise you made, every job
+                decision — it&apos;s somewhere in your inbox, your notes, or your
+                memory. Company Brain finds it.
               </p>
               <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-2xl">
-                Your team can ask what was quoted, what got promised, what happened
-                on a job, or where a document lives and get an answer without
-                calling you first.
+                Your team gets answers in seconds. You get pulled in for
+                judgment calls, not routine lookups.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <Link
@@ -99,12 +75,12 @@ export default function HomePage() {
                   href="/how-it-works"
                   className="inline-flex items-center justify-center text-base font-medium text-gray-600 px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:text-black transition-colors"
                 >
-                  See Company Brain
+                  See How It Works
                 </Link>
               </div>
               <p className="text-xs text-gray-400">
-                High-touch setup. Private by default. Built for teams that already
-                have too much context trapped in too many places.
+                High-touch setup. Private by default. Built for teams that
+                already have too much context trapped in too many places.
               </p>
             </div>
 
@@ -134,8 +110,9 @@ export default function HomePage() {
               </div>
               <div className="mt-6 pt-6 border-t border-stone-200">
                 <p className="text-sm text-gray-500 leading-relaxed">
-                  Company Brain gives the team a trusted place to ask first, so
-                  you get pulled in for exceptions instead of routine lookups.
+                  Company Brain gives the team a trusted place to ask first,
+                  so you get pulled in for exceptions instead of routine
+                  lookups.
                 </p>
               </div>
             </div>
@@ -143,66 +120,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Company Brain demo */}
       <section className="bg-gray-950 text-white py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-[0.95fr,1.05fr] gap-16 items-start">
             <div>
               <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-500 mb-4">
-                The Main Offer
+                How It Works
               </span>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-                One private place
+                Your company
                 <br />
-                for company memory.
+                already knows
+                <br />
+                the answer.
               </h2>
-              <p className="text-gray-400 leading-relaxed text-lg mb-6">
-                REBB is not a generalist marketing agency and not a vague AI
-                consultancy. The main offer is a private Company Brain built around
-                the way your business already stores and uses knowledge.
+              <p className="text-gray-400 leading-relaxed text-lg mb-4">
+                Every quote, email, job note, and vendor call holds context
+                your team needs daily. Company Brain reads it all, connects
+                the dots, and answers questions with citations back to the
+                source.
               </p>
-              <p className="text-gray-400 leading-relaxed">
-                The job is simple: help the team retrieve answers faster without
-                routing every routine question back through the owner.
+              <p className="text-gray-500 leading-relaxed mb-8">
+                The more you feed it, the sharper it gets. Knowledge
+                compounds instead of disappearing across inboxes and
+                turnover.
               </p>
+              <ul className="space-y-2.5">
+                {[
+                  "Email threads and attachments",
+                  "Quotes, invoices, and job notes",
+                  "Shared drives and SOPs",
+                  "Vendor docs and call notes",
+                  "Owner tribal knowledge — written down once",
+                ].map((s) => (
+                  <li key={s} className="flex items-center gap-3 text-sm text-gray-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="border border-white/10 rounded-2xl p-8 md:p-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-500 mb-4">
-                  What It Reads
-                </p>
-                <ul className="space-y-3">
-                  {sources.map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-gray-300">
-                      <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                          <path d="M2 6l3 3 5-5" stroke="#22c55e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="border border-white/10 rounded-2xl p-8 md:p-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-500 mb-4">
-                  What Changes
-                </p>
-                <div className="space-y-4">
-                  {outcomes.map((item) => (
-                    <div key={item.title}>
-                      <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">{item.body}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <CompanyBrainDemo />
           </div>
         </div>
       </section>
 
+      {/* Setup process */}
       <section className="bg-white py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-[0.9fr,1.1fr] gap-16 items-start">
@@ -218,9 +183,9 @@ export default function HomePage() {
                 actual workflow.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                This is not a login we throw over the fence. The first version is
-                scoped around real questions, connected to real sources, and tuned
-                with the people who need it most.
+                Not a login we throw over the fence. The first version is
+                scoped around real questions, connected to real sources, and
+                tuned with the people who need it most.
               </p>
               <Link
                 href="/how-it-works"
@@ -246,6 +211,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Best fit */}
       <section className="bg-gray-50 py-24 md:py-32 border-y border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-[0.9fr,1.1fr] gap-16 items-start">
@@ -261,9 +227,9 @@ export default function HomePage() {
                 the owner.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                The best first clients are owner-led service businesses with enough
-                team complexity to feel the pain, but not enough process maturity
-                to have solved it cleanly.
+                The best first clients are owner-led service businesses with
+                enough team complexity to feel the pain, but not enough
+                process maturity to have solved it cleanly.
               </p>
               <Link
                 href="/contact"
@@ -287,34 +253,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* LLC Owner Finder + final CTA */}
       <section className="bg-white py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="border border-amber-200 bg-amber-50 rounded-3xl p-8 md:p-10 mb-12">
             <div className="grid lg:grid-cols-[0.9fr,1.1fr] gap-12 items-start">
               <div>
                 <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-amber-700 mb-4">
-                  Secondary Path
+                  LLC Owner Finder — Early Access
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
-                  LLC Owner Finder
+                  We find the owner.
                   <br />
-                  is the beta branch,
-                  <br />
-                  not the main offer.
+                  You make the sale.
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  We are still refining how consistently we resolve LLCs into clean,
-                  usable decision-maker data and how that should be delivered.
+                  Daily sync of Greenville County property transfers, SOS
+                  filings, and mortgage records. We unmask the LLC to surface
+                  the decision-maker — name, phone, email — before they start
+                  shopping around.
                 </p>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  It can be discussed as an early-access pilot for the right trade
-                  and territory, but Company Brain remains the core service.
+                <p className="text-gray-500 leading-relaxed mb-8 text-sm">
+                  This is an early-access workflow we&apos;re actively refining.
+                  Right trades, right territory, right timing.
                 </p>
                 <Link
                   href="/lead-intelligence"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-amber-700 hover:text-amber-800 transition-colors"
                 >
-                  Learn About The Beta
+                  See How It Works
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

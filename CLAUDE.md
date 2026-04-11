@@ -8,8 +8,8 @@
 **REBB's tagline:** "We find the owner. You make the sale."
 
 **Two products:**
-1. **LLC Owner Finder** — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Framing: **"Who do I call this week to make money?"**
-2. **Company Brain** — Private local AI (built on Rowboat, white-labeled) that ingests client emails, quotes, and project notes. Team members query it instead of interrupting the owner. Runs on the client's office computer; no data leaves their machine.
+1. **Company Brain** *(core offer)* — Private AI knowledge system built around a service company's existing emails, quotes, job notes, SOPs, and vendor docs. Team members query it to get answers with source citations instead of interrupting the owner. Knowledge compounds over time — the more context fed in, the sharper the answers. Positioned as a hands-on setup service, not a self-serve SaaS.
+2. **LLC Owner Finder** *(beta — quality still being refined)* — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Tagline: **"We find the owner. You make the sale."** — but do not position this as a polished product. LLC-to-person resolution quality and contact accuracy are still inconsistent. Frame honestly as early-access for the right trade and territory. When in doubt, default to Company Brain as the conversation anchor.
 
 ## Tech Stack
 
@@ -42,6 +42,7 @@ src/
 ├── components/
 │   ├── Nav.tsx, Footer.tsx
 │   ├── LiveSignalFeed.tsx       — real-time Supabase Realtime terminal (client)
+│   ├── CompanyBrainDemo.tsx     — static chat mockup showing Company Brain answering 3 trade Q&A with source citations (client)
 │   └── ThemeProvider.tsx + DarkModeToggle.tsx — dark mode (client)
 └── lib/supabase.ts
 
@@ -375,7 +376,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero + LiveSignalFeed, Two Products (LLC Owner Finder + Company Brain), How It Works (3-step), The Window (Day 0→21 timeline), Dashboard Preview mockup, Company Brain (chat mockup), Offer, CTA. All CTAs → "Get More Jobs" → `/contact` |
+| `/` | Hero (Company Brain pitch, pain card), CompanyBrainDemo chat mockup (dark section, compounding angle), How It Lands (3-step setup), Best Fit, LLC Owner Finder beta section (amber, LiveSignalFeed), final CTA. All CTAs → `/contact` |
 | `/how-it-works` | 5-step onboarding + process walkthrough |
 | `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
