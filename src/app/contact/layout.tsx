@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Free Call — REBB Advisors · Greenville SC",
+  title: "Book a Setup Call - REBB Advisors",
   description:
-    "Book a free 30-minute call with REBB Advisors. We'll audit your lead flow and show you exactly where you're losing jobs to competitors in Greenville County.",
+    "Book a setup call with REBB Advisors to see whether a private Company Brain is a good fit for your owner-led service business.",
   alternates: { canonical: "https://rebbadvisors.com/contact" },
 };
 

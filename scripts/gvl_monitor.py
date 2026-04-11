@@ -28,6 +28,10 @@ import json
 import time
 import random
 import argparse
+
+# Windows console may default to cp1252 which can't encode ✓/✗ etc.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
 from typing import Optional
@@ -285,6 +289,45 @@ def _save_debug_html(name: str, html: str) -> None:
     print(f"  [debug] saved {out}")
 
 
+def _extract_address_from_govos_api(responses: list[dict]) -> Optional[str]:
+    """
+    Scan captured GovOS XHR/fetch JSON responses for a property/mailing address.
+    GovOS may return structured fields like situsAddress, mailingAddress, propertyAddress,
+    or nested objects. Returns the first non-empty address string found, or None.
+    """
+    _ADDR_KEYS = (
+        "situsAddress", "situs_address", "propertyAddress", "property_address",
+        "mailingAddress", "mailing_address", "address", "returnToAddress",
+        "return_to_address", "location",
+    )
+
+    def _search(obj: object) -> Optional[str]:
+        if isinstance(obj, dict):
+            for key in _ADDR_KEYS:
+                val = obj.get(key)
+                if isinstance(val, str) and val.strip():
+                    candidate = val.strip()
+                    # Reject obvious non-addresses (single words, state/zip only, etc.)
+                    if len(candidate) > 8 and re.search(r"\d", candidate):
+                        return candidate
+            for val in obj.values():
+                result = _search(val)
+                if result:
+                    return result
+        elif isinstance(obj, list):
+            for item in obj:
+                result = _search(item)
+                if result:
+                    return result
+        return None
+
+    for payload in responses:
+        result = _search(payload)
+        if result:
+            return result
+    return None
+
+
 def _parse_govos_detail(html: str) -> tuple[Optional[float], Optional[str]]:
     """
     Extract consideration (sale price) and property address from a GovOS deed detail page.
@@ -478,15 +521,58 @@ def scrape_greenville_deeds(days_back: int = 7, debug: bool = False) -> list[Mar
 
             for pos, (row_idx, doc_type, grantor, grantee, rec_date, _) in enumerate(deed_data):
                 try:
+                    # ── Network interception: find document image URL ──────────
+                    # GovOS is a React SPA; structured address data is NOT in the
+                    # rendered HTML or any JSON XHR. The deed is a scanned image.
+                    # Capture all network requests to find the image URL pattern,
+                    # then OCR page 1 for the "Return To:" grantee mailing address.
+                    captured_api: list[dict] = []   # JSON responses (kept for _extract_address_from_govos_api fallback)
+                    captured_urls: list[str] = []   # all response URLs for debug + image detection
+
+                    def _on_response(resp, _api=captured_api, _urls=captured_urls):
+                        _urls.append(resp.url)
+                        ct = resp.headers.get("content-type", "")
+                        if "json" not in ct:
+                            return
+                        try:
+                            body = resp.json()
+                            _api.append({"url": resp.url, "body": body})
+                        except Exception:
+                            pass
+
+                    page.on("response", _on_response)
+
                     rows_locator.nth(row_idx).click()
                     page.wait_for_load_state("networkidle", timeout=8_000)
                     page.wait_for_timeout(800)
+
+                    page.remove_listener("response", _on_response)
+
+                    # Save full URL log + JSON payloads in debug mode
+                    if debug:
+                        _DEBUG_DIR.mkdir(exist_ok=True)
+                        urls_out = _DEBUG_DIR / f"govos_network_{pos}.txt"
+                        urls_out.write_text("\n".join(captured_urls), encoding="utf-8")
+                        print(f"  [debug] saved {urls_out} ({len(captured_urls)} request(s))")
+                        if captured_api:
+                            api_out = _DEBUG_DIR / f"govos_api_responses_{pos}.json"
+                            api_out.write_text(
+                                json.dumps(captured_api, indent=2, default=str),
+                                encoding="utf-8",
+                            )
+                            print(f"  [debug] saved {api_out} ({len(captured_api)} JSON response(s))")
+
+                    # Try structured address from API responses first; fall back to HTML parse
+                    api_addr = _extract_address_from_govos_api(
+                        [r["body"] for r in captured_api]
+                    )
 
                     detail_html = page.content()
                     if debug:
                         _save_debug_html(f"govos_detail_{pos}", detail_html)
 
-                    amount, prop_addr = _parse_govos_detail(detail_html)
+                    amount, html_addr = _parse_govos_detail(detail_html)
+                    prop_addr = api_addr or html_addr
                     consid_map[row_idx]  = amount
                     address_map[row_idx] = prop_addr
                     if amount:

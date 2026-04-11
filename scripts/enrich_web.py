@@ -270,20 +270,193 @@ def scrape_sos_entity_page(url: str, expected_entity_name: str = "") -> Enrichme
     return result
 
 
+SOS_SEARCH_URL = "https://businessfilings.sc.gov/BusinessFiling/Entity/Search"
+_SOS_CAPTCHA_RE = re.compile(r"captcha|recaptcha|hcaptcha|cf-challenge|challenge-form", re.I)
+
+
+def lookup_sos_direct(entity_name: str) -> EnrichmentResult:
+    """
+    Search SC SOS entity filings directly via Playwright, bypassing DDG.
+
+    Navigates to businessfilings.sc.gov, fills the name search form with a
+    "Contains" match, extracts entity detail page links from the results, then
+    scores and scrapes each matching entity page.
+
+    Falls back gracefully (returns empty result) if:
+    - Playwright is not installed
+    - A CAPTCHA is detected in the page
+    - Any browser or network error occurs
+
+    The caller (enrich_via_duckduckgo) uses this result to skip the DDG
+    site:businessfilings.sc.gov query when a direct hit is found.
+    """
+    result = EnrichmentResult()
+    result.notes.append(f"SOS direct: searching for '{entity_name}'")
+
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+    except ImportError:
+        result.notes.append("SOS direct: Playwright not installed - skipping")
+        return result
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            locale="en-US",
+            viewport={"width": 1280, "height": 800},
+        )
+        page = context.new_page()
+        try:
+            page.goto(SOS_SEARCH_URL, timeout=20_000, wait_until="domcontentloaded")
+            page.wait_for_timeout(800)
+
+            html = page.content()
+            if _SOS_CAPTCHA_RE.search(html):
+                result.notes.append("SOS direct: CAPTCHA detected on search page - falling back to DDG")
+                browser.close()
+                return result
+
+            # Fill the entity name input (first text input on the page)
+            name_input = page.locator("input[type='text']").first
+            name_input.fill(entity_name, timeout=5_000)
+
+            # Set search type to "Contains" if the dropdown exists
+            try:
+                select_el = page.locator("select").first
+                select_el.select_option(label="Contains", timeout=3_000)
+            except Exception:
+                pass  # dropdown may not exist or have different options
+
+            # Submit the search form
+            try:
+                page.keyboard.press("Enter")
+            except Exception:
+                try:
+                    page.locator("input[type='submit'], button[type='submit']").first.click(timeout=5_000)
+                except Exception:
+                    pass
+
+            page.wait_for_load_state("domcontentloaded", timeout=20_000)
+            page.wait_for_timeout(500)
+            html = page.content()
+
+            if _SOS_CAPTCHA_RE.search(html):
+                result.notes.append("SOS direct: CAPTCHA detected after search submit - falling back to DDG")
+                browser.close()
+                return result
+
+        except PWTimeout:
+            result.notes.append("SOS direct: page timeout - falling back to DDG")
+            browser.close()
+            return result
+        except Exception as e:
+            result.notes.append(f"SOS direct: browser error - {e}")
+            browser.close()
+            return result
+
+        browser.close()
+
+    # Parse results for entity detail links
+    soup = BeautifulSoup(html, "html.parser")
+    detail_links: list[str] = []
+    seen: set[str] = set()
+    for a in soup.find_all("a", href=True):
+        href = str(a["href"])
+        if "/BusinessFiling/Entity/Details/" not in href:
+            continue
+        full = href if href.startswith("http") else f"https://businessfilings.sc.gov{href}"
+        if full not in seen:
+            seen.add(full)
+            detail_links.append(full)
+
+    if not detail_links:
+        result.notes.append("SOS direct: search returned no entity detail links")
+        return result
+
+    result.notes.append(f"SOS direct: found {len(detail_links)} entity page(s) - scoring")
+
+    best_result: Optional[EnrichmentResult] = None
+    best_score = -1
+
+    for url in detail_links[:5]:   # score up to 5 candidates
+        sos_result = scrape_sos_entity_page(url, expected_entity_name=entity_name)
+        score = 0
+        for note in sos_result.notes:
+            m = re.search(r"scored (\d+)", note, re.I)
+            if m:
+                score = int(m.group(1))
+                break
+        if score > best_score:
+            best_result = sos_result
+            best_score = score
+        if sos_result.principal_name and score >= _SOS_ACCEPT_SCORE:
+            # High-confidence match — use it immediately
+            if initials_match(entity_name, sos_result.principal_name):
+                sos_result.principal_role = ROLE_SOS_INITIALS
+                sos_result.notes.append(
+                    f"Initials check: '{entity_name}' initials match "
+                    f"'{sos_result.principal_name}' - high confidence"
+                )
+            result.notes += sos_result.notes
+            result.principal_name  = sos_result.principal_name
+            result.principal_role  = sos_result.principal_role
+            result.search_evidence = sos_result.search_evidence
+            return result
+
+    # No high-confidence hit — carry forward the best we found
+    if best_result:
+        result.notes += best_result.notes
+        if best_result.principal_name:
+            result.principal_name  = best_result.principal_name
+            result.principal_role  = best_result.principal_role
+            result.search_evidence = best_result.search_evidence
+        elif best_result.search_evidence:
+            result.search_evidence = choose_best_evidence_url(
+                result.search_evidence, best_result.search_evidence
+            )
+
+    return result
+
+
 def enrich_via_duckduckgo(entity_name: str, address: str = "") -> EnrichmentResult:
     """
     Search DuckDuckGo for the LLC name and try to surface the human owner/principal,
     a SC SOS entity detail page URL, or a LinkedIn profile.
+
+    Tries a direct Playwright SOS search first. If it finds a high-confidence
+    result, the DDG site:businessfilings.sc.gov query is skipped.
     """
     result = EnrichmentResult()
+
+    # Try direct SOS search before DDG — more reliable than DDG index freshness
+    sos_direct = lookup_sos_direct(entity_name)
+    result.notes += sos_direct.notes
+    if sos_direct.is_enriched():
+        result.principal_name  = sos_direct.principal_name
+        result.principal_role  = sos_direct.principal_role
+        result.search_evidence = sos_direct.search_evidence
+        result.enrichment_status = "enriched"
+        return result
+
+    # Carry forward any evidence URL the SOS search found, even without a name
+    if sos_direct.search_evidence:
+        result.search_evidence = choose_best_evidence_url(
+            result.search_evidence, sos_direct.search_evidence
+        )
+    _sos_direct_found_urls = bool(sos_direct.search_evidence or sos_direct.principal_name)
 
     q1 = f'"{entity_name}" Greenville SC owner'
     snippets1, urls1 = search_duckduckgo(q1)
     time.sleep(1.5)
 
-    q2 = f'site:businessfilings.sc.gov "{entity_name}"'
-    snippets2, urls2 = search_duckduckgo(q2)
-    time.sleep(1.0)
+    # Skip the DDG SOS query if the direct search already worked or found URLs
+    if not _sos_direct_found_urls:
+        q2 = f'site:businessfilings.sc.gov "{entity_name}"'
+        snippets2, urls2 = search_duckduckgo(q2)
+        time.sleep(1.0)
+    else:
+        snippets2, urls2 = [], []
 
     q3 = f'site:upstatebusinessjournal.com "{entity_name}"'
     snippets3, urls3 = search_duckduckgo(q3)

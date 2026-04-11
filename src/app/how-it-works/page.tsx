@@ -2,290 +2,417 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How It Works — LLC Owner Finder · REBB Advisors",
+  title: "How It Works - Company Brain Setup - REBB Advisors",
   description:
-    "We watch Greenville County public records every day, unmask the LLC, and put a ranked call list in your dashboard every Monday. One real lead in 30 days or full refund.",
+    "See how REBB sets up a private Company Brain for owner-led service businesses in Greenville and Upstate SC, from knowledge mapping through rollout and tuning.",
   openGraph: {
-    title: "How It Works — LLC Owner Finder · REBB Advisors",
+    title: "How It Works - Company Brain Setup - REBB Advisors",
     description:
-      "Daily property and business filing data turned into a ranked call list. One new lead in 30 days or full refund.",
+      "A hands-on setup process for private company knowledge systems built around the way your team already works.",
     type: "website",
     url: "https://rebbadvisors.com/how-it-works",
   },
   alternates: { canonical: "https://rebbadvisors.com/how-it-works" },
 };
 
-const steps = [
+const phases = [
   {
     step: "01",
-    title: "We talk for 30 minutes",
-    duration: "Day 1",
-    body: "We go over your trade, your service area, and what a good job looks like for you. We use that to filter the data so your call list only shows the property types and deal sizes that actually matter to your business.",
-    details: [
-      "Tell us your trade and ideal job size",
-      "We configure filters for your market",
-      "Dashboard access sent same day",
+    label: "Map the mess",
+    timing: "Week 1",
+    title: "We find where the answers already live.",
+    body: "We start with the actual places your team pulls context from now: inboxes, shared drives, estimates, job notes, SOPs, vendor files, and the owner.",
+    bullets: [
+      "Inventory the sources worth trusting",
+      "Identify who gets interrupted most",
+      "Surface the repeat internal questions",
     ],
   },
   {
     step: "02",
-    title: "Your dashboard goes live",
-    duration: "Days 1–2",
-    body: "You get a login to your private dashboard showing live Greenville County data — property transfers, new business filings, and mortgages — already filtered and scored for your trade. You can see what happened this week before your first call list drops.",
-    details: [
-      "Private login — your data, your view",
-      "Greenville County records, updated daily",
-      "Scored and ranked by revenue potential",
+    label: "Build the first version",
+    timing: "Week 1",
+    title: "We structure a useful Company Brain first, not a software demo.",
+    body: "The first version is built around the questions that cause real drag. We connect the right context, shape the retrieval flow, and keep the scope grounded.",
+    bullets: [
+      "Set up the core source set",
+      "Define the first workflows to support",
+      "Keep it private and company-specific",
     ],
   },
   {
     step: "03",
-    title: "LLC Owner Finder starts running",
-    duration: "Days 3–7",
-    body: "We run the first full data pull. Property transfers get cross-referenced with tax records, state filings, and public data to surface the actual decision-maker behind each LLC. Your first ranked call list lands Monday morning.",
-    details: [
-      "First call list delivered within the week",
-      "Real names, real contact info, real reasons to call",
-      "HOT signals trigger same-day alerts by email",
+    label: "Pressure test it",
+    timing: "Week 2",
+    title: "We test it against the questions your team already asks.",
+    body: "Before wider rollout, we use real company questions to see where the system is strong, where retrieval is thin, and where the owner still needs to stay in the loop.",
+    bullets: [
+      "Run real office, PM, and field questions",
+      "Tighten weak answers and missing sources",
+      "Define what should escalate to the owner",
     ],
   },
   {
     step: "04",
-    title: "Monday mornings: you know who to call",
-    duration: "Every week",
-    body: "Every Monday you get a short, ranked list. Each entry: who the person is, what changed, why it matters for your trade, and how to reach them. You don't analyze anything. You just make the calls.",
-    details: [
-      "Scored 0–100 by deal size, recency, and trade match",
-      "Name, phone, email — or we flag it as manual review",
-      "Opening line included — not a generic script",
+    label: "Roll out and tune",
+    timing: "First 30 days",
+    title: "We turn it into a working habit for the team.",
+    body: "The goal is not installation alone. The goal is that the team asks the system first, trusts the answers when appropriate, and stops routing every lookup through the owner.",
+    bullets: [
+      "Train the people who use it most",
+      "Tune around recurring friction",
+      "Improve adoption with source-backed answers",
     ],
+  },
+];
+
+const deliverables = [
+  {
+    title: "Knowledge map",
+    body: "A practical view of where company answers live now and which sources are worth feeding into the system first.",
   },
   {
-    step: "05",
-    title: "The guarantee",
-    duration: "Within 30 days",
-    body: "One real lead you wouldn't have found otherwise. A property that just changed hands, a business that just started up, someone who hasn't talked to a single contractor yet. If we don't deliver it within 30 days, you get a full refund.",
-    details: [
-      "Full refund if no new lead surfaced in 30 days",
-      "No questions. No case to make.",
-      "Keep going if it works — no long-term contract required",
-    ],
+    title: "First-use workflows",
+    body: "A clear starting scope for the questions that matter most, like quotes, promises, documents, job context, and handoffs.",
   },
+  {
+    title: "Private setup",
+    body: "A company-specific internal system designed for operational retrieval, not generic AI theater or public-facing content.",
+  },
+  {
+    title: "Tuning window",
+    body: "Hands-on refinement after rollout so the first version gets better from actual usage instead of staying static.",
+  },
+];
+
+const fitPoints = [
+  "5-25 person HVAC, plumbing, electrical, roofing, GC, or similar service teams",
+  "Owner still answers routine internal questions most days",
+  "Knowledge spread across email, notes, shared drives, and job folders",
+  "Team loses time re-checking promises, documents, and prior decisions",
+];
+
+const nonFitPoints = [
+  "A generic chatbot widget for the website",
+  "A broad AI consulting engagement with no clear workflow target",
+  "A polished self-serve SaaS platform handed over on day one",
+  "A replacement for owner judgment on edge cases and exceptions",
 ];
 
 export default function HowItWorksPage() {
   return (
     <>
-      {/* Header */}
-      <section className="bg-white pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="bg-white pt-32 pb-18 md:pt-40 md:pb-24">
         <div className="max-w-6xl mx-auto px-6">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-            The Process
-          </span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black mb-5 leading-tight">
-            How It Works
-          </h1>
-          <p className="text-xl text-gray-500 max-w-xl leading-relaxed">
-            From a 30-minute call to a ranked list of people you can call this
-            week — before they&apos;ve talked to anyone.
-          </p>
-        </div>
-      </section>
-
-      {/* How LLC Owner Finder Works */}
-      <section className="bg-gray-50 py-20 md:py-28 border-y border-gray-100">
-        <div className="max-w-6xl mx-auto px-6">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-            LLC Owner Finder
-          </span>
-          <div className="grid md:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-[1.15fr,0.85fr] gap-14 items-start">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-5 leading-tight">
-                We watch three public data sources. Every day.
-              </h2>
-              <p className="text-gray-500 leading-relaxed mb-8">
-                When money changes hands or a business formally starts, it creates
-                a paper trail in public records before anyone ever Googles a
-                contractor. That&apos;s the window. We live in it.
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-5">
+                Company Brain Setup
+              </span>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black leading-[1.02] mb-6">
+                How REBB installs
+                <br />
+                a working Company Brain
+                <br />
+                around your team.
+              </h1>
+              <p className="text-lg text-gray-600 leading-relaxed mb-4 max-w-2xl">
+                This is a hands-on setup process for owner-led service businesses
+                where the answers already exist, but the team still has to call
+                the owner to find them.
               </p>
-              <div className="space-y-5">
+              <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-2xl">
+                We map the knowledge mess, build a first usable version, test it
+                against real company questions, and tune it until the team can ask
+                the system first.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-black text-white text-base font-medium px-7 py-3.5 rounded-xl hover:bg-gray-800 transition-colors"
+                >
+                  Book a Setup Call
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/lead-intelligence"
+                  className="inline-flex items-center justify-center text-base font-medium text-gray-600 px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:text-black transition-colors"
+                >
+                  See The Beta Initiative
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-stone-50 border border-stone-200 rounded-3xl p-8 md:p-10">
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                    Typical Engagement
+                  </p>
+                  <h2 className="text-2xl font-bold text-black mt-2">
+                    First usable system in weeks, then tune it.
+                  </h2>
+                </div>
+                <span className="text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full">
+                  High Touch
+                </span>
+              </div>
+
+              <div className="space-y-3 mb-6">
                 {[
-                  {
-                    label: "Greenville County Register of Deeds",
-                    body: "Every commercial property transfer filed in the county. New owner, new address, transaction value — recorded within 24–48 hours of closing.",
-                  },
-                  {
-                    label: "SC Secretary of State Filings",
-                    body: "Every new LLC and corporation registered in Greenville County. A new business filing almost always means a new location, new lease, and a fresh vendor slate.",
-                  },
-                  {
-                    label: "Municipal Permit Database",
-                    body: "Industrial and commercial construction permits. A permit means a building is about to change — and someone needs to do the work.",
-                  },
-                ].map((src) => (
-                  <div key={src.label} className="flex gap-4">
-                    <div className="mt-1 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-black mb-1">{src.label}</p>
-                      <p className="text-sm text-gray-500 leading-relaxed">{src.body}</p>
-                    </div>
+                  "Week 1: map sources and recurring questions",
+                  "Week 1: build the first retrieval structure",
+                  "Week 2: test against real internal requests",
+                  "First 30 days: train, refine, and improve trust",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="bg-white border border-stone-200 rounded-2xl px-4 py-4 text-sm text-gray-600 leading-relaxed"
+                  >
+                    {item}
                   </div>
                 ))}
               </div>
-            </div>
 
-            <div className="space-y-6">
-              {/* Example signal */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Example Signal</p>
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <p className="text-sm font-semibold text-black">4401 Pelham Rd — Greenville Office Park</p>
-                    <p className="text-xs text-gray-400 mt-0.5">Property Transfer · 12,000 sq ft · $1.4M</p>
-                  </div>
-                  <span className="flex-shrink-0 text-xs font-bold bg-red-50 text-red-600 px-2.5 py-1 rounded-full">HOT</span>
-                </div>
-                <p className="text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-4">
-                  <span className="font-semibold text-black">What this means:</span> A new owner just took possession of a 12,000 sq ft commercial property. Previous vendor relationships are up for grabs. The new owner is in decision-making mode right now — before they&apos;ve talked to anyone.
+              <div className="pt-6 border-t border-stone-200">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                  Main Outcome
                 </p>
-              </div>
-
-              {/* The call */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">The Play for a GC</p>
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                  We find the actual person behind the LLC. You call them this week — not after they post a bid, not after they&apos;ve talked to five other contractors.
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  The team gets a trusted internal place to check first, while the
+                  owner gets pulled in for judgment calls instead of routine lookups.
                 </p>
-                <div className="bg-gray-950 rounded-xl p-4">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Opening line</p>
-                  <p className="text-sm text-gray-200 leading-relaxed italic">
-                    &ldquo;I saw the transfer on 4401 Pelham — congratulations. I specialize in commercial buildouts in Greenville County. Are you planning any tenant improvements on that space?&rdquo;
-                  </p>
-                </div>
-              </div>
-
-              {/* Comparison */}
-              <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-                <div className="grid grid-cols-2 divide-x divide-gray-100">
-                  <div className="p-5">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Traditional Lead Gen</p>
-                    <ul className="space-y-2 text-sm text-gray-500">
-                      <li>Prospect searches, you compete</li>
-                      <li>8–12 contractors get the same lead</li>
-                      <li>Race to the bottom on price</li>
-                      <li>Days to weeks of lag</li>
-                    </ul>
-                  </div>
-                  <div className="p-5 bg-green-50">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-3">LLC Owner Finder</p>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>You call before they search</li>
-                      <li>Often the only call they get</li>
-                      <li>You set the price</li>
-                      <li>Signal fires within 24–48 hrs</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Monday Call List */}
-      <section className="bg-white py-16 md:py-20 border-b border-gray-100">
+      <section className="bg-gray-950 text-white py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-              The Deliverable
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-500 mb-4">
+                What This Is
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+                A setup service for
+                <br />
+                company memory,
+                <br />
+                not generic AI advice.
+              </h2>
+              <p className="text-gray-400 leading-relaxed text-lg mb-6">
+                Most service businesses do not need a bigger pile of tools. They
+                need one place that helps the team retrieve what the business
+                already knows.
+              </p>
+              <p className="text-gray-400 leading-relaxed">
+                REBB is focused on that specific operational problem: too much
+                context spread across too many places, with the owner still acting
+                like the default answer engine.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="border border-white/10 rounded-2xl p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-500 mb-4">
+                  Strong Fit
+                </p>
+                <ul className="space-y-3 text-sm text-gray-300">
+                  {fitPoints.map((item) => (
+                    <li key={item} className="leading-relaxed">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="border border-white/10 rounded-2xl p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red-300 mb-4">
+                  Not The Offer
+                </p>
+                <ul className="space-y-3 text-sm text-gray-400">
+                  {nonFitPoints.map((item) => (
+                    <li key={item} className="leading-relaxed">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl mb-14">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-4">
+              The Process
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 leading-tight">
-              Every Monday morning: a ranked call list.
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
+              Four phases from
+              <br />
+              knowledge sprawl
+              <br />
+              to working usage.
             </h2>
-            <p className="text-gray-500 leading-relaxed">
-              Each signal is scored 0–100 by lead quality — deal size, property type, recency,
-              and match to your trade. Your dashboard shows the full list. You answer one question:{" "}
-              <span className="font-semibold text-black">who do I call this week to make money?</span>
+            <p className="text-lg text-gray-500 leading-relaxed">
+              The point is not to ship a clever interface. The point is to make
+              routine internal retrieval faster, calmer, and less dependent on one
+              person.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Steps */}
-      <section className="bg-white pb-24 md:pb-32">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="divide-y divide-gray-100">
-            {steps.map((item) => (
-              <div key={item.step} className="py-12 grid md:grid-cols-12 gap-8">
-                <div className="md:col-span-1">
-                  <span className="text-xs font-semibold text-gray-300">{item.step}</span>
-                </div>
-                <div className="md:col-span-5">
-                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-                    {item.duration}
+          <div className="space-y-6">
+            {phases.map((phase) => (
+              <div
+                key={phase.step}
+                className="grid lg:grid-cols-[140px,1fr,320px] gap-6 border border-gray-100 rounded-3xl p-8 md:p-10"
+              >
+                <div>
+                  <div className="text-xs font-semibold text-gray-300 mb-2">{phase.step}</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-green-700">
+                    {phase.label}
                   </div>
-                  <h2 className="text-2xl font-bold text-black mb-3">{item.title}</h2>
-                  <p className="text-gray-500 leading-relaxed">{item.body}</p>
                 </div>
-                <div className="md:col-span-5 md:col-start-8">
-                  <ul className="space-y-3">
-                    {item.details.map((d) => (
-                      <li key={d} className="flex items-start gap-3">
-                        <div className="mt-0.5 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </div>
-                        <span className="text-sm text-gray-600">{d}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    {phase.timing}
+                  </div>
+                  <h3 className="text-2xl font-bold text-black mb-3 leading-tight">
+                    {phase.title}
+                  </h3>
+                  <p className="text-gray-500 leading-relaxed">{phase.body}</p>
                 </div>
+
+                <ul className="space-y-3">
+                  {phase.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-3">
+                      <span className="mt-0.5 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                          <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      <span className="text-sm text-gray-600 leading-relaxed">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Guarantee callout */}
-      <section className="bg-gray-50 py-16 md:py-20 border-y border-gray-100">
+      <section className="bg-gray-50 py-20 md:py-28 border-y border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-              The Guarantee
+          <div className="grid lg:grid-cols-[0.9fr,1.1fr] gap-16 items-start">
+            <div>
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-4">
+                What You Get
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
+                The first deliverable
+                <br />
+                is a usable internal
+                <br />
+                retrieval system.
+              </h2>
+              <p className="text-gray-500 leading-relaxed">
+                Not a vague strategy deck. Not a pile of prompts. Not a generic AI
+                rollout plan. The goal is a first version your team can actually
+                use and improve.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {deliverables.map((item) => (
+                <div key={item.title} className="bg-white border border-gray-200 rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold text-black mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="border border-gray-100 rounded-3xl p-8 md:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-400 mb-4">
+                Before
+              </p>
+              <h2 className="text-2xl font-bold text-black mb-4">
+                The owner is still the company&apos;s search bar.
+              </h2>
+              <ul className="space-y-3 text-sm text-gray-500">
+                <li>Answers trapped in inboxes, folders, and memory</li>
+                <li>Constant interruptions for routine lookups</li>
+                <li>Slow onboarding because context lives in people</li>
+                <li>Too much re-checking before anyone acts</li>
+              </ul>
+            </div>
+
+            <div className="border border-green-200 bg-green-50 rounded-3xl p-8 md:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-4">
+                After
+              </p>
+              <h2 className="text-2xl font-bold text-black mb-4">
+                The team checks the system before it checks the owner.
+              </h2>
+              <ul className="space-y-3 text-sm text-gray-700">
+                <li>Routine answers are easier to retrieve quickly</li>
+                <li>The owner gets pulled into exceptions, not everything</li>
+                <li>Knowledge gets more durable across hires and handoffs</li>
+                <li>Internal execution speeds up with better context</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-amber-50 border-y border-amber-200 py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-3xl">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-amber-700 mb-4">
+              Beta Initiative
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 leading-tight">
-              One lead. 30 days. Or you don&apos;t pay.
+            <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight mb-4">
+              LLC Owner Finder is separate and still experimental.
             </h2>
-            <p className="text-gray-500 leading-relaxed">
-              We don&apos;t charge retainers or lock you into long-term contracts.
-              If LLC Owner Finder doesn&apos;t surface a lead you wouldn&apos;t have found
-              on your own within 30 days, we refund everything. No case to make. No questions.
+            <p className="text-gray-600 leading-relaxed">
+              The public-record lead workflow can be discussed as an early-access
+              beta, but it is not the main offer on this page. Company Brain setup
+              is the core service. LLC Owner Finder remains a lower-risk pilot
+              conversation while the workflow matures.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gray-950 py-24">
+      <section className="bg-black py-24 md:py-28">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              Ready to see what&apos;s in the data?
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              Want to see if your team is a fit?
             </h2>
             <p className="text-gray-400">
-              30 minutes. We&apos;ll pull live GVL records on the call and show you exactly who&apos;s out there right now.
+              We&apos;ll look at where answers live now, what your team keeps asking,
+              and whether a Company Brain setup would solve a real operational
+              bottleneck.
             </p>
           </div>
           <Link
             href="/contact"
             className="flex-shrink-0 inline-flex items-center gap-2 bg-green-500 text-black font-semibold px-7 py-3.5 rounded-xl hover:bg-green-400 transition-colors"
           >
-            Book a Free Call
+            Book a Setup Call
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

@@ -37,6 +37,7 @@ _VEHICLE_RE = re.compile(
 
 # Reject cells that look like tax payment / account data, not addresses
 _TAX_NOISE_RE = re.compile(r"\$[\d,.]|District:|^\d{4}\s+\d{2}\s+\d+", re.I)
+_ENTITY_SUFFIX_RE = re.compile(r"(LLC|INC|CORP|LTD|LP|LLP)$", re.I)
 
 
 def _is_vehicle_record(cells: list[str]) -> bool:
@@ -46,6 +47,31 @@ def _is_vehicle_record(cells: list[str]) -> bool:
 
 def _looks_like_address(s: str) -> bool:
     return bool(s) and not _TAX_NOISE_RE.search(s)
+
+
+def _normalize_entity_tokens(value: str) -> list[str]:
+    value = (value or "").strip().lower().replace("&", " and ")
+    value = re.sub(r"[^a-z0-9\s]", " ", value)
+    value = _ENTITY_SUFFIX_RE.sub(r" \1", value)
+    tokens = [t for t in value.split() if t]
+    while tokens and tokens[-1] in {"llc", "inc", "corp", "ltd", "lp", "llp"}:
+        tokens.pop()
+    return tokens
+
+
+def _looks_like_entity_owner(owner_raw: str, entity_name: str) -> bool:
+    owner_tokens = _normalize_entity_tokens(owner_raw)
+    entity_tokens = _normalize_entity_tokens(entity_name)
+    if len(owner_tokens) < 2 or len(entity_tokens) < 2:
+        return False
+
+    overlap = sum(1 for token in owner_tokens if token in entity_tokens)
+    if not overlap:
+        return False
+
+    coverage = overlap / len(entity_tokens)
+    precision = overlap / len(owner_tokens)
+    return coverage >= 0.75 and precision >= 0.75
 
 
 def _parse_tax_row(cells: list[str]) -> tuple[str, Optional[str], Optional[str]]:
@@ -205,12 +231,14 @@ def lookup_gis(entity_name: str, address: str = "", _retried: bool = False) -> E
         result.property_address = prop_addr
         if is_non_human_name(owner_raw):
             result.principal_name = owner_raw.title()
+        elif _looks_like_entity_owner(owner_raw, entity_name):
+            result.principal_name = entity_name.title()
         else:
             result.principal_name = normalize_person_name(owner_raw)
         result.principal_role   = ROLE_GIS_OWNER
         result.search_evidence  = choose_best_evidence_url(detail_url, TAX_QUERY_URL)
         result.notes.append(
-            f"GIS: tax record owner '{owner_raw}' → '{result.principal_name}'"
+            f"GIS: tax record owner '{owner_raw}' -> '{result.principal_name}'"
             + (f" (Map # {result.pin})" if result.pin else "")
         )
         break

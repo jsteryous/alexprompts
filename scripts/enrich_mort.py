@@ -19,6 +19,7 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 try:
     import pytesseract
@@ -34,11 +35,18 @@ from enrich_models import (
     choose_best_evidence_url,
     extract_best_property_address,
     EnrichmentResult,
+    principal_name_quality_issue,
 )
 
 ROD_VIEWER_URL      = "https://viewer.greenvillecounty.org/countyweb"
-ROD_VIEWER_USERNAME = os.environ.get("ROD_VIEWER_USERNAME", "asteryous")
-ROD_PASSWORD        = os.environ.get("ROD_PASSWORD")
+load_dotenv(Path(__file__).parent.parent / ".env.local")
+
+
+def _get_mortgage_credentials() -> tuple[str, Optional[str]]:
+    return (
+        os.environ.get("ROD_VIEWER_USERNAME", "asteryous"),
+        os.environ.get("ROD_PASSWORD"),
+    )
 
 # ── Borrower title vocabulary ─────────────────────────────────────────────────
 
@@ -407,8 +415,9 @@ def lookup_mortgage_borrower(
     """
     result = EnrichmentResult()
     mortgage_evidence_url: Optional[str] = None
+    rod_viewer_username, rod_password = _get_mortgage_credentials()
 
-    if not ROD_PASSWORD:
+    if not rod_password:
         result.notes.append("Mortgage lookup: ROD_PASSWORD not set in .env.local — skipping")
         return result
 
@@ -453,8 +462,8 @@ def lookup_mortgage_borrower(
             page.wait_for_timeout(800)
             _dbg("01_login_page", page.content())
 
-            page.fill("input[name='username']", ROD_VIEWER_USERNAME)
-            page.fill("input[name='password']", ROD_PASSWORD)
+            page.fill("input[name='username']", rod_viewer_username)
+            page.fill("input[name='password']", rod_password)
             _dbg("02_credentials_filled", page.content())
 
             with page.expect_navigation(timeout=20_000):
@@ -467,7 +476,7 @@ def lookup_mortgage_borrower(
                 result.notes.append("Mortgage lookup: login failed — check ROD_VIEWER_USERNAME/ROD_PASSWORD")
                 browser.close()
                 return result
-            print(f"         Mortgage lookup: logged in → {page.url}")
+            print(f"         Mortgage lookup: logged in -> {page.url}")
 
             # ── Step 2: Accept disclaimer ───────────────────────────────────
             page.wait_for_timeout(2_000)
@@ -493,12 +502,12 @@ def lookup_mortgage_borrower(
                     return result
 
             _dbg("04b_after_disclaimer", frame.content())
-            print(f"         Mortgage lookup: bodyframe URL → {frame.url}")
+            print(f"         Mortgage lookup: bodyframe URL -> {frame.url}")
 
             # ── Step 3: Navigate to search page ────────────────────────────
             nav_link = page.locator("a[href*='searchMain.do']")
             if nav_link.count() > 0:
-                print("         Mortgage lookup: clicking nav link → bodyframe...")
+                print("         Mortgage lookup: clicking nav link -> bodyframe...")
                 nav_link.first.click()
             else:
                 page.evaluate("window.frames['bodyframe'].location = '/countyweb/search/searchMain.do?defaultType=Public'")
@@ -511,7 +520,7 @@ def lookup_mortgage_borrower(
                 browser.close()
                 return result
             _dbg("05_search_page", frame.content())
-            print(f"         Mortgage lookup: search page loaded → {frame.url}")
+            print(f"         Mortgage lookup: search page loaded -> {frame.url}")
 
             # ── Step 4: Access criteria form ────────────────────────────────
             page.wait_for_timeout(2_000)
@@ -527,7 +536,7 @@ def lookup_mortgage_borrower(
                 pass
 
             _dbg("06_search_form", sf.content())
-            print(f"         Mortgage lookup: search form URL → {sf.url}")
+            print(f"         Mortgage lookup: search form URL -> {sf.url}")
 
             cf = page.frame(name="criteriaframe")
             if cf is None:
@@ -541,14 +550,14 @@ def lookup_mortgage_borrower(
             except PlaywrightTimeoutError:
                 pass
             _dbg("07_criteria_form", cf.content())
-            print(f"         Mortgage lookup: criteria frame URL → {cf.url}")
+            print(f"         Mortgage lookup: criteria frame URL -> {cf.url}")
 
             cf.evaluate("(name) => $('#allNames').textbox('setValue', name)", search_name)
             print(f"         Mortgage lookup: set ALLNAMES = '{search_name}'")
 
             cf.evaluate(f"$('#FROMDATE').datebox('setValue', '{date_from}')")
             cf.evaluate(f"$('#TODATE').datebox('setValue', '{date_to}')")
-            print(f"         Mortgage lookup: date range {date_from} → {date_to}")
+            print(f"         Mortgage lookup: date range {date_from} -> {date_to}")
 
             cf.evaluate("document.getElementById('partyRBBoth').checked = true;")
             _dbg("08_form_filled", cf.content())
@@ -572,7 +581,7 @@ def lookup_mortgage_borrower(
             except PlaywrightTimeoutError:
                 pass
             _dbg("09_search_results", results_frame.content())
-            print(f"         Mortgage lookup: results frame URL → {results_frame.url}")
+            print(f"         Mortgage lookup: results frame URL -> {results_frame.url}")
 
             # ── Step 5: Open first MORTGAGE row ────────────────────────────
             results_text = BeautifulSoup(
@@ -792,13 +801,19 @@ def lookup_mortgage_borrower(
 
     name, title = _parse_borrower_from_text(doc_text)
     if name:
+        issue = principal_name_quality_issue(name)
+        if issue:
+            result.notes.append(
+                f"Mortgage lookup: rejected parsed borrower '{name}' ({issue})"
+            )
+            return result
         role = f"{ROLE_MORTGAGE_SIG} – {title}" if title else ROLE_MORTGAGE_SIG
         result.principal_name    = name
         result.principal_role    = role
         result.search_evidence   = choose_best_evidence_url(mortgage_evidence_url)
         result.enrichment_status = "enriched"
         result.notes.append(f"Mortgage lookup: borrower signature found — '{name}', {title or 'no title'}")
-        print(f"   ✓ Mortgage borrower: {name}{', ' + title if title else ''}")
+        print(f"   [ok] Mortgage borrower: {name}{', ' + title if title else ''}")
     else:
         result.notes.append(
             f"Mortgage lookup: document text parsed but no borrower signature found "
@@ -806,3 +821,340 @@ def lookup_mortgage_borrower(
         )
 
     return result
+
+
+# ── Deed mailing ("Return To:") lookup ───────────────────────────────────────
+
+_DEED_DOC_TYPES = {
+    "DEED", "WARRANTY DEED", "GENERAL WARRANTY DEED",
+    "QUIT CLAIM DEED", "QUIT CLAIM",
+}
+
+_RETURN_TO_RE = re.compile(
+    r"(?:after\s+recording[,\s]+return\s+to|prepared\s+by\s+and\s+return\s+to|return\s+to)\s*:?\s*\n"
+    r"((?:.+\n){1,6})",
+    re.I,
+)
+
+
+def _parse_return_to_address(text: str) -> Optional[str]:
+    """
+    Extract the 'Return To:' / 'After Recording Return To:' mailing block
+    from page 1 of a deed OCR text. Returns the first line that looks like a
+    street address (has a leading house number), or None.
+    """
+    text = _preprocess_ocr(text)
+    m = _RETURN_TO_RE.search(text)
+    if m:
+        block = m.group(1)
+        addr = extract_best_property_address(block)
+        if addr:
+            return addr
+
+    # Fallback: scan all lines for an address if the header was garbled by OCR
+    return extract_best_property_address(text[:3000])
+
+
+def lookup_deed_mailing(
+    entity_name: str,
+    rec_date_str: str,
+    debug: bool = False,
+) -> Optional[str]:
+    """
+    Log into the Greenville County ROD viewer (CountyWeb), find the DEED filed
+    by/to entity_name near rec_date_str, OCR page 1, and extract the grantee
+    mailing address from the 'Return To:' block.
+
+    Returns a street address string on success, None otherwise.
+    rec_date_str: 'M/D/YYYY' format as stored in market_signals.details.
+    """
+    rod_viewer_username, rod_password = _get_mortgage_credentials()
+    if not rod_password:
+        return None
+
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+    except ImportError:
+        return None
+
+    def _dbg(label: str, content: str) -> None:
+        if not debug:
+            return
+        DEBUG_DIR.mkdir(exist_ok=True)
+        slug = re.sub(r"[^\w]", "_", label)[:40]
+        path = DEBUG_DIR / f"deed_{slug}.html"
+        path.write_text(content, encoding="utf-8", errors="replace")
+        print(f"         Deed lookup: saved {path.name}")
+
+    try:
+        rec_dt    = datetime.strptime(rec_date_str, "%m/%d/%Y")
+        date_from = (rec_dt - timedelta(days=3)).strftime("%m/%d/%Y")
+        date_to   = (rec_dt + timedelta(days=3)).strftime("%m/%d/%Y")
+    except (ValueError, TypeError):
+        return None
+
+    search_name = re.sub(
+        r"\b(LLC|INC|CORP|LTD|LP|LLP|,)\b", "", entity_name, flags=re.I
+    ).strip(" ,.")
+
+    print(f"         Deed lookup: '{search_name}' | {date_from}–{date_to}")
+
+    result_addr: Optional[str] = None
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page    = browser.new_page()
+        try:
+            # ── Login ──────────────────────────────────────────────────────────
+            login_url = f"{ROD_VIEWER_URL}/loginDisplay.action?countyname=Greenville"
+            page.goto(login_url, timeout=30_000)
+            page.wait_for_load_state("domcontentloaded", timeout=15_000)
+            page.wait_for_timeout(800)
+
+            page.fill("input[name='username']", rod_viewer_username)
+            page.fill("input[name='password']", rod_password)
+
+            with page.expect_navigation(timeout=20_000):
+                page.evaluate("document.loginform.submit()")
+            page.wait_for_load_state("domcontentloaded", timeout=15_000)
+            page.wait_for_timeout(2_000)
+
+            if "login" in page.url.lower():
+                print("         Deed lookup: login failed")
+                browser.close()
+                return None
+            print(f"         Deed lookup: logged in -> {page.url}")
+
+            # ── Accept disclaimer ──────────────────────────────────────────────
+            page.wait_for_timeout(2_000)
+            frame = page.frame(name="bodyframe")
+            if frame is None:
+                browser.close()
+                return None
+
+            if frame.locator("input[name='accept']").count() > 0:
+                with page.expect_navigation(timeout=15_000):
+                    frame.click("input[name='accept']")
+                page.wait_for_load_state("domcontentloaded", timeout=15_000)
+                page.wait_for_timeout(2_000)
+                frame = page.frame(name="bodyframe")
+                if frame is None:
+                    browser.close()
+                    return None
+
+            # ── Navigate to search ─────────────────────────────────────────────
+            nav_link = page.locator("a[href*='searchMain.do']")
+            if nav_link.count() > 0:
+                nav_link.first.click()
+            else:
+                page.evaluate("window.frames['bodyframe'].location = '/countyweb/search/searchMain.do?defaultType=Public'")
+
+            frame.wait_for_load_state("domcontentloaded", timeout=15_000)
+            frame.wait_for_timeout(1_500)
+            frame = page.frame(name="bodyframe")
+            if frame is None:
+                browser.close()
+                return None
+            _dbg("05_search_page", frame.content())
+
+            # ── Fill criteria form ─────────────────────────────────────────────
+            page.wait_for_timeout(2_000)
+            sf = page.frame(name="dynSearchFrame") or page.frame(name="searchFrame")
+            if sf is None:
+                browser.close()
+                return None
+            try:
+                sf.wait_for_load_state("domcontentloaded", timeout=15_000)
+            except PlaywrightTimeoutError:
+                pass
+
+            cf = page.frame(name="criteriaframe")
+            if cf is None:
+                browser.close()
+                return None
+            try:
+                cf.wait_for_load_state("domcontentloaded", timeout=15_000)
+                cf.wait_for_selector("input[type='text']", timeout=10_000)
+            except PlaywrightTimeoutError:
+                pass
+            _dbg("07_criteria_form", cf.content())
+
+            cf.evaluate("(name) => $('#allNames').textbox('setValue', name)", search_name)
+            cf.evaluate(f"$('#FROMDATE').datebox('setValue', '{date_from}')")
+            cf.evaluate(f"$('#TODATE').datebox('setValue', '{date_to}')")
+            cf.evaluate("document.getElementById('partyRBBoth').checked = true;")
+            cf.evaluate("executeSearch()")
+            page.wait_for_timeout(5_000)
+
+            # ── Find deed row in results ───────────────────────────────────────
+            results_frame = (
+                page.frame(name="resultListFrame")
+                or page.frame(name="resultFrame")
+                or page.frame(name="searchFrame")
+            )
+            if results_frame is None:
+                browser.close()
+                return None
+
+            try:
+                results_frame.wait_for_load_state("domcontentloaded", timeout=15_000)
+            except PlaywrightTimeoutError:
+                pass
+            _dbg("09_search_results", results_frame.content())
+
+            results_html = results_frame.content()
+            results_soup = BeautifulSoup(results_html, "html.parser")
+            results_text = results_soup.get_text(" ", strip=True)
+            if "no record" in results_text.lower() or "0 record" in results_text.lower():
+                print(f"         Deed lookup: no results for '{search_name}'")
+                browser.close()
+                return None
+
+            target_idx   = None
+            deed_inst_id = None
+            for row in results_soup.select("tr[datagrid-row-index]"):
+                type_cell = row.select_one("td[field='7'] div")
+                if not type_cell:
+                    continue
+                doc_type = type_cell.get_text(strip=True).upper()
+                if any(dt in doc_type for dt in _DEED_DOC_TYPES):
+                    target_idx = int(row["datagrid-row-index"])
+                    iid_m = re.search(
+                        rf"documentRowInfo\[{target_idx}\]\.instId\s*=\s*[\"'](\d+)",
+                        results_html,
+                    )
+                    if iid_m:
+                        deed_inst_id = iid_m.group(1)
+                    print(f"         Deed lookup: found '{doc_type}' at row {target_idx}")
+                    break
+
+            if target_idx is None:
+                _doc_types = [
+                    r.select_one("td[field='7'] div").get_text(strip=True)
+                    for r in results_soup.select("tr[datagrid-row-index]")
+                    if r.select_one("td[field='7'] div")
+                ]
+                print(f"         Deed lookup: no deed row — only: {_doc_types}")
+                browser.close()
+                return None
+
+            # ── Open deed document ─────────────────────────────────────────────
+            doc_link = results_frame.locator(f"a#inst{target_idx}")
+            if doc_link.count() == 0:
+                doc_link = results_frame.locator(f"a[onclick*='documentRowInfo[{target_idx}]']")
+            if doc_link.count() == 0:
+                browser.close()
+                return None
+
+            doc_link.first.click()
+            page.wait_for_timeout(3_000)
+
+            doc_frame = page.frame(name="documentFrame")
+            if doc_frame is None:
+                browser.close()
+                return None
+
+            try:
+                doc_frame.wait_for_load_state("domcontentloaded", timeout=20_000)
+                doc_frame.wait_for_timeout(2_000)
+            except PlaywrightTimeoutError:
+                pass
+            _dbg("10_document_viewer", doc_frame.content())
+
+            doc_frame_html = doc_frame.content()
+
+            # ── Navigate to HTML5 image viewer ─────────────────────────────────
+            img_viewer_m  = re.search(r"InstrumentImageView\.jsp\?[^\"']+", doc_frame_html)
+            img_view_frame = None
+            if img_viewer_m:
+                html5_url = img_viewer_m.group(0).replace("&amp;", "&").rstrip(";")
+                if not html5_url.startswith("http"):
+                    html5_url = f"https://viewer.greenvillecounty.org/countyweb/search/{html5_url}"
+                try:
+                    doc_frame.evaluate(
+                        f"if (window.frames['docImgViewFrame']) "
+                        f"  window.frames['docImgViewFrame'].location = '{html5_url}';"
+                    )
+                    page.wait_for_timeout(3_000)
+                    img_view_frame = page.frame(name="docImgViewFrame")
+                    if img_view_frame:
+                        img_view_frame.wait_for_load_state("domcontentloaded", timeout=15_000)
+                        _dbg("11_img_view_frame", img_view_frame.content())
+                except Exception as e_img:
+                    print(f"         Deed lookup: HTML5 viewer nav failed — {e_img}")
+
+            if not img_view_frame or not deed_inst_id:
+                print("         Deed lookup: no image viewer or inst_id — cannot OCR")
+                browser.close()
+                return None
+
+            # ── Fetch page 1 PNG and OCR ───────────────────────────────────────
+            cookies_list = page.context.cookies()
+            sess_cookies = {c["name"]: c["value"] for c in cookies_list}
+            jsid_m       = re.search(r"jsessionid=([A-F0-9]+)", doc_frame_html, re.I)
+            jsid_suffix  = f";jsessionid={jsid_m.group(1)}" if jsid_m else ""
+
+            gp_result = img_view_frame.evaluate(
+                f"""async () => {{
+                    try {{
+                        const r = await fetch('/countyweb/imageViewer/getPage.do?'
+                            + 'addWatermarks=false&isPreview=false'
+                            + '&instnum={deed_inst_id}&pageNumber=1');
+                        return await r.json();
+                    }} catch(e) {{ return {{status: 'error', error: String(e)}}; }}
+                }}"""
+            )
+            if not isinstance(gp_result, dict) or gp_result.get("status") != "success":
+                print(f"         Deed lookup: getPage.do page 1 failed: {gp_result}")
+                browser.close()
+                return None
+
+            page_path = gp_result.get("pagePath", "")
+            ts        = int(time.time() * 1000)
+            png_url   = (
+                f"https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do"
+                f"?ver={ts}&instnum={deed_inst_id}&isPreview=false"
+                f"&imgpath={page_path}{jsid_suffix}"
+            )
+            print("         Deed lookup: fetching page 1 image...")
+            png_resp = requests.get(png_url, cookies=sess_cookies, timeout=30)
+            ctype    = png_resp.headers.get("content-type", "")
+            if not ctype.startswith("image/"):
+                print(f"         Deed lookup: page 1 PNG fetch returned {ctype}")
+                browser.close()
+                return None
+
+            if debug:
+                img_file = DEBUG_DIR / "deed_page_1.png"
+                img_file.write_bytes(png_resp.content)
+                print(f"         Deed lookup: saved {img_file.name}")
+
+            if not _TESSERACT_AVAILABLE:
+                print("         Deed lookup: pytesseract not installed — cannot OCR")
+                browser.close()
+                return None
+
+            _TESS_EXE = os.environ.get(
+                "TESSERACT_CMD",
+                r"C:\Program Files\Tesseract-OCR\tesseract.exe",
+            )
+            if os.path.exists(_TESS_EXE):
+                pytesseract.pytesseract.tesseract_cmd = _TESS_EXE
+
+            img_obj  = _PILImage.open(io.BytesIO(png_resp.content))
+            ocr_text = pytesseract.image_to_string(img_obj)
+            _dbg("12_ocr_page_1", f"<pre>{ocr_text}</pre>")
+            print(f"         Deed lookup: OCR page 1 ({len(ocr_text)} chars)")
+
+            result_addr = _parse_return_to_address(ocr_text)
+            if result_addr:
+                print(f"         Deed lookup: Return To address -> '{result_addr}'")
+            else:
+                print("         Deed lookup: no Return To address found in OCR text")
+
+        except Exception as e:
+            print(f"         Deed lookup: browser error — {e}")
+        finally:
+            browser.close()
+
+    return result_addr

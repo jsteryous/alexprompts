@@ -6,30 +6,30 @@ import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
 export const metadata: Metadata = {
-  title: "REBB Advisors — Lead Generation & Marketing for Greenville SC Trades",
+  title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
   description:
-    "REBB Advisors helps Greenville County service businesses — HVAC, landscaping, pool, pressure washing — find high-value contracts before competitors do. Powered by daily property transfer and business filing data.",
+    "REBB Advisors sets up a private Company Brain for owner-led service businesses in Greenville and Upstate SC so teams can find answers across email, notes, files, and job history without interrupting the owner.",
   keywords: [
-    "lead generation Greenville SC",
-    "marketing for service businesses Greenville",
-    "HVAC marketing Greenville SC",
-    "landscaping marketing Upstate SC",
-    "local SEO Greenville SC",
-    "Greenville County property data leads",
+    "company brain Greenville SC",
+    "AI knowledge base for service businesses",
+    "private AI for HVAC company",
+    "internal search for contractors",
+    "owner-led service business systems",
+    "company knowledge assistant Greenville",
   ],
   openGraph: {
-    title: "REBB Advisors — Lead Generation & Marketing for Greenville SC Trades",
+    title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
     description:
-      "We programmatically sync Greenville County property transfers and business filings to surface your next contract before competitors know it exists.",
+      "Private company knowledge systems for owner-led service businesses. Help your team find answers without pulling the owner into every routine question.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
   },
   twitter: {
     card: "summary_large_image",
-    title: "REBB Advisors — Lead Generation & Marketing for Greenville SC Trades",
+    title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
     description:
-      "We programmatically sync Greenville County property transfers and business filings to surface your next contract before competitors know it exists.",
+      "Private company knowledge systems for owner-led service businesses in Greenville and Upstate SC.",
   },
   alternates: {
     canonical: "https://rebbadvisors.com",
@@ -44,13 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevent flash of wrong theme on page load */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('rebb-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`,
           }}
         />
-        {/* LocalBusiness structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -61,7 +59,7 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Proactive lead intelligence and marketing systems for Greenville County service businesses — HVAC, landscaping, pool, pressure washing, and trades.",
+                "Private Company Brain setup for owner-led service businesses in Greenville and Upstate SC.",
               areaServed: {
                 "@type": "AdministrativeArea",
                 name: "Greenville County, South Carolina",
@@ -73,16 +71,16 @@ export default function RootLayout({
                 addressCountry: "US",
               },
               serviceType: [
-                "Lead Intelligence",
-                "Local SEO",
-                "Web Development",
-                "Outreach Automation",
+                "Company Brain Setup",
+                "Private AI Knowledge Base",
+                "Internal Search for Service Businesses",
+                "LLC Owner Finder Beta",
               ],
               knowsAbout: [
-                "Greenville County property transfers",
-                "Lead generation for service businesses",
-                "Google Business Profile optimization",
-                "Marketing automation",
+                "Private company knowledge systems",
+                "Operational knowledge retrieval",
+                "Internal AI for service businesses",
+                "Greenville service business workflows",
               ],
             }),
           }}

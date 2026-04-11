@@ -34,6 +34,8 @@ from dataclasses import dataclass
 
 from dotenv import load_dotenv
 
+load_dotenv(Path(__file__).parent.parent / ".env.local")
+
 from lib.db_models import EnrichedLeadRow
 from enrich_models import (
     LLC_NAME_RE,
@@ -47,10 +49,11 @@ from enrich_models import (
     ENRICH_VERSION,
     ROLE_TAX_CARE_OF,
     ROLE_GIS_MAIL_FLIP,
+    ROLE_GIS_ADDR_HOP,
 )
 from enrich_gis import lookup_gis, lookup_property_detail
 from enrich_web import enrich_via_duckduckgo
-from enrich_mort import lookup_mortgage_borrower, _parse_recording_date
+from enrich_mort import lookup_mortgage_borrower, lookup_deed_mailing, _parse_recording_date
 from enrich_contact import lookup_apollo_contact, lookup_pdl_company
 
 logging.basicConfig(
@@ -59,8 +62,6 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 _log = logging.getLogger(__name__)
-
-load_dotenv(Path(__file__).parent.parent / ".env.local")
 
 SUPABASE_URL         = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -327,6 +328,66 @@ def _enrich_contact_info(
     )
 
 
+# ── Commercial address GIS hop ────────────────────────────────────────────────
+
+_SUITE_RE = re.compile(
+    r"\s*,?\s*(?:Ste|Suite|Apt\.?|Apartment|Unit|#|Floor|Fl\.?)\s*\S+.*$",
+    re.I,
+)
+_PO_BOX_RE = re.compile(r"\bP\.?O\.?\s*Box\b", re.I)
+
+
+def _gis_commercial_hop(address: str, original_entity: str) -> EnrichmentResult:
+    """
+    Look up the owner of a commercial building via GIS when the target LLC's
+    mailing address is a commercial street address (has suite/floor info).
+
+    Strategy:
+      Hop 1 — strip suite info, GIS flip on the building address.
+               If a human is found, return immediately.
+               If another LLC is found, try its property detail page.
+      Hop 2 — check the building LLC's Care Of field on its detail page.
+               If a human Care Of exists, return it.
+
+    Always returns an EnrichmentResult (may be empty). Never raises.
+    """
+    # Strip suite/unit to get building-level address
+    building_addr = _SUITE_RE.sub("", address).strip(" ,")
+    if not _is_street_address(building_addr):
+        result = EnrichmentResult()
+        result.notes.append(f"GIS addr hop: '{building_addr}' not a usable street address after suite strip")
+        return result
+
+    street_name = re.sub(r"^\d+\s+", "", building_addr).split(",")[0].strip()
+
+    # Hop 1: who owns that building?
+    hop1 = lookup_gis(street_name, building_addr)
+    for note in hop1.notes:
+        print(f"          {note}")
+
+    if hop1.is_enriched():
+        return hop1  # human owner found — done
+
+    # Hop 2: building owner is an LLC — check its Care Of on the detail page
+    if hop1.principal_name and is_non_human_name(hop1.principal_name) and hop1.detail_url:
+        detail = lookup_property_detail(hop1.detail_url)
+        care_of = detail.get("care_of", "").strip()
+        if care_of and not _LLC_TERMS_RE.search(care_of):
+            care_words = care_of.lower().split()
+            llc_words  = (hop1.principal_name or "").lower().split()
+            if len(set(care_words) & set(llc_words)) < 2:
+                human_name = normalize_person_name(care_of)
+                hop1.notes.append(
+                    f"GIS addr hop 2: building LLC '{hop1.principal_name}' "
+                    f"Care Of = '{care_of}' -> '{human_name}'"
+                )
+                hop1.principal_name = human_name
+                hop1.enrichment_status = "enriched"
+                print(f"          {hop1.notes[-1]}")
+
+    return hop1
+
+
 # ── Orchestrator ──────────────────────────────────────────────────────────────
 
 def enrich(entity_name: str, address: str = "", dry_run: bool = False,
@@ -335,7 +396,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
     Run the full free enrichment chain for an LLC + address.
     Returns the best EnrichmentResult found.
     """
-    print(f"\n── Enriching: {entity_name}")
+    print(f"\n== Enriching: {entity_name}")
     if address:
         print(f"   Address:  {address}")
 
@@ -356,7 +417,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             except Exception as e:
                 _log.error("Mortgage lookup browser error for '%s': %s", entity_name, e)
                 mort_result = EnrichmentResult()
-                mort_result.notes.append(f"Mortgage lookup: browser error — {e}")
+                mort_result.notes.append(f"Mortgage lookup: browser error - {e}")
             for note in mort_result.notes:
                 print(f"         {note}")
             if mort_result.is_enriched():
@@ -364,7 +425,30 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
                     return mort_result
                 result = mort_result   # dry_run: fall through to show all steps
         else:
-            print(f"   [0/3] Mortgage lookup: no recording date in details — skipping")
+            print(f"   [0/3] Mortgage lookup: no recording date in details - skipping")
+
+    # Step 0b: Deed mailing lookup (CountyWeb OCR, page 1 "Return To:" address)
+    # Runs for deed-only signals (no mortgage) when Step 0 didn't resolve.
+    # Extracts the grantee mailing address from the scanned deed first page and
+    # seeds it into the GIS chain as a mailing address for the PIN pivot / GIS flip.
+    _deed_mailing: Optional[str] = None
+    if (
+        not result.is_enriched()
+        and sig_source == "deeds"
+        and LLC_NAME_RE.search(entity_name)
+        and not result.mailing_address  # don't run if we already have a mailing address
+    ):
+        rec_date = _parse_recording_date(sig_details)
+        if rec_date:
+            print(f"   [0b/3] Deed mailing lookup (CountyWeb OCR, page 1)...")
+            try:
+                _deed_mailing = lookup_deed_mailing(entity_name, rec_date, debug=debug)
+            except Exception as e:
+                _log.error("Deed mailing lookup error for '%s': %s", entity_name, e)
+                _deed_mailing = None
+            if _deed_mailing:
+                result.mailing_address = _deed_mailing
+                result.notes.append(f"Deed mailing lookup: Return To address -> '{_deed_mailing}'")
 
     # Step 1: GIS parcel lookup
     print("   [1/3] Greenville County tax record lookup...")
@@ -373,7 +457,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
     except Exception as e:
         _log.error("GIS lookup browser error for '%s': %s", entity_name, e)
         gis_result = EnrichmentResult()
-        gis_result.notes.append(f"GIS: browser error — {e}")
+        gis_result.notes.append(f"GIS: browser error - {e}")
     for note in gis_result.notes:
         print(f"         {note}")
     if gis_result.principal_name:
@@ -395,16 +479,16 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
                 if deed_name:
                     result.principal_name = deed_name
             if result.property_address:
-                print(f"   ✓ Found human: {result.principal_name} @ {result.property_address}")
+                print(f"   [ok] Found human: {result.principal_name} @ {result.property_address}")
             else:
-                print(f"   ✓ Found human: {result.principal_name}")
+                print(f"   [ok] Found human: {result.principal_name}")
             result.enrichment_status = "enriched"
             return result
         else:
             if is_non_human_name(result.principal_name):
-                print(f"   → Owner is still a non-human entity: {result.principal_name}")
+                print(f"   -> Owner is still a non-human entity: {result.principal_name}")
             else:
-                print(f"   → Owner is still an LLC: {result.principal_name}")
+                print(f"   -> Owner is still an LLC: {result.principal_name}")
             if (
                 result.principal_name != entity_name
                 and result.principal_name
@@ -412,10 +496,10 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             ):
                 entity_name = result.principal_name
 
-    # Step 1b: PIN Pivot — fetch Real Property detail page to get Care Of + mailing address
+    # Step 1b: PIN Pivot - fetch Real Property detail page to get Care Of + mailing address
     if not result.is_enriched() and result.detail_url:
         pin_label = f"Map # {result.pin}" if result.pin else "parcel"
-        print(f"   [1b/3] PIN pivot — fetching property detail ({pin_label})...")
+        print(f"   [1b/3] PIN pivot - fetching property detail ({pin_label})...")
         detail = lookup_property_detail(result.detail_url)
 
         care_of   = detail.get("care_of", "").strip()
@@ -427,12 +511,12 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             overlap    = len(set(care_words) & set(llc_words))
             if overlap < 2:
                 human_name = normalize_person_name(care_of)
-                print(f"   ✓ PIN pivot — Care Of: '{care_of}' → '{human_name}'")
+                print(f"   [ok] PIN pivot - Care Of: '{care_of}' -> '{human_name}'")
                 result.principal_name    = human_name
                 result.principal_role    = ROLE_TAX_CARE_OF
                 result.search_evidence   = result.detail_url
                 result.mailing_address   = mail_addr or None
-                result.notes.append(f"PIN pivot: Care Of = '{care_of}' → '{human_name}'")
+                result.notes.append(f"PIN pivot: Care Of = '{care_of}' -> '{human_name}'")
                 result.enrichment_status = "enriched"
                 return result
 
@@ -448,27 +532,52 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
             )
             if is_residential:
                 street_name = re.sub(r"^\d+\s+", "", first_line).split(",")[0].strip()
-                print(f"   [1c/3] GIS flip — residential mailing address: '{first_line}'...")
+                print(f"   [1c/3] GIS flip - residential mailing address: '{first_line}'...")
                 flip_result = lookup_gis(street_name, first_line)
                 for note in flip_result.notes:
                     print(f"          {note}")
                 if flip_result.principal_name and flip_result.is_enriched():
-                    print(f"   ✓ GIS flip found human: {flip_result.principal_name}")
+                    print(f"   [ok] GIS flip found human: {flip_result.principal_name}")
                     result.principal_name    = flip_result.principal_name
                     result.principal_role    = ROLE_GIS_MAIL_FLIP
                     result.search_evidence   = flip_result.search_evidence
                     result.notes.append(
-                        f"PIN pivot → mailing: {first_line} → "
+                        f"PIN pivot -> mailing: {first_line} -> "
                         f"GIS flip found '{flip_result.principal_name}'"
                     )
                     result.enrichment_status = "enriched"
                     return result
                 else:
-                    print(f"   → GIS flip returned LLC or no result — proceeding to web search")
+                    print(f"   -> GIS flip returned LLC or no result - proceeding to web search")
+            elif _is_street_address(first_line) and not _PO_BOX_RE.search(first_line):
+                # Commercial street address (has Suite/Floor/etc.) — look up building owner
+                print(f"   [1d/3] GIS address hop - commercial mailing: '{first_line}'...")
+                hop_result = _gis_commercial_hop(first_line, entity_name)
+                if hop_result.is_enriched():
+                    print(f"   [ok] GIS address hop found human: {hop_result.principal_name}")
+                    result.principal_name    = hop_result.principal_name
+                    result.principal_role    = ROLE_GIS_ADDR_HOP
+                    result.search_evidence   = choose_best_evidence_url(
+                        hop_result.search_evidence, result.search_evidence
+                    )
+                    result.notes.append(
+                        f"Commercial addr hop: '{first_line}' -> '{hop_result.principal_name}'"
+                    )
+                    result.notes += hop_result.notes
+                    result.enrichment_status = "enriched"
+                    return result
+                else:
+                    result.notes += hop_result.notes
+                    if hop_result.principal_name:
+                        result.notes.append(
+                            f"Commercial addr hop: building owner is '{hop_result.principal_name}' "
+                            f"(still an entity) - proceeding to web search"
+                        )
+                    print(f"   -> Commercial addr hop: no human found, proceeding to web search")
             else:
-                print(f"   → Commercial/PO Box mailing address — skipping GIS flip, using in DDG")
+                print(f"   -> PO Box mailing address - skipping GIS, using in DDG")
         else:
-            print(f"   → No Care Of or mailing address on detail page")
+            print(f"   -> No Care Of or mailing address on detail page")
 
     elif result.mailing_address and not result.is_enriched():
         # Legacy path: mailing address was already set before PIN pivot ran
@@ -476,12 +585,12 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
         first_line = mail_addr.split("\n")[0].strip()
         if _is_street_address(first_line):
             street_name = re.sub(r"^\d+\s+", "", first_line).split(",")[0].strip()
-            print(f"   [1b/3] GIS flip — mailing address: {first_line}...")
+            print(f"   [1b/3] GIS flip - mailing address: {first_line}...")
             flip_result = lookup_gis(street_name, first_line)
             for note in flip_result.notes:
                 print(f"          {note}")
             if flip_result.principal_name and flip_result.is_enriched():
-                print(f"   ✓ GIS flip found human: {flip_result.principal_name}")
+                print(f"   [ok] GIS flip found human: {flip_result.principal_name}")
                 result.principal_name    = flip_result.principal_name
                 result.principal_role    = ROLE_GIS_MAIL_FLIP
                 result.search_evidence   = flip_result.search_evidence
@@ -491,7 +600,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
                 result.enrichment_status = "enriched"
                 return result
             else:
-                print(f"   → GIS flip returned LLC or no result — proceeding to web search")
+                print(f"   -> GIS flip returned LLC or no result - proceeding to web search")
 
     # Step 2: DuckDuckGo search (also checks for SC SOS entity pages, UBJ, GSABiz)
     print("   [2/3] DuckDuckGo search + SC SOS entity page check...")
@@ -508,7 +617,7 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
         result.search_evidence   = ddg_result.search_evidence
         result.notes            += ddg_result.notes
         result.enrichment_status = "enriched"
-        print(f"   ✓ Found human: {result.principal_name}")
+        print(f"   [ok] Found human: {result.principal_name}")
         return result
 
     # DDG may surface contact info even without resolving a human name (e.g. LLC
@@ -521,15 +630,15 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
     # Step 3: Manual queue
     if result.mailing_address:
         result.notes.append(
-            f"Manual follow-up: mailing address is {result.mailing_address} — "
+            f"Manual follow-up: mailing address is {result.mailing_address} - "
             "check county property records at that address to find the owner"
         )
     result.notes.append(
         "Manual Assist: https://viewer.greenvillecounty.org/countyweb/disclaimer.do "
-        "— search the ROD viewer by entity name or rec date to find the document"
+        "- search the ROD viewer by entity name or rec date to find the document"
     )
-    print("   ↳ Status: pending (manual research needed)")
-    print("   → Manual Assist: https://viewer.greenvillecounty.org/countyweb/disclaimer.do")
+    print("   -> Status: pending (manual research needed)")
+    print("   -> Manual Assist: https://viewer.greenvillecounty.org/countyweb/disclaimer.do")
     result.enrichment_status = "pending"
     return result
 
@@ -537,35 +646,32 @@ def enrich(entity_name: str, address: str = "", dry_run: bool = False,
 # ── Supabase read/write ───────────────────────────────────────────────────────
 
 def fetch_pending_signals(limit: int = 20) -> list[dict]:
-    """Return market_signals that don't yet have an enriched_leads row."""
+    """
+    Return market_signals that don't yet have an enriched_leads row.
+
+    Uses a PostgREST left-join pattern instead of NOT IN to avoid URL length
+    limits that would silently drop signals at ~2000+ enriched rows.
+    """
     client = get_supabase()
     if not client:
         print("Supabase not configured.")
         return []
 
-    # Fetch all enriched signal IDs first (child table — typically small).
-    # Then filter server-side with NOT IN so we never miss signals due to a
-    # hard cap on the parent query. For deployments with > ~10k enriched leads,
-    # move this to a Postgres function/view to avoid URL length limits.
-    existing_resp = (
-        client.table("enriched_leads")
-        .select("signal_id")
-        .execute()
-    )
-    existing_ids = [
-        r["signal_id"] for r in (existing_resp.data or []) if r.get("signal_id")
-    ]
-
-    query = (
+    resp = (
         client.table("market_signals")
-        .select("id, entity_name, location, event_type, valuation, score, tag, source, details, signal_type")
+        .select(
+            "id, entity_name, location, event_type, valuation, score, tag, source, details, signal_type, "
+            "enriched_leads!left(signal_id)"
+        )
+        .is_("enriched_leads.signal_id", "null")
         .order("created_at", desc=True)
         .limit(limit)
+        .execute()
     )
-    if existing_ids:
-        query = query.filter("id", "not.in", f"({','.join(existing_ids)})")
-
-    return query.execute().data or []
+    rows = resp.data or []
+    for row in rows:
+        row.pop("enriched_leads", None)
+    return rows
 
 
 def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = False) -> None:
@@ -602,7 +708,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
         "notes":              "\n".join(result.notes),
     }
     if dry_run:
-        print("\n── Would insert to enriched_leads:")
+        print("\n== Would insert to enriched_leads:")
         for k, v in row.items():
             if v:
                 print(f"   {k}: {v}")
@@ -622,7 +728,7 @@ def save_enriched_lead(signal: dict, result: EnrichmentResult, dry_run: bool = F
     except Exception as e:
         _log.error("Supabase upsert failed for signal %s: %s", signal['id'], e)
         return
-    print(f"   ✓ Saved to enriched_leads (status: {result.enrichment_status})")
+    print(f"   [ok] Saved to enriched_leads (status: {result.enrichment_status})")
 
 
 # ── Batch runner (also imported by run_daily.py) ─────────────────────────────
@@ -667,7 +773,7 @@ def run_retry_pending(dry_run: bool = False) -> None:
     Re-run the full enrichment chain on leads that are already in enriched_leads
     with enrichment_status = 'pending' (LLC owner was never resolved).
 
-    Safe to run repeatedly — save_enriched_lead upserts on signal_id so each
+    Safe to run repeatedly - save_enriched_lead upserts on signal_id so each
     run overwrites the previous result. Useful after adding new data sources or
     improving the enrichment logic.
     """
@@ -691,11 +797,11 @@ def run_retry_pending(dry_run: bool = False) -> None:
         print("No pending leads to retry.")
         return
 
-    print(f"\n── Retrying {len(rows)} pending lead(s) ──\n")
+    print(f"\n== Retrying {len(rows)} pending lead(s) ==\n")
     for row in rows:
         sig = row.get("market_signals")
         if not sig:
-            print(f"   Skipping {row['id']} — no linked signal")
+            print(f"   Skipping {row['id']} - no linked signal")
             continue
         try:
             _process_signal(sig, dry_run=dry_run)
@@ -723,19 +829,61 @@ def _stale_repair_reasons(row: dict) -> list[str]:
     elif principal_name:
         issue = principal_name_quality_issue(principal_name)
         if issue:
-            reasons.append(f"principal_name needs repair ({issue})")
+            # Pending rows can legitimately retain a non-human entity name when
+            # no person-level owner was found. Keep repairing malformed/junk
+            # labels, but do not requeue rows solely because the best known
+            # owner is still an LLC or government entity.
+            if not (status != "enriched" and issue == "non-human owner/entity"):
+                reasons.append(f"principal_name needs repair ({issue})")
 
     return reasons
 
 
-def fetch_stale_repair_candidates(limit: int = 25, scan_limit: int = 500) -> list[dict]:
+def _stale_repair_priority(row: dict, reasons: list[str]) -> tuple[int, int]:
+    """
+    Rank stale rows so obviously-bad historical data gets repaired before
+    generic legacy rows that merely lack an enrichment_version marker.
+    """
+    score = 0
+    status = (row.get("enrichment_status") or "").strip().lower()
+    version = row.get("enrichment_version")
+    principal_name = (row.get("principal_name") or "").strip()
+
+    if any(reason.startswith("principal_name needs repair") for reason in reasons):
+        score += 300
+    if "enriched row missing principal_name" in reasons:
+        score += 260
+
+    if status == "pending":
+        score += 180
+    elif status != "enriched":
+        score += 80
+
+    if version is None:
+        score += 60
+    elif version < ENRICH_VERSION:
+        score += 60 + ((ENRICH_VERSION - version) * 20)
+
+    if not principal_name:
+        score += 40
+
+    # Prefer rows that are stale for multiple independent reasons.
+    score += len(reasons) * 15
+
+    updated_at = row.get("updated_at")
+    updated_rank = 0
+    if isinstance(updated_at, str):
+        updated_rank = -int(re.sub(r"\D", "", updated_at) or "0")
+
+    return score, updated_rank
+
+
+def fetch_stale_repair_candidates(limit: int = 25, scan_limit: int = 2000) -> list[dict]:
     """
     Return enriched_leads rows that should be repaired/backfilled.
 
-    Selection is intentionally local and conservative:
-    - legacy rows with no enrichment_version
-    - rows produced by an older enrichment version
-    - rows whose stored principal_name now fails quality checks
+    Selection intentionally scans a wider slice, then ranks candidates so
+    obviously bad/junk historical rows are repaired before generic old rows.
     """
     client = get_supabase()
     if not client:
@@ -746,11 +894,11 @@ def fetch_stale_repair_candidates(limit: int = 25, scan_limit: int = 500) -> lis
     page_size = min(max(limit * 3, 50), 200)
     offset = 0
 
-    while offset < scan_limit and len(candidates) < limit:
+    while offset < scan_limit:
         resp = (
             client.table("enriched_leads")
             .select(
-                "id, signal_id, enrichment_status, enrichment_version, principal_name, "
+                "id, signal_id, enrichment_status, enrichment_version, principal_name, updated_at, "
                 "market_signals(id, entity_name, location, event_type, valuation, score, tag, source, details, signal_type)"
             )
             .order("updated_at", desc=False)
@@ -777,16 +925,16 @@ def fetch_stale_repair_candidates(limit: int = 25, scan_limit: int = 500) -> lis
                     "lead_id": row.get("id"),
                     "signal": signal,
                     "reasons": reasons,
+                    "priority": _stale_repair_priority(row, reasons),
                 }
             )
-            if len(candidates) >= limit:
-                break
 
         if len(rows) < page_size:
             break
         offset += page_size
 
-    return candidates
+    candidates.sort(key=lambda row: row["priority"], reverse=True)
+    return candidates[:limit]
 
 
 def run_repair_stale(dry_run: bool = False, limit: int = 25) -> None:
@@ -799,7 +947,7 @@ def run_repair_stale(dry_run: bool = False, limit: int = 25) -> None:
         print("No stale leads need repair.")
         return
 
-    print(f"\n── Repairing {len(rows)} stale lead(s) ──\n")
+    print(f"\n== Repairing {len(rows)} stale lead(s) ==\n")
     for row in rows:
         signal = row["signal"]
         reasons = "; ".join(row["reasons"])
@@ -847,7 +995,7 @@ def run_contact_only(dry_run: bool = False) -> None:
         print("No enriched leads need contact lookup.")
         return
 
-    print(f"\n── {len(rows)} enriched lead(s) with no contact info ──\n")
+    print(f"\n== {len(rows)} enriched lead(s) with no contact info ==\n")
     for row in rows:
         sig = row.get("market_signals") or {}
         entity_name = sig.get("entity_name", "")
@@ -886,7 +1034,7 @@ def run_contact_only(dry_run: bool = False) -> None:
 
         if update:
             client.table("enriched_leads").update(update).eq("id", row["id"]).execute()
-            print(f"     ✓ Updated")
+            print(f"     [ok] Updated")
 
         time.sleep(1)
 
@@ -894,11 +1042,11 @@ def run_contact_only(dry_run: bool = False) -> None:
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="REBB Advisors — LLC Owner Finder enrichment")
+    parser = argparse.ArgumentParser(description="REBB Advisors - LLC Owner Finder enrichment")
     parser.add_argument("--signal-id",    help="UUID of a market_signals row to enrich")
     parser.add_argument("--address",      help="Street address to look up")
     parser.add_argument("--entity",       help="LLC / entity name to unmask")
-    parser.add_argument("--rec-date",     help="Recording date M/D/YYYY — runs mortgage lookup only (use with --entity)")
+    parser.add_argument("--rec-date",     help="Recording date M/D/YYYY - runs mortgage lookup only (use with --entity)")
     parser.add_argument("--list-pending", action="store_true",
                         help="List market_signals not yet in enriched_leads")
     parser.add_argument("--run-pending",       action="store_true",
@@ -918,11 +1066,11 @@ def main():
         if not signals:
             print("No unenriched signals found.")
             return
-        print(f"\n── {len(signals)} signal(s) pending enrichment ──\n")
+        print(f"\n== {len(signals)} signal(s) pending enrichment ==\n")
         for s in signals:
             val = f"  ${s['valuation']:,.0f}" if s.get("valuation") else ""
             print(f"  [{s['tag']}] {s['event_type']}{val}")
-            print(f"       {s['location']} — {s['entity_name']}")
+            print(f"       {s['location']} - {s['entity_name']}")
             print(f"       id: {s['id']}")
             print()
         return
@@ -969,13 +1117,13 @@ def main():
 
     if args.entity and args.rec_date:
         debug = os.environ.get("ENRICH_DEBUG") == "1"
-        print(f"\n── Mortgage lookup only: {args.entity} | {args.rec_date}")
+        print(f"\n== Mortgage lookup only: {args.entity} | {args.rec_date}")
         result = lookup_mortgage_borrower(args.entity, args.rec_date, debug=debug)
         for note in result.notes:
             print(f"   {note}")
-        print(f"\n── Result ──")
-        print(f"   principal_name: {result.principal_name or '—'}")
-        print(f"   principal_role: {result.principal_role or '—'}")
+        print(f"\n== Result ==")
+        print(f"   principal_name: {result.principal_name or '-'}")
+        print(f"   principal_role: {result.principal_role or '-'}")
         print(f"   status:         {result.enrichment_status}")
         return
 
@@ -990,14 +1138,14 @@ def main():
             args.entity or "",
             args.address or "",
         )
-        print(f"\n── Result ──")
-        print(f"   principal_name:    {result.principal_name or '—'}")
-        print(f"   principal_role:    {result.principal_role or '—'}")
-        print(f"   contact_email:     {result.contact_email or '—'}")
-        print(f"   contact_phone:     {result.contact_phone or '—'}")
-        print(f"   linkedin_url:      {result.linkedin_url or '—'}")
-        print(f"   mailing_address:   {result.mailing_address or '—'}")
-        print(f"   search_evidence:   {result.search_evidence or '—'}")
+        print(f"\n== Result ==")
+        print(f"   principal_name:    {result.principal_name or '-'}")
+        print(f"   principal_role:    {result.principal_role or '-'}")
+        print(f"   contact_email:     {result.contact_email or '-'}")
+        print(f"   contact_phone:     {result.contact_phone or '-'}")
+        print(f"   linkedin_url:      {result.linkedin_url or '-'}")
+        print(f"   mailing_address:   {result.mailing_address or '-'}")
+        print(f"   search_evidence:   {result.search_evidence or '-'}")
         print(f"   enrichment_status: {result.enrichment_status}")
         return
 

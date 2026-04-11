@@ -26,7 +26,7 @@ DEBUG_DIR = Path(__file__).parent / "debug"
 # Bump this when the enrichment chain meaningfully improves (new source added,
 # major logic fix). Stored in enriched_leads.enrichment_version so stale rows
 # can be selected and re-processed with --re-enrich-stale.
-ENRICH_VERSION = 4
+ENRICH_VERSION = 6
 
 # ── principal_role constants ──────────────────────────────────────────────────
 # Stable string labels consumed by the /dashboard frontend to derive confidence
@@ -35,6 +35,7 @@ ROLE_MORTGAGE_SIG  = "Mortgage Signature"       # signed legal doc — highest c
 ROLE_TAX_CARE_OF   = "Tax Record – Care Of"     # county property detail, Care Of field
 ROLE_GIS_OWNER     = "Tax Record – GIS"         # GIS name search, human owner
 ROLE_GIS_MAIL_FLIP = "Tax Record – Mailing"     # mailing address GIS reverse lookup
+ROLE_GIS_ADDR_HOP  = "Tax Record – Address Hop" # commercial mailing addr -> building owner lookup
 ROLE_SOS_INITIALS  = "SC SOS – Initials Match"  # SOS filing, name initials corroborated
 ROLE_PRESS_UBJ     = "Business Press – UBJ"     # Upstate Business Journal mention
 ROLE_PRESS_GBIZ    = "Business Press – GSABiz"  # GSA BizWire press release
@@ -456,7 +457,5 @@ class EnrichmentResult:
     linkedin_url:      Optional[str] = None   # from Apollo /v1/people/match
 
     def is_enriched(self) -> bool:
-        """True if we found a human name (not just an LLC)."""
-        if not self.principal_name:
-            return False
-        return not is_non_human_name(self.principal_name)
+        """True if we found a human name that passes principal quality checks."""
+        return principal_name_quality_issue(self.principal_name) is None

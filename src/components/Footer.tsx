@@ -9,16 +9,19 @@ export default function Footer() {
             REBB Advisors
           </Link>
           <p className="mt-1 text-sm text-gray-400">
-            Automated lead systems for local service businesses.
+            Private company knowledge systems for owner-led service businesses.
           </p>
         </div>
 
         <nav className="flex flex-wrap gap-6">
           <Link href="/how-it-works" className="text-sm text-gray-400 hover:text-black transition-colors">
-            How It Works
+            Company Brain
           </Link>
-          <Link href="/case-study" className="text-sm text-gray-400 hover:text-black transition-colors">
-            Case Study
+          <Link href="/lead-intelligence" className="text-sm text-gray-400 hover:text-black transition-colors">
+            LLC Owner Finder Beta
+          </Link>
+          <Link href="/insights" className="text-sm text-gray-400 hover:text-black transition-colors">
+            Insights
           </Link>
           <Link href="/contact" className="text-sm text-gray-400 hover:text-black transition-colors">
             Contact
