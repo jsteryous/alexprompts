@@ -120,6 +120,14 @@ function ArrowIcon() {
   );
 }
 
+function BrainIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9.5 2a4.5 4.5 0 014.5 4.5v.5M9.5 2a4.5 4.5 0 00-4.5 4.5v.5M9.5 2v2M14 7h1.5a4.5 4.5 0 010 9H14M5 7H3.5a4.5 4.5 0 000 9H5M14 16v2a4 4 0 01-4 4 4 4 0 01-4-4v-2M14 16H5" />
+    </svg>
+  );
+}
+
 // ── data ─────────────────────────────────────────────────────────────
 
 const painScenarios = [
@@ -147,13 +155,6 @@ const comparisons = [
     queryable: false as boolean | "partial",
   },
   {
-    solution: "Jobber / ServiceTitan",
-    note: "Data entry required; job records only",
-    behaviorChange: true,
-    worksOnMess: "partial" as boolean | "partial",
-    queryable: false as boolean | "partial",
-  },
-  {
     solution: "Hire SOP consultant",
     note: "Major project; output still isn't queryable",
     behaviorChange: true,
@@ -161,29 +162,34 @@ const comparisons = [
     queryable: false as boolean | "partial",
   },
   {
-    solution: "Generic AI (ChatGPT, etc.)",
-    note: "Paste context each session; no persistent memory",
+    solution: "NotebookLM / Claude Projects",
+    note: "Works up to ~50 docs. No live inboxes, no ongoing curation",
     behaviorChange: true,
-    worksOnMess: false as boolean | "partial",
-    queryable: false as boolean | "partial",
+    worksOnMess: "partial" as boolean | "partial",
+    queryable: "partial" as boolean | "partial",
   },
 ];
 
 const setupSteps = [
   {
-    step: "01",
+    week: "Week 1",
     title: "Map the knowledge mess",
-    body: "We find where answers live now — inboxes, folders, estimates, notes, vendor docs, and the owner's memory.",
+    body: "We get access to the inboxes, drives, and job systems that matter. We find the landmines — the \"OLD pricing DO NOT USE\" folder that's been the reference for three years, the shared inbox nobody monitors, the estimator who keeps everything in a personal Gmail.",
   },
   {
-    step: "02",
-    title: "Build the first version",
-    body: "We structure a private Company Brain around the internal questions that cause real drag, not around generic AI demos.",
+    week: "Week 2–3",
+    title: "Build and tune",
+    body: "We pick one high-value slice — the last 3 years of accepted quotes, the vendor email threads — and build the first working index. Then we sit with your estimator and PM and have them ask real questions from their actual workday. Half the answers will be incomplete on first pass. We fix it.",
   },
   {
-    step: "03",
-    title: "Train and tune",
-    body: "We pressure-test it with real team questions, improve weak spots, and make it something people actually use.",
+    week: "Week 4",
+    title: "Handoff and guardrails",
+    body: "We train the team on how to ask questions that work, how to flag wrong answers, and how to add new documents going forward. We set up a feedback loop so we can tune it again in 30 days.",
+  },
+  {
+    week: "Ongoing",
+    title: "Monthly tuning and curation",
+    body: "New documents need to be ingested. Stale ones flagged. The team finds new failure modes. If you're not in a retainer relationship, the system decays. If you are, it compounds. This is why we price it as an ongoing engagement.",
   },
 ];
 
@@ -216,6 +222,69 @@ function CompCell({ value }: { value: boolean | "partial" }) {
   return <XIcon />;
 }
 
+// ── Pipeline diagram (How It Works illustration) ──────────────────────
+
+function PipelineDiagram() {
+  return (
+    <div className="mt-8 p-5 bg-white/[0.04] border border-white/[0.07] rounded-2xl">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-5">
+        How it flows
+      </p>
+      <div className="flex items-stretch gap-3">
+        {/* Source docs column */}
+        <div className="flex flex-col gap-2 flex-shrink-0 justify-center">
+          {[
+            { icon: "envelope", label: "Sent email" },
+            { icon: "file", label: "Quote PDFs" },
+            { icon: "folder", label: "Job notes" },
+          ].map((s) => (
+            <div key={s.label} className="flex items-center gap-2 bg-white/[0.05] border border-white/[0.07] rounded-lg px-2.5 py-1.5">
+              <span className="text-white/35 flex-shrink-0"><SourceIcon icon={s.icon} /></span>
+              <span className="text-[11px] text-white/40 leading-none">{s.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Arrow left */}
+        <div className="flex items-center flex-1 min-w-0">
+          <div className="flex-1 h-px bg-white/10" />
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="flex-shrink-0">
+            <path d="M1 5h8M6 2l3 3-3 3" stroke="rgba(255,255,255,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        {/* Company Brain node */}
+        <div className="flex flex-col items-center justify-center flex-shrink-0 gap-2">
+          <div className="w-14 h-14 rounded-2xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-green-400">
+            <BrainIcon />
+          </div>
+          <span className="text-[10px] text-white/35 text-center leading-tight max-w-[60px]">Company Brain</span>
+        </div>
+
+        {/* Arrow right */}
+        <div className="flex items-center flex-1 min-w-0">
+          <div className="flex-1 h-px bg-white/10" />
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="flex-shrink-0">
+            <path d="M1 5h8M6 2l3 3-3 3" stroke="rgba(255,255,255,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        {/* Answer block */}
+        <div className="flex-shrink-0 flex items-center">
+          <div className="bg-green-500/[0.1] border border-green-500/[0.2] rounded-xl px-3 py-3 max-w-[130px]">
+            <p className="text-[11px] text-green-300/80 leading-relaxed">Answer with source citation</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Honest caveat */}
+      <p className="text-[11px] text-white/25 leading-relaxed mt-5 pt-4 border-t border-white/[0.06]">
+        Ten years of documents also means ten years of outdated pricing and superseded SOPs. Part of what we do is teach the system which sources to trust, and flag conflicts instead of guessing.
+      </p>
+    </div>
+  );
+}
+
 // ── page ─────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -244,9 +313,10 @@ export default function HomePage() {
                 SOPs, and vendor files.
               </p>
               <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-2xl">
-                No behavior change required. It reads what&apos;s already there
-                and makes it queryable. When a key person leaves, the knowledge
-                stays.
+                You don&apos;t need to build a wiki or retrain your team on new
+                software. The behavior change is on our side — we do the
+                ingestion, tuning, and ongoing curation. Your team just asks
+                questions.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <Link
@@ -258,8 +328,8 @@ export default function HomePage() {
                 </Link>
               </div>
               <p className="text-xs text-gray-400">
-                High-touch setup. Built for teams that already have too much
-                context trapped in too many places.
+                Two to four weeks of scoped setup, then ongoing tuning.
+                Not a self-serve tool.
               </p>
             </div>
 
@@ -319,7 +389,7 @@ export default function HomePage() {
                 <br />
                 the answer.
               </h2>
-              <p className="text-gray-400 leading-relaxed text-base mb-8">
+              <p className="text-gray-400 leading-relaxed text-base mb-6">
                 Ten years of knowledge is sitting in your sent folder, quote
                 files, and job notes right now. Nobody can find it fast enough
                 to use it — so they ask the person who already knows. Company
@@ -331,7 +401,7 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-3">
                 What it reads
               </p>
-              <div className="grid grid-cols-3 gap-2 mb-6">
+              <div className="grid grid-cols-3 gap-2 mb-4">
                 {docSources.map((src) => (
                   <div
                     key={src.label}
@@ -345,10 +415,7 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <p className="text-xs text-white/30 leading-relaxed">
-                The more you add, the sharper it gets. Knowledge compounds
-                instead of walking out when someone leaves.
-              </p>
+              <PipelineDiagram />
             </div>
 
             <CompanyBrainDemo />
@@ -417,8 +484,10 @@ export default function HomePage() {
                     </td>
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-2">
-                        <XIcon />
-                        <span className="text-xs text-gray-400">No</span>
+                        <CompCell value={row.queryable} />
+                        <span className="text-xs text-gray-400">
+                          {row.queryable === "partial" ? "Partially" : "No"}
+                        </span>
                       </div>
                     </td>
                   </tr>
@@ -452,6 +521,11 @@ export default function HomePage() {
               </tbody>
             </table>
           </div>
+
+          {/* NotebookLM honest note */}
+          <p className="text-xs text-gray-400 mt-6 leading-relaxed max-w-2xl">
+            For a 3-person shop with a clean Google Drive and 200 documents, NotebookLM is probably the right answer — it&apos;s free and it works. Company Brain is for the 14-year company with thousands of documents across scattered systems that no consumer tool was built to handle.
+          </p>
         </div>
       </section>
 
@@ -473,11 +547,14 @@ export default function HomePage() {
               <p className="text-gray-500 leading-relaxed mb-8">
                 Not a login we throw over the fence. The first version is
                 scoped around real questions, connected to real sources, and
-                tuned with the people who need it most.
+                tuned with the people who need it most. The hard part isn&apos;t
+                the technology — it&apos;s the judgment calls about what to
+                ingest, what to exclude, and how to handle conflicts.
+                That&apos;s the consulting.
               </p>
 
               {/* Estimator vault callout */}
-              <div className="bg-gray-950 text-white rounded-2xl p-6 mb-8">
+              <div className="bg-gray-950 text-white rounded-2xl p-6 mb-6">
                 <p className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-3">
                   Where we start
                 </p>
@@ -486,6 +563,17 @@ export default function HomePage() {
                   We start there — build his vault while he&apos;s still here,
                   feed it with 5 years of quotes and emails, capture what&apos;s
                   only in his head. Highest-risk gap first. Then expand.&rdquo;
+                </p>
+              </div>
+
+              {/* Pricing transparency */}
+              <div className="border border-gray-100 rounded-2xl p-5 mb-8">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Pricing</p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Engagements start with a scoped setup fee, then a monthly
+                  retainer for re-ingestion, tuning, and team support. The
+                  retainer is what keeps the system current — without it, it
+                  decays. We&apos;ll scope both numbers on the first call.
                 </p>
               </div>
 
@@ -498,14 +586,31 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="space-y-4">
-              {setupSteps.map((item) => (
-                <div key={item.step} className="border border-gray-100 rounded-2xl p-7">
-                  <div className="text-xs font-semibold text-gray-300 mb-3">{item.step}</div>
-                  <h3 className="text-xl font-bold text-black mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
-                </div>
-              ))}
+            {/* Setup steps with week timeline */}
+            <div className="relative">
+              {/* Vertical connecting line */}
+              <div className="absolute left-[19px] top-8 bottom-8 w-px bg-gray-100 hidden sm:block" aria-hidden="true" />
+              <div className="space-y-4">
+                {setupSteps.map((item, i) => (
+                  <div key={item.week} className="relative flex gap-5">
+                    {/* Week dot */}
+                    <div className="flex-shrink-0 flex flex-col items-center">
+                      <div className={`w-[38px] h-[38px] rounded-full border-2 flex items-center justify-center text-[10px] font-bold z-10 ${
+                        item.week === "Ongoing"
+                          ? "bg-green-50 border-green-200 text-green-700"
+                          : "bg-white border-gray-200 text-gray-400"
+                      }`}>
+                        {i + 1}
+                      </div>
+                    </div>
+                    <div className="flex-1 border border-gray-100 rounded-2xl p-6 mb-0">
+                      <div className="text-xs font-semibold text-green-700 mb-1.5">{item.week}</div>
+                      <h3 className="text-lg font-bold text-black mb-2">{item.title}</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -540,18 +645,38 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {fitPoints.map((item) => (
-                <div
-                  key={item.text}
-                  className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-3"
-                >
-                  <span className="mt-0.5 w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0 text-green-700">
-                    <FitIcon icon={item.icon} />
-                  </span>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.text}</p>
-                </div>
-              ))}
+            <div className="space-y-4">
+              {/* Who it IS for */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {fitPoints.map((item) => (
+                  <div
+                    key={item.text}
+                    className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-3"
+                  >
+                    <span className="mt-0.5 w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0 text-green-700">
+                      <FitIcon icon={item.icon} />
+                    </span>
+                    <p className="text-sm text-gray-600 leading-relaxed">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Who this isn't for */}
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
+                  Who this isn&apos;t for
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  If you&apos;re under 8 years old, under 5 people, or your documents
+                  already live cleanly in one system — you probably don&apos;t need us.
+                  Try NotebookLM or Claude Projects first. They&apos;re free, and for
+                  a tidy operation they&apos;ll do the job.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  We&apos;ll tell you this on the first call if it applies. The
+                  people who do fit trust the rest of what we say because of it.
+                </p>
+              </div>
             </div>
           </div>
         </div>

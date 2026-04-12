@@ -109,7 +109,7 @@ supabase/schema.sql
 3. **Growth ceiling** — adding crew, PMs, or new markets adds proportional owner load. As long as the owner is the system, the owner is the ceiling. State this explicitly.
 
 ### Core differentiator
-Company Brain works on the mess that already exists. Every other solution requires someone to put things into a new system first. This one ingests what's already there — emails, quote PDFs, job notes, scattered drives — and makes it queryable. That's the answer to "why not just use Notion / Jobber / a shared drive."
+Company Brain works on the mess that already exists. Every other solution requires someone to put things into a new system first. This one ingests what's already there — emails, quote PDFs, job notes, scattered drives — and makes it queryable. That's the answer to "why not just use Notion / a shared drive / NotebookLM." (NotebookLM is a legitimate alternative for small clean shops — acknowledge it, don't dismiss it.)
 
 ### Best fit qualifier
 **Tenure + accumulated chaos**, not just headcount + trade. A company operating 8+ years with context accumulated across hundreds of jobs that was never formalized. A 2-year-old HVAC startup doesn't have this problem. A 14-year-old GC with 3 PMs and 10 subs does.
@@ -128,7 +128,7 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 
 ### Copy rules
 - **One CTA above the fold.** No secondary link beside the primary button in the hero.
-- **Company Brain definition must appear in hero sub-copy.** Current: *"a private AI knowledge system built from the documents your company already has."* Don't let the name float undefined.
+- **Company Brain definition must appear in hero sub-copy.** Current: *"a private AI knowledge system built from the documents your company already has."* Don't let the name float undefined. Hero framing: behavior change is on REBB's side ("we do the ingestion, tuning, and ongoing curation") — not "no behavior change required."
 - **Homepage section order:** Hero → Demo → Comparison → Setup Process → Best Fit → Data Security → Final CTA.
 - **LLC Owner Finder stays off the homepage.** Lives on `/lead-intelligence` only.
 - **Section headers state outcomes.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
@@ -369,7 +369,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero (key-person risk H1, role-badged pain card) → CompanyBrainDemo (dark, source chip grid) → Comparison table (Notion / Jobber / SOP consultant / ChatGPT vs Company Brain) → Setup Process (estimator vault callout + 3 steps) → Best Fit (icon cards) → Data Security → Final CTA. All CTAs → `/contact`. No LiveSignalFeed. |
+| `/` | Hero (key-person risk H1, role-badged pain card; hero sub-copy frames behavior change as REBB's job not client's) → CompanyBrainDemo (dark, source chip grid + `PipelineDiagram` SVG with honest "outdated docs" caveat) → Comparison table (Notion / SOP consultant / NotebookLM vs Company Brain; Jobber and Generic AI removed; plain-text note below table recommending NotebookLM for small shops) → Setup Process (estimator vault callout, pricing transparency callout, 4-step week-labeled timeline: Week 1 / Week 2–3 / Week 4 / Ongoing) → Best Fit (icon cards + amber "Who this isn't for" block) → Data Security → Final CTA. All CTAs → `/contact`. No LiveSignalFeed. |
 | `/how-it-works` | 4-phase process walkthrough (map → build → test → tune) |
 | `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
