@@ -129,7 +129,7 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 ### Copy rules
 - **One CTA above the fold.** No secondary link beside the primary button in the hero.
 - **Company Brain definition must appear in hero sub-copy.** Current: *"a private AI knowledge system built from the documents your company already has."* Don't let the name float undefined.
-- **Homepage section order:** Hero → Demo → Setup Process → Best Fit → Data Security → Final CTA.
+- **Homepage section order:** Hero → Demo → Comparison → Setup Process → Best Fit → Data Security → Final CTA.
 - **LLC Owner Finder stays off the homepage.** Lives on `/lead-intelligence` only.
 - **Section headers state outcomes.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
 - **Final CTA headline must match hero specificity.** Concrete and blunt.
@@ -369,7 +369,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero (Company Brain pitch, pain card) → CompanyBrainDemo (dark) → Setup Process (3 steps) → Best Fit → Data Security (trust checkpoint) → Final CTA. All CTAs → `/contact`. No LiveSignalFeed on homepage. |
+| `/` | Hero (key-person risk H1, role-badged pain card) → CompanyBrainDemo (dark, source chip grid) → Comparison table (Notion / Jobber / SOP consultant / ChatGPT vs Company Brain) → Setup Process (estimator vault callout + 3 steps) → Best Fit (icon cards) → Data Security → Final CTA. All CTAs → `/contact`. No LiveSignalFeed. |
 | `/how-it-works` | 4-phase process walkthrough (map → build → test → tune) |
 | `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
