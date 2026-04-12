@@ -101,6 +101,18 @@ supabase/schema.sql
 - Dark CTA sections: `bg-gray-950` or `bg-black` with `green-500` buttons
 - Article body: `prose prose-gray max-w-none` + `dangerouslySetInnerHTML`
 
+## Marketing Copy Standards
+
+- **One CTA above the fold.** No secondary link beside the primary button in the hero.
+- **Define Company Brain immediately.** The hero sub-copy must include a one-phrase definition: *"Company Brain is a private AI system built from your actual company documents."* Don't let the product name float undefined.
+- **Lead with the strongest benefit.** The benefit line ("Your team gets answers in seconds. You get pulled in for judgment calls.") must not be visually subordinated below a weaker setup sentence.
+- **Homepage section order:** Hero → Demo → Setup Process → Best Fit → Data Security → Final CTA. Data security is a trust checkpoint near the CTA, not a third section.
+- **LLC Owner Finder stays off the homepage.** It lives on `/lead-intelligence` only. Beta products with inconsistent quality don't belong on the homepage.
+- **Section headers state outcomes, not delivery methods.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
+- **Final CTA headline must match hero specificity.** Concrete and blunt, like the hero. No abstract closers.
+- **Don't repeat the owner-interruption benefit verbatim.** One canonical formulation: "Your team gets answers in seconds. You get pulled in for judgment calls, not routine lookups." Use it once; vary or omit elsewhere.
+- **Include a scope signal.** "Most first engagements complete in under 30 days" — lets visitors self-qualify. Lives in the pain card footer.
+
 ## Supabase
 
 - Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
@@ -334,8 +346,8 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Hero (Company Brain pitch, pain card), CompanyBrainDemo chat mockup (dark section, compounding angle), How It Lands (3-step setup), Best Fit, LLC Owner Finder beta section (amber, LiveSignalFeed), final CTA. All CTAs → `/contact` |
-| `/how-it-works` | 5-step onboarding + process walkthrough |
+| `/` | Hero (Company Brain pitch, pain card) → CompanyBrainDemo (dark) → Setup Process (3 steps) → Best Fit → Data Security (trust checkpoint) → Final CTA. All CTAs → `/contact`. No LiveSignalFeed on homepage. |
+| `/how-it-works` | 4-phase process walkthrough (map → build → test → tune) |
 | `/lead-intelligence` | LLC Owner Finder deep dive |
 | `/seo` | Local SEO audits + GBP optimization |
 | `/web-development` | React/Next.js builds for trades |

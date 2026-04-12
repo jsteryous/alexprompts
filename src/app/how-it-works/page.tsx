@@ -137,10 +137,10 @@ export default function HowItWorksPage() {
                   </svg>
                 </Link>
                 <Link
-                  href="/lead-intelligence"
+                  href="/contact"
                   className="inline-flex items-center justify-center text-base font-medium text-gray-600 px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:text-black transition-colors"
                 >
-                  See The Beta Initiative
+                  See If You Fit
                 </Link>
               </div>
             </div>
