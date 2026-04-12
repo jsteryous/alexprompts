@@ -20,6 +20,7 @@ import logging
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -125,7 +126,7 @@ def fetch_recent_titles(n: int = 20) -> list[str]:
     url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_KEY")
     if not url or not key:
-        log.warning("Supabase credentials not set — recent titles unavailable.")
+        log.warning("Supabase credentials not set — recent titles unavailable. Topics will not avoid repeats.")
         return []
     try:
         from supabase import create_client
@@ -139,8 +140,51 @@ def fetch_recent_titles(n: int = 20) -> list[str]:
         )
         return [row["title"] for row in result.data]
     except Exception as exc:
-        log.warning(f"Could not fetch recent titles: {exc}")
+        log.error(
+            f"Could not fetch recent titles from Supabase: {exc}\n"
+            "  Proceeding without deduplication — topic may repeat a recent article."
+        )
         return []
+
+
+def _call_gemini_for_topics(client, prompt: str, types) -> dict:
+    """Call Gemini and parse JSON response. Retries up to 3 times with backoff."""
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    temperature=1.0,  # max safe value; 1.2 can be silently clamped
+                ),
+            )
+            raw = response.text.strip()
+
+            # Strip markdown code fences if Gemini wraps the JSON anyway
+            if raw.startswith("```"):
+                lines = raw.splitlines()
+                raw = "\n".join(lines[1:])
+                if raw.rstrip().endswith("```"):
+                    raw = raw[: raw.rfind("```")]
+                raw = raw.strip()
+
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            last_exc = exc
+            log.warning(f"Gemini returned invalid JSON (attempt {attempt + 1}/3): {exc}")
+            log.warning(f"Raw response:\n{response.text[:500]}")
+        except Exception as exc:
+            last_exc = exc
+            log.warning(f"Gemini call failed (attempt {attempt + 1}/3): {exc}")
+
+        if attempt < 2:
+            wait = 2 ** attempt
+            log.info(f"Retrying in {wait}s...")
+            time.sleep(wait)
+
+    log.error(f"Gemini topic generation failed after 3 attempts: {last_exc}")
+    sys.exit(1)
 
 
 def generate_topic(recent_titles: list[str]) -> str:
@@ -172,30 +216,7 @@ def generate_topic(recent_titles: list[str]) -> str:
     client = genai.Client(api_key=api_key)
     log.info("Asking Gemini to generate topic candidates...")
 
-    response = client.models.generate_content(
-        model=GEMINI_MODEL,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            temperature=1.2,  # higher creativity for topic generation
-        ),
-    )
-
-    raw = response.text.strip()
-
-    # Strip markdown code fences if Gemini wraps the JSON anyway
-    if raw.startswith("```"):
-        lines = raw.splitlines()
-        raw = "\n".join(lines[1:])
-        if raw.rstrip().endswith("```"):
-            raw = raw[: raw.rfind("```")]
-        raw = raw.strip()
-
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        log.error(f"Gemini returned invalid JSON for topic generation: {exc}")
-        log.error(f"Raw response:\n{raw}")
-        sys.exit(1)
+    data = _call_gemini_for_topics(client, prompt, types)
 
     candidates = data.get("candidates", [])
     winner = data.get("winner", "").strip()
@@ -204,9 +225,18 @@ def generate_topic(recent_titles: list[str]) -> str:
     for c in candidates:
         log.info(f"  [{c.get('score', '?'):>3}] [{c.get('category', '?')[:30]}]  {c.get('topic', '')}")
 
-    if not winner:
-        log.error("No winner returned in Gemini topic-generation response.")
+    if not candidates:
+        log.error("No candidates returned in Gemini topic-generation response.")
         sys.exit(1)
+
+    # Validate winner is one of the actual candidates; fall back to highest score if not
+    candidate_topics = [c["topic"] for c in candidates if c.get("topic")]
+    if winner not in candidate_topics:
+        log.warning(
+            f"Winner {winner!r} not found in candidate list — "
+            "falling back to highest-scored candidate."
+        )
+        winner = max(candidates, key=lambda c: c.get("score", 0))["topic"]
 
     log.info(f"Winner: {winner!r}")
     return winner

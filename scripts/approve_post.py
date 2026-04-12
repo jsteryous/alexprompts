@@ -33,6 +33,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 from supabase import create_client
 
+# Import summary extractor from the sibling module
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from generate_insights import extract_summary  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env.local")
 
@@ -179,6 +183,8 @@ def edit_post(client, post_id: str) -> None:
         print("\n  No changes detected. Nothing saved.\n")
         return
 
+    new_summary = extract_summary(new_body)
+
     # Confirm
     print("\n  What would you like to do?")
     print("  [p] Save edits and PUBLISH now")
@@ -190,11 +196,13 @@ def edit_post(client, post_id: str) -> None:
         print("  Edits discarded.\n")
         return
 
-    updates: dict = {"title": new_title, "body_md": new_body}
+    updates: dict = {"title": new_title, "body_md": new_body, "summary": new_summary}
 
     if choice == "p":
         updates["status"] = "PUBLISHED"
-        updates["published_at"] = datetime.now(timezone.utc).isoformat()
+        # Only set published_at on first publish — preserve original date on re-publish
+        if not post.get("published_at"):
+            updates["published_at"] = datetime.now(timezone.utc).isoformat()
     else:
         updates["status"] = "DRAFT"
 
@@ -213,7 +221,7 @@ def update_status(client, post_id: str, new_status: str) -> None:
         log.error(f"Invalid status '{new_status}'. Must be one of: {', '.join(VALID_STATUSES)}")
         sys.exit(1)
 
-    fetch = client.table("blog_posts").select("id, title, slug, status").eq("id", post_id).execute()
+    fetch = client.table("blog_posts").select("id, title, slug, status, published_at").eq("id", post_id).execute()
     if not fetch.data:
         log.error(f"No post found with id={post_id}")
         sys.exit(1)
@@ -226,7 +234,8 @@ def update_status(client, post_id: str, new_status: str) -> None:
         return
 
     updates: dict = {"status": new_status}
-    if new_status == "PUBLISHED":
+    if new_status == "PUBLISHED" and not post.get("published_at"):
+        # Only set published_at on first publish — preserve original date on re-publish
         updates["published_at"] = datetime.now(timezone.utc).isoformat()
 
     client.table("blog_posts").update(updates).eq("id", post_id).execute()

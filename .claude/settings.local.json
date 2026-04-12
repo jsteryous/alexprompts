@@ -98,7 +98,10 @@
       "Bash(grep:*)",
       "WebFetch(domain:github.com)",
       "Bash(PYTHONUTF8=1 python enrich.py --list-pending)",
-      "Bash(PYTHONUTF8=1 python:*)"
+      "Bash(PYTHONUTF8=1 python:*)",
+      "WebFetch(domain:verify.llronline.com)",
+      "WebFetch(domain:llr.sc.gov)",
+      "Bash(ENRICH_DEBUG=1 python:*)"
     ]
   }
 }

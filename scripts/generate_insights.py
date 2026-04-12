@@ -20,10 +20,12 @@ Optional env vars:
 """
 
 import argparse
+import html
 import logging
 import os
 import re
 import sys
+import time
 import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
@@ -118,8 +120,11 @@ def extract_summary(body_md: str, max_chars: int = 280) -> str:
     return ""
 
 
-def generate_with_gemini(topic: str) -> str:
-    """Call the Gemini API and return the raw Markdown string."""
+def generate_with_gemini(topic: str, max_retries: int = 3) -> str:
+    """Call the Gemini API and return the raw Markdown string.
+
+    Retries up to max_retries times with exponential backoff on transient errors.
+    """
     try:
         from google import genai
         from google.genai import types
@@ -135,14 +140,30 @@ def generate_with_gemini(topic: str) -> str:
     client = genai.Client(api_key=api_key)
 
     log.info(f"Calling Gemini ({GEMINI_MODEL}) for topic: {topic!r}")
-    response = client.models.generate_content(
-        model=GEMINI_MODEL,
-        contents=topic,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_PROMPT,
-        ),
-    )
-    return response.text
+    last_exc: Exception | None = None
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=topic,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT,
+                ),
+            )
+            text = response.text
+            if not text or len(text.strip()) < 200:
+                raise ValueError(f"Gemini returned suspiciously short content ({len(text or '')} chars)")
+            return text
+        except Exception as exc:
+            last_exc = exc
+            if attempt < max_retries - 1:
+                wait = 2 ** attempt
+                log.warning(f"Gemini attempt {attempt + 1}/{max_retries} failed: {exc} — retrying in {wait}s")
+                time.sleep(wait)
+            else:
+                log.error(f"Gemini failed after {max_retries} attempts: {exc}")
+
+    sys.exit(1)
 
 
 def save_draft(supabase_client, title: str, slug: str, body_md: str,
@@ -215,13 +236,16 @@ def send_email_notification(post_id: str, title: str, summary: str,
     else:
         buttons = '<p style="font-size:12px;color:#aaa">(Set PUBLISH_SECRET + NEXT_PUBLIC_SITE_URL in .env.local to enable buttons)</p>'
 
+    safe_title   = html.escape(title)
+    safe_summary = html.escape(summary) if summary else "(no summary)"
+
     email_html = f"""
 <html><body style="font-family:system-ui,sans-serif;max-width:620px;margin:40px auto;color:#0a0a0a;padding:0 16px">
   <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#16a34a;margin:0 0 12px">
     REBB Advisors · Market Insights
   </p>
-  <h2 style="margin:0 0 8px;font-size:22px;line-height:1.3">{title}</h2>
-  <p style="color:#555;margin:0 0 28px;font-size:15px;line-height:1.6">{summary or "(no summary)"}</p>
+  <h2 style="margin:0 0 8px;font-size:22px;line-height:1.3">{safe_title}</h2>
+  <p style="color:#555;margin:0 0 28px;font-size:15px;line-height:1.6">{safe_summary}</p>
 
   <div style="margin-bottom:32px">{buttons}</div>
 
