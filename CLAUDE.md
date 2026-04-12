@@ -8,7 +8,7 @@
 **REBB's tagline:** "We find the owner. You make the sale."
 
 **Two products:**
-1. **Company Brain** *(core offer)* — Private AI knowledge system built around a service company's existing emails, quotes, job notes, SOPs, and vendor docs. Team members query it to get answers with source citations instead of interrupting the owner. Knowledge compounds over time — the more context fed in, the sharper the answers. Positioned as a hands-on setup service, not a self-serve SaaS.
+1. **Company Brain** *(core offer)* — RAG system (Retrieval Augmented Generation) with Obsidian as the structured knowledge layer. Ingests the documents a company already has — emails, quotes, job notes, SOPs, vendor files — and makes them queryable with source citations. The core differentiator: works on the mess that already exists without requiring anyone to change how they work. Value is in the setup service (ingestion, structuring, adoption), not the technology itself. Structured as role-based Obsidian vaults (estimator, PM, field, admin) that feed a unified AI query layer. Land-and-expand: start with the highest-risk knowledge gap (usually estimator or owner tribal knowledge), prove value, expand.
 
    **Three deployment tiers (homepage data security section):**
    - **Air-Gapped** — open-source LLM runs entirely on client hardware. Nothing leaves. Lower model quality.
@@ -103,15 +103,38 @@ supabase/schema.sql
 
 ## Marketing Copy Standards
 
+### Problems to sell (in order of severity)
+1. **Key-person risk** — lead estimator/PM leaves, takes 10 years of pricing logic, vendor context, and job history with them. This is the fear that creates urgency. Lead with it.
+2. **Owner can't step back** — every delegation attempt collapses because the team routes everything back to the owner; there's no other place to look. Framed as: "The system is the owner."
+3. **Growth ceiling** — adding crew, PMs, or new markets adds proportional owner load. As long as the owner is the system, the owner is the ceiling. State this explicitly.
+
+### Core differentiator
+Company Brain works on the mess that already exists. Every other solution requires someone to put things into a new system first. This one ingests what's already there — emails, quote PDFs, job notes, scattered drives — and makes it queryable. That's the answer to "why not just use Notion / Jobber / a shared drive."
+
+### Best fit qualifier
+**Tenure + accumulated chaos**, not just headcount + trade. A company operating 8+ years with context accumulated across hundreds of jobs that was never formalized. A 2-year-old HVAC startup doesn't have this problem. A 14-year-old GC with 3 PMs and 10 subs does.
+
+### What Company Brain can't solve (manage expectations in sales)
+- **Pure tacit knowledge** — things never written down. Captured only through intentional Obsidian documentation before someone leaves.
+- **Garbage in, garbage out** — sparse notes produce low-confidence answers.
+- **Adoption** — people will still call the owner if it's easier. The setup service must address this.
+
+### Sales motion
+Don't pitch "whole company in 30 days." Start with the highest-risk knowledge gap:
+> *"What happens if your lead estimator leaves tomorrow? We start there — build his vault while he's still here, feed it with 5 years of quotes and emails, capture what's only in his head. That's the highest-risk gap first."*
+
+### Positioning line
+*"We capture and protect the knowledge that runs your business — before someone takes it with them."*
+
+### Copy rules
 - **One CTA above the fold.** No secondary link beside the primary button in the hero.
-- **Define Company Brain immediately.** The hero sub-copy must include a one-phrase definition: *"Company Brain is a private AI system built from your actual company documents."* Don't let the product name float undefined.
-- **Lead with the strongest benefit.** The benefit line ("Your team gets answers in seconds. You get pulled in for judgment calls.") must not be visually subordinated below a weaker setup sentence.
-- **Homepage section order:** Hero → Demo → Setup Process → Best Fit → Data Security → Final CTA. Data security is a trust checkpoint near the CTA, not a third section.
-- **LLC Owner Finder stays off the homepage.** It lives on `/lead-intelligence` only. Beta products with inconsistent quality don't belong on the homepage.
-- **Section headers state outcomes, not delivery methods.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
-- **Final CTA headline must match hero specificity.** Concrete and blunt, like the hero. No abstract closers.
-- **Don't repeat the owner-interruption benefit verbatim.** One canonical formulation: "Your team gets answers in seconds. You get pulled in for judgment calls, not routine lookups." Use it once; vary or omit elsewhere.
-- **Include a scope signal.** "Most first engagements complete in under 30 days" — lets visitors self-qualify. Lives in the pain card footer.
+- **Company Brain definition must appear in hero sub-copy.** Current: *"a private AI knowledge system built from the documents your company already has."* Don't let the name float undefined.
+- **Homepage section order:** Hero → Demo → Setup Process → Best Fit → Data Security → Final CTA.
+- **LLC Owner Finder stays off the homepage.** Lives on `/lead-intelligence` only.
+- **Section headers state outcomes.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
+- **Final CTA headline must match hero specificity.** Concrete and blunt.
+- **One canonical interruption line.** Use once: *"Your team gets answers in seconds. You get pulled in for judgment calls, not routine lookups."*
+- **"Company Brain" name stays.** "Real Business Brain" is worse — longer, sounds defensive.
 
 ## Supabase
 

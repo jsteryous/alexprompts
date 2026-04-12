@@ -205,14 +205,16 @@ export default function HowItWorksPage() {
                 not generic AI advice.
               </h2>
               <p className="text-gray-400 leading-relaxed text-lg mb-6">
-                Most service businesses do not need a bigger pile of tools. They
-                need one place that helps the team retrieve what the business
-                already knows.
+                Your job management software tracks jobs. Your shared drive
+                stores files. Neither one answers a question. Company Brain
+                reads the documents your company already has — emails, quotes,
+                notes, vendor files — and makes them queryable without asking
+                anyone to change how they work.
               </p>
               <p className="text-gray-400 leading-relaxed">
-                REBB is focused on that specific operational problem: too much
-                context spread across too many places, with the owner still acting
-                like the default answer engine.
+                The knowledge is already there. It&apos;s just trapped. REBB does
+                the hard work of pulling it out, structuring it, and making it
+                something the team actually uses.
               </p>
             </div>
 
@@ -352,10 +354,10 @@ export default function HowItWorksPage() {
                 The owner is still the company&apos;s search bar.
               </h2>
               <ul className="space-y-3 text-sm text-gray-500">
-                <li>Answers trapped in inboxes, folders, and memory</li>
-                <li>Constant interruptions for routine lookups</li>
-                <li>Slow onboarding because context lives in people</li>
-                <li>Too much re-checking before anyone acts</li>
+                <li>Key person leaves — pricing logic, vendor context, and job history go with them</li>
+                <li>Answers trapped in inboxes, folders, and the owner&apos;s memory</li>
+                <li>Constant interruptions for questions that have already been answered a hundred times</li>
+                <li>Slow onboarding because everything useful lives in people, not somewhere findable</li>
               </ul>
             </div>
 
@@ -367,10 +369,10 @@ export default function HowItWorksPage() {
                 The team checks the system before it checks the owner.
               </h2>
               <ul className="space-y-3 text-sm text-gray-700">
-                <li>Routine answers are easier to retrieve quickly</li>
-                <li>The owner gets pulled into exceptions, not everything</li>
-                <li>Knowledge gets more durable across hires and handoffs</li>
-                <li>Internal execution speeds up with better context</li>
+                <li>When a key person leaves, the knowledge stays</li>
+                <li>New hires get up to speed faster because context is findable</li>
+                <li>The owner gets pulled into judgment calls, not routine lookups</li>
+                <li>The company can grow without proportionally growing the owner&apos;s workload</li>
               </ul>
             </div>
           </div>

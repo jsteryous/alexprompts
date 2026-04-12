@@ -2,9 +2,9 @@ import Link from "next/link";
 import CompanyBrainDemo from "@/components/CompanyBrainDemo";
 
 const painPoints = [
+  "Your lead estimator gives notice. Half your pricing logic is in his head.",
   "Your estimator asks if a quote was already sent.",
   "Your PM asks what got promised on a job.",
-  "Your office asks where an invoice or CO lives.",
   "Everyone asks you because you're still the system.",
 ];
 
@@ -27,10 +27,10 @@ const setupSteps = [
 ];
 
 const fitPoints = [
-  "5–25 person HVAC, plumbing, electrical, roofing, GC, or similar service teams",
+  "5–25 person HVAC, plumbing, electrical, roofing, GC, or similar service team",
+  "In business 8+ years with context accumulated across hundreds of jobs",
   "Owner still answers routine operational questions most days",
-  "Knowledge spread across email, notes, shared drives, and job folders",
-  "Need faster onboarding, fewer interruptions, and more durable company memory",
+  "Knowledge spread across email, notes, shared drives, and job folders — never properly formalized",
 ];
 
 export default function HomePage() {
@@ -53,12 +53,15 @@ export default function HomePage() {
               </h1>
               <p className="text-lg text-gray-700 leading-relaxed mb-4 max-w-2xl">
                 Your team gets answers in seconds. You get pulled in for
-                judgment calls, not routine lookups.
+                judgment calls, not routine lookups. And when a key person
+                leaves, the knowledge stays.
               </p>
               <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-2xl">
-                Company Brain is a private AI system built from your actual
-                company documents — quotes, job notes, emails, and SOPs.
-                Private by default. No training on your data.
+                Company Brain is a private AI knowledge system built from the
+                documents your company already has — quotes, job notes, emails,
+                SOPs, and vendor files. It doesn&apos;t require anyone to change
+                how they work. It reads what&apos;s already there and makes it
+                queryable. Private by default. No training on your data.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <Link
@@ -103,9 +106,9 @@ export default function HomePage() {
               </div>
               <div className="mt-6 pt-6 border-t border-stone-200">
                 <p className="text-sm text-gray-500 leading-relaxed">
-                  Most first engagements complete in under 30 days. The team
-                  gets a trusted place to check first — the owner gets their
-                  time back.
+                  As long as you&apos;re the system, you&apos;re also the ceiling.
+                  Every new hire, every crew, every expansion adds to the
+                  load. Most first engagements complete in under 30 days.
                 </p>
               </div>
             </div>
@@ -129,23 +132,23 @@ export default function HomePage() {
                 the answer.
               </h2>
               <p className="text-gray-400 leading-relaxed text-lg mb-4">
-                Every quote, email, job note, and vendor call holds context
-                your team needs daily. Company Brain reads it all, connects
-                the dots, and answers questions with citations back to the
-                source.
+                The knowledge already exists in your company. It&apos;s in sent
+                folders, quote files, job notes, and vendor emails accumulated
+                over years. It&apos;s just unqueryable. Company Brain reads
+                everything that&apos;s already there — no new system to feed —
+                and returns answers with citations back to the source.
               </p>
               <p className="text-gray-500 leading-relaxed mb-8">
-                The more you feed it, the sharper it gets. Knowledge
-                compounds instead of disappearing across inboxes and
-                turnover.
+                The more you add, the sharper it gets. Knowledge compounds
+                instead of walking out the door when someone leaves.
               </p>
               <ul className="space-y-2.5">
                 {[
+                  "Owner tribal knowledge — captured once, stays forever",
                   "Email threads and attachments",
                   "Quotes, invoices, and job notes",
                   "Shared drives and SOPs",
                   "Vendor docs and call notes",
-                  "Owner tribal knowledge — written down once",
                 ].map((s) => (
                   <li key={s} className="flex items-center gap-3 text-sm text-gray-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
@@ -215,14 +218,15 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
                 Built for the company
                 <br />
-                that keeps asking
+                with years of context
                 <br />
-                the owner.
+                and nowhere to put it.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                If the owner is still the fastest path to any answer, and the
-                team has grown complex enough that this creates real drag —
-                that&apos;s who this is built for.
+                If your company has been running long enough to accumulate
+                real institutional knowledge — and that knowledge lives in
+                people and inboxes instead of somewhere the team can
+                actually use it — that&apos;s the problem this is built for.
               </p>
               <Link
                 href="/contact"
