@@ -9,6 +9,11 @@
 
 **Two products:**
 1. **Company Brain** *(core offer)* — Private AI knowledge system built around a service company's existing emails, quotes, job notes, SOPs, and vendor docs. Team members query it to get answers with source citations instead of interrupting the owner. Knowledge compounds over time — the more context fed in, the sharper the answers. Positioned as a hands-on setup service, not a self-serve SaaS.
+
+   **Three deployment tiers (homepage data security section):**
+   - **Air-Gapped** — open-source LLM runs entirely on client hardware. Nothing leaves. Lower model quality.
+   - **API (REBB default)** — Claude commercial API. Contractually: no training on client data, 7-day retention then deleted. Distinct from Claude.ai consumer products (Free/Pro/Max) which have opt-in training. Verify at privacy.claude.com if citing in sales.
+   - **Hybrid** — docs stored locally; only question + matched excerpt sent to API at query time.
 2. **LLC Owner Finder** *(beta — quality still being refined)* — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Tagline: **"We find the owner. You make the sale."** — but do not position this as a polished product. LLC-to-person resolution quality and contact accuracy are still inconsistent. Frame honestly as early-access for the right trade and territory. When in doubt, default to Company Brain as the conversation anchor.
 
 ## Tech Stack
@@ -120,37 +125,6 @@ supabase/schema.sql
 | `source_key` | text | dedup key — unique constraint, NULLs exempt (demo signals) |
 | `signal_type` | text | `MORTGAGE_FILING` (triggers OCR enrichment) / `NOMINAL_TRANSFER` (consideration < $1,000 — family/trust deed) / null |
 
-### LiveSignalFeed behavior
-
-- No env vars: renders mock data, footer shows `DEMO MODE`
-- With env vars: fetches last 6 on mount, subscribes to Postgres INSERT via Realtime
-- New signal: border flashes green, row slides in at top; capped at 6 visible rows
-
-### blog_posts columns
-
-| Column | Type | Notes |
-|---|---|---|
-| `slug` | text | unique URL slug |
-| `body_md` | text | Markdown |
-| `summary` | text | excerpt |
-| `tags` | text[] | |
-| `status` | text | `DRAFT` / `APPROVED` / `PUBLISHED` |
-| `published_at` | timestamptz | auto-set on PUBLISHED |
-| `topic` | text | generation prompt |
-| `gemini_model` | text | e.g. `gemini-2.5-flash` |
-
-RLS: public SELECT only where `status = 'PUBLISHED'`.
-
-### clients columns
-
-| Column | Type | Notes |
-|---|---|---|
-| `slug` | text | unique, URL-safe |
-| `token` | text | token-gated access secret |
-| `trade_tags` | text[] | `hvac` / `landscaping` / `electrical` / `cleaning` / `security` |
-| `contact_email` | text | |
-| `status` | text | `trial` / `active` / `inactive` |
-
 ### enriched_leads columns
 
 | Column | Type | Notes |
@@ -158,7 +132,7 @@ RLS: public SELECT only where `status = 'PUBLISHED'`.
 | `signal_id` | uuid | FK → market_signals |
 | `client_id` | uuid | FK → clients (null = unassigned) |
 | `principal_name` | text | human name or LLC title-case if unresolved |
-| `principal_role` | text | source label — see constants below |
+| `principal_role` | text | source label — constants in `enrich_models.py` |
 | `contact_email` / `contact_phone` / `linkedin_url` | text | |
 | `search_evidence` | text | source URL |
 | `enrichment_status` | text | `raw` / `pending` / `enriched` |
@@ -290,22 +264,6 @@ Dashboard validates `location` with `isStreetAddress()` before rendering it as a
 
 `normalize_person_name()`: ALL-CAPS deed format `LASTNAME FIRSTNAME MIDDLE` → `Firstname Lastname`. Drops middle names, preserves JR/SR/II/III. For simple deed grantees (≤3 words, no "AND"), deed `entity_name` preferred over GIS (GIS concatenates first+middle without spaces).
 
-### principal_role constants
-
-| Constant | Value |
-|---|---|
-| `ROLE_MORTGAGE_SIG` | `"Mortgage Signature"` — format: `"Mortgage Signature – {title}"` |
-| `ROLE_TAX_CARE_OF` | `"Tax Record – Care Of"` |
-| `ROLE_GIS_OWNER` | `"Tax Record – GIS"` |
-| `ROLE_GIS_MAIL_FLIP` | `"Tax Record – Mailing"` |
-| `ROLE_SOS_INITIALS` | `"SC SOS – Initials Match"` |
-| dynamic | `f"SC SOS – {filing_role}"` |
-| `ROLE_PRESS_UBJ` | `"Business Press – UBJ"` |
-| `ROLE_PRESS_GBIZ` | `"Business Press – GSABiz"` |
-| `ROLE_WEB_SEARCH` | `"Web Search"` |
-
-TypeScript dashboard maps by `startsWith()` prefix for confidence tiers.
-
 ### Enrichment Stack Roadmap
 
 | Tier | Source | Status |
@@ -395,3 +353,4 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 - **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage. Any refactor is unprotected.
 - **`fetch_pending_signals` NOT IN query** — uses `.filter("id", "not.in", ...)` which passes as a URL param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.
+- **`principal_role` constants** — defined in `enrich_models.py`. TypeScript dashboard maps confidence tiers by `startsWith()` prefix.

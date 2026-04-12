@@ -167,6 +167,98 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Data security */}
+      <section className="bg-white py-24 md:py-32 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl mb-16">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-green-700 mb-4">
+              Data Security
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-5">
+              Your documents
+              <br />
+              aren&apos;t for training
+              <br />
+              someone else&apos;s AI.
+            </h2>
+            <p className="text-gray-500 leading-relaxed mb-6">
+              Most AI tools are consumer products. Uploading your quotes,
+              contracts, and job history to them carries real risks that most
+              business owners don&apos;t read the fine print on.
+            </p>
+            <div className="space-y-3">
+              {[
+                {
+                  label: "Your data may train the model.",
+                  body: "Consumer AI tools — ChatGPT, Claude.ai free and paid plans — can use your inputs to improve future versions of the model. Your pricing, customer details, and internal processes become part of the training set.",
+                },
+                {
+                  label: "Retention isn't guaranteed.",
+                  body: "Consumer products have no committed deletion timeline. Your documents sit on third-party servers indefinitely unless you manually request removal — and even then it isn't always clean.",
+                },
+                {
+                  label: "\"Private\" doesn't mean no one sees it.",
+                  body: "AI providers reserve the right to review conversations for safety and trust purposes. Sensitive contracts, proformas, or personnel notes have no privilege protections once uploaded.",
+                },
+              ].map((item) => (
+                <div key={item.label} className="border border-gray-100 rounded-2xl p-6">
+                  <p className="text-sm font-semibold text-black mb-1">{item.label}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                tag: "Maximum Privacy",
+                title: "Air-Gapped",
+                subtitle: "Nothing leaves your building.",
+                body: "The AI model runs entirely on your hardware using open-source models. No data ever touches an external server. Best fit for regulated industries or highly sensitive documents.",
+                tradeoff: "Tradeoff: lower model quality than cloud AI.",
+                accent: "bg-gray-950 text-white",
+                tagStyle: "bg-white/10 text-gray-300",
+                bodyStyle: "text-gray-400",
+                tradeoffStyle: "text-gray-600",
+              },
+              {
+                tag: "REBB Default",
+                title: "API — Secure by Design",
+                subtitle: "Commercial-grade. Not the consumer chatbot.",
+                body: "We use Claude's commercial API — a contractually different product from Claude.ai. By default: your data is never used to train the model, retained for 7 days only, then deleted. No opting in required.",
+                tradeoff: "Best quality. Contractually clean. This is what we recommend for most clients.",
+                accent: "bg-green-950 text-white",
+                tagStyle: "bg-green-500/20 text-green-400",
+                bodyStyle: "text-gray-400",
+                tradeoffStyle: "text-green-500",
+              },
+              {
+                tag: "Middle Ground",
+                title: "Hybrid",
+                subtitle: "Docs local. Queries go out, not documents.",
+                body: "Your source documents stay on your machine or internal network. When someone asks a question, only the question and the matched excerpt — not the full file — are sent to the API.",
+                tradeoff: "Best of both: local control with full model quality.",
+                accent: "bg-gray-950 text-white",
+                tagStyle: "bg-white/10 text-gray-300",
+                bodyStyle: "text-gray-400",
+                tradeoffStyle: "text-gray-400",
+              },
+            ].map((card) => (
+              <div key={card.title} className={`${card.accent} rounded-2xl p-7 flex flex-col`}>
+                <span className={`inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-5 self-start ${card.tagStyle}`}>
+                  {card.tag}
+                </span>
+                <h3 className="text-xl font-bold mb-1">{card.title}</h3>
+                <p className="text-sm font-medium text-gray-300 mb-4">{card.subtitle}</p>
+                <p className={`text-sm leading-relaxed mb-5 flex-1 ${card.bodyStyle}`}>{card.body}</p>
+                <p className={`text-xs leading-relaxed border-t border-white/10 pt-4 ${card.tradeoffStyle}`}>{card.tradeoff}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Setup process */}
       <section className="bg-white py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
