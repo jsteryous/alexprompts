@@ -117,6 +117,157 @@ export default function LeadIntelligencePage() {
         </div>
       </section>
 
+      {/* ── Dashboard mockup ── */}
+      <section className="bg-white py-20 md:py-28 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl mb-10">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
+              Sample Output
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight mb-4">
+              A ranked call list,
+              <br />
+              ready every Monday.
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              Each scored signal shows the decision-maker, their contact info,
+              and the public record that triggered it. Highest-confidence leads
+              first.
+            </p>
+          </div>
+
+          {/* Dashboard frame */}
+          <div className="border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            {/* Toolbar */}
+            <div className="bg-gray-950 px-5 py-3.5 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                </div>
+                <span className="text-xs text-white/35 font-mono ml-2">rebbadvisors.com/dashboard</span>
+              </div>
+              <span className="text-xs font-semibold text-amber-400">
+                Monday Digest · 14 signals this week
+              </span>
+            </div>
+
+            {/* Column headers */}
+            <div className="bg-gray-50 border-b border-gray-100 px-5 py-2.5 grid grid-cols-[56px_1fr_140px_120px_160px] gap-4 text-[10px] font-semibold uppercase tracking-widest text-gray-400 hidden md:grid">
+              <span>Score</span>
+              <span>Owner</span>
+              <span>Signal</span>
+              <span>Location</span>
+              <span>Contact</span>
+            </div>
+
+            {/* Lead rows */}
+            {[
+              {
+                score: 91,
+                tag: "HOT",
+                name: "Marcus T. Holloway",
+                role: "Deed Grantee",
+                event: "Property Transfer",
+                valuation: "$1.4M",
+                location: "1247 Pelham Rd",
+                sublocation: "Greenville SC 29615",
+                email: "m.holloway@midlandsdev.com",
+                phone: "(864) 555-0182",
+                status: "enriched",
+              },
+              {
+                score: 84,
+                tag: "HOT",
+                name: "Jennifer R. Sikes",
+                role: "Deed Grantee",
+                event: "Mortgage Filing",
+                valuation: "$680K",
+                location: "329 Augusta Rd",
+                sublocation: "Greenville SC 29605",
+                email: "jsikes@trident-sc.com",
+                phone: "(864) 555-0341",
+                status: "enriched",
+              },
+              {
+                score: 72,
+                tag: "WARM",
+                name: "Westside Holdings LLC",
+                role: "LLC — Unresolved",
+                event: "New Business Filing",
+                valuation: "—",
+                location: "Greenville County",
+                sublocation: "SC SOS Filing",
+                email: "—",
+                phone: "(864) 555-0207",
+                status: "pending",
+              },
+            ].map((lead) => (
+              <div
+                key={lead.name}
+                className="border-b border-gray-100 last:border-0 px-5 py-4 grid md:grid-cols-[56px_1fr_140px_120px_160px] gap-4 items-start"
+              >
+                {/* Score */}
+                <div className="flex flex-col items-center gap-1">
+                  <span className={`text-xl font-bold leading-none ${
+                    lead.tag === "HOT" ? "text-amber-500" : "text-gray-400"
+                  }`}>
+                    {lead.score}
+                  </span>
+                  <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                    lead.tag === "HOT"
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-gray-100 text-gray-500"
+                  }`}>
+                    {lead.tag}
+                  </span>
+                </div>
+
+                {/* Owner */}
+                <div>
+                  <p className="text-sm font-semibold text-black leading-snug">{lead.name}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{lead.role}</p>
+                </div>
+
+                {/* Signal */}
+                <div>
+                  <p className="text-xs font-medium text-gray-700">{lead.event}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{lead.valuation}</p>
+                </div>
+
+                {/* Location */}
+                <div>
+                  <p className="text-xs text-gray-700 leading-snug">{lead.location}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{lead.sublocation}</p>
+                </div>
+
+                {/* Contact */}
+                <div className="space-y-1">
+                  <p className={`text-xs font-mono leading-snug ${
+                    lead.email === "—" ? "text-gray-300" : "text-gray-600"
+                  }`}>
+                    {lead.email}
+                  </p>
+                  <p className="text-xs text-gray-500 font-mono">{lead.phone}</p>
+                  <span className={`inline-block text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                    lead.status === "enriched"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-amber-100 text-amber-700"
+                  }`}>
+                    {lead.status === "enriched" ? "Enriched" : "Pending review"}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+            Illustrative sample — names, addresses, and contact fields reflect the real structure of output. Actual data is live Greenville County public records.
+          </p>
+        </div>
+      </section>
+
       <section className="bg-white py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">

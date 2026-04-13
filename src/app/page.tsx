@@ -131,10 +131,10 @@ function BrainIcon() {
 // ── data ─────────────────────────────────────────────────────────────
 
 const painScenarios = [
-  { role: "Estimator", scenario: "Your lead estimator gives notice. Half your pricing logic is in his head." },
-  { role: "Office", scenario: "Your estimator asks if a quote was already sent to this client." },
-  { role: "PM", scenario: "Your PM asks what got promised on a job from last spring." },
-  { role: "Owner", scenario: "Everyone asks you — because you're still the system." },
+  { role: "Ops Mgr", scenario: "Your operations manager gives notice. A decade of vendor relationships, job history, and field judgment walks out the door." },
+  { role: "PM", scenario: "Your new PM asks which subs were on the Millbrook project — and who to never use again." },
+  { role: "Field", scenario: "A foreman needs the spec from a job three years ago. Nobody knows where to look." },
+  { role: "Owner", scenario: "Everyone routes it to you — because you're the only system left." },
 ];
 
 const docSources = [
@@ -179,7 +179,7 @@ const setupSteps = [
   {
     week: "Week 2–3",
     title: "Build and tune",
-    body: "We pick one high-value slice — the last 3 years of accepted quotes, the vendor email threads — and build the first working index. Then we sit with your estimator and PM and have them ask real questions from their actual workday. Half the answers will be incomplete on first pass. We fix it.",
+    body: "We pick one high-value slice — the last 3 years of accepted quotes, the vendor email threads — and build the first working index. Then we sit with your operations manager and key leads and have them ask real questions from their actual workday. Half the answers will be incomplete on first pass. We fix it.",
   },
   {
     week: "Week 4",
@@ -278,7 +278,7 @@ function PipelineDiagram() {
       </div>
 
       {/* Honest caveat */}
-      <p className="text-[11px] text-white/25 leading-relaxed mt-5 pt-4 border-t border-white/[0.06]">
+      <p className="text-[11px] text-white/55 leading-relaxed mt-5 pt-4 border-t border-white/[0.08]">
         Ten years of documents also means ten years of outdated pricing and superseded SOPs. Part of what we do is teach the system which sources to trust, and flag conflicts instead of guessing.
       </p>
     </div>
@@ -299,11 +299,11 @@ export default function HomePage() {
                 Greenville SC — Owner-Led Service Businesses
               </span>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black leading-[1.02] mb-6">
-                Your lead estimator
+                Your operations manager
                 <br />
                 gives notice.
                 <br />
-                Where does 10 years
+                Where does 12 years
                 <br />
                 of knowledge go?
               </h1>
@@ -559,10 +559,10 @@ export default function HomePage() {
                   Where we start
                 </p>
                 <p className="text-sm text-gray-300 leading-relaxed mb-0">
-                  &ldquo;What happens if your lead estimator leaves tomorrow?
-                  We start there — build his vault while he&apos;s still here,
-                  feed it with 5 years of quotes and emails, capture what&apos;s
-                  only in his head. Highest-risk gap first. Then expand.&rdquo;
+                  &ldquo;What happens if your operations manager leaves tomorrow?
+                  We start there — build her vault while she&apos;s still here,
+                  capture the vendor relationships, job history, and field judgment
+                  that never got written down. Highest-risk gap first. Then expand.&rdquo;
                 </p>
               </div>
 

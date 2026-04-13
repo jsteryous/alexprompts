@@ -43,7 +43,7 @@ export default function CompanyBrainDemo() {
                 <div className="bg-green-500/[0.1] border border-green-500/[0.18] text-green-100/90 text-sm px-4 py-2.5 rounded-2xl rounded-tl-sm leading-relaxed">
                   {ex.a}
                 </div>
-                <div className="mt-1.5 ml-1 flex items-center gap-1.5 text-[11px] text-white/25 font-mono">
+                <div className="mt-1.5 ml-1 flex items-center gap-1.5 text-[11px] text-white/50 font-mono">
                   <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                     <path d="M3 6h6M6 3v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
