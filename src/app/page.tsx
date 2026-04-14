@@ -195,8 +195,8 @@ const setupSteps = [
 
 const fitPoints = [
   { icon: "users", text: "5–25 person HVAC, plumbing, electrical, roofing, GC, or similar service team" },
-  { icon: "calendar", text: "In business 8+ years with context accumulated across hundreds of jobs" },
-  { icon: "person", text: "Owner still answers routine operational questions most days" },
+  { icon: "person", text: "A lead estimator, PM, or owner holding years of pricing logic, vendor history, and job context no one else has" },
+  { icon: "calendar", text: "Owner still answers routine operational questions most days" },
   { icon: "folder", text: "Knowledge spread across email, notes, drives, and job folders — never formalized" },
 ];
 
@@ -629,9 +629,10 @@ export default function HomePage() {
                 and nowhere to put it.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                Tenure plus accumulated chaos — not just headcount. A 2-year
-                startup doesn&apos;t have this problem. A 14-year GC with 3
-                PMs and 10 subs does.
+                The signal is accumulated complexity in specific people — not
+                years in business. A 4-year company whose lead estimator has
+                written 500 quotes has more at-risk knowledge than a 12-year
+                company that&apos;s kept clean records.
               </p>
               <Link
                 href="/contact"
@@ -664,8 +665,9 @@ export default function HomePage() {
                   Who this isn&apos;t for
                 </p>
                 <p className="text-sm text-gray-700 leading-relaxed mb-3">
-                  If you&apos;re under 8 years old, under 5 people, or your documents
-                  already live cleanly in one system — you probably don&apos;t need us.
+                  If no single person is holding critical knowledge the rest of
+                  the team can&apos;t easily access, or your documents already live
+                  cleanly in one system — you probably don&apos;t need us.
                   Try NotebookLM or Claude Projects first. They&apos;re free, and for
                   a tidy operation they&apos;ll do the job.
                 </p>

@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "REBB Advisors <noreply@rebbadvisors.com>",
+      from: process.env.MAIL_FROM || "REBB Advisors <noreply@rebbadvisors.com>",
       to: ["alex@rebbadvisors.com"],
       reply_to: email,
       subject: `New setup call request: ${firstName} ${lastName} - ${companyName}`,
