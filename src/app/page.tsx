@@ -299,24 +299,22 @@ export default function HomePage() {
                 Greenville SC — Owner-Led Service Businesses
               </span>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black leading-[1.02] mb-6">
-                Your operations manager
+                Your lead estimator
                 <br />
                 gives notice.
                 <br />
-                Where does 12 years
+                Ten years of pricing logic
                 <br />
-                of knowledge go?
+                walks out the door.
               </h1>
               <p className="text-lg text-gray-700 leading-relaxed mb-3 max-w-2xl">
-                Company Brain is a private AI knowledge system built from the
-                documents your company already has — quotes, job notes, emails,
-                SOPs, and vendor files.
+                Company Brain ingests the documents your company already has —
+                quotes, job notes, emails, vendor files — and makes them
+                queryable. Ask a question, get an answer with a source citation.
               </p>
               <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-2xl">
-                You don&apos;t need to build a wiki or retrain your team on new
-                software. The behavior change is on our side — we do the
-                ingestion, tuning, and ongoing curation. Your team just asks
-                questions.
+                The behavior change is on our side — we do the ingestion,
+                tuning, and ongoing curation. Your team just asks questions.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <Link
@@ -337,10 +335,7 @@ export default function HomePage() {
             <div className="bg-stone-50 border border-stone-200 rounded-3xl p-8 md:p-10">
               <div className="flex items-center justify-between gap-4 mb-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
-                    Typical Week
-                  </p>
-                  <h2 className="text-xl font-bold text-black mt-2">
+                  <h2 className="text-xl font-bold text-black">
                     The owner is still the system.
                   </h2>
                 </div>
@@ -366,7 +361,8 @@ export default function HomePage() {
               <div className="mt-6 pt-6 border-t border-stone-200">
                 <p className="text-sm text-gray-500 leading-relaxed">
                   As long as you&apos;re the system, you&apos;re also the ceiling.
-                  Every new hire and every expansion adds to the load.
+                  The departure is the reason to start. The owner stepping out
+                  of routine answers is the reason to keep it.
                 </p>
               </div>
             </div>
@@ -570,10 +566,11 @@ export default function HomePage() {
               <div className="border border-gray-100 rounded-2xl p-5 mb-8">
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Pricing</p>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Engagements start with a scoped setup fee, then a monthly
-                  retainer for re-ingestion, tuning, and team support. The
-                  retainer is what keeps the system current — without it, it
-                  decays. We&apos;ll scope both numbers on the first call.
+                  Setup: $4,000–$8,000 depending on scope and document volume.
+                  Monthly retainer: $500–$1,500 for re-ingestion, tuning, and
+                  team support. The retainer is what keeps the system current —
+                  without it, it decays. We&apos;ll land on both numbers in the
+                  first call.
                 </p>
               </div>
 
@@ -701,27 +698,18 @@ export default function HomePage() {
               contracts, and job history to them carries real risks that most
               business owners don&apos;t read the fine print on.
             </p>
-            <div className="space-y-3">
+            <ul className="space-y-3">
               {[
-                {
-                  label: "Your data may train the model.",
-                  body: "Consumer AI tools — ChatGPT, Claude.ai free and paid plans — can use your inputs to improve future versions of the model. Your pricing, customer details, and internal processes become part of the training set.",
-                },
-                {
-                  label: "Retention isn't guaranteed.",
-                  body: "Consumer products have no committed deletion timeline. Your documents sit on third-party servers indefinitely unless you manually request removal — and even then it isn't always clean.",
-                },
-                {
-                  label: "\"Private\" doesn't mean no one sees it.",
-                  body: "AI providers reserve the right to review conversations for safety and trust purposes. Sensitive contracts, proformas, or personnel notes have no privilege protections once uploaded.",
-                },
+                "Consumer AI tools can use your inputs to train the model. Your pricing strategy, customer details, and internal processes become part of the training set.",
+                "No committed deletion timeline. Documents sit on third-party servers indefinitely unless you request removal — and that removal isn't always clean.",
+                "\"Private\" doesn't mean no one sees it. Providers reserve the right to review conversations for safety purposes. Sensitive contracts and personnel notes have no privilege protections once uploaded.",
               ].map((item) => (
-                <div key={item.label} className="border border-gray-100 rounded-2xl p-6">
-                  <p className="text-sm font-semibold text-black mb-1">{item.label}</p>
-                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
-                </div>
+                <li key={item} className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed">
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0" />
+                  {item}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
@@ -782,15 +770,15 @@ export default function HomePage() {
               Primary Next Step
             </span>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-black mb-6 leading-tight">
-              Your team is still
+              We build it until your team
               <br />
-              calling the owner.
+              asks the system
               <br />
-              Let&apos;s fix that.
+              before they ask you.
             </h2>
             <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed">
-              We map the knowledge mess, build the first usable version, and
-              tune it until the team asks the system before they ask you.
+              Your team gets answers in seconds. You get pulled in for judgment
+              calls, not routine lookups.
             </p>
             <Link
               href="/contact"
