@@ -101,7 +101,9 @@
       "Bash(PYTHONUTF8=1 python:*)",
       "WebFetch(domain:verify.llronline.com)",
       "WebFetch(domain:llr.sc.gov)",
-      "Bash(ENRICH_DEBUG=1 python:*)"
+      "Bash(ENRICH_DEBUG=1 python:*)",
+      "WebFetch(domain:rebbadvisors.com)",
+      "WebFetch(domain:membase.so)"
     ]
   }
 }
