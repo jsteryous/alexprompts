@@ -181,9 +181,12 @@ def audit_prospect(
     findings.stale_copyright  = detectors.detect_stale_copyright(text)
     findings.jquery_version   = detectors.detect_jquery_version(html)
 
-    forms_found, unreachable, unverifiable = detectors.detect_forms(html, final_url or website_url)
+    forms_found, unreachable, unverifiable, triggering_status = detectors.detect_forms(
+        html, final_url or website_url,
+    )
     findings.forms_found = forms_found
     findings.forms_unreachable = unreachable
+    findings.forms_unreachable_status = triggering_status
     findings.forms_unverifiable = unverifiable
 
     # Lighthouse last — slowest + most likely to time out

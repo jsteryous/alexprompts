@@ -10,12 +10,16 @@ Detectors:
   1. viewport_missing       — no <meta name="viewport">
   2. https_issues           — site doesn't redirect HTTP→HTTPS, or mixed content
   3. stale_copyright        — rendered copyright year ≥3 years behind
-  4. forms_unreachable      — forms with an absolute action URL returning 4xx/5xx
+  4. forms_unreachable      — forms with an absolute action URL returning 404/410
   5. lighthouse_mobile      — PageSpeed Insights mobile score <40
 
 A "detector hit" is recorded only when the signal is unambiguous. For forms
 with no action / JS-only submission we record `forms_unverifiable` but do not
 flag — verbosity here produces false positives that kill the pitch.
+
+Forms policy: only HTTP 404 (Not Found) and 410 (Gone) flip `forms_unreachable`.
+405 / 403 / 5xx / network errors are ambiguous (server may accept POST, IP may
+be blocked, error may be transient) and get demoted to `forms_unverifiable`.
 """
 
 from __future__ import annotations
@@ -51,7 +55,8 @@ class AuditFindings:
     stale_copyright: Optional[int] = None          # year shown on page, if stale
     forms_found: int = 0
     forms_unreachable: bool = False
-    forms_unverifiable: int = 0                    # JS-only / no-action forms
+    forms_unreachable_status: Optional[int] = None # 404 / 410 that triggered the flag
+    forms_unverifiable: int = 0                    # JS-only / no-action / ambiguous
     lighthouse_mobile: Optional[int] = None        # 0-100
     jquery_version: Optional[str] = None
     errors: list[str] = field(default_factory=list)
@@ -68,15 +73,16 @@ class AuditFindings:
 
     def to_jsonb(self) -> dict:
         return {
-            "viewport_missing":   self.viewport_missing,
-            "no_https":           self.no_https,
-            "mixed_content":      self.mixed_content,
-            "stale_copyright":    self.stale_copyright,
-            "forms_found":        self.forms_found,
-            "forms_unreachable":  self.forms_unreachable,
-            "forms_unverifiable": self.forms_unverifiable,
-            "lighthouse_mobile":  self.lighthouse_mobile,
-            "jquery_version":     self.jquery_version,
+            "viewport_missing":         self.viewport_missing,
+            "no_https":                 self.no_https,
+            "mixed_content":            self.mixed_content,
+            "stale_copyright":          self.stale_copyright,
+            "forms_found":              self.forms_found,
+            "forms_unreachable":        self.forms_unreachable,
+            "forms_unreachable_status": self.forms_unreachable_status,
+            "forms_unverifiable":       self.forms_unverifiable,
+            "lighthouse_mobile":        self.lighthouse_mobile,
+            "jquery_version":           self.jquery_version,
         }
 
 
@@ -165,24 +171,31 @@ def _extract_forms(rendered_html: str) -> list[dict]:
     return forms
 
 
-def detect_forms(rendered_html: str, base_url: str) -> tuple[int, bool, int]:
+DEFINITIVE_BROKEN_STATUSES = {404, 410}
+
+
+def detect_forms(rendered_html: str, base_url: str) -> tuple[int, bool, int, Optional[int]]:
     """
-    Returns (forms_found, any_unreachable, unverifiable_count).
+    Returns (forms_found, any_unreachable, unverifiable_count, triggering_status).
 
-    A form is "unreachable" only if it has a non-empty action URL AND a GET to
-    that resolved URL returns 4xx/5xx. Forms with empty action, "#", or
-    javascript: are counted as unverifiable (JS-submitted) — NOT flagged.
+    A form is "unreachable" only if its action URL resolves to an HTTP status in
+    DEFINITIVE_BROKEN_STATUSES (404 / 410) — the endpoint definitively does not
+    exist. Every other response (including 405, 403, 5xx, redirects to unknown
+    pages, and network errors) is demoted to `forms_unverifiable`.
 
-    Rationale: many servers 405 HEAD but accept POST; many modern forms
-    submit via JS with no action attribute. Flagging either produces false
-    positives that destroy trust in the pitch.
+    Rationale: 405 means the server just refuses GET but probably accepts POST;
+    5xx may be transient; network errors may be our IP getting blocked. We
+    optimize for zero false positives because a bad claim in a cold email
+    torches sender credibility. 404 / 410 are unambiguous — we can quote the
+    status in outreach and the recipient can verify in DevTools.
     """
     forms = _extract_forms(rendered_html)
     if not forms:
-        return 0, False, 0
+        return 0, False, 0, None
 
     unverifiable = 0
     any_unreachable = False
+    triggering_status: Optional[int] = None
 
     for f in forms:
         action = f["action"]
@@ -204,15 +217,21 @@ def detect_forms(rendered_html: str, base_url: str) -> tuple[int, bool, int]:
                 timeout=10,
                 allow_redirects=True,
             )
-            if 400 <= r.status_code < 600:
+            if r.status_code in DEFINITIVE_BROKEN_STATUSES:
                 any_unreachable = True
-                _log.info("form action unreachable: %s → %d", resolved, r.status_code)
+                if triggering_status is None:
+                    triggering_status = r.status_code
+                _log.info("form action DEFINITIVELY broken: %s → %d", resolved, r.status_code)
+            elif 400 <= r.status_code < 600:
+                # Ambiguous (405/403/5xx) — demoted to unverifiable
+                unverifiable += 1
+                _log.info("form action ambiguous status (demoted): %s → %d", resolved, r.status_code)
         except requests.RequestException as e:
-            # Network-level failure = unreachable
-            any_unreachable = True
-            _log.info("form action network error: %s (%s)", resolved, e)
+            # Network error — could be transient or IP block. Ambiguous.
+            unverifiable += 1
+            _log.info("form action network error (demoted): %s (%s)", resolved, e)
 
-    return len(forms), any_unreachable, unverifiable
+    return len(forms), any_unreachable, unverifiable, triggering_status
 
 
 # ── 5. PageSpeed Insights (Lighthouse in the cloud) ──────────────────────────
