@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { signOut } from "./login/actions";
 
 export const metadata: Metadata = {
@@ -242,12 +243,24 @@ export default async function DashboardPage({ searchParams }: Props) {
       <div className="border-b border-gray-800 bg-gray-950">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-center gap-3 mb-1">
+            <div className="flex items-center gap-3 mb-3">
               <span className="text-xs font-semibold uppercase tracking-widest text-green-500">
                 REBB Advisors
               </span>
-              <span className="text-xs text-gray-600">·</span>
-              <span className="text-xs text-gray-500">LLC Owner Finder</span>
+              <div className="flex items-center gap-1">
+                <Link
+                  href="/dashboard"
+                  className="text-sm px-3 py-1.5 rounded-md bg-gray-900 text-white border border-gray-800 transition-colors"
+                >
+                  Leads
+                </Link>
+                <Link
+                  href="/dashboard/prospects"
+                  className="text-sm px-3 py-1.5 rounded-md text-gray-500 hover:text-gray-300 transition-colors"
+                >
+                  Prospects
+                </Link>
+              </div>
             </div>
             <h1 className="text-2xl font-bold text-white">Ranked Call List</h1>
             <p className="text-sm text-gray-500 mt-1">

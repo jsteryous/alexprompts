@@ -221,3 +221,76 @@ CREATE INDEX IF NOT EXISTS enriched_leads_signal_id_idx
 CREATE INDEX IF NOT EXISTS enriched_leads_tag_idx
   ON enriched_leads (tag, score DESC)
   WHERE enrichment_status = 'enriched';
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Website Prospects — "broken website" outbound pitch list
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Populated by scripts/prospects/* — Google Places discovery + Playwright audit.
+-- Each row = one candidate local business whose site has a concrete, pitchable
+-- problem we can fix (no viewport, no HTTPS, stale copyright, broken forms,
+-- low Lighthouse mobile score, or no site at all).
+
+CREATE TABLE IF NOT EXISTS website_prospects (
+  id                       uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at               timestamptz NOT NULL    DEFAULT now(),
+  updated_at               timestamptz NOT NULL    DEFAULT now(),
+  audited_at               timestamptz,
+
+  -- Identity (Google Places)
+  place_id                 text        NOT NULL UNIQUE,  -- dedup key
+  business_name            text        NOT NULL,
+  vertical                 text        NOT NULL,         -- 'dental' | 'personal_injury'
+
+  -- Location + contact from Places
+  address                  text,
+  city                     text,
+  county                   text,                         -- Greenville | Spartanburg | Anderson | Pickens | Oconee
+  phone                    text,
+  website_url              text,                         -- NULL = no-website prospect class
+  google_rating            numeric,
+  google_review_count      integer,
+
+  -- Audit results
+  audit_status             text        NOT NULL DEFAULT 'pending',
+  -- pending | no_website | audited | error
+  issues                   jsonb,
+  -- { viewport_missing: bool, no_https: bool, mixed_content: bool,
+  --   stale_copyright: int|null, form_unreachable: bool, forms_found: int,
+  --   forms_unverifiable: int, lighthouse_mobile: int|null, jquery_version: str|null }
+  severity_score           integer,                      -- 0-100, higher = worse
+  severity_tag             text,                         -- HOT | WARM | COLD
+
+  -- Proof artifacts (Supabase Storage URLs)
+  mobile_screenshot_url    text,
+  desktop_screenshot_url   text,
+  lighthouse_mobile_score  integer,
+  audit_error              text,
+  audit_notes              text,
+
+  -- Sales workflow
+  contact_status           text        DEFAULT 'not_contacted',
+  -- not_contacted | contacted | replied | booked | dead
+  notes                    text
+);
+
+ALTER TABLE website_prospects ENABLE ROW LEVEL SECURITY;
+
+CREATE TRIGGER website_prospects_updated_at
+  BEFORE UPDATE ON website_prospects
+  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+
+CREATE INDEX IF NOT EXISTS website_prospects_severity_idx
+  ON website_prospects (severity_score DESC NULLS LAST)
+  WHERE audit_status IN ('audited', 'no_website');
+
+CREATE INDEX IF NOT EXISTS website_prospects_status_idx
+  ON website_prospects (audit_status);
+
+CREATE INDEX IF NOT EXISTS website_prospects_vertical_idx
+  ON website_prospects (vertical, severity_score DESC NULLS LAST);
+
+-- Storage bucket for audit screenshots.
+-- Run once in Supabase SQL editor after this migration:
+--   INSERT INTO storage.buckets (id, name, public)
+--   VALUES ('prospect-audits', 'prospect-audits', true)
+--   ON CONFLICT (id) DO NOTHING;
