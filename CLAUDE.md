@@ -42,6 +42,7 @@ src/
 │   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s
 │   ├── review/page.tsx          — token-gated draft review
 │   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; deduplicates by principal_name (highest score per person)
+│   ├── dashboard/prospects/page.tsx — website_prospects ranked list (broken-website outbound pitch)
 │   ├── dashboard/login/page.tsx + actions.ts — Supabase Auth server action
 │   └── api/contact/route.ts + publish/route.ts
 ├── components/
@@ -67,6 +68,11 @@ scripts/
 ├── enrich_contact.py            — PDL person + company contact enrichment (email/phone/LinkedIn)
 ├── weekly_leads_digest.py       — weekly email digest
 ├── run_daily.bat                — local Windows pipeline runner
+├── prospects/                   — website-audit outbound pipeline (dental / PI)
+│   ├── discover.py              — Google Places text search → website_prospects
+│   ├── detectors.py             — pure detectors (viewport, HTTPS, forms, copyright, Lighthouse)
+│   ├── audit.py                 — Playwright mobile+desktop capture, screenshot upload, scoring
+│   └── run_prospects.py         — CLI: --discover / --audit-pending / --audit-url / --re-audit
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
 ├── lib/email_format.py          — shared email formatting helpers
 └── requirements.txt / requirements-insights.txt / requirements-scraper.txt
@@ -139,9 +145,10 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 ## Supabase
 
 - Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- Tables: `market_signals` · `blog_posts` · `clients` · `enriched_leads`
-- RLS: `market_signals` + `blog_posts` have public SELECT. `clients` + `enriched_leads` service key only.
+- Tables: `market_signals` · `blog_posts` · `clients` · `enriched_leads` · `website_prospects`
+- RLS: `market_signals` + `blog_posts` have public SELECT. `clients` + `enriched_leads` + `website_prospects` service key only.
 - Realtime on `market_signals` via `supabase_realtime` publication.
+- Storage bucket: `prospect-audits` (public) — mobile+desktop PNG screenshots keyed by `{prospect_id}/{kind}-{ts}.png`.
 
 ### market_signals columns
 
@@ -178,6 +185,22 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 | `notes` | text | |
 
 Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_leads` row → lookup chain → `enriched` or `pending` (manual queue).
+
+### website_prospects columns
+
+| Column | Type | Notes |
+|---|---|---|
+| `place_id` | text | Google Places ID, UNIQUE dedup key |
+| `business_name` / `vertical` | text | `dental` \| `personal_injury` |
+| `address` / `city` / `county` / `phone` / `website_url` | text | from Places; `website_url` NULL → highest-severity class |
+| `google_rating` / `google_review_count` | numeric / integer | |
+| `audit_status` | text | `pending` / `no_website` / `audited` / `error` |
+| `issues` | jsonb | `AuditFindings.to_jsonb()` — viewport/https/forms/copyright/lighthouse |
+| `severity_score` / `severity_tag` | integer / text | 0-100 · HOT / WARM / COLD |
+| `mobile_screenshot_url` / `desktop_screenshot_url` | text | Supabase Storage public URLs |
+| `lighthouse_mobile_score` | integer | mirror of `issues.lighthouse_mobile` |
+| `audit_error` | text | Playwright/network failure reason |
+| `contact_status` | text | sales workflow: `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
 
 ## Market Insights Engine
 
@@ -312,6 +335,29 @@ Dashboard validates `location` with `isStreetAddress()` before rendering it as a
 
 Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = clients.contact_email` — no client-facing dashboard route yet; `/dashboard` shows all leads.
 
+## Website Prospects Pipeline (scripts/prospects/)
+
+Outbound pitch list: dental + personal injury law firms with visible website problems (broken mobile, no HTTPS, broken forms, stale copyright, low Lighthouse, or no site at all). Populates `website_prospects` table; surfaced on `/dashboard/prospects`.
+
+```bash
+cd scripts
+python -m prospects.run_prospects --discover --vertical dental --county greenville [--dry-run] [--limit N]
+python -m prospects.run_prospects --discover --all                                   # all verticals × all counties
+python -m prospects.run_prospects --audit-pending [--limit 10] [--vertical dental]
+python -m prospects.run_prospects --audit-url https://example.com                    # smoke test (no DB write)
+python -m prospects.run_prospects --re-audit --days 30 [--limit N]
+```
+
+**Flow:** Places discovery writes rows as `pending` (or `no_website` when Places has no URL) → `--audit-pending` runs Playwright mobile+desktop capture, runs detectors, hits PageSpeed Insights, uploads screenshots to Storage, writes severity (0-100) + tag (HOT ≥70 / WARM ≥40 / COLD).
+
+**Detector philosophy:** low false-positive rate over coverage. Forms with empty action / `#` / `javascript:` → `forms_unverifiable` (NOT flagged). Only forms with absolute action returning 4xx/5xx → `forms_unreachable` (flagged). Copyright detection uses rendered text (many sites `document.write()` the year).
+
+**Severity weights** (`detectors.score_severity`): viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
+
+**Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury). Search radii 20-25km around county seat lat/lng in `discover.COUNTIES`.
+
+**PageSpeed API** reuses `GOOGLE_PLACES_API_KEY` by default; set `GOOGLE_PAGESPEED_API_KEY` to split quotas. Enable the PageSpeed Insights API in Google Cloud on the same project.
+
 ## Known Issues / Gotchas
 
 **Next.js / Framework:**
@@ -350,6 +396,7 @@ Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = c
 | `ROD_PASSWORD` | GovOS + CountyWeb (shared) |
 | `ROD_VIEWER_USERNAME` | CountyWeb (default: `asteryous`) |
 | `PDL_API_KEY` | People Data Labs free tier (100 credits/month) — contact enrichment via `enrich_contact.py`. Falls back to `APOLLO_API_KEY` if set. |
+| `GOOGLE_PLACES_API_KEY` | Places API (New) — prospect discovery. Reused by PageSpeed Insights unless `GOOGLE_PAGESPEED_API_KEY` is set. Not free — $200/month credit then paid. |
 | `TESSERACT_CMD` | Optional — path to `tesseract.exe` if not at default |
 | `DISCORD_WEBHOOK_URL` | Optional — new draft alert |
 | `EDITOR` | Optional — for `approve_post.py --edit` (default: notepad) |
@@ -378,6 +425,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 | `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked` |
 | `/review` | Token-gated draft review (email only) |
 | `/dashboard` | enriched_leads ranked list, Supabase Auth gated |
+| `/dashboard/prospects` | website_prospects list — severity-ranked, vertical filter, screenshot proof; Auth gated |
 | `/dashboard/login` | No public registration; users created manually in Supabase |
 | `/case-study` | Placeholder — **noindexed**, do not remove until real content |
 | `/contact` | Form → `/api/contact` → Resend to alex@rebbadvisors.com |

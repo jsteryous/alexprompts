@@ -103,7 +103,9 @@
       "WebFetch(domain:llr.sc.gov)",
       "Bash(ENRICH_DEBUG=1 python:*)",
       "WebFetch(domain:rebbadvisors.com)",
-      "WebFetch(domain:membase.so)"
+      "WebFetch(domain:membase.so)",
+      "Bash(npx next *)",
+      "Bash(pip show *)"
     ]
   }
 }

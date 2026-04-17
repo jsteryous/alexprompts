@@ -289,6 +289,15 @@ CREATE INDEX IF NOT EXISTS website_prospects_status_idx
 CREATE INDEX IF NOT EXISTS website_prospects_vertical_idx
   ON website_prospects (vertical, severity_score DESC NULLS LAST);
 
+-- Track when a prospect was included in the weekly digest email so the next
+-- run skips it. NULL = never emailed; timestamptz = last digest that carried it.
+ALTER TABLE website_prospects
+  ADD COLUMN IF NOT EXISTS emailed_at timestamptz;
+
+CREATE INDEX IF NOT EXISTS website_prospects_digest_queue_idx
+  ON website_prospects (severity_score DESC NULLS LAST)
+  WHERE emailed_at IS NULL AND severity_tag IN ('HOT', 'WARM');
+
 -- Storage bucket for audit screenshots.
 -- Run once in Supabase SQL editor after this migration:
 --   INSERT INTO storage.buckets (id, name, public)
