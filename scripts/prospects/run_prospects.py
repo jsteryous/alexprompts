@@ -31,6 +31,7 @@ from dotenv import load_dotenv
 from supabase import create_client
 
 from . import discover
+from . import digest as digest_mod
 from .audit import audit_prospect, save_audit
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env.local")
@@ -160,6 +161,10 @@ def cmd_re_audit(args) -> int:
     return 0
 
 
+def cmd_digest(args) -> int:
+    return digest_mod.run(min_severity=args.min_severity, dry_run=args.dry_run)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
 
@@ -168,6 +173,8 @@ def main() -> int:
     ap.add_argument("--audit-pending", action="store_true")
     ap.add_argument("--audit-url", help="Audit a single URL (no DB write)")
     ap.add_argument("--re-audit", action="store_true")
+    ap.add_argument("--digest", action="store_true",
+                    help="Send email digest of new HOT/WARM prospects (emailed_at is null)")
 
     # Discover args
     ap.add_argument("--vertical", choices=list(discover.VERTICALS.keys()))
@@ -177,6 +184,8 @@ def main() -> int:
     # Shared
     ap.add_argument("--limit", type=int, default=20)
     ap.add_argument("--days", type=int, default=30, help="--re-audit: days since last audit")
+    ap.add_argument("--min-severity", type=int, default=40,
+                    help="--digest: minimum severity to include (default 40)")
     ap.add_argument("--dry-run", action="store_true")
 
     args = ap.parse_args()
@@ -189,6 +198,8 @@ def main() -> int:
         return cmd_audit_url(args)
     if args.re_audit:
         return cmd_re_audit(args)
+    if args.digest:
+        return cmd_digest(args)
 
     ap.print_help()
     return 1
