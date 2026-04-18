@@ -56,17 +56,17 @@ export default async function InsightsPage() {
   return (
     <>
       {/* ── Header ── */}
-      <section className="bg-white pt-32 pb-16 border-b border-gray-100">
+      <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-6xl mx-auto px-6">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
             Upstate SC · Market Insights
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black leading-tight mb-4">
+          <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
             What&apos;s moving
             <br />
             Greenville this week
           </h1>
-          <p className="text-lg text-gray-500 max-w-xl leading-relaxed">
+          <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
             Data-driven analysis of property transfers, business filings, and
             economic signals for local service contractors.
           </p>
@@ -74,20 +74,23 @@ export default async function InsightsPage() {
       </section>
 
       {/* ── Post list ── */}
-      <section className="bg-white py-16 md:py-24">
+      <section className="theme-section py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
           {posts.length === 0 ? (
             <div className="py-24 text-center">
-              <p className="text-gray-400 text-sm">No published insights yet. Check back soon.</p>
+              <p className="theme-text-muted text-sm">No published insights yet. Check back soon.</p>
             </div>
           ) : (
-            <div className="divide-y divide-gray-100">
-              {posts.map((post) => (
-                <article key={post.id} className="py-10 group">
+            <div>
+              {posts.map((post, idx) => (
+                <article
+                  key={post.id}
+                  className={`theme-border py-10 group ${idx === 0 ? "" : "border-t"}`}
+                >
                   <div className="flex flex-col md:flex-row md:items-start md:gap-16">
                     {/* Date */}
                     <div className="flex-shrink-0 w-36 mb-3 md:mb-0">
-                      <time className="text-xs text-gray-400 font-medium">
+                      <time className="theme-text-muted text-xs font-medium">
                         {formatDate(post.published_at ?? post.created_at)}
                       </time>
                     </div>
@@ -99,7 +102,7 @@ export default async function InsightsPage() {
                           {post.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="text-xs font-semibold uppercase tracking-widest text-green-700 bg-green-50 px-2 py-0.5 rounded"
+                              className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded"
                             >
                               {tag}
                             </span>
@@ -107,19 +110,19 @@ export default async function InsightsPage() {
                         </div>
                       )}
 
-                      <h2 className="text-xl md:text-2xl font-bold text-black tracking-tight mb-2 group-hover:text-green-700 transition-colors">
-                        <Link href={`/insights/${post.slug}`}>{post.title}</Link>
+                      <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight mb-2 transition-colors">
+                        <Link href={`/insights/${post.slug}`} className="theme-text-primary hover:opacity-80">{post.title}</Link>
                       </h2>
 
                       {post.summary && (
-                        <p className="text-sm text-gray-500 leading-relaxed mb-4 max-w-2xl">
+                        <p className="theme-text-muted text-sm leading-relaxed mb-4 max-w-2xl">
                           {post.summary}
                         </p>
                       )}
 
                       <Link
                         href={`/insights/${post.slug}`}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-black hover:text-green-700 transition-colors"
+                        className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:opacity-80 transition-opacity"
                       >
                         Read more
                         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

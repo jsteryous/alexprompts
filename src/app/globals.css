@@ -113,6 +113,13 @@ button {
 }
 
 .theme-section-contrast {
+  --foreground: #edf1eb;
+  --foreground-soft: #c6d0c6;
+  --foreground-muted: #90a08f;
+  --border: rgba(229, 240, 231, 0.12);
+  --border-strong: rgba(229, 240, 231, 0.2);
+  --accent: #43bd78;
+  --accent-strong: #8fe3b1;
   background:
     radial-gradient(circle at top left, rgba(43, 182, 115, 0.12), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
@@ -139,11 +146,45 @@ button {
 }
 
 .theme-card-contrast {
+  --foreground: #edf1eb;
+  --foreground-soft: #c6d0c6;
+  --foreground-muted: #90a08f;
+  --border: rgba(229, 240, 231, 0.12);
+  --border-strong: rgba(229, 240, 231, 0.2);
+  --accent: #43bd78;
+  --accent-strong: #8fe3b1;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
     var(--surface-inverse-2);
   border-color: var(--border);
   box-shadow: var(--shadow-soft);
+  color: var(--foreground);
+}
+
+/* Inside a contrast surface, restore page-mode foreground for nested cards
+   that still use a light surface — otherwise their text would inherit the
+   dark-mode override above and become light-on-light. */
+.theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
+.theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
+  --foreground: #171717;
+  --foreground-soft: #4f4a43;
+  --foreground-muted: #736d65;
+  --border: rgba(23, 23, 23, 0.1);
+  --border-strong: rgba(23, 23, 23, 0.18);
+  --accent: #238a59;
+  --accent-strong: #17583a;
+  color: var(--foreground);
+}
+
+html.dark .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
+html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
+  --foreground: #edf1eb;
+  --foreground-soft: #c6d0c6;
+  --foreground-muted: #90a08f;
+  --border: rgba(229, 240, 231, 0.12);
+  --border-strong: rgba(229, 240, 231, 0.2);
+  --accent: #43bd78;
+  --accent-strong: #8fe3b1;
 }
 
 .theme-card-accent {
