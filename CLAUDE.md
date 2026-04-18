@@ -84,8 +84,8 @@ supabase/schema.sql
 
 ## Design System
 
-- Background: `#ffffff` · Text: `#0a0a0a` · Accent/CTA: `green-500` (`#22c55e`) / `green-600`
-- Dark sections: `bg-gray-950` · Borders: `gray-100/200`
+- **Palette lives in CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark). Do NOT hardcode hex / `bg-gray-950` — use the `.theme-*` utility classes (`theme-text-primary/secondary/muted`, `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`, `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`). Tokens: light bg `#f4f0e8` (cream), dark bg `#0f1411`; accent green `#238a59` light / `#43bd78` dark.
+- **Tailwind `dark:` variant** is wired via `@custom-variant dark (&:where(.dark, .dark *))` in `globals.css` — use it only for one-off chromatic cases the theme tokens don't cover (e.g. HOT/WARM red/amber badges).
 - Typography: system font stack (no Google Fonts — Turbopack http2 error at build time)
 - Sections: `py-24 md:py-32`, max-width `max-w-6xl`, articles `max-w-2xl`
 - Direction: Stripe / Linear aesthetic — whitespace, strong type scale, minimal decoration
@@ -101,12 +101,13 @@ supabase/schema.sql
 ## Key Conventions
 
 - Tailwind v4: `@theme {}` in `globals.css`. Typography: `@plugin "@tailwindcss/typography"`.
-- All pages are server components except: `Nav`, `LiveSignalFeed`, `ThemeProvider`, `DarkModeToggle`, `/contact/page.tsx`
-- **Dark mode:** class-based (`html.dark`). ThemeProvider → localStorage. Palette: bg `#0d1f16`, dark sections `#060f09`, text `#dff0e6`. `suppressHydrationWarning` on `<html>` + inline script prevent flash.
+- All pages are server components except: `Nav`, `Footer`, `LiveSignalFeed`, `ThemeProvider`, `DarkModeToggle`, `/contact/page.tsx`
+- **Dark mode:** class-based (`html.dark`). ThemeProvider → localStorage. `suppressHydrationWarning` on `<html>` + inline script in `layout.tsx` prevent flash. Token values live in `globals.css`.
+- `Nav` + `Footer` return `null` on `/dashboard/*` (via `usePathname`) so the admin views render without the fixed marketing chrome. Do NOT re-add a sticky header there.
 - CTAs always link to `/contact`
-- Section labels: `text-xs font-semibold uppercase tracking-widest text-green-600`
-- Dark CTA sections: `bg-gray-950` or `bg-black` with `green-500` buttons
-- Article body: `prose prose-gray max-w-none` + `dangerouslySetInnerHTML`
+- Section labels: `text-xs font-semibold uppercase tracking-widest theme-label`
+- Dark contrast surfaces: wrap in `theme-section-contrast` / `theme-card-contrast` (auto-flips token values). Avoid raw `bg-gray-950`.
+- Article body: `prose theme-prose max-w-none` + `dangerouslySetInnerHTML`
 
 ## Marketing Copy Standards
 
