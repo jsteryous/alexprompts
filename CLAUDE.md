@@ -72,12 +72,13 @@ scripts/
 │   ├── discover.py              — Google Places text search → website_prospects
 │   ├── detectors.py             — pure detectors (viewport, HTTPS, forms, copyright, Lighthouse)
 │   ├── audit.py                 — Playwright mobile+desktop capture, screenshot upload, scoring
-│   └── run_prospects.py         — CLI: --discover / --audit-pending / --audit-url / --re-audit
+│   ├── digest.py                — weekly HOT/WARM email digest; dedup via emailed_at
+│   └── run_prospects.py         — CLI: --discover / --audit-pending / --audit-url / --re-audit / --digest
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
 ├── lib/email_format.py          — shared email formatting helpers
 └── requirements.txt / requirements-insights.txt / requirements-scraper.txt
 
-.github/workflows/weekly-insights.yml + daily-leads.yml
+.github/workflows/weekly-insights.yml + daily-leads.yml + weekly-prospects.yml
 supabase/schema.sql
 ```
 
@@ -201,6 +202,7 @@ Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_
 | `lighthouse_mobile_score` | integer | mirror of `issues.lighthouse_mobile` |
 | `audit_error` | text | Playwright/network failure reason |
 | `contact_status` | text | sales workflow: `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
+| `emailed_at` | timestamptz | set when included in a weekly digest; NULL = eligible for next send |
 
 ## Market Insights Engine
 
@@ -346,11 +348,16 @@ python -m prospects.run_prospects --discover --all                              
 python -m prospects.run_prospects --audit-pending [--limit 10] [--vertical dental]
 python -m prospects.run_prospects --audit-url https://example.com                    # smoke test (no DB write)
 python -m prospects.run_prospects --re-audit --days 30 [--limit N]
+python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]            # email new HOT/WARM
 ```
 
 **Flow:** Places discovery writes rows as `pending` (or `no_website` when Places has no URL) → `--audit-pending` runs Playwright mobile+desktop capture, runs detectors, hits PageSpeed Insights, uploads screenshots to Storage, writes severity (0-100) + tag (HOT ≥70 / WARM ≥40 / COLD).
 
-**Detector philosophy:** low false-positive rate over coverage. Forms with empty action / `#` / `javascript:` → `forms_unverifiable` (NOT flagged). Only forms with absolute action returning 4xx/5xx → `forms_unreachable` (flagged). Copyright detection uses rendered text (many sites `document.write()` the year).
+**Automation:** `.github/workflows/weekly-prospects.yml` runs Mondays 14:00 UTC (9am EST / 10am EDT): discover all verticals × counties → audit-pending (limit 50) → re-audit stale >30d (limit 20) → digest. Secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `RESEND_API_KEY`, `NOTIFICATION_EMAIL`, `GOOGLE_PLACES_API_KEY`, optional `GOOGLE_PAGESPEED_API_KEY`.
+
+**Digest dedup:** `digest.py` sends HOT/WARM rows where `emailed_at IS NULL` and stamps `emailed_at = now()` on send. Nothing resends unless the row is wiped/re-emailed manually. Row-level `place_id` UNIQUE prevents duplicate discovery.
+
+**Detector philosophy:** low false-positive rate over coverage. Forms with empty action / `#` / `javascript:` → `forms_unverifiable` (NOT flagged). Only forms with absolute action returning **404 or 410** (`DEFINITIVE_BROKEN_STATUSES` in `detectors.py`) → `forms_unreachable` (flagged); triggering status written to `issues.forms_unreachable_status` so outreach copy can quote it. Ambiguous responses (405, 403, 5xx, network errors) demote to `forms_unverifiable` — 405 usually means "GET refused, POST fine" and false-positive form claims torch sender credibility in cold email. Copyright detection uses rendered text (many sites `document.write()` the year).
 
 **Severity weights** (`detectors.score_severity`): viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
 
