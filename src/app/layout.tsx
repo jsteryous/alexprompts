@@ -6,30 +6,30 @@ import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
 export const metadata: Metadata = {
-  title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
+  title: "REBB Advisors - Website Cleanup for Local Businesses",
   description:
-    "REBB Advisors sets up a private Company Brain for owner-led service businesses in Greenville and Upstate SC so teams can find answers across email, notes, files, and job history without interrupting the owner.",
+    "REBB Advisors fixes broken business websites for local businesses. Forms, mobile issues, dead pages, and outdated trust leaks cleaned up fast with a clear fixed-price offer.",
   keywords: [
-    "company brain Greenville SC",
-    "AI knowledge base for service businesses",
-    "private AI for HVAC company",
-    "internal search for contractors",
-    "owner-led service business systems",
-    "company knowledge assistant Greenville",
+    "website cleanup Greenville SC",
+    "fix broken forms website",
+    "mobile friendly website fix",
+    "website modernization local business",
+    "business website repair",
+    "fix outdated website Greenville",
   ],
   openGraph: {
-    title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
+    title: "REBB Advisors - Website Cleanup for Local Businesses",
     description:
-      "Private company knowledge systems for owner-led service businesses. Help your team find answers without pulling the owner into every routine question.",
+      "Clear website cleanup offer for local businesses: broken forms, mobile issues, dead pages, and outdated trust leaks fixed fast.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
   },
   twitter: {
     card: "summary_large_image",
-    title: "REBB Advisors - Company Brain for Greenville SC Service Businesses",
+    title: "REBB Advisors - Website Cleanup for Local Businesses",
     description:
-      "Private company knowledge systems for owner-led service businesses in Greenville and Upstate SC.",
+      "Broken forms, mobile issues, and outdated business websites fixed fast.",
   },
   alternates: {
     canonical: "https://rebbadvisors.com",
@@ -46,7 +46,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('rebb-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('rebb-theme');var shouldUseDark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',shouldUseDark);}catch(e){}})();`,
           }}
         />
         <script
@@ -59,7 +59,7 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Private Company Brain setup for owner-led service businesses in Greenville and Upstate SC.",
+                "Website cleanup and modernization for local businesses with broken forms, mobile issues, and outdated trust leaks.",
               areaServed: {
                 "@type": "AdministrativeArea",
                 name: "Greenville County, South Carolina",
@@ -71,16 +71,16 @@ export default function RootLayout({
                 addressCountry: "US",
               },
               serviceType: [
-                "Company Brain Setup",
-                "Private AI Knowledge Base",
-                "Internal Search for Service Businesses",
-                "LLC Owner Finder Beta",
+                "Website Cleanup",
+                "Website Modernization",
+                "Broken Form Repair",
+                "Mobile Website Fixes",
               ],
               knowsAbout: [
-                "Private company knowledge systems",
-                "Operational knowledge retrieval",
-                "Internal AI for service businesses",
-                "Greenville service business workflows",
+                "Business website cleanup",
+                "Broken web forms",
+                "Mobile-friendly websites",
+                "Local business website credibility",
               ],
             }),
           }}

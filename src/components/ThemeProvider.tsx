@@ -19,7 +19,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
       return "light";
     }
 
-    return localStorage.getItem("rebb-theme") === "dark" ? "dark" : "light";
+    const savedTheme = localStorage.getItem("rebb-theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   });
 
   useEffect(() => {

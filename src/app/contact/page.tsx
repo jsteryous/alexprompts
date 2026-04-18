@@ -7,12 +7,12 @@ export default function ContactPage() {
     firstName: "",
     lastName: "",
     companyName: "",
+    websiteUrl: "",
     businessType: "",
-    teamSize: "",
-    serviceArea: "",
     phone: "",
     email: "",
-    mainPain: "",
+    biggestIssue: "",
+    timeline: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -40,44 +40,43 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="bg-white pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="theme-page pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
-            Company Brain Setup
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
+            Free Website Screenshots
           </span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black mb-5 leading-tight">
-            Book a Setup Call
+          <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight mb-5 leading-tight">
+            Send your website.
+            <br />
+            I&apos;ll show you what is broken.
           </h1>
-          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-            We&apos;ll look at where company knowledge lives today, where your team
-            gets stuck, and whether a Company Brain setup is a good fit for your
-            business.
+          <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
+            If the site is a fit for the cleanup offer, I&apos;ll send back the issues worth fixing and we can move forward on the $1,200, 48-hour website cleanup.
           </p>
         </div>
       </section>
 
-      <section className="bg-white pb-24 md:pb-32">
+      <section className="theme-section pb-24 md:pb-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="bg-gray-50 rounded-2xl p-8 md:p-10">
+            <div className="theme-card border rounded-2xl p-8 md:p-10">
               {status === "success" ? (
                 <div className="text-center py-8">
-                  <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
+                  <div className="theme-card-accent border w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 13l4 4L19 7" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h2 className="text-xl font-bold text-black mb-2">Expect a reply within 1 business day.</h2>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    We&apos;ll review your intake, then reach out if the fit looks
-                    right for a Company Brain setup conversation.
+                  <h2 className="theme-text-primary text-xl font-bold mb-2">Expect a reply within 1 business day.</h2>
+                  <p className="theme-text-muted text-sm leading-relaxed">
+                    I&apos;ll review the site, then send back the issues worth fixing and whether the cleanup offer is the right fit.
                   </p>
                 </div>
               ) : (
                 <form className="space-y-5" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                         First Name
                       </label>
                       <input
@@ -87,11 +86,11 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="John"
                         required
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                         Last Name
                       </label>
                       <input
@@ -100,13 +99,13 @@ export default function ContactPage() {
                         value={form.lastName}
                         onChange={handleChange}
                         placeholder="Smith"
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                       Company Name
                     </label>
                     <input
@@ -114,15 +113,30 @@ export default function ContactPage() {
                       name="companyName"
                       value={form.companyName}
                       onChange={handleChange}
-                      placeholder="Smith Mechanical"
+                      placeholder="Smith Family Dental"
                       required
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                      Website URL
+                    </label>
+                    <input
+                      type="url"
+                      name="websiteUrl"
+                      value={form.websiteUrl}
+                      onChange={handleChange}
+                      placeholder="https://example.com"
+                      required
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                     />
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                         Business Type
                       </label>
                       <select
@@ -130,56 +144,19 @@ export default function ContactPage() {
                         value={form.businessType}
                         onChange={handleChange}
                         required
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
+                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
                       >
                         <option value="">Select one...</option>
-                        <option>HVAC</option>
-                        <option>Plumbing</option>
-                        <option>Electrical</option>
-                        <option>Roofing</option>
-                        <option>General Contractor</option>
-                        <option>Remodeling</option>
-                        <option>Landscaping</option>
-                        <option>Other</option>
+                        <option>Dentist</option>
+                        <option>Law Firm</option>
+                        <option>Contractor</option>
+                        <option>Home Services</option>
+                        <option>Professional Services</option>
+                        <option>Other Local Business</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                        Team Size
-                      </label>
-                      <select
-                        name="teamSize"
-                        value={form.teamSize}
-                        onChange={handleChange}
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
-                      >
-                        <option value="">Select one...</option>
-                        <option>1-4</option>
-                        <option>5-10</option>
-                        <option>11-25</option>
-                        <option>26-50</option>
-                        <option>50+</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      Service Area
-                    </label>
-                    <input
-                      type="text"
-                      name="serviceArea"
-                      value={form.serviceArea}
-                      onChange={handleChange}
-                      placeholder="Greenville, Spartanburg, Anderson"
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                    />
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                         Phone Number
                       </label>
                       <input
@@ -188,55 +165,73 @@ export default function ContactPage() {
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="(555) 000-0000"
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="john@smithmechanical.com"
-                        required
-                        className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                      Main Pain Point
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      required
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                      Biggest Issue
                     </label>
                     <textarea
-                      name="mainPain"
-                      value={form.mainPain}
+                      name="biggestIssue"
+                      value={form.biggestIssue}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="What questions keep bouncing back to you or your office? What knowledge is hardest to find fast?"
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-y"
+                      placeholder="Broken forms, bad mobile experience, site looks outdated, low trust, or whatever you already suspect."
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-y"
                     />
+                  </div>
+
+                  <div>
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                      Timeline
+                    </label>
+                    <select
+                      name="timeline"
+                      value={form.timeline}
+                      onChange={handleChange}
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
+                    >
+                      <option value="">Select one...</option>
+                      <option>This week</option>
+                      <option>This month</option>
+                      <option>Just exploring</option>
+                    </select>
                   </div>
 
                   {status === "error" && (
                     <p className="text-xs text-red-600 text-center">
-                      Something went wrong. Try again or email us directly at alex@rebbadvisors.com.
+                      Something went wrong. Try again or email alex@rebbadvisors.com directly.
                     </p>
                   )}
 
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full bg-black text-white font-semibold text-sm py-4 rounded-xl hover:bg-gray-800 transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="theme-cta-accent w-full font-semibold text-sm py-4 rounded-xl mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {status === "loading" ? "Sending..." : "Book My Setup Call"}
+                    {status === "loading" ? "Sending..." : "Send My Website"}
                   </button>
 
-                  <p className="text-xs text-gray-400 text-center">
-                    Best fit is usually owner-led service businesses with 5-25 people and too much company knowledge trapped in too many places.
+                  <p className="theme-text-muted text-xs text-center">
+                    Best fit is a local business with a site that is clearly leaking trust or leads.
                   </p>
                 </form>
               )}
@@ -244,56 +239,54 @@ export default function ContactPage() {
 
             <div className="space-y-10">
               <div>
-                <h2 className="text-2xl font-bold text-black mb-4">
-                  What happens on the call?
+                <h2 className="theme-text-primary text-2xl font-bold mb-4">
+                  What happens next?
                 </h2>
                 <ul className="space-y-4">
                   {[
                     {
-                      title: "We map where answers live now",
-                      body: "Email, drives, SOPs, notes, estimates, and tribal knowledge. We want to understand the current mess before suggesting a system.",
+                      title: "I review the actual site",
+                      body: "Not a generic sales call. I look at the pages, the forms, the mobile experience, and the obvious trust issues.",
                     },
                     {
-                      title: "We identify the repeat questions",
-                      body: "The best setups start with the questions your PMs, office staff, and field team already keep asking every week.",
+                      title: "I send screenshots of the problems",
+                      body: "You get clear proof of what is broken so you are not buying blind.",
                     },
                     {
-                      title: "We decide if the fit is real",
-                      body: "If a Company Brain setup makes sense, we outline the first version. If it does not, we will say that directly.",
+                      title: "We decide whether the $1,200 cleanup fits",
+                      body: "If it is a cleanup job, we move fast. If it really needs a rebuild, I say that directly.",
                     },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">
-                      <div className="mt-1 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                      <div className="theme-card-accent border mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                          <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-black mb-1">{item.title}</p>
-                        <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                        <p className="theme-text-primary text-sm font-semibold mb-1">{item.title}</p>
+                        <p className="theme-text-muted text-sm leading-relaxed">{item.body}</p>
                       </div>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="border-t border-gray-100 pt-10">
-                <h3 className="text-sm font-semibold text-black mb-4 uppercase tracking-widest text-xs text-gray-400">
-                  Strongest Fit
+              <div className="theme-border border-t pt-10">
+                <h3 className="theme-text-muted text-xs font-semibold mb-4 uppercase tracking-widest">
+                  Good Fit
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "HVAC",
-                    "Plumbing",
-                    "Electrical",
-                    "Roofing",
-                    "General Contractors",
-                    "Remodelers",
-                    "Commercial Subs",
+                    "Dentists",
+                    "Law Firms",
+                    "Contractors",
+                    "Home Services",
+                    "Local Professional Services",
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1.5 rounded-full"
+                      className="theme-card border theme-text-secondary text-xs font-medium px-3 py-1.5 rounded-full"
                     >
                       {tag}
                     </span>
@@ -301,18 +294,15 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-gray-950 rounded-2xl p-8 text-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-500 mb-4">
-                  What We Are Not Selling
+              <div className="theme-card-contrast border rounded-2xl p-8">
+                <p className="theme-label text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+                  Clear Scope
                 </p>
-                <p className="text-sm text-gray-300 leading-relaxed mb-3">
-                  This is not generic AI consulting, a chatbot widget, or a broad
-                  marketing audit.
+                <p className="theme-text-contrast-muted text-sm leading-relaxed mb-3">
+                  This is not a broad agency retainer and not a vague digital strategy conversation.
                 </p>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  The offer is a private Company Brain setup for businesses where
-                  operational knowledge already exists but is too hard for the
-                  team to retrieve quickly.
+                <p className="theme-text-contrast-muted text-sm leading-relaxed">
+                  The offer is simple: identify what is broken, decide if the quick cleanup fits, then fix it fast.
                 </p>
               </div>
             </div>

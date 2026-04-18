@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Setup Call - REBB Advisors",
+  title: "Get Free Website Screenshots - REBB Advisors",
   description:
-    "Book a setup call with REBB Advisors to see whether a private Company Brain is a good fit for your owner-led service business.",
+    "Send REBB Advisors your website and get clear screenshots of what is broken, what needs cleanup, and whether the $1,200 website fix offer is the right fit.",
   alternates: { canonical: "https://rebbadvisors.com/contact" },
 };
 
