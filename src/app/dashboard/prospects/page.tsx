@@ -104,16 +104,16 @@ async function getCurrentUser() {
 // ── Presentation ─────────────────────────────────────────────────────────────
 
 function SeverityBadge({ score, tag }: { score: number | null; tag: string | null }) {
-  if (score === null) return <span className="text-gray-600 text-xs">—</span>;
+  if (score === null) return <span className="theme-text-muted text-xs">—</span>;
   const color =
-    tag === "HOT"  ? "text-red-400" :
-    tag === "WARM" ? "text-amber-400" :
-                     "text-gray-400";
+    tag === "HOT"  ? "text-red-600 dark:text-red-400" :
+    tag === "WARM" ? "text-amber-600 dark:text-amber-400" :
+                     "theme-text-secondary";
   return (
     <div className="flex items-center gap-2">
       <span className={`text-base font-bold tabular-nums ${color}`}>{score}</span>
       {tag && (
-        <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-900 text-gray-400 border border-gray-800">
+        <span className="text-xs font-semibold px-2 py-0.5 rounded-full theme-card-muted theme-text-secondary border theme-border">
           {tag}
         </span>
       )}
@@ -124,12 +124,12 @@ function SeverityBadge({ score, tag }: { score: number | null; tag: string | nul
 function IssueChips({ issues, status }: { issues: AuditIssues | null; status: string }) {
   if (status === "no_website") {
     return (
-      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-red-950/50 text-red-300 border border-red-900/60">
+      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/50 dark:text-red-300 dark:border-red-900/60">
         NO WEBSITE
       </span>
     );
   }
-  if (!issues) return <span className="text-gray-600 text-xs">—</span>;
+  if (!issues) return <span className="theme-text-muted text-xs">—</span>;
 
   const chips: { label: string; tone: "bad" | "warn" }[] = [];
   if (issues.viewport_missing)  chips.push({ label: "No viewport", tone: "bad" });
@@ -140,7 +140,7 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
   if (issues.lighthouse_mobile !== null && issues.lighthouse_mobile !== undefined && issues.lighthouse_mobile < 40) {
     chips.push({ label: `Mobile ${issues.lighthouse_mobile}`, tone: "bad" });
   }
-  if (chips.length === 0) return <span className="text-xs text-gray-600">Clean</span>;
+  if (chips.length === 0) return <span className="text-xs theme-text-muted">Clean</span>;
 
   return (
     <div className="flex flex-wrap gap-1">
@@ -149,8 +149,8 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
           key={c.label}
           className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
             c.tone === "bad"
-              ? "bg-red-950/40 text-red-300 border border-red-900/40"
-              : "bg-amber-950/40 text-amber-300 border border-amber-900/40"
+              ? "bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/40"
+              : "bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/40"
           }`}
         >
           {c.label}
@@ -166,8 +166,8 @@ function DashNav({ active }: { active: "leads" | "prospects" }) {
       href={href}
       className={`text-sm px-3 py-1.5 rounded-md transition-colors ${
         active === key
-          ? "bg-gray-900 text-white border border-gray-800"
-          : "text-gray-500 hover:text-gray-300"
+          ? "theme-card-strong theme-text-primary border theme-border"
+          : "theme-text-muted hover:theme-text-primary"
       }`}
     >
       {label}
@@ -197,8 +197,8 @@ export default async function ProspectsPage({ searchParams }: Props) {
       href={slug ? `/dashboard/prospects?vertical=${slug}` : "/dashboard/prospects"}
       className={`text-xs px-2 py-1 rounded ${
         vertical === slug
-          ? "bg-green-500/20 text-green-400 border border-green-800/50"
-          : "text-gray-500 hover:text-gray-300"
+          ? "theme-badge"
+          : "theme-text-muted hover:theme-text-primary"
       }`}
     >
       {label}
@@ -206,43 +206,43 @@ export default async function ProspectsPage({ searchParams }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
+    <div className="min-h-screen theme-text-primary">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gray-950">
+      <div className="border-b theme-border">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-green-500">
+              <span className="text-xs font-semibold uppercase tracking-widest theme-label">
                 REBB Advisors
               </span>
               <DashNav active="prospects" />
             </div>
-            <h1 className="text-2xl font-bold text-white">Website Prospects</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <h1 className="text-2xl font-bold theme-text-primary">Website Prospects</h1>
+            <p className="text-sm theme-text-muted mt-1">
               Upstate businesses with broken or missing websites we can fix.
             </p>
           </div>
           <div className="flex items-start gap-8">
             <div className="flex gap-6 text-right">
               <div>
-                <p className="text-2xl font-bold text-red-400">{noWebsite}</p>
-                <p className="text-xs text-gray-500">No website</p>
+                <p className="text-2xl font-bold text-red-600 dark:text-red-400">{noWebsite}</p>
+                <p className="text-xs theme-text-muted">No website</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-amber-400">{hot}</p>
-                <p className="text-xs text-gray-500">HOT</p>
+                <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{hot}</p>
+                <p className="text-xs theme-text-muted">HOT</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-400">{pending}</p>
-                <p className="text-xs text-gray-500">Pending</p>
+                <p className="text-2xl font-bold theme-text-secondary">{pending}</p>
+                <p className="text-xs theme-text-muted">Pending</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-600 mb-1">{user?.email}</p>
+              <p className="text-xs theme-text-muted mb-1">{user?.email}</p>
               <form action={signOut}>
                 <button
                   type="submit"
-                  className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                  className="text-xs theme-text-muted hover:theme-text-primary transition-colors"
                 >
                   Sign out
                 </button>
@@ -252,7 +252,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 pb-4 flex items-center gap-2">
-          <span className="text-xs text-gray-600 mr-1">Vertical:</span>
+          <span className="text-xs theme-text-muted mr-1">Vertical:</span>
           {verticalLink(undefined, "All")}
           {verticalLink("dental", "Dental")}
           {verticalLink("personal_injury", "Personal Injury")}
@@ -262,44 +262,44 @@ export default async function ProspectsPage({ searchParams }: Props) {
       {/* Table */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         {prospects.length === 0 ? (
-          <div className="text-center py-24 text-gray-600">
+          <div className="text-center py-24 theme-text-muted">
             <p className="text-sm">
               No prospects yet. Run{" "}
-              <code className="text-gray-400">
+              <code className="theme-text-secondary">
                 python -m prospects.run_prospects --discover --vertical dental --county greenville
               </code>{" "}
               to populate.
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-gray-800">
+          <div className="overflow-x-auto rounded-xl border theme-border theme-card">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-800 bg-gray-900/60">
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500 w-8">#</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Severity</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Business</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">City</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Vertical</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Issues</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Proof</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Rating</th>
+                <tr className="border-b theme-border theme-card-muted">
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted w-8">#</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Severity</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Business</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">City</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Vertical</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Issues</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Proof</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Rating</th>
                 </tr>
               </thead>
               <tbody>
                 {prospects.map((p, i) => (
                   <tr
                     key={p.id}
-                    className={`border-b border-gray-800/60 hover:bg-gray-900/40 transition-colors ${
+                    className={`border-b theme-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${
                       p.audit_status === "error" ? "opacity-50" : ""
                     }`}
                   >
-                    <td className="px-4 py-4 text-gray-600 text-xs">{i + 1}</td>
+                    <td className="px-4 py-4 theme-text-muted text-xs">{i + 1}</td>
                     <td className="px-4 py-4">
                       <SeverityBadge score={p.severity_score} tag={p.severity_tag} />
                     </td>
                     <td className="px-4 py-4">
-                      <p className="font-semibold text-white text-sm leading-snug">
+                      <p className="font-semibold theme-text-primary text-sm leading-snug">
                         {p.business_name}
                       </p>
                       {p.website_url ? (
@@ -307,28 +307,28 @@ export default async function ProspectsPage({ searchParams }: Props) {
                           href={p.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-blue-400 hover:text-blue-300 transition-colors truncate max-w-[220px] block mt-0.5"
+                          className="text-xs text-blue-600 dark:text-blue-400 hover:underline transition-colors truncate max-w-[220px] block mt-0.5"
                         >
                           {(() => { try { return new URL(p.website_url).hostname; } catch { return p.website_url; } })()} ↗
                         </a>
                       ) : (
-                        <span className="text-xs text-red-400 mt-0.5 block">No website</span>
+                        <span className="text-xs text-red-600 dark:text-red-400 mt-0.5 block">No website</span>
                       )}
-                      {p.phone && <p className="text-xs text-gray-500 mt-0.5">{p.phone}</p>}
+                      {p.phone && <p className="text-xs theme-text-muted mt-0.5">{p.phone}</p>}
                     </td>
-                    <td className="px-4 py-4 text-gray-400 text-xs">
+                    <td className="px-4 py-4 theme-text-secondary text-xs">
                       {p.city || "—"}
-                      {p.county && <p className="text-gray-600 text-[10px]">{p.county}</p>}
+                      {p.county && <p className="theme-text-muted text-[10px]">{p.county}</p>}
                     </td>
                     <td className="px-4 py-4">
-                      <span className="text-xs text-gray-400 capitalize">
+                      <span className="text-xs theme-text-secondary capitalize">
                         {p.vertical.replace("_", " ")}
                       </span>
                     </td>
                     <td className="px-4 py-4 max-w-[260px]">
                       <IssueChips issues={p.issues} status={p.audit_status} />
                       {p.audit_error && (
-                        <p className="text-[10px] text-red-400 mt-1 truncate" title={p.audit_error}>
+                        <p className="text-[10px] text-red-600 dark:text-red-400 mt-1 truncate" title={p.audit_error}>
                           {p.audit_error}
                         </p>
                       )}
@@ -340,7 +340,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
                             href={p.mobile_screenshot_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] text-gray-500 hover:text-gray-300 border border-gray-800 rounded px-1.5 py-0.5"
+                            className="text-[10px] theme-text-muted hover:theme-text-primary border theme-border rounded px-1.5 py-0.5"
                           >
                             📱 mobile
                           </a>
@@ -350,18 +350,18 @@ export default async function ProspectsPage({ searchParams }: Props) {
                             href={p.desktop_screenshot_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] text-gray-500 hover:text-gray-300 border border-gray-800 rounded px-1.5 py-0.5"
+                            className="text-[10px] theme-text-muted hover:theme-text-primary border theme-border rounded px-1.5 py-0.5"
                           >
                             🖥 desktop
                           </a>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-4 text-xs text-gray-400 tabular-nums whitespace-nowrap">
+                    <td className="px-4 py-4 text-xs theme-text-secondary tabular-nums whitespace-nowrap">
                       {p.google_rating ? (
                         <>
                           <span>{p.google_rating.toFixed(1)}★</span>
-                          <p className="text-[10px] text-gray-600">{p.google_review_count ?? 0} reviews</p>
+                          <p className="text-[10px] theme-text-muted">{p.google_review_count ?? 0} reviews</p>
                         </>
                       ) : "—"}
                     </td>
@@ -372,7 +372,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
           </div>
         )}
 
-        <p className="text-xs text-gray-700 mt-4 text-right">
+        <p className="text-xs theme-text-muted mt-4 text-right opacity-70">
           {prospects.length} prospects · sorted by severity desc
         </p>
       </div>

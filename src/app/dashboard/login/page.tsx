@@ -13,26 +13,25 @@ export default async function LoginPage({ searchParams }: Props) {
   const { error, next } = await searchParams;
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-sm theme-card-strong border theme-border rounded-2xl p-8">
         {/* Logo / brand */}
         <div className="text-center mb-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-2">
+          <p className="text-xs font-semibold uppercase tracking-widest theme-label mb-2">
             REBB Advisors
           </p>
-          <h1 className="text-xl font-bold text-white">LLC Owner Finder</h1>
-          <p className="text-sm text-gray-500 mt-1">Sign in to view the ranked call list</p>
+          <h1 className="text-xl font-bold theme-text-primary">LLC Owner Finder</h1>
+          <p className="text-sm theme-text-muted mt-1">Sign in to view the ranked call list</p>
         </div>
 
         {/* Form */}
         <form action={signIn} className="space-y-4">
-          {/* Preserve the intended destination after login */}
           <input type="hidden" name="next" value={next ?? "/dashboard"} />
 
           <div>
             <label
               htmlFor="email"
-              className="block text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2"
+              className="block text-xs font-semibold uppercase tracking-widest theme-text-muted mb-2"
             >
               Email
             </label>
@@ -42,7 +41,7 @@ export default async function LoginPage({ searchParams }: Props) {
               type="email"
               autoComplete="email"
               required
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full theme-card-muted border theme-border rounded-lg px-4 py-3 text-sm theme-text-primary placeholder:theme-text-muted focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition"
               placeholder="alex@rebbadvisors.com"
             />
           </div>
@@ -50,7 +49,7 @@ export default async function LoginPage({ searchParams }: Props) {
           <div>
             <label
               htmlFor="password"
-              className="block text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2"
+              className="block text-xs font-semibold uppercase tracking-widest theme-text-muted mb-2"
             >
               Password
             </label>
@@ -60,20 +59,20 @@ export default async function LoginPage({ searchParams }: Props) {
               type="password"
               autoComplete="current-password"
               required
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full theme-card-muted border theme-border rounded-lg px-4 py-3 text-sm theme-text-primary placeholder:theme-text-muted focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition"
               placeholder="••••••••"
             />
           </div>
 
           {error && (
-            <p className="text-xs text-red-400 text-center">
+            <p className="text-xs text-red-600 dark:text-red-400 text-center">
               Invalid email or password.
             </p>
           )}
 
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold text-sm py-3 rounded-lg transition-colors mt-2"
+            className="theme-cta-accent w-full font-semibold text-sm py-3 rounded-lg transition-colors mt-2"
           >
             Sign In
           </button>

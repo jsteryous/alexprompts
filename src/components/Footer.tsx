@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/dashboard")) return null;
+
   return (
     <footer className="theme-card-strong border-t">
       <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
