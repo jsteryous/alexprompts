@@ -114,12 +114,13 @@ button {
 
 .theme-section-contrast {
   --foreground: #edf1eb;
-  --foreground-soft: #c6d0c6;
-  --foreground-muted: #90a08f;
+  --foreground-soft: #d3dcd0;
+  --foreground-muted: #a4b2a2;
   --border: rgba(229, 240, 231, 0.12);
   --border-strong: rgba(229, 240, 231, 0.2);
   --accent: #43bd78;
   --accent-strong: #8fe3b1;
+  --accent-contrast: #08100b;
   background:
     radial-gradient(circle at top left, rgba(43, 182, 115, 0.12), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
@@ -147,12 +148,13 @@ button {
 
 .theme-card-contrast {
   --foreground: #edf1eb;
-  --foreground-soft: #c6d0c6;
-  --foreground-muted: #90a08f;
+  --foreground-soft: #d3dcd0;
+  --foreground-muted: #a4b2a2;
   --border: rgba(229, 240, 231, 0.12);
   --border-strong: rgba(229, 240, 231, 0.2);
   --accent: #43bd78;
   --accent-strong: #8fe3b1;
+  --accent-contrast: #08100b;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
     var(--surface-inverse-2);
@@ -179,12 +181,13 @@ button {
 html.dark .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
 html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
   --foreground: #edf1eb;
-  --foreground-soft: #c6d0c6;
-  --foreground-muted: #90a08f;
+  --foreground-soft: #d3dcd0;
+  --foreground-muted: #a4b2a2;
   --border: rgba(229, 240, 231, 0.12);
   --border-strong: rgba(229, 240, 231, 0.2);
   --accent: #43bd78;
   --accent-strong: #8fe3b1;
+  --accent-contrast: #08100b;
 }
 
 .theme-card-accent {
@@ -224,7 +227,7 @@ html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-ca
 }
 
 .theme-text-contrast-muted {
-  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+  color: var(--foreground-soft);
 }
 
 .theme-label {

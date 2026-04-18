@@ -48,10 +48,10 @@ export default function ContactPage() {
           <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight mb-5 leading-tight">
             Send your website.
             <br />
-            I&apos;ll show you what is broken.
+            We&apos;ll show you what is broken.
           </h1>
           <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
-            If the site is a fit for the cleanup offer, I&apos;ll send back the issues worth fixing and we can move forward on the $1,200, 48-hour website cleanup.
+            If the site is a fit for the cleanup offer, we&apos;ll send back the issues worth fixing and move forward on the $1,200, 48-hour website cleanup.
           </p>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ContactPage() {
                   </div>
                   <h2 className="theme-text-primary text-xl font-bold mb-2">Expect a reply within 1 business day.</h2>
                   <p className="theme-text-muted text-sm leading-relaxed">
-                    I&apos;ll review the site, then send back the issues worth fixing and whether the cleanup offer is the right fit.
+                    We&apos;ll review the site, then send back the issues worth fixing and whether the cleanup offer is the right fit.
                   </p>
                 </div>
               ) : (
@@ -245,16 +245,16 @@ export default function ContactPage() {
                 <ul className="space-y-4">
                   {[
                     {
-                      title: "I review the actual site",
-                      body: "Not a generic sales call. I look at the pages, the forms, the mobile experience, and the obvious trust issues.",
+                      title: "We review the actual site",
+                      body: "Not a generic sales call. We look at the pages, the forms, the mobile experience, and the obvious trust issues.",
                     },
                     {
-                      title: "I send screenshots of the problems",
+                      title: "We send screenshots of the problems",
                       body: "You get clear proof of what is broken so you are not buying blind.",
                     },
                     {
                       title: "We decide whether the $1,200 cleanup fits",
-                      body: "If it is a cleanup job, we move fast. If it really needs a rebuild, I say that directly.",
+                      body: "If it is a cleanup job, we move fast. If it really needs a rebuild, we say that directly.",
                     },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">

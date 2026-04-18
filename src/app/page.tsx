@@ -37,17 +37,17 @@ const auditChecks = [
 const processSteps = [
   {
     step: "01",
-    title: "I show you what is broken",
-    body: "You send your site. I review it and send back screenshots of the issues worth fixing.",
+    title: "We show you what is broken",
+    body: "You send your site. We review it and send back screenshots of the issues worth fixing.",
   },
   {
     step: "02",
     title: "You approve the $1,200 cleanup",
-    body: "Flat price. Clear scope. If the site actually needs a rebuild instead, I tell you before taking the job.",
+    body: "Flat price. Clear scope. If the site actually needs a rebuild instead, we tell you before taking the job.",
   },
   {
     step: "03",
-    title: "I fix it in 48 hours",
+    title: "We fix it in 48 hours",
     body: "Forms work, the mobile experience gets cleaned up, and the site looks like someone still runs the business.",
   },
 ];
@@ -70,14 +70,14 @@ export default function HomePage() {
                 Website Cleanup for Local Businesses
               </span>
               <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
-                I fix broken business websites
+                We fix broken business websites
                 <br />
                 for $1,200
                 <br />
                 in 48 hours.
               </h1>
               <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                If your forms fail, your site falls apart on mobile, or the whole thing looks dated, I clean it up fast.
+                If your forms fail, your site falls apart on mobile, or the whole thing looks dated, we clean it up fast.
                 REBB runs a weekly audit that catches broken forms, mobile issues, dead pages, and obvious trust leaks.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
@@ -100,7 +100,7 @@ export default function HomePage() {
                 </a>
               </div>
               <p className="theme-text-muted text-xs">
-                Flat fee for standard cleanup. If your site needs a full rebuild, I will say that directly before any work starts.
+                Flat fee for standard cleanup. If your site needs a full rebuild, we will say that directly before any work starts.
               </p>
             </div>
 
@@ -218,7 +218,7 @@ export default function HomePage() {
               </h2>
               <p className="theme-text-muted leading-relaxed mb-8">
                 That is the public offer. One service. One price. One timeline.
-                If your site needs more than cleanup, I will tell you instead of pretending the flat fee covers a rebuild.
+                If your site needs more than cleanup, we will tell you instead of pretending the flat fee covers a rebuild.
               </p>
               <Link
                 href="/contact"
@@ -272,7 +272,7 @@ export default function HomePage() {
                 </p>
                 <p className="theme-text-secondary text-sm leading-relaxed">
                   Sometimes the audit reveals a site that is too far gone for a cleanup pass.
-                  In that case, I will quote a rebuild separately after the quick-fix conversation.
+                  In that case, we will quote a rebuild separately after the quick-fix conversation.
                   The rebuild is the upsell, not the bait.
                 </p>
               </div>
@@ -321,17 +321,17 @@ export default function HomePage() {
             <h2 className="theme-text-primary text-3xl md:text-4xl font-bold mb-3">
               Reply with your website.
               <br />
-              I&apos;ll show you what is broken.
+              We&apos;ll show you what is broken.
             </h2>
             <p className="theme-text-contrast-muted">
-              If the cleanup is the right fit, it is $1,200 and I turn it around in 48 hours.
+              If the cleanup is the right fit, it is $1,200 and we turn it around in 48 hours.
             </p>
           </div>
           <Link
             href="/contact"
             className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
           >
-            Get My Free Screenshots
+            Get Free Screenshots
             <ArrowIcon />
           </Link>
         </div>
