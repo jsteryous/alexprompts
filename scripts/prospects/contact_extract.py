@@ -46,6 +46,40 @@ CANDIDATE_CONTACT_PATHS = (
 )
 
 
+# Always-probe fallback paths when href discovery finds nothing. Dentists and
+# law firms often put these in a footer/hamburger menu that doesn't render as
+# a plain <a> on the mobile home page.
+FALLBACK_PROBE_PATHS = (
+    "/contact", "/contact-us", "/about", "/about-us",
+    "/meet-the-doctor", "/our-team", "/attorneys",
+)
+
+
+def fallback_probe_urls(home_url: str, already_found: Iterable[str], limit: int = 3) -> list[str]:
+    """
+    Build absolute URLs for well-known contact-ish paths on the same origin
+    as `home_url`, excluding any already in `already_found`. Cap at `limit`.
+    Callers should fetch these speculatively — 404s are expected.
+    """
+    try:
+        base = urlparse(home_url)
+    except Exception:
+        return []
+    if not base.netloc:
+        return []
+    existing = {u.rstrip("/") for u in already_found}
+    root = f"{base.scheme}://{base.netloc}"
+    out: list[str] = []
+    for path in FALLBACK_PROBE_PATHS:
+        url = f"{root}{path}"
+        if url.rstrip("/") in existing:
+            continue
+        out.append(url)
+        if len(out) >= limit:
+            break
+    return out
+
+
 def find_candidate_page_urls(home_url: str, links: Iterable[str], limit: int = 3) -> list[str]:
     """
     From href values collected on the home page, pick same-origin internal
@@ -91,6 +125,8 @@ def find_candidate_page_urls(home_url: str, links: Iterable[str], limit: int = 3
 
 _EMAIL_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._%+\-]*@[A-Za-z0-9.\-]+\.[A-Za-z]{2,24}")
 _MAILTO_RE = re.compile(r'mailto:([^"\'>\s?]+)', re.I)
+_CF_DATA_RE = re.compile(r'data-cfemail\s*=\s*["\']([0-9a-fA-F]+)["\']', re.I)
+_CF_HREF_RE = re.compile(r'/cdn-cgi/l/email-protection#([0-9a-fA-F]+)', re.I)
 
 EMAIL_BLOCKLIST_LOCAL_PARTS = {
     "noreply", "no-reply", "donotreply", "do-not-reply",
@@ -122,8 +158,25 @@ _SPURIOUS_EMAIL_SUBSTRINGS = (
 )
 
 
+def _decode_cf_email(hex_str: str) -> Optional[str]:
+    """
+    Decode a Cloudflare email-obfuscation payload.
+    Format: first byte = XOR key, remaining bytes = XOR'd email chars.
+    """
+    try:
+        data = bytes.fromhex(hex_str)
+        if len(data) < 2:
+            return None
+        key = data[0]
+        decoded = "".join(chr(b ^ key) for b in data[1:])
+        return decoded if "@" in decoded else None
+    except ValueError:
+        return None
+
+
 def extract_emails(html: str, text: str) -> list[str]:
-    """All unique emails found in page html + visible text, lowercased."""
+    """All unique emails found in page html + visible text, lowercased.
+    Also decodes Cloudflare `data-cfemail` / `/cdn-cgi/l/email-protection` obfuscation."""
     found: set[str] = set()
     for m in _MAILTO_RE.finditer(html or ""):
         raw = m.group(1).split("?")[0].strip().lower()
@@ -132,6 +185,12 @@ def extract_emails(html: str, text: str) -> list[str]:
     for src in (html or "", text or ""):
         for m in _EMAIL_RE.finditer(src):
             found.add(m.group(0).lower())
+    # Cloudflare email obfuscation
+    for pattern in (_CF_DATA_RE, _CF_HREF_RE):
+        for m in pattern.finditer(html or ""):
+            decoded = _decode_cf_email(m.group(1))
+            if decoded and _EMAIL_RE.fullmatch(decoded):
+                found.add(decoded.lower())
     return sorted(found)
 
 

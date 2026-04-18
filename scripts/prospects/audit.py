@@ -45,7 +45,10 @@ NETWORKIDLE_TIMEOUT_MS = 5_000
 EXTRA_PAGE_NAV_TIMEOUT_MS = 12_000
 EXTRA_PAGE_NETWORKIDLE_TIMEOUT_MS = 3_000
 MAX_EXTRA_PAGES = 3
-PRIMARY_EMAIL_MIN_SCORE = 20  # discard ranked emails below this before picking primary
+# Any email that survives the blocklist becomes a valid primary_email fallback.
+# Ranking still puts personal emails above info@ — this just lets info@ show up
+# in the dashboard when it's the only thing the site exposes.
+PRIMARY_EMAIL_MIN_SCORE = 1
 
 
 @dataclass
@@ -217,6 +220,18 @@ def _capture(url: str) -> _CaptureResult:
                 extra = _capture_extra_page(mobile_ctx, candidate_url)
                 if extra:
                     result.extra_pages.append(extra)
+
+            # If href discovery came up short, probe well-known fallback paths
+            # (many sites hide Contact in a JS-rendered nav we couldn't see).
+            if len(result.extra_pages) < MAX_EXTRA_PAGES:
+                already = [p["url"] for p in result.extra_pages] + [result.final_url]
+                slots_left = MAX_EXTRA_PAGES - len(result.extra_pages)
+                for fallback_url in contact_extract.fallback_probe_urls(
+                    result.final_url, already, limit=slots_left,
+                ):
+                    extra = _capture_extra_page(mobile_ctx, fallback_url)
+                    if extra:
+                        result.extra_pages.append(extra)
 
             mobile_ctx.close()
 
