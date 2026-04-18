@@ -391,4 +391,13 @@ def save_audit(result: AuditResult) -> None:
         "decision_maker_name": result.decision_maker_name,
         "decision_maker_title": result.decision_maker_title,
     }
-    sb.table("website_prospects").update(payload).eq("id", result.prospect_id).execute()
+    try:
+        resp = sb.table("website_prospects").update(payload).eq("id", result.prospect_id).execute()
+    except Exception as e:
+        _log.error("save_audit update failed for %s: %s", result.prospect_id, e)
+        raise
+    if not resp.data:
+        _log.warning(
+            "save_audit affected 0 rows for %s — check column names exist in DB",
+            result.prospect_id,
+        )

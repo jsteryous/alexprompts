@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Always render fresh — avoid Next.js caching stale Supabase responses after
+// a re-audit.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // ── Types ────────────────────────────────────────────────────────────────────
 
 interface AuditIssues {
