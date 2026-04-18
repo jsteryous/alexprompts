@@ -3,9 +3,9 @@ import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata: Metadata = {
-  title: "Market Insights — Greenville SC Lead Generation & Marketing · REBB Advisors",
+  title: "Insights — Dental Practice Websites, Fixed · REBB Advisors",
   description:
-    "Tactical articles on lead generation, local SEO, and outreach automation for Greenville County service businesses — HVAC, landscaping, pool, pressure washing, and trades.",
+    "Tactical articles for dental practice owners and office managers in Greenville SC: broken booking forms, mobile experience, new-patient trust signals, and when a website cleanup beats a full rebuild.",
   alternates: { canonical: "https://rebbadvisors.com/insights" },
 };
 
@@ -59,16 +59,17 @@ export default async function InsightsPage() {
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-6xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Upstate SC · Market Insights
+            Greenville SC · Dental Website Insights
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            What&apos;s moving
+            What breaks on
             <br />
-            Greenville this week
+            dental websites
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            Data-driven analysis of property transfers, business filings, and
-            economic signals for local service contractors.
+            Field notes from auditing dental practice websites in the Upstate —
+            broken booking forms, mobile layouts that lose patients, and the
+            handful of fixes that actually move the needle.
           </p>
         </div>
       </section>

@@ -20,7 +20,7 @@
 **Internal tooling (not customer-facing):**
 - `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits sites, scores severity, emails a HOT/WARM digest. Surfaces on `/dashboard/prospects` (auth-gated).
 - `scripts/gvl_monitor.py` + `scripts/enrich.py` + `scripts/run_daily.py` — legacy LLC-to-human resolution pipeline (property transfers + mortgages + SOS filings → `enriched_leads`). Still runs; surfaces on `/dashboard` (auth-gated). Not pitched on the public site.
-- `scripts/generate_insights.py` — AI-drafted blog posts (Gemini → DRAFT → manual approve → `/insights`). Still operational; `/insights` is not currently in the public nav.
+- `scripts/generate_insights.py` — AI-drafted blog posts (Gemini → DRAFT → manual approve → `/insights`). Topics target dental practice owners: broken booking forms, mobile viewport, stale copyright, Lighthouse, GBP alignment, cleanup-vs-rebuild. `/insights` is in the public nav.
 
 ## Tech Stack
 
@@ -46,7 +46,7 @@ src/
 │   ├── contact/page.tsx         — client component form → /api/contact
 │   ├── how-it-works / seo / web-development / lead-intelligence / outreach-automation
 │   │                            — all permanentRedirect("/"); kept for inbound link preservation
-│   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s (not in public nav)
+│   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s; Article JSON-LD on [slug]; in public nav
 │   ├── review/page.tsx          — token-gated draft review (not in nav)
 │   ├── case-study/page.tsx      — placeholder, noindexed
 │   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; dedup by principal_name
@@ -216,7 +216,8 @@ In descending severity, these are the failures that justify the cleanup:
 | `contact_status` | text | `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
 | `emailed_at` | timestamptz | NULL = eligible for next digest |
 | `contact_emails` | jsonb | ranked `[{email, score, role_hint}]` |
-| `primary_email` | text | top-ranked email (score ≥ 20) |
+| `primary_email` | text | person-identified address (score ≥ 50: DM match, dr.<lastname>, ownership, first.last) |
+| `fallback_email` | text | best shared/generic inbox when no primary — dashboard renders dimmed |
 | `decision_maker_name` / `decision_maker_title` | text | best-guess owner/dentist/partner |
 
 ## Market Insights Engine
@@ -339,11 +340,11 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]
 
 **Digest dedup:** `digest.py` sends HOT/WARM rows where `emailed_at IS NULL` and stamps `emailed_at = now()` on send.
 
-**Detector philosophy:** low false-positive rate over coverage. Only forms with absolute action returning **404 or 410** → `forms_unreachable` (flagged). 405/403/5xx demote to `forms_unverifiable` — false-positive form claims torch sender credibility.
+**Detector philosophy:** low false-positive rate over coverage. Forms are probed on **every crawled page** (home + contact/about/team), not just home — forms often live on `/contact`. Only absolute actions returning **404 or 410** flip `forms_unreachable`; the triggering page URL + dead action land in `issues.forms_unreachable_page` / `forms_unreachable_action` so outreach can quote them. 405/403/5xx demote to `forms_unverifiable` — false-positive form claims torch sender credibility.
 
 **Severity weights:** viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
 
-**Contact extraction** (`contact_extract.py`, pure): `audit.py` follows up to 3 same-origin links with `about` / `contact` / `team` in path. Combined HTML → `extract_decision_maker()` + `rank_emails()`. `primary_email` = top-ranked email with score ≥ 20.
+**Contact extraction** (`contact_extract.py`, pure): `audit.py` follows up to 3 same-origin links with `about` / `contact` / `team` in path. Combined HTML → `extract_decision_maker()` + `rank_emails()`. `primary_email` = top-ranked email with score ≥ 50 (person-identified). `fallback_email` = best address below that threshold, so the dashboard still surfaces an inbox when no named contact is found — but labels it as a shared inbox rather than overstating confidence.
 
 **Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury).
 
@@ -405,7 +406,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 |---|---|
 | `/` | Single-offer homepage: Hero → Visual Proof (`#what-we-fix`) → Process (`#process`) → Pricing (`#pricing`) → Outcomes → Final CTA |
 | `/contact` | Form → `/api/contact` → Resend to alex@rebbadvisors.com |
-| `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked`. Not currently in public nav. |
+| `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked`. Article JSON-LD on `[slug]`. In public nav. |
 | `/review` | Token-gated draft review. Not in nav. |
 | `/case-study` | Placeholder — **noindexed**, do not remove until real content exists. |
 
@@ -419,7 +420,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 | `/dashboard/prospects` | website_prospects list (outbound pitch list internal tool) |
 | `/dashboard/login` | No public registration; users created manually in Supabase |
 
-**Nav:** logo · What We Fix · Process · Pricing · Contact · [Show Me What's Broken CTA]
+**Nav:** logo · What We Fix · Process · Pricing · Insights · Contact · [Show Me What's Broken CTA]
 
 ## Python Pipeline — Open Tech Debt
 

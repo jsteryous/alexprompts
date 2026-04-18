@@ -39,35 +39,45 @@ GEMINI_MODEL = "gemini-2.5-flash"
 # Weight a category by listing it more than once.
 
 CATEGORIES = [
-    # Company Brain — accessible AI for service businesses with multiple moving parts
-    "Company Brain (AI for service businesses) — how a private local AI helps a trade contractor with 5+ active jobs stay organized: answering questions from past quotes, job notes, and client emails without the owner stopping work to explain it; why most 'AI for business' tools fail service companies and what actually works",
+    # Broken booking / contact forms — the #1 audit finding
+    "Broken booking and contact forms on dental practice websites — how to tell when a form is actually submitting vs. silently 404ing, why 'it worked when I tested it' isn't enough, what a practice loses per week when new-patient forms are dead, and how to test your own form in under 60 seconds without a developer",
 
-    # LLC Owner Finder — public records lead intelligence, accessible angle
-    "LLC Owner Finder (lead intelligence for Upstate SC trades) — how Greenville County deed transfers, SOS filings, and mortgage records reveal who the real decision-maker is behind an LLC; why calling the right person on day 1 vs. day 21 is the difference between winning and losing a bid; what the public records actually look like and how to read them",
+    # Mobile viewport / mobile experience
+    "Mobile experience on dental practice websites — why desktop-designed sites get pinch-zoomed on phones, how a missing viewport tag drops a practice out of Google's mobile results, why iPhone Safari and Android Chrome can render the same site completely differently, and the 3-minute self-check any office manager can run",
 
-    # Greenville commercial real estate — news pegged to local market activity
-    "Greenville SC commercial real estate and development — new industrial parks, major commercial property transfers, large-scale infrastructure investments in Upstate SC, and which local trades contractors should be positioning themselves to work with the owners behind those projects",
+    # New-patient trust signals
+    "New-patient trust signals on a dental website — what a first-time patient looks for in the first 10 seconds (real staff photos, insurance clarity, address/hours matching Google, clear new-patient pricing), what actively damages trust (stock photos of strangers in lab coats, stale copyright, broken phone links), and the difference a cleanup makes on conversion",
 
-    # Practical operations for trade businesses
-    "Running a local service business — estimating, follow-up, managing crews on multiple concurrent jobs, keeping job notes in a format a new employee can actually use; real workflows that save time without adding another app to manage",
+    # Online booking reality check
+    "Online booking on a dental practice site that actually works — why embedded booking widgets fail on iPhone Safari but pass on desktop, why 'click to call' is still the highest-converting path for most practices, and when a custom booking form beats third-party scheduling",
 
-    # Reading and using public records — no-code, practical angle
-    "Public records for local businesses — how to read Greenville County deed transfers, LLC filings, and mortgage filings to find leads before competitors do; no coding required; what the documents mean in plain English and what action to take",
+    # Google Business Profile ↔ website alignment
+    "Google Business Profile and website alignment for dental practices — how a mismatched phone number, address, or hours between your GBP and your website footer tanks local pack ranking, how to audit the two in 10 minutes, and why fixing this usually moves the needle faster than any on-page SEO change",
 
-    # Digital tools for trades — honest, opinionated comparisons
-    "Digital tools for trades businesses — CRMs, quoting software, AI assistants, route optimization, invoicing; what actually saves time for a 5–15 person service company vs. what just adds overhead",
+    # Speed / Lighthouse / Core Web Vitals
+    "Why dental practice websites load slowly and what actually fixes it — the real culprits (uncompressed hero images, embedded chat widgets, 14 tracking pixels), why a slow site hurts both patient experience and Google ranking, how to read a Lighthouse score without a developer, and which problems are cheap to fix vs. which require a rebuild",
+
+    # Cleanup vs. rebuild decision
+    "When a dental website needs a cleanup vs. a full rebuild — specific signals that cleanup is the right call (working CMS, decent structure, fixable issues) vs. signals the foundation is gone (no mobile framework, no content management, abandoned platform), why REBB will tell a practice to rebuild even though cleanup is our offer, and what a rebuild actually involves",
+
+    # Insurance carrier pages
+    "Insurance, pricing, and transparency pages on a dental website — why an out-of-date insurance list actively loses new patients at the decision moment, why 'call for pricing' converts worse than a simple starting-price range, and the handful of pages every dental site needs that most are missing",
+
+    # HIPAA-aware web practices (practical, not legal advice)
+    "HIPAA-aware practices for dental websites — what a dental practice should and shouldn't collect on a contact form, why most dental form plugins handle PHI incorrectly by default, and the practical setup that keeps a practice safe without making the form unusable",
 ]
 
 # ── Topic generation prompt ───────────────────────────────────────────────────
 
 _TOPIC_PROMPT_TEMPLATE = """\
-You generate article topic briefs for REBB Advisors, a Greenville SC company that
-helps local service businesses (HVAC, plumbing, landscaping, electrical, cleaning)
-find better leads and run smarter operations.
+You generate article topic briefs for REBB Advisors, a Greenville SC firm that does
+flat-fee website cleanup for dental practices. The lead magnet is a free screenshot
+audit: practice sends their URL, REBB replies with screenshots of what's broken.
+If cleanup fixes it, REBB quotes the flat fee. If it needs a rebuild, REBB says so.
 
-The audience is a local service business owner or office manager — NOT a developer.
-The ideal topic makes that reader think: "I had no idea I could do this — and now I'm
-going to try it."
+The audience is a dental practice owner or office manager — NOT a developer, and
+NOT interested in being pitched SEO packages. The ideal topic makes that reader
+think: "we probably have this problem — let me go check our site right now."
 
 ## Content categories (rotate through these, don't repeat the same category twice in a row)
 {categories}
@@ -77,28 +87,31 @@ going to try it."
 
 ## What makes a GOOD topic brief
 - Specific enough that a reader knows exactly what they will learn from the title alone
-- Takes a clear position or reveals something non-obvious for a local trade contractor
+- Takes a clear position or reveals something non-obvious about dental practice websites
 - Procedural or comparative — not "here's why X matters" but "here's exactly how X works"
-- Grounded in Greenville SC or Upstate SC market reality where relevant
-- Accessible: the insight should land for a business owner, not just a developer
-- Can be borderline uncomfortable — says the thing most business guides quietly skip
+- Grounded in the actual failures REBB sees on dental sites (dead booking forms, no
+  mobile viewport, stale copyright, mismatched GBP, low Lighthouse scores)
+- Accessible: the insight should land for a practice owner, not a developer
+- Can be borderline uncomfortable — says the thing most dental-marketing blogs quietly skip
 
 Good examples:
-- "How Greenville County deed records can tell you who to call before a new construction project breaks ground — and how to find the owner behind the LLC"
-- "Why a 10-person HVAC company with 8 active jobs needs a Company Brain, not a group chat"
-- "How to read a Greenville County property transfer record: what the document means, what the LLC name hides, and how to find the real decision-maker"
-- "The difference between calling a lead on day 1 vs. day 21 after a property transfer — real numbers from Upstate SC trades contractors"
-- "What Greenville's new industrial corridor means for local contractors: which property transfers to watch and who owns what"
-- "How a local plumbing company used public mortgage filings to find commercial clients before competitors did"
-- "Company Brain vs. a shared Google Drive: why a service company with 6 crews needs something smarter than folders"
-- "How to stop losing institutional knowledge when an estimator leaves: what a Company Brain actually stores and how teams use it"
+- "How to tell if your dental practice's contact form is silently broken — a 60-second test any office manager can run"
+- "Why your dental website looks fine on your phone but terrible on every new patient's phone"
+- "The difference between a dental website cleanup and a rebuild — and how to tell which one you actually need"
+- "Why a 'Call for pricing' page is losing your dental practice new patients — and what to put there instead"
+- "What a Google Business Profile–website mismatch costs a dental practice in local search, and how to fix it in 10 minutes"
+- "Why most dental site contact forms handle patient information incorrectly, and the simple fix"
+- "The three things a new dental patient checks in the first 10 seconds on your website"
+- "Why your insurance list page is probably years out of date, and why new patients are bouncing because of it"
 
 ## Hard rules — never produce these
 - Seasonal framing: "Why spring is important for..."
-- Starts with "Why your..." — sounds like a lecture, not insight
-- Generic small business advice that could have been written in 2015
-- Vague outcome promises: "...and how it can transform your business"
-- Listicles with no specific claim: "5 things every contractor should know"
+- Starts with "Why your..." unless followed by something genuinely specific
+- Generic "5 reasons every dental website needs..." listicles
+- Vague outcome promises: "...and how it can transform your practice"
+- Anything about SEO rankings, lead volume, or revenue guarantees
+- References to other verticals (law firms, HVAC, chiropractors, etc.)
+- Pitching retainers, ongoing SEO, marketing strategy, or social media management
 - Anything that requires the reader to be a developer to understand or act on it
 
 ## Task
