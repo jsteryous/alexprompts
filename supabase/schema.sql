@@ -298,12 +298,21 @@ CREATE INDEX IF NOT EXISTS website_prospects_digest_queue_idx
   ON website_prospects (severity_score DESC NULLS LAST)
   WHERE emailed_at IS NULL AND severity_tag IN ('HOT', 'WARM');
 
+-- Outreach tracking — manually stamped from /dashboard/prospects when Alex
+-- marks a prospect contacted / replied / booked / dead. NULL = never touched.
+ALTER TABLE website_prospects
+  ADD COLUMN IF NOT EXISTS last_contacted_at timestamptz;
+
 -- Contact enrichment — populated by audit.py via scripts/prospects/contact_extract.py.
--- Ranked email list (jsonb), top-ranked primary_email for quick dashboard access,
--- and best-guess decision-maker (owner/dentist/partner) name + title.
+-- primary_email is *person-identified* (score ≥ 50: DM match, dr.<lastname>,
+-- ownership inbox, or firstname.lastname). fallback_email is the best shared
+-- inbox (info@/contact@/billing@) when no person-identified address exists, so
+-- the dashboard still has something to show without overstating confidence.
+-- contact_emails carries the full ranked list (each entry: email/score/role_hint).
 ALTER TABLE website_prospects
   ADD COLUMN IF NOT EXISTS contact_emails       jsonb,
   ADD COLUMN IF NOT EXISTS primary_email        text,
+  ADD COLUMN IF NOT EXISTS fallback_email       text,
   ADD COLUMN IF NOT EXISTS decision_maker_name  text,
   ADD COLUMN IF NOT EXISTS decision_maker_title text;
 

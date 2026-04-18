@@ -8,15 +8,22 @@ per prospect and passes the combined content through here.
 Goal: surface the human we should actually email, not info@.
 
 Email ranking (0-100, higher = better):
-  95 — local part matches extracted decision-maker's first or last name
+  95 — both DM first AND last name appear in local part
   85 — "dr.<lastname>" / "<lastname>dds" pattern
   80 — owner@, founder@, partner@, principal@
+  75 — DM surname match only (surname inbox — shared by family/firm)
   70 — firstname.lastname / f.lastname style
+  55 — DM first-name match only
   30 — low-priority shared (appointments@, billing@, hr@)
   20 — unclassified single-word local part
   10 — shared inbox (info@, contact@, office@, reception@)
    0 — blocklisted (noreply@, postmaster@, etc.)
 Off-domain email → -20 adjustment (clamped at 0).
+
+Surname-only vs full-match distinction: `smith@firm.com` when DM is "Jane Smith"
+is a shared inbox (husband/partner/family), not a direct line to Jane. Elevating
+it to a full DM match overstates confidence for outreach. 75 keeps it near the
+top but below genuine personal addresses.
 
 Decision-maker extraction looks for:
   - "Dr. Jane Smith" (dental) / "Jane Smith, DDS"
@@ -237,18 +244,38 @@ def _score_email(
 
     domain_adj = 0 if _domain_matches(email, site_host) else -20
 
-    # Decision-maker match
+    # Decision-maker match — tiered: full match > dr.<lastname> > surname-only > first-name only.
+    # Single-token segment matches are treated as partial (not "full DM match") because
+    # a surname local part is usually a family/firm shared inbox, not a personal line.
     if decision_maker_name:
         parts = _name_tokens(decision_maker_name)
         if parts:
             first, last = parts[0], parts[-1]
             segments = set(re.split(r"[._\-]", local))
-            if first in segments or last in segments:
-                return max(0, 95 + domain_adj), "decision-maker match"
-            if first and last and first in local_alpha and last in local_alpha:
-                return max(0, 95 + domain_adj), "decision-maker match"
-            if local in (f"dr{last}", f"dr.{last}", f"{last}dds", f"{last}dmd"):
+
+            # For substring ("in local_alpha") checks, require ≥3 chars so short
+            # tokens like "Li" / "Jo" don't false-match inside unrelated locals.
+            def _token_match(tok: str) -> bool:
+                if not tok:
+                    return False
+                if tok in segments:
+                    return True
+                return len(tok) >= 3 and tok in local_alpha
+
+            dr_aliases = (f"dr{last}", f"dr.{last}", f"{last}dds", f"{last}dmd") if last else ()
+
+            first_matches = _token_match(first)
+            last_matches  = _token_match(last)
+            distinct_names = first != last  # single-token DMs (rare) — treat as surname-only
+
+            if distinct_names and first_matches and last_matches:
+                return max(0, 95 + domain_adj), "DM full match"
+            if local in dr_aliases:
                 return max(0, 85 + domain_adj), "dr.<lastname>"
+            if last_matches:
+                return max(0, 75 + domain_adj), "DM surname match"
+            if first_matches and distinct_names:
+                return max(0, 55 + domain_adj), "DM first-name match"
 
     if local in OWNERSHIP_LOCAL_PARTS:
         return max(0, 80 + domain_adj), f"{local}@"

@@ -56,6 +56,8 @@ class AuditFindings:
     forms_found: int = 0
     forms_unreachable: bool = False
     forms_unreachable_status: Optional[int] = None # 404 / 410 that triggered the flag
+    forms_unreachable_action: Optional[str] = None # the dead POST target URL
+    forms_unreachable_page: Optional[str] = None   # the page URL hosting the broken form
     forms_unverifiable: int = 0                    # JS-only / no-action / ambiguous
     lighthouse_mobile: Optional[int] = None        # 0-100
     jquery_version: Optional[str] = None
@@ -80,10 +82,21 @@ class AuditFindings:
             "forms_found":              self.forms_found,
             "forms_unreachable":        self.forms_unreachable,
             "forms_unreachable_status": self.forms_unreachable_status,
+            "forms_unreachable_action": self.forms_unreachable_action,
+            "forms_unreachable_page":   self.forms_unreachable_page,
             "forms_unverifiable":       self.forms_unverifiable,
             "lighthouse_mobile":        self.lighthouse_mobile,
             "jquery_version":           self.jquery_version,
         }
+
+
+@dataclass
+class FormsResult:
+    forms_found: int = 0
+    unreachable: bool = False
+    unreachable_status: Optional[int] = None  # 404 / 410
+    unreachable_action: Optional[str] = None  # the dead resolved URL
+    unverifiable: int = 0
 
 
 # ── 1. Viewport ──────────────────────────────────────────────────────────────
@@ -174,41 +187,39 @@ def _extract_forms(rendered_html: str) -> list[dict]:
 DEFINITIVE_BROKEN_STATUSES = {404, 410}
 
 
-def detect_forms(rendered_html: str, base_url: str) -> tuple[int, bool, int, Optional[int]]:
+def detect_forms(rendered_html: str, base_url: str) -> FormsResult:
     """
-    Returns (forms_found, any_unreachable, unverifiable_count, triggering_status).
+    Scan one page for <form> tags and probe their action URLs.
 
     A form is "unreachable" only if its action URL resolves to an HTTP status in
     DEFINITIVE_BROKEN_STATUSES (404 / 410) — the endpoint definitively does not
     exist. Every other response (including 405, 403, 5xx, redirects to unknown
-    pages, and network errors) is demoted to `forms_unverifiable`.
+    pages, and network errors) is demoted to `unverifiable`.
 
     Rationale: 405 means the server just refuses GET but probably accepts POST;
     5xx may be transient; network errors may be our IP getting blocked. We
     optimize for zero false positives because a bad claim in a cold email
     torches sender credibility. 404 / 410 are unambiguous — we can quote the
-    status in outreach and the recipient can verify in DevTools.
+    status AND the dead URL in outreach and the recipient can verify.
     """
     forms = _extract_forms(rendered_html)
     if not forms:
-        return 0, False, 0, None
+        return FormsResult()
 
-    unverifiable = 0
-    any_unreachable = False
-    triggering_status: Optional[int] = None
+    out = FormsResult(forms_found=len(forms))
 
     for f in forms:
         action = f["action"]
         if not action or action in ("#", "/") or action.lower().startswith("javascript:"):
-            unverifiable += 1
+            out.unverifiable += 1
             continue
         try:
             resolved = urljoin(base_url, action)
         except Exception:
-            unverifiable += 1
+            out.unverifiable += 1
             continue
         if not resolved.startswith(("http://", "https://")):
-            unverifiable += 1
+            out.unverifiable += 1
             continue
         try:
             r = requests.get(
@@ -218,20 +229,19 @@ def detect_forms(rendered_html: str, base_url: str) -> tuple[int, bool, int, Opt
                 allow_redirects=True,
             )
             if r.status_code in DEFINITIVE_BROKEN_STATUSES:
-                any_unreachable = True
-                if triggering_status is None:
-                    triggering_status = r.status_code
+                out.unreachable = True
+                if out.unreachable_status is None:
+                    out.unreachable_status = r.status_code
+                    out.unreachable_action = resolved
                 _log.info("form action DEFINITIVELY broken: %s → %d", resolved, r.status_code)
             elif 400 <= r.status_code < 600:
-                # Ambiguous (405/403/5xx) — demoted to unverifiable
-                unverifiable += 1
+                out.unverifiable += 1
                 _log.info("form action ambiguous status (demoted): %s → %d", resolved, r.status_code)
         except requests.RequestException as e:
-            # Network error — could be transient or IP block. Ambiguous.
-            unverifiable += 1
+            out.unverifiable += 1
             _log.info("form action network error (demoted): %s (%s)", resolved, e)
 
-    return len(forms), any_unreachable, unverifiable, triggering_status
+    return out
 
 
 # ── 5. PageSpeed Insights (Lighthouse in the cloud) ──────────────────────────

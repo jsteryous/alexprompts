@@ -54,7 +54,8 @@ def fetch_new_prospects(min_severity: int) -> list[dict]:
             "id, business_name, vertical, city, county, phone, website_url, "
             "google_rating, google_review_count, audit_status, issues, "
             "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, "
-            "lighthouse_mobile_score, primary_email, decision_maker_name, decision_maker_title"
+            "lighthouse_mobile_score, primary_email, fallback_email, "
+            "decision_maker_name, decision_maker_title"
         )
         .is_("emailed_at", "null")
         .in_("severity_tag", ["HOT", "WARM"])
@@ -89,7 +90,19 @@ def _issue_labels(issues: dict | None, audit_status: str) -> list[str]:
     if issues.get("mixed_content"):
         labels.append("Mixed content")
     if issues.get("forms_unreachable"):
-        labels.append("Broken contact form")
+        page_url = issues.get("forms_unreachable_page") or ""
+        path = ""
+        if page_url:
+            try:
+                from urllib.parse import urlparse
+                path = (urlparse(page_url).path or "").rstrip("/") or "/"
+            except Exception:
+                path = ""
+        status = issues.get("forms_unreachable_status")
+        suffix = f" on {path}" if path and path != "/" else ""
+        if status:
+            suffix += f" (POST → {status})"
+        labels.append(f"Broken form{suffix}")
     stale = issues.get("stale_copyright")
     if stale:
         labels.append(f"Copyright {stale}")
@@ -116,6 +129,7 @@ def _card(row: dict, idx: int) -> str:
     score = row.get("severity_score") or 0
     screenshot = row.get("mobile_screenshot_url") or row.get("desktop_screenshot_url") or ""
     primary_email = row.get("primary_email") or ""
+    fallback_email = row.get("fallback_email") or ""
     dm_name = row.get("decision_maker_name") or ""
     dm_title = row.get("decision_maker_title") or ""
 
@@ -135,11 +149,20 @@ def _card(row: dict, idx: int) -> str:
         f'<a href="tel:{phone}" style="color:#22c55e;text-decoration:none">{phone}</a>'
         if phone else ""
     )
-    email_html = (
-        f'<a href="mailto:{primary_email}" style="color:#22c55e;text-decoration:none">'
-        f'{primary_email}</a>'
-        if primary_email else ""
-    )
+    if primary_email:
+        email_html = (
+            f'<a href="mailto:{primary_email}" style="color:#22c55e;text-decoration:none">'
+            f'{primary_email}</a>'
+        )
+    elif fallback_email:
+        # Honest labeling — don't pretend a generic inbox is the owner's line.
+        email_html = (
+            f'<a href="mailto:{fallback_email}" style="color:#6b7280;text-decoration:none">'
+            f'{fallback_email}</a> '
+            f'<span style="color:#9ca3af;font-size:11px">(shared inbox)</span>'
+        )
+    else:
+        email_html = ""
     dm_html = ""
     if dm_name:
         dm_html = (

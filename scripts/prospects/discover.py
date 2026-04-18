@@ -184,26 +184,76 @@ def search_vertical_county(
 
 
 def upsert_prospects(rows: Iterable[PlaceRow], dry_run: bool = False) -> int:
-    """Insert new prospects. Conflict on place_id → skip (don't overwrite)."""
+    """
+    Insert new prospects, refresh mutable Places metadata on existing ones.
+
+    For existing rows we update the Places-sourced fields (name, address, phone,
+    rating, website_url) but do NOT touch audit/scoring columns. If website_url
+    flipped (appeared, disappeared, or changed), audit_status is reset so the
+    next --audit-pending run re-captures against the new URL — the previous
+    audit is stale against a different target.
+    """
     url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_KEY")
     if not url or not key:
         _log.error("SUPABASE_URL / SUPABASE_SERVICE_KEY missing")
         return 0
 
-    inserted = 0
+    rows = list(rows)
+    if not rows:
+        return 0
+
     if dry_run:
         for r in rows:
             _log.info("[dry] %s — %s — %s", r.vertical, r.business_name, r.website_url or "NO WEBSITE")
-            inserted += 1
-        return inserted
+        return len(rows)
 
     sb = create_client(url, key)
+
+    # Pull current state for any rows we've seen before so we can diff website_url
+    # and refresh metadata surgically.
+    place_ids = [r.place_id for r in rows]
+    existing: dict[str, dict] = {}
+    try:
+        resp = (
+            sb.table("website_prospects")
+            .select("place_id, website_url, audit_status")
+            .in_("place_id", place_ids)
+            .execute()
+        )
+        for row in resp.data or []:
+            existing[row["place_id"]] = row
+    except Exception as e:
+        _log.warning("existing-row lookup failed (will fall back to insert-only): %s", e)
+
+    touched = 0
     for r in rows:
-        payload = {
-            "place_id": r.place_id,
+        current = existing.get(r.place_id)
+        if current is None:
+            payload = {
+                "place_id": r.place_id,
+                "business_name": r.business_name,
+                "vertical": r.vertical,
+                "address": r.address,
+                "city": r.city,
+                "county": r.county,
+                "phone": r.phone,
+                "website_url": r.website_url,
+                "google_rating": r.google_rating,
+                "google_review_count": r.google_review_count,
+                "audit_status": "no_website" if not r.website_url else "pending",
+            }
+            try:
+                sb.table("website_prospects").insert(payload).execute()
+                touched += 1
+                _log.info("✔ insert %s — %s", r.business_name, r.website_url or "NO WEBSITE")
+            except Exception as e:
+                _log.warning("insert failed for %s: %s", r.business_name, e)
+            continue
+
+        # Existing row — refresh Places-sourced fields only.
+        update_payload = {
             "business_name": r.business_name,
-            "vertical": r.vertical,
             "address": r.address,
             "city": r.city,
             "county": r.county,
@@ -211,18 +261,27 @@ def upsert_prospects(rows: Iterable[PlaceRow], dry_run: bool = False) -> int:
             "website_url": r.website_url,
             "google_rating": r.google_rating,
             "google_review_count": r.google_review_count,
-            "audit_status": "no_website" if not r.website_url else "pending",
         }
+        prior_url = (current.get("website_url") or "").strip() or None
+        new_url = (r.website_url or "").strip() or None
+        url_changed = prior_url != new_url
+        if url_changed:
+            update_payload["audit_status"] = "no_website" if not new_url else "pending"
+
         try:
-            sb.table("website_prospects").insert(payload).execute()
-            inserted += 1
-            _log.info("✔ %s — %s", r.business_name, r.website_url or "NO WEBSITE")
+            sb.table("website_prospects").update(update_payload).eq("place_id", r.place_id).execute()
+            touched += 1
+            if url_changed:
+                _log.info(
+                    "↻ refresh %s — website_url %s → %s (audit reset)",
+                    r.business_name, prior_url or "∅", new_url or "∅",
+                )
+            else:
+                _log.debug("↻ refresh %s — metadata only", r.business_name)
         except Exception as e:
-            # Duplicate place_id is expected on re-runs
-            if "duplicate" in str(e).lower() or "23505" in str(e):
-                continue
-            _log.warning("insert failed for %s: %s", r.business_name, e)
-    return inserted
+            _log.warning("update failed for %s: %s", r.business_name, e)
+
+    return touched
 
 
 def main() -> int:

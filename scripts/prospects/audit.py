@@ -45,10 +45,12 @@ NETWORKIDLE_TIMEOUT_MS = 5_000
 EXTRA_PAGE_NAV_TIMEOUT_MS = 12_000
 EXTRA_PAGE_NETWORKIDLE_TIMEOUT_MS = 3_000
 MAX_EXTRA_PAGES = 3
-# Any email that survives the blocklist becomes a valid primary_email fallback.
-# Ranking still puts personal emails above info@ — this just lets info@ show up
-# in the dashboard when it's the only thing the site exposes.
-PRIMARY_EMAIL_MIN_SCORE = 1
+# primary_email is reserved for person-identified addresses — score ≥ 50 clears:
+#   95 DM full match · 85 dr.<lastname> · 80 ownership · 75 surname · 70 first.last · 55 DM first-name
+# Everything below (info@/billing@/unclassified) goes to fallback_email so the
+# dashboard can render confidence honestly instead of treating a generic inbox
+# as the headline contact for outreach.
+PRIMARY_EMAIL_MIN_SCORE = 50
 
 
 @dataclass
@@ -73,7 +75,8 @@ class AuditResult:
     desktop_screenshot_url: Optional[str] = None
     error: Optional[str] = None
     contact_emails: list[dict] = field(default_factory=list)
-    primary_email: Optional[str] = None
+    primary_email: Optional[str] = None      # person-identified (score ≥ 50)
+    fallback_email: Optional[str] = None     # best shared/generic inbox when no primary
     decision_maker_name: Optional[str] = None
     decision_maker_title: Optional[str] = None
 
@@ -265,9 +268,9 @@ def _capture(url: str) -> _CaptureResult:
 def _resolve_contacts(
     capture: _CaptureResult,
     business_name: Optional[str],
-) -> tuple[list[dict], Optional[str], Optional[str], Optional[str]]:
+) -> tuple[list[dict], Optional[str], Optional[str], Optional[str], Optional[str]]:
     """Run extractors against the combined page corpus. Returns
-    (ranked_emails, primary_email, decision_maker_name, decision_maker_title)."""
+    (ranked_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title)."""
     combined_text = "\n".join(
         [capture.home_text] + [p.get("text", "") for p in capture.extra_pages]
     )
@@ -285,7 +288,16 @@ def _resolve_contacts(
         (r["email"] for r in ranked if r["score"] >= PRIMARY_EMAIL_MIN_SCORE),
         None,
     )
-    return ranked, primary, dm_name, dm_title
+    # Fallback = best surviving address below the primary threshold. Only set
+    # when there's no primary — otherwise we're just echoing a lower-ranked
+    # noise email.
+    fallback: Optional[str] = None
+    if primary is None:
+        fallback = next(
+            (r["email"] for r in ranked if 0 < r["score"] < PRIMARY_EMAIL_MIN_SCORE),
+            None,
+        )
+    return ranked, primary, fallback, dm_name, dm_title
 
 
 def audit_prospect(
@@ -328,31 +340,50 @@ def audit_prospect(
     findings.stale_copyright  = detectors.detect_stale_copyright(capture.home_text)
     findings.jquery_version   = detectors.detect_jquery_version(capture.home_html)
 
-    forms_found, unreachable, unverifiable, triggering_status = detectors.detect_forms(
-        capture.home_html, capture.final_url or website_url,
-    )
-    findings.forms_found = forms_found
-    findings.forms_unreachable = unreachable
-    findings.forms_unreachable_status = triggering_status
-    findings.forms_unverifiable = unverifiable
+    # Forms live on /contact as often as on home — scan every captured page and
+    # aggregate. First DEFINITIVE 404/410 wins (we record which page + which
+    # action URL triggered so outreach can quote the exact broken endpoint).
+    home_page_url = capture.final_url or website_url
+    pages_for_forms: list[tuple[str, str]] = [(home_page_url, capture.home_html)]
+    for p in capture.extra_pages:
+        if p.get("html"):
+            pages_for_forms.append((p.get("url") or home_page_url, p["html"]))
+
+    total_forms = 0
+    total_unverifiable = 0
+    for page_url, page_html in pages_for_forms:
+        res = detectors.detect_forms(page_html, page_url)
+        total_forms += res.forms_found
+        total_unverifiable += res.unverifiable
+        if res.unreachable and not findings.forms_unreachable:
+            findings.forms_unreachable = True
+            findings.forms_unreachable_status = res.unreachable_status
+            findings.forms_unreachable_action = res.unreachable_action
+            findings.forms_unreachable_page = page_url
+    findings.forms_found = total_forms
+    findings.forms_unverifiable = total_unverifiable
 
     findings.lighthouse_mobile = detectors.detect_lighthouse_mobile(
         capture.final_url or website_url, pagespeed_key,
     )
 
     # Contact extraction across home + crawled pages
-    ranked_emails, primary_email, dm_name, dm_title = _resolve_contacts(capture, business_name)
+    ranked_emails, primary_email, fallback_email, dm_name, dm_title = _resolve_contacts(
+        capture, business_name,
+    )
     result.contact_emails = ranked_emails
     result.primary_email = primary_email
+    result.fallback_email = fallback_email
     result.decision_maker_name = dm_name
     result.decision_maker_title = dm_title
 
     _log.info(
-        "  ↳ contact: dm=%s (%s) · %d emails · primary=%s",
+        "  ↳ contact: dm=%s (%s) · %d emails · primary=%s  fallback=%s",
         dm_name or "—",
         dm_title or "—",
         len(ranked_emails),
         primary_email or "—",
+        fallback_email or "—",
     )
 
     # Upload screenshots (skip for smoke test)
@@ -388,6 +419,7 @@ def save_audit(result: AuditResult) -> None:
         "audit_error": result.error,
         "contact_emails": result.contact_emails or None,
         "primary_email": result.primary_email,
+        "fallback_email": result.fallback_email,
         "decision_maker_name": result.decision_maker_name,
         "decision_maker_title": result.decision_maker_title,
     }
@@ -401,3 +433,23 @@ def save_audit(result: AuditResult) -> None:
             "save_audit affected 0 rows for %s — check column names exist in DB",
             result.prospect_id,
         )
+
+
+def persist_audit_failure(prospect_id: str, error_msg: str) -> None:
+    """
+    Mark a prospect as 'error' after an unhandled exception in audit_prospect.
+
+    Without this, a row that crashes before save_audit runs stays audit_status=
+    'pending' forever and re-enters every --audit-pending batch. Writing a
+    minimal error record takes it out of the queue AND makes the failure
+    visible in the dashboard.
+    """
+    try:
+        result = AuditResult(
+            prospect_id=prospect_id,
+            findings=AuditFindings(),
+            error=error_msg[:500],
+        )
+        save_audit(result)
+    except Exception as e:
+        _log.error("persist_audit_failure also failed for %s: %s", prospect_id, e)

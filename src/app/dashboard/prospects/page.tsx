@@ -4,6 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { signOut } from "../login/actions";
+import OutreachCell from "./OutreachCell";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -23,6 +24,9 @@ interface AuditIssues {
   stale_copyright?: number | null;
   forms_found?: number;
   forms_unreachable?: boolean;
+  forms_unreachable_status?: number | null;
+  forms_unreachable_action?: string | null;
+  forms_unreachable_page?: string | null;
   forms_unverifiable?: number;
   lighthouse_mobile?: number | null;
   jquery_version?: string | null;
@@ -57,9 +61,11 @@ interface Prospect {
   lighthouse_mobile_score: number | null;
   audit_error: string | null;
   contact_status: string | null;
+  last_contacted_at: string | null;
   notes: string | null;
   contact_emails: RankedEmail[] | null;
   primary_email: string | null;
+  fallback_email: string | null;
   decision_maker_name: string | null;
   decision_maker_title: string | null;
 }
@@ -83,8 +89,8 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
       "id, created_at, audited_at, place_id, business_name, vertical, address, city, county, " +
       "phone, website_url, google_rating, google_review_count, audit_status, issues, " +
       "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, " +
-      "lighthouse_mobile_score, audit_error, contact_status, notes, " +
-      "contact_emails, primary_email, decision_maker_name, decision_maker_title"
+      "lighthouse_mobile_score, audit_error, contact_status, last_contacted_at, notes, " +
+      "contact_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title"
     )
     .order("severity_score", { ascending: false, nullsFirst: false })
     .order("created_at", { ascending: false })
@@ -151,7 +157,19 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
   if (issues.viewport_missing)  chips.push({ label: "No viewport", tone: "bad" });
   if (issues.no_https)          chips.push({ label: "No HTTPS", tone: "bad" });
   if (issues.mixed_content)     chips.push({ label: "Mixed content", tone: "warn" });
-  if (issues.forms_unreachable) chips.push({ label: "Broken form", tone: "bad" });
+  if (issues.forms_unreachable) {
+    let label = "Broken form";
+    const pageUrl = issues.forms_unreachable_page;
+    if (pageUrl) {
+      try {
+        const path = new URL(pageUrl).pathname.replace(/\/$/, "");
+        if (path && path !== "") label = `Broken form ${path}`;
+      } catch { /* fall through to generic label */ }
+    }
+    const status = issues.forms_unreachable_status;
+    if (status) label += ` · ${status}`;
+    chips.push({ label, tone: "bad" });
+  }
   if (issues.stale_copyright)   chips.push({ label: `©${issues.stale_copyright}`, tone: "warn" });
   if (issues.lighthouse_mobile !== null && issues.lighthouse_mobile !== undefined && issues.lighthouse_mobile < 40) {
     chips.push({ label: `Mobile ${issues.lighthouse_mobile}`, tone: "bad" });
@@ -180,11 +198,15 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
   const dmName = prospect.decision_maker_name;
   const dmTitle = prospect.decision_maker_title;
   const primary = prospect.primary_email;
-  const alternates = (prospect.contact_emails ?? [])
-    .filter((r) => r.email !== primary)
+  const fallback = prospect.fallback_email;
+  const ranked = prospect.contact_emails ?? [];
+  const primaryEntry = primary ? ranked.find((r) => r.email === primary) : null;
+  const headlineEmail = primary ?? fallback ?? null;
+  const alternates = ranked
+    .filter((r) => r.email !== primary && r.email !== fallback)
     .slice(0, 3);
 
-  if (!dmName && !primary && alternates.length === 0) {
+  if (!dmName && !headlineEmail && alternates.length === 0) {
     return <span className="text-xs theme-text-muted">—</span>;
   }
 
@@ -199,13 +221,34 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
         </div>
       )}
       {primary && (
-        <a
-          href={`mailto:${primary}`}
-          className="block text-xs text-blue-600 dark:text-blue-400 hover:underline break-all"
-          title={`Send email to ${primary}`}
-        >
-          {primary}
-        </a>
+        <div className="flex items-baseline gap-1.5">
+          <a
+            href={`mailto:${primary}`}
+            className="text-xs text-blue-600 dark:text-blue-400 hover:underline break-all"
+            title={primaryEntry ? `${primaryEntry.role_hint} · score ${primaryEntry.score}` : primary}
+          >
+            {primary}
+          </a>
+          {primaryEntry && (
+            <span className="text-[9px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 shrink-0">
+              {primaryEntry.score}
+            </span>
+          )}
+        </div>
+      )}
+      {!primary && fallback && (
+        <div className="flex items-baseline gap-1.5">
+          <a
+            href={`mailto:${fallback}`}
+            className="text-xs theme-text-muted hover:underline break-all italic"
+            title="Shared inbox — not a person-identified address"
+          >
+            {fallback}
+          </a>
+          <span className="text-[9px] uppercase tracking-wider theme-text-muted shrink-0">
+            shared
+          </span>
+        </div>
       )}
       {alternates.length > 0 && (
         <details className="text-[10px]">
@@ -222,6 +265,7 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
                 >
                   {r.email}
                 </a>
+                <span className="theme-text-muted ml-1">· {r.score}</span>
               </li>
             ))}
           </ul>
@@ -351,6 +395,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Severity</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Business</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Contact</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Outreach</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">City</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Vertical</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Issues</th>
@@ -390,6 +435,13 @@ export default async function ProspectsPage({ searchParams }: Props) {
                     </td>
                     <td className="px-4 py-4 max-w-[260px]">
                       <ContactCell prospect={p} />
+                    </td>
+                    <td className="px-4 py-4">
+                      <OutreachCell
+                        id={p.id}
+                        status={p.contact_status ?? "not_contacted"}
+                        lastContactedAt={p.last_contacted_at}
+                      />
                     </td>
                     <td className="px-4 py-4 theme-text-secondary text-xs">
                       {p.city || "—"}

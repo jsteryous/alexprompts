@@ -32,7 +32,7 @@ from supabase import create_client
 
 from . import discover
 from . import digest as digest_mod
-from .audit import audit_prospect, save_audit
+from .audit import audit_prospect, persist_audit_failure, save_audit
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env.local")
 
@@ -115,6 +115,7 @@ def cmd_audit_pending(args) -> int:
             )
         except Exception as e:
             _log.exception("audit failed for %s: %s", r["business_name"], e)
+            persist_audit_failure(r["id"], f"{type(e).__name__}: {e}")
     return 0
 
 
@@ -135,6 +136,7 @@ def cmd_audit_url(args) -> int:
         print(f"Findings:       {result.findings.to_jsonb()}")
     print(f"Decision maker: {result.decision_maker_name or '—'} ({result.decision_maker_title or '—'})")
     print(f"Primary email:  {result.primary_email or '—'}")
+    print(f"Fallback email: {result.fallback_email or '—'}")
     if result.contact_emails:
         print("Ranked emails:")
         for r in result.contact_emails[:8]:
@@ -173,7 +175,8 @@ def cmd_re_audit(args) -> int:
             )
             save_audit(result)
         except Exception as e:
-            _log.exception("re-audit failed: %s", e)
+            _log.exception("re-audit failed for %s: %s", r["business_name"], e)
+            persist_audit_failure(r["id"], f"{type(e).__name__}: {e}")
     return 0
 
 
