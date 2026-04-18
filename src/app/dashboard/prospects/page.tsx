@@ -99,7 +99,11 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
   if (vertical) q = q.eq("vertical", vertical);
   if (status)   q = q.eq("audit_status", status);
 
-  const { data } = await q;
+  const { data, error } = await q;
+  if (error) {
+    console.error("[prospects] getProspects failed:", error.message, error.details);
+    throw new Error(`website_prospects query failed: ${error.message}`);
+  }
   return (data as unknown as Prospect[]) ?? [];
 }
 

@@ -230,6 +230,7 @@ def upsert_prospects(rows: Iterable[PlaceRow], dry_run: bool = False) -> int:
     for r in rows:
         current = existing.get(r.place_id)
         if current is None:
+            has_website = bool(r.website_url)
             payload = {
                 "place_id": r.place_id,
                 "business_name": r.business_name,
@@ -241,7 +242,10 @@ def upsert_prospects(rows: Iterable[PlaceRow], dry_run: bool = False) -> int:
                 "website_url": r.website_url,
                 "google_rating": r.google_rating,
                 "google_review_count": r.google_review_count,
-                "audit_status": "no_website" if not r.website_url else "pending",
+                "audit_status": "pending" if has_website else "no_website",
+                # No-website = instant 100/HOT so it ranks without needing an audit pass.
+                "severity_score": None if has_website else 100,
+                "severity_tag":   None if has_website else "HOT",
             }
             try:
                 sb.table("website_prospects").insert(payload).execute()
@@ -266,7 +270,11 @@ def upsert_prospects(rows: Iterable[PlaceRow], dry_run: bool = False) -> int:
         new_url = (r.website_url or "").strip() or None
         url_changed = prior_url != new_url
         if url_changed:
-            update_payload["audit_status"] = "no_website" if not new_url else "pending"
+            has_website = bool(new_url)
+            update_payload["audit_status"] = "pending" if has_website else "no_website"
+            # Stamp/clear the 100/HOT shortcut when the website disappears or returns.
+            update_payload["severity_score"] = None if has_website else 100
+            update_payload["severity_tag"]   = None if has_website else "HOT"
 
         try:
             sb.table("website_prospects").update(update_payload).eq("place_id", r.place_id).execute()
