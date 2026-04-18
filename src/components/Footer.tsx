@@ -15,7 +15,7 @@ export default function Footer() {
             REBB Advisors
           </Link>
           <p className="theme-text-muted mt-1 text-sm">
-            Broken forms, mobile issues, and outdated business websites fixed fast.
+            Website cleanup for dental practices in Greenville SC.
           </p>
         </div>
 

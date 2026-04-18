@@ -51,7 +51,7 @@ export default function ContactPage() {
             We&apos;ll show you what is broken.
           </h1>
           <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
-            If the site is a fit for the cleanup offer, we&apos;ll send back the issues worth fixing and move forward on the $1,200, 48-hour website cleanup.
+            If your practice site is a fit for the cleanup offer, we&apos;ll send back the issues worth fixing and move forward on the $1,200, 48-hour website cleanup.
           </p>
         </div>
       </section>
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                        Business Type
+                        Practice Type
                       </label>
                       <select
                         name="businessType"
@@ -147,12 +147,14 @@ export default function ContactPage() {
                         className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
                       >
                         <option value="">Select one...</option>
-                        <option>Dentist</option>
-                        <option>Law Firm</option>
-                        <option>Contractor</option>
-                        <option>Home Services</option>
-                        <option>Professional Services</option>
-                        <option>Other Local Business</option>
+                        <option>General Dentistry</option>
+                        <option>Orthodontics</option>
+                        <option>Pediatric Dentistry</option>
+                        <option>Oral Surgery</option>
+                        <option>Cosmetic / Implants</option>
+                        <option>Periodontics</option>
+                        <option>Endodontics</option>
+                        <option>Other Dental</option>
                       </select>
                     </div>
                     <div>
@@ -194,7 +196,7 @@ export default function ContactPage() {
                       value={form.biggestIssue}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="Broken forms, bad mobile experience, site looks outdated, low trust, or whatever you already suspect."
+                      placeholder="Booking form does not work, bad mobile experience, site looks outdated, or whatever you already suspect."
                       className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-y"
                     />
                   </div>
@@ -231,7 +233,7 @@ export default function ContactPage() {
                   </button>
 
                   <p className="theme-text-muted text-xs text-center">
-                    Best fit is a local business with a site that is clearly leaking trust or leads.
+                    Best fit is a dental practice with a site that is clearly leaking new-patient calls.
                   </p>
                 </form>
               )}
@@ -278,11 +280,13 @@ export default function ContactPage() {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "Dentists",
-                    "Law Firms",
-                    "Contractors",
-                    "Home Services",
-                    "Local Professional Services",
+                    "General Dentistry",
+                    "Orthodontics",
+                    "Pediatric",
+                    "Oral Surgery",
+                    "Cosmetic / Implants",
+                    "Periodontics",
+                    "Endodontics",
                   ].map((tag) => (
                     <span
                       key={tag}

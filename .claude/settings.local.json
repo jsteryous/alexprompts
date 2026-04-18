@@ -122,7 +122,10 @@
       "Bash(curl -s http://localhost:3000/_next/static/chunks/src_app_globals_0p2ml0n.css -o C:/Users/alexs/rebbadvisors-website/.next/globals.css)",
       "Bash(node *)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(jobs -l)"
+      "Bash(jobs -l)",
+      "Read(//c/Users/alexs/AppData/Local/Temp/claude/C--Users-alexs-rebbadvisors-website/1b440fe3-ca33-4278-b9e4-7a35038ab869/tasks/**)",
+      "Bash(curl -s http://localhost:3000 -o /tmp/home.html -w \"status=%{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:3000/contact -o /tmp/contact.html -w \"status=%{http_code}\\\\n\")"
     ]
   }
 }

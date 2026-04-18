@@ -14,28 +14,30 @@ export function useTheme() {
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-
-    const savedTheme = localStorage.getItem("rebb-theme");
-    if (savedTheme === "dark" || savedTheme === "light") {
-      return savedTheme;
-    }
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  });
+  // SSR and first client render must match. Initialize to a safe default and
+  // sync with the actual theme (already applied to <html> by the inline script
+  // in layout.tsx) after mount.
+  const [theme, setTheme] = useState<Theme>("light");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Sync React state with the `dark` class set by the inline <head> script
+    // before hydration. This is the one-time bridge from pre-hydration DOM
+    // state into React and is expected to trigger exactly one re-render.
+    const isDark = document.documentElement.classList.contains("dark");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(isDark ? "dark" : "light");
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     localStorage.setItem("rebb-theme", theme);
     document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
+  }, [theme, mounted]);
 
   function toggle() {
-    setTheme((prev) => {
-      return prev === "light" ? "dark" : "light";
-    });
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }
 
   return (

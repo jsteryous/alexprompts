@@ -1,4 +1,11 @@
 import Link from "next/link";
+import {
+  BrokenPhoneHero,
+  AestheticBeforeAfterMock,
+  FormErrorMock,
+  CrampedMobileMock,
+  StaleFooterMock,
+} from "@/components/VisualMocks";
 
 function ArrowIcon() {
   return (
@@ -8,29 +15,30 @@ function ArrowIcon() {
   );
 }
 
-const issues = [
-  "Contact forms that fail with 404 or 405 errors",
-  "Mobile layouts that break on phones",
-  "Dead pages, weak calls to action, and trust leaks",
-  "Outdated sections that make the business look neglected",
-];
-
-const auditChecks = [
+const brokenExamples = [
   {
-    title: "Form failures",
-    body: "If a lead form posts to the wrong endpoint or throws a 404 or 405, we catch it fast.",
+    title: "Dated look",
+    caption:
+      "Gray-on-gray, clip-art teeth, beveled buttons. The practice looks frozen in 2012 — new patients judge the office by it.",
+    visual: <AestheticBeforeAfterMock />,
   },
   {
-    title: "Mobile breakage",
-    body: "We check whether the site actually works on the device most visitors use first.",
+    title: "Booking form 404",
+    caption:
+      "Appointment forms posting to dead endpoints. The patient hits submit, sees an error, and calls the practice down the street.",
+    visual: <FormErrorMock />,
   },
   {
-    title: "Credibility issues",
-    body: "Weak headlines, stale layouts, broken trust signals, and confusing contact paths get flagged.",
+    title: "No mobile viewport",
+    caption:
+      "Desktop layout pinch-zoomed into a phone. Most new-patient searches happen on a phone — they bounce before they read a word.",
+    visual: <CrampedMobileMock />,
   },
   {
-    title: "Fix-first scope",
-    body: "We are not selling an open-ended retainer. We identify the problem, fix the problem, and move on.",
+    title: "Stale copyright",
+    caption:
+      "Footer still says 2019. The office looks closed — whether it is or not. Trust leaks before the patient sees your hours.",
+    visual: <StaleFooterMock />,
   },
 ];
 
@@ -42,21 +50,21 @@ const processSteps = [
   },
   {
     step: "02",
-    title: "You approve the $1,200 cleanup",
-    body: "Flat price. Clear scope. If the site actually needs a rebuild instead, we tell you before taking the job.",
+    title: "You approve the cleanup scope",
+    body: "Flat price. Clear scope. If the site actually needs a visual refresh or a rebuild instead, we tell you before taking the job.",
   },
   {
     step: "03",
     title: "We fix it in 48 hours",
-    body: "Forms work, the mobile experience gets cleaned up, and the site looks like someone still runs the business.",
+    body: "Booking forms work, the mobile experience gets cleaned up, and the practice looks like someone still runs it.",
   },
 ];
 
 const outcomes = [
-  "Your website works on phones",
-  "People can actually submit the form",
-  "The business looks current instead of neglected",
-  "You stop leaking leads to competitors with cleaner sites",
+  "Your site works on phones",
+  "Patients can actually book an appointment",
+  "The practice looks modern instead of abandoned",
+  "You stop losing bookings to practices with cleaner sites",
 ];
 
 export default function HomePage() {
@@ -64,75 +72,37 @@ export default function HomePage() {
     <>
       <section className="theme-page pt-24 md:pt-32">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
-          <div className="grid gap-14 lg:grid-cols-[1.1fr,0.9fr] items-start">
+          <div className="grid gap-16 lg:grid-cols-[1.05fr,0.95fr] items-center">
             <div>
               <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-5">
-                Website Cleanup for Local Businesses
+                Website Cleanup for Dental Practices
               </span>
               <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
-                We fix broken business websites
+                Your dental site is quietly
                 <br />
-                for $1,200
-                <br />
-                in 48 hours.
+                costing you new patients.
               </h1>
               <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                If your forms fail, your site falls apart on mobile, or the whole thing looks dated, we clean it up fast.
-                REBB runs a weekly audit that catches broken forms, mobile issues, dead pages, and obvious trust leaks.
+                Booking forms that 404. Layouts that crumble on phones. A copyright year still stuck in 2019.
+                Patients close the tab and call the practice down the street — they do not call you to tell you why.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                This is not a vague marketing package and not an open-ended web project.
-                It is a clear website cleanup offer for businesses losing trust because the basics are broken.
+                Send us the URL. We reply with screenshots of what is broken. No sales call, no pitch deck.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-5">
-                <Link
-                  href="/contact"
-                  className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
-                >
-                  Show Me What&apos;s Broken
-                  <ArrowIcon />
-                </Link>
-                <a
-                  href="#pricing"
-                  className="theme-card border inline-flex items-center justify-center gap-2 text-base font-medium px-7 py-3.5 rounded-xl theme-text-primary"
-                >
-                  See Pricing
-                </a>
-              </div>
-              <p className="theme-text-muted text-xs">
-                Flat fee for standard cleanup. If your site needs a full rebuild, we will say that directly before any work starts.
+              <Link
+                href="/contact"
+                className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
+              >
+                Show Me What&apos;s Broken
+                <ArrowIcon />
+              </Link>
+              <p className="theme-text-muted text-xs mt-5">
+                Free audit. Flat-fee cleanup if it is a fit. If the site needs a full visual refresh instead, we say so.
               </p>
             </div>
 
-            <div className="theme-card rounded-3xl border p-8 md:p-10">
-              <div className="flex items-center justify-between gap-4 mb-6">
-                <div>
-                  <p className="theme-text-muted text-xs font-semibold uppercase tracking-[0.2em]">
-                    What Gets Fixed
-                  </p>
-                  <h2 className="theme-text-primary text-2xl font-bold mt-2">
-                    The stuff that quietly costs you calls.
-                  </h2>
-                </div>
-                <span className="theme-badge text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
-                  48 Hours
-                </span>
-              </div>
-
-              <div className="space-y-3">
-                {issues.map((item) => (
-                  <div key={item} className="theme-card-strong border rounded-2xl px-4 py-4">
-                    <p className="theme-text-secondary text-sm leading-relaxed">{item}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="theme-border mt-6 pt-6 border-t">
-                <p className="theme-text-muted text-sm leading-relaxed">
-                  Good businesses lose leads every week because the website looks neglected, the forms do not work,
-                  or the phone experience is bad. That is the problem this offer solves.
-                </p>
-              </div>
+            <div className="flex justify-center lg:justify-end">
+              <BrokenPhoneHero />
             </div>
           </div>
         </div>
@@ -140,36 +110,31 @@ export default function HomePage() {
 
       <section id="what-we-fix" className="theme-section-contrast py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid gap-16 lg:grid-cols-[0.9fr,1.1fr] items-start">
-            <div>
-              <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-                What We Catch
-              </span>
-              <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-                Every Monday the audit looks
-                <br />
-                for the things that make a
-                <br />
-                business look broken.
-              </h2>
-              <p className="theme-text-contrast-muted text-base leading-relaxed mb-6">
-                The point is not to hand you a giant website report.
-                The point is to find obvious revenue leaks fast and fix them before they keep costing you calls.
-              </p>
-              <p className="theme-text-contrast-muted text-base leading-relaxed">
-                If the issue is a quick cleanup, that is the $1,200 offer.
-                If the site needs a full rebuild, that becomes a separate conversation after the audit.
-              </p>
-            </div>
+          <div className="max-w-2xl mb-14">
+            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+              Visual Proof
+            </span>
+            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+              This is what broken
+              <br />
+              actually looks like.
+            </h2>
+            <p className="theme-text-contrast-muted text-base leading-relaxed">
+              Not a giant website report. Four problems the audit catches on dental-practice sites — each costs
+              new-patient calls in a way the office rarely sees.
+            </p>
+          </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {auditChecks.map((item) => (
-                <div key={item.title} className="theme-card border rounded-2xl p-6">
-                  <p className="theme-text-primary text-lg font-semibold mb-2">{item.title}</p>
-                  <p className="theme-text-contrast-muted text-sm leading-relaxed">{item.body}</p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {brokenExamples.map((item) => (
+              <div key={item.title} className="theme-card border rounded-2xl p-5 flex flex-col gap-4">
+                <div>{item.visual}</div>
+                <div>
+                  <p className="theme-text-primary text-base font-semibold mb-1.5">{item.title}</p>
+                  <p className="theme-text-contrast-muted text-sm leading-relaxed">{item.caption}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -217,8 +182,8 @@ export default function HomePage() {
                 48-hour turnaround.
               </h2>
               <p className="theme-text-muted leading-relaxed mb-8">
-                That is the public offer. One service. One price. One timeline.
-                If your site needs more than cleanup, we will tell you instead of pretending the flat fee covers a rebuild.
+                One service. One price. One timeline.
+                If the practice site needs a visual refresh or a rebuild instead, we quote that separately — no surprises.
               </p>
               <Link
                 href="/contact"
@@ -236,7 +201,7 @@ export default function HomePage() {
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Broken form diagnosis and cleanup",
+                    "Broken booking-form diagnosis and cleanup",
                     "Mobile layout fixes on key pages",
                     "Basic modernization and trust cleanup",
                     "Clear contact path and CTA cleanup",
@@ -271,9 +236,9 @@ export default function HomePage() {
                   If It Needs More
                 </p>
                 <p className="theme-text-secondary text-sm leading-relaxed">
-                  Sometimes the audit reveals a site that is too far gone for a cleanup pass.
-                  In that case, we will quote a rebuild separately after the quick-fix conversation.
-                  The rebuild is the upsell, not the bait.
+                  Sometimes the audit reveals the site needs a full visual refresh, not just a cleanup.
+                  We quote that separately after the screenshots — you see the issues first, then decide.
+                  The refresh is the upsell, not the bait.
                 </p>
               </div>
             </div>
@@ -291,13 +256,13 @@ export default function HomePage() {
               <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
                 Your site works.
                 <br />
-                You look current.
+                The practice looks current.
                 <br />
-                People actually contact you.
+                Patients actually book.
               </h2>
               <p className="theme-text-muted leading-relaxed">
-                You should not lose business because your website looks abandoned.
-                People are judging the business by the site whether that is fair or not.
+                You should not lose new patients because the website looks abandoned.
+                They are judging the practice by the site whether that is fair or not.
               </p>
             </div>
 
@@ -319,12 +284,12 @@ export default function HomePage() {
               Direct Call To Action
             </span>
             <h2 className="theme-text-primary text-3xl md:text-4xl font-bold mb-3">
-              Reply with your website.
+              Reply with your practice website.
               <br />
               We&apos;ll show you what is broken.
             </h2>
             <p className="theme-text-contrast-muted">
-              If the cleanup is the right fit, it is $1,200 and we turn it around in 48 hours.
+              Free audit. If the cleanup is the right fit, we quote the flat fee and turn it around in 48 hours.
             </p>
           </div>
           <Link

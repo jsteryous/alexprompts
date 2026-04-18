@@ -2,19 +2,25 @@
 
 ## Business Context
 
-**Business:** REBB Advisors — Upstate SC (Greenville County), targeting local service trades.  
+**Business:** REBB Advisors — Greenville SC. Website cleanup for dental practices.
 **Tone:** Confident, minimal, blunt. No fluff.
+**Rule #1: Confused customers don't buy.** Site is intentionally single-offer, minimal nav, one CTA above the fold.
 
-**REBB's tagline:** "We find the owner. You make the sale."
+**Public offer (single):** Flat-fee website cleanup for dental practices — broken booking forms, mobile layout fixes, basic modernization, trust cleanup. 48-hour turnaround. **Flat fee is disclosed in the `#pricing` section, not in the hero.**
 
-**Two products:**
-1. **Company Brain** *(core offer)* — RAG system (Retrieval Augmented Generation) with Obsidian as the structured knowledge layer. Ingests the documents a company already has — emails, quotes, job notes, SOPs, vendor files — and makes them queryable with source citations. The core differentiator: works on the mess that already exists without requiring anyone to change how they work. Value is in the setup service (ingestion, structuring, adoption), not the technology itself. Structured as role-based Obsidian vaults (estimator, PM, field, admin) that feed a unified AI query layer. Land-and-expand: start with the highest-risk knowledge gap (usually estimator or owner tribal knowledge), prove value, expand.
+**Lead magnet:** Free screenshot audit. Practice sends URL → REBB replies with screenshots of what's broken. No sales call required. This is the entry point — the paid cleanup is the downstream conversion, not the hero CTA.
 
-   **Three deployment tiers (homepage data security section):**
-   - **Air-Gapped** — open-source LLM runs entirely on client hardware. Nothing leaves. Lower model quality.
-   - **API (REBB default)** — Claude commercial API. Contractually: no training on client data, 7-day retention then deleted. Distinct from Claude.ai consumer products (Free/Pro/Max) which have opt-in training. Verify at privacy.claude.com if citing in sales.
-   - **Hybrid** — docs stored locally; only question + matched excerpt sent to API at query time.
-2. **LLC Owner Finder** *(beta — quality still being refined)* — Daily syncs of GVL County property transfers, SOS filings, and mortgages. We unmask the LLC to find the human decision-maker (name, phone, email). Score > 80 triggers immediate email alert. Ranked call list every Monday. Tagline: **"We find the owner. You make the sale."** — but do not position this as a polished product. LLC-to-person resolution quality and contact accuracy are still inconsistent. Frame honestly as early-access for the right trade and territory. When in doubt, default to Company Brain as the conversation anchor.
+**Target:** Dental practices only. General dentistry, orthodontics, pediatric, oral surgery, cosmetic/implants, periodontics, endodontics. Greenville County + Upstate SC. The public site should not reference any other vertical — the internal prospects pipeline also audits personal injury firms, but that is outbound-only and not pitched on the marketing site.
+
+**Positioning:**
+- "If the cleanup is the right fit, we quote it. If it needs a rebuild instead, we say so."
+- No retainers. No open-ended agency work. No marketing-strategy calls.
+- The rebuild is the upsell after the audit, not the bait in the offer.
+
+**Internal tooling (not customer-facing):**
+- `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits sites, scores severity, emails a HOT/WARM digest. Surfaces on `/dashboard/prospects` (auth-gated).
+- `scripts/gvl_monitor.py` + `scripts/enrich.py` + `scripts/run_daily.py` — legacy LLC-to-human resolution pipeline (property transfers + mortgages + SOS filings → `enriched_leads`). Still runs; surfaces on `/dashboard` (auth-gated). Not pitched on the public site.
+- `scripts/generate_insights.py` — AI-drafted blog posts (Gemini → DRAFT → manual approve → `/insights`). Still operational; `/insights` is not currently in the public nav.
 
 ## Tech Stack
 
@@ -33,22 +39,25 @@
 src/
 ├── app/
 │   ├── globals.css              — design tokens, @plugin typography
-│   ├── layout.tsx               — root layout, LocalBusiness JSON-LD
+│   ├── layout.tsx               — root layout, ProfessionalService JSON-LD
 │   ├── opengraph-image.tsx      — edge Satori OG image (auto-injected; don't set openGraph.images)
 │   ├── sitemap.ts / robots.ts
-│   ├── page.tsx                 — homepage
-│   ├── contact/layout.tsx + page.tsx — client component form → /api/contact
-│   ├── lead-intelligence / seo / web-development / outreach-automation / how-it-works / case-study
-│   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s
-│   ├── review/page.tsx          — token-gated draft review
-│   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; deduplicates by principal_name (highest score per person)
-│   ├── dashboard/prospects/page.tsx — website_prospects ranked list (broken-website outbound pitch)
+│   ├── page.tsx                 — single-offer homepage
+│   ├── contact/page.tsx         — client component form → /api/contact
+│   ├── how-it-works / seo / web-development / lead-intelligence / outreach-automation
+│   │                            — all permanentRedirect("/"); kept for inbound link preservation
+│   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s (not in public nav)
+│   ├── review/page.tsx          — token-gated draft review (not in nav)
+│   ├── case-study/page.tsx      — placeholder, noindexed
+│   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; dedup by principal_name
+│   ├── dashboard/prospects/page.tsx — website_prospects ranked list, auth-gated
 │   ├── dashboard/login/page.tsx + actions.ts — Supabase Auth server action
 │   └── api/contact/route.ts + publish/route.ts
 ├── components/
-│   ├── Nav.tsx, Footer.tsx
-│   ├── LiveSignalFeed.tsx       — real-time Supabase Realtime terminal (client)
-│   ├── CompanyBrainDemo.tsx     — static chat mockup showing Company Brain answering 3 trade Q&A with source citations (client)
+│   ├── Nav.tsx, Footer.tsx      — return null on /dashboard/*
+│   ├── VisualMocks.tsx          — synthetic SVG/CSS mockups (broken phone, form 404, cramped mobile, stale copyright, low Lighthouse). Pure presentational server components.
+│   ├── LiveSignalFeed.tsx       — real-time Supabase Realtime terminal (client) — still present but not on homepage
+│   ├── CompanyBrainDemo.tsx     — legacy Company Brain chat mockup — still present but not on homepage
 │   └── ThemeProvider.tsx + DarkModeToggle.tsx — dark mode (client)
 └── lib/supabase.ts
 
@@ -58,21 +67,21 @@ scripts/
 ├── generate_insights.py         — Gemini → DRAFT → email
 ├── approve_post.py              — CLI draft management
 ├── weekly_insights.py           — topic rotation (GH Actions Monday 8am EST)
-├── run_daily.py                 — pipeline orchestrator (direct imports from gvl_monitor + enrich)
+├── run_daily.py                 — pipeline orchestrator
 ├── gvl_monitor.py               — scraper: deeds (GovOS), SOS (DDG), mortgages (CountyWeb)
 ├── enrich.py                    — enrichment orchestrator
 ├── enrich_gis.py                — GIS tax query + property detail lookup
-├── enrich_web.py                — DuckDuckGo + SC SOS entity pages; email/phone regex extraction
+├── enrich_web.py                — DuckDuckGo + SC SOS entity pages
 ├── enrich_mort.py               — CountyWeb mortgage OCR
 ├── enrich_models.py             — shared types, constants, name normalization; ENRICH_VERSION
-├── enrich_contact.py            — PDL person + company contact enrichment (email/phone/LinkedIn)
+├── enrich_contact.py            — PDL person + company contact enrichment
 ├── weekly_leads_digest.py       — weekly email digest
 ├── run_daily.bat                — local Windows pipeline runner
 ├── prospects/                   — website-audit outbound pipeline (dental / PI)
 │   ├── discover.py              — Google Places text search → website_prospects
 │   ├── detectors.py             — pure detectors (viewport, HTTPS, forms, copyright, Lighthouse)
-│   ├── contact_extract.py       — pure extractors for decision-maker name/title + ranked emails
-│   ├── audit.py                 — Playwright mobile+desktop capture, extra-page crawl, extraction, upload, scoring
+│   ├── contact_extract.py       — pure extractors for decision-maker + ranked emails
+│   ├── audit.py                 — Playwright capture, crawl, extraction, upload, scoring
 │   ├── digest.py                — weekly HOT/WARM email digest; dedup via emailed_at
 │   └── run_prospects.py         — CLI: --discover / --audit-pending / --audit-url / --re-audit / --digest
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
@@ -85,8 +94,9 @@ supabase/schema.sql
 
 ## Design System
 
-- **Palette lives in CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark). Do NOT hardcode hex / `bg-gray-950` — use the `.theme-*` utility classes (`theme-text-primary/secondary/muted`, `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`, `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`). Tokens: light bg `#f4f0e8` (cream), dark bg `#0f1411`; accent green `#238a59` light / `#43bd78` dark.
-- **Tailwind `dark:` variant** is wired via `@custom-variant dark (&:where(.dark, .dark *))` in `globals.css` — use it only for one-off chromatic cases the theme tokens don't cover (e.g. HOT/WARM red/amber badges).
+- **Palette lives in CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark). Do NOT hardcode hex / `bg-gray-950` — use `.theme-*` utility classes (`theme-text-primary/secondary/muted`, `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`, `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`). Tokens: light bg `#f4f0e8` (cream), dark bg `#0f1411`; accent green `#238a59` light / `#43bd78` dark.
+- **Tailwind `dark:` variant** wired via `@custom-variant dark (&:where(.dark, .dark *))` — use only for one-off cases the theme tokens don't cover.
+- **Visual mocks (`VisualMocks.tsx`) are an intentional exception** — they represent external websites, not REBB's own surface, so they use fixed neutral grays + red callouts rather than theme tokens. They must look credible as "this is someone else's broken site" in both light and dark modes.
 - Typography: system font stack (no Google Fonts — Turbopack http2 error at build time)
 - Sections: `py-24 md:py-32`, max-width `max-w-6xl`, articles `max-w-2xl`
 - Direction: Stripe / Linear aesthetic — whitespace, strong type scale, minimal decoration
@@ -97,53 +107,55 @@ supabase/schema.sql
 - Every page: `title` (includes "Greenville SC"), `description`, `openGraph`, `alternates.canonical`
 - `/case-study` has `robots: { index: false }` — do not remove until real content exists
 - JSON-LD: `ProfessionalService`, `areaServed: Greenville County SC` in `layout.tsx`
-- Brand tagline: "Lead Generation & Marketing for Greenville SC Trades"
 
 ## Key Conventions
 
 - Tailwind v4: `@theme {}` in `globals.css`. Typography: `@plugin "@tailwindcss/typography"`.
 - All pages are server components except: `Nav`, `Footer`, `LiveSignalFeed`, `ThemeProvider`, `DarkModeToggle`, `/contact/page.tsx`
-- **Dark mode:** class-based (`html.dark`). ThemeProvider → localStorage. `suppressHydrationWarning` on `<html>` + inline script in `layout.tsx` prevent flash. Token values live in `globals.css`.
-- `Nav` + `Footer` return `null` on `/dashboard/*` (via `usePathname`) so the admin views render without the fixed marketing chrome. Do NOT re-add a sticky header there.
-- CTAs always link to `/contact`
+- **Dark mode:** class-based (`html.dark`). ThemeProvider → localStorage. `suppressHydrationWarning` on `<html>` + inline script in `layout.tsx` prevent flash.
+- `Nav` + `Footer` return `null` on `/dashboard/*` (via `usePathname`) so admin views render without the marketing chrome. Do NOT re-add a sticky header there.
+- CTAs always link to `/contact`.
 - Section labels: `text-xs font-semibold uppercase tracking-widest theme-label`
-- Dark contrast surfaces: wrap in `theme-section-contrast` / `theme-card-contrast` (auto-flips token values). Avoid raw `bg-gray-950`.
+- Dark contrast surfaces: wrap in `theme-section-contrast` / `theme-card-contrast` (auto-flips token values).
 - Article body: `prose theme-prose max-w-none` + `dangerouslySetInnerHTML`
 
 ## Marketing Copy Standards
 
-### Problems to sell (in order of severity)
-1. **Key-person risk** — lead estimator/PM leaves, takes 10 years of pricing logic, vendor context, and job history with them. This is the fear that creates urgency. Lead with it.
-2. **Owner can't step back** — every delegation attempt collapses because the team routes everything back to the owner; there's no other place to look. Framed as: "The system is the owner."
-3. **Growth ceiling** — adding crew, PMs, or new markets adds proportional owner load. As long as the owner is the system, the owner is the ceiling. State this explicitly.
+### Rule #1 — Confused customers don't buy
+- **One offer, one price, one timeline.** No bundles, no tiers, no "packages."
+- **One CTA above the fold.** Hero CTA matches nav CTA. No secondary link in the hero.
+- **Lead with the problem, not the price.** Price is disclosed in `#pricing`. The hero's job is to make the prospect feel the pain.
 
-### Core differentiator
-Company Brain works on the mess that already exists. Every other solution requires someone to put things into a new system first. This one ingests what's already there — emails, quote PDFs, job notes, scattered drives — and makes it queryable. That's the answer to "why not just use Notion / a shared drive / NotebookLM." (NotebookLM is a legitimate alternative for small clean shops — acknowledge it, don't dismiss it.)
+### Voice
+- Blunt, concrete, no agency-speak.
+- Short sentences. Period-separated statements over comma-separated clauses.
+- "If X, we'll say so" framing — anti-upsell credibility signal. Only works when it's true.
 
-### Best fit qualifier
-**Tenure + accumulated chaos**, not just headcount + trade. A company operating 8+ years with context accumulated across hundreds of jobs that was never formalized. A 2-year-old HVAC startup doesn't have this problem. A 14-year-old GC with 3 PMs and 10 subs does.
+### Show, don't tell
+- The site sells *audits*. It must visibly demonstrate what an audit surfaces.
+- Use **synthetic visual mocks only** (`components/VisualMocks.tsx`). NO real company names, logos, screenshots, or identifiable layouts — not even anonymized. The internal prospects pipeline captures real sites; do not expose any of that to the public site.
+- Text cards describing problems must be paired with or replaced by a mock that shows the problem.
 
-### What Company Brain can't solve (manage expectations in sales)
-- **Pure tacit knowledge** — things never written down. Captured only through intentional Obsidian documentation before someone leaves.
-- **Garbage in, garbage out** — sparse notes produce low-confidence answers.
-- **Adoption** — people will still call the owner if it's easier. The setup service must address this.
+### Problems the site sells
+In descending severity, these are the failures that justify the cleanup:
+1. **Form 404 / 405** — contact form posts to a dead endpoint; lead never reaches the business.
+2. **No mobile viewport** — desktop layout pinch-zoomed into a phone screen; visitors bounce.
+3. **Stale copyright** — "© 2019" still in the footer; business looks abandoned whether it is or not.
+4. **Low Lighthouse score** — slow loading, heavy, poor Core Web Vitals.
 
-### Sales motion
-Don't pitch "whole company in 30 days." Start with the highest-risk knowledge gap:
-> *"What happens if your lead estimator leaves tomorrow? We start there — build his vault while he's still here, feed it with 5 years of quotes and emails, capture what's only in his head. That's the highest-risk gap first."*
+### Homepage section order
+1. **Hero** — problem-first H1, outcome subcopy, single CTA, broken-phone visual.
+2. **Visual proof** (`#what-we-fix`) — "What broken actually looks like." Four mocks with short captions.
+3. **Process** (`#process`) — three steps, no pricing mention.
+4. **Pricing** (`#pricing`) — first explicit price mention on the page.
+5. **Outcomes** — what success looks like.
+6. **Final CTA** — concrete and blunt.
 
-### Positioning line
-*"We capture and protect the knowledge that runs your business — before someone takes it with them."*
-
-### Copy rules
-- **One CTA above the fold.** No secondary link beside the primary button in the hero.
-- **Company Brain definition must appear in hero sub-copy.** Current: *"a private AI knowledge system built from the documents your company already has."* Don't let the name float undefined. Hero framing: behavior change is on REBB's side ("we do the ingestion, tuning, and ongoing curation") — not "no behavior change required."
-- **Homepage section order:** Hero → Demo → Comparison → Setup Process → Best Fit → Data Security → Final CTA.
-- **LLC Owner Finder stays off the homepage.** Lives on `/lead-intelligence` only.
-- **Section headers state outcomes.** "Setup Process" not "How It Lands." "Ready in weeks" not "Hands-on setup."
-- **Final CTA headline must match hero specificity.** Concrete and blunt.
-- **One canonical interruption line.** Use once: *"Your team gets answers in seconds. You get pulled in for judgment calls, not routine lookups."*
-- **"Company Brain" name stays.** "Real Business Brain" is worse — longer, sounds defensive.
+### What the site does NOT promise
+- No "digital transformation."
+- No retainers, no SEO packages, no "ongoing optimization."
+- No marketing-strategy calls.
+- No full rebuilds under the cleanup flat fee. If the audit reveals a rebuild is needed, it's quoted separately.
 
 ## Supabase
 
@@ -167,8 +179,8 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 | `score` | integer | 0–100 |
 | `tag` | text | `HOT` / `WARM` / `COLD` |
 | `source` | text | `deeds` / `sos` / `permits` / `demo` / `mortgages` |
-| `source_key` | text | dedup key — unique constraint, NULLs exempt (demo signals) |
-| `signal_type` | text | `MORTGAGE_FILING` (triggers OCR enrichment) / `NOMINAL_TRANSFER` (consideration < $1,000 — family/trust deed) / null |
+| `source_key` | text | dedup key — unique constraint, NULLs exempt |
+| `signal_type` | text | `MORTGAGE_FILING` / `NOMINAL_TRANSFER` / null |
 
 ### enriched_leads columns
 
@@ -183,11 +195,9 @@ Don't pitch "whole company in 30 days." Start with the highest-risk knowledge ga
 | `enrichment_status` | text | `raw` / `pending` / `enriched` |
 | `trade_tag` | text | client routing |
 | `score` / `tag` / `event_type` / `location` / `valuation` | | copied from signal |
-| `transfer_type` | text | `NOMINAL_TRANSFER` (copied from signal) or null — dashboard shows "Trust / Family" badge and hides dollar value |
-| `enrichment_version` | integer | version of `ENRICH_VERSION` constant at write time; null on legacy rows |
+| `transfer_type` | text | `NOMINAL_TRANSFER` or null — dashboard shows "Trust / Family" badge and hides dollar value |
+| `enrichment_version` | integer | version of `ENRICH_VERSION` at write time; null on legacy rows |
 | `notes` | text | |
-
-Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_leads` row → lookup chain → `enriched` or `pending` (manual queue).
 
 ### website_prospects columns
 
@@ -195,41 +205,38 @@ Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_
 |---|---|---|
 | `place_id` | text | Google Places ID, UNIQUE dedup key |
 | `business_name` / `vertical` | text | `dental` \| `personal_injury` |
-| `address` / `city` / `county` / `phone` / `website_url` | text | from Places; `website_url` NULL → highest-severity class |
+| `address` / `city` / `county` / `phone` / `website_url` | text | `website_url` NULL → highest-severity class |
 | `google_rating` / `google_review_count` | numeric / integer | |
 | `audit_status` | text | `pending` / `no_website` / `audited` / `error` |
-| `issues` | jsonb | `AuditFindings.to_jsonb()` — viewport/https/forms/copyright/lighthouse |
+| `issues` | jsonb | viewport/https/forms/copyright/lighthouse |
 | `severity_score` / `severity_tag` | integer / text | 0-100 · HOT / WARM / COLD |
 | `mobile_screenshot_url` / `desktop_screenshot_url` | text | Supabase Storage public URLs |
-| `lighthouse_mobile_score` | integer | mirror of `issues.lighthouse_mobile` |
-| `audit_error` | text | Playwright/network failure reason |
-| `contact_status` | text | sales workflow: `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
-| `emailed_at` | timestamptz | set when included in a weekly digest; NULL = eligible for next send |
-| `contact_emails` | jsonb | ranked `[{email, score, role_hint}]` from `contact_extract.py`; higher score = better outreach target |
-| `primary_email` | text | top-ranked email (score ≥ 20) — used for `mailto:` in dashboard + digest |
-| `decision_maker_name` | text | best-guess owner/dentist/partner from about/team pages |
-| `decision_maker_title` | text | detected title (Owner, Dr., Partner, Esq., DDS, etc.) |
+| `lighthouse_mobile_score` | integer | |
+| `audit_error` | text | |
+| `contact_status` | text | `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
+| `emailed_at` | timestamptz | NULL = eligible for next digest |
+| `contact_emails` | jsonb | ranked `[{email, score, role_hint}]` |
+| `primary_email` | text | top-ranked email (score ≥ 20) |
+| `decision_maker_name` / `decision_maker_title` | text | best-guess owner/dentist/partner |
 
 ## Market Insights Engine
 
-Workflow: `generate_insights.py --topic "..."` → Gemini → DRAFT → email to alex@ with Review/Publish buttons → manual click publishes → `revalidatePath('/insights')`
+Workflow: `generate_insights.py --topic "..."` → Gemini → DRAFT → email to alex@ → manual click publishes → `revalidatePath('/insights')`
 
 ```bash
 cd scripts
 python generate_insights.py --topic "..." [--dry-run]
 python generate_insights.py --test-email
-python weekly_insights.py [--dry-run]          # GH Actions Monday 8am EST
+python weekly_insights.py [--dry-run]
 python approve_post.py --list-drafts
 python approve_post.py --id <uuid> --view / --edit / --status PUBLISHED
 ```
 
-**Topic generation:** `weekly_insights.py` queries last 20 titles → Gemini picks from 6 category buckets. No state file. Edit `CATEGORIES` in `weekly_insights.py` to bias topics. Categories are currently oriented toward: LLC Owner Finder (public records/lead intel), Company Brain (AI for multi-job service businesses), Greenville commercial real estate, trade business operations, reading public records, and digital tools for trades.
-
-**GH Actions — weekly-insights.yml:** Monday 13:00 UTC, Python 3.12, `requirements-insights.txt`.  
+**GH Actions — weekly-insights.yml:** Monday 13:00 UTC, Python 3.12, `requirements-insights.txt`.
 Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `GEMINI_API_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `PUBLISH_SECRET` · `NEXT_PUBLIC_SITE_URL`
 
-**`/review`:** `?id=<uuid>&token=<PUBLISH_SECRET>` — server component, service key, token-gated. Not in nav.  
-**`/api/publish`:** `GET ?id=&token=` — flips status, `revalidatePath('/insights')`, idempotent.
+**`/review`:** `?id=<uuid>&token=<PUBLISH_SECRET>` — server component, token-gated. Not in nav.
+**`/api/publish`:** `GET ?id=&token=` — idempotent, `revalidatePath('/insights')`.
 
 ## Python Scraper (gvl_monitor.py)
 
@@ -249,23 +256,11 @@ python gvl_monitor.py --mode mortgages [--days 14] [--debug] [--dry-run]
 | `--scrape sos` | DuckDuckGo → SC SOS detail pages | none |
 | `--mode mortgages` | CountyWeb `viewer.greenvillecounty.org` | `ROD_VIEWER_USERNAME` + `ROD_PASSWORD` |
 
-**GovOS deed scraper:**
-- React SPA — after login, stay on `/`. Don't navigate away. Date: `aria-label="Starting Recorded Date"` + `press_sequentially()`. Submit: `data-testid="searchSubmitButton"`. Results: `tr.is-uncertified`.
-- Results columns: `cells[6]`=rec_date · `cells[7]`=doc_type · `cells[8]`=grantor · `cells[9]`=grantee. Consideration always `N/A` in results.
-- Click each qualifying row (Phase B) to get real consideration + property address. Direct `/document/{id}` URLs return 404 — must click from live Playwright session. `_parse_govos_detail()` checks `Consideration:`, `Loan Amount:`, `Principal Amount:`, `Situs Address:`.
-- Only DEED / WARRANTY DEED / DEED OF TRUST / QUIT CLAIM kept. `location` = property address → grantor name fallback (deed detail pages often have no situs address).
-- Dedup key: `deeds:{GRANTEE}:{rec_date}`
+**GovOS deed scraper:** React SPA. Date: `aria-label="Starting Recorded Date"` + `press_sequentially()`. Submit: `data-testid="searchSubmitButton"`. Results: `tr.is-uncertified`. Direct `/document/{id}` URLs return 404 — must click from live Playwright session. Only DEED / WARRANTY DEED / DEED OF TRUST / QUIT CLAIM kept. Dedup key: `deeds:{GRANTEE}:{rec_date}`.
 
-**CountyWeb mortgage scraper:**
-- Login via `page.evaluate("doLogin()")` — login button has no `type` attribute.
-- Nested iframes: `page.frame("bodyframe")` → `page.frame("dynSearchFrame")` → `page.frame("criteriaframe")`. Accept disclaimer, then click outer nav link (target="bodyframe") to reach `searchMain.do` — `frame.goto()` returns 404.
-- Datagrid field numbers (verified): `field 6`=rec_date · `field 7`=doc_type · `field 9`=grantor/borrower · `field 11`=grantee/lender.
-- Filter doc types by exact set membership (not substring) to exclude SATISFACTION OF MORTGAGE. Scan all rows; click MORTGAGE row specifically (ASSIGNMENT OF RENTS may appear first).
-- Grantor = borrower (who we want). Grantee = lender. `location` = borrower name; lender stored in `details`.
-- Signals: `event_type/signal_type = "MORTGAGE_FILING"`. MTG base 82 (WARM), CON base 88 (HOT).
-- Dedup key: `mtg:{BORROWER}:{rec_date}`
+**CountyWeb mortgage scraper:** Login via `page.evaluate("doLogin()")`. Nested iframes: `bodyframe` → `dynSearchFrame` → `criteriaframe`. Datagrid: `field 6`=rec_date · `field 7`=doc_type · `field 9`=borrower · `field 11`=lender. Filter doc types by exact set membership (not substring). Grantor = borrower (who we want). Dedup key: `mtg:{BORROWER}:{rec_date}`.
 
-**SOS scraper:** DDG `site:businessfilings.sc.gov "Greenville"` → fetch entity detail pages directly (no CAPTCHA on detail URLs). May return 0 if DDG hasn't indexed recent filings.
+**SOS scraper:** DDG `site:businessfilings.sc.gov "Greenville"` → detail pages (no CAPTCHA on detail URLs).
 
 **Dedup:** `source_key` upsert. Demo signals have null key — always insert.
 
@@ -276,9 +271,9 @@ python run_daily.py [--dry-run] [--days 14] [--no-deeds] [--no-mortgages] [--no-
 python weekly_leads_digest.py [--days 14] [--all] [--dry-run]
 ```
 
-**GH Actions daily-leads.yml (4am EST):** 5 steps: (1) CountyWeb mortgage scraper, (2) `--run-pending` enrich new signals, (3) `--retry-pending` re-run stuck leads, (4) `--run-contact` fill missing PDL contact info, (5) high-confidence alert email. Deed scraper runs locally only (fragile GovOS login).  
-Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `ROD_PASSWORD` · `ROD_VIEWER_USERNAME` · `PDL_API_KEY`  
-Python 3.12 required. Uses `requirements-scraper.txt` + `apt-get install tesseract-ocr`.
+**GH Actions daily-leads.yml (4am EST):** mortgage scraper → `--run-pending` → `--retry-pending` → `--run-contact` → alert email. Deed scraper runs locally only.
+Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `ROD_PASSWORD` · `ROD_VIEWER_USERNAME` · `PDL_API_KEY`
+Python 3.12 required. `requirements-scraper.txt` + `apt-get install tesseract-ocr`.
 
 ## Lead Enrichment Engine (enrich.py)
 
@@ -288,112 +283,87 @@ Unmasks LLC → human decision-maker. Writes to `enriched_leads`.
 python enrich.py --entity "Name LLC" [--rec-date "M/D/YYYY"] [--dry-run]
 python enrich.py --signal-id <uuid>
 python enrich.py --list-pending
-python enrich.py --run-pending [--dry-run]      # enrich new signals (no enriched_leads row yet)
-python enrich.py --retry-pending [--dry-run]    # re-run full chain on stuck pending leads (max 10)
-python enrich.py --run-contact [--dry-run]      # retry PDL on enriched leads with no contact info
-ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run   # saves HTML/PNG to scripts/debug/
+python enrich.py --run-pending [--dry-run]
+python enrich.py --retry-pending [--dry-run]
+python enrich.py --run-contact [--dry-run]
+ENRICH_DEBUG=1 python enrich.py --entity "..." --dry-run
 ```
 
 ### Enrichment chain
 
-**Step 0 — Mortgage OCR** (deed + mortgage signals with LLC entity names):  
-Triggered for `source in ("deeds", "mortgages")`. CountyWeb viewer — match by entity name (LLC suffixes stripped) + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path param — NOT cookie; Playwright session must stay active). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic scorer fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Returns immediately on hit. Browser errors return a partial result (error in `notes`) — they do not raise.
+**Step 0 — Mortgage OCR** (deed + mortgage signals with LLC entity names): CountyWeb viewer, match by entity name + rec_date ±3 days. Fetch last 4 pages as PNG via `viewImagePNG.do` (jsessionid in URL path — NOT cookie). `_parse_borrower_from_text()`: 6 structured regex patterns → heuristic fallback. Standard SC layout: `BORROWER:\n[LLC]\n\nBy ___\n\nName, Title`. Browser errors return partial result — they do not raise.
 
-**Step 1 — GVL tax query (`votaxqry`):**  
-Form at `greenvillecounty.org/appsas400/votaxqry/` — name search only (`txt_Name = input[name="ctl00$bodyContent$txt_Name"]`). Must force `hdn_SearchCategory = "Real Estate"` via `page.evaluate()` — tab click alone unreliable. Strip LLC/INC/CORP and "AND ..." joint suffixes before searching. Results: `cells[0]`=name+href · `cells[1]`=Map#/PIN. No mailing address column. Skip rows with vehicle codes (CHEV, FORD, TOYT, BOAT, TRLR, etc.). Name-flip retry on 0 results: 2-word → reverse; 3-word ending in initial → strip initial; 3-word no initial → FIRST MIDDLE LAST → LAST FIRST MIDDLE. Browser errors return a partial result — they do not raise.
+**Step 1 — GVL tax query (`votaxqry`):** Form at `greenvillecounty.org/appsas400/votaxqry/`. Force `hdn_SearchCategory = "Real Estate"` via `page.evaluate()`. Strip LLC/INC/CORP and "AND ..." joint suffixes. Results: `cells[0]`=name+href · `cells[1]`=Map#/PIN. Skip vehicle codes. Name-flip retry on 0 results.
 
-**Step 1b — PIN Pivot:**  
-Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (publicly accessible, plain `requests`). Shows Owner/Care Of/Mailing Address. If Care Of = human → done. If mailing is residential → GIS name search at that address. If commercial → pass to DDG q5. Bug: Care Of regex can bleed "Mailing Address:..." when empty — trimmed at "Mailing Address:" and values >60 chars rejected.
+**Step 1b — PIN Pivot:** Fetch `RealProperty/Details.aspx?MapNumber=<PIN>` (public). Shows Owner/Care Of/Mailing Address. If Care Of = human → done. If mailing is residential → GIS name search at that address.
 
-**Step 2 — DuckDuckGo (5 queries):**  
-`[entity] Greenville SC owner` · `site:businessfilings.sc.gov "[entity]"` · `site:upstatebusinessjournal.com "[entity]"` · `site:gsabizwire.com "[entity]"` · mailing address query (when PIN pivot found one). SC SOS detail pages have no CAPTCHA. Email + phone regex extracted from all snippets at no cost.
+**Step 2 — DuckDuckGo (5 queries):** `[entity] Greenville SC owner` · `site:businessfilings.sc.gov "[entity]"` · `site:upstatebusinessjournal.com "[entity]"` · `site:gsabizwire.com "[entity]"` · mailing address query. Email + phone regex extracted from snippets.
 
 **Step 2b — Initials logic:** If LLC = `[2-5 initials] + Partners/Group/etc.`, rank candidates whose initials match.
 
-**Step 2c — PDL person enrichment** (`enrich_contact.py`): fires after a human name is resolved, only if DDG didn't surface both email + phone. `PDL_API_KEY` required. 100 free credits/month; credits consumed only on successful matches.
+**Step 2c — PDL person enrichment** (`enrich_contact.py`): fires after a human name is resolved if DDG didn't surface email + phone. 100 free credits/month; credits consumed only on successful matches.
 
-**Step 2d — PDL company enrichment** (`enrich_contact.py`): last-resort fallback — fires when still no contact info after the full chain (owner unresolved or person lookup missed). Returns business phone/LinkedIn. Same credit rules apply.
+**Step 2d — PDL company enrichment** (`enrich_contact.py`): last-resort fallback when still no contact info.
 
-**Step 3 — Manual queue:** Log mailing address + ROD viewer link (`viewer.greenvillecounty.org/countyweb/disclaimer.do`) in notes, set `enrichment_status = 'pending'`.
+**Step 3 — Manual queue:** Log mailing address + ROD viewer link, set `enrichment_status = 'pending'`.
 
 ### Enrichment versioning
 
-`ENRICH_VERSION` in `enrich_models.py` (currently `1`) is written to every row. Bump it when the chain meaningfully improves. To re-process stale rows: query `WHERE enrichment_version < <new_version>` and run `--retry-pending` or `--signal-id` per row. `--retry-pending` targets `enrichment_status = 'pending'`; future `--re-enrich-stale` flag would target old `enrichment_version`.
+`ENRICH_VERSION` in `enrich_models.py` (currently `1`) written to every row. Bump when chain meaningfully improves.
 
 ### Location resolution
 
-`save_enriched_lead()` sets `enriched_leads.location` to: GIS-resolved property address → `signal.location` if it passes `_is_street_address()` (leading house number `\d{1,5}\s+[A-Za-z]`) → null. Legacy rows written before the filter may contain a grantor/borrower name instead of an address.
-
-Dashboard validates `location` with `isStreetAddress()` before rendering it as an address. It also joins `market_signals(entity_name, location)` — when `market_signals.location` is not itself a street address (i.e. it's the grantor/borrower name fallback), it's shown as a dimmed sub-label below the address field. Never assume `enriched_leads.location` contains a street address.
+`save_enriched_lead()` sets `enriched_leads.location` to: GIS-resolved property address → `signal.location` if it passes `_is_street_address()` → null. Dashboard validates `location` with `isStreetAddress()` before rendering.
 
 ### Name normalization
 
-`normalize_person_name()`: ALL-CAPS deed format `LASTNAME FIRSTNAME MIDDLE` → `Firstname Lastname`. Drops middle names, preserves JR/SR/II/III. For simple deed grantees (≤3 words, no "AND"), deed `entity_name` preferred over GIS (GIS concatenates first+middle without spaces).
-
-### Enrichment Stack Roadmap
-
-| Tier | Source | Status |
-|---|---|---|
-| Primary | Mortgage OCR (CountyWeb) | Working |
-| Contact (person) | DDG snippet regex → PDL `/v5/person/enrich` (if DDG misses) | Built |
-| Contact (company) | PDL `/v5/company/enrich` — last resort when person lookup fails | Built |
-| Secondary | UCC (`ucconline.sc.gov`) | Not built |
-| Tertiary | City business license (FOIA to `businesslicense@greenvillesc.gov`) | Awaiting response |
-| Fallback | SOS via DDG + address clustering | Current |
-
-Client delivery roadmap: add RLS policy on `enriched_leads` so `auth.email() = clients.contact_email` — no client-facing dashboard route yet; `/dashboard` shows all leads.
+`normalize_person_name()`: ALL-CAPS `LASTNAME FIRSTNAME MIDDLE` → `Firstname Lastname`. Drops middle names, preserves JR/SR/II/III. For simple deed grantees (≤3 words, no "AND"), deed `entity_name` preferred over GIS.
 
 ## Website Prospects Pipeline (scripts/prospects/)
 
-Outbound pitch list: dental + personal injury law firms with visible website problems (broken mobile, no HTTPS, broken forms, stale copyright, low Lighthouse, or no site at all). Populates `website_prospects` table; surfaced on `/dashboard/prospects`.
+Outbound pitch list: dental + personal injury with visible website problems. Populates `website_prospects`; surfaced on `/dashboard/prospects`.
 
 ```bash
 cd scripts
 python -m prospects.run_prospects --discover --vertical dental --county greenville [--dry-run] [--limit N]
-python -m prospects.run_prospects --discover --all                                   # all verticals × all counties
+python -m prospects.run_prospects --discover --all
 python -m prospects.run_prospects --audit-pending [--limit 10] [--vertical dental]
-python -m prospects.run_prospects --audit-url https://example.com                    # smoke test (no DB write)
+python -m prospects.run_prospects --audit-url https://example.com
 python -m prospects.run_prospects --re-audit --days 30 [--limit N]
-python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]            # email new HOT/WARM
+python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]
 ```
 
-**Flow:** Places discovery writes rows as `pending` (or `no_website` when Places has no URL) → `--audit-pending` runs Playwright mobile+desktop capture, runs detectors, hits PageSpeed Insights, uploads screenshots to Storage, writes severity (0-100) + tag (HOT ≥70 / WARM ≥40 / COLD).
+**Flow:** Places discovery writes rows as `pending` → `--audit-pending` runs Playwright mobile+desktop capture, runs detectors, hits PageSpeed Insights, uploads screenshots to Storage, writes severity (0-100) + tag (HOT ≥70 / WARM ≥40 / COLD).
 
-**Automation:** `.github/workflows/weekly-prospects.yml` runs Mondays 14:00 UTC (9am EST / 10am EDT): discover all verticals × counties → audit-pending (limit 50) → re-audit stale >30d (limit 20) → digest. Secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `RESEND_API_KEY`, `NOTIFICATION_EMAIL`, `GOOGLE_PLACES_API_KEY`, optional `GOOGLE_PAGESPEED_API_KEY`.
+**Automation:** `.github/workflows/weekly-prospects.yml` runs Mondays 14:00 UTC. Secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `RESEND_API_KEY`, `NOTIFICATION_EMAIL`, `GOOGLE_PLACES_API_KEY`, optional `GOOGLE_PAGESPEED_API_KEY`.
 
-**Digest dedup:** `digest.py` sends HOT/WARM rows where `emailed_at IS NULL` and stamps `emailed_at = now()` on send. Nothing resends unless the row is wiped/re-emailed manually. Row-level `place_id` UNIQUE prevents duplicate discovery.
+**Digest dedup:** `digest.py` sends HOT/WARM rows where `emailed_at IS NULL` and stamps `emailed_at = now()` on send.
 
-**Detector philosophy:** low false-positive rate over coverage. Forms with empty action / `#` / `javascript:` → `forms_unverifiable` (NOT flagged). Only forms with absolute action returning **404 or 410** (`DEFINITIVE_BROKEN_STATUSES` in `detectors.py`) → `forms_unreachable` (flagged); triggering status written to `issues.forms_unreachable_status` so outreach copy can quote it. Ambiguous responses (405, 403, 5xx, network errors) demote to `forms_unverifiable` — 405 usually means "GET refused, POST fine" and false-positive form claims torch sender credibility in cold email. Copyright detection uses rendered text (many sites `document.write()` the year).
+**Detector philosophy:** low false-positive rate over coverage. Only forms with absolute action returning **404 or 410** → `forms_unreachable` (flagged). 405/403/5xx demote to `forms_unverifiable` — false-positive form claims torch sender credibility.
 
-**Severity weights** (`detectors.score_severity`): viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
+**Severity weights:** viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
 
-**Contact extraction** (`contact_extract.py`, pure): after the mobile pass, `audit.py` follows up to 3 same-origin links whose path contains `about` / `contact` / `team` / `meet-the-doctor` / `our-attorneys` / `leadership` / etc. (see `CANDIDATE_CONTACT_PATHS`). Combined rendered HTML + innerText are passed to `extract_decision_maker()` (dental: `Dr. Jane Smith` / `, DDS`; PI: `, Esq.` / `, Partner` / `, Founder`) and `rank_emails()`. Ranking: decision-maker name match = 95 · owner@/partner@ = 80 · `firstname.lastname` = 70 · low-priority (`appointments@`, `billing@`) = 30 · shared (`info@`, `office@`) = 10 · off-domain -20. Business surname bump of +40 for DM candidates whose name contains a non-stopword token from the business name. `primary_email` = top-ranked email with score ≥ 20.
+**Contact extraction** (`contact_extract.py`, pure): `audit.py` follows up to 3 same-origin links with `about` / `contact` / `team` in path. Combined HTML → `extract_decision_maker()` + `rank_emails()`. `primary_email` = top-ranked email with score ≥ 20.
 
-**Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury). Search radii 20-25km around county seat lat/lng in `discover.COUNTIES`.
-
-**PageSpeed API** reuses `GOOGLE_PLACES_API_KEY` by default; set `GOOGLE_PAGESPEED_API_KEY` to split quotas. Enable the PageSpeed Insights API in Google Cloud on the same project.
+**Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury).
 
 ## Known Issues / Gotchas
 
 **Next.js / Framework:**
-- Next.js 16: `middleware.ts` → `proxy.ts`, `export function proxy`. Do NOT create `middleware.ts` — deprecated.
+- Next.js 16: `middleware.ts` → `proxy.ts`, `export function proxy`. Do NOT create `middleware.ts`.
 - Supabase Auth in App Router: use `createServerClient` from `@supabase/ssr`, NOT `createClient` from `@supabase/supabase-js`.
-- `next.config.ts` sets `turbopack.root: __dirname` to suppress lockfile warning from `C:\Users\alexs\package-lock.json`.
+- `next.config.ts` sets `turbopack.root: __dirname` to suppress lockfile warning.
 - Google Fonts: Turbopack http2 error at build time — system fonts everywhere including `opengraph-image.tsx`.
 
 **Python deps:**
 - `google-genai` requires `httpx>=0.28.1`. Do not downgrade `supabase` below 2.15.0.
-- Tesseract: `pip install pytesseract` is Python-only wrapper. Install binary separately: `winget install tesseract-ocr.tesseract`. Default path: `C:\Program Files\Tesseract-OCR\tesseract.exe`. Override: `TESSERACT_CMD`. `enrich_mort.py` imports at module level with `_TESSERACT_AVAILABLE` flag — missing binary degrades gracefully.
-- `playwright install chromium` required after `pip install playwright` (~130MB).
+- Tesseract: install binary separately. Override: `TESSERACT_CMD`. Missing binary degrades gracefully.
+- `playwright install chromium` required after `pip install playwright`.
 
 **GVL tax query (`votaxqry`):**
-- `gcgis.org` ArcGIS API times out for non-browser requests (IP-blocked) — don't use.
+- `gcgis.org` ArcGIS API times out for non-browser requests — don't use.
 - `greenvillecounty.org/vRealPr24/` returns 500 — don't use.
-- New deed grantees may return 0 GIS results for weeks — county records lag behind filings.
-
-**Misc:**
-- SOS DDG scraper may return 0 if DDG hasn't crawled recent filings.
-- GovOS account required at `greenville.sc.publicsearch.us/register` — no guest login despite JS `doGuestLogin()` function.
+- New deed grantees may return 0 GIS results for weeks — county records lag filings.
 
 ## Environment Variables
 
@@ -401,7 +371,7 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]      
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Safe to expose |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access |
-| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Required by `/api/publish` + `/review` on Vercel |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit |
 | `GEMINI_API_KEY` | Google AI Studio |
 | `RESEND_API_KEY` | Contact form + Python alerts |
 | `NOTIFICATION_EMAIL` | `alex@rebbadvisors.com` |
@@ -410,12 +380,12 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]      
 | `ROD_EMAIL` | GovOS deed scraper |
 | `ROD_PASSWORD` | GovOS + CountyWeb (shared) |
 | `ROD_VIEWER_USERNAME` | CountyWeb (default: `asteryous`) |
-| `PDL_API_KEY` | People Data Labs free tier (100 credits/month) — contact enrichment via `enrich_contact.py`. Falls back to `APOLLO_API_KEY` if set. |
-| `GOOGLE_PLACES_API_KEY` | Places API (New) — prospect discovery. Reused by PageSpeed Insights unless `GOOGLE_PAGESPEED_API_KEY` is set. Not free — $200/month credit then paid. |
+| `PDL_API_KEY` | People Data Labs — contact enrichment |
+| `GOOGLE_PLACES_API_KEY` | Places API (New). Reused by PageSpeed Insights unless `GOOGLE_PAGESPEED_API_KEY` is set. |
 | `TESSERACT_CMD` | Optional — path to `tesseract.exe` if not at default |
 | `DISCORD_WEBHOOK_URL` | Optional — new draft alert |
-| `EDITOR` | Optional — for `approve_post.py --edit` (default: notepad) |
-| `MAIL_FROM` | Optional — email `from` address for all pipeline emails (default: `REBB Advisors <noreply@rebbadvisors.com>` / `REBB Insights <onboarding@resend.dev>` for insights) |
+| `EDITOR` | Optional — for `approve_post.py --edit` |
+| `MAIL_FROM` | Optional — email `from` address override |
 
 ## Deployment
 
@@ -429,26 +399,30 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 ## Pages
 
+**Public routes:**
+
 | Route | Notes |
 |---|---|
-| `/` | Hero (key-person risk H1, role-badged pain card; hero sub-copy frames behavior change as REBB's job not client's) → CompanyBrainDemo (dark, source chip grid + `PipelineDiagram` SVG with honest "outdated docs" caveat) → Comparison table (Notion / SOP consultant / NotebookLM vs Company Brain; Jobber and Generic AI removed; plain-text note below table recommending NotebookLM for small shops) → Setup Process (estimator vault callout, pricing transparency callout, 4-step week-labeled timeline: Week 1 / Week 2–3 / Week 4 / Ongoing) → Best Fit (icon cards + amber "Who this isn't for" block) → Data Security → Final CTA. All CTAs → `/contact`. No LiveSignalFeed. |
-| `/how-it-works` | 4-phase process walkthrough (map → build → test → tune) |
-| `/lead-intelligence` | LLC Owner Finder deep dive |
-| `/seo` | Local SEO audits + GBP optimization |
-| `/web-development` | React/Next.js builds for trades |
-| `/outreach-automation` | Email/SMS sequences |
-| `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked` |
-| `/review` | Token-gated draft review (email only) |
-| `/dashboard` | enriched_leads ranked list, Supabase Auth gated |
-| `/dashboard/prospects` | website_prospects list — severity-ranked, vertical filter, screenshot proof; Auth gated |
-| `/dashboard/login` | No public registration; users created manually in Supabase |
-| `/case-study` | Placeholder — **noindexed**, do not remove until real content |
+| `/` | Single-offer homepage: Hero → Visual Proof (`#what-we-fix`) → Process (`#process`) → Pricing (`#pricing`) → Outcomes → Final CTA |
 | `/contact` | Form → `/api/contact` → Resend to alex@rebbadvisors.com |
+| `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked`. Not currently in public nav. |
+| `/review` | Token-gated draft review. Not in nav. |
+| `/case-study` | Placeholder — **noindexed**, do not remove until real content exists. |
 
-**Nav:** logo · Services ▾ (Lead Intelligence / Outreach Automation / Local SEO / Web Development) · How It Works · Insights · Contact · [Get More Jobs CTA]
+**Redirects** (legacy service pages, all `permanentRedirect("/")`): `/how-it-works` · `/web-development` · `/seo` · `/lead-intelligence` · `/outreach-automation`. Kept for inbound-link preservation; do not delete without 301 strategy.
+
+**Internal / auth-gated:**
+
+| Route | Notes |
+|---|---|
+| `/dashboard` | enriched_leads ranked list (LLC Owner Finder internal tool) |
+| `/dashboard/prospects` | website_prospects list (outbound pitch list internal tool) |
+| `/dashboard/login` | No public registration; users created manually in Supabase |
+
+**Nav:** logo · What We Fix · Process · Pricing · Contact · [Show Me What's Broken CTA]
 
 ## Python Pipeline — Open Tech Debt
 
-- **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage. Any refactor is unprotected.
-- **`fetch_pending_signals` NOT IN query** — uses `.filter("id", "not.in", ...)` which passes as a URL param; hits length limits at ~2000+ enriched signals. Move to a Postgres function/view when volume grows.
+- **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, and `is_enriched()` are pure functions with complex logic and zero test coverage.
+- **`fetch_pending_signals` NOT IN query** — `.filter("id", "not.in", ...)` passed as URL param; hits length limits at ~2000+ enriched signals.
 - **`principal_role` constants** — defined in `enrich_models.py`. TypeScript dashboard maps confidence tiers by `startsWith()` prefix.

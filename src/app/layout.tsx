@@ -6,30 +6,30 @@ import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
 export const metadata: Metadata = {
-  title: "REBB Advisors - Website Cleanup for Local Businesses",
+  title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
   description:
-    "REBB Advisors fixes broken business websites for local businesses. Forms, mobile issues, dead pages, and outdated trust leaks cleaned up fast with a clear fixed-price offer.",
+    "REBB Advisors fixes broken dental practice websites in Greenville SC. Booking forms, mobile issues, dead pages, and outdated trust leaks cleaned up fast with a clear fixed-price offer.",
   keywords: [
-    "website cleanup Greenville SC",
-    "fix broken forms website",
-    "mobile friendly website fix",
-    "website modernization local business",
-    "business website repair",
-    "fix outdated website Greenville",
+    "dental website cleanup Greenville SC",
+    "dentist website repair",
+    "fix dental booking form",
+    "mobile friendly dental website",
+    "dental practice website modernization",
+    "outdated dentist website fix",
   ],
   openGraph: {
-    title: "REBB Advisors - Website Cleanup for Local Businesses",
+    title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Clear website cleanup offer for local businesses: broken forms, mobile issues, dead pages, and outdated trust leaks fixed fast.",
+      "Clear website cleanup offer for dental practices: broken booking forms, mobile issues, and outdated trust leaks fixed fast.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
   },
   twitter: {
     card: "summary_large_image",
-    title: "REBB Advisors - Website Cleanup for Local Businesses",
+    title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Broken forms, mobile issues, and outdated business websites fixed fast.",
+      "Broken booking forms, mobile issues, and outdated dental practice websites fixed fast.",
   },
   alternates: {
     canonical: "https://rebbadvisors.com",
@@ -59,7 +59,7 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Website cleanup and modernization for local businesses with broken forms, mobile issues, and outdated trust leaks.",
+                "Website cleanup and modernization for dental practices with broken booking forms, mobile issues, and outdated trust leaks.",
               areaServed: {
                 "@type": "AdministrativeArea",
                 name: "Greenville County, South Carolina",
@@ -71,16 +71,16 @@ export default function RootLayout({
                 addressCountry: "US",
               },
               serviceType: [
-                "Website Cleanup",
-                "Website Modernization",
-                "Broken Form Repair",
-                "Mobile Website Fixes",
+                "Dental Website Cleanup",
+                "Dental Website Modernization",
+                "Dental Booking Form Repair",
+                "Mobile Dental Website Fixes",
               ],
               knowsAbout: [
-                "Business website cleanup",
-                "Broken web forms",
-                "Mobile-friendly websites",
-                "Local business website credibility",
+                "Dental practice website cleanup",
+                "Broken dental booking forms",
+                "Mobile-friendly dental websites",
+                "Dental practice website credibility",
               ],
             }),
           }}
