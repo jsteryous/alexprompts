@@ -54,7 +54,7 @@ def fetch_new_prospects(min_severity: int) -> list[dict]:
             "id, business_name, vertical, city, county, phone, website_url, "
             "google_rating, google_review_count, audit_status, issues, "
             "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, "
-            "lighthouse_mobile_score"
+            "lighthouse_mobile_score, primary_email, decision_maker_name, decision_maker_title"
         )
         .is_("emailed_at", "null")
         .in_("severity_tag", ["HOT", "WARM"])
@@ -115,6 +115,9 @@ def _card(row: dict, idx: int) -> str:
     tag = (row.get("severity_tag") or "WARM").upper()
     score = row.get("severity_score") or 0
     screenshot = row.get("mobile_screenshot_url") or row.get("desktop_screenshot_url") or ""
+    primary_email = row.get("primary_email") or ""
+    dm_name = row.get("decision_maker_name") or ""
+    dm_title = row.get("decision_maker_title") or ""
 
     issue_labels = _issue_labels(row.get("issues") or {}, row.get("audit_status") or "")
     issues_html = "".join(
@@ -132,6 +135,17 @@ def _card(row: dict, idx: int) -> str:
         f'<a href="tel:{phone}" style="color:#22c55e;text-decoration:none">{phone}</a>'
         if phone else ""
     )
+    email_html = (
+        f'<a href="mailto:{primary_email}" style="color:#22c55e;text-decoration:none">'
+        f'{primary_email}</a>'
+        if primary_email else ""
+    )
+    dm_html = ""
+    if dm_name:
+        dm_html = (
+            f'<span style="color:#0a0a0a;font-weight:600">{dm_name}</span>'
+            + (f' <span style="color:#6b7280">· {dm_title}</span>' if dm_title else "")
+        )
     url_html = (
         f'<a href="{url}" style="color:#22c55e;text-decoration:none;word-break:break-all">{url}</a>'
         if url else '<span style="color:#dc2626;font-weight:600">No website</span>'
@@ -160,6 +174,8 @@ def _card(row: dict, idx: int) -> str:
   </div>
   <div style="font-size:13px;color:#374151;margin-bottom:4px">{location} &nbsp;·&nbsp; {rating_html}</div>
   <div style="font-size:12px;margin-bottom:8px">{url_html}</div>
+  {f'<div style="font-size:12px;margin-bottom:4px">{dm_html}</div>' if dm_html else ''}
+  {f'<div style="font-size:12px;margin-bottom:4px">✉ {email_html}</div>' if email_html else ''}
   {f'<div style="font-size:12px;margin-bottom:8px">{phone_html}</div>' if phone_html else ''}
   <div>{issues_html}</div>
   {shot_html}

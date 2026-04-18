@@ -100,7 +100,12 @@ def cmd_audit_pending(args) -> int:
     for r in rows:
         _log.info("► %s — %s", r["business_name"], r["website_url"])
         try:
-            result = audit_prospect(r["id"], r["website_url"], pagespeed_key=pagespeed_key)
+            result = audit_prospect(
+                r["id"],
+                r["website_url"],
+                pagespeed_key=pagespeed_key,
+                business_name=r.get("business_name"),
+            )
             save_audit(result)
             _log.info(
                 "  ↳ severity=%d %s  issues=%s",
@@ -128,6 +133,12 @@ def cmd_audit_url(args) -> int:
     print(f"Error:          {result.error or '—'}")
     if result.findings:
         print(f"Findings:       {result.findings.to_jsonb()}")
+    print(f"Decision maker: {result.decision_maker_name or '—'} ({result.decision_maker_title or '—'})")
+    print(f"Primary email:  {result.primary_email or '—'}")
+    if result.contact_emails:
+        print("Ranked emails:")
+        for r in result.contact_emails[:8]:
+            print(f"   {r['score']:>3}  {r['email']}  ({r['role_hint']})")
     print(f"Mobile shot:    {result.mobile_screenshot_url or '—'}")
     print(f"Desktop shot:   {result.desktop_screenshot_url or '—'}")
     return 0
@@ -154,7 +165,12 @@ def cmd_re_audit(args) -> int:
     for r in rows:
         _log.info("↻ re-audit %s", r["business_name"])
         try:
-            result = audit_prospect(r["id"], r["website_url"], pagespeed_key=pagespeed_key)
+            result = audit_prospect(
+                r["id"],
+                r["website_url"],
+                pagespeed_key=pagespeed_key,
+                business_name=r.get("business_name"),
+            )
             save_audit(result)
         except Exception as e:
             _log.exception("re-audit failed: %s", e)

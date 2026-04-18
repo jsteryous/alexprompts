@@ -298,6 +298,15 @@ CREATE INDEX IF NOT EXISTS website_prospects_digest_queue_idx
   ON website_prospects (severity_score DESC NULLS LAST)
   WHERE emailed_at IS NULL AND severity_tag IN ('HOT', 'WARM');
 
+-- Contact enrichment — populated by audit.py via scripts/prospects/contact_extract.py.
+-- Ranked email list (jsonb), top-ranked primary_email for quick dashboard access,
+-- and best-guess decision-maker (owner/dentist/partner) name + title.
+ALTER TABLE website_prospects
+  ADD COLUMN IF NOT EXISTS contact_emails       jsonb,
+  ADD COLUMN IF NOT EXISTS primary_email        text,
+  ADD COLUMN IF NOT EXISTS decision_maker_name  text,
+  ADD COLUMN IF NOT EXISTS decision_maker_title text;
+
 -- Storage bucket for audit screenshots.
 -- Run once in Supabase SQL editor after this migration:
 --   INSERT INTO storage.buckets (id, name, public)

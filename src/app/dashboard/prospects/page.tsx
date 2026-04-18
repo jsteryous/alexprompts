@@ -23,6 +23,12 @@ interface AuditIssues {
   jquery_version?: string | null;
 }
 
+interface RankedEmail {
+  email: string;
+  score: number;
+  role_hint: string;
+}
+
 interface Prospect {
   id: string;
   created_at: string;
@@ -47,6 +53,10 @@ interface Prospect {
   audit_error: string | null;
   contact_status: string | null;
   notes: string | null;
+  contact_emails: RankedEmail[] | null;
+  primary_email: string | null;
+  decision_maker_name: string | null;
+  decision_maker_title: string | null;
 }
 
 interface Props {
@@ -68,7 +78,8 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
       "id, created_at, audited_at, place_id, business_name, vertical, address, city, county, " +
       "phone, website_url, google_rating, google_review_count, audit_status, issues, " +
       "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, " +
-      "lighthouse_mobile_score, audit_error, contact_status, notes"
+      "lighthouse_mobile_score, audit_error, contact_status, notes, " +
+      "contact_emails, primary_email, decision_maker_name, decision_maker_title"
     )
     .order("severity_score", { ascending: false, nullsFirst: false })
     .order("created_at", { ascending: false })
@@ -156,6 +167,61 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
           {c.label}
         </span>
       ))}
+    </div>
+  );
+}
+
+function ContactCell({ prospect }: { prospect: Prospect }) {
+  const dmName = prospect.decision_maker_name;
+  const dmTitle = prospect.decision_maker_title;
+  const primary = prospect.primary_email;
+  const alternates = (prospect.contact_emails ?? [])
+    .filter((r) => r.email !== primary)
+    .slice(0, 3);
+
+  if (!dmName && !primary && alternates.length === 0) {
+    return <span className="text-xs theme-text-muted">—</span>;
+  }
+
+  return (
+    <div className="space-y-1">
+      {dmName && (
+        <div>
+          <p className="text-xs font-semibold theme-text-primary leading-tight">{dmName}</p>
+          {dmTitle && (
+            <p className="text-[10px] theme-text-muted leading-tight">{dmTitle}</p>
+          )}
+        </div>
+      )}
+      {primary && (
+        <a
+          href={`mailto:${primary}`}
+          className="block text-xs text-blue-600 dark:text-blue-400 hover:underline break-all"
+          title={`Send email to ${primary}`}
+        >
+          {primary}
+        </a>
+      )}
+      {alternates.length > 0 && (
+        <details className="text-[10px]">
+          <summary className="theme-text-muted hover:theme-text-secondary cursor-pointer select-none">
+            +{alternates.length} more
+          </summary>
+          <ul className="mt-1 space-y-0.5">
+            {alternates.map((r) => (
+              <li key={r.email} className="break-all">
+                <a
+                  href={`mailto:${r.email}`}
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  title={`${r.role_hint} · score ${r.score}`}
+                >
+                  {r.email}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }
@@ -279,6 +345,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted w-8">#</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Severity</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Business</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Contact</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">City</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Vertical</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Issues</th>
@@ -315,6 +382,9 @@ export default async function ProspectsPage({ searchParams }: Props) {
                         <span className="text-xs text-red-600 dark:text-red-400 mt-0.5 block">No website</span>
                       )}
                       {p.phone && <p className="text-xs theme-text-muted mt-0.5">{p.phone}</p>}
+                    </td>
+                    <td className="px-4 py-4 max-w-[260px]">
+                      <ContactCell prospect={p} />
                     </td>
                     <td className="px-4 py-4 theme-text-secondary text-xs">
                       {p.city || "—"}

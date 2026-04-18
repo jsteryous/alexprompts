@@ -3,23 +3,25 @@ audit.py — Run the detector suite against one prospect's website.
 
 Flow per prospect:
   1. Skip if audit_status = 'no_website' — nothing to probe.
-  2. Launch Playwright, request mobile viewport (iPhone 12) first.
-  3. Navigate with a 20s timeout; record final URL (catches http→https redirects).
-  4. Wait for networkidle (bounded); read rendered HTML + visible text.
-  5. Full-page mobile screenshot → bytes → Supabase Storage.
+  2. Launch Playwright mobile viewport (iPhone 12), navigate home.
+  3. Wait for networkidle (bounded); read rendered HTML + visible text + anchor hrefs.
+  4. Full-page mobile screenshot → bytes → Supabase Storage.
+  5. Same mobile context: follow up to 3 same-origin candidate contact/about/team
+     pages (from contact_extract.find_candidate_page_urls), collect html + text.
   6. Switch to desktop viewport (1440×900), repeat screenshot.
-  7. Run the HTML-only detectors (viewport/https/copyright/forms/jquery).
-  8. Run PageSpeed Insights mobile (network call — slowest step).
-  9. Compute severity + upsert into website_prospects.
+  7. Run the HTML-only detectors (viewport/https/copyright/forms/jquery) on home.
+  8. Run PageSpeed Insights mobile (slowest step).
+  9. Run contact_extract over the combined page corpus: decision-maker name/title,
+     emails, ranked with decision-maker hint + same-domain boost.
+ 10. Compute severity + upsert into website_prospects.
 """
 
 from __future__ import annotations
 
 import logging
 import os
-import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -30,7 +32,7 @@ from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 from supabase import create_client
 
-from . import detectors
+from . import contact_extract, detectors
 from .detectors import AuditFindings
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env.local")
@@ -40,6 +42,21 @@ _log = logging.getLogger(__name__)
 STORAGE_BUCKET = "prospect-audits"
 NAV_TIMEOUT_MS = 20_000
 NETWORKIDLE_TIMEOUT_MS = 5_000
+EXTRA_PAGE_NAV_TIMEOUT_MS = 12_000
+EXTRA_PAGE_NETWORKIDLE_TIMEOUT_MS = 3_000
+MAX_EXTRA_PAGES = 3
+PRIMARY_EMAIL_MIN_SCORE = 20  # discard ranked emails below this before picking primary
+
+
+@dataclass
+class _CaptureResult:
+    final_url: Optional[str] = None
+    home_html: str = ""
+    home_text: str = ""
+    extra_pages: list[dict] = field(default_factory=list)  # [{url, html, text}]
+    mobile_png: bytes = b""
+    desktop_png: bytes = b""
+    error: Optional[str] = None
 
 
 @dataclass
@@ -52,6 +69,10 @@ class AuditResult:
     mobile_screenshot_url: Optional[str] = None
     desktop_screenshot_url: Optional[str] = None
     error: Optional[str] = None
+    contact_emails: list[dict] = field(default_factory=list)
+    primary_email: Optional[str] = None
+    decision_maker_name: Optional[str] = None
+    decision_maker_title: Optional[str] = None
 
 
 # ── Supabase helpers ─────────────────────────────────────────────────────────
@@ -80,13 +101,65 @@ def _upload_screenshot(sb, prospect_id: str, kind: str, png_bytes: bytes) -> Opt
         return None
 
 
+def _lookup_business_name(sb, prospect_id: str) -> Optional[str]:
+    try:
+        r = (
+            sb.table("website_prospects")
+            .select("business_name")
+            .eq("id", prospect_id)
+            .limit(1)
+            .execute()
+        )
+        if r.data:
+            return r.data[0].get("business_name")
+    except Exception as e:
+        _log.debug("business_name lookup failed: %s", e)
+    return None
+
+
 # ── Playwright capture ───────────────────────────────────────────────────────
 
-def _capture(url: str) -> tuple[Optional[str], str, str, bytes, bytes, Optional[str]]:
-    """
-    Returns (final_url, rendered_html, rendered_text, mobile_png, desktop_png, error).
-    Any single-step failure returns a partial tuple with an error string.
-    """
+def _collect_hrefs(page) -> list[str]:
+    try:
+        raw = page.evaluate(
+            "() => Array.from(document.querySelectorAll('a[href]'))"
+            ".map(a => a.href).filter(Boolean)"
+        )
+    except PlaywrightError:
+        return []
+    return raw if isinstance(raw, list) else []
+
+
+def _capture_extra_page(ctx, url: str) -> Optional[dict]:
+    """Navigate an already-open mobile context to a secondary page. Returns None on failure."""
+    page = ctx.new_page()
+    try:
+        try:
+            page.goto(url, timeout=EXTRA_PAGE_NAV_TIMEOUT_MS, wait_until="domcontentloaded")
+        except PlaywrightError as e:
+            _log.debug("extra-page nav failed for %s: %s", url, e)
+            return None
+        try:
+            page.wait_for_load_state("networkidle", timeout=EXTRA_PAGE_NETWORKIDLE_TIMEOUT_MS)
+        except PlaywrightError:
+            pass
+        try:
+            html = page.content()
+            text = page.evaluate("() => document.body ? document.body.innerText : ''") or ""
+        except PlaywrightError as e:
+            _log.debug("extra-page read failed for %s: %s", url, e)
+            return None
+        return {"url": page.url, "html": html, "text": text}
+    finally:
+        try:
+            page.close()
+        except PlaywrightError:
+            pass
+
+
+def _capture(url: str) -> _CaptureResult:
+    """One browser launch, mobile + extras + desktop. Errors surface via .error."""
+    result = _CaptureResult()
     if not url.startswith(("http://", "https://")):
         url = "https://" + url
 
@@ -109,23 +182,45 @@ def _capture(url: str) -> tuple[Optional[str], str, str, bytes, bytes, Optional[
             try:
                 resp = m_page.goto(url, timeout=NAV_TIMEOUT_MS, wait_until="domcontentloaded")
             except PlaywrightError as e:
-                return None, "", "", b"", b"", f"navigation failed: {e}"
+                result.error = f"navigation failed: {e}"
+                mobile_ctx.close()
+                return result
 
             if resp is None:
-                return None, "", "", b"", b"", "no response"
+                result.error = "no response"
+                mobile_ctx.close()
+                return result
 
-            final_url = m_page.url
+            result.final_url = m_page.url
             try:
                 m_page.wait_for_load_state("networkidle", timeout=NETWORKIDLE_TIMEOUT_MS)
             except PlaywrightError:
-                pass  # networkidle can time out on analytics-heavy sites; that's fine
+                pass
 
-            rendered_html = m_page.content()
-            rendered_text = m_page.evaluate("() => document.body ? document.body.innerText : ''")
-            mobile_png = m_page.screenshot(full_page=True)
+            result.home_html = m_page.content()
+            result.home_text = m_page.evaluate(
+                "() => document.body ? document.body.innerText : ''"
+            ) or ""
+            result.mobile_png = m_page.screenshot(full_page=True)
+
+            # Follow candidate contact/about/team pages (same origin, same browser context)
+            hrefs = _collect_hrefs(m_page)
+            candidates = contact_extract.find_candidate_page_urls(
+                result.final_url, hrefs, limit=MAX_EXTRA_PAGES,
+            )
+            try:
+                m_page.close()
+            except PlaywrightError:
+                pass
+
+            for candidate_url in candidates:
+                extra = _capture_extra_page(mobile_ctx, candidate_url)
+                if extra:
+                    result.extra_pages.append(extra)
+
             mobile_ctx.close()
 
-            # Desktop pass
+            # Desktop pass — screenshot only
             d_ctx = browser.new_context(
                 viewport={"width": 1440, "height": 900},
                 user_agent=(
@@ -140,22 +235,49 @@ def _capture(url: str) -> tuple[Optional[str], str, str, bytes, bytes, Optional[
                     d_page.wait_for_load_state("networkidle", timeout=NETWORKIDLE_TIMEOUT_MS)
                 except PlaywrightError:
                     pass
-                desktop_png = d_page.screenshot(full_page=True)
+                result.desktop_png = d_page.screenshot(full_page=True)
             except PlaywrightError:
-                desktop_png = b""
+                result.desktop_png = b""
             d_ctx.close()
 
-            return final_url, rendered_html, rendered_text or "", mobile_png, desktop_png, None
+            return result
         finally:
             browser.close()
 
 
 # ── Audit orchestrator ───────────────────────────────────────────────────────
 
+def _resolve_contacts(
+    capture: _CaptureResult,
+    business_name: Optional[str],
+) -> tuple[list[dict], Optional[str], Optional[str], Optional[str]]:
+    """Run extractors against the combined page corpus. Returns
+    (ranked_emails, primary_email, decision_maker_name, decision_maker_title)."""
+    combined_text = "\n".join(
+        [capture.home_text] + [p.get("text", "") for p in capture.extra_pages]
+    )
+    combined_html = "\n".join(
+        [capture.home_html] + [p.get("html", "") for p in capture.extra_pages]
+    )
+
+    dm_name, dm_title = contact_extract.extract_decision_maker(combined_text, business_name)
+
+    emails = contact_extract.extract_emails(combined_html, combined_text)
+    site_host = urlparse(capture.final_url or "").netloc or None
+    ranked = contact_extract.rank_emails(emails, decision_maker_name=dm_name, site_host=site_host)
+
+    primary = next(
+        (r["email"] for r in ranked if r["score"] >= PRIMARY_EMAIL_MIN_SCORE),
+        None,
+    )
+    return ranked, primary, dm_name, dm_title
+
+
 def audit_prospect(
     prospect_id: str,
     website_url: Optional[str],
     pagespeed_key: Optional[str] = None,
+    business_name: Optional[str] = None,
 ) -> AuditResult:
     result = AuditResult(prospect_id=prospect_id, findings=AuditFindings())
 
@@ -165,41 +287,70 @@ def audit_prospect(
         result.severity_tag = "HOT"
         return result
 
-    final_url, html, text, mobile_png, desktop_png, err = _capture(website_url)
-    if err:
-        result.error = err
-        result.findings.errors.append(err)
+    # Look up business_name from DB if not supplied (used as a surname hint for
+    # decision-maker ranking — safe to skip for smoke tests).
+    if not business_name and prospect_id != "smoke-test":
+        try:
+            business_name = _lookup_business_name(_get_supabase(), prospect_id)
+        except Exception:
+            pass
+
+    capture = _capture(website_url)
+    if capture.error:
+        result.error = capture.error
+        result.findings.errors.append(capture.error)
         return result
 
-    result.final_url = final_url
+    result.final_url = capture.final_url
 
-    # Detectors over rendered state
+    # Detectors run against home only — extras are for contact extraction.
     findings = result.findings
-    findings.viewport_missing = detectors.detect_viewport_missing(html)
-    findings.no_https         = detectors.detect_no_https(final_url or website_url)
-    findings.mixed_content    = detectors.detect_mixed_content(html, final_url or website_url)
-    findings.stale_copyright  = detectors.detect_stale_copyright(text)
-    findings.jquery_version   = detectors.detect_jquery_version(html)
+    findings.viewport_missing = detectors.detect_viewport_missing(capture.home_html)
+    findings.no_https         = detectors.detect_no_https(capture.final_url or website_url)
+    findings.mixed_content    = detectors.detect_mixed_content(
+        capture.home_html, capture.final_url or website_url
+    )
+    findings.stale_copyright  = detectors.detect_stale_copyright(capture.home_text)
+    findings.jquery_version   = detectors.detect_jquery_version(capture.home_html)
 
     forms_found, unreachable, unverifiable, triggering_status = detectors.detect_forms(
-        html, final_url or website_url,
+        capture.home_html, capture.final_url or website_url,
     )
     findings.forms_found = forms_found
     findings.forms_unreachable = unreachable
     findings.forms_unreachable_status = triggering_status
     findings.forms_unverifiable = unverifiable
 
-    # Lighthouse last — slowest + most likely to time out
     findings.lighthouse_mobile = detectors.detect_lighthouse_mobile(
-        final_url or website_url, pagespeed_key,
+        capture.final_url or website_url, pagespeed_key,
     )
 
-    # Upload screenshots
-    sb = _get_supabase()
-    if mobile_png:
-        result.mobile_screenshot_url = _upload_screenshot(sb, prospect_id, "mobile", mobile_png)
-    if desktop_png:
-        result.desktop_screenshot_url = _upload_screenshot(sb, prospect_id, "desktop", desktop_png)
+    # Contact extraction across home + crawled pages
+    ranked_emails, primary_email, dm_name, dm_title = _resolve_contacts(capture, business_name)
+    result.contact_emails = ranked_emails
+    result.primary_email = primary_email
+    result.decision_maker_name = dm_name
+    result.decision_maker_title = dm_title
+
+    _log.info(
+        "  ↳ contact: dm=%s (%s) · %d emails · primary=%s",
+        dm_name or "—",
+        dm_title or "—",
+        len(ranked_emails),
+        primary_email or "—",
+    )
+
+    # Upload screenshots (skip for smoke test)
+    if prospect_id != "smoke-test":
+        sb = _get_supabase()
+        if capture.mobile_png:
+            result.mobile_screenshot_url = _upload_screenshot(
+                sb, prospect_id, "mobile", capture.mobile_png
+            )
+        if capture.desktop_png:
+            result.desktop_screenshot_url = _upload_screenshot(
+                sb, prospect_id, "desktop", capture.desktop_png
+            )
 
     result.severity_score, result.severity_tag = detectors.score_severity(findings, has_website=True)
     return result
@@ -220,5 +371,9 @@ def save_audit(result: AuditResult) -> None:
         "desktop_screenshot_url": result.desktop_screenshot_url,
         "lighthouse_mobile_score": result.findings.lighthouse_mobile if result.findings else None,
         "audit_error": result.error,
+        "contact_emails": result.contact_emails or None,
+        "primary_email": result.primary_email,
+        "decision_maker_name": result.decision_maker_name,
+        "decision_maker_title": result.decision_maker_title,
     }
     sb.table("website_prospects").update(payload).eq("id", result.prospect_id).execute()

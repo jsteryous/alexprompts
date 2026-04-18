@@ -71,7 +71,8 @@ scripts/
 ├── prospects/                   — website-audit outbound pipeline (dental / PI)
 │   ├── discover.py              — Google Places text search → website_prospects
 │   ├── detectors.py             — pure detectors (viewport, HTTPS, forms, copyright, Lighthouse)
-│   ├── audit.py                 — Playwright mobile+desktop capture, screenshot upload, scoring
+│   ├── contact_extract.py       — pure extractors for decision-maker name/title + ranked emails
+│   ├── audit.py                 — Playwright mobile+desktop capture, extra-page crawl, extraction, upload, scoring
 │   ├── digest.py                — weekly HOT/WARM email digest; dedup via emailed_at
 │   └── run_prospects.py         — CLI: --discover / --audit-pending / --audit-url / --re-audit / --digest
 ├── lib/db_models.py             — Pydantic row validators (extra="forbid")
@@ -204,6 +205,10 @@ Enrichment flow: scraper → `market_signals` → `enrich.py` creates `enriched_
 | `audit_error` | text | Playwright/network failure reason |
 | `contact_status` | text | sales workflow: `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
 | `emailed_at` | timestamptz | set when included in a weekly digest; NULL = eligible for next send |
+| `contact_emails` | jsonb | ranked `[{email, score, role_hint}]` from `contact_extract.py`; higher score = better outreach target |
+| `primary_email` | text | top-ranked email (score ≥ 20) — used for `mailto:` in dashboard + digest |
+| `decision_maker_name` | text | best-guess owner/dentist/partner from about/team pages |
+| `decision_maker_title` | text | detected title (Owner, Dr., Partner, Esq., DDS, etc.) |
 
 ## Market Insights Engine
 
@@ -361,6 +366,8 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]      
 **Detector philosophy:** low false-positive rate over coverage. Forms with empty action / `#` / `javascript:` → `forms_unverifiable` (NOT flagged). Only forms with absolute action returning **404 or 410** (`DEFINITIVE_BROKEN_STATUSES` in `detectors.py`) → `forms_unreachable` (flagged); triggering status written to `issues.forms_unreachable_status` so outreach copy can quote it. Ambiguous responses (405, 403, 5xx, network errors) demote to `forms_unverifiable` — 405 usually means "GET refused, POST fine" and false-positive form claims torch sender credibility in cold email. Copyright detection uses rendered text (many sites `document.write()` the year).
 
 **Severity weights** (`detectors.score_severity`): viewport_missing +35, no_https +30, forms_unreachable +30, lighthouse <20 +25 / <40 +15, stale_copyright up to +20, mixed_content +10. No-website = instant 100/HOT.
+
+**Contact extraction** (`contact_extract.py`, pure): after the mobile pass, `audit.py` follows up to 3 same-origin links whose path contains `about` / `contact` / `team` / `meet-the-doctor` / `our-attorneys` / `leadership` / etc. (see `CANDIDATE_CONTACT_PATHS`). Combined rendered HTML + innerText are passed to `extract_decision_maker()` (dental: `Dr. Jane Smith` / `, DDS`; PI: `, Esq.` / `, Partner` / `, Founder`) and `rank_emails()`. Ranking: decision-maker name match = 95 · owner@/partner@ = 80 · `firstname.lastname` = 70 · low-priority (`appointments@`, `billing@`) = 30 · shared (`info@`, `office@`) = 10 · off-domain -20. Business surname bump of +40 for DM candidates whose name contains a non-stopword token from the business name. `primary_email` = top-ranked email with score ≥ 20.
 
 **Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury). Search radii 20-25km around county seat lat/lng in `discover.COUNTIES`.
 
