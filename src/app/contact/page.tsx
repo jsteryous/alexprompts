@@ -43,7 +43,7 @@ export default function ContactPage() {
       <section className="theme-page pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Free Website Screenshots
+            Free Audit + Written Proposal
           </span>
           <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight mb-5 leading-tight">
             Send your website.
@@ -51,7 +51,7 @@ export default function ContactPage() {
             We&apos;ll show you what is broken.
           </h1>
           <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
-            If your practice site is a fit for the cleanup offer, we&apos;ll send back the issues worth fixing and move forward on the $1,200, 48-hour website cleanup.
+            Reply within one business day: screenshots of the issues worth fixing, plus a written proposal naming the tier that actually fits &mdash; Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance ($7,500 + $1,200/mo). If the site is already fine, the proposal says that.
           </p>
         </div>
       </section>
@@ -255,8 +255,8 @@ export default function ContactPage() {
                       body: "You get clear proof of what is broken so you are not buying blind.",
                     },
                     {
-                      title: "We decide whether the $1,200 cleanup fits",
-                      body: "If it is a cleanup job, we move fast. If it really needs a rebuild, we say that directly.",
+                      title: "We name the tier that honestly fits",
+                      body: "Cleanup, Growth, or Dominance — or none, if the site is already fine. The proposal is the product; the tier is just how it ships.",
                     },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">

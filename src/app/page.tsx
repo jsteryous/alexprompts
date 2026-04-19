@@ -10,6 +10,7 @@ import {
   FinalCtaSection,
   faqJsonLd,
 } from "@/components/HomeSections";
+import { LeadMagnetSection } from "@/components/LeadMagnetSection";
 
 export default function HomePage() {
   return (
@@ -57,6 +58,7 @@ export default function HomePage() {
 
       <VisualProofSection />
       <ProcessSection />
+      <LeadMagnetSection />
       <PricingSection />
       <OutcomesSection />
       <FaqSection />
