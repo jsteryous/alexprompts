@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) return {};
   const url = `https://rebbadvisors.com/dental-website-cleanup/${city.slug}`;
   const title = `Dental Website Cleanup in ${city.name} SC | REBB Advisors`;
-  const description = `Flat-fee dental practice website cleanup for ${city.name} and the ${city.county} County area. Booking forms fixed, mobile layouts cleaned up, 48-hour turnaround. Free screenshot audit.`;
+  const description = `Dental website cleanup, growth, and dominance tiers for ${city.name} and the ${city.county} County area. From $1,500 one-time Cleanup to full Growth and Dominance retainers. Free audit and written proposal.`;
   return {
     title,
     description,
@@ -61,9 +61,11 @@ export default async function CityPage({ params }: Props) {
       name: `${city.county} County, South Carolina`,
     },
     offers: {
-      "@type": "Offer",
-      price: "1200",
+      "@type": "AggregateOffer",
       priceCurrency: "USD",
+      lowPrice: "1500",
+      highPrice: "7500",
+      offerCount: "3",
       availability: "https://schema.org/InStock",
     },
   };
@@ -100,17 +102,17 @@ export default async function CityPage({ params }: Props) {
                 Booking forms that 404. Layouts that crumble on phones. A copyright year still stuck in 2019. Patients across {city.county} County close the tab and call the practice down the street &mdash; they do not call to tell you why.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                Send us the URL. We reply with screenshots of what is broken. No sales call, no pitch deck.
+                Send us the URL. We reply with screenshots of what is broken and a written proposal naming the tier that actually fits. No sales call, no pitch deck.
               </p>
               <Link
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Show Me What&apos;s Broken
+                Get Free Audit + Proposal
                 <ArrowIcon />
               </Link>
               <p className="theme-text-muted text-xs mt-5">
-                Free audit. Flat-fee cleanup if it is a fit. If the site needs a full visual refresh instead, we say so.
+                Three tiers from $1,500. <Link href="/sample-proposal" className="theme-link underline underline-offset-4">See a sample proposal</Link> before you send the URL.
               </p>
             </div>
 

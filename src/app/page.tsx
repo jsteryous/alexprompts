@@ -34,17 +34,17 @@ export default function HomePage() {
                 Booking forms that 404. Layouts that crumble on phones. A copyright year still stuck in 2019. Patients close the tab and call the practice down the street &mdash; they do not call you to tell you why.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                Send us the URL. We reply with screenshots of what is broken. No sales call, no pitch deck.
+                Send us the URL. We reply with screenshots of what is broken and a written proposal naming the tier that actually fits. No sales call, no pitch deck.
               </p>
               <Link
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Show Me What&apos;s Broken
+                Get Free Audit + Proposal
                 <ArrowIcon />
               </Link>
               <p className="theme-text-muted text-xs mt-5">
-                Free audit. Flat-fee cleanup if it is a fit. If the site needs a full visual refresh instead, we say so.
+                Three tiers from $1,500. <Link href="/sample-proposal" className="theme-link underline underline-offset-4">See a sample proposal</Link> before you send the URL.
               </p>
             </div>
 

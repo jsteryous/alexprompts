@@ -33,9 +33,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 from supabase import create_client
 
-# Import summary extractor from the sibling module
+# Import shared helpers from the sibling module
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from generate_insights import extract_summary  # noqa: E402
+from generate_insights import extract_summary, VALID_CLUSTERS  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env.local")
@@ -59,7 +59,7 @@ def get_client():
 def fetch_post(client, post_id: str) -> dict:
     result = (
         client.table("blog_posts")
-        .select("id, title, slug, summary, body_md, status, created_at, topic, tags")
+        .select("id, title, slug, summary, body_md, status, created_at, topic, tags, cluster")
         .eq("id", post_id)
         .execute()
     )
@@ -74,7 +74,7 @@ def fetch_post(client, post_id: str) -> dict:
 def list_drafts(client) -> None:
     result = (
         client.table("blog_posts")
-        .select("id, title, status, created_at, topic")
+        .select("id, title, status, created_at, topic, cluster")
         .in_("status", ["DRAFT", "APPROVED"])
         .order("created_at", desc=True)
         .execute()
@@ -91,6 +91,8 @@ def list_drafts(client) -> None:
         created = p.get("created_at", "")[:19].replace("T", " ")
         print(f"  {p['status']:<12} {created:<22} {p['title']}")
         print(f"  {'ID:':<12} {p['id']}")
+        if p.get("cluster"):
+            print(f"  {'Cluster:':<12} {p['cluster']}")
         if p.get("topic"):
             print(f"  {'Topic:':<12} {p['topic'][:70]}")
         print()
@@ -99,6 +101,7 @@ def list_drafts(client) -> None:
     print("  Commands:")
     print("    python approve_post.py --id <uuid> --view")
     print("    python approve_post.py --id <uuid> --edit")
+    print("    python approve_post.py --id <uuid> --cluster <slug>")
     print(f"{SEP}\n")
 
 
@@ -111,6 +114,8 @@ def view_post(client, post_id: str) -> None:
     print(f"\n{SEP}")
     print(f"  {post['status']} · {post['title']}")
     print(f"  ID: {post_id}  |  Created: {created}")
+    if post.get("cluster"):
+        print(f"  Cluster: {post['cluster']}")
     if post.get("topic"):
         print(f"  Topic: {post['topic']}")
     print(SEP)
@@ -214,6 +219,45 @@ def edit_post(client, post_id: str) -> None:
         print(f"  Live at: /insights/{post['slug']}\n")
 
 
+# ── cluster update ────────────────────────────────────────────────────────────
+
+def update_cluster(client, post_id: str, new_cluster: str) -> None:
+    if new_cluster not in VALID_CLUSTERS:
+        log.error(
+            f"Invalid cluster {new_cluster!r}. "
+            f"Must be one of: {', '.join(sorted(VALID_CLUSTERS))}"
+        )
+        sys.exit(1)
+
+    fetch = (
+        client.table("blog_posts")
+        .select("id, title, slug, cluster")
+        .eq("id", post_id)
+        .execute()
+    )
+    if not fetch.data:
+        log.error(f"No post found with id={post_id}")
+        sys.exit(1)
+
+    post = fetch.data[0]
+    old_cluster = post.get("cluster")
+
+    if old_cluster == new_cluster:
+        log.info(f"Post '{post['title']}' is already in cluster {new_cluster!r}. Nothing changed.")
+        return
+
+    client.table("blog_posts").update({"cluster": new_cluster}).eq("id", post_id).execute()
+
+    print(f"\n{SEP}")
+    print(f"  CLUSTER UPDATED")
+    print(SEP)
+    print(f"  ID     : {post_id}")
+    print(f"  Title  : {post['title']}")
+    print(f"  Before : {old_cluster or '(unset)'}")
+    print(f"  After  : {new_cluster}")
+    print(f"{SEP}\n")
+
+
 # ── status update ─────────────────────────────────────────────────────────────
 
 def update_status(client, post_id: str, new_status: str) -> None:
@@ -262,6 +306,11 @@ def main() -> None:
         choices=list(VALID_STATUSES),
         help="Set status: DRAFT | APPROVED | PUBLISHED",
     )
+    parser.add_argument(
+        "--cluster",
+        choices=sorted(VALID_CLUSTERS),
+        help="Set topic cluster slug",
+    )
     parser.add_argument("--list-drafts", action="store_true",
                         help="List all DRAFT and APPROVED posts")
     parser.add_argument("--view", action="store_true",
@@ -277,16 +326,19 @@ def main() -> None:
         return
 
     if not args.id:
-        parser.error("--id is required with --view, --edit, or --status")
+        parser.error("--id is required with --view, --edit, --status, or --cluster")
 
     if args.view:
         view_post(client, args.id)
     elif args.edit:
         edit_post(client, args.id)
-    elif args.status:
-        update_status(client, args.id, args.status)
     else:
-        parser.error("Specify --view, --edit, or --status")
+        if args.cluster:
+            update_cluster(client, args.id, args.cluster)
+        if args.status:
+            update_status(client, args.id, args.status)
+        if not args.cluster and not args.status:
+            parser.error("Specify --view, --edit, --status, or --cluster")
 
 
 if __name__ == "__main__":

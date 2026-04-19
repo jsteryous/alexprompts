@@ -321,3 +321,19 @@ ALTER TABLE website_prospects
 --   INSERT INTO storage.buckets (id, name, public)
 --   VALUES ('prospect-audits', 'prospect-audits', true)
 --   ON CONFLICT (id) DO NOTHING;
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- blog_posts.cluster — topic cluster assignment
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Every article belongs to exactly one of 5 topic clusters. Clusters power the
+-- /insights/topics/{slug} hub pages, article breadcrumbs, and the "related
+-- posts" rail on article pages. Source of truth for valid values: src/lib/clusters.ts.
+-- Valid slugs: booking-forms | mobile-experience | trust-and-stale-content
+--              | lighthouse-core-vitals | cleanup-vs-rebuild
+-- NULL = not yet classified. Backfill with scripts/classify_post.py.
+ALTER TABLE blog_posts
+  ADD COLUMN IF NOT EXISTS cluster text;
+
+CREATE INDEX IF NOT EXISTS blog_posts_cluster_idx
+  ON blog_posts (cluster, published_at DESC NULLS LAST)
+  WHERE status = 'PUBLISHED';

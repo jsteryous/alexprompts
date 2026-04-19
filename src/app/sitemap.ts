@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { citySlugs } from "@/lib/cities";
+import { clusterSlugs } from "@/lib/clusters";
 
 const BASE_URL = "https://rebbadvisors.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/sample-proposal`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
     { url: `${BASE_URL}/insights`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
     { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
   ];
@@ -18,11 +20,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  const clusterRoutes: MetadataRoute.Sitemap = clusterSlugs.map((slug) => ({
+    url: `${BASE_URL}/insights/topics/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
   // Add published blog posts
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !key) return [...staticRoutes, ...cityRoutes];
+  if (!url || !key) return [...staticRoutes, ...cityRoutes, ...clusterRoutes];
 
   const client = createClient(url, key);
   const { data } = await client
@@ -37,5 +46,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...cityRoutes, ...postRoutes];
+  return [...staticRoutes, ...cityRoutes, ...clusterRoutes, ...postRoutes];
 }

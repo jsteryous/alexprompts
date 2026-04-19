@@ -2,20 +2,28 @@
 
 ## Business Context
 
-**Business:** REBB Advisors — Greenville SC. Website cleanup for dental practices.
+**Business:** REBB Advisors — Greenville SC. Dental website engagements at three tiers: Cleanup, Growth, Dominance.
 **Tone:** Confident, minimal, blunt. No fluff.
-**Rule #1: Confused customers don't buy.** Site is intentionally single-offer, minimal nav, one CTA above the fold.
+**Rule #1: Confused customers don't buy.** The site has exactly **one entry point** (free audit), **one deliverable** (written proposal), and the tier choice happens *inside* the proposal — not on the homepage. One CTA above the fold ("Get Free Audit + Proposal").
 
-**Public offer (single):** Flat-fee website cleanup for dental practices — broken booking forms, mobile layout fixes, basic modernization, trust cleanup. 48-hour turnaround. **Flat fee is disclosed in the `#pricing` section, not in the hero.**
+**Public offer (three tiers, one entry point):**
+- **Cleanup** — $1,500 flat, 48-hour turnaround. Booking-form repair, mobile fixes, trust cleanup, basic modernization. No retainer.
+- **Growth** — $3,500 setup + **$500/mo** (month-to-month). Cleanup + LocalBusiness/Dentist schema + GBP management + on-page SEO + 2 blog posts/mo + review monitoring.
+- **Dominance** — $7,500 setup + **$1,200/mo** (month-to-month). Growth + visual refresh + 4 posts/mo + active link building + review generation + quarterly CRO.
 
-**Lead magnet:** Free screenshot audit. Practice sends URL → REBB replies with screenshots of what's broken. No sales call required. This is the entry point — the paid cleanup is the downstream conversion, not the hero CTA.
+Tier definitions are the source of truth in `src/components/HomeSections.tsx` (exported `tiers` array). The sample-proposal page and pricing section both consume it. Update that array to change pricing/scope — do not duplicate values.
+
+**Lead magnet:** Free audit + written proposal. Practice sends URL → REBB replies with screenshots of what's broken **and a written proposal naming the tier that honestly fits**. No sales call required. The tier selection is the downstream conversion, not the hero CTA.
+
+**Every audit returns a written proposal.** The proposal is the product; the tier is just how it ships. Sample public proposal lives at `/sample-proposal` (sanitized fictional practice "Pinecrest Family Dentistry"). Link from hero fine print, Process step 2, Pricing section, nav, and footer.
 
 **Target:** Dental practices only. General dentistry, orthodontics, pediatric, oral surgery, cosmetic/implants, periodontics, endodontics. Greenville County + Upstate SC. The public site should not reference any other vertical — the internal prospects pipeline also audits personal injury firms, but that is outbound-only and not pitched on the marketing site.
 
 **Positioning:**
-- "If the cleanup is the right fit, we quote it. If it needs a rebuild instead, we say so."
-- No retainers. No open-ended agency work. No marketing-strategy calls.
-- The rebuild is the upsell after the audit, not the bait in the offer.
+- "Every audit comes back as a written proposal. We name the tier that honestly fits — or tell you no tier is needed."
+- Retainers **are** offered on Growth and Dominance — but month-to-month only, 30-day cancellation, no long-term contracts. No marketing-strategy calls.
+- The tier recommendation is the output of the audit, not the bait in the hero.
+- Cleanup stays available as a one-time engagement for practices that only need the fix and do not want ongoing work. Not every prospect should be pushed into a retainer.
 
 **Internal tooling (not customer-facing):**
 - `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits sites, scores severity, emails a HOT/WARM digest. Surfaces on `/dashboard/prospects` (auth-gated).
@@ -42,11 +50,17 @@ src/
 │   ├── layout.tsx               — root layout, ProfessionalService JSON-LD
 │   ├── opengraph-image.tsx      — edge Satori OG image (auto-injected; don't set openGraph.images)
 │   ├── sitemap.ts / robots.ts
-│   ├── page.tsx                 — single-offer homepage
+│   ├── page.tsx                 — tiered homepage; hero inline + imports shared sections from components/HomeSections
+│   ├── dental-website-cleanup/[city]/page.tsx — programmatic city pages (SSG via generateStaticParams). City list in lib/cities.ts. Service JSON-LD (AggregateOffer $1,500-$7,500) + city-specific H1, then shared HomeSections.
+│   ├── sample-proposal/page.tsx — public sanitized proposal (fictional "Pinecrest Family Dentistry"). Consumes the tiers array exported from HomeSections.tsx. Indexed, SSG.
 │   ├── contact/page.tsx         — client component form → /api/contact
 │   ├── how-it-works / seo / web-development / lead-intelligence / outreach-automation
 │   │                            — all permanentRedirect("/"); kept for inbound link preservation
-│   ├── insights/page.tsx + [slug]/page.tsx — ISR 60s; Article JSON-LD on [slug]; in public nav
+│   ├── insights/page.tsx + [slug]/page.tsx + topics/[cluster]/page.tsx
+│   │                            — ISR 60s. /insights index shows cluster cards + chronological list.
+│   │                              /insights/[slug] has Article + BreadcrumbList JSON-LD + "More on {cluster}" rail.
+│   │                              /insights/topics/[cluster] = SSG hub per cluster (BreadcrumbList + CollectionPage JSON-LD).
+│   │                              Cluster list in lib/clusters.ts. In public nav.
 │   ├── review/page.tsx          — token-gated draft review (not in nav)
 │   ├── case-study/page.tsx      — placeholder, noindexed
 │   ├── dashboard/page.tsx       — enriched_leads ranked list, auth-gated; dedup by principal_name
@@ -54,19 +68,25 @@ src/
 │   ├── dashboard/login/page.tsx + actions.ts — Supabase Auth server action
 │   └── api/contact/route.ts + publish/route.ts
 ├── components/
-│   ├── Nav.tsx, Footer.tsx      — return null on /dashboard/*
+│   ├── Nav.tsx, Footer.tsx      — return null on /dashboard/*; Footer has "Service areas" row that cross-links every city page
+│   ├── HomeSections.tsx         — shared sections: VisualProofSection, ProcessSection, PricingSection (3-tier layout), OutcomesSection, FaqSection, FinalCtaSection. Also exports ArrowIcon, faqs, faqJsonLd, and **the `tiers` array (source of truth for pricing + scope)**. Imported by /page.tsx, /dental-website-cleanup/[city]/page.tsx, and /sample-proposal/page.tsx. Changing prices or tier scope = edit the `tiers` array.
+│   ├── InsightsPostList.tsx     — shared post list used by /insights index AND every /insights/topics/[cluster] hub. Takes posts array + optional emptyMessage.
 │   ├── VisualMocks.tsx          — synthetic SVG/CSS mockups (broken phone, form 404, cramped mobile, stale copyright, low Lighthouse). Pure presentational server components.
 │   ├── LiveSignalFeed.tsx       — real-time Supabase Realtime terminal (client) — still present but not on homepage
 │   ├── CompanyBrainDemo.tsx     — legacy Company Brain chat mockup — still present but not on homepage
 │   └── ThemeProvider.tsx + DarkModeToggle.tsx — dark mode (client)
-└── lib/supabase.ts
+└── lib/
+    ├── supabase.ts
+    ├── cities.ts                — CitySlug union + city metadata (name, county, neighborhoods) for the 5 service-area pages: greenville, spartanburg, anderson, easley (Pickens), seneca (Oconee). Sitemap + Footer both import citySlugs.
+    └── clusters.ts              — ClusterSlug union + cluster metadata (name, hubTitle, intro, description) for the 5 topic hubs: booking-forms, mobile-experience, trust-and-stale-content, lighthouse-core-vitals, cleanup-vs-rebuild. Sitemap and /insights pages import from here. Python pipeline mirrors via VALID_CLUSTERS in scripts/generate_insights.py — keep in sync.
 
 proxy.ts   — Next.js 16 route proxy (replaces middleware.ts); guards /dashboard/*
 
 scripts/
-├── generate_insights.py         — Gemini → DRAFT → email
-├── approve_post.py              — CLI draft management
-├── weekly_insights.py           — topic rotation (GH Actions Monday 8am EST)
+├── generate_insights.py         — Gemini → DRAFT → email. Accepts --cluster <slug> to tag new posts.
+├── approve_post.py              — CLI draft management; --cluster <slug> reassigns classification
+├── classify_post.py             — Gemini backfill: classifies existing blog_posts into one of 5 clusters. --id / --all / --override / --dry-run
+├── weekly_insights.py           — topic rotation (GH Actions Monday 8am EST). Each CATEGORIES entry is (cluster_slug, brief); winner's cluster flows through to generate_insights.py.
 ├── run_daily.py                 — pipeline orchestrator
 ├── gvl_monitor.py               — scraper: deeds (GovOS), SOS (DDG), mortgages (CountyWeb)
 ├── enrich.py                    — enrichment orchestrator
@@ -106,7 +126,9 @@ supabase/schema.sql
 - OG image: `opengraph-image.tsx` (edge Satori). **Do NOT set `openGraph.images` in page metadata** — conflicts.
 - Every page: `title` (includes "Greenville SC"), `description`, `openGraph`, `alternates.canonical`
 - `/case-study` has `robots: { index: false }` — do not remove until real content exists
-- JSON-LD: `ProfessionalService` (with `Offer` $1,200, `priceRange`, `slogan`, 5-county `areaServed`) in `layout.tsx`; `FAQPage` on the homepage paired with the visible `#faq` section.
+- JSON-LD: `ProfessionalService` in `layout.tsx` with `hasOfferCatalog` (three `Offer`s — Cleanup $1,500, Growth $3,500 setup + $500/mo `UnitPriceSpecification`, Dominance $7,500 setup + $1,200/mo), `priceRange: "$1,500 - $7,500+"`, `slogan`, 5-county `areaServed`. `FAQPage` on the homepage and every city page (paired with the visible `#faq` section). `Service` JSON-LD on each city page with `areaServed: AdministrativeArea` for the city's county and an `AggregateOffer` (`lowPrice: 1500`, `highPrice: 7500`, `offerCount: 3`). `Article` + `BreadcrumbList` on each insights post; `CollectionPage` + `BreadcrumbList` on each topic hub.
+- **Programmatic city pages** at `/dental-website-cleanup/{slug}` — one per `CitySlug` in `lib/cities.ts`. SSG via `generateStaticParams`. Listed in `sitemap.ts` (priority 0.8, weekly) and cross-linked from the Footer "Service areas" row. Add a city by editing `lib/cities.ts` only — sitemap, footer, and route all derive from it.
+- **Topic cluster hubs** at `/insights/topics/{slug}` — one per `ClusterSlug` in `lib/clusters.ts`. SSG via `generateStaticParams`, ISR 60s for post list. Breadcrumbs on articles link back to the hub. Add/rename a cluster by editing `lib/clusters.ts` AND the `VALID_CLUSTERS` constant in `scripts/generate_insights.py` (the Python pipeline mirrors it).
 
 ## Key Conventions
 
@@ -122,46 +144,52 @@ supabase/schema.sql
 ## Marketing Copy Standards
 
 ### Rule #1 — Confused customers don't buy
-- **One offer, one price, one timeline.** No bundles, no tiers, no "packages."
-- **One CTA above the fold.** Hero CTA matches nav CTA. No secondary link in the hero.
-- **Lead with the problem, not the price.** Price is disclosed in `#pricing`. The hero's job is to make the prospect feel the pain.
+- **One entry point, one deliverable, one CTA.** Audit → proposal. Tier choice happens *inside* the proposal, not on the homepage.
+- **Three tiers, not three products.** Cleanup / Growth / Dominance are scope lanes inside the same engagement, not a menu of different offers. The page still reads as one offer because the decision (which tier) is made after the audit, not before.
+- **One CTA above the fold.** Hero CTA matches nav CTA. No secondary link in the hero. The only secondary nav link permitted in hero fine print is "See a sample proposal" — it is proof of deliverable, not a competing CTA.
+- **Lead with the problem, not the price.** Prices live in `#pricing`. Hero's job is to make the prospect feel the pain.
 
 ### Voice
 - Blunt, concrete, no agency-speak.
 - Short sentences. Period-separated statements over comma-separated clauses.
 - "If X, we'll say so" framing — anti-upsell credibility signal. Only works when it's true.
+- "The proposal is the product; the tier is just how it ships." — the honesty signal that makes tiers work without feeling like a pitch deck.
 
 ### Show, don't tell
-- The site sells *audits*. It must visibly demonstrate what an audit surfaces.
+- The site sells *audits* and *written proposals*. It must visibly demonstrate both. `/sample-proposal` is the live proof-of-deliverable.
 - Use **synthetic visual mocks only** (`components/VisualMocks.tsx`). NO real company names, logos, screenshots, or identifiable layouts — not even anonymized. The internal prospects pipeline captures real sites; do not expose any of that to the public site.
+- Sample proposal uses a fictional practice ("Pinecrest Family Dentistry") with fabricated but plausible findings. Same rule: no real-practice data may surface in the sample.
 - Text cards describing problems must be paired with or replaced by a mock that shows the problem.
 
 ### Problems the site sells
-In descending severity, these are the failures that justify the cleanup:
+In descending severity, these are the failures that justify the engagement:
 1. **Form 404 / 405** — contact form posts to a dead endpoint; lead never reaches the business.
 2. **No mobile viewport** — desktop layout pinch-zoomed into a phone screen; visitors bounce.
 3. **Stale copyright** — "© 2019" still in the footer; business looks abandoned whether it is or not.
 4. **Low Lighthouse score** — slow loading, heavy, poor Core Web Vitals.
+5. **Unclaimed / unoptimized GBP** — invisible in the map pack; the reason newer practices out-rank established ones.
+6. **No structured data** — Google cannot surface hours, specialties, or insurance in rich results.
 
 ### Homepage section order
-1. **Hero** — problem-first H1, outcome subcopy, single CTA, broken-phone visual.
-2. **Visual proof** (`#what-we-fix`) — "What broken actually looks like." Four mocks with short captions.
-3. **Process** (`#process`) — three steps, no pricing mention.
-4. **Pricing** (`#pricing`) — first explicit price mention on the page.
+1. **Hero** — problem-first H1, outcome subcopy, single CTA ("Get Free Audit + Proposal"), broken-phone visual. Fine print may reference the tier range and link to `/sample-proposal` — this is the only secondary link allowed in the hero.
+2. **Visual proof** (`#what-we-fix`) — "What broken actually looks like." Mocks with short captions.
+3. **Process** (`#process`) — three steps: audit → written proposal → execute the tier. Includes "See a sample proposal" link at section bottom.
+4. **Pricing** (`#pricing`) — three tiers, Growth marked "Most practices." Ends with a "Not sure which tier?" card that recenters on the audit.
 5. **Outcomes** — what success looks like.
-6. **FAQ** (`#faq`) — five honest answers to the most common prospect objections; pairs with `FAQPage` JSON-LD.
+6. **FAQ** (`#faq`) — five honest answers (tiers, retainer cancellation, rebuild path, audit turnaround, geography); pairs with `FAQPage` JSON-LD.
 7. **Final CTA** — concrete and blunt.
 
 ### What the site does NOT promise
 - No "digital transformation."
-- No retainers, no SEO packages, no "ongoing optimization."
-- No marketing-strategy calls.
-- No full rebuilds under the cleanup flat fee. If the audit reveals a rebuild is needed, it's quoted separately.
+- No long-term contracts on retainers. Month-to-month only, 30-day cancellation. Do not write copy that implies a lock-in.
+- No marketing-strategy calls. The audit and proposal are the deliverable; calls are only scheduled if the prospect asks.
+- No à la carte pricing. If a practice wants something between tiers, it is handled in the written proposal as a custom scope — not a fourth public tier.
+- No full rebuilds disguised as Cleanup. A rebuild is the scope of Dominance (or a custom quote), and the audit makes that call — not the salesperson.
 
 ## Supabase
 
 - Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- Tables: `market_signals` · `blog_posts` · `clients` · `enriched_leads` · `website_prospects`
+- Tables: `market_signals` · `blog_posts` (has `cluster text` — one of 5 slugs; see `src/lib/clusters.ts`) · `clients` · `enriched_leads` · `website_prospects`
 - RLS: `market_signals` + `blog_posts` have public SELECT. `clients` + `enriched_leads` + `website_prospects` service key only.
 - Realtime on `market_signals` via `supabase_realtime` publication.
 - Storage bucket: `prospect-audits` (public) — mobile+desktop PNG screenshots keyed by `{prospect_id}/{kind}-{ts}.png`.
@@ -223,16 +251,25 @@ In descending severity, these are the failures that justify the cleanup:
 
 ## Market Insights Engine
 
-Workflow: `generate_insights.py --topic "..."` → Gemini → DRAFT → email to alex@ → manual click publishes → `revalidatePath('/insights')`
+Workflow: `generate_insights.py --topic "..." --cluster <slug>` → Gemini → DRAFT → email to alex@ → manual click publishes → `revalidatePath('/insights')`
 
 ```bash
 cd scripts
-python generate_insights.py --topic "..." [--dry-run]
+python generate_insights.py --topic "..." --cluster booking-forms [--dry-run]
 python generate_insights.py --test-email
-python weekly_insights.py [--dry-run]
+python weekly_insights.py [--dry-run]                          # rotates cluster automatically
 python approve_post.py --list-drafts
-python approve_post.py --id <uuid> --view / --edit / --status PUBLISHED
+python approve_post.py --id <uuid> --view / --edit
+python approve_post.py --id <uuid> --cluster <slug>            # reassign cluster
+python approve_post.py --id <uuid> --status PUBLISHED
+python classify_post.py --all                                  # backfill missing clusters via Gemini
+python classify_post.py --id <uuid> [--dry-run]
+python classify_post.py --all --override                       # force re-classify everything
 ```
+
+**Topic clusters** (source of truth: `src/lib/clusters.ts`; Python mirror: `VALID_CLUSTERS` in `scripts/generate_insights.py`):
+`booking-forms` · `mobile-experience` · `trust-and-stale-content` · `lighthouse-core-vitals` · `cleanup-vs-rebuild`.
+Every post belongs to exactly one. `weekly_insights.py` rotates by cluster: each `CATEGORIES` tuple is `(cluster_slug, brief)`, Gemini picks 3 candidates from different clusters, and the winner's cluster flows to `generate_insights.py` via `--cluster`.
 
 **GH Actions — weekly-insights.yml:** Monday 13:00 UTC, Python 3.12, `requirements-insights.txt`.
 Secrets: `SUPABASE_URL` · `SUPABASE_SERVICE_KEY` · `GEMINI_API_KEY` · `RESEND_API_KEY` · `NOTIFICATION_EMAIL` · `PUBLISH_SECRET` · `NEXT_PUBLIC_SITE_URL`
@@ -405,9 +442,13 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 | Route | Notes |
 |---|---|
-| `/` | Single-offer homepage: Hero → Visual Proof (`#what-we-fix`) → Process (`#process`) → Pricing (`#pricing`) → Outcomes → Final CTA |
+| `/` | Tiered homepage: Hero → Visual Proof (`#what-we-fix`) → Process (`#process`, with "See a sample proposal" link) → Pricing (`#pricing`, 3 tiers + "Not sure which tier?" card) → Outcomes → FAQ (`#faq`) → Final CTA. Hero fine print links to `/sample-proposal`. |
+| `/dental-website-cleanup/{city}` | Programmatic SSG city pages. Slugs: `greenville`, `spartanburg`, `anderson`, `easley`, `seneca`. City-specific hero + service-area neighborhood list, then shared homepage sections (tiers included). Service JSON-LD uses `AggregateOffer` ($1,500-$7,500). Driven by `lib/cities.ts`. |
+| `/sample-proposal` | Public sanitized proposal for fictional "Pinecrest Family Dentistry." Findings → recommended tier (Growth) → all-tiers compare → timeline → terms → CTA. Linked from nav, footer, hero fine print, Process step 2, Pricing section. Keep indexed — it is a credibility signal. |
 | `/contact` | Form → `/api/contact` → Resend to alex@rebbadvisors.com |
-| `/insights` / `/insights/[slug]` | ISR 60s, prose via `marked`. Article JSON-LD on `[slug]`. In public nav. |
+| `/insights` | ISR 60s. Header → "Browse by topic" cluster cards → chronological post list. In public nav. |
+| `/insights/topics/{cluster}` | SSG hub page per topic cluster (5 slugs from `lib/clusters.ts`). Breadcrumb + intro + cluster posts + "More topics" row + Final CTA. BreadcrumbList + CollectionPage JSON-LD. |
+| `/insights/[slug]` | ISR 60s, prose via `marked`. Breadcrumb → cluster hub + "More on {cluster}" related rail. Article + BreadcrumbList JSON-LD. |
 | `/review` | Token-gated draft review. Not in nav. |
 | `/case-study` | Placeholder — **noindexed**, do not remove until real content exists. |
 
@@ -421,7 +462,7 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 | `/dashboard/prospects` | website_prospects list (outbound pitch list internal tool) |
 | `/dashboard/login` | No public registration; users created manually in Supabase |
 
-**Nav:** logo · What We Fix · Process · Pricing · Insights · Contact · [Show Me What's Broken CTA]
+**Nav:** logo · What We Fix · Process · Pricing · Sample Proposal · Insights · Contact · [Get Free Audit CTA]
 
 ## Python Pipeline — Open Tech Debt
 

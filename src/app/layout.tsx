@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rebbadvisors.com"),
   title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
   description:
-    "REBB Advisors fixes broken dental practice websites in Greenville SC. Booking forms, mobile issues, dead pages, and outdated trust leaks cleaned up fast with a clear fixed-price offer.",
+    "REBB Advisors fixes and grows dental practice websites in Greenville SC. Three tiers from $1,500 Cleanup to Growth and Dominance retainers. Free audit and written proposal before you commit.",
   keywords: [
     "dental website cleanup Greenville SC",
     "dentist website repair",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Clear website cleanup offer for dental practices: broken booking forms, mobile issues, and outdated trust leaks fixed fast.",
+      "Three-tier dental website engagements: Cleanup ($1,500 flat), Growth ($3,500 + $500/mo), Dominance ($7,500 + $1,200/mo). Free audit and written proposal.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Broken booking forms, mobile issues, and outdated dental practice websites fixed fast.",
+      "Three-tier dental website engagements. Cleanup, Growth, Dominance. Free audit and written proposal.",
   },
   alternates: {
     canonical: "https://rebbadvisors.com",
@@ -61,9 +61,9 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Website cleanup and modernization for dental practices with broken booking forms, mobile issues, and outdated trust leaks.",
+                "Tiered website cleanup, growth, and dominance engagements for dental practices. From flat-fee Cleanup ($1,500) to Growth ($3,500 setup + $500/mo) to Dominance ($7,500 setup + $1,200/mo). Every engagement starts with a free audit and a written proposal.",
               slogan: "Confused customers don't buy.",
-              priceRange: "$1,200",
+              priceRange: "$1,500 - $7,500+",
               areaServed: [
                 { "@type": "AdministrativeArea", name: "Greenville County, South Carolina" },
                 { "@type": "AdministrativeArea", name: "Spartanburg County, South Carolina" },
@@ -80,29 +80,83 @@ export default function RootLayout({
               serviceType: [
                 "Dental Website Cleanup",
                 "Dental Website Modernization",
-                "Dental Booking Form Repair",
-                "Mobile Dental Website Fixes",
+                "Dental Local SEO",
+                "Dental Google Business Profile Management",
+                "Dental Website Content Marketing",
+                "Dental Website Redesign",
               ],
               knowsAbout: [
                 "Dental practice website cleanup",
                 "Broken dental booking forms",
                 "Mobile-friendly dental websites",
+                "Dental practice local SEO",
+                "Dental Google Business Profile optimization",
                 "Dental practice website credibility",
               ],
-              makesOffer: {
-                "@type": "Offer",
-                name: "Dental Website Cleanup",
-                description:
-                  "Flat-fee website cleanup for dental practices: broken booking-form repair, mobile layout fixes, basic modernization, and trust cleanup. 48-hour turnaround.",
-                price: "1200",
-                priceCurrency: "USD",
-                availability: "https://schema.org/InStock",
-                category: "Web design",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Dental Website Cleanup",
-                  serviceType: "Website cleanup and modernization",
-                },
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Dental Website Engagement Tiers",
+                itemListElement: [
+                  {
+                    "@type": "Offer",
+                    name: "Cleanup",
+                    description:
+                      "One-time, 48-hour flat-fee cleanup: broken booking-form repair, mobile layout fixes, SSL and trust cleanup, basic modernization.",
+                    price: "1500",
+                    priceCurrency: "USD",
+                    availability: "https://schema.org/InStock",
+                    category: "Web design",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Dental Website Cleanup",
+                      serviceType: "Website cleanup and modernization",
+                    },
+                  },
+                  {
+                    "@type": "Offer",
+                    name: "Growth",
+                    description:
+                      "Cleanup plus ongoing local SEO, schema, Google Business Profile management, and two blog posts per month. Month-to-month retainer.",
+                    price: "3500",
+                    priceCurrency: "USD",
+                    availability: "https://schema.org/InStock",
+                    category: "Digital marketing",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Dental Website Growth",
+                      serviceType: "Local SEO and content marketing",
+                    },
+                    priceSpecification: {
+                      "@type": "UnitPriceSpecification",
+                      price: "500",
+                      priceCurrency: "USD",
+                      billingIncrement: 1,
+                      unitCode: "MON",
+                    },
+                  },
+                  {
+                    "@type": "Offer",
+                    name: "Dominance",
+                    description:
+                      "Growth plus visual refresh, four long-form posts per month, active link building, review generation, and quarterly CRO. Month-to-month retainer.",
+                    price: "7500",
+                    priceCurrency: "USD",
+                    availability: "https://schema.org/InStock",
+                    category: "Digital marketing",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Dental Website Dominance",
+                      serviceType: "Full-service dental website marketing",
+                    },
+                    priceSpecification: {
+                      "@type": "UnitPriceSpecification",
+                      price: "1200",
+                      priceCurrency: "USD",
+                      billingIncrement: 1,
+                      unitCode: "MON",
+                    },
+                  },
+                ],
               },
             }),
           }}

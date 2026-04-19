@@ -8,6 +8,7 @@ const links = [
   { href: "/#what-we-fix", label: "What We Fix" },
   { href: "/#process", label: "Process" },
   { href: "/#pricing", label: "Pricing" },
+  { href: "/sample-proposal", label: "Sample Proposal" },
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
@@ -38,7 +39,7 @@ export default function Nav() {
             href="/contact"
             className="theme-cta text-sm font-medium px-4 py-2 rounded-lg"
           >
-            Show Me What&apos;s Broken
+            Get Free Audit
           </Link>
         </nav>
 
@@ -74,7 +75,7 @@ export default function Nav() {
             className="theme-cta text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
             onClick={() => setOpen(false)}
           >
-            Show Me What&apos;s Broken
+            Get Free Audit
           </Link>
         </div>
       )}

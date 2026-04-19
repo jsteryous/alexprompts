@@ -38,18 +38,18 @@ const brokenExamples = [
 const processSteps = [
   {
     step: "01",
-    title: "We show you what is broken",
-    body: "You send your site. We review it and send back screenshots of the issues worth fixing.",
+    title: "We audit your site",
+    body: "You send your URL. We review it and send back screenshots of the issues worth fixing \u2014 booking forms, mobile, trust leaks, speed.",
   },
   {
     step: "02",
-    title: "You approve the cleanup scope",
-    body: "Flat price. Clear scope. If the site actually needs a visual refresh or a rebuild instead, we tell you before taking the job.",
+    title: "You get a written proposal",
+    body: "Every audit comes back as a real proposal, not a sales pitch. Scope, price, timeline, and which tier is the honest fit \u2014 or none, if the site is already fine.",
   },
   {
     step: "03",
-    title: "We fix it in 48 hours",
-    body: "Booking forms work, the mobile experience gets cleaned up, and the practice looks like someone still runs it.",
+    title: "We execute the tier you approve",
+    body: "Cleanup ships in 48 hours. Growth and Dominance run on published milestones. You see exactly what was done at the end of every month.",
   },
 ];
 
@@ -62,24 +62,24 @@ const outcomes = [
 
 export const faqs = [
   {
-    q: "What does the cleanup actually include?",
-    a: "Booking-form diagnosis and repair, mobile layout fixes on the pages new patients land on, basic modernization (typography, spacing, current-year footer, broken links), and a clear contact path. Flat $1,200, 48-hour turnaround.",
+    q: "What is the free audit and proposal exactly?",
+    a: "You send your practice URL. Within one business day we reply with screenshots of what is broken and a written proposal naming the tier that actually fits \u2014 scope, price, timeline. No sales call, no follow-up sequence. If the site is already fine, the proposal says that.",
   },
   {
-    q: "What if my site needs a full rebuild instead of a cleanup?",
-    a: "We tell you. If the audit reveals the site needs a visual refresh or a rebuild rather than a cleanup, we say so before quoting and you decide. The cleanup only gets quoted when it is genuinely the right fit \u2014 the rebuild is the upsell after the audit, not the bait.",
+    q: "How do the three tiers differ?",
+    a: "Cleanup ($1,500) is a one-time 48-hour fix of broken booking forms, mobile, trust leaks, and basic modernization \u2014 no retainer. Growth ($3,500 setup + $500/month) adds schema, Google Business Profile management, on-page SEO, and two blog posts a month. Dominance ($7,500 setup + $1,200/month) adds a visual refresh, four posts a month, active link building, and CRO.",
   },
   {
-    q: "Do I have to get on a sales call?",
-    a: "No. Send your URL, we reply by email with screenshots of what is broken. There is no follow-up sequence and no calls unless you ask for one.",
+    q: "Are the monthly retainers locked in?",
+    a: "No. Growth and Dominance are month-to-month after the setup phase. Cancel with 30 days notice. We do not use long-term contracts \u2014 if the work is not producing results, neither of us should be stuck.",
   },
   {
-    q: "How fast do you respond with the audit?",
-    a: "Within one business day. The cleanup itself, if it is a fit and you approve the scope, is delivered within 48 hours.",
+    q: "What if my site needs a full rebuild instead?",
+    a: "We tell you in the proposal. If the audit reveals Cleanup will not hold up and a rebuild is the honest answer, we quote it as Dominance or a custom scope \u2014 you see the reasoning before you decide. The rebuild is the upsell after the audit, not the bait in the hero.",
   },
   {
-    q: "Do you only work with practices in Greenville?",
-    a: "Greenville County is home base, but we work across the Upstate \u2014 Spartanburg, Anderson, Pickens, and Oconee counties. We focus on dental practices only.",
+    q: "Do you only work with dental practices in Greenville?",
+    a: "Dental practices only. Greenville County is home base and we cover the full Upstate \u2014 Spartanburg, Anderson, Pickens, and Oconee counties. Specialty included: general, pediatric, ortho, oral surgery, cosmetic/implants, perio, endo.",
   },
 ];
 
@@ -162,7 +162,7 @@ export function ProcessSection() {
             No mystery.
           </h2>
           <p className="theme-text-muted leading-relaxed">
-            Confused customers do not buy. This offer is intentionally simple so you know exactly what happens next.
+            Confused customers do not buy. One entry point &mdash; the audit. One deliverable &mdash; a written proposal. You decide what happens next.
           </p>
         </div>
 
@@ -175,85 +175,183 @@ export function ProcessSection() {
             </div>
           ))}
         </div>
+
+        <div className="mt-10">
+          <Link
+            href="/sample-proposal"
+            className="theme-link text-sm font-semibold inline-flex items-center gap-1.5"
+          >
+            See a sample proposal
+            <ArrowIcon />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
+export const tiers = [
+  {
+    slug: "cleanup",
+    name: "Cleanup",
+    tagline: "Stop the bleeding.",
+    setupPrice: "$1,500",
+    setupNote: "one-time",
+    monthlyPrice: null,
+    monthlyNote: "No retainer",
+    timeline: "48-hour turnaround",
+    bestFor:
+      "Practices with a working-but-broken site. Booking form 404s, cramped mobile, stale footer, low Lighthouse.",
+    included: [
+      "Broken booking-form diagnosis and repair",
+      "Mobile viewport + layout fixes on key pages",
+      "Trust cleanup (copyright year, broken links, SSL)",
+      "Basic modernization of hero, CTAs, and contact path",
+      "Before/after screenshots at handoff",
+    ],
+    featured: false,
+    cta: "Request Free Audit",
+  },
+  {
+    slug: "growth",
+    name: "Growth",
+    tagline: "Start actually ranking.",
+    setupPrice: "$3,500",
+    setupNote: "setup",
+    monthlyPrice: "$500",
+    monthlyNote: "per month, month-to-month",
+    timeline: "2-3 week build, ongoing from month 2",
+    bestFor:
+      "Established practices that want the phone to ring more. Everything in Cleanup, plus the ongoing work that moves rankings.",
+    included: [
+      "Everything in Cleanup",
+      "LocalBusiness + Dentist schema markup",
+      "Google Business Profile claim + monthly optimization",
+      "On-page SEO on home + top 5 service pages",
+      "2 patient-facing blog posts per month",
+      "Review monitoring + response templates",
+      "NAP consistency + top local directory submissions",
+      "Monthly report: what shipped, what moved",
+    ],
+    featured: true,
+    cta: "Request Free Audit",
+  },
+  {
+    slug: "dominance",
+    name: "Dominance",
+    tagline: "Own the local market.",
+    setupPrice: "$7,500",
+    setupNote: "setup",
+    monthlyPrice: "$1,200",
+    monthlyNote: "per month, month-to-month",
+    timeline: "4-6 week build, ongoing from month 2",
+    bestFor:
+      "Multi-provider or expansion-stage practices ready to out-rank every other dentist in the county.",
+    included: [
+      "Everything in Growth",
+      "Visual refresh / redesign (conversion-focused)",
+      "4 long-form blog posts per month",
+      "Active link building (3-5 per month)",
+      "Review generation automation",
+      "Before/after galleries + treatment landing pages",
+      "Insurance + new-patient landing pages",
+      "Core Web Vitals + CRO pass each quarter",
+      "Quarterly strategy review",
+    ],
+    featured: false,
+    cta: "Request Free Audit",
+  },
+] as const;
+
 export function PricingSection() {
   return (
     <section id="pricing" className="theme-section-muted theme-border py-24 md:py-32 border-y">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-16 lg:grid-cols-[0.9fr,1.1fr] items-start">
-          <div>
-            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-              The Offer
-            </span>
-            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-              Website cleanup.
-              <br />
-              $1,200.
-              <br />
-              48-hour turnaround.
-            </h2>
-            <p className="theme-text-muted leading-relaxed mb-8">
-              One service. One price. One timeline. If the practice site needs a visual refresh or a rebuild instead, we quote that separately &mdash; no surprises.
-            </p>
-            <Link
-              href="/contact"
-              className="theme-cta inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
-            >
-              Request Free Screenshots
-              <ArrowIcon />
+        <div className="max-w-3xl mb-14">
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+            Tiered Pricing
+          </span>
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+            Three tiers.
+            <br />
+            One honest proposal.
+          </h2>
+          <p className="theme-text-muted leading-relaxed">
+            Every audit comes back as a written proposal naming the tier that actually fits. You pick. No upsells, no surprise line items.{" "}
+            <Link href="/sample-proposal" className="theme-link font-semibold underline underline-offset-4">
+              See a sample proposal
             </Link>
-          </div>
+            .
+          </p>
+        </div>
 
-          <div className="grid gap-4">
-            <div className="theme-card-strong border rounded-3xl p-8">
-              <p className="theme-text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">
-                Included
+        <div className="grid gap-6 md:grid-cols-3">
+          {tiers.map((tier) => (
+            <div
+              key={tier.slug}
+              className={`${
+                tier.featured ? "theme-card-strong" : "theme-card"
+              } border rounded-3xl p-8 flex flex-col relative`}
+            >
+              {tier.featured && (
+                <span className="theme-badge absolute top-5 right-5 text-[10px] font-semibold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full">
+                  Most practices
+                </span>
+              )}
+              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-2">
+                Tier {tier.slug === "cleanup" ? "01" : tier.slug === "growth" ? "02" : "03"}
               </p>
-              <ul className="space-y-3">
-                {[
-                  "Broken booking-form diagnosis and cleanup",
-                  "Mobile layout fixes on key pages",
-                  "Basic modernization and trust cleanup",
-                  "Clear contact path and CTA cleanup",
-                ].map((item) => (
-                  <li key={item} className="theme-text-secondary text-sm leading-relaxed">
-                    {item}
+              <h3 className="theme-text-primary text-2xl font-bold mb-1.5">{tier.name}</h3>
+              <p className="theme-text-secondary text-sm mb-6">{tier.tagline}</p>
+
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="theme-text-primary text-4xl font-bold tracking-tight">
+                    {tier.setupPrice}
+                  </span>
+                  <span className="theme-text-muted text-sm">{tier.setupNote}</span>
+                </div>
+                {tier.monthlyPrice ? (
+                  <p className="theme-text-secondary text-sm mt-1">
+                    + <span className="font-semibold">{tier.monthlyPrice}</span> {tier.monthlyNote}
+                  </p>
+                ) : (
+                  <p className="theme-text-muted text-sm mt-1">{tier.monthlyNote}</p>
+                )}
+                <p className="theme-text-muted text-xs mt-2">{tier.timeline}</p>
+              </div>
+
+              <p className="theme-text-secondary text-sm leading-relaxed mb-5">{tier.bestFor}</p>
+
+              <ul className="space-y-2.5 mb-8 flex-1">
+                {tier.included.map((item) => (
+                  <li key={item} className="theme-text-secondary text-sm leading-relaxed flex gap-2">
+                    <span className="theme-label font-bold mt-0.5">✓</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
 
-            <div className="theme-card border rounded-3xl p-8">
-              <p className="theme-text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">
-                Not Included
-              </p>
-              <ul className="space-y-3">
-                {[
-                  "Open-ended retainers",
-                  "Custom app development",
-                  "A full-site rebuild disguised as a quick fix",
-                  "Agency-style bundles with a dozen moving parts",
-                ].map((item) => (
-                  <li key={item} className="theme-text-secondary text-sm leading-relaxed">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <Link
+                href="/contact"
+                className={`${
+                  tier.featured ? "theme-cta-accent" : "theme-cta"
+                } inline-flex items-center justify-center gap-2 font-semibold px-5 py-3 rounded-xl text-sm`}
+              >
+                {tier.cta}
+                <ArrowIcon />
+              </Link>
             </div>
+          ))}
+        </div>
 
-            <div className="theme-card-warn border rounded-3xl p-8">
-              <p className="theme-warn-badge inline-block text-xs font-semibold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full mb-4">
-                If It Needs More
-              </p>
-              <p className="theme-text-secondary text-sm leading-relaxed">
-                Sometimes the audit reveals the site needs a full visual refresh, not just a cleanup. We quote that separately after the screenshots &mdash; you see the issues first, then decide. The refresh is the upsell, not the bait.
-              </p>
-            </div>
-          </div>
+        <div className="theme-card-warn border rounded-3xl p-6 md:p-8 mt-10">
+          <p className="theme-warn-badge inline-block text-xs font-semibold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full mb-3">
+            Not sure which tier?
+          </p>
+          <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+            Don&apos;t guess. Send the URL. The free audit tells you which tier your site actually needs &mdash; and if none of them do, we&apos;ll say that too. The proposal is the product; the tier is just how it ships.
+          </p>
         </div>
       </div>
     </section>
@@ -309,7 +407,7 @@ export function FaqSection() {
               worth answering.
             </h2>
             <p className="theme-text-muted leading-relaxed">
-              Five honest answers. If something else is on your mind, the audit reply is the right place to ask it.
+              Five honest answers about the audit, the tiers, and what happens after you hit reply.
             </p>
           </div>
 
@@ -347,17 +445,17 @@ export function FinalCtaSection() {
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold mb-3">
             Reply with your practice website.
             <br />
-            We&apos;ll show you what is broken.
+            You&apos;ll have a proposal tomorrow.
           </h2>
           <p className="theme-text-contrast-muted">
-            Free audit. If the cleanup is the right fit, we quote the flat fee and turn it around in 48 hours.
+            Free audit. Written proposal with the tier that honestly fits. No call, no pitch, no follow-up sequence.
           </p>
         </div>
         <Link
           href="/contact"
           className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
         >
-          Get Free Screenshots
+          Get Free Audit + Proposal
           <ArrowIcon />
         </Link>
       </div>

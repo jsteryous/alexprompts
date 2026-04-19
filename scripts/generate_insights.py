@@ -43,6 +43,15 @@ log = logging.getLogger(__name__)
 
 GEMINI_MODEL = "gemini-2.5-flash"
 
+# Topic clusters — source of truth is src/lib/clusters.ts. Keep in sync.
+VALID_CLUSTERS = {
+    "booking-forms",
+    "mobile-experience",
+    "trust-and-stale-content",
+    "lighthouse-core-vitals",
+    "cleanup-vs-rebuild",
+}
+
 SYSTEM_PROMPT = """You are a content writer for REBB Advisors, a Greenville SC firm
 that does flat-fee website cleanup for dental practices — fixing broken booking
 forms, mobile layouts, stale content, and slow load times. 48-hour turnaround.
@@ -195,7 +204,7 @@ def generate_with_gemini(topic: str, max_retries: int = 3) -> str:
 
 
 def save_draft(supabase_client, title: str, slug: str, body_md: str,
-               summary: str, topic: str) -> dict:
+               summary: str, topic: str, cluster: str | None = None) -> dict:
     """Insert a DRAFT blog post and return the row.
 
     Idempotent: if a row with this slug already exists (e.g. script crashed
@@ -225,6 +234,7 @@ def save_draft(supabase_client, title: str, slug: str, body_md: str,
         "status": "DRAFT",
         "topic": topic,
         "gemini_model": GEMINI_MODEL,
+        "cluster": cluster,
     }
     result = supabase_client.table("blog_posts").insert(row).execute()
     return result.data[0]
@@ -354,7 +364,17 @@ def main() -> None:
                         help="Discord webhook URL for 'Review Needed' alert")
     parser.add_argument("--test-email", action="store_true",
                         help="Send a test email via Resend and exit (no generation)")
+    parser.add_argument(
+        "--cluster",
+        help=f"Topic cluster slug. One of: {', '.join(sorted(VALID_CLUSTERS))}",
+    )
     args = parser.parse_args()
+
+    if args.cluster and args.cluster not in VALID_CLUSTERS:
+        parser.error(
+            f"Invalid --cluster {args.cluster!r}. "
+            f"Must be one of: {', '.join(sorted(VALID_CLUSTERS))}"
+        )
 
     # ── Test email mode ──────────────────────────────────────────────────────
     if args.test_email:
@@ -408,7 +428,7 @@ def main() -> None:
     client = create_client(url, key)
 
     # 5. Save DRAFT
-    post = save_draft(client, title, slug, body_md, summary, args.topic)
+    post = save_draft(client, title, slug, body_md, summary, args.topic, args.cluster)
     post_id = post["id"]
 
     print(f"{separator}")

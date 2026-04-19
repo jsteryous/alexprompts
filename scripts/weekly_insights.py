@@ -34,37 +34,58 @@ log = logging.getLogger(__name__)
 SCRIPTS_DIR = Path(__file__).resolve().parent
 GEMINI_MODEL = "gemini-2.5-flash"
 
-# ── Category buckets ──────────────────────────────────────────────────────────
-# Edit freely. These constrain the topic space without fixing individual topics.
-# Weight a category by listing it more than once.
+# Topic clusters — source of truth is src/lib/clusters.ts. Keep in sync with
+# VALID_CLUSTERS in generate_insights.py. Every category below maps to exactly
+# one cluster. The weekly runner passes the winning cluster through to
+# generate_insights.py via --cluster, which persists it to blog_posts.cluster.
+VALID_CLUSTERS = {
+    "booking-forms",
+    "mobile-experience",
+    "trust-and-stale-content",
+    "lighthouse-core-vitals",
+    "cleanup-vs-rebuild",
+}
 
-CATEGORIES = [
+# ── Category buckets ──────────────────────────────────────────────────────────
+# Each entry is (cluster_slug, brief). Weight a cluster by listing more entries
+# for it. Gemini generates one candidate per cluster present in the prompt.
+
+CATEGORIES: list[tuple[str, str]] = [
     # Broken booking / contact forms — the #1 audit finding
-    "Broken booking and contact forms on dental practice websites — how to tell when a form is actually submitting vs. silently 404ing, why 'it worked when I tested it' isn't enough, what a practice loses per week when new-patient forms are dead, and how to test your own form in under 60 seconds without a developer",
+    ("booking-forms",
+     "Broken booking and contact forms on dental practice websites — how to tell when a form is actually submitting vs. silently 404ing, why 'it worked when I tested it' isn't enough, what a practice loses per week when new-patient forms are dead, and how to test your own form in under 60 seconds without a developer"),
 
     # Mobile viewport / mobile experience
-    "Mobile experience on dental practice websites — why desktop-designed sites get pinch-zoomed on phones, how a missing viewport tag drops a practice out of Google's mobile results, why iPhone Safari and Android Chrome can render the same site completely differently, and the 3-minute self-check any office manager can run",
+    ("mobile-experience",
+     "Mobile experience on dental practice websites — why desktop-designed sites get pinch-zoomed on phones, how a missing viewport tag drops a practice out of Google's mobile results, why iPhone Safari and Android Chrome can render the same site completely differently, and the 3-minute self-check any office manager can run"),
 
     # New-patient trust signals
-    "New-patient trust signals on a dental website — what a first-time patient looks for in the first 10 seconds (real staff photos, insurance clarity, address/hours matching Google, clear new-patient pricing), what actively damages trust (stock photos of strangers in lab coats, stale copyright, broken phone links), and the difference a cleanup makes on conversion",
+    ("trust-and-stale-content",
+     "New-patient trust signals on a dental website — what a first-time patient looks for in the first 10 seconds (real staff photos, insurance clarity, address/hours matching Google, clear new-patient pricing), what actively damages trust (stock photos of strangers in lab coats, stale copyright, broken phone links), and the difference a cleanup makes on conversion"),
 
     # Online booking reality check
-    "Online booking on a dental practice site that actually works — why embedded booking widgets fail on iPhone Safari but pass on desktop, why 'click to call' is still the highest-converting path for most practices, and when a custom booking form beats third-party scheduling",
+    ("booking-forms",
+     "Online booking on a dental practice site that actually works — why embedded booking widgets fail on iPhone Safari but pass on desktop, why 'click to call' is still the highest-converting path for most practices, and when a custom booking form beats third-party scheduling"),
 
     # Google Business Profile ↔ website alignment
-    "Google Business Profile and website alignment for dental practices — how a mismatched phone number, address, or hours between your GBP and your website footer tanks local pack ranking, how to audit the two in 10 minutes, and why fixing this usually moves the needle faster than any on-page SEO change",
+    ("trust-and-stale-content",
+     "Google Business Profile and website alignment for dental practices — how a mismatched phone number, address, or hours between your GBP and your website footer tanks local pack ranking, how to audit the two in 10 minutes, and why fixing this usually moves the needle faster than any on-page SEO change"),
 
     # Speed / Lighthouse / Core Web Vitals
-    "Why dental practice websites load slowly and what actually fixes it — the real culprits (uncompressed hero images, embedded chat widgets, 14 tracking pixels), why a slow site hurts both patient experience and Google ranking, how to read a Lighthouse score without a developer, and which problems are cheap to fix vs. which require a rebuild",
+    ("lighthouse-core-vitals",
+     "Why dental practice websites load slowly and what actually fixes it — the real culprits (uncompressed hero images, embedded chat widgets, 14 tracking pixels), why a slow site hurts both patient experience and Google ranking, how to read a Lighthouse score without a developer, and which problems are cheap to fix vs. which require a rebuild"),
 
     # Cleanup vs. rebuild decision
-    "When a dental website needs a cleanup vs. a full rebuild — specific signals that cleanup is the right call (working CMS, decent structure, fixable issues) vs. signals the foundation is gone (no mobile framework, no content management, abandoned platform), why REBB will tell a practice to rebuild even though cleanup is our offer, and what a rebuild actually involves",
+    ("cleanup-vs-rebuild",
+     "When a dental website needs a cleanup vs. a full rebuild — specific signals that cleanup is the right call (working CMS, decent structure, fixable issues) vs. signals the foundation is gone (no mobile framework, no content management, abandoned platform), why REBB will tell a practice to rebuild even though cleanup is our offer, and what a rebuild actually involves"),
 
     # Insurance carrier pages
-    "Insurance, pricing, and transparency pages on a dental website — why an out-of-date insurance list actively loses new patients at the decision moment, why 'call for pricing' converts worse than a simple starting-price range, and the handful of pages every dental site needs that most are missing",
+    ("trust-and-stale-content",
+     "Insurance, pricing, and transparency pages on a dental website — why an out-of-date insurance list actively loses new patients at the decision moment, why 'call for pricing' converts worse than a simple starting-price range, and the handful of pages every dental site needs that most are missing"),
 
     # HIPAA-aware web practices (practical, not legal advice)
-    "HIPAA-aware practices for dental websites — what a dental practice should and shouldn't collect on a contact form, why most dental form plugins handle PHI incorrectly by default, and the practical setup that keeps a practice safe without making the form unusable",
+    ("trust-and-stale-content",
+     "HIPAA-aware practices for dental websites — what a dental practice should and shouldn't collect on a contact form, why most dental form plugins handle PHI incorrectly by default, and the practical setup that keeps a practice safe without making the form unusable"),
 ]
 
 # ── Topic generation prompt ───────────────────────────────────────────────────
@@ -79,7 +100,7 @@ The audience is a dental practice owner or office manager — NOT a developer, a
 NOT interested in being pitched SEO packages. The ideal topic makes that reader
 think: "we probably have this problem — let me go check our site right now."
 
-## Content categories (rotate through these, don't repeat the same category twice in a row)
+## Topic clusters (each bullet is a category; the bracketed slug is the cluster it belongs to)
 {categories}
 
 ## Recently published titles (do not repeat these angles)
@@ -115,7 +136,9 @@ Good examples:
 - Anything that requires the reader to be a developer to understand or act on it
 
 ## Task
-Generate exactly 3 topic candidates, each from a DIFFERENT category above.
+Generate exactly 3 topic candidates, each from a DIFFERENT cluster above.
+For each candidate include the exact cluster slug (the value inside the brackets)
+from the category line it came from.
 Score each on specificity (0–100), where 100 means the title alone tells you \
 exactly what you will learn and names at least one concrete thing.
 Pick the highest-scoring candidate as the winner.
@@ -123,9 +146,9 @@ Pick the highest-scoring candidate as the winner.
 Return ONLY valid JSON — no markdown fences, no explanation, nothing else:
 {{
   "candidates": [
-    {{"topic": "...", "category": "...", "score": 0}},
-    {{"topic": "...", "category": "...", "score": 0}},
-    {{"topic": "...", "category": "...", "score": 0}}
+    {{"topic": "...", "cluster": "<cluster-slug>", "score": 0}},
+    {{"topic": "...", "cluster": "<cluster-slug>", "score": 0}},
+    {{"topic": "...", "cluster": "<cluster-slug>", "score": 0}}
   ],
   "winner": "..."
 }}
@@ -200,8 +223,13 @@ def _call_gemini_for_topics(client, prompt: str, types) -> dict:
     sys.exit(1)
 
 
-def generate_topic(recent_titles: list[str]) -> str:
-    """Ask Gemini to generate 3 scored topic candidates and return the winner."""
+def generate_topic(recent_titles: list[str]) -> tuple[str, str | None]:
+    """Ask Gemini to generate 3 scored topic candidates and return the winner.
+
+    Returns (topic, cluster_slug). cluster_slug is None if Gemini returned a
+    value that does not match any known slug — the caller should still proceed
+    but skip --cluster so the draft lands with cluster=NULL for manual triage.
+    """
     try:
         from google import genai
         from google.genai import types
@@ -214,7 +242,7 @@ def generate_topic(recent_titles: list[str]) -> str:
         log.error("GEMINI_API_KEY not set in .env.local")
         sys.exit(1)
 
-    categories_str = "\n".join(f"- {c}" for c in CATEGORIES)
+    categories_str = "\n".join(f"- [{slug}] {brief}" for slug, brief in CATEGORIES)
     titles_str = (
         "\n".join(f"- {t}" for t in recent_titles)
         if recent_titles
@@ -232,11 +260,13 @@ def generate_topic(recent_titles: list[str]) -> str:
     data = _call_gemini_for_topics(client, prompt, types)
 
     candidates = data.get("candidates", [])
-    winner = data.get("winner", "").strip()
+    winner_topic = data.get("winner", "").strip()
 
     log.info("Generated candidates:")
     for c in candidates:
-        log.info(f"  [{c.get('score', '?'):>3}] [{c.get('category', '?')[:30]}]  {c.get('topic', '')}")
+        log.info(
+            f"  [{c.get('score', '?'):>3}] [{c.get('cluster', '?')[:30]}]  {c.get('topic', '')}"
+        )
 
     if not candidates:
         log.error("No candidates returned in Gemini topic-generation response.")
@@ -244,15 +274,30 @@ def generate_topic(recent_titles: list[str]) -> str:
 
     # Validate winner is one of the actual candidates; fall back to highest score if not
     candidate_topics = [c["topic"] for c in candidates if c.get("topic")]
-    if winner not in candidate_topics:
+    if winner_topic not in candidate_topics:
         log.warning(
-            f"Winner {winner!r} not found in candidate list — "
+            f"Winner {winner_topic!r} not found in candidate list — "
             "falling back to highest-scored candidate."
         )
-        winner = max(candidates, key=lambda c: c.get("score", 0))["topic"]
+        best = max(candidates, key=lambda c: c.get("score", 0))
+        winner_topic = best["topic"]
+        winner_cluster = best.get("cluster", "")
+    else:
+        winner_cluster = next(
+            (c.get("cluster", "") for c in candidates if c.get("topic") == winner_topic),
+            "",
+        )
 
-    log.info(f"Winner: {winner!r}")
-    return winner
+    winner_cluster = (winner_cluster or "").strip()
+    if winner_cluster and winner_cluster not in VALID_CLUSTERS:
+        log.warning(
+            f"Gemini returned cluster {winner_cluster!r} which is not in the valid set "
+            f"({sorted(VALID_CLUSTERS)}). Dropping — draft will land unclassified."
+        )
+        winner_cluster = ""
+
+    log.info(f"Winner: {winner_topic!r}  (cluster={winner_cluster or 'NONE'})")
+    return winner_topic, (winner_cluster or None)
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -266,13 +311,15 @@ def main() -> None:
     args = parser.parse_args()
 
     recent_titles = fetch_recent_titles()
-    topic = generate_topic(recent_titles)
+    topic, cluster = generate_topic(recent_titles)
 
     if args.dry_run:
         log.info("DRY RUN — no article generated.")
         return
 
     cmd = [sys.executable, str(SCRIPTS_DIR / "generate_insights.py"), "--topic", topic]
+    if cluster:
+        cmd.extend(["--cluster", cluster])
     log.info("Running generate_insights.py...")
     result = subprocess.run(cmd, cwd=str(SCRIPTS_DIR))
     sys.exit(result.returncode)

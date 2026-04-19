@@ -27,8 +27,11 @@ export default function Footer() {
           <Link href="/#pricing" className="theme-link text-sm">
             Pricing
           </Link>
-          <Link href="/contact" className="theme-link text-sm">
-            Free Screenshots
+          <Link href="/sample-proposal" className="theme-link text-sm">
+            Sample Proposal
+          </Link>
+          <Link href="/insights" className="theme-link text-sm">
+            Insights
           </Link>
           <Link href="/contact" className="theme-link text-sm">
             Contact

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import { clusters, clusterSlugs } from "@/lib/clusters";
+import {
+  InsightsPostList,
+  type InsightsListPost,
+} from "@/components/InsightsPostList";
 
 export const metadata: Metadata = {
   title: "Insights — Dental Practice Websites, Fixed · REBB Advisors",
@@ -9,14 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://rebbadvisors.com/insights" },
 };
 
-interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  summary: string | null;
-  tags: string[];
-  published_at: string | null;
-  created_at: string;
+interface BlogPost extends InsightsListPost {
+  cluster: string | null;
 }
 
 async function getPublishedPosts(): Promise<BlogPost[]> {
@@ -28,7 +27,7 @@ async function getPublishedPosts(): Promise<BlogPost[]> {
   const client = createClient(url, key);
   const { data, error } = await client
     .from("blog_posts")
-    .select("id, title, slug, summary, tags, published_at, created_at")
+    .select("id, title, slug, summary, tags, published_at, created_at, cluster")
     .eq("status", "PUBLISHED")
     .order("published_at", { ascending: false });
 
@@ -39,19 +38,17 @@ async function getPublishedPosts(): Promise<BlogPost[]> {
   return data ?? [];
 }
 
-function formatDate(iso: string | null): string {
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
-export const revalidate = 60; // ISR: re-fetch every 60 s
+export const revalidate = 60;
 
 export default async function InsightsPage() {
   const posts = await getPublishedPosts();
+  const clusterCounts = clusterSlugs.reduce<Record<string, number>>(
+    (acc, slug) => {
+      acc[slug] = posts.filter((p) => p.cluster === slug).length;
+      return acc;
+    },
+    {},
+  );
 
   return (
     <>
@@ -74,70 +71,39 @@ export default async function InsightsPage() {
         </div>
       </section>
 
-      {/* ── Post list ── */}
-      <section className="theme-section py-16 md:py-24">
+      {/* ── Browse by topic ── */}
+      <section className="theme-section-muted border-b theme-border py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {posts.length === 0 ? (
-            <div className="py-24 text-center">
-              <p className="theme-text-muted text-sm">No published insights yet. Check back soon.</p>
-            </div>
-          ) : (
-            <div>
-              {posts.map((post, idx) => (
-                <article
-                  key={post.id}
-                  className={`theme-border py-10 group ${idx === 0 ? "" : "border-t"}`}
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-6">
+            Browse by topic
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            {clusterSlugs.map((slug) => {
+              const c = clusters[slug];
+              const count = clusterCounts[slug] ?? 0;
+              return (
+                <Link
+                  key={slug}
+                  href={`/insights/topics/${slug}`}
+                  className="theme-card hover:opacity-90 transition-opacity p-4 rounded-lg flex flex-col gap-2 min-h-[88px]"
                 >
-                  <div className="flex flex-col md:flex-row md:items-start md:gap-16">
-                    {/* Date */}
-                    <div className="flex-shrink-0 w-36 mb-3 md:mb-0">
-                      <time className="theme-text-muted text-xs font-medium">
-                        {formatDate(post.published_at ?? post.created_at)}
-                      </time>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      {post.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {post.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight mb-2 transition-colors">
-                        <Link href={`/insights/${post.slug}`} className="theme-text-primary hover:opacity-80">{post.title}</Link>
-                      </h2>
-
-                      {post.summary && (
-                        <p className="theme-text-muted text-sm leading-relaxed mb-4 max-w-2xl">
-                          {post.summary}
-                        </p>
-                      )}
-
-                      <Link
-                        href={`/insights/${post.slug}`}
-                        className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:opacity-80 transition-opacity"
-                      >
-                        Read more
-                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+                  <span className="theme-text-primary text-sm font-semibold leading-tight">
+                    {c.name}
+                  </span>
+                  <span className="theme-text-muted text-xs">
+                    {count === 0
+                      ? "Coming soon"
+                      : `${count} ${count === 1 ? "article" : "articles"}`}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      {/* ── Post list ── */}
+      <InsightsPostList posts={posts} />
     </>
   );
 }
