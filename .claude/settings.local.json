@@ -125,7 +125,10 @@
       "Bash(jobs -l)",
       "Read(//c/Users/alexs/AppData/Local/Temp/claude/C--Users-alexs-rebbadvisors-website/1b440fe3-ca33-4278-b9e4-7a35038ab869/tasks/**)",
       "Bash(curl -s http://localhost:3000 -o /tmp/home.html -w \"status=%{http_code}\\\\n\")",
-      "Bash(curl -s http://localhost:3000/contact -o /tmp/contact.html -w \"status=%{http_code}\\\\n\")"
+      "Bash(curl -s http://localhost:3000/contact -o /tmp/contact.html -w \"status=%{http_code}\\\\n\")",
+      "Bash(npx --yes tsc --noEmit -p .)",
+      "WebFetch(domain:www.googleapis.com)",
+      "Bash(curl -sIL https://rebbadvisors.com)"
     ]
   }
 }

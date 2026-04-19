@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -6,6 +7,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rebbadvisors.com"),
   title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
   description:
     "REBB Advisors fixes broken dental practice websites in Greenville SC. Booking forms, mobile issues, dead pages, and outdated trust leaks cleaned up fast with a clear fixed-price offer.",
@@ -42,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={GeistSans.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -60,10 +62,15 @@ export default function RootLayout({
               email: "alex@rebbadvisors.com",
               description:
                 "Website cleanup and modernization for dental practices with broken booking forms, mobile issues, and outdated trust leaks.",
-              areaServed: {
-                "@type": "AdministrativeArea",
-                name: "Greenville County, South Carolina",
-              },
+              slogan: "Confused customers don't buy.",
+              priceRange: "$1,200",
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "Greenville County, South Carolina" },
+                { "@type": "AdministrativeArea", name: "Spartanburg County, South Carolina" },
+                { "@type": "AdministrativeArea", name: "Anderson County, South Carolina" },
+                { "@type": "AdministrativeArea", name: "Pickens County, South Carolina" },
+                { "@type": "AdministrativeArea", name: "Oconee County, South Carolina" },
+              ],
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Greenville",
@@ -82,6 +89,21 @@ export default function RootLayout({
                 "Mobile-friendly dental websites",
                 "Dental practice website credibility",
               ],
+              makesOffer: {
+                "@type": "Offer",
+                name: "Dental Website Cleanup",
+                description:
+                  "Flat-fee website cleanup for dental practices: broken booking-form repair, mobile layout fixes, basic modernization, and trust cleanup. 48-hour turnaround.",
+                price: "1200",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                category: "Web design",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Dental Website Cleanup",
+                  serviceType: "Website cleanup and modernization",
+                },
+              },
             }),
           }}
         />

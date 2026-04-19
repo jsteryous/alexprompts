@@ -5,7 +5,7 @@
 @theme {
   --color-accent: #2bb673;
   --color-accent-dark: #21895a;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -24,7 +24,7 @@
   --surface-highlight: rgba(43, 182, 115, 0.12);
   --surface-warn: rgba(217, 119, 6, 0.12);
   --surface-accent: #1c7c50;
-  --accent: #238a59;
+  --accent: #1f7d4e;
   --accent-strong: #17583a;
   --accent-soft: rgba(35, 138, 89, 0.14);
   --accent-contrast: #effaf4;
@@ -99,7 +99,12 @@ button {
 }
 
 .theme-page {
-  background: transparent;
+  position: relative;
+  background:
+    radial-gradient(900px 520px at 78% 28%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 62%),
+    radial-gradient(700px 460px at 8% 92%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 68%),
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 0);
+  background-size: auto, auto, 26px 26px;
 }
 
 .theme-section {
@@ -174,7 +179,7 @@ button {
   --foreground-muted: #736d65;
   --border: rgba(23, 23, 23, 0.1);
   --border-strong: rgba(23, 23, 23, 0.18);
-  --accent: #238a59;
+  --accent: #1f7d4e;
   --accent-strong: #17583a;
   color: var(--foreground);
 }

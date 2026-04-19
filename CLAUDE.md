@@ -94,10 +94,10 @@ supabase/schema.sql
 
 ## Design System
 
-- **Palette lives in CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark). Do NOT hardcode hex / `bg-gray-950` — use `.theme-*` utility classes (`theme-text-primary/secondary/muted`, `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`, `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`). Tokens: light bg `#f4f0e8` (cream), dark bg `#0f1411`; accent green `#238a59` light / `#43bd78` dark.
+- **Palette lives in CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark). Do NOT hardcode hex / `bg-gray-950` — use `.theme-*` utility classes (`theme-text-primary/secondary/muted`, `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`, `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`). Tokens: light bg `#f4f0e8` (cream), dark bg `#0f1411`; accent green `#1f7d4e` light / `#43bd78` dark.
 - **Tailwind `dark:` variant** wired via `@custom-variant dark (&:where(.dark, .dark *))` — use only for one-off cases the theme tokens don't cover.
 - **Visual mocks (`VisualMocks.tsx`) are an intentional exception** — they represent external websites, not REBB's own surface, so they use fixed neutral grays + red callouts rather than theme tokens. They must look credible as "this is someone else's broken site" in both light and dark modes.
-- Typography: system font stack (no Google Fonts — Turbopack http2 error at build time)
+- Typography: Geist Sans via the `geist` npm package (self-hosted by Vercel, bypasses the Google Fonts http2 build error). Wired through `--font-geist-sans` → `--font-sans` in `globals.css`. Falls through to a system stack on font-load failure.
 - Sections: `py-24 md:py-32`, max-width `max-w-6xl`, articles `max-w-2xl`
 - Direction: Stripe / Linear aesthetic — whitespace, strong type scale, minimal decoration
 
@@ -106,7 +106,7 @@ supabase/schema.sql
 - OG image: `opengraph-image.tsx` (edge Satori). **Do NOT set `openGraph.images` in page metadata** — conflicts.
 - Every page: `title` (includes "Greenville SC"), `description`, `openGraph`, `alternates.canonical`
 - `/case-study` has `robots: { index: false }` — do not remove until real content exists
-- JSON-LD: `ProfessionalService`, `areaServed: Greenville County SC` in `layout.tsx`
+- JSON-LD: `ProfessionalService` (with `Offer` $1,200, `priceRange`, `slogan`, 5-county `areaServed`) in `layout.tsx`; `FAQPage` on the homepage paired with the visible `#faq` section.
 
 ## Key Conventions
 
@@ -149,7 +149,8 @@ In descending severity, these are the failures that justify the cleanup:
 3. **Process** (`#process`) — three steps, no pricing mention.
 4. **Pricing** (`#pricing`) — first explicit price mention on the page.
 5. **Outcomes** — what success looks like.
-6. **Final CTA** — concrete and blunt.
+6. **FAQ** (`#faq`) — five honest answers to the most common prospect objections; pairs with `FAQPage` JSON-LD.
+7. **Final CTA** — concrete and blunt.
 
 ### What the site does NOT promise
 - No "digital transformation."
