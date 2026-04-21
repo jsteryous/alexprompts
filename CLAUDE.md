@@ -46,7 +46,7 @@ These are the file relationships you can't derive by reading individual files:
 - **`src/components/VisualMocks.tsx`** — synthetic SVG/CSS mockups (broken phone, form 404, cramped mobile, stale copyright, low Lighthouse). **Intentional theme-token exception**: uses fixed neutral grays + red callouts because they represent *other people's* broken sites, not REBB's surface.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/dashboard/*` (via `usePathname`). Do NOT re-add chrome there.
 - **`proxy.ts`** (root) — Next.js 16 route proxy, replaces `middleware.ts`. Guards `/dashboard/*`. Do NOT create `middleware.ts`.
-- **`src/app/dashboard/_components/DashboardShell.tsx`** — async server component wrapping every dashboard route. Owns header, `<DashNav>`, signed-in email + sign-out form, stat row slot, optional `filters` slot. Props: `title`, `subtitle`, `active`, `stats`, `filters?`, `children`. Pair with `<StatTile>` (`_components/StatTile.tsx`) for the stat row. Add a new tab by extending `TABS` in `_components/DashNav.tsx` + the `DashNavKey` union. `getCurrentUser()` lives in `_lib/auth.ts`. Do NOT rebuild the header per page.
+- **`src/app/dashboard/_components/DashboardShell.tsx`** — async server component wrapping every dashboard route. Owns header, `<DashNav>`, signed-in email + sign-out form, stat row slot, optional `filters` slot. Props: `title`, `subtitle`, `active`, `stats`, `filters?`, `children`. Stats render in their own row *below* the title (not beside the sign-out) — this is deliberate; the earlier right-rail placement crowded the chrome and forced a flex layout that couldn't breathe. Pair with `<StatTile>` for the stat row. Add a new tab by extending `TABS` in `_components/DashNav.tsx` + the `DashNavKey` union. `getCurrentUser()` lives in `_lib/auth.ts`. Do NOT rebuild the header per page.
 - **`app/opengraph-image.tsx`** — edge Satori OG image, auto-injected. Do NOT set `openGraph.images` in page metadata — it conflicts.
 - **Redirects** (all `permanentRedirect("/")`): `/how-it-works`, `/web-development`, `/seo`, `/lead-intelligence`, `/outreach-automation`. Kept for inbound-link preservation.
 
@@ -64,6 +64,17 @@ These are the file relationships you can't derive by reading individual files:
 - Article body: `prose theme-prose max-w-none` + `dangerouslySetInnerHTML`.
 - Section labels: `text-xs font-semibold uppercase tracking-widest theme-label`.
 - Direction: Stripe / Linear aesthetic — whitespace, strong type scale, minimal decoration.
+
+### Dashboard table conventions
+
+Applies to every table under `src/app/dashboard/**`. Deviating from these rules is usually a regression — check git log before "fixing" any of them.
+
+- **Two font sizes only.** Body cells use `text-sm` for primary content and `text-xs` for meta (roles, dates, subcopy, truncated hostnames). Do NOT introduce `text-[10px]`, `text-[9px]`, or any arbitrary smaller size — the cascade got collapsed deliberately.
+- **Headers are quiet.** `text-xs font-medium theme-text-muted`. No `uppercase tracking-widest` — that treatment belongs on marketing section labels, not on 9 columns of a CRM table where every header would shout equally.
+- **Sticky thead.** `<thead className="sticky top-0 z-10 theme-card-muted">` on any table that can exceed ~15 rows. The outer `overflow-x-auto` wrapper doesn't block vertical sticky.
+- **Row padding:** `px-4 py-3` for `<td>`, `px-4 py-2.5` for `<th>`. Do not revert to `py-4` — rows felt bloated on a 200+ row call list.
+- **No rank/`#` column.** The tables are pre-sorted (score desc, severity desc). A visible rank number duplicates that and steals ~60px of width.
+- **No emoji in dashboard UI.** Use text labels (`Mobile` / `Desktop`, not `📱` / `🖥`). The `↗` arrow on external links is fine — it's typographic, not pictographic. This keeps the Stripe/Linear aesthetic intact.
 
 ## SEO Architecture
 
@@ -358,13 +369,15 @@ Ordered by long-term leverage (not what's visible today). The user settled on th
 **Done**
 1. **Design tokens** — `.tone-{hot,warm,cool,good,good-strong,neutral,info}` in `globals.css`. All dashboard status/severity colors route through them (see Design System section).
 2. **Shared shell** — `DashboardShell` + `DashNav` + `StatTile` + `getCurrentUser()` extracted to `src/app/dashboard/_components/` and `_lib/`.
+3. **Typography + layout pass** — font cascade collapsed to two sizes (`text-sm` / `text-xs`), table headers quieted (`font-medium theme-text-muted`, no uppercase tracking-widest), sticky thead, row padding tightened to `py-3`, rank column dropped, emoji screenshot buttons replaced with text pills. Stats moved out of header chrome into their own row under the title. Conventions codified above under "Dashboard table conventions" — check there before touching table styles.
 
 **Next**
-3. **Generic `<DataTable>` primitive** — do NOT bolt sort/filter onto one page. Build a column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, sticky header, column visibility. TanStack Table is the default pick. Use on both dashboard pages. This is the biggest UX lever because every future internal view is a table.
-4. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time. Formalize the TS↔Python coupling around `principal_role` prefixes and cluster slugs instead of string-matching.
-5. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.
-6. **A11y pass** — row focus styles, aria-labels on emoji-only screenshot buttons, stat-tile labels, nested-interactive cleanup (`<details>` inside row). Mostly solved for free by the DataTable primitive.
-7. **URL as state** — filters/sort/selected-row in query params so dashboard views are linkable ("send me the HOT dental list"). Free once DataTable lands.
+4. **Row-detail drawer + notes** — click row → right-side sheet with editable notes, screenshot previews, audit issue detail. Start with a single `notes text` column (`website_prospects` needs a migration; `enriched_leads.notes` already exists) and one server action per table. When a notes timeline becomes real, migrate to `{lead,prospect}_notes` append-only tables without rewriting the UI.
+5. **Generic `<DataTable>` primitive** — do NOT bolt sort/filter onto one page. Build a column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, column visibility. TanStack Table is the default pick. Use on both dashboard pages. Biggest UX lever because every future internal view is a table. Sticky thead is already in place per-page — the primitive should keep that as a default.
+6. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time. Formalize the TS↔Python coupling around `principal_role` prefixes and cluster slugs instead of string-matching.
+7. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.
+8. **A11y pass** — row focus styles, aria-labels on icon-only buttons, stat-tile labels, nested-interactive cleanup (`<details>` inside row). Mostly solved for free by the DataTable primitive.
+9. **URL as state** — filters/sort/selected-row in query params so dashboard views are linkable ("send me the HOT dental list"). Free once DataTable lands.
 
 **Explicitly deprioritized**
 - Mobile responsive layout — internal CRM, desktop-only by design. Don't "fix."
