@@ -56,6 +56,22 @@ export async function updateContactStatus(formData: FormData) {
   revalidatePath("/dashboard/prospects");
 }
 
+export async function updateNotes(formData: FormData) {
+  await requireUser();
+
+  const id = formData.get("id") as string;
+  const notes = (formData.get("notes") as string | null) ?? "";
+  if (!id) throw new Error("Invalid input");
+
+  const { error } = await serviceClient()
+    .from("website_prospects")
+    .update({ notes: notes.trim() === "" ? null : notes })
+    .eq("id", id);
+  if (error) throw error;
+
+  revalidatePath("/dashboard/prospects");
+}
+
 export async function bumpContactedAt(formData: FormData) {
   await requireUser();
 
