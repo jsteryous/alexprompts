@@ -232,21 +232,20 @@ export default async function DashboardPage({ searchParams }: Props) {
         ) : (
           <div className="overflow-x-auto rounded-xl border theme-border theme-card">
             <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b theme-border theme-card-muted">
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted w-8">#</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Score</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Contact</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Grantee / Borrower</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Location</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Event</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Value</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Evidence</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Added</th>
+              <thead className="sticky top-0 z-10 theme-card-muted">
+                <tr className="border-b theme-border">
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Score</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Contact</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Grantee / Borrower</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Location</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Event</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Value</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Evidence</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Added</th>
                 </tr>
               </thead>
               <tbody>
-                {leads.map((lead, i) => {
+                {leads.map((lead) => {
                   const { tier, label } = getConfidenceTier(lead.principal_role, lead.enrichment_status);
                   const isPending = lead.enrichment_status === "pending";
 
@@ -257,11 +256,8 @@ export default async function DashboardPage({ searchParams }: Props) {
                         isPending ? "opacity-60" : ""
                       }`}
                     >
-                      {/* Rank */}
-                      <td className="px-4 py-4 theme-text-muted text-xs">{i + 1}</td>
-
                       {/* Score + tag */}
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <span className={`text-base font-bold tabular-nums ${
                             (lead.score ?? 0) >= 85 ? "tone-good-text" :
@@ -276,7 +272,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Contact */}
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         {isPending ? (
                           <span className="theme-text-muted italic text-xs">Needs research</span>
                         ) : (
@@ -310,19 +306,19 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Source LLC */}
-                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[240px]">
+                      <td className="px-4 py-3 theme-text-secondary text-xs max-w-[240px]">
                         <p className="truncate" title={lead.market_signals?.entity_name ?? ""}>
                           {lead.market_signals?.entity_name ?? "—"}
                         </p>
                         {lead.trade_tag && (
-                          <p className="theme-text-muted mt-0.5 uppercase tracking-wide text-[10px]">
+                          <p className="theme-text-muted mt-0.5 uppercase tracking-wide text-xs">
                             {lead.trade_tag}
                           </p>
                         )}
                       </td>
 
                       {/* Location / address */}
-                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[280px]">
+                      <td className="px-4 py-3 theme-text-secondary text-xs max-w-[280px]">
                         {(() => {
                           const addr = isStreetAddress(lead.location) ? lead.location : null;
                           const sigLoc = lead.market_signals?.location ?? null;
@@ -335,7 +331,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                                 <span className="theme-text-muted italic">No address</span>
                               )}
                               {grantorName && (
-                                <p className="theme-text-muted text-[10px] truncate mt-0.5" title={grantorName}>
+                                <p className="theme-text-muted text-xs truncate mt-0.5" title={grantorName}>
                                   {grantorName}
                                 </p>
                               )}
@@ -345,19 +341,19 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Event type */}
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         <span className="text-xs theme-text-secondary whitespace-nowrap">
                           {lead.event_type ?? "—"}
                         </span>
                       </td>
 
                       {/* Valuation */}
-                      <td className="px-4 py-4 theme-text-secondary text-xs tabular-nums whitespace-nowrap">
+                      <td className="px-4 py-3 theme-text-secondary text-xs tabular-nums whitespace-nowrap">
                         {lead.transfer_type === "NOMINAL_TRANSFER" ? "—" : formatValuation(lead.valuation)}
                       </td>
 
                       {/* Evidence / confidence tier */}
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex flex-col gap-1.5">
                           <span title={lead.notes ?? undefined}>
                             <TierBadge tier={tier} label={label} />
@@ -371,7 +367,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                                 href={rawUrl ?? undefined}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[10px] theme-text-muted hover:underline truncate max-w-[180px] block transition-colors"
+                                className="text-xs theme-text-muted hover:underline truncate max-w-[180px] block transition-colors"
                                 title={lead.search_evidence}
                               >
                                 {hostname ?? lead.search_evidence.slice(0, 40)}
@@ -382,7 +378,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Date */}
-                      <td className="px-4 py-4 theme-text-muted text-xs whitespace-nowrap">
+                      <td className="px-4 py-3 theme-text-muted text-xs whitespace-nowrap">
                         {formatDate(lead.created_at)}
                       </td>
                     </tr>

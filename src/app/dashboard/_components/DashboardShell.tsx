@@ -25,19 +25,18 @@ export default async function DashboardShell({
   return (
     <div className="min-h-screen theme-text-primary">
       <div className="border-b theme-border">
-        <div className="max-w-screen-2xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-widest theme-label">
-                REBB Advisors
-              </span>
-              <DashNav active={active} />
+        <div className="max-w-screen-2xl mx-auto px-6 py-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xs font-semibold uppercase tracking-widest theme-label">
+                  REBB Advisors
+                </span>
+                <DashNav active={active} />
+              </div>
+              <h1 className="text-2xl font-bold theme-text-primary">{title}</h1>
+              <p className="text-sm theme-text-muted mt-1">{subtitle}</p>
             </div>
-            <h1 className="text-2xl font-bold theme-text-primary">{title}</h1>
-            <p className="text-sm theme-text-muted mt-1">{subtitle}</p>
-          </div>
-          <div className="flex items-start gap-8">
-            {stats && <div className="flex gap-6 text-right">{stats}</div>}
             <div className="text-right">
               <p className="text-xs theme-text-muted mb-1">{user?.email}</p>
               <form action={signOut}>
@@ -50,10 +49,13 @@ export default async function DashboardShell({
               </form>
             </div>
           </div>
+          {stats && (
+            <div className="flex flex-wrap gap-8 mt-6">{stats}</div>
+          )}
+          {filters && (
+            <div className="mt-4">{filters}</div>
+          )}
         </div>
-        {filters && (
-          <div className="max-w-screen-2xl mx-auto px-6 pb-4">{filters}</div>
-        )}
       </div>
       <div className="max-w-screen-2xl mx-auto px-6 py-8">{children}</div>
     </div>

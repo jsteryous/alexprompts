@@ -158,7 +158,7 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
       {chips.map((c) => (
         <span
           key={c.label}
-          className={`text-[10px] font-medium px-1.5 py-0.5 rounded border ${
+          className={`text-xs font-medium px-1.5 py-0.5 rounded border ${
             c.tone === "bad" ? "tone-hot" : "tone-warm"
           }`}
         >
@@ -191,7 +191,7 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
         <div>
           <p className="text-xs font-semibold theme-text-primary leading-tight">{dmName}</p>
           {dmTitle && (
-            <p className="text-[10px] theme-text-muted leading-tight">{dmTitle}</p>
+            <p className="text-xs theme-text-muted leading-tight">{dmTitle}</p>
           )}
         </div>
       )}
@@ -205,7 +205,7 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
             {primary}
           </a>
           {primaryEntry && (
-            <span className="text-[9px] font-semibold uppercase tracking-wider tone-good-text shrink-0">
+            <span className="text-xs font-semibold uppercase tracking-wider tone-good-text shrink-0">
               {primaryEntry.score}
             </span>
           )}
@@ -220,13 +220,13 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
           >
             {fallback}
           </a>
-          <span className="text-[9px] uppercase tracking-wider theme-text-muted shrink-0">
+          <span className="text-xs uppercase tracking-wider theme-text-muted shrink-0">
             shared
           </span>
         </div>
       )}
       {alternates.length > 0 && (
-        <details className="text-[10px]">
+        <details className="text-xs">
           <summary className="theme-text-muted hover:theme-text-secondary cursor-pointer select-none">
             +{alternates.length} more
           </summary>
@@ -307,33 +307,31 @@ export default async function ProspectsPage({ searchParams }: Props) {
         ) : (
           <div className="overflow-x-auto rounded-xl border theme-border theme-card">
             <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b theme-border theme-card-muted">
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted w-8">#</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Severity</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Business</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Contact</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Outreach</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">City</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Vertical</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Issues</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Proof</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-widest theme-text-muted">Rating</th>
+              <thead className="sticky top-0 z-10 theme-card-muted">
+                <tr className="border-b theme-border">
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Severity</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Business</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Contact</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Outreach</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">City</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Vertical</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Issues</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Proof</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium theme-text-muted">Rating</th>
                 </tr>
               </thead>
               <tbody>
-                {prospects.map((p, i) => (
+                {prospects.map((p) => (
                   <tr
                     key={p.id}
                     className={`border-b theme-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${
                       p.audit_status === "error" ? "opacity-50" : ""
                     }`}
                   >
-                    <td className="px-4 py-4 theme-text-muted text-xs">{i + 1}</td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-3">
                       <SeverityBadge score={p.severity_score} tag={p.severity_tag} />
                     </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-3">
                       <p className="font-semibold theme-text-primary text-sm leading-snug">
                         {p.business_name}
                       </p>
@@ -351,43 +349,43 @@ export default async function ProspectsPage({ searchParams }: Props) {
                       )}
                       {p.phone && <p className="text-xs theme-text-muted mt-0.5">{p.phone}</p>}
                     </td>
-                    <td className="px-4 py-4 max-w-[260px]">
+                    <td className="px-4 py-3 max-w-[260px]">
                       <ContactCell prospect={p} />
                     </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-3">
                       <OutreachCell
                         id={p.id}
                         status={p.contact_status ?? "not_contacted"}
                         lastContactedAt={p.last_contacted_at}
                       />
                     </td>
-                    <td className="px-4 py-4 theme-text-secondary text-xs">
+                    <td className="px-4 py-3 theme-text-secondary text-xs">
                       {p.city || "—"}
-                      {p.county && <p className="theme-text-muted text-[10px]">{p.county}</p>}
+                      {p.county && <p className="theme-text-muted text-xs">{p.county}</p>}
                     </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-3">
                       <span className="text-xs theme-text-secondary capitalize">
                         {p.vertical.replace("_", " ")}
                       </span>
                     </td>
-                    <td className="px-4 py-4 max-w-[260px]">
+                    <td className="px-4 py-3 max-w-[260px]">
                       <IssueChips issues={p.issues} status={p.audit_status} />
                       {p.audit_error && (
-                        <p className="text-[10px] tone-hot-text mt-1 truncate" title={p.audit_error}>
+                        <p className="text-xs tone-hot-text mt-1 truncate" title={p.audit_error}>
                           {p.audit_error}
                         </p>
                       )}
                     </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-3">
                       <div className="flex gap-1">
                         {p.mobile_screenshot_url && (
                           <a
                             href={p.mobile_screenshot_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] theme-text-muted hover:theme-text-primary border theme-border rounded px-1.5 py-0.5"
+                            className="text-xs theme-text-muted hover:theme-text-primary border theme-border rounded px-2 py-0.5"
                           >
-                            📱 mobile
+                            Mobile
                           </a>
                         )}
                         {p.desktop_screenshot_url && (
@@ -395,18 +393,18 @@ export default async function ProspectsPage({ searchParams }: Props) {
                             href={p.desktop_screenshot_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] theme-text-muted hover:theme-text-primary border theme-border rounded px-1.5 py-0.5"
+                            className="text-xs theme-text-muted hover:theme-text-primary border theme-border rounded px-2 py-0.5"
                           >
-                            🖥 desktop
+                            Desktop
                           </a>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-4 text-xs theme-text-secondary tabular-nums whitespace-nowrap">
+                    <td className="px-4 py-3 text-xs theme-text-secondary tabular-nums whitespace-nowrap">
                       {p.google_rating ? (
                         <>
                           <span>{p.google_rating.toFixed(1)}★</span>
-                          <p className="text-[10px] theme-text-muted">{p.google_review_count ?? 0} reviews</p>
+                          <p className="text-xs theme-text-muted">{p.google_review_count ?? 0} reviews</p>
                         </>
                       ) : "—"}
                     </td>
