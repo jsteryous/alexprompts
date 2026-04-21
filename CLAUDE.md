@@ -46,6 +46,7 @@ These are the file relationships you can't derive by reading individual files:
 - **`src/components/VisualMocks.tsx`** — synthetic SVG/CSS mockups (broken phone, form 404, cramped mobile, stale copyright, low Lighthouse). **Intentional theme-token exception**: uses fixed neutral grays + red callouts because they represent *other people's* broken sites, not REBB's surface.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/dashboard/*` (via `usePathname`). Do NOT re-add chrome there.
 - **`proxy.ts`** (root) — Next.js 16 route proxy, replaces `middleware.ts`. Guards `/dashboard/*`. Do NOT create `middleware.ts`.
+- **`src/app/dashboard/_components/DashboardShell.tsx`** — async server component wrapping every dashboard route. Owns header, `<DashNav>`, signed-in email + sign-out form, stat row slot, optional `filters` slot. Props: `title`, `subtitle`, `active`, `stats`, `filters?`, `children`. Pair with `<StatTile>` (`_components/StatTile.tsx`) for the stat row. Add a new tab by extending `TABS` in `_components/DashNav.tsx` + the `DashNavKey` union. `getCurrentUser()` lives in `_lib/auth.ts`. Do NOT rebuild the header per page.
 - **`app/opengraph-image.tsx`** — edge Satori OG image, auto-injected. Do NOT set `openGraph.images` in page metadata — it conflicts.
 - **Redirects** (all `permanentRedirect("/")`): `/how-it-works`, `/web-development`, `/seo`, `/lead-intelligence`, `/outreach-automation`. Kept for inbound-link preservation.
 
@@ -349,6 +350,30 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]
 ```bash
 npm run dev | npm run build | npm run lint | npx vercel --prod
 ```
+
+## Dashboard — Long-Term UX Roadmap
+
+Ordered by long-term leverage (not what's visible today). The user settled on this sequence for the internal CRM at `/dashboard` + `/dashboard/prospects`. Do the earlier items first — each one makes the next cheaper.
+
+**Done**
+1. **Design tokens** — `.tone-{hot,warm,cool,good,good-strong,neutral,info}` in `globals.css`. All dashboard status/severity colors route through them (see Design System section).
+2. **Shared shell** — `DashboardShell` + `DashNav` + `StatTile` + `getCurrentUser()` extracted to `src/app/dashboard/_components/` and `_lib/`.
+
+**Next**
+3. **Generic `<DataTable>` primitive** — do NOT bolt sort/filter onto one page. Build a column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, sticky header, column visibility. TanStack Table is the default pick. Use on both dashboard pages. This is the biggest UX lever because every future internal view is a table.
+4. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time. Formalize the TS↔Python coupling around `principal_role` prefixes and cluster slugs instead of string-matching.
+5. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.
+6. **A11y pass** — row focus styles, aria-labels on emoji-only screenshot buttons, stat-tile labels, nested-interactive cleanup (`<details>` inside row). Mostly solved for free by the DataTable primitive.
+7. **URL as state** — filters/sort/selected-row in query params so dashboard views are linkable ("send me the HOT dental list"). Free once DataTable lands.
+
+**Explicitly deprioritized**
+- Mobile responsive layout — internal CRM, desktop-only by design. Don't "fix."
+- Horizontal scroll on desktop — solved by DataTable column visibility; not worth a standalone pass.
+
+**Non-goals masquerading as tasks** — do not be tempted by these over the roadmap above:
+- Adding more badge tones before a real use case demands one.
+- Rebuilding the shell into a client component.
+- Adding react-query / SWR before server components demonstrably fall short.
 
 ## Python Pipeline — Open Tech Debt
 
