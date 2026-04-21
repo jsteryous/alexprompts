@@ -39,8 +39,8 @@ const checklistHtml = `
 
     <div style="margin-top:32px;padding:24px;background:#f4f0e8;border-radius:12px">
       <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0f1411">Want us to just audit it for you?</p>
-      <p style="margin:0 0 16px;font-size:14px;color:#4a544c">Send your URL. We reply within one business day with screenshots of what's broken and a written proposal naming the tier that fits — Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance ($7,500 + $1,200/mo). If the site is already fine, the proposal says that.</p>
-      <a href="https://rebbadvisors.com/contact" style="display:inline-block;background:#1f7d4e;color:#fff;font-weight:600;font-size:14px;padding:12px 22px;border-radius:10px;text-decoration:none">Get Free Audit + Proposal →</a>
+      <p style="margin:0 0 16px;font-size:14px;color:#4a544c">Send your URL. We reply within one business day with screenshots of what's broken and a written proposal naming the tier that fits — Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance (custom scope). If the site is already fine, the proposal says that.</p>
+      <a href="https://rebbadvisors.com/contact" style="display:inline-block;background:#1f7d4e;color:#fff;font-weight:600;font-size:14px;padding:12px 22px;border-radius:10px;text-decoration:none">Get Free Audit →</a>
     </div>
 
     <p style="margin:32px 0 0;font-size:12px;color:#8a8f8c">REBB Advisors · Greenville SC · Website cleanup for dental practices.</p>

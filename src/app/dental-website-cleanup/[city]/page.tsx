@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) return {};
   const url = `https://rebbadvisors.com/dental-website-cleanup/${city.slug}`;
   const title = `Dental Website Cleanup in ${city.name} SC | REBB Advisors`;
-  const description = `Dental website cleanup, growth, and dominance tiers for ${city.name} and the ${city.county} County area. From $1,500 one-time Cleanup to full Growth and Dominance retainers. Free audit and written proposal.`;
+  const description = `Dental website cleanup, growth, and dominance tiers for ${city.name} and the ${city.county} County area. Cleanup from $1,500, Growth retainer from $500/mo, Dominance custom-scoped. Free audit and written proposal.`;
   return {
     title,
     description,
@@ -64,7 +64,6 @@ export default async function CityPage({ params }: Props) {
       "@type": "AggregateOffer",
       priceCurrency: "USD",
       lowPrice: "1500",
-      highPrice: "7500",
       offerCount: "3",
       availability: "https://schema.org/InStock",
     },
@@ -108,7 +107,7 @@ export default async function CityPage({ params }: Props) {
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Get Free Audit + Proposal
+                Get Free Audit
                 <ArrowIcon />
               </Link>
               <p className="theme-text-muted text-xs mt-5">

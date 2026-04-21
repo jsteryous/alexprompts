@@ -34,6 +34,8 @@ import requests
 from dotenv import load_dotenv
 from supabase import create_client
 
+from audit_stats import fetch_dental_stats, stats_methodology_md, stats_prompt_block
+
 # ── Load .env.local from project root ───────────────────────────────────────
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env.local")
@@ -157,7 +159,7 @@ def extract_summary(body_md: str, max_chars: int = 280) -> str:
     return ""
 
 
-def generate_with_gemini(topic: str, max_retries: int = 3) -> str:
+def generate_with_gemini(topic: str, stats_block: str = "", max_retries: int = 3) -> str:
     """Call the Gemini API and return the raw Markdown string.
 
     Retries up to max_retries times with exponential backoff on transient errors.
@@ -176,6 +178,10 @@ def generate_with_gemini(topic: str, max_retries: int = 3) -> str:
 
     client = genai.Client(api_key=api_key)
 
+    system_instruction = SYSTEM_PROMPT
+    if stats_block:
+        system_instruction = f"{SYSTEM_PROMPT}\n\n{stats_block}"
+
     log.info(f"Calling Gemini ({GEMINI_MODEL}) for topic: {topic!r}")
     last_exc: Exception | None = None
     for attempt in range(max_retries):
@@ -184,7 +190,7 @@ def generate_with_gemini(topic: str, max_retries: int = 3) -> str:
                 model=GEMINI_MODEL,
                 contents=topic,
                 config=types.GenerateContentConfig(
-                    system_instruction=SYSTEM_PROMPT,
+                    system_instruction=system_instruction,
                 ),
             )
             text = response.text
@@ -390,8 +396,27 @@ def main() -> None:
     if not args.topic:
         parser.error("--topic is required (or use --test-email)")
 
+    # 0. Fetch proprietary audit stats (EEAT grounding) before generation
+    stats = {}
+    stats_block = ""
+    url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL")
+    key = os.getenv("SUPABASE_SERVICE_KEY")
+    if url and key:
+        try:
+            stats = fetch_dental_stats(create_client(url, key))
+            stats_block = stats_prompt_block(stats) if stats else ""
+            if stats:
+                log.info(
+                    f"Grounded on {stats['n_audited']} audited dental sites "
+                    f"across {len(stats['counties'])} counties."
+                )
+            else:
+                log.warning("Insufficient audited rows (<5) — generating without first-party stats.")
+        except Exception as exc:
+            log.warning(f"Audit stats fetch failed (non-fatal): {exc}")
+
     # 1. Generate content
-    raw_markdown = generate_with_gemini(args.topic)
+    raw_markdown = generate_with_gemini(args.topic, stats_block=stats_block)
 
     # 2. Parse title / body
     title, body_md = extract_title_and_body(raw_markdown)
@@ -400,6 +425,10 @@ def main() -> None:
         title = args.topic.strip().rstrip(".")
     slug = slugify(title)
     summary = extract_summary(body_md)
+
+    # 2b. Append methodology footer when the article was stat-grounded
+    if stats:
+        body_md = body_md.rstrip() + stats_methodology_md(stats)
 
     # 3. Print preview
     separator = "─" * 60

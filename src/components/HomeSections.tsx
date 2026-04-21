@@ -54,10 +54,10 @@ const processSteps = [
 ];
 
 const outcomes = [
-  "Your site works on phones",
-  "Patients can actually book an appointment",
-  "The practice looks modern instead of abandoned",
-  "You stop losing bookings to practices with cleaner sites",
+  "Patients book without hitting a dead form",
+  "Your site loads fast and looks right on every phone",
+  "You show up first when patients Google \u201Cdentist near me\u201D",
+  "New reviews arrive steadily \u2014 and Google notices",
 ];
 
 export const faqs = [
@@ -67,7 +67,7 @@ export const faqs = [
   },
   {
     q: "How do the three tiers differ?",
-    a: "Cleanup ($1,500) is a one-time 48-hour fix of broken booking forms, mobile, trust leaks, and basic modernization \u2014 no retainer. Growth ($3,500 setup + $500/month) adds schema, Google Business Profile management, on-page SEO, and two blog posts a month. Dominance ($7,500 setup + $1,200/month) adds a visual refresh, four posts a month, active link building, and CRO.",
+    a: "Cleanup ($1,500) is a one-time 48-hour fix for the things on your site that are quietly losing you patients \u2014 broken forms, mobile problems, stale footer. No retainer. Growth ($3,500 setup + $500/month) adds the ongoing work that makes new patients find you first on Google: listing management, content written for what patients actually search, review responses, monthly reporting. Dominance is custom \u2014 a visual refresh, more content, authority building, and dedicated landing pages, scoped and priced inside the proposal for practices fighting to be the default choice in their ZIP code.",
   },
   {
     q: "Are the monthly retainers locked in?",
@@ -194,72 +194,69 @@ export const tiers = [
   {
     slug: "cleanup",
     name: "Cleanup",
-    tagline: "Stop the bleeding.",
+    tagline: "Stop losing patients who are already trying to book you.",
     setupPrice: "$1,500",
     setupNote: "one-time",
     monthlyPrice: null,
     monthlyNote: "No retainer",
     timeline: "48-hour turnaround",
     bestFor:
-      "Practices with a working-but-broken site. Booking form 404s, cramped mobile, stale footer, low Lighthouse.",
+      "Your site works but is quietly embarrassing. The booking form\u2019s broken. It looks bad on a phone. The footer still says 2019.",
     included: [
-      "Broken booking-form diagnosis and repair",
-      "Mobile viewport + layout fixes on key pages",
-      "Trust cleanup (copyright year, broken links, SSL)",
-      "Basic modernization of hero, CTAs, and contact path",
-      "Before/after screenshots at handoff",
+      "Your booking and contact forms actually work \u2014 on every device",
+      "Your site displays and scrolls properly on phones",
+      "Copyright year, broken links, and the padlock in the address bar all correct",
+      "Hero, buttons, and contact flow refreshed so the practice looks current",
+      "Before/after screenshots at handoff, so you see exactly what changed",
     ],
     featured: false,
-    cta: "Request Free Audit",
+    cta: "Get Free Audit",
   },
   {
     slug: "growth",
     name: "Growth",
-    tagline: "Start actually ranking.",
+    tagline: "Be the dentist new patients see first \u2014 month after month.",
     setupPrice: "$3,500",
     setupNote: "setup",
     monthlyPrice: "$500",
     monthlyNote: "per month, month-to-month",
     timeline: "2-3 week build, ongoing from month 2",
     bestFor:
-      "Established practices that want the phone to ring more. Everything in Cleanup, plus the ongoing work that moves rankings.",
+      "You\u2019re an established practice. The site is okay. You want to show up when patients in your area Google \u201Cdentist near me\u201D \u2014 and keep showing up.",
     included: [
       "Everything in Cleanup",
-      "LocalBusiness + Dentist schema markup",
-      "Google Business Profile claim + monthly optimization",
-      "On-page SEO on home + top 5 service pages",
-      "2 patient-facing blog posts per month",
-      "Review monitoring + response templates",
-      "NAP consistency + top local directory submissions",
-      "Monthly report: what shipped, what moved",
+      "Your Google listing claimed, filled out, and optimized every month so new patients find you first",
+      "Home and top service pages rewritten to match what patients actually search for",
+      "Two patient-facing articles a month, written about questions your patients actually ask",
+      "New reviews monitored; we draft responses, you approve",
+      "Listed correctly across the directories Google checks when ranking local dentists",
+      "A monthly email showing what shipped and what moved",
     ],
     featured: true,
-    cta: "Request Free Audit",
+    cta: "Get Free Audit",
   },
   {
     slug: "dominance",
     name: "Dominance",
-    tagline: "Own the local market.",
-    setupPrice: "$7,500",
-    setupNote: "setup",
-    monthlyPrice: "$1,200",
-    monthlyNote: "per month, month-to-month",
-    timeline: "4-6 week build, ongoing from month 2",
+    tagline: "Own your ZIP code. Be the default dentist for every procedure.",
+    setupPrice: "Let\u2019s talk",
+    setupNote: "custom scope",
+    monthlyPrice: null,
+    monthlyNote: "Scope and retainer priced in the proposal",
+    timeline: "Timeline confirmed in proposal",
     bestFor:
-      "Multi-provider or expansion-stage practices ready to out-rank every other dentist in the county.",
+      "Multi-provider, expansion-stage, or fighting a crowded market. You want to be the default dentist choice in your ZIP code \u2014 for cleanings, implants, ortho, all of it.",
     included: [
       "Everything in Growth",
-      "Visual refresh / redesign (conversion-focused)",
-      "4 long-form blog posts per month",
-      "Active link building (3-5 per month)",
-      "Review generation automation",
-      "Before/after galleries + treatment landing pages",
-      "Insurance + new-patient landing pages",
-      "Core Web Vitals + CRO pass each quarter",
-      "Quarterly strategy review",
+      "A visual refresh designed around new-patient conversion \u2014 not redesign for its own sake",
+      "Four long-form articles a month that earn search traffic over time",
+      "Mentions and links from other local and dental sites to boost your authority",
+      "Automated review requests sent to patients after appointments",
+      "Before/after galleries, treatment explainers, and dedicated pages for insurance and new patients",
+      "A quarterly review \u2014 what\u2019s working, what we\u2019re doubling down on next",
     ],
     featured: false,
-    cta: "Request Free Audit",
+    cta: "Get Free Audit",
   },
 ] as const;
 
@@ -455,7 +452,7 @@ export function FinalCtaSection() {
           href="/contact"
           className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
         >
-          Get Free Audit + Proposal
+          Get Free Audit
           <ArrowIcon />
         </Link>
       </div>

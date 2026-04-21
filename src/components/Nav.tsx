@@ -10,7 +10,6 @@ const links = [
   { href: "/#pricing", label: "Pricing" },
   { href: "/sample-proposal", label: "Sample Proposal" },
   { href: "/insights", label: "Insights" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {

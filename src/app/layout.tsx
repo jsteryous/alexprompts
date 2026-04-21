@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rebbadvisors.com"),
   title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
   description:
-    "REBB Advisors fixes and grows dental practice websites in Greenville SC. Three tiers from $1,500 Cleanup to Growth and Dominance retainers. Free audit and written proposal before you commit.",
+    "REBB Advisors fixes and grows dental practice websites in Greenville SC. Cleanup from $1,500, Growth retainer from $500/mo, Dominance custom-scoped. Free audit and written proposal before you commit.",
   keywords: [
     "dental website cleanup Greenville SC",
     "dentist website repair",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Three-tier dental website engagements: Cleanup ($1,500 flat), Growth ($3,500 + $500/mo), Dominance ($7,500 + $1,200/mo). Free audit and written proposal.",
+      "Three-tier dental website engagements: Cleanup ($1,500 flat), Growth ($3,500 + $500/mo), Dominance (custom scope). Free audit and written proposal.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
@@ -61,9 +61,9 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Tiered website cleanup, growth, and dominance engagements for dental practices. From flat-fee Cleanup ($1,500) to Growth ($3,500 setup + $500/mo) to Dominance ($7,500 setup + $1,200/mo). Every engagement starts with a free audit and a written proposal.",
+                "Tiered website cleanup, growth, and dominance engagements for dental practices. Cleanup ($1,500 flat), Growth ($3,500 setup + $500/mo), Dominance custom-scoped. Every engagement starts with a free audit and a written proposal.",
               slogan: "Confused customers don't buy.",
-              priceRange: "$1,500 - $7,500+",
+              priceRange: "$1,500+",
               areaServed: [
                 { "@type": "AdministrativeArea", name: "Greenville County, South Carolina" },
                 { "@type": "AdministrativeArea", name: "Spartanburg County, South Carolina" },
@@ -138,8 +138,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     name: "Dominance",
                     description:
-                      "Growth plus visual refresh, four long-form posts per month, active link building, review generation, and quarterly CRO. Month-to-month retainer.",
-                    price: "7500",
+                      "Custom-scoped engagement for multi-provider, expansion-stage, or highly competitive practices. Growth plus visual refresh, deeper content, authority building, and dedicated landing pages. Scope, setup, and month-to-month retainer priced in the written proposal.",
                     priceCurrency: "USD",
                     availability: "https://schema.org/InStock",
                     category: "Digital marketing",
@@ -147,13 +146,6 @@ export default function RootLayout({
                       "@type": "Service",
                       name: "Dental Website Dominance",
                       serviceType: "Full-service dental website marketing",
-                    },
-                    priceSpecification: {
-                      "@type": "UnitPriceSpecification",
-                      price: "1200",
-                      priceCurrency: "USD",
-                      billingIncrement: 1,
-                      unitCode: "MON",
                     },
                   },
                 ],

@@ -51,7 +51,7 @@ export default function ContactPage() {
             We&apos;ll show you what is broken.
           </h1>
           <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
-            Reply within one business day: screenshots of the issues worth fixing, plus a written proposal naming the tier that actually fits &mdash; Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance ($7,500 + $1,200/mo). If the site is already fine, the proposal says that.
+            Reply within one business day: screenshots of the issues worth fixing, plus a written proposal naming the tier that actually fits &mdash; Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance (custom scope). If the site is already fine, the proposal says that.
           </p>
         </div>
       </section>

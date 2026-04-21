@@ -139,9 +139,9 @@ A visible trust leak. Prospects reading the footer assume the practice is closed
 
 ### "Own the local market."
 
-**Investment:** $7,500 (one-time setup)
-**Timeline:** 4–6 week build, ongoing from month 2
-**Monthly ongoing:** $1,200 / month — month-to-month, 30-day cancel
+**Investment:** Custom scope — setup and monthly retainer quoted in the proposal. For a practice at Pinecrest's scale, Dominance is more than needed; the tier is usually scoped for multi-provider or expansion-stage practices.
+**Timeline:** Confirmed in proposal
+**Retainer:** Month-to-month, 30-day cancel
 
 ### What's included
 
@@ -168,9 +168,9 @@ A visible trust leak. Prospects reading the footer assume the practice is closed
 
 | Feature                              | Cleanup        | Growth          | Dominance       |
 | ------------------------------------ | -------------- | --------------- | --------------- |
-| **Setup investment**                 | $1,500         | $3,500          | $7,500          |
-| **Monthly ongoing**                  | None           | $500            | $1,200          |
-| **Timeline**                         | 48 hours       | 2–3 weeks       | 4–6 weeks       |
+| **Setup investment**                 | $1,500         | $3,500          | Custom          |
+| **Monthly ongoing**                  | None           | $500            | Custom          |
+| **Timeline**                         | 48 hours       | 2–3 weeks       | Quoted          |
 | Booking-form repair                  | ✓              | ✓               | ✓               |
 | Mobile viewport + layout fixes       | ✓              | ✓               | ✓               |
 | Basic modernization                  | ✓              | ✓               | ✓               |
@@ -280,7 +280,7 @@ A: If the platform cannot support the Growth scope (some very old WordPress buil
 | ------------- | ------- | --------- | -------------- |
 | **Cleanup**   | $1,500  | —         | $1,500         |
 | **Growth**    | $3,500  | $500      | $9,500         |
-| **Dominance** | $7,500  | $1,200    | $21,900        |
+| **Dominance** | Custom  | Custom    | Quoted per practice |
 
 **Recommended: Growth — $9,500 over 12 months, cancellable with 30 days notice at any time.**
 
@@ -330,7 +330,7 @@ export default async function SampleProposalPage() {
             href="/contact"
             className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm"
           >
-            Get Free Audit + Proposal
+            Get Free Audit
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
