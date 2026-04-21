@@ -33,6 +33,30 @@
   --shadow-soft: 0 24px 80px rgba(32, 24, 13, 0.08);
   --shadow-card: 0 16px 44px rgba(42, 31, 19, 0.08);
   --header-bg: rgba(255, 252, 247, 0.76);
+
+  /* Semantic tone tokens — dashboard status/severity signals.
+     Use .tone-* utilities instead of hardcoded bg-red-50 / text-amber-600 / etc. */
+  --tone-hot-bg:         #fef2f2;
+  --tone-hot-fg:         #b91c1c;
+  --tone-hot-border:     #fecaca;
+  --tone-warm-bg:        #fffbeb;
+  --tone-warm-fg:        #b45309;
+  --tone-warm-border:    #fde68a;
+  --tone-cool-bg:        #eff6ff;
+  --tone-cool-fg:        #1d4ed8;
+  --tone-cool-border:    #bfdbfe;
+  --tone-good-bg:        #f0fdf4;
+  --tone-good-fg:        #15803d;
+  --tone-good-border:    #bbf7d0;
+  --tone-good-strong-bg: #dcfce7;
+  --tone-good-strong-fg: #166534;
+  --tone-good-strong-border: #86efac;
+  --tone-neutral-bg:     #f3f4f6;
+  --tone-neutral-fg:     #6b7280;
+  --tone-neutral-border: #e5e7eb;
+  --tone-info-bg:        #faf5ff;
+  --tone-info-fg:        #7e22ce;
+  --tone-info-border:    #e9d5ff;
 }
 
 html {
@@ -66,6 +90,28 @@ html.dark {
   --shadow-soft: 0 28px 84px rgba(0, 0, 0, 0.34);
   --shadow-card: 0 18px 46px rgba(0, 0, 0, 0.28);
   --header-bg: rgba(15, 20, 17, 0.74);
+
+  --tone-hot-bg:         rgba(127, 29, 29, 0.28);
+  --tone-hot-fg:         #fca5a5;
+  --tone-hot-border:     rgba(153, 27, 27, 0.42);
+  --tone-warm-bg:        rgba(120, 53, 15, 0.3);
+  --tone-warm-fg:        #fcd34d;
+  --tone-warm-border:    rgba(146, 64, 14, 0.45);
+  --tone-cool-bg:        rgba(30, 58, 138, 0.32);
+  --tone-cool-fg:        #93c5fd;
+  --tone-cool-border:    rgba(30, 64, 175, 0.42);
+  --tone-good-bg:        rgba(20, 83, 45, 0.32);
+  --tone-good-fg:        #86efac;
+  --tone-good-border:    rgba(22, 101, 52, 0.45);
+  --tone-good-strong-bg: rgba(22, 101, 52, 0.5);
+  --tone-good-strong-fg: #bbf7d0;
+  --tone-good-strong-border: rgba(22, 101, 52, 0.7);
+  --tone-neutral-bg:     rgba(31, 41, 55, 0.55);
+  --tone-neutral-fg:     #9ca3af;
+  --tone-neutral-border: rgba(55, 65, 81, 0.6);
+  --tone-info-bg:        rgba(88, 28, 135, 0.38);
+  --tone-info-fg:        #d8b4fe;
+  --tone-info-border:    rgba(107, 33, 168, 0.5);
 }
 
 body {
@@ -280,6 +326,23 @@ html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-ca
   color: var(--warn);
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
+
+/* Tone utilities — apply bg + fg + border-color together. Pair with `border`
+   (or the consumer's own border class) to render the outline. Use the -text
+   variants when only the foreground color is needed (score digits, link text,
+   stat-tile numerals). */
+.tone-hot         { background: var(--tone-hot-bg);         color: var(--tone-hot-fg);         border-color: var(--tone-hot-border); }
+.tone-warm        { background: var(--tone-warm-bg);        color: var(--tone-warm-fg);        border-color: var(--tone-warm-border); }
+.tone-cool        { background: var(--tone-cool-bg);        color: var(--tone-cool-fg);        border-color: var(--tone-cool-border); }
+.tone-good        { background: var(--tone-good-bg);        color: var(--tone-good-fg);        border-color: var(--tone-good-border); }
+.tone-good-strong { background: var(--tone-good-strong-bg); color: var(--tone-good-strong-fg); border-color: var(--tone-good-strong-border); }
+.tone-neutral     { background: var(--tone-neutral-bg);     color: var(--tone-neutral-fg);     border-color: var(--tone-neutral-border); }
+.tone-info        { background: var(--tone-info-bg);        color: var(--tone-info-fg);        border-color: var(--tone-info-border); }
+
+.tone-hot-text    { color: var(--tone-hot-fg); }
+.tone-warm-text   { color: var(--tone-warm-fg); }
+.tone-cool-text   { color: var(--tone-cool-fg); }
+.tone-good-text   { color: var(--tone-good-fg); }
 
 .theme-toggle {
   background: color-mix(in srgb, var(--surface-inverse) 68%, var(--background) 32%);

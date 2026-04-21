@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { signOut } from "../login/actions";
+import DashboardShell from "../_components/DashboardShell";
+import StatTile from "../_components/StatTile";
 import OutreachCell from "./OutreachCell";
 
 export const metadata: Metadata = {
@@ -101,33 +100,13 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
   return (data as unknown as Prospect[]) ?? [];
 }
 
-async function getCurrentUser() {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll(); },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
-}
-
 // ── Presentation ─────────────────────────────────────────────────────────────
 
 function SeverityBadge({ score, tag }: { score: number | null; tag: string | null }) {
   if (score === null) return <span className="theme-text-muted text-xs">—</span>;
   const color =
-    tag === "HOT"  ? "text-red-600 dark:text-red-400" :
-    tag === "WARM" ? "text-amber-600 dark:text-amber-400" :
+    tag === "HOT"  ? "tone-hot-text" :
+    tag === "WARM" ? "tone-warm-text" :
                      "theme-text-secondary";
   return (
     <div className="flex items-center gap-2">
@@ -144,7 +123,7 @@ function SeverityBadge({ score, tag }: { score: number | null; tag: string | nul
 function IssueChips({ issues, status }: { issues: AuditIssues | null; status: string }) {
   if (status === "no_website") {
     return (
-      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/50 dark:text-red-300 dark:border-red-900/60">
+      <span className="text-xs font-medium px-2 py-0.5 rounded-full border tone-hot">
         NO WEBSITE
       </span>
     );
@@ -179,10 +158,8 @@ function IssueChips({ issues, status }: { issues: AuditIssues | null; status: st
       {chips.map((c) => (
         <span
           key={c.label}
-          className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
-            c.tone === "bad"
-              ? "bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/40"
-              : "bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/40"
+          className={`text-[10px] font-medium px-1.5 py-0.5 rounded border ${
+            c.tone === "bad" ? "tone-hot" : "tone-warm"
           }`}
         >
           {c.label}
@@ -222,13 +199,13 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
         <div className="flex items-baseline gap-1.5">
           <a
             href={`mailto:${primary}`}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline break-all"
+            className="text-xs tone-cool-text hover:underline break-all"
             title={primaryEntry ? `${primaryEntry.role_hint} · score ${primaryEntry.score}` : primary}
           >
             {primary}
           </a>
           {primaryEntry && (
-            <span className="text-[9px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 shrink-0">
+            <span className="text-[9px] font-semibold uppercase tracking-wider tone-good-text shrink-0">
               {primaryEntry.score}
             </span>
           )}
@@ -258,7 +235,7 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
               <li key={r.email} className="break-all">
                 <a
                   href={`mailto:${r.email}`}
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="tone-cool-text hover:underline"
                   title={`${r.role_hint} · score ${r.score}`}
                 >
                   {r.email}
@@ -273,32 +250,10 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
   );
 }
 
-function DashNav({ active }: { active: "leads" | "prospects" }) {
-  const tab = (href: string, label: string, key: "leads" | "prospects") => (
-    <Link
-      href={href}
-      className={`text-sm px-3 py-1.5 rounded-md transition-colors ${
-        active === key
-          ? "theme-card-strong theme-text-primary border theme-border"
-          : "theme-text-muted hover:theme-text-primary"
-      }`}
-    >
-      {label}
-    </Link>
-  );
-  return (
-    <div className="flex items-center gap-1">
-      {tab("/dashboard", "Leads", "leads")}
-      {tab("/dashboard/prospects", "Prospects", "prospects")}
-    </div>
-  );
-}
-
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function ProspectsPage({ searchParams }: Props) {
   const { vertical, status } = await searchParams;
-  const user = await getCurrentUser();
   const prospects = await getProspects(vertical, status);
 
   const hot        = prospects.filter((p) => p.severity_tag === "HOT").length;
@@ -319,62 +274,27 @@ export default async function ProspectsPage({ searchParams }: Props) {
   );
 
   return (
-    <div className="min-h-screen theme-text-primary">
-      {/* Header */}
-      <div className="border-b theme-border">
-        <div className="max-w-screen-2xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-widest theme-label">
-                REBB Advisors
-              </span>
-              <DashNav active="prospects" />
-            </div>
-            <h1 className="text-2xl font-bold theme-text-primary">Website Prospects</h1>
-            <p className="text-sm theme-text-muted mt-1">
-              Upstate businesses with broken or missing websites we can fix.
-            </p>
-          </div>
-          <div className="flex items-start gap-8">
-            <div className="flex gap-6 text-right">
-              <div>
-                <p className="text-2xl font-bold text-red-600 dark:text-red-400">{noWebsite}</p>
-                <p className="text-xs theme-text-muted">No website</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{hot}</p>
-                <p className="text-xs theme-text-muted">HOT</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold theme-text-secondary">{pending}</p>
-                <p className="text-xs theme-text-muted">Pending</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-xs theme-text-muted mb-1">{user?.email}</p>
-              <form action={signOut}>
-                <button
-                  type="submit"
-                  className="text-xs theme-text-muted hover:theme-text-primary transition-colors"
-                >
-                  Sign out
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-screen-2xl mx-auto px-6 pb-4 flex items-center gap-2">
+    <DashboardShell
+      active="prospects"
+      title="Website Prospects"
+      subtitle="Upstate businesses with broken or missing websites we can fix."
+      stats={
+        <>
+          <StatTile label="No website" value={noWebsite} tone="hot" />
+          <StatTile label="HOT"        value={hot}       tone="warm" />
+          <StatTile label="Pending"    value={pending}   tone="muted" />
+        </>
+      }
+      filters={
+        <div className="flex items-center gap-2">
           <span className="text-xs theme-text-muted mr-1">Vertical:</span>
           {verticalLink(undefined, "All")}
           {verticalLink("dental", "Dental")}
           {verticalLink("personal_injury", "Personal Injury")}
         </div>
-      </div>
-
-      {/* Table */}
-      <div className="max-w-screen-2xl mx-auto px-6 py-8">
-        {prospects.length === 0 ? (
+      }
+    >
+      {prospects.length === 0 ? (
           <div className="text-center py-24 theme-text-muted">
             <p className="text-sm">
               No prospects yet. Run{" "}
@@ -422,12 +342,12 @@ export default async function ProspectsPage({ searchParams }: Props) {
                           href={p.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-blue-600 dark:text-blue-400 hover:underline transition-colors truncate max-w-[220px] block mt-0.5"
+                          className="text-xs tone-cool-text hover:underline transition-colors truncate max-w-[220px] block mt-0.5"
                         >
                           {(() => { try { return new URL(p.website_url).hostname; } catch { return p.website_url; } })()} ↗
                         </a>
                       ) : (
-                        <span className="text-xs text-red-600 dark:text-red-400 mt-0.5 block">No website</span>
+                        <span className="text-xs tone-hot-text mt-0.5 block">No website</span>
                       )}
                       {p.phone && <p className="text-xs theme-text-muted mt-0.5">{p.phone}</p>}
                     </td>
@@ -453,7 +373,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
                     <td className="px-4 py-4 max-w-[260px]">
                       <IssueChips issues={p.issues} status={p.audit_status} />
                       {p.audit_error && (
-                        <p className="text-[10px] text-red-600 dark:text-red-400 mt-1 truncate" title={p.audit_error}>
+                        <p className="text-[10px] tone-hot-text mt-1 truncate" title={p.audit_error}>
                           {p.audit_error}
                         </p>
                       )}
@@ -497,10 +417,9 @@ export default async function ProspectsPage({ searchParams }: Props) {
           </div>
         )}
 
-        <p className="text-xs theme-text-muted mt-4 text-right opacity-70">
-          {prospects.length} prospects · sorted by severity desc
-        </p>
-      </div>
-    </div>
+      <p className="text-xs theme-text-muted mt-4 text-right opacity-70">
+        {prospects.length} prospects · sorted by severity desc
+      </p>
+    </DashboardShell>
   );
 }

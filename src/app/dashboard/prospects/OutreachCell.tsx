@@ -13,10 +13,10 @@ const STATUS_OPTIONS: { value: string; label: string }[] = [
 
 function statusTone(status: string): string {
   switch (status) {
-    case "contacted": return "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-900/50";
-    case "replied":   return "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900/50";
-    case "booked":    return "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-900/50 dark:text-emerald-200 dark:border-emerald-800";
-    case "dead":      return "bg-zinc-100 text-zinc-500 border-zinc-200 dark:bg-zinc-900/60 dark:text-zinc-500 dark:border-zinc-800 line-through";
+    case "contacted": return "tone-cool";
+    case "replied":   return "tone-good";
+    case "booked":    return "tone-good-strong";
+    case "dead":      return "tone-neutral line-through";
     default:          return "bg-transparent theme-text-muted border-transparent";
   }
 }

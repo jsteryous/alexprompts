@@ -65,7 +65,7 @@ export default async function LoginPage({ searchParams }: Props) {
           </div>
 
           {error && (
-            <p className="text-xs text-red-600 dark:text-red-400 text-center">
+            <p className="text-xs tone-hot-text text-center">
               Invalid email or password.
             </p>
           )}

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import Link from "next/link";
-import { signOut } from "./login/actions";
+import DashboardShell from "./_components/DashboardShell";
+import StatTile from "./_components/StatTile";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -169,13 +167,13 @@ function formatDate(iso: string): string {
 
 function TagBadge({ tag }: { tag: string | null }) {
   const map: Record<string, string> = {
-    HOT: "bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50",
-    WARM: "bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/50",
-    COLD: "bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-900/50",
+    HOT: "tone-hot",
+    WARM: "tone-warm",
+    COLD: "tone-cool",
   };
   if (!tag) return null;
   return (
-    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${map[tag] ?? "theme-card-muted theme-text-muted border"}`}>
+    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${map[tag] ?? "theme-card-muted theme-text-muted"}`}>
       {tag}
     </span>
   );
@@ -183,13 +181,13 @@ function TagBadge({ tag }: { tag: string | null }) {
 
 function TierBadge({ tier, label }: TierDisplay) {
   const map: Record<ConfidenceTier, string> = {
-    verified: "bg-green-50 text-green-700 border border-green-200 dark:bg-green-950/40 dark:text-green-300 dark:border-green-900/50",
-    matched:  "bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-900/50",
-    inferred: "bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/50",
-    pending:  "bg-gray-100 text-gray-500 border border-gray-200 dark:bg-gray-900/60 dark:text-gray-400 dark:border-gray-800",
+    verified: "tone-good",
+    matched:  "tone-cool",
+    inferred: "tone-warm",
+    pending:  "tone-neutral",
   };
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${map[tier]}`}>
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${map[tier]}`}>
       {label}
     </span>
   );
@@ -198,7 +196,7 @@ function TierBadge({ tier, label }: TierDisplay) {
 function TransferTypeBadge({ transferType }: { transferType: string | null }) {
   if (transferType !== "NOMINAL_TRANSFER") return null;
   return (
-    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/50">
+    <span className="text-xs font-medium px-2 py-0.5 rounded-full border tone-info">
       Trust / Family
     </span>
   );
@@ -206,31 +204,8 @@ function TransferTypeBadge({ transferType }: { transferType: string | null }) {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-async function getCurrentUser() {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll(); },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
-}
-
 export default async function DashboardPage({ searchParams }: Props) {
   const { client: clientSlug } = await searchParams;
-
-  // Middleware already enforces auth — this is a secondary check for display
-  const user = await getCurrentUser();
 
   const leads = await getLeads(clientSlug);
   const enrichedCount = leads.filter((l) => l.enrichment_status === "enriched").length;
@@ -238,68 +213,19 @@ export default async function DashboardPage({ searchParams }: Props) {
   const hotCount      = leads.filter((l) => l.tag === "HOT").length;
 
   return (
-    <div className="min-h-screen theme-text-primary">
-      {/* Header */}
-      <div className="border-b theme-border">
-        <div className="max-w-screen-2xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-widest theme-label">
-                REBB Advisors
-              </span>
-              <div className="flex items-center gap-1">
-                <Link
-                  href="/dashboard"
-                  className="text-sm px-3 py-1.5 rounded-md theme-card-strong border theme-border theme-text-primary transition-colors"
-                >
-                  Leads
-                </Link>
-                <Link
-                  href="/dashboard/prospects"
-                  className="text-sm px-3 py-1.5 rounded-md theme-text-muted hover:theme-text-primary transition-colors"
-                >
-                  Prospects
-                </Link>
-              </div>
-            </div>
-            <h1 className="text-2xl font-bold theme-text-primary">Ranked Call List</h1>
-            <p className="text-sm theme-text-muted mt-1">
-              Who do I call this week to make money?
-            </p>
-          </div>
-          <div className="flex items-start gap-8">
-            <div className="flex gap-6 text-right">
-              <div>
-                <p className="text-2xl font-bold theme-text-primary">{enrichedCount}</p>
-                <p className="text-xs theme-text-muted">Enriched</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{hotCount}</p>
-                <p className="text-xs theme-text-muted">HOT</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold theme-text-secondary">{pendingCount}</p>
-                <p className="text-xs theme-text-muted">Pending</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-xs theme-text-muted mb-1">{user?.email}</p>
-              <form action={signOut}>
-                <button
-                  type="submit"
-                  className="text-xs theme-text-muted hover:theme-text-primary transition-colors"
-                >
-                  Sign out
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Table */}
-      <div className="max-w-screen-2xl mx-auto px-6 py-8">
-        {leads.length === 0 ? (
+    <DashboardShell
+      active="leads"
+      title="Ranked Call List"
+      subtitle="Who do I call this week to make money?"
+      stats={
+        <>
+          <StatTile label="Enriched" value={enrichedCount} />
+          <StatTile label="HOT"      value={hotCount}      tone="warm" />
+          <StatTile label="Pending"  value={pendingCount}  tone="muted" />
+        </>
+      }
+    >
+      {leads.length === 0 ? (
           <div className="text-center py-24 theme-text-muted">
             <p className="text-sm">No leads yet. Run the enrichment pipeline to populate the list.</p>
           </div>
@@ -338,8 +264,8 @@ export default async function DashboardPage({ searchParams }: Props) {
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
                           <span className={`text-base font-bold tabular-nums ${
-                            (lead.score ?? 0) >= 85 ? "text-green-700 dark:text-green-400" :
-                            (lead.score ?? 0) >= 70 ? "text-amber-600 dark:text-amber-400" :
+                            (lead.score ?? 0) >= 85 ? "tone-good-text" :
+                            (lead.score ?? 0) >= 70 ? "tone-warm-text" :
                             "theme-text-secondary"
                           }`}>
                             {lead.score ?? "—"}
@@ -364,7 +290,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                               </p>
                             )}
                             {lead.contact_email && (
-                              <p className="text-xs text-green-700 dark:text-green-400 mt-1">{lead.contact_email}</p>
+                              <p className="text-xs tone-good-text mt-1">{lead.contact_email}</p>
                             )}
                             {lead.contact_phone && (
                               <p className="text-xs theme-text-secondary">{lead.contact_phone}</p>
@@ -374,7 +300,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                                 href={lead.linkedin_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-blue-600 dark:text-blue-400 hover:underline transition-colors mt-0.5 inline-block"
+                                className="text-xs tone-cool-text hover:underline transition-colors mt-0.5 inline-block"
                               >
                                 LinkedIn ↗
                               </a>
@@ -467,10 +393,9 @@ export default async function DashboardPage({ searchParams }: Props) {
           </div>
         )}
 
-        <p className="text-xs theme-text-muted mt-4 text-right opacity-70">
-          {leads.length} leads · sorted by score desc
-        </p>
-      </div>
-    </div>
+      <p className="text-xs theme-text-muted mt-4 text-right opacity-70">
+        {leads.length} leads · sorted by score desc
+      </p>
+    </DashboardShell>
   );
 }
