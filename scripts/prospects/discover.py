@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import re
 import sys
 import time
 from dataclasses import dataclass
@@ -70,6 +71,72 @@ FIELD_MASK = ",".join([
     "places.businessStatus",
     "nextPageToken",
 ])
+
+
+# ── Practitioner filter ──────────────────────────────────────────────────────
+# Google Places returns two shapes of record for dental/PI: the practice/firm
+# itself (has a website, correct outreach target) AND individual practitioners
+# with their own GBP (often no website — the practice's site covers them).
+# Pitching "you have no website" to Dr. Karen Doty when she works at Pickens
+# Dental Associates torches credibility, so drop person-named records before
+# they ever hit the database.
+#
+# A record is a practitioner if its displayName looks like a person's name
+# AND does NOT contain a practice/firm keyword. Credential suffixes (DDS, DMD,
+# MD, Esq) are a hard signal.
+
+_PRACTITIONER_CREDENTIALS = re.compile(
+    r"\b(?:DDS|DMD|D\.?D\.?S\.?|D\.?M\.?D\.?|MD|M\.?D\.?|"
+    r"DO|PhD|Ph\.?D\.?|Esq\.?|Esquire|JD|J\.?D\.?|Attorney\s+at\s+Law)\b",
+    re.IGNORECASE,
+)
+
+# Words that indicate a practice / firm / group entity — if any appear, the
+# record is a business name and we keep it even if it also contains a person's
+# name ("Smith Family Dentistry", "Jones & Associates Law Firm").
+_PRACTICE_KEYWORDS = re.compile(
+    r"\b(?:"
+    r"dental|dentistry|dentist|orthodontic|orthodontics|pediatric|"
+    r"periodontic|periodontics|endodontic|endodontics|prosthodontic|"
+    r"oral\s+surgery|maxillofacial|implant|implants|cosmetic|"
+    r"smiles?|teeth|family|associates|assoc|partners|group|"
+    r"clinic|center|centre|office|practice|pllc|p\.?c\.?|p\.?a\.?|llc|"
+    r"inc|incorporated|corp|corporation|ltd|"
+    r"law|legal|firm|attorneys?|lawyers?|injury|accident|"
+    r"care|health|medical|services|and\s+co"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Accept hyphens and apostrophes inside surnames (O'Brien, Smith-Jones).
+_NAME_TOKEN = r"[A-Z][a-zA-Z'’\-]+"
+
+# "Lastname, Firstname" / "Lastname Firstname" / "Firstname Lastname" with
+# optional middle initial or name. Up to 4 tokens so "Mary Ann Smith DDS" fits.
+_PERSON_NAME_PATTERN = re.compile(
+    rf"^\s*{_NAME_TOKEN}(?:,?\s+{_NAME_TOKEN}){{1,3}}\s*[,\-–—]?\s*"
+    rf"(?:{_PRACTITIONER_CREDENTIALS.pattern}\s*)*$",
+    re.IGNORECASE,
+)
+
+
+def is_practitioner_name(name: str) -> bool:
+    """True if the displayName looks like an individual practitioner, not a practice.
+
+    Rules:
+      1. If the name contains a practice/firm keyword, it's a business — False.
+      2. If the name contains a credential suffix (DDS/DMD/Esq/…), True.
+      3. Otherwise, if the name matches a bare person-name pattern
+         (2-4 Capitalized tokens with no practice keywords), True.
+    """
+    if not name:
+        return False
+    stripped = name.strip()
+    if _PRACTICE_KEYWORDS.search(stripped):
+        return False
+    if _PRACTITIONER_CREDENTIALS.search(stripped):
+        return True
+    return bool(_PERSON_NAME_PATTERN.match(stripped))
 
 
 @dataclass
@@ -146,6 +213,7 @@ def search_vertical_county(
 
     lat, lng, radius = COUNTIES[county_slug]
     seen: dict[str, PlaceRow] = {}
+    skipped_practitioners = 0
 
     for query_term in VERTICALS[vertical]:
         full_query = f"{query_term} {county_slug.title()} County SC"
@@ -160,10 +228,18 @@ def search_vertical_county(
                     continue
                 if p.get("businessStatus") and p["businessStatus"] != "OPERATIONAL":
                     continue
+                display_name = (p.get("displayName") or {}).get("text", "") or ""
+                # Skip individual practitioner/attorney GBPs — the practice (not
+                # the person) is the outreach target, and practitioner records
+                # usually lack a website because the practice's site covers them.
+                if is_practitioner_name(display_name):
+                    skipped_practitioners += 1
+                    _log.debug("skip practitioner: %s", display_name)
+                    continue
                 city, county = _extract_city_county(p.get("addressComponents", []))
                 seen[pid] = PlaceRow(
                     place_id=pid,
-                    business_name=(p.get("displayName") or {}).get("text", ""),
+                    business_name=display_name,
                     vertical=vertical,
                     address=p.get("formattedAddress"),
                     city=city,
@@ -180,6 +256,8 @@ def search_vertical_county(
             # Google requires a short delay before the next page token is valid
             time.sleep(2)
 
+    if skipped_practitioners:
+        _log.info("skipped %d practitioner-named records", skipped_practitioners)
     return list(seen.values())
 
 
