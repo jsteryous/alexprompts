@@ -241,7 +241,7 @@ export default async function DashboardPage({ searchParams }: Props) {
     <div className="min-h-screen theme-text-primary">
       {/* Header */}
       <div className="border-b theme-border">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
+        <div className="max-w-screen-2xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <span className="text-xs font-semibold uppercase tracking-widest theme-label">
@@ -298,7 +298,7 @@ export default async function DashboardPage({ searchParams }: Props) {
       </div>
 
       {/* Table */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-screen-2xl mx-auto px-6 py-8">
         {leads.length === 0 ? (
           <div className="text-center py-24 theme-text-muted">
             <p className="text-sm">No leads yet. Run the enrichment pipeline to populate the list.</p>
@@ -384,7 +384,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Source LLC */}
-                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[160px]">
+                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[240px]">
                         <p className="truncate" title={lead.market_signals?.entity_name ?? ""}>
                           {lead.market_signals?.entity_name ?? "—"}
                         </p>
@@ -396,7 +396,7 @@ export default async function DashboardPage({ searchParams }: Props) {
                       </td>
 
                       {/* Location / address */}
-                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[180px]">
+                      <td className="px-4 py-4 theme-text-secondary text-xs max-w-[280px]">
                         {(() => {
                           const addr = isStreetAddress(lead.location) ? lead.location : null;
                           const sigLoc = lead.market_signals?.location ?? null;

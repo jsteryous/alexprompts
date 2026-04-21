@@ -40,12 +40,8 @@ interface RankedEmail {
 
 interface Prospect {
   id: string;
-  created_at: string;
-  audited_at: string | null;
-  place_id: string;
   business_name: string;
   vertical: string;
-  address: string | null;
   city: string | null;
   county: string | null;
   phone: string | null;
@@ -58,11 +54,9 @@ interface Prospect {
   severity_tag: string | null;
   mobile_screenshot_url: string | null;
   desktop_screenshot_url: string | null;
-  lighthouse_mobile_score: number | null;
   audit_error: string | null;
   contact_status: string | null;
   last_contacted_at: string | null;
-  notes: string | null;
   contact_emails: RankedEmail[] | null;
   primary_email: string | null;
   fallback_email: string | null;
@@ -86,10 +80,10 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
   let q = client
     .from("website_prospects")
     .select(
-      "id, created_at, audited_at, place_id, business_name, vertical, address, city, county, " +
-      "phone, website_url, google_rating, google_review_count, audit_status, issues, " +
+      "id, business_name, vertical, city, county, phone, website_url, " +
+      "google_rating, google_review_count, audit_status, issues, " +
       "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, " +
-      "lighthouse_mobile_score, audit_error, contact_status, last_contacted_at, notes, " +
+      "audit_error, contact_status, last_contacted_at, " +
       "contact_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title"
     )
     .order("severity_score", { ascending: false, nullsFirst: false })
@@ -328,7 +322,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
     <div className="min-h-screen theme-text-primary">
       {/* Header */}
       <div className="border-b theme-border">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
+        <div className="max-w-screen-2xl mx-auto px-6 py-6 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <span className="text-xs font-semibold uppercase tracking-widest theme-label">
@@ -370,7 +364,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 pb-4 flex items-center gap-2">
+        <div className="max-w-screen-2xl mx-auto px-6 pb-4 flex items-center gap-2">
           <span className="text-xs theme-text-muted mr-1">Vertical:</span>
           {verticalLink(undefined, "All")}
           {verticalLink("dental", "Dental")}
@@ -379,7 +373,7 @@ export default async function ProspectsPage({ searchParams }: Props) {
       </div>
 
       {/* Table */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-screen-2xl mx-auto px-6 py-8">
         {prospects.length === 0 ? (
           <div className="text-center py-24 theme-text-muted">
             <p className="text-sm">
