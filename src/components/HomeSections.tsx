@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function ArrowIcon() {
@@ -73,7 +74,10 @@ export function HipaaSection() {
             a HIPAA problem.
           </h2>
           <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-            A patient types <em>&ldquo;I&rsquo;ve had a cracked molar for two weeks and need it pulled&rdquo;</em> into the contact form on your site. They hit submit. The moment that message &mdash; a symptom tied to an identified patient &mdash; lands in your inbox, it&rsquo;s Protected Health Information.
+            A patient types: <em className="theme-text-primary not-italic font-semibold">&ldquo;I&rsquo;ve had a cracked molar for two weeks and need it pulled.&rdquo;</em>
+          </p>
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
+            That message is Protected Health Information the second it hits your inbox.
           </p>
           <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
             Then the form quietly does one of these:
@@ -163,39 +167,55 @@ export function ProcessSection() {
 
 const practiceTypes = [
   {
-    label: "Emergency-focused GP",
-    scenario:
-      "Emergency searches happen on mobile. If your phone number isn\u2019t visible instantly, they call the next dentist.",
-    fix: "We put a persistent tap-to-call bar with an \u201cOpen now\u201d status above the fold.",
-    outcome: "You capture same-day patients instead of losing them at 9pm on a Friday.",
+    label: "Emergency-focused",
+    image: "/practice-types/emergency.png",
+    alt: "Patient holding jaw in pain, using phone",
+    headline:
+      "Your site should be the first result when someone types \u201cemergency dentist near me.\u201d",
+    bullets: [
+      "Tap-to-call header with \u201cOpen now\u201d status.",
+      "Same-day slots surfaced above the fold.",
+    ],
   },
   {
-    label: "High-ticket cosmetic",
-    scenario:
-      "Cosmetic patients research for weeks. They read, bookmark, compare. If your before-and-afters are three clicks deep, they close the tab before they ever see your work.",
-    fix: "We pull your case results above the fold and give each outcome a short written narrative.",
-    outcome: "More consultations booked from the same monthly traffic, because the trust signal now lands on first visit.",
+    label: "Cosmetic",
+    image: "/practice-types/cosmetic.jpg",
+    alt: "Close-up of a bright cosmetic dentistry smile",
+    headline: "Cosmetic patients buy trust before they buy work.",
+    bullets: [
+      "Case results and before/afters above the fold.",
+      "Short written narratives on every outcome.",
+    ],
   },
   {
     label: "Pediatric",
-    scenario:
-      "A parent searching &ldquo;kids dentist near me&rdquo; at 8pm is exhausted. If your booking path takes longer than 30 seconds on their phone, they put it off. Most never come back.",
-    fix: "We rebuild the mobile booking path to finish under 30 seconds and move &ldquo;what the first visit looks like&rdquo; above the scroll.",
-    outcome: "Less drop-off between the click and the confirmed appointment.",
+    image: "/practice-types/pediatric.jpg",
+    alt: "Parent and child at a pediatric dental visit",
+    headline: "A parent on a phone at 8pm will book in 30 seconds \u2014 or not at all.",
+    bullets: [
+      "Mobile booking path finishes under 30 seconds.",
+      "\u201cWhat the first visit looks like\u201d above the scroll.",
+    ],
   },
   {
     label: "Sedation / anxiety",
-    scenario:
-      "Patients who have avoided the dentist for years don\u2019t need a services grid. They need to know what the first visit actually feels like &mdash; before they commit to a phone call.",
-    fix: "We lead with &ldquo;Your first visit,&rdquo; name the comfort amenities you offer (weighted blankets, noise-cancelling headphones, nitrous), and push the clinical copy below.",
-    outcome: "You capture the patients other practices scare away before the intake call even happens.",
+    image: "/practice-types/sedation.jpg",
+    alt: "Calm, relaxed patient in a sedation dentistry chair",
+    headline: "Fearful patients don\u2019t need a services grid. They need reassurance first.",
+    bullets: [
+      "Homepage leads with \u201cYour first visit.\u201d",
+      "Comfort amenities named: weighted blanket, headphones, nitrous.",
+    ],
   },
   {
     label: "Fee-for-service / membership",
-    scenario:
-      "If you\u2019ve walked away from insurance, your website still acts like you take it. No visible membership plan, no transparent pricing, no way to sign up online.",
-    fix: "We build the membership tier page, wire up Stripe for monthly billing, and price every service openly.",
-    outcome: "Recurring monthly revenue instead of your front desk explaining the same plan on the phone twice a day.",
+    image: "/practice-types/membership.jpg",
+    alt: "Membership pricing and transparent dental billing",
+    headline: "If you\u2019ve walked away from insurance, your website still acts like you take it.",
+    bullets: [
+      "Membership tiers priced openly, Stripe-backed signup.",
+      "Every service transparently costed.",
+    ],
   },
 ];
 
@@ -203,49 +223,60 @@ export function CompetenceSection() {
   return (
     <section className="theme-section-muted border-y theme-border py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl mb-12">
+        <div className="max-w-3xl mb-14">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
             We know how your practice actually works
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            Different practices.
+            Different practices lose patients
             <br />
-            Different failure modes.
-            <br />
-            Different fixes.
+            in different ways.
           </h2>
-          <p className="theme-text-muted text-base leading-relaxed mb-4">
-            A sedation practice and an emergency-focused GP sell to completely different patients on completely different timelines. Most web shops pour them into the same template anyway &mdash; services grid, stock hero, generic &ldquo;book now&rdquo; button &mdash; and wonder why conversion flatlines.
-          </p>
           <p className="theme-text-muted text-base leading-relaxed">
-            We don&rsquo;t. Before we quote scope, we figure out which kind of practice you run and what that specific site should do on a phone at 8pm.
+            Most web shops pour every dental practice into the same template. We don&rsquo;t.
           </p>
         </div>
 
-        <div className="grid gap-4 md:gap-5">
-          {practiceTypes.map((p) => (
-            <div key={p.label} className="theme-card border rounded-3xl p-7 md:p-8">
-              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-4">{p.label}</p>
-              <p
-                className="theme-text-primary text-lg md:text-xl font-semibold leading-snug mb-5"
-                dangerouslySetInnerHTML={{ __html: p.scenario }}
-              />
-              <div className="space-y-2.5">
-                <p className="theme-text-secondary text-sm md:text-base leading-relaxed flex gap-3">
-                  <span className="theme-label font-bold mt-0.5 select-none">&rarr;</span>
-                  <span dangerouslySetInnerHTML={{ __html: p.fix }} />
-                </p>
-                <p className="theme-text-secondary text-sm md:text-base leading-relaxed flex gap-3">
-                  <span className="theme-label font-bold mt-0.5 select-none">&rarr;</span>
-                  <span dangerouslySetInnerHTML={{ __html: p.outcome }} />
-                </p>
+        <div className="space-y-10 md:space-y-14">
+          {practiceTypes.map((p, i) => (
+            <div
+              key={p.label}
+              className={`grid gap-6 md:gap-10 md:grid-cols-2 items-center ${
+                i % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
+              }`}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl theme-border border">
+                <Image
+                  src={p.image}
+                  alt={p.alt}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-3">{p.label}</p>
+                <h3 className="theme-text-primary text-2xl md:text-[1.75rem] font-bold leading-snug mb-5">
+                  {p.headline}
+                </h3>
+                <ul className="space-y-2.5">
+                  {p.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="theme-text-secondary text-sm md:text-base leading-relaxed flex gap-3"
+                    >
+                      <span className="theme-label font-bold mt-0.5 select-none">&rarr;</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
         </div>
 
-        <p className="theme-text-muted text-sm mt-10 max-w-3xl leading-relaxed">
-          Every Cleanup also preserves your Weave, LocalMed, or RevenueWell sync, swaps intake to a BAA-backed destination, and aligns your schema for Map Pack visibility. That&rsquo;s not add-on scope &mdash; that&rsquo;s baseline.
+        <p className="theme-text-muted text-sm mt-14 max-w-3xl leading-relaxed">
+          Every Cleanup also preserves your Weave, LocalMed, or RevenueWell sync, swaps intake to a BAA-backed destination, and aligns your schema for Map Pack visibility. Baseline, not add-on.
         </p>
       </div>
     </section>
