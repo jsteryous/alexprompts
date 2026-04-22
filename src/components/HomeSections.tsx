@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { practiceTypeList } from "@/lib/practiceTypes";
 
 export function ArrowIcon() {
   return (
@@ -33,8 +34,8 @@ export const faqs = [
     a: "You send your practice URL. Within 48 hours we reply with screenshots of what is broken and a written quote \u2014 scope, price, timeline. No sales call, no follow-up sequence. If the site is already fine, the note says that.",
   },
   {
-    q: "What is included in the $1,500 Cleanup?",
-    a: "Mobile layout fixes. A contact-form replacement that lands in a HIPAA-compliant destination under a signed Business Associate Agreement, with the documentation for your compliance binder. A speed pass \u2014 Lighthouse improvements, image compression, unused scripts removed. A visual refresh so the practice looks current: hero, buttons, contact path. Your existing Weave, LocalMed, or RevenueWell sync is preserved and tested before handoff. Ships in five business days or less.",
+    q: "What is included in the Cleanup?",
+    a: "Mobile layout fixes. A contact-form replacement that lands in a HIPAA-compliant destination under a signed Business Associate Agreement, with the documentation for your compliance binder. A speed pass \u2014 Lighthouse improvements, image compression, unused scripts removed. A visual refresh so the practice looks current: hero, buttons, contact path. Your existing Weave, LocalMed, or RevenueWell sync is preserved and tested before handoff. Ships in five business days or less. Cleanup starts at $1,500; the audit tells you where your site lands.",
   },
   {
     q: "What if my site needs more than the Cleanup?",
@@ -64,58 +65,42 @@ export function HipaaSection() {
   return (
     <section className="theme-section-contrast py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Liability hiding in plain sight
-          </span>
-          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            Your contact form is probably
-            <br />
-            a HIPAA problem.
-          </h2>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-            A patient types: <em className="theme-text-primary not-italic font-semibold">&ldquo;I&rsquo;ve had a cracked molar for two weeks and need it pulled.&rdquo;</em>
-          </p>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-            That message is Protected Health Information the second it hits your inbox.
-          </p>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
-            Then the form quietly does one of these:
-          </p>
-          <ul className="space-y-2.5 mb-6">
-            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
-              <span className="theme-label font-bold mt-0.5">&mdash;</span>
-              <span>Stores submissions in a plugin database with no retention policy and no audit log.</span>
-            </li>
-            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
-              <span className="theme-label font-bold mt-0.5">&mdash;</span>
-              <span>Submits through a plugin on a host you don&rsquo;t have a Business Associate Agreement with.</span>
-            </li>
-            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
-              <span className="theme-label font-bold mt-0.5">&mdash;</span>
-              <span>Lands in a Gmail inbox that was never set up under a Google Workspace BAA.</span>
-            </li>
-            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
-              <span className="theme-label font-bold mt-0.5">&mdash;</span>
-              <span>Routes through a form service whose terms of service explicitly exclude healthcare.</span>
-            </li>
-          </ul>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
-            Most front-desk staff don&rsquo;t know which of those four is happening on your site right now. Most dentists haven&rsquo;t thought about it since their last compliance training. But if HHS &mdash; the federal agency that enforces HIPAA &mdash; comes with a records request, it&rsquo;s the practice on the hook, not the form plugin.
-          </p>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-8">
-            Cleanup replaces the intake form with one that posts into a destination covered by a signed Business Associate Agreement, and hands you the documentation for the file. If you already run new-patient intake through Weave or LocalMed, we point the site at that flow instead of duplicating capture.
-          </p>
-          {/* TODO: add synthetic non-compliant dental contact form mock to VisualMocks.tsx
-              — red callouts on plugin-stored PHI, no-BAA destination, no retention policy.
-              Inline here when asset exists. */}
-          <Link
-            href="/contact"
-            className="theme-cta-accent inline-flex items-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
-          >
-            Send us your URL
-            <ArrowIcon />
-          </Link>
+        <div className="grid gap-12 md:gap-16 md:grid-cols-[1.1fr,0.9fr] items-center">
+          <div>
+            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+              Liability hiding in plain sight
+            </span>
+            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+              Your contact form is probably
+              <br />
+              a HIPAA problem.
+            </h2>
+            <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
+              A patient types <em className="theme-text-primary not-italic font-semibold">&ldquo;cracked molar, need it pulled&rdquo;</em> &mdash; that message is Protected Health Information the second it hits your inbox.
+            </p>
+            <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
+              Most dental forms quietly fail HIPAA: plugin databases with no audit log, hosts without a Business Associate Agreement, Gmail inboxes never set up under a Workspace BAA, form services whose terms exclude healthcare.
+            </p>
+            <p className="theme-text-contrast-muted text-base leading-relaxed mb-8">
+              Cleanup swaps intake for a BAA-backed destination and hands you the documentation for your compliance binder. If HHS comes knocking, it&rsquo;s the practice on the hook &mdash; not the plugin.
+            </p>
+            <Link
+              href="/contact"
+              className="theme-cta-accent inline-flex items-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
+            >
+              Send us your URL
+              <ArrowIcon />
+            </Link>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl theme-border border">
+            <Image
+              src="/hipaa.jpg"
+              alt="HIPAA compliance and patient data protection"
+              fill
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -165,61 +150,8 @@ export function ProcessSection() {
   );
 }
 
-const practiceTypes = [
-  {
-    label: "Emergency-focused",
-    image: "/practice-types/emergency.jpg",
-    alt: "Patient holding jaw in pain, using phone",
-    headline:
-      "Your site should be the first result when someone types \u201cemergency dentist near me.\u201d",
-    bullets: [
-      "Tap-to-call header with \u201cOpen now\u201d status.",
-      "Same-day slots surfaced above the fold.",
-    ],
-  },
-  {
-    label: "Cosmetic",
-    image: "/practice-types/cosmetic.jpg",
-    alt: "Close-up of a bright cosmetic dentistry smile",
-    headline: "Cosmetic patients buy trust before they buy work.",
-    bullets: [
-      "Case results and before/afters above the fold.",
-      "Short written narratives on every outcome.",
-    ],
-  },
-  {
-    label: "Pediatric",
-    image: "/practice-types/pediatric.jpg",
-    alt: "Parent and child at a pediatric dental visit",
-    headline: "A parent on a phone at 8pm will book in 30 seconds \u2014 or not at all.",
-    bullets: [
-      "Mobile booking path finishes under 30 seconds.",
-      "\u201cWhat the first visit looks like\u201d above the scroll.",
-    ],
-  },
-  {
-    label: "Sedation / anxiety",
-    image: "/practice-types/sedation.jpg",
-    alt: "Calm, relaxed patient in a sedation dentistry chair",
-    headline: "Fearful patients don\u2019t need a services grid. They need reassurance first.",
-    bullets: [
-      "Homepage leads with \u201cYour first visit.\u201d",
-      "Comfort amenities named: weighted blanket, headphones, nitrous.",
-    ],
-  },
-  {
-    label: "Fee-for-service / membership",
-    image: "/practice-types/membership.jpg",
-    alt: "Membership pricing and transparent dental billing",
-    headline: "If you\u2019ve walked away from insurance, your website still acts like you take it.",
-    bullets: [
-      "Membership tiers priced openly, Stripe-backed signup.",
-      "Every service transparently costed.",
-    ],
-  },
-];
-
 export function CompetenceSection() {
+  const practiceTypes = practiceTypeList;
   return (
     <section className="theme-section-muted border-y theme-border py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -259,7 +191,7 @@ export function CompetenceSection() {
                 <h3 className="theme-text-primary text-2xl md:text-[1.75rem] font-bold leading-snug mb-5">
                   {p.headline}
                 </h3>
-                <ul className="space-y-2.5">
+                <ul className="space-y-2.5 mb-5">
                   {p.bullets.map((b) => (
                     <li
                       key={b}
@@ -270,6 +202,13 @@ export function CompetenceSection() {
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href={`/${p.slug}`}
+                  className="theme-link text-sm font-semibold inline-flex items-center gap-1.5"
+                >
+                  How we build for {p.label.toLowerCase()} practices
+                  <ArrowIcon />
+                </Link>
               </div>
             </div>
           ))}
@@ -297,7 +236,7 @@ const fixPatterns = [
     result: "PHI exposure closed. HHS records request stops being a panic drill.",
   },
   {
-    label: "Mobile booking",
+    label: "Mobile-first experience",
     problem: "No visible way to book on mobile above the fold. Phone number is plain text, not tap-to-call.",
     fix: "Persistent \u201cBook online\u201d bar, tap-to-call phone in the header, &ldquo;same-day emergency&rdquo; shortcut for high-intent searches.",
     result: "High-intent mobile clicks actually convert instead of bouncing to the next pin.",
@@ -326,9 +265,11 @@ export function BeforeAfterSection() {
 
         <div className="grid gap-5 md:grid-cols-3">
           {fixPatterns.map((item) => (
-            <div key={item.label} className="theme-card border rounded-3xl p-7">
-              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-4">{item.label}</p>
-              <div className="space-y-3.5">
+            <div key={item.label} className="theme-card border rounded-3xl p-7 flex flex-col items-center text-center">
+              <span className="theme-badge inline-block text-xs font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-5">
+                {item.label}
+              </span>
+              <div className="space-y-3.5 text-left w-full">
                 <p className="theme-text-secondary text-sm leading-relaxed">
                   <span className="theme-text-primary font-semibold">Problem. </span>
                   {item.problem}
@@ -426,10 +367,10 @@ export function PricingSection() {
             starting at $1,500.
           </h2>
           <p className="theme-text-secondary text-base leading-relaxed mb-4">
-            The Cleanup is $1,500. It covers the four fixes &mdash; mobile, contact form, speed, outdated look &mdash; a HIPAA-compliant intake swap, and we preserve your Weave, LocalMed, or RevenueWell sync before handoff.
+            The Cleanup starts at $1,500. It covers the four fixes &mdash; mobile, contact form, speed, outdated look &mdash; a HIPAA-compliant intake swap, and we preserve your Weave, LocalMed, or RevenueWell sync before handoff.
           </p>
           <p className="theme-text-secondary text-base leading-relaxed mb-8">
-            Larger rebuilds are scoped to your project. Send what you need; we&rsquo;ll work within your budget.
+            Scope varies by practice. The audit tells you which tier your site actually needs, and larger rebuilds are scoped to your project. Send what you need; we&rsquo;ll work within your budget.
           </p>
           <Link
             href="/contact"

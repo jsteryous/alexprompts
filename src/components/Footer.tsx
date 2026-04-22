@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cities, citySlugs } from "@/lib/cities";
+import { practiceTypeList } from "@/lib/practiceTypes";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -51,6 +52,19 @@ export default function Footer() {
               className="theme-link text-sm"
             >
               {cities[slug].name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
+        <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
+          Practice types
+        </p>
+        <nav className="flex flex-wrap gap-x-6 gap-y-2">
+          {practiceTypeList.map((p) => (
+            <Link key={p.slug} href={`/${p.slug}`} className="theme-link text-sm">
+              {p.label}
             </Link>
           ))}
         </nav>

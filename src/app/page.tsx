@@ -26,21 +26,21 @@ export default function HomePage() {
           <div className="grid gap-16 lg:grid-cols-[1.05fr,0.95fr] items-center">
             <div>
               <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-5">
-                Dental Website Cleanup &middot; Greenville SC
+                Dental Website Cleanup &amp; Audits
               </span>
               <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
-                Your website is costing
+                Your website might be
                 <br />
-                you patients.
+                costing you patients.
               </h1>
               <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                Dental website cleanup. $1,500. Screenshots of what&rsquo;s broken before you pay a dollar.
+                Get a free audit report of your dental website today.
               </p>
               <p className="theme-text-secondary text-base leading-relaxed mb-4 max-w-2xl">
-                Broken contact form. Slow on phones. Copyright says 2019. A patient Googles your practice, taps the first result, and closes the tab before they read a word. They don&rsquo;t call to tell you why. They call the office down the street.
+                Common issues we find: broken contact forms, slow mobile experience, dated copyright, poor search results and SEO, and more.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                Send us the URL. We reply with screenshots of what&rsquo;s wrong &mdash; free. If the site is fine, the note says so.
+                Rebuilds starting at $1,500.
               </p>
               <Link
                 href="/contact"
