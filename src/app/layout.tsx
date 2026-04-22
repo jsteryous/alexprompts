@@ -10,19 +10,19 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rebbadvisors.com"),
   title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
   description:
-    "REBB Advisors fixes and grows dental practice websites in Greenville SC. Cleanup from $1,500, Growth retainer from $500/mo, Dominance custom-scoped. Free audit and written proposal before you commit.",
+    "Dental website cleanup for Greenville SC and Upstate practices. $1,500. HIPAA-compliant intake swap, Weave sync preserved, five business days. Larger rebuilds scoped to your project. Free audit first.",
   keywords: [
     "dental website cleanup Greenville SC",
     "dentist website repair",
     "fix dental booking form",
     "mobile friendly dental website",
+    "HIPAA compliant dental contact form",
     "dental practice website modernization",
-    "outdated dentist website fix",
   ],
   openGraph: {
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Three-tier dental website engagements: Cleanup ($1,500 flat), Growth ($3,500 + $500/mo), Dominance (custom scope). Free audit and written proposal.",
+      "Dental website cleanup starting at $1,500. HIPAA-compliant intake, Weave/LocalMed/RevenueWell sync preserved, five business days. Free audit and written quote first.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Three-tier dental website engagements. Cleanup, Growth, Dominance. Free audit and written proposal.",
+      "Dental website cleanup. $1,500. HIPAA-compliant intake. Weave sync preserved. Free audit first.",
   },
   alternates: {
     canonical: "https://rebbadvisors.com",
@@ -61,7 +61,7 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Tiered website cleanup, growth, and dominance engagements for dental practices. Cleanup ($1,500 flat), Growth ($3,500 setup + $500/mo), Dominance custom-scoped. Every engagement starts with a free audit and a written proposal.",
+                "Dental website cleanup and scoped rebuilds for practices in Greenville SC and the Upstate. HIPAA-compliant contact form replacement, Weave / LocalMed / RevenueWell sync preservation, Map Pack visibility. Every engagement starts with a free audit and a written quote.",
               slogan: "Confused customers don't buy.",
               priceRange: "$1,500+",
               areaServed: [
@@ -79,76 +79,34 @@ export default function RootLayout({
               },
               serviceType: [
                 "Dental Website Cleanup",
-                "Dental Website Modernization",
+                "Dental Website Rebuild",
+                "HIPAA-Compliant Dental Intake Forms",
                 "Dental Local SEO",
                 "Dental Google Business Profile Management",
-                "Dental Website Content Marketing",
-                "Dental Website Redesign",
               ],
               knowsAbout: [
                 "Dental practice website cleanup",
-                "Broken dental booking forms",
+                "HIPAA-compliant dental contact forms",
+                "Dental patient-engagement platform integration",
+                "Weave, LocalMed, and RevenueWell synchronization",
                 "Mobile-friendly dental websites",
-                "Dental practice local SEO",
-                "Dental Google Business Profile optimization",
-                "Dental practice website credibility",
+                "Dental practice local SEO and Map Pack visibility",
+                "Dentist schema markup and Google Business Profile optimization",
               ],
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Dental Website Engagement Tiers",
-                itemListElement: [
-                  {
-                    "@type": "Offer",
-                    name: "Cleanup",
-                    description:
-                      "One-time, 48-hour flat-fee cleanup: broken booking-form repair, mobile layout fixes, SSL and trust cleanup, basic modernization.",
-                    price: "1500",
-                    priceCurrency: "USD",
-                    availability: "https://schema.org/InStock",
-                    category: "Web design",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Dental Website Cleanup",
-                      serviceType: "Website cleanup and modernization",
-                    },
-                  },
-                  {
-                    "@type": "Offer",
-                    name: "Growth",
-                    description:
-                      "Cleanup plus ongoing local SEO, schema, Google Business Profile management, and two blog posts per month. Month-to-month retainer.",
-                    price: "3500",
-                    priceCurrency: "USD",
-                    availability: "https://schema.org/InStock",
-                    category: "Digital marketing",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Dental Website Growth",
-                      serviceType: "Local SEO and content marketing",
-                    },
-                    priceSpecification: {
-                      "@type": "UnitPriceSpecification",
-                      price: "500",
-                      priceCurrency: "USD",
-                      billingIncrement: 1,
-                      unitCode: "MON",
-                    },
-                  },
-                  {
-                    "@type": "Offer",
-                    name: "Dominance",
-                    description:
-                      "Custom-scoped engagement for multi-provider, expansion-stage, or highly competitive practices. Growth plus visual refresh, deeper content, authority building, and dedicated landing pages. Scope, setup, and month-to-month retainer priced in the written proposal.",
-                    priceCurrency: "USD",
-                    availability: "https://schema.org/InStock",
-                    category: "Digital marketing",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Dental Website Dominance",
-                      serviceType: "Full-service dental website marketing",
-                    },
-                  },
-                ],
+              makesOffer: {
+                "@type": "Offer",
+                name: "Dental Website Cleanup",
+                description:
+                  "Flat-fee dental website cleanup: mobile fixes, HIPAA-compliant contact form replacement, speed pass, visual refresh. Existing Weave / LocalMed / RevenueWell sync preserved and tested before handoff. Ships in five business days or less. Larger rebuilds scoped per project.",
+                price: "1500",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                category: "Web design",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Dental Website Cleanup",
+                  serviceType: "Website cleanup and modernization",
+                },
               },
             }),
           }}

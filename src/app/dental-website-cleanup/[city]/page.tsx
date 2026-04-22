@@ -4,10 +4,12 @@ import type { Metadata } from "next";
 import { BrokenPhoneHero } from "@/components/VisualMocks";
 import {
   ArrowIcon,
-  VisualProofSection,
+  HipaaSection,
   ProcessSection,
+  CompetenceSection,
+  BeforeAfterSection,
+  StakesSection,
   PricingSection,
-  OutcomesSection,
   FaqSection,
   FinalCtaSection,
   faqJsonLd,
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) return {};
   const url = `https://rebbadvisors.com/dental-website-cleanup/${city.slug}`;
   const title = `Dental Website Cleanup in ${city.name} SC | REBB Advisors`;
-  const description = `Dental website cleanup, growth, and dominance tiers for ${city.name} and the ${city.county} County area. Cleanup from $1,500, Growth retainer from $500/mo, Dominance custom-scoped. Free audit and written proposal.`;
+  const description = `Dental website cleanup for ${city.name} and ${city.county} County practices. $1,500. HIPAA-compliant intake swap, Weave sync preserved, five business days. Larger rebuilds scoped to your project. Free audit first.`;
   return {
     title,
     description,
@@ -61,11 +63,12 @@ export default async function CityPage({ params }: Props) {
       name: `${city.county} County, South Carolina`,
     },
     offers: {
-      "@type": "AggregateOffer",
+      "@type": "Offer",
+      price: "1500",
       priceCurrency: "USD",
-      lowPrice: "1500",
-      offerCount: "3",
       availability: "https://schema.org/InStock",
+      description:
+        "Dental website cleanup \u2014 mobile fixes, HIPAA-compliant contact form replacement, speed pass, visual refresh. Larger rebuilds scoped per project.",
     },
   };
 
@@ -95,23 +98,31 @@ export default async function CityPage({ params }: Props) {
               <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
                 Your {city.name} dental site
                 <br />
-                is quietly losing new patients.
+                is costing you patients.
               </h1>
               <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                Booking forms that 404. Layouts that crumble on phones. A copyright year still stuck in 2019. Patients across {city.county} County close the tab and call the practice down the street &mdash; they do not call to tell you why.
+                Dental website cleanup for {city.county} County practices. $1,500. Screenshots of what&rsquo;s broken before you pay a dollar.
+              </p>
+              <p className="theme-text-secondary text-base leading-relaxed mb-4 max-w-2xl">
+                Broken contact form. Slow on phones. Copyright says 2019. Patients across {city.county} County Google your practice, tap the first result, and close the tab before they read a word. They don&rsquo;t call to tell you why.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                Send us the URL. We reply with screenshots of what is broken and a written proposal naming the tier that actually fits. No sales call, no pitch deck.
+                Send us the URL. We reply with screenshots of what&rsquo;s wrong &mdash; free. If the site is fine, the note says so.
               </p>
               <Link
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Get Free Audit
+                Show me what&rsquo;s broken
                 <ArrowIcon />
               </Link>
+              {/* TODO: requires sample proposal asset — do not ship live until this exists */}
               <p className="theme-text-muted text-xs mt-5">
-                Three tiers from $1,500. <Link href="/sample-proposal" className="theme-link underline underline-offset-4">See a sample proposal</Link> before you send the URL.
+                Starting at $1,500.{" "}
+                <Link href="/sample-proposal" className="theme-link underline underline-offset-4">
+                  See a sample proposal
+                </Link>{" "}
+                before you send the URL.
               </p>
             </div>
 
@@ -133,10 +144,12 @@ export default async function CityPage({ params }: Props) {
         </div>
       </section>
 
-      <VisualProofSection />
+      <HipaaSection />
       <ProcessSection />
+      <CompetenceSection />
+      <BeforeAfterSection />
+      <StakesSection />
       <PricingSection />
-      <OutcomesSection />
       <FaqSection />
       <FinalCtaSection />
     </>

@@ -5,11 +5,11 @@ import { marked } from "marked";
 export const metadata: Metadata = {
   title: "Sample Proposal | REBB Advisors",
   description:
-    "An example of the written proposal every REBB audit produces. Sanitized for a fictional Greenville dental practice: findings, recommended tier, scope, timeline, and terms.",
+    "An example of the written quote every REBB audit produces. Sanitized for a fictional Greenville dental practice: findings, scope, timeline, and terms.",
   openGraph: {
     title: "Sample Proposal | REBB Advisors",
     description:
-      "What you get after a REBB audit: a written proposal with findings, a recommended tier, and a real scope. This one is a sanitized example.",
+      "What you get after a REBB audit: a written quote with findings, a scoped recommendation, and a real timeline. This one is a sanitized example.",
     type: "article",
     url: "https://rebbadvisors.com/sample-proposal",
     siteName: "REBB Advisors",
@@ -21,18 +21,16 @@ const proposalMarkdown = `# Website Proposal — Pinecrest Family Dentistry
 
 **Prepared for:** Pinecrest Family Dentistry — Greenville, SC
 **Prepared by:** REBB Advisors
-**Date:** April 19, 2026
+**Date:** April 21, 2026
 **Proposal valid:** 30 days
 
 ---
 
 ## Executive Summary
 
-Your audit surfaced seven issues. Two are critical — the new-patient booking form silently drops submissions, and the mobile viewport is not set. Two more (Lighthouse 38 on mobile, an unclaimed Google Business Profile) are the reason newer practices in Greenville are ranking above Pinecrest despite smaller patient bases.
+Your audit surfaced seven issues. Two are critical — the new-patient contact form silently drops submissions, and the mobile viewport is not set. Two more (Lighthouse 38 on mobile, an unclaimed Google Business Profile) are the reason newer practices in Greenville are ranking above Pinecrest despite smaller patient bases.
 
-Cleanup alone would fix the critical issues and buy breathing room, but it will not close the ranking and visibility gaps. For a practice your size (≈1,400 active patients, one location, two providers), **we recommend Tier 2 — Growth**. It fixes the breakage, installs the infrastructure that actually moves local rankings, and runs month-to-month so you can cancel the moment it is not producing.
-
-Dominance is overkill at your current scale. Revisit it in 12–18 months if you add a second location or a third provider.
+The $1,500 Cleanup fixes the critical breakage and the stale-trust issues, but it does not close the ranking and visibility gaps on its own. For a practice your size (≈1,400 active patients, one location, two providers), **we recommend Cleanup plus a scoped rebuild with ongoing care** — $4,500 setup plus $500 per month, month-to-month. Scope, timeline, and what you get for the retainer are spelled out below. If the Cleanup is all you want, that is a fine answer too; skip to the Cleanup-only track at the bottom.
 
 ---
 
@@ -40,8 +38,8 @@ Dominance is overkill at your current scale. Revisit it in 12–18 months if you
 
 ### 🔴 Critical
 
-**1. Booking form returns HTTP 405**
-The new-patient form on \`/appointments\` posts to an endpoint that no longer exists. Every submission silently fails. Estimated impact: 8–14 lost patient inquiries per month.
+**1. Contact form returns HTTP 405**
+The new-patient form on \`/appointments\` posts to an endpoint that no longer exists. Every submission silently fails. Estimated impact: 8–14 lost patient inquiries per month. Separately, the form currently stores submissions in a plugin database on a host with no signed Business Associate Agreement — any symptom-describing message is Protected Health Information on non-compliant infrastructure.
 
 **2. Mobile viewport not set**
 The site renders the desktop layout pinch-zoomed on phones. 71% of new-patient searches are mobile. Current mobile bounce rate: 78% (vs. 34% on desktop).
@@ -69,135 +67,40 @@ A visible trust leak. Prospects reading the footer assume the practice is closed
 
 ---
 
-## 🥉 Tier 1 — Cleanup
+## Recommended Scope
 
-### "Stop the bleeding."
+### Cleanup + scoped rebuild with ongoing care.
 
-**Investment:** $1,500 (one-time)
-**Timeline:** 48-hour turnaround
-**Monthly ongoing:** None
+**Setup:** $4,500 (one-time)
+**Timeline:** Two- to three-week build, ongoing from month 2
+**Monthly retainer:** $500 / month — month-to-month, 30-day cancellation, no long-term contract
 
-### What's included
+### What the setup covers
 
-- Booking-form diagnosis and repair
-- Mobile viewport + layout fixes on key pages
-- Trust cleanup: copyright year, broken links, SSL verification
-- Basic modernization: hero, CTAs, contact path
-- Before/after screenshots at handoff
+- **Cleanup, first.** Contact form replaced with a HIPAA-compliant intake under a signed Business Associate Agreement. Mobile viewport and layout fixed on every page. Lighthouse pass (image compression, script pruning, critical-render path cleanup). Copyright year, broken links, SSL verified. Hero, CTAs, and contact path refreshed.
+- **Weave, LocalMed, RevenueWell — preserved.** Before launch we document every integration wired to the current site and submit a test record through the live form. We show you the entry on the receiving end before we invoice.
+- **LocalBusiness + Dentist schema markup.** Hours, location, insurance accepted, and specialties surfaced for Google rich results.
+- **Google Business Profile.** Claimed, verified, filled, photographed. Services and insurance populated. Categories aligned to dental-specific terms.
+- **On-page SEO on home + top five service pages.** Rewritten for intent, not keyword density.
+- **NAP consistency audit across 15+ local directories.** Broken or inconsistent listings corrected.
 
-### What's NOT included
+### What the retainer covers
 
-- Ongoing SEO or content work
-- Google Business Profile management
-- Schema / structured data implementation
-- Visual redesign
+- Two patient-facing articles per month, written for questions your patients actually ask and published to your site.
+- Review monitoring. We draft responses to new reviews; you approve before they post.
+- GBP posts and photos refreshed monthly.
+- End-of-month email report: what shipped, what moved, what is queued.
 
-### Ideal for
+### What this scope does NOT include
 
-- Practices with a basically-working site that only needs the breakage fixed
-- Owners who are already ranking well and do not need marketing support
-- Anyone who wants to test REBB before committing to a retainer
-
----
-
-## 🥈 Tier 2 — Growth  *(Recommended)*
-
-### "Start actually ranking."
-
-**Investment:** $3,500 (one-time setup)
-**Timeline:** 2–3 week build, ongoing from month 2
-**Monthly ongoing:** $500 / month — month-to-month, 30-day cancel
-
-### What's included
-
-**Everything in Cleanup, plus:**
-
-- LocalBusiness + Dentist schema markup
-- Google Business Profile: claim, optimize, photograph, populate services and insurance
-- On-page SEO on home + top 5 service pages
-- 2 patient-facing blog posts per month (SEO-optimized, published to your site)
-- Review monitoring + response templates
-- NAP (name/address/phone) consistency audit across 15+ local directories
-- Monthly report by email: what shipped, what moved, what's next
-
-### What's NOT included
-
-- Visual redesign (that's Dominance)
-- Paid ads management
-- Social media management
-- More than 2 posts per month
-
-### Ideal for
-
-- Established practices that want the phone to ring more
-- Owners who do not want to hire a marketing person in-house
-- Practices currently below the map pack for their primary keywords
+- Paid ads management.
+- Social media management.
+- A full visual redesign (this is a refresh, not a rebuild of the site's look and feel).
+- More than two posts per month.
 
 ---
 
-## 🥇 Tier 3 — Dominance
-
-### "Own the local market."
-
-**Investment:** Custom scope — setup and monthly retainer quoted in the proposal. For a practice at Pinecrest's scale, Dominance is more than needed; the tier is usually scoped for multi-provider or expansion-stage practices.
-**Timeline:** Confirmed in proposal
-**Retainer:** Month-to-month, 30-day cancel
-
-### What's included
-
-**Everything in Growth, plus:**
-
-- Visual refresh / redesign (conversion-focused)
-- 4 long-form blog posts per month
-- Active link building: 3–5 quality backlinks per month
-- Review generation automation
-- Before/after galleries + treatment landing pages
-- Insurance + new-patient landing pages
-- Core Web Vitals + conversion rate optimization pass each quarter
-- Quarterly strategy review call
-
-### Ideal for
-
-- Multi-provider or expansion-stage practices
-- Practices planning a second location
-- Owners ready to out-rank every other dentist in the county
-
----
-
-## Side-by-Side Comparison
-
-| Feature                              | Cleanup        | Growth          | Dominance       |
-| ------------------------------------ | -------------- | --------------- | --------------- |
-| **Setup investment**                 | $1,500         | $3,500          | Custom          |
-| **Monthly ongoing**                  | None           | $500            | Custom          |
-| **Timeline**                         | 48 hours       | 2–3 weeks       | Quoted          |
-| Booking-form repair                  | ✓              | ✓               | ✓               |
-| Mobile viewport + layout fixes       | ✓              | ✓               | ✓               |
-| Basic modernization                  | ✓              | ✓               | ✓               |
-| Schema markup                        | —              | ✓               | ✓               |
-| Google Business Profile management   | —              | ✓               | ✓               |
-| On-page SEO                          | —              | Top 5 pages     | All pages       |
-| Blog posts / month                   | —              | 2               | 4               |
-| Review monitoring                    | —              | ✓               | ✓ + generation  |
-| Active link building                 | —              | —               | 3–5 / month     |
-| Visual refresh / redesign            | —              | —               | ✓               |
-| Landing pages (insurance, services)  | —              | —               | ✓               |
-| Quarterly CRO pass                   | —              | —               | ✓               |
-| Contract term                        | One-time       | Month-to-month  | Month-to-month  |
-
----
-
-## Recommended Tier for Pinecrest: Growth
-
-The reasoning, in one paragraph:
-
-Your site is not broken enough to only need Cleanup. Fixing the form and viewport stops the bleeding, but you will still be sitting below the map pack with no schema, no GBP, and five thin service pages. Those are the gaps that actually cost you rankings — and they will not close themselves. At the same time, Dominance is more than Pinecrest needs. A full redesign and four posts a month is the scope for a practice with three providers or two locations, not a solid two-provider practice that mostly needs to be findable.
-
-Growth is the honest fit.
-
----
-
-## Timeline & Milestones (Growth Build)
+## Timeline & Milestones
 
 **Week 1 — Cleanup + technical foundation**
 Booking form rebuilt and tested. Mobile viewport, SSL, Lighthouse, broken links, copyright year. LocalBusiness and Dentist schema shipped.
@@ -216,13 +119,13 @@ Two posts per month. GBP posts and photos refreshed monthly. Reviews monitored; 
 ## Payment Options
 
 **Option 1 — Standard**
-50% of setup ($1,750) at contract signing. 50% at launch. Monthly retainer begins month 2.
+50% of setup ($2,250) at contract signing. 50% at launch. Monthly retainer begins month 2.
 
 **Option 2 — Paid in full**
-Full setup paid at contract signing. 5% discount ($175 off setup). Monthly retainer begins month 2.
+Full setup paid at contract signing. 5% discount ($225 off setup). Monthly retainer begins month 2.
 
 **Option 3 — Extended**
-30% at contract signing ($1,050). Remaining setup split across three monthly invoices alongside retainer. No discount; no interest.
+30% at contract signing ($1,350). Remaining setup split across three monthly invoices alongside retainer. No discount; no interest.
 
 ---
 
@@ -248,11 +151,11 @@ Full setup paid at contract signing. 5% discount ($175 off setup). Monthly retai
 
 ## FAQ
 
-**Q: Can we upgrade from Growth to Dominance later?**
-A: Yes. If Growth results are working and you want to accelerate, we credit your first Dominance setup invoice against Growth's setup fee. No penalty for starting smaller.
-
 **Q: What if we only want the Cleanup but none of the ongoing work?**
-A: That is fine. Cleanup is a legitimate one-time engagement. We will not pressure you into a retainer.
+A: That is fine. The $1,500 Cleanup is a legitimate one-time engagement. We will not pressure you into a retainer.
+
+**Q: Can we expand scope later?**
+A: Yes. If the scoped rebuild is working and you want to push further — more content, paid ads integration, additional locations — we quote the delta against the work already done. No penalty for starting where you are.
 
 **Q: How soon will we see ranking improvements?**
 A: Technical fixes (schema, Core Web Vitals) register with Google in 2–4 weeks. On-page SEO and GBP work typically show in 6–12 weeks. Content-driven ranking is 4–6 months. We report monthly so you see the trend, not just the endpoint.
@@ -261,7 +164,7 @@ A: Technical fixes (schema, Core Web Vitals) register with Google in 2–4 weeks
 A: No. Anyone who does is lying — Google's algorithm is not something we control. We guarantee the scope of work outlined here and the quality of execution.
 
 **Q: What happens if our site platform is ancient?**
-A: If the platform cannot support the Growth scope (some very old WordPress builds and proprietary CMSs cannot), we will say so in week 1 and either migrate you (custom quote) or refund the setup minus work completed. We will not pretend.
+A: If the platform cannot support this scope, we will say so in week 1 and either migrate you (custom quote) or refund the setup minus work completed. We will not pretend.
 
 ---
 
@@ -276,13 +179,12 @@ A: If the platform cannot support the Growth scope (some very old WordPress buil
 
 ## Investment Summary
 
-| Tier          | Setup   | Monthly   | 12-month total |
-| ------------- | ------- | --------- | -------------- |
-| **Cleanup**   | $1,500  | —         | $1,500         |
-| **Growth**    | $3,500  | $500      | $9,500         |
-| **Dominance** | Custom  | Custom    | Quoted per practice |
+| Scope              | Setup   | Monthly | 12-month total |
+| ------------------ | ------- | ------- | -------------- |
+| **Cleanup only**   | $1,500  | —       | $1,500         |
+| **Recommended**    | $4,500  | $500    | $10,500        |
 
-**Recommended: Growth — $9,500 over 12 months, cancellable with 30 days notice at any time.**
+**Recommended: $10,500 over 12 months — $4,500 setup plus $500/month retainer, cancellable with 30 days notice at any time.**
 
 ---
 

@@ -2,21 +2,23 @@
 
 ## Business Context
 
-**Business:** REBB Advisors — Greenville SC. Dental website engagements at three tiers: Cleanup, Growth, Dominance.
+**Business:** REBB Advisors — Greenville SC. Hyper-focused dental website cleanup, with scoped rebuilds for practices that need more.
 **Tone:** Confident, minimal, blunt. No fluff.
 **Target:** Dental practices only (general, ortho, pediatric, oral surgery, cosmetic/implants, perio, endo). Greenville County + Upstate SC. The public site must not reference other verticals — the internal prospects pipeline also audits personal injury firms, but that is outbound-only.
 
-**Rule #1: Confused customers don't buy.** One entry point (free audit), one deliverable (written proposal), one CTA ("Get Free Audit + Proposal"). Tier choice happens *inside* the proposal, not on the homepage.
+**Rule #1: Confused customers don't buy.** One entry point (free audit), one deliverable (written proposal), one CTA. No public tier menu.
 
-**Public offer — source of truth:** `tiers` array exported from `src/components/HomeSections.tsx`. Consumed by homepage PricingSection, city pages, and `/sample-proposal`. Edit there to change prices or scope. Current shape:
-- **Cleanup** — $1,500 flat, 48h turnaround. No retainer.
-- **Growth** — $3,500 setup + $500/mo. Month-to-month, 30-day cancel.
-- **Dominance** — Custom scope ("Let's talk"). No public price. Setup + monthly retainer quoted inside the written proposal. Month-to-month, 30-day cancel. Historical anchor for internal reference: setup ~$7,500+, retainer ~$1,200+/mo.
+**Public offer — single anchor:**
+- **Cleanup** — $1,500 flat, five business days. No retainer. The only number displayed publicly.
+- **Larger rebuilds** — scoped per practice inside the written proposal. Setup + $500/mo retainer typical for scoped rebuilds; month-to-month, 30-day cancel. Never priced on the public site.
+
+The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recommending a $4,500 setup + $500/mo scoped rebuild as a concrete example of what a written proposal looks like — that is illustrative, not a public tier.
 
 **Positioning:**
-- "The proposal is the product; the tier is just how it ships."
-- Retainers are month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte — custom scope goes in the written proposal, not a fourth public tier.
+- "The proposal is the product."
+- Retainers are month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte, no public tier menu — scope lives inside the written proposal.
 - If the audit shows no engagement is needed, say so. Cleanup stays available as a one-time fix.
+- Two load-bearing differentiators in copy: **HIPAA** (fear lever, near top) and **PMS/patient-engagement integrations named** — Weave, LocalMed, RevenueWell (competence lever, middle, justifies price).
 - Sample proposal at `/sample-proposal` uses fictional "Pinecrest Family Dentistry" — keep sanitized, never reference a real practice.
 
 **Internal tooling (not customer-facing):**
@@ -39,7 +41,7 @@
 
 These are the file relationships you can't derive by reading individual files:
 
-- **`src/components/HomeSections.tsx`** — exports `tiers` array (single source of truth for pricing/scope), plus shared sections (VisualProofSection, ProcessSection, PricingSection, OutcomesSection, FaqSection, FinalCtaSection), `faqs`, `faqJsonLd`, `ArrowIcon`. Imported by `/page.tsx`, `/dental-website-cleanup/[city]/page.tsx`, `/sample-proposal/page.tsx`.
+- **`src/components/HomeSections.tsx`** — exports the shared marketing sections consumed by `/page.tsx`, `/dental-website-cleanup/[city]/page.tsx`, and `/sample-proposal/page.tsx`: `HipaaSection`, `ProcessSection`, `CompetenceSection`, `BeforeAfterSection`, `StakesSection`, `PricingSection`, `FaqSection`, `FinalCtaSection`, plus `faqs`, `faqJsonLd`, `ArrowIcon`. No `tiers` array — pricing is a single $1,500 anchor rendered inline in `PricingSection`; larger scope lives in the written proposal only.
 - **`src/lib/cities.ts`** — `CitySlug` union (greenville, spartanburg, anderson, easley, seneca). Sitemap, Footer "Service areas" row, and `[city]` route all derive from it. Add a city by editing this file only.
 - **`src/lib/clusters.ts`** — `ClusterSlug` union (booking-forms, mobile-experience, trust-and-stale-content, lighthouse-core-vitals, cleanup-vs-rebuild). Python mirror: `VALID_CLUSTERS` in `scripts/generate_insights.py` — **keep in sync**.
 - **`src/components/InsightsPostList.tsx`** — shared by `/insights` index and every `/insights/topics/[cluster]` hub.
@@ -47,6 +49,7 @@ These are the file relationships you can't derive by reading individual files:
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/dashboard/*` (via `usePathname`). Do NOT re-add chrome there.
 - **`proxy.ts`** (root) — Next.js 16 route proxy, replaces `middleware.ts`. Guards `/dashboard/*`. Do NOT create `middleware.ts`.
 - **`src/app/dashboard/_components/DashboardShell.tsx`** — async server component wrapping every dashboard route. Owns header, `<DashNav>`, signed-in email + sign-out form, stat row slot, optional `filters` slot. Props: `title`, `subtitle`, `active`, `stats`, `filters?`, `children`. Stats render in their own row *below* the title (not beside the sign-out) — this is deliberate; the earlier right-rail placement crowded the chrome and forced a flex layout that couldn't breathe. Pair with `<StatTile>` for the stat row. Add a new tab by extending `TABS` in `_components/DashNav.tsx` + the `DashNavKey` union. `getCurrentUser()` lives in `_lib/auth.ts`. Do NOT rebuild the header per page.
+- **`src/app/dashboard/prospects/ProspectTable.tsx`** — client component that renders the prospects table + row-detail drawer. `page.tsx` stays a server component and just loads data. Any interactive child (mailto links, `<details>`, `OutreachCell`) must `stopPropagation` on click or it'll also open the drawer. Drawer re-mounts via `key={prospect.id}` so notes state resets cleanly per row — do NOT re-add a `useEffect` to sync notes.
 - **`app/opengraph-image.tsx`** — edge Satori OG image, auto-injected. Do NOT set `openGraph.images` in page metadata — it conflicts.
 - **Redirects** (all `permanentRedirect("/")`): `/how-it-works`, `/web-development`, `/seo`, `/lead-intelligence`, `/outreach-automation`. Kept for inbound-link preservation.
 
@@ -80,9 +83,9 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
 
 - Every page: `title` (includes "Greenville SC"), `description`, `openGraph`, `alternates.canonical`.
 - **JSON-LD:**
-  - `ProfessionalService` in `layout.tsx` with `hasOfferCatalog` (three `Offer`s: Cleanup $1,500; Growth $3,500 setup + $500/mo `UnitPriceSpecification`; Dominance — custom, no `price`/`priceSpecification`, description notes "scope and retainer priced in proposal"). `priceRange: "$1,500+"`, 5-county `areaServed`.
+  - `ProfessionalService` in `layout.tsx` with a single `makesOffer` Offer (Cleanup $1,500). `priceRange: "$1,500+"`, 5-county `areaServed`. Do not reintroduce `hasOfferCatalog` — we do not publish larger-scope prices.
   - `FAQPage` on homepage + every city page (paired with visible `#faq`).
-  - `Service` + `AggregateOffer` (`lowPrice: 1500`, `offerCount: 3`, no `highPrice` since Dominance is custom) on each city page, with `areaServed: AdministrativeArea` for the county.
+  - `Service` + single `Offer` ($1,500) on each city page, with `areaServed: AdministrativeArea` for the county. No `AggregateOffer` — we do not publish larger-scope prices.
   - `Article` + `BreadcrumbList` on each insights post.
   - `CollectionPage` + `BreadcrumbList` on each topic hub.
 - **City pages** (`/dental-website-cleanup/{slug}`) and **topic hubs** (`/insights/topics/{slug}`) are SSG via `generateStaticParams`. Cities: priority 0.8 weekly in sitemap. Adding/renaming a cluster requires editing `lib/clusters.ts` AND `VALID_CLUSTERS` in `generate_insights.py`.
@@ -93,10 +96,10 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
 ### Voice
 - Blunt, concrete, no agency-speak. Short sentences. Period-separated statements over comma-separated clauses.
 - "If X, we'll say so" framing — anti-upsell credibility signal. Only works when it's true.
-- "The proposal is the product; the tier is just how it ships." — reuse if writing new copy.
+- "The proposal is the product." — reuse if writing new copy.
 
 ### Sell outcomes, not the stack
-- **The sales surface** (homepage hero, tier cards, `bestFor`, tier bullets, city pages, FAQ, `OutcomesSection`) speaks in dentist-frustration language and visible outcomes. No stack words, no SEO jargon. Name the thing the dentist can *see or feel*: "patients can actually book," "show up when patients Google 'dentist near me,'" "new reviews arrive steadily." Translate — never expose — terms like `schema markup`, `Lighthouse`, `Core Web Vitals`, `CRO`, `NAP`. Real product names dentists recognize (Google Business Profile, reviews, landing pages) are fine.
+- **The sales surface** (homepage hero, HIPAA/Process/Competence/BeforeAfter/Stakes/Pricing sections, city pages, FAQ) speaks in dentist-frustration language and visible outcomes. No stack words, no SEO jargon. Name the thing the dentist can *see or feel*: "patients can actually book," "show up when patients Google 'dentist near me,'" "new reviews arrive steadily." Translate — never expose — terms like `schema markup`, `Lighthouse`, `Core Web Vitals`, `CRO`, `NAP`. Real product names dentists recognize (Google Business Profile, reviews, landing pages) are fine.
 - **The proof/education surface** (`/sample-proposal`, `/insights`, lead-magnet checklist) is where technical depth lives. Schema, Lighthouse scores, LCP/CLS, NAP consistency — load-bearing there because it signals expertise. Do not sanitize these surfaces to match the sales surface; the contrast is the credibility play.
 - **Stack is invisible on the public site.** Never reference Next.js, React, WordPress, Wix, Squarespace, or any CMS by name in marketing copy. Custom builds are the default but stay unnamed; the audit decides scope inside the written proposal.
 - **Outcome vocabulary is still being honed.** Copy is "best guess v1" until real audit conversations produce verbatim dentist phrases worth mirroring back. Expect quarterly copy passes.
@@ -109,8 +112,8 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
 ### What the site does NOT promise
 - No "digital transformation." No marketing-strategy calls.
 - No long-term contracts on retainers — month-to-month only, 30-day cancel. Never write copy that implies lock-in.
-- No à la carte pricing. Custom scope goes in the written proposal, not a fourth public tier.
-- No full rebuilds disguised as Cleanup. A rebuild is Dominance scope (or a custom quote); the audit makes that call.
+- No à la carte pricing and no public tier menu. Only the $1,500 Cleanup is priced publicly; larger scope is quoted in the written proposal.
+- No full rebuilds disguised as Cleanup. A rebuild is a custom-scoped quote; the audit makes that call.
 
 ### CTAs
 - Always link to `/contact`. Hero CTA matches nav CTA. No secondary link in the hero except "See a sample proposal" in fine print.
@@ -370,9 +373,9 @@ Ordered by long-term leverage (not what's visible today). The user settled on th
 1. **Design tokens** — `.tone-{hot,warm,cool,good,good-strong,neutral,info}` in `globals.css`. All dashboard status/severity colors route through them (see Design System section).
 2. **Shared shell** — `DashboardShell` + `DashNav` + `StatTile` + `getCurrentUser()` extracted to `src/app/dashboard/_components/` and `_lib/`.
 3. **Typography + layout pass** — font cascade collapsed to two sizes (`text-sm` / `text-xs`), table headers quieted (`font-medium theme-text-muted`, no uppercase tracking-widest), sticky thead, row padding tightened to `py-3`, rank column dropped, emoji screenshot buttons replaced with text pills. Stats moved out of header chrome into their own row under the title. Conventions codified above under "Dashboard table conventions" — check there before touching table styles.
+4. **Row-detail drawer + notes (prospects)** — `ProspectTable.tsx` client component owns row click → right-side drawer with editable notes (auto-saves on blur via `updateNotes` action), contact, screenshot previews, audit detail. Single `notes text` column on `website_prospects`; upgrade to append-only `prospect_notes` table later without rewriting the drawer. Leads side still pending — mirror the same pattern (`enriched_leads.notes` already exists).
 
 **Next**
-4. **Row-detail drawer + notes** — click row → right-side sheet with editable notes, screenshot previews, audit issue detail. Start with a single `notes text` column (`website_prospects` needs a migration; `enriched_leads.notes` already exists) and one server action per table. When a notes timeline becomes real, migrate to `{lead,prospect}_notes` append-only tables without rewriting the UI.
 5. **Generic `<DataTable>` primitive** — do NOT bolt sort/filter onto one page. Build a column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, column visibility. TanStack Table is the default pick. Use on both dashboard pages. Biggest UX lever because every future internal view is a table. Sticky thead is already in place per-page — the primitive should keep that as a default.
 6. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time. Formalize the TS↔Python coupling around `principal_role` prefixes and cluster slugs instead of string-matching.
 7. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.

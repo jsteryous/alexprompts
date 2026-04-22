@@ -1,10 +1,4 @@
 import Link from "next/link";
-import {
-  AestheticBeforeAfterMock,
-  FormErrorMock,
-  CrampedMobileMock,
-  StaleFooterMock,
-} from "./VisualMocks";
 
 export function ArrowIcon() {
   return (
@@ -14,68 +8,40 @@ export function ArrowIcon() {
   );
 }
 
-const brokenExamples = [
-  {
-    title: "Dated look",
-    caption:
-      "Gray-on-gray, clip-art teeth, beveled buttons. The practice looks frozen in 2012 \u2014 new patients judge the office by it.",
-    visual: <AestheticBeforeAfterMock />,
-  },
-  {
-    title: "No mobile viewport",
-    caption:
-      "Desktop layout pinch-zoomed into a phone. Most new-patient searches happen on a phone \u2014 they bounce before they read a word.",
-    visual: <CrampedMobileMock />,
-  },
-  {
-    title: "Stale copyright",
-    caption:
-      "Footer still says 2019. The office looks closed \u2014 whether it is or not. Trust leaks before the patient sees your hours.",
-    visual: <StaleFooterMock />,
-  },
-];
-
 const processSteps = [
   {
     step: "01",
-    title: "We audit your site",
-    body: "You send your URL. We review it and send back screenshots of the issues worth fixing \u2014 booking forms, mobile, trust leaks, speed.",
+    title: "Send us the URL.",
+    body: "That\u2019s the whole intake. No form with 14 questions, no discovery call, no sales sequence.",
   },
   {
     step: "02",
-    title: "You get a written proposal",
-    body: "Every audit comes back as a real proposal, not a sales pitch. Scope, price, timeline, and which tier is the honest fit \u2014 or none, if the site is already fine.",
+    title: "Get screenshots back \u2014 free.",
+    body: "Within 48 hours we reply with the issues worth fixing and a written quote. If the site is already fine, the note says so.",
   },
   {
     step: "03",
-    title: "We execute the tier you approve",
-    body: "Cleanup ships in 48 hours. Growth and Dominance run on published milestones. You see exactly what was done at the end of every month.",
+    title: "Say yes, and it\u2019s fixed in a week.",
+    body: "Payment on approval. Cleanup ships in five business days or less.",
   },
-];
-
-const outcomes = [
-  "Patients book without hitting a dead form",
-  "Your site loads fast and looks right on every phone",
-  "You show up first when patients Google \u201Cdentist near me\u201D",
-  "New reviews arrive steadily \u2014 and Google notices",
 ];
 
 export const faqs = [
   {
     q: "What is the free audit and proposal exactly?",
-    a: "You send your practice URL. Within one business day we reply with screenshots of what is broken and a written proposal naming the tier that actually fits \u2014 scope, price, timeline. No sales call, no follow-up sequence. If the site is already fine, the proposal says that.",
+    a: "You send your practice URL. Within 48 hours we reply with screenshots of what is broken and a written quote \u2014 scope, price, timeline. No sales call, no follow-up sequence. If the site is already fine, the note says that.",
   },
   {
-    q: "How do the three tiers differ?",
-    a: "Cleanup ($1,500) is a one-time 48-hour fix for the things on your site that are quietly losing you patients \u2014 broken forms, mobile problems, stale footer. No retainer. Growth ($3,500 setup + $500/month) adds the ongoing work that makes new patients find you first on Google: listing management, content written for what patients actually search, review responses, monthly reporting. Dominance is custom \u2014 a visual refresh, more content, authority building, and dedicated landing pages, scoped and priced inside the proposal for practices fighting to be the default choice in their ZIP code.",
+    q: "What is included in the $1,500 Cleanup?",
+    a: "Mobile layout fixes. A contact-form replacement that lands in a HIPAA-compliant destination under a signed Business Associate Agreement, with the documentation for your compliance binder. A speed pass \u2014 Lighthouse improvements, image compression, unused scripts removed. A visual refresh so the practice looks current: hero, buttons, contact path. Your existing Weave, LocalMed, or RevenueWell sync is preserved and tested before handoff. Ships in five business days or less.",
   },
   {
-    q: "Are the monthly retainers locked in?",
-    a: "No. Growth and Dominance are month-to-month after the setup phase. Cancel with 30 days notice. We do not use long-term contracts \u2014 if the work is not producing results, neither of us should be stuck.",
+    q: "What if my site needs more than the Cleanup?",
+    a: "We will say so in the quote. Larger rebuilds are scoped to your project \u2014 send the URL, we will tell you what it actually needs, and we will work within your budget. Rebuild engagements run month-to-month after the build phase with 30-day cancellation. No long-term contracts.",
   },
   {
-    q: "What if my site needs a full rebuild instead?",
-    a: "We tell you in the proposal. If the audit reveals Cleanup will not hold up and a rebuild is the honest answer, we quote it as Dominance or a custom scope \u2014 you see the reasoning before you decide. The rebuild is the upsell after the audit, not the bait in the hero.",
+    q: "Do you touch our Weave or schedule-sync setup?",
+    a: "Only to preserve it. Before we swap anything, we document what is wired to your current site. We submit a test record through the new contact form and show you the entry on the receiving end before we invoice. We do not migrate or reconfigure your patient-engagement tools \u2014 those belong to your front desk.",
   },
   {
     q: "Do you only work with dental practices in Greenville?",
@@ -93,55 +59,59 @@ export const faqJsonLd = {
   })),
 };
 
-export function VisualProofSection() {
+export function HipaaSection() {
   return (
-    <section id="what-we-fix" className="theme-section-contrast py-24 md:py-32">
+    <section className="theme-section-contrast py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-2xl mb-14">
+        <div className="max-w-3xl">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Visual Proof
+            Liability hiding in plain sight
           </span>
-          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            This is what broken
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+            Your contact form is probably
             <br />
-            actually looks like.
+            a HIPAA problem.
           </h2>
-          <p className="theme-text-contrast-muted text-base leading-relaxed">
-            Not a giant website report. Four problems the audit catches on dental-practice sites &mdash; each costs new-patient calls in a way the office rarely sees.
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
+            A patient types <em>&ldquo;I&rsquo;ve had a cracked molar for two weeks and need it pulled&rdquo;</em> into the contact form on your site. They hit submit. The moment that message &mdash; a symptom tied to an identified patient &mdash; lands in your inbox, it&rsquo;s Protected Health Information.
           </p>
-        </div>
-
-        <div className="space-y-6">
-          <div className="theme-card-strong border rounded-3xl p-6 md:p-10">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              <div>
-                <span className="theme-warn-badge inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full mb-4">
-                  Worst offender
-                </span>
-                <p className="theme-text-primary text-2xl md:text-3xl font-bold mb-3 leading-tight">
-                  Booking form 404
-                </p>
-                <p className="theme-text-contrast-muted text-base leading-relaxed">
-                  The patient fills out the appointment form, hits submit, and lands on a 404. They close the tab and call the practice down the street. The office never sees the lead &mdash; they just keep wondering why the phone is quiet.
-                </p>
-              </div>
-              <div>
-                <FormErrorMock />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-            {brokenExamples.map((item) => (
-              <div key={item.title} className="theme-card border rounded-2xl p-5 flex flex-col gap-4">
-                <div>{item.visual}</div>
-                <div>
-                  <p className="theme-text-primary text-base font-semibold mb-1.5">{item.title}</p>
-                  <p className="theme-text-contrast-muted text-sm leading-relaxed">{item.caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
+            Then the form quietly does one of these:
+          </p>
+          <ul className="space-y-2.5 mb-6">
+            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+              <span className="theme-label font-bold mt-0.5">&mdash;</span>
+              <span>Stores submissions in a plugin database with no retention policy and no audit log.</span>
+            </li>
+            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+              <span className="theme-label font-bold mt-0.5">&mdash;</span>
+              <span>Submits through a plugin on a host you don&rsquo;t have a Business Associate Agreement with.</span>
+            </li>
+            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+              <span className="theme-label font-bold mt-0.5">&mdash;</span>
+              <span>Lands in a Gmail inbox that was never set up under a Google Workspace BAA.</span>
+            </li>
+            <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+              <span className="theme-label font-bold mt-0.5">&mdash;</span>
+              <span>Routes through a form service whose terms of service explicitly exclude healthcare.</span>
+            </li>
+          </ul>
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
+            Most front-desk staff don&rsquo;t know which of those four is happening on your site right now. Most dentists haven&rsquo;t thought about it since their last compliance training. But if HHS &mdash; the federal agency that enforces HIPAA &mdash; comes with a records request, it&rsquo;s the practice on the hook, not the form plugin.
+          </p>
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-8">
+            Cleanup replaces the intake form with one that posts into a destination covered by a signed Business Associate Agreement, and hands you the documentation for the file. If you already run new-patient intake through Weave or LocalMed, we point the site at that flow instead of duplicating capture.
+          </p>
+          {/* TODO: add synthetic non-compliant dental contact form mock to VisualMocks.tsx
+              — red callouts on plugin-stored PHI, no-BAA destination, no retention policy.
+              Inline here when asset exists. */}
+          <Link
+            href="/contact"
+            className="theme-cta-accent inline-flex items-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
+          >
+            Send us your URL
+            <ArrowIcon />
+          </Link>
         </div>
       </div>
     </section>
@@ -154,15 +124,15 @@ export function ProcessSection() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-12">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Simple Process
+            How it works
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
             Three steps.
             <br />
-            No mystery.
+            One week.
           </h2>
           <p className="theme-text-muted leading-relaxed">
-            Confused customers do not buy. One entry point &mdash; the audit. One deliverable &mdash; a written proposal. You decide what happens next.
+            One entry point &mdash; the audit. One deliverable &mdash; a written quote with screenshots. You decide what happens next.
           </p>
         </div>
 
@@ -177,6 +147,7 @@ export function ProcessSection() {
         </div>
 
         <div className="mt-10">
+          {/* TODO: requires sample proposal asset \u2014 do not ship live until this exists */}
           <Link
             href="/sample-proposal"
             className="theme-link text-sm font-semibold inline-flex items-center gap-1.5"
@@ -190,199 +161,165 @@ export function ProcessSection() {
   );
 }
 
-export const tiers = [
-  {
-    slug: "cleanup",
-    name: "Cleanup",
-    tagline: "Stop losing patients who are already trying to book you.",
-    setupPrice: "$1,500",
-    setupNote: "one-time",
-    monthlyPrice: null,
-    monthlyNote: "No retainer",
-    timeline: "48-hour turnaround",
-    bestFor:
-      "Your site works but is quietly embarrassing. The booking form\u2019s broken. It looks bad on a phone. The footer still says 2019.",
-    included: [
-      "Your booking and contact forms actually work \u2014 on every device",
-      "Your site displays and scrolls properly on phones",
-      "Copyright year, broken links, and the padlock in the address bar all correct",
-      "Hero, buttons, and contact flow refreshed so the practice looks current",
-      "Before/after screenshots at handoff, so you see exactly what changed",
-    ],
-    featured: false,
-    cta: "Get Free Audit",
-  },
-  {
-    slug: "growth",
-    name: "Growth",
-    tagline: "Be the dentist new patients see first \u2014 month after month.",
-    setupPrice: "$3,500",
-    setupNote: "setup",
-    monthlyPrice: "$500",
-    monthlyNote: "per month, month-to-month",
-    timeline: "2-3 week build, ongoing from month 2",
-    bestFor:
-      "You\u2019re an established practice. The site is okay. You want to show up when patients in your area Google \u201Cdentist near me\u201D \u2014 and keep showing up.",
-    included: [
-      "Everything in Cleanup",
-      "Your Google listing claimed, filled out, and optimized every month so new patients find you first",
-      "Home and top service pages rewritten to match what patients actually search for",
-      "Two patient-facing articles a month, written about questions your patients actually ask",
-      "New reviews monitored; we draft responses, you approve",
-      "Listed correctly across the directories Google checks when ranking local dentists",
-      "A monthly email showing what shipped and what moved",
-    ],
-    featured: true,
-    cta: "Get Free Audit",
-  },
-  {
-    slug: "dominance",
-    name: "Dominance",
-    tagline: "Own your ZIP code. Be the default dentist for every procedure.",
-    setupPrice: "Let\u2019s talk",
-    setupNote: "custom scope",
-    monthlyPrice: null,
-    monthlyNote: "Scope and retainer priced in the proposal",
-    timeline: "Timeline confirmed in proposal",
-    bestFor:
-      "Multi-provider, expansion-stage, or fighting a crowded market. You want to be the default dentist choice in your ZIP code \u2014 for cleanings, implants, ortho, all of it.",
-    included: [
-      "Everything in Growth",
-      "A visual refresh designed around new-patient conversion \u2014 not redesign for its own sake",
-      "Four long-form articles a month that earn search traffic over time",
-      "Mentions and links from other local and dental sites to boost your authority",
-      "Automated review requests sent to patients after appointments",
-      "Before/after galleries, treatment explainers, and dedicated pages for insurance and new patients",
-      "A quarterly review \u2014 what\u2019s working, what we\u2019re doubling down on next",
-    ],
-    featured: false,
-    cta: "Get Free Audit",
-  },
-] as const;
-
-export function PricingSection() {
+export function CompetenceSection() {
   return (
-    <section id="pricing" className="theme-section-muted theme-border py-24 md:py-32 border-y">
+    <section className="theme-section-muted border-y theme-border py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl mb-14">
+        <div className="max-w-3xl mb-12">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Tiered Pricing
+            We won&rsquo;t break the front desk
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            Three tiers.
+            Your Weave sync survives
             <br />
-            One honest proposal.
+            the cleanup.
           </h2>
-          <p className="theme-text-muted leading-relaxed">
-            Every audit comes back as a written proposal naming the tier that actually fits. You pick. No upsells, no surprise line items.{" "}
-            <Link href="/sample-proposal" className="theme-link font-semibold underline underline-offset-4">
-              See a sample proposal
-            </Link>
-            .
+          <p className="theme-text-muted text-base leading-relaxed mb-4">
+            Every dentist who&rsquo;s been through a website redesign has the same story. The new site goes live on a Monday. By Wednesday the front desk is on the phone with Weave support because new appointments aren&rsquo;t syncing to the schedule. Nobody admits it&rsquo;s the website&rsquo;s fault for three days. The practice bleeds a week of confirmations.
+          </p>
+          <p className="theme-text-muted text-base leading-relaxed">
+            We don&rsquo;t do that. Before we swap anything, we document what&rsquo;s wired to your current site &mdash; and we test that it still fires after handoff.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {tiers.map((tier) => (
-            <div
-              key={tier.slug}
-              className={`${
-                tier.featured ? "theme-card-strong" : "theme-card"
-              } border rounded-3xl p-8 flex flex-col relative`}
-            >
-              {tier.featured && (
-                <span className="theme-badge absolute top-5 right-5 text-[10px] font-semibold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full">
-                  Most practices
-                </span>
-              )}
-              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-2">
-                Tier {tier.slug === "cleanup" ? "01" : tier.slug === "growth" ? "02" : "03"}
-              </p>
-              <h3 className="theme-text-primary text-2xl font-bold mb-1.5">{tier.name}</h3>
-              <p className="theme-text-secondary text-sm mb-6">{tier.tagline}</p>
-
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2">
-                  <span className="theme-text-primary text-4xl font-bold tracking-tight">
-                    {tier.setupPrice}
-                  </span>
-                  <span className="theme-text-muted text-sm">{tier.setupNote}</span>
-                </div>
-                {tier.monthlyPrice ? (
-                  <p className="theme-text-secondary text-sm mt-1">
-                    + <span className="font-semibold">{tier.monthlyPrice}</span> {tier.monthlyNote}
-                  </p>
-                ) : (
-                  <p className="theme-text-muted text-sm mt-1">{tier.monthlyNote}</p>
-                )}
-                <p className="theme-text-muted text-xs mt-2">{tier.timeline}</p>
-              </div>
-
-              <p className="theme-text-secondary text-sm leading-relaxed mb-5">{tier.bestFor}</p>
-
-              <ul className="space-y-2.5 mb-8 flex-1">
-                {tier.included.map((item) => (
-                  <li key={item} className="theme-text-secondary text-sm leading-relaxed flex gap-2">
-                    <span className="theme-label font-bold mt-0.5">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/contact"
-                className={`${
-                  tier.featured ? "theme-cta-accent" : "theme-cta"
-                } inline-flex items-center justify-center gap-2 font-semibold px-5 py-3 rounded-xl text-sm`}
-              >
-                {tier.cta}
-                <ArrowIcon />
-              </Link>
-            </div>
-          ))}
+        <div className="grid gap-5 md:grid-cols-3">
+          <div className="theme-card border rounded-3xl p-7">
+            <h3 className="theme-text-primary text-base font-bold mb-3">Weave, LocalMed, RevenueWell.</h3>
+            <p className="theme-text-secondary text-sm leading-relaxed">
+              If your site posts into one of these for new-patient intake or recall reminders, we preserve the endpoint your front desk built. We submit a test record through the live form and show you the entry on the receiving end before we invoice.
+            </p>
+          </div>
+          <div className="theme-card border rounded-3xl p-7">
+            <h3 className="theme-text-primary text-base font-bold mb-3">HIPAA-compliant intake.</h3>
+            <p className="theme-text-secondary text-sm leading-relaxed">
+              The replacement form lands in a destination covered by a signed Business Associate Agreement. You get the documentation for your compliance binder.
+            </p>
+          </div>
+          <div className="theme-card border rounded-3xl p-7">
+            <h3 className="theme-text-primary text-base font-bold mb-3">Map Pack visibility.</h3>
+            <p className="theme-text-secondary text-sm leading-relaxed">
+              Dentist-specific schema markup, Google Business Profile category alignment, consistent name/address/phone across citations &mdash; the things that move your pin forward when a patient searches &ldquo;dentist near me&rdquo; on their phone.
+            </p>
+          </div>
         </div>
 
-        <div className="theme-card-warn border rounded-3xl p-6 md:p-8 mt-10">
-          <p className="theme-warn-badge inline-block text-xs font-semibold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full mb-3">
-            Not sure which tier?
-          </p>
-          <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-            Don&apos;t guess. Send the URL. The free audit tells you which tier your site actually needs &mdash; and if none of them do, we&apos;ll say that too. The proposal is the product; the tier is just how it ships.
-          </p>
-        </div>
+        <p className="theme-text-muted text-sm mt-8">
+          None of this is add-on scope. It&rsquo;s what Cleanup means.
+        </p>
       </div>
     </section>
   );
 }
 
-export function OutcomesSection() {
+export function BeforeAfterSection() {
   return (
     <section className="theme-section py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-[1fr,1fr] items-start">
-          <div>
-            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-              What Success Looks Like
-            </span>
-            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-              Your site works.
-              <br />
-              The practice looks current.
-              <br />
-              Patients actually book.
-            </h2>
-            <p className="theme-text-muted leading-relaxed">
-              You should not lose new patients because the website looks abandoned. They are judging the practice by the site whether that is fair or not.
-            </p>
-          </div>
+        <div className="max-w-2xl mb-8">
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+            Before / after
+          </span>
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+            Real dental practices,
+            <br />
+            real repairs.
+          </h2>
+        </div>
+        {/* TODO: populate with real before/after case studies \u2014 anonymized only with
+            explicit written permission from the practice. Per brief, target two
+            studies that hit different emotional registers:
+              1. Cosmetic / Invisalign practice \u2014 younger demographic, mobile-first
+                 visual proof.
+              2. Implant / full-arch practice \u2014 older demographic, trust and
+                 authority proof.
+            Do NOT ship placeholder images. VisualMocks.tsx is for synthetic
+            "other people's broken sites" only and is not the right home for these.
+            Replace the italic placeholder below with real case studies when at
+            least one exists. */}
+        <p className="theme-text-muted text-sm italic">
+          Case studies shipping soon. Coming from real Greenville-area practices &mdash; with their permission.
+        </p>
+      </div>
+    </section>
+  );
+}
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {outcomes.map((item) => (
-              <div key={item} className="theme-card-accent border rounded-2xl p-5">
-                <p className="theme-text-primary text-sm font-semibold leading-relaxed">{item}</p>
-              </div>
-            ))}
-          </div>
+export function StakesSection() {
+  return (
+    <section className="theme-section-contrast py-24 md:py-32">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-3xl mb-10">
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+            What it costs to wait
+          </span>
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+            The patient you lost this week
+            <br />
+            is already in another chair.
+          </h2>
+          <p className="theme-text-contrast-muted text-base leading-relaxed">
+            New-patient searches don&rsquo;t pause for your schedule. They happen every evening, every weekend morning, the minute a crown cracks on a Sunday. If your site is broken when the patient looks, they don&rsquo;t come back when it&rsquo;s fixed. They find the practice on the next map pin.
+          </p>
+        </div>
+
+        <p className="theme-text-contrast-muted text-base leading-relaxed mb-4 max-w-3xl">
+          Three things get worse the longer the cleanup waits:
+        </p>
+        <ul className="space-y-4 mb-8 max-w-3xl">
+          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+            <span className="theme-label font-bold mt-0.5">&mdash;</span>
+            <span>
+              <strong className="theme-text-primary">Google&rsquo;s Map Pack weights mobile experience.</strong> Every month your Lighthouse mobile score stays low, your pin drifts further from the top of the local results. Your competitor&rsquo;s doesn&rsquo;t.
+            </span>
+          </li>
+          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+            <span className="theme-label font-bold mt-0.5">&mdash;</span>
+            <span>
+              <strong className="theme-text-primary">Reviews compound off new patients.</strong> The patients who can&rsquo;t get through your booking form aren&rsquo;t leaving reviews. Their five-star count grows; yours doesn&rsquo;t.
+            </span>
+          </li>
+          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+            <span className="theme-label font-bold mt-0.5">&mdash;</span>
+            <span>
+              <strong className="theme-text-primary">The form&rsquo;s liability window keeps widening.</strong> Every new submission into a non-BAA destination is another record on the pile.
+            </span>
+          </li>
+        </ul>
+
+        <p className="theme-text-contrast-muted text-base leading-relaxed max-w-3xl">
+          The site isn&rsquo;t hurting existing patients. They already know where to park. Every bounce is a new patient &mdash; the one who was going to replace the patient who moved away last month.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export function PricingSection() {
+  return (
+    <section id="pricing" className="theme-section-muted theme-border py-24 md:py-32 border-y">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-3xl">
+          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+            Pricing
+          </span>
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+            Website builds
+            <br />
+            starting at $1,500.
+          </h2>
+          <p className="theme-text-secondary text-base leading-relaxed mb-4">
+            The Cleanup is $1,500. It covers the four fixes &mdash; mobile, contact form, speed, outdated look &mdash; a HIPAA-compliant intake swap, and we preserve your Weave, LocalMed, or RevenueWell sync before handoff.
+          </p>
+          <p className="theme-text-secondary text-base leading-relaxed mb-8">
+            Larger rebuilds are scoped to your project. Send what you need; we&rsquo;ll work within your budget.
+          </p>
+          <Link
+            href="/contact"
+            className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
+          >
+            Show me what&rsquo;s broken
+            <ArrowIcon />
+          </Link>
         </div>
       </div>
     </section>
@@ -404,7 +341,7 @@ export function FaqSection() {
               worth answering.
             </h2>
             <p className="theme-text-muted leading-relaxed">
-              Five honest answers about the audit, the tiers, and what happens after you hit reply.
+              Honest answers about the audit, the Cleanup, and what happens after you hit reply.
             </p>
           </div>
 
@@ -437,15 +374,15 @@ export function FinalCtaSection() {
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div className="max-w-2xl">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Direct Call To Action
+            Send the URL
           </span>
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold mb-3">
             Reply with your practice website.
             <br />
-            You&apos;ll have a proposal tomorrow.
+            You&rsquo;ll have screenshots inside 48 hours.
           </h2>
           <p className="theme-text-contrast-muted">
-            Free audit. Written proposal with the tier that honestly fits. No call, no pitch, no follow-up sequence.
+            Free audit. Screenshots plus a written quote. No call, no follow-up sequence. If the site is fine, the note says so.
           </p>
         </div>
         <Link
