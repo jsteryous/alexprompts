@@ -92,12 +92,12 @@ export function HipaaSection() {
               <ArrowIcon />
             </Link>
           </div>
-          <div className="relative aspect-[4/3] w-full max-w-[220px] md:max-w-[260px] mx-auto overflow-hidden rounded-3xl theme-border border">
+          <div className="relative aspect-[4/3] w-full max-w-[360px] md:max-w-[420px] mx-auto overflow-hidden rounded-3xl theme-border border">
             <Image
               src="/hipaa.jpg"
               alt="HIPAA compliance and patient data protection"
               fill
-              sizes="260px"
+              sizes="(min-width: 768px) 420px, 360px"
               className="object-cover"
             />
           </div>
