@@ -65,7 +65,7 @@ export function HipaaSection() {
   return (
     <section className="theme-section-contrast py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 md:gap-16 md:grid-cols-[1.1fr,0.9fr] items-center">
+        <div className="grid gap-12 md:gap-16 md:grid-cols-[1.4fr,0.6fr] items-center">
           <div>
             <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
               Liability hiding in plain sight
@@ -92,12 +92,12 @@ export function HipaaSection() {
               <ArrowIcon />
             </Link>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl theme-border border">
+          <div className="relative aspect-[4/3] w-full max-w-sm md:max-w-none mx-auto overflow-hidden rounded-3xl theme-border border">
             <Image
               src="/hipaa.jpg"
               alt="HIPAA compliance and patient data protection"
               fill
-              sizes="(min-width: 768px) 40vw, 100vw"
+              sizes="(min-width: 768px) 28vw, 80vw"
               className="object-cover"
             />
           </div>
@@ -187,7 +187,7 @@ export function CompetenceSection() {
                 />
               </div>
               <div>
-                <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-3">{p.label}</p>
+                <p className="theme-label text-sm md:text-base font-extrabold uppercase tracking-[0.22em] mb-4">{p.label}</p>
                 <h3 className="theme-text-primary text-2xl md:text-[1.75rem] font-bold leading-snug mb-5">
                   {p.headline}
                 </h3>
