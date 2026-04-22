@@ -92,12 +92,12 @@ export function HipaaSection() {
               <ArrowIcon />
             </Link>
           </div>
-          <div className="relative aspect-[4/3] w-full max-w-sm md:max-w-none mx-auto overflow-hidden rounded-3xl theme-border border">
+          <div className="relative aspect-[4/3] w-full max-w-[220px] md:max-w-[260px] mx-auto overflow-hidden rounded-3xl theme-border border">
             <Image
               src="/hipaa.jpg"
               alt="HIPAA compliance and patient data protection"
               fill
-              sizes="(min-width: 768px) 28vw, 80vw"
+              sizes="260px"
               className="object-cover"
             />
           </div>
@@ -222,7 +222,14 @@ export function CompetenceSection() {
   );
 }
 
-const fixPatterns = [
+export type FixPattern = {
+  label: string;
+  problem: string;
+  fix: string;
+  result: string;
+};
+
+const defaultFixPatterns: FixPattern[] = [
   {
     label: "Speed",
     problem: "Site takes 5.2s to paint on a mid-tier Android over LTE. Patients leave after three.",
@@ -243,28 +250,45 @@ const fixPatterns = [
   },
 ];
 
-export function BeforeAfterSection() {
+type BeforeAfterProps = {
+  eyebrow?: string;
+  headlineTop?: string;
+  headlineBottom?: string;
+  intro?: React.ReactNode;
+  patterns?: FixPattern[];
+};
+
+export function BeforeAfterSection({
+  eyebrow = "What the audits find",
+  headlineTop = "Here\u2019s what breaks.",
+  headlineBottom = "Here\u2019s what changes.",
+  intro,
+  patterns = defaultFixPatterns,
+}: BeforeAfterProps = {}) {
+  const defaultIntro = (
+    <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+      We&rsquo;ve audited <strong className="theme-text-primary">87 dental websites</strong> across Greenville, Spartanburg, Anderson, Pickens, and Oconee counties. The median mobile Lighthouse score is <strong className="theme-text-primary">55 out of 100</strong>. Thirty-nine percent score below 50. These are the fixes that show up most.
+    </p>
+  );
   return (
     <section className="theme-section py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-10">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            What the audits find
+            {eyebrow}
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            Here&rsquo;s what breaks.
+            {headlineTop}
             <br />
-            Here&rsquo;s what changes.
+            {headlineBottom}
           </h2>
           <div className="theme-card-muted border theme-border rounded-2xl p-5 md:p-6">
-            <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-              We&rsquo;ve audited <strong className="theme-text-primary">87 dental websites</strong> across Greenville, Spartanburg, Anderson, Pickens, and Oconee counties. The median mobile Lighthouse score is <strong className="theme-text-primary">55 out of 100</strong>. Thirty-nine percent score below 50. These are the fixes that show up most.
-            </p>
+            {intro ?? defaultIntro}
           </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-3">
-          {fixPatterns.map((item) => (
+          {patterns.map((item) => (
             <div key={item.label} className="theme-card border rounded-3xl p-7 flex flex-col items-center text-center">
               <span className="theme-badge inline-block text-xs font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-5">
                 {item.label}

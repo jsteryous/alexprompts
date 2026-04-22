@@ -138,8 +138,18 @@ export default async function PracticeTypePage({ params }: Props) {
 
       <HipaaSection />
       <ProcessSection />
+      <BeforeAfterSection
+        eyebrow={pt.fixesEyebrow}
+        headlineTop={pt.fixesHeadlineTop}
+        headlineBottom={pt.fixesHeadlineBottom}
+        intro={
+          <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+            {pt.fixesIntro}
+          </p>
+        }
+        patterns={pt.specificFixes}
+      />
       <CompetenceSection />
-      <BeforeAfterSection />
       <StakesSection />
       <PricingSection />
       <FaqSection />
