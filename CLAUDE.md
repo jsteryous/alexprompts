@@ -19,7 +19,6 @@ The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recomm
 - Retainers are month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte, no public tier menu — scope lives inside the written proposal.
 - If the audit shows no engagement is needed, say so. Cleanup stays available as a one-time fix.
 - Two load-bearing differentiators in copy: **HIPAA** (fear lever, near top) and **PMS/patient-engagement integrations named** — Weave, LocalMed, RevenueWell (competence lever, middle, justifies price).
-- Sample proposal at `/sample-proposal` uses fictional "Pinecrest Family Dentistry" — keep sanitized, never reference a real practice.
 
 **Internal tooling (not customer-facing):**
 - `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits, scores, emails HOT/WARM digest. Surfaces on `/dashboard/prospects`.
@@ -89,7 +88,7 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
   - `Article` + `BreadcrumbList` on each insights post.
   - `CollectionPage` + `BreadcrumbList` on each topic hub.
 - **City pages** (`/dental-website-cleanup/{slug}`) and **topic hubs** (`/insights/topics/{slug}`) are SSG via `generateStaticParams`. Cities: priority 0.8 weekly in sitemap. Adding/renaming a cluster requires editing `lib/clusters.ts` AND `VALID_CLUSTERS` in `generate_insights.py`.
-- **Dual-track positioning (intentional, do not "fix"):** The homepage eyebrow is broad (`"Dental Practice Websites · Greenville SC"`) because it sells all three tiers. The city-page eyebrow stays cleanup-anchored (`"Website Cleanup for {city} Dental Practices"`) because the URL, metadata, and exact-match target keyword for those pages is *"dental website cleanup [city]"* — widening the eyebrow there dilutes the wedge. Both surfaces funnel into the same shared `PricingSection`, so a cleanup-intent visitor still encounters Growth and Dominance on scroll. Renaming the `/dental-website-cleanup/` URL tree is a separate decision that requires Search Console impression data first.
+- **Cleanup-anchored across the funnel.** Homepage and city-page eyebrows both lead with "Dental Website Cleanup" — the wedge keyword. Larger scope is never advertised on the public site; it surfaces only inside the written proposal. Renaming the `/dental-website-cleanup/` URL tree is a separate decision that requires Search Console impression data first.
 
 ## Marketing Copy Standards
 
