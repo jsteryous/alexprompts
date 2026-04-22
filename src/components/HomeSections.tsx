@@ -168,7 +168,7 @@ export function ProcessSection() {
 const practiceTypes = [
   {
     label: "Emergency-focused",
-    image: "/practice-types/emergency.png",
+    image: "/practice-types/emergency.jpg",
     alt: "Patient holding jaw in pain, using phone",
     headline:
       "Your site should be the first result when someone types \u201cemergency dentist near me.\u201d",
