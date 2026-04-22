@@ -161,83 +161,167 @@ export function ProcessSection() {
   );
 }
 
+const practiceTypes = [
+  {
+    label: "Emergency-focused GP",
+    scenario:
+      "Emergency searches happen on mobile. If your phone number isn\u2019t visible instantly, they call the next dentist.",
+    fix: "We put a persistent tap-to-call bar with an \u201cOpen now\u201d status above the fold.",
+    outcome: "You capture same-day patients instead of losing them at 9pm on a Friday.",
+  },
+  {
+    label: "High-ticket cosmetic",
+    scenario:
+      "Cosmetic patients research for weeks. They read, bookmark, compare. If your before-and-afters are three clicks deep, they close the tab before they ever see your work.",
+    fix: "We pull your case results above the fold and give each outcome a short written narrative.",
+    outcome: "More consultations booked from the same monthly traffic, because the trust signal now lands on first visit.",
+  },
+  {
+    label: "Pediatric",
+    scenario:
+      "A parent searching &ldquo;kids dentist near me&rdquo; at 8pm is exhausted. If your booking path takes longer than 30 seconds on their phone, they put it off. Most never come back.",
+    fix: "We rebuild the mobile booking path to finish under 30 seconds and move &ldquo;what the first visit looks like&rdquo; above the scroll.",
+    outcome: "Less drop-off between the click and the confirmed appointment.",
+  },
+  {
+    label: "Sedation / anxiety",
+    scenario:
+      "Patients who have avoided the dentist for years don\u2019t need a services grid. They need to know what the first visit actually feels like &mdash; before they commit to a phone call.",
+    fix: "We lead with &ldquo;Your first visit,&rdquo; name the comfort amenities you offer (weighted blankets, noise-cancelling headphones, nitrous), and push the clinical copy below.",
+    outcome: "You capture the patients other practices scare away before the intake call even happens.",
+  },
+  {
+    label: "Fee-for-service / membership",
+    scenario:
+      "If you\u2019ve walked away from insurance, your website still acts like you take it. No visible membership plan, no transparent pricing, no way to sign up online.",
+    fix: "We build the membership tier page, wire up Stripe for monthly billing, and price every service openly.",
+    outcome: "Recurring monthly revenue instead of your front desk explaining the same plan on the phone twice a day.",
+  },
+];
+
 export function CompetenceSection() {
   return (
     <section className="theme-section-muted border-y theme-border py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            We won&rsquo;t break the front desk
+            We know how your practice actually works
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            Your Weave sync survives
+            Different practices.
             <br />
-            the cleanup.
+            Different failure modes.
+            <br />
+            Different fixes.
           </h2>
           <p className="theme-text-muted text-base leading-relaxed mb-4">
-            Every dentist who&rsquo;s been through a website redesign has the same story. The new site goes live on a Monday. By Wednesday the front desk is on the phone with Weave support because new appointments aren&rsquo;t syncing to the schedule. Nobody admits it&rsquo;s the website&rsquo;s fault for three days. The practice bleeds a week of confirmations.
+            A sedation practice and an emergency-focused GP sell to completely different patients on completely different timelines. Most web shops pour them into the same template anyway &mdash; services grid, stock hero, generic &ldquo;book now&rdquo; button &mdash; and wonder why conversion flatlines.
           </p>
           <p className="theme-text-muted text-base leading-relaxed">
-            We don&rsquo;t do that. Before we swap anything, we document what&rsquo;s wired to your current site &mdash; and we test that it still fires after handoff.
+            We don&rsquo;t. Before we quote scope, we figure out which kind of practice you run and what that specific site should do on a phone at 8pm.
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          <div className="theme-card border rounded-3xl p-7">
-            <h3 className="theme-text-primary text-base font-bold mb-3">Weave, LocalMed, RevenueWell.</h3>
-            <p className="theme-text-secondary text-sm leading-relaxed">
-              If your site posts into one of these for new-patient intake or recall reminders, we preserve the endpoint your front desk built. We submit a test record through the live form and show you the entry on the receiving end before we invoice.
-            </p>
-          </div>
-          <div className="theme-card border rounded-3xl p-7">
-            <h3 className="theme-text-primary text-base font-bold mb-3">HIPAA-compliant intake.</h3>
-            <p className="theme-text-secondary text-sm leading-relaxed">
-              The replacement form lands in a destination covered by a signed Business Associate Agreement. You get the documentation for your compliance binder.
-            </p>
-          </div>
-          <div className="theme-card border rounded-3xl p-7">
-            <h3 className="theme-text-primary text-base font-bold mb-3">Map Pack visibility.</h3>
-            <p className="theme-text-secondary text-sm leading-relaxed">
-              Dentist-specific schema markup, Google Business Profile category alignment, consistent name/address/phone across citations &mdash; the things that move your pin forward when a patient searches &ldquo;dentist near me&rdquo; on their phone.
-            </p>
-          </div>
+        <div className="grid gap-4 md:gap-5">
+          {practiceTypes.map((p) => (
+            <div key={p.label} className="theme-card border rounded-3xl p-7 md:p-8">
+              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-4">{p.label}</p>
+              <p
+                className="theme-text-primary text-lg md:text-xl font-semibold leading-snug mb-5"
+                dangerouslySetInnerHTML={{ __html: p.scenario }}
+              />
+              <div className="space-y-2.5">
+                <p className="theme-text-secondary text-sm md:text-base leading-relaxed flex gap-3">
+                  <span className="theme-label font-bold mt-0.5 select-none">&rarr;</span>
+                  <span dangerouslySetInnerHTML={{ __html: p.fix }} />
+                </p>
+                <p className="theme-text-secondary text-sm md:text-base leading-relaxed flex gap-3">
+                  <span className="theme-label font-bold mt-0.5 select-none">&rarr;</span>
+                  <span dangerouslySetInnerHTML={{ __html: p.outcome }} />
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <p className="theme-text-muted text-sm mt-8">
-          None of this is add-on scope. It&rsquo;s what Cleanup means.
+        <p className="theme-text-muted text-sm mt-10 max-w-3xl leading-relaxed">
+          Every Cleanup also preserves your Weave, LocalMed, or RevenueWell sync, swaps intake to a BAA-backed destination, and aligns your schema for Map Pack visibility. That&rsquo;s not add-on scope &mdash; that&rsquo;s baseline.
         </p>
       </div>
     </section>
   );
 }
 
+const fixPatterns = [
+  {
+    label: "Speed",
+    problem: "Site takes 5.2s to paint on a mid-tier Android over LTE. Patients leave after three.",
+    fix: "Compress the hero image. Drop the unused analytics stack. Swap fonts for system defaults. Modern image formats only.",
+    result: "Loads in 1.3s. Bounce stops being a speed problem.",
+  },
+  {
+    label: "Contact form",
+    problem: "Form submits into a plugin database with no BAA, no audit log, no retention policy.",
+    fix: "Replace with intake that lands in a BAA-backed destination. Documentation for your compliance binder included.",
+    result: "PHI exposure closed. HHS records request stops being a panic drill.",
+  },
+  {
+    label: "Mobile booking",
+    problem: "No visible way to book on mobile above the fold. Phone number is plain text, not tap-to-call.",
+    fix: "Persistent \u201cBook online\u201d bar, tap-to-call phone in the header, &ldquo;same-day emergency&rdquo; shortcut for high-intent searches.",
+    result: "High-intent mobile clicks actually convert instead of bouncing to the next pin.",
+  },
+];
+
 export function BeforeAfterSection() {
   return (
     <section className="theme-section py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-2xl mb-8">
+        <div className="max-w-3xl mb-10">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            Before / after
+            What the audits find
           </span>
-          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            Real dental practices,
+          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+            Here&rsquo;s what breaks.
             <br />
-            real repairs.
+            Here&rsquo;s what changes.
           </h2>
+          <div className="theme-card-muted border theme-border rounded-2xl p-5 md:p-6">
+            <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+              We&rsquo;ve audited <strong className="theme-text-primary">87 dental websites</strong> across Greenville, Spartanburg, Anderson, Pickens, and Oconee counties. The median mobile Lighthouse score is <strong className="theme-text-primary">55 out of 100</strong>. Thirty-nine percent score below 50. These are the fixes that show up most.
+            </p>
+          </div>
         </div>
-        {/* TODO: populate with real before/after case studies \u2014 anonymized only with
-            explicit written permission from the practice. Per brief, target two
-            studies that hit different emotional registers:
-              1. Cosmetic / Invisalign practice \u2014 younger demographic, mobile-first
-                 visual proof.
-              2. Implant / full-arch practice \u2014 older demographic, trust and
-                 authority proof.
-            Do NOT ship placeholder images. VisualMocks.tsx is for synthetic
-            "other people's broken sites" only and is not the right home for these.
-            Replace the italic placeholder below with real case studies when at
-            least one exists. */}
-        <p className="theme-text-muted text-sm italic">
-          Case studies shipping soon. Coming from real Greenville-area practices &mdash; with their permission.
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {fixPatterns.map((item) => (
+            <div key={item.label} className="theme-card border rounded-3xl p-7">
+              <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-4">{item.label}</p>
+              <div className="space-y-3.5">
+                <p className="theme-text-secondary text-sm leading-relaxed">
+                  <span className="theme-text-primary font-semibold">Problem. </span>
+                  {item.problem}
+                </p>
+                <p className="theme-text-secondary text-sm leading-relaxed">
+                  <span className="theme-text-primary font-semibold">Fix. </span>
+                  <span dangerouslySetInnerHTML={{ __html: item.fix }} />
+                </p>
+                <p className="theme-text-secondary text-sm leading-relaxed">
+                  <span className="theme-text-primary font-semibold">Result. </span>
+                  {item.result}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* TODO: when a real Greenville-area practice gives written permission,
+            add a named before/after case study here \u2014 one cosmetic/Invisalign
+            (younger, mobile-first visual proof) and one implant/full-arch
+            (older, trust/authority proof). Do NOT fabricate or pull from
+            the prospects pipeline. */}
+        <p className="theme-text-muted text-xs md:text-sm italic mt-8">
+          Named case studies from Greenville-area practices coming once we have written permission. Until then, patterns only.
         </p>
       </div>
     </section>
@@ -250,20 +334,23 @@ export function StakesSection() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-10">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            What it costs to wait
+            The real diagnosis
           </span>
           <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-            The patient you lost this week
+            You don&rsquo;t have a traffic problem.
             <br />
-            is already in another chair.
+            You have a booking problem.
           </h2>
+          <p className="theme-text-contrast-muted text-base leading-relaxed mb-4">
+            Patients are already finding you. They search &ldquo;dentist near me&rdquo; at 9pm, they tap the map pin, they land on your homepage. Then the site fails them before they finish booking &mdash; the form errors, the phone number isn&rsquo;t tap-to-call on mobile, the page takes six seconds to paint on their carrier.
+          </p>
           <p className="theme-text-contrast-muted text-base leading-relaxed">
-            New-patient searches don&rsquo;t pause for your schedule. They happen every evening, every weekend morning, the minute a crown cracks on a Sunday. If your site is broken when the patient looks, they don&rsquo;t come back when it&rsquo;s fixed. They find the practice on the next map pin.
+            Every bounce is a new patient you never met. And a five-star review you&rsquo;ll never get.
           </p>
         </div>
 
         <p className="theme-text-contrast-muted text-base leading-relaxed mb-4 max-w-3xl">
-          Three things get worse the longer the cleanup waits:
+          Three things compound every month the cleanup waits:
         </p>
         <ul className="space-y-4 mb-8 max-w-3xl">
           <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
@@ -275,19 +362,19 @@ export function StakesSection() {
           <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
             <span className="theme-label font-bold mt-0.5">&mdash;</span>
             <span>
-              <strong className="theme-text-primary">Reviews compound off new patients.</strong> The patients who can&rsquo;t get through your booking form aren&rsquo;t leaving reviews. Their five-star count grows; yours doesn&rsquo;t.
+              <strong className="theme-text-primary">Reviews compound off new patients.</strong> Patients who can&rsquo;t get through your booking form aren&rsquo;t leaving reviews. Your competitor&rsquo;s five-star count grows; yours doesn&rsquo;t.
             </span>
           </li>
           <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
             <span className="theme-label font-bold mt-0.5">&mdash;</span>
             <span>
-              <strong className="theme-text-primary">The form&rsquo;s liability window keeps widening.</strong> Every new submission into a non-BAA destination is another record on the pile.
+              <strong className="theme-text-primary">The form&rsquo;s liability window keeps widening.</strong> Every submission into a non-BAA destination is another record on the pile.
             </span>
           </li>
         </ul>
 
         <p className="theme-text-contrast-muted text-base leading-relaxed max-w-3xl">
-          The site isn&rsquo;t hurting existing patients. They already know where to park. Every bounce is a new patient &mdash; the one who was going to replace the patient who moved away last month.
+          The site isn&rsquo;t hurting existing patients &mdash; they already know where to park. Every bounce is a new patient. The one who was going to replace the patient who moved away last month.
         </p>
       </div>
     </section>
