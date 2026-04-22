@@ -45,3 +45,6 @@ next-env.d.ts
 # Python scraper debug output (may contain authenticated session HTML/screenshots)
 scripts/debug/
 scripts/__pycache__/
+
+# Image source originals (processed copies live in public/)
+/pics/
