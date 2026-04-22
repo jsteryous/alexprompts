@@ -65,7 +65,16 @@ export function HipaaSection() {
   return (
     <section className="theme-section-contrast py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 md:gap-16 md:grid-cols-[1.4fr,0.6fr] items-center">
+        <div className="grid gap-12 md:gap-16 md:grid-cols-[0.6fr,1.4fr] items-center">
+          <div className="relative aspect-[4/3] w-full max-w-[360px] md:max-w-[420px] mx-auto overflow-hidden rounded-3xl theme-border border">
+            <Image
+              src="/hipaa.jpg"
+              alt="HIPAA compliance and patient data protection"
+              fill
+              sizes="(min-width: 768px) 420px, 360px"
+              className="object-cover"
+            />
+          </div>
           <div>
             <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
               Liability hiding in plain sight
@@ -91,15 +100,6 @@ export function HipaaSection() {
               Send us your URL
               <ArrowIcon />
             </Link>
-          </div>
-          <div className="relative aspect-[4/3] w-full max-w-[360px] md:max-w-[420px] mx-auto overflow-hidden rounded-3xl theme-border border">
-            <Image
-              src="/hipaa.jpg"
-              alt="HIPAA compliance and patient data protection"
-              fill
-              sizes="(min-width: 768px) 420px, 360px"
-              className="object-cover"
-            />
           </div>
         </div>
       </div>
