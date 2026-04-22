@@ -18,7 +18,7 @@ The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recomm
 - "The proposal is the product."
 - Retainers are month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte, no public tier menu — scope lives inside the written proposal.
 - If the audit shows no engagement is needed, say so. Cleanup stays available as a one-time fix.
-- Two load-bearing differentiators in copy: **HIPAA** (fear lever, near top) and **PMS/patient-engagement integrations named** — Weave, LocalMed, RevenueWell (competence lever, middle, justifies price).
+- Three load-bearing homepage beats: **StakesSection** reframes the problem ("you don't have a traffic problem — you have a booking problem"); **HipaaSection** is the fear lever (PHI exposure, BAA-backed intake); **CompetenceSection** is the competence lever — a 5-row practice-type matrix (emergency / cosmetic / pediatric / sedation / FFS-membership) with per-row photography, scenario headline + two bullets. PMS integrations (Weave/LocalMed/RevenueWell) and Map Pack schema collapse to a one-line baseline footer under the matrix, not a standalone card grid. **BeforeAfterSection** carries proof-of-inspection stats from `audit_stats.py` (currently n=87 Upstate dental sites, median mobile Lighthouse 55, 39% below 50) above three generic problem→fix→result cards — do not fabricate named case studies.
 
 **Internal tooling (not customer-facing):**
 - `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits, scores, emails HOT/WARM digest. Surfaces on `/dashboard/prospects`.
@@ -40,7 +40,7 @@ The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recomm
 
 These are the file relationships you can't derive by reading individual files:
 
-- **`src/components/HomeSections.tsx`** — exports the shared marketing sections consumed by `/page.tsx`, `/dental-website-cleanup/[city]/page.tsx`, and `/sample-proposal/page.tsx`: `HipaaSection`, `ProcessSection`, `CompetenceSection`, `BeforeAfterSection`, `StakesSection`, `PricingSection`, `FaqSection`, `FinalCtaSection`, plus `faqs`, `faqJsonLd`, `ArrowIcon`. No `tiers` array — pricing is a single $1,500 anchor rendered inline in `PricingSection`; larger scope lives in the written proposal only.
+- **`src/components/HomeSections.tsx`** — exports the shared marketing sections consumed by `/page.tsx`, `/dental-website-cleanup/[city]/page.tsx`, and `/sample-proposal/page.tsx`: `HipaaSection`, `ProcessSection`, `CompetenceSection`, `BeforeAfterSection`, `StakesSection`, `PricingSection`, `FaqSection`, `FinalCtaSection`, plus `faqs`, `faqJsonLd`, `ArrowIcon`. No `tiers` array — pricing is a single $1,500 anchor rendered inline in `PricingSection`; larger scope lives in the written proposal only. `CompetenceSection` is driven by the `practiceTypes` array (add/remove a dental sub-niche by editing it; each row pairs with `/public/practice-types/{emergency,cosmetic,pediatric,sedation,membership}.jpg`). `BeforeAfterSection` is driven by `fixPatterns` and has a hardcoded stat block — update the `n=87 / 55 / 39%` numbers when `python scripts/audit_stats.py` shifts materially.
 - **`src/lib/cities.ts`** — `CitySlug` union (greenville, spartanburg, anderson, easley, seneca). Sitemap, Footer "Service areas" row, and `[city]` route all derive from it. Add a city by editing this file only.
 - **`src/lib/clusters.ts`** — `ClusterSlug` union (booking-forms, mobile-experience, trust-and-stale-content, lighthouse-core-vitals, cleanup-vs-rebuild). Python mirror: `VALID_CLUSTERS` in `scripts/generate_insights.py` — **keep in sync**.
 - **`src/components/InsightsPostList.tsx`** — shared by `/insights` index and every `/insights/topics/[cluster]` hub.
@@ -105,7 +105,8 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
 
 ### Show, don't tell
 - The site sells *audits* and *written proposals*. `/sample-proposal` is the live proof-of-deliverable.
-- **Synthetic visual mocks only** (`VisualMocks.tsx`). NO real company names, logos, screenshots, or identifiable layouts — not even anonymized. The prospects pipeline captures real sites; never expose any of that to the public site.
+- **Synthetic visual mocks only for website content** (`VisualMocks.tsx`). NO real company names, logos, screenshots, or identifiable layouts — not even anonymized. The prospects pipeline captures real sites; never expose any of that to the public site.
+- **Photography of people / environments is fine** and lives in `public/practice-types/` (one per `CompetenceSection` row). Source originals go in `/pics/` (gitignored); compress via `sharp` at 1600px wide / q=80 mozjpeg to land each file ~100–250 KB. Next.js `<Image>` handles per-viewport downscaling at runtime.
 - Sample proposal uses fictional "Pinecrest Family Dentistry" with fabricated-but-plausible findings.
 
 ### What the site does NOT promise
