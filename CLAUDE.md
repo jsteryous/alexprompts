@@ -396,6 +396,6 @@ Ordered by long-term leverage (not what's visible today). The user settled on th
 
 ## Python Pipeline — Open Tech Debt
 
-- **No unit tests** — `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, `is_enriched()` are pure functions with complex logic and zero coverage.
+- **Partial unit-test coverage** — `scripts/tests/test_prospects.py` covers the `scripts/prospects/` pure functions (`is_practitioner_name`, `detect_*`, `score_severity`, `extract_emails`, `rank_emails`, `extract_decision_maker`, candidate-page helpers). Run: `python -m unittest scripts.tests.test_prospects -v`. Still uncovered on the enrichment side: `normalize_person_name()`, `score_signal()`, `_parse_borrower_from_text()`, `is_enriched()`.
 - **`fetch_pending_signals` NOT IN query** — `.filter("id", "not.in", ...)` passed as URL param; hits length limits at ~2000+ enriched signals.
 - **`principal_role` constants** — defined in `enrich_models.py`. TypeScript dashboard maps confidence tiers by `startsWith()` prefix.
