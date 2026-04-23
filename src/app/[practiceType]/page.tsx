@@ -6,14 +6,14 @@ import {
   ArrowIcon,
   HipaaSection,
   ProcessSection,
-  CompetenceSection,
   BeforeAfterSection,
   StakesSection,
   PricingSection,
   FaqSection,
   FinalCtaSection,
-  faqJsonLd,
+  buildFaqJsonLd,
 } from "@/components/HomeSections";
+import SpecialtyPlaybook from "@/components/SpecialtyPlaybook";
 import {
   practiceTypes,
   practiceTypeSlugs,
@@ -75,6 +75,8 @@ export default async function PracticeTypePage({ params }: Props) {
     },
   };
 
+  const specialtyFaqJsonLd = buildFaqJsonLd(pt.specialtyFaqs);
+
   return (
     <>
       <script
@@ -83,7 +85,7 @@ export default async function PracticeTypePage({ params }: Props) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(specialtyFaqJsonLd) }}
       />
 
       <section className="theme-page pt-24 md:pt-32">
@@ -128,6 +130,11 @@ export default async function PracticeTypePage({ params }: Props) {
                   fill
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover"
+                  style={
+                    pt.imagePosition
+                      ? { objectPosition: pt.imagePosition }
+                      : undefined
+                  }
                   priority
                 />
               </div>
@@ -136,8 +143,7 @@ export default async function PracticeTypePage({ params }: Props) {
         </div>
       </section>
 
-      <HipaaSection />
-      <ProcessSection />
+      <SpecialtyPlaybook slug={pt.slug} />
       <BeforeAfterSection
         eyebrow={pt.fixesEyebrow}
         headlineTop={pt.fixesHeadlineTop}
@@ -149,10 +155,17 @@ export default async function PracticeTypePage({ params }: Props) {
         }
         patterns={pt.specificFixes}
       />
-      <CompetenceSection />
+      <HipaaSection />
+      <ProcessSection />
       <StakesSection />
       <PricingSection />
-      <FaqSection />
+      <FaqSection
+        eyebrow={`FAQ · ${pt.label}`}
+        headlineTop="Questions specific"
+        headlineBottom={`to ${pt.label.toLowerCase()} practices.`}
+        lede="Specialty-specific decisions the audit looks at — and how the written proposal answers them."
+        items={pt.specialtyFaqs}
+      />
       <FinalCtaSection />
     </>
   );

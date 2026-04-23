@@ -15,8 +15,12 @@ import {
   faqJsonLd,
 } from "@/components/HomeSections";
 import { cities, citySlugs, type CitySlug } from "@/lib/cities";
+import CityAuditStats from "@/components/CityAuditStats";
+import { fetchCityStats } from "@/lib/cityStats";
 
 type Props = { params: Promise<{ city: string }> };
+
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return citySlugs.map((slug) => ({ city: slug }));
@@ -47,6 +51,8 @@ export default async function CityPage({ params }: Props) {
   const { city: slug } = await params;
   const city = cities[slug as CitySlug];
   if (!city) notFound();
+
+  const cityStats = await fetchCityStats(city.county);
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -147,7 +153,15 @@ export default async function CityPage({ params }: Props) {
       <HipaaSection />
       <ProcessSection />
       <CompetenceSection />
-      <BeforeAfterSection />
+      {cityStats ? (
+        <CityAuditStats
+          cityName={city.name}
+          county={city.county}
+          stats={cityStats}
+        />
+      ) : (
+        <BeforeAfterSection />
+      )}
       <StakesSection />
       <PricingSection />
       <FaqSection />

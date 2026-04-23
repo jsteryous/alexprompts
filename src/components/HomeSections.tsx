@@ -51,15 +51,21 @@ export const faqs = [
   },
 ];
 
-export const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+export type Faq = { q: string; a: string };
+
+export function buildFaqJsonLd(list: Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: list.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+export const faqJsonLd = buildFaqJsonLd(faqs);
 
 export function HipaaSection() {
   return (
@@ -184,6 +190,11 @@ export function CompetenceSection() {
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
                   className="object-cover"
+                  style={
+                    p.imagePosition
+                      ? { objectPosition: p.imagePosition }
+                      : undefined
+                  }
                 />
               </div>
               <div>
@@ -409,27 +420,37 @@ export function PricingSection() {
   );
 }
 
-export function FaqSection() {
+export function FaqSection({
+  items = faqs,
+  eyebrow = "FAQ",
+  headlineTop = "The questions",
+  headlineBottom = "worth answering.",
+  lede = "Honest answers about the audit, the Cleanup, and what happens after you hit reply.",
+}: {
+  items?: Faq[];
+  eyebrow?: string;
+  headlineTop?: string;
+  headlineBottom?: string;
+  lede?: string;
+} = {}) {
   return (
     <section id="faq" className="theme-section py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid gap-14 lg:grid-cols-[0.85fr,1.15fr] items-start">
           <div>
             <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-              FAQ
+              {eyebrow}
             </span>
             <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
-              The questions
+              {headlineTop}
               <br />
-              worth answering.
+              {headlineBottom}
             </h2>
-            <p className="theme-text-muted leading-relaxed">
-              Honest answers about the audit, the Cleanup, and what happens after you hit reply.
-            </p>
+            <p className="theme-text-muted leading-relaxed">{lede}</p>
           </div>
 
           <div className="theme-border border-t">
-            {faqs.map((faq) => (
+            {items.map((faq) => (
               <details key={faq.q} className="group theme-border border-b py-5">
                 <summary className="flex items-start justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                   <span className="theme-text-primary text-base md:text-lg font-semibold leading-snug">
