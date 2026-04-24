@@ -49,6 +49,102 @@ function median(values: number[]): number | null {
     : sorted[mid];
 }
 
+export type PortfolioStats = {
+  n_audited: number;
+  counties: string[];
+  lh_median: number | null;
+  lh_sample: number;
+  lh_under_50_pct: number;
+  // Established cohort: audited practices with >=100 Google reviews.
+  // This is the StoryBrand "authority" stat — established practices with
+  // strong reputations whose sites silently underperform.
+  established_n: number;
+  established_avg_rating: number | null;
+  established_lh_under_50_pct: number;
+  generated_at: string;
+};
+
+const PORTFOLIO_MIN_N = 10;
+const ESTABLISHED_MIN_REVIEWS = 100;
+const ESTABLISHED_MIN_N = 10;
+
+export async function fetchPortfolioStats(): Promise<PortfolioStats | null> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) return null;
+
+  const client = createClient(url, key);
+  const { data, error } = await client
+    .from("website_prospects")
+    .select(
+      "audit_status, lighthouse_mobile_score, county, google_rating, google_review_count",
+    )
+    .eq("vertical", "dental")
+    .eq("audit_status", "audited");
+
+  if (error) {
+    console.error("[portfolioStats]:", error.message);
+    return null;
+  }
+  const rows = (data ?? []) as {
+    lighthouse_mobile_score: number | null;
+    county: string | null;
+    google_rating: number | null;
+    google_review_count: number | null;
+  }[];
+  const n = rows.length;
+  if (n < PORTFOLIO_MIN_N) return null;
+
+  const counties = Array.from(
+    new Set(rows.map((r) => r.county).filter((c): c is string => Boolean(c))),
+  ).sort();
+
+  const lhScores = rows
+    .map((r) => r.lighthouse_mobile_score)
+    .filter((s): s is number => typeof s === "number");
+
+  const established = rows.filter(
+    (r) => (r.google_review_count ?? 0) >= ESTABLISHED_MIN_REVIEWS,
+  );
+  const establishedN = established.length;
+  const establishedRatings = established
+    .map((r) => r.google_rating)
+    .filter((x): x is number => typeof x === "number");
+  const establishedLhScores = established
+    .map((r) => r.lighthouse_mobile_score)
+    .filter((s): s is number => typeof s === "number");
+  const establishedAvgRating =
+    establishedRatings.length > 0
+      ? Math.round(
+          (establishedRatings.reduce((a, b) => a + b, 0) /
+            establishedRatings.length) *
+            10,
+        ) / 10
+      : null;
+  const establishedUnder50Pct = pct(
+    establishedLhScores.filter((s) => s < 50).length,
+    establishedLhScores.length,
+  );
+
+  return {
+    n_audited: n,
+    counties,
+    lh_median: median(lhScores),
+    lh_sample: lhScores.length,
+    lh_under_50_pct: pct(lhScores.filter((s) => s < 50).length, lhScores.length),
+    established_n: establishedN >= ESTABLISHED_MIN_N ? establishedN : 0,
+    established_avg_rating:
+      establishedN >= ESTABLISHED_MIN_N ? establishedAvgRating : null,
+    established_lh_under_50_pct:
+      establishedN >= ESTABLISHED_MIN_N ? establishedUnder50Pct : 0,
+    generated_at: new Date().toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }),
+  };
+}
+
 export async function fetchCityStats(county: string): Promise<CityStats | null> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;

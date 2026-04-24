@@ -5,11 +5,11 @@ import { marked } from "marked";
 export const metadata: Metadata = {
   title: "Sample Proposal | REBB Advisors",
   description:
-    "An example of the written quote every REBB audit produces. Sanitized for a fictional Greenville dental practice: findings, scope, timeline, and terms.",
+    "An example of the written proposal every REBB audit produces. Sanitized for a fictional Greenville dental practice: findings, scope, timeline, and terms.",
   openGraph: {
     title: "Sample Proposal | REBB Advisors",
     description:
-      "What you get after a REBB audit: a written quote with findings, a scoped recommendation, and a real timeline. This one is a sanitized example.",
+      "What you get after a REBB audit: a written proposal with findings, a scoped recommendation, and a real timeline. This one is a sanitized example.",
     type: "article",
     url: "https://rebbadvisors.com/sample-proposal",
     siteName: "REBB Advisors",

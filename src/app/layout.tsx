@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
     description:
-      "Dental website cleanup starting at $1,500. HIPAA-compliant intake, Weave/LocalMed/RevenueWell sync preserved, five business days. Free audit and written quote first.",
+      "Dental website cleanup starting at $1,500. HIPAA-compliant intake, Weave/LocalMed/RevenueWell sync preserved, five business days. Free audit and written proposal first.",
     type: "website",
     url: "https://rebbadvisors.com",
     siteName: "REBB Advisors",
@@ -61,7 +61,7 @@ export default function RootLayout({
               url: "https://rebbadvisors.com",
               email: "alex@rebbadvisors.com",
               description:
-                "Dental website cleanup and scoped rebuilds for practices in Greenville SC and the Upstate. HIPAA-compliant contact form replacement, Weave / LocalMed / RevenueWell sync preservation, Map Pack visibility. Every engagement starts with a free audit and a written quote.",
+                "Dental website cleanup and scoped rebuilds for practices in Greenville SC and the Upstate. HIPAA-compliant contact form replacement, Weave / LocalMed / RevenueWell sync preservation, Map Pack visibility. Every engagement starts with a free audit and a written proposal.",
               slogan: "Confused customers don't buy.",
               priceRange: "$1,500+",
               areaServed: [

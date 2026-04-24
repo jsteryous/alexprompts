@@ -113,13 +113,13 @@ export default async function CityPage({ params }: Props) {
                 Broken contact form. Slow on phones. Copyright says 2019. Patients across {city.county} County Google your practice, tap the first result, and close the tab before they read a word. They don&rsquo;t call to tell you why.
               </p>
               <p className="theme-text-muted text-base leading-relaxed mb-10 max-w-2xl">
-                Send us the URL. We reply with screenshots of what&rsquo;s wrong &mdash; free. If the site is fine, the note says so.
+                Send us the URL. We reply with screenshots of what we found &mdash; free. If your site&rsquo;s fine, we&rsquo;ll say so.
               </p>
               <Link
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Show me what&rsquo;s broken
+                Get your free audit
                 <ArrowIcon />
               </Link>
               {/* TODO: requires sample proposal asset — do not ship live until this exists */}

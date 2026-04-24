@@ -110,7 +110,7 @@ export default async function PracticeTypePage({ params }: Props) {
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Show me what&rsquo;s broken
+                Get your free audit
                 <ArrowIcon />
               </Link>
               <p className="theme-text-muted text-xs mt-5">
