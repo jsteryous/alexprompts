@@ -456,6 +456,77 @@ export function StaleFooterMock() {
 }
 
 /* ============================================================
+ * Lost revenue — what one new patient is worth
+ * ============================================================ */
+
+const revenueRows: { label: string; value: string }[] = [
+  { label: "First visit", value: "$300" },
+  { label: "5 years of recall", value: "$3,000+" },
+  { label: "A crown or implant", value: "$5,000+" },
+  { label: "Family they bring", value: "$5,000+" },
+];
+
+export function LostRevenuePanel() {
+  return (
+    <div className="relative w-full max-w-[520px] mx-auto" aria-hidden="true">
+      <style>{`
+        @keyframes rebb-rev-strike {
+          0%, 35% { transform: scaleX(0); opacity: 0; }
+          50% { opacity: 0.95; }
+          100% { transform: scaleX(1); opacity: 1; }
+        }
+        .rebb-rev-strike {
+          transform-origin: left center;
+          animation: rebb-rev-strike 2.6s ease-out 0.6s both;
+        }
+      `}</style>
+
+      <div className="rounded-2xl border-2 border-red-600/60 bg-neutral-950 shadow-2xl overflow-hidden">
+        <div className="bg-red-600 px-5 md:px-6 py-3.5">
+          <span className="text-xs md:text-sm uppercase tracking-[0.22em] text-white font-bold">
+            What walks away when one patient bounces
+          </span>
+        </div>
+
+        <div className="px-5 md:px-6 py-5 md:py-6 space-y-3.5">
+          {revenueRows.map((row) => (
+            <div key={row.label} className="flex items-baseline justify-between gap-4">
+              <span className="text-sm md:text-base text-neutral-300 leading-relaxed">
+                {row.label}
+              </span>
+              <span className="text-sm md:text-base text-neutral-100 font-semibold font-mono tabular-nums">
+                {row.value}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="px-5 md:px-6 py-7 md:py-8 border-t border-neutral-800 bg-neutral-900/30 text-center">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.22em] text-neutral-500 font-semibold mb-3">
+            Lifetime relationship
+          </p>
+          <div className="relative inline-block">
+            <span className="text-5xl md:text-6xl font-bold text-red-500 font-mono tabular-nums leading-none">
+              $13,000+
+            </span>
+            <span
+              className="rebb-rev-strike absolute left-[-8px] right-[-8px] h-[3px] md:h-[4px] bg-red-500"
+              style={{ top: "calc(50% - 1.5px)" }}
+            />
+          </div>
+        </div>
+
+        <div className="bg-red-600 px-5 md:px-6 py-3.5 text-center">
+          <p className="text-sm md:text-base text-white font-bold leading-snug tracking-tight">
+            Lost in a four-second wait.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
  * Lighthouse gauge (kept for future use; not on current homepage)
  * ============================================================ */
 

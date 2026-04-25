@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { practiceTypeList } from "@/lib/practiceTypes";
+import { LostRevenuePanel } from "@/components/VisualMocks";
 
 export function ArrowIcon() {
   return (
@@ -94,10 +95,10 @@ export function HipaaSection() {
               <br />
               that protects you.
             </h2>
-            <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
+            <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-5">
               When a patient types <em className="theme-text-primary not-italic font-semibold">&ldquo;cracked molar, need it pulled&rdquo;</em> into your contact form, that&rsquo;s a medical complaint sitting in a database your website plugin owns. Most dental forms quietly fail HIPAA. Most dentists never find out until something goes wrong.
             </p>
-            <p className="theme-text-contrast-muted text-base leading-relaxed mb-8">
+            <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-8">
               Cleanup moves intake to a HIPAA-compliant inbox you actually monitor, with the signed paperwork and audit log your compliance binder needs. If anyone ever asks, you have the file. The practice is on the hook for this &mdash; not the plugin.
             </p>
             <Link
@@ -127,7 +128,7 @@ export function ProcessSection() {
             <br />
             One week.
           </h2>
-          <p className="theme-text-muted leading-relaxed">
+          <p className="theme-text-muted text-base md:text-lg leading-relaxed">
             One entry point &mdash; the audit. One deliverable &mdash; a written proposal with screenshots. You decide what happens next.
           </p>
         </div>
@@ -137,7 +138,7 @@ export function ProcessSection() {
             <div key={item.step} className="theme-card border rounded-3xl p-8">
               <p className="theme-label text-xs font-semibold uppercase tracking-[0.22em] mb-4">{item.step}</p>
               <h3 className="theme-text-primary text-2xl font-bold leading-tight mb-3">{item.title}</h3>
-              <p className="theme-text-secondary text-sm leading-relaxed">{item.body}</p>
+              <p className="theme-text-secondary text-base md:text-lg leading-relaxed">{item.body}</p>
             </div>
           ))}
         </div>
@@ -171,7 +172,7 @@ export function CompetenceSection() {
             <br />
             in different ways.
           </h2>
-          <p className="theme-text-muted text-base leading-relaxed">
+          <p className="theme-text-muted text-base md:text-lg leading-relaxed">
             Most web shops pour every dental practice into the same template. We don&rsquo;t.
           </p>
         </div>
@@ -226,7 +227,7 @@ export function CompetenceSection() {
           ))}
         </div>
 
-        <p className="theme-text-muted text-sm mt-14 max-w-3xl leading-relaxed">
+        <p className="theme-text-muted text-sm md:text-base mt-14 max-w-3xl leading-relaxed">
           Every Cleanup also keeps your Weave, LocalMed, or RevenueWell sync working, moves intake to a HIPAA-compliant inbox, and tunes the technical bits Google reads to rank your practice on the local map. Baseline, not add-on.
         </p>
       </div>
@@ -280,7 +281,7 @@ export function BeforeAfterSection({
   patterns = defaultFixPatterns,
 }: BeforeAfterProps = {}) {
   const defaultIntro = (
-    <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+    <p className="theme-text-secondary text-base md:text-lg leading-relaxed">
       We&rsquo;ve audited dental practice websites across Greenville, Spartanburg, Anderson, Pickens, and Oconee counties. The pattern is nearly universal: excellent reviews in person, mediocre performance on a phone. These are the three fixes that show up most.
     </p>
   );
@@ -313,15 +314,15 @@ export function BeforeAfterSection({
                 {item.label}
               </span>
               <div className="space-y-3.5 text-left w-full">
-                <p className="theme-text-secondary text-sm leading-relaxed">
+                <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
                   <span className="theme-text-primary font-semibold">Problem. </span>
                   {item.problem}
                 </p>
-                <p className="theme-text-secondary text-sm leading-relaxed">
+                <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
                   <span className="theme-text-primary font-semibold">Fix. </span>
                   <span dangerouslySetInnerHTML={{ __html: item.fix }} />
                 </p>
-                <p className="theme-text-secondary text-sm leading-relaxed">
+                <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
                   <span className="theme-text-primary font-semibold">Result. </span>
                   {item.result}
                 </p>
@@ -363,26 +364,34 @@ export function StakesSection({
   return (
     <section className="theme-section-contrast py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl mb-10">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            The invisible leak
-          </span>
-          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            The patients you&rsquo;re losing,
-            <br />
-            you&rsquo;ll never meet.
-          </h2>
-          <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-            It&rsquo;s 9pm. Someone searches &ldquo;dentist near me.&rdquo; They tap your pin first. Your site hangs. They swipe back and book the next one.
-          </p>
-          <p className="theme-text-primary text-base leading-relaxed font-semibold">
-            You will never know they existed.
-          </p>
+        <div className="grid gap-12 md:gap-14 md:grid-cols-2 items-center mb-14">
+          <div>
+            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+              The invisible leak
+            </span>
+            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+              The patients you&rsquo;re losing,
+              <br />
+              you&rsquo;ll never meet.
+            </h2>
+            <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-5">
+              It&rsquo;s 9pm. Someone searches &ldquo;dentist near me.&rdquo; They tap your pin first. Your site hangs. They swipe back and book the next one.
+            </p>
+            <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-5">
+              You will never know they existed. And what walks away isn&rsquo;t a single visit &mdash; it&rsquo;s years of recall, the family they&rsquo;d have brought, and the case you&rsquo;d have caught a year in.
+            </p>
+            <p className="theme-text-primary text-lg md:text-xl leading-relaxed font-semibold">
+              Every silent bounce takes the whole arc.
+            </p>
+          </div>
+          <div className="flex justify-center md:justify-end">
+            <LostRevenuePanel />
+          </div>
         </div>
 
         {showCohortStat && (
           <div className="theme-card-muted border theme-border rounded-2xl p-5 md:p-6 mb-8 max-w-3xl">
-            <p className="theme-text-contrast-muted text-sm md:text-base leading-relaxed">
+            <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
               Across{" "}
               <strong className="theme-text-primary">
                 {cohortN} Upstate dental practices
@@ -400,32 +409,32 @@ export function StakesSection({
           </div>
         )}
 
-        <p className="theme-text-contrast-muted text-base leading-relaxed mb-4 max-w-3xl">
+        <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-4 max-w-3xl">
           Three things compound every month:
         </p>
         <ul className="space-y-4 mb-8 max-w-3xl">
-          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+          <li className="theme-text-contrast-muted text-base md:text-lg leading-relaxed flex gap-3">
             <span className="theme-label font-bold mt-0.5">&mdash;</span>
             <span>
-              <strong className="theme-text-primary">Your map pin drifts.</strong> Google weights mobile experience in local results. The fast practice&rsquo;s pin holds its spot. Yours slides.
+              <strong className="theme-text-primary">Your map pin drifts.</strong> Google weights mobile experience in local results. The fast practice keeps the calls. Yours stops getting them.
             </span>
           </li>
-          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+          <li className="theme-text-contrast-muted text-base md:text-lg leading-relaxed flex gap-3">
             <span className="theme-label font-bold mt-0.5">&mdash;</span>
             <span>
-              <strong className="theme-text-primary">Your review count stalls.</strong> The patient who never booked never reviews. Your competitor&rsquo;s five-star count grows on patients that were going to be yours.
+              <strong className="theme-text-primary">Your review count stalls.</strong> The patient who never booked never reviews. Your competitor&rsquo;s five-star count grows on patients who were going to be yours.
             </span>
           </li>
-          <li className="theme-text-contrast-muted text-base leading-relaxed flex gap-3">
+          <li className="theme-text-contrast-muted text-base md:text-lg leading-relaxed flex gap-3">
             <span className="theme-label font-bold mt-0.5">&mdash;</span>
             <span>
-              <strong className="theme-text-primary">Your ad dollar shrinks.</strong> Every Google Ads click lands on a page that bounces before it paints. You&rsquo;re paying for traffic your site refuses.
+              <strong className="theme-text-primary">Your ad dollar shrinks.</strong> Every Google Ads click lands on a page that bounces before it paints. You&rsquo;re paying to send patients to a site that turns them away.
             </span>
           </li>
         </ul>
 
-        <p className="theme-text-contrast-muted text-base leading-relaxed max-w-3xl">
-          The site isn&rsquo;t hurting the patients already on your schedule &mdash; they know where to park. Every bounce is a <em className="theme-text-primary not-italic font-semibold">new</em> one. The one who was going to replace the patient who moved away last month.
+        <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed max-w-3xl">
+          The site isn&rsquo;t hurting the patients already on your schedule &mdash; they know where to park. Every bounce is the <em className="theme-text-primary not-italic font-semibold">new</em> patient &mdash; the one who would have replaced the family that moved away. Multiply that by every month the leak has been silent.
         </p>
       </div>
     </section>
@@ -446,10 +455,10 @@ export function SuccessSection() {
               <br />
               matching your chairside.
             </h2>
-            <p className="theme-text-secondary text-base leading-relaxed mb-5">
+            <p className="theme-text-secondary text-base md:text-lg leading-relaxed mb-5">
               Mondays look different. The same patients who Googled you last week reach your booking form this week. The ones clicking through from your Google Business Profile don&rsquo;t watch a spinner. The Google Ads dollars you already spend actually land on a page that doesn&rsquo;t bounce.
             </p>
-            <p className="theme-text-primary text-base leading-relaxed font-semibold">
+            <p className="theme-text-primary text-lg md:text-xl leading-relaxed font-semibold">
               You won&rsquo;t see the patients you were losing. You&rsquo;ll only see the ones who show up.
             </p>
           </div>
@@ -481,10 +490,10 @@ export function PricingSection() {
             <br />
             starting at $1,500.
           </h2>
-          <p className="theme-text-secondary text-base leading-relaxed mb-4">
+          <p className="theme-text-secondary text-base md:text-lg leading-relaxed mb-4">
             The Cleanup starts at $1,500. Faster on phones, intake moved to a HIPAA-compliant inbox, your Weave / LocalMed / RevenueWell sync still working, a visual refresh that matches your chairside. Five business days or less.
           </p>
-          <p className="theme-text-secondary text-base leading-relaxed mb-8">
+          <p className="theme-text-secondary text-base md:text-lg leading-relaxed mb-8">
             Scope varies by practice. The audit tells you which tier your site actually needs. Larger rebuilds are scoped per project &mdash; send what you need, we&rsquo;ll work within your budget. If the audit says you don&rsquo;t need us, we&rsquo;ll say so.
           </p>
           <Link
@@ -526,7 +535,7 @@ export function FaqSection({
               <br />
               {headlineBottom}
             </h2>
-            <p className="theme-text-muted leading-relaxed">{lede}</p>
+            <p className="theme-text-muted text-base md:text-lg leading-relaxed">{lede}</p>
           </div>
 
           <div className="theme-border border-t">
@@ -540,7 +549,7 @@ export function FaqSection({
                     +
                   </span>
                 </summary>
-                <p className="theme-text-secondary text-sm md:text-base leading-relaxed mt-3 pr-8">
+                <p className="theme-text-secondary text-base md:text-lg leading-relaxed mt-3 pr-8">
                   {faq.a}
                 </p>
               </details>
@@ -565,7 +574,7 @@ export function FinalCtaSection() {
             <br />
             You&rsquo;ll have screenshots in 48 hours.
           </h2>
-          <p className="theme-text-contrast-muted">
+          <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
             Free audit. Screenshots plus a written proposal. No call. No follow-up sequence. If your site&rsquo;s fine, we&rsquo;ll say so.
           </p>
         </div>

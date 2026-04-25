@@ -22,7 +22,7 @@ export default async function HomePage() {
   const portfolio = await fetchPortfolioStats();
 
   const leanIntro = (
-    <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+    <p className="theme-text-secondary text-base md:text-lg leading-relaxed">
       Same pattern, almost every audit. These are the three fixes that show up most.
     </p>
   );
@@ -45,11 +45,11 @@ export default async function HomePage() {
                 <br />
                 Your website doesn&rsquo;t show it.
               </h1>
-              <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                You earned a five-star reputation in person. On a phone, a few seconds of delay is all it takes for a new patient to swipe back and tap the next pin.
+              <p className="theme-text-secondary text-lg md:text-xl leading-relaxed mb-4 max-w-2xl">
+                You earned a five-star reputation in person. On a phone, a four-second delay sends a new patient to the next pin. What walks away isn&rsquo;t one cleaning &mdash; it&rsquo;s years of recall, the family they&rsquo;d have brought, and the case you&rsquo;d have caught a year in.
               </p>
-              <p className="theme-text-primary text-lg leading-relaxed mb-10 max-w-2xl font-semibold">
-                Most dentists never see it happen. We do.
+              <p className="theme-text-primary text-lg md:text-xl leading-relaxed mb-10 max-w-2xl font-semibold">
+                Most dentists never see them leave. We do.
               </p>
               <Link
                 href="/contact"
