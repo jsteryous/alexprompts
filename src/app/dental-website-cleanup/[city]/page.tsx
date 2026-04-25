@@ -119,7 +119,7 @@ export default async function CityPage({ params }: Props) {
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Get your free audit
+                See if your website is losing patients
                 <ArrowIcon />
               </Link>
               {/* TODO: requires sample proposal asset — do not ship live until this exists */}

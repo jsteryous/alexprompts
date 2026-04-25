@@ -18,62 +18,57 @@ import { fetchPortfolioStats } from "@/lib/cityStats";
 
 export const revalidate = 3600;
 
-function formatCountyList(counties: string[]): string {
-  if (counties.length === 0) return "Upstate SC";
-  const named = counties.map((c) => `${c.replace(/\s+county\s*$/i, "").trim()}`);
-  if (named.length === 1) return `${named[0]} County`;
-  if (named.length === 2) return `${named[0]} and ${named[1]} counties`;
-  return `${named.slice(0, -1).join(", ")}, and ${named[named.length - 1]} counties`;
-}
-
 export default async function HomePage() {
   const portfolio = await fetchPortfolioStats();
 
   const liveIntro =
     portfolio && portfolio.established_n > 0 ? (
-      <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-        Across{" "}
-        <strong className="theme-text-primary">
-          {portfolio.established_n} Upstate dental practices
-        </strong>{" "}
-        with 100+ Google reviews and an average{" "}
-        <strong className="theme-text-primary">
-          {portfolio.established_avg_rating}-star rating
-        </strong>
-        ,{" "}
-        <strong className="theme-text-primary">
-          {portfolio.established_lh_under_50_pct}%
-        </strong>{" "}
-        score below 50 on Google&rsquo;s own mobile performance metric. Great
-        practices. Slow websites. These are the three fixes that show up most.
-      </p>
+      <div className="space-y-3">
+        <p className="theme-text-primary text-base md:text-lg leading-relaxed font-semibold">
+          We expected bad websites from bad practices. We didn&rsquo;t expect them from the best ones.
+        </p>
+        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+          Across{" "}
+          <strong className="theme-text-primary">
+            {portfolio.established_n} Upstate dental practices
+          </strong>{" "}
+          with 100+ Google reviews and an average{" "}
+          <strong className="theme-text-primary">
+            {portfolio.established_avg_rating}-star rating
+          </strong>
+          ,{" "}
+          <strong className="theme-text-primary">
+            {portfolio.established_lh_under_50_pct}%
+          </strong>{" "}
+          score below 50 on Google&rsquo;s own mobile performance metric.
+        </p>
+        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+          These are the three things that show up most.
+        </p>
+      </div>
     ) : portfolio ? (
-      <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-        We&rsquo;ve audited{" "}
-        <strong className="theme-text-primary">
-          {portfolio.n_audited} dental websites
-        </strong>{" "}
-        across {formatCountyList(portfolio.counties)}.
-        {portfolio.lh_median !== null && (
-          <>
-            {" "}The median mobile Lighthouse score is{" "}
-            <strong className="theme-text-primary">
-              {portfolio.lh_median} out of 100
-            </strong>
-            . {portfolio.lh_under_50_pct}% score below 50.
-          </>
-        )}{" "}
-        These are the three fixes that show up most.
-      </p>
+      <div className="space-y-3">
+        <p className="theme-text-primary text-base md:text-lg leading-relaxed font-semibold">
+          We expected bad websites from bad practices. We didn&rsquo;t expect them from the best ones.
+        </p>
+        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+          {portfolio.lh_median !== null && (
+            <>
+              The median mobile Lighthouse score across{" "}
+              <strong className="theme-text-primary">
+                {portfolio.n_audited} Upstate dental sites
+              </strong>{" "}
+              we audited is{" "}
+              <strong className="theme-text-primary">
+                {portfolio.lh_median} out of 100
+              </strong>
+              .{" "}
+            </>
+          )}
+          These are the three things that show up most.
+        </p>
+      </div>
     ) : undefined;
-
-  const liveMethodology = portfolio ? (
-    <>
-      Methodology: headless-browser audit of dental practice websites across{" "}
-      {formatCountyList(portfolio.counties)}, {portfolio.generated_at}. n ={" "}
-      {portfolio.n_audited} audited. Counts refresh as the audit pipeline runs.
-    </>
-  ) : undefined;
 
   return (
     <>
@@ -94,16 +89,16 @@ export default async function HomePage() {
                 Your website doesn&rsquo;t show it.
               </h1>
               <p className="theme-text-secondary text-lg leading-relaxed mb-4 max-w-2xl">
-                You built the practice one patient at a time. Five stars in person. Four seconds of spinner on their phone &mdash; and the new patients clicking through from Google never meet you.
+                You earned a five-star reputation in person. On a phone, a few seconds of delay is all it takes for a new patient to swipe back and tap the next pin.
               </p>
-              <p className="theme-text-secondary text-base leading-relaxed mb-10 max-w-2xl">
-                Free audit. Written proposal. If your site&rsquo;s fine, we&rsquo;ll say so.
+              <p className="theme-text-primary text-lg leading-relaxed mb-10 max-w-2xl font-semibold">
+                Most dentists never see it happen. We do.
               </p>
               <Link
                 href="/contact"
                 className="theme-cta-accent inline-flex items-center justify-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
               >
-                Get your free audit
+                See if your website is losing patients
                 <ArrowIcon />
               </Link>
               {/* TODO: requires sample proposal asset — do not ship live until this exists */}
@@ -128,7 +123,7 @@ export default async function HomePage() {
         cohortAvgRating={portfolio?.established_avg_rating ?? null}
         cohortUnder50Pct={portfolio?.established_lh_under_50_pct}
       />
-      <BeforeAfterSection intro={liveIntro} methodology={liveMethodology} />
+      <BeforeAfterSection intro={liveIntro} />
       <ProcessSection />
       <CompetenceSection />
       <HipaaSection />

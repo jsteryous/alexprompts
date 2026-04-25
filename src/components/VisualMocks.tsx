@@ -25,80 +25,113 @@ function BrowserChrome({ url }: { url?: string }) {
   );
 }
 
-function Callout({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`absolute inline-flex items-center gap-1 bg-red-500 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full shadow-lg whitespace-nowrap ${className}`}
-    >
-      {children}
-    </span>
-  );
-}
-
 export function BrokenPhoneHero() {
   return (
     <div className="relative mx-auto w-[260px] md:w-[280px] select-none" aria-hidden="true">
+      <style>{`
+        @keyframes rebb-spin { to { transform: rotate(360deg); } }
+        @keyframes rebb-progress {
+          0% { width: 18%; }
+          40% { width: 38%; }
+          70% { width: 52%; }
+          100% { width: 64%; }
+        }
+        @keyframes rebb-tick {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.35; }
+        }
+      `}</style>
+
       <div
-        className="rounded-[2.5rem] border-[10px] border-neutral-900 bg-white shadow-2xl overflow-hidden"
+        className="rounded-[2.5rem] border-[10px] border-neutral-900 bg-white shadow-2xl overflow-hidden relative"
         style={{ aspectRatio: "9 / 18" }}
       >
-        <BrowserChrome />
+        <BrowserChrome url="smiledental.com" />
+
+        <div
+          className="absolute left-0 right-0 h-[3px] bg-red-500"
+          style={{
+            top: 28,
+            animation: "rebb-progress 4s ease-out infinite",
+          }}
+        />
 
         <div className="p-3 text-neutral-800">
-          <div className="flex items-center gap-1.5 mb-2">
-            <ToothIcon className="w-4 h-4 text-neutral-600" />
-            <span className="text-[10px] font-bold tracking-tight text-neutral-900">
+          <div className="flex items-center gap-1.5 mb-3">
+            <ToothIcon className="w-4 h-4 text-neutral-400" />
+            <span className="text-[10px] font-bold tracking-tight text-neutral-400">
               SMILE DENTAL
             </span>
           </div>
 
-          <div className="text-[18px] font-extrabold whitespace-nowrap tracking-tight text-neutral-900">
-            FAMILY DENTIST SINCE 2008
-          </div>
-          <div className="text-[8px] text-neutral-500 mt-0.5 whitespace-nowrap">
-            Comprehensive dental care for the whole family in Greenville
+          <div className="space-y-1.5">
+            <div className="h-3 bg-neutral-100 rounded w-[85%]" />
+            <div className="h-3 bg-neutral-100 rounded w-[70%]" />
           </div>
 
-          <div className="flex items-center gap-1 mt-2 text-[8px]">
-            <span className="text-amber-500 tracking-tighter">★★★★☆</span>
-            <span className="text-neutral-500 ml-0.5">4.2 · 87 reviews</span>
-          </div>
-
-          <div className="mt-3 border border-neutral-300 rounded-md p-2">
-            <div className="text-[7px] uppercase tracking-wider text-neutral-500 font-semibold">
-              Schedule Appointment
-            </div>
-            <div className="h-2.5 bg-neutral-100 rounded mt-1.5" />
-            <div className="h-2.5 bg-neutral-100 rounded mt-1" />
-            <div className="h-2.5 bg-neutral-100 rounded mt-1" />
-            <div className="h-3.5 bg-teal-600 rounded mt-2 w-16" />
-            <div className="mt-2 bg-red-50 border border-red-300 rounded text-red-700 text-[7px] px-1.5 py-1 flex items-center gap-1">
-              <span className="font-bold">!</span>
-              <span className="font-mono">POST /book → 404</span>
+          <div className="mt-8 mb-8 flex flex-col items-center justify-center">
+            <div
+              className="w-9 h-9 rounded-full border-[3px] border-neutral-200 border-t-neutral-700"
+              style={{ animation: "rebb-spin 0.9s linear infinite" }}
+            />
+            <div className="mt-3 text-[9px] text-neutral-400 tracking-wide">
+              Loading&hellip;
             </div>
           </div>
 
-          <div className="mt-3 border-t border-neutral-200 pt-2 text-[6.5px] text-neutral-400 text-center">
-            © 2019 Smile Dental · All Rights Reserved
+          <div className="space-y-1.5 opacity-60">
+            <div className="h-2 bg-neutral-100 rounded w-full" />
+            <div className="h-2 bg-neutral-100 rounded w-[92%]" />
+            <div className="h-2 bg-neutral-100 rounded w-[78%]" />
+          </div>
+
+          <div className="mt-4 rounded border border-neutral-200 bg-neutral-50 p-2">
+            <div className="text-[7px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
+              Book appointment
+            </div>
+            <div className="h-4 rounded border border-neutral-200 bg-white flex items-center px-1.5 text-[8px] text-neutral-700">
+              Jennif<span className="inline-block w-px h-2 bg-neutral-700 ml-px animate-pulse" />
+            </div>
+            <div className="h-4 rounded border border-neutral-200 bg-white mt-1" />
+            <div className="h-4 rounded border border-neutral-200 bg-white mt-1" />
           </div>
         </div>
+
+        <div
+          className="absolute left-1/2 -translate-x-1/2 bottom-2 w-12 h-[3px] rounded-full bg-neutral-900"
+        />
       </div>
 
-      <Callout className="top-[11%] -right-3 md:-right-8 rotate-[4deg]">
-        Overflow →
-      </Callout>
-      <Callout className="top-[55%] -left-6 md:-left-12 -rotate-[6deg]">
-        Form 404
-      </Callout>
-      <Callout className="bottom-[6%] -right-3 md:-right-8 rotate-[3deg]">
-        Stale 2019
-      </Callout>
+      <div
+        className="absolute -right-4 md:-right-10 top-[18%] flex items-center gap-2"
+        style={{ animation: "rebb-tick 1s steps(2, end) infinite" }}
+      >
+        <span className="font-mono text-[11px] font-bold text-red-600 bg-white border border-red-300 px-2 py-1 rounded-full shadow-md tabular-nums">
+          4.2s
+        </span>
+      </div>
+
+      <div className="absolute -left-6 md:-left-14 bottom-[18%] flex items-center gap-1.5">
+        <svg width="34" height="34" viewBox="0 0 40 40" fill="none" className="text-neutral-700">
+          <path
+            d="M32 28 C 28 14 14 10 6 14"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M6 14 L 11 9 M6 14 L 11 19"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+          />
+        </svg>
+        <span className="text-[10px] font-semibold text-neutral-700 leading-tight">
+          swipe<br />back
+        </span>
+      </div>
     </div>
   );
 }

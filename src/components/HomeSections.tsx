@@ -39,7 +39,7 @@ export const faqs = [
   },
   {
     q: "What is included in the Cleanup?",
-    a: "Mobile speed pass — Lighthouse improvements, image compression, unused scripts removed. Mobile layout fixes so the booking path actually works with a thumb. A contact-form replacement that lands in a HIPAA-compliant destination under a signed Business Associate Agreement, with the documentation for your compliance binder. A visual refresh so the practice looks current: hero, buttons, contact path. Your existing Weave, LocalMed, or RevenueWell sync is preserved and tested before handoff. Ships in five business days or less. Cleanup starts at $1,500; the audit tells you where your site lands.",
+    a: "Faster on phones — image compression, unused scripts cut, the parts Google scores on mobile pulled out of the red. Layout fixed so the booking path actually works with a thumb. Contact form replaced with a HIPAA-compliant inbox you monitor, with the signed paperwork and audit log your compliance binder needs. Visual refresh so the practice looks current: hero, buttons, contact path. Your Weave, LocalMed, or RevenueWell sync stays working — we test it before handoff. Five business days or less. Cleanup starts at $1,500; the audit tells you where your site actually lands.",
   },
   {
     q: "What if my site needs more than the Cleanup?",
@@ -95,16 +95,16 @@ export function HipaaSection() {
               that protects you.
             </h2>
             <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-              If your contact form collects <em className="theme-text-primary not-italic font-semibold">&ldquo;cracked molar, need it pulled&rdquo;</em> and posts it into a plugin database with no Business Associate Agreement, that&rsquo;s Protected Health Information sitting on uncovered infrastructure. Most dental forms quietly fail HIPAA. Most dentists don&rsquo;t know.
+              When a patient types <em className="theme-text-primary not-italic font-semibold">&ldquo;cracked molar, need it pulled&rdquo;</em> into your contact form, that&rsquo;s a medical complaint sitting in a database your website plugin owns. Most dental forms quietly fail HIPAA. Most dentists never find out until something goes wrong.
             </p>
             <p className="theme-text-contrast-muted text-base leading-relaxed mb-8">
-              Cleanup swaps intake for a BAA-backed destination and hands you the documentation for your compliance binder. Baseline, not an upsell. If HHS ever asks, it&rsquo;s the practice on the hook &mdash; not the plugin.
+              Cleanup moves intake to a HIPAA-compliant inbox you actually monitor, with the signed paperwork and audit log your compliance binder needs. If anyone ever asks, you have the file. The practice is on the hook for this &mdash; not the plugin.
             </p>
             <Link
               href="/contact"
               className="theme-cta-accent inline-flex items-center gap-2 text-base font-semibold px-7 py-3.5 rounded-xl"
             >
-              Get your free audit
+              See if your website is losing patients
               <ArrowIcon />
             </Link>
           </div>
@@ -227,7 +227,7 @@ export function CompetenceSection() {
         </div>
 
         <p className="theme-text-muted text-sm mt-14 max-w-3xl leading-relaxed">
-          Every Cleanup also preserves your Weave, LocalMed, or RevenueWell sync, swaps intake to a BAA-backed destination, and aligns your schema for Map Pack visibility. Baseline, not add-on.
+          Every Cleanup also keeps your Weave, LocalMed, or RevenueWell sync working, moves intake to a HIPAA-compliant inbox, and tunes the technical bits Google reads to rank your practice on the local map. Baseline, not add-on.
         </p>
       </div>
     </section>
@@ -244,21 +244,21 @@ export type FixPattern = {
 const defaultFixPatterns: FixPattern[] = [
   {
     label: "Speed",
-    problem: "Site takes 5.2s to paint on a mid-tier Android over LTE. Patients leave after three.",
-    fix: "Compress the hero image. Drop the unused analytics stack. Swap fonts for system defaults. Modern image formats only.",
-    result: "Loads in 1.3s. Bounce stops being a speed problem.",
+    problem: "Patients leave before your site even loads.",
+    fix: "Compress the hero image, drop the unused analytics, swap webfonts for system defaults.",
+    result: "Loads in 1.3s. The bounce stops.",
   },
   {
-    label: "Contact form",
-    problem: "Form submits into a plugin database with no BAA, no audit log, no retention policy.",
-    fix: "Replace with intake that lands in a BAA-backed destination. Documentation for your compliance binder included.",
-    result: "PHI exposure closed. HHS records request stops being a panic drill.",
+    label: "Booking",
+    problem: "Patients try to book \u2014 and nothing happens.",
+    fix: "Replace the form with intake that lands in a HIPAA-compliant inbox you actually monitor.",
+    result: "Bookings reach your front desk. PHI exposure closed.",
   },
   {
-    label: "Mobile-first experience",
-    problem: "No visible way to book on mobile above the fold. Phone number is plain text, not tap-to-call.",
-    fix: "Persistent \u201cBook online\u201d bar, tap-to-call phone in the header, &ldquo;same-day emergency&rdquo; shortcut for high-intent searches.",
-    result: "High-intent mobile clicks actually convert instead of bouncing to the next pin.",
+    label: "Phone",
+    problem: "On a phone, there\u2019s no clear next step.",
+    fix: "Persistent \u201cBook\u201d bar, tap-to-call number in the header, same-day shortcut up top.",
+    result: "High-intent mobile clicks convert instead of bouncing to the next pin.",
   },
 ];
 
@@ -436,21 +436,32 @@ export function SuccessSection() {
   return (
     <section className="theme-section py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-            After the Cleanup
-          </span>
-          <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            Your website starts
-            <br />
-            matching your chairside.
-          </h2>
-          <p className="theme-text-secondary text-base leading-relaxed mb-5">
-            Mondays look different. The same patients who Googled you last week reach your booking form this week. The ones clicking through from your Google Business Profile don&rsquo;t watch a spinner. The Google Ads dollars you already spend actually land on a page that doesn&rsquo;t bounce.
-          </p>
-          <p className="theme-text-primary text-base leading-relaxed font-semibold">
-            You won&rsquo;t see the patients you were losing. You&rsquo;ll only see the ones who show up.
-          </p>
+        <div className="grid gap-12 md:gap-16 md:grid-cols-[1.05fr,0.95fr] items-center">
+          <div>
+            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+              After the Cleanup
+            </span>
+            <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+              Your website starts
+              <br />
+              matching your chairside.
+            </h2>
+            <p className="theme-text-secondary text-base leading-relaxed mb-5">
+              Mondays look different. The same patients who Googled you last week reach your booking form this week. The ones clicking through from your Google Business Profile don&rsquo;t watch a spinner. The Google Ads dollars you already spend actually land on a page that doesn&rsquo;t bounce.
+            </p>
+            <p className="theme-text-primary text-base leading-relaxed font-semibold">
+              You won&rsquo;t see the patients you were losing. You&rsquo;ll only see the ones who show up.
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl theme-border border">
+            <Image
+              src="/after-cleanup.jpg"
+              alt="A patient and dentist sharing a confident smile after care"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -471,7 +482,7 @@ export function PricingSection() {
             starting at $1,500.
           </h2>
           <p className="theme-text-secondary text-base leading-relaxed mb-4">
-            The Cleanup starts at $1,500. Mobile-speed pass, intake swap to a BAA-backed destination, Weave / LocalMed / RevenueWell sync preserved, visual refresh. Five business days or less.
+            The Cleanup starts at $1,500. Faster on phones, intake moved to a HIPAA-compliant inbox, your Weave / LocalMed / RevenueWell sync still working, a visual refresh that matches your chairside. Five business days or less.
           </p>
           <p className="theme-text-secondary text-base leading-relaxed mb-8">
             Scope varies by practice. The audit tells you which tier your site actually needs. Larger rebuilds are scoped per project &mdash; send what you need, we&rsquo;ll work within your budget. If the audit says you don&rsquo;t need us, we&rsquo;ll say so.
@@ -480,7 +491,7 @@ export function PricingSection() {
             href="/contact"
             className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
           >
-            Get your free audit
+            See if your website is losing patients
             <ArrowIcon />
           </Link>
         </div>
@@ -562,7 +573,7 @@ export function FinalCtaSection() {
           href="/contact"
           className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
         >
-          Get your free audit
+          See if your website is losing patients
           <ArrowIcon />
         </Link>
       </div>
