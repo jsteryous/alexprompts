@@ -373,7 +373,7 @@ export function StakesSection({
             you&rsquo;ll never meet.
           </h2>
           <p className="theme-text-contrast-muted text-base leading-relaxed mb-5">
-            It&rsquo;s 9pm. A new patient has a toothache. They Google &ldquo;dentist near me,&rdquo; see your five-star rating, and tap your pin first. Your page starts to load on their phone. It hangs. Three seconds. Four. They swipe back and tap the next pin.
+            It&rsquo;s 9pm. Someone searches &ldquo;dentist near me.&rdquo; They tap your pin first. Your site hangs. They swipe back and book the next one.
           </p>
           <p className="theme-text-primary text-base leading-relaxed font-semibold">
             You will never know they existed.

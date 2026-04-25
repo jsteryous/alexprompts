@@ -21,54 +21,11 @@ export const revalidate = 3600;
 export default async function HomePage() {
   const portfolio = await fetchPortfolioStats();
 
-  const liveIntro =
-    portfolio && portfolio.established_n > 0 ? (
-      <div className="space-y-3">
-        <p className="theme-text-primary text-base md:text-lg leading-relaxed font-semibold">
-          We expected bad websites from bad practices. We didn&rsquo;t expect them from the best ones.
-        </p>
-        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-          Across{" "}
-          <strong className="theme-text-primary">
-            {portfolio.established_n} Upstate dental practices
-          </strong>{" "}
-          with 100+ Google reviews and an average{" "}
-          <strong className="theme-text-primary">
-            {portfolio.established_avg_rating}-star rating
-          </strong>
-          ,{" "}
-          <strong className="theme-text-primary">
-            {portfolio.established_lh_under_50_pct}%
-          </strong>{" "}
-          score below 50 on Google&rsquo;s own mobile performance metric.
-        </p>
-        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-          These are the three things that show up most.
-        </p>
-      </div>
-    ) : portfolio ? (
-      <div className="space-y-3">
-        <p className="theme-text-primary text-base md:text-lg leading-relaxed font-semibold">
-          We expected bad websites from bad practices. We didn&rsquo;t expect them from the best ones.
-        </p>
-        <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
-          {portfolio.lh_median !== null && (
-            <>
-              The median mobile Lighthouse score across{" "}
-              <strong className="theme-text-primary">
-                {portfolio.n_audited} Upstate dental sites
-              </strong>{" "}
-              we audited is{" "}
-              <strong className="theme-text-primary">
-                {portfolio.lh_median} out of 100
-              </strong>
-              .{" "}
-            </>
-          )}
-          These are the three things that show up most.
-        </p>
-      </div>
-    ) : undefined;
+  const leanIntro = (
+    <p className="theme-text-secondary text-sm md:text-base leading-relaxed">
+      Same pattern, almost every audit. These are the three fixes that show up most.
+    </p>
+  );
 
   return (
     <>
@@ -123,7 +80,7 @@ export default async function HomePage() {
         cohortAvgRating={portfolio?.established_avg_rating ?? null}
         cohortUnder50Pct={portfolio?.established_lh_under_50_pct}
       />
-      <BeforeAfterSection intro={liveIntro} />
+      <BeforeAfterSection intro={leanIntro} />
       <ProcessSection />
       <CompetenceSection />
       <HipaaSection />

@@ -230,6 +230,13 @@ button {
   color: var(--foreground);
 }
 
+/* Translucent muted cards turn into murky brown when layered over a dark
+   contrast surface. Force a solid light fill so dark text stays readable. */
+.theme-section-contrast :where(.theme-card-muted),
+.theme-card-contrast :where(.theme-card-muted) {
+  background: #fffdf8;
+}
+
 html.dark .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
 html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
   --foreground: #edf1eb;
@@ -240,6 +247,11 @@ html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-ca
   --accent: #43bd78;
   --accent-strong: #8fe3b1;
   --accent-contrast: #08100b;
+}
+
+html.dark .theme-section-contrast :where(.theme-card-muted),
+html.dark .theme-card-contrast :where(.theme-card-muted) {
+  background: var(--surface-muted);
 }
 
 .theme-card-accent {
