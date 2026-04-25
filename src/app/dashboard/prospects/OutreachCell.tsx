@@ -64,7 +64,7 @@ export default function OutreachCell({ id, status, lastContactedAt }: Props) {
           <option key={o.value} value={o.value}>{o.label}</option>
         ))}
       </select>
-      <div className="flex items-center gap-2 text-[10px] theme-text-muted">
+      <div className="flex items-center gap-2 text-xs theme-text-muted">
         <span className="tabular-nums" title={lastContactedAt ?? "never contacted"}>
           {formatDate(lastContactedAt)}
         </span>
@@ -78,7 +78,7 @@ export default function OutreachCell({ id, status, lastContactedAt }: Props) {
               await bumpContactedAt(fd);
             });
           }}
-          className="text-[10px] theme-text-muted hover:theme-text-primary underline decoration-dotted underline-offset-2"
+          className="text-xs theme-text-muted hover:theme-text-primary underline decoration-dotted underline-offset-2"
           title="Stamp last-contacted date to now"
         >
           touch

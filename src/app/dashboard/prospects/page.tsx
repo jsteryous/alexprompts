@@ -77,8 +77,8 @@ export default async function ProspectsPage({ searchParams }: Props) {
       subtitle="Upstate businesses with broken or missing websites we can fix."
       stats={
         <>
-          <StatTile label="No website" value={noWebsite} tone="hot" />
-          <StatTile label="HOT"        value={hot}       tone="warm" />
+          <StatTile label="HOT"        value={hot}       tone="hot" />
+          <StatTile label="No website" value={noWebsite} tone="warm" />
           <StatTile label="Pending"    value={pending}   tone="muted" />
         </>
       }
