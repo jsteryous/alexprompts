@@ -19,8 +19,8 @@ const processSteps = [
   },
   {
     step: "02",
-    title: "Get screenshots back \u2014 free.",
-    body: "Within 48 hours we reply with the issues worth fixing and a written proposal. If your site is already fine, we will say so.",
+    title: "Hear us out.",
+    body: "Within 48 hours, we\u2019ll send back screenshots of what\u2019s costing you patients, the fixes that actually move the needle, and a written proposal with scope and price. If your site is already fine, we\u2019ll tell you that instead.",
   },
   {
     step: "03",
