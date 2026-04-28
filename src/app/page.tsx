@@ -38,7 +38,7 @@ export default async function HomePage() {
           <div className="grid gap-16 lg:grid-cols-[1.05fr,0.95fr] items-center">
             <div>
               <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-5">
-                For dentists whose reputations are better than their websites
+                You&rsquo;re a great dentist.
               </span>
               <h1 className="theme-text-primary text-5xl md:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
                 Your patients love you.

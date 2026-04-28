@@ -367,12 +367,12 @@ export function StakesSection({
         <div className="grid gap-12 md:gap-14 md:grid-cols-2 items-center mb-14">
           <div>
             <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4">
-              The invisible leak
+              Lost revenue
             </span>
             <h2 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-              The patients you&rsquo;re losing,
+              Don&rsquo;t let your website
               <br />
-              you&rsquo;ll never meet.
+              be the reason for less revenue.
             </h2>
             <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-5">
               It&rsquo;s 9pm. Someone searches &ldquo;dentist near me.&rdquo; They tap your pin first. Your site hangs. They swipe back and book the next one.

@@ -1,9 +1,10 @@
 """
-discover.py — Google Places (New) Text Search for Upstate SC verticals.
+discover.py — Google Places (New) Text Search for SC verticals.
 
 Populates `website_prospects` with candidate businesses (dental practices,
-personal injury law firms) across Greenville, Spartanburg, Anderson, Pickens,
-and Oconee counties. A missing `website_url` is kept (it's a valid pitch class:
+personal injury law firms) across the 5 Upstate counties plus 10 SC metro
+counties (Charleston tri-county, Midlands, Pee Dee, Coast, etc. — see
+COUNTIES below). A missing `website_url` is kept (it's a valid pitch class:
 "you have no site").
 
 Usage:
@@ -12,8 +13,8 @@ Usage:
     python discover.py --all                           # every vertical × every county
 
 Cost: Places Text Search is $32/1k after the $200/month Google Maps Platform
-free credit. Upstate-wide scan across both verticals is ~6 queries × pagination
-(~3 pages each) = <50 requests. Well inside the free tier.
+free credit. Statewide-metro scan across both verticals is ~15 counties ×
+2 verticals × 3 query terms × ~3 pages ≈ 270 requests. Inside the free tier.
 """
 
 from __future__ import annotations
@@ -43,14 +44,32 @@ _log = logging.getLogger(__name__)
 
 PLACES_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 
-# Upstate SC county centroids (lat, lng, radius_m). Radius chosen to fit county
-# without spilling far outside. Places caps radius at 50km.
+# SC county centroids (lat, lng, radius_m). Radius chosen to fit each county's
+# practice density without spilling far outside. Places caps radius at 50km.
+# Two tiers: 5 Upstate counties (original target market) + 10 metro counties
+# covering ~80% of SC dental practice density. Add rural counties only if the
+# pool dries up — they have <10 dentists each and dilute audit throughput.
 COUNTIES: dict[str, tuple[float, float, int]] = {
+    # ── Upstate SC ─────────────────────────────────────────────────────────
     "greenville":  (34.8526, -82.3940, 25_000),
     "spartanburg": (34.9496, -81.9320, 25_000),
     "anderson":    (34.5034, -82.6501, 25_000),
     "pickens":     (34.8873, -82.7085, 20_000),
     "oconee":      (34.7516, -83.0668, 25_000),
+    # ── Charleston tri-county ──────────────────────────────────────────────
+    "charleston":  (32.7765, -79.9311, 25_000),
+    "berkeley":    (33.1962, -80.0117, 30_000),
+    "dorchester":  (33.0788, -80.4087, 25_000),
+    # ── Midlands ───────────────────────────────────────────────────────────
+    "richland":    (34.0007, -81.0348, 25_000),
+    "lexington":   (33.9818, -81.2364, 25_000),
+    # ── Pee Dee / Coast ────────────────────────────────────────────────────
+    "horry":       (33.8362, -78.7361, 35_000),  # Conway ↔ Myrtle Beach spread
+    "florence":    (34.1955, -79.7626, 25_000),
+    # ── Other metros ───────────────────────────────────────────────────────
+    "york":        (34.9249, -81.0251, 25_000),  # Rock Hill / Fort Mill
+    "aiken":       (33.5391, -81.7195, 25_000),
+    "beaufort":    (32.4316, -80.6699, 30_000),  # Beaufort ↔ Bluffton ↔ HHI
 }
 
 VERTICALS: dict[str, list[str]] = {

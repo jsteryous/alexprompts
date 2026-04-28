@@ -20,11 +20,26 @@ from typing import Any
 
 
 COUNTY_LABELS = {
+    # Upstate
     "greenville": "Greenville",
     "spartanburg": "Spartanburg",
     "anderson": "Anderson",
     "pickens": "Pickens",
     "oconee": "Oconee",
+    # Charleston tri-county
+    "charleston": "Charleston",
+    "berkeley": "Berkeley",
+    "dorchester": "Dorchester",
+    # Midlands
+    "richland": "Richland",
+    "lexington": "Lexington",
+    # Pee Dee / Coast
+    "horry": "Horry",
+    "florence": "Florence",
+    # Other metros
+    "york": "York",
+    "aiken": "Aiken",
+    "beaufort": "Beaufort",
 }
 
 

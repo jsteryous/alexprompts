@@ -18,7 +18,7 @@ The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recomm
 - **One-liner anchor:** REBB = the company that finds and fixes hidden patient loss. Every copy decision orbits this — not "web design," not "performance optimization," not "dental marketing."
 - "The proposal is the product." If the audit shows no engagement is needed, say so.
 - Retainers month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte.
-- **Homepage follows a StoryBrand arc** (April 2026): hero (audience name + internal problem) → villain (StakesSection, "the invisible leak" — the patient you never meet) → guide's authority (BeforeAfterSection, cohort stat) → plan (ProcessSection + CompetenceSection) → supporting evidence (HipaaSection, demoted) → victory (SuccessSection) → price → FAQ → lead magnet → final CTA. Hero eyebrow: "For dentists whose reputations are better than their websites." H1: "Your patients love you. Your website doesn't show it." City pages keep the Cleanup-anchored geo eyebrow; practice-type pages carry specialty-specific heroes.
+- **Homepage follows a StoryBrand arc** (April 2026): hero (audience name + internal problem) → villain (StakesSection, "lost revenue" — the patient you never meet) → guide's authority (BeforeAfterSection, cohort stat) → plan (ProcessSection + CompetenceSection) → supporting evidence (HipaaSection, demoted) → victory (SuccessSection) → price → FAQ → lead magnet → final CTA. Hero eyebrow: "You're a great dentist." H1: "Your patients love you. Your website doesn't show it." City pages keep the Cleanup-anchored geo eyebrow; practice-type pages carry specialty-specific heroes.
 - **CTAs:** All body CTAs across the public site (homepage hero + sections, city pages, practice-type pages) read **"See if your website is losing patients"** — the StoryBrand villain pulled into the button so the click is about exposing a hidden leak, not requesting a service. Nav stays Title-case **"Get Free Audit"** (button-convention shortform — the long line wraps in a 130px nav slot). Do not reintroduce "Show me what's broken" or "Get your free audit" in body copy without an A/B test plan; the unified CTA is a deliberate voice decision, not a default.
 
 **Internal tooling (not customer-facing):**
@@ -107,7 +107,7 @@ Applies to every table under `src/app/dashboard/**`. Deviating from these rules 
 - **The sales surface** (homepage hero, HIPAA/Process/Competence/BeforeAfter/Stakes/Pricing sections, city pages, FAQ) speaks in dentist-frustration language and visible outcomes. No stack words, no SEO jargon. Name the thing the dentist can *see or feel*: "patients can actually book," "show up when patients Google 'dentist near me,'" "new reviews arrive steadily." Translate — never expose — terms like `schema markup`, `Lighthouse`, `Core Web Vitals`, `CRO`, `NAP`. Real product names dentists recognize (Google Business Profile, reviews, landing pages) are fine.
 - **The proof/education surface** (`/sample-proposal`, `/insights`, lead-magnet checklist) is where technical depth lives. Schema, Lighthouse scores, LCP/CLS, NAP consistency — load-bearing there because it signals expertise. Do not sanitize these surfaces to match the sales surface; the contrast is the credibility play.
 - **Stack is invisible on the public site.** Never reference Next.js, React, WordPress, Wix, Squarespace, or any CMS by name in marketing copy. Custom builds are the default but stay unnamed; the audit decides scope inside the written proposal.
-- **Outcome vocabulary is still being honed.** Copy is "best guess v1" until real audit conversations produce verbatim dentist phrases worth mirroring back. Expect quarterly copy passes.
+- **Outcome vocabulary still being honed.** Mirror back verbatim dentist phrases as real audit conversations surface them.
 
 ### Show, don't tell
 - The site sells *audits* and *written proposals*. `/sample-proposal` is the live proof-of-deliverable.
@@ -317,7 +317,7 @@ python -m prospects.run_prospects --digest [--min-severity 40] [--dry-run]
 
 **Contact extraction** (`contact_extract.py`, pure): `audit.py` follows up to 3 same-origin links with `about` / `contact` / `team` in path. Combined HTML → `extract_decision_maker()` + `rank_emails()`. `primary_email` = top-ranked email with score ≥ 50 (person-identified). `fallback_email` = best address below that threshold.
 
-**Geography:** 5 counties (Greenville, Spartanburg, Anderson, Pickens, Oconee) × 2 verticals (dental, personal_injury).
+**Geography:** 15 SC counties × 2 verticals (dental, personal_injury). Tier 1 — Upstate (Greenville, Spartanburg, Anderson, Pickens, Oconee). Tier 2 — statewide metros added Apr 2026 once the Upstate pool dried up: Charleston / Berkeley / Dorchester (Charleston tri-county), Richland / Lexington (Midlands), Horry / Florence (Coast / Pee Dee), York (Rock Hill), Aiken, Beaufort. Adding a county = edit `COUNTIES` in `scripts/prospects/discover.py` AND `COUNTY_LABELS` in `scripts/audit_stats.py` (the latter feeds cited stats in `/insights` posts).
 
 ## Known Issues / Gotchas
 
@@ -371,29 +371,18 @@ npm run dev | npm run build | npm run lint | npx vercel --prod
 
 ## Dashboard — Long-Term UX Roadmap
 
-Ordered by long-term leverage (not what's visible today). The user settled on this sequence for the internal CRM at `/dashboard` + `/dashboard/prospects`. Do the earlier items first — each one makes the next cheaper.
+Internal CRM at `/dashboard` + `/dashboard/prospects`. Ordered by leverage; do earlier items first.
 
-**Done**
-1. **Design tokens** — `.tone-{hot,warm,cool,good,good-strong,neutral,info}` in `globals.css`. All dashboard status/severity colors route through them (see Design System section).
-2. **Shared shell** — `DashboardShell` + `DashNav` + `StatTile` + `getCurrentUser()` extracted to `src/app/dashboard/_components/` and `_lib/`.
-3. **Typography + layout pass** — font cascade collapsed to two sizes (`text-sm` / `text-xs`), table headers quieted (`font-medium theme-text-muted`, no uppercase tracking-widest), sticky thead, row padding tightened to `py-3`, rank column dropped, emoji screenshot buttons replaced with text pills. Stats moved out of header chrome into their own row under the title. Conventions codified above under "Dashboard table conventions" — check there before touching table styles.
-4. **Row-detail drawer + notes (prospects)** — `ProspectTable.tsx` client component owns row click → right-side drawer with editable notes (auto-saves on blur via `updateNotes` action), contact, screenshot previews, audit detail. Single `notes text` column on `website_prospects`; upgrade to append-only `prospect_notes` table later without rewriting the drawer. Leads side still pending — mirror the same pattern (`enriched_leads.notes` already exists).
+**Done** — design tokens (`.tone-*`), shared shell (`DashboardShell` + `DashNav` + `StatTile`), typography/layout pass (see Design System + Dashboard table conventions for current rules), prospects row-detail drawer with editable notes (`ProspectTable.tsx`). Leads-side drawer still pending — mirror the same pattern (`enriched_leads.notes` already exists).
 
 **Next**
-5. **Generic `<DataTable>` primitive** — do NOT bolt sort/filter onto one page. Build a column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, column visibility. TanStack Table is the default pick. Use on both dashboard pages. Biggest UX lever because every future internal view is a table. Sticky thead is already in place per-page — the primitive should keep that as a default.
-6. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time. Formalize the TS↔Python coupling around `principal_role` prefixes and cluster slugs instead of string-matching.
-7. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.
-8. **A11y pass** — row focus styles, aria-labels on icon-only buttons, stat-tile labels, nested-interactive cleanup (`<details>` inside row). Mostly solved for free by the DataTable primitive.
-9. **URL as state** — filters/sort/selected-row in query params so dashboard views are linkable ("send me the HOT dental list"). Free once DataTable lands.
+1. **Generic `<DataTable>` primitive** — column-def-driven table with sort, text filter, tag/status filter, pagination, URL-synced state, column visibility. TanStack Table is the default pick. Use on both dashboard pages. Biggest UX lever — every future internal view is a table.
+2. **Generated Supabase types + shared types package** — kill the `as unknown as EnrichedLead[]` / `as unknown as Prospect[]` casts, catch schema drift at build time.
+3. **`error.tsx` + nested `loading.tsx` per dashboard route** — prospects page currently throws into the void; leads page silently 500s on Supabase errors.
+4. **A11y pass** — row focus styles, aria-labels on icon-only buttons, stat-tile labels, nested-interactive cleanup. Mostly solved for free by the DataTable primitive.
+5. **URL as state** — filters/sort/selected-row in query params so dashboard views are linkable. Free once DataTable lands.
 
-**Explicitly deprioritized**
-- Mobile responsive layout — internal CRM, desktop-only by design. Don't "fix."
-- Horizontal scroll on desktop — solved by DataTable column visibility; not worth a standalone pass.
-
-**Non-goals masquerading as tasks** — do not be tempted by these over the roadmap above:
-- Adding more badge tones before a real use case demands one.
-- Rebuilding the shell into a client component.
-- Adding react-query / SWR before server components demonstrably fall short.
+**Don't** — mobile responsive (desktop-only by design), more badge tones without a real use case, rebuilding the shell into a client component, adding react-query / SWR before server components demonstrably fall short.
 
 ## Python Pipeline — Open Tech Debt
 
