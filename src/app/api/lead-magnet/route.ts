@@ -39,7 +39,7 @@ const checklistHtml = `
 
     <div style="margin-top:32px;padding:24px;background:#f4f0e8;border-radius:12px">
       <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0f1411">Want us to just audit it for you?</p>
-      <p style="margin:0 0 16px;font-size:14px;color:#4a544c">Send your URL. We reply within one business day with screenshots of what's broken and a written proposal naming the tier that fits — Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance (custom scope). If the site is already fine, the proposal says that.</p>
+      <p style="margin:0 0 16px;font-size:14px;color:#4a544c">Send your URL. Within 48 hours: screenshots of what's broken plus a written proposal — scope, price, timeline. Cleanup starts at $1,500. Larger rebuilds are scoped per practice inside the proposal. If the site is already fine, the proposal says so.</p>
       <a href="https://rebbadvisors.com/contact" style="display:inline-block;background:#1f7d4e;color:#fff;font-weight:600;font-size:14px;padding:12px 22px;border-radius:10px;text-decoration:none">Get Free Audit →</a>
     </div>
 

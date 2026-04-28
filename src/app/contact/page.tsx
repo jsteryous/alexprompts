@@ -5,14 +5,10 @@ import { useState } from "react";
 export default function ContactPage() {
   const [form, setForm] = useState({
     firstName: "",
-    lastName: "",
     companyName: "",
     websiteUrl: "",
     businessType: "",
-    phone: "",
     email: "",
-    biggestIssue: "",
-    timeline: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -51,7 +47,7 @@ export default function ContactPage() {
             We&apos;ll show you what is broken.
           </h1>
           <p className="theme-text-muted text-xl max-w-2xl leading-relaxed">
-            Reply within one business day: screenshots of the issues worth fixing, plus a written proposal naming the tier that actually fits &mdash; Cleanup ($1,500), Growth ($3,500 + $500/mo), or Dominance (custom scope). If the site is already fine, the proposal says that.
+            Within 48 hours: screenshots of the issues worth fixing, plus a written proposal &mdash; scope, price, timeline. Cleanup starts at $1,500. If your site needs more, the proposal scopes that. If it&rsquo;s already fine, the proposal says so.
           </p>
         </div>
       </section>
@@ -67,58 +63,13 @@ export default function ContactPage() {
                       <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h2 className="theme-text-primary text-xl font-bold mb-2">Expect a reply within 1 business day.</h2>
+                  <h2 className="theme-text-primary text-xl font-bold mb-2">Expect screenshots within 48 hours.</h2>
                   <p className="theme-text-muted text-sm leading-relaxed">
-                    We&apos;ll review the site, then send back the issues worth fixing and whether the cleanup offer is the right fit.
+                    We&apos;ll review the site, send back the issues worth fixing, and a written proposal. No call, no follow-up sequence.
                   </p>
                 </div>
               ) : (
                 <form className="space-y-5" onSubmit={handleSubmit}>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={form.firstName}
-                        onChange={handleChange}
-                        placeholder="John"
-                        required
-                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      />
-                    </div>
-                    <div>
-                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={form.lastName}
-                        onChange={handleChange}
-                        placeholder="Smith"
-                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={form.companyName}
-                      onChange={handleChange}
-                      placeholder="Smith Family Dental"
-                      required
-                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                    />
-                  </div>
-
                   <div>
                     <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                       Website URL
@@ -128,13 +79,60 @@ export default function ContactPage() {
                       name="websiteUrl"
                       value={form.websiteUrl}
                       onChange={handleChange}
-                      placeholder="https://example.com"
+                      placeholder="https://yourpractice.com"
+                      required
+                      autoFocus
+                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="you@yourpractice.com"
                       required
                       className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="theme-border border-t pt-5">
+                    <p className="theme-text-muted text-xs mb-4">
+                      Optional &mdash; lets us address the reply to you and route to the right specialty.
+                    </p>
+                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                          First Name
+                        </label>
+                        <input
+                          type="text"
+                          name="firstName"
+                          value={form.firstName}
+                          onChange={handleChange}
+                          placeholder="John"
+                          className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
+                          Practice Name
+                        </label>
+                        <input
+                          type="text"
+                          name="companyName"
+                          value={form.companyName}
+                          onChange={handleChange}
+                          placeholder="Smith Family Dental"
+                          className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        />
+                      </div>
+                    </div>
                     <div>
                       <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
                         Practice Type
@@ -143,7 +141,6 @@ export default function ContactPage() {
                         name="businessType"
                         value={form.businessType}
                         onChange={handleChange}
-                        required
                         className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
                       >
                         <option value="">Select one...</option>
@@ -157,65 +154,6 @@ export default function ContactPage() {
                         <option>Other Dental</option>
                       </select>
                     </div>
-                    <div>
-                      <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        placeholder="(555) 000-0000"
-                        className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="john@example.com"
-                      required
-                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                      Biggest Issue
-                    </label>
-                    <textarea
-                      name="biggestIssue"
-                      value={form.biggestIssue}
-                      onChange={handleChange}
-                      rows={4}
-                      placeholder="Booking form does not work, bad mobile experience, site looks outdated, or whatever you already suspect."
-                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-y"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="theme-text-secondary block text-xs font-semibold mb-2 uppercase tracking-wide">
-                      Timeline
-                    </label>
-                    <select
-                      name="timeline"
-                      value={form.timeline}
-                      onChange={handleChange}
-                      className="theme-card-strong theme-text-primary w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition appearance-none"
-                    >
-                      <option value="">Select one...</option>
-                      <option>This week</option>
-                      <option>This month</option>
-                      <option>Just exploring</option>
-                    </select>
                   </div>
 
                   {status === "error" && (
@@ -229,11 +167,11 @@ export default function ContactPage() {
                     disabled={status === "loading"}
                     className="theme-cta-accent w-full font-semibold text-sm py-4 rounded-xl mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {status === "loading" ? "Sending..." : "Send My Website"}
+                    {status === "loading" ? "Sending..." : "Send my URL"}
                   </button>
 
                   <p className="theme-text-muted text-xs text-center">
-                    Best fit is a dental practice with a site that is clearly leaking new-patient calls.
+                    That&rsquo;s the whole intake. No discovery call, no follow-up sequence.
                   </p>
                 </form>
               )}
@@ -242,21 +180,21 @@ export default function ContactPage() {
             <div className="space-y-10">
               <div>
                 <h2 className="theme-text-primary text-2xl font-bold mb-4">
-                  What happens next?
+                  What happens next.
                 </h2>
                 <ul className="space-y-4">
                   {[
                     {
-                      title: "We review the actual site",
-                      body: "Not a generic sales call. We look at the pages, the forms, the mobile experience, and the obvious trust issues.",
+                      title: "We audit the actual site",
+                      body: "Pages, forms, mobile experience, the parts Google scores on. Not a generic checklist.",
                     },
                     {
-                      title: "We send screenshots of the problems",
-                      body: "You get clear proof of what is broken so you are not buying blind.",
+                      title: "Within 48 hours, screenshots + a written proposal",
+                      body: "What is broken, the fixes that move the needle, and the scope and price. Cleanup starts at $1,500. Larger rebuilds are scoped inside the proposal — month-to-month, 30-day cancel.",
                     },
                     {
-                      title: "We name the tier that honestly fits",
-                      body: "Cleanup, Growth, or Dominance — or none, if the site is already fine. The proposal is the product; the tier is just how it ships.",
+                      title: "Say yes, and it ships in a week",
+                      body: "Cleanup ships in five business days or less. If the site is already fine, the proposal says that and you owe nothing.",
                     },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">
@@ -303,10 +241,10 @@ export default function ContactPage() {
                   Clear Scope
                 </p>
                 <p className="theme-text-contrast-muted text-sm leading-relaxed mb-3">
-                  This is not a broad agency retainer and not a vague digital strategy conversation.
+                  Not a broad agency retainer. Not a vague digital-strategy conversation.
                 </p>
                 <p className="theme-text-contrast-muted text-sm leading-relaxed">
-                  The offer is simple: identify what is broken, decide if the quick cleanup fits, then fix it fast.
+                  The proposal is the product. Identify what&rsquo;s broken, name the scope and price, ship the fix.
                 </p>
               </div>
             </div>

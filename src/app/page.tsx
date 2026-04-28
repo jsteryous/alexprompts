@@ -79,6 +79,7 @@ export default async function HomePage() {
         cohortN={portfolio?.established_n}
         cohortAvgRating={portfolio?.established_avg_rating ?? null}
         cohortUnder50Pct={portfolio?.established_lh_under_50_pct}
+        cohortRegionLabel={portfolio?.region_label}
       />
       <BeforeAfterSection intro={leanIntro} />
       <ProcessSection />

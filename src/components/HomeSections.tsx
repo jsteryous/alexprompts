@@ -348,12 +348,14 @@ type StakesProps = {
   cohortN?: number;
   cohortAvgRating?: number | null;
   cohortUnder50Pct?: number;
+  cohortRegionLabel?: "Upstate" | "South Carolina";
 };
 
 export function StakesSection({
   cohortN,
   cohortAvgRating,
   cohortUnder50Pct,
+  cohortRegionLabel = "Upstate",
 }: StakesProps = {}) {
   const showCohortStat =
     typeof cohortN === "number" &&
@@ -394,7 +396,7 @@ export function StakesSection({
             <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
               Across{" "}
               <strong className="theme-text-primary">
-                {cohortN} Upstate dental practices
+                {cohortN} {cohortRegionLabel} dental practices
               </strong>{" "}
               with 100+ Google reviews and an average{" "}
               <strong className="theme-text-primary">

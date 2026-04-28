@@ -52,6 +52,9 @@ function median(values: number[]): number | null {
 export type PortfolioStats = {
   n_audited: number;
   counties: string[];
+  // "Upstate" when audited counties ⊂ Upstate Tier 1; "South Carolina"
+  // once the audit pool spans Midlands/Lowcountry/Coast. Derived, not stored.
+  region_label: "Upstate" | "South Carolina";
   lh_median: number | null;
   lh_sample: number;
   lh_under_50_pct: number;
@@ -67,6 +70,13 @@ export type PortfolioStats = {
 const PORTFOLIO_MIN_N = 10;
 const ESTABLISHED_MIN_REVIEWS = 100;
 const ESTABLISHED_MIN_N = 10;
+const UPSTATE_COUNTIES = new Set([
+  "greenville",
+  "spartanburg",
+  "anderson",
+  "pickens",
+  "oconee",
+]);
 
 export async function fetchPortfolioStats(): Promise<PortfolioStats | null> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -98,6 +108,11 @@ export async function fetchPortfolioStats(): Promise<PortfolioStats | null> {
   const counties = Array.from(
     new Set(rows.map((r) => r.county).filter((c): c is string => Boolean(c))),
   ).sort();
+  const regionLabel: "Upstate" | "South Carolina" =
+    counties.length > 0 &&
+    counties.every((c) => UPSTATE_COUNTIES.has(c.toLowerCase()))
+      ? "Upstate"
+      : "South Carolina";
 
   const lhScores = rows
     .map((r) => r.lighthouse_mobile_score)
@@ -129,6 +144,7 @@ export async function fetchPortfolioStats(): Promise<PortfolioStats | null> {
   return {
     n_audited: n,
     counties,
+    region_label: regionLabel,
     lh_median: median(lhScores),
     lh_sample: lhScores.length,
     lh_under_50_pct: pct(lhScores.filter((s) => s < 50).length, lhScores.length),
