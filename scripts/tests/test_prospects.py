@@ -12,7 +12,8 @@ Covers the functions most likely to silently break when regex/scoring is tweaked
   - detectors.detect_viewport_missing / no_https / mixed_content / stale_copyright
       / jquery_version / forms / score_severity
   - contact_extract.extract_emails / rank_emails / extract_decision_maker
-      / find_candidate_page_urls / fallback_probe_urls
+      / find_candidate_page_urls / fallback_probe_urls / extract_facebook_url
+  - message_draft.pick_top_issue / generate_fb_message / _first_name
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
 # Supabase client construction runs at import time for some modules via
 # `load_dotenv` → OK, but audit.py would try to init a client. We only import
 # the pure modules here.
-from prospects import contact_extract, detectors, discover  # noqa: E402
+from prospects import contact_extract, detectors, discover, message_draft  # noqa: E402
 
 
 # ── discover.is_practitioner_name ────────────────────────────────────────────
@@ -660,6 +661,432 @@ class TestFallbackProbeUrls(unittest.TestCase):
         )
         for u in urls:
             self.assertNotIn(u.rstrip("/"), {"https://clinic.com/contact", "https://clinic.com/about"})
+
+
+# ── contact_extract.extract_facebook_url ─────────────────────────────────────
+
+
+class TestExtractFacebookUrl(unittest.TestCase):
+    """Mining the practice's FB Page URL from already-crawled site HTML."""
+
+    def test_returns_none_for_empty_html(self):
+        self.assertIsNone(contact_extract.extract_facebook_url(""))
+        self.assertIsNone(contact_extract.extract_facebook_url(None))  # type: ignore[arg-type]
+
+    def test_picks_up_basic_vanity_url(self):
+        html = '<a href="https://www.facebook.com/PinecrestFamilyDentistry">FB</a>'
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFamilyDentistry",
+        )
+
+    def test_strips_trailing_slash_and_query(self):
+        html = '<a href="https://www.facebook.com/PinecrestFD/?ref=footer">FB</a>'
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFD",
+        )
+
+    def test_normalizes_mobile_subdomain(self):
+        html = '<a href="https://m.facebook.com/PinecrestFD">m</a>'
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFD",
+        )
+
+    def test_rejects_share_button_urls(self):
+        html = """
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fclinic.com">Share</a>
+        <a href="https://www.facebook.com/share.php?u=...">Share</a>
+        """
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_rejects_login_and_plugin_paths(self):
+        html = """
+        <a href="https://www.facebook.com/login">Login</a>
+        <a href="https://www.facebook.com/plugins/like.php?href=...">Like</a>
+        <a href="https://www.facebook.com/dialog/share">Dialog</a>
+        <a href="https://www.facebook.com/tr">Pixel</a>
+        """
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_rejects_post_video_photo_paths(self):
+        html = """
+        <a href="https://www.facebook.com/PinecrestFD/posts/123">Post</a>
+        <a href="https://www.facebook.com/PinecrestFD/videos/456">Video</a>
+        <a href="https://www.facebook.com/PinecrestFD/photos/789">Photo</a>
+        """
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_rejects_graph_api_version_paths(self):
+        # FB SDK injects /v17.0/dialog and similar — those aren't Pages.
+        html = '<script src="https://www.facebook.com/v17.0/sdk.js"></script>'
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_rejects_fbml_xmlns(self):
+        # Old FB markup used xmlns:fb="https://www.facebook.com/2008/fbml" —
+        # purely structural, never a Page.
+        html = '<html xmlns:fb="https://www.facebook.com/2008/fbml">'
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_picks_most_referenced_url_when_multiple(self):
+        html = """
+        <a href="https://www.facebook.com/PinecrestFD">Header</a>
+        <a href="https://www.facebook.com/PinecrestFD">Footer</a>
+        <a href="https://www.facebook.com/PinecrestFD">Contact</a>
+        <a href="https://www.facebook.com/SomeOtherPage">One off</a>
+        """
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFD",
+        )
+
+    def test_tie_breaks_to_shortest_path(self):
+        # /pages/Name/12345 form vs vanity — vanity should win when both
+        # appear once each.
+        html = """
+        <a href="https://www.facebook.com/pages/Pinecrest-Family-Dentistry/123456789">Long</a>
+        <a href="https://www.facebook.com/PinecrestFD">Vanity</a>
+        """
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFD",
+        )
+
+    def test_keeps_pages_form_when_only_option(self):
+        html = '<a href="https://www.facebook.com/pages/Pinecrest-FD/123456">Page</a>'
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/pages/Pinecrest-FD/123456",
+        )
+
+    def test_rejects_incomplete_pages_path(self):
+        # /pages/<thing> without an ID is unusable.
+        html = '<a href="https://www.facebook.com/pages/Pinecrest-FD">Bad</a>'
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+    def test_preserves_fb_me_redirector(self):
+        html = '<a href="https://fb.me/PinecrestFD">Short</a>'
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://fb.me/PinecrestFD",
+        )
+
+    def test_share_buttons_dont_drown_out_real_page(self):
+        # Many sites have one real Page link in the footer and dozens of
+        # share buttons across blog posts. The Page should still surface.
+        html = """
+        <a href="https://www.facebook.com/PinecrestFD">FB</a>
+        """ + ('<a href="https://www.facebook.com/sharer/sharer.php?u=x">Share</a>' * 20)
+        self.assertEqual(
+            contact_extract.extract_facebook_url(html),
+            "https://www.facebook.com/PinecrestFD",
+        )
+
+    def test_no_facebook_at_all_returns_none(self):
+        html = '<html><body>No FB here, just <a href="https://twitter.com/x">tw</a></body></html>'
+        self.assertIsNone(contact_extract.extract_facebook_url(html))
+
+
+# ── message_draft.pick_top_issue ─────────────────────────────────────────────
+
+
+class TestPickTopIssue(unittest.TestCase):
+    """The storyline picker that drives which template fires."""
+
+    def test_no_website_when_status_says_so(self):
+        p = {"audit_status": "no_website", "website_url": None, "issues": None}
+        self.assertEqual(message_draft.pick_top_issue(p), "no_website")
+
+    def test_no_website_when_url_missing(self):
+        p = {"audit_status": "audited", "website_url": None, "issues": {"viewport_missing": True}}
+        self.assertEqual(message_draft.pick_top_issue(p), "no_website")
+
+    def test_forms_unreachable_takes_priority_over_https(self):
+        p = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "issues": {"forms_unreachable": True, "no_https": True, "viewport_missing": True},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p), "forms_unreachable")
+
+    def test_viewport_above_https(self):
+        p = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "issues": {"viewport_missing": True, "no_https": True},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p), "no_viewport")
+
+    def test_lighthouse_low_only_below_threshold(self):
+        p_below = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "lighthouse_mobile_score": 18,
+            "issues": {},
+        }
+        p_above = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "lighthouse_mobile_score": 55,
+            "issues": {},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p_below), "lighthouse_low")
+        self.assertEqual(message_draft.pick_top_issue(p_above), "generic")
+
+    def test_lighthouse_falls_back_to_issues_dict(self):
+        # Pre-2.0 rows may not have lighthouse_mobile_score column populated.
+        p = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "lighthouse_mobile_score": None,
+            "issues": {"lighthouse_mobile": 15},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p), "lighthouse_low")
+
+    def test_stale_copyright_only_when_others_clean(self):
+        p = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "issues": {"stale_copyright": 2019},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p), "stale_copyright")
+
+    def test_falls_through_to_generic(self):
+        p = {
+            "audit_status": "audited",
+            "website_url": "https://clinic.com",
+            "issues": {},
+        }
+        self.assertEqual(message_draft.pick_top_issue(p), "generic")
+
+
+# ── message_draft._first_name ────────────────────────────────────────────────
+
+
+class TestFirstName(unittest.TestCase):
+    """Honorific + credential stripping for the greeting line."""
+
+    def test_plain_first_name(self):
+        self.assertEqual(message_draft._first_name("Jane Smith"), "Jane")
+
+    def test_strips_dr(self):
+        self.assertEqual(message_draft._first_name("Dr. Jane Smith"), "Jane")
+        self.assertEqual(message_draft._first_name("Dr Jane Smith"), "Jane")
+
+    def test_strips_post_nominal_credential(self):
+        self.assertEqual(message_draft._first_name("Mary Ann Smith DDS"), "Mary")
+        self.assertEqual(message_draft._first_name("Jane Smith, DMD"), "Jane")
+
+    def test_handles_all_caps(self):
+        self.assertEqual(message_draft._first_name("JANE SMITH"), "Jane")
+
+    def test_handles_combined(self):
+        self.assertEqual(message_draft._first_name("Dr. JANE SMITH, DDS"), "Jane")
+
+    def test_returns_none_for_empty(self):
+        self.assertIsNone(message_draft._first_name(""))
+        self.assertIsNone(message_draft._first_name(None))
+
+    def test_skips_lone_initial(self):
+        # "J. Smith" — single-letter token gets skipped, falls to "Smith".
+        # Surname-as-greeting is awkward but better than no greeting at all.
+        self.assertEqual(message_draft._first_name("J. Smith"), "Smith")
+
+
+# ── message_draft.generate_fb_message ────────────────────────────────────────
+
+
+def _base_prospect(**overrides) -> dict:
+    """Minimal valid prospect row, override any field for a specific test."""
+    base = {
+        "id": "test-id",
+        "place_id": "ChIJABC123XYZ",
+        "business_name": "Pinecrest Family Dentistry",
+        "vertical": "dental",
+        "city": "Greenville",
+        "decision_maker_name": "Dr. Jane Smith",
+        "decision_maker_title": "Dr.",
+        "google_rating": 4.7,
+        "google_review_count": 134,
+        "audit_status": "audited",
+        "website_url": "https://pinecrestfamilydentistry.com",
+        "lighthouse_mobile_score": 65,
+        "issues": {
+            "viewport_missing": False,
+            "no_https": False,
+            "forms_unreachable": False,
+            "stale_copyright": None,
+            "lighthouse_mobile": 65,
+        },
+    }
+    base.update(overrides)
+    return base
+
+
+class TestGenerateFbMessage(unittest.TestCase):
+    """Output sanity, voice rules, and personalization wiring."""
+
+    def test_returns_string(self):
+        msg = message_draft.generate_fb_message(_base_prospect())
+        self.assertIsInstance(msg, str)
+        self.assertGreater(len(msg), 50)
+
+    def test_raises_on_non_dict(self):
+        with self.assertRaises(TypeError):
+            message_draft.generate_fb_message("not a dict")  # type: ignore[arg-type]
+
+    # ── Voice rules ───
+
+    def test_no_price_in_first_touch(self):
+        """Memory rule: no price, cadence, or retainer terms in email/DM #1."""
+        for issue, payload in [
+            ("no_website", {"audit_status": "no_website", "website_url": None, "issues": None}),
+            ("forms_unreachable", {"issues": {"forms_unreachable": True,
+                                              "forms_unreachable_page": "https://x.com/contact"}}),
+            ("no_viewport", {"issues": {"viewport_missing": True}}),
+            ("no_https", {"issues": {"no_https": True}}),
+            ("lighthouse_low", {"lighthouse_mobile_score": 12, "issues": {}}),
+            ("stale_copyright", {"issues": {"stale_copyright": 2019}}),
+        ]:
+            with self.subTest(issue=issue):
+                p = _base_prospect(**payload)
+                msg = message_draft.generate_fb_message(p).lower()
+                for forbidden in ("$1,500", "$1500", "five days", "5 days",
+                                  "no retainer", "month-to-month", "30-day",
+                                  "30 day cancel"):
+                    self.assertNotIn(forbidden, msg, f"{issue!r} leaked: {forbidden!r}")
+
+    def test_signs_off_as_alex(self):
+        msg = message_draft.generate_fb_message(_base_prospect())
+        self.assertTrue(msg.rstrip().endswith("-Alex"))
+
+    def test_includes_anti_upsell_beat(self):
+        msg = message_draft.generate_fb_message(_base_prospect())
+        self.assertIn("No obligation", msg)
+
+    # ── Compliment opener gates ───
+
+    def test_compliment_appears_when_thresholds_clear(self):
+        msg = message_draft.generate_fb_message(_base_prospect())
+        self.assertIn("4.7 stars", msg)
+        self.assertIn("134", msg)
+
+    def test_compliment_dropped_when_low_rating(self):
+        msg = message_draft.generate_fb_message(_base_prospect(google_rating=3.4))
+        self.assertNotIn("stars across", msg)
+
+    def test_compliment_dropped_when_few_reviews(self):
+        msg = message_draft.generate_fb_message(_base_prospect(google_review_count=4))
+        self.assertNotIn("stars across", msg)
+
+    def test_compliment_dropped_when_review_data_missing(self):
+        msg = message_draft.generate_fb_message(
+            _base_prospect(google_rating=None, google_review_count=None)
+        )
+        self.assertNotIn("stars across", msg)
+
+    # ── Greeting personalization ───
+
+    def test_greeting_uses_first_name(self):
+        msg = message_draft.generate_fb_message(_base_prospect())
+        self.assertTrue(msg.startswith("Hello Jane,"))
+
+    def test_greeting_falls_back_when_no_decision_maker(self):
+        msg = message_draft.generate_fb_message(_base_prospect(decision_maker_name=None))
+        self.assertTrue(msg.startswith("Hello,"))
+
+    # ── Per-template content checks ───
+
+    def test_no_website_template_pitches_one_page_mock(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            audit_status="no_website", website_url=None, issues=None,
+        ))
+        self.assertIn("one-page mock", msg)
+        # Don't fabricate a finding — the leak is "they bounce to the next result".
+        self.assertIn("bounce", msg.lower())
+
+    def test_forms_unreachable_cites_page_when_known(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            issues={
+                "forms_unreachable": True,
+                "forms_unreachable_page": "https://pinecrestfamilydentistry.com/contact",
+            },
+        ))
+        self.assertIn("pinecrestfamilydentistry.com/contact", msg)
+        self.assertIn("call the next dentist", msg)
+
+    def test_forms_unreachable_falls_back_to_host_only(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            issues={"forms_unreachable": True, "forms_unreachable_page": None},
+        ))
+        self.assertIn("pinecrestfamilydentistry.com", msg)
+
+    def test_no_viewport_calls_out_mobile(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            issues={"viewport_missing": True},
+        ))
+        self.assertIn("phone", msg.lower())
+        self.assertIn("mobile", msg.lower())
+
+    def test_no_https_calls_out_chrome_warning(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            issues={"no_https": True},
+        ))
+        self.assertIn("HTTPS", msg)
+        self.assertIn("Not Secure", msg)
+
+    def test_lighthouse_low_includes_score(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            lighthouse_mobile_score=18,
+            issues={"lighthouse_mobile": 18},
+        ))
+        self.assertIn("18/100", msg)
+
+    def test_stale_copyright_mentions_year(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            issues={"stale_copyright": 2019},
+        ))
+        self.assertIn("2019", msg)
+
+    # ── Vertical guard ───
+
+    def test_personal_injury_uses_neutral_template(self):
+        msg = message_draft.generate_fb_message(_base_prospect(
+            vertical="personal_injury",
+            issues={"viewport_missing": True},  # would normally pick mobile template
+        ))
+        # The generic/neutral template uses "inquiries" instead of dental "patients"
+        # and never emits the dental-search statistic.
+        self.assertNotIn("dental searches", msg.lower())
+        self.assertIn("inquiries", msg.lower())
+
+    # ── Determinism + variance across prospects ───
+
+    def test_same_prospect_produces_same_message(self):
+        p = _base_prospect(issues={"forms_unreachable": True,
+                                   "forms_unreachable_page": "https://x.com/contact"})
+        self.assertEqual(
+            message_draft.generate_fb_message(p),
+            message_draft.generate_fb_message(p),
+        )
+
+    def test_different_prospects_can_produce_different_recency(self):
+        # Across many prospects, the recency adverb varies (deterministically).
+        # Test a sample and confirm we don't always get "this morning".
+        adverbs = set()
+        for i in range(40):
+            p = _base_prospect(
+                place_id=f"ChIJ{i}xyz",
+                issues={"forms_unreachable": True,
+                        "forms_unreachable_page": "https://x.com/contact"},
+            )
+            msg = message_draft.generate_fb_message(p)
+            for opt in message_draft._RECENCY_ADVERBS:
+                if opt in msg:
+                    adverbs.add(opt)
+                    break
+        self.assertGreater(len(adverbs), 1, "recency phrasing should vary across prospects")
 
 
 if __name__ == "__main__":

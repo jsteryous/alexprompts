@@ -31,6 +31,7 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
       "id, business_name, vertical, city, county, phone, website_url, " +
       "google_rating, google_review_count, audit_status, issues, " +
       "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, " +
+      "lighthouse_mobile_score, place_id, facebook_url, " +
       "audit_error, contact_status, last_contacted_at, " +
       "contact_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title, notes"
     )

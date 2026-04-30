@@ -35,6 +35,7 @@ from dotenv import load_dotenv
 from supabase import create_client
 
 from audit_stats import fetch_dental_stats, stats_methodology_md, stats_prompt_block
+from voice_anchors import recent_titles_block, voice_prompt_block
 
 # ── Load .env.local from project root ───────────────────────────────────────
 ROOT = Path(__file__).resolve().parent.parent
@@ -81,14 +82,33 @@ new patient trying to book on their iPhone, an insurance verification form that
 feel like you've actually seen this happen.
 
 The four problems REBB's audit surfaces most often, in descending severity:
-1. Contact / booking form posts to a dead endpoint (404 or 405) — leads never
+1. Contact / booking form posts to a dead endpoint (404 or 410) — leads never
    arrive; the practice never knows they're losing them.
-2. No mobile viewport — desktop site pinch-zoomed on a phone. 60%+ of visitors
-   bounce in under 5 seconds.
-3. Stale copyright ("© 2019") in the footer — practice looks abandoned even when
-   it's booked solid.
-4. Low Lighthouse score — slow load, Core Web Vitals failing, Google ranking
-   penalties on top of the patient experience damage.
+2. No mobile viewport — desktop site pinch-zoomed on a phone. Patients bail
+   before the page is usable.
+3. Stale footer copyright (multiple years out of date) — practice looks
+   abandoned even when it's booked solid. Use a relative phrase like "years
+   out of date" rather than a hardcoded year.
+4. Low Lighthouse score — slow load, Core Web Vitals failing, lower visibility
+   when patients search on phones.
+
+Stat hygiene (load-bearing — the audit data block above is the ONLY source
+of numeric claims):
+- Cite figures from the audit data block verbatim. Do NOT invent supporting
+  stats ("60% bounce in under 5 seconds", "8 in 10 patients…", etc.) even as
+  rhetorical color. If a stat isn't in the data block, don't write a number.
+- If the topic's headline issue is rare in the audit data (<10% prevalence),
+  do NOT lead the article with the rare stat — that frames the piece around
+  a problem the reader probably doesn't have. Reframe the lede around the
+  broader cluster (mobile experience, trust signals, form reliability) and
+  use the rare issue as one concrete example inside the piece.
+
+Voice on SEO mechanics: this is the educational surface, so technical depth
+is fine — but translate jargon into outcomes. Prefer "patients searching on
+phones don't see you as high" over "Google penalizes your site." Prefer "your
+site loads slowly enough that patients leave" over "your Core Web Vitals are
+failing." Name the metric once if it's load-bearing; don't lean on it as the
+villain.
 
 Other dental-specific angles that land well:
 - Online booking that silently breaks on iPhone Safari but "works" on the owner's
@@ -396,14 +416,17 @@ def main() -> None:
     if not args.topic:
         parser.error("--topic is required (or use --test-email)")
 
-    # 0. Fetch proprietary audit stats (EEAT grounding) before generation
+    # 0. Fetch grounding context (EEAT stats + voice anchors + recent titles)
     stats = {}
     stats_block = ""
+    voice_block = voice_prompt_block()
+    titles_block = ""
     url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_KEY")
     if url and key:
         try:
-            stats = fetch_dental_stats(create_client(url, key))
+            sb = create_client(url, key)
+            stats = fetch_dental_stats(sb)
             stats_block = stats_prompt_block(stats) if stats else ""
             if stats:
                 log.info(
@@ -412,11 +435,16 @@ def main() -> None:
                 )
             else:
                 log.warning("Insufficient audited rows (<5) — generating without first-party stats.")
+            titles_block = recent_titles_block(sb, limit=10)
+            if titles_block:
+                log.info("Loaded recent published titles for de-duplication.")
         except Exception as exc:
-            log.warning(f"Audit stats fetch failed (non-fatal): {exc}")
+            log.warning(f"Grounding fetch failed (non-fatal): {exc}")
+
+    grounding_block = "\n\n".join(b for b in (stats_block, voice_block, titles_block) if b)
 
     # 1. Generate content
-    raw_markdown = generate_with_gemini(args.topic, stats_block=stats_block)
+    raw_markdown = generate_with_gemini(args.topic, stats_block=grounding_block)
 
     # 2. Parse title / body
     title, body_md = extract_title_and_body(raw_markdown)

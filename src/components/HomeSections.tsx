@@ -492,8 +492,11 @@ export function PricingSection() {
             <br />
             starting at $1,500.
           </h2>
+          <p className="theme-text-primary text-lg md:text-xl leading-relaxed font-semibold mb-6">
+            One new patient is $13,000+ in lifetime value. Cleanup is $1,500. The math pays itself back the first time the leak closes.
+          </p>
           <p className="theme-text-secondary text-base md:text-lg leading-relaxed mb-4">
-            The Cleanup starts at $1,500. Faster on phones, intake moved to a HIPAA-compliant inbox, your Weave / LocalMed / RevenueWell sync still working, a visual refresh that matches your chairside. Five business days or less.
+            Faster on phones. Intake moved to a HIPAA-compliant inbox. Your Weave / LocalMed / RevenueWell sync still working. A visual refresh that matches your chairside. Five business days or less.
           </p>
           <p className="theme-text-secondary text-base md:text-lg leading-relaxed mb-8">
             Scope varies by practice. The audit tells you which tier your site actually needs. Larger rebuilds are scoped per project &mdash; send what you need, we&rsquo;ll work within your budget. If the audit says you don&rsquo;t need us, we&rsquo;ll say so.

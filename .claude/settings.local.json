@@ -128,7 +128,8 @@
       "Bash(curl -s http://localhost:3000/contact -o /tmp/contact.html -w \"status=%{http_code}\\\\n\")",
       "Bash(npx --yes tsc --noEmit -p .)",
       "WebFetch(domain:www.googleapis.com)",
-      "Bash(curl -sIL https://rebbadvisors.com)"
+      "Bash(curl -sIL https://rebbadvisors.com)",
+      "Bash(npx eslint *)"
     ]
   }
 }

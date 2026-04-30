@@ -7,7 +7,7 @@ import { practiceTypeList } from "@/lib/practiceTypes";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/dashboard")) return null;
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/review")) return null;
 
   return (
     <footer className="theme-card-strong border-t">

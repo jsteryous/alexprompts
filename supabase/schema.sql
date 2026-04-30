@@ -316,6 +316,14 @@ ALTER TABLE website_prospects
   ADD COLUMN IF NOT EXISTS decision_maker_name  text,
   ADD COLUMN IF NOT EXISTS decision_maker_title text;
 
+-- Facebook page mined from the prospect's own website HTML during audit.
+-- We message dental practices on Alex's personal FB instead of (or before)
+-- email — emails bounce, FB Pages are usually monitored by the owner.
+-- Populated by contact_extract.extract_facebook_url() in audit.py; left NULL
+-- when the site doesn't link to FB or the prospect has no website.
+ALTER TABLE website_prospects
+  ADD COLUMN IF NOT EXISTS facebook_url text;
+
 -- Storage bucket for audit screenshots.
 -- Run once in Supabase SQL editor after this migration:
 --   INSERT INTO storage.buckets (id, name, public)

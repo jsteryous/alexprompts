@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import OutreachCell from "./OutreachCell";
 import { updateNotes } from "./actions";
+import { generateFbMessage, fbSearchUrl } from "@/lib/messageDraft";
 
 // ── Types (mirror page.tsx) ─────────────────────────────────────────────────
 
@@ -29,6 +30,7 @@ interface RankedEmail {
 
 export interface Prospect {
   id: string;
+  place_id: string | null;
   business_name: string;
   vertical: string;
   city: string | null;
@@ -43,6 +45,8 @@ export interface Prospect {
   severity_tag: string | null;
   mobile_screenshot_url: string | null;
   desktop_screenshot_url: string | null;
+  lighthouse_mobile_score: number | null;
+  facebook_url: string | null;
   audit_error: string | null;
   contact_status: string | null;
   last_contacted_at: string | null;
@@ -202,6 +206,83 @@ function ContactCell({ prospect }: { prospect: Prospect }) {
   );
 }
 
+// ── Outreach draft (FB DM) ──────────────────────────────────────────────────
+
+function OutreachDraft({ prospect }: { prospect: Prospect }) {
+  // Recompute when prospect identity changes (drawer remounts via key on row),
+  // but keep useMemo to avoid regenerating on unrelated re-renders.
+  const initial = useMemo(() => generateFbMessage(prospect), [prospect]);
+  const [text, setText] = useState(initial);
+  const [copied, setCopied] = useState(false);
+  const dirty = text !== initial;
+
+  const fbHref = prospect.facebook_url ?? fbSearchUrl(prospect);
+  const fbLabel = prospect.facebook_url ? "Open on Facebook" : "Search Facebook";
+
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // Older browsers / clipboard blocked — silent fail; user can select manually.
+    }
+  };
+
+  return (
+    <section className="space-y-2">
+      <h3 className="text-xs font-semibold uppercase tracking-widest theme-label">
+        Outreach
+      </h3>
+      <div className="theme-card-muted border theme-border rounded p-3 space-y-3">
+        <div className="flex items-center gap-2 flex-wrap">
+          <a
+            href={fbHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs theme-cta rounded px-3 py-1.5 inline-block"
+          >
+            {fbLabel} ↗
+          </a>
+          {!prospect.facebook_url && (
+            <span className="text-xs theme-text-muted">
+              FB page not auto-resolved — opens a pre-filled search
+            </span>
+          )}
+        </div>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          rows={Math.max(8, text.split("\n").length + 1)}
+          spellCheck
+          className="w-full text-sm theme-card theme-text-primary border theme-border rounded p-3 resize-y focus:outline-none focus:ring-1 focus:ring-current"
+        />
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            onClick={onCopy}
+            className="text-xs theme-cta rounded px-3 py-1.5"
+          >
+            {copied ? "Copied" : "Copy draft"}
+          </button>
+          {dirty && (
+            <button
+              type="button"
+              onClick={() => setText(initial)}
+              className="text-xs theme-text-muted hover:theme-text-primary border theme-border rounded px-3 py-1.5"
+            >
+              Reset
+            </button>
+          )}
+          <span className="text-xs theme-text-muted">
+            {text.length} chars{dirty ? " · edited" : ""}
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Drawer ──────────────────────────────────────────────────────────────────
 
 function hostname(url: string | null): string {
@@ -289,6 +370,9 @@ function ProspectDrawer({
             <SeverityBadge score={prospect.severity_score} tag={prospect.severity_tag} />
             <IssueChips issues={issues} status={prospect.audit_status} />
           </div>
+
+          {/* Outreach — pre-generated FB DM draft + link to the practice's FB page */}
+          <OutreachDraft prospect={prospect} />
 
           {/* Notes */}
           <section className="space-y-2">

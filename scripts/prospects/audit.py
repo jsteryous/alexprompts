@@ -79,6 +79,7 @@ class AuditResult:
     fallback_email: Optional[str] = None     # best shared/generic inbox when no primary
     decision_maker_name: Optional[str] = None
     decision_maker_title: Optional[str] = None
+    facebook_url: Optional[str] = None       # mined from site HTML, used for FB outreach
 
 
 # ── Supabase helpers ─────────────────────────────────────────────────────────
@@ -377,13 +378,20 @@ def audit_prospect(
     result.decision_maker_name = dm_name
     result.decision_maker_title = dm_title
 
+    # Facebook page mining — same crawled HTML the contact extractor saw.
+    combined_html_for_fb = "\n".join(
+        [capture.home_html] + [p.get("html", "") for p in capture.extra_pages]
+    )
+    result.facebook_url = contact_extract.extract_facebook_url(combined_html_for_fb)
+
     _log.info(
-        "  ↳ contact: dm=%s (%s) · %d emails · primary=%s  fallback=%s",
+        "  ↳ contact: dm=%s (%s) · %d emails · primary=%s  fallback=%s · fb=%s",
         dm_name or "—",
         dm_title or "—",
         len(ranked_emails),
         primary_email or "—",
         fallback_email or "—",
+        result.facebook_url or "—",
     )
 
     # Upload screenshots (skip for smoke test)
@@ -422,6 +430,7 @@ def save_audit(result: AuditResult) -> None:
         "fallback_email": result.fallback_email,
         "decision_maker_name": result.decision_maker_name,
         "decision_maker_title": result.decision_maker_title,
+        "facebook_url": result.facebook_url,
     }
     try:
         resp = sb.table("website_prospects").update(payload).eq("id", result.prospect_id).execute()

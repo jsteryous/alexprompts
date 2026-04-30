@@ -1,11 +1,15 @@
 """
-contact_extract.py — Pull emails + decision-maker name/title from a prospect's site.
+contact_extract.py — Pull emails + decision-maker name/title + Facebook page
+from a prospect's site.
 
 Pure functions over already-captured HTML + visible text. No network calls,
 no DB calls. The audit loop crawls up to 3 candidate contact/about/team pages
 per prospect and passes the combined content through here.
 
-Goal: surface the human we should actually email, not info@.
+Goal: surface the human we should actually email, not info@. Also surface the
+practice's Facebook Page URL when the site links to one — outbound runs from
+Alex's personal FB account (emails bounce; FB Pages are usually monitored by
+the owner) so a resolved page URL skips a manual search per prospect.
 
 Email ranking (0-100, higher = better):
   95 — both DM first AND last name appear in local part
@@ -418,3 +422,116 @@ def extract_decision_maker(
 
     (name, title), _score = max(candidates.items(), key=lambda kv: kv[1])
     return name, title
+
+
+# ── Facebook page extraction ─────────────────────────────────────────────────
+
+# Match facebook.com / fb.com / fb.me references with full http(s) scheme.
+# Protocol-relative (//facebook.com/...) is intentionally skipped — extremely
+# rare on dental/firm sites and not worth the false-positive surface.
+# Path capture stops at ?, #, or whitespace so query strings/fragments drop.
+_FB_URL_RE = re.compile(
+    r'https?://(?:www\.|m\.|web\.)?(facebook\.com|fb\.com|fb\.me)'
+    r'(/[^\s"\'<>?#]*)?',
+    re.I,
+)
+
+# Top-level path tokens that mean "not a Page" — share buttons, plugin embeds,
+# login dialogs, system endpoints, Graph API namespaces, FBML xmlns, etc.
+_FB_PATH_BLOCKLIST = frozenset({
+    "sharer", "sharer.php", "share.php", "share",
+    "dialog", "plugins", "tr", "tr.php",
+    "login", "login.php", "signup", "recover", "checkpoint",
+    "policies", "policy", "legal", "ads",
+    "developers", "business",
+    "watch", "marketplace", "gaming", "fundraisers",
+    "settings", "help", "directory", "lite", "messenger",
+    "photo.php", "story.php", "profile.php", "permalink.php",
+    "events", "notes", "groups",
+    "notifications", "messages", "search",
+    "2008",  # /2008/fbml xmlns
+})
+
+# Path fragments that mean "post / photo / video page", not the Page itself.
+_FB_PATH_FRAGMENT_BLOCKLIST = (
+    "/posts/", "/post/", "/videos/", "/video/", "/photos/", "/photo/",
+    "/permalink/", "/story/", "/reel/", "/reels/",
+    "/events/", "/notes/", "/groups/",
+)
+
+_FB_VERSION_RE = re.compile(r"^v\d+\.\d+$")  # graph API versions like v17.0
+
+
+def _canonicalize_facebook_url(url: str) -> Optional[str]:
+    """
+    Validate a Facebook URL points at a Page (not a share button, login dialog,
+    post/photo/video, or Graph API path) and return canonical form. Returns
+    None when the URL is not a usable Page reference.
+
+    Canonical form for facebook.com / fb.com → ``https://www.facebook.com/<path>``.
+    Canonical form for fb.me → ``https://fb.me/<path>`` (preserved as-is — fb.me
+    is a redirector, we can't resolve without a network call but the link still
+    works in a browser).
+    """
+    if not url:
+        return None
+    m = _FB_URL_RE.match(url.strip())
+    if not m:
+        return None
+    host = m.group(1).lower()
+    path = (m.group(2) or "").rstrip("/")
+    if not path or path == "/":
+        return None
+
+    first = path.lstrip("/").split("/", 1)[0].lower()
+    if not first:
+        return None
+
+    # fb.me is a vanity-redirector domain — keep the path, only block obvious
+    # non-Page tokens. Most fb.me/<token> URLs map to a Page.
+    if host == "fb.me":
+        if first in {"login", "signup"}:
+            return None
+        return f"https://fb.me{path}"
+
+    # facebook.com / fb.com — full Page validation
+    if first in _FB_PATH_BLOCKLIST:
+        return None
+    if _FB_VERSION_RE.match(first):
+        return None
+    if any(frag in path.lower() for frag in _FB_PATH_FRAGMENT_BLOCKLIST):
+        return None
+    # /pages/<name>/<id>/ form is OK only when both segments are present
+    if first == "pages":
+        parts = [p for p in path.lstrip("/").split("/") if p]
+        if len(parts) < 3:
+            return None
+
+    return f"https://www.facebook.com{path}"
+
+
+def extract_facebook_url(html: str) -> Optional[str]:
+    """
+    Mine a single canonical Facebook Page URL from already-rendered HTML.
+
+    Scans every facebook.com / fb.com / fb.me reference, filters out share
+    buttons, plugin embeds, login dialogs, post/photo/video paths, and Graph
+    API versions. The remaining candidate referenced most often wins (header +
+    footer + contact page typically all link the same Page); ties break by
+    shortest path so a vanity URL (`/PinecrestFamilyDentistry`) beats the
+    longer `/pages/Pinecrest-Family-Dentistry/12345` form.
+
+    Pure function — no network calls. Returns None when no usable Page is
+    found (e.g. the site only contains share buttons, or has no FB link at all).
+    """
+    if not html:
+        return None
+    counts: dict[str, int] = {}
+    for m in _FB_URL_RE.finditer(html):
+        canon = _canonicalize_facebook_url(m.group(0))
+        if canon:
+            counts[canon] = counts.get(canon, 0) + 1
+    if not counts:
+        return None
+    best, _n = max(counts.items(), key=lambda kv: (kv[1], -len(kv[0])))
+    return best
