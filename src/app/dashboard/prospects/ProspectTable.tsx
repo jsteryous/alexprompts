@@ -340,7 +340,7 @@ function PacketSection({ prospect }: { prospect: Prospect }) {
         <div className="flex items-center gap-2 flex-wrap">
           {url && (
             <a
-              href={url}
+              href={`/dashboard/prospects/${prospect.id}/packet`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs theme-cta rounded px-3 py-1.5 inline-block"
@@ -350,8 +350,7 @@ function PacketSection({ prospect }: { prospect: Prospect }) {
           )}
           {url && (
             <a
-              href={url}
-              download={`${prospect.business_name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase()}-packet.html`}
+              href={`/dashboard/prospects/${prospect.id}/packet?download=1`}
               className="text-xs theme-text-muted hover:theme-text-primary border theme-border rounded px-3 py-1.5"
             >
               Download

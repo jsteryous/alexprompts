@@ -129,7 +129,8 @@
       "Bash(npx --yes tsc --noEmit -p .)",
       "WebFetch(domain:www.googleapis.com)",
       "Bash(curl -sIL https://rebbadvisors.com)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(curl -sI \"https://ykuenmwfxecmmqichwit.supabase.co/storage/v1/object/public/prospect-audits/946330d2-4a87-473b-9a4a-70d6c4584a07/packet-1777982192.html\")"
     ]
   }
 }

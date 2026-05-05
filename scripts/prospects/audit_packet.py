@@ -1013,7 +1013,13 @@ def _render_daily_email_html(row: dict) -> str:
     """Tiny one-row email — link to the packet, the envelope text inline so
     the user can hand-write the address from their phone if they're away from
     a printer. Voice tracks the rest of the dashboard chrome (terse, no
-    decoration), not the marketing site."""
+    decoration), not the marketing site.
+
+    The packet link points at the dashboard proxy route, NOT the raw Supabase
+    Storage URL — Supabase serves stored HTML as text/plain with a sandboxing
+    CSP (anti-XSS), so the storage URL renders as raw source in a browser tab.
+    The proxy route re-serves with text/html for a clickable inbox experience.
+    """
     name = _esc(row.get("business_name") or "Prospect")
     city = _esc(row.get("city") or "")
     addr = _esc(row.get("address") or "—")
@@ -1024,9 +1030,13 @@ def _render_daily_email_html(row: dict) -> str:
         f'<a href="{_esc(site)}" style="color:#1f7d4e">{_esc(_hostname(site) or site)}</a>'
         if site else "<em>no website</em>"
     )
-    packet_url = _esc(row.get("packet_html_url") or "")
+    site_origin = os.getenv("NEXT_PUBLIC_SITE_URL", "https://rebbadvisors.com").rstrip("/")
+    packet_url = (
+        f"{site_origin}/dashboard/prospects/{_esc(row.get('id') or '')}/packet"
+        if row.get("id") else _esc(row.get("packet_html_url") or "")
+    )
     envelope = _esc(row.get("packet_envelope_text") or "").replace("\n", "<br>")
-    dashboard = "https://rebbadvisors.com/dashboard/prospects"
+    dashboard = f"{site_origin}/dashboard/prospects"
 
     return f"""<!DOCTYPE html>
 <html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#111;max-width:600px;margin:0 auto;padding:24px">
