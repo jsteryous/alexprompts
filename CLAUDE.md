@@ -119,6 +119,10 @@ The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recomm
 | `primary_email` | text | person-identified (score ≥ 50) |
 | `fallback_email` | text | best shared/generic inbox when no primary |
 | `decision_maker_name` / `decision_maker_title` | text | best-guess owner/dentist/partner |
+| `packet_html_url` | text | print-ready audit packet HTML in `prospect-audits` bucket; surfaced in `/dashboard/prospects` drawer |
+| `packet_envelope_text` | text | plain-text envelope copy (TO/FROM lines) — small enough to inline on the row |
+| `packet_generated_at` | timestamptz | last `audit_packet.py --upload` run for this row |
+| `packet_emailed_at` | timestamptz | stamped by daily-packet workflow when the print-this email is sent; NULL = eligible queue |
 
 ## Environment Variables
 

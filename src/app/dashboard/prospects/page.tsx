@@ -33,7 +33,8 @@ async function getProspects(vertical?: string, status?: string): Promise<Prospec
       "severity_score, severity_tag, mobile_screenshot_url, desktop_screenshot_url, " +
       "lighthouse_mobile_score, place_id, facebook_url, " +
       "audit_error, contact_status, last_contacted_at, " +
-      "contact_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title, notes"
+      "contact_emails, primary_email, fallback_email, decision_maker_name, decision_maker_title, notes, " +
+      "packet_html_url, packet_envelope_text, packet_generated_at, packet_emailed_at"
     )
     .order("severity_score", { ascending: false, nullsFirst: false })
     .order("created_at", { ascending: false })
