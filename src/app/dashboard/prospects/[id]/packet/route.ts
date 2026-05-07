@@ -41,7 +41,15 @@ export async function GET(
   if (!upstream.ok) {
     return new NextResponse(`Packet fetch failed (${upstream.status})`, { status: 502 });
   }
-  const html = await upstream.text();
+  let html = await upstream.text();
+
+  // Suppress browser-added URL/page-number footer: @page margin:0 removes the
+  // margin area where Chrome/Edge render those elements. Body horizontal padding
+  // preserves the 0.75in side margins that @page used to provide.
+  const printFix = `<style>@page{margin:0!important}html,body{padding:0 0.75in}</style>`;
+  html = html.includes("</head>")
+    ? html.replace("</head>", `${printFix}</head>`)
+    : printFix + html;
 
   const headers: Record<string, string> = {
     "Content-Type": "text/html; charset=utf-8",

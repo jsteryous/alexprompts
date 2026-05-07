@@ -485,7 +485,7 @@ def _shared_page_css() -> str:
     a B&W home printer should produce something that reads as correspondence,
     not a marketing flyer."""
     return """
-        @page { size: letter; margin: 0.75in; }
+        @page { size: letter; margin: 0; }
         :root { color-scheme: light; }
         * { box-sizing: border-box; }
         html, body {
@@ -495,6 +495,7 @@ def _shared_page_css() -> str:
             font-size: 11.5pt;
             line-height: 1.55;
             margin: 0;
+            padding: 0 0.75in;
         }
         .sheet {
             max-width: 7.0in;
