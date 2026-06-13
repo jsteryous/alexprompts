@@ -1,0 +1,7 @@
+# Alex Prompts weekly newsletter engine (scripts/ai_news/).
+# Lighter than the dental pipeline — no Supabase, Playwright, or Places.
+python-dotenv==1.0.1
+requests==2.32.3
+google-genai>=1.7.0
+defusedxml>=0.7.1   # safe RSS parsing (XXE / billion-laughs hardening)
+markdown>=3.5       # render the draft to HTML for the email
