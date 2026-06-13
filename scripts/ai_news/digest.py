@@ -30,13 +30,13 @@ import logging
 import os
 import re
 import sys
-import time
 from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
 
 from ai_news.collect import Collection, collect_all, story_attention
+from ai_news.llm import generate as _gemini
 
 # ai_news/ is one level deeper than the other scripts, so repo root is 3 up:
 # digest.py -> ai_news -> scripts -> repo root.
@@ -217,73 +217,25 @@ def find_fluff(text: str) -> list[str]:
 
 # ── Gemini ────────────────────────────────────────────────────────────────────
 
-def _gemini(system: str, contents: str, model: str, *,
-            grounded: bool = True, fallback_model: str | None = None,
-            max_retries: int = 3) -> str:
-    """One grounded Gemini call with retry, optionally falling back to a 2nd model."""
-    try:
-        from google import genai
-        from google.genai import types
-    except ImportError:
-        log.error("google-genai not installed. Run: pip install google-genai")
-        sys.exit(1)
-
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        log.error("GEMINI_API_KEY not set in .env.local")
-        sys.exit(1)
-
-    client = genai.Client(api_key=api_key)
-    cfg_kwargs = {"system_instruction": system, "temperature": 0.7}
-    if grounded:
-        cfg_kwargs["tools"] = [types.Tool(google_search=types.GoogleSearch())]
-
-    models_to_try = [model] + ([fallback_model] if fallback_model else [])
-    last_exc: Exception | None = None
-    for m in models_to_try:
-        log.info("Gemini call (%s)%s ...", m, " + grounding" if grounded else "")
-        for attempt in range(max_retries):
-            try:
-                response = client.models.generate_content(
-                    model=m, contents=contents,
-                    config=types.GenerateContentConfig(**cfg_kwargs),
-                )
-                text = response.text
-                if not text or len(text.strip()) < 200:
-                    raise ValueError(f"suspiciously short output ({len(text or '')} chars)")
-                return text.strip()
-            except Exception as exc:
-                last_exc = exc
-                if attempt < max_retries - 1:
-                    wait = 2 ** attempt
-                    log.warning("%s attempt %d/%d failed: %s — retrying in %ds",
-                                m, attempt + 1, max_retries, exc, wait)
-                    time.sleep(wait)
-                else:
-                    log.warning("%s exhausted retries: %s", m, exc)
-        if fallback_model and m != fallback_model:
-            log.warning("Falling back to %s ...", fallback_model)
-
-    log.error("Gemini failed on all models: %s", last_exc)
-    sys.exit(1)
-
-
-def build_draft(collection: Collection, show_research: bool = False) -> str:
-    """Reporter pass -> writer pass -> style guardrails -> final markdown."""
-    payload = render_payload(collection)
-
+def run_reporter(collection: Collection, show_research: bool = False) -> str:
+    """Reporter pass: research the top story into a fact brief (reused by shorts)."""
     log.info("Reporter pass: researching the top story ...")
-    brief = _gemini(REPORTER_PROMPT, REPORTER_TASK.format(payload=payload), REPORTER_MODEL)
+    brief = _gemini(REPORTER_PROMPT,
+                    REPORTER_TASK.format(payload=render_payload(collection)),
+                    REPORTER_MODEL)
     if show_research:
         print("\n" + "=" * 70 + "\nRESEARCH BRIEF\n" + "=" * 70 + "\n" + brief)
+    return brief
 
+
+def build_draft(collection: Collection, brief: str) -> str:
+    """Writer pass -> style guardrails -> final newsletter markdown."""
     log.info("Writer pass: drafting the issue ...")
     draft = _gemini(
         WRITER_PROMPT,
-        WRITER_TASK.format(brief=brief, payload=payload),
+        WRITER_TASK.format(brief=brief, payload=render_payload(collection)),
         WRITER_MODEL, fallback_model=WRITER_FALLBACK_MODEL,
     )
-
     draft = strip_em_dashes(draft)
     slipped = find_fluff(draft)
     if slipped:
@@ -354,6 +306,8 @@ def main() -> int:
     p.add_argument("--show-research", action="store_true", help="also print the research brief")
     p.add_argument("--show-payload", action="store_true", help="also print the collected signal")
     p.add_argument("--collect-only", action="store_true", help="skip Gemini; show the raw collection")
+    p.add_argument("--no-shorts", action="store_true", help="newsletter only; skip the short-form script queue")
+    p.add_argument("--shorts-count", type=int, default=6, help="number of short-form scripts (default 6)")
     p.add_argument("--email", action="store_true", help="send the draft via Resend to NOTIFICATION_EMAIL")
     args = p.parse_args()
 
@@ -365,14 +319,25 @@ def main() -> int:
         if args.collect_only:
             return 0
 
-    draft = build_draft(collection, show_research=args.show_research)
+    brief = run_reporter(collection, show_research=args.show_research)
+    draft = build_draft(collection, brief)
 
     print("\n" + "=" * 70 + "\nDRAFT — Alex Prompts\n" + "=" * 70 + "\n")
     print(draft)
+
+    # Short-form queue feeds the discovery engine; reuses the same research brief.
+    # Lazy import: shorts.py imports from digest, so a top-level import would cycle.
+    shorts_md = ""
+    if not args.no_shorts:
+        from ai_news.shorts import build_shorts
+        shorts_md = build_shorts(collection, brief, count=args.shorts_count)
+        print("\n" + "=" * 70 + "\nSHORT-FORM QUEUE\n" + "=" * 70 + "\n")
+        print(shorts_md)
     print("\n" + "=" * 70)
 
     if args.email:
-        send_email(draft)
+        body = draft if not shorts_md else f"{draft}\n\n---\n\n# Short-form queue\n\n{shorts_md}"
+        send_email(body)
     else:
         log.info("Dry run. No email sent. Re-run with --email to send to %s", NOTIFICATION_EMAIL)
     return 0

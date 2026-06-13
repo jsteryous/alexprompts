@@ -17,11 +17,13 @@ reference only, nothing there runs on a schedule anymore.
 
 ```bash
 cd scripts
-python -m ai_news.digest                 # collect -> reporter -> writer, print draft
+python -m ai_news.digest                 # collect -> reporter -> writer -> shorts, print
 python -m ai_news.digest --show-research  # also print the research brief
 python -m ai_news.digest --collect-only   # just the sourced signal, no Gemini
-python -m ai_news.digest --email          # send the draft via Resend
+python -m ai_news.digest --no-shorts      # newsletter only, skip the short-form queue
+python -m ai_news.digest --email          # email newsletter + short-form queue via Resend
 python -m ai_news.digest --days 14        # widen the lookback window
+python -m ai_news.shorts --count 8        # short-form scripts only
 python -m unittest scripts.tests.test_ai_news -v
 ```
 
@@ -63,11 +65,26 @@ through. Top story is thorough (What we know / What is still unclear / Why it ma
 The other side); the rest go in a short "In other news" section. Faith content is NOT
 generated here — Alex writes any of that himself.
 
+### `shorts.py` — short-form script queue
+
+Short-form video is the **discovery engine** (TikTok/Shorts/Reels/X); the newsletter
+is the **capture**. `shorts.py` reuses the same collection + research brief (no extra
+reporter pass) and writes `--count` (default 6) shoot-ready scripts, so one weekly
+research pass becomes a week of posts. Primary format is **voiceover over b-roll/screen
+with some on-camera**, so scripts are spoken narration with `[VISUAL: ...]` cues. Each
+script: 4 hook options (first 3 seconds decide everything), a 15-45s spoken body that
+translates the jargon and ends on a discussion prompt, a varied newsletter CTA, visual
+cues, and a caption with hashtags. Same voice constitution as the newsletter, adapted
+to spoken short-form; same `strip_em_dashes` guardrail. `gemini-2.5-pro` (flash
+fallback). `digest.py` bundles the queue into the weekly run/email by default
+(`--no-shorts` to skip); `llm.py` holds the shared Gemini call helper both use.
+
 ### Email + automation
 
 `--email` renders the markdown to HTML (rendered + raw-markdown copy block, with a
 "verify every claim before sending" banner) and sends via **Resend** to
-`NOTIFICATION_EMAIL` (`jsteryous@gmail.com`).
+`NOTIFICATION_EMAIL` (`jsteryous@gmail.com`). The weekly email bundles the newsletter
+draft and the short-form queue in one message.
 
 **Resend deliverability:** the Resend account email is `alex@rebbadvisors.com`, so the
 shared `onboarding@resend.dev` sender can only reach *that* address. To deliver to the

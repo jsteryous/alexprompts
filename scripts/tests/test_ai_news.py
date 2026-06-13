@@ -20,7 +20,7 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
-from ai_news import collect, digest  # noqa: E402
+from ai_news import collect, digest, shorts  # noqa: E402
 from ai_news.collect import Story  # noqa: E402
 
 
@@ -191,6 +191,22 @@ class TestStyleGuardrails(unittest.TestCase):
 
     def test_first_headline_fallback(self):
         self.assertEqual(digest._first_headline("no h1 here"), "Alex Prompts — weekly draft")
+
+
+# ── short-form ────────────────────────────────────────────────────────────────
+
+class TestShorts(unittest.TestCase):
+    def test_prompt_interpolates_count(self):
+        self.assertIn("Produce 6 scripts", shorts.SHORTS_PROMPT.format(n=6))
+
+    def test_prompt_bans_em_dashes_and_format(self):
+        p = shorts.SHORTS_PROMPT.format(n=4)
+        self.assertIn("NO em dashes", p)
+        self.assertIn("[VISUAL:", p)
+        self.assertIn("voiceover", p.lower())
+
+    def test_build_shorts_is_callable(self):
+        self.assertTrue(callable(shorts.build_shorts))
 
 
 if __name__ == "__main__":
