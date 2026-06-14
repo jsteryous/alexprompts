@@ -262,7 +262,7 @@ export default async function HomePage() {
             </h2>
             <p className="theme-text-muted text-base md:text-lg leading-relaxed">
               This does not make every optimist right. It raises the bar for &ldquo;this time is
-              different.&rdquo; We keep the receipts.
+              different.&rdquo;
             </p>
           </div>
 
@@ -278,7 +278,7 @@ export default async function HomePage() {
               />
             </div>
             <figcaption className="theme-text-muted text-sm mt-3 leading-relaxed">
-              And the builders know it. Elon Musk on his own record. Direction is the easy part.
+              Elon Musk on his own record. Direction is the easy part.
               Timing is where almost everyone, optimist and skeptic alike, gets humbled.
             </figcaption>
           </figure>
