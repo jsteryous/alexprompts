@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { marked } from "marked";
+import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site, newsletterUrl } from "@/lib/site";
@@ -33,7 +34,10 @@ export default async function ArchivePost({ params }: Props) {
   const post = await getPost(slug);
   if (!post) notFound();
 
-  const bodyHtml = await marked(post.body_md ?? "");
+  // body_md is first-party (token-gated publish flow), but sanitize anyway:
+  // markdown issues never need raw <script>, and this blocks stored XSS if a
+  // blog_posts row is ever tampered with.
+  const bodyHtml = DOMPurify.sanitize(await marked(post.body_md ?? ""));
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
 
