@@ -31,31 +31,20 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6 theme-prose prose max-w-none">
           <h2>The problem</h2>
           <p>
-            The pace is the problem. Every week an AI lab ships something, a rocket flies, a
-            chip launches, a chart goes vertical. The coverage splits into two useless piles.
-            One says everything is a miracle. The other says everything is the end. Both are
-            easier to write than the truth, and both leave you with a feeling instead of an
-            understanding.
+            Confusion, fear, anxiety, & over-simplifications. "All work will be optional." "AI is going to change everything." "Start learning AI." All that is potentially true or good advice, but it doesn't help one understand why to take certain actions, or provide any grounding foundations for understanding the trajectory of the future.  
           </p>
 
           <h2>The stance</h2>
           <p>
-            Here is the bias I will be upfront about. The crowd is often wrong, and legacy
-            media is often most wrong of all. When the entire room agrees on something obvious
-            about technology, the opposite is frequently closer to the truth. People said the
-            internet was a fad. People said smartphones were toys. Today the consensus says AI
-            ends work. I think the more likely story is the one nobody is selling. New kinds of
-            jobs that do not exist yet, stronger economies, and demand for human work we cannot
-            picture from here.
+            We do agree with the quote from Alan Kay, "The best way to predict the future is to create it." Well, we aren't the ones creating the future. We're simply a part of it. But the people creating the future are often discussing what they're building, why they're building it, and they also frequently make predictions. We analyze those predictions, acknowledge counterpoints, and reason what opportunities there are for us to take advantage of or what risks we should avoid.
           </p>
           <p>
-            I hold that view loosely and honestly. It runs straight into the people actually
-            building this. Elon Musk says work will become optional. Dario Amodei warns about
+            Elon Musk says work will become optional. Dario Amodei warns about
             what happens to jobs. These are not pundits. They are the builders, and the surest
             way to predict the future is to build it, so I take them seriously. I just do not
             take them as settled. When someone says work will be optional, the right response is
-            not applause or panic. It is a better question. Optional for whom. On what timeline.
-            Paid how. That is the work {site.name} does.
+            not applause or panic. It is a better question. Optional for whom? On what timeline?
+            Paid how? That is the work {site.name} does.
           </p>
 
           <h2>The method</h2>
@@ -84,13 +73,11 @@ export default function AboutPage() {
           </p>
 
           <h2>What I cover</h2>
-          <p>{coverage.join(", ")}, and the others actually moving the frontier.</p>
+          <p>{coverage.join(", ")}, and how to reason strategically about the future.</p>
 
           <h2>How it works</h2>
           <p>
-            Short clips during the week on the platforms you already scroll. The full story
-            lands in your inbox once a week. The newsletter is free. The clips are how you find
-            me. The inbox is how you go deep.
+            Always free content. We appreciate any and all support. We especially appreciate you joining the discussion.
           </p>
         </div>
       </section>
@@ -98,7 +85,7 @@ export default function AboutPage() {
       <section className="theme-section-contrast py-20">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-4">
-            Come argue about the future.
+            Prompt the future. Pontificate with us.
           </h2>
           <p className="theme-text-contrast-muted mb-8 leading-relaxed">
             Subscribe for the weekly issue, or follow the clips wherever you watch.

@@ -1,0 +1,1550 @@
+<!DOCTYPE html><html lang="en"><head>
+  	<base href="https://viewer.greenvillecounty.org/countyweb/search/InstrumentImageViewInternal.jsp"><title>Document Number: 2023015317</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="">
+    <meta http-equiv="description" content="">
+    
+    <!------------------- START STYLE SHEETS -------------------->
+
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/styles.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/Greenville/countystyles.css?ver=1">
+<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/easyui.css?ver=6">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/fontawesome/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/imageviewer/cropper.css?ver=1">
+
+	<style type="text/css">
+
+	<!--
+		a:hover {
+			font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color:#903326; text-decoration:underline
+		}
+		#imageHolder {
+			position:absolute; top:0px; left:0px; width:100%; height:100%;
+		}
+		#noimage {
+			position:absolute; top:0px; left:0px; width:100%; height:400px; text-align:center
+		}
+		#docImgView {
+			position:absolute; top:0px; left:730px; width:300px; height:330px; visibility:hidden
+		}
+		#printstatus {position:absolute; left:0px; top:0px; visibility:hidden}
+		#tabbar {position:absolute; left:0px; top:0px; height:30px; width:width:300px; text-align:right;}
+		#dialog {position:absolute; width:400px; height:150px;visibility:hidden;border-style:outset; border-width:3px; background-color:#cccccc; filter:progid:DXImageTransform.Microsoft.Fade(duration=0.5) }
+		#disablediv {position:absolute; left:0px; top:0px; width:100%; height:100%; visibility:hidden; opacity:0.7; filter:alpha(opacity=70) progid:DXImageTransform.Microsoft.Fade(duration=0.5); background-color:#666666}
+		.msg3 { font-size: 18px; }		
+		
+		.invert {
+			-webkit-filter: invert(1);
+			filter: invert(1);
+		}
+		.hHeight { height:42px}
+		
+		.hTTHeight { height:12px}
+
+		.panel-icon, .panel-tool {
+			height: 30px;
+		}
+		.panel-tool a{
+			height: 22px;
+			width: 22px;
+		}
+		
+		.panel-icon, .panel-tool {
+			position: static;
+		}
+		
+		.panel-icon, .panel-tool {
+			margin-top: -14px;
+		}
+		.panel-footer {
+			height:40px;
+			padding-top:2px;
+			padding-left:4px;
+		}
+		.fa {
+			color: #0070a9;
+		}
+		.l-btn:hover {
+			color: #0070a9;
+		}
+		.image {
+			background: #ffffff;
+			-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 6px,
+			rgba(0, 0, 0, 0.2) 0 1px 4px;
+			box-shadow: 0px 1px 6px rgba(0,0,0,0.2), 0px 1px 4px rgba(0,0,0,0.2);
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-flex: 1;
+			flex: 1;
+			overflow: hidden;
+			position: relative;
+			width: 100%;
+		}
+		.fa.fa-pull-right {
+			margin-left: 0.15em;
+		}
+		.fa-thumb-left:before {
+  			content: "\f142\00A0";
+		}
+		.fa-thumb-left:after {
+  			content: "\f016";
+		}
+		.fa-thumb-right:before {
+  			content: "\f016\00A0";
+		}
+		.fa-thumb-right:after {
+  			content: "\f142";
+		}
+		.fa-thumb-top:before {
+  			content: "\00A0\f141\A";
+		}
+		.fa-thumb-top:after {
+  			content: "\f016";
+		}
+		.fa-thumb-bottom:before {
+  			content: "\00A0\f016\A";
+		}
+		.fa-thumb-bottom:after {
+  			content: "\f141";
+		}
+		.fa-actual-size:before {
+  			content: "\0031\003A\A";
+		}
+		.fa-question {
+			padding-left:2px;
+		}
+		.thumbTop {
+			top: 5px;
+		}
+		.thumbBottom {
+			top: 9px;
+		}
+		.thumbLeft, .thumbRight {
+		    font: normal normal normal 12px/1 FontAwesome;
+		    top: 13px;
+    	}
+    	.datagrid-row {
+  			background: #e2e2e2;
+    	}
+		.datagrid-row-over {
+    		background: #808080;
+		}
+		.datagrid-row-selected {
+  			background: #0092DC;
+  			color: #000000;
+		}    	
+		
+		.cropper-bg {
+    		background-image: none;
+    		background-color: #e2e2e2;
+    	}
+
+		.center {
+			display: block;
+  			margin-left: auto;
+  			margin-right: auto;
+  			width: 50%;
+  		}
+  		
+		.buttonsize {
+			width:26px;
+			height:26px;
+			padding-top:2px;
+		}
+		
+		.buttonspacer {
+			width:2px;
+		}
+  		
+		@media only screen and (max-width: 700px) {
+			.fa-lg {
+				font-size: 1.0em;
+  			}
+  			.fa.fa-pull-right {
+				margin-left: -0.125em;
+			}
+			.fa-question {
+				padding-left:0px;
+			}
+			.fa-move-left4 {
+				margin-left:-4px;
+			}
+			.fa-move-left3 {
+				margin-left:-3px;
+			}
+			.fa-move-left2 {
+				margin-left:-2px;
+			}
+			.fa-move-left1 {
+				margin-left:-1px;
+			}
+  			.buttonsize {
+  				width:20px;
+  				height:20px;
+				padding-top:0px;
+				padding-left:0px  				
+  			}
+			.buttonspacer {
+				width:0px;
+			}
+   		}
+
+	-->
+	
+	</style>
+
+    <!-------------------- END STYLE SHEETS --------------------->
+
+
+    <!-------------------- START JAVASCRIPT --------------------->
+
+    <script src="/countyweb/scripts/utils.js?ver=9"></script>
+	<script src="/countyweb/scripts/validate.js?ver=2"></script>
+	<script src="/countyweb/scripts/dhtml.js?ver=2"></script>
+	<script src="/countyweb/scripts/dialog.js?ver=6"></script>
+	<script src="/countyweb/scripts/jquery/jquery-3.6.3.min.js"></script>	
+	<script src="/countyweb/scripts/jquery/easyui/jquery.easyui.min.js"></script>
+	<script src="/countyweb/scripts/jquery/jquery.scrollstop.min.js?ver=2"></script>
+	<script src="/countyweb/scripts/ScrollWatch-2.0.1.js?ver=1"></script>
+	<script src="/countyweb/scripts/jquery/imageviewer/cropper.js?ver=1"></script>
+	<script src="/countyweb/scripts/json2.js?ver=2"></script>
+    <script src="/countyweb/scripts/secondaryWindow.js?ver=4"></script>
+
+    <script language="JavaScript" type="text/javascript">
+
+	//===============================================
+    //===============================================
+
+	var		inPrint = false;
+	var		imgArray = new Array();
+	var		curImage = 0;
+	var		viewerLoaded = false;		
+	var 	currPage = 1;
+	var		ready = 0;
+	var		gotoPageOnNextResize = false;
+
+    function hideProgress() {
+    	window.opener.progressWin.close();
+    }
+
+	function receiveMessage(event){
+		let sizeDeviation = localStorage.getItem("sizeDeviation");
+		if (!sizeDeviation && event.key === 'imgViewerWindowPosition') {
+			let windowNewPositions = event.newValue.split("|");
+			sizeDeviation =(windowNewPositions[0] - window.localStorage.getItem('firstScreenX'))+ '|'+ (windowNewPositions[1] - window.localStorage.getItem('firstScreenY'));
+			localStorage.setItem( "sizeDeviation", sizeDeviation)
+		}
+	}
+
+	window.addEventListener("storage", receiveMessage, false)
+
+
+    function handleResize () {
+		
+		if (ready < 2) {
+			return;
+		}
+
+	    var     height;
+	    var		width;
+	    var		initLoad = false;
+	    
+	    if (arguments.length > 0 && arguments[0] == true)
+	    	initLoad = true;
+	    	
+	    height = $(this).height();
+	    width = $(this).width();
+
+	    if (height < 40) {
+	    	height = 40;
+	    	if (initLoad) {
+	    		gotoPageOnNextResize = true;
+	    	}
+	    }
+	    if (width < 10) {
+	    	width = 10;
+	    	if (initLoad) {
+	    		gotoPageOnNextResize = true;
+	    	}
+	    }
+	    
+		if (document.getElementById ("imageHolder") != null)
+			document.getElementById ("imageHolder").style.width = width;
+	    
+		if (initLoad || true) {	    
+			if (document.getElementById ("imageHolder") != null) {
+				document.getElementById ("imageHolder").style.height = height - 0;
+				if (false) {
+					document.getElementById ("imageHolder").style.top = 30;
+				}
+			}
+		}			
+
+
+
+		if (document.getElementById ("noimage") != null) {
+			document.getElementById ("noimage").style.width = width;
+			document.getElementById ("noimage").style.height = height - 6;
+		}
+
+		if (document.getElementById ("dialog") != null && document.getElementById ("dialog").style != null) {
+		    document.getElementById ("dialog").style.top = Math.max (0, (height / 2) - (document.getElementById ("dialog").style.width/2));
+		    document.getElementById ("dialog").style.left = Math.max (0, (width / 2) - (document.getElementById ("dialog").style.height/2));
+			document.getElementById ("disablediv").style.width = width;
+		}
+		
+		$("#imagePanel").panel('resize', {height:height});
+		
+		if (! initLoad && gotoPageOnNextResize) {
+			gotoPageOnNextResize = false;
+			goToPage(pageNumber);
+		}
+	}
+	
+	function setImageWindow(iWnd) {
+   		parent.setImageWindow(iWnd);
+   	}
+	
+	function getImageWindow() {
+   		return parent.getImageWindow();
+   	}
+
+	function jumpToBaseImageViewer () {
+		parent.showBaseImageViewer ();
+	}
+
+	function viewBaseImage () {
+		parent.showImage(true);
+	}
+
+	function showAltImage (code, ct, pagect) {
+		parent.showAltImage (code, ct, pagect, true);
+	}
+	
+	function showSelectedPagesMessage() {
+		parent.showSelectedPagesMessage();
+	}
+	
+	function downloadDocImage(instrId, pdfformat, pages, printopt, isPreview) {
+		if (window.self !== window.top) {	//page in iframe
+			parent.downloadDocImage(instrId, pdfformat, pages, printopt, isPreview);
+		}
+		else {
+			downloadDocImageEx(instrId, pdfformat, pages, printopt, isPreview);
+		}
+	}
+	
+    function downloadDocImageEx(instrId, pdf, pages, printopt, isPreview) {
+		var	redacted = curImage == 0;
+		var uuid = "directDownload";
+		var messageObj;
+		
+		$.ajax({
+			url: "/countyweb/search/startLongDownloadWatch.do",
+			type: "POST",
+			dataType: "json",
+			data: {id: uuid},
+			success: function(data) {
+				if (data.showMessage) {
+					messageObj = $.messager.alert({
+						title: "Processing Download",
+						msg: "This file is being processed for downloading. Depending on the size of the file, processing may take up to several minutes. You may continue working while the file processes. Please do not log out until the download is complete.",
+						icon: "info",
+						height: 'auto',
+						width: 550
+					});
+				}
+			}
+		});
+			
+		var goUrl = "/countyweb/download/downloadImages.do?cmd=download&isPreview=" + isPreview + "&instrId=" + instrId + "&pdfformat=" + pdf + "&printopt=" + printopt + "&pages=" + pages + "&redacted=" + redacted + "&uuid=" + uuid;
+		window.frames["dlframe"].location = goUrl;
+	}
+	
+	function printImage (cmd, data, printer, forcePrintWM) {
+		if (forcePrintWM == null) {
+			forcePrintWM = !false;
+		}
+		if (false) {
+			printImageService(cmd, data, printer, forcePrintWM, false);
+		}
+	}	
+	
+	function printImageService(cmd, data, printer, forcePrintWM, hasSeparator) {
+		// TODO: Do we need to handle cmd == "printvisible" and/or cmd == "printpage" && printTransform using currPage ??
+		var redacted = 	true;		
+		if (curImage == 0) {
+			redacted = true;
+		} else {
+			redacted = false;
+		}
+		
+		var printVisible = null;
+		if (cmd == "printvisible") {
+			printVisible = getPrintVisibleData();
+		}
+		
+		// set source to printstatus frame - track prints
+		var		src = "/countyweb/print/printAudit.do?instId=4322641&printopt=" + cmd + "&printdata=" + data + "&redacted=" + redacted + "&forcePrintWM=" + forcePrintWM + "&hasSeparator=" + hasSeparator;
+		window.frames["statusframe"].location = src;
+		
+		var		printSvc = "/countyweb/print/printService.do?cmd=printImage&instId=4322641&printer=" + printer +  
+							"&printopt=" + cmd + "&printdata=" + data + "&redacted=" + redacted + "&forcePrintWM=" + forcePrintWM + "&hasSeparator=" + hasSeparator;
+		if (printVisible != null)
+			printSvc += "&printVisible=" + printVisible;						
+		window.frames["printSvcFrame"].location = printSvc;
+	}
+	
+	function getPage () {
+
+		return pageNumber;
+	}
+
+	function getSelectedPages () {
+		if (selectedPages.length > 0)
+			return selectedPages.sort(function(a, b){return a-b}).toString();
+		return "";
+	}
+
+	function getNumPages () {
+
+		return maxPageNumber;
+	}
+	
+	function getPrintVisibleData () {
+	
+		var printVisible = null;
+		if (cropper != null && $("#toolBarButtons").is(":visible")) {
+			var invert = isInvert();
+			var cropData = cropper.getData(true);
+			if (cropData.width > 0 && cropData.height > 0) {
+				var imageData = cropper.getImageData();
+				var canvasData = cropper.getCanvasData();
+				var rotate = 0;
+				if (imageData.rotate)
+					rotate = imageData.rotate;
+				printVisible = cropData.x + "," + cropData.y + "," + cropData.width + "," + cropData.height + "," + canvasData.naturalWidth + "," + canvasData.naturalHeight + "," + rotate + "," + invert;
+			}
+		}
+		return printVisible;
+	}
+	
+	function setPage (page) {
+
+		if (page > getNumPages ())
+			page = getNumPages ();
+			
+		if (thumbnailsLoaded)
+	    	$('#thumbnails').datalist("selectRow", page-1);
+		else
+			goToPage(page);
+	}
+	
+	function authenticationComplete (pass, authorized) {
+
+		hideDialog ();
+		
+		if (! authorized)
+			showUnauthorized ();
+		else if (pass) {
+			document.getElementById ("imageHolder").style.display = "";
+			if (thumbnailsLoaded)
+		    	$('#thumbnails').datalist("selectRow", 0);
+			else
+				goToPage(1, true);
+		}
+	}
+	
+	
+	function showAuthentication () {
+		
+		initDialog();
+		showDialog(true, "../authenticate.jsp?instrid=4322641&width=400", "Authentication Required", 400, 150);
+	}
+
+	function activateAuthentication () {
+		window.frames["dialogframe"].setFocus ();
+	}
+
+	function showUnauthorized () {
+		document.getElementById ("unauthorized").style.display= "";
+	}
+	
+	
+	function handleOnLoad () {
+		loaded();
+	}
+
+	function loaded() {
+    	ready++;
+    	
+    	// make sure both onLoad and .ready have been called
+    	if (ready < 2)
+    		return;
+    	
+        if (window.frameElement === null) {
+            window.localStorage.setItem("imgViewerWindowPosition",window.screenX + '|' + window.screenY + '|'+window.innerWidth + '|' + window.innerHeight)
+        }
+
+		handleResize (true);
+
+
+
+		$(this).bind("contextmenu", function(e) {
+       	e.preventDefault();
+       }); 
+       
+
+				goToPage(1);
+			
+			var imageWindow = getImageWindow();
+				
+			if (imageWindow != null && !imageWindow.closed) {
+				openImageInWindow('1000', '744', "/countyweb", "searchSessionId=searchJobMain&instId=4322641&instNum=2023015317&instType=MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();",'WEB', 'JxBrowser');
+			}
+				
+	}
+	
+    $(document).ready(loaded);
+
+	function isPrinting () {
+
+		if (false)
+			return inPrint;
+
+		return false;
+	}
+	
+<!-- The open/close Secondary Window js code has been moved to secondaryWindow.js file #57800 us -->
+
+	window.onresize = handleResize;
+
+    </script>
+    <!--------------------- END JAVASCRIPT intimage view ---------------------->
+
+  	</head>
+
+  	<body onload="handleOnLoad();" class="base">
+
+<div id="imageHolder" class="panel-noscroll">
+				<!--------------------- BEGIN JAVASCRIPT Viewer ---------------------->
+
+    <script language="JavaScript" type="text/javascript">
+		var cropper = null;
+		var cropperReady = false;
+		var originalImage = {};
+		var originalHeightScale = 1.0;
+		var originalWidthScale = 1.0;
+		var isOriginalPortrait = true;
+		var thumbnailsLoaded = false;
+		var viewScale = "ftow";
+		var isInit = true;
+		const minZoomRatio = 4;
+		var lastMousePosition = {x: 0, y: 0};
+		var requestedPages = [];
+		var selectedPages = [];
+		var pageNumber = 0;
+		var maxPageNumber = 0;
+		var pageNumParamStr = "";
+		//61955
+		var saveZoom = "false";
+		saveZoom = (saveZoom === "true");
+		var saveZoomRatio = "0.0|0.0";
+		if(saveZoomRatio){
+			saveZoomRatio = $.map(saveZoomRatio.split('|', 2), function(value){
+				return (typeof value == 'number') ? parseFloat(value, 10) : value;
+			});
+			saveZoomRatio = (saveZoomRatio.length == 1) ? [saveZoomRatio,0.0] : saveZoomRatio; 
+		}else{
+			saveZoomRatio = [0.0,0.0];
+		}
+		
+		localStorage.setObj("saveZoomRatio", saveZoomRatio);
+		
+		var saveZoomRatioOld = [0.01,0.01];
+		var isSecondary = "null";
+		isSecondary = (isSecondary === "true");
+		
+		var dataListJSON = [
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+	
+			{"text":"<div style='text-align:center'><img src='/countyweb/images/loading-bar.gif' width='80px'></div>"},
+
+		];
+		
+		$(document).ready(function() {	
+			$("#pageNumber").textbox("textbox").bind("keypress", function(event){
+				return validateNumberInput(event);
+			});
+			
+			$("#toolBar").on("click", function() {
+				$(window).focus();
+			});
+			$("#imagePanel").on("click", function() {
+				$(window).focus();
+			});
+			
+			 $(document).bind("keydown", function(event){
+      			if(event.keyCode == 33){
+      				event.preventDefault();
+      				previousPage();
+        		}
+      			else if(event.keyCode == 34){
+      				event.preventDefault();
+      				nextPage();
+        		}
+      			else if(event.keyCode == 35){
+      				event.preventDefault();
+      				lastPage();
+        		}
+      			else if(event.keyCode == 36){
+      				event.preventDefault();
+      				firstPage();
+        		}
+      			else if(event.keyCode == 37){
+      				event.preventDefault();
+					if (cropper != null)
+	      				cropper.move(10,0);
+        		}
+      			else if(event.keyCode == 38){
+      				event.preventDefault();
+					if (cropper != null)
+	      				cropper.move(0,10);
+        		}
+      			else if(event.keyCode == 39){
+      				event.preventDefault();
+					if (cropper != null)
+      				cropper.move(-10, 0);
+	        		}
+      			else if(event.keyCode == 40){
+      				event.preventDefault();
+      				if (cropper != null)
+      					cropper.move(0, -10);
+        		}
+        		else if(event.keyCode == 87){	// "w" - open in new window
+        		
+      					event.preventDefault();
+      					openImageInWindow('1000', '744', "/countyweb", "searchSessionId=searchJobMain&instId=4322641&instNum=2023015317&instType=MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();",'WEB', 'JxBrowser');
+      					
+        		}
+      			else if(event.keyCode == 83){	// "s" - toggle select page
+      			
+						if (getPrintVisibleData() == null) {
+      						event.preventDefault();
+      						addSelectedPage();
+      					}
+      					
+        		}
+      			else if(event.keyCode == 67){	// "c" - clear all selected pages
+      			
+						if (getPrintVisibleData() == null) {
+	      					event.preventDefault();
+    	  					clearAllSelectedPages();
+    	  				}
+      					
+        		}
+			});			
+			
+
+				setViewMode("fullpage");
+
+
+			if (isIE() || isIE9() ||  isIE10Plus()) {
+				$("#invertButton").hide();
+			}
+			
+			try {
+				$("#help").tooltip({
+	                content: $("<div></div>"),
+	                showEvent: "mouseover",
+	                onUpdate: function(content){
+	                    content.panel({
+	                        width: $("#helpTable").width(),
+	                        border: false,
+	                        title: "Keyboard Shortcuts",
+	                        content: $("#helpContent").html(),
+	                        headerCls: "hTTHeight"
+	                    });
+	                },
+	                onShow: function(){
+	                    var t = $(this);
+	                    t.tooltip("tip").unbind().bind("mouseenter", function(){
+	                        t.tooltip("show");
+	                    }).bind("mouseleave", function(){
+	                        t.tooltip("hide");
+	                    });
+	                }
+	            });
+	       	} catch (error) {}		
+			
+			isInit = false;
+			$(window).focus();			
+  		});
+  		
+  		function initScrollWatcher() {
+ 			if ($(".datalist").length) {
+				var scrollWatch;
+				var thumbList = [];
+				var loaded = [];
+				$(".datagrid-body").bind("scrollstop", {latency: 250}, function() {
+					thumbList.length = 0;
+					scrollWatch = new ScrollWatch({
+						container: ".datalist",
+						watch: ".datagrid-row",
+						watchOnce: true,
+						onElementInView: function(data) {
+							 var toLoad = data.el.getAttribute("datagrid-row-index");
+							 try {
+								 if (! loaded.includes(toLoad)) {
+								 	thumbList[thumbList.length] = toLoad;
+								 	loaded[loaded.length] = toLoad;
+								}
+							 } catch(e) {
+							   let fnd = false;
+							   for (let xx = 0; xx < loaded.length; xx++) {
+									let ld = loaded[xx];
+									if (ls === toLoad) {
+	                     				fnd = true;
+	                     				break;
+	                   				}
+	                 			}
+	                 			if (!fnd)
+								    thumbList[thumbList.length] = toLoad;
+							 }
+						}
+					});
+				
+					scrollWatch.destroy();
+					if (thumbList.length > 0) {
+						thumbList.sort(function(a, b){return a-b});
+					    $.ajax({
+						    url: "/countyweb/imageViewer/getThumbnails.do",
+						    type: "GET",
+						    dataType: "json",
+						    data: {startPage: thumbList[0], endPage: (parseInt(thumbList[thumbList.length-1], 10)+1).toString(), isPreview: false, instnum: "4322641", pageNumber: pageNumParamStr},
+						    success: function (data) {
+						    	renderThumbnails(parseInt(thumbList[0], 10), parseInt(thumbList[thumbList.length-1], 10)+1);
+		   					},
+		   					async: false
+						});
+					}
+				});
+			}
+  		}
+
+		function handleReturn() {
+			if ($("#pageNumber").textbox("getValue") != "") {
+				var pageNum = parseInt($("#pageNumber").textbox("getValue"), 10);
+				if (pageNum > 0 && pageNum <= maxPageNumber) {
+					if (thumbnailsLoaded)
+				    	$('#thumbnails').datalist("selectRow", pageNum-1);
+				    else
+	    				goToPage(pageNum);
+	    		}			
+			}
+		}		
+		
+		//Start 61955
+		function setZoomRatio(latter){
+			if(cropper && saveZoom){
+		     var imgData = cropper.getImageData();
+		     var lsSaveZoomRatio = localStorage.getObj("saveZoomRatio");
+		     if(isSecondary){
+		    	 lsSaveZoomRatio[1] = latter ? latter: imgData.width / imgData.naturalWidth;
+		     }else{
+		    	 lsSaveZoomRatio[0] = latter ? latter: imgData.width / imgData.naturalWidth;
+		     }
+		     localStorage.setObj("saveZoomRatio", lsSaveZoomRatio);
+			 if(!compareArrays(saveZoomRatioOld, localStorage.getObj("saveZoomRatio"))){
+		   	    $.ajax({
+				    url: "/countyweb/user/saveImageViewerZoomAction.do",
+				    type: "POST",
+				    dataType: "text",
+				    data: "zoom=" + localStorage.getObj("saveZoomRatio").join("|")
+			        });
+		   	    saveZoomRatioOld = localStorage.getObj("saveZoomRatio").slice();
+			 }
+			}  
+		}
+		//End 61955
+
+		function fitInViewer(byWidth, isZoomSaved) {
+			if (cropper == null)
+				return;
+			var canvasData = cropper.getCanvasData();
+			var rect = cropper.getContainerData();
+			
+			if (canvasData.width && rect.width) {
+				var imageScale = 0.0;
+	
+				if (byWidth) {
+					imageScale = rect.width / canvasData.naturalWidth;
+				}
+				else {
+					imageScale = rect.height / canvasData.naturalHeight;
+				}
+				
+				//61955
+				if(!isZoomSaved && saveZoom){
+					let data = localStorage.getObj("saveZoomRatio")[0];
+					if(isSecondary){
+						data = localStorage.getObj("saveZoomRatio")[1];
+					}
+					switch (data){
+						case 'A':{
+							actualSize()
+							break;
+						}
+						case 'Win':{
+							fitWindow();
+							break;
+						}
+						case 'W':
+						case 'H':{
+							cropper.zoomTo(imageScale);
+							break;
+						}
+						default:{
+							cropper.zoomTo(data==0 ? imageScale: data);
+							break;
+						}
+					}
+				}else {
+					cropper.zoomTo(imageScale);
+				}
+				    canvasData = cropper.getCanvasData();
+				
+				    var x = 0;
+				    var y = 0;
+				
+				    if (rect.width > canvasData.width)
+					   x = (rect.width - canvasData.width) / 2;
+				
+				    if (rect.height > canvasData.height)
+					   y = (rect.height - canvasData.height) / 2;
+
+					//61955
+					var saveZoomR = isSecondary ? localStorage.getObj("saveZoomRatio")[1] : localStorage.getObj("saveZoomRatio")[0];
+					if(saveZoom && saveZoomR !=0 ) { //for vertical center
+						cropper.moveTo( x, y );
+					}else {
+						cropper.moveTo(byWidth ? 0 : x, byWidth ? y : 0);
+					}
+				    if (byWidth)
+					   viewScale = "ftow";
+				    else
+					   viewScale = "ftoh";
+				//61955
+				    if(isZoomSaved){
+				        setZoomRatio(byWidth ? 'W' : 'H');
+					}
+
+			}
+		}
+		
+		function fitWindow() {
+			if (cropper != null) {
+				cropper.reset();
+				viewScale = "ftoh";
+				//61955
+			    setZoomRatio('Win');
+			}
+		}			
+		
+		function actualSize(val) {
+			if (cropper != null) {
+				var rect = cropper.getContainerData();
+				cropper.zoomTo(1, {
+					x: rect.width / 2,
+					y: rect.height / 2,
+				});
+				
+				//61955
+			    setZoomRatio('A');
+			}		
+		}
+		
+		function rotateCW() {
+			if (cropper != null) {
+				cropper.rotate(90);
+				fitInViewer(viewScale == "ftow" ? true : false);
+			}				
+		}
+		
+		function rotateCCW() {
+			if (cropper != null) {
+				cropper.rotate(-90);
+				fitInViewer(viewScale == "ftow" ? true : false);
+			}				
+		}
+		
+		function invert() {
+			if (cropper != null) {
+				if ($(".cropper-canvas").hasClass("invert")) {
+					$(".cropper-canvas").removeClass("invert");
+				}
+				else {
+					$(".cropper-canvas").addClass("invert");
+				}
+			}
+		}
+		
+		function isInvert() {
+			var ret = false;
+			if (cropper != null && $(".cropper-canvas").hasClass("invert"))
+				ret = true;
+			return ret;
+		}
+
+		function zoomIn() {
+			if (cropper != null){
+				cropper.zoom(0.1);
+				//61955
+				setZoomRatio();
+			}
+		}
+		
+		function zoomOut() {
+			if (cropper != null){
+				cropper.zoom(-0.1);
+				//61955
+				setZoomRatio();			
+			}	
+		}
+		
+		function nextPage() {
+			if (pageNumber == maxPageNumber)
+				return;
+			if (thumbnailsLoaded)
+		    	$('#thumbnails').datalist("selectRow", pageNumber);
+		    else
+    			goToPage(pageNumber+1);			
+		}
+
+		function previousPage() {
+			if (pageNumber == 1)
+				return;
+			if (thumbnailsLoaded)
+	    		$('#thumbnails').datalist("selectRow", pageNumber-2);
+	    	else
+				goToPage(pageNumber-1);			
+		}
+
+		function firstPage() {
+			if (thumbnailsLoaded) {
+		    	$('#thumbnails').datalist("scrollTo", 0);
+		    	$('#thumbnails').datalist("selectRow", 0);
+		    }
+		    else
+				goToPage(1);			
+		}
+
+		function lastPage() {
+			if (thumbnailsLoaded) {
+				var lPage = maxPageNumber-1;
+		    	$('#thumbnails').datalist("scrollTo", lPage);
+		    	$('#thumbnails').datalist("selectRow", lPage);
+		    }
+			else
+				goToPage(maxPageNumber);
+		}
+		
+		function goToPage(page) {
+		    if (arguments.length == 1) {
+				if (pageNumber == page)
+					return;
+			}		
+			if (requestedPages.length == 0)
+				requestedPages[0] = page;
+			else if (requestedPages[0] != page)
+				requestedPages[1] = page;
+
+			if (requestedPages.length == 2)
+				return;
+
+			pageNumber = page;
+			
+			pageNumParamStr = page + (curImage == 1 ? "N" : "");
+			
+			if (cropper != null) {
+				cropper.destroy();
+				cropper = null;
+			}
+			$("#mainCropperImage")[0].style.visibility = "hidden";
+			$("#loadingImage")[0].style.visibility = "visible";
+		    $.ajax({
+			    url: "/countyweb/imageViewer/getPage.do",
+			    type: "GET",
+			    dataType: "json",
+			    data: {addWatermarks: false, isPreview: false, instnum: "4322641", pageNumber: pageNumParamStr},
+			    success: function (data) {
+			    	if (data.status == "success") {
+						loadImage(data.pagePath);
+						updatePageNumber();
+						setTotalPageNumber(data.numberOfPages);
+						if (! thumbnailsLoaded) {
+							initScrollWatcher();				
+							$("#thumbnails").datalist("loadData", dataListJSON);
+						}
+   					}
+   					else {
+   						$("#mainCropperImage")[0].src = "/countyweb/images/cannot_display_page.gif";
+   						$("#mainCropperImage")[0].style.visibility = "visible";
+   						$("#loadingImage")[0].style.visibility = "hidden";
+						updatePageNumber();
+						setTotalPageNumber(dataListJSON.length);
+						if (! thumbnailsLoaded) {
+							initScrollWatcher();				
+							$("#thumbnails").datalist("loadData", dataListJSON);
+						}
+						if (requestedPages.length > 0)
+   							requestedPages.splice(0, 1);
+						if (requestedPages.length > 0)
+							goToPage(requestedPages[0]);
+   					}
+   				},
+			    error: function () {
+					$("#mainCropperImage")[0].src = "/countyweb/images/cannot_display_page.gif";
+  					$("#mainCropperImage")[0].style.visibility = "visible";
+  					$("#loadingImage")[0].style.visibility = "hidden";
+			    },
+   				async: true
+			});
+
+			$("#selectedPageId").text(pageNumber);
+			
+			
+				var selectedIndex = $.inArray(pageNumber, selectedPages);
+				if (selectedIndex > -1)
+					$("#selectedPageId").css("background-color", "#ffff00");		
+				else
+					$("#selectedPageId").css("background-color", "#fafafa");
+	
+
+		}
+		
+		function setCursor(obj, over) {
+			obj.style.cursor = over ? "pointer" : "default";
+		}
+		
+
+		function setTotalPageNumber(pages) {
+			maxPageNumber = pages;
+			$("#totalPages").html("&nbsp;of " + maxPageNumber + "&nbsp;");
+			if (maxPageNumber > 1) {
+				$("#gotoPageIcon").html("<span onclick='handleReturn();return false;' onmouseover='setCursor(this, true)' onmouseout='setCursor(this, false)'><i class='fa fa-play-circle fa-fw fa-lg fa-welcome-icon' aria-hidden='true'></i></span>");
+				$("#gotoPageIcon").show();
+			}
+			else
+				$("#gotoPageIcon").hide();
+		}
+		
+		function updatePageNumber() {
+			$("#pageNumber").textbox("setValue", pageNumber);
+		}
+		
+		function validateNumberInput(evt) {
+			var validChars = "0123456789,";
+			return validateKeyInput(evt, validChars);
+		}
+
+		function validateKeyInput(evt, validChars) {
+
+			var key, keychar;
+
+			key = getkey(evt);
+			
+			// get character
+			keychar = String.fromCharCode(key);
+
+			// check goodkeys
+			if (validChars.indexOf(keychar) != -1)
+				return true;
+
+			// control keys
+			if (key == null || key == 0 || key == 8 || key == 9 || key == 13 || key == 27)
+				return true;
+
+			// else return false
+			return false;
+		}
+
+		function getkey(evt) {
+			if (window.event)
+				return window.event.keyCode;
+			else if (evt)
+				return evt.which;
+			else
+				return null;
+		}
+		
+		function loadImage(imgPath) {
+			var imgSrc = "https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do?ver=" + Date.now() + Math.floor(Math.random()*1000) + "&instnum=4322641&isPreview=false&;jsessionid=DBAAEAC84AF1B4FC5929B68C082A5BF3";
+			var newImg = new Image();
+			newImg.onload = function() {
+				originalImage.height = newImg.height;
+				originalImage.width = newImg.width;
+				isOriginalPortrait = originalImage.height > originalImage.width;
+				$("#mainCropperImage")[0].style.visibility = "hidden";
+				$("#loadingImage")[0].style.visibility = "visible";
+				var image = $("#mainCropperImage")[0];
+				image.src = "";
+				cropperReady = false;
+				if (cropper != null) {	// make sure old one is gone
+					cropper.destroy();
+					cropper = null;
+				}
+				cropper = new Cropper(image, {
+					autoCrop: false,
+					autoCropArea: .5,
+					viewMode: 1,
+					dragMode: "move",
+					toggleDragModeOnDblclick: false,
+					guides: false,
+					ready: function () {
+						cropperReady = true;
+						fitInViewer((isSecondary && saveZoomRatio[1]=='H') || (!isSecondary && saveZoomRatio[0]=='H')? false : true);
+   						$("#mainCropperImage")[0].style.visibility = "visible";
+   						$("#loadingImage")[0].style.visibility = "hidden";
+					},
+					cropstart: function(event) {
+						if (!cropperReady)
+							return;
+						if (isIE() || isIE9() || isIE10Plus()) {
+							lastMousePosition.x = event.detail.originalEvent.clientX;
+							lastMousePosition.y = event.detail.originalEvent.clientY;
+						}
+					},
+					cropmove: function(event) {
+						if (!cropperReady)
+							return;
+						if (event.detail.action == "move") {
+							var moveToContainerEdge = false;
+							var deltaX = 0;
+							var deltaY = 0;
+							
+							// handle IE limitations detecting mousemove delta
+							if (isIE() || isIE9() || isIE10Plus()) {
+								deltaX = lastMousePosition.x - event.detail.originalEvent.clientX > 0 ? -1 : 1;
+								deltaY = lastMousePosition.y - event.detail.originalEvent.clientY > 0 ? -1 : 1;
+							}
+							else {
+								deltaX = event.detail.originalEvent.movementX > 0 ? 1 : -1;
+								deltaY = event.detail.originalEvent.movementY > 0 ? 1 : -1;
+							}
+							
+							var canvasData = cropper.getCanvasData();
+						    var containerData = cropper.getContainerData();
+						    
+							var moveToX = canvasData.left;
+							var moveToY = canvasData.top;
+							
+						   	if (deltaY > 0 && canvasData.top > 0) {
+						   		moveToY =  containerData.height > canvasData.height ? (containerData.height - canvasData.height) / 2 : 0;
+						   		moveToContainerEdge = true;
+						   	}
+							else if (deltaY < 0 && canvasData.top < containerData.height - canvasData.height) {
+								moveToY = containerData.height > canvasData.height ? (containerData.height - canvasData.height) / 2 : containerData.height - canvasData.height;
+						   		moveToContainerEdge = true;
+						   	}
+								
+						   	if (deltaX > 0 && canvasData.left > 0) {
+						   		moveToX = containerData.width > canvasData.width ? (containerData.width - canvasData.width) / 2 : 0;
+						   		moveToContainerEdge = true;
+							}							   		
+							else if (deltaX < 0 && canvasData.left < containerData.width - canvasData.width) {
+								moveToX = containerData.width > canvasData.width ? (containerData.width - canvasData.width) / 2 : containerData.width - canvasData.width;
+								moveToContainerEdge = true;
+							}
+							if (moveToContainerEdge)
+									cropper.moveTo(moveToX, moveToY);
+							}
+					},
+					zoom: function(event) {
+						if (!cropperReady)
+							return;
+						if (event.detail.ratio > minZoomRatio)
+							event.preventDefault();							
+					}
+				});
+ 				cropper.replace(imgSrc);
+//				fitInViewer(viewScale == "ftow" ? true : false);
+				viewerLoaded = true;
+				if (requestedPages.length > 0)
+  						requestedPages.splice(0, 1);
+				if (requestedPages.length > 0)
+					goToPage(requestedPages[0]);
+			}
+			newImg.src = imgSrc;
+		}
+		
+		var maxRepetitions = 240;
+		
+		function renderThumbnails(start, end) {
+			var interval = 125;
+			var i = start;
+			for (; i < end; i++) {
+				createInterval(loadThumbnailImage, i, "https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do?isPreview=false&page=" + i +  (curImage == 1 ? "N" : "") + "&instnum=4322641&;jsessionid=DBAAEAC84AF1B4FC5929B68C082A5BF3", interval);
+			}
+		}
+		
+		function loadThumbnailImage(index, src) {
+			// if already loaded, we are done
+			var 	img = document.getElementById ("img_ThumbnailId" + (index+1));
+			if (img != null) 
+				return;
+			
+			var img = new Image();
+			img.onload = function() {
+				$("#thumbnails").datalist("updateRow",{
+					index: index,
+					row: {text: "<div style='text-align:center'><div id='img_ThumbnailId" + (index+1) + "'><img src='" + this.src + "' width='80px'></div><div style='background-color:white;display:inline-block;padding-left:4px;padding-right:4px' id='selectedThumbnailId" + (index+1) + "'>" + (index+1) + "</div></div>"}
+				});
+				
+			
+					var selectedIndex = $.inArray(index+1, selectedPages);
+					if (selectedIndex > -1) {
+						$("#selectedThumbnailId" + selectedPages[selectedIndex]).css("background-color", "#ffff00");
+					}
+
+
+				if (! viewerLoaded)
+					viewerLoaded = true;
+			};
+			img.onerror = function() {
+				createInterval(loadThumbnailImage, index, src, 250);
+			};
+			if (src.indexOf("&ver") < 0)
+				src += "&ver=" + Date.now() + Math.floor(Math.random()*1000);
+			img.src = src;
+		}
+		
+		function createInterval(func, index, src, interval) {
+			var count = 0;
+			var imgInt = setTimeout(
+				function() {
+					func(index, src);
+					if (++count == maxRepetitions) {
+						$("#thumbnails").datalist("updateRow",{
+							index: index,
+							row: {text: "<div style='text-align:center'><div id='img_ThumbnailId" + (index+1) + "'><img src='/countyweb/images/cannot_display_page.gif' width='80px'></div><div style='background-color:white;display:inline-block;padding-left:4px;padding-right:4px' id='selectedThumbnailId" + (index+1) + "'>" + (index+1) + "</div></div>"}
+						});
+					}
+				},
+				interval
+			);
+			return imgInt;
+		}
+		
+		function setViewMode (mode) {
+			window.localStorage.setItem('currentThumbnailViewMode', mode);
+			var region = "";
+			switch(mode) {
+			    case "thumbsleft":
+			    	region = "west";
+			    	break;
+				case "thumbsright":
+			    	region = "east";
+					break;
+				case "thumbstop":
+			    	region = "north";
+					break;
+				case "thumbsbottom":
+			    	region = "south";
+					break;
+				default:
+			    	region = "";
+			  }		
+		
+			var eastPanel = $("#main").layout("panel", "east");
+			if (eastPanel.length)
+			 	$("#main").layout("remove", "east");
+			var westPanel = $("#main").layout("panel", "west");
+			if (westPanel.length)
+		 		$("#main").layout("remove", "west");
+			var northPanel = $("#main").layout("panel", "north");
+			if (northPanel.length)
+		 		$("#main").layout("remove", "north");
+			var southPanel = $("#main").layout("panel", "south");
+			if (southPanel.length)
+		 		$("#main").layout("remove", "south");
+
+	    	thumbnailsLoaded = false;
+	    	
+	    	$("#toolBarButtons").show();
+	    	
+	    	if (region == "west" || region == "east") {
+				initLeftRightThumbnailPanel(region);	    	
+	    		goToPage(pageNumber == 0 ? 1 : pageNumber, true);
+	    	}
+	    	else if (region == "north" || region == "south") {
+	    		initTopBottomThumbnailPanel(region, false);
+	    		goToPage(pageNumber == 0 ? 1 : pageNumber, true);
+	    	}
+	    	else if (mode == "thumbsonly") {
+	    		initTopBottomThumbnailPanel("north", true);
+	    		$("#toolBarButtons").hide();
+	    		if (dataListJSON && dataListJSON.length > 0)
+	    			maxPageNumber = dataListJSON.length;
+	    	}
+	    	else
+	    		goToPage(pageNumber == 0 ? 1 : pageNumber, true);
+	    		
+	    	if (! isInit || mode == "thumbsonly") {
+				initScrollWatcher();				
+	
+		    	if (region != "" || mode == "thumbsonly") {
+					$("#thumbnails").datalist("loadData", dataListJSON);
+				}
+			}
+			if (! $("#toolBarButtons").is(":visible"))
+				$("#selectedPageId").hide();
+			else
+				$("#selectedPageId").show();
+		}		
+
+		function initLeftRightThumbnailPanel(region) {
+	        var options = {
+	        	region: region,
+	        	width: 80 + 40,
+	            title: '',
+	            border: false,
+	            collapsible: false,
+	            expandMode: 'dock',
+	            content: '<div id="thumbnails" style="height:100%"></div>'
+	      	};
+	        $("#main").layout("add", options);
+			$('#thumbnails').datalist({
+			    lines: false,
+				onSelect: function(index,row){
+					goToPage(index+1);
+	        	},			    
+			    onLoadSuccess: function (data) {
+			    	thumbnailsLoaded = true;
+			    	$('#thumbnails').datalist("selectRow", pageNumber == 0 ? 0 : pageNumber-1);
+			    }
+			});
+		}
+		
+		function initTopBottomThumbnailPanel(region, thumbsonly) {
+	        var options = {
+	        	region: region,
+	        	height: 162.56,
+	            title: '',
+	            border: false,
+	            collapsible: false,
+	            expandMode: 'dock',
+	            fit: (false || thumbsonly ? true : false),
+	            content: '<div id="thumbnails" style="height:100%"></div>'
+	      	};
+	        $("#main").layout("add", options);
+			$('#thumbnails').datalist({
+			    lines: false,
+				onSelect: function(index,row){
+					if (false || thumbsonly)
+						pageNumber = index+1;
+					else
+						goToPage(index+1);
+	        	},	
+	        	onDblClickRow: function(index,row){
+
+						if (thumbsonly)
+							setViewMode("fullview");
+							
+	        	},		    
+			    onLoadSuccess: function (data) {
+			    	thumbnailsLoaded = true;
+			    	$('#thumbnails').datalist("selectRow", pageNumber == 0 ? 0 : pageNumber-1);
+			    },
+				rowStyler: function(index,row){
+					if (false || thumbsonly)
+						return 'float:left;height:158.56px';
+					else
+						return 'float:left;height:100%';
+				}
+			});
+			 		
+			
+		}
+		
+		function disableHeaderFooter() {
+	        $('#imagePanel').panel({
+        	    footer: null
+        	});
+	    }
+	    
+
+
+		function togglePrintVisible() {
+			if (selectedPages.length > 0) {
+				showSelectedPagesMessage();
+			}
+			else
+				toggleCropper();   						
+		}
+		
+		function toggleCropper() {
+			clearAllSelectedPages();		
+			if (cropper != null && viewerLoaded && cropperReady) {
+				var cropData = cropper.getData(true);
+				if (cropData.width == 0 && cropData.height == 0)	// no crop box, enable it
+					cropper.crop();
+				else
+					cropper.clear();
+			}
+		}
+		
+		function addSelectedPage() {
+			var index = $.inArray(pageNumber, selectedPages);
+			if (index > -1) {
+				selectedPages.splice(index, 1);
+				$("#selectedThumbnailId" + pageNumber).css("background-color", "white");
+				if ($("#toolBarButtons").is(":visible")) {
+					$("#selectedPageId").css("background-color", "#fafafa");
+				}
+			}
+			else {
+				selectedPages[selectedPages.length] = pageNumber;
+				$("#selectedThumbnailId" + pageNumber).css("background-color", "#ffff00");
+				if ($("#toolBarButtons").is(":visible")) {
+					$("#selectedPageId").css("background-color", "#ffff00");
+				}
+			}
+		}
+		
+		function clearAllSelectedPages() {
+			if ($("#toolBarButtons").is(":visible"))
+				$("#selectedPageId").css("background-color", "#fafafa");
+		
+			$.each(selectedPages, function (index, row) {
+				$("#selectedThumbnailId" + row).css("background-color", "white");
+			});
+			selectedPages = [];
+		}
+		
+		function updateDocImgViewFrame(){
+			setViewMode(window.localStorage.getItem('currentThumbnailViewMode'))
+		}
+    </script>
+
+	<!--------------------- END JAVASCRIPT Viewer ---------------------->
+
+	<div class="panel panel-htop easyui-fluid" style="display: block; width: 713px;"><div class="panel-header hHeight" style="width: 713px;"><div class="panel-title"> </div><div class="panel-tool"><div id="toolBarButtonContainer" class="panel-tool-a">
+			<span id="toolBarButtons">
+				<button type="button" onclick="firstPage()" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-fast-forward fa-lg fa-flip-horizontal fa-move-left4'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-fast-forward fa-lg fa-flip-horizontal fa-move-left4">&nbsp;</span></span></button>
+				<button type="button" onclick="previousPage()" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-forward fa-lg fa-flip-horizontal fa-move-left4'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-forward fa-lg fa-flip-horizontal fa-move-left4">&nbsp;</span></span></button>
+				<button type="button" onclick="nextPage()" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-forward fa-lg'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-forward fa-lg">&nbsp;</span></span></button>
+				<button type="button" onclick="lastPage()" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-fast-forward fa-lg'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-fast-forward fa-lg">&nbsp;</span></span></button>
+				<span style="display:inline-block;" class="buttonspacer"></span>
+				<input id="pageNumber" type="text" value="1" style="width: 40px; height: 26px; display: none;" class="easyui-textbox textbox-f"><span class="textbox" style="width: 40px; height: 26px;"><input id="_easyui_textbox_input1" type="text" class="textbox-text validatebox-text" autocomplete="off" tabindex="" placeholder="" style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 24px; line-height: 24px; width: 38px;"><input type="hidden" class="textbox-value" value="1"></span>
+				<span id="totalPages" style="display:inline-block; height:26px; font-size:12px;" class="base">&nbsp;of 12&nbsp;</span><span id="gotoPageIcon" class="easyui-tooltip tooltip-f" title="" style=""><span onclick="handleReturn();return false;" onmouseover="setCursor(this, true)" onmouseout="setCursor(this, false)"><i class="fa fa-play-circle fa-fw fa-lg fa-welcome-icon" aria-hidden="true"></i></span></span>
+				<span style="display:inline-block;" class="buttonspacer"></span>
+				<button type="button" onclick="zoomIn();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-search-plus fa-lg fa-move-left1'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-search-plus fa-lg fa-move-left1">&nbsp;</span></span></button>
+				<button type="button" onclick="zoomOut();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-search-minus fa-lg fa-move-left1'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-search-minus fa-lg fa-move-left1">&nbsp;</span></span></button>
+				<span style="display:inline-block;" class="buttonspacer"></span>
+				<button type="button" onclick="fitInViewer(true,true);" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-arrows-h fa-lg fa-move-left1'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-arrows-h fa-lg fa-move-left1">&nbsp;</span></span></button>
+				<button type="button" onclick="fitInViewer(false,true);" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-arrows-v fa-lg fa-pull-right'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-arrows-v fa-lg fa-pull-right">&nbsp;</span></span></button>
+				<button type="button" onclick="fitWindow();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-arrows fa-lg fa-move-left2'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-arrows fa-lg fa-move-left2">&nbsp;</span></span></button>
+				<button type="button" onclick="actualSize(1);" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-actual-size fa-lg fa-move-left4'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-actual-size fa-lg fa-move-left4">&nbsp;</span></span></button>
+				<span style="display:inline-block;" class="buttonspacer"></span>
+				<button type="button" onclick="rotateCW();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-repeat fa-lg fa-move-left1'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-repeat fa-lg fa-move-left1">&nbsp;</span></span></button>
+				<button type="button" onclick="rotateCCW();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-undo fa-lg fa-move-left1'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-undo fa-lg fa-move-left1">&nbsp;</span></span></button>
+				<span style="display:inline-block;" class="buttonspacer"></span>
+				<span id="invertButton">
+					<button type="button" id="invert" onclick="invert()" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-adjust fa-lg fa-move-left1'" group=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-adjust fa-lg fa-move-left1">&nbsp;</span></span></button>
+				</span>
+<button type="button" onclick="togglePrintVisible();" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-crop fa-lg fa-move-left2'" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-crop fa-lg fa-move-left2">&nbsp;</span></span></button>
+<button type="button" id="newWindow" onclick="openImageInWindow('1000', '744', '/countyweb', 'searchSessionId=searchJobMain&amp;instId=4322641&amp;instNum=2023015317&amp;instType=MORTGAGE&amp;assocDoc=undefined&amp;assocParentNum=undefined&amp;parcelNum=undefined&amp;assocType=undefined&amp;onloadAction=parent.documentLoaded();','WEB', 'JxBrowser');" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-window-maximize fa-lg fa-move-left1'" group=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-window-maximize fa-lg fa-move-left1">&nbsp;</span></span></button>
+<span style="float:right;padding-top:3px">
+					<button type="button" id="help" title="" class="easyui-linkbutton easyui-tooltip buttonsize tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-question fa-lg fa-move-left2'" group=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-question fa-lg fa-move-left2">&nbsp;</span></span></button>
+</span>
+			</span>	
+		</div></div></div><div id="imagePanel" class="easyui-panel base panel-body panel-body-nobottom" title="" style="background-color: rgb(243, 243, 243); width: 713px; height: 393px;" data-options="headerCls:'hHeight',closable:false,tools:'#toolBar',footer:'#iconBar',fit:true">
+		<div id="main" class="easyui-layout layout easyui-fluid" style="height: 393px; width: 709px;">
+        	<div class="panel layout-panel layout-panel-center panel-htop" style="width: 709px; left: 0px; top: 0px;"><div data-options="region:'center',border:false,onResize:function(width,height){fitInViewer(viewScale == 'ftow' ? true : false);}" title="" class="panel-noscroll panel-body panel-body-noheader panel-body-noborder layout-body" style="width: 709px; height: 393px;" id="">
+				<img id="mainCropperImage" src="https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do?ver=1775500127318344&amp;instnum=4322641&amp;isPreview=false&amp;;jsessionid=DBAAEAC84AF1B4FC5929B68C082A5BF3" style="max-width: 100%; min-width: 1px; min-height: 1px; visibility: visible;" class="center cropper-hidden"><div class="cropper-container cropper-bg" touch-action="none" style="width: 709px; height: 393px;"><div class="cropper-wrap-box"><div class="cropper-canvas" style="width: 709px; height: 917.529px; transform: none;"><img src="https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do?ver=1775500127318344&amp;instnum=4322641&amp;isPreview=false&amp;;jsessionid=DBAAEAC84AF1B4FC5929B68C082A5BF3" class="cropper-hide" style="width: 709px; height: 917.529px; transform: none;"></div></div><div class="cropper-drag-box cropper-move" data-cropper-action="move"></div><div class="cropper-crop-box cropper-hidden"><span class="cropper-view-box"><img src="https://viewer.greenvillecounty.org/countyweb/viewImagePNG.do?ver=1775500127318344&amp;instnum=4322641&amp;isPreview=false&amp;;jsessionid=DBAAEAC84AF1B4FC5929B68C082A5BF3"></span><span class="cropper-dashed dashed-h cropper-hidden"></span><span class="cropper-dashed dashed-v cropper-hidden"></span><span class="cropper-center"></span><span class="cropper-face cropper-move" data-cropper-action="all"></span><span class="cropper-line line-e" data-cropper-action="e"></span><span class="cropper-line line-n" data-cropper-action="n"></span><span class="cropper-line line-w" data-cropper-action="w"></span><span class="cropper-line line-s" data-cropper-action="s"></span><span class="cropper-point point-e" data-cropper-action="e"></span><span class="cropper-point point-n" data-cropper-action="n"></span><span class="cropper-point point-w" data-cropper-action="w"></span><span class="cropper-point point-s" data-cropper-action="s"></span><span class="cropper-point point-ne" data-cropper-action="ne"></span><span class="cropper-point point-nw" data-cropper-action="nw"></span><span class="cropper-point point-sw" data-cropper-action="sw"></span><span class="cropper-point point-se" data-cropper-action="se"></span></div></div>
+				<img id="loadingImage" src="/countyweb/images/loading-bar.gif" style="max-width: 100%; min-width: 1px; min-height: 1px; visibility: hidden;" class="center">
+			</div></div>
+		<div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>	
+	</div><div id="iconBar" class="base panel-footer">
+		<button type="button" onclick="setViewMode('fullpage')" title="" style="padding-top: 4px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-file-o fa-lg',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 1px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-file-o fa-lg">&nbsp;</span></span></button>
+		<button type="button" onclick="setViewMode('thumbsonly')" title="" style="padding-top: 4px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-th fa-lg',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 1px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-th fa-lg">&nbsp;</span></span></button>
+		<button type="button" onclick="setViewMode('thumbsleft')" title="" style="padding-top: 3px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-thumb-left fa-sm thumbLeft',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 1px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-thumb-left fa-sm thumbLeft">&nbsp;</span></span></button>
+		<button type="button" onclick="setViewMode('thumbsbottom')" title="" style="padding-top: 2px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-thumb-bottom fa-sm thumbBottom',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 2px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-thumb-bottom fa-sm thumbBottom">&nbsp;</span></span></button>
+		<button type="button" onclick="setViewMode('thumbsright')" title="" style="padding-top: 3px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-thumb-right fa-sm thumbLeft',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 1px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-thumb-right fa-sm thumbLeft">&nbsp;</span></span></button>
+		<button type="button" onclick="setViewMode('thumbstop')" title="" style="padding-top: 2px; width: 34px; height: 32px;" class="easyui-linkbutton easyui-tooltip tooltip-f l-btn l-btn-small" data-options="iconCls:'fa fa-thumb-top fa-sm thumbTop',height:32,width:34" group="" id=""><span class="l-btn-left l-btn-icon-left" style="margin-top: 2px;"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon fa fa-thumb-top fa-sm thumbTop">&nbsp;</span></span></button>
+		<span id="selectedPageId" style="float: right; height: 32px; font-size: 12px; padding-top: 6px; padding-left: 4px; padding-right: 4px; background-color: rgb(250, 250, 250);">1</span>
+	</div></div>
+	
+	<div id="toolBar" class="base">
+		
+	</div>	
+	
+		
+	
+	<div id="helpContent">
+		<div class="panel datagrid panel-htop" style="width: 300px;"><div class="datagrid-wrap panel-body panel-body-noheader" title="" id="" style="width: 300px;"><div class="datagrid-view" style="width: 298px; height: 300px;"><div class="datagrid-view1" style="width: 0px;"><div class="datagrid-header" style="width: 0px; height: 25px;"><div class="datagrid-header-inner" style="display: block;"><table class="datagrid-htable" border="0" cellspacing="0" cellpadding="0" style="height: 25px;"><tbody></tbody></table></div></div><div class="datagrid-body" style="width: 0px; margin-top: 0px; height: 275px;"><div class="datagrid-body-inner"></div></div><div class="datagrid-footer" style="width: 0px;"><div class="datagrid-footer-inner" style="display: none;"></div></div></div><div class="datagrid-view2" style="width: 298px;"><div class="datagrid-header" style="width: 298px; height: 25px;"><div class="datagrid-header-inner" style="display: block;"><table class="datagrid-htable" border="0" cellspacing="0" cellpadding="0" style="height: 25px;"><tbody><tr class="datagrid-header-row"><td class="" style="" field="desc"><div class="datagrid-cell helpTable_datagrid-cell-c1-desc"><span><b>Description</b></span><span class="datagrid-sort-icon"></span></div></td><td class="" style="" field="shortcut"><div class="datagrid-cell helpTable_datagrid-cell-c1-shortcut" style="text-align: center;"><span><b>Shortcut</b></span><span class="datagrid-sort-icon"></span></div></td></tr></tbody></table></div></div><div class="datagrid-body" style="width: 298px; margin-top: 0px; overflow-x: hidden; height: 275px;"><table class="datagrid-btable" cellspacing="0" cellpadding="0" border="0"><tbody><tr id="helpTable_datagrid-row-r1-2-0" datagrid-row-index="0" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">First Page</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">Home</div></td></tr><tr id="helpTable_datagrid-row-r1-2-1" datagrid-row-index="1" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Last Page</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">End</div></td></tr><tr id="helpTable_datagrid-row-r1-2-2" datagrid-row-index="2" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Next Page</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">PgDn</div></td></tr><tr id="helpTable_datagrid-row-r1-2-3" datagrid-row-index="3" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Previous Page</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">PgUp</div></td></tr><tr id="helpTable_datagrid-row-r1-2-4" datagrid-row-index="4" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Pan Down</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">Down Arrow</div></td></tr><tr id="helpTable_datagrid-row-r1-2-5" datagrid-row-index="5" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Pan Up</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">Up Arrow</div></td></tr><tr id="helpTable_datagrid-row-r1-2-6" datagrid-row-index="6" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Pan Left</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">Left Arrow</div></td></tr><tr id="helpTable_datagrid-row-r1-2-7" datagrid-row-index="7" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Pan Right</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">Right Arrow</div></td></tr><tr id="helpTable_datagrid-row-r1-2-8" datagrid-row-index="8" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Toggle Page Selection</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">s</div></td></tr><tr id="helpTable_datagrid-row-r1-2-9" datagrid-row-index="9" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Clear All Selected Pages</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">c</div></td></tr><tr id="helpTable_datagrid-row-r1-2-10" datagrid-row-index="10" class="datagrid-row  " style="background-color:white"><td field="desc"><div style="height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-desc">Open New Window</div></td><td field="shortcut"><div style="text-align:center;height:auto;" class="datagrid-cell helpTable_datagrid-cell-c1-shortcut">w</div></td></tr></tbody></table></div><div class="datagrid-footer" style="width: 298px;"><div class="datagrid-footer-inner" style="display: none;"></div></div></div><table id="helpTable" data-options="rowStyler: function(index,row){return 'background-color:white';}" class="easyui-datagrid base datagrid-f" width="300&quot;" style="display: none;"><thead><tr><th data-options="field: 'desc', width:180"><b>Description</b></th><th data-options="field: 'shortcut', width:100, align: 'center'"><b>Shortcut</b></th></tr></thead><tbody><tr><td>First Page</td><td>Home</td></tr><tr><td>Last Page</td><td>End</td></tr><tr><td>Next Page</td><td>PgDn</td></tr><tr><td>Previous Page</td><td>PgUp</td></tr><tr><td>Pan Down</td><td>Down Arrow</td></tr><tr><td>Pan Up</td><td>Up Arrow</td></tr><tr><td>Pan Left</td><td>Left Arrow</td></tr><tr><td>Pan Right</td><td>Right Arrow</td></tr><tr><td>Toggle Page Selection</td><td>s</td></tr><tr><td>Clear All Selected Pages</td><td>c</td></tr><tr><td>Open New Window</td><td>w</td></tr></tbody></table><style type="text/css" easyui="true">
+.datagrid-header-rownumber{width:29px}
+.datagrid-cell-rownumber{width:29px}
+.helpTable_datagrid-cell-c1-desc{width:179px}
+.helpTable_datagrid-cell-c1-shortcut{width:99px}
+</style></div></div></div></div>
+</div>
+<div id="unauthorized" style="display:none;text-align:center;">
+		<span class="msg3" id="imageNotAvail" style="position:relative; top:30%; width:100%;">
+			Document image not available. <br><br>
+			You do not have authorization to view this document image.
+		</span>
+	</div>
+	
+	<div id="printstatus">
+		<iframe name="statusframe" id="statusframe" width="10" height="10" src="/countyweb/blank.jsp" frameborder="0"></iframe>
+		<iframe name="printSvcFrame" id="printSvcFrame" width="10" height="10" src="/countyweb/blank.jsp" frameborder="0"></iframe>
+		<iframe name="dlframe" id="dlframe" width="10" height="10" src="/countyweb/blank.jsp" frameborder="0"></iframe>
+	</div>
+
+  	<div class="positions" id="disablediv" style="z-index:20">
+	</div>
+
+	<div id="dialog" style="z-index:100">
+		<div align="left" id="dialogheader">
+			<table align="center" class="dialoghdr" cellpadding="0" cellspacing="0" width="99%">
+				<tbody><tr height="20" valign="middle">
+					<td width="80%" class="dialoghdr">
+						&nbsp;<span id="dialogtitle">Authentication Required</span>
+					</td>
+					<td width="20%" class="dialoghdr" align="right">
+						<a href="#" onclick="hideDialog();return false;"><img alt="" border="0" src="/countyweb/images/icons/close.gif"></a>&nbsp;
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+		<iframe name="dialogframe" id="dialogframe" src="/countyweb/blankDlg.jsp" frameborder="0" width="400" height="150" scrolling="no"></iframe>
+	</div>
+	
+  
+
+</body></html>

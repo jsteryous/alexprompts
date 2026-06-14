@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head>
+    <base href="https://viewer.greenvillecounty.org/countyweb/disclaimer.jsp"><title>welcome.jsp</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/styles.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/Greenville/countystyles.css?ver=1">
+<style type="text/css">
+		<!--
+		a:hover { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color:#903326; text-decoration:underline }
+		all.positions {}
+		#maindiv {position:absolute; left:0; top:50; width:100%; text-align:center;}
+		#maincontent {position:absolute; left:0; top:0; overflow:auto; width:630}
+		-->
+	</style>
+
+	<script src="/countyweb/scripts/utils.js?ver=9"></script>
+	<script src="/countyweb/scripts/validate.js?ver=2"></script>
+	<script src="/countyweb/scripts/dhtml.js?ver=2"></script>
+	<script src="/countyweb/scripts/popup.js?ver=5"></script>
+	<script src="/countyweb/scripts/mousemove.js?ver=2"></script>
+
+	<script>
+
+		function executeCommand (cmd) {
+		
+			parent.forceLogout = false;
+			document.disclaimerform.cmd.value = cmd;
+			document.disclaimerform.submit ();
+		}
+
+		function handleReturn () {
+
+			executeCommand ('Accept');
+			return false;
+		}
+
+		function handleResize () {
+
+		    var     height;
+		    var 	width;
+
+			if (isMozillaClient ()) {
+				height = window.innerHeight;
+				width = window.innerWidth;
+			}
+			else {
+		        height = window.document.body.clientHeight;
+		        width = window.document.body.clientWidth;
+		    }
+
+			document.getElementById ("maincontent").style.height = (height - 50);
+
+			document.getElementById ("maincontent").style.left = (width - 550) / 2 - 30;
+		}
+
+
+		function handleOnload () {
+
+			handleResize ();
+	  		window.focus ();
+		}
+
+		window.onresize=handleResize;
+
+	</script>
+
+  </head>
+
+  <body onload="handleOnload()">
+
+	<div class="positions" id="maindiv">
+		<div class="positions" id="maincontent" style="height: 490px; left: 322.5px;">
+			<form name="disclaimerform" method="post" action="disclaimer.do" target="_parent">
+				<input type="hidden" name="cmd" id="cmd" value="Accept">
+
+<table width="550" cellspacing="0" cellpadding="0" border="0">
+						<tbody><tr class="msg3" style="height:30;text-align:center" valign="top">
+							<td>Greenville CountyRegister of Deeds Online Services Disclaimer</td>
+						</tr>
+					</tbody></table>
+<br>
+
+				<table class="base" width="550" cellpadding="0" cellspacing="0" border="0">
+					<tbody><tr>
+<td width="100%" align="center">
+								&nbsp;&nbsp;&nbsp;
+								<input id="accept" name="accept" type="button" class="base" style="width:75" onclick="executeCommand('Accept')" value="Accept">
+								&nbsp;&nbsp;&nbsp;
+								<input id="decline" name="decline" type="button" class="base" style="width:75" onclick="executeCommand('Decline')" value="Decline">
+								&nbsp;&nbsp;&nbsp;
+							</td>
+</tr>
+				</tbody></table>
+
+<br>
+
+					<table width="550" cellspacing="0" cellpadding="0" border="0">
+						<tbody><tr class="msg5" style="height:30" valign="top">
+							<td>
+								<p style="text-align:justify">Neither the County of Greenville, South Carolina nor any agency, officer, elected official or employee of the County of Greenville, South Carolina (collectively known as "the County") warrants the accuracy, reliability or timeliness of any information provided with the date herein.  The County shall not be liable for any losses caused by such reliance on the accuracy, reliability or timeliness of such information, including but not limited to, incidental and consequential damages.  The data is provided "as is" without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability, fitness for a particular purpose or non-infringement.  The County maintains all immunities as provided in the South Carolina Tort Claims Act.<br><br><b>NOTICE TO ALL REQUESTORS OF RECORDS</b><br><br>State law requires certain public bodies to provide notice to requestors of records.  The Freedom of Information ACT (FOIA) limits the use of certain information revealed in response to a FOIA request.  See S.C. Code Ann. 30-4-50(B).  Obtaining or using public records from certain governmental entities for commercial solicitation directed to any person in this State is prohibited under South Carolina Code Section 30-2-50.  A person knowingly violating the provisions of 30-2-50 is guilty of a misdemeanor and, upon conviction, must be fined an amount not to exceed five hundred dollars or imprisoned for a term not to exceed one year, or both.  Section 30-2-50(D)<br><br><b>Financial Identity Fraud and Identity Theft Protection Act</b><br><br>A person preparing or filing a document for recordation or filing in the official records may not include a social security, driver's license, state identification, passport, checking account, savings account, credit card, or debit card number, or personal identification (PIN)code, or passwords in the document, unless expressly required by law.  An individual has a right to request a register of deeds or clerk of court to remove, from an image or copy of an official record placed on a publicly available Internet web site or on a publicly available Internet web site used by a register of deeds or clerk of court to display public records, any social security, driver's license, state identification, passport, checking account, savings account, credit card, or debit cart number, or personal identification (PIN) code, or passwords contained in an official record.  The request must be made in writing and delivered by mail, facsimile, or electronic transmission or in person, to the register of deeds or clerk of court.  The request must specify the identification page number that contains the social security, driver's license, state identification, passport, checking account, savings account, credit card, or debit card number, or personal identification (PIN) or code, or passwords to be redacted.  There is no fee for the redaction pursuant to request.</p>
+							</td>
+						</tr>
+					</tbody></table>
+</form>
+
+		</div>
+	</div>
+
+  
+
+  <script>
+  		window.focus ();
+  </script>
+</body></html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en-US"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Search</title>
+
+    <link rel="stylesheet" href="/vendor.d4e91992004e5c264223bab19fcacc9e.css">
+    <link rel="stylesheet" href="/app.d8eb7594676750ee03f572d1b1d667c3.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.102ee91d3ae6dc088d72435b16f25515.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.e72050f581223cd2b825d3f26361d0e4.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.f8341ba5a321cb3f59fd5d573e499af0.png">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.8370893c36696675d5bc89ee7eeea2e6.svg" color="#5bbad5">
+
+    <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-R8DLNV5LWZ&amp;cx=c&amp;gtm=4e6420"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-NLVQ7LJ"></script><script>
+      globalThis.injectScript = (src) => {
+        if (!globalThis.injectedScripts) {
+          globalThis.injectedScripts = new Set();
+        }
+
+        if (globalThis.injectedScripts.has(src)) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.addEventListener("load", () => {
+            globalThis.injectedScripts.add(src);
+            resolve();
+          });
+          script.addEventListener("error", e => reject(e.error));
+          document.head.appendChild(script);
+        });
+      };
+    </script>
+  <style>                      .htmx-indicator{opacity:0;transition: opacity 200ms ease-in;}                      .htmx-request .htmx-indicator{opacity:1}                      .htmx-request.htmx-indicator{opacity:1}                    </style></head>
+  <body class="SIGNIN">
+
+<div class="CONTAINER container-is-limited">
+  <header class="MASTHEAD Masthead">
+    <a href="/" aria-label="Home">
+      <img src="https://s3-us-west-2.amazonaws.com/search-public-assets/45045/GreenvilleCountySeal.jpg" alt="county seal" class="masthead-county-seal">
+    </a>
+
+    <h1 class="Title">Official Records Search</h1>
+
+
+  </header>
+
+  <main class="MAIN">
+    <script type="text/hyperscript">
+      behavior PasswordVisibilityToggle
+        init show me
+
+        on click
+          if my innerText is 'Hide'
+            set { type: 'password' } on the previous <input/>
+            then put 'Show' into me
+          else
+            set { type: 'text' } on the previous <input/>
+            then put 'Hide' into me
+
+      end
+    </script>
+
+    <form method="post" hx-boost="true" action="/signin" hx-target="this" class="Form">
+      <fieldset id="sign-in-fieldset">
+        <legend>Sign In</legend>
+
+
+
+
+
+
+
+
+
+
+        <div class="FormField">
+          <input type="text" name="email" id="email" required="" class="formfield-input">
+          <label for="email">Email</label>
+        </div>
+
+        <div class="FormField formfield-password">
+          <input type="password" name="password" id="password" required="" class="formfield-input">
+          <label for="password">Password</label>
+          <button type="button" style="" class="Control formfield-password-visibility-toggle" _="install PasswordVisibilityToggle">Show</button>
+        </div>
+
+        <button class="CallToAction" type="submit">Sign In</button>
+        <svg class="LoadingIndicator"><use href="/img/sprites.5977a3888f639f6b73221fe216d1db15.svg#loading"></use></svg>
+      </fieldset>
+    </form>
+
+    <style>
+     #sign-in-fieldset {
+      padding: 10px 20px;
+     }
+    </style>  </main>
+
+  <aside>
+    <ul class="LinkList linklist-is-vertical">
+      <li><a href="/register">Register</a></li>
+      <li><a href="/forgotpassword">Forgot your password?</a></li>
+      <li><a href="/">Return to Public Search</a></li>
+    </ul>
+  </aside>
+
+  <footer class="FOOTER">
+    <script>
+      function openLiveChat() {
+        const params = new URLSearchParams();
+
+        params.append("d", "37437"); // department number
+        params.append("lhnid", "25615"); // livehelp account number
+        params.append("zzwindow", "36182"); // window number?
+        params.append("pcv", JSON.stringify({ "-website": window.location.href }));
+        params.append("time", "4/6/2026 7:37:22PM");
+
+        const url = "https://www.livehelpnow.net/lhn/lcv.aspx?" + params;
+        const wWidth = 500;
+        const wHeight = 500;
+        const left = window.screen.width / 2 - wWidth / 2;
+        const top = window.screen.height / 2 - wHeight / 2;
+
+        const popupOptions = [
+          "resizable",
+          "scrollbars",
+          `width={wWidth}`,
+          `height={wHeight}`,
+          `top={top}`,
+          `left={left}`,
+        ].join(",");
+
+        window.open(url, "Live Chat Support", popupOptions).focus();
+      }
+    </script>
+
+    <div class="Footer">
+      <ul id="info-links" class="LinkList linklist-is-vertical">
+        <li><a href="https://kofilehelp.zendesk.com/hc/en-us">Knowledgebase</a></li>
+        <li><a href="#" _="on click halt the event then call openLiveChat()">Live Chat</a></li>
+      </ul>
+
+      <p class="footer-copyright">© 2026 Greenville County, South Carolina.</p>
+      <p class="footer-copyright-cont">All Rights Reserved.</p>
+      <p class="footer-built-on">
+        <span class="footer-powered-by">Powered by</span>
+        <a href="https://govos.com">
+          <img class="footer-govos-logo" alt="Neumo logo" src="/img/neumo_logo.9b6421548ba19ac23c722f020eba649a.svg">
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <style>
+    .Footer {
+      padding: 20px 0;
+    }
+
+    .Footer p {
+      padding-bottom: 5px;
+    }
+
+   #info-links li a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--color-primary-600, initial);
+    line-height: 1.2
+   }
+  </style></div>
+
+    <script>
+      document.body.addEventListener("htmx:beforeSwap", function(evt) {
+        const status = evt.detail.xhr.status;
+        const handleStatuses = [400, 401, 409];
+
+        for (const handledStatus of handleStatuses) {
+          if (status === handledStatus) {
+            evt.detail.shouldSwap = true;
+            evt.detail.isError = false;
+          }
+        }
+      });
+    </script>
+
+    <script src="/vendor/htmx.a32c80ce5d772ed1f522f0c582fb2742.js" charset="utf-8" type="text/javascript"></script>
+    <script src="/vendor/hyperscript.228c4e09a8f7b54482f5b9a0f4fd8c41.js" charset="utf-8" type="text/javascript"></script>
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-115781850-1">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-115781850-1');
+    </script>
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NLVQ7LJ');
+    </script>
+
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NLVQ7LJ"
+        height="0"
+        width="0"
+        title="gtmv2"
+        style='display: "none"; visibility: "hidden";'
+      ></iframe>
+    </noscript>
+  
+
+
+<style>
+  .LinkList li a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--color-primary-600, initial);
+    line-height: 1.2
+  }
+</style></body></html>

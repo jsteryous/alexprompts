@@ -1,0 +1,743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head>
+	<base href="https://viewer.greenvillecounty.org/countyweb/search/DocumentInfoView.jsp"><title>Document Info</title>
+
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+
+	<!------------------- START STYLE SHEETS -------------------->
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/easyui.css?ver=6">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/icon.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/styles.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/Greenville/countystyles.css?ver=1">
+<style type="text/css">
+
+	<!--
+		a:hover {
+			font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color:#903326; text-decoration:underline
+		}
+		#docInfoHolder {
+			position:absolute; top:0px; left:0px; width:700px; height:100%; visibility:hidden;
+		}
+		#docImgView {
+			position:absolute; top:0px; left:0px; width:300px; height:100%; visibility:hidden
+		}
+		#docImgViewMsg {
+			position:absolute; top:0px; left:0px; width:100%; height:100%; visibility:hidden
+		}
+		#docInfoNav {
+			width:700px; height:30px; background-color:#e6e6e6;
+			vertical-align: middle;
+		}
+		#imageNotAvail {
+			position:absolute; height:100%; width:100%; text-align: center; vertical-align: middle;
+		}
+		#processframe {position:absolute; left:0; top:50; visibility:hidden }
+
+		#commentsdiv { position:absolute; left:30; top:50; width:440px; height:320; visibility:hidden }
+		#useraudit {position:absolute; left:0; top:0; visibility:hidden}
+		.msg3 { font-size: 18px; }		
+			
+	-->
+
+	</style>
+
+	<!-------------------- END STYLE SHEETS --------------------->
+
+	<!-------------------- START JAVASCRIPT --------------------->
+
+	<script src="/countyweb/scripts/utils.js?ver=9"></script>
+	<script src="/countyweb/scripts/validate.js?ver=2"></script>
+	<script src="/countyweb/scripts/dhtml.js?ver=2"></script>
+	<script src="/countyweb/scripts/jquery/jquery-3.6.3.min.js"></script>
+	<script src="/countyweb/scripts/jquery/easyui/jquery.easyui.min.js"></script>
+	<script src="/countyweb/scripts/jquery/jqueryutils.js?ver=28"></script>
+	<script src="/countyweb/scripts/json2.js?ver=2"></script>
+
+	<script language="JavaScript" type="text/javascript">
+
+		var instId = "4672835";
+		var docHistInfo = new Array();
+		var onInitialLoad = true;
+		
+
+		   	docHistInfo[0] 				= new Object();
+		 	docHistInfo[0].instId			= "4672835";
+			docHistInfo[0].instNum		= "2026023115 ";
+			docHistInfo[0].instType 		= "AMENDMENT OF MORTGAGE";
+
+
+		function getInstrumentId () {
+			return instId;
+		}
+		
+    $(document).ready(function(){	
+		var westPanel = $("#main").layout("panel", "west");
+		if (westPanel.length) {
+			westPanel.panel({
+		        onResize: function(width, height) {
+		        	if (! onInitialLoad) {
+						waitForFinalEvent(function(){
+							saveSearchDetailsState();
+								
+						}, 1000, "search details panel");
+					}	        
+				}
+	    	});
+	    }
+
+
+			if (parent.updateFooter) {
+				parent.updateFooter();
+			} else if (parent.parent) {
+				if (parent.parent.updateFooter) {
+					parent.parent.updateFooter();
+				} else if (parent.parent.parent && parent.parent.parent.updateFooter) {
+					parent.parent.parent.updateFooter();
+				}
+			}
+
+			window.frames["docInfoFrame"].location = "/countyweb/search/displayDocument.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+	        document.getElementById ("docInfoHolder").style.visibility = "visible";
+
+
+		       if (document.getElementById("docImgViewFrame") != null)
+	    	    	window.frames["docImgViewFrame"].location = "/countyweb/imageViewApplet.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+	    	    	//window.frames["docImgViewFrame"].location = "/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+	   			document.getElementById ("docImgView").style.visibility = "visible";
+
+			onInitialLoad = false;
+			handleResize ();
+
+
+    });
+   	
+	function setImageWindow(iWnd) {
+		if (parent.setImageWindow)
+			parent.setImageWindow(iWnd);
+		else if (parent.parent) {
+			if (parent.parent.setImageWindow)
+				parent.parent.setImageWindow(iWnd);
+			else if (parent.parent.parent && parent.parent.parent.setImageWindow)
+				parent.parent.parent.setImageWindow(iWnd);
+		}
+   	}
+   	
+   	function getImageWindow() {
+   		if (parent.getImageWindow)
+   			return parent.getImageWindow();
+   		else if (parent.parent) {
+   			if (parent.parent.getImageWindow)
+				return parent.parent.getImageWindow();
+			else if (parent.parent.parent.getImageWindow)   
+				return parent.parent.parent.getImageWindow();			
+   		}
+   	}
+
+    //===============================================
+    //===============================================
+    /** Called when document has loaded. (onloadAction see transAddDoc.jsp)
+    **	Re-enables actions on Results screen (SearchResultsView.jsp)
+    **/
+    function documentLoaded() {
+    	parent.resultFrame.setDocLoading(false);
+    	parent.resultFrame.setActionsEnabled(true);
+    	parent.showProgressBar(false);
+    	parent.reloadNav();
+    }
+
+    //===============================================
+    //===============================================
+    /** Navigate documents.
+     *	Calls resultListFrame. SearchResultsView.jsp > SearchResultList.jsp
+    **/
+    function navToDocument(navDirection) {
+
+    	if (isPrinting ()) {
+    		alert ("Printing in progress, unable to complete request until print job is complete.");
+    		return;
+    	}
+
+    	var	show_details = true;
+		if (document.getElementById ("docDetails").style.display == "none") {
+				show_details = false;
+		}
+    	if(parent.frames["resultFrame"]) { // FOR INST SEARCH
+    		parent.frames["resultFrame"].frames["resultListFrame"].navigateToDocument(navDirection, show_details);
+    	}
+    	else if (parent.frames["instListFrame"]) { // FOR INST LIST DISPLAY IN CASEFILE
+    		parent.frames["instListFrame"].frames["resultListFrame"].navigateToDocument(navDirection, show_details);
+    	}
+    	else {
+    		alert("Error loading document. Result list may be invalid. Try search again." );
+    	}
+    }
+
+    function processKey (key, ctrl, alt) {
+
+    	if (alt && key == 80)
+    		navToDocument('prev');
+
+    	if (alt && key == 78)
+    		navToDocument('next');
+    }
+    
+    //===============================================
+    //===============================================
+    /** Load doc from history.
+     *	Calls resultListFrame. SearchResultsView.jsp > SearchResultList.jsp
+    **/
+    function loadDocFromHistory() {
+
+    	if (isPrinting ()) {
+    		alert ("Printing in progress, unable to complete request until print job is complete.");
+    		return;
+    	}
+
+   		var docIndex = $("#navHistory").combobox("getValue");
+		var show_details = true;
+		if (document.getElementById("docDetails").style.display == "none") {
+			show_details = false;
+		}
+    	if(parent.frames["resultFrame"]) {
+    		parent.frames["resultFrame"].loadDocument(docHistInfo[docIndex], show_details);
+    	}
+    	else if (parent.frames["instListFrame"]) {
+    		parent.frames["instListFrame"].loadDocument(docHistInfo[docIndex], show_details);
+    	}
+    	else {
+    		alert("Error loading document. Result list may be invalid. Try search again." );
+    	}
+    }
+
+    //===============================================
+    //===============================================
+
+    /** Open Document Image window. **/
+
+    var imgWin = null;
+    var progressWin = null;
+
+    function openDocImage () {
+    	// First lets open up progress window.
+    	var pUrl = "/countyweb/ProgressBar.jsp?message=Loading Document Images...";
+   	 	var pSizing = "top=200,left=200,width=450,height=200,";
+    	var pParams = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0";
+    	progressWin = window.open(pUrl, "pWin", pSizing + pParams);
+
+    	// Now open image window.
+    	var sizing = "top=10,left=10,width=790,height=650,";
+    	var params = "toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1";
+    	var url = "/countyweb/imageViewApplet.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+    	//var url = "/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+    	imgWin = window.open(url,"imgWin4672835", sizing + params);
+    	progressWin.focus();
+    }
+
+    //===============================================
+    //===============================================
+	function executeCommand (cmd) {
+
+		if (cmd == "toggledetails")
+			toggleDetails ();
+
+		if (cmd.indexOf ("print") != -1) {
+
+			if (document.getElementById ("docImgView").style.visibility != "visible" && ! inPrint) {
+				alert ("You must choose to view the document image before you can print.");
+				return;
+			}
+
+			var data = "";
+			var printer = "";
+			var	addrdata = "";
+			var		forcePrintWM = null;
+
+			if (arguments.length >= 2)
+				data = arguments[1];
+			if (arguments.length >= 3)
+				printer = arguments[2];
+			if (arguments.length >= 4)
+				addrdata = arguments[3];
+			if(arguments.length >= 5)
+				forcePrintWM = arguments[4];
+
+			document.getElementById("docImgViewFrame").contentWindow.printImage (cmd, data, printer, forcePrintWM);
+		}
+	}
+    
+
+	function isPrinting () {
+
+
+	       	if (document.getElementById("docImgViewFrame") != null && document.getElementById("docImgViewFrame").contentWindow.isPrinting) {
+				return document.getElementById("docImgViewFrame").contentWindow.isPrinting ();
+			}
+
+	}
+
+    //===============================================
+    //===============================================
+	function toggleDetails() {
+
+		if (document.getElementById ("docDetails") == null)
+			return;
+
+		if (document.getElementById ("docDetails").style.display == "none") {
+			document.getElementById ("docDetails").style.display = "";
+			$("#main").layout("expand", "west");
+		}
+		else {
+			document.getElementById ("docDetails").style.display = "none";
+			$("#main").layout("collapse", "west");
+		}
+	}
+	
+	function showImageViewer(show) {
+		if (document.getElementById("docImgViewFrame").contentWindow.viewONE) {
+			if (show)
+				document.getElementById("docImgView").style.visibility = "visible";
+			else
+				document.getElementById("docImgView").style.visibility = "hidden";
+		}
+	}
+
+    //===============================================
+    //===============================================
+	function showBaseImageViewer () {
+		//alert("/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();");
+        if(document.getElementById("docImgViewFrame") != null)
+        	window.frames["docImgViewFrame"].location = "/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+	}
+	
+    //===============================================
+    //===============================================
+    
+//	function showVirtualImageViewer () {
+//       if(document.getElementById("docImgViewFrame") != null) {
+
+//        	parent.reloadNav();
+//        }
+//	}
+
+    //===============================================
+    //===============================================
+	function showInternalImageViewer () {
+        if(document.getElementById("docImgViewFrame") != null) {
+        	window.frames["docImgViewFrame"].location = "/countyweb/search/InstrumentImageViewInternal.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();";
+        	parent.reloadNav();
+        }
+	}
+
+    //===============================================
+    //===============================================
+	function showImage () {
+
+		//alert("showImage: /countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();");
+       	if (document.getElementById("docImgViewFrame") != null)
+   	    	window.frames["docImgViewFrame"].location = "/countyweb/imageViewApplet.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();&manual=true";
+   	    	//window.frames["docImgViewFrame"].location = "/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();&manual=true";
+   	    	
+
+		document.getElementById ("docImgViewMsg").style.visibility = "hidden";
+		document.getElementById ("docImgView").style.visibility = "visible";
+	}
+
+    //===============================================
+    //===============================================
+	function showAltImage (fieldcode, ct, pagect) {
+
+
+		if (document.getElementById("docImgViewFrame") != null) {
+			var		src = "/countyweb/imageViewApplet.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();&fieldcode=" + fieldcode + "&seltab=" + ct + "&manual=true";
+			//var		src = "/countyweb/search/InstrumentImageView.jsp?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();&fieldcode=" + fieldcode + "&seltab=" + ct + "&manual=true";
+
+			if (pagect != '')
+				src += "&pagect=" + pagect;
+
+   	    	window.frames["docImgViewFrame"].location = src;
+		}
+
+		document.getElementById ("docImgViewMsg").style.visibility = "hidden";
+		document.getElementById ("docImgView").style.visibility = "visible";
+	}
+
+    //===============================================
+    //===============================================
+    var		extimage;
+	var		auditkey = "";
+	var		auditdetails = "";
+
+	function showExtImage (path, formula, nofee, ordertype, audit_key, audit_details) {
+
+		auditkey = audit_key;
+		auditdetails = audit_details;
+
+		if (nofee) {
+			completeExtImage(path, false);
+			return;
+		}
+
+		var	src = "/countyweb/print/validatePrint.do?callback=completeExtImage('" + path + "')&feeformula=" + formula + "&viewext=true&ordertype=" + ordertype;
+
+		getScreenCenter(400, 325);
+		extimage = window.open (src, "extimage", "left=" + centerx + ",top=" + centery + ",screenX=" + centerx + ",screenY=" + centery + ",width=400,height=325,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0");
+		extimage.focus();
+	}
+
+	function completeExtImage (path) {
+
+		if (auditkey != "")
+			writeAudit (auditkey, auditdetails);
+
+		if (arguments.length <= 1 || (arguments.length > 1 && arguments[1] == true)) {
+			parent.updateFooter ();
+			extimage.close ();
+		}
+
+		var	src = "/countyweb/imageView.do?imgpath=" + path;
+
+		getScreenCenter(800, 865);
+		var wnd = window.open (src, "viewimage", "left=" + centerx + ",top=" + centery + ",screenX=" + centerx + ",screenY=" + centery + ",width=800,height=865,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1");
+		wnd.focus();
+	}
+
+    //===============================================
+    //===============================================
+	function writeAudit(key, details) {
+
+		var		src = "/countyweb/userAudit.do?instId=4672835&auditkey=" + key + "&auditdetails=" + details;
+		window.frames["auditframe"].location = src;
+		auditkey = auditdetails = "";
+    }
+
+    //===============================================
+    //===============================================
+	function showPrintView () {
+		var	page = document.getElementById("docInfoFrame").contentWindow.getCurrentPage ();
+		var	src = "/countyweb/search/displayDocument.do?searchSessionId=searchJobMain&instId=4672835&instNum=2026023115&instType=AMENDMENT%20OF%20MORTGAGE&assocDoc=undefined&assocParentNum=undefined&parcelNum=undefined&assocType=undefined&onloadAction=parent.documentLoaded();&printview=true&pagenum=" + page;
+
+		getScreenCenter(500, 600);
+		var	wnd = window.open (src, "printview", "left=" + centerx + ",top=" + centery + ",screenX=" + centerx + ",screenY=" + centery + ",width=500,height=600,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1");
+		wnd.focus();
+	}
+    //===============================================
+    //===============================================
+	function showCommentView () {
+
+		window.frames["commentframe"].location  = "userComment.do?instrid=4672835";
+		document.getElementById("commentsdiv").style.visibility = "visible";
+    }
+
+	function hideCommentView () {
+
+		document.getElementById("commentsdiv").style.visibility = "hidden";
+
+    }
+    //===============================================
+    //===============================================
+	function showCriteriaPopup(sessionid, title, e) {
+		if (parent.showCriteriaPopup)
+			parent.showCriteriaPopup (sessionid, title, e);
+	}
+
+    //===============================================
+    //===============================================
+	function getPage () {
+		if (imageDisplayed () == 1 || (imageDisplayed () == 0 && inPrint))
+			return document.getElementById("docImgViewFrame").contentWindow.getPage();
+
+		return 1;
+	}
+
+	function setPage (page) {
+		if (imageDisplayed () == 1 || (imageDisplayed () == 0 && inPrint))
+			document.getElementById("docImgViewFrame").contentWindow.setPage(page);
+	}
+
+    //===============================================
+    //===============================================
+	function getSelectedPages () {
+		if (imageDisplayed () == 1 || (imageDisplayed () == 0 && inPrint))
+			return document.getElementById("docImgViewFrame").contentWindow.getSelectedPages();
+
+		return "";
+	}
+
+	function getNumPages () {
+		if (imageDisplayed () == 1 || (imageDisplayed () == 0 && inPrint))
+			return document.getElementById("docImgViewFrame").contentWindow.getNumPages();
+
+		return "";
+	}
+    
+	function hasImageViewer () {
+		if ((document.getElementById("docImgViewFrame").contentWindow.viewONE || document.getElementById("docImgViewFrame").contentWindow.mainCropperImage)
+			&& document.getElementById("docImgViewFrame").contentWindow.viewerLoaded
+			&& document.getElementById("docImgViewFrame").contentWindow.imageHolder
+			&& document.getElementById("docImgViewFrame").contentWindow.imageHolder.style.display != "none")
+			return true;
+		return false;
+	}
+	
+	function getCurImage () {
+		return document.getElementById("docImgViewFrame").contentWindow.curImage;
+	}
+
+	function getPrintVisibleData () {
+		if (imageDisplayed () == 1 || (imageDisplayed () == 0 && inPrint))
+			return document.getElementById("docImgViewFrame").contentWindow.getPrintVisibleData();
+
+		return "";
+	}
+
+    //===============================================
+    //===============================================
+	function imageDisplayed () {
+		if (false || false)
+			return -1;
+		else if (document.getElementById ("docImgView").style.visibility != "visible" || !hasImageViewer())
+			return 0;
+		return 1;
+	}
+
+	var		inPrint;
+	function showImagePrint(show) {
+		if (show) {
+			if (document.getElementById("docImgViewFrame").contentWindow.printingDifWM != null && document.getElementById("docImgViewFrame").contentWindow.printingDifWM) {
+				document.getElementById("docImgView").style.visibility = "hidden";
+			} else {
+				document.getElementById("docImgView").style.visibility = "visible";
+				if (document.getElementById("docImgViewFrame") != null)				
+					document.getElementById("docImgViewFrame").contentWindow.focus();
+			}
+			inPrint = false;
+		} else {
+			document.getElementById ("docImgView").style.visibility = "hidden";
+			inPrint = true;
+		}
+	}
+
+    //===============================================
+    //===============================================
+	function handleResize () {
+		if (onInitialLoad)
+			return;
+		
+		waitForFinalEvent(function(){
+			resizeMe();
+		}, isIE() ? 250 : 0, "resize search details");	
+	}
+	
+	
+	function resizeMe () {
+	    var height;
+	    var width;
+		if (isMozillaClient ()) {
+			height = window.innerHeight;
+			width = window.innerWidth;
+		}
+		else {
+	        height = window.document.body.clientHeight;
+	        width = window.document.body.clientWidth;
+	    }
+	    
+	    if (height > 20) {
+	        document.getElementById ("docInfoHolder").style.height = height - 10;
+	        document.getElementById ("docInfoFrame").height = height - 52;
+	    }
+	    else {
+	        document.getElementById ("docInfoHolder").style.height = 20;
+	        document.getElementById ("docInfoFrame").height = 20;
+		}
+		
+		var	height = height - 10;	
+		var	width = width - 40;
+		$("#main").layout("resize", {
+			height:height,
+			width:width
+		});
+		
+		try {
+			var mainCenterPanel = $("#main").layout("panel", "center");
+			if (document.getElementById("docImgViewFrame") != null) {
+				document.getElementById("docImgViewFrame").style.height = mainCenterPanel.panel("panel").outerHeight();
+			}
+		} catch(e) {}
+	}
+
+    //===============================================
+    //===============================================
+	function handleOnLoad () {
+    	// moved to ready
+	}
+	
+	function downloadDocImage(instrId, pdfformat, pages, printopt, isPreview) {
+		parent.downloadDocImage(instrId, pdfformat, pages, printopt, isPreview);
+	}	
+	
+    function getPanelState(){
+    
+       	var panelState = {};
+		var requestData = new Array();
+		
+		var westPanel = $("#main").layout("panel", "west");
+       	if (westPanel.length) {
+          	var state = {};
+            state.panel = "west";
+            state.width = westPanel.panel("panel").outerWidth();
+            state.height = westPanel.panel("panel").outerHeight();
+            state.collapsed = false;
+           	requestData.push(state);
+      	}
+      	
+        panelState.state = requestData;
+        return panelState;
+	}
+	
+	function saveSearchDetailsState () {
+	
+		var state = getPanelState();
+		
+	   	$.ajax({
+		    url: "/countyweb/user/searchDetailsState.do",
+		    type: "POST",
+		    dataType: "json",
+		    data: {state: JSON.stringify(state)}
+		});
+	}	
+	
+	function showSelectedPagesMessage () {
+		if (parent.showSelectedPagesMessage)
+			parent.showSelectedPagesMessage();
+		else if (parent.parent) {
+			if (parent.parent.showSelectedPagesMessage)
+				parent.parent.showSelectedPagesMessage();
+			else if (parent.parent.parent && parent.parent.parent.showSelectedPagesMessage)
+				parent.parent.parent.showSelectedPagesMessage();
+		}
+	}
+	
+	function toggleCropper () {
+		document.getElementById("docImgViewFrame").contentWindow.toggleCropper();
+	}
+	
+	function clearAllSelectedPages() {
+        if (typeof document.getElementById("docImgViewFrame").contentWindow.clearAllSelectedPages !== "undefined")
+			document.getElementById("docImgViewFrame").contentWindow.clearAllSelectedPages();
+	}
+	
+	window.onresize=handleResize;
+
+    </script>
+
+</head>
+
+<body onload="handleOnLoad()">
+
+<form name="docNavForm">
+		<input type="hidden" name="searchSessionId" value="searchJobMain">
+		
+<div id="main" class="easyui-layout layout" style="width: 1215px; height: 475px;">		
+	<div class="panel layout-panel layout-panel-west panel-htop layout-split-west" style="width: 500px; left: 0px; top: 0px;"><div id="mainWest" data-options="region:'west',noheader:true,split:true,minWidth:375,maxWidth:750,hideExpandTool:true,expandMode:'dock',collapsedSize:0,
+		onExpand:function(region) {document.getElementById ('docDetails').style.display = '';}" style="width: 495px; height: 475px;" title="" class="panel-body panel-body-noheader layout-body panel-noscroll">
+       	<div id="subWest" class="easyui-layout layout easyui-fluid" data-options="fit:true" style="width: 493px; height: 473px;">
+           	<div class="panel layout-panel layout-panel-north panel-htop" style="width: 493px; left: 0px; top: 0px;"><div data-options="region:'north'" style="width: 493px; height: 34px;" title="" class="panel-body panel-body-noheader layout-body panel-noscroll" id="">
+				<div class="panel panel-htop easyui-fluid" style="display: block; width: 491px;"><div id="docInfoNav" class="easyui-panel panel-body panel-body-noheader panel-body-noborder" data-options="fit:true,border:false" style="padding-left: 4px; padding-right: 4px; width: 491px; height: 32px;" title="">
+					<table class="base" align="center" border="0" width="100%" cellpadding="0" cellspacing="0" height="30px">
+						<tbody><tr height="25" style="vertical-align: middle">
+							<td width="25">
+								<a href="#" onclick="showCriteriaPopup ('searchJobMain', 'Search Criteria', event); return false" title="Show Search Criteria"><img src="/countyweb/images/icons/criteria.gif" border="0"></a>
+							</td>
+<td width="25">
+									<a href="#" onclick="showPrintView(); return false" title="Show Printer Friendly View"><img src="/countyweb/images/icons/printer.gif" border="0"></a>
+								</td>
+<td class="msg1" align="center">
+								&nbsp;History:&nbsp;
+								<select class="easyui-combobox base combobox-f combo-f textbox-f" id="navHistory" style="width: 70%; display: none;" data-options="
+									onChange:function(newVal, oldVal){
+										loadDocFromHistory();
+									},
+									editable:false,
+									formatter: setComboboxBaseStyle
+									" textboxname="navHistory" comboname="navHistory">
+									<option class="base" value="0" selected="">2026023115  AMENDMENT OF MORTGAGE</option>
+									</select><span class="textbox easyui-fluid combo" style="width: 272px;"><span class="textbox-addon textbox-addon-right" style="right: 0px; top: 0px;"><a href="javascript:;" class="textbox-icon combo-arrow" icon-index="0" tabindex="-1" style="width: 26px; height: 20px;"></a></span><input id="_easyui_textbox_input1" type="text" class="textbox-text validatebox-text validatebox-readonly" autocomplete="off" tabindex="" readonly="" placeholder="" style="width: 244px; margin: 0px 26px 0px 0px; padding-top: 0px; padding-bottom: 0px; height: 20px; line-height: 20px;"><input type="hidden" class="textbox-value" name="navHistory" value="0"></span>
+							</td>
+							<td width="22px" align="left">
+								<a href="#" onclick="navToDocument('prev'); return false;"> <img alt="Load Previous Document" src="/countyweb/images/navicons/back.gif" id="previmg" border="0">
+								</a>
+							</td>
+							<td width="22px" align="right">
+								<a href="#" onclick="navToDocument('next'); return false;"> <img alt="Load Next Document" src="/countyweb/images/navicons/next.gif" id="nextimg" border="0">
+								</a>
+							</td>
+						</tr>
+					</tbody></table>
+				</div></div>
+			</div></div>
+           	<div class="panel layout-panel layout-panel-center panel-htop" style="width: 493px; left: 0px; top: 33px;"><div data-options="region:'center'" title="" class="panel-body panel-body-noheader layout-body panel-noscroll" id="" style="width: 493px; height: 440px;">
+				<div class="panel panel-htop easyui-fluid" style="display: block; width: 491px;"><div id="docInfoHolder" class="easyui-panel panel-body panel-body-noheader panel-body-noborder" data-options="fit:true,border:false" style="width: 491px; height: 438px; visibility: visible;" title="">
+<div id="docDetails">
+						<iframe id="docInfoFrame" name="docInfoFrame" src="/countyweb/blank.jsp" frameborder="0" width="100%" height="433" align="top" scrolling="no">
+						</iframe>
+					</div>
+				</div></div>
+			</div></div>	
+		<div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>	
+	</div></div>
+	<div class="panel layout-panel layout-panel-center panel-htop" style="width: 715px; left: 500px; top: 0px;"><div id="mainCenter" data-options="region:'center',noheader:true,border:false" style="width: 715px; height: 475px;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body panel-noscroll">
+		<div id="docImgViewMsg">
+			<br><br><br>
+			<table class="msg1" border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td colspan="3" align="center">
+						To view the image for this document, click a "View Image" link below.</td>
+				</tr>
+
+				<tr>
+					<td width="40%">&nbsp;</td>
+					<td>
+						<br><br><br>
+						<a href="#" class="linknounderbold" onclick="showImage (true); return false"><img id="viewimg" alt="View Document Image" border="0" src="/countyweb/images/icons/image.gif"></a>&nbsp;&nbsp;<a href="#" class="linknounderbold" onclick="showImage (true); return false">View Image</a>
+					</td>
+					<td width="30%">&nbsp;</td>
+				</tr>
+
+</tbody></table>
+		</div>
+
+		<div class="panel panel-htop easyui-fluid" style="display: block; width: 715px;"><div id="docImgView" class="easyui-panel panel-noscroll panel-body panel-body-noheader" data-options="fit:true" style="text-align: center; width: 715px; height: 475px; visibility: visible;" title="">
+
+<iframe id="docImgViewFrame" name="docImgViewFrame" src="/countyweb/blank.jsp" frameborder="0" width="100%" scrolling="no" height="100%" style="height: 475px;">
+				</iframe>
+</div></div>
+	</div></div>
+<div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>
+		<div id="commentsdiv">
+			<iframe name="commentframe" id="commentframe" src="/countyweb/blank.jsp" frameborder="0" width="100%" height="100%" style="border-style:outset; border-width:3" scrolling="no"></iframe>
+		</div>
+
+	<div id="useraudit">
+		<iframe name="auditframe" id="auditframe" width="10" height="10" src="/countyweb/blank.jsp" frameborder="0"></iframe>
+	</div>
+
+	</form>
+
+	<form name="ValidateImageViewForm" method="post" action="/countyweb/user/processEscrow.do">
+		<input type="hidden" name="rawfees" id="rawfees" value="0">
+		<input type="hidden" name="reqescrowpin" id="reqescrowpin" value="false">
+		<input type="hidden" name="jsmethod" id="jsmethod" value="showImage">
+		<input type="hidden" name="actiondetails" id="actiondetails" value="View document image">
+
+		<div class="positions" id="processframe">
+			<iframe name="escrowframe" id="escrowframe" width="30" height="30" frameborder="1" src="/countyweb/blank.jsp">
+		</div>
+	</form>
+
+</body>
+
+</html></iframe></div></form><div class="panel combo-p panel-htop" style="position: absolute; z-index: 10; display: none;"><div class="combo-panel panel-body panel-body-noheader" title="" id=""><div id="navHistory_easyui_combobox_i1_0" class="combobox-item combobox-item-selected"><span class="base">2026023115  AMENDMENT OF MORTGAGE</span></div></div></div></body></html>

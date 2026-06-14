@@ -130,7 +130,20 @@
       "WebFetch(domain:www.googleapis.com)",
       "Bash(curl -sIL https://rebbadvisors.com)",
       "Bash(npx eslint *)",
-      "Bash(curl -sI \"https://ykuenmwfxecmmqichwit.supabase.co/storage/v1/object/public/prospect-audits/946330d2-4a87-473b-9a4a-70d6c4584a07/packet-1777982192.html\")"
+      "Bash(curl -sI \"https://ykuenmwfxecmmqichwit.supabase.co/storage/v1/object/public/prospect-audits/946330d2-4a87-473b-9a4a-70d6c4584a07/packet-1777982192.html\")",
+      "Bash(set -e)",
+      "Bash(mv scripts/debug scripts/_archive/debug)",
+      "Bash(gh secret *)",
+      "Bash(ls -1 \".claude/projects/C--Users-alexs-OneDrive-Desktop-alexprompts/memory/\")",
+      "Bash(ls -1 'C:\\\\Users\\\\alexs/.claude/projects/C--Users-alexs-OneDrive-Desktop-alexprompts/memory/')",
+      "Bash(cat src/proxy.ts)",
+      "Bash(cat proxy.ts)",
+      "Bash(nslookup alexprompts.com)",
+      "Bash(nslookup www.alexprompts.com)",
+      "Bash(curl -s -m 20 https://alexprompts.com)",
+      "Bash(curl -s -m 20 -I https://alexprompts.com)",
+      "WebFetch(domain:www.piratewires.com)",
+      "WebFetch(domain:www.baseborn.studio)"
     ]
   }
 }

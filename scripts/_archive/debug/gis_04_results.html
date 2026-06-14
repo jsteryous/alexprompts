@@ -1,0 +1,152 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Page-Exit" content="Alpha(opacity=100)"><meta http-equiv="X-UA-Compatible" content="IE=EDGE"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"><title>
+	Vehicle &amp; Other Taxes Search - Greenville County, S.C.
+</title><link href="css/IconFont.css" rel="stylesheet"><link href="css/uniform.default.css" type="text/css" rel="Stylesheet" media="screen"><link href="css/stylesheet.css?v1.02" type="text/css" rel="Stylesheet" media="screen"><link href="//www.greenvillecounty.org/newlook/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet"><link href="css/print.css" type="text/css" rel="Stylesheet" media="print">
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script src="//www.greenvillecounty.org/newlook/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="js/highlight.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+</head>
+<body>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bindTextboxHighlightEvent();
+            //WBegin Warning Events
+            var warningClosed = sessionStorage['warningClosed'];
+            if (!warningClosed) {
+                $('.siteWarningDiv').show();
+            }
+            $('.closeSiteWarning').click(function () {
+                $('.siteWarningDiv').slideUp();
+                sessionStorage['warningClosed'] = true;
+            });
+            //End Warning Events
+        });
+
+        //        function setTitleText(args) {
+        //            var title = document.getElementById("titleText");
+        //            title.innerHTML = args;
+        //        }
+
+        function bindTextboxHighlightEvent() {
+
+            $('input[type=text]').focus(function () {
+                $(this).css("border", "solid 1px #666");
+            });
+
+            $('input[type=text], textarea').blur(function () {
+                $(this).css("border", "solid 1px #B1B0B2");
+            });
+        }
+
+        //Filters user input, allows only numbers and select other keys
+        function isLegalInput() {
+            // Allow only delete (46) , backspace (8), left arrow (37), right arrow (39), enter (13), tab (9), spacebar  
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9 || event.keyCode == 32) {
+                return true;
+            }
+            else if ((event.ctrlKey) && (event.keyCode == 67 || event.keyCode == 86 || event.keyCode == 88)) {
+                return true;
+            }
+            else {
+                // Ensure that it is a number and stop the keypress
+                if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                    return false;
+                }
+            }
+        }
+
+        function isAlphaNumeric() {
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9 || event.keyCode == 32) {
+                return true;
+            }
+            if (event.keyCode == 32)
+                return true;
+            if (48 <= event.keyCode && event.keyCode <= 57)
+                return true;
+            if (65 <= event.keyCode && event.keyCode <= 90)
+                return true;
+            if (96 <= event.keyCode && event.keyCode <= 122)
+                return true;
+            return false;
+
+        }
+
+        //Filters user input, allows only numbers and select other keys
+        function isLegalZipInput() {
+
+            // Allow only delete (46) , backspace (8), left arrow (37), right arrow (39), enter (13), tab (9), spacebar  
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9) {
+                return true;
+            }
+            else {
+                // Ensure that it is a number and stop the keypress
+                return /^\d/.test(String.fromCharCode(event.keyCode)) && !event.shiftKey;
+            }
+        }
+
+    </script>
+
+    <form name="aspnetForm" method="post" action="RealTaxesResults.aspx?SearchType=Name&amp;Criteria=BLVD+LOWCOUNTRY" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTc4MTkyMDM2MGQYAQUdY3RsMDAkYm9keUNvbnRlbnQkbHR2X1Jlc3VsdHMPPCsACgEIZmQ/JjdWelRNjQDYKXPtfj4lQTaffQ==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="28200EFC">
+</div>
+        <div class="header">
+            <div class="innerHeader">
+                <a href="http://www.greenvillecounty.org/" id="banner" title="Go to Greenville County Home Page"></a>
+                <div class="Nav">
+                    <a id="lnk_Home" href="http://www.greenvillecounty.org/" title="Go to the Greenville County Home Page">Home</a>
+                    <span>|</span> <a id="lnk_Search" title="Search Vehicle, Real Estate, and Other Taxes" href="Default.aspx">Search</a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var criteria = document.getElementById("ctl00_bodyContent_lbl_SearchCriteria").innerText;
+            $("#tbl_Results").highlight(criteria);
+
+            $("#tbl_Results").tablesorter({ widgets: ['zebra'] });
+
+        });
+
+    </script>
+    <h1 class="smaller">Real Property Taxes Search Results</h1>
+    <div class="infoDiv">
+
+        <span style="font-weight: bold;">Search Results For:</span>&nbsp;<span id="ctl00_bodyContent_lbl_SearchCriteria">BLVD LOWCOUNTRY</span>
+        <br>
+        <span style="font-weight: bold;">Results Found:</span>&nbsp;<span id="ctl00_bodyContent_lbl_Count">0</span>
+    </div>
+    <center>
+        
+    </center>
+
+        </div>
+        <div id="footerContainer">
+            <table class="footer">
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="https://www.greenvillecounty.org/">County Home</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/AnswerBook/Browser.aspx">Browser Information</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/LegalNotice.aspx">Legal Notice</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/PrivacyStatement.aspx">Privacy Statement</a>&nbsp;•&nbsp; 
+                            <a href="mailto:webmaster@greenvillecounty.org">Contact Us</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+
+</body></html>

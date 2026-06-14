@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head>
+    <base href="https://viewer.greenvillecounty.org/countyweb/transaction/transAddDoc.jsp"><title>transAddDoc.jsp</title>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/easyui.css?ver=6">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/icon.css?ver=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/fontawesome/css/font-awesome.css">	
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/styles.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/Greenville/countystyles.css?ver=1">
+<style type="text/css">
+		<!--
+		a:hover { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color:#903326; text-decoration:underline }
+		all.positions {}
+		#tabbar {
+			position:absolute; 
+			left:-9; top:-8; width:100%;
+		}
+		#data {
+			width:100%;height:100%;
+		}				
+		#content {position:absolute; left:10; top:0;}
+		#loadbkpgdiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#loadinstdiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#loadexnumgendiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#printButton {text-align:right;}
+		@media print
+		{    
+		    .no-print, .no-print *
+		    {
+		        display: none !important;
+		    }
+		}		
+		.l-btn-text {
+		    font-size: 11px;
+		}
+		.textbox {margin-bottom:4px;}
+		
+			.panel-noscroll {padding-top:30px;}
+
+
+	    fieldset { padding-top:6px; padding-left:6px; margin-top:4px; border: 0px}
+	    .l-btn-text {font-size:12px}
+		-->
+	</style>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+	<script src="/countyweb/scripts/transAddDoc.js?ver=6"></script>
+	<script src="/countyweb/scripts/utils.js?ver=9"></script>
+	<script src="/countyweb/scripts/validate.js?ver=2"></script>
+	<script src="/countyweb/scripts/dhtml.js?ver=2"></script>
+	<script src="/countyweb/scripts/mousemove.js?ver=2"></script>
+	<script src="/countyweb/scripts/jquery/jquery-3.6.3.min.js"></script>
+	<script src="/countyweb/scripts/jquery/easyui/jquery.easyui.min.js"></script>
+	<script src="/countyweb/scripts/jquery/jqueryutils.js?ver=28"></script>
+	
+    <script language="JavaScript" type="text/javascript">
+
+		var		unexpectedData = "";
+		var		muniCount = 0;
+		var		multiCount = 0;
+		var		currRowEdit = -1;
+		var		executing = false;
+		var		itemClicked = false;
+		var		gridIsReady = false;
+		
+		$(document).ready(function(){
+			gridIsReady = true;
+			
+			$(".combobox-item").bind("click", function(event) {
+				itemClicked = true;								
+			});
+			handleResize ();
+			// EXECUTE ONLOAD ACTION.
+			
+
+			if(typeof(parent.refreshStatus) != "undefined") {
+				parent.refreshStatus (12);
+			}
+
+			if (unexpectedData != "" && "info" == "debug")
+				alert ("Unexpected Data Types: " + unexpectedData);
+		});
+
+
+	    function processKey (key, ctrl, alt) {
+	    	if (parent.processKey)
+				parent.processKey(key, ctrl, alt);
+	    }
+
+		function showMap (addr) {
+			getScreenCenter(800, 865);
+            var goUrl = "/countyweb/transaction/addrMap.jsp?addr=" + addr;
+			var	wnd = window.open (goUrl, "AddressMap", "left=" + centerx + ",top=" + centery + ",screenX=" + centerx + ",screenY=" + centery + ",width=800,height=865,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1");
+			wnd.focus();
+		}
+	    
+	    function handleOnLoad () {
+	    	// moved to ready
+		}
+		
+		function validateData () {
+
+
+
+			return true;
+		}
+
+		function validateMunicipalityData (validate) {
+
+			var			munidata = "";
+			var			schooldata = "";
+			var			totalpercent = 0;
+			
+
+			return true;
+		}
+
+		function validateMultiData (validate) {
+
+			var			multidata = "";
+			var			totalpercent = 0;
+
+			return true;
+		}
+
+		function executeCommand (nextCmd) {
+
+			var			validate = false;
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			if (arguments.length == 4)
+				document.DocInfoForm.cmd.value = arguments[3];
+			else
+				document.DocInfoForm.cmd.value = "save";
+
+			document.DocInfoForm.nextcmd.value = nextCmd;
+
+			// see if target is passed in
+			if (arguments.length == 3)
+				document.DocInfoForm.target = arguments[2];
+			else
+				document.DocInfoForm.target = "bodyframe";	// else use default frame
+
+			document.DocInfoForm.action = "transAddDoc.do";
+			document.DocInfoForm.submit ();
+		}
+
+		function deleteDocument (cmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+		}
+
+		function navigateDocPage (cmd, nextCmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			document.DocInfoForm.cmd.value = cmd;
+			document.DocInfoForm.nextcmd.value = nextCmd;
+			document.DocInfoForm.target = "";
+			document.DocInfoForm.action = "transAddDoc.do";
+
+			document.DocInfoForm.submit ();
+		}
+
+		function navigateDocPageNum (page, nextCmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			document.DocInfoForm.cmd.value = "gotoPage";
+			document.DocInfoForm.gotopage.value = page;
+			document.DocInfoForm.nextcmd.value = nextCmd;
+			document.DocInfoForm.target = "";
+			document.DocInfoForm.action = "transAddDoc.do";
+
+			if (arguments.length == 3)
+				document.DocInfoForm.newinstrid.value = arguments[2];
+			document.DocInfoForm.submit ();
+		}
+
+		function handleReturn () {
+
+			if (baseNameFC != "") {
+				if (baseNameTarget.indexOf("parcel") == -1) {
+					if (currRowEdit == -1)
+						addName (baseNameFC, baseNameTarget);
+					else
+						updateName (baseNameFC, baseNameTarget);
+
+					jqClearNameFields (baseNameFC);
+				}
+				else {
+					if (currRowEdit == -1)
+						addParcel (baseNameFC, baseNameTarget);
+					else
+						updateParcel (baseNameFC, baseNameTarget);
+
+					jqClearParcelFields (baseNameFC);
+				}
+
+				return false;
+			}
+
+			if (false && parcelIdFocus) {
+				executeCommand('LookupParcel', false, '');
+				return false;
+			}
+		}
+
+		function handleResize () {
+			if (!gridIsReady)
+				return;
+
+		    var     height;
+		    var		width;
+
+			if (isMozillaClient ()) {
+				height = window.innerHeight;
+				width = window.innerWidth;
+			}
+			else {
+		        height = window.document.body.clientHeight;
+		        width = window.document.body.clientWidth;
+		    }
+
+
+				var  ht_above = 53;
+
+
+		    if (height > ht_above) {
+		        document.getElementById ("data").style.height = height - ht_above;
+		    }
+		    else {
+		        document.getElementById ("data").style.height = ht_above;
+		    }
+		    
+			if (document.getElementById ("tabbar") != null) {
+		    	document.getElementById ("tabbar").style.width = width + 18;
+		 	}		    
+		    
+
+		}
+		
+		window.onresize=handleResize;
+		
+    </script>
+</head>
+
+  <body class="base" onload="handleOnLoad ()">
+
+	<form name="DocInfoForm" action="transAddDoc.do" method="post" target="bodyframe" class="panel-noscroll">
+		<input type="hidden" name="nextcmd" id="nextcmd" value="">
+		<input type="hidden" name="cmd" id="cmd" value="">
+		<input type="hidden" name="page" id="page" value="trans.docinfo">
+		<input type="hidden" name="munidata" id="munidata" value="">
+		<input type="hidden" name="multidata" id="multidata" value="">
+		<input type="hidden" name="basefieldcode" id="basefieldcode" value="">
+		<input type="hidden" name="rownum" id="rownum" value="">
+		<input type="hidden" name="readonly" id="readonly" value="true">
+		<input type="hidden" name="gotopage" id="gotopage" value="0">
+		<input type="hidden" name="newinstrid" id="newinstrid" value="">
+		<input type="hidden" name="usage" value="ADVSCH">
+		<input type="hidden" name="widthpercent" value="">
+		<input type="hidden" name="columns" value="1">
+		<input type="hidden" name="skipDBSwitch" value="true">
+		<input type="hidden" name="searchSessionId" value="searchJobMain">
+
+<input type="hidden" name="pagenum" id="pagenum" value="12">
+<input type="hidden" name="subnavmenu" id="subnavmenu" value="null">
+
+			<div class="positions" id="tabbar" style="width: 509px;">
+				<iframe name="tabs" id="tabs" src="/countyweb/tabbar.do?subnav=1&amp;seltab=12&amp;usage=ADVSCH&amp;maxpage=3" width="100%" height="45" scrolling="no" frameborder="0"></iframe>
+			</div>
+<div class="panel panel-htop easyui-fluid" style="display: block; width: 475px;"><div class="easyui-panel panel-body panel-body-noheader panel-body-noborder" id="data" data-options="fit:true,border:false" title="" style="width: 475px; height: 380px;">
+<p></p>
+
+
+	</div></div>
+
+	</form>
+
+  
+
+</body></html>

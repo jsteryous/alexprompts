@@ -1,0 +1,662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en"><head>
+    <base href="https://viewer.greenvillecounty.org/countyweb/transaction/transAddDoc.jsp"><title>transAddDoc.jsp</title>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/easyui.css?ver=6">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/jquery/easyui/icon.css?ver=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="/countyweb/styles/fontawesome/css/font-awesome.css">	
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/styles.css?ver=1">
+	<link rel="stylesheet" type="text/css" href="/countyweb/styles/Greenville/countystyles.css?ver=1">
+<style type="text/css">
+		<!--
+		a:hover { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color:#903326; text-decoration:underline }
+		all.positions {}
+		#tabbar {
+			position:absolute; 
+			left:-9; top:-8; width:100%;
+		}
+		#data {
+			width:100%;height:100%;
+		}				
+		#content {position:absolute; left:10; top:0;}
+		#loadbkpgdiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#loadinstdiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#loadexnumgendiv {position:absolute; left:350; top:0; width:100; height:3; visibility:hidden; z-index:2;}
+		#printButton {text-align:right;}
+		@media print
+		{    
+		    .no-print, .no-print *
+		    {
+		        display: none !important;
+		    }
+		}		
+		.l-btn-text {
+		    font-size: 11px;
+		}
+		.textbox {margin-bottom:4px;}
+		
+			.panel-noscroll {padding-top:30px;}
+
+
+	    fieldset { padding-top:6px; padding-left:6px; margin-top:4px; border: 0px}
+	    .l-btn-text {font-size:12px}
+		-->
+	</style>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+	<script src="/countyweb/scripts/transAddDoc.js?ver=6"></script>
+	<script src="/countyweb/scripts/utils.js?ver=9"></script>
+	<script src="/countyweb/scripts/validate.js?ver=2"></script>
+	<script src="/countyweb/scripts/dhtml.js?ver=2"></script>
+	<script src="/countyweb/scripts/mousemove.js?ver=2"></script>
+	<script src="/countyweb/scripts/jquery/jquery-3.6.3.min.js"></script>
+	<script src="/countyweb/scripts/jquery/easyui/jquery.easyui.min.js"></script>
+	<script src="/countyweb/scripts/jquery/jqueryutils.js?ver=28"></script>
+	
+    <script language="JavaScript" type="text/javascript">
+
+		var		unexpectedData = "";
+		var		muniCount = 0;
+		var		multiCount = 0;
+		var		currRowEdit = -1;
+		var		executing = false;
+		var		itemClicked = false;
+		var		gridIsReady = false;
+		
+		$(document).ready(function(){
+			gridIsReady = true;
+			
+			$(".combobox-item").bind("click", function(event) {
+				itemClicked = true;								
+			});
+			handleResize ();
+			// EXECUTE ONLOAD ACTION.
+			
+
+			if( ("parent.documentLoaded();".indexOf("frames['bodyframe']") != -1 && typeof(top.frames['bodyframe'])) != "undefined"
+					&& parent.documentLoaded) {
+
+				parent.documentLoaded();
+			}
+			// INTERNAL SEARCH > JUST SEARCH FRAMES > NO BODYFRAME
+			else if( "parent.documentLoaded();".indexOf("frames['bodyframe']") != -1) {
+
+				var newCall = "parent.documentLoaded();".replace("frames['bodyframe'].","");
+				try {
+					eval(newCall);
+				}
+				catch(e) {
+					alert("Error loading instrument details: " + e);
+				}
+			}
+			
+
+			if(typeof(parent.refreshStatus) != "undefined") {
+				parent.refreshStatus (1);
+			}
+
+			if (unexpectedData != "" && "info" == "debug")
+				alert ("Unexpected Data Types: " + unexpectedData);
+		});
+
+
+	    function processKey (key, ctrl, alt) {
+	    	if (parent.processKey)
+				parent.processKey(key, ctrl, alt);
+	    }
+
+		function showMap (addr) {
+			getScreenCenter(800, 865);
+            var goUrl = "/countyweb/transaction/addrMap.jsp?addr=" + addr;
+			var	wnd = window.open (goUrl, "AddressMap", "left=" + centerx + ",top=" + centery + ",screenX=" + centerx + ",screenY=" + centery + ",width=800,height=865,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1");
+			wnd.focus();
+		}
+	    
+	    function handleOnLoad () {
+	    	// moved to ready
+		}
+		
+		function validateData () {
+
+
+							if (document.getElementById ("fc1") != null && $("#fc1").textbox("getValue") != "") {
+
+								var		newDate = validateDate ($("#fc1").textbox("getValue"));
+
+								if (newDate == "") {
+									alert ($("#fc1").textbox("getValue") + " is not a valid date.  Dates must be of the format: mm/dd/yyyy.");
+									$("#fc1").textbox("textbox").focus ();
+									return false;
+								}
+								else {
+									$("#fc1").textbox("setValue", newDate);
+								}
+							}
+
+
+							if (document.getElementById ("fc0") != null && $("#fc0").combobox("getValue") == "") {
+								alert ("Instrument Typeis a required field.");
+								$("#fc0").combobox("textbox").focus ();
+								return false;
+							}
+
+							if (document.getElementById ("fc34") != null && $("#fc34").textbox("getValue") != "") {
+
+								var		newMoney = validateMoney ($("#fc34").textbox("getValue"));
+
+								if (newMoney == "") {
+									alert ($("#fc34").textbox("getValue") + " is not a valid money format..");
+									$("#fc34").textbox("textbox").focus ();
+									return false;
+								}
+								else
+									$("#fc34").textbox("setValue", newMoney);
+							}
+
+
+							// check valid number
+							if (document.getElementById ("fc38") != null && $("#fc38").textbox("getValue") != "") {
+								if (! isNumber ($("#fc38").textbox("getValue"))) {
+										alert ("Number of Pagesmust be a number between 1 and 1000.");
+
+									$("#fc38").textbox("textbox").focus ();
+									return false;
+								}
+							}
+
+
+								if (document.getElementById ("fc38") != null && $("#fc38").textbox("getValue") != "") {
+									if (! checkNumberConstraints ($("#fc38").textbox("getValue"), 1, 1000)) {
+										alert ("Number of Pagesmust be a number between 1 and 1000.");
+										$("#fc38").textbox("textbox").focus ();
+										return false;
+									}
+								}
+
+
+			return true;
+		}
+
+		function validateMunicipalityData (validate) {
+
+			var			munidata = "";
+			var			schooldata = "";
+			var			totalpercent = 0;
+			
+
+			return true;
+		}
+
+		function validateMultiData (validate) {
+
+			var			multidata = "";
+			var			totalpercent = 0;
+
+			return true;
+		}
+
+		function executeCommand (nextCmd) {
+
+			var			validate = false;
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			if (arguments.length == 4)
+				document.DocInfoForm.cmd.value = arguments[3];
+			else
+				document.DocInfoForm.cmd.value = "save";
+
+			document.DocInfoForm.nextcmd.value = nextCmd;
+
+			// see if target is passed in
+			if (arguments.length == 3)
+				document.DocInfoForm.target = arguments[2];
+			else
+				document.DocInfoForm.target = "bodyframe";	// else use default frame
+
+			document.DocInfoForm.action = "transAddDoc.do";
+			document.DocInfoForm.submit ();
+		}
+
+		function deleteDocument (cmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+		}
+
+		function navigateDocPage (cmd, nextCmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			document.DocInfoForm.cmd.value = cmd;
+			document.DocInfoForm.nextcmd.value = nextCmd;
+			document.DocInfoForm.target = "";
+			document.DocInfoForm.action = "transAddDoc.do";
+
+			document.DocInfoForm.submit ();
+		}
+
+		function navigateDocPageNum (page, nextCmd) {
+
+			if (executing)
+				return;
+			executing = true;
+
+
+			// perform save action
+			document.DocInfoForm.cmd.value = "gotoPage";
+			document.DocInfoForm.gotopage.value = page;
+			document.DocInfoForm.nextcmd.value = nextCmd;
+			document.DocInfoForm.target = "";
+			document.DocInfoForm.action = "transAddDoc.do";
+
+			if (arguments.length == 3)
+				document.DocInfoForm.newinstrid.value = arguments[2];
+			document.DocInfoForm.submit ();
+		}
+
+		function handleReturn () {
+
+			if (baseNameFC != "") {
+				if (baseNameTarget.indexOf("parcel") == -1) {
+					if (currRowEdit == -1)
+						addName (baseNameFC, baseNameTarget);
+					else
+						updateName (baseNameFC, baseNameTarget);
+
+					jqClearNameFields (baseNameFC);
+				}
+				else {
+					if (currRowEdit == -1)
+						addParcel (baseNameFC, baseNameTarget);
+					else
+						updateParcel (baseNameFC, baseNameTarget);
+
+					jqClearParcelFields (baseNameFC);
+				}
+
+				return false;
+			}
+
+			if (false && parcelIdFocus) {
+				executeCommand('LookupParcel', false, '');
+				return false;
+			}
+		}
+
+		function handleResize () {
+			if (!gridIsReady)
+				return;
+
+		    var     height;
+		    var		width;
+
+			if (isMozillaClient ()) {
+				height = window.innerHeight;
+				width = window.innerWidth;
+			}
+			else {
+		        height = window.document.body.clientHeight;
+		        width = window.document.body.clientWidth;
+		    }
+
+
+				var  ht_above = 53;
+
+
+		    if (height > ht_above) {
+		        document.getElementById ("data").style.height = height - ht_above;
+		    }
+		    else {
+		        document.getElementById ("data").style.height = ht_above;
+		    }
+		    
+			if (document.getElementById ("tabbar") != null) {
+		    	document.getElementById ("tabbar").style.width = width + 18;
+		 	}		    
+		    
+
+		}
+		
+		window.onresize=handleResize;
+		
+    </script>
+</head>
+
+  <body class="base" onload="handleOnLoad ()">
+
+	<form name="DocInfoForm" action="transAddDoc.do" method="post" target="bodyframe" class="panel-noscroll">
+		<input type="hidden" name="nextcmd" id="nextcmd" value="">
+		<input type="hidden" name="cmd" id="cmd" value="">
+		<input type="hidden" name="page" id="page" value="null">
+		<input type="hidden" name="munidata" id="munidata" value="">
+		<input type="hidden" name="multidata" id="multidata" value="">
+		<input type="hidden" name="basefieldcode" id="basefieldcode" value="">
+		<input type="hidden" name="rownum" id="rownum" value="">
+		<input type="hidden" name="readonly" id="readonly" value="true">
+		<input type="hidden" name="gotopage" id="gotopage" value="0">
+		<input type="hidden" name="newinstrid" id="newinstrid" value="">
+		<input type="hidden" name="usage" value="ADVSCH">
+		<input type="hidden" name="widthpercent" value="">
+		<input type="hidden" name="columns" value="1">
+		<input type="hidden" name="skipDBSwitch" value="true">
+		<input type="hidden" name="searchSessionId" value="searchJobMain">
+
+<input type="hidden" name="pagenum" id="pagenum" value="1">
+<input type="hidden" name="subnavmenu" id="subnavmenu" value="null">
+
+			<div class="positions" id="tabbar" style="width: 509px;">
+				<iframe name="tabs" id="tabs" src="/countyweb/tabbar.do?subnav=1&amp;seltab=1&amp;usage=ADVSCH&amp;maxpage=3" width="100%" height="45" scrolling="no" frameborder="0"></iframe>
+			</div>
+<div class="panel panel-htop easyui-fluid" style="display: block; width: 475px;"><div class="easyui-panel panel-body panel-body-noheader panel-body-noborder" id="data" data-options="fit:true,border:false" title="" style="width: 475px; height: 380px;">
+<p></p>
+<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+</table>
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+
+						<tbody><tr style="height:35">
+							<td><br>
+								<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+									<tbody><tr class="sectionheader" style="height:22">
+										<td><nobr>Document Details&nbsp;&nbsp;&nbsp;</nobr>
+	
+<br><hr width="99%">
+</td>
+									</tr>
+								</tbody></table>
+							<br></td>
+						</tr>
+					</tbody></table>
+
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+<tbody><tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc2span" class="base">Instrument Number:</span></td>
+					<td width="50%" style="padding-left: 5px">
+2026023115</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+			<td width="3%">&nbsp;</td>
+			<td width="38%" align="right"><span id="fc1span" class="base">Recorded Date:</span></td>
+			<td width="50%" style="padding-left: 5px">
+04/10/2026 04:40:05 PM</td>
+			
+			<td width="9%">
+
+					&nbsp;
+</td>
+		</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc0span" class="base">Instrument Type:</span></td>
+					<td width="50%" style="padding-left: 5px">
+AMENDMENT OF MORTGAGE</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc3span" class="base">Book Type:</span></td>
+					<td width="50%" style="padding-left: 5px">
+MO</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc4span" class="base">Book:</span></td>
+					<td width="50%" style="padding-left: 5px">
+5867</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc5span" class="base">Page:</span></td>
+					<td width="50%" style="padding-left: 5px">
+5834</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc34span" class="base">Consideration:</span></td>
+					<td width="50%" style="padding-left: 5px">
+</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fc38span" class="base">Number of Pages:</span></td>
+					<td width="50%" style="padding-left: 5px">
+7</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+<tr height="22" valign="top">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right" valign="top"><span id="fc113span" class="base">Remarks - External:</span></td>
+					<td width="50%" style="padding-left: 5px">
+</td>
+
+					<td width="9%">
+							&nbsp;
+</td>
+				</tr>
+</tbody></table>
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+
+						<tbody><tr style="height:35">
+							<td><br>
+								<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+									<tbody><tr class="sectionheader" style="height:22">
+										<td><nobr>Names&nbsp;&nbsp;&nbsp;</nobr>
+	
+<br><hr width="99%">
+</td>
+									</tr>
+								</tbody></table>
+							<br></td>
+						</tr>
+					</tbody></table>
+
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+</table>
+
+<script>
+					firstCtrlId = "fc2";
+					firstCtrlIdType = "text";
+				</script>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+					<tbody><tr class="subsectionheader" height="20" valign="top">
+						<td width="3%">&nbsp;</td>
+						<td><nobr><span id="7header" class="subsectionheader">Grantor:</span></nobr>&nbsp;&nbsp;&nbsp;</td>
+
+</tr>
+				</tbody></table>
+
+<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+					<tbody><tr>
+						<td width="20">&nbsp;</td>
+						<td>
+							<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+
+<tbody><tr class="evenrow">
+										<td width="600">&nbsp;
+HUNTER QUINN HOMES LLC</td>
+
+</tr>
+
+</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+
+</table><table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+</table>
+
+<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+						<tbody><tr height="28">
+							<td>&nbsp;</td>
+						</tr>
+					</tbody></table>
+<script>
+					firstCtrlId = "fc2";
+					firstCtrlIdType = "text";
+				</script>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+					<tbody><tr class="subsectionheader" height="20" valign="top">
+						<td width="3%">&nbsp;</td>
+						<td><nobr><span id="6header" class="subsectionheader">Grantee:</span></nobr>&nbsp;&nbsp;&nbsp;</td>
+
+</tr>
+				</tbody></table>
+
+<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+					<tbody><tr>
+						<td width="20">&nbsp;</td>
+						<td>
+							<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+
+<tbody><tr class="evenrow">
+										<td width="600">&nbsp;
+PINNACLE BANK A TENNESSEE BANK</td>
+
+</tr>
+
+</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+
+</table><table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+</table>
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+
+						<tbody><tr style="height:35">
+							<td><br>
+								<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+									<tbody><tr class="sectionheader" style="height:22">
+										<td><nobr>Return Address&nbsp;&nbsp;&nbsp;</nobr>
+	
+<br><hr width="99%">
+</td>
+									</tr>
+								</tbody></table>
+							<br></td>
+						</tr>
+					</tbody></table>
+
+					<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+</table>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+			    <tbody><tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fcname138span" class="base">Name:</span></td>
+					<td width="50%" style="padding-left: 5px">
+Patterson &amp; Associates, PA</td>
+
+					<td width="9%">
+								&nbsp;
+</td>
+				</tr>
+
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fcaddr138span" class="base">Address:</span></td>
+					<td width="50%" style="padding-left: 5px">
+1088 N CHURCH ST</td>
+
+					<td width="9%">
+								&nbsp;
+</td>
+				</tr>
+
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fcaddr1138span" class="base">Address 1:</span></td>
+					<td width="50%" style="padding-left: 5px">
+</td>
+
+					<td width="9%">
+						&nbsp;
+					</td>
+				</tr>
+
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fccity138span" class="base">City:</span></td>
+					<td width="50%" style="padding-left: 5px">
+GREENVILLE</td>
+
+					<td width="9%">
+						&nbsp;
+					</td>
+				</tr>
+<tr height="22">
+					<td width="3%">&nbsp;</td>
+					<td width="38%" align="right"><span id="fcstate138span" class="base">State:</span></td>
+					<td width="50%" style="padding-left: 5px">
+						<table class="base" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+							<tbody><tr height="22">
+								<td width="40%">
+SC</td>
+								
+<td width="20%" align="right"><span id="fczip138span" class="base">Zip:</span></td>
+								<td width="40%" style="padding-left: 5px">
+29601-1639</td>
+</tr>
+						</tbody></table>
+					</td>
+					<td width="9%">&nbsp;</td>
+				</tr>
+				
+</tbody></table>
+
+				<table class="base" width="100%" cellpadding="0" cellspacing="0" align="center">
+</table>
+
+	</div></div>
+
+	</form>
+
+  
+
+</body></html>

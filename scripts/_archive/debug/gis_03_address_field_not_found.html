@@ -1,0 +1,490 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Page-Exit" content="Alpha(opacity=100)"><meta http-equiv="X-UA-Compatible" content="IE=EDGE"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"><title>
+	Vehicle &amp; Other Taxes Search - Greenville County, S.C.
+</title><link href="css/IconFont.css" rel="stylesheet"><link href="css/uniform.default.css" type="text/css" rel="Stylesheet" media="screen"><link href="css/stylesheet.css?v1.02" type="text/css" rel="Stylesheet" media="screen"><link href="//www.greenvillecounty.org/newlook/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet"><link href="css/print.css" type="text/css" rel="Stylesheet" media="print">
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script src="//www.greenvillecounty.org/newlook/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="js/highlight.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+</head>
+<body>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bindTextboxHighlightEvent();
+            //WBegin Warning Events
+            var warningClosed = sessionStorage['warningClosed'];
+            if (!warningClosed) {
+                $('.siteWarningDiv').show();
+            }
+            $('.closeSiteWarning').click(function () {
+                $('.siteWarningDiv').slideUp();
+                sessionStorage['warningClosed'] = true;
+            });
+            //End Warning Events
+        });
+
+        //        function setTitleText(args) {
+        //            var title = document.getElementById("titleText");
+        //            title.innerHTML = args;
+        //        }
+
+        function bindTextboxHighlightEvent() {
+
+            $('input[type=text]').focus(function () {
+                $(this).css("border", "solid 1px #666");
+            });
+
+            $('input[type=text], textarea').blur(function () {
+                $(this).css("border", "solid 1px #B1B0B2");
+            });
+        }
+
+        //Filters user input, allows only numbers and select other keys
+        function isLegalInput() {
+            // Allow only delete (46) , backspace (8), left arrow (37), right arrow (39), enter (13), tab (9), spacebar  
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9 || event.keyCode == 32) {
+                return true;
+            }
+            else if ((event.ctrlKey) && (event.keyCode == 67 || event.keyCode == 86 || event.keyCode == 88)) {
+                return true;
+            }
+            else {
+                // Ensure that it is a number and stop the keypress
+                if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                    return false;
+                }
+            }
+        }
+
+        function isAlphaNumeric() {
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9 || event.keyCode == 32) {
+                return true;
+            }
+            if (event.keyCode == 32)
+                return true;
+            if (48 <= event.keyCode && event.keyCode <= 57)
+                return true;
+            if (65 <= event.keyCode && event.keyCode <= 90)
+                return true;
+            if (96 <= event.keyCode && event.keyCode <= 122)
+                return true;
+            return false;
+
+        }
+
+        //Filters user input, allows only numbers and select other keys
+        function isLegalZipInput() {
+
+            // Allow only delete (46) , backspace (8), left arrow (37), right arrow (39), enter (13), tab (9), spacebar  
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 13 || event.keyCode == 9) {
+                return true;
+            }
+            else {
+                // Ensure that it is a number and stop the keypress
+                return /^\d/.test(String.fromCharCode(event.keyCode)) && !event.shiftKey;
+            }
+        }
+
+    </script>
+
+    <form name="aspnetForm" method="post" action="Default.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjE0MzY0NzM1N2RkdsqAlUzBvoBWHaQ5CQQrLLNsJLE=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="E242C9CD">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCwKqqMCHCAKqq4XFBwKJzsH2DwL0ssDVAQK/6b3uAwKyhfnwCALNqNHABgL32eMmArjdq9IDAsyU2egGAtLW464BHhqdMwQQ9UY/P8DD+uwicp7azaU=">
+</div>
+        <div class="header">
+            <div class="innerHeader">
+                <a href="http://www.greenvillecounty.org/" id="banner" title="Go to Greenville County Home Page"></a>
+                <div class="Nav">
+                    <a id="lnk_Home" href="http://www.greenvillecounty.org/" title="Go to the Greenville County Home Page">Home</a>
+                    <span>|</span> <a id="lnk_Search" title="Search Vehicle, Real Estate, and Other Taxes" href="Default.aspx">Search</a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            
+
+<!--[if lt IE 9 ]>
+<style>
+    h6 
+    {
+    margin-top:35px;
+    }
+</style>
+<![endif]-->
+
+
+<style type="text/css">
+@media (-webkit-min-device-pixel-ratio:0) {
+   .SearchType
+   {
+      margin-bottom:50px;
+   }
+}
+</style>
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+         var previousLink = readCookie("searchCategory");
+          
+            if (previousLink) {
+                    toggleTextBoxes(previousLink);
+            }
+            else {
+                toggleTextBoxes("Car");
+            }
+                  
+            if ($(window).width() > 600) {
+                $('input[type="text"]').tooltip({
+                    hide: false,
+                    position: { my: "left+15 center", at: "right center" }
+                }).off("mouseover mouseout");
+            }
+            
+
+        $("#ctl00_bodyContent_txt_AccountNumber").tooltip({
+                content: "Please enter an 18 or 13 digit Account # <br /><br />Example: <label style='font-weight:bold';>1999 000001212 66 001</label>"
+        });
+        
+         $("#ctl00_bodyContent_txt_Name").tooltip({
+                content: "Please enter a name using Last Name First Name <br /><br /> Example: <label style='font-weight:bold'>Doe John</label> or you may search on a Business name <br /> Example: <label style='font-weight:bold'>B &amp; B Toys Ind</label>"
+        });
+        
+         $("#ctl00_bodyContent_txt_StateFileNumber").tooltip({
+                content: "Please enter your 8 digit SCDOR Reference ID Number<br /><br /> Example: <label style='font-weight:bold';>52307352</label>"
+        });
+        
+         $("#ctl00_bodyContent_txt_MapNumber").tooltip({
+                content: "Please enter your 13 digit Map Number<br /><br /> Example: <label style='font-weight:bold';>1234567890123</label>"
+        });
+        
+       
+         $("#ctl00_bodyContent_txt_CountyFileNumber").tooltip({
+                content: "Please enter your 5 digit County Account Number<br /><br /> Example: <label style='font-weight:bold';>05448</label>"
+        });
+        
+         $("#ctl00_bodyContent_txt_PermitNumber").tooltip({
+                content: "Please enter your 7 digit Permit Number<br /><br /> Example: <label style='font-weight:bold';>1234567</label>"
+        });
+                
+         $("#ctl00_bodyContent_txt_TitleNumber").tooltip({
+                content: "lease enter your Boat or Motor Title #<br /><br /> Example: <label style='font-weight:bold';>WAA232970</label>"
+        });
+        
+          $("#ctl00_bodyContent_txt_VIN").tooltip({
+                content: "Please enter your Vin Number<br /><br /> Example: <label style='font-weight:bold';>CCE6JN601130</label>"
+        });
+
+            
+      });
+
+        function hideAndClearMapNumber() {
+            document.getElementById("div_MapNumber").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_MapNumber").value = "";
+        }
+
+        function hideAndClearCountyFile() {
+            document.getElementById("div_CountyFile").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_CountyFileNumber").value = "";
+        }
+
+        function hideAndClearStateFile() {
+            document.getElementById("div_StateFile").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_StateFileNumber").value = "";
+        }
+
+        function hideAndClearVINNumber() {
+            document.getElementById("div_VIN").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_VIN").value = "";
+        }
+
+        function hideAndClearPermitNumber() {
+            document.getElementById("div_PermitNumber").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_PermitNumber").value = "";
+        }
+
+        function hideAndClearTitleNumber() {
+            document.getElementById("div_TitleNumber").style.display = "none";
+            document.getElementById("ctl00_bodyContent_txt_TitleNumber").value = "";
+        }
+
+        function toggleTextBoxes(category) {
+            var searchCategory = document.getElementById("ctl00_bodyContent_hdn_SearchCategory");
+
+            if (category == "Car") {
+                document.getElementById("div_VIN").style.display = "";
+                document.getElementById("ctl00_bodyContent_lnk_Search").innerText = "Search Vehicles";
+                hideAndClearStateFile();
+                hideAndClearCountyFile();
+                hideAndClearMapNumber();
+                hideAndClearPermitNumber();
+                hideAndClearTitleNumber();
+                searchCategory.value = "Car";
+                selectSearchType(document.getElementById('lnk_car'), document.getElementById('lnk_RealEstate'), document.getElementById('lnk_Other'));
+            }
+
+            if (category == "Real Estate") {
+                document.getElementById("div_MapNumber").style.display = "";
+                document.getElementById("ctl00_bodyContent_lnk_Search").innerText = "Search Real Estate";
+                hideAndClearVINNumber();
+                hideAndClearStateFile();
+                hideAndClearCountyFile();
+                hideAndClearPermitNumber();
+                hideAndClearTitleNumber();
+                searchCategory.value = "Real Estate";
+                selectSearchType(document.getElementById('lnk_RealEstate'), document.getElementById('lnk_car'), document.getElementById('lnk_Other'));
+            }
+
+            if (category == "Other") {
+                document.getElementById("ctl00_bodyContent_lnk_Search").innerText = "Search Other";
+                document.getElementById("div_StateFile").style.display = "";
+                document.getElementById("div_CountyFile").style.display = "";
+                document.getElementById("div_PermitNumber").style.display = "";
+                document.getElementById("div_TitleNumber").style.display = "";
+
+                hideAndClearVINNumber();
+                hideAndClearMapNumber();
+                searchCategory.value = "Other";
+                selectSearchType(document.getElementById('lnk_Other'), document.getElementById('lnk_RealEstate'), document.getElementById('lnk_car'));
+            }
+
+          
+        }
+
+        function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+
+        }
+
+        function showTooltip(args) {
+            var status = document.getElementById("lbl_Tooltip");
+            status.innerHTML = args;
+        }
+
+        function hideTooltip() {
+            var status = document.getElementById("lbl_Tooltip");
+
+            status.innerHTML = "";
+        }
+
+
+        //sets hidden field to search category (vehicle, real estate, other) chosen so when user hits back button
+        //it is retained
+        function setSearchCategory() {
+            createCookie("searchCategory", document.getElementById("ctl00_bodyContent_hdn_SearchCategory").value);
+        }
+
+        function selectSearchType(linkClicked, link2, link3) {
+
+            linkClicked.style.color = "#3079C0";
+         
+
+            link2.style.color = "#555";
+            link3.style.color = "#555";
+           
+
+            var searchCategory = document.getElementById("ctl00_bodyContent_hdn_SearchCategory");
+
+            if (linkClicked.id == "lnk_car") {
+                searchCategory.value = "Car";
+            }
+
+            if (linkClicked.id == "lnk_RealEstate") {
+                searchCategory.value = "Real Estate";
+            }
+
+            if (linkClicked.id == "lnk_Other") {
+                searchCategory.value = "Other";
+            }
+
+        }
+    </script>
+    <h1 class="smaller">Property Tax Search</h1>
+    <input type="hidden" name="ctl00$bodyContent$hdn_SearchCategory" id="ctl00_bodyContent_hdn_SearchCategory" value="Car">
+    <div class="ContentDivHeader">
+        <h4 class="DarkBlueHeader">
+            <span>Search Vehicle, Real Estate, Other Taxes</span></h4>
+    </div>
+    <div class="ContentDiv">
+        <div id="ctl00_bodyContent_pnl" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_bodyContent_lnk_Search')">
+	
+            <table class="SearchTable">
+                <tbody><tr>
+                    <td class="LeftCol">
+                        <h6>
+                            Select A Search Type</h6>
+                        <center>
+                               
+                       
+                  
+                            <div class="SearchType">
+                                <a id="lnk_car" title="Search for Automobile Taxes" href="#" onclick="selectSearchType(this, document.getElementById('lnk_RealEstate'), document.getElementById('lnk_Other'));toggleTextBoxes('Car');" style="color: rgb(48, 121, 192);">
+                                    <img id="img_car" class="carIcon" src="./img/car.png">Vehicles</a><span style="color: #FFCD96;">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span><a id="lnk_RealEstate" title="Search for Real Estate Taxes" href="#" onclick="selectSearchType(this, document.getElementById('lnk_car'), document.getElementById('lnk_Other'));toggleTextBoxes('Real Estate');" style="color: rgb(85, 85, 85);"><img class="realEstateIcon" src="./img/home.png">Real Estate</a><span style="color: #FFCD96;">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span><a id="lnk_Other" href="#" title="Search for Other Taxes (Moblie Homes, Boats, Furniture etc.)" onclick="selectSearchType(this, document.getElementById('lnk_RealEstate'), document.getElementById('lnk_car'));toggleTextBoxes('Other');" style="color: rgb(85, 85, 85);"><img class="globeIcon" src="./img/globe2.png">Other</a>
+                                                   
+                            </div>
+                         
+                        </center>
+                    </td>
+                    <td class="RightCol" style="valign=" top"="" rowspan="5">
+                        <div style="margin-top: 50px; margin-left: 25px; font-family: Calibri, Tahoma, Helvetica;
+                            color: #333;">
+                            <p>
+                                <span style="font-weight: bold;">NOTE:</span> This website may not reflect the current
+                                status of your account. Payments made via mail may take up to 3-weeks to process.
+                                <br>
+                                <br>
+                                </p><p>
+                                    Online payments may take up to 4 days to reflect payment. Your payment is considered
+                                    received as of the Post Mark date.
+                                </p>
+                                <br>
+                                <p>Internet payments received after closing time will be counted as being made the next day. </p>
+                                <br>
+                                <p>
+                                    <span style="font-weight: bold;">If paying by mail, please make your check payable to
+                                        “Greenville County Tax Collector”, and mail to:</span>
+                                </p>
+                                <br>
+                                <p>
+                                    </p><div>
+                                        County of Greenville</div>
+                                    <div>
+                                        Tax Collector Suite S-1100</div>
+                                    <div>
+                                        301 University Ridge</div>
+                                    <div>
+                                        Greenville, SC 29601</div>
+                                <p></p>
+                        </div>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td align="center">
+                    <br>
+                         <b><span style="color: #666; font-family: Calibri, Arial, Helvetica; font-size: 16px;">
+                            Only search using 1 of the boxes below</span></b>
+                            <br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <div class="SearchDivs" id="div_AccountNumber">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_AccountNumber">
+                                    Account #</label><input name="ctl00$bodyContent$txt_AccountNumber" type="text" maxlength="25" id="ctl00_bodyContent_txt_AccountNumber" title="Please enter an 18 or 13 digit Account # Example: 1999 000001212 66 001" onkeydown="return isLegalInput();"></div>
+                            <div class="SearchDivs" id="div_Name">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_Name">
+                                    Name</label><input name="ctl00$bodyContent$txt_Name" type="text" maxlength="30" id="ctl00_bodyContent_txt_Name" title="Please enter a name using Last Name First Name Example: Doe John or you may search on a Business name Example: B &amp; B Toys Ind"></div>
+                            <div class="SearchDivs" id="div_VIN">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_VIN">
+                                    VIN #</label><input name="ctl00$bodyContent$txt_VIN" type="text" maxlength="19" id="ctl00_bodyContent_txt_VIN" title="Please enter your Vin Number Example: CCE6JN601130"></div>
+                            <div class="SearchDivs" id="div_StateFile" style="display: none;">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_StateFileNumber">
+                                    SCDOR Reference ID #</label><input name="ctl00$bodyContent$txt_StateFileNumber" type="text" maxlength="8" id="ctl00_bodyContent_txt_StateFileNumber" title="Please enter your 8 digit SCDOR Reference ID Number Example: 52307352" onkeydown="return isLegalInput();"></div>
+                            <div class="SearchDivs" id="div_CountyFile" style="display: none;">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_CountyFileNumber">
+                                    County File #</label><input name="ctl00$bodyContent$txt_CountyFileNumber" type="text" maxlength="5" id="ctl00_bodyContent_txt_CountyFileNumber" title="Please enter your 5 digit County Account Number Example: 05448" onkeydown="return isLegalInput();"></div>
+                            <div class="SearchDivs" id="div_MapNumber" style="display: none;">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_MapNumber">
+                                    MAP #</label><input name="ctl00$bodyContent$txt_MapNumber" type="text" maxlength="13" id="ctl00_bodyContent_txt_MapNumber" title="Please enter your 13 digit Map Number Example: 1234567890123" onkeydown="return isAlphaNumeric();"></div>
+                            <div class="SearchDivs" id="div_PermitNumber" style="display: none;">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_PermitNumber">
+                                    Permit #</label><input name="ctl00$bodyContent$txt_PermitNumber" type="text" maxlength="7" id="ctl00_bodyContent_txt_PermitNumber" title="Please enter your 7 digit Permit Number Example: 1234567" onkeydown="return isLegalInput();"></div>
+                            <div class="SearchDivs" id="div_TitleNumber" style="display: none;">
+                                <label class="blockLabel" for="ctl00_bodyContent_txt_TitleNumber">
+                                    Boat or Motor #
+                                </label>
+                                <input name="ctl00$bodyContent$txt_TitleNumber" type="text" maxlength="10" id="ctl00_bodyContent_txt_TitleNumber" title="Please enter your Boat or Motor Title # Example: WAA232970">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a onclick="setSearchCategory();" id="ctl00_bodyContent_lnk_Search" title="Search" class="green" href="javascript:__doPostBack('ctl00$bodyContent$lnk_Search','')">Search Vehicles</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span id="ctl00_bodyContent_lbl_Status" class="tooltip"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <br>
+                        <label id="lbl_Tooltip" class="tooltip" style="font-family: Tahoma; color: #333; font-size: 15x;">
+                        </label>
+                    </td>
+                </tr>
+            </tbody></table>
+        
+</div>
+    </div>
+
+        </div>
+        <div id="footerContainer">
+            <table class="footer">
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="https://www.greenvillecounty.org/">County Home</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/AnswerBook/Browser.aspx">Browser Information</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/LegalNotice.aspx">Legal Notice</a>&nbsp;•&nbsp;
+                            <a href="https://www.greenvillecounty.org/PrivacyStatement.aspx">Privacy Statement</a>&nbsp;•&nbsp; 
+                            <a href="mailto:webmaster@greenvillecounty.org">Contact Us</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+<script src="/appsAS400/voTaxQry/WebResource.axd?d=2rT15y7iqYzSGbR2uHhxHgqcki8cwlEQTdaUknfL82-4AmVIlrnIDXKzBxJaaLkRVA-ia1uottXRuGbQTG3t1YtZ-9E1&amp;t=638313752380000000" type="text/javascript"></script>
+</form>
+<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&amp;ns=1&amp;cb=659927056" async=""></script>
+
+</body></html>
