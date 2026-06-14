@@ -6,7 +6,6 @@ import {
   coverage,
   newsletterUrl,
   principles,
-  anchorQuote,
   manifesto,
   trackRecord,
 } from "@/lib/site";
@@ -193,23 +192,13 @@ export default async function HomePage() {
       <section className="theme-section-contrast py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-8">What we&apos;re about</Eyebrow>
-          <figure className="mb-10 md:mb-12">
-            <blockquote className="theme-text-primary text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]">
-              <span className="theme-label">&ldquo;</span>
-              {anchorQuote.text}
-              <span className="theme-label">&rdquo;</span>
-            </blockquote>
-            <figcaption className="theme-text-muted text-sm uppercase tracking-widest mt-5">
-              {anchorQuote.author} · {anchorQuote.year}
-            </figcaption>
-          </figure>
           <div className="space-y-5 md:space-y-6">
             {manifesto.map((para, i) => (
               <p
                 key={i}
                 className={`leading-relaxed ${
                   i === 0
-                    ? "theme-text-primary text-lg md:text-xl font-medium"
+                    ? "theme-text-primary text-xl md:text-2xl font-medium tracking-tight"
                     : "theme-text-contrast-muted text-base md:text-lg"
                 }`}
               >

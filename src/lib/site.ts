@@ -115,27 +115,18 @@ export const principles = [
 ] as const;
 
 /**
- * The anchor quote behind the whole brand. VERIFIED: Alan Kay, 1971 (Xerox PARC).
- * His actual words are "invent it," not the misquoted "create it." Keep it exact.
- */
-export const anchorQuote = {
-  text: "The best way to predict the future is to invent it.",
-  author: "Alan Kay",
-  year: "1971",
-} as const;
-
-/**
  * The "what we're about" blurb. Prose, not bullets. It demonstrates the value
- * (orientation) instead of claiming it: it shows the reader the swirl of
- * predictions, then hands them the frame that makes it legible. Voice = house
- * style (no em dashes, no fragments, plain English, grounded optimism). Rendered
- * as paragraphs under the anchor quote.
+ * (orientation) instead of claiming it: shows the reader why frontier tech is
+ * worth tracking, why specific predictions fail, and why synthesizing the old
+ * and long-form against the news leaves you better oriented than chasing it.
+ * Voice = house style (no em dashes, no fragments). Anchor quote is Alan Kay,
+ * 1971, exact wording "invent it" (the "create it" version is a misquote).
+ * Rendered as paragraphs; the first reads as the lead.
  */
 export const manifesto = [
-  "The people building the future will not stop telling you what it looks like. One says work will soon be optional. Another says half of today's entry-level jobs disappear inside a decade. A third is building datacenters to put in orbit and treating it like a normal Tuesday. It arrives faster than anyone can read, and almost none of it comes with a way to separate the signal from the sales pitch.",
-  "That line is the idea behind everything here. If the best way to predict the future is to invent it, then the clearest view of where we are headed does not belong to pundits, politicians, or the people reacting to them. It belongs to the ones actually building it, in the technology they ship and the predictions they make out loud.",
-  "So we listen to them closely, and then we do the part they will not do for you. We hold each claim up against the present, so you can see how far it still has to travel. We hold it up against the past, because we have heard confident forecasts before and we know how they aged. And we hold it up against the loudest predictions pointing the other way, so you can see who really disagrees, and why.",
-  "What is left is a clean line between what is real, what is hope, and what is hype, and a sense of where each big claim sits on it. The future stops being a wall of noise and starts being something you can actually follow. We think it points somewhere good for people. We will show you why, we will take the strongest objection seriously, and we will end on the question worth arguing about.",
+  `Technology is one of the few forces that reliably reshapes the basic conditions of life, often within a single career or lifetime. If you’re making decisions with long time horizons, like what to study, what skills to build, where to invest, what to build a company around, or how to think about your kids’ future, then having an informed sense of where things are heading helps you avoid betting on a dying paradigm or missing an emerging one.`,
+  `Alan Kay famously said, “The best way to predict the future is to invent it,” so we analyze what the builders are predicting and the actions they are taking. But specific predictions are usually wrong, especially on timing. People who confidently called the direction of the internet often badly missed the shape (we got social media and ad surveillance, not the decentralized utopia many expected). The useful skill is less “knowing what happens” and more developing good intuitions about how change propagates, what bottlenecks are real, and how to distinguish hype cycles from genuine inflection points.`,
+  `Following frontier-tech discourse can become a consumption habit that feels like insight but mostly produces anxiety and a sense of falling behind. Depth in one thing you can actually act on usually beats shallow awareness of everything. This type of information decays in days. Alex Prompts aims to avoid that by synthesizing older long-form pieces and good books with present-day news. Counterintuitively, going slower and older often leaves you better oriented, because you’re learning structure instead of tracking noise.`,
 ] as const;
 
 /**
