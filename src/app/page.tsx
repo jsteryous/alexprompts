@@ -349,7 +349,7 @@ export default async function HomePage() {
       <section className="theme-section-contrast relative overflow-hidden py-24 md:py-32">
         <div className="absolute inset-0" aria-hidden>
           <Image
-            src="/img/falcon-heavy-launch.jpg"
+            src="/img/falcon-heavy-plume.jpg"
             alt=""
             fill
             sizes="100vw"
@@ -359,7 +359,7 @@ export default async function HomePage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(53, 72, 108, 0.82) 0%, rgba(53, 72, 108, 0.82) 50%, rgba(53, 72, 108, 0.82) 100%)",
+                "linear-gradient(180deg, rgba(53, 72, 108, 0.88) 0%, rgba(53, 72, 108, 0.55) 52%, rgba(53, 72, 108, 0.8) 100%)",
             }}
           />
         </div>
