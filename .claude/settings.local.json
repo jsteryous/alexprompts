@@ -143,7 +143,9 @@
       "Bash(curl -s -m 20 https://alexprompts.com)",
       "Bash(curl -s -m 20 -I https://alexprompts.com)",
       "WebFetch(domain:www.piratewires.com)",
-      "WebFetch(domain:www.baseborn.studio)"
+      "WebFetch(domain:www.baseborn.studio)",
+      "Bash(node -e \"try{require.resolve\\('sharp'\\);console.log\\('sharp:yes'\\)}catch\\(e\\){console.log\\('sharp:no'\\)}\")",
+      "Bash(node -e \"try{require.resolve\\('png-to-ico'\\);console.log\\('png-to-ico:yes'\\)}catch\\(e\\){console.log\\('png-to-ico:no'\\)}\")"
     ]
   }
 }
