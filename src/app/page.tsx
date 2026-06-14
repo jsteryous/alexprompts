@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { site, socials, coverage, newsletterUrl, principles } from "@/lib/site";
+import {
+  site,
+  socials,
+  coverage,
+  newsletterUrl,
+  principles,
+  beliefs,
+  trackRecord,
+} from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
 
 export const revalidate = 300;
@@ -42,9 +50,9 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
           </time>
         )}
       </div>
-      <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-4 group-hover:opacity-80">
+      <h3 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-4 group-hover:opacity-80">
         {post.title}
-      </h2>
+      </h3>
       {post.summary && (
         <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mb-5">
           {post.summary}
@@ -63,15 +71,24 @@ function EmptyLead() {
       <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
         Issue 001 incoming
       </span>
-      <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
-        The first issues are on their way.
-      </h2>
+      <h3 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
+        The first issue is loading.
+      </h3>
       <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-7">
-        Subscribe now and the very first one lands in your inbox the day it goes out.
-        No spam, no noise. One read a week.
+        Subscribe now and the very first one lands in your inbox the day it ships.
+        No spam. No filler. One read a week.
       </p>
       <SubscribeButton className="px-7 py-3.5" />
     </div>
+  );
+}
+
+function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={`theme-label inline-block text-xs font-semibold uppercase tracking-[0.2em] ${className}`}>
+      <span className="opacity-50">{"> "}</span>
+      {children}
+    </span>
   );
 }
 
@@ -81,31 +98,43 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Masthead ── */}
-      <section className="theme-page pt-24 md:pt-28">
-        <div className="max-w-5xl mx-auto px-6 pt-10 pb-8 md:pt-14 md:pb-10">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
-            <div className="max-w-2xl">
-              <span className="theme-label inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-3">
-                Frontier tech, weekly
-              </span>
-              <h1 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-[1.1]">
-                The companies building the future, in plain English.
-              </h1>
-              <p className="theme-text-muted text-base md:text-lg mt-3 leading-relaxed">
-                {site.oneLiner}
-              </p>
-            </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <SubscribeButton className="px-5 py-3 text-sm" />
-            </div>
+      {/* ── Hero ── */}
+      <section className="theme-section-contrast relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24">
+        <span
+          aria-hidden
+          className="prompt-watermark absolute -right-4 -top-16 md:-top-24 text-[55vw] md:text-[26rem]"
+        >
+          ›
+        </span>
+        <div className="max-w-5xl mx-auto px-6 relative">
+          <Eyebrow className="mb-5">No hype. No doom. Just the frontier.</Eyebrow>
+          <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
+            {site.tagline}
+            <span className="caret" aria-hidden>▌</span>
+          </h1>
+          <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
+            {site.oneLiner}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-9">
+            <SubscribeButton className="px-7 py-3.5" />
+            <Link
+              href="/archive"
+              className="theme-link inline-flex items-center gap-2 font-medium px-2 py-3.5 text-sm"
+            >
+              Read the latest issue <ArrowIcon className="w-3.5 h-3.5" />
+            </Link>
           </div>
+          <p className="theme-text-muted text-sm mt-10 border-t theme-border pt-5 max-w-2xl">
+            We don&apos;t build the future. We listen to the people who are, and argue about
+            what it means.
+          </p>
         </div>
       </section>
 
       {/* ── Top content ── */}
-      <section className="theme-section pb-16">
+      <section className="theme-page pt-14 md:pt-20 pb-16">
         <div className="max-w-5xl mx-auto px-6">
+          <Eyebrow className="mb-6">Fresh off the wire</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
 
           {rest.length > 0 && (
@@ -147,15 +176,34 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── How we cover it (the editorial method) ── */}
+      {/* ── Manifesto ── */}
+      <section className="theme-section-contrast py-20 md:py-28">
+        <div className="max-w-5xl mx-auto px-6">
+          <Eyebrow className="mb-8">What we believe</Eyebrow>
+          <ul className="space-y-5 md:space-y-6">
+            {beliefs.map((line, i) => (
+              <li
+                key={i}
+                className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-[1.15] flex gap-4 md:gap-6"
+              >
+                <span className="theme-label text-base md:text-xl font-mono pt-1.5 md:pt-2.5 tabular-nums opacity-60">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── How every issue works (the method) ── */}
       <section className="theme-section-muted border-y theme-border py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-2xl mb-10">
-            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-3">
-              How we cover it
-            </span>
+            <Eyebrow className="mb-4">How every issue works</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
-              Most coverage is hype or doom. Neither helps you decide what to think.
+              We start with the builders&apos; own words and pressure-test them. Five steps,
+              every time.
             </h2>
           </div>
           <ol className="grid gap-5 md:grid-cols-2">
@@ -174,12 +222,43 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── The track record ── */}
+      <section className="theme-section py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-2xl mb-10">
+            <Eyebrow className="mb-4">The track record</Eyebrow>
+            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-4">
+              Very smart people have a long history of betting against technology, confidently,
+              and losing.
+            </h2>
+            <p className="theme-text-muted text-base md:text-lg leading-relaxed">
+              This does not make every optimist right. It raises the bar for &ldquo;this time is
+              different.&rdquo; We keep the receipts.
+            </p>
+          </div>
+          <ul className="grid gap-5 md:grid-cols-2">
+            {trackRecord.map((r) => (
+              <li key={r.who} className="theme-card border theme-border rounded-xl p-6 flex flex-col">
+                <p className="theme-text-primary text-lg md:text-xl font-semibold leading-snug mb-4">
+                  &ldquo;{r.quote}&rdquo;
+                </p>
+                <p className="theme-text-secondary text-sm font-medium">
+                  {r.who}
+                  <span className="theme-text-muted font-normal">
+                    {" "}· {r.role} · {r.year}
+                  </span>
+                </p>
+                <p className="theme-text-muted text-sm leading-relaxed mt-2">{r.aftermath}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── Coverage ── */}
-      <section className="theme-section py-12 md:py-16">
+      <section className="theme-section-muted border-y theme-border py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-6">
-            We cover the people building it
-          </span>
+          <Eyebrow className="mb-6">On our radar</Eyebrow>
           <div className="flex flex-wrap justify-center gap-2.5">
             {coverage.map((c) => (
               <span
@@ -194,14 +273,12 @@ export default async function HomePage() {
       </section>
 
       {/* ── Follow ── */}
-      <section id="follow" className="theme-section pb-16 md:pb-24">
+      <section id="follow" className="theme-section py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-3">
-              Follow along
-            </span>
-            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight">
-              Short clips during the week. The full story in your inbox.
+          <div className="mb-8">
+            <Eyebrow className="mb-4">Where to find us</Eyebrow>
+            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight max-w-2xl">
+              Short clips during the week. The full argument in your inbox.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -228,8 +305,8 @@ export default async function HomePage() {
             Understand the future before it&apos;s common knowledge.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            One issue a week. Free. The biggest story from the frontier, translated, and the
-            question worth arguing about.
+            One issue a week. Free. The builders&apos; biggest claim, translated and
+            pressure-tested, and the question worth arguing about.
           </p>
           <SubscribeButton className="px-8 py-4" />
         </div>

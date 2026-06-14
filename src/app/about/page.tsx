@@ -51,7 +51,7 @@ export default function AboutPage() {
           <p>
             I hold that view loosely and honestly. It runs straight into the people actually
             building this. Elon Musk says work will become optional. Dario Amodei warns about
-            what happens to jobs. These are not pundits. They are the builders, and the easiest
+            what happens to jobs. These are not pundits. They are the builders, and the surest
             way to predict the future is to build it, so I take them seriously. I just do not
             take them as settled. When someone says work will be optional, the right response is
             not applause or panic. It is a better question. Optional for whom. On what timeline.

@@ -19,8 +19,9 @@ export default function Nav() {
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight">
+        <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight inline-flex items-center">
           {site.name}
+          <span className="caret" aria-hidden>▌</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
