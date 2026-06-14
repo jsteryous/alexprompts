@@ -58,12 +58,25 @@ The quality lever is the **two-pass** split (do not collapse it back into one pr
 
 **House style is non-negotiable** (`WRITER_PROMPT` + guardrails): NO em dashes, NO
 sentence fragments, cold concrete lede, plain-English jargon translation, steelman-
-then-resolve, grounded optimism. Banned fluff ("in an unprecedented move," "sent
-ripples," etc.) is listed in `BANNED_PHRASES`. `strip_em_dashes()` is a hard backstop
-because models ignore the no-dash rule; `find_fluff()` warns when banned phrases slip
-through. Top story is thorough (What we know / What is still unclear / Why it matters /
-The other side); the rest go in a short "In other news" section. Faith content is NOT
-generated here — Alex writes any of that himself.
+then-resolve. Banned fluff ("in an unprecedented move," "sent ripples," etc.) is listed
+in `BANNED_PHRASES`. `strip_em_dashes()` is a hard backstop because models ignore the
+no-dash rule; `find_fluff()` warns when banned phrases slip through. Top story is
+thorough (What we know / What is still unclear / Why it matters / The other side); the
+rest go in a short "In other news" section. Faith content is NOT generated here. Alex
+writes any of that himself.
+
+**The editorial FRAMEWORK is encoded in `WRITER_PROMPT` (and mirrored in `shorts.py`),
+as *disciplines, not biases* — the brand aims at truth, not at pushing a prior.** The
+four: (1) read the builders, then pressure-test, splitting CAPABILITY claims (credible)
+from TIMELINE/CONSEQUENCE claims (also a sales pitch); (2) doubt the consensus only when
+you can name the specific distortion, never invert just to be contrarian; (3) optimism is
+a *finding*, not a default; (4) steelman before resolving, and separate the transition
+from the endpoint on sweeping claims (e.g. AI and jobs). Each issue ends on **the
+question worth arguing about** (one you'd respect both answers to), which is the "prompt"
+the brand is named for. The `REPORTER_PROMPT` feeds this by tagging each claim
+[capability]/[timeline-consequence] and noting who benefits if it is believed. This
+framework also lives in the root `CLAUDE.md` and `src/lib/site.ts` `principles`; keep the
+three in sync. Do not regress "optimism as a finding" back to "optimistic by default."
 
 ### `shorts.py` — short-form script queue
 

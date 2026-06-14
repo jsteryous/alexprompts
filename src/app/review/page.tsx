@@ -54,7 +54,7 @@ function ErrorPage({ heading, body }: { heading: string; body: string }) {
         <h1 className="text-xl font-bold text-black mb-3">{heading}</h1>
         <p className="text-sm text-gray-500">{body}</p>
         <Link href="/" className="inline-block mt-6 text-sm text-gray-500 hover:text-black">
-          ← rebbadvisors.com
+          ← alexprompts.com
         </Link>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "REBB Advisors — Lead Generation & Marketing for Greenville SC Trades";
+export const alt = "Alex Prompts — Frontier tech, translated.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,7 +10,7 @@ export default function OgImage() {
     (
       <div
         style={{
-          background: "#0d1f16",
+          background: "#0a0c10",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -23,7 +23,7 @@ export default function OgImage() {
         {/* Top label */}
         <div
           style={{
-            color: "#22c55e",
+            color: "#818cf8",
             fontSize: 13,
             fontWeight: 700,
             letterSpacing: "0.18em",
@@ -34,24 +34,17 @@ export default function OgImage() {
             gap: 10,
           }}
         >
-          <div
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: "50%",
-              background: "#22c55e",
-            }}
-          />
-          REBB ADVISORS · GREENVILLE SC · LEAD GENERATION FOR TRADES
+          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
+          ALEX PROMPTS · FRONTIER TECH, WEEKLY
         </div>
 
         {/* Main headline */}
         <div
           style={{
             color: "#ffffff",
-            fontSize: 68,
+            fontSize: 64,
             fontWeight: 800,
-            lineHeight: 1.04,
+            lineHeight: 1.06,
             letterSpacing: "-0.025em",
             marginBottom: 28,
             flex: 1,
@@ -59,24 +52,23 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Your next big contract
+          The companies building
           <br />
-          just changed hands.
+          the future, in plain English.
         </div>
 
         {/* Sub */}
         <div
           style={{
-            color: "#6b7280",
+            color: "#8b8f9c",
             fontSize: 22,
             lineHeight: 1.55,
-            maxWidth: 760,
+            maxWidth: 820,
             marginBottom: 52,
           }}
         >
-          We programmatically sync Greenville County property transfers and new
-          business filings to surface high-value contracts before your
-          competitors know they exist.
+          Every week, the biggest story from the AI labs and hard-tech companies,
+          translated. The facts, the open questions, and grounded optimism.
         </div>
 
         {/* Bottom bar */}
@@ -89,40 +81,32 @@ export default function OgImage() {
             paddingTop: 28,
           }}
         >
-          <div style={{ color: "#4b5563", fontSize: 15, letterSpacing: "0.02em" }}>
-            rebbadvisors.com
+          <div style={{ color: "#6b7280", fontSize: 15, letterSpacing: "0.02em" }}>
+            alexprompts.com
           </div>
 
-          {/* Terminal signal badge */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: 10,
-              background: "rgba(34,197,94,0.08)",
-              border: "1px solid rgba(34,197,94,0.2)",
+              background: "rgba(129,140,248,0.1)",
+              border: "1px solid rgba(129,140,248,0.25)",
               borderRadius: 8,
               padding: "8px 16px",
             }}
           >
-            <div
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "#22c55e",
-              }}
-            />
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8" }} />
             <span
               style={{
-                color: "#22c55e",
+                color: "#a5b4fc",
                 fontSize: 12,
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
             >
-              SIGNAL ACTIVE
+              NEW ISSUE WEEKLY
             </span>
           </div>
         </div>

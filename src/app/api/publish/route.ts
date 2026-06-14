@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
   if (rows.status === "PUBLISHED") {
     return html(
       "Already published",
-      `"${rows.title}" is already live at <a href="/insights/${rows.slug}" style="color:#16a34a">/insights/${rows.slug}</a>.`,
+      `"${rows.title}" is already live at <a href="/archive/${rows.slug}" style="color:#4f46e5">/archive/${rows.slug}</a>.`,
       200,
     );
   }
@@ -61,12 +61,12 @@ export async function GET(req: NextRequest) {
     return html("Database error", updateErr.message, 500);
   }
 
-  // Bust the ISR cache so /insights shows the new post immediately
-  revalidatePath("/insights");
+  // Bust the ISR cache so the archive shows the new issue immediately
+  revalidatePath("/archive");
 
   return html(
     "Published",
-    `"${rows.title}" is now live at <a href="/insights/${rows.slug}" style="color:#16a34a">/insights/${rows.slug}</a>.`,
+    `"${rows.title}" is now live at <a href="/archive/${rows.slug}" style="color:#4f46e5">/archive/${rows.slug}</a>.`,
     200,
   );
 }
@@ -82,7 +82,7 @@ function html(heading: string, body: string, status: number) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>${heading} — REBB Advisors</title>
+  <title>${heading} — Alex Prompts</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:system-ui,sans-serif;background:#f9fafb;min-height:100vh;
@@ -105,7 +105,7 @@ function html(heading: string, body: string, status: number) {
     <div class="icon">${icon}</div>
     <h1>${heading}</h1>
     <p>${body}</p>
-    <a class="back" href="/">← rebbadvisors.com</a>
+    <a class="back" href="/">← alexprompts.com</a>
   </div>
 </body>
 </html>`;

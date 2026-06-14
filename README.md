@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alex Prompts
 
-## Getting Started
+The website + content engine for **Alex Prompts**, a personal media brand covering the
+companies building the future (frontier AI labs + hard tech). Frontier tech, translated.
 
-First, run the development server:
+- **Site:** Next.js 16 home base — homepage, `/about`, and the `/archive` of newsletter
+  issues. Built to grow an audience and convert viewers into email subscribers.
+- **Content engine:** `scripts/ai_news/` — a Python pipeline that sources the week's
+  frontier-tech news, drafts the newsletter + short-form scripts with Gemini, and emails
+  them to Alex for edit/publish.
+
+See `CLAUDE.md` for full context, voice, and architecture.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (rm -rf .next first if you renamed routes)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Brand details (name, tagline, social handles, domain, covered companies) live in
+`src/lib/site.ts` — edit there and every surface updates. Confirm the `TODO(alex)`
+placeholders before launch.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content engine
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd scripts
+python -m ai_news.digest           # collect -> reporter -> writer -> shorts, print
+python -m ai_news.digest --email   # email the weekly draft + short-form queue
+```
 
-## Learn More
+See `scripts/CLAUDE.md` for the full pipeline.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel (auto-deploy on push to `main`). Production: alexprompts.com.

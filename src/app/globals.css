@@ -3,38 +3,38 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-accent: #2bb673;
-  --color-accent-dark: #21895a;
+  --color-accent: #6366f1;
+  --color-accent-dark: #4f46e5;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
-  --background: #f4f0e8;
-  --background-rgb: 244, 240, 232;
-  --foreground: #171717;
-  --foreground-soft: #4f4a43;
-  --foreground-muted: #736d65;
-  --border: rgba(23, 23, 23, 0.1);
-  --border-strong: rgba(23, 23, 23, 0.18);
-  --surface: rgba(255, 252, 247, 0.84);
-  --surface-strong: #fffdf8;
-  --surface-muted: rgba(228, 220, 208, 0.56);
-  --surface-inverse: #111512;
-  --surface-inverse-2: #171d19;
-  --surface-highlight: rgba(43, 182, 115, 0.12);
+  --background: #fafafb;
+  --background-rgb: 250, 250, 251;
+  --foreground: #14161a;
+  --foreground-soft: #44474f;
+  --foreground-muted: #6b7280;
+  --border: rgba(20, 22, 26, 0.1);
+  --border-strong: rgba(20, 22, 26, 0.18);
+  --surface: rgba(255, 255, 255, 0.84);
+  --surface-strong: #ffffff;
+  --surface-muted: rgba(240, 241, 245, 0.62);
+  --surface-inverse: #0e1016;
+  --surface-inverse-2: #141720;
+  --surface-highlight: rgba(99, 102, 241, 0.12);
   --surface-warn: rgba(217, 119, 6, 0.12);
-  --surface-accent: #1c7c50;
-  --accent: #1f7d4e;
-  --accent-strong: #17583a;
-  --accent-soft: rgba(35, 138, 89, 0.14);
-  --accent-contrast: #effaf4;
+  --surface-accent: #4f46e5;
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
+  --accent-soft: rgba(99, 102, 241, 0.14);
+  --accent-contrast: #eef2ff;
   --warn: #b56a17;
   --warn-soft: rgba(245, 158, 11, 0.18);
-  --shadow-soft: 0 24px 80px rgba(32, 24, 13, 0.08);
-  --shadow-card: 0 16px 44px rgba(42, 31, 19, 0.08);
-  --header-bg: rgba(255, 252, 247, 0.76);
+  --shadow-soft: 0 24px 80px rgba(15, 18, 30, 0.1);
+  --shadow-card: 0 16px 44px rgba(15, 18, 30, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.76);
 
-  /* Semantic tone tokens — dashboard status/severity signals.
+  /* Semantic tone tokens — status/severity signals.
      Use .tone-* utilities instead of hardcoded bg-red-50 / text-amber-600 / etc. */
   --tone-hot-bg:         #fef2f2;
   --tone-hot-fg:         #b91c1c;
@@ -54,9 +54,9 @@
   --tone-neutral-bg:     #f3f4f6;
   --tone-neutral-fg:     #6b7280;
   --tone-neutral-border: #e5e7eb;
-  --tone-info-bg:        #faf5ff;
-  --tone-info-fg:        #7e22ce;
-  --tone-info-border:    #e9d5ff;
+  --tone-info-bg:        #eef2ff;
+  --tone-info-fg:        #4338ca;
+  --tone-info-border:    #c7d2fe;
 }
 
 html {
@@ -66,30 +66,30 @@ html {
 
 html.dark {
   color-scheme: dark;
-  --background: #0f1411;
-  --background-rgb: 15, 20, 17;
-  --foreground: #edf1eb;
-  --foreground-soft: #c6d0c6;
-  --foreground-muted: #90a08f;
-  --border: rgba(229, 240, 231, 0.12);
-  --border-strong: rgba(229, 240, 231, 0.2);
-  --surface: rgba(20, 27, 22, 0.82);
-  --surface-strong: #18211b;
-  --surface-muted: rgba(31, 39, 34, 0.86);
-  --surface-inverse: #070b09;
-  --surface-inverse-2: #0d120f;
-  --surface-highlight: rgba(67, 189, 120, 0.14);
+  --background: #0a0c10;
+  --background-rgb: 10, 12, 16;
+  --foreground: #e9eaee;
+  --foreground-soft: #c3c6cf;
+  --foreground-muted: #8b8f9c;
+  --border: rgba(233, 234, 238, 0.12);
+  --border-strong: rgba(233, 234, 238, 0.2);
+  --surface: rgba(20, 22, 30, 0.82);
+  --surface-strong: #14161e;
+  --surface-muted: rgba(30, 33, 44, 0.86);
+  --surface-inverse: #05060a;
+  --surface-inverse-2: #0b0d13;
+  --surface-highlight: rgba(129, 140, 248, 0.14);
   --surface-warn: rgba(245, 158, 11, 0.12);
-  --surface-accent: #269560;
-  --accent: #43bd78;
-  --accent-strong: #8fe3b1;
-  --accent-soft: rgba(67, 189, 120, 0.16);
-  --accent-contrast: #08100b;
+  --surface-accent: #6366f1;
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-soft: rgba(129, 140, 248, 0.16);
+  --accent-contrast: #0b1020;
   --warn: #efb55f;
   --warn-soft: rgba(245, 158, 11, 0.18);
   --shadow-soft: 0 28px 84px rgba(0, 0, 0, 0.34);
   --shadow-card: 0 18px 46px rgba(0, 0, 0, 0.28);
-  --header-bg: rgba(15, 20, 17, 0.74);
+  --header-bg: rgba(10, 12, 16, 0.74);
 
   --tone-hot-bg:         rgba(127, 29, 29, 0.28);
   --tone-hot-fg:         #fca5a5;
@@ -109,9 +109,9 @@ html.dark {
   --tone-neutral-bg:     rgba(31, 41, 55, 0.55);
   --tone-neutral-fg:     #9ca3af;
   --tone-neutral-border: rgba(55, 65, 81, 0.6);
-  --tone-info-bg:        rgba(88, 28, 135, 0.38);
-  --tone-info-fg:        #d8b4fe;
-  --tone-info-border:    rgba(107, 33, 168, 0.5);
+  --tone-info-bg:        rgba(49, 46, 129, 0.4);
+  --tone-info-fg:        #c7d2fe;
+  --tone-info-border:    rgba(67, 56, 202, 0.5);
 }
 
 body {
@@ -148,7 +148,7 @@ button {
   position: relative;
   background:
     radial-gradient(900px 520px at 78% 28%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 62%),
-    radial-gradient(700px 460px at 8% 92%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 68%),
+    radial-gradient(700px 460px at 8% 92%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 68%),
     radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 0);
   background-size: auto, auto, 26px 26px;
 }
@@ -165,16 +165,16 @@ button {
 }
 
 .theme-section-contrast {
-  --foreground: #edf1eb;
-  --foreground-soft: #d3dcd0;
-  --foreground-muted: #a4b2a2;
-  --border: rgba(229, 240, 231, 0.12);
-  --border-strong: rgba(229, 240, 231, 0.2);
-  --accent: #43bd78;
-  --accent-strong: #8fe3b1;
-  --accent-contrast: #08100b;
+  --foreground: #e9eaee;
+  --foreground-soft: #d2d4db;
+  --foreground-muted: #9a9eab;
+  --border: rgba(233, 234, 238, 0.12);
+  --border-strong: rgba(233, 234, 238, 0.2);
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-contrast: #0b1020;
   background:
-    radial-gradient(circle at top left, rgba(43, 182, 115, 0.12), transparent 28%),
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.16), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
     var(--surface-inverse);
   color: var(--foreground);
@@ -199,14 +199,14 @@ button {
 }
 
 .theme-card-contrast {
-  --foreground: #edf1eb;
-  --foreground-soft: #d3dcd0;
-  --foreground-muted: #a4b2a2;
-  --border: rgba(229, 240, 231, 0.12);
-  --border-strong: rgba(229, 240, 231, 0.2);
-  --accent: #43bd78;
-  --accent-strong: #8fe3b1;
-  --accent-contrast: #08100b;
+  --foreground: #e9eaee;
+  --foreground-soft: #d2d4db;
+  --foreground-muted: #9a9eab;
+  --border: rgba(233, 234, 238, 0.12);
+  --border-strong: rgba(233, 234, 238, 0.2);
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-contrast: #0b1020;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
     var(--surface-inverse-2);
@@ -220,33 +220,33 @@ button {
    dark-mode override above and become light-on-light. */
 .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
 .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
-  --foreground: #171717;
-  --foreground-soft: #4f4a43;
-  --foreground-muted: #736d65;
-  --border: rgba(23, 23, 23, 0.1);
-  --border-strong: rgba(23, 23, 23, 0.18);
-  --accent: #1f7d4e;
-  --accent-strong: #17583a;
+  --foreground: #14161a;
+  --foreground-soft: #44474f;
+  --foreground-muted: #6b7280;
+  --border: rgba(20, 22, 26, 0.1);
+  --border-strong: rgba(20, 22, 26, 0.18);
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
   color: var(--foreground);
 }
 
-/* Translucent muted cards turn into murky brown when layered over a dark
-   contrast surface. Force a solid light fill so dark text stays readable. */
+/* Translucent muted cards turn murky when layered over a dark contrast
+   surface. Force a solid light fill so dark text stays readable. */
 .theme-section-contrast :where(.theme-card-muted),
 .theme-card-contrast :where(.theme-card-muted) {
-  background: #fffdf8;
+  background: #ffffff;
 }
 
 html.dark .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
 html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
-  --foreground: #edf1eb;
-  --foreground-soft: #d3dcd0;
-  --foreground-muted: #a4b2a2;
-  --border: rgba(229, 240, 231, 0.12);
-  --border-strong: rgba(229, 240, 231, 0.2);
-  --accent: #43bd78;
-  --accent-strong: #8fe3b1;
-  --accent-contrast: #08100b;
+  --foreground: #e9eaee;
+  --foreground-soft: #d2d4db;
+  --foreground-muted: #9a9eab;
+  --border: rgba(233, 234, 238, 0.12);
+  --border-strong: rgba(233, 234, 238, 0.2);
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-contrast: #0b1020;
 }
 
 html.dark .theme-section-contrast :where(.theme-card-muted),
@@ -256,7 +256,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 
 .theme-card-accent {
   background: var(--surface-highlight);
-  border-color: rgba(43, 182, 115, 0.2);
+  border-color: rgba(99, 102, 241, 0.22);
 }
 
 .theme-card-warn {
@@ -309,7 +309,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 .theme-cta {
   background: var(--foreground);
   color: var(--background);
-  box-shadow: 0 14px 32px rgba(17, 17, 17, 0.18);
+  box-shadow: 0 14px 32px rgba(20, 22, 26, 0.18);
 }
 
 .theme-cta:hover {
@@ -320,7 +320,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 .theme-cta-accent {
   background: var(--accent);
   color: var(--accent-contrast);
-  box-shadow: 0 16px 34px rgba(35, 138, 89, 0.22);
+  box-shadow: 0 16px 34px rgba(79, 70, 229, 0.24);
 }
 
 .theme-cta-accent:hover {
@@ -330,7 +330,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 .theme-badge {
   background: var(--accent-soft);
   color: var(--accent-strong);
-  border: 1px solid rgba(43, 182, 115, 0.18);
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .theme-warn-badge {
@@ -341,8 +341,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 
 /* Tone utilities — apply bg + fg + border-color together. Pair with `border`
    (or the consumer's own border class) to render the outline. Use the -text
-   variants when only the foreground color is needed (score digits, link text,
-   stat-tile numerals). */
+   variants when only the foreground color is needed. */
 .tone-hot         { background: var(--tone-hot-bg);         color: var(--tone-hot-fg);         border-color: var(--tone-hot-border); }
 .tone-warm        { background: var(--tone-warm-bg);        color: var(--tone-warm-fg);        border-color: var(--tone-warm-border); }
 .tone-cool        { background: var(--tone-cool-bg);        color: var(--tone-cool-fg);        border-color: var(--tone-cool-border); }

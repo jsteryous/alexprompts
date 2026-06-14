@@ -1,156 +1,139 @@
-# REBB Advisors Website
+# Alex Prompts
 
 This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
-- **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO architecture, Next.js gotchas.
-- **`src/app/dashboard/CLAUDE.md`** — dashboard table conventions, tone tokens, roadmap.
-- **`scripts/CLAUDE.md`** — Python pipeline mechanics: prospects, enrich, generate_insights, scrapers, gotchas, tech debt.
+- **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
+- **`scripts/CLAUDE.md`** — the Python content engine (`ai_news/`): newsletter + short-form scripts.
 
-## Business Context
+## What this is
 
-**Business:** REBB Advisors — Greenville SC. Hyper-focused dental website cleanup, with scoped rebuilds for practices that need more.
-**Tone:** Confident, minimal, blunt. No fluff.
-**Target:** Dental practices only (general, ortho, pediatric, oral surgery, cosmetic/implants, perio, endo). Greenville County + Upstate SC. The public site must not reference other verticals — the internal prospects pipeline also audits personal injury firms, but that is outbound-only.
+**Alex Prompts** is a personal media brand by Alex Steryous covering the companies
+building the future: the frontier AI labs and hard-tech companies (Anthropic, OpenAI,
+Google DeepMind, xAI, Meta AI, Nvidia, Tesla, SpaceX, Neuralink, and others actually
+moving the frontier). It publishes on **TikTok, YouTube, X, and Substack**; the goal is
+to build an audience and monetize on the internet.
 
-**Rule #1: Confused customers don't buy.** One entry point (free audit), one deliverable (written proposal), one CTA. No public tier menu.
+**The job:** ingest the week's highest-signal frontier-tech news, translate the facts
+into plain English, separate confirmed facts from claims, and lay out the trajectory we
+are on. Optimistic about technology and people, honest about the hard parts.
 
-**Public offer — single anchor:**
-- **Cleanup** — starts at $1,500, five business days. No retainer. The only number displayed publicly. "Starting at" framing is deliberate: audits reveal tiered scope — some dentists need the minimum Cleanup, others need more. We do not commit to a flat $1,500 for every engagement.
-- **Larger rebuilds** — scoped per practice inside the written proposal. Setup + $500/mo retainer typical for scoped rebuilds; month-to-month, 30-day cancel. Never priced on the public site.
+**The name is a double meaning:** the *AI prompts*, and *prompting real discussion*. Every
+piece (article, video, TikTok, X post) exists to stimulate discussion. It asks a simple
+question that turns out to be hard, the kind that gets opinionated people to say what they
+actually think.
 
-The `/sample-proposal` page uses a fictional "Pinecrest Family Dentistry" recommending a $4,500 setup + $500/mo scoped rebuild as a concrete example of what a written proposal looks like — that is illustrative, not a public tier.
+### Editorial framework (the brand's POV — drives all copy)
 
-**Positioning:**
-- **One-liner anchor:** REBB = the company that finds and fixes hidden patient loss. Every copy decision orbits this — not "web design," not "performance optimization," not "dental marketing."
-- "The proposal is the product." If the audit shows no engagement is needed, say so.
-- Retainers month-to-month, 30-day cancel. No long-term contracts, no strategy calls, no à la carte.
-- **Homepage follows a StoryBrand arc** (April 2026): hero (audience name + internal problem) → villain (StakesSection, "lost revenue" — the patient you never meet) → guide's authority (BeforeAfterSection, cohort stat) → plan (ProcessSection + CompetenceSection) → supporting evidence (HipaaSection, demoted) → victory (SuccessSection) → price → FAQ → lead magnet → final CTA. Hero eyebrow: "You're a great dentist." H1: "Your patients love you. Your website doesn't show it." City pages keep the Cleanup-anchored geo eyebrow; practice-type pages carry specialty-specific heroes.
-- **CTAs:** All body CTAs across the public site (homepage hero + sections, city pages, practice-type pages) read **"See if your website is losing patients"** — the StoryBrand villain pulled into the button so the click is about exposing a hidden leak, not requesting a service. Nav stays Title-case **"Get Free Audit"** (button-convention shortform — the long line wraps in a 130px nav slot). Do not reintroduce "Show me what's broken" or "Get your free audit" in body copy without an A/B test plan; the unified CTA is a deliberate voice decision, not a default.
+The method, in order (mirrored in `src/lib/site.ts` `principles` and the homepage):
+1. **Inform clearly** — what actually happened, plain English, no hype/doom.
+2. **Read the builders** — take the people building the future at their word, then
+   pressure-test it. "The easiest way to predict the future is to build it," so start from
+   what the builders are actually saying.
+3. **Steelman the skeptic** — the strongest version of the other side, argued honestly
+   before landing anywhere.
+4. **A grounded take, then a prompt** — a clear, logical read (NOT investment advice), then
+   the hard question worth arguing about.
 
-**Internal tooling (not customer-facing):**
-- `scripts/prospects/` — weekly outbound: discovers dental + PI firms, audits, scores, emails HOT/WARM digest. Surfaces on `/dashboard/prospects`.
-- `scripts/gvl_monitor.py` + `enrich.py` + `run_daily.py` — legacy LLC→human resolution (deeds + mortgages + SOS → `enriched_leads`). Surfaces on `/dashboard`.
-- `scripts/generate_insights.py` — AI-drafted blog posts (Gemini → DRAFT → manual approve → `/insights`).
+The stance, stated honestly:
+- **Contrarian / Thiel-esque:** the crowd, especially legacy media, is confidently wrong
+  often enough that the consensus is worth doubting. The house lean on AI-and-jobs is that
+  groundbreaking tech *creates* new work, new industries, stronger economies, rather than
+  ending work. Held loosely and always paired with the steelman.
+- **Held in honest tension with the builders.** This lean runs into Musk ("work will be
+  optional") and Amodei (job-loss warnings). Do not resolve that by cheering or panicking.
+  Resolve it by asking a better question (optional for whom, on what timeline, paid how).
+  Take builders seriously, never as settled.
+- Grounded optimism, never blind optimism. The hard parts are real and named.
 
-## Marketing Copy Standards
+### Brand strategy (the model the site is built around)
 
-### Voice
-- Blunt, concrete, no agency-speak. Short sentences. Period-separated statements over comma-separated clauses.
-- "If X, we'll say so" framing — anti-upsell credibility signal. Only works when it's true.
-- "The proposal is the product." — reuse if writing new copy.
+- **Short-form video is the discovery engine** (TikTok / YouTube Shorts / Reels / X).
+  The **newsletter is the capture** (Substack). The website is the **home base**: it
+  converts a curious viewer into a follower and an email subscriber, and hosts the
+  issue archive.
+- **The site optimizes for audience growth first** — the dominant CTA is *Subscribe*
+  (email is the owned asset), with *Follow* secondary. Not paid subscriptions or
+  sponsorships yet; those come once there is an audience.
+- **Substack stays the newsletter home.** Issues are written/sent there. The site
+  *mirrors* them into `/archive` for credibility and a controllable link. **SEO is a
+  passive bonus, not the bet** — a new domain will not out-rank TechCrunch/The Verge on
+  news queries for a long time, so we do not optimize hard for it. (If we ever want the
+  site to be the SEO source of truth, add a `canonical_url` column to `blog_posts` and
+  point article canonicals at the site instead of Substack.)
 
-### Sell outcomes, not the stack
-- **The sales surface** (homepage hero, HIPAA/Process/Competence/BeforeAfter/Stakes/Pricing sections, city pages, FAQ) speaks in dentist-frustration language and visible outcomes. No stack words, no SEO jargon. Name the thing the dentist can *see or feel*: "patients can actually book," "show up when patients Google 'dentist near me,'" "new reviews arrive steadily." Translate — never expose — terms like `schema markup`, `Lighthouse`, `Core Web Vitals`, `CRO`, `NAP`. Real product names dentists recognize (Google Business Profile, reviews, landing pages) are fine.
-- **The proof/education surface** (`/sample-proposal`, `/insights`, lead-magnet checklist) is where technical depth lives. Schema, Lighthouse scores, LCP/CLS, NAP consistency — load-bearing there because it signals expertise. Do not sanitize these surfaces to match the sales surface; the contrast is the credibility play.
-- **Stack is invisible on the public site.** Never reference Next.js, React, WordPress, Wix, Squarespace, or any CMS by name in marketing copy. Custom builds are the default but stay unnamed; the audit decides scope inside the written proposal.
-- **Outcome vocabulary still being honed.** Mirror back verbatim dentist phrases as real audit conversations surface them.
+## Voice (mirror of `scripts/ai_news` prompts — keep in sync)
 
-### Show, don't tell
-- The site sells *audits* and *written proposals*. `/sample-proposal` is the live proof-of-deliverable.
-- **Synthetic visual mocks only for website content** (`VisualMocks.tsx`). NO real company names, logos, screenshots, or identifiable layouts — not even anonymized. The prospects pipeline captures real sites; never expose any of that to the public site.
-- **Photography of people / environments is fine** and lives in `public/practice-types/` (one per `CompetenceSection` row). Source originals go in `/pics/` (gitignored); compress via `sharp` at 1600px wide / q=80 mozjpeg to land each file ~100–250 KB. Next.js `<Image>` handles per-viewport downscaling at runtime.
-- Sample proposal uses fictional "Pinecrest Family Dentistry" with fabricated-but-plausible findings.
+The canonical voice lives in `scripts/ai_news/digest.py` (`WRITER_PROMPT`) and
+`shorts.py`. Site copy must match it:
 
-### What the site does NOT promise
-- No "digital transformation." No marketing-strategy calls. Never write copy that implies retainer lock-in.
-- No full rebuilds disguised as Cleanup. A rebuild is a custom-scoped proposal; the audit makes that call.
+- **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (`digest.py`
+  has a `strip_em_dashes()` backstop because models ignore the rule — the website has no
+  such backstop, so do not introduce dashes in copy.)
+- **No sentence fragments.** Every sentence has a subject and a verb.
+- Punch comes from short sentences and strong verbs, not dashes or fragments.
+- Open cold and concrete. Lead with a fact, a scene, or a number.
+- Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
+- **Grounded optimism.** Steelman the strongest opposing view before resolving.
+- Banned fluff (see `BANNED_PHRASES` in `digest.py`): "in an unprecedented move," "sent
+  ripples," "the AI landscape," "game-changer," "a new era," etc.
 
-### CTAs
-- Always link to `/contact`. No secondary link in the hero except "See a sample proposal" in fine print.
+## The content engine (`scripts/ai_news/`)
+
+Already pivoted to Alex Prompts; see `scripts/CLAUDE.md`. Two-pass Gemini pipeline:
+reporter brief (grounded fact-finding) → writer pass (house style). Emits a **newsletter
+draft** + a **short-form script queue** and emails them to Alex via Resend for manual
+edit/publish. The legacy dental pipeline is retired under `scripts/_archive/` — do not
+revive it.
+
+## Site structure
+
+- `/` — **content-first landing page** (a magazine front page, not a marketing splash):
+  compact masthead → featured latest issue + recent-issues grid → the editorial method →
+  coverage → follow → subscribe. Top content sits high on purpose. Money model is ads
+  later; content is free, so the homepage's job is to put the best content in front of a
+  visitor immediately.
+- `/about` — who Alex is, the editorial framework, the contrarian stance, the name.
+- `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
+- `/review` — token-gated draft editor (not in nav). `/api/publish` + `/api/review/save`
+  drive the publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate `/archive`).
+
+**`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, social
+links, covered-company list). Edit handles/domain there and nav/footer/JSON-LD/sitemap
+update together. It currently holds **placeholder** social URLs and domain — confirm and
+replace the `TODO(alex)` values.
 
 ## Supabase
 
-- Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-- Tables: `market_signals` · `blog_posts` (has `cluster text`) · `clients` · `enriched_leads` · `website_prospects`.
-- RLS: `market_signals` + `blog_posts` public SELECT. `clients` + `enriched_leads` + `website_prospects` service key only.
-- Realtime on `market_signals` via `supabase_realtime` publication.
-- Storage bucket: `prospect-audits` (public) — keyed `{prospect_id}/{kind}-{ts}.png`.
-
-### market_signals
-
-| Column | Type | Notes |
-|---|---|---|
-| `id` | uuid | PK |
-| `timestamp` | timestamptz | event time |
-| `event_type` | text | `PROPERTY TRANSFER` / `NEW BUSINESS FILING` / `INDUSTRIAL PERMIT` / `MORTGAGE_FILING` |
-| `location` | text | address, or grantor/borrower name if no address |
-| `entity_name` | text | company/owner being enriched |
-| `valuation` | numeric | |
-| `details` | text | context; mortgages include `Lender: {name}` |
-| `score` | integer | 0–100 |
-| `tag` | text | `HOT` / `WARM` / `COLD` |
-| `source` | text | `deeds` / `sos` / `permits` / `demo` / `mortgages` |
-| `source_key` | text | dedup key — unique, NULLs exempt |
-| `signal_type` | text | `MORTGAGE_FILING` / `NOMINAL_TRANSFER` / null |
-
-### enriched_leads
-
-| Column | Type | Notes |
-|---|---|---|
-| `signal_id` | uuid | FK → market_signals |
-| `client_id` | uuid | FK → clients (null = unassigned) |
-| `principal_name` | text | human name or LLC title-case if unresolved |
-| `principal_role` | text | source label — constants in `enrich_models.py` |
-| `contact_email` / `contact_phone` / `linkedin_url` | text | |
-| `search_evidence` | text | source URL |
-| `enrichment_status` | text | `raw` / `pending` / `enriched` |
-| `trade_tag` | text | client routing |
-| `score` / `tag` / `event_type` / `location` / `valuation` | | copied from signal |
-| `transfer_type` | text | `NOMINAL_TRANSFER` or null — dashboard shows "Trust / Family" badge and hides dollar value |
-| `enrichment_version` | integer | `ENRICH_VERSION` at write time; null on legacy rows |
-| `notes` | text | |
-
-### website_prospects
-
-| Column | Type | Notes |
-|---|---|---|
-| `place_id` | text | Google Places ID, UNIQUE dedup key |
-| `business_name` / `vertical` | text | `dental` \| `personal_injury` |
-| `address` / `city` / `county` / `phone` / `website_url` | text | `website_url` NULL → highest severity |
-| `google_rating` / `google_review_count` | numeric / integer | |
-| `audit_status` | text | `pending` / `no_website` / `audited` / `error` |
-| `issues` | jsonb | viewport/https/forms/copyright/lighthouse |
-| `severity_score` / `severity_tag` | integer / text | 0-100 · HOT / WARM / COLD |
-| `mobile_screenshot_url` / `desktop_screenshot_url` | text | Supabase Storage public URLs |
-| `lighthouse_mobile_score` | integer | |
-| `audit_error` | text | |
-| `contact_status` | text | `not_contacted` / `contacted` / `replied` / `booked` / `dead` |
-| `emailed_at` | timestamptz | NULL = eligible for next digest |
-| `contact_emails` | jsonb | ranked `[{email, score, role_hint}]` |
-| `primary_email` | text | person-identified (score ≥ 50) |
-| `fallback_email` | text | best shared/generic inbox when no primary |
-| `decision_maker_name` / `decision_maker_title` | text | best-guess owner/dentist/partner |
-| `packet_html_url` | text | print-ready audit packet HTML in `prospect-audits` bucket; surfaced in `/dashboard/prospects` drawer |
-| `packet_envelope_text` | text | plain-text envelope copy (TO/FROM lines) — small enough to inline on the row |
-| `packet_generated_at` | timestamptz | last `audit_packet.py --upload` run for this row |
-| `packet_emailed_at` | timestamptz | stamped by daily-packet workflow when the print-this email is sent; NULL = eligible queue |
+- Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, RLS-guarded).
+  `SUPABASE_SERVICE_KEY` for the publish route only.
+- **`blog_posts`** is the only table the site uses now. Columns used: `id`, `title`,
+  `slug`, `summary`, `body_md`, `tags`, `status` (`DRAFT`/`PUBLISHED`), `published_at`,
+  `created_at`, `author`. Public SELECT via RLS on `status = PUBLISHED`. The dental
+  `cluster` column is ignored (taxonomy dropped); other dental tables
+  (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
+  the old project — unused by this site.
 
 ## Environment Variables
 
 | Variable | Notes |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Safe to expose |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access |
-| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit |
-| `GEMINI_API_KEY` | Google AI Studio |
-| `RESEND_API_KEY` | Contact form + Python alerts |
-| `NOTIFICATION_EMAIL` | `alex@rebbadvisors.com` |
-| `PUBLISH_SECRET` | Shared secret for /review + /api/publish + /api/review/save |
-| `NEXT_PUBLIC_SITE_URL` | `https://rebbadvisors.com` |
-| `ROD_EMAIL` | GovOS deed scraper |
-| `ROD_PASSWORD` | GovOS + CountyWeb (shared) |
-| `ROD_VIEWER_USERNAME` | CountyWeb (default: `asteryous`) |
-| `PDL_API_KEY` | People Data Labs |
-| `GOOGLE_PLACES_API_KEY` | Places API (New). Reused by PageSpeed Insights unless `GOOGLE_PAGESPEED_API_KEY` is set. |
-| `TESSERACT_CMD` | Optional — path to `tesseract.exe` |
-| `DISCORD_WEBHOOK_URL` | Optional — new draft alert |
-| `EDITOR` | Optional — for `approve_post.py --edit` |
-| `MAIL_FROM` | Optional — email `from` override |
+| `NEXT_PUBLIC_SITE_URL` | `https://alexprompts.com` (confirm). Drives canonical/sitemap/robots. |
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Used by `/api/publish`. |
+| `PUBLISH_SECRET` | Shared secret for `/review` + `/api/publish` + `/api/review/save`. |
+| `GEMINI_API_KEY` | Content engine (`scripts/ai_news/`). |
+| `RESEND_API_KEY` | Emails the weekly draft to Alex. |
+| `NOTIFICATION_EMAIL` | Draft recipient (`jsteryous@gmail.com`). |
+| `MAIL_FROM` | Resend sender on a verified domain (see `scripts/CLAUDE.md`). |
+
+> The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `GOOGLE_PLACES_API_KEY`,
+> `TESSERACT_CMD`, etc.) belong only to `scripts/_archive/` and are not needed to run
+> this site or the `ai_news` engine.
 
 ## Deployment
 
 - **Platform:** Vercel (Hobby), auto-deploy on push to `main`.
-- **Repo:** https://github.com/jsteryous/rebbadvisors-website
-- **Production:** rebbadvisors.com (DNS via Cloudflare).
+- **Repo:** https://github.com/jsteryous/rebbadvisors-website (repo not yet renamed).
+- **Production:** alexprompts.com (confirm DNS).
 
 ```bash
 npm run dev | npm run build | npm run lint | npx vercel --prod

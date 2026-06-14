@@ -5,37 +5,67 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import { site, socials } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rebbadvisors.com"),
-  title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
-  description:
-    "Dental website cleanup for Greenville SC and Upstate practices. $1,500. HIPAA-compliant intake swap, Weave sync preserved, five business days. Larger rebuilds scoped to your project. Free audit first.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} — ${site.tagline}`,
+    template: `%s · ${site.name}`,
+  },
+  description: site.description,
   keywords: [
-    "dental website cleanup Greenville SC",
-    "dentist website repair",
-    "fix dental booking form",
-    "mobile friendly dental website",
-    "HIPAA compliant dental contact form",
-    "dental practice website modernization",
+    "frontier tech news",
+    "AI news explained",
+    "Anthropic news",
+    "OpenAI news",
+    "SpaceX news",
+    "Tesla AI",
+    "Neuralink",
+    "xAI",
+    "tech news for normal people",
+    "Alex Prompts",
   ],
   openGraph: {
-    title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
-    description:
-      "Dental website cleanup starting at $1,500. HIPAA-compliant intake, Weave/LocalMed/RevenueWell sync preserved, five business days. Free audit and written proposal first.",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
     type: "website",
-    url: "https://rebbadvisors.com",
-    siteName: "REBB Advisors",
+    url: site.url,
+    siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "REBB Advisors - Dental Website Cleanup in Greenville SC",
-    description:
-      "Dental website cleanup. $1,500. HIPAA-compliant intake. Weave sync preserved. Free audit first.",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.oneLiner,
   },
   alternates: {
-    canonical: "https://rebbadvisors.com",
+    canonical: site.url,
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      publisher: { "@id": `${site.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.author,
+      url: site.url,
+      email: site.email,
+      jobTitle: "Writer",
+      description:
+        "Writes Alex Prompts, translating frontier AI and hard tech for an intelligent general reader.",
+      sameAs: socials.map((s) => s.url),
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -48,68 +78,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('rebb-theme');var shouldUseDark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',shouldUseDark);}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('alexprompts-theme');var shouldUseDark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',shouldUseDark);}catch(e){}})();`,
           }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: "REBB Advisors",
-              url: "https://rebbadvisors.com",
-              email: "alex@rebbadvisors.com",
-              description:
-                "Dental website cleanup and scoped rebuilds for practices in Greenville SC and the Upstate. HIPAA-compliant contact form replacement, Weave / LocalMed / RevenueWell sync preservation, Map Pack visibility. Every engagement starts with a free audit and a written proposal.",
-              slogan: "Confused customers don't buy.",
-              priceRange: "$1,500+",
-              areaServed: [
-                { "@type": "AdministrativeArea", name: "Greenville County, South Carolina" },
-                { "@type": "AdministrativeArea", name: "Spartanburg County, South Carolina" },
-                { "@type": "AdministrativeArea", name: "Anderson County, South Carolina" },
-                { "@type": "AdministrativeArea", name: "Pickens County, South Carolina" },
-                { "@type": "AdministrativeArea", name: "Oconee County, South Carolina" },
-              ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Greenville",
-                addressRegion: "SC",
-                addressCountry: "US",
-              },
-              serviceType: [
-                "Dental Website Cleanup",
-                "Dental Website Rebuild",
-                "HIPAA-Compliant Dental Intake Forms",
-                "Dental Local SEO",
-                "Dental Google Business Profile Management",
-              ],
-              knowsAbout: [
-                "Dental practice website cleanup",
-                "HIPAA-compliant dental contact forms",
-                "Dental patient-engagement platform integration",
-                "Weave, LocalMed, and RevenueWell synchronization",
-                "Mobile-friendly dental websites",
-                "Dental practice local SEO and Map Pack visibility",
-                "Dentist schema markup and Google Business Profile optimization",
-              ],
-              makesOffer: {
-                "@type": "Offer",
-                name: "Dental Website Cleanup",
-                description:
-                  "Flat-fee dental website cleanup: mobile fixes, HIPAA-compliant contact form replacement, speed pass, visual refresh. Existing Weave / LocalMed / RevenueWell sync preserved and tested before handoff. Ships in five business days or less. Larger rebuilds scoped per project.",
-                price: "1500",
-                priceCurrency: "USD",
-                availability: "https://schema.org/InStock",
-                category: "Web design",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Dental Website Cleanup",
-                  serviceType: "Website cleanup and modernization",
-                },
-              },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="antialiased">

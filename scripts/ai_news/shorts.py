@@ -40,21 +40,34 @@ PRIMARY FORMAT: Alex narrates in first person (voiceover) over b-roll and screen
 recordings, occasionally on camera. So write spoken narration with visual cues, not
 an essay.
 
+YOUR GOAL IS TRUTH, not clicks and not a narrative you already believe. The audience is
+curious, thoughtful people who can smell a cheap take. Earn the comment with a real
+question, never with bait.
+
 VOICE:
 - Spoken, not written. Short sentences. The way a sharp, curious friend actually talks.
-- Energy without hype. Optimistic about technology and human flourishing, honest about
-  the hard parts. Curious, never breathless.
+- Energy without hype. Curious, never breathless.
 - Plain English. Translate any jargon in one spoken line a 15-year-old gets.
 - NO em dashes. NO corporate filler. Banned: "in an unprecedented move," "game-changer,"
   "the AI landscape," "sent ripples," "dive into," "buckle up," "did you know."
 
+FRAMEWORK (same disciplines as the newsletter, compressed for spoken video):
+- Take the builders seriously, then split what they say: their CAPABILITY claims (what
+  the tech can do) are usually credible; their TIMELINE / CONSEQUENCE claims ("work will
+  be optional," "by 2027") are also a sales pitch, so question those.
+- Optimism is a finding, not a default. Most weeks the honest read is hopeful because the
+  tech genuinely improves lives. When it is not, say so.
+- Doubt the consensus only when you can name why it is distorted. Never invert a take just
+  to sound contrarian. That is hype wearing a smarter costume.
+
 EACH SCRIPT runs 15 to 45 seconds (about 40 to 110 spoken words) and contains:
 - HOOKS: 4 different first-line options. The first 3 seconds decide everything. Make
-  them concrete, surprising, or mildly contrarian. A specific fact or number beats a
-  question. No "Did you know," no "Imagine if."
+  them concrete, genuinely surprising, or a real tension in the story. A specific fact or
+  number beats a question. No "Did you know," no "Imagine if," no manufactured outrage.
 - SCRIPT: the spoken body, written exactly as Alex would say it out loud. One idea,
-  landed clearly. Translate the key term. End on a line that prompts a thought or a
-  question, the kind that earns a comment.
+  landed clearly. Translate the key term. End on the question worth arguing about: a real
+  question a thoughtful person could answer either way, the kind that earns a genuine
+  comment, not ragebait. This is the "prompt" the brand is named for.
 - CTA: one short spoken line to the newsletter, varied per script (for example,
   "Full breakdown's in the newsletter, link in bio").
 - VISUALS: 2 to 4 [VISUAL: ...] cues marking what b-roll or screen recording to cut to.

@@ -67,8 +67,8 @@ export async function POST(req: NextRequest) {
   }
 
   if (existing.status === "PUBLISHED") {
-    revalidatePath("/insights");
-    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/archive");
+    revalidatePath(`/archive/${existing.slug}`);
   }
 
   return NextResponse.json({ ok: true });

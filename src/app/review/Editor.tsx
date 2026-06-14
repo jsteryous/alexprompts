@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 
 interface Props {
@@ -61,7 +62,7 @@ export default function Editor({
       <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="text-xs font-semibold uppercase tracking-widest text-green-600">
-            REBB Advisors · Draft Review
+            Alex Prompts · Draft Review
           </span>
           <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded font-medium uppercase">
             {status}
@@ -80,9 +81,9 @@ export default function Editor({
           )}
         </div>
         <div className="flex items-center gap-3">
-          <a href="/" className="text-sm text-gray-500 hover:text-black">
+          <Link href="/" className="text-sm text-gray-500 hover:text-black">
             ← Site
-          </a>
+          </Link>
           <button
             type="button"
             onClick={save}
@@ -104,7 +105,7 @@ export default function Editor({
           )}
           {status === "PUBLISHED" && (
             <a
-              href={`/insights/${slug}`}
+              href={`/archive/${slug}`}
               className="inline-flex items-center gap-2 bg-black text-white font-semibold text-sm px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors"
             >
               View Live →

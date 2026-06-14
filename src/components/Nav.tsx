@@ -3,43 +3,40 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { newsletterUrl, site } from "@/lib/site";
 
 const links = [
-  { href: "/#what-we-fix", label: "What We Fix" },
-  { href: "/#process", label: "Process" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/sample-proposal", label: "Sample Proposal" },
-  { href: "/insights", label: "Insights" },
+  { href: "/archive", label: "Archive" },
+  { href: "/about", label: "About" },
+  { href: "/#follow", label: "Follow" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/review")) return null;
+  if (pathname?.startsWith("/review")) return null;
 
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight">
-          REBB Advisors
+          {site.name}
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="theme-link text-sm"
-            >
+            <Link key={link.href} href={link.href} className="theme-link text-sm">
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href={newsletterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="theme-cta text-sm font-medium px-4 py-2 rounded-lg"
           >
-            Get Free Audit
-          </Link>
+            Subscribe
+          </a>
         </nav>
 
         <button
@@ -69,13 +66,15 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href={newsletterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="theme-cta text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
             onClick={() => setOpen(false)}
           >
-            Get Free Audit
-          </Link>
+            Subscribe
+          </a>
         </div>
       )}
     </header>

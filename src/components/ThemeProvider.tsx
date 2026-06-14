@@ -32,7 +32,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     if (!mounted) return;
-    localStorage.setItem("rebb-theme", theme);
+    localStorage.setItem("alexprompts-theme", theme);
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme, mounted]);
 

@@ -2,77 +2,55 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cities, citySlugs } from "@/lib/cities";
-import { practiceTypeList } from "@/lib/practiceTypes";
+import { site, socials, coverage } from "@/lib/site";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/review")) return null;
+  if (pathname?.startsWith("/review")) return null;
 
   return (
     <footer className="theme-card-strong border-t">
       <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
           <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight">
-            REBB Advisors
+            {site.name}
           </Link>
-          <p className="theme-text-muted mt-1 text-sm">
-            Website cleanup for dental practices in Greenville SC.
-          </p>
+          <p className="theme-text-muted mt-1 text-sm">{site.tagline}</p>
         </div>
 
         <nav className="flex flex-wrap gap-6">
-          <Link href="/#what-we-fix" className="theme-link text-sm">
-            What We Fix
+          <Link href="/archive" className="theme-link text-sm">
+            Archive
           </Link>
-          <Link href="/#pricing" className="theme-link text-sm">
-            Pricing
+          <Link href="/about" className="theme-link text-sm">
+            About
           </Link>
-          <Link href="/sample-proposal" className="theme-link text-sm">
-            Sample Proposal
-          </Link>
-          <Link href="/insights" className="theme-link text-sm">
-            Insights
-          </Link>
-          <Link href="/contact" className="theme-link text-sm">
-            Contact
-          </Link>
-        </nav>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
-        <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
-          Service areas
-        </p>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2">
-          {citySlugs.map((slug) => (
-            <Link
-              key={slug}
-              href={`/dental-website-cleanup/${slug}`}
+          {socials.map((s) => (
+            <a
+              key={s.key}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="theme-link text-sm"
             >
-              {cities[slug].name}
-            </Link>
+              {s.label}
+            </a>
           ))}
         </nav>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
         <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
-          Practice types
+          We cover
         </p>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2">
-          {practiceTypeList.map((p) => (
-            <Link key={p.slug} href={`/${p.slug}`} className="theme-link text-sm">
-              {p.label}
-            </Link>
-          ))}
-        </nav>
+        <p className="theme-text-muted text-sm leading-relaxed max-w-3xl">
+          {coverage.join(" · ")}
+        </p>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pb-8">
         <p className="theme-text-muted text-xs">
-          &copy; {new Date().getFullYear()} REBB Advisors. All rights reserved.
+          &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
         </p>
       </div>
     </footer>
