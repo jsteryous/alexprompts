@@ -6,7 +6,8 @@ import {
   coverage,
   newsletterUrl,
   principles,
-  beliefs,
+  anchorQuote,
+  manifesto,
   trackRecord,
 } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
@@ -188,23 +189,34 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Manifesto ── */}
+      {/* ── What we're about ── */}
       <section className="theme-section-contrast py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <Eyebrow className="mb-8">What we believe</Eyebrow>
-          <ul className="space-y-5 md:space-y-6">
-            {beliefs.map((line, i) => (
-              <li
+        <div className="max-w-3xl mx-auto px-6">
+          <Eyebrow className="mb-8">What we&apos;re about</Eyebrow>
+          <figure className="mb-10 md:mb-12">
+            <blockquote className="theme-text-primary text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]">
+              <span className="theme-label">&ldquo;</span>
+              {anchorQuote.text}
+              <span className="theme-label">&rdquo;</span>
+            </blockquote>
+            <figcaption className="theme-text-muted text-sm uppercase tracking-widest mt-5">
+              {anchorQuote.author} · {anchorQuote.year}
+            </figcaption>
+          </figure>
+          <div className="space-y-5 md:space-y-6">
+            {manifesto.map((para, i) => (
+              <p
                 key={i}
-                className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-[1.15] flex gap-4 md:gap-6"
+                className={`leading-relaxed ${
+                  i === 0
+                    ? "theme-text-primary text-lg md:text-xl font-medium"
+                    : "theme-text-contrast-muted text-base md:text-lg"
+                }`}
               >
-                <span className="theme-label text-base md:text-xl font-mono pt-1.5 md:pt-2.5 tabular-nums opacity-60">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span>{line}</span>
-              </li>
+                {para}
+              </p>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 

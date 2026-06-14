@@ -114,14 +114,28 @@ export const principles = [
   },
 ] as const;
 
-/** Manifesto lines. Renders as a bold "what we believe" band. Voice, with spine. */
-export const beliefs = [
-  "Progress is the default. Stagnation is the exception that needs explaining.",
-  "We are not building the future. We are listening closely to the people who are.",
-  "Hype and doom are both lazy. The truth is more interesting than either.",
-  "Optimism is a finding, not a vibe. When the facts turn, so do we.",
-  "The smartest people in the room have a long history of being wrong about technology.",
-  "Every story should end in an argument worth having.",
+/**
+ * The anchor quote behind the whole brand. VERIFIED: Alan Kay, 1971 (Xerox PARC).
+ * His actual words are "invent it," not the misquoted "create it." Keep it exact.
+ */
+export const anchorQuote = {
+  text: "The best way to predict the future is to invent it.",
+  author: "Alan Kay",
+  year: "1971",
+} as const;
+
+/**
+ * The "what we're about" blurb. Prose, not bullets. It demonstrates the value
+ * (orientation) instead of claiming it: it shows the reader the swirl of
+ * predictions, then hands them the frame that makes it legible. Voice = house
+ * style (no em dashes, no fragments, plain English, grounded optimism). Rendered
+ * as paragraphs under the anchor quote.
+ */
+export const manifesto = [
+  "The people building the future will not stop telling you what it looks like. One says work will soon be optional. Another says half of today's entry-level jobs disappear inside a decade. A third is building datacenters to put in orbit and treating it like a normal Tuesday. It arrives faster than anyone can read, and almost none of it comes with a way to separate the signal from the sales pitch.",
+  "That line is the idea behind everything here. If the best way to predict the future is to invent it, then the clearest view of where we are headed does not belong to pundits, politicians, or the people reacting to them. It belongs to the ones actually building it, in the technology they ship and the predictions they make out loud.",
+  "So we listen to them closely, and then we do the part they will not do for you. We hold each claim up against the present, so you can see how far it still has to travel. We hold it up against the past, because we have heard confident forecasts before and we know how they aged. And we hold it up against the loudest predictions pointing the other way, so you can see who really disagrees, and why.",
+  "What is left is a clean line between what is real, what is hope, and what is hype, and a sense of where each big claim sits on it. The future stops being a wall of noise and starts being something you can actually follow. We think it points somewhere good for people. We will show you why, we will take the strongest objection seriously, and we will end on the question worth arguing about.",
 ] as const;
 
 /**
