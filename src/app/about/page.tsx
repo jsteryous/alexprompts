@@ -17,12 +17,10 @@ export default function AboutPage() {
             About
           </span>
           <h1 className="theme-text-primary text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            Change is the only constant. Technological literacy (understanding what’s actually happening with AI, biotech, robotics, energy, computing, etc.) has become as essential today as reading and writing were 200 years ago. If you can’t read, you’re shut out of modern society. If you don’t understand the major technologies shaping the next 10–30 years, you’re increasingly shut out of economic opportunity, political decisions, and personal control over your life.
+            Change is the only constant. 
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed">
-            {site.name} is written by {site.author}. It is about the companies building the
-            future, written for smart people who do not have time to follow it full time and
-            who would rather think than be told what to think.
+            {site.name} aims to help with technological literacy (understanding what’s actually happening with AI, biotech, robotics, energy, computing, etc.), which has become as essential today as reading and writing were 200 years ago. If you can’t read, you’re shut out of modern society. If you don’t understand the major technologies shaping the next 10–30 years, you’re increasingly shut out of economic opportunity, political decisions, and personal control over your life.
           </p>
         </div>
       </section>
