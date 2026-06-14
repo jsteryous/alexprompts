@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   site,
   socials,
@@ -100,13 +101,24 @@ export default async function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="theme-section-contrast relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24">
-        <span
-          aria-hidden
-          className="prompt-watermark absolute -right-4 -top-16 md:-top-24 text-[55vw] md:text-[26rem]"
-        >
-          ›
-        </span>
-        <div className="max-w-5xl mx-auto px-6 relative">
+        <div className="absolute inset-0" aria-hidden>
+          <Image
+            src="/img/hero-earth-limb.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(8,10,14,0.94) 0%, rgba(8,10,14,0.78) 48%, rgba(8,10,14,0.4) 100%), linear-gradient(0deg, rgba(8,10,14,0.95) 0%, rgba(8,10,14,0) 45%)",
+            }}
+          />
+        </div>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           <Eyebrow className="mb-5">No hype. No doom. Just the frontier.</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
             {site.tagline}
@@ -299,8 +311,24 @@ export default async function HomePage() {
       </section>
 
       {/* ── Subscribe CTA ── */}
-      <section className="theme-section-contrast py-20 md:py-24">
-        <div className="max-w-2xl mx-auto px-6 text-center">
+      <section className="theme-section-contrast relative overflow-hidden py-24 md:py-32">
+        <div className="absolute inset-0" aria-hidden>
+          <Image
+            src="/img/falcon-heavy-launch.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(8,10,14,0.82) 0%, rgba(8,10,14,0.7) 50%, rgba(8,10,14,0.88) 100%)",
+            }}
+          />
+        </div>
+        <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
             Understand the future before it&apos;s common knowledge.
           </h2>

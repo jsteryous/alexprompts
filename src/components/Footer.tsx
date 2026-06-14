@@ -52,6 +52,9 @@ export default function Footer() {
         <p className="theme-text-muted text-xs">
           &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
         </p>
+        <p className="theme-text-muted text-xs mt-1 opacity-70">
+          Imagery: NASA / public domain.
+        </p>
       </div>
     </footer>
   );
