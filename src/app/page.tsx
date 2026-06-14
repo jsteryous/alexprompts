@@ -359,13 +359,13 @@ export default async function HomePage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(8,10,14,0.82) 0%, rgba(8,10,14,0.7) 50%, rgba(8,10,14,0.88) 100%)",
+                "linear-gradient(180deg, rgba(53, 72, 108, 0.82) 0%, rgba(53, 72, 108, 0.82) 50%, rgba(53, 72, 108, 0.82) 100%)",
             }}
           />
         </div>
         <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Understand the future before it&apos;s common knowledge.
+            Position yourself accordingly.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
             One issue a week. Free. The builders&apos; biggest claim, translated and
