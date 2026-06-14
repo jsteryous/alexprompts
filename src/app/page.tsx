@@ -210,8 +210,24 @@ export default async function HomePage() {
       </section>
 
       {/* ── How every issue works (the method) ── */}
-      <section className="theme-section-muted border-y theme-border py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="theme-section-contrast relative overflow-hidden border-y theme-border py-16 md:py-24">
+        <div className="absolute inset-0" aria-hidden>
+          <Image
+            src="/img/dario-amodei.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-right"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(8,10,14,0.97) 0%, rgba(8,10,14,0.9) 50%, rgba(8,10,14,0.66) 100%), linear-gradient(0deg, rgba(8,10,14,0.85) 0%, rgba(8,10,14,0.5) 30%)",
+            }}
+          />
+        </div>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           <div className="max-w-2xl mb-10">
             <Eyebrow className="mb-4">How every issue works</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
@@ -249,6 +265,24 @@ export default async function HomePage() {
               different.&rdquo; We keep the receipts.
             </p>
           </div>
+
+          <figure className="mb-10 md:mb-12 max-w-xl">
+            <div className="theme-card-strong border theme-border rounded-xl p-2 shadow-sm">
+              <Image
+                src="/img/elon-prediction.jpg"
+                alt="Elon Musk post: for time-based predictions he aims for the 50th-percentile date, so half land early and half late, but the prediction rarely fails to come true over time."
+                width={901}
+                height={362}
+                sizes="(max-width: 768px) 100vw, 36rem"
+                className="w-full h-auto rounded-md"
+              />
+            </div>
+            <figcaption className="theme-text-muted text-sm mt-3 leading-relaxed">
+              And the builders know it. Elon Musk on his own record. Direction is the easy part.
+              Timing is where almost everyone, optimist and skeptic alike, gets humbled.
+            </figcaption>
+          </figure>
+
           <ul className="grid gap-5 md:grid-cols-2">
             {trackRecord.map((r) => (
               <li key={r.who} className="theme-card border theme-border rounded-xl p-6 flex flex-col">

@@ -53,7 +53,7 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
         </p>
         <p className="theme-text-muted text-xs mt-1 opacity-70">
-          Imagery: NASA / public domain.
+          Space imagery: NASA / public domain.
         </p>
       </div>
     </footer>
