@@ -147,7 +147,11 @@
       "Bash(node -e \"try{require.resolve\\('sharp'\\);console.log\\('sharp:yes'\\)}catch\\(e\\){console.log\\('sharp:no'\\)}\")",
       "Bash(node -e \"try{require.resolve\\('png-to-ico'\\);console.log\\('png-to-ico:yes'\\)}catch\\(e\\){console.log\\('png-to-ico:no'\\)}\")",
       "Bash(rm -f plume-preview.jpg plume-preview2.jpg)",
-      "Bash(grep -rn \"falcon-heavy-launch\" src/)"
+      "Bash(grep -rn \"falcon-heavy-launch\" src/)",
+      "Skill(schedule)",
+      "Bash(gh repo *)",
+      "mcp__claude_ai_Google_Drive__search_files",
+      "mcp__claude_ai_Google_Drive__read_file_content"
     ]
   }
 }
