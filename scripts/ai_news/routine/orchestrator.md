@@ -4,7 +4,11 @@ WORKSPACE. Do ALL scratch work in /tmp/ap (run: mkdir -p /tmp/ap). Write every i
 
 ISOLATION (the quality lever). Run each pass as a separate sub-agent (Task tool, subagent_type "general-purpose") so it starts cold and sees ONLY the input you hand it: its spec file plus the named /tmp/ap input(s). The fact-finder must not know the angle; the writer must not see the raw sources, only the verified brief. Save each pass output to its /tmp/ap file before starting the next. If you cannot spawn sub-agents, do the passes yourself as clean rooms: finish and save one before reading anything for the next, and never let a later pass rewrite an earlier file.
 
-STEP 0, COLLECT (free). Run: cd scripts && pip install -q -r requirements-ai-news.txt && python -m ai_news.digest --collect-only > /tmp/ap/signal.txt 2>/tmp/ap/collect.err . If signal.txt is empty or errored, write COLLECTOR FAILED into /tmp/ap/signal.txt and the Reporter will fall back to web search.
+STEP 0, COLLECT (free). The signal is collected FOR you by GitHub Actions (.github/workflows/collect-signal.yml) from a non-blocked IP and committed to the repo, because this cloud sandbox's IP is blocked (HTTP 403) by Google News, Hacker News, and Reddit, so collecting live here returns zero items. Run: mkdir -p /tmp/ap. Then, in order:
+  1. NORMAL PATH. If scripts/ai_news/data/signal-latest.txt exists and the "Collected <timestamp>" line near its top is within the last 4 days, copy that file to /tmp/ap/signal.txt and use it. This is the expected path.
+  2. FALLBACK. If that file is missing or its timestamp is stale (older than 4 days), try collecting live anyway: cd scripts && pip install -q -r requirements-ai-news.txt && python -m ai_news.digest --collect-only > /tmp/ap/signal.txt 2>/tmp/ap/collect.err . It will usually return nothing from this IP, but cost is low.
+  3. LAST RESORT. If /tmp/ap/signal.txt is still empty or lists no stories, write COLLECTOR FAILED into it and the Reporter will fall back to its own web search.
+Record which path you used (fresh CI signal / stale-or-live fallback / COLLECTOR FAILED) and report it in STEP 6.
 
 STEP 1, PASS 1, REPORTER. Read scripts/ai_news/routine/pass1_reporter.md. Hand its full contents plus the contents of /tmp/ap/signal.txt to a fresh sub-agent. Save the output to /tmp/ap/pass1_brief.md.
 

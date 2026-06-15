@@ -20,6 +20,8 @@ cd scripts
 python -m ai_news.digest                 # collect -> reporter -> writer -> shorts, print
 python -m ai_news.digest --show-research  # also print the research brief
 python -m ai_news.digest --collect-only   # just the sourced signal, no Gemini
+python -m ai_news.digest --collect-only --json-out signal.json   # also dump scored JSON (CI hand-off)
+python -m ai_news.digest --from-json signal.json                 # run the pipeline off a saved snapshot, no live fetch
 python -m ai_news.digest --no-shorts      # newsletter only, skip the short-form queue
 python -m ai_news.digest --email          # email newsletter + short-form queue via Resend
 python -m ai_news.digest --days 14        # widen the lookback window
@@ -37,6 +39,18 @@ Neuralink — edit the `ENTITIES` list to change coverage):
   attention signal. Free, no key.
 - **Reddit search JSON** — best-effort; Reddit now 403s unauthenticated cloud
   requests, so it degrades to empty and HN carries the weight. Not a bug.
+
+**Datacenter-IP blocking + the CI hand-off.** From a *datacenter* IP, all three
+sources can 403 (Google News and HN challenge datacenter ranges; Reddit always does),
+not just Reddit. GitHub-hosted runners are not blocked; the Claude Code cloud *script
+routine* sandbox is. So the routine does NOT collect for itself. Instead
+`.github/workflows/collect-signal.yml` (Saturday 12:00 UTC, before the routine) runs
+`--collect-only --json-out` from the runner's good IP and commits the scored signal to
+`scripts/ai_news/data/` (`signal-latest.json` + the rendered `signal-latest.txt`). The
+routine's STEP 0 reads that committed file; live collection is only a fallback. The
+serialization round-trips through `collect.to_json` / `collect.from_json` (unit-tested);
+`--from-json PATH` replays a saved snapshot through the whole pipeline with no network.
+The Monday email pipeline (`ai-news.yml`) still collects live because GitHub runners can.
 
 All network fns degrade gracefully (log + return `[]`, never raise). RSS is parsed
 with **defusedxml** (XXE/billion-laughs hardening; falls back to stdlib if absent).

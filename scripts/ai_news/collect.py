@@ -19,10 +19,11 @@ scripts/tests/test_ai_news.py.
 
 from __future__ import annotations
 
+import json
 import logging
 import time
 import urllib.parse
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 
 import requests
@@ -109,6 +110,45 @@ class Collection:
     entities: list[EntityReport]
     biggest: Story | None
     generated_at: str
+
+
+# ── Serialization (unit-tested) ───────────────────────────────────────────────
+# The cloud script routine cannot collect — its sandbox IP is blocked (HTTP 403)
+# by Google News, HN, and Reddit. So GitHub Actions collects from a non-blocked IP
+# and hands the scored Collection to the routine as JSON. to_json/from_json round-
+# trip losslessly; the computed properties (news_count, attention) are derived on
+# read, not stored. See .github/workflows/collect-signal.yml and scripts/CLAUDE.md.
+
+def to_json(c: Collection) -> str:
+    """Serialize a Collection to indented JSON (round-trips through from_json)."""
+    return json.dumps(
+        {
+            "generated_at": c.generated_at,
+            "biggest": asdict(c.biggest) if c.biggest else None,
+            "entities": [
+                {"entity": r.entity, "headlines": r.headlines,
+                 "stories": [asdict(s) for s in r.stories]}
+                for r in c.entities
+            ],
+        },
+        indent=2, ensure_ascii=False,
+    )
+
+
+def from_json(text: str) -> Collection:
+    """Rebuild a Collection from to_json output (the inverse of to_json)."""
+    d = json.loads(text)
+    entities = [
+        EntityReport(
+            entity=r["entity"],
+            headlines=r.get("headlines", []),
+            stories=[Story(**s) for s in r.get("stories", [])],
+        )
+        for r in d.get("entities", [])
+    ]
+    biggest = Story(**d["biggest"]) if d.get("biggest") else None
+    return Collection(entities=entities, biggest=biggest,
+                      generated_at=d.get("generated_at", ""))
 
 
 # ── Pure helpers (unit-tested) ────────────────────────────────────────────────

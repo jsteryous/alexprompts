@@ -21,7 +21,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from ai_news import collect, digest, shorts  # noqa: E402
-from ai_news.collect import Story  # noqa: E402
+from ai_news.collect import Collection, EntityReport, Story  # noqa: E402
 
 
 # ── query building ────────────────────────────────────────────────────────────
@@ -157,6 +157,51 @@ class TestScoring(unittest.TestCase):
 
     def test_pick_biggest_empty(self):
         self.assertIsNone(collect.pick_biggest([]))
+
+
+# ── JSON hand-off (CI collects -> cloud routine reads) ────────────────────────
+
+class TestSerialization(unittest.TestCase):
+    def _sample(self) -> Collection:
+        big = Story("OpenAI", "high", "u2", "hackernews", hn_points=10, hn_comments=200)
+        return Collection(
+            entities=[
+                EntityReport(
+                    entity="Anthropic",
+                    headlines=[{"title": "Claude ships", "link": "https://x/1",
+                                "source": "The Verge", "published": "Mon"}],
+                    stories=[Story("Anthropic", "t", "https://x/2", "reddit", reddit_score=80)],
+                ),
+                EntityReport(entity="OpenAI", headlines=[], stories=[big]),
+            ],
+            biggest=big,
+            generated_at="2026-06-15 12:00 UTC",
+        )
+
+    def test_round_trips_losslessly(self):
+        c = self._sample()
+        back = collect.from_json(collect.to_json(c))
+        self.assertEqual(back.generated_at, c.generated_at)
+        self.assertEqual([e.entity for e in back.entities], ["Anthropic", "OpenAI"])
+        self.assertEqual(back.entities[0].headlines, c.entities[0].headlines)
+        self.assertEqual(back.entities[0].stories[0].reddit_score, 80)
+        self.assertEqual(back.biggest.title, "high")
+        # Derived properties recompute on the rebuilt object.
+        self.assertEqual(back.entities[0].news_count, 1)
+        self.assertEqual(back.entities[1].attention, c.entities[1].attention)
+
+    def test_round_trips_none_biggest(self):
+        c = Collection(entities=[], biggest=None, generated_at="2026-06-15 12:00 UTC")
+        back = collect.from_json(collect.to_json(c))
+        self.assertIsNone(back.biggest)
+        self.assertEqual(back.entities, [])
+
+    def test_payload_renders_from_rebuilt_collection(self):
+        # The cloud routine renders the rebuilt collection; it must not error.
+        back = collect.from_json(collect.to_json(self._sample()))
+        payload = digest.render_payload(back)
+        self.assertIn("Collected 2026-06-15 12:00 UTC", payload)
+        self.assertIn("Anthropic", payload)
 
 
 # ── style guardrails ──────────────────────────────────────────────────────────

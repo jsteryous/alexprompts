@@ -35,7 +35,7 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
-from ai_news.collect import Collection, collect_all, story_attention
+from ai_news.collect import Collection, collect_all, from_json, story_attention, to_json
 from ai_news.llm import generate as _gemini
 
 # ai_news/ is one level deeper than the other scripts, so repo root is 3 up:
@@ -342,12 +342,24 @@ def main() -> int:
     p.add_argument("--show-research", action="store_true", help="also print the research brief")
     p.add_argument("--show-payload", action="store_true", help="also print the collected signal")
     p.add_argument("--collect-only", action="store_true", help="skip Gemini; show the raw collection")
+    p.add_argument("--json-out", metavar="PATH",
+                   help="also write the scored collection as JSON (for the CI -> cloud-routine hand-off)")
+    p.add_argument("--from-json", metavar="PATH",
+                   help="load the collection from a JSON file instead of fetching live (skips all network sources)")
     p.add_argument("--no-shorts", action="store_true", help="newsletter only; skip the short-form script queue")
     p.add_argument("--shorts-count", type=int, default=6, help="number of short-form scripts (default 6)")
     p.add_argument("--email", action="store_true", help="send the draft via Resend to NOTIFICATION_EMAIL")
     args = p.parse_args()
 
-    collection = collect_all(when_days=args.days, news_limit=args.news_limit)
+    if args.from_json:
+        collection = from_json(Path(args.from_json).read_text(encoding="utf-8"))
+        log.info("Loaded collection from %s (collected %s)", args.from_json, collection.generated_at)
+    else:
+        collection = collect_all(when_days=args.days, news_limit=args.news_limit)
+
+    if args.json_out:
+        Path(args.json_out).write_text(to_json(collection), encoding="utf-8")
+        log.info("Wrote collection JSON to %s", args.json_out)
 
     if args.collect_only or args.show_payload:
         print("\n" + "=" * 70 + "\nCOLLECTED SIGNAL\n" + "=" * 70)
