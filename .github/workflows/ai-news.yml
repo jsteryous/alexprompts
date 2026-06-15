@@ -1,9 +1,13 @@
 name: Alex Prompts Weekly Digest
 
+# DISABLED 2026-06-15: the Saturday cloud script routine (Opus, grounded by the CI
+# signal hand-off) is now the weekly draft. This Gemini + Resend pipeline is kept
+# runnable on demand but no longer auto-runs, so Alex does not get two drafts.
+# To re-enable the weekly email, uncomment the schedule block below.
 on:
-  schedule:
-    # Monday 8:00 AM EST (13:00 UTC). Shifts to 9am during EDT; adjust if you care.
-    - cron: '0 13 * * 1'
+  # schedule:
+  #   # Monday 8:00 AM EST (13:00 UTC). Shifts to 9am during EDT; adjust if you care.
+  #   - cron: '0 13 * * 1'
   workflow_dispatch: # manual trigger from the GitHub UI
 
 jobs:
