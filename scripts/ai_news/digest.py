@@ -349,7 +349,15 @@ def main() -> int:
     p.add_argument("--no-shorts", action="store_true", help="newsletter only; skip the short-form script queue")
     p.add_argument("--shorts-count", type=int, default=6, help="number of short-form scripts (default 6)")
     p.add_argument("--email", action="store_true", help="send the draft via Resend to NOTIFICATION_EMAIL")
+    p.add_argument("--email-file", metavar="PATH",
+                   help="email an existing markdown draft via Resend and exit (used by email-draft.yml)")
     args = p.parse_args()
+
+    # Email a pre-written draft (the Saturday cloud routine's output) and stop.
+    # No collection, no Gemini: just render the markdown and send it.
+    if args.email_file:
+        send_email(Path(args.email_file).read_text(encoding="utf-8"))
+        return 0
 
     if args.from_json:
         collection = from_json(Path(args.from_json).read_text(encoding="utf-8"))
