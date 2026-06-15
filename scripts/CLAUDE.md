@@ -113,12 +113,14 @@ fallback). `digest.py` bundles the queue into the weekly run/email by default
 `NOTIFICATION_EMAIL` (`jsteryous@gmail.com`). The weekly email bundles the newsletter
 draft and the short-form queue in one message.
 
-**Resend deliverability:** the Resend account email is `alex@rebbadvisors.com`, so the
-shared `onboarding@resend.dev` sender can only reach *that* address. To deliver to the
-Gmail, `MAIL_FROM` must be an address on a Resend-verified domain. `rebbadvisors.com`
-is already verified, so `MAIL_FROM="Alex Prompts <noreply@rebbadvisors.com>"` works
-today. When that domain is dropped, verify a new one at resend.com/domains and update
-`MAIL_FROM` (set in `.env.local` and the `MAIL_FROM` GitHub secret).
+**Resend deliverability:** `MAIL_FROM` must be an address on a Resend-VERIFIED domain
+or Resend 403s the send (the shared `onboarding@resend.dev` fallback only reaches the
+Resend account's own address, not the Gmail). `rebbadvisors.com` is NO LONGER verified
+(it 403'd the email-draft job on 2026-06-15). Use the brand domain: verify
+`alexprompts.com` at resend.com/domains, then set `MAIL_FROM="Alex Prompts
+<noreply@alexprompts.com>"` in both `.env.local` and the `MAIL_FROM` GitHub secret
+(repo Settings, Secrets and variables, Actions). The same secret feeds `ai-news.yml`
+and `email-draft.yml`.
 
 **GH Actions — `ai-news.yml`:** Monday 13:00 UTC, Python 3.12,
 `requirements-ai-news.txt`. Secrets: `GEMINI_API_KEY`, `RESEND_API_KEY`,

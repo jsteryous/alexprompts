@@ -35,8 +35,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-          # Must be an address on a Resend-verified domain (rebbadvisors.com for now).
-          # Without it the run sends from onboarding@resend.dev, which only reaches
-          # the Resend account email (alex@rebbadvisors.com), not your Gmail.
+          # Must be an address on a Resend-verified domain (alexprompts.com; verify
+          # at resend.com/domains). An unverified domain 403s the send.
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
         run: python -m ai_news.digest --email

@@ -38,8 +38,8 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-          # Must be on a Resend-verified domain (rebbadvisors.com for now), or the
-          # send only reaches the Resend account address, not Alex's Gmail.
+          # Must be on a Resend-verified domain (alexprompts.com; verify it at
+          # resend.com/domains), or Resend 403s the send.
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
         run: |
           latest=$(ls -t ../drafts/*.md 2>/dev/null | head -1)

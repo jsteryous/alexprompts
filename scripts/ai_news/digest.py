@@ -52,9 +52,10 @@ REPORTER_MODEL = "gemini-2.5-flash"
 WRITER_MODEL = "gemini-2.5-pro"
 WRITER_FALLBACK_MODEL = "gemini-2.5-flash"
 
-# Email defaults. rebbadvisors.com is going away, so send from Resend's shared
-# sender. Recipient is whatever NOTIFICATION_EMAIL points to (set it to your Gmail).
-MAIL_FROM = os.getenv("MAIL_FROM", "Alex Prompts <onboarding@resend.dev>")
+# Email defaults. The sender must be on a Resend-VERIFIED domain or Resend 403s.
+# alexprompts.com is the brand domain (verify it at resend.com/domains); the
+# MAIL_FROM secret overrides this default in CI. Recipient is NOTIFICATION_EMAIL.
+MAIL_FROM = os.getenv("MAIL_FROM", "Alex Prompts <noreply@alexprompts.com>")
 NOTIFICATION_EMAIL = os.getenv("NOTIFICATION_EMAIL", "jsteryous@gmail.com")
 
 # Phrases that betray fluff. The writer prompt bans them; we also warn if any slip
