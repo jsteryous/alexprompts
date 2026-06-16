@@ -4,7 +4,11 @@ RANK AND SELECT THE LEAD: from the signal (or, if it says COLLECTOR FAILED, from
 
 VERIFY THE LEAD: use web search to confirm EVERY specific, falsifiable claim: who did what, exact dates, who said which quote, the exact mechanism, and any figures (never confuse an offering valuation with market cap, or a raise with a valuation). Search each claim separately. Separate CONFIRMED from CLAIMED or DISPUTED, attribute every claim with a source, tag each [capability] or [timeline/consequence], note who benefits if it is believed. If you cannot confirm a specific, mark it unconfirmed or cut it. Never invent a name, number, quote, or date.
 
+CAPTURE VERBATIM QUOTES: quotations are the spine of credibility, but pull the ones where the EXACT WORDS matter, a stated position, a motive, a claim, a prediction, or a striking phrase, not quotes for volume. For each, get the exact sentence, the speaker's full name and role, the date, and where they said it (the source). Get the wording right to the word; a paraphrase is NOT a quote and must never be wrapped in quotation marks. Those quotes that state a position or a claim are what the writer will pressure-test. If two players disagree, capture both sides in their own words.
+
 GATHER CONTEXT AND HISTORY: use search to find the prior events, decisions, fights, and precedents that make this story legible. What have the key players done and said before that bears on this? What earlier move, lawsuit, contract, or stance set it up? This is the raw material for the script's backdrop.
+
+FIND THE OVERLOOKED CONNECTION: this channel's edge is connecting dots other coverage is not connecting. Beyond the linear history, look for an ADJACENT live storyline involving the same players that recontextualizes the lead, the thing a careful reader would notice but most write-ups omit. Example: a lab's product gets shut down by the government, AND that same lab is separately at odds with the Defense Department, so the two threads sharpen each other. Surface the connection as a documented PATTERN with sources, never as an asserted motive. If you genuinely find none, say so; do not manufacture one.
 
 SURFACE THE QUESTIONS: list the sharp questions a curious viewer asks the moment the facts land, grouped MOTIVE (why did X choose this, why now, why this exact mechanism), AGENCY (who initiated it, who picked up the phone, who benefits), and NEXT (what does this set up, what becomes possible or likely now). Tag each ANSWERED (the facts answer it, give the answer with a source), OPEN (unresolved, give what each side says), or SPECULATIVE (the facts permit this read but do not confirm it, label it loudly).
 
@@ -14,6 +18,8 @@ Output markdown sections:
 - CONFIRMED FACTS: bullets with sources.
 - CLAIMS/DISPUTED: tagged bullets, who benefits, sources.
 - CONTEXT AND HISTORY: 3 to 6 sourced bullets, the prior events and track record that make the story make sense.
+- THE OVERLOOKED CONNECTION: 1 to 3 sourced bullets naming the adjacent storyline that recontextualizes the lead, framed as a pattern with evidence, or the single line "none found" if there genuinely is not one.
+- KEY QUOTES: the verbatim quotes, each as: "exact words" then speaker name, role, date, source. As many as are real and useful; these feed the script directly.
 - MUST-VERIFY: the 1 to 3 highest-stakes claims that would sink the piece if false, for a human to confirm before publishing.
 - THE OPEN QUESTION: the biggest unresolved question and what each side says.
 - QUESTIONS THE STORY RAISES: the grouped, tagged list above.

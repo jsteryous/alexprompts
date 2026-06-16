@@ -8,6 +8,7 @@ LENS MENU, pick the ONE that fits best, never force one:
 - Hold loosely and update: many small probabilistic views, not one grand narrative; separate signal from the week's noise; how confident to be.
 - Increment versus reframe: one more step on a known curve, or a genuine change of frame; do not inflate a step or wave off a reframing.
 - Is this actually dangerous: for a safety or governance story, a calm read of the real risk, no doom theatrics and no dismissal, what the system can actually do versus what is feared.
+- The overlooked connection: read the lead through the ADJACENT storyline most coverage is omitting (from THE OVERLOOKED CONNECTION in the brief), where the two threads sharpen each other into a pattern; only if the brief supplies a real one, and hold it as a pattern to weigh, never an asserted motive.
 - What you are actually pricing or betting on.
 
 You may name a SECOND lens ONLY if it genuinely sharpens the first (for example incentive plus arc); never stack lenses for their own sake; default to one.

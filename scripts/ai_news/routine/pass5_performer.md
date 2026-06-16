@@ -6,4 +6,6 @@ Examples to fix: clunky transitions like "Here is the strongest case against my 
 
 Keep every fact, the angle, the spine question, the structure, and the rules (no em dashes, no fragments, no filler, plain unescaped markdown). Do not add new facts.
 
+DO NOT TOUCH THE FACTS WHILE POLISHING: you are the last pass that can change words, and no fact-check runs after you. Never alter anything inside quotation marks, and never change a number, a name, a title, or a date, even to make a line easier to say. If a quote is awkward to speak, change how you introduce it, never the words inside the marks.
+
 Output the final, camera-ready script only, same structure.
