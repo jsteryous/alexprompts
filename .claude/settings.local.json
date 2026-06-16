@@ -151,7 +151,19 @@
       "Skill(schedule)",
       "Bash(gh repo *)",
       "mcp__claude_ai_Google_Drive__search_files",
-      "mcp__claude_ai_Google_Drive__read_file_content"
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -A \"alex-prompts-newsletter/0.1 \\(+https://substack.com\\)\" \"https://news.google.com/rss/search?q=%22Anthropic%22%20when:7d&hl=en-US&gl=US&ceid=US:en\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36\" \"https://news.google.com/rss/search?q=%22Anthropic%22%20when:7d&hl=en-US&gl=US&ceid=US:en\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -A \"alex-prompts-newsletter/0.1\" \"http://hn.algolia.com/api/v1/search_by_date?query=anthropic.com&tags=story&hitsPerPage=5\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://hn.algolia.com/api/v1/search_by_date?query=anthropic.com&tags=story&hitsPerPage=5\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -A \"alex-prompts-newsletter/0.1\" \"https://www.reddit.com/r/singularity/search.json?q=%22Anthropic%22&restrict_sr=true&sort=top&t=week&limit=5\")",
+      "Bash(echo \"=== exit: $? ===\")",
+      "Bash(gh auth *)",
+      "Bash(gh workflow *)",
+      "Bash(printf '# Test Headline For Subject\\\\n\\\\nBody paragraph.\\\\n\\\\n---\\\\n\\\\n## Editor notes \\(not part of the script\\)\\\\nstuff\\\\n')",
+      "Bash(RESEND_API_KEY= python -m ai_news.digest --email-file /tmp/draft.md)",
+      "Bash(echo \"exit=$?\")",
+      "PowerShell(npm run *)"
     ]
   }
 }

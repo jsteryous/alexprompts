@@ -20,7 +20,7 @@ export default function AboutPage() {
             Change is the only constant. 
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed">
-            {site.name} aims to help with technological literacy (understanding what’s actually happening with AI, biotech, robotics, energy, computing, etc.), which has become as essential today as reading and writing were 200 years ago. If you can’t read, you’re shut out of modern society. If you don’t understand the major technologies shaping the next 10–30 years, you’re increasingly shut out of economic opportunity, political decisions, and personal control over your life.
+            {site.name} aims to help with technological literacy (understanding what’s actually happening with AI, biotech, robotics, energy, computing, etc.), which has become as essential today as reading and writing were 200 years ago. If you can’t read, you’re shut out of modern society. If you don’t understand the major technologies shaping the next 10 to 30 years, you’re increasingly shut out of economic opportunity, political decisions, and personal control over your life.
           </p>
         </div>
       </section>
@@ -29,12 +29,23 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6 theme-prose prose max-w-none">
           <h2>The problem</h2>
           <p>
-            Confusion, fear, anxiety, & over-simplifications. "All work will be optional." "AI is going to change everything." "Start learning AI." All that is potentially true or good advice, but it doesn't help one understand why to take certain actions, or provide any grounding foundations for understanding the trajectory of the future.  
+            The public conversation runs on confusion, fear, and oversimplification.
+            &ldquo;All work will be optional.&rdquo; &ldquo;AI is going to change
+            everything.&rdquo; &ldquo;Just start learning AI.&rdquo; Each of those might be
+            true, or even good advice. None of them tells you why, and none of them gives
+            you any ground to stand on when you try to read where the future is actually
+            heading.
           </p>
 
           <h2>The stance</h2>
           <p>
-            We do agree with the quote from Alan Kay, "The best way to predict the future is to create it." Well, we aren't the ones creating the future. We're simply a part of it. But the people creating the future are often discussing what they're building, why they're building it, and they also frequently make predictions. We analyze those predictions, acknowledge counterpoints, and reason what opportunities there are for us to take advantage of or what risks we should avoid.
+            Alan Kay said it back in 1971. &ldquo;The best way to predict the future is to
+            invent it.&rdquo; We are not the ones inventing it. We are part of it, watching
+            closely. The
+            people who are building it talk constantly about what they are making, why they
+            are making it, and what they expect to happen next. We take those predictions
+            apart, give the counterarguments their due, and ask what is actually worth acting
+            on and what is worth steering clear of.
           </p>
           <p>
             Elon Musk says work will become optional. Dario Amodei warns about
@@ -75,7 +86,8 @@ export default function AboutPage() {
 
           <h2>How it works</h2>
           <p>
-            Always free content. We appreciate any and all support. We especially appreciate you joining the discussion.
+            The content is always free. I appreciate any support you send my way. I
+            appreciate you joining the argument even more.
           </p>
         </div>
       </section>

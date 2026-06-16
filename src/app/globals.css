@@ -66,18 +66,18 @@ html {
 
 html.dark {
   color-scheme: dark;
-  --background: #0a0c10;
-  --background-rgb: 10, 12, 16;
-  --foreground: #e9eaee;
-  --foreground-soft: #c3c6cf;
-  --foreground-muted: #8b8f9c;
-  --border: rgba(233, 234, 238, 0.12);
-  --border-strong: rgba(233, 234, 238, 0.2);
-  --surface: rgba(20, 22, 30, 0.82);
-  --surface-strong: #14161e;
-  --surface-muted: rgba(30, 33, 44, 0.86);
-  --surface-inverse: #05060a;
-  --surface-inverse-2: #0b0d13;
+  --background: #15171d;
+  --background-rgb: 21, 23, 29;
+  --foreground: #ecedf1;
+  --foreground-soft: #c8cbd3;
+  --foreground-muted: #969aa7;
+  --border: rgba(236, 237, 241, 0.13);
+  --border-strong: rgba(236, 237, 241, 0.22);
+  --surface: rgba(34, 37, 47, 0.82);
+  --surface-strong: #1e212a;
+  --surface-muted: rgba(44, 48, 60, 0.86);
+  --surface-inverse: #0c0e13;
+  --surface-inverse-2: #11131a;
   --surface-highlight: rgba(129, 140, 248, 0.14);
   --surface-warn: rgba(245, 158, 11, 0.12);
   --surface-accent: #6366f1;
