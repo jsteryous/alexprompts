@@ -3,6 +3,9 @@
 This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
 - **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
 - **`scripts/CLAUDE.md`** — the Python content engine (`ai_news/`): newsletter + short-form scripts.
+- **`BRAND.md`** — the StoryBrand BrandScript (villain = the noise, hero = the reader, guide
+  = Alex). Drives all *positioning* copy (site, welcome email, bios, CTAs). Stays OUT of the
+  truth-seeking writer method by design.
 
 ## What this is
 
@@ -93,8 +96,13 @@ revive it.
   visitor immediately.
 - `/about` — who Alex is, the editorial framework, the contrarian stance, the name.
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
+  **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
+  reads the publication RSS feed, converts each post's HTML to markdown via
+  `src/lib/substack.ts` (turndown; images kept as `<figure>`/`<figcaption>`), and upserts
+  rows as `PUBLISHED`. So posting on Substack populates the site with no manual step.
 - `/review` — token-gated draft editor (not in nav). `/api/publish` + `/api/review/save`
-  drive the publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate `/archive`).
+  drive the manual publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate
+  `/archive`). Kept for engine-generated drafts; the Substack mirror is the live path.
 
 **`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, social
 links, covered-company list). Edit handles/domain there and nav/footer/JSON-LD/sitemap
@@ -124,6 +132,9 @@ replace the `TODO(alex)` values.
 | `RESEND_API_KEY` | Emails the weekly draft to Alex. |
 | `NOTIFICATION_EMAIL` | Draft recipient (`jsteryous@gmail.com`). |
 | `MAIL_FROM` | Resend sender on a verified domain (see `scripts/CLAUDE.md`). |
+| `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication base (subdomain or custom domain, NOT the `/@handle` profile). Drives the Subscribe button (`/subscribe`) and the archive RSS mirror (`/feed`). Defaults to `https://alexprompts.substack.com` — confirm. |
+| `SUBSTACK_FEED_URL` | Optional override for the feed URL. Defaults to `${NEXT_PUBLIC_SUBSTACK_URL}/feed`. |
+| `CRON_SECRET` | Authorizes the Vercel cron call to `/api/sync-substack` (sent as `Authorization: Bearer …`). Manual runs use `?token=${PUBLISH_SECRET}`. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `GOOGLE_PLACES_API_KEY`,
 > `TESSERACT_CMD`, etc.) belong only to `scripts/_archive/` and are not needed to run

@@ -12,6 +12,19 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://alexprompts.com";
 
+// Substack publication base (NOT the profile page). Drives the Subscribe button
+// (-> /subscribe) and the archive RSS mirror (-> /feed, see lib/substack.ts).
+// Confirmed June 2026: https://alexprompts.substack.com. Override with
+// NEXT_PUBLIC_SUBSTACK_URL only if a custom domain is set up later. One place,
+// and the button + sync both pick it up.
+export const SUBSTACK_URL =
+  process.env.NEXT_PUBLIC_SUBSTACK_URL?.replace(/\/$/, "") ?? "https://alexprompts.substack.com";
+
+/** RSS feed the archive mirror reads. Server-only; override with SUBSTACK_FEED_URL. */
+export function substackFeedUrl(): string {
+  return process.env.SUBSTACK_FEED_URL?.replace(/\/$/, "") ?? `${SUBSTACK_URL}/feed`;
+}
+
 export const site = {
   name: "Alex Prompts",
   author: "Alex Steryous",
@@ -24,7 +37,7 @@ export const site = {
   // track record, then end on the questions worth arguing about.
   tagline: "The future, in the builders' own words.",
   oneLiner:
-    "We read what the people building the future are actually saying, weigh it against the present and the skeptics, and end on the questions worth arguing about.",
+    "AI hype and doom keep you anxious and no smarter. Alex Prompts turns the biggest story from the people building the future into plain English each week, so you can see where this is heading and decide from understanding, not fear.",
   description:
     "Alex Prompts covers the companies building the future. We take what the tech leaders " +
     "say, both what they are building and what they predict, and translate it into plain " +
@@ -47,7 +60,7 @@ export const socials = [
     key: "substack",
     label: "Substack",
     handle: "Read the newsletter",
-    url: "https://substack.com/@alexprompts",
+    url: SUBSTACK_URL,
     primary: true,
   },
   {
@@ -70,8 +83,8 @@ export const socials = [
   },
 ] as const;
 
-export const newsletterUrl =
-  socials.find((s) => s.key === "substack")?.url ?? "#";
+/** The Subscribe button target: Substack's one-click subscribe page. */
+export const newsletterUrl = `${SUBSTACK_URL}/subscribe`;
 
 /** Companies covered. Mirrors collect.py ENTITIES (the discovery/scoring set). */
 export const coverage = [

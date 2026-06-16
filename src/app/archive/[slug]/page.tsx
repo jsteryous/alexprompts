@@ -119,11 +119,12 @@ export default async function ArchivePost({ params }: Props) {
             {site.name}
           </span>
           <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-4">
-            Get the next issue in your inbox.
+            See the next one coming.
           </h2>
           <p className="theme-text-contrast-muted mb-8 leading-relaxed">
-            One read a week. The biggest story from the frontier, translated, with the
-            honest open question at the end. Free.
+            One read a week. The biggest story from the frontier, the facts split from the
+            sales pitch, and the honest open question at the end. Free. You walk away
+            oriented, not anxious.
           </p>
           <a
             href={newsletterUrl}

@@ -1,0 +1,5 @@
+{
+  "crons": [
+    { "path": "/api/sync-substack", "schedule": "0 8 * * *" }
+  ]
+}

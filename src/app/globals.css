@@ -392,6 +392,25 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   color: var(--foreground-muted);
 }
 
+/* Images mirrored from Substack (markdown images + raw <figure> blocks). */
+.theme-prose :where(img) {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+
+.theme-prose :where(figure) {
+  margin: 2rem 0;
+}
+
+.theme-prose :where(figcaption) {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--foreground-muted);
+}
+
 /* ── Brand motif: the terminal prompt caret ───────────────────────────────── */
 @keyframes ap-blink {
   0%, 49% { opacity: 1; }

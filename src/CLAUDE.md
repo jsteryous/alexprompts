@@ -22,6 +22,12 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `getPost(slug)`, `formatDate()`. Returns `[]`/`null` when Supabase env is unset so the
   site builds and renders an empty archive (not a crash). Used by `/`, `/archive`,
   `/archive/[slug]`, `sitemap.ts`.
+- **`src/lib/substack.ts`** — Substack RSS -> markdown converter (`parseSubstackFeed`,
+  `fetchSubstackPosts`). `content:encoded` HTML -> markdown via turndown; images kept as
+  raw `<figure>`/`<figcaption>` so they render through the same `marked` + `theme-prose`
+  pipeline. Pure parse split from the fetch. Called only by `/api/sync-substack` (daily
+  Vercel cron in `vercel.json`), which upserts posts into `blog_posts` as `PUBLISHED`.
+  Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
 - **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: hero →
   what-this-is → coverage chips → latest 3 issues → `#follow` (social cards) → subscribe
   CTA. No shared section components (the old `HomeSections.tsx` was dental-only, deleted).

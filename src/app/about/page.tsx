@@ -29,12 +29,16 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6 theme-prose prose max-w-none">
           <h2>The problem</h2>
           <p>
-            The public conversation runs on confusion, fear, and oversimplification.
-            &ldquo;All work will be optional.&rdquo; &ldquo;AI is going to change
-            everything.&rdquo; &ldquo;Just start learning AI.&rdquo; Each of those might be
-            true, or even good advice. None of them tells you why, and none of them gives
-            you any ground to stand on when you try to read where the future is actually
-            heading.
+            It is not AI. It is the noise about it. Open any feed and you get a miracle and
+            an apocalypse in the same thirty seconds. AI just cured a disease. AI is coming
+            for your job. Buy this. Fear that. The feed does not want you informed, because
+            an informed person closes the app. It wants you scrolling, so it sells you a
+            feeling instead of an understanding, and you go to bed wired, worried, and no
+            smarter than you woke up.
+          </p>
+          <p>
+            Hype and doom look like enemies. They are business partners. Both trade your
+            attention for a take you will have forgotten by morning.
           </p>
 
           <h2>The stance</h2>
