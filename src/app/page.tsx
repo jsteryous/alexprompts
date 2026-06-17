@@ -124,10 +124,12 @@ export default async function HomePage() {
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            You didn&apos;t need to understand the internet in 1993. By 2010, missing it meant
-            missing the biggest opportunities of a generation. AI is the same story, moving
-            faster, and Alex Prompts turns what the builders are actually saying into plain
-            English every week.
+            Most AI content is just noise and recycled headlines.
+
+            Alex Prompts is the filter. I track the people actually building the frontier—tracking everything from Dario Amodei's papers to Elon Musk's timelines
+            and break down where AI is actually headed every single week. The goal is to leave you feeling informed and oriented so you can position yourself strategically.
+
+            In 1993, ignoring the internet was easy. By 2010, it was a mistake. Don't make the same mistake with AI.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
@@ -363,12 +365,10 @@ export default async function HomePage() {
         </div>
         <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            See it coming before everyone else.
+            The Big picture of AI.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            One issue a week. Free. The biggest story from the frontier, the facts split
-            from the sales pitch, and the question worth arguing about. You walk away
-            oriented, not anxious.
+            And what to do about it.
           </p>
           <SubscribeButton className="px-8 py-4" />
         </div>
