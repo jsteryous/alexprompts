@@ -118,16 +118,19 @@ export default async function HomePage() {
           />
         </div>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-5">No hype. No doom. Just the frontier.</Eyebrow>
+          <Eyebrow className="mb-5">Frontier Takes.</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
-            AI will be the best thing that ever happened to you, or the worst.
+            AI is a force worth understanding.
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            The feed hands you a miracle and an apocalypse every hour and leaves you no
-            smarter. Once a week I take the biggest story from the people building the
-            future and put it in plain English, so you can see where this is actually
-            going. The facts, the honest open question, and a real argument.
+            Most people didn't need to understand the internet in 1993.
+            But by 2010, not understanding the internet meant missing career opportunities, missing investment opportunities, and losing competitive advantages.
+            AI is similar.
+            It's creating new careers, investments, businesses, and opportunities.
+            You don't need to become an expert.
+            You DO deserve to understand the forces shaping your future.
+            The goal of Alex Prompts is to help understand the technologies shaping our future.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-9">
             <SubscribeButton className="px-7 py-3.5" />

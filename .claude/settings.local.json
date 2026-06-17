@@ -163,7 +163,8 @@
       "Bash(printf '# Test Headline For Subject\\\\n\\\\nBody paragraph.\\\\n\\\\n---\\\\n\\\\n## Editor notes \\(not part of the script\\)\\\\nstuff\\\\n')",
       "Bash(RESEND_API_KEY= python -m ai_news.digest --email-file /tmp/draft.md)",
       "Bash(echo \"exit=$?\")",
-      "PowerShell(npm run *)"
+      "PowerShell(npm run *)",
+      "PowerShell(git *)"
     ]
   }
 }
