@@ -1,13 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  socials,
-  coverage,
-  newsletterUrl,
-  principles,
-  manifesto,
-  trackRecord,
-} from "@/lib/site";
+import { socials, newsletterUrl, manifesto } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
 
 export const revalidate = 300;
@@ -126,10 +119,10 @@ export default async function HomePage() {
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
             Most AI content is just noise and recycled headlines.
 
-            Alex Prompts is the filter. I track the people actually building the frontier—tracking everything from Dario Amodei's papers to Elon Musk's timelines
+            Alex Prompts is the filter. I track the people actually building the frontier, covering everything from Dario Amodei&apos;s papers to Elon Musk&apos;s timelines
             and break down where AI is actually headed every single week. The goal is to leave you feeling informed and oriented so you can position yourself strategically.
 
-            In 1993, ignoring the internet was easy. By 2010, it was a mistake. Don't make the same mistake with AI.
+            In 1993, ignoring the internet was easy. By 2010, it was a mistake. Don&apos;t make the same mistake with AI.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
@@ -144,7 +137,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Top content ── */}
-      <section className="theme-page pt-10 md:pt-12 pb-16">
+      <section className="theme-section pt-10 md:pt-12 pb-16">
         <div className="max-w-5xl mx-auto px-6">
           <Eyebrow className="mb-6">Fresh off the wire</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
@@ -189,7 +182,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── What we're about ── */}
-      <section className="theme-section-contrast py-20 md:py-28">
+      <section className="theme-section py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-8">What we&apos;re about</Eyebrow>
           <div className="space-y-5 md:space-y-6">
@@ -204,116 +197,6 @@ export default async function HomePage() {
               >
                 {para}
               </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── How every issue works (the method) ── */}
-      <section className="theme-section-contrast relative overflow-hidden border-y theme-border py-16 md:py-24">
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src="/img/dario-amodei.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-right"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(8,10,14,0.95) 0%, rgba(8,10,14,0.8) 45%, rgba(8,10,14,0.3) 100%), linear-gradient(0deg, rgba(8,10,14,0.7) 0%, rgba(8,10,14,0.22) 35%)",
-            }}
-          />
-        </div>
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <div className="max-w-2xl mb-10">
-            <Eyebrow className="mb-4">How every issue works</Eyebrow>
-            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
-              We start with the builders&apos; own words and pressure-test them. Five steps,
-              every time.
-            </h2>
-          </div>
-          <ol className="grid gap-5 md:grid-cols-2">
-            {principles.map((p, i) => (
-              <li key={p.title} className="theme-card-strong border theme-border rounded-xl p-6 flex gap-4">
-                <span className="theme-label text-sm font-bold tabular-nums pt-0.5">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="theme-text-primary text-base font-semibold mb-1.5">{p.title}</h3>
-                  <p className="theme-text-muted text-sm leading-relaxed">{p.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ── The track record ── */}
-      <section className="theme-section py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-10">
-            <Eyebrow className="mb-4">The track record</Eyebrow>
-            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-4">
-              Very smart people have a long history of betting against technology, confidently,
-              and losing.
-            </h2>
-            <p className="theme-text-muted text-base md:text-lg leading-relaxed">
-              This does not make every optimist right. It raises the bar for &ldquo;this time is
-              different.&rdquo;
-            </p>
-          </div>
-
-          <figure className="mb-10 md:mb-12 max-w-xl">
-            <div className="theme-card-strong border theme-border rounded-xl p-2 shadow-sm">
-              <Image
-                src="/img/elon-prediction.jpg"
-                alt="Elon Musk post: for time-based predictions he aims for the 50th-percentile date, so half land early and half late, but the prediction rarely fails to come true over time."
-                width={901}
-                height={362}
-                sizes="(max-width: 768px) 100vw, 36rem"
-                className="w-full h-auto rounded-md"
-              />
-            </div>
-            <figcaption className="theme-text-muted text-sm mt-3 leading-relaxed">
-              Elon Musk on his own record. Direction is the easy part.
-              Timing is where almost everyone, optimist and skeptic alike, gets humbled.
-            </figcaption>
-          </figure>
-
-          <ul className="grid gap-5 md:grid-cols-2">
-            {trackRecord.map((r) => (
-              <li key={r.who} className="theme-card border theme-border rounded-xl p-6 flex flex-col">
-                <p className="theme-text-primary text-lg md:text-xl font-semibold leading-snug mb-4">
-                  &ldquo;{r.quote}&rdquo;
-                </p>
-                <p className="theme-text-secondary text-sm font-medium">
-                  {r.who}
-                  <span className="theme-text-muted font-normal">
-                    {" "}· {r.role} · {r.year}
-                  </span>
-                </p>
-                <p className="theme-text-muted text-sm leading-relaxed mt-2">{r.aftermath}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── Coverage ── */}
-      <section className="theme-section-muted border-y theme-border py-12 md:py-16">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <Eyebrow className="mb-6">On our radar</Eyebrow>
-          <div className="flex flex-wrap justify-center gap-2.5">
-            {coverage.map((c) => (
-              <span
-                key={c}
-                className="theme-card-strong theme-text-secondary border theme-border text-sm font-medium px-4 py-2 rounded-full"
-              >
-                {c}
-              </span>
             ))}
           </div>
         </div>

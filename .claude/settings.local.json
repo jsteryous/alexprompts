@@ -164,7 +164,9 @@
       "Bash(RESEND_API_KEY= python -m ai_news.digest --email-file /tmp/draft.md)",
       "Bash(echo \"exit=$?\")",
       "PowerShell(npm run *)",
-      "PowerShell(git *)"
+      "PowerShell(git *)",
+      "Read(//c/Users/alexs/AppData/Local/Temp/claude/C--Users-alexs-OneDrive-Desktop-alexprompts/b9996de7-9149-4065-9141-5a1b535c941a/tasks/**)",
+      "Bash(sleep 0.5)"
     ]
   }
 }
