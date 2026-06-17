@@ -99,7 +99,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="theme-section-contrast relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24">
+      <section className="theme-section-contrast relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
         <div className="absolute inset-0" aria-hidden>
           <Image
             src="/img/hero-earth-limb.jpg"
@@ -124,15 +124,12 @@ export default async function HomePage() {
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            Most people didn&apos;t need to understand the internet in 1993.
-            But by 2010, not understanding the internet meant missing career opportunities, missing investment opportunities, and losing competitive advantages.
-            AI is similar.
-            It&apos;s creating new careers, investments, businesses, and opportunities.
-            You don&apos;t need to become an expert.
-            You DO deserve to understand the forces shaping your future.
-            The goal of Alex Prompts is to help understand the technologies shaping our future.
+            You didn&apos;t need to understand the internet in 1993. By 2010, missing it meant
+            missing the biggest opportunities of a generation. AI is the same story, moving
+            faster, and Alex Prompts turns what the builders are actually saying into plain
+            English every week.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-9">
+          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
             <Link
               href="/archive"
@@ -141,15 +138,11 @@ export default async function HomePage() {
               Read the latest issue <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <p className="theme-text-muted text-sm mt-10 border-t theme-border pt-5 max-w-2xl">
-            We don&apos;t build the future. We listen to the people who are, and converse about
-            what it means.
-          </p>
         </div>
       </section>
 
       {/* ── Top content ── */}
-      <section className="theme-page pt-14 md:pt-20 pb-16">
+      <section className="theme-page pt-10 md:pt-12 pb-16">
         <div className="max-w-5xl mx-auto px-6">
           <Eyebrow className="mb-6">Fresh off the wire</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
