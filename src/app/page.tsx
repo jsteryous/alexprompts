@@ -124,11 +124,11 @@ export default async function HomePage() {
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            Most people didn't need to understand the internet in 1993.
+            Most people didn&apos;t need to understand the internet in 1993.
             But by 2010, not understanding the internet meant missing career opportunities, missing investment opportunities, and losing competitive advantages.
             AI is similar.
-            It's creating new careers, investments, businesses, and opportunities.
-            You don't need to become an expert.
+            It&apos;s creating new careers, investments, businesses, and opportunities.
+            You don&apos;t need to become an expert.
             You DO deserve to understand the forces shaping your future.
             The goal of Alex Prompts is to help understand the technologies shaping our future.
           </p>
@@ -142,7 +142,7 @@ export default async function HomePage() {
             </Link>
           </div>
           <p className="theme-text-muted text-sm mt-10 border-t theme-border pt-5 max-w-2xl">
-            We don&apos;t build the future. We listen to the people who are, and argue about
+            We don&apos;t build the future. We listen to the people who are, and converse about
             what it means.
           </p>
         </div>
