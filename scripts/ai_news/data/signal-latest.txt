@@ -2,144 +2,148 @@
 ======================================================================
 COLLECTED SIGNAL
 ======================================================================
-Collected 2026-06-15 22:49 UTC.
+Collected 2026-06-20 10:29 UTC.
 
-FLAGGED HIGHEST-ENGAGEMENT STORY (score 7744):
-  "Statement on US government directive to suspend access to Fable 5 and Mythos 5" [Anthropic]
-  https://www.anthropic.com/news/fable-mythos-access
-  hn_points=3138 hn_comments=2303 reddit=0
+FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
+  "Claude Corps" [Anthropic]
+  https://www.anthropic.com/news/claude-corps
+  hn_points=163 hn_comments=119 reddit=0
 
 
-### Anthropic  (attention 15489, 8 news items)
-  - Claude Fable 5 and Claude Mythos 5 - Anthropic — Anthropic
-    https://news.google.com/rss/articles/CBMiZEFVX3lxTE0tNXJJQXNGZWM1d1VmMVRfOFZlYU9VUFcwdm03RFhDRE5uajJOY19mbUQ5ZVpXYW9IOWhzd3JOS3F2c0xIdFRYVUgtZF9RVVI1VW1KVExGb0RVRDBWdlpNTXN1cTA?oc=5
-  - The revenge of Claude Mythos - Marcus on AI | Substack — Marcus on AI | Substack
-    https://news.google.com/rss/articles/CBMib0FVX3lxTE9vVnZ3ZWlxYW10NlZfcnhtOWUxZTZ4QjVCZFNyNEhEQnF3SDBVay1EZk1CUk15RHllMDNtRjRYSGdKdkEtdnZ4LUlmOHRtY1MyWHJia0FQMW10LW9yYVM1WDVNSnhIX2o1SUFNQ3hGSQ?oc=5
-  - Claude Fable 5: Mythos-grade hype, record cheating, and a few hall-of-fame entries - Endor Labs — Endor Labs
-    https://news.google.com/rss/articles/CBMickFVX3lxTE15UmdmSEM1WkZfRkFKNTNGMDF5Vkp6b3R4LUtQZ1BfckpNMWFJbjlPOUVrS3ZVaVFxdGgtQjRVdXBRT1daZWRkWW92TnlxanRiazZIMU5vRFIxYnZZSi1ZemVZNFhaT0NSbHFtdHU1VEpVdw?oc=5
-  - Claude Fable 5 and new safety fables - by Nathan Lambert - Interconnects AI — Interconnects AI
-    https://news.google.com/rss/articles/CBMicEFVX3lxTE1XOUpqaUlWeFZ2RDF3NGY4UjlBa0JKV0VFSk9yZlNfNXNlSHpBZlJ1VUQ2TTE0V291UE9iSDZVQ292ZjV6SGF2ZGI3Yk5lQS1IaGJvaGtnSVQzd1ZaeGJ1bmF6RVJLeC15Q0t2dWpBd0Y?oc=5
-  - Claude Fable 5 available today in Microsoft Foundry: Powering the next era of autonomous agents - Microsoft Azure — Microsoft Azure
-    https://news.google.com/rss/articles/CBMi0AFBVV95cUxOSW5BNkhvSXNYVEpPcDdMTDlINGIzZVVsazh5bjcyYW0yMWdKaGZ2UHVHWmEybmpLRE5ZblppR0U0c0VWcUZFaUFhTkFxd29UbzRvbmFTc1M4TDNDZXNhTXdoNUJweGdwaERaN0M2ZlBlaFhkUWIwZDdJb2xFNTZYSlgzN2JQNVpTOEpaNVQ5Um81Zk5XQ3ZyeV9hM1hFclJrMHBCLTVFVDY1YkdqRHMtaVVIeTdicVBmdlQyWTZIN1dKT21XcTZiNWh2TU0xVWF3?oc=5
-  - Welcoming Claude Into the Classroom Risks the Soul of Education - Chicago Maroon — Chicago Maroon
-    https://news.google.com/rss/articles/CBMiswFBVV95cUxQV3NZdmUxREtxMWpRYzY3S1pFWTJ6WUdKaEE2M3hKLTZVczREaTd5M1ZmNlN1UEVmZ0s2bEFpMHZGUXR5ZWtrY3hpZldDYUR5SGwyZUVsZEpYaFB0NlBuWE1Ual9McHlTS0dOdThLcmJaUE50WE1fT3AtSGhJZ2E0RGNLUGdtd0wtQUotZ3BvaENXYkdsdmdQVUZXSkc4LVdFdUd4UnVfc0VhRTVWYTFVQ2tVaw?oc=5
-  - [hackernews hn 3138/2303] Statement on US government directive to suspend access to Fable 5 and Mythos 5
-    https://www.anthropic.com/news/fable-mythos-access
-  - [hackernews hn 2621/2153] Claude Fable 5
-    https://www.anthropic.com/news/claude-fable-5-mythos-5
-  - [hackernews hn 91/89] Making Claude a Chemist
+### Anthropic  (attention 805, 8 news items)
+  - Agentic coding and persistent returns to expertise - Anthropic — Anthropic
+    https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lM0p2cGtZWWJ4aE9Ocy05NEU1SXFraWl1V1gwNmxwdGpMWkg3N2Z3WGF6eFFMZXlWMGZEeGZZVGxmcGJyVlBSLXlCUXhma0lWRm1SNllTSVlmNXlTMFEzLTZIMFIwSDA?oc=5
+  - Why Anthropic Is Sounding the Alarm on the Next Generation of AI - Council on Foreign Relations — Council on Foreign Relations
+    https://news.google.com/rss/articles/CBMimAFBVV95cUxOSEFBZGphQ2loamYwOWhBQTAwLTNZa1pRQ1V6bmdEdjNOQlMyV1NiQUhHWHJ1Q0VCWG9RYmRvZkRFX1ZjMEhaNjVIeFBaWlZMeEM1MmhQdVk2WC02d1JrQnRYWWI3MEtLaElKMHMyY1IxUGQ0SFF4UkRoSnVFNWVuWk9jNmdEX0Q2M1hsWE8zSDlZY1JXRk5uUg?oc=5
+  - The Department of Commerce Restricted Access to Anthropic’s Latest Models. What Comes Next? - CSIS | Center for Strategic and International Studies — CSIS | Center for Strategic and International Studies
+    https://news.google.com/rss/articles/CBMirAFBVV95cUxOdHdWR19xN0liMFpabFhzMDMyX2xGbURCS0VfaWRodlZtS2xRVmdmb3JJMDNRQm5aanFvVFpGQmhQZnc5ZVhHNkQ2ZjJtSElScFJmZ2xHclFxRUlnTXdsazdMaHRHaUNEMjMyS1hLOUY1ZHNBLUxiOHBVWHltbDdCb2l0ay04NE5LMnU2T3dsc3RDOHplcFlIUzRSS1FIY1lSZUktRjltOUFKQy1x?oc=5
+  - How Powerful is Claude Fable (Mythos) 5 for Coding? - Towards Data Science — Towards Data Science
+    https://news.google.com/rss/articles/CBMihwFBVV95cUxQemtmODFpbUd5V0g4OEVaaTItbWxNb3p4VGpFTElNeGVfcG1QV0xNU0lCT0RRd0RUNTBqc1RaZnRoMGdudERzMnBicy1qWE43UEFtaVRXdjRPMHlPdTktbk94cjVKY0ppNUxrMnJ1UnhTMm5Da2ZQVFR3aElENFUwRHU1amxnVmc?oc=5
+  - Introducing Claude Agent for Jira - Atlassian — Atlassian
+    https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5
+  - Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs — Endor Labs
+    https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5
+  - [hackernews hn 163/119] Claude Corps
+    https://www.anthropic.com/news/claude-corps
+  - [hackernews hn 94/91] Making Claude a Chemist
     https://www.anthropic.com/research/making-claude-a-chemist
-  - [hackernews hn 213/1] System Card: Claude Fable 5 and Claude Mythos 5 [pdf]
-    https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf
+  - [hackernews hn 15/4] Agentic coding and persistent returns to expertise
+    https://www.anthropic.com/research/claude-code-expertise
+  - [hackernews hn 8/3] Agentic coding and persistent returns to expertise
+    https://www.anthropic.com/research/claude-code-expertise
 
-### OpenAI  (attention 744, 8 news items)
-  - Visa Partners with OpenAI to Power the Next Generation of AI Commerce - Visa - Investor Relations — Visa - Investor Relations
-    https://news.google.com/rss/articles/CBMiywFBVV95cUxQNnhSb05qd01OSEljTlBIejRYSFZ2bDVGRDdJeFpmZnRlMEU3dGYtLTNMUkc5SXpfTmRYQk9FNDRrQUxiNHZIUmlRc0p0LTROLVl0UGVyU0V0ZGFBQ3dQSEtDRUJadUk4bjNMbnYtT1gyQU5neVh1TUt6YnZGS0h4WTVVMFlZUG9MeWw3X2ZRTG90TzVhMGJXZlp3Q3BTUTQ5NnlPdEVCTDk2X0Q4YVNacmV6RktPcW01TnBjd3hJTDJJSnhRUTI5Vi1ORQ?oc=5
-  - Introducing the OpenAI Partner Network - OpenAI — OpenAI
-    https://news.google.com/rss/articles/CBMibEFVX3lxTE9uMkJtTlNBalBxNWxuLVlzbHlsaTFGdXdmUks2Z1pqZ0IyZkNyYmZUU1JkYlc4emNMclpXUWo1aEpyRVJRX3VKQnlScl93bkdrN1pBeWlaVVNSeWk2cmh5dlpWRF9ZTkY2LW9qMw?oc=5
-  - Anthropic has caught up to OpenAI in image understanding - understandingai.org — understandingai.org
-    https://news.google.com/rss/articles/CBMidkFVX3lxTFBoR202UGp3cWcyRFZYeEdMbGs2Y01aZi03eE1QRnBmS0VvaVd6Szh0SGRBUjJydFZCbzJ3QkVUVngzby01c2g1dlR0RDMzZ3RfaVh2d0h2Q0VsTWRLeEU4RUxrYkVNZjJqRzlqSGtZWEFES1FzdWc?oc=5
-  - OpenAI files confidential SEC paperwork for IPO, opening the door to a Wall Street debut - AP News — AP News
-    https://news.google.com/rss/articles/CBMihAFBVV95cUxPSkpfUFlIUUZQOEFhdG5ZaEE1V1UxTV9veVdiZlZjNWxJVWMxWDhTRzBzN3A5UFhUNmRXZTRpcjNsWXdleWVPQlVOdGlxYWdJcENrRmNndUZMT3RxbVN0TnpldnpfQzNHSzlzbUFvRDR2VTdMdHB5WDE2VHBBVFVDYWZBM1E?oc=5
-  - ChatGPT hits a billion monthly app users despite souring public AI sentiment - CNBC — CNBC
-    https://news.google.com/rss/articles/CBMirAFBVV95cUxPZE1nOU05NFNKQ2NPd1o3Y2loTk5HY1ZPUmJNaURoaEh6bnFXWTRQRlhYd2ZJdFBURlg1TXBaVGs0UGZwWi0tUml3NkFaZTByV1NQcHVOQlVUNmxxV2p5TUlWY3pmNllWTDM3dm1VTkZYaVRwbzVrTlBoR1VoR25hS3Z0NFgwcmpHUDBZS2d5WnJWcl92bnpLTWFYZ19aLUwzWVdta091Rjg4dVBv0gGyAUFVX3lxTE9ZZGo4VmdWclVJMGUwMVQyTWk0d2F6UlJ6cG0tdW1MNndaclZHMTRPQnI0eEFUTzlBRnJoVlZBSDJmQVRpRmNnYV9yYkhaeENGWjA5WHhnbkZ5b2V6Nll1a2tVQlR1cm14NW4wMS1vV1htUmRhRjVSbzRGeTRYSUZHTnBzdlZtWklObW5TbnFxNEN1VmphN2VWaGRzT1R5VUdWTTN4M1V3a1FYTVMxdXZwWXc?oc=5
-  - State Attorneys General Are Investigating OpenAI - The New York Times — The New York Times
-    https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5
-  - [hackernews hn 274/117] Codex for open source
-    https://openai.com/form/codex-for-oss/
-  - [hackernews hn 46/6] OpenAI to acquire Ona to expand Codex
-    https://openai.com/index/openai-to-acquire-ona/
-  - [hackernews hn 19/15] PRC-linked influence operations are targeting AI debates in the US
-    https://openai.com/index/prc-linked-influence-operations-ai-debates/
-  - [hackernews hn 20/4] OpenAI's June 2026 Report on Malicious Uses of AI [pdf]
-    https://cdn.openai.com/pdf/96b559fa-c165-4575-805d-e636909e2f78/June-2026-Threat-Report.pdf
+### OpenAI  (attention 216, 8 news items)
+  - OpenAI deepens Japan footprint with Hitachi deal - Computer Weekly — Computer Weekly
+    https://news.google.com/rss/articles/CBMimgFBVV95cUxQTGlWM2tQMEgzQ0x2bGgyaHlBZ2ZYbG9mV1NtaE9ZeTBrcnpMR2lRNUNBSVlRdVZFSjlZNllfOVVDVml3N1RHZ3NGbWNyeklQWVFEdWVpRUdrNkRQLUNMTEg4UG9OQ0ljVFlZb19UUldoc3YwOE1WRUxCT3RkZEdOeVFZa0dEZ2d5c1dnVFFsc0xnNUQ3ME1ldFZn?oc=5
+  - OpenAI hit with multistate probe into possible user harm as its IPO looms - WSYR — WSYR
+    https://news.google.com/rss/articles/CBMixwFBVV95cUxQWkw0R05mVHU5YTZmYmd0eXQ5cDE3eEE3eG1ya1NsbDdqNWJ2UVp0RGFTZ01sRGZYRFdfTFNvVjFEX1Ezc2VnYkVhUkpQLUtVZXVvWllTek4xVWVSTzRRalNsRHN6Uk9fTlFJQVJodWtSX2dDTHo4X3ZFVklxSl9NWUhiVFdNMTc2SjU1U0VJWnRFQzBiNk92Znl1a29QRjUzRWxEcE5aWWQ4aGhWRUNjOE1GUXdEU2JVeU92czNrdmhQcGF5Yl9R0gHMAUFVX3lxTFBvSm1WQ3JhTmpCU0ZtY0htcjY4aE5oaW9aV3A1SGJaR01vOUVFendtM2d3QnZNS18wcFktQW9WcGtHTDZOSFU2ZVlDN2dkZG9wQllDcTN4Z1lPM1JGcUU1MFdrRkMxckhVZDlxWW1sWXg3TkpzUTAyMXNPVUo4eUhhTGoyLTVEZzZkUGVMSmNwZVNWaG5YaDN2VnBXdlNIbHQwdC04MjBOaXhPb0N2cjlqMFRBVkFvc3p0R2dvLTdCU3B3dFlhTXU3VXlrSw?oc=5
+  - Inside OpenAI's AI Chemist: How GPT-5.4 Improved a Drug-Making Reaction - LinkedIn — LinkedIn
+    https://news.google.com/rss/articles/CBMipwFBVV95cUxQaF9LckFqZjhIb2dyXzJzWFVERTZBUEx4N1NpLVdVOVlyZWpSdGlPVDlNRFdUcTdXZGJhMUg0azRqOEVXeVlKdk1jUFVhUW5zVVA2NnZIbFU0RTJUWlExOHZyUXJqcG85QTlfNTBvdUtxME4wUGpTbGdONzdJMTFGd1puTHBxdDdIT0g0VjdXajgyRmU2YUJFRzc1TlNfRDRDcjJlMkI0SQ?oc=5
+  - Walmart Shares Jump More Than 4% Today After Announcing Partnership With OpenAI Patrick Bruel (27s78xRF4z) - Mshale — Mshale
+    https://news.google.com/rss/articles/CBMiW0FVX3lxTE9pT3hESHJraXUwbGdvWlp4N01MSHVKbU1yZndLdUt2c1dkcHpXUEJic2pIQ1U1RTZNTU9MckVBbXpGdU9xRGFXeFhtQTBBRURaaFRscU9FdlRMeFk?oc=5
+  - Japan’s tech business SoftBank rolls out OpenAI ‘patches’ against cyberattacks - KTALnews.com — KTALnews.com
+    https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQjdZc3ZBOV9GeVRoYXRDUjBNREtqY1Q2V1g2MV9UR28tbjZSSlY4VGY0bnFxZW1OV3VBdzQ0MjZWSEsyVFk5NnZrek90eTVGaTRRWkdWTzVBbkUzMFphOER5ZHJuTWM3MVVZdG01a2RBSjVUU2N3VEpPLWt0b3E1Q2x0azNoMkxNNW9VTFpEMjRCRk1BYlBUb2tLSWN2SlRncTdVRFlLTTV5TGJvc1oyeVJOeUlrMlk1NThN0gHAAUFVX3lxTE9ucXpCcGtLMWJjZEgtVk92V041NExFLVR5VzNUUWJlZmxUNUFfUHA0aXZib3JFa1BQZW9LTWVLcEY5V05mTTFoaG5JSWJ6RVBtQnA5UENocGlDZ0VVdGQzWGlNa0s4c1daUm4xSWVvZFFldlgxQ3FnNkxwODBkQkRlbzhlUFE5ZUtjbHBoZC14aF81b2JvOHR6RWZoZ09QdHE1eUs3dzA5WlBNNWJTNmxBMlphbzM5LUZWeF9Fb25ZVg?oc=5
+  - Japan's tech business SoftBank rolls out OpenAI 'patches' against cyberattacks - Click2Houston — Click2Houston
+    https://news.google.com/rss/articles/CBMiygFBVV95cUxORVFMV2JKQmY3TXdBcGtGdXNTSVoyNVlFOGRqOWEwNVM5aGVnWG1FOXJZcnNZNzNBNzhlOTNNSTNSeW9mVUpHLTZkV0dMY1RmSjU2NzJBQ1R4SFk1M29MdXBkdlFlVmsxYnFFSGpudld1bGUyRFJRY0JBTkI4UEZmaXVTdXN2UGsydkhicHRDNURnbmhZdl9PZkdXU2trbHJ6T3ZicWgzSDFEZXFPM3ZtUElENnFhWTNfRExtS2EwWlQ2NHF4akdueXZ3?oc=5
+  - [hackernews hn 58/20] Using AI to improve a challenging reaction in medicinal chemistry
+    https://openai.com/index/ai-chemist-improves-reaction/
+  - [hackernews hn 3/2] Designing delightful front ends with GPT-5.4
+    https://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4
+  - [hackernews hn 4/1] Using AI to help physicians diagnose rare genetic diseases affecting children
+    https://openai.com/index/diagnose-rare-childhood-diseases/
+  - [hackernews hn 6/0] Codex Is Down
+    https://status.openai.com/incidents/01KV7ZT644J4V94GSXMFPY2ANR
 
-### Google DeepMind  (attention 69, 8 news items)
-  - Investing in multi-agent AI safety research - Google DeepMind — Google DeepMind
-    https://news.google.com/rss/articles/CBMifkFVX3lxTFB6ZTIyTWFiOG9PQmJKR0FIVHJ6WlNuMEZFTmFGM2hSb3Vyb3F5N0VmckU5clpMSmFKN1RMYmJPdjctckRseFpwZ2YxeDJmc0Npb0FqcWFLNk1Ma2g5UW1mM2hzUW1IN2NVWU95SmJWRDQ2bDVRdTRvWV8wZG9ZQQ?oc=5
-  - Fluid, natural voice translation with Gemini 3.5 Live Translate - blog.google — blog.google
-    https://news.google.com/rss/articles/CBMinwFBVV95cUxQYmE4REJXdHJpTzA0SVhCY3NMeTZTdGlGeVMtQUYtMFR4WnNKMWp2ZzM4Zi10UTREdGd3dzJ4X1dKN2hIWVZObkw4ZkdQX2tVdnMwRERfU0g3WG9kcGJNNUlmaDhzVER4VE9QQkJENXI2N0NhcnVCNFlpcEViNloyWG83UGlCdDFFaGt2bV9zLTdSZHBSUEUxb2xzeXE4SnM?oc=5
-  - Google DeepMind is worried about what happens when millions of agents start to interact - MIT Technology Review — MIT Technology Review
-    https://news.google.com/rss/articles/CBMi1wFBVV95cUxORHBFZElKbGtTUF8tWlA4Vk80R3AzOG9ISWxOQUgwQVRxQi13S0t2UFdtb1hqM05nd1ZDV0lHRnBQamo4NzJqRG1ucmQwcS1BZ1BFa1JKLVgxN3dnTXZkbW5Bb3RqMTdtNTNPTXVya1ZTdmJRTUVvRXVwM0xmNzVNWDR3Y3g0UHh1MUdYMXVmTl9tcFJIMmtqWEpZU0E3UGNMMGw5QlY2TW5scnVEanphYWlfVVNKSmpYY1VtLTB6U0xXc3ZfakcxVTQ5R2sydTFlMUVCWElkNNIB3AFBVV95cUxPTGVXZHA1LUl0bHVoWGJEcTB6RFQ1LUIyYmYyaDZTR2JnTFJOZG9iVDRHczljMHVybzdXWjFYaE1faW14UE5FRUFwbGZ2TEhEZFVSQlpOU2FFdnFBN1VnWS12VkNiVGtabkw0V2Fua3psWjhRWnZGdG5Qd19PQk5ybG5KRzd2TUo1dnpWU1ZZeERJYzNxQXMwak5oSnc4LUxnX01oS1BXMkNsZ0R0bmxTcWZHSVhRS3NoU3dzeFhjZlplNEd1TzFtVzN3Qk1VYjFOaXRSWGliZURkYlFw?oc=5
-  - 20 Incredibly Useful Things You Didn’t Know Google’s Gemini AI Could Do - inc.com — inc.com
-    https://news.google.com/rss/articles/CBMiowFBVV95cUxQcTJGV3dUQ2NWNTJPVU12bGxXNjhRcWNiM1NRZnlDdWFaV3haOG5mb2hoZUd3MUlfVUM5OU1KeFBVQWU0b3RCc0sxMm0zcWl0MjIzVDRHckNhRmt5aFBDM2J2RmlhTTR4SWx2WENqZGpqM28wQWFGM1VURWlLTVY4THZ3b0xJbUloME5yd1lFMkdCUUtPeXRGdjBsT3JMU25tQ3JJ?oc=5
-  - Artificial Intelligence Sneaks Into the World Cup Thanks to Google Gemini - WIRED — WIRED
-    https://news.google.com/rss/articles/CBMipAFBVV95cUxNTXM5QzJBWEJPZHV0RXQtcEVQd3IwazJoOWhlY1lpNWxYVEt5N2FvWTNBUUR4RWpFbkp1b3Z1bzZBdU5INjA4Z2pSRk8xRnB4YVEzclZFV1g0cE5kLXRyNXJJUGZ5S3BJWEhDOTVqcmpwd0h2YndzM0t6VlUzOXRVd0RDNTVuOFVvVmpSY2ZzSTNqcEd4U3h5VTFJMFpPVl9OUzN4Rg?oc=5
-  - Google announces Gemini 3.5 Live Translate for instant voice-to-voice translation - Ars Technica — Ars Technica
-    https://news.google.com/rss/articles/CBMiuAFBVV95cUxQMUh5bjBGalp5Q0stWTlpeUZCa1RqQm1MRUxjR1dPcWs3ck5ZMWRveE9NbUxFSlFzTE5wQWlvRU91NFZmVlFLdDAza0RyVHdsdVBrbUFsYXY3TmZoYmoxLXoyWElKTjF6X2VaOGhwaWNkRHEtUzNrZ2tnOHJ4TnBnbXJ1dmE5Z1ZoMWVwQ0Z1YUlmbU1pemN0bTVEQ1VaTkd0NHo1Tmw2dy1OWVhJcEZsRE1fTVZhLTFi?oc=5
-  - [hackernews hn 3/1] DiffusionGemma
-    https://deepmind.google/models/gemma/diffusiongemma/
+### Google DeepMind  (attention 95, 8 news items)
+  - How we’re securing internal systems against increasingly capable and imperfectly aligned AI - Google DeepMind — Google DeepMind
+    https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbVhyR04tNjU3OFI5RHI4TWVqQjVxeUQ5OTVTSHkybWpPc3UwRkhWVnRfRkFSTUZEREhadFE0TWpkZnFYMGJFR1BsVGJhaXQwSkw3eDhPR1lYM1lRX2doTS1rajFzQXV3eXVBWS1IQQ?oc=5
+  - Google Gemini co-lead Noam Shazeer leaves for OpenAI - CNBC — CNBC
+    https://news.google.com/rss/articles/CBMikwFBVV95cUxNOFk4aXNWVHM1WGRKVjh5a0t6NVQ0bkVrazFyRmZtbTB1cHZrazJMVHV4ZTNHWHc0NVdvb2NMRl9UNG15MDlxblVjVkl2NzJ3SHhkMy02Nk1oMGFrLURGMmNtVzdFQjlMNkdRYWxkRGJtaXJMQW85eF9VRjdOckJvWUQyWXV2NFVDNTVGNy1pVktnUEXSAZgBQVVfeXFMTlo0bGE0T0JyeEJTMVltX3RVdHBFYlB6VGVaSlpHRkdReGs2aHc4eHBvQ2lBb19BNlNSakV2ZmZsMndkcDdBQkRyT2NHNk5fa0E5VDdzSXFHLXZid0cyZUFuRHNKNXozNVFyb3BEcE1nQW5MVVB0aU5rVmE5ZVhXWjhHUDRLQjdSRDdBSFRfb3VPVldESE5qVVQ?oc=5
+  - How Target is Shaping Shopping Experiences in Conversational AI - Target — Target
+    https://news.google.com/rss/articles/CBMie0FVX3lxTE13MDZCM3VvN2NwZHR2T005ZF91OTQtUm9FcXRxN3V5a1BBVlZaRnJsMGFMd1poNlRvSXBNZUozVFpjMkFWd0p1ZzF4RF9DOVhqbXlfd2piczE5NTl5MC1ZelFwdzBuVkhaTEE1S2NCbk9wN1g5Z1UyeHpJbw?oc=5
+  - Meet the new Google Home Speaker, built for Gemini - blog.google — blog.google
+    https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmNNMTByMGR2azV3SE5FR0RJVzRQTnB2VWtoSS1kWHh0dXJ0MkFycWZxNjhlZ1E2UFlKX252ei1SenoxX0lKdVMyT0tqQ2RHS0dMdEVQbVdWVEN4aU5zSHVfbjhkVS10MlNVeVd1QmY3TnhwR1RLcF96NmdQbWtsWUtNWHNFNWU3Y0pONWp0SnFvQ3VWYV9MUHVVSV9DZ1N3?oc=5
+  - Google DeepMind unveils a plan to protect itself from its own rogue AI agents - Fortune — Fortune
+    https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTy10VmVENVdzSG00VjRXOUxLSHhWNkwzU2JmMGtybzNRdTY4MXE3R0tfV2JLcEZfM05va21rLWV6RWFKQVZzc3V5enFNWTBQNHY3c2JnbVB3c2lidmkxcVhjVU03QUs1em9Hc2tYbG9SZHJNOWhWd044cVY0SFU0S2FfNXB4NDVHUWxvU1FtQUVKX2RCekc0ZlVTaXllR3BjM3UwOHhBeFV0S3c?oc=5
+  - Google bets on Gemini to reinvent the smart home speaker - TechCrunch — TechCrunch
+    https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5
+  - [hackernews hn 14/4] Securing the Future of AI Agents
+    https://deepmind.google/blog/securing-the-future-of-ai-agents/
+  - [hackernews hn 5/2] From AGI to ASI
+    https://deepmind.google/research/publications/239142/
+
+### xAI  (attention 72, 8 news items)
+  - Grok Imagine Video 1.5 - xAI — xAI
+    https://news.google.com/rss/articles/CBMiUkFVX3lxTE5pcjI5WlFfWUlkbWttZHJsVGJCNEI1RldHWWtMeGprRVJ6VXFkUzItTzVOamJGVWliZ2RmWWJReDk4ZEtZNWRua1Z3N3JsZkZ1emc?oc=5
+  - Trump Administration Attempts Massive Power Grab in Defense of Musk’s xAI - Earthjustice — Earthjustice
+    https://news.google.com/rss/articles/CBMirAFBVV95cUxPMjdQN0ZUdnUtM2xKQ1Fmd0liRjZNU3FyXzNXUGsxa1VLMlJEUXQ3dWlaZXpuanV2RF95czZDdFlVakloNXJBYlFYZFotNDhvTTBhT1BQZVlZR05DS21GbXFPb2Y3S1piZU83NjJheXV5VDlZVkhiTVNCR0YzdnZiamFCUEYwSy0wNTdOVjJqU0lZbnY5UThCM2lvbHYxVU9lcENvVGppT01Nbi1h?oc=5
+  - DOJ intervenes on behalf of xAI in data center gas turbine lawsuit - Utility Dive — Utility Dive
+    https://news.google.com/rss/articles/CBMilgFBVV95cUxPcHhFZElmVW5SSnhpcVZsd2Q1QmNpcGJTc1YwQ0YtOXE3UVp1ODRqNXY5TWxrdVFQaFBfSUFydGU4bzJsaVNpd24xSFFsU1VuM1lvbWVBVHZ6a3Q3LU0td1VvWFdsR1JubE5rNDhidkVDaGt6eWEzRkJ4SjJsNnZRVmI5ZVZhMHR0NzJ3SFV4TzhvbTg1bVE?oc=5
+  - Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer — The Ringer
+    https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5
+  - Godfather of AI blasts Musk's xAI as 'failure,' says labs are risking a 'big bubble explosion' - CNBC — CNBC
+    https://news.google.com/rss/articles/CBMikwFBVV95cUxQZ0xtN2k3bkpySVpWLWlMQVBIWWcwdWE5eXlMWE9IbGUxekRtVjBXblN0dXZKOWFOeDd1MmJfalhOR01VWGJma1JOZVZIa1VRNlBNeFgxREFxLVRHdm5QX0REd1JVamo5Q0Z2ZEZ1S0tFT1FFWXNMRHZwZEJsaEVTZm1rcmd5aGg0STM2QllTc2hJOTTSAZgBQVVfeXFMUHRzdl9sS0JnNlVScnNPV2NVUHVud1o1QmVqRDd2OXdQZTBuWF8yMFJRVTIwTWpqSTBXS0lnNFh0MUcwaVVvaHN6QkRPZE5OaW9DR254cWRDYl82ZThGWTV2UnpBR1lLZVVJYTlEamdyVmlJRlI5M1A2ZzZiQTNMb2ZyeUlmcEFFdWV6SkdSTkFnb0FWWlZzWkg?oc=5
+  - DOJ Defends Musk’s xAI in Data-Center Pollution Lawsuit - WSJ — WSJ
+    https://news.google.com/rss/articles/CBMirAFBVV95cUxPazJvUmd5b0UtelEtNnR4SG94SlZvWDJKWmQ0QllNZE9kcVhkenpYRXpjaGE0di1JUTczMEZDWVdkcGo1b0hreWhMREhLUmRkRUFmOUdrUnRtNDRqQTgyYVdubms0TVRYd1BqdFI3cjMwcnZ3TC14Z2ZIejRvRnI1RTNvbzgtbmFuUzB4bFhFTTdodkY1U2dtTlBHZkZSMThqdTlhOHFuVVpoTWhH?oc=5
+  - [hackernews hn 5/0] Grok Imagine Video 1.5
+    https://x.ai/news/grok-imagine-video-1-5
+  - [hackernews hn 3/0] Grok models are now available via Amazon Bedrock
+    https://x.ai/news/grok-amazon-bedrock
 
 ### SpaceX  (attention 69, 8 news items)
-  - Exclusive | Mining Tycoon Gina Rinehart Buys Over $1 Billion SpaceX Stake - WSJ — WSJ
-    https://news.google.com/rss/articles/CBMinwFBVV95cUxQTVpyeVhBYXJ6SmVFLU9XNk5QWU5zY1hFaFdkYVRzVzVrT0tlczI1a1ByMnpjbU5nMnQ4YThFLUpsTmc0cVZBWlgwdGc3XzdoRkhCcGxLdlF2NDBTM1FuUU1Qb2ZpaVdXWjM3VUtnZEtwZFp6bGs1ZUlfc3VKWFhjQW5JZ0VwTFBHeS05dDNXQWVpNFlZUGFrTmR2akQzRUk?oc=5
-  - SpaceX stock soars in debut and makes Elon Musk the first trillionaire - AP News — AP News
-    https://news.google.com/rss/articles/CBMivAFBVV95cUxORjJYREd6U2x6SkRDTmgxdkV6b2dUSVo4c0t0NzJFeVA2czRKT0F2dXdTc0hLQkNDLXRxUVRHbnMwS0NtVmtOd3dqM3ZBQUpOYktVZzY1SEFSd2p4WG4xN3RpdVJDSmVqeTlQVDN4SHBFVzU1Um1pU1NsMFNFNnJfa2FaRE9zSFhNbDk0SDN2UllsUUpqWGd3Wm9hMkppYXJBRjg3dDl4Tk9fRklUWVBGWnJTcV9OZ0JSZEd5Qw?oc=5
-  - SpaceX blasts off with a record-breaking $75 billion IPO - NPR — NPR
-    https://news.google.com/rss/articles/CBMie0FVX3lxTE5fdzBHc2d3M1ptX0lfanhhZEZiLXF0WTlSTHY3bDhsVGlNMnNDV0htTHVwaVJiZnRlY1JPeXdJbkd3TWhaQjJYTl95T1VTN2Y4LUc5aGVjTl9jbDAwbzQ3RFFkdGlsNXpLa3VtT0VTb3F5bXVhcjFod2FVRQ?oc=5
-  - Letter to the London Stock Exchange Group and FTSE Russell Re: SpaceX - NYC.gov — NYC.gov
-    https://news.google.com/rss/articles/CBMiqAFBVV95cUxNeFZDWDNGZEEyMWk0MVIydTVBRkhKVE5tMTVNZnZlVjdkNzgwUGpSVDk0TGlCUHNXaFI2ME5SaXdNOFlCV3RkaHNIdDA3dUxLNFVIVERrRHpaTzRPaWJfazlpOEdweEw3SzdBX0hPSDkwOUV0SXBQSDZGNDZpcXpET3cyWHVOdE5sSWtCZFg0NEVGd2JvYnpBQ1NxQlVxMU5IVzFpaFpzVGY?oc=5
-  - Opinion | How to Kick SpaceX Out of Your 401(k) - The New York Times — The New York Times
-    https://news.google.com/rss/articles/CBMidkFVX3lxTE5RWnByYTlyN0xCd3JUOFJiS3VSZk53M3YxMm1mTnk3R2JNS3h2VXRmcHpUY0tjaW9wNWo0UFJNM0VHY0VyVWY4ZzR3ZGtrSC1jTjl2dFVRenY1a2pLZlVlSERZSmJYQWtad0JhSnRWXzVTNFp5cFE?oc=5
-  - SpaceX shares rise nearly 20% in historic IPO - SpaceNews — SpaceNews
-    https://news.google.com/rss/articles/CBMidkFVX3lxTE95OFBkOE00LUxGOHc5b0pfLXltRnh1eVhDOGM2SjdPSDVIbXVoajlueE9WMWJ1TEN1TG1ZMEVOUWEzTUUyeEJPMURfcjFDaHZWUkE2cVJWVDNtRW5PWlFySFNzR0NjRERRNDVnbmhLSzF0SDRhdVE?oc=5
+  - Bluebird 8-10 Mission - SpaceX — SpaceX
+    https://news.google.com/rss/articles/CBMiV0FVX3lxTE83US1jV3pyVko3RTVxOFdqQWowMG5kT1FRVGFTRmpZeWxyRXNub3JsODEyalViajVsbDI4YV9Jc1M5X2pZRExya2habHgxRmVMVkNMV2RKdw?oc=5
+  - Before SpaceX IPO, Investors in China Secretly Acquired Stakes - ProPublica — ProPublica
+    https://news.google.com/rss/articles/CBMihgFBVV95cUxNVHU0WFBmb0NMOUVwZ0ZxcDV0Ukoybzdsb0Foa2dLZklHYjllWkUxbk5VTGlyYVJySHV0cDN2LTloNWdyT09ELW8zLUdGdExoQTdwbFNvZUV0WTFVWXFJbkMzYkF3Qk0xOXdVb2RSczgtM3hyWFFVb2pwWHNnUk16UlUxSWpwZw?oc=5
+  - The riskiest SpaceX stock trade of all had a big first week - CNBC — CNBC
+    https://news.google.com/rss/articles/CBMicEFVX3lxTFBRMFpFeENNVHlmdFRFSG40ZWo1dnZMbktNaFFaaTFlbklTWnRhWVdXTm5ERURKdHJVRjBkQ1p5dXZ3N0JYYUNaRHotdmJmbEFTSHJqV3RnWmloelVMNVBZbDl3cmpVaHdmZF9nMUgwSk_SAXZBVV95cUxPWlhDNzU5S0VfQkRiUUhGd25Ha3FiMWF1TW9WeXRJdlFORWN1eTloWVktZVhnQkdwVnZwS0dsbF80aU5fOERIV3YtNHJLOGUzZmtmRkVSSTJKdjZwTDlBWEQzanBRYzJNR001cVhPSFVxVm1NS2pn?oc=5
+  - SpaceX launches its first Falcon 9 rocket since Nasdaq debut - Spaceflight Now — Spaceflight Now
+    https://news.google.com/rss/articles/CBMitAFBVV95cUxOWHZNYlhZc01MV2RqUWsxOHk5bm5PUzJoZEROTFNob2FmWWQ0ZldJSnBOZFVTSE00ZWV2akNxclRrZFVXZDBYMWpOXzR2eExjYXlvS1pIWFNzY1JLMWZlQm9NWURBSEVWMXNDeENYSzFoYTlsWHlwYmVPdS1YUURQSVV2ejlhN19SNTgwa18zbmNmN3Y1WUFiNjVMbk1JZnpaQzNKaWNMRmtoS0xTbHpYZC16cWM?oc=5
+  - Elon Musk Becomes World’s First Trillionaire on SpaceX’s First Day of Trading - The New York Times — The New York Times
+    https://news.google.com/rss/articles/CBMieEFVX3lxTFBZcWVuUGwzMTNybzJfS1pSQWxFRDByb1JhYzJqQ3lKc0JQd00yNXduRGR6NE4zMm9uT2xPTFFsb3FPd3Fyd2ZLd3RJTS0tNkpjRGNvSE1rLVVTeXU4M2JzU2ZNYmlLTHl5RDAyTURvUzFIbldCRVE5bg?oc=5
+  - The $17 billion mistake hidden inside SpaceX’s blockbuster IPO - Fortune — Fortune
+    https://news.google.com/rss/articles/CBMif0FVX3lxTFBBWHF6eWZab3FUemlzWlg2S1lTRXlNWVlTYVRIVnZKRGpkNnFhTWFuS1JVU0J0WWVqMExkX0NyMzlkN1RpcGpXczJtaGxmdDdReW1lSDJTSHhIWEJjNjZ1VkNUVFQ4YzFHbUFjUUlyQjBIVFNaNndfWWJ5X0ZoTjQ?oc=5
   - [hackernews hn 3/1] Is SpaceX's prospectus just blank pages?
     https://ir.spacex.com/financials/default.aspx
 
-### xAI  (attention 68, 8 news items)
-  - Grok's AI image generation tool violated Canadian privacy law, watchdog says - Reuters — Reuters
-    https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdHSDJtNEpTMFFyUDJMSzc4Q3NudjNXQmFvSFBFZ01rRW5JaGQteEEwdWVya3ozdU9XS2VENjJIWUVHUGItVHNpTFBsenhKN1lUckp6d2JaVG1FUDNsNU5nRDNPVjdtNDJkdGg0aVQ4bEJUT0QzM1JoZkhESVJ4Z3NndmpKNHh3TmM4T3IxYXdSdnNKSl9BeVBjaDRYZURXR25STmdaeFBfTmt5eWMyZUFrVTBxZkhIeEsxaTJxNnJzTUZDOWV5S1d4alV1Zw?oc=5
-  - Grok’s sexualized deepfakes violate Canada’s privacy law, watchdog rules - Politico — Politico
-    https://news.google.com/rss/articles/CBMifkFVX3lxTE1naGUwSmduck14TU16NU5yME5VczFTNktKd2RKTzlLTURpYW5rVEF0QTA3U1ZiTkVIMk0tcWpJckhwWVFzU3c4QnVTSkphemhJcURybENrekxFVnM3cDIxS2E0dmpuQWRkY2RyVUtmNkgyWXh4eTRkRUJUNUc0dw?oc=5
-  - Powering Gopuff's Go agent - xAI — xAI
-    https://news.google.com/rss/articles/CBMiQ0FVX3lxTE0tSFZnQkZQLUljWU8yZXh6NGxib2ZDeHlkWmpXMFM3bGxkVTE5RHpsSWFaUm1uZjY5UUluUUNXRmZXUTg?oc=5
-  - Grok Is Still Hosting Sexualized Deepfakes of Famous Women - WIRED — WIRED
-    https://news.google.com/rss/articles/CBMikAFBVV95cUxPU3B2YThjTnlsT2ZIWlJ6dHVGWFFvNERtdnRkb1pqUW91c180aDdpVXpYNld4TDVhRjczZjNPSG00YWNWWU1mSjBSLVdpcGVYUUN0WEVDUUpWS2ZDeDg4ZGtFTnJVeV8tY01CclYtWmYtQVRHQ1NCdWpqZk9lOUU3UzdxU0Y0Rlp3clIyQ21PRUM?oc=5
-  - Southaven residents sue Elon Musk’s xAI alleging harm from gas turbines - Mississippi Today — Mississippi Today
-    https://news.google.com/rss/articles/CBMihwFBVV95cUxPalluOHRESlZReHl4SW9uNC1lSnhPNXRiaWJVazhhZFBDcEpTTThaM1FuQlFac213S2RXQUtHOGlxaGxzVDliaXVzdDNWa0NwdlFLYmFhaUM2WUp2STV1aFJDelpGZEtJb011eTJoSlg4TkVPaVhsWDZ0aGE5cE9meDRRQ2NtelE?oc=5
-  - xAI fired an engineer who raised alarms about Grok safety, new lawsuit claims - TechCrunch — TechCrunch
-    https://news.google.com/rss/articles/CBMisAFBVV95cUxNRUxlVG1tT2ZVcTBpZ3VHWnB2dnBIbkZoU0V4ekhhS1dHYWFXYUtsajFmSVNCSUh5WHp3TndMMEF6VmNqQlVTaktZZ1dXYl9rOWYtWjBRMW5Oa0Ywa3FJWnlZcU44NlJnSFhMT29yU05qRzRDdm1kRjNjcXplNVBSX2dkVXJ3alZoQ0ZvOG10MHo4U0VMVUx5Z3lLZmxnY05zV0pfTVRtT0Z4SUJ2dnpkeA?oc=5
-  - [hackernews hn 2/1] Grok Build
-    https://docs.x.ai/build/overview
-
 ### Meta AI  (attention 64, 8 news items)
-  - Will PA participate in the Trump state fair? - Spotlight PA — Spotlight PA
-    https://news.google.com/rss/articles/CBMiqAFBVV95cUxOakZna3NNWnd4WTRNWTViekVSek5Bb3JIZUh5RzB5YUJCVno2a3g5ZjJwN0ZJUm1haFZncklycDhHR2JMLXJ6VERRcHVzdlpHTDJUSk1XLTZmV1pjVVplNjVka09KamRHT1NzM0luS0VVeWdwRzFzdVhKdU03WF9WTDZNMmZsdkltbXhTdXY3VEVTNWV1N0kyVkd3VkVnSm9Jam5iTDFNX3U?oc=5
-  - Oregon, Washington among states declining to participate in Trump’s ‘Great American State Fair’ - Oregon Public Broadcasting - OPB — Oregon Public Broadcasting - OPB
-    https://news.google.com/rss/articles/CBMiiwFBVV95cUxQQUNfOUd3NXpQdG1lY3RQazZpRHE3OXdrejZ1eEFGN05QMkIxLVZjaWJJUGVpOFVtcVhGcEl2ajhaN0lnNTc3VnhhN1dfUjh0T0JYQlk3bFpWelhNNjNVR3RXTWlaa1k0XzFpWVJDMzQ4aXB1VUJtbmFGWmtwWUtoNXV6NGdLb0hXZEU0?oc=5
-  - San Diego County Fair kicks off. Here's how to save on tickets - KPBS — KPBS
-    https://news.google.com/rss/articles/CBMirwFBVV95cUxQY0NnQ2M5aVlOT2haVGo4VDhHR2xWZVhDSG9IVTFqbWJLbDJnNGZwRlQwWTlrdzNER0NaT3FzVWRSSUlZME5RYllfcHV1ZDZxdHRrX09GZlhjam4yTmlWVU9lV2Y4LURERDNKR0F4TEhRLU1uR0wtYzRMMmpRZTNNTHlndThhSGlrTW41SWEwWkM1OWpGZVJvTEdyZ1VuRXNndTVHa05nb2paMGRmRGJz?oc=5
-  - Minnesota State Fair unveils new cookbook looking back at 50 years of blue ribbon winners - MPR News — MPR News
-    https://news.google.com/rss/articles/CBMitAFBVV95cUxQRE9OREJBTmU3V3pYVHpmWVNtZ1Bvc1dXaTRxaC1MckF3WUNFM2F3a3hDU2xZdEttZFVwNGkxeVE1YWFxc1M5dWRESUg3M2hjTmpIVEZPNWMzcVF0OWNtNW1PWG5ZTmJwWDR0SF9CdmFBUFJ2OE12dXhaSFBXc2w2U3dlbkdtQUl4dnRoNXg0OTZhdU1ZYnBXTFVsQVRrM0pjZ2x0N0RWemdkLUoxQlFSdnYwNGg?oc=5
-  - Sydney Sweeney Talks 'Euphoria' Ending, the OnlyFans Controversy, and Navigating Fame - Vanity Fair — Vanity Fair
-    https://news.google.com/rss/articles/CBMidEFVX3lxTE5qZFFaSkRrTUFKaTRsaWlsYnVJdGlHWTd1UWhhWG93WG5Qci12SGxaWFpMX3E3cU52LTU5Z0p0VTY0NXlfbElQWnZ0LUdjZUF0anhCaDVNLVEtaDhlYTM5VElWQ2x5NmF4TEtPTFpBeU1hcVI5?oc=5
-  - What to Know About the States Skipping Trump’s ‘Great American State Fair’ - Time Magazine — Time Magazine
-    https://news.google.com/rss/articles/CBMirwFBVV95cUxOYVVJazdfQmc3OXl5NG9nSmV1V3MzdlJ4X3BQcnByRTRxckczTFQtME56MURoNkM5WFozNWxWZ0txQksxQnk1S1R1cVBqX3BjTHFsOUNoOERMbHVaSXVJZ0k4dnpxc0JRVEpKc2dJSGxFdS1VREdVUEYzTFdUeXAwMHJQaTQwQTJGamx1UWx4Q0NmQ2wtRlZtMEstYlk3NWpoQkJZX2tiOXVPbjNDQmxR?oc=5
+  - What — and who — will be at the Great American State Fair? Here's a primer - NPR — NPR
+    https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5
+  - Storm damages Omaha Art Fair, destroys 17 booths - WOWT — WOWT
+    https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5
+  - Massachusetts not participating in Great American State Fair: ‘Just ridiculous,’ Healey says - Boston Herald — Boston Herald
+    https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTVNmNVpPamVNX2F5ako4UXc2TGpWdVcyb0dzUUx4b3RpSGt0QmVXeUVBNUtLQzRfNWdzMUd4WEFmX2d0aVpaOXpVTnJCRTFZMklvT3VoanctWXBaVUxabzEyWF91cHFrdS0wajlVcTN2WjA0cE5HRmNzTHVETXJUTFJkTkVLZ3FlbDdzU3NHUmJ0NlNzRFdkRndqQjZFUTFWVFR5MmJCY0lnWHdKRlJTYnctY0xLcG9IVDRFRmhXT1Y2c2xMN2Rkdg?oc=5
+  - Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair — Vanity Fair
+    https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5
+  - How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review — Harvard Business Review
+    https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5
+  - NYS Fair announces funk festival lineup with two major headliners - Syracuse.com — Syracuse.com
+    https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5
 
 ### Tesla AI  (attention 64, 8 news items)
-  - Tesla Optimus Gen 2 Review: Specs, Price, Factory Use [2026] - Robozaps — Robozaps
-    https://news.google.com/rss/articles/CBMiZEFVX3lxTE1CNmY1S0hqMUk1WVN2S2lOR0dKSWY0WUwwd1NOOVlqcWRNMXpXa1NDU3hQRUFuZWhBSmVtUmlnY1RtU0tycW43OXF5cFZrZWJnZFNEdWtZM2JOZk5uX1ZGSXY4elA?oc=5
-  - What Robotics Experts Think of Tesla’s Optimus Robot - IEEE Spectrum — IEEE Spectrum
-    https://news.google.com/rss/articles/CBMifEFVX3lxTE9aSVZBc2JNOVZ2aHJQYVNnVjZEbGNBTnRwbENMYzVGdEJfVUNLLUVzSmxtWFZUT2RJd3FtazgzUGxGUjV6NzF4Z2FSaGgtVEhPZGpqLUlxZGxlbjBaa3lscWdnUTBMWTYxMUhzOHI4RU0yelUwa0tqNmdramY?oc=5
-  - Tesla's Optimus robot ambitions come into focus in Austin - Austin American-Statesman — Austin American-Statesman
-    https://news.google.com/rss/articles/CBMimwFBVV95cUxPSHQzSzV5VVltc19qa2p6Rnl0aDJjdGctal9DdTZEVERfbmtxbnJHSkNSWF9iOC1NS0MwX0hCYjRjNE9mRE5sdUZEVUFoVDJpNG5qSnI5YkpsUl9oa3RzWnY4SjQ5M1BzR2JIWjVYWEs3WEpNdFpBQ2FLYUhkekFUcVprWERJYWxkV1pyc3g0QjlOamFjcDh3d1V4Yw?oc=5
   - Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App — Not a Tesla App
-    https://news.google.com/rss/articles/CBMivgFBVV95cUxPMzJjWnRKY3RMV0tUdG1OWkNnTFRqZkttU2pzN2N3WkdBTlFaWERSbGxUMnNJaENTQmNwOWJOYWtnSktzNWNWRktpZWJVWjFWOFgzOEw2UFhkZHFrM2FJMzZSUnNCTWtGWjhZN1JzVHBLME9kX1NSUTV4TXM1ODRLZGs3alRJc1FlZEdlV0VVajVvb2FKdy10RlY3Y3ZGMHFEUFBLVDZnVlNYcWtubUpfdkFsSHAxR2o2NkI0blhR?oc=5
-  - Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Benzinga — Benzinga
-    https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQlNzdUpsSDE3T1ZZQ2JjbEJaYXRhcThia2lxTkxOSnNMcmljMGt5bW5PLWl1MXRuT2dVNlk0UzhZcUdVTlAyVDdNUExKTHV5SHNHNF9kNjQza0RVN0lDZTBjaUhVcXR2WGxMZHFQYUNTNkpUamQ2VFQ5OXVSRTBvVE54M0VGeE9SLXBCVGdFcU40NVhOWG5yb0lUR2pnZTFVTUJTWlRUb3RxM3dyZDVQZEh6YXg1TWExb0I0WXhSc2puUDVpMHFJVEdTTzlNbVhY?oc=5
-  - Tesla Is Turning Its Model S Line Into an Optimus Robot Factory：Gen 3 Targets a 2026 Production Start - Tech Times — Tech Times
-    https://news.google.com/rss/articles/CBMi2gFBVV95cUxPekRjb01yQ2dndzRuQkdQZ3FfZ2RUZXhjX2hwTUtVWVFUdVkySTRkM3pkMzNxc0gzdVNtZ0VuSmd0NldMZ3NtdWhNakRsRE9TdHliamk4QkN3TkVlMGZGMnh5M1ZPWjVFUnVNOWJ4Vlozb2lpdjJOLVlUb0VlQ2o3U0dyM0NLTlhZa0xMaHRscmVGOXg5OGQyUmVLN0hnWVNzcEpiR25Hc0pacGVHYlFrRmJxc0tHanVqN0Z2ZWFPVmczT3ZQVDZCT1p6d0VCbVJkNU9MUE9QcFJZQQ?oc=5
+    https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5
+  - What Robotics Experts Think of Tesla’s Optimus Robot - IEEE Spectrum — IEEE Spectrum
+    https://news.google.com/rss/articles/CBMifEFVX3lxTFAzU1ZqWk5OSEFQZHJtV1VtZXo5UGZlejZoSUNORHB1Z1pHX0tfWmhpcEJLeWhoV1B1MXg3SzRRU19XVW9fd05Rdk9DSDRlbGpZcjU4NUI4blhYTG1wSDJBTUNqVUpFSkYyRDdhSFU1MkozekV5dHF2OWFZb1E?oc=5
+  - Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance — Yahoo Finance
+    https://news.google.com/rss/articles/CBMiogFBVV95cUxNdm9uSnU1Zk41Z3RBanJmS3prdk5JbGI5NUhVWlE5ekVMdXEtTFN0ZF9QRUlZRHFyZFdVakl1dUR3d00wRTZBTmJ2RHktRXJ6RWh4OF9uSU5BdTFLb21tTFlyWEEzQTFtWU1Pc2tzRTZjeG9SZkVMd0ZCSHl3Snp3ZmFxWFlRSnRlWW5oc3FHS2prbGlhd19sUWNQYi1yZTBMSWc?oc=5
+  - Musk Shares Video Of Tesla's Optimus Robot Performing Household Chores - NDTV — NDTV
+    https://news.google.com/rss/articles/CBMixwJBVV95cUxNMEE5ZkJWNUJfNy14Tmg5aGo0XzZpajBremZPdUU1STJhN1V4YWhSYVFPLXZEYnBiZU93b0lYZm52bnU5c1N2VGdLZWJTM1BKZlNlSFV2cUNldUJxdjNXVjYweHdlUmE5bDkyQkp6Z2xqRDRsei1oZElzTTdaZXZhdmI2QW9ITmN6NXNaSXQ5dnpjU2I5WlRyWXhGTnRMMjFfTWNPT2s0aFBQTXdwU3FoWGZrLW9RT0dUVUliaEs2ZzVWbEpudTlaVUo0Tk5zamhfLTZSaVBGMDVLS29Sby0weVpVbkRLRGFtdUhsUkdFcmZpQ0poNVFyWnNnNVkwcXdick16cTY3ZWpnZ1Q4ZGVjYkJ1NjN2aVVMa3duamFHcVN0eU90ZXRMVS1IQVUtS1FiSmNDaXY1NUZnbUNOamJWV2lSTWVuNDQ?oc=5
+  - OpenAI Robotics Expansion: Could It Challenge Tesla's Optimus? - News and Statistics - IndexBox — IndexBox
+    https://news.google.com/rss/articles/CBMimgFBVV95cUxOeDJJNFppMG5yQmRLSWJIYV9DRnFidGVxTGxLcExuZk5aTGhMcGVvOU1jaUNRY2VrSzZOcURLNkNkTEJfRlZlUmlOOHFvRm9YRTVSZVhERVZpS1prNVVZUWx4MDRvX0RvbnhnQ1UzVDE3aTd3WDY0TGhoLUZJRVpNbFB6Wl9vR2ROUVNiY1hoUWd0VzExQ21KVDdn?oc=5
+  - TSLA Stock In Focus: Could Optimus Be The Missing Link Between Tesla And SpaceX? - TradingView — TradingView
+    https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRXlQYnB0S1F4S1pJTjdwdHk2RExRM3puMXpXdWZEZWh4TDMtelBUY2pKYlp5S2xsb292c0N2NzNjams3MEJYYTFONXRqSkVTOHIwSXVLOXlPelctaUIya3N0SnFMZjJqdUszWTdRMFpsSVdaQzBHOXBlWFA0dlF4ckt3ZVNZdk05aWdfS2NfeEE0dV93SjhPdnRtUnJtblk5UTdoWVB3RUlDSWlNbkVFbUFaZFlyVDRmd3pURTVpeFJJeExnWlRacF9wV3BsMFQ3OTYxaVZ3?oc=5
 
 ### Neuralink  (attention 64, 8 news items)
-  - Elon Musk claims new 'Jesus-level' brain chip can restore sight to the blind - KTXS — KTXS
-    https://news.google.com/rss/articles/CBMipAFBVV95cUxNcW9JLUtKcTRRYmVmeGlSYkplWVIyNU5uYTVsZXZYTHZuV0dtS08zZEgwWEM4MHBURGp3YkdBMnM2R0dxcmZ5cmxVcVpyS0tZR0w1Mm5oUXdYZ0JLUjRQdHBzaWxsSnNRYmtobXo0NlpBUG9BQWlQUHRDUUVIX2FVam5PSjM4aWFWT2EySXlOVklETFFVNGd5TWM3cnczZDViWXJ6dQ?oc=5
-  - More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune — Fortune
-    https://news.google.com/rss/articles/CBMikAFBVV95cUxOb0x1ZWcwTWtvOTNqbGZEbjFSWGtNaHB3bnpfaDJJX1liNlA2cHlOa0xFOXc4c1NjQnJCMnRGZTZOWjFJa2hxcmhjNkdNNWJjYnJoZzBzRVBpdThmQ0JqZ0M1RlpoTlF6MlR2UXBrT1FSZjh1UUpsbkc3OEhvYjJwanYxTGs3OHdMVnlBaWUxRDM?oc=5
-  - China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com — bgr.com
-    https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5
-  - China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India — The Times of India
-    https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5
   - Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global — KED Global
     https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5
-  - Inside Elon Musk’s AI Ecosystem: How xAI, Tesla, X, Neuralink, and SpaceX Are Converging - TechRepublic — TechRepublic
-    https://news.google.com/rss/articles/CBMilwFBVV95cUxPb2Q3QXlRbnIwV2FMUDFSQTlENElsVm14bDRkaTlqNjlhTmktTWdBRE5HTEJ4bkRmNGl2Q3FFUElXdHJyUW1xSzdKT0RBd2ZfckdZVWtocEZnNGhRbWU3TGhnUmdia21ZMGtfYTRCOHF3RFpYTUdZTWd6QV9MLXotUHN5RU1yM3pqd051ektqZm41NURrUC1J?oc=5
+  - Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider — Business Insider
+    https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5
+  - More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune — Fortune
+    https://news.google.com/rss/articles/CBMikAFBVV95cUxOb0x1ZWcwTWtvOTNqbGZEbjFSWGtNaHB3bnpfaDJJX1liNlA2cHlOa0xFOXc4c1NjQnJCMnRGZTZOWjFJa2hxcmhjNkdNNWJjYnJoZzBzRVBpdThmQ0JqZ0M1RlpoTlF6MlR2UXBrT1FSZjh1UUpsbkc3OEhvYjJwanYxTGs3OHdMVnlBaWUxRDM?oc=5
+  - China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India — The Times of India
+    https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5
+  - Samsung and Neuralink are working on a fourth-generation chip - Root-Nation.com — Root-Nation.com
+    https://news.google.com/rss/articles/CBMikAFBVV95cUxQbkFkX29Hd3RfQkcyQXNqNlFwVnBialBGS25BUHJVNEZvcmt3TThxZTctdDZZRHdQMUlmeE9SS2cwOTRjWk1GSS1wSm1qTFkxSmU2V0NuRENaYlBseGhYN01RQTNKQmI2N3Jzbm1QNlZtelhWMWpVQWk4TWJXRlB2TFpkLVdaLWplTkFEMmZVU0M?oc=5
+  - Samsung to build Neuralink's next-gen brain chip on 4nm process - MSN — MSN
+    https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcnpwX3FqbFdvYy1rRlBFSjVHdWVIRjl0d3hGeF93S2x6Q1JWLVhQREVsNml6RUhROHJHMFNMYTJaNWVZOFFMR3RFdVV0UWVNdGhCS2Q3MkxVZ1RMbUFLT2xWWGV2NEhReEhDd0d3ZHZkYnpaSnFTMldtOWxtaXROc2EyWjk0MnNLdGlIdEt2WlJ4ZERnNEdycnNsOFRyUGpOcEJWOTZYUkY1RklObUdYMWVXTzg2bTVRMGtablZFbXlRd3dlR1Bua0lWLWItcGRORkJEMVlXX2pKSGNleVJ5azViVlRWNlp5V0t1RDN4X3lhZHZfa3hyag?oc=5

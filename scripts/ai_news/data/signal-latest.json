@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-15 22:49 UTC",
+  "generated_at": "2026-06-20 10:29 UTC",
   "biggest": {
     "entity": "Anthropic",
-    "title": "Statement on US government directive to suspend access to Fable 5 and Mythos 5",
-    "url": "https://www.anthropic.com/news/fable-mythos-access",
+    "title": "Claude Corps",
+    "url": "https://www.anthropic.com/news/claude-corps",
     "source": "hackernews",
     "published": null,
-    "hn_points": 3138,
-    "hn_comments": 2303,
+    "hn_points": 163,
+    "hn_comments": 119,
     "reddit_score": 0
   },
   "entities": [
@@ -15,63 +15,113 @@
       "entity": "Anthropic",
       "headlines": [
         {
-          "title": "Claude Fable 5 and Claude Mythos 5 - Anthropic",
-          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE0tNXJJQXNGZWM1d1VmMVRfOFZlYU9VUFcwdm03RFhDRE5uajJOY19mbUQ5ZVpXYW9IOWhzd3JOS3F2c0xIdFRYVUgtZF9RVVI1VW1KVExGb0RVRDBWdlpNTXN1cTA?oc=5",
+          "title": "Agentic coding and persistent returns to expertise - Anthropic",
+          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lM0p2cGtZWWJ4aE9Ocy05NEU1SXFraWl1V1gwNmxwdGpMWkg3N2Z3WGF6eFFMZXlWMGZEeGZZVGxmcGJyVlBSLXlCUXhma0lWRm1SNllTSVlmNXlTMFEzLTZIMFIwSDA?oc=5",
           "source": "Anthropic",
-          "published": "Tue, 09 Jun 2026 17:08:42 GMT"
+          "published": "Tue, 16 Jun 2026 19:29:35 GMT"
         },
         {
-          "title": "The revenge of Claude Mythos - Marcus on AI | Substack",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9vVnZ3ZWlxYW10NlZfcnhtOWUxZTZ4QjVCZFNyNEhEQnF3SDBVay1EZk1CUk15RHllMDNtRjRYSGdKdkEtdnZ4LUlmOHRtY1MyWHJia0FQMW10LW9yYVM1WDVNSnhIX2o1SUFNQ3hGSQ?oc=5",
-          "source": "Marcus on AI | Substack",
-          "published": "Tue, 09 Jun 2026 17:52:08 GMT"
+          "title": "Why Anthropic Is Sounding the Alarm on the Next Generation of AI - Council on Foreign Relations",
+          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOSEFBZGphQ2loamYwOWhBQTAwLTNZa1pRQ1V6bmdEdjNOQlMyV1NiQUhHWHJ1Q0VCWG9RYmRvZkRFX1ZjMEhaNjVIeFBaWlZMeEM1MmhQdVk2WC02d1JrQnRYWWI3MEtLaElKMHMyY1IxUGQ0SFF4UkRoSnVFNWVuWk9jNmdEX0Q2M1hsWE8zSDlZY1JXRk5uUg?oc=5",
+          "source": "Council on Foreign Relations",
+          "published": "Thu, 18 Jun 2026 19:07:41 GMT"
         },
         {
-          "title": "Claude Fable 5: Mythos-grade hype, record cheating, and a few hall-of-fame entries - Endor Labs",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE15UmdmSEM1WkZfRkFKNTNGMDF5Vkp6b3R4LUtQZ1BfckpNMWFJbjlPOUVrS3ZVaVFxdGgtQjRVdXBRT1daZWRkWW92TnlxanRiazZIMU5vRFIxYnZZSi1ZemVZNFhaT0NSbHFtdHU1VEpVdw?oc=5",
+          "title": "The Department of Commerce Restricted Access to Anthropic’s Latest Models. What Comes Next? - CSIS | Center for Strategic and International Studies",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdHdWR19xN0liMFpabFhzMDMyX2xGbURCS0VfaWRodlZtS2xRVmdmb3JJMDNRQm5aanFvVFpGQmhQZnc5ZVhHNkQ2ZjJtSElScFJmZ2xHclFxRUlnTXdsazdMaHRHaUNEMjMyS1hLOUY1ZHNBLUxiOHBVWHltbDdCb2l0ay04NE5LMnU2T3dsc3RDOHplcFlIUzRSS1FIY1lSZUktRjltOUFKQy1x?oc=5",
+          "source": "CSIS | Center for Strategic and International Studies",
+          "published": "Tue, 16 Jun 2026 20:30:59 GMT"
+        },
+        {
+          "title": "How Powerful is Claude Fable (Mythos) 5 for Coding? - Towards Data Science",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQemtmODFpbUd5V0g4OEVaaTItbWxNb3p4VGpFTElNeGVfcG1QV0xNU0lCT0RRd0RUNTBqc1RaZnRoMGdudERzMnBicy1qWE43UEFtaVRXdjRPMHlPdTktbk94cjVKY0ppNUxrMnJ1UnhTMm5Da2ZQVFR3aElENFUwRHU1amxnVmc?oc=5",
+          "source": "Towards Data Science",
+          "published": "Thu, 18 Jun 2026 16:30:00 GMT"
+        },
+        {
+          "title": "Introducing Claude Agent for Jira - Atlassian",
+          "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5",
+          "source": "Atlassian",
+          "published": "Thu, 18 Jun 2026 15:55:00 GMT"
+        },
+        {
+          "title": "Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs",
+          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5",
           "source": "Endor Labs",
-          "published": "Thu, 11 Jun 2026 06:54:45 GMT"
+          "published": "Wed, 17 Jun 2026 23:40:56 GMT"
         },
         {
-          "title": "Claude Fable 5 and new safety fables - by Nathan Lambert - Interconnects AI",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1XOUpqaUlWeFZ2RDF3NGY4UjlBa0JKV0VFSk9yZlNfNXNlSHpBZlJ1VUQ2TTE0V291UE9iSDZVQ292ZjV6SGF2ZGI3Yk5lQS1IaGJvaGtnSVQzd1ZaeGJ1bmF6RVJLeC15Q0t2dWpBd0Y?oc=5",
-          "source": "Interconnects AI",
-          "published": "Tue, 09 Jun 2026 22:59:35 GMT"
+          "title": "Anthropic asked for regulation. Washington went much further - CNBC",
+          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE56Z2JfUVJpNDBXRVFoTDB0V2E4ZDdEbHIxNDF1YXBUS1dOaTZPY3NZaHJ6b1VrY2VySzRWaHN4TXN3M21XWEo5RGtxZ1hBckhVTDkxY0NLNExpQVAtRXpuQk1wanMzQjdlbDBhcktUVWM0cFFq0gF6QVVfeXFMTzg3d3lndGR4Z2Q5Q200RVpnSm82dFBfMmp5d2xkcEFOUVJ1VGZQUUhXOTczTVpyTVVkU3JjbUlvNktvLUVyV3QxU1ZEaW5HeGtQSm5XeWVFMmF3VExuRGxzaHl5eW5Xbzk0V2V1MFJFdnA1cTRvc1Fycnc?oc=5",
+          "source": "CNBC",
+          "published": "Wed, 17 Jun 2026 12:30:16 GMT"
         },
         {
-          "title": "Claude Fable 5 available today in Microsoft Foundry: Powering the next era of autonomous agents - Microsoft Azure",
-          "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOSW5BNkhvSXNYVEpPcDdMTDlINGIzZVVsazh5bjcyYW0yMWdKaGZ2UHVHWmEybmpLRE5ZblppR0U0c0VWcUZFaUFhTkFxd29UbzRvbmFTc1M4TDNDZXNhTXdoNUJweGdwaERaN0M2ZlBlaFhkUWIwZDdJb2xFNTZYSlgzN2JQNVpTOEpaNVQ5Um81Zk5XQ3ZyeV9hM1hFclJrMHBCLTVFVDY1YkdqRHMtaVVIeTdicVBmdlQyWTZIN1dKT21XcTZiNWh2TU0xVWF3?oc=5",
-          "source": "Microsoft Azure",
-          "published": "Tue, 09 Jun 2026 17:00:00 GMT"
-        },
-        {
-          "title": "Welcoming Claude Into the Classroom Risks the Soul of Education - Chicago Maroon",
-          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQV3NZdmUxREtxMWpRYzY3S1pFWTJ6WUdKaEE2M3hKLTZVczREaTd5M1ZmNlN1UEVmZ0s2bEFpMHZGUXR5ZWtrY3hpZldDYUR5SGwyZUVsZEpYaFB0NlBuWE1Ual9McHlTS0dOdThLcmJaUE50WE1fT3AtSGhJZ2E0RGNLUGdtd0wtQUotZ3BvaENXYkdsdmdQVUZXSkc4LVdFdUd4UnVfc0VhRTVWYTFVQ2tVaw?oc=5",
-          "source": "Chicago Maroon",
-          "published": "Wed, 10 Jun 2026 02:11:03 GMT"
-        },
-        {
-          "title": "Anthropic Halts Access to Top AI Models After U.S. Ban on Foreign Use - WSJ",
-          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOVTZaMEVPXzdZczdjYm92RU9RR2Y0WmpvNXd3RGk3ZnV2bXJyaU9JRlJteFRnQjlrcVp2dDV5TkpXVXF0dWhKQ0ttVjlESWU4N0l5UXNfeVpUZWd1ZmY1REQ5emNCVGZOVFZvZG4waG1WTUhlOVVRYW4taWxVWTF1QU5QVnJnX280aDhmWC05N1Utc3g1OTZHUUJFbVdMN2tINTVDQ2oyNE8?oc=5",
-          "source": "WSJ",
-          "published": "Sat, 13 Jun 2026 04:34:00 GMT"
-        },
-        {
-          "title": "Announcing Anthropic Claude Fable 5 on Snowflake Cortex AI - Snowflake",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE13ZFBRaGUwN2hnZll1bEZpTTNXdFJNNXNhaEdkNzNqQnllTGRPZ2pXY1NYcG5va0lkcWY4YmxSM2VLdWptMWRuNEVpY0dKTzJwVW5xVEN1dzVjT1RQOUpXX0VTd0N2QmFZaU05QVlNbGxuNDZ4dzBZQg?oc=5",
-          "source": "Snowflake",
-          "published": "Tue, 09 Jun 2026 20:18:26 GMT"
+          "title": "Anthropic Invests $150 Million To Launch 1,000 Claude Corps Fellowships - Forbes",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMmplakZsUTBhenBnb1ViN2xXQmZjdjdhN09PSFBrLW1oYXdra3JINjVVa2FjODc3ekRraEw4VndFNmI0TENKVzloaFhROUVCYVNWam1MWmJ5dm8zeEs5WkF2WFl4VmVwUkx5RkZrYzdEcUp2VU42ZTQ1Yi1RVXd6OTJwbGEwalFkNnV0NWpHdzZaUFlINjNnb3pfQ2NkTEdyOUhuZ0dQb3hLZWd0aGZVU09sR2dPSXR1aGRKS0ZYZWJhVEY3?oc=5",
+          "source": "Forbes",
+          "published": "Thu, 18 Jun 2026 10:06:12 GMT"
         }
       ],
       "stories": [
+        {
+          "entity": "Anthropic",
+          "title": "Project Fetch: Phase Two",
+          "url": "https://www.anthropic.com/research/project-fetch-phase-two",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 5,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "Anthropic",
+          "title": "Agentic coding and persistent returns to expertise",
+          "url": "https://www.anthropic.com/research/claude-code-expertise",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 15,
+          "hn_comments": 4,
+          "reddit_score": 0
+        },
+        {
+          "entity": "Anthropic",
+          "title": "Updated Anthropic Privacy Policy (effective 7/8/26)",
+          "url": "https://www.anthropic.com/legal/privacy",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 2,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "Anthropic",
+          "title": "Agentic coding and persistent returns to expertise",
+          "url": "https://www.anthropic.com/research/claude-code-expertise",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 2,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "Anthropic",
+          "title": "Agentic coding and persistent returns to expertise",
+          "url": "https://www.anthropic.com/research/claude-code-expertise",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 8,
+          "hn_comments": 3,
+          "reddit_score": 0
+        },
         {
           "entity": "Anthropic",
           "title": "Claude Corps",
           "url": "https://www.anthropic.com/news/claude-corps",
           "source": "hackernews",
           "published": null,
-          "hn_points": 63,
-          "hn_comments": 52,
+          "hn_points": 163,
+          "hn_comments": 119,
           "reddit_score": 0
         },
         {
@@ -90,8 +140,8 @@
           "url": "https://www.anthropic.com/research/making-claude-a-chemist",
           "source": "hackernews",
           "published": null,
-          "hn_points": 91,
-          "hn_comments": 89,
+          "hn_points": 94,
+          "hn_comments": 91,
           "reddit_score": 0
         },
         {
@@ -123,156 +173,6 @@
           "hn_points": 3,
           "hn_comments": 2,
           "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Anthropic Policy on the AI Exponential",
-          "url": "https://www.anthropic.com/policy-on-the-ai-exponential",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Fable 5 is gone from model lists",
-          "url": "https://www.anthropic.com",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 4,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Statement on US government directive to suspend access to Fable 5 and Mythos 5",
-          "url": "https://www.anthropic.com/news/fable-mythos-access",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3138,
-          "hn_comments": 2303,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Measuring LLMs' impact on N-day exploits",
-          "url": "https://red.anthropic.com/2026/n-days/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 4,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "TCS and Anthropic partner to bring Claude to regulated industries",
-          "url": "https://www.anthropic.com/news/tcs-anthropic-partnership",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Results from First Anthropic Public Record",
-          "url": "https://www.anthropic.com/news/anthropic-public-record",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Fable 5 is nothing besides expensive loops",
-          "url": "https://www.anthropic.com",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 2,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Corps",
-          "url": "https://www.anthropic.com/claude-corps",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Corps",
-          "url": "https://www.anthropic.com/news/claude-corps",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 1,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Anthropic being a good citizen or pushing ideology?",
-          "url": "https://www.anthropic.com/policy-on-the-ai-exponential",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 7,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "New Anthropic privacy policy: age/identity verification for consumer accounts",
-          "url": "https://www.anthropic.com/legal/privacy",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 2,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Measuring LLMs' impact on N-day exploits",
-          "url": "https://red.anthropic.com/2026/n-days/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Mythos 5 / Fable 5",
-          "url": "https://www.anthropic.com/claude/fable",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 17,
-          "hn_comments": 2,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "System Card: Claude Fable 5 and Claude Mythos 5 [pdf]",
-          "url": "https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 213,
-          "hn_comments": 1,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Fable 5",
-          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2621,
-          "hn_comments": 2153,
-          "reddit_score": 0
         }
       ]
     },
@@ -280,55 +180,175 @@
       "entity": "OpenAI",
       "headlines": [
         {
-          "title": "Visa Partners with OpenAI to Power the Next Generation of AI Commerce - Visa - Investor Relations",
-          "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQNnhSb05qd01OSEljTlBIejRYSFZ2bDVGRDdJeFpmZnRlMEU3dGYtLTNMUkc5SXpfTmRYQk9FNDRrQUxiNHZIUmlRc0p0LTROLVl0UGVyU0V0ZGFBQ3dQSEtDRUJadUk4bjNMbnYtT1gyQU5neVh1TUt6YnZGS0h4WTVVMFlZUG9MeWw3X2ZRTG90TzVhMGJXZlp3Q3BTUTQ5NnlPdEVCTDk2X0Q4YVNacmV6RktPcW01TnBjd3hJTDJJSnhRUTI5Vi1ORQ?oc=5",
-          "source": "Visa - Investor Relations",
-          "published": "Wed, 10 Jun 2026 19:10:33 GMT"
+          "title": "OpenAI deepens Japan footprint with Hitachi deal - Computer Weekly",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQTGlWM2tQMEgzQ0x2bGgyaHlBZ2ZYbG9mV1NtaE9ZeTBrcnpMR2lRNUNBSVlRdVZFSjlZNllfOVVDVml3N1RHZ3NGbWNyeklQWVFEdWVpRUdrNkRQLUNMTEg4UG9OQ0ljVFlZb19UUldoc3YwOE1WRUxCT3RkZEdOeVFZa0dEZ2d5c1dnVFFsc0xnNUQ3ME1ldFZn?oc=5",
+          "source": "Computer Weekly",
+          "published": "Thu, 18 Jun 2026 05:29:23 GMT"
         },
         {
-          "title": "Introducing the OpenAI Partner Network - OpenAI",
-          "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9uMkJtTlNBalBxNWxuLVlzbHlsaTFGdXdmUks2Z1pqZ0IyZkNyYmZUU1JkYlc4emNMclpXUWo1aEpyRVJRX3VKQnlScl93bkdrN1pBeWlaVVNSeWk2cmh5dlpWRF9ZTkY2LW9qMw?oc=5",
-          "source": "OpenAI",
-          "published": "Mon, 15 Jun 2026 00:15:49 GMT"
+          "title": "OpenAI hit with multistate probe into possible user harm as its IPO looms - WSYR",
+          "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQWkw0R05mVHU5YTZmYmd0eXQ5cDE3eEE3eG1ya1NsbDdqNWJ2UVp0RGFTZ01sRGZYRFdfTFNvVjFEX1Ezc2VnYkVhUkpQLUtVZXVvWllTek4xVWVSTzRRalNsRHN6Uk9fTlFJQVJodWtSX2dDTHo4X3ZFVklxSl9NWUhiVFdNMTc2SjU1U0VJWnRFQzBiNk92Znl1a29QRjUzRWxEcE5aWWQ4aGhWRUNjOE1GUXdEU2JVeU92czNrdmhQcGF5Yl9R0gHMAUFVX3lxTFBvSm1WQ3JhTmpCU0ZtY0htcjY4aE5oaW9aV3A1SGJaR01vOUVFendtM2d3QnZNS18wcFktQW9WcGtHTDZOSFU2ZVlDN2dkZG9wQllDcTN4Z1lPM1JGcUU1MFdrRkMxckhVZDlxWW1sWXg3TkpzUTAyMXNPVUo4eUhhTGoyLTVEZzZkUGVMSmNwZVNWaG5YaDN2VnBXdlNIbHQwdC04MjBOaXhPb0N2cjlqMFRBVkFvc3p0R2dvLTdCU3B3dFlhTXU3VXlrSw?oc=5",
+          "source": "WSYR",
+          "published": "Sat, 13 Jun 2026 19:17:45 GMT"
         },
         {
-          "title": "Anthropic has caught up to OpenAI in image understanding - understandingai.org",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBoR202UGp3cWcyRFZYeEdMbGs2Y01aZi03eE1QRnBmS0VvaVd6Szh0SGRBUjJydFZCbzJ3QkVUVngzby01c2g1dlR0RDMzZ3RfaVh2d0h2Q0VsTWRLeEU4RUxrYkVNZjJqRzlqSGtZWEFES1FzdWc?oc=5",
-          "source": "understandingai.org",
-          "published": "Wed, 10 Jun 2026 19:21:18 GMT"
+          "title": "Inside OpenAI's AI Chemist: How GPT-5.4 Improved a Drug-Making Reaction - LinkedIn",
+          "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQaF9LckFqZjhIb2dyXzJzWFVERTZBUEx4N1NpLVdVOVlyZWpSdGlPVDlNRFdUcTdXZGJhMUg0azRqOEVXeVlKdk1jUFVhUW5zVVA2NnZIbFU0RTJUWlExOHZyUXJqcG85QTlfNTBvdUtxME4wUGpTbGdONzdJMTFGd1puTHBxdDdIT0g0VjdXajgyRmU2YUJFRzc1TlNfRDRDcjJlMkI0SQ?oc=5",
+          "source": "LinkedIn",
+          "published": "Thu, 18 Jun 2026 14:06:27 GMT"
         },
         {
-          "title": "OpenAI files confidential SEC paperwork for IPO, opening the door to a Wall Street debut - AP News",
-          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPSkpfUFlIUUZQOEFhdG5ZaEE1V1UxTV9veVdiZlZjNWxJVWMxWDhTRzBzN3A5UFhUNmRXZTRpcjNsWXdleWVPQlVOdGlxYWdJcENrRmNndUZMT3RxbVN0TnpldnpfQzNHSzlzbUFvRDR2VTdMdHB5WDE2VHBBVFVDYWZBM1E?oc=5",
-          "source": "AP News",
-          "published": "Tue, 09 Jun 2026 01:20:00 GMT"
+          "title": "Walmart Shares Jump More Than 4% Today After Announcing Partnership With OpenAI Patrick Bruel (27s78xRF4z) - Mshale",
+          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9pT3hESHJraXUwbGdvWlp4N01MSHVKbU1yZndLdUt2c1dkcHpXUEJic2pIQ1U1RTZNTU9MckVBbXpGdU9xRGFXeFhtQTBBRURaaFRscU9FdlRMeFk?oc=5",
+          "source": "Mshale",
+          "published": "Fri, 19 Jun 2026 06:16:26 GMT"
         },
         {
-          "title": "ChatGPT hits a billion monthly app users despite souring public AI sentiment - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPZE1nOU05NFNKQ2NPd1o3Y2loTk5HY1ZPUmJNaURoaEh6bnFXWTRQRlhYd2ZJdFBURlg1TXBaVGs0UGZwWi0tUml3NkFaZTByV1NQcHVOQlVUNmxxV2p5TUlWY3pmNllWTDM3dm1VTkZYaVRwbzVrTlBoR1VoR25hS3Z0NFgwcmpHUDBZS2d5WnJWcl92bnpLTWFYZ19aLUwzWVdta091Rjg4dVBv0gGyAUFVX3lxTE9ZZGo4VmdWclVJMGUwMVQyTWk0d2F6UlJ6cG0tdW1MNndaclZHMTRPQnI0eEFUTzlBRnJoVlZBSDJmQVRpRmNnYV9yYkhaeENGWjA5WHhnbkZ5b2V6Nll1a2tVQlR1cm14NW4wMS1vV1htUmRhRjVSbzRGeTRYSUZHTnBzdlZtWklObW5TbnFxNEN1VmphN2VWaGRzT1R5VUdWTTN4M1V3a1FYTVMxdXZwWXc?oc=5",
-          "source": "CNBC",
-          "published": "Fri, 12 Jun 2026 06:05:36 GMT"
+          "title": "Japan’s tech business SoftBank rolls out OpenAI ‘patches’ against cyberattacks - KTALnews.com",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQjdZc3ZBOV9GeVRoYXRDUjBNREtqY1Q2V1g2MV9UR28tbjZSSlY4VGY0bnFxZW1OV3VBdzQ0MjZWSEsyVFk5NnZrek90eTVGaTRRWkdWTzVBbkUzMFphOER5ZHJuTWM3MVVZdG01a2RBSjVUU2N3VEpPLWt0b3E1Q2x0azNoMkxNNW9VTFpEMjRCRk1BYlBUb2tLSWN2SlRncTdVRFlLTTV5TGJvc1oyeVJOeUlrMlk1NThN0gHAAUFVX3lxTE9ucXpCcGtLMWJjZEgtVk92V041NExFLVR5VzNUUWJlZmxUNUFfUHA0aXZib3JFa1BQZW9LTWVLcEY5V05mTTFoaG5JSWJ6RVBtQnA5UENocGlDZ0VVdGQzWGlNa0s4c1daUm4xSWVvZFFldlgxQ3FnNkxwODBkQkRlbzhlUFE5ZUtjbHBoZC14aF81b2JvOHR6RWZoZ09QdHE1eUs3dzA5WlBNNWJTNmxBMlphbzM5LUZWeF9Fb25ZVg?oc=5",
+          "source": "KTALnews.com",
+          "published": "Tue, 16 Jun 2026 08:53:35 GMT"
         },
         {
-          "title": "State Attorneys General Are Investigating OpenAI - The New York Times",
-          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5",
-          "source": "The New York Times",
-          "published": "Sat, 13 Jun 2026 23:25:44 GMT"
+          "title": "Japan's tech business SoftBank rolls out OpenAI 'patches' against cyberattacks - Click2Houston",
+          "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxORVFMV2JKQmY3TXdBcGtGdXNTSVoyNVlFOGRqOWEwNVM5aGVnWG1FOXJZcnNZNzNBNzhlOTNNSTNSeW9mVUpHLTZkV0dMY1RmSjU2NzJBQ1R4SFk1M29MdXBkdlFlVmsxYnFFSGpudld1bGUyRFJRY0JBTkI4UEZmaXVTdXN2UGsydkhicHRDNURnbmhZdl9PZkdXU2trbHJ6T3ZicWgzSDFEZXFPM3ZtUElENnFhWTNfRExtS2EwWlQ2NHF4akdueXZ3?oc=5",
+          "source": "Click2Houston",
+          "published": "Tue, 16 Jun 2026 08:56:48 GMT"
         },
         {
-          "title": "OpenAI files paperwork for an IPO - Axios",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9zYlJFR3NXNW5ndGtZeVFKRHUyRkdVMmNJZHF6MENydkVtODlaNWd4Zk04a0t6QktUS25QNzdwd09kLWl6VWVRZlZkLVdNNmlaeVZlR1l3?oc=5",
-          "source": "Axios",
-          "published": "Tue, 09 Jun 2026 06:21:24 GMT"
+          "title": "I Asked ChatGPT What I Must Buy at Costco in June — Here's What It Said - AOL.com",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9oNjZ2ZXZ0Nk5sNnhCMVkzdlJzdmRjRm94dFkyME50b3N0VXZjUTRWRG5JQ0M1UTJ4VGlObVBoc3FkZ0hNRlVDeDNMLW1jZEpwdHFKcDVfNXhWRlIxYk5RUU9uenp4VTlDZW92Y0xuMTJ0RnpfYmIxZ2duUlZKZw?oc=5",
+          "source": "AOL.com",
+          "published": "Thu, 18 Jun 2026 01:13:39 GMT"
         },
         {
-          "title": "Exclusive | OpenAI Considers Drastic Price Cuts, Anticipating War for Users With Anthropic - WSJ",
-          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOVnFqNTRNQ3kyTnVCSTY1Z1V2QXEzUUd4MndFc2dNLWJqSWNHWTIxa19CelFzT3IzTFVsTEdiY2xJOU52OW1qVERrLTFfSlptTV83cmxtYkYyX3lIRzJjT2xScENLeGdyeEdTaGdFRHp1aGQxRGd4Tm5YS3RWRGlibWJtYXRVeVlXUEtvLUVOM3ZqZlJTTEh5eDJlWVRpRm9PNThFbTNNUXdPRFB3Q2tGa19na0M?oc=5",
-          "source": "WSJ",
-          "published": "Thu, 11 Jun 2026 01:36:00 GMT"
+          "title": "Rocket Lab Corporation (RKLB): Among Stocks ChatGPT Predicts Could Make You Wealthy in 3 Years - Insider Monkey",
+          "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQT0xONXNHclJEemJ2YUMxbXRxeE4zU3FkUEtBTTR4VnJXNnd2NWZWcWYtS2laX2tBc1RZbjBCaV8tSHcyU2VHVlNGYVhvMnI0MnZ1ZVhfNnFDOXRpVzNjMVlaTElrWTJIU0RBZDBTc3BIRUVGYW9RVnVKRHk1a24wX2k2ZDhLcHR6QkZPd29tb2dhaWpFUHI3bzM4c2NnNkFtQl91TGFSc3dWRVZQVHJuNG0xQkhMbWVwYVprWmR4SVB0dWMzR1Q1WXpRbXNKUV9u0gHYAUFVX3lxTE9vSDVRdk5mdHRqRng2SHJiODJUdVlwaE9aemZMcnVCSGpnZFJmaWhDMV9lSkhEdkxNVWItcFd6MVVhVXBCYUNzVUhmNFQ5ZXdjbUVleDhRLXFjcGpCNFRZdVEzelJZQVhQVktXN2JKOFVvOWNvMUViMFpkNTlkODJyejY1WGoxTUlsbXVjQzFqS0Y5eVV3QU9yRzRULU1xbGV1akhZeUQybGJJVl9BVThmZFZPLTFFYjdpOEF5ZWcxZHMzZnZBTGhsaHBEZVh3VHRvdXpJNE4yaw?oc=5",
+          "source": "Insider Monkey",
+          "published": "Tue, 16 Jun 2026 06:32:41 GMT"
         }
       ],
       "stories": [
+        {
+          "entity": "OpenAI",
+          "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
+          "url": "https://openai.com/index/diagnose-rare-childhood-diseases/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 4,
+          "hn_comments": 1,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Introducing ChatGPT (2022)",
+          "url": "https://openai.com/index/chatgpt/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 4,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Reinforcement learning towards broadly and persistently beneficial models",
+          "url": "https://alignment.openai.com/beneficial-rl/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 1,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Designing delightful front ends with GPT-5.4",
+          "url": "https://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 3,
+          "hn_comments": 2,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Catching bad LLM behavior: OpenAI's new Deployment Simulation",
+          "url": "https://openai.com/index/deployment-simulation/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 1,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "LifeSciBench: Evaluating LLMs on Expert-Level Tasks in the Life Sciences [pdf]",
+          "url": "https://cdn.openai.com/pdf/b4299379-0a97-4ffa-8b9b-c3fbb299caa9/lifescibench_preprint.pdf",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 1,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "LifeSciBench",
+          "url": "https://openai.com/index/introducing-life-sci-bench/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 3,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Using AI to improve a challenging reaction in medicinal chemistry",
+          "url": "https://openai.com/index/ai-chemist-improves-reaction/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 58,
+          "hn_comments": 20,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Flexible Rate Limit Resets for Codex (bank rate limit resets)",
+          "url": "https://community.openai.com/t/flexible-rate-limit-resets-for-codex-and-a-method-to-get-a-reset/1383470",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 3,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Predicting model behavior before release by simulating deployment",
+          "url": "https://openai.com/index/deployment-simulation/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 3,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Codex Is Down",
+          "url": "https://status.openai.com/incidents/01KV7ZT644J4V94GSXMFPY2ANR",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 6,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "OpenAI",
+          "title": "Generative Models (2016)",
+          "url": "https://openai.com/index/generative-models/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 1,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
         {
           "entity": "OpenAI",
           "title": "OpenAI requires face scan to use o3 (June 2025)",
@@ -378,126 +398,6 @@
           "hn_points": 3,
           "hn_comments": 0,
           "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Built to benefit everyone: our plan",
-          "url": "https://openai.com/index/built-to-benefit-everyone-our-plan/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Codex for every role, tool, and workflow",
-          "url": "https://openai.com/index/codex-for-every-role-tool-workflow/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 1,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Codex for open source",
-          "url": "https://openai.com/form/codex-for-oss/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 274,
-          "hn_comments": 117,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "OpenAI's June 2026 Report on Malicious Uses of AI [pdf]",
-          "url": "https://cdn.openai.com/pdf/96b559fa-c165-4575-805d-e636909e2f78/June-2026-Threat-Report.pdf",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 20,
-          "hn_comments": 4,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "OpenAI to acquire Ona to expand Codex",
-          "url": "https://openai.com/index/openai-to-acquire-ona/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 46,
-          "hn_comments": 6,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "OpenAI C2PA Policy",
-          "url": "https://help.openai.com/en/articles/8912793-c2pa-and-synthid-in-openai-generated-images",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "PRC-linked influence operations are targeting AI debates in the US",
-          "url": "https://openai.com/index/prc-linked-influence-operations-ai-debates/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 19,
-          "hn_comments": 15,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Getting Started with OpenAI Models on Amazon Bedrock",
-          "url": "https://developers.openai.com/cookbook/examples/partners/aws/openai_models_with_amazon_bedrock",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Macro Evals for Agentic Systems",
-          "url": "https://developers.openai.com/cookbook/examples/partners/macro_evals_for_agentic_systems/macro_evals_for_agentic_systems",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Building an AI-Native Engineering Team",
-          "url": "https://developers.openai.com/codex/guides/build-ai-native-engineering-team",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Built to benefit everyone: our plan",
-          "url": "https://openai.com/index/built-to-benefit-everyone-our-plan/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 1,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Built to benefit everyone: our plan By Sam Altman and Jakub Pachocki",
-          "url": "https://openai.com/index/built-to-benefit-everyone-our-plan/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 1,
-          "reddit_score": 0
         }
       ]
     },
@@ -505,63 +405,148 @@
       "entity": "Google DeepMind",
       "headlines": [
         {
-          "title": "Investing in multi-agent AI safety research - Google DeepMind",
-          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB6ZTIyTWFiOG9PQmJKR0FIVHJ6WlNuMEZFTmFGM2hSb3Vyb3F5N0VmckU5clpMSmFKN1RMYmJPdjctckRseFpwZ2YxeDJmc0Npb0FqcWFLNk1Ma2g5UW1mM2hzUW1IN2NVWU95SmJWRDQ2bDVRdTRvWV8wZG9ZQQ?oc=5",
+          "title": "How we’re securing internal systems against increasingly capable and imperfectly aligned AI - Google DeepMind",
+          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbVhyR04tNjU3OFI5RHI4TWVqQjVxeUQ5OTVTSHkybWpPc3UwRkhWVnRfRkFSTUZEREhadFE0TWpkZnFYMGJFR1BsVGJhaXQwSkw3eDhPR1lYM1lRX2doTS1rajFzQXV3eXVBWS1IQQ?oc=5",
           "source": "Google DeepMind",
-          "published": "Thu, 11 Jun 2026 11:17:28 GMT"
+          "published": "Thu, 18 Jun 2026 13:01:46 GMT"
         },
         {
-          "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate - blog.google",
-          "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQYmE4REJXdHJpTzA0SVhCY3NMeTZTdGlGeVMtQUYtMFR4WnNKMWp2ZzM4Zi10UTREdGd3dzJ4X1dKN2hIWVZObkw4ZkdQX2tVdnMwRERfU0g3WG9kcGJNNUlmaDhzVER4VE9QQkJENXI2N0NhcnVCNFlpcEViNloyWG83UGlCdDFFaGt2bV9zLTdSZHBSUEUxb2xzeXE4SnM?oc=5",
+          "title": "Google Gemini co-lead Noam Shazeer leaves for OpenAI - CNBC",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNOFk4aXNWVHM1WGRKVjh5a0t6NVQ0bkVrazFyRmZtbTB1cHZrazJMVHV4ZTNHWHc0NVdvb2NMRl9UNG15MDlxblVjVkl2NzJ3SHhkMy02Nk1oMGFrLURGMmNtVzdFQjlMNkdRYWxkRGJtaXJMQW85eF9VRjdOckJvWUQyWXV2NFVDNTVGNy1pVktnUEXSAZgBQVVfeXFMTlo0bGE0T0JyeEJTMVltX3RVdHBFYlB6VGVaSlpHRkdReGs2aHc4eHBvQ2lBb19BNlNSakV2ZmZsMndkcDdBQkRyT2NHNk5fa0E5VDdzSXFHLXZid0cyZUFuRHNKNXozNVFyb3BEcE1nQW5MVVB0aU5rVmE5ZVhXWjhHUDRLQjdSRDdBSFRfb3VPVldESE5qVVQ?oc=5",
+          "source": "CNBC",
+          "published": "Thu, 18 Jun 2026 03:21:00 GMT"
+        },
+        {
+          "title": "How Target is Shaping Shopping Experiences in Conversational AI - Target",
+          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE13MDZCM3VvN2NwZHR2T005ZF91OTQtUm9FcXRxN3V5a1BBVlZaRnJsMGFMd1poNlRvSXBNZUozVFpjMkFWd0p1ZzF4RF9DOVhqbXlfd2piczE5NTl5MC1ZelFwdzBuVkhaTEE1S2NCbk9wN1g5Z1UyeHpJbw?oc=5",
+          "source": "Target",
+          "published": "Thu, 18 Jun 2026 11:00:00 GMT"
+        },
+        {
+          "title": "Meet the new Google Home Speaker, built for Gemini - blog.google",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmNNMTByMGR2azV3SE5FR0RJVzRQTnB2VWtoSS1kWHh0dXJ0MkFycWZxNjhlZ1E2UFlKX252ei1SenoxX0lKdVMyT0tqQ2RHS0dMdEVQbVdWVEN4aU5zSHVfbjhkVS10MlNVeVd1QmY3TnhwR1RLcF96NmdQbWtsWUtNWHNFNWU3Y0pONWp0SnFvQ3VWYV9MUHVVSV9DZ1N3?oc=5",
           "source": "blog.google",
-          "published": "Tue, 09 Jun 2026 15:15:10 GMT"
+          "published": "Wed, 17 Jun 2026 13:03:48 GMT"
         },
         {
-          "title": "Google DeepMind is worried about what happens when millions of agents start to interact - MIT Technology Review",
-          "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxORHBFZElKbGtTUF8tWlA4Vk80R3AzOG9ISWxOQUgwQVRxQi13S0t2UFdtb1hqM05nd1ZDV0lHRnBQamo4NzJqRG1ucmQwcS1BZ1BFa1JKLVgxN3dnTXZkbW5Bb3RqMTdtNTNPTXVya1ZTdmJRTUVvRXVwM0xmNzVNWDR3Y3g0UHh1MUdYMXVmTl9tcFJIMmtqWEpZU0E3UGNMMGw5QlY2TW5scnVEanphYWlfVVNKSmpYY1VtLTB6U0xXc3ZfakcxVTQ5R2sydTFlMUVCWElkNNIB3AFBVV95cUxPTGVXZHA1LUl0bHVoWGJEcTB6RFQ1LUIyYmYyaDZTR2JnTFJOZG9iVDRHczljMHVybzdXWjFYaE1faW14UE5FRUFwbGZ2TEhEZFVSQlpOU2FFdnFBN1VnWS12VkNiVGtabkw0V2Fua3psWjhRWnZGdG5Qd19PQk5ybG5KRzd2TUo1dnpWU1ZZeERJYzNxQXMwak5oSnc4LUxnX01oS1BXMkNsZ0R0bmxTcWZHSVhRS3NoU3dzeFhjZlplNEd1TzFtVzN3Qk1VYjFOaXRSWGliZURkYlFw?oc=5",
-          "source": "MIT Technology Review",
-          "published": "Thu, 11 Jun 2026 11:00:45 GMT"
+          "title": "Google DeepMind unveils a plan to protect itself from its own rogue AI agents - Fortune",
+          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTy10VmVENVdzSG00VjRXOUxLSHhWNkwzU2JmMGtybzNRdTY4MXE3R0tfV2JLcEZfM05va21rLWV6RWFKQVZzc3V5enFNWTBQNHY3c2JnbVB3c2lidmkxcVhjVU03QUs1em9Hc2tYbG9SZHJNOWhWd044cVY0SFU0S2FfNXB4NDVHUWxvU1FtQUVKX2RCekc0ZlVTaXllR3BjM3UwOHhBeFV0S3c?oc=5",
+          "source": "Fortune",
+          "published": "Thu, 18 Jun 2026 13:00:00 GMT"
         },
         {
-          "title": "20 Incredibly Useful Things You Didn’t Know Google’s Gemini AI Could Do - inc.com",
-          "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQcTJGV3dUQ2NWNTJPVU12bGxXNjhRcWNiM1NRZnlDdWFaV3haOG5mb2hoZUd3MUlfVUM5OU1KeFBVQWU0b3RCc0sxMm0zcWl0MjIzVDRHckNhRmt5aFBDM2J2RmlhTTR4SWx2WENqZGpqM28wQWFGM1VURWlLTVY4THZ3b0xJbUloME5yd1lFMkdCUUtPeXRGdjBsT3JMU25tQ3JJ?oc=5",
-          "source": "inc.com",
-          "published": "Tue, 09 Jun 2026 12:47:30 GMT"
+          "title": "Google bets on Gemini to reinvent the smart home speaker - TechCrunch",
+          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5",
+          "source": "TechCrunch",
+          "published": "Wed, 17 Jun 2026 16:30:09 GMT"
         },
         {
-          "title": "Artificial Intelligence Sneaks Into the World Cup Thanks to Google Gemini - WIRED",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNTXM5QzJBWEJPZHV0RXQtcEVQd3IwazJoOWhlY1lpNWxYVEt5N2FvWTNBUUR4RWpFbkp1b3Z1bzZBdU5INjA4Z2pSRk8xRnB4YVEzclZFV1g0cE5kLXRyNXJJUGZ5S3BJWEhDOTVqcmpwd0h2YndzM0t6VlUzOXRVd0RDNTVuOFVvVmpSY2ZzSTNqcEd4U3h5VTFJMFpPVl9OUzN4Rg?oc=5",
+          "title": "US scientist John Jumper to leave Google DeepMind for Anthropic - Reuters",
+          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQWlJJNjNtbk1wb0l5aXZZNzMwOHNJNnFnam1NTWY0dFFES1o0VG15ZDVuYTB1dGs4dlQtUnp6RWM2U19kcVRZOHJ3NEh3RTk1clIta3hQX0pKampSdHo5bnNrNmhoWUJtbEswamhoOXVxRXNOdnRKM2pVeUZjN3gtWVZZN0JWbXAxcHZMYUNSRUlVR1g1UmFtaHRleUJKNXNmOEhmQkhR?oc=5",
+          "source": "Reuters",
+          "published": "Fri, 19 Jun 2026 22:12:38 GMT"
+        },
+        {
+          "title": "The Gemini-Powered Google Home Speaker Is Finally Here - WIRED",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZjZhek53V1dqMkRsTEZEQmUzTUh6dTR4TkVRbFlUUEFWQ0tfNzlaaFBZMTk4OHZ2bmRZUXR3ODk0a21wYW5pS0haQ3RPXzVRZmFZNldXMGVkcEN4SnlpVmwzdFZZVk1OWEhCcWFXVndhcFVuNDNFZnhIZk91YjIxN0hJeWZ1LXdLUWQ4?oc=5",
           "source": "WIRED",
-          "published": "Wed, 10 Jun 2026 10:00:00 GMT"
-        },
-        {
-          "title": "Google announces Gemini 3.5 Live Translate for instant voice-to-voice translation - Ars Technica",
-          "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQMUh5bjBGalp5Q0stWTlpeUZCa1RqQm1MRUxjR1dPcWs3ck5ZMWRveE9NbUxFSlFzTE5wQWlvRU91NFZmVlFLdDAza0RyVHdsdVBrbUFsYXY3TmZoYmoxLXoyWElKTjF6X2VaOGhwaWNkRHEtUzNrZ2tnOHJ4TnBnbXJ1dmE5Z1ZoMWVwQ0Z1YUlmbU1pemN0bTVEQ1VaTkd0NHo1Tmw2dy1OWVhJcEZsRE1fTVZhLTFi?oc=5",
-          "source": "Ars Technica",
-          "published": "Tue, 09 Jun 2026 18:57:25 GMT"
-        },
-        {
-          "title": "Siri AI is powered by Gemini models, but is not Gemini – what does that mean? - 9to5Mac",
-          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxObTlGQ044SjlnSG9adEpPRzkxTXk5aGJnSzFKbnhBbjhNSDZ3MkVkMEVwdXpuSXB4bEx6QmMzcFRvc3hvOTdRNDYxOEJCYThqby0xLUVYcy14SzREa1RtTDVlRTBqQnFtZnpMTm5haW5HWkhaUWV2RWxCRDQ5cUZITWxRUV9pdWFWcXVTSVlpbVFtekZvNkNCeWVmeERMeENCc3o2bk5kZGE?oc=5",
-          "source": "9to5Mac",
-          "published": "Thu, 11 Jun 2026 12:11:00 GMT"
-        },
-        {
-          "title": "Why I’m leaving Copilot for Gemini - Computerworld",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOZkVvV0lOV25GOF82OTBUUHVVOFVMQkx6UkNhM24wbFZCdV8zRTRSRkhOSVdicTRZMVgwcFBPbU5INF93ZVFPUnlsQVhUQ2RuUmZyeHY0U0g3QUw1d0VOSldDcjlHMHdYUnBsUVhrZzlrb2NnMjVMQnBaS2tLd3FPSGI3a0ZhdnJNSndWNQ?oc=5",
-          "source": "Computerworld",
-          "published": "Wed, 10 Jun 2026 11:23:32 GMT"
+          "published": "Wed, 17 Jun 2026 13:00:00 GMT"
         }
       ],
       "stories": [
         {
           "entity": "Google DeepMind",
-          "title": "DiffusionGemma",
-          "url": "https://deepmind.google/models/gemma/diffusiongemma/",
+          "title": "Securing the Future of AI Agents",
+          "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 14,
+          "hn_comments": 4,
+          "reddit_score": 0
+        },
+        {
+          "entity": "Google DeepMind",
+          "title": "From AGI to ASI",
+          "url": "https://deepmind.google/research/publications/239142/",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 5,
+          "hn_comments": 2,
+          "reddit_score": 0
+        }
+      ]
+    },
+    {
+      "entity": "xAI",
+      "headlines": [
+        {
+          "title": "Grok Imagine Video 1.5 - xAI",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5pcjI5WlFfWUlkbWttZHJsVGJCNEI1RldHWWtMeGprRVJ6VXFkUzItTzVOamJGVWliZ2RmWWJReDk4ZEtZNWRua1Z3N3JsZkZ1emc?oc=5",
+          "source": "xAI",
+          "published": "Wed, 17 Jun 2026 02:55:32 GMT"
+        },
+        {
+          "title": "Trump Administration Attempts Massive Power Grab in Defense of Musk’s xAI - Earthjustice",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPMjdQN0ZUdnUtM2xKQ1Fmd0liRjZNU3FyXzNXUGsxa1VLMlJEUXQ3dWlaZXpuanV2RF95czZDdFlVakloNXJBYlFYZFotNDhvTTBhT1BQZVlZR05DS21GbXFPb2Y3S1piZU83NjJheXV5VDlZVkhiTVNCR0YzdnZiamFCUEYwSy0wNTdOVjJqU0lZbnY5UThCM2lvbHYxVU9lcENvVGppT01Nbi1h?oc=5",
+          "source": "Earthjustice",
+          "published": "Tue, 16 Jun 2026 16:58:30 GMT"
+        },
+        {
+          "title": "DOJ intervenes on behalf of xAI in data center gas turbine lawsuit - Utility Dive",
+          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPcHhFZElmVW5SSnhpcVZsd2Q1QmNpcGJTc1YwQ0YtOXE3UVp1ODRqNXY5TWxrdVFQaFBfSUFydGU4bzJsaVNpd24xSFFsU1VuM1lvbWVBVHZ6a3Q3LU0td1VvWFdsR1JubE5rNDhidkVDaGt6eWEzRkJ4SjJsNnZRVmI5ZVZhMHR0NzJ3SFV4TzhvbTg1bVE?oc=5",
+          "source": "Utility Dive",
+          "published": "Thu, 18 Jun 2026 15:38:29 GMT"
+        },
+        {
+          "title": "Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer",
+          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5",
+          "source": "The Ringer",
+          "published": "Wed, 17 Jun 2026 10:30:00 GMT"
+        },
+        {
+          "title": "Godfather of AI blasts Musk's xAI as 'failure,' says labs are risking a 'big bubble explosion' - CNBC",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQZ0xtN2k3bkpySVpWLWlMQVBIWWcwdWE5eXlMWE9IbGUxekRtVjBXblN0dXZKOWFOeDd1MmJfalhOR01VWGJma1JOZVZIa1VRNlBNeFgxREFxLVRHdm5QX0REd1JVamo5Q0Z2ZEZ1S0tFT1FFWXNMRHZwZEJsaEVTZm1rcmd5aGg0STM2QllTc2hJOTTSAZgBQVVfeXFMUHRzdl9sS0JnNlVScnNPV2NVUHVud1o1QmVqRDd2OXdQZTBuWF8yMFJRVTIwTWpqSTBXS0lnNFh0MUcwaVVvaHN6QkRPZE5OaW9DR254cWRDYl82ZThGWTV2UnpBR1lLZVVJYTlEamdyVmlJRlI5M1A2ZzZiQTNMb2ZyeUlmcEFFdWV6SkdSTkFnb0FWWlZzWkg?oc=5",
+          "source": "CNBC",
+          "published": "Thu, 18 Jun 2026 11:11:11 GMT"
+        },
+        {
+          "title": "DOJ Defends Musk’s xAI in Data-Center Pollution Lawsuit - WSJ",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPazJvUmd5b0UtelEtNnR4SG94SlZvWDJKWmQ0QllNZE9kcVhkenpYRXpjaGE0di1JUTczMEZDWVdkcGo1b0hreWhMREhLUmRkRUFmOUdrUnRtNDRqQTgyYVdubms0TVRYd1BqdFI3cjMwcnZ3TC14Z2ZIejRvRnI1RTNvbzgtbmFuUzB4bFhFTTdodkY1U2dtTlBHZkZSMThqdTlhOHFuVVpoTWhH?oc=5",
+          "source": "WSJ",
+          "published": "Wed, 17 Jun 2026 16:35:00 GMT"
+        },
+        {
+          "title": "Musk’s Grok AI tool helped guide US strikes on Iran, legal briefing shows - The Times of Israel",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbVN4S0cyYzhsS0NmSFFfUWRlT2RiM2ZXazNaRGgtLU5UMjBDQ2VpNWpXdXQ3bUpyOG9nODFqWEZTTGdYelhMdTBNVHhad3NHbG90amRZU3pUUmp1R1FoQ0h0c04weVRDWGNTZ0dySEt5dTZGOHBVYVU4MGk0WHlON0wtNGRjMm9oUklkZlhuMEpNb2FrVEh5NFNmcmVPT2RmMmFNcNIBqgFBVV95cUxQblRHQWFxYm80YXh6dEVFaC1NRVQ3d0c2WXE4UUVoQUp4eEstRHJ2dTVIb3NXcGI3MlVfM1RoOEI5RlJScmRoeXhmWi1rWTFoMlFwUmd3eHFxNk5Pb0dhankwYTM5Q3BtUGNxR1FhSlRXNFQ5YkhrME1iTnJrRnNsaXhjTkQwMFFyOG9DQ0RnOUphbk1oT2JrQ3NRdlE0NUNLbmczOXNYdmpjUQ?oc=5",
+          "source": "The Times of Israel",
+          "published": "Wed, 17 Jun 2026 07:28:00 GMT"
+        },
+        {
+          "title": "Top analyst: 71% of SpaceX’s $2 trillion value rests on AI. Grok’s numbers are ‘almost comical’ by comparison - Fortune",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUEhrQ1VuaEc5VENjNEh5a0NmVEhpdTRzS2l2LThfVzgxQlROUlc0VTYyWVJkRm5mWWFJT1doSldQbmhDUHZlTGFqQTJUN2pQU2ZjQXhaZm0zVDM0OXNZall0UU1EZDhOTUVXVldQQ2MxRHM2U1lSVUhvRU53SE1jQldQeHFIRjB1WE5QUmd3OA?oc=5",
+          "source": "Fortune",
+          "published": "Mon, 15 Jun 2026 19:58:00 GMT"
+        }
+      ],
+      "stories": [
+        {
+          "entity": "xAI",
+          "title": "Grok Imagine Video 1.5",
+          "url": "https://x.ai/news/grok-imagine-video-1-5",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 5,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
+        {
+          "entity": "xAI",
+          "title": "Grok models are now available via Amazon Bedrock",
+          "url": "https://x.ai/news/grok-amazon-bedrock",
           "source": "hackernews",
           "published": null,
           "hn_points": 3,
-          "hn_comments": 1,
+          "hn_comments": 0,
           "reddit_score": 0
         }
       ]
@@ -570,52 +555,52 @@
       "entity": "SpaceX",
       "headlines": [
         {
-          "title": "Exclusive | Mining Tycoon Gina Rinehart Buys Over $1 Billion SpaceX Stake - WSJ",
-          "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQTVpyeVhBYXJ6SmVFLU9XNk5QWU5zY1hFaFdkYVRzVzVrT0tlczI1a1ByMnpjbU5nMnQ4YThFLUpsTmc0cVZBWlgwdGc3XzdoRkhCcGxLdlF2NDBTM1FuUU1Qb2ZpaVdXWjM3VUtnZEtwZFp6bGs1ZUlfc3VKWFhjQW5JZ0VwTFBHeS05dDNXQWVpNFlZUGFrTmR2akQzRUk?oc=5",
-          "source": "WSJ",
-          "published": "Mon, 15 Jun 2026 09:02:00 GMT"
+          "title": "Bluebird 8-10 Mission - SpaceX",
+          "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE83US1jV3pyVko3RTVxOFdqQWowMG5kT1FRVGFTRmpZeWxyRXNub3JsODEyalViajVsbDI4YV9Jc1M5X2pZRExya2habHgxRmVMVkNMV2RKdw?oc=5",
+          "source": "SpaceX",
+          "published": "Wed, 17 Jun 2026 07:00:00 GMT"
         },
         {
-          "title": "SpaceX stock soars in debut and makes Elon Musk the first trillionaire - AP News",
-          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxORjJYREd6U2x6SkRDTmgxdkV6b2dUSVo4c0t0NzJFeVA2czRKT0F2dXdTc0hLQkNDLXRxUVRHbnMwS0NtVmtOd3dqM3ZBQUpOYktVZzY1SEFSd2p4WG4xN3RpdVJDSmVqeTlQVDN4SHBFVzU1Um1pU1NsMFNFNnJfa2FaRE9zSFhNbDk0SDN2UllsUUpqWGd3Wm9hMkppYXJBRjg3dDl4Tk9fRklUWVBGWnJTcV9OZ0JSZEd5Qw?oc=5",
-          "source": "AP News",
-          "published": "Fri, 12 Jun 2026 22:57:00 GMT"
+          "title": "Before SpaceX IPO, Investors in China Secretly Acquired Stakes - ProPublica",
+          "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNVHU0WFBmb0NMOUVwZ0ZxcDV0Ukoybzdsb0Foa2dLZklHYjllWkUxbk5VTGlyYVJySHV0cDN2LTloNWdyT09ELW8zLUdGdExoQTdwbFNvZUV0WTFVWXFJbkMzYkF3Qk0xOXdVb2RSczgtM3hyWFFVb2pwWHNnUk16UlUxSWpwZw?oc=5",
+          "source": "ProPublica",
+          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
         },
         {
-          "title": "SpaceX blasts off with a record-breaking $75 billion IPO - NPR",
-          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5fdzBHc2d3M1ptX0lfanhhZEZiLXF0WTlSTHY3bDhsVGlNMnNDV0htTHVwaVJiZnRlY1JPeXdJbkd3TWhaQjJYTl95T1VTN2Y4LUc5aGVjTl9jbDAwbzQ3RFFkdGlsNXpLa3VtT0VTb3F5bXVhcjFod2FVRQ?oc=5",
-          "source": "NPR",
-          "published": "Thu, 11 Jun 2026 09:00:00 GMT"
-        },
-        {
-          "title": "Letter to the London Stock Exchange Group and FTSE Russell Re: SpaceX - NYC.gov",
-          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNeFZDWDNGZEEyMWk0MVIydTVBRkhKVE5tMTVNZnZlVjdkNzgwUGpSVDk0TGlCUHNXaFI2ME5SaXdNOFlCV3RkaHNIdDA3dUxLNFVIVERrRHpaTzRPaWJfazlpOEdweEw3SzdBX0hPSDkwOUV0SXBQSDZGNDZpcXpET3cyWHVOdE5sSWtCZFg0NEVGd2JvYnpBQ1NxQlVxMU5IVzFpaFpzVGY?oc=5",
-          "source": "NYC.gov",
-          "published": "Thu, 11 Jun 2026 18:57:36 GMT"
-        },
-        {
-          "title": "Opinion | How to Kick SpaceX Out of Your 401(k) - The New York Times",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5RWnByYTlyN0xCd3JUOFJiS3VSZk53M3YxMm1mTnk3R2JNS3h2VXRmcHpUY0tjaW9wNWo0UFJNM0VHY0VyVWY4ZzR3ZGtrSC1jTjl2dFVRenY1a2pLZlVlSERZSmJYQWtad0JhSnRWXzVTNFp5cFE?oc=5",
-          "source": "The New York Times",
-          "published": "Sat, 13 Jun 2026 11:00:10 GMT"
-        },
-        {
-          "title": "SpaceX shares rise nearly 20% in historic IPO - SpaceNews",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE95OFBkOE00LUxGOHc5b0pfLXltRnh1eVhDOGM2SjdPSDVIbXVoajlueE9WMWJ1TEN1TG1ZMEVOUWEzTUUyeEJPMURfcjFDaHZWUkE2cVJWVDNtRW5PWlFySFNzR0NjRERRNDVnbmhLSzF0SDRhdVE?oc=5",
-          "source": "SpaceNews",
-          "published": "Fri, 12 Jun 2026 21:06:39 GMT"
-        },
-        {
-          "title": "SpaceX raising $75 billion in record-setting IPO as Nasdaq debut awaits - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQLXRDZWs5RmhLbDJrVml0bTFWUnJyWjNZU19HdjJjSTFMM3pNOVh5amlURERwSXJmTmJwcnlaMnlNQ2I3UVdCVjdMcU11a0lMS1JrZ1JSZko3cEtNQVBCTjVueFZqdkpoaTEyMmhDcWdxT3hsTHFWeTF0RkNRb0lKZ3JYNzREbkZ4a1hVbTlpckUwaHdONXJkOE1BTnJhR3lwU2FZSUg4SnLSAa4BQVVfeXFMUGp5am45NVlaYzlpMzV6ejI2aDJLOUhMblRHZkF3OW9ZSG02X1BWd1pIcGgyMFZJaU5meVVVLVNSSnVsTGJ6Q0RBYktpakFKUTdxWTE1VUdYUXNyR1E2Y3BZLU1VV2Y0NVRreGFET2Q4VGFrZWlLaUc1TXZRSGhrWUFLd0ZOQ2VEbm5DM1FSbXJxcGlVaFZISnFHREgySDh2d3BqbWg2X1c3NGRSWnBB?oc=5",
+          "title": "The riskiest SpaceX stock trade of all had a big first week - CNBC",
+          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBRMFpFeENNVHlmdFRFSG40ZWo1dnZMbktNaFFaaTFlbklTWnRhWVdXTm5ERURKdHJVRjBkQ1p5dXZ3N0JYYUNaRHotdmJmbEFTSHJqV3RnWmloelVMNVBZbDl3cmpVaHdmZF9nMUgwSk_SAXZBVV95cUxPWlhDNzU5S0VfQkRiUUhGd25Ha3FiMWF1TW9WeXRJdlFORWN1eTloWVktZVhnQkdwVnZwS0dsbF80aU5fOERIV3YtNHJLOGUzZmtmRkVSSTJKdjZwTDlBWEQzanBRYzJNR001cVhPSFVxVm1NS2pn?oc=5",
           "source": "CNBC",
-          "published": "Thu, 11 Jun 2026 23:35:43 GMT"
+          "published": "Fri, 19 Jun 2026 15:31:43 GMT"
         },
         {
-          "title": "The bull and bear cases for SpaceX - Axios",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5zckVpNkEtZUNOdWN4RFdmQ2J4VzZMOTVUZ2NyOUJ0SGFuWWdENDNEWnRTU1R3c3dzYmJUV3dOUUFFeVREUG1MUG9aWkJPZ0pMSHVmTW9vNzNreU9mR0NvcURmQ1VIMnFQTVM1ak13MDg?oc=5",
+          "title": "SpaceX launches its first Falcon 9 rocket since Nasdaq debut - Spaceflight Now",
+          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOWHZNYlhZc01MV2RqUWsxOHk5bm5PUzJoZEROTFNob2FmWWQ0ZldJSnBOZFVTSE00ZWV2akNxclRrZFVXZDBYMWpOXzR2eExjYXlvS1pIWFNzY1JLMWZlQm9NWURBSEVWMXNDeENYSzFoYTlsWHlwYmVPdS1YUURQSVV2ejlhN19SNTgwa18zbmNmN3Y1WUFiNjVMbk1JZnpaQzNKaWNMRmtoS0xTbHpYZC16cWM?oc=5",
+          "source": "Spaceflight Now",
+          "published": "Sun, 14 Jun 2026 23:30:11 GMT"
+        },
+        {
+          "title": "Elon Musk Becomes World’s First Trillionaire on SpaceX’s First Day of Trading - The New York Times",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBZcWVuUGwzMTNybzJfS1pSQWxFRDByb1JhYzJqQ3lKc0JQd00yNXduRGR6NE4zMm9uT2xPTFFsb3FPd3Fyd2ZLd3RJTS0tNkpjRGNvSE1rLVVTeXU4M2JzU2ZNYmlLTHl5RDAyTURvUzFIbldCRVE5bg?oc=5",
+          "source": "The New York Times",
+          "published": "Mon, 15 Jun 2026 07:00:00 GMT"
+        },
+        {
+          "title": "The $17 billion mistake hidden inside SpaceX’s blockbuster IPO - Fortune",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBBWHF6eWZab3FUemlzWlg2S1lTRXlNWVlTYVRIVnZKRGpkNnFhTWFuS1JVU0J0WWVqMExkX0NyMzlkN1RpcGpXczJtaGxmdDdReW1lSDJTSHhIWEJjNjZ1VkNUVFQ4YzFHbUFjUUlyQjBIVFNaNndfWWJ5X0ZoTjQ?oc=5",
+          "source": "Fortune",
+          "published": "Fri, 19 Jun 2026 07:00:00 GMT"
+        },
+        {
+          "title": "SpaceX is public: Everything you need to know post-IPO - TechCrunch",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPMEY5QlVycHRia0FUdUtnOFkzei1zbzJoc2Fpd0tuY0hZanluR0dtVjc3OTNpVGVnNEN5WmNlamlIZDJtSU41M1ZrNmE2bE1LMFRkNDJmYl9HZ0lFeU45NzVWNDFzN0dhSFp3NUtmRFpkcnJ6cFYxN3pWdm04SXAtdnk3NEVQWjdVQUZIb2ZnNU5SQQ?oc=5",
+          "source": "TechCrunch",
+          "published": "Tue, 16 Jun 2026 15:53:12 GMT"
+        },
+        {
+          "title": "How SpaceX's arrival impacts the stock market - Axios",
+          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9jM0hlSDgzQnlKQXVpOTJCUElqdGZLRFJpZTBadTNOTUZ4ejMzNG1WaURad19XWVFxYVd5SUZweWNHNGx1T2V5ZkJnSmFZX09Yc1hOS2dTTkgyU1VLN2E5WnM1cEdDNEU?oc=5",
           "source": "Axios",
-          "published": "Tue, 09 Jun 2026 15:23:29 GMT"
+          "published": "Mon, 15 Jun 2026 19:05:04 GMT"
         }
       ],
       "stories": [
@@ -632,120 +617,55 @@
       ]
     },
     {
-      "entity": "xAI",
-      "headlines": [
-        {
-          "title": "Grok's AI image generation tool violated Canadian privacy law, watchdog says - Reuters",
-          "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdHSDJtNEpTMFFyUDJMSzc4Q3NudjNXQmFvSFBFZ01rRW5JaGQteEEwdWVya3ozdU9XS2VENjJIWUVHUGItVHNpTFBsenhKN1lUckp6d2JaVG1FUDNsNU5nRDNPVjdtNDJkdGg0aVQ4bEJUT0QzM1JoZkhESVJ4Z3NndmpKNHh3TmM4T3IxYXdSdnNKSl9BeVBjaDRYZURXR25STmdaeFBfTmt5eWMyZUFrVTBxZkhIeEsxaTJxNnJzTUZDOWV5S1d4alV1Zw?oc=5",
-          "source": "Reuters",
-          "published": "Thu, 11 Jun 2026 15:35:28 GMT"
-        },
-        {
-          "title": "Grok’s sexualized deepfakes violate Canada’s privacy law, watchdog rules - Politico",
-          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1naGUwSmduck14TU16NU5yME5VczFTNktKd2RKTzlLTURpYW5rVEF0QTA3U1ZiTkVIMk0tcWpJckhwWVFzU3c4QnVTSkphemhJcURybENrekxFVnM3cDIxS2E0dmpuQWRkY2RyVUtmNkgyWXh4eTRkRUJUNUc0dw?oc=5",
-          "source": "Politico",
-          "published": "Thu, 11 Jun 2026 16:36:46 GMT"
-        },
-        {
-          "title": "Powering Gopuff's Go agent - xAI",
-          "link": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE0tSFZnQkZQLUljWU8yZXh6NGxib2ZDeHlkWmpXMFM3bGxkVTE5RHpsSWFaUm1uZjY5UUluUUNXRmZXUTg?oc=5",
-          "source": "xAI",
-          "published": "Tue, 09 Jun 2026 16:37:27 GMT"
-        },
-        {
-          "title": "Grok Is Still Hosting Sexualized Deepfakes of Famous Women - WIRED",
-          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPU3B2YThjTnlsT2ZIWlJ6dHVGWFFvNERtdnRkb1pqUW91c180aDdpVXpYNld4TDVhRjczZjNPSG00YWNWWU1mSjBSLVdpcGVYUUN0WEVDUUpWS2ZDeDg4ZGtFTnJVeV8tY01CclYtWmYtQVRHQ1NCdWpqZk9lOUU3UzdxU0Y0Rlp3clIyQ21PRUM?oc=5",
-          "source": "WIRED",
-          "published": "Thu, 11 Jun 2026 19:41:00 GMT"
-        },
-        {
-          "title": "Southaven residents sue Elon Musk’s xAI alleging harm from gas turbines - Mississippi Today",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPalluOHRESlZReHl4SW9uNC1lSnhPNXRiaWJVazhhZFBDcEpTTThaM1FuQlFac213S2RXQUtHOGlxaGxzVDliaXVzdDNWa0NwdlFLYmFhaUM2WUp2STV1aFJDelpGZEtJb011eTJoSlg4TkVPaVhsWDZ0aGE5cE9meDRRQ2NtelE?oc=5",
-          "source": "Mississippi Today",
-          "published": "Tue, 09 Jun 2026 22:04:39 GMT"
-        },
-        {
-          "title": "xAI fired an engineer who raised alarms about Grok safety, new lawsuit claims - TechCrunch",
-          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNRUxlVG1tT2ZVcTBpZ3VHWnB2dnBIbkZoU0V4ekhhS1dHYWFXYUtsajFmSVNCSUh5WHp3TndMMEF6VmNqQlVTaktZZ1dXYl9rOWYtWjBRMW5Oa0Ywa3FJWnlZcU44NlJnSFhMT29yU05qRzRDdm1kRjNjcXplNVBSX2dkVXJ3alZoQ0ZvOG10MHo4U0VMVUx5Z3lLZmxnY05zV0pfTVRtT0Z4SUJ2dnpkeA?oc=5",
-          "source": "TechCrunch",
-          "published": "Wed, 10 Jun 2026 22:31:19 GMT"
-        },
-        {
-          "title": "Musk’s xAI fired engineer for raising concerns about Grok chatbot, lawsuit claims - The Guardian",
-          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQRHlYNnFQeW5OWXJqRDB2Y283UVdLRzdPMHFEUEM4SENCVWhXVUl1bFpxeHFfYzdjQV9WNWIwLWItVjZiZHhaQ0JEMWVUSmUyWkJqbEI2Y1RaYlAwajZxVWV3aFY5R2gyb2dxaDczNEZoR2ZPR0V1QXo4bFB1c2NVS0dBYUN6MUN5RWpwYURSUWlxdw?oc=5",
-          "source": "The Guardian",
-          "published": "Thu, 11 Jun 2026 21:40:00 GMT"
-        },
-        {
-          "title": "Musk’s xAI Taps Starlink Staffer to Run Grok Training Team - Bloomberg.com",
-          "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZUFmam05V3I1UURYaDItbE9maU52cFB6SE1nWVh4Rlo1R0VuZXBhdmlfdkE3cDJkcVpuVXNWb0ZfWGlhdXd5WjJxbmcxNTFiZlpLNUstclREdGx2ekxNa2owbVEyNnlhSGgxaEtCemMwZXFrUWxJVnZWUVg2aG9ETGp1QVBDWnNYMHhRX1FsaVRTWFUtaFhUblMxUUx2VklWeHdBZWVmaHBjelZvcVE?oc=5",
-          "source": "Bloomberg.com",
-          "published": "Tue, 09 Jun 2026 02:02:00 GMT"
-        }
-      ],
-      "stories": [
-        {
-          "entity": "xAI",
-          "title": "Grok Build",
-          "url": "https://docs.x.ai/build/overview",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 1,
-          "reddit_score": 0
-        }
-      ]
-    },
-    {
       "entity": "Meta AI",
       "headlines": [
         {
-          "title": "Will PA participate in the Trump state fair? - Spotlight PA",
-          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOakZna3NNWnd4WTRNWTViekVSek5Bb3JIZUh5RzB5YUJCVno2a3g5ZjJwN0ZJUm1haFZncklycDhHR2JMLXJ6VERRcHVzdlpHTDJUSk1XLTZmV1pjVVplNjVka09KamRHT1NzM0luS0VVeWdwRzFzdVhKdU03WF9WTDZNMmZsdkltbXhTdXY3VEVTNWV1N0kyVkd3VkVnSm9Jam5iTDFNX3U?oc=5",
-          "source": "Spotlight PA",
-          "published": "Thu, 11 Jun 2026 14:50:05 GMT"
+          "title": "What — and who — will be at the Great American State Fair? Here's a primer - NPR",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5",
+          "source": "NPR",
+          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
         },
         {
-          "title": "Oregon, Washington among states declining to participate in Trump’s ‘Great American State Fair’ - Oregon Public Broadcasting - OPB",
-          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQQUNfOUd3NXpQdG1lY3RQazZpRHE3OXdrejZ1eEFGN05QMkIxLVZjaWJJUGVpOFVtcVhGcEl2ajhaN0lnNTc3VnhhN1dfUjh0T0JYQlk3bFpWelhNNjNVR3RXTWlaa1k0XzFpWVJDMzQ4aXB1VUJtbmFGWmtwWUtoNXV6NGdLb0hXZEU0?oc=5",
-          "source": "Oregon Public Broadcasting - OPB",
-          "published": "Fri, 12 Jun 2026 22:18:48 GMT"
+          "title": "Storm damages Omaha Art Fair, destroys 17 booths - WOWT",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5",
+          "source": "WOWT",
+          "published": "Sun, 14 Jun 2026 17:07:00 GMT"
         },
         {
-          "title": "San Diego County Fair kicks off. Here's how to save on tickets - KPBS",
-          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQY0NnQ2M5aVlOT2haVGo4VDhHR2xWZVhDSG9IVTFqbWJLbDJnNGZwRlQwWTlrdzNER0NaT3FzVWRSSUlZME5RYllfcHV1ZDZxdHRrX09GZlhjam4yTmlWVU9lV2Y4LURERDNKR0F4TEhRLU1uR0wtYzRMMmpRZTNNTHlndThhSGlrTW41SWEwWkM1OWpGZVJvTEdyZ1VuRXNndTVHa05nb2paMGRmRGJz?oc=5",
-          "source": "KPBS",
-          "published": "Thu, 11 Jun 2026 15:03:00 GMT"
+          "title": "Massachusetts not participating in Great American State Fair: ‘Just ridiculous,’ Healey says - Boston Herald",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTVNmNVpPamVNX2F5ako4UXc2TGpWdVcyb0dzUUx4b3RpSGt0QmVXeUVBNUtLQzRfNWdzMUd4WEFmX2d0aVpaOXpVTnJCRTFZMklvT3VoanctWXBaVUxabzEyWF91cHFrdS0wajlVcTN2WjA0cE5HRmNzTHVETXJUTFJkTkVLZ3FlbDdzU3NHUmJ0NlNzRFdkRndqQjZFUTFWVFR5MmJCY0lnWHdKRlJTYnctY0xLcG9IVDRFRmhXT1Y2c2xMN2Rkdg?oc=5",
+          "source": "Boston Herald",
+          "published": "Sat, 13 Jun 2026 17:34:15 GMT"
         },
         {
-          "title": "Minnesota State Fair unveils new cookbook looking back at 50 years of blue ribbon winners - MPR News",
-          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQRE9OREJBTmU3V3pYVHpmWVNtZ1Bvc1dXaTRxaC1MckF3WUNFM2F3a3hDU2xZdEttZFVwNGkxeVE1YWFxc1M5dWRESUg3M2hjTmpIVEZPNWMzcVF0OWNtNW1PWG5ZTmJwWDR0SF9CdmFBUFJ2OE12dXhaSFBXc2w2U3dlbkdtQUl4dnRoNXg0OTZhdU1ZYnBXTFVsQVRrM0pjZ2x0N0RWemdkLUoxQlFSdnYwNGg?oc=5",
-          "source": "MPR News",
-          "published": "Wed, 10 Jun 2026 09:00:00 GMT"
-        },
-        {
-          "title": "Sydney Sweeney Talks 'Euphoria' Ending, the OnlyFans Controversy, and Navigating Fame - Vanity Fair",
-          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5qZFFaSkRrTUFKaTRsaWlsYnVJdGlHWTd1UWhhWG93WG5Qci12SGxaWFpMX3E3cU52LTU5Z0p0VTY0NXlfbElQWnZ0LUdjZUF0anhCaDVNLVEtaDhlYTM5VElWQ2x5NmF4TEtPTFpBeU1hcVI5?oc=5",
+          "title": "Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5",
           "source": "Vanity Fair",
-          "published": "Tue, 09 Jun 2026 15:30:12 GMT"
+          "published": "Thu, 18 Jun 2026 13:44:40 GMT"
         },
         {
-          "title": "What to Know About the States Skipping Trump’s ‘Great American State Fair’ - Time Magazine",
-          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOYVVJazdfQmc3OXl5NG9nSmV1V3MzdlJ4X3BQcnByRTRxckczTFQtME56MURoNkM5WFozNWxWZ0txQksxQnk1S1R1cVBqX3BjTHFsOUNoOERMbHVaSXVJZ0k4dnpxc0JRVEpKc2dJSGxFdS1VREdVUEYzTFdUeXAwMHJQaTQwQTJGamx1UWx4Q0NmQ2wtRlZtMEstYlk3NWpoQkJZX2tiOXVPbjNDQmxR?oc=5",
-          "source": "Time Magazine",
-          "published": "Fri, 12 Jun 2026 21:06:59 GMT"
+          "title": "How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review",
+          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5",
+          "source": "Harvard Business Review",
+          "published": "Mon, 15 Jun 2026 12:11:58 GMT"
         },
         {
-          "title": "Connecticut Opts Out Of Freedom 250-Aligned Great American State Fair - CT News Junkie",
-          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPTHdWdDJBbHBKdXA1MVV6RVZRWWprX01GSTg3S1RaWDZRbl92a3IxSFJjc21QUWR4VjcydlM2QTRNNC1OLU5oNVcxdmFFMGt4bExNTm1FcnhsS2JEY1ZCcVFiOC1wajlXZkc1SWszVTlQTFZ4N1VjZ3NhUGo2N1pkUkdJcVQtNElxOXQ3WDZOeXRvU0E3bFJwU0x1NTMwR3JWQXZfMG1OdFZoQQ?oc=5",
-          "source": "CT News Junkie",
-          "published": "Fri, 12 Jun 2026 19:02:05 GMT"
+          "title": "NYS Fair announces funk festival lineup with two major headliners - Syracuse.com",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5",
+          "source": "Syracuse.com",
+          "published": "Mon, 15 Jun 2026 14:11:00 GMT"
         },
         {
-          "title": "NY State Fair concert lineup announced. See who's performing in 2026 - The Journal News | lohud.com",
-          "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOd0R0YzhtdGF5THZraE4ybnpRWmRYaGNlc3lvb3R2LWtvd19vdVhBNWF6b3M1YlhLR3BnN2dQT1pwQWhQMHB4QzRseXctamtWRXZJajhyWlUyTVZ5b1dNVm9jWTVtaGRMMl84T0lMdklLMWVNOUhyQU9qNmc2dlZHc1pBdDlmVXFERkhiVmNrUzhHdHluWG83eXJRN2xta1RORUZz?oc=5",
-          "source": "The Journal News | lohud.com",
-          "published": "Sat, 13 Jun 2026 13:34:12 GMT"
+          "title": "Omaha Art Fair vendors pick up the pieces after destructive storms - KETV",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOZzNYNjR1YkF2TVFqTkFZaEdkMFoxQUZTVnY0VXJQZno0cURfX1MxaXJXWVBhN05CVHRWbzZvVTJMOGRIc3RHZ3lwYnVfb0VKNXZfcGVOd0taQzRMMnNyY0tldmkzdGVPY3dKSm1xS3ZfZDZRd3J1UTFjQVllWFBkVzJxVjlSbHBBYjhjUWc5RQ?oc=5",
+          "source": "KETV",
+          "published": "Sun, 14 Jun 2026 00:07:00 GMT"
+        },
+        {
+          "title": "Philly Fair 250 brings food trucks, trapeze, fireworks to Centennial District, Please Touch Museum - CBS News",
+          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOVnlfbnZHejV6Q0RBbGh6cEctYjhUZGlwY0Q1VFRzbXplNHZaakhRd1dFb1NQU3pabk94N0JBV1M2ZlZyem5UdUtSejhmRGt1bVRzUG4wRXZSVVhCcXNNVnVlNkhfSkllVnBVdUZUQVN5dFoxTEVEN2YwanlnNGxDQW1xWnQ?oc=5",
+          "source": "CBS News",
+          "published": "Thu, 18 Jun 2026 23:17:00 GMT"
         }
       ],
       "stories": []
@@ -754,40 +674,16 @@
       "entity": "Tesla AI",
       "headlines": [
         {
-          "title": "Tesla Optimus Gen 2 Review: Specs, Price, Factory Use [2026] - Robozaps",
-          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1CNmY1S0hqMUk1WVN2S2lOR0dKSWY0WUwwd1NOOVlqcWRNMXpXa1NDU3hQRUFuZWhBSmVtUmlnY1RtU0tycW43OXF5cFZrZWJnZFNEdWtZM2JOZk5uX1ZGSXY4elA?oc=5",
-          "source": "Robozaps",
-          "published": "Wed, 10 Jun 2026 07:00:00 GMT"
+          "title": "Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5",
+          "source": "Not a Tesla App",
+          "published": "Thu, 18 Jun 2026 14:57:51 GMT"
         },
         {
           "title": "What Robotics Experts Think of Tesla’s Optimus Robot - IEEE Spectrum",
-          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9aSVZBc2JNOVZ2aHJQYVNnVjZEbGNBTnRwbENMYzVGdEJfVUNLLUVzSmxtWFZUT2RJd3FtazgzUGxGUjV6NzF4Z2FSaGgtVEhPZGpqLUlxZGxlbjBaa3lscWdnUTBMWTYxMUhzOHI4RU0yelUwa0tqNmdramY?oc=5",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFAzU1ZqWk5OSEFQZHJtV1VtZXo5UGZlejZoSUNORHB1Z1pHX0tfWmhpcEJLeWhoV1B1MXg3SzRRU19XVW9fd05Rdk9DSDRlbGpZcjU4NUI4blhYTG1wSDJBTUNqVUpFSkYyRDdhSFU1MkozekV5dHF2OWFZb1E?oc=5",
           "source": "IEEE Spectrum",
-          "published": "Sun, 14 Jun 2026 17:56:17 GMT"
-        },
-        {
-          "title": "Tesla's Optimus robot ambitions come into focus in Austin - Austin American-Statesman",
-          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPSHQzSzV5VVltc19qa2p6Rnl0aDJjdGctal9DdTZEVERfbmtxbnJHSkNSWF9iOC1NS0MwX0hCYjRjNE9mRE5sdUZEVUFoVDJpNG5qSnI5YkpsUl9oa3RzWnY4SjQ5M1BzR2JIWjVYWEs3WEpNdFpBQ2FLYUhkekFUcVprWERJYWxkV1pyc3g0QjlOamFjcDh3d1V4Yw?oc=5",
-          "source": "Austin American-Statesman",
-          "published": "Thu, 11 Jun 2026 17:20:34 GMT"
-        },
-        {
-          "title": "Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App",
-          "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPMzJjWnRKY3RMV0tUdG1OWkNnTFRqZkttU2pzN2N3WkdBTlFaWERSbGxUMnNJaENTQmNwOWJOYWtnSktzNWNWRktpZWJVWjFWOFgzOEw2UFhkZHFrM2FJMzZSUnNCTWtGWjhZN1JzVHBLME9kX1NSUTV4TXM1ODRLZGs3alRJc1FlZEdlV0VVajVvb2FKdy10RlY3Y3ZGMHFEUFBLVDZnVlNYcWtubUpfdkFsSHAxR2o2NkI0blhR?oc=5",
-          "source": "Not a Tesla App",
-          "published": "Sat, 13 Jun 2026 20:19:33 GMT"
-        },
-        {
-          "title": "Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Benzinga",
-          "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQlNzdUpsSDE3T1ZZQ2JjbEJaYXRhcThia2lxTkxOSnNMcmljMGt5bW5PLWl1MXRuT2dVNlk0UzhZcUdVTlAyVDdNUExKTHV5SHNHNF9kNjQza0RVN0lDZTBjaUhVcXR2WGxMZHFQYUNTNkpUamQ2VFQ5OXVSRTBvVE54M0VGeE9SLXBCVGdFcU40NVhOWG5yb0lUR2pnZTFVTUJTWlRUb3RxM3dyZDVQZEh6YXg1TWExb0I0WXhSc2puUDVpMHFJVEdTTzlNbVhY?oc=5",
-          "source": "Benzinga",
-          "published": "Wed, 10 Jun 2026 11:08:34 GMT"
-        },
-        {
-          "title": "Tesla Is Turning Its Model S Line Into an Optimus Robot Factory：Gen 3 Targets a 2026 Production Start - Tech Times",
-          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPekRjb01yQ2dndzRuQkdQZ3FfZ2RUZXhjX2hwTUtVWVFUdVkySTRkM3pkMzNxc0gzdVNtZ0VuSmd0NldMZ3NtdWhNakRsRE9TdHliamk4QkN3TkVlMGZGMnh5M1ZPWjVFUnVNOWJ4Vlozb2lpdjJOLVlUb0VlQ2o3U0dyM0NLTlhZa0xMaHRscmVGOXg5OGQyUmVLN0hnWVNzcEpiR25Hc0pacGVHYlFrRmJxc0tHanVqN0Z2ZWFPVmczT3ZQVDZCT1p6d0VCbVJkNU9MUE9QcFJZQQ?oc=5",
-          "source": "Tech Times",
-          "published": "Tue, 09 Jun 2026 15:51:01 GMT"
+          "published": "Mon, 15 Jun 2026 10:00:55 GMT"
         },
         {
           "title": "Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance",
@@ -796,10 +692,34 @@
           "published": "Mon, 15 Jun 2026 12:00:57 GMT"
         },
         {
-          "title": "Tesla Optimus Is Working a Shift at the Tesla Diner Today - BASENOR - Tesla Accessories",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQUWdUQWNrUm95d204UVhwbXlRZFRKN0lKSFllTWNDZXVmMHRWdGxkYUg0SzRNalVmNEEycWFvYW9SQUp4WGZ2VXkycDlodmZHLVR3OE1ZS0kxSkNtdV9mcF9BR1VNNFd3TXpUbXNNdHMteDVNTVpvNnBjaUxKaTR3M3RHT3JJeWxLUGpXcHNSY3I3bnFkY3Bv?oc=5",
-          "source": "BASENOR - Tesla Accessories",
-          "published": "Thu, 11 Jun 2026 23:13:58 GMT"
+          "title": "Musk Shares Video Of Tesla's Optimus Robot Performing Household Chores - NDTV",
+          "link": "https://news.google.com/rss/articles/CBMixwJBVV95cUxNMEE5ZkJWNUJfNy14Tmg5aGo0XzZpajBremZPdUU1STJhN1V4YWhSYVFPLXZEYnBiZU93b0lYZm52bnU5c1N2VGdLZWJTM1BKZlNlSFV2cUNldUJxdjNXVjYweHdlUmE5bDkyQkp6Z2xqRDRsei1oZElzTTdaZXZhdmI2QW9ITmN6NXNaSXQ5dnpjU2I5WlRyWXhGTnRMMjFfTWNPT2s0aFBQTXdwU3FoWGZrLW9RT0dUVUliaEs2ZzVWbEpudTlaVUo0Tk5zamhfLTZSaVBGMDVLS29Sby0weVpVbkRLRGFtdUhsUkdFcmZpQ0poNVFyWnNnNVkwcXdick16cTY3ZWpnZ1Q4ZGVjYkJ1NjN2aVVMa3duamFHcVN0eU90ZXRMVS1IQVUtS1FiSmNDaXY1NUZnbUNOamJWV2lSTWVuNDQ?oc=5",
+          "source": "NDTV",
+          "published": "Fri, 19 Jun 2026 02:04:52 GMT"
+        },
+        {
+          "title": "OpenAI Robotics Expansion: Could It Challenge Tesla's Optimus? - News and Statistics - IndexBox",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOeDJJNFppMG5yQmRLSWJIYV9DRnFidGVxTGxLcExuZk5aTGhMcGVvOU1jaUNRY2VrSzZOcURLNkNkTEJfRlZlUmlOOHFvRm9YRTVSZVhERVZpS1prNVVZUWx4MDRvX0RvbnhnQ1UzVDE3aTd3WDY0TGhoLUZJRVpNbFB6Wl9vR2ROUVNiY1hoUWd0VzExQ21KVDdn?oc=5",
+          "source": "IndexBox",
+          "published": "Sun, 14 Jun 2026 12:40:00 GMT"
+        },
+        {
+          "title": "TSLA Stock In Focus: Could Optimus Be The Missing Link Between Tesla And SpaceX? - TradingView",
+          "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRXlQYnB0S1F4S1pJTjdwdHk2RExRM3puMXpXdWZEZWh4TDMtelBUY2pKYlp5S2xsb292c0N2NzNjams3MEJYYTFONXRqSkVTOHIwSXVLOXlPelctaUIya3N0SnFMZjJqdUszWTdRMFpsSVdaQzBHOXBlWFA0dlF4ckt3ZVNZdk05aWdfS2NfeEE0dV93SjhPdnRtUnJtblk5UTdoWVB3RUlDSWlNbkVFbUFaZFlyVDRmd3pURTVpeFJJeExnWlRacF9wV3BsMFQ3OTYxaVZ3?oc=5",
+          "source": "TradingView",
+          "published": "Wed, 17 Jun 2026 09:17:33 GMT"
+        },
+        {
+          "title": "Tesla's AI5 Chip Recently Completed Tape-Out. Here's Why This Could Be the Most Important Development in the Company's Transition From Automaker to AI Giant. - The Globe and Mail",
+          "link": "https://news.google.com/rss/articles/CBMi2AJBVV95cUxPc0dtRkpzdncwMmh5SUROb0RIQUtHXzNiYnhWcWdNS3lydnBBbWlmV3hDTHdzNmJycll1cTBKWnhzM2h4TmtidEdlTmw1QjEtX184RXMtejk0UTZmaXJnVHROTzNWMThuWWZYdmR3TjRPZEl0RVRqVU9IZFRLRTJubFhpd3lHMFNKUGd3N19jR0llUS1VcmxPLXpHUUlUWHBPRzZwU1UtTjBkYzdSU09DcTAwWkI4S3lEZm1pSWRyeG1LVWxvSHd6aGppeXBTNmFSQUREaU5QVzUxYmV1TnlTbVRZSU9uOWd1cFVkeGhQVkpWbldiSDVUSlJ4UnpNNEVDSmN4VnU1RnY1VGh0OUJCR2laeDlpQ0xHMGtoT1ZVVlJZQXVzV01QTXpfNThoVUVMSTBHek45Zzdma2k3TkRvM0RqaVBGcE80ODIzWFZpSm1mcURoczRmeg?oc=5",
+          "source": "The Globe and Mail",
+          "published": "Tue, 16 Jun 2026 22:28:00 GMT"
+        },
+        {
+          "title": "Musk cautions on automation as Tesla’s Optimus nears rollout - MSN",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOZ2RBMFktdGNnME1jSjd4OFl0cVdqWnkxbm1vR0FFSUhJQ09LTlQwVVkyZnliU2kyMzh4cFRZdXVjQ2hvNnlmZnFWZGhzT2Fra0NPTlBsTi1NTXFNU0phMGVkejc0bFpEOUVZdEc5dmhfcmkzb0JnSlZXTTJ5WXRZNFE0bjkwLXU4cGwxZkFwc1hiYjdobUljNVk2eWNMVXlLM2NKd0U0Z0RxN2Fy?oc=5",
+          "source": "MSN",
+          "published": "Fri, 19 Jun 2026 09:27:55 GMT"
         }
       ],
       "stories": []
@@ -808,10 +728,16 @@
       "entity": "Neuralink",
       "headlines": [
         {
-          "title": "Elon Musk claims new 'Jesus-level' brain chip can restore sight to the blind - KTXS",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNcW9JLUtKcTRRYmVmeGlSYkplWVIyNU5uYTVsZXZYTHZuV0dtS08zZEgwWEM4MHBURGp3YkdBMnM2R0dxcmZ5cmxVcVpyS0tZR0w1Mm5oUXdYZ0JLUjRQdHBzaWxsSnNRYmtobXo0NlpBUG9BQWlQUHRDUUVIX2FVam5PSjM4aWFWT2EySXlOVklETFFVNGd5TWM3cnczZDViWXJ6dQ?oc=5",
-          "source": "KTXS",
-          "published": "Tue, 09 Jun 2026 06:33:55 GMT"
+          "title": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5",
+          "source": "KED Global",
+          "published": "Mon, 15 Jun 2026 14:23:00 GMT"
+        },
+        {
+          "title": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider",
+          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
+          "source": "Business Insider",
+          "published": "Wed, 17 Jun 2026 13:00:00 GMT"
         },
         {
           "title": "More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune",
@@ -820,40 +746,34 @@
           "published": "Sat, 13 Jun 2026 14:09:00 GMT"
         },
         {
-          "title": "China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5",
-          "source": "bgr.com",
-          "published": "Sun, 14 Jun 2026 21:17:00 GMT"
-        },
-        {
           "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
           "link": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5",
           "source": "The Times of India",
           "published": "Sun, 14 Jun 2026 06:16:00 GMT"
         },
         {
-          "title": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5",
-          "source": "KED Global",
-          "published": "Mon, 15 Jun 2026 14:23:00 GMT"
+          "title": "Samsung and Neuralink are working on a fourth-generation chip - Root-Nation.com",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQbkFkX29Hd3RfQkcyQXNqNlFwVnBialBGS25BUHJVNEZvcmt3TThxZTctdDZZRHdQMUlmeE9SS2cwOTRjWk1GSS1wSm1qTFkxSmU2V0NuRENaYlBseGhYN01RQTNKQmI2N3Jzbm1QNlZtelhWMWpVQWk4TWJXRlB2TFpkLVdaLWplTkFEMmZVU0M?oc=5",
+          "source": "Root-Nation.com",
+          "published": "Mon, 15 Jun 2026 15:20:48 GMT"
         },
         {
-          "title": "Inside Elon Musk’s AI Ecosystem: How xAI, Tesla, X, Neuralink, and SpaceX Are Converging - TechRepublic",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPb2Q3QXlRbnIwV2FMUDFSQTlENElsVm14bDRkaTlqNjlhTmktTWdBRE5HTEJ4bkRmNGl2Q3FFUElXdHJyUW1xSzdKT0RBd2ZfckdZVWtocEZnNGhRbWU3TGhnUmdia21ZMGtfYTRCOHF3RFpYTUdZTWd6QV9MLXotUHN5RU1yM3pqd051ektqZm41NURrUC1J?oc=5",
-          "source": "TechRepublic",
-          "published": "Fri, 12 Jun 2026 17:50:05 GMT"
+          "title": "Samsung to build Neuralink's next-gen brain chip on 4nm process - MSN",
+          "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcnpwX3FqbFdvYy1rRlBFSjVHdWVIRjl0d3hGeF93S2x6Q1JWLVhQREVsNml6RUhROHJHMFNMYTJaNWVZOFFMR3RFdVV0UWVNdGhCS2Q3MkxVZ1RMbUFLT2xWWGV2NEhReEhDd0d3ZHZkYnpaSnFTMldtOWxtaXROc2EyWjk0MnNLdGlIdEt2WlJ4ZERnNEdycnNsOFRyUGpOcEJWOTZYUkY1RklObUdYMWVXTzg2bTVRMGtablZFbXlRd3dlR1Bua0lWLWItcGRORkJEMVlXX2pKSGNleVJ5azViVlRWNlp5V0t1RDN4X3lhZHZfa3hyag?oc=5",
+          "source": "MSN",
+          "published": "Tue, 16 Jun 2026 03:27:06 GMT"
         },
         {
-          "title": "Samsung said to be making next-generation Neuralink brain chip - SamMobile",
-          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNMUtSRlI1MWZhZzJsbFJycGlJM1ZvbGxtbzhHc3pWUFpqNV9Db191MmpnVzVuS19oRktIUjNjeHhOYjZtbzcydFVIYlBQbW9RU1QyS1NoMnJDY19nV0R0U255a0thRzRUUkJ6cUFCUlFrQTVITGQzYXBIcUF1azU3TkltUDJKLTZkemVrNldB?oc=5",
-          "source": "SamMobile",
-          "published": "Mon, 15 Jun 2026 11:01:00 GMT"
+          "title": "China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com",
+          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5",
+          "source": "bgr.com",
+          "published": "Sun, 14 Jun 2026 21:17:00 GMT"
         },
         {
-          "title": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped - Wccftech",
-          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOSkdIenR1Nk5lSU1BTE9RZkV4YlVSazFHRkxHUVZIUTVieTdvN3ItcG1kTlZQbWJnRXFKdy1YYnh5dkZQMUhUNWJ5QTdyampjZXV5TlhRaDZiMGNDZngzUmJ6ckRBcnlRa3hldE00dmRIUEZrRmRHSGdxMDJUa04zMDhNUnJHU1o2bjF6V0ZobFJ4Y2PSAZgBQVVfeXFMTWFmZjc0Z0ZuSUpQdXU2ekVNV1dNOHV1czRfdmRzVVowVWo3dzRQanZSdkRvcVVjbDF5SjVFSVJYOW83R3hMQ2w3amIyMDNnWEJucWFjbzhzaU9uclp4VXhrYTBCMlZtVXJOS0lYYW5mNGJaUUtMRTZRWC1EZ1pZZEVETmVybmFBLUpLWXY4Z3NxUFJhcE8yQmk?oc=5",
-          "source": "Wccftech",
-          "published": "Mon, 15 Jun 2026 11:55:00 GMT"
+          "title": "Samsung To Manufacture Elon Musk’s Next-Gen Neuralink Brain Chip - Ubergizmo",
+          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBSc3I3MXQycV9TNnFvd2tlQkpVTlBPSEJIQ0FSVGxSM1E2Z200YkhMYnlZNXk3VEIzZnAweV9LWVBlLUw1eEMzLVFrbTZtUW5oZGVkTE1mVWFYNHBURUJqbDFMU1EyS281aXdmT2dBZm9URWhVakx5ZHFEdw?oc=5",
+          "source": "Ubergizmo",
+          "published": "Tue, 16 Jun 2026 10:32:38 GMT"
         }
       ],
       "stories": []
