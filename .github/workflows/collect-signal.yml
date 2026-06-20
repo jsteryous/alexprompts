@@ -11,7 +11,7 @@ on:
     # Saturday 08:00 UTC (4am EDT / 3am EST), one hour ahead of the cloud script
     # routine at 09:00 UTC, so the script is delivered before Alex wakes (~6am ET).
     # Keep this BEFORE the routine so STEP 0 reads fresh signal.
-    - cron: '0 8 * * 6'
+    - cron: '0 5 * * 6'
   workflow_dispatch: # manual trigger from the GitHub UI
 
 permissions:
