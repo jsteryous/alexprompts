@@ -2,7 +2,7 @@
 ======================================================================
 COLLECTED SIGNAL
 ======================================================================
-Collected 2026-06-20 10:29 UTC.
+Collected 2026-06-20 18:26 UTC.
 
 FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
   "Claude Corps" [Anthropic]
@@ -10,7 +10,7 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
   hn_points=163 hn_comments=119 reddit=0
 
 
-### Anthropic  (attention 805, 8 news items)
+### Anthropic  (attention 798, 8 news items)
   - Agentic coding and persistent returns to expertise - Anthropic — Anthropic
     https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lM0p2cGtZWWJ4aE9Ocy05NEU1SXFraWl1V1gwNmxwdGpMWkg3N2Z3WGF6eFFMZXlWMGZEeGZZVGxmcGJyVlBSLXlCUXhma0lWRm1SNllTSVlmNXlTMFEzLTZIMFIwSDA?oc=5
   - Why Anthropic Is Sounding the Alarm on the Next Generation of AI - Council on Foreign Relations — Council on Foreign Relations
@@ -19,10 +19,10 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
     https://news.google.com/rss/articles/CBMirAFBVV95cUxOdHdWR19xN0liMFpabFhzMDMyX2xGbURCS0VfaWRodlZtS2xRVmdmb3JJMDNRQm5aanFvVFpGQmhQZnc5ZVhHNkQ2ZjJtSElScFJmZ2xHclFxRUlnTXdsazdMaHRHaUNEMjMyS1hLOUY1ZHNBLUxiOHBVWHltbDdCb2l0ay04NE5LMnU2T3dsc3RDOHplcFlIUzRSS1FIY1lSZUktRjltOUFKQy1x?oc=5
   - How Powerful is Claude Fable (Mythos) 5 for Coding? - Towards Data Science — Towards Data Science
     https://news.google.com/rss/articles/CBMihwFBVV95cUxQemtmODFpbUd5V0g4OEVaaTItbWxNb3p4VGpFTElNeGVfcG1QV0xNU0lCT0RRd0RUNTBqc1RaZnRoMGdudERzMnBicy1qWE43UEFtaVRXdjRPMHlPdTktbk94cjVKY0ppNUxrMnJ1UnhTMm5Da2ZQVFR3aElENFUwRHU1amxnVmc?oc=5
-  - Introducing Claude Agent for Jira - Atlassian — Atlassian
-    https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5
   - Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs — Endor Labs
     https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5
+  - Introducing Claude Agent for Jira - Atlassian — Atlassian
+    https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5
   - [hackernews hn 163/119] Claude Corps
     https://www.anthropic.com/news/claude-corps
   - [hackernews hn 94/91] Making Claude a Chemist
@@ -32,19 +32,19 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
   - [hackernews hn 8/3] Agentic coding and persistent returns to expertise
     https://www.anthropic.com/research/claude-code-expertise
 
-### OpenAI  (attention 216, 8 news items)
-  - OpenAI deepens Japan footprint with Hitachi deal - Computer Weekly — Computer Weekly
-    https://news.google.com/rss/articles/CBMimgFBVV95cUxQTGlWM2tQMEgzQ0x2bGgyaHlBZ2ZYbG9mV1NtaE9ZeTBrcnpMR2lRNUNBSVlRdVZFSjlZNllfOVVDVml3N1RHZ3NGbWNyeklQWVFEdWVpRUdrNkRQLUNMTEg4UG9OQ0ljVFlZb19UUldoc3YwOE1WRUxCT3RkZEdOeVFZa0dEZ2d5c1dnVFFsc0xnNUQ3ME1ldFZn?oc=5
-  - OpenAI hit with multistate probe into possible user harm as its IPO looms - WSYR — WSYR
-    https://news.google.com/rss/articles/CBMixwFBVV95cUxQWkw0R05mVHU5YTZmYmd0eXQ5cDE3eEE3eG1ya1NsbDdqNWJ2UVp0RGFTZ01sRGZYRFdfTFNvVjFEX1Ezc2VnYkVhUkpQLUtVZXVvWllTek4xVWVSTzRRalNsRHN6Uk9fTlFJQVJodWtSX2dDTHo4X3ZFVklxSl9NWUhiVFdNMTc2SjU1U0VJWnRFQzBiNk92Znl1a29QRjUzRWxEcE5aWWQ4aGhWRUNjOE1GUXdEU2JVeU92czNrdmhQcGF5Yl9R0gHMAUFVX3lxTFBvSm1WQ3JhTmpCU0ZtY0htcjY4aE5oaW9aV3A1SGJaR01vOUVFendtM2d3QnZNS18wcFktQW9WcGtHTDZOSFU2ZVlDN2dkZG9wQllDcTN4Z1lPM1JGcUU1MFdrRkMxckhVZDlxWW1sWXg3TkpzUTAyMXNPVUo4eUhhTGoyLTVEZzZkUGVMSmNwZVNWaG5YaDN2VnBXdlNIbHQwdC04MjBOaXhPb0N2cjlqMFRBVkFvc3p0R2dvLTdCU3B3dFlhTXU3VXlrSw?oc=5
-  - Inside OpenAI's AI Chemist: How GPT-5.4 Improved a Drug-Making Reaction - LinkedIn — LinkedIn
-    https://news.google.com/rss/articles/CBMipwFBVV95cUxQaF9LckFqZjhIb2dyXzJzWFVERTZBUEx4N1NpLVdVOVlyZWpSdGlPVDlNRFdUcTdXZGJhMUg0azRqOEVXeVlKdk1jUFVhUW5zVVA2NnZIbFU0RTJUWlExOHZyUXJqcG85QTlfNTBvdUtxME4wUGpTbGdONzdJMTFGd1puTHBxdDdIT0g0VjdXajgyRmU2YUJFRzc1TlNfRDRDcjJlMkI0SQ?oc=5
-  - Walmart Shares Jump More Than 4% Today After Announcing Partnership With OpenAI Patrick Bruel (27s78xRF4z) - Mshale — Mshale
-    https://news.google.com/rss/articles/CBMiW0FVX3lxTE9pT3hESHJraXUwbGdvWlp4N01MSHVKbU1yZndLdUt2c1dkcHpXUEJic2pIQ1U1RTZNTU9MckVBbXpGdU9xRGFXeFhtQTBBRURaaFRscU9FdlRMeFk?oc=5
-  - Japan’s tech business SoftBank rolls out OpenAI ‘patches’ against cyberattacks - KTALnews.com — KTALnews.com
-    https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQjdZc3ZBOV9GeVRoYXRDUjBNREtqY1Q2V1g2MV9UR28tbjZSSlY4VGY0bnFxZW1OV3VBdzQ0MjZWSEsyVFk5NnZrek90eTVGaTRRWkdWTzVBbkUzMFphOER5ZHJuTWM3MVVZdG01a2RBSjVUU2N3VEpPLWt0b3E1Q2x0azNoMkxNNW9VTFpEMjRCRk1BYlBUb2tLSWN2SlRncTdVRFlLTTV5TGJvc1oyeVJOeUlrMlk1NThN0gHAAUFVX3lxTE9ucXpCcGtLMWJjZEgtVk92V041NExFLVR5VzNUUWJlZmxUNUFfUHA0aXZib3JFa1BQZW9LTWVLcEY5V05mTTFoaG5JSWJ6RVBtQnA5UENocGlDZ0VVdGQzWGlNa0s4c1daUm4xSWVvZFFldlgxQ3FnNkxwODBkQkRlbzhlUFE5ZUtjbHBoZC14aF81b2JvOHR6RWZoZ09QdHE1eUs3dzA5WlBNNWJTNmxBMlphbzM5LUZWeF9Fb25ZVg?oc=5
-  - Japan's tech business SoftBank rolls out OpenAI 'patches' against cyberattacks - Click2Houston — Click2Houston
-    https://news.google.com/rss/articles/CBMiygFBVV95cUxORVFMV2JKQmY3TXdBcGtGdXNTSVoyNVlFOGRqOWEwNVM5aGVnWG1FOXJZcnNZNzNBNzhlOTNNSTNSeW9mVUpHLTZkV0dMY1RmSjU2NzJBQ1R4SFk1M29MdXBkdlFlVmsxYnFFSGpudld1bGUyRFJRY0JBTkI4UEZmaXVTdXN2UGsydkhicHRDNURnbmhZdl9PZkdXU2trbHJ6T3ZicWgzSDFEZXFPM3ZtUElENnFhWTNfRExtS2EwWlQ2NHF4akdueXZ3?oc=5
+### OpenAI  (attention 218, 8 news items)
+  - Improving health intelligence in ChatGPT - OpenAI — OpenAI
+    https://news.google.com/rss/articles/CBMidEFVX3lxTE5vcjB4NGtoanAzaElMUVhXZEZydkl4M3F0Mk96ZWoyRHNGMG1xT0RMeHRwTVFNbG1NVzd1LVVMaWFmQ0NYRWtWYll2Skc3YU43TmlzbS0tRlJVTFB2RDNfV3dSQmgwMkhsZEhaUTMwVXFaZGpi?oc=5
+  - Visa and OpenAI integrate Visa's secure global payment directly into ChatGPT - NPR — NPR
+    https://news.google.com/rss/articles/CBMivAFBVV95cUxONDZuX3ItQ1lKMmlRbEd5VWxlVjZDQXNRdDRybGFWN0N0T3hQSW4zZUxQNWV1clI5VVE1dGhsMHIwNTlmZUFwcklaWFZmNzB5aUduVGJneU9naC1Wb3VoWnpYUG9QdTRmdHZVMXU0dC04NkpGZUtwSHNnWHV4ZzFjcVR6dHdHYkdqWVFKTVpsblR1V0E0aURYeFdISTdlVzJSMlhqUnFqVFJWSHNtc0FreW9fZ1RoUkxMMWgtNQ?oc=5
+  - State Attorneys General Are Investigating OpenAI - The New York Times — The New York Times
+    https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5
+  - Exclusive: Ha Thai departs Meta to lead comms for OpenAI devices - Axios — Axios
+    https://news.google.com/rss/articles/CBMiZkFVX3lxTE1fZjFWVU9UM0w1WjItb1oyOXkwaVhKaUJ2Y0pxNmlXQ0k0OUpoaDNMbWYyYjAxa2Y5bHMtSENrdHhMbXBFZExULW5qeC11VFJaMzlrTlpSWG5fYWRXT3V0eWF1cjRyUQ?oc=5
+  - OpenAI hit with multistate probe into possible user harm as its IPO looms - AP News — AP News
+    https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTDJsQlNzM0JtUFpBTUJkalVSS3htd0ZEUVVsOFhYOGhYbFBkNkV6RkZfcERSWV9ZVngzRUYyN29uUXgycFBrek1ZUllLM3MtVzNCY1BUNXBoXzVWbEYtS2pzTFNBUVFKOXZRWlBCN2VoNkxFa0FSWEVGN18xZmRyM3N1ODNwOERDd0ZFa2ozQTNrM3o1Mjc2M3JRODlxN2t6cWsxOUI1WE5QNWc?oc=5
+  - ChatGPT’s market share slips below 50% for first time - TechCrunch — TechCrunch
+    https://news.google.com/rss/articles/CBMijwFBVV95cUxQRzJUMmlQOUlIWVVXUWJpUTJxem1pb1NNYjR5NG81TDB5WTdfeXhjOUlyZm15eElhOU5rdUJmb3Y2MUZWbUNFV1Y1N1lrRWJZVWpOOHBqNzNlMjRIWndla0NOMWpFckNDTUtGS0RfLUhfNUp4T3dMVFZGenVweU94QmVfUGp3MDZWQ0JjVEpZUQ?oc=5
   - [hackernews hn 58/20] Using AI to improve a challenging reaction in medicinal chemistry
     https://openai.com/index/ai-chemist-improves-reaction/
   - [hackernews hn 3/2] Designing delightful front ends with GPT-5.4
@@ -65,8 +65,8 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
     https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmNNMTByMGR2azV3SE5FR0RJVzRQTnB2VWtoSS1kWHh0dXJ0MkFycWZxNjhlZ1E2UFlKX252ei1SenoxX0lKdVMyT0tqQ2RHS0dMdEVQbVdWVEN4aU5zSHVfbjhkVS10MlNVeVd1QmY3TnhwR1RLcF96NmdQbWtsWUtNWHNFNWU3Y0pONWp0SnFvQ3VWYV9MUHVVSV9DZ1N3?oc=5
   - Google DeepMind unveils a plan to protect itself from its own rogue AI agents - Fortune — Fortune
     https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTy10VmVENVdzSG00VjRXOUxLSHhWNkwzU2JmMGtybzNRdTY4MXE3R0tfV2JLcEZfM05va21rLWV6RWFKQVZzc3V5enFNWTBQNHY3c2JnbVB3c2lidmkxcVhjVU03QUs1em9Hc2tYbG9SZHJNOWhWd044cVY0SFU0S2FfNXB4NDVHUWxvU1FtQUVKX2RCekc0ZlVTaXllR3BjM3UwOHhBeFV0S3c?oc=5
-  - Google bets on Gemini to reinvent the smart home speaker - TechCrunch — TechCrunch
-    https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5
+  - The first Google Home Speaker in years has Gemini, costs $99, and arrives soon - Mashable — Mashable
+    https://news.google.com/rss/articles/CBMidkFVX3lxTE5KWUVZbVFUQzI3bm5QamdhV255RVNYUlVQbU9QcEdmNnZ5b2R2Tk9seEpNNGZMM3lHZFhKd1pNRHlwZGlPb2U3RlZ2bWxrcnRwUXozR0ZmZFBRMDNZR3BYVmNrb0J2ZUVIMUY4ZnBFOHVLM0JlS3c?oc=5
   - [hackernews hn 14/4] Securing the Future of AI Agents
     https://deepmind.google/blog/securing-the-future-of-ai-agents/
   - [hackernews hn 5/2] From AGI to ASI
@@ -90,7 +90,21 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
   - [hackernews hn 3/0] Grok models are now available via Amazon Bedrock
     https://x.ai/news/grok-amazon-bedrock
 
-### SpaceX  (attention 69, 8 news items)
+### Meta AI  (attention 64, 8 news items)
+  - What — and who — will be at the Great American State Fair? Here's a primer - NPR — NPR
+    https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5
+  - Storm damages Omaha Art Fair, destroys 17 booths - WOWT — WOWT
+    https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5
+  - Wawa Welcome America Day 2: First day of Philly Fair 250 and Free Museum Days - NBC10 Philadelphia — NBC10 Philadelphia
+    https://news.google.com/rss/articles/CBMi9AFBVV95cUxOWjd6czhUcnhRekZBT2hIWlBXQnFzNmJOMW9xS2E1NUxiT0dTSHltYmFmak41bkdQV2ktV0p2eVhvZkxVaVVqOHU4TGcyZC0tNUwxZ0FLSFQzSTk3bXlNWnhiT01UZjJ5WjBIRDFzTHFoSmFGTkhyaGN3ckoyYTFIVnBJVU85ZzI1a2doYy0wSDZadkZ0Z0Y3U1RKZ3R0ekcxOUpodG01bEYyMkpXYjlFT2ktQlRLY0hVTmQtTDFDV29EZ0FnNGo5OXZ3eWxkbzRVRlQ2UC0zNVhCRDVFZUp0bnZKT0RMN0Z4YmRlQmd0d3N2Y3Ry0gH8AUFVX3lxTE5sNnlxbDMzeFJMdEdBaWtHeWU0cGNEUG44bGhLX2VhU25SZG5SLU5sbGZ4MGpCenFEOG1RUEFveTNUVkpKb2lEMzhmbUlqX2d5eFJkWVpRVEhEX0JpY0tTb1piVHRXU1B3aUtfWDc1QzV1bV9welVXMVA1eTFTNV95NzB1RUdjLUtURElCLTJ5N2dweWozYk5uSGo5VzFsRG1fMWNUTHQ2aVROalhnQmYzbXY1Q3ZNbEZpSkpzSkdxekRka3hWNGtlMHVrNS1PenpzWGM0ZWw0UWRBbHZpOU5CQlp2Z2s1RzZpX1dGQWwyZEg0MUFqMTJJOVJFNg?oc=5
+  - Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair — Vanity Fair
+    https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5
+  - How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review — Harvard Business Review
+    https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5
+  - Neshoba County Fair: Your guide to Mississippi’s Giant House Party - SuperTalk Mississippi Media — SuperTalk Mississippi Media
+    https://news.google.com/rss/articles/CBMilAFBVV95cUxPdmkzZjEyYzM2aGxPMjh4bl9aaFp5b2tEZGpxMVhwSjFjZnpCdmxhMU1CU29yczJON2k4a0x6MFhEMGlmTGpGZm1jYjlxRFNUVUxSY0FnS3Vrc3NKWkFSLUlaRjBrQkozeTlJYVRrSlNTYkxwVWJZcGpoWnlEUmNXXzJMUWhFNXA1MUswYjEtbFZjZHlp?oc=5
+
+### SpaceX  (attention 64, 8 news items)
   - Bluebird 8-10 Mission - SpaceX — SpaceX
     https://news.google.com/rss/articles/CBMiV0FVX3lxTE83US1jV3pyVko3RTVxOFdqQWowMG5kT1FRVGFTRmpZeWxyRXNub3JsODEyalViajVsbDI4YV9Jc1M5X2pZRExya2habHgxRmVMVkNMV2RKdw?oc=5
   - Before SpaceX IPO, Investors in China Secretly Acquired Stakes - ProPublica — ProPublica
@@ -101,30 +115,12 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
     https://news.google.com/rss/articles/CBMitAFBVV95cUxOWHZNYlhZc01MV2RqUWsxOHk5bm5PUzJoZEROTFNob2FmWWQ0ZldJSnBOZFVTSE00ZWV2akNxclRrZFVXZDBYMWpOXzR2eExjYXlvS1pIWFNzY1JLMWZlQm9NWURBSEVWMXNDeENYSzFoYTlsWHlwYmVPdS1YUURQSVV2ejlhN19SNTgwa18zbmNmN3Y1WUFiNjVMbk1JZnpaQzNKaWNMRmtoS0xTbHpYZC16cWM?oc=5
   - Elon Musk Becomes World’s First Trillionaire on SpaceX’s First Day of Trading - The New York Times — The New York Times
     https://news.google.com/rss/articles/CBMieEFVX3lxTFBZcWVuUGwzMTNybzJfS1pSQWxFRDByb1JhYzJqQ3lKc0JQd00yNXduRGR6NE4zMm9uT2xPTFFsb3FPd3Fyd2ZLd3RJTS0tNkpjRGNvSE1rLVVTeXU4M2JzU2ZNYmlLTHl5RDAyTURvUzFIbldCRVE5bg?oc=5
-  - The $17 billion mistake hidden inside SpaceX’s blockbuster IPO - Fortune — Fortune
-    https://news.google.com/rss/articles/CBMif0FVX3lxTFBBWHF6eWZab3FUemlzWlg2S1lTRXlNWVlTYVRIVnZKRGpkNnFhTWFuS1JVU0J0WWVqMExkX0NyMzlkN1RpcGpXczJtaGxmdDdReW1lSDJTSHhIWEJjNjZ1VkNUVFQ4YzFHbUFjUUlyQjBIVFNaNndfWWJ5X0ZoTjQ?oc=5
-  - [hackernews hn 3/1] Is SpaceX's prospectus just blank pages?
-    https://ir.spacex.com/financials/default.aspx
-
-### Meta AI  (attention 64, 8 news items)
-  - What — and who — will be at the Great American State Fair? Here's a primer - NPR — NPR
-    https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5
-  - Storm damages Omaha Art Fair, destroys 17 booths - WOWT — WOWT
-    https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5
-  - Massachusetts not participating in Great American State Fair: ‘Just ridiculous,’ Healey says - Boston Herald — Boston Herald
-    https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTVNmNVpPamVNX2F5ako4UXc2TGpWdVcyb0dzUUx4b3RpSGt0QmVXeUVBNUtLQzRfNWdzMUd4WEFmX2d0aVpaOXpVTnJCRTFZMklvT3VoanctWXBaVUxabzEyWF91cHFrdS0wajlVcTN2WjA0cE5HRmNzTHVETXJUTFJkTkVLZ3FlbDdzU3NHUmJ0NlNzRFdkRndqQjZFUTFWVFR5MmJCY0lnWHdKRlJTYnctY0xLcG9IVDRFRmhXT1Y2c2xMN2Rkdg?oc=5
-  - Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair — Vanity Fair
-    https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5
-  - How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review — Harvard Business Review
-    https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5
-  - NYS Fair announces funk festival lineup with two major headliners - Syracuse.com — Syracuse.com
-    https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5
+  - The Myth of SpaceX - The Atlantic — The Atlantic
+    https://news.google.com/rss/articles/CBMingFBVV95cUxNVkg2NmZkNm4wdm5rbFJLVk9jVzVMTk1jOTBRVnJpbWlUdm1RblpOZTJmYVNjVXJxby02ZXBvMEhJUTNQdm83aGRQREFJLWdzTTl0RDlCcEt6dkRHdVkyUnYxa1VLaFJyU2RieUpXblFxX01XRllUc0hsN3J5aUtMdlY5TXVfTi01NlJLNjNxTFNmMzZUZlpOQlVsVXVodw?oc=5
 
 ### Tesla AI  (attention 64, 8 news items)
   - Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App — Not a Tesla App
     https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5
-  - What Robotics Experts Think of Tesla’s Optimus Robot - IEEE Spectrum — IEEE Spectrum
-    https://news.google.com/rss/articles/CBMifEFVX3lxTFAzU1ZqWk5OSEFQZHJtV1VtZXo5UGZlejZoSUNORHB1Z1pHX0tfWmhpcEJLeWhoV1B1MXg3SzRRU19XVW9fd05Rdk9DSDRlbGpZcjU4NUI4blhYTG1wSDJBTUNqVUpFSkYyRDdhSFU1MkozekV5dHF2OWFZb1E?oc=5
   - Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance — Yahoo Finance
     https://news.google.com/rss/articles/CBMiogFBVV95cUxNdm9uSnU1Zk41Z3RBanJmS3prdk5JbGI5NUhVWlE5ekVMdXEtTFN0ZF9QRUlZRHFyZFdVakl1dUR3d00wRTZBTmJ2RHktRXJ6RWh4OF9uSU5BdTFLb21tTFlyWEEzQTFtWU1Pc2tzRTZjeG9SZkVMd0ZCSHl3Snp3ZmFxWFlRSnRlWW5oc3FHS2prbGlhd19sUWNQYi1yZTBMSWc?oc=5
   - Musk Shares Video Of Tesla's Optimus Robot Performing Household Chores - NDTV — NDTV
@@ -133,17 +129,19 @@ FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
     https://news.google.com/rss/articles/CBMimgFBVV95cUxOeDJJNFppMG5yQmRLSWJIYV9DRnFidGVxTGxLcExuZk5aTGhMcGVvOU1jaUNRY2VrSzZOcURLNkNkTEJfRlZlUmlOOHFvRm9YRTVSZVhERVZpS1prNVVZUWx4MDRvX0RvbnhnQ1UzVDE3aTd3WDY0TGhoLUZJRVpNbFB6Wl9vR2ROUVNiY1hoUWd0VzExQ21KVDdn?oc=5
   - TSLA Stock In Focus: Could Optimus Be The Missing Link Between Tesla And SpaceX? - TradingView — TradingView
     https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRXlQYnB0S1F4S1pJTjdwdHk2RExRM3puMXpXdWZEZWh4TDMtelBUY2pKYlp5S2xsb292c0N2NzNjams3MEJYYTFONXRqSkVTOHIwSXVLOXlPelctaUIya3N0SnFMZjJqdUszWTdRMFpsSVdaQzBHOXBlWFA0dlF4ckt3ZVNZdk05aWdfS2NfeEE0dV93SjhPdnRtUnJtblk5UTdoWVB3RUlDSWlNbkVFbUFaZFlyVDRmd3pURTVpeFJJeExnWlRacF9wV3BsMFQ3OTYxaVZ3?oc=5
+  - Tesla's AI5 Chip Recently Completed Tape-Out. Here's Why This Could Be the Most Important Development in the Company's Transition From Automaker to AI Giant. - The Globe and Mail — The Globe and Mail
+    https://news.google.com/rss/articles/CBMi2AJBVV95cUxPc0dtRkpzdncwMmh5SUROb0RIQUtHXzNiYnhWcWdNS3lydnBBbWlmV3hDTHdzNmJycll1cTBKWnhzM2h4TmtidEdlTmw1QjEtX184RXMtejk0UTZmaXJnVHROTzNWMThuWWZYdmR3TjRPZEl0RVRqVU9IZFRLRTJubFhpd3lHMFNKUGd3N19jR0llUS1VcmxPLXpHUUlUWHBPRzZwU1UtTjBkYzdSU09DcTAwWkI4S3lEZm1pSWRyeG1LVWxvSHd6aGppeXBTNmFSQUREaU5QVzUxYmV1TnlTbVRZSU9uOWd1cFVkeGhQVkpWbldiSDVUSlJ4UnpNNEVDSmN4VnU1RnY1VGh0OUJCR2laeDlpQ0xHMGtoT1ZVVlJZQXVzV01QTXpfNThoVUVMSTBHek45Zzdma2k3TkRvM0RqaVBGcE80ODIzWFZpSm1mcURoczRmeg?oc=5
 
 ### Neuralink  (attention 64, 8 news items)
   - Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global — KED Global
     https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5
   - Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider — Business Insider
     https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5
-  - More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune — Fortune
-    https://news.google.com/rss/articles/CBMikAFBVV95cUxOb0x1ZWcwTWtvOTNqbGZEbjFSWGtNaHB3bnpfaDJJX1liNlA2cHlOa0xFOXc4c1NjQnJCMnRGZTZOWjFJa2hxcmhjNkdNNWJjYnJoZzBzRVBpdThmQ0JqZ0M1RlpoTlF6MlR2UXBrT1FSZjh1UUpsbkc3OEhvYjJwanYxTGs3OHdMVnlBaWUxRDM?oc=5
   - China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India — The Times of India
     https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5
   - Samsung and Neuralink are working on a fourth-generation chip - Root-Nation.com — Root-Nation.com
     https://news.google.com/rss/articles/CBMikAFBVV95cUxQbkFkX29Hd3RfQkcyQXNqNlFwVnBialBGS25BUHJVNEZvcmt3TThxZTctdDZZRHdQMUlmeE9SS2cwOTRjWk1GSS1wSm1qTFkxSmU2V0NuRENaYlBseGhYN01RQTNKQmI2N3Jzbm1QNlZtelhWMWpVQWk4TWJXRlB2TFpkLVdaLWplTkFEMmZVU0M?oc=5
   - Samsung to build Neuralink's next-gen brain chip on 4nm process - MSN — MSN
     https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcnpwX3FqbFdvYy1rRlBFSjVHdWVIRjl0d3hGeF93S2x6Q1JWLVhQREVsNml6RUhROHJHMFNMYTJaNWVZOFFMR3RFdVV0UWVNdGhCS2Q3MkxVZ1RMbUFLT2xWWGV2NEhReEhDd0d3ZHZkYnpaSnFTMldtOWxtaXROc2EyWjk0MnNLdGlIdEt2WlJ4ZERnNEdycnNsOFRyUGpOcEJWOTZYUkY1RklObUdYMWVXTzg2bTVRMGtablZFbXlRd3dlR1Bua0lWLWItcGRORkJEMVlXX2pKSGNleVJ5azViVlRWNlp5V0t1RDN4X3lhZHZfa3hyag?oc=5
+  - China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com — bgr.com
+    https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5

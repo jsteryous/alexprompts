@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20 10:29 UTC",
+  "generated_at": "2026-06-20 18:26 UTC",
   "biggest": {
     "entity": "Anthropic",
     "title": "Claude Corps",
@@ -39,16 +39,16 @@
           "published": "Thu, 18 Jun 2026 16:30:00 GMT"
         },
         {
-          "title": "Introducing Claude Agent for Jira - Atlassian",
-          "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5",
-          "source": "Atlassian",
-          "published": "Thu, 18 Jun 2026 15:55:00 GMT"
-        },
-        {
           "title": "Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs",
           "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5",
           "source": "Endor Labs",
           "published": "Wed, 17 Jun 2026 23:40:56 GMT"
+        },
+        {
+          "title": "Introducing Claude Agent for Jira - Atlassian",
+          "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5",
+          "source": "Atlassian",
+          "published": "Thu, 18 Jun 2026 15:55:00 GMT"
         },
         {
           "title": "Anthropic asked for regulation. Washington went much further - CNBC",
@@ -163,16 +163,6 @@
           "hn_points": 5,
           "hn_comments": 0,
           "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Corps",
-          "url": "https://www.anthropic.com/claude-corps",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 2,
-          "reddit_score": 0
         }
       ]
     },
@@ -180,55 +170,65 @@
       "entity": "OpenAI",
       "headlines": [
         {
-          "title": "OpenAI deepens Japan footprint with Hitachi deal - Computer Weekly",
-          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQTGlWM2tQMEgzQ0x2bGgyaHlBZ2ZYbG9mV1NtaE9ZeTBrcnpMR2lRNUNBSVlRdVZFSjlZNllfOVVDVml3N1RHZ3NGbWNyeklQWVFEdWVpRUdrNkRQLUNMTEg4UG9OQ0ljVFlZb19UUldoc3YwOE1WRUxCT3RkZEdOeVFZa0dEZ2d5c1dnVFFsc0xnNUQ3ME1ldFZn?oc=5",
-          "source": "Computer Weekly",
-          "published": "Thu, 18 Jun 2026 05:29:23 GMT"
+          "title": "Improving health intelligence in ChatGPT - OpenAI",
+          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5vcjB4NGtoanAzaElMUVhXZEZydkl4M3F0Mk96ZWoyRHNGMG1xT0RMeHRwTVFNbG1NVzd1LVVMaWFmQ0NYRWtWYll2Skc3YU43TmlzbS0tRlJVTFB2RDNfV3dSQmgwMkhsZEhaUTMwVXFaZGpi?oc=5",
+          "source": "OpenAI",
+          "published": "Wed, 17 Jun 2026 19:20:33 GMT"
         },
         {
-          "title": "OpenAI hit with multistate probe into possible user harm as its IPO looms - WSYR",
-          "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQWkw0R05mVHU5YTZmYmd0eXQ5cDE3eEE3eG1ya1NsbDdqNWJ2UVp0RGFTZ01sRGZYRFdfTFNvVjFEX1Ezc2VnYkVhUkpQLUtVZXVvWllTek4xVWVSTzRRalNsRHN6Uk9fTlFJQVJodWtSX2dDTHo4X3ZFVklxSl9NWUhiVFdNMTc2SjU1U0VJWnRFQzBiNk92Znl1a29QRjUzRWxEcE5aWWQ4aGhWRUNjOE1GUXdEU2JVeU92czNrdmhQcGF5Yl9R0gHMAUFVX3lxTFBvSm1WQ3JhTmpCU0ZtY0htcjY4aE5oaW9aV3A1SGJaR01vOUVFendtM2d3QnZNS18wcFktQW9WcGtHTDZOSFU2ZVlDN2dkZG9wQllDcTN4Z1lPM1JGcUU1MFdrRkMxckhVZDlxWW1sWXg3TkpzUTAyMXNPVUo4eUhhTGoyLTVEZzZkUGVMSmNwZVNWaG5YaDN2VnBXdlNIbHQwdC04MjBOaXhPb0N2cjlqMFRBVkFvc3p0R2dvLTdCU3B3dFlhTXU3VXlrSw?oc=5",
-          "source": "WSYR",
-          "published": "Sat, 13 Jun 2026 19:17:45 GMT"
+          "title": "Visa and OpenAI integrate Visa's secure global payment directly into ChatGPT - NPR",
+          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxONDZuX3ItQ1lKMmlRbEd5VWxlVjZDQXNRdDRybGFWN0N0T3hQSW4zZUxQNWV1clI5VVE1dGhsMHIwNTlmZUFwcklaWFZmNzB5aUduVGJneU9naC1Wb3VoWnpYUG9QdTRmdHZVMXU0dC04NkpGZUtwSHNnWHV4ZzFjcVR6dHdHYkdqWVFKTVpsblR1V0E0aURYeFdISTdlVzJSMlhqUnFqVFJWSHNtc0FreW9fZ1RoUkxMMWgtNQ?oc=5",
+          "source": "NPR",
+          "published": "Tue, 16 Jun 2026 08:46:26 GMT"
         },
         {
-          "title": "Inside OpenAI's AI Chemist: How GPT-5.4 Improved a Drug-Making Reaction - LinkedIn",
-          "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQaF9LckFqZjhIb2dyXzJzWFVERTZBUEx4N1NpLVdVOVlyZWpSdGlPVDlNRFdUcTdXZGJhMUg0azRqOEVXeVlKdk1jUFVhUW5zVVA2NnZIbFU0RTJUWlExOHZyUXJqcG85QTlfNTBvdUtxME4wUGpTbGdONzdJMTFGd1puTHBxdDdIT0g0VjdXajgyRmU2YUJFRzc1TlNfRDRDcjJlMkI0SQ?oc=5",
-          "source": "LinkedIn",
-          "published": "Thu, 18 Jun 2026 14:06:27 GMT"
+          "title": "State Attorneys General Are Investigating OpenAI - The New York Times",
+          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5",
+          "source": "The New York Times",
+          "published": "Sat, 13 Jun 2026 23:25:44 GMT"
         },
         {
-          "title": "Walmart Shares Jump More Than 4% Today After Announcing Partnership With OpenAI Patrick Bruel (27s78xRF4z) - Mshale",
-          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9pT3hESHJraXUwbGdvWlp4N01MSHVKbU1yZndLdUt2c1dkcHpXUEJic2pIQ1U1RTZNTU9MckVBbXpGdU9xRGFXeFhtQTBBRURaaFRscU9FdlRMeFk?oc=5",
-          "source": "Mshale",
-          "published": "Fri, 19 Jun 2026 06:16:26 GMT"
+          "title": "Exclusive: Ha Thai departs Meta to lead comms for OpenAI devices - Axios",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1fZjFWVU9UM0w1WjItb1oyOXkwaVhKaUJ2Y0pxNmlXQ0k0OUpoaDNMbWYyYjAxa2Y5bHMtSENrdHhMbXBFZExULW5qeC11VFJaMzlrTlpSWG5fYWRXT3V0eWF1cjRyUQ?oc=5",
+          "source": "Axios",
+          "published": "Fri, 19 Jun 2026 11:11:23 GMT"
         },
         {
-          "title": "Japan’s tech business SoftBank rolls out OpenAI ‘patches’ against cyberattacks - KTALnews.com",
-          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQjdZc3ZBOV9GeVRoYXRDUjBNREtqY1Q2V1g2MV9UR28tbjZSSlY4VGY0bnFxZW1OV3VBdzQ0MjZWSEsyVFk5NnZrek90eTVGaTRRWkdWTzVBbkUzMFphOER5ZHJuTWM3MVVZdG01a2RBSjVUU2N3VEpPLWt0b3E1Q2x0azNoMkxNNW9VTFpEMjRCRk1BYlBUb2tLSWN2SlRncTdVRFlLTTV5TGJvc1oyeVJOeUlrMlk1NThN0gHAAUFVX3lxTE9ucXpCcGtLMWJjZEgtVk92V041NExFLVR5VzNUUWJlZmxUNUFfUHA0aXZib3JFa1BQZW9LTWVLcEY5V05mTTFoaG5JSWJ6RVBtQnA5UENocGlDZ0VVdGQzWGlNa0s4c1daUm4xSWVvZFFldlgxQ3FnNkxwODBkQkRlbzhlUFE5ZUtjbHBoZC14aF81b2JvOHR6RWZoZ09QdHE1eUs3dzA5WlBNNWJTNmxBMlphbzM5LUZWeF9Fb25ZVg?oc=5",
-          "source": "KTALnews.com",
-          "published": "Tue, 16 Jun 2026 08:53:35 GMT"
+          "title": "OpenAI hit with multistate probe into possible user harm as its IPO looms - AP News",
+          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTDJsQlNzM0JtUFpBTUJkalVSS3htd0ZEUVVsOFhYOGhYbFBkNkV6RkZfcERSWV9ZVngzRUYyN29uUXgycFBrek1ZUllLM3MtVzNCY1BUNXBoXzVWbEYtS2pzTFNBUVFKOXZRWlBCN2VoNkxFa0FSWEVGN18xZmRyM3N1ODNwOERDd0ZFa2ozQTNrM3o1Mjc2M3JRODlxN2t6cWsxOUI1WE5QNWc?oc=5",
+          "source": "AP News",
+          "published": "Sat, 13 Jun 2026 19:17:00 GMT"
         },
         {
-          "title": "Japan's tech business SoftBank rolls out OpenAI 'patches' against cyberattacks - Click2Houston",
-          "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxORVFMV2JKQmY3TXdBcGtGdXNTSVoyNVlFOGRqOWEwNVM5aGVnWG1FOXJZcnNZNzNBNzhlOTNNSTNSeW9mVUpHLTZkV0dMY1RmSjU2NzJBQ1R4SFk1M29MdXBkdlFlVmsxYnFFSGpudld1bGUyRFJRY0JBTkI4UEZmaXVTdXN2UGsydkhicHRDNURnbmhZdl9PZkdXU2trbHJ6T3ZicWgzSDFEZXFPM3ZtUElENnFhWTNfRExtS2EwWlQ2NHF4akdueXZ3?oc=5",
-          "source": "Click2Houston",
-          "published": "Tue, 16 Jun 2026 08:56:48 GMT"
+          "title": "ChatGPT’s market share slips below 50% for first time - TechCrunch",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRzJUMmlQOUlIWVVXUWJpUTJxem1pb1NNYjR5NG81TDB5WTdfeXhjOUlyZm15eElhOU5rdUJmb3Y2MUZWbUNFV1Y1N1lrRWJZVWpOOHBqNzNlMjRIWndla0NOMWpFckNDTUtGS0RfLUhfNUp4T3dMVFZGenVweU94QmVfUGp3MDZWQ0JjVEpZUQ?oc=5",
+          "source": "TechCrunch",
+          "published": "Tue, 16 Jun 2026 10:30:00 GMT"
         },
         {
-          "title": "I Asked ChatGPT What I Must Buy at Costco in June — Here's What It Said - AOL.com",
-          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9oNjZ2ZXZ0Nk5sNnhCMVkzdlJzdmRjRm94dFkyME50b3N0VXZjUTRWRG5JQ0M1UTJ4VGlObVBoc3FkZ0hNRlVDeDNMLW1jZEpwdHFKcDVfNXhWRlIxYk5RUU9uenp4VTlDZW92Y0xuMTJ0RnpfYmIxZ2duUlZKZw?oc=5",
-          "source": "AOL.com",
-          "published": "Thu, 18 Jun 2026 01:13:39 GMT"
+          "title": "OpenAI hires former Trump AI official Dean Ball - Politico",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOSVcyTmUwcURQTi1oUzkyNjRHYjlPMUpPMFZWTnczZXM4dzlvNTkxQXEwZzFQZXUtMUZGYzdBSi1NengwUnVaSDVvMGVmNnEyQlhBZjVWdXBoUXlxSGp3aDFlbjF2UFRPekllTGhVM3BxdUhxME1rUW9ZcTZ1a0lKRXotV29PZVJSUGRVbVZRYm5tVEhhQnNfMTRIRkhlUQ?oc=5",
+          "source": "Politico",
+          "published": "Thu, 18 Jun 2026 15:35:59 GMT"
         },
         {
-          "title": "Rocket Lab Corporation (RKLB): Among Stocks ChatGPT Predicts Could Make You Wealthy in 3 Years - Insider Monkey",
-          "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQT0xONXNHclJEemJ2YUMxbXRxeE4zU3FkUEtBTTR4VnJXNnd2NWZWcWYtS2laX2tBc1RZbjBCaV8tSHcyU2VHVlNGYVhvMnI0MnZ1ZVhfNnFDOXRpVzNjMVlaTElrWTJIU0RBZDBTc3BIRUVGYW9RVnVKRHk1a24wX2k2ZDhLcHR6QkZPd29tb2dhaWpFUHI3bzM4c2NnNkFtQl91TGFSc3dWRVZQVHJuNG0xQkhMbWVwYVprWmR4SVB0dWMzR1Q1WXpRbXNKUV9u0gHYAUFVX3lxTE9vSDVRdk5mdHRqRng2SHJiODJUdVlwaE9aemZMcnVCSGpnZFJmaWhDMV9lSkhEdkxNVWItcFd6MVVhVXBCYUNzVUhmNFQ5ZXdjbUVleDhRLXFjcGpCNFRZdVEzelJZQVhQVktXN2JKOFVvOWNvMUViMFpkNTlkODJyejY1WGoxTUlsbXVjQzFqS0Y5eVV3QU9yRzRULU1xbGV1akhZeUQybGJJVl9BVThmZFZPLTFFYjdpOEF5ZWcxZHMzZnZBTGhsaHBEZVh3VHRvdXpJNE4yaw?oc=5",
-          "source": "Insider Monkey",
-          "published": "Tue, 16 Jun 2026 06:32:41 GMT"
+          "title": "OpenAI spending hit $34 billion last year ahead of planned IPO, FT reports - Reuters",
+          "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxObG14cjl0dTdRdWhUWmROcmN1WXhXM2RnZ25TczRBdDNsUW43a0tSR25MLTdXcmF5bE1wRXh5Wk1TWmVpMWt0N0ZGQjBEbmpmajcwT1JqQWdvdTNpWklmOGstQlMzWFlVSkZmQ1hndFpnRG5FUVB4RG5NV1BMR2VYSExIY3ZHVW14UE9JREI3QmswbE8yanNueWNRbXBLNnEyUGpZVEFBRzdlbXhEUmd2aW5SeFRRZ3lHVTRVVVpqVDhIR0U?oc=5",
+          "source": "Reuters",
+          "published": "Tue, 16 Jun 2026 03:41:00 GMT"
         }
       ],
       "stories": [
+        {
+          "entity": "OpenAI",
+          "title": "Scheduled Tasks in ChatGPT",
+          "url": "https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt",
+          "source": "hackernews",
+          "published": null,
+          "hn_points": 2,
+          "hn_comments": 0,
+          "reddit_score": 0
+        },
         {
           "entity": "OpenAI",
           "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
@@ -435,10 +435,10 @@
           "published": "Thu, 18 Jun 2026 13:00:00 GMT"
         },
         {
-          "title": "Google bets on Gemini to reinvent the smart home speaker - TechCrunch",
-          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5",
-          "source": "TechCrunch",
-          "published": "Wed, 17 Jun 2026 16:30:09 GMT"
+          "title": "The first Google Home Speaker in years has Gemini, costs $99, and arrives soon - Mashable",
+          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5KWUVZbVFUQzI3bm5QamdhV255RVNYUlVQbU9QcEdmNnZ5b2R2Tk9seEpNNGZMM3lHZFhKd1pNRHlwZGlPb2U3RlZ2bWxrcnRwUXozR0ZmZFBRMDNZR3BYVmNrb0J2ZUVIMUY4ZnBFOHVLM0JlS3c?oc=5",
+          "source": "Mashable",
+          "published": "Wed, 17 Jun 2026 13:01:20 GMT"
         },
         {
           "title": "US scientist John Jumper to leave Google DeepMind for Anthropic - Reuters",
@@ -447,10 +447,10 @@
           "published": "Fri, 19 Jun 2026 22:12:38 GMT"
         },
         {
-          "title": "The Gemini-Powered Google Home Speaker Is Finally Here - WIRED",
-          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZjZhek53V1dqMkRsTEZEQmUzTUh6dTR4TkVRbFlUUEFWQ0tfNzlaaFBZMTk4OHZ2bmRZUXR3ODk0a21wYW5pS0haQ3RPXzVRZmFZNldXMGVkcEN4SnlpVmwzdFZZVk1OWEhCcWFXVndhcFVuNDNFZnhIZk91YjIxN0hJeWZ1LXdLUWQ4?oc=5",
-          "source": "WIRED",
-          "published": "Wed, 17 Jun 2026 13:00:00 GMT"
+          "title": "Google bets on Gemini to reinvent the smart home speaker - TechCrunch",
+          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5",
+          "source": "TechCrunch",
+          "published": "Wed, 17 Jun 2026 16:30:09 GMT"
         }
       ],
       "stories": [
@@ -552,6 +552,60 @@
       ]
     },
     {
+      "entity": "Meta AI",
+      "headlines": [
+        {
+          "title": "What — and who — will be at the Great American State Fair? Here's a primer - NPR",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5",
+          "source": "NPR",
+          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
+        },
+        {
+          "title": "Storm damages Omaha Art Fair, destroys 17 booths - WOWT",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5",
+          "source": "WOWT",
+          "published": "Sun, 14 Jun 2026 17:07:00 GMT"
+        },
+        {
+          "title": "Wawa Welcome America Day 2: First day of Philly Fair 250 and Free Museum Days - NBC10 Philadelphia",
+          "link": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOWjd6czhUcnhRekZBT2hIWlBXQnFzNmJOMW9xS2E1NUxiT0dTSHltYmFmak41bkdQV2ktV0p2eVhvZkxVaVVqOHU4TGcyZC0tNUwxZ0FLSFQzSTk3bXlNWnhiT01UZjJ5WjBIRDFzTHFoSmFGTkhyaGN3ckoyYTFIVnBJVU85ZzI1a2doYy0wSDZadkZ0Z0Y3U1RKZ3R0ekcxOUpodG01bEYyMkpXYjlFT2ktQlRLY0hVTmQtTDFDV29EZ0FnNGo5OXZ3eWxkbzRVRlQ2UC0zNVhCRDVFZUp0bnZKT0RMN0Z4YmRlQmd0d3N2Y3Ry0gH8AUFVX3lxTE5sNnlxbDMzeFJMdEdBaWtHeWU0cGNEUG44bGhLX2VhU25SZG5SLU5sbGZ4MGpCenFEOG1RUEFveTNUVkpKb2lEMzhmbUlqX2d5eFJkWVpRVEhEX0JpY0tTb1piVHRXU1B3aUtfWDc1QzV1bV9welVXMVA1eTFTNV95NzB1RUdjLUtURElCLTJ5N2dweWozYk5uSGo5VzFsRG1fMWNUTHQ2aVROalhnQmYzbXY1Q3ZNbEZpSkpzSkdxekRka3hWNGtlMHVrNS1PenpzWGM0ZWw0UWRBbHZpOU5CQlp2Z2s1RzZpX1dGQWwyZEg0MUFqMTJJOVJFNg?oc=5",
+          "source": "NBC10 Philadelphia",
+          "published": "Sat, 20 Jun 2026 10:24:59 GMT"
+        },
+        {
+          "title": "Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5",
+          "source": "Vanity Fair",
+          "published": "Thu, 18 Jun 2026 13:44:40 GMT"
+        },
+        {
+          "title": "How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review",
+          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5",
+          "source": "Harvard Business Review",
+          "published": "Mon, 15 Jun 2026 12:11:58 GMT"
+        },
+        {
+          "title": "Neshoba County Fair: Your guide to Mississippi’s Giant House Party - SuperTalk Mississippi Media",
+          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPdmkzZjEyYzM2aGxPMjh4bl9aaFp5b2tEZGpxMVhwSjFjZnpCdmxhMU1CU29yczJON2k4a0x6MFhEMGlmTGpGZm1jYjlxRFNUVUxSY0FnS3Vrc3NKWkFSLUlaRjBrQkozeTlJYVRrSlNTYkxwVWJZcGpoWnlEUmNXXzJMUWhFNXA1MUswYjEtbFZjZHlp?oc=5",
+          "source": "SuperTalk Mississippi Media",
+          "published": "Fri, 19 Jun 2026 19:20:06 GMT"
+        },
+        {
+          "title": "Perry Hall Town Fair returns for 29th year with live music, kids zone, and America's 250th celebration - WMAR 2 News Baltimore",
+          "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOODRNRmRoQXlaZnNTQm81bjlDNjYyMmdvVW9ESzhpVjA1VC1vVGgwbmFJempCX2JCcUZ1dUxZSUlueTFnZEs1Q0licFFRbFA5bUVmNmFDekNaLVgwNTE2YjJYMDJlNTVVdi0xTVBKZEdhcGlIWVZfNDV0dnhDOVJsRFF0UFFNcklPVVNlQngwckxhRktZaFJzVGNSREFUSHdLcXdxWmZIZWdBOXh6V2NnbHpzV1B4MEdQTnZSaDdHamItMHlIREg1TllRRmwyRGRfWlVXTzltRDBscTJuUElfQmw1cU94SzMtakE?oc=5",
+          "source": "WMAR 2 News Baltimore",
+          "published": "Fri, 19 Jun 2026 06:59:08 GMT"
+        },
+        {
+          "title": "NYS Fair announces funk festival lineup with two major headliners - Syracuse.com",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5",
+          "source": "Syracuse.com",
+          "published": "Mon, 15 Jun 2026 14:11:00 GMT"
+        }
+      ],
+      "stories": []
+    },
+    {
       "entity": "SpaceX",
       "headlines": [
         {
@@ -585,87 +639,22 @@
           "published": "Mon, 15 Jun 2026 07:00:00 GMT"
         },
         {
-          "title": "The $17 billion mistake hidden inside SpaceX’s blockbuster IPO - Fortune",
-          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBBWHF6eWZab3FUemlzWlg2S1lTRXlNWVlTYVRIVnZKRGpkNnFhTWFuS1JVU0J0WWVqMExkX0NyMzlkN1RpcGpXczJtaGxmdDdReW1lSDJTSHhIWEJjNjZ1VkNUVFQ4YzFHbUFjUUlyQjBIVFNaNndfWWJ5X0ZoTjQ?oc=5",
-          "source": "Fortune",
-          "published": "Fri, 19 Jun 2026 07:00:00 GMT"
-        },
-        {
-          "title": "SpaceX is public: Everything you need to know post-IPO - TechCrunch",
-          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPMEY5QlVycHRia0FUdUtnOFkzei1zbzJoc2Fpd0tuY0hZanluR0dtVjc3OTNpVGVnNEN5WmNlamlIZDJtSU41M1ZrNmE2bE1LMFRkNDJmYl9HZ0lFeU45NzVWNDFzN0dhSFp3NUtmRFpkcnJ6cFYxN3pWdm04SXAtdnk3NEVQWjdVQUZIb2ZnNU5SQQ?oc=5",
-          "source": "TechCrunch",
-          "published": "Tue, 16 Jun 2026 15:53:12 GMT"
+          "title": "The Myth of SpaceX - The Atlantic",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVkg2NmZkNm4wdm5rbFJLVk9jVzVMTk1jOTBRVnJpbWlUdm1RblpOZTJmYVNjVXJxby02ZXBvMEhJUTNQdm83aGRQREFJLWdzTTl0RDlCcEt6dkRHdVkyUnYxa1VLaFJyU2RieUpXblFxX01XRllUc0hsN3J5aUtMdlY5TXVfTi01NlJLNjNxTFNmMzZUZlpOQlVsVXVodw?oc=5",
+          "source": "The Atlantic",
+          "published": "Sat, 20 Jun 2026 11:00:00 GMT"
         },
         {
           "title": "How SpaceX's arrival impacts the stock market - Axios",
           "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9jM0hlSDgzQnlKQXVpOTJCUElqdGZLRFJpZTBadTNOTUZ4ejMzNG1WaURad19XWVFxYVd5SUZweWNHNGx1T2V5ZkJnSmFZX09Yc1hOS2dTTkgyU1VLN2E5WnM1cEdDNEU?oc=5",
           "source": "Axios",
           "published": "Mon, 15 Jun 2026 19:05:04 GMT"
-        }
-      ],
-      "stories": [
-        {
-          "entity": "SpaceX",
-          "title": "Is SpaceX's prospectus just blank pages?",
-          "url": "https://ir.spacex.com/financials/default.aspx",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 1,
-          "reddit_score": 0
-        }
-      ]
-    },
-    {
-      "entity": "Meta AI",
-      "headlines": [
-        {
-          "title": "What — and who — will be at the Great American State Fair? Here's a primer - NPR",
-          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5",
-          "source": "NPR",
-          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
         },
         {
-          "title": "Storm damages Omaha Art Fair, destroys 17 booths - WOWT",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5",
-          "source": "WOWT",
-          "published": "Sun, 14 Jun 2026 17:07:00 GMT"
-        },
-        {
-          "title": "Massachusetts not participating in Great American State Fair: ‘Just ridiculous,’ Healey says - Boston Herald",
-          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTVNmNVpPamVNX2F5ako4UXc2TGpWdVcyb0dzUUx4b3RpSGt0QmVXeUVBNUtLQzRfNWdzMUd4WEFmX2d0aVpaOXpVTnJCRTFZMklvT3VoanctWXBaVUxabzEyWF91cHFrdS0wajlVcTN2WjA0cE5HRmNzTHVETXJUTFJkTkVLZ3FlbDdzU3NHUmJ0NlNzRFdkRndqQjZFUTFWVFR5MmJCY0lnWHdKRlJTYnctY0xLcG9IVDRFRmhXT1Y2c2xMN2Rkdg?oc=5",
-          "source": "Boston Herald",
-          "published": "Sat, 13 Jun 2026 17:34:15 GMT"
-        },
-        {
-          "title": "Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair",
-          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5",
-          "source": "Vanity Fair",
-          "published": "Thu, 18 Jun 2026 13:44:40 GMT"
-        },
-        {
-          "title": "How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review",
-          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5",
-          "source": "Harvard Business Review",
-          "published": "Mon, 15 Jun 2026 12:11:58 GMT"
-        },
-        {
-          "title": "NYS Fair announces funk festival lineup with two major headliners - Syracuse.com",
-          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5",
-          "source": "Syracuse.com",
-          "published": "Mon, 15 Jun 2026 14:11:00 GMT"
-        },
-        {
-          "title": "Omaha Art Fair vendors pick up the pieces after destructive storms - KETV",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOZzNYNjR1YkF2TVFqTkFZaEdkMFoxQUZTVnY0VXJQZno0cURfX1MxaXJXWVBhN05CVHRWbzZvVTJMOGRIc3RHZ3lwYnVfb0VKNXZfcGVOd0taQzRMMnNyY0tldmkzdGVPY3dKSm1xS3ZfZDZRd3J1UTFjQVllWFBkVzJxVjlSbHBBYjhjUWc5RQ?oc=5",
-          "source": "KETV",
-          "published": "Sun, 14 Jun 2026 00:07:00 GMT"
-        },
-        {
-          "title": "Philly Fair 250 brings food trucks, trapeze, fireworks to Centennial District, Please Touch Museum - CBS News",
-          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOVnlfbnZHejV6Q0RBbGh6cEctYjhUZGlwY0Q1VFRzbXplNHZaakhRd1dFb1NQU3pabk94N0JBV1M2ZlZyem5UdUtSejhmRGt1bVRzUG4wRXZSVVhCcXNNVnVlNkhfSkllVnBVdUZUQVN5dFoxTEVEN2YwanlnNGxDQW1xWnQ?oc=5",
-          "source": "CBS News",
-          "published": "Thu, 18 Jun 2026 23:17:00 GMT"
+          "title": "Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer",
+          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5",
+          "source": "The Ringer",
+          "published": "Wed, 17 Jun 2026 10:30:00 GMT"
         }
       ],
       "stories": []
@@ -678,12 +667,6 @@
           "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5",
           "source": "Not a Tesla App",
           "published": "Thu, 18 Jun 2026 14:57:51 GMT"
-        },
-        {
-          "title": "What Robotics Experts Think of Tesla’s Optimus Robot - IEEE Spectrum",
-          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFAzU1ZqWk5OSEFQZHJtV1VtZXo5UGZlejZoSUNORHB1Z1pHX0tfWmhpcEJLeWhoV1B1MXg3SzRRU19XVW9fd05Rdk9DSDRlbGpZcjU4NUI4blhYTG1wSDJBTUNqVUpFSkYyRDdhSFU1MkozekV5dHF2OWFZb1E?oc=5",
-          "source": "IEEE Spectrum",
-          "published": "Mon, 15 Jun 2026 10:00:55 GMT"
         },
         {
           "title": "Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance",
@@ -720,6 +703,12 @@
           "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOZ2RBMFktdGNnME1jSjd4OFl0cVdqWnkxbm1vR0FFSUhJQ09LTlQwVVkyZnliU2kyMzh4cFRZdXVjQ2hvNnlmZnFWZGhzT2Fra0NPTlBsTi1NTXFNU0phMGVkejc0bFpEOUVZdEc5dmhfcmkzb0JnSlZXTTJ5WXRZNFE0bjkwLXU4cGwxZkFwc1hiYjdobUljNVk2eWNMVXlLM2NKd0U0Z0RxN2Fy?oc=5",
           "source": "MSN",
           "published": "Fri, 19 Jun 2026 09:27:55 GMT"
+        },
+        {
+          "title": "SpaceX’s Newest $60 Billion Bet Might Be Its Best Chance to Surpass Nvidia - 24/7 Wall St.",
+          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeGpqcDFFS3FDS0wxbEpyR0VOaF9Fa0FFTTB5RFI4UzdIMnl2Q0Y2a1JpUTM4M3lPQjVVcU1SOGtyTVZpcVpKcC1HMVRGRVZ2UFdQUkZ6blI2TXFkN19GSENJeXBSUFRaVHpxcUVKanFjd2NUYXFOTVJ0ekhobG9CZExpUGF1VzlCd003M2IzeWVIQ24xdjVpOGYzeWRJZkdua1cyeHQyempLbXFXTVJDYnRRUXJhdlE?oc=5",
+          "source": "24/7 Wall St.",
+          "published": "Thu, 18 Jun 2026 14:30:52 GMT"
         }
       ],
       "stories": []
@@ -738,12 +727,6 @@
           "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
           "source": "Business Insider",
           "published": "Wed, 17 Jun 2026 13:00:00 GMT"
-        },
-        {
-          "title": "More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune",
-          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOb0x1ZWcwTWtvOTNqbGZEbjFSWGtNaHB3bnpfaDJJX1liNlA2cHlOa0xFOXc4c1NjQnJCMnRGZTZOWjFJa2hxcmhjNkdNNWJjYnJoZzBzRVBpdThmQ0JqZ0M1RlpoTlF6MlR2UXBrT1FSZjh1UUpsbkc3OEhvYjJwanYxTGs3OHdMVnlBaWUxRDM?oc=5",
-          "source": "Fortune",
-          "published": "Sat, 13 Jun 2026 14:09:00 GMT"
         },
         {
           "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
@@ -774,6 +757,12 @@
           "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBSc3I3MXQycV9TNnFvd2tlQkpVTlBPSEJIQ0FSVGxSM1E2Z200YkhMYnlZNXk3VEIzZnAweV9LWVBlLUw1eEMzLVFrbTZtUW5oZGVkTE1mVWFYNHBURUJqbDFMU1EyS281aXdmT2dBZm9URWhVakx5ZHFEdw?oc=5",
           "source": "Ubergizmo",
           "published": "Tue, 16 Jun 2026 10:32:38 GMT"
+        },
+        {
+          "title": "Neuralink co-founder Max Hodak on why U.S. science needs reform - Yahoo",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1xLTVwdzBWdGUyTWo3N1lHeVRsNHBPeHJBSVJKa2x3VzNwNVN1MkVEUzF1V2RaTk5xQVdpZTdHaFlJdVpwZEgzRmJRalpST25CeEtrZ2loMlRUN3YzMkw0eHl6VVY5YlNRa2pvWWZGODl4YmE5SFBN?oc=5",
+          "source": "Yahoo",
+          "published": "Tue, 16 Jun 2026 07:00:00 GMT"
         }
       ],
       "stories": []
