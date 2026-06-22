@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
       slug: p.slug,
       summary: p.summary,
       body_md: p.body_md,
-      tags: p.tags,
+      tags: p.tags ?? [],
       author: p.author ?? site.author,
       published_at: p.published_at,
       status: "PUBLISHED" as const,
