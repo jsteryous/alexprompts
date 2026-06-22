@@ -31,13 +31,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArchivePost({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug);
-  if (!post) notFound();
 
-  // body_md is first-party (token-gated publish flow), but sanitize anyway:
-  // markdown issues never need raw <script>, and this blocks stored XSS if a
-  // blog_posts row is ever tampered with.
-  const bodyHtml = DOMPurify.sanitize(await marked(post.body_md ?? ""));
+  // TEMP DIAGNOSTIC: surface the real production error (Next redacts server
+  // error messages to a digest in prod). Remove after root cause is found.
+  let post: Awaited<ReturnType<typeof getPost>> = null;
+  let bodyHtml = "";
+  let stage = "getPost";
+  try {
+    post = await getPost(slug);
+    if (!post) notFound();
+    stage = "marked";
+    const md = await marked(post.body_md ?? "");
+    stage = "sanitize";
+    bodyHtml = DOMPurify.sanitize(md);
+  } catch (e) {
+    if (e && typeof e === "object" && "digest" in e && String((e as { digest?: string }).digest).startsWith("NEXT_")) {
+      throw e; // notFound()/redirect signals must propagate
+    }
+    return (
+      <pre style={{ whiteSpace: "pre-wrap", padding: 40, paddingTop: 120, fontSize: 13 }}>
+        {`DIAGNOSTIC — failed at stage: ${stage}\nslug: ${slug}\n\n${String(e)}\n\n${(e as Error)?.stack ?? "(no stack)"}`}
+      </pre>
+    );
+  }
+
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
 
