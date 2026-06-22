@@ -8,6 +8,7 @@ import { getPost, formatDate } from "@/lib/posts";
 
 interface Props {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export const revalidate = 300;
@@ -29,11 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ArchivePost({ params }: Props) {
+export default async function ArchivePost({ params, searchParams }: Props) {
   const { slug } = await params;
 
   // TEMP DIAGNOSTIC: surface the real production error (Next redacts server
-  // error messages to a digest in prod). Remove after root cause is found.
+  // error messages to a digest in prod). Logged server-side always; the stack
+  // is only rendered when ?token=<PUBLISH_SECRET> matches, never to the public.
+  // Remove this whole try/catch once the root cause is found.
   let post: Awaited<ReturnType<typeof getPost>> = null;
   let bodyHtml = "";
   let stage = "getPost";
@@ -48,11 +51,17 @@ export default async function ArchivePost({ params }: Props) {
     if (e && typeof e === "object" && "digest" in e && String((e as { digest?: string }).digest).startsWith("NEXT_")) {
       throw e; // notFound()/redirect signals must propagate
     }
-    return (
-      <pre style={{ whiteSpace: "pre-wrap", padding: 40, paddingTop: 120, fontSize: 13 }}>
-        {`DIAGNOSTIC — failed at stage: ${stage}\nslug: ${slug}\n\n${String(e)}\n\n${(e as Error)?.stack ?? "(no stack)"}`}
-      </pre>
-    );
+    console.error("archive post render failed", { stage, slug, err: e });
+    const token = (await searchParams)?.token;
+    const secret = process.env.PUBLISH_SECRET;
+    if (secret && token === secret) {
+      return (
+        <pre style={{ whiteSpace: "pre-wrap", padding: 40, paddingTop: 120, fontSize: 13 }}>
+          {`DIAGNOSTIC — failed at stage: ${stage}\nslug: ${slug}\n\n${String(e)}\n\n${(e as Error)?.stack ?? "(no stack)"}`}
+        </pre>
+      );
+    }
+    throw e; // public visitors get the normal redacted error page
   }
 
   const authorName = post.author ?? site.author;
