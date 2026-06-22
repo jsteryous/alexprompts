@@ -15,7 +15,15 @@ export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  // TEMP DIAGNOSTIC: don't let a getPost failure here 500 the page before the
+  // component's try/catch can surface it. Remove with the rest of the diagnostic.
+  let post: Awaited<ReturnType<typeof getPost>> = null;
+  try {
+    post = await getPost(slug);
+  } catch (e) {
+    console.error("generateMetadata getPost failed", { slug, err: e });
+    return { title: "Issue" };
+  }
   if (!post) return { title: "Not found" };
   return {
     title: post.title,
