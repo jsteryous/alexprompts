@@ -147,7 +147,7 @@ replace the `TODO(alex)` values.
 ## Deployment
 
 - **Platform:** Vercel (Hobby), auto-deploy on push to `main`.
-- **Repo:** https://github.com/jsteryous/rebbadvisors-website (repo not yet renamed).
+- **Repo:** https://github.com/jsteryous/alexprompts (renamed from `rebbadvisors-website`; the old URL still redirects).
 - **Production:** alexprompts.com (confirm DNS).
 
 ```bash
