@@ -2,7 +2,8 @@
  * Single source of truth for Alex Prompts brand + links + voice.
  *
  * Edit handles/URLs here and every page (nav, footer, JSON-LD, sitemap) updates.
- * Voice mirrors scripts/ai_news/ (WRITER_PROMPT). NOTE: the site is repositioned
+ * Voice mirrors the Claude routine's writer pass
+ * (scripts/ai_news/routine/pass3_writer.md). NOTE: the site is repositioned
  * to AI how-to education; the scripts/ pipeline + brand docs still describe the
  * old frontier-news brand and lag this file.
  *
@@ -99,7 +100,7 @@ export const tools = [
 /**
  * The teaching approach, in order. Renders as the homepage "how every guide
  * works" strip and the About page. This IS the promise to the reader; keep the
- * voice in sync with scripts/ai_news/digest.py (WRITER_PROMPT).
+ * voice in sync with scripts/ai_news/routine/pass3_writer.md.
  */
 export const principles = [
   {

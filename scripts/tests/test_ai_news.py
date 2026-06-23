@@ -20,7 +20,7 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
-from ai_news import collect, digest, shorts  # noqa: E402
+from ai_news import collect, digest  # noqa: E402
 from ai_news.collect import Collection, EntityReport, Story  # noqa: E402
 
 
@@ -204,54 +204,9 @@ class TestSerialization(unittest.TestCase):
         self.assertIn("Anthropic", payload)
 
 
-# ── style guardrails ──────────────────────────────────────────────────────────
-
-class TestStyleGuardrails(unittest.TestCase):
-    def test_sentence_joining_dash_becomes_period(self):
-        out = digest.strip_em_dashes("It shipped Friday — Anthropic complied within hours.")
-        self.assertEqual(out, "It shipped Friday. Anthropic complied within hours.")
-
-    def test_parenthetical_dash_becomes_comma(self):
-        out = digest.strip_em_dashes("the model — its most capable yet — went dark")
-        self.assertEqual(out, "the model, its most capable yet, went dark")
-
-    def test_en_dash_also_stripped(self):
-        self.assertNotIn("–", digest.strip_em_dashes("a 2020–2026 trend in models"))
-
-    def test_no_dash_left_untouched(self):
-        s = "A clean sentence with no dashes at all."
-        self.assertEqual(digest.strip_em_dashes(s), s)
-
-    def test_find_fluff_flags_banned(self):
-        found = digest.find_fluff("In an unprecedented move that sent ripples through the AI landscape.")
-        self.assertIn("in an unprecedented move", found)
-        self.assertIn("the ai landscape", found)
-
-    def test_find_fluff_clean_text(self):
-        self.assertEqual(digest.find_fluff("Anthropic shut both models off worldwide."), [])
-
-    def test_first_headline_extraction(self):
-        md = "# Washington Switched It Off\n\nOn Friday evening..."
-        self.assertEqual(digest._first_headline(md), "Washington Switched It Off")
-
-    def test_first_headline_fallback(self):
-        self.assertEqual(digest._first_headline("no h1 here"), "Alex Prompts — weekly draft")
-
-
-# ── short-form ────────────────────────────────────────────────────────────────
-
-class TestShorts(unittest.TestCase):
-    def test_prompt_interpolates_count(self):
-        self.assertIn("Produce 6 scripts", shorts.SHORTS_PROMPT.format(n=6))
-
-    def test_prompt_bans_em_dashes_and_format(self):
-        p = shorts.SHORTS_PROMPT.format(n=4)
-        self.assertIn("NO em dashes", p)
-        self.assertIn("[VISUAL:", p)
-        self.assertIn("voiceover", p.lower())
-
-    def test_build_shorts_is_callable(self):
-        self.assertTrue(callable(shorts.build_shorts))
+# Gemini-era style-guardrail and short-form tests were removed with the Gemini
+# pipeline (digest.strip_em_dashes / find_fluff / _first_headline, shorts.*).
+# The Claude routine now owns drafting + house-style enforcement.
 
 
 if __name__ == "__main__":

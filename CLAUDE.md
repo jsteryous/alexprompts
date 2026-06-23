@@ -65,27 +65,32 @@ The stance, stated honestly:
 
 ## Voice (mirror of `scripts/ai_news` prompts — keep in sync)
 
-The canonical voice lives in `scripts/ai_news/digest.py` (`WRITER_PROMPT`) and
-`shorts.py`. Site copy must match it:
+The canonical voice lives in the Claude routine's writer pass
+(`scripts/ai_news/routine/pass3_writer.md`). Site copy must match it:
 
-- **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (`digest.py`
-  has a `strip_em_dashes()` backstop because models ignore the rule — the website has no
-  such backstop, so do not introduce dashes in copy.)
+- **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (The routine
+  enforces this in its passes; the website has no automated backstop, so do not introduce
+  dashes in copy.)
 - **No sentence fragments.** Every sentence has a subject and a verb.
 - Punch comes from short sentences and strong verbs, not dashes or fragments.
 - Open cold and concrete. Lead with a fact, a scene, or a number.
 - Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
 - **Grounded optimism.** Steelman the strongest opposing view before resolving.
-- Banned fluff (see `BANNED_PHRASES` in `digest.py`): "in an unprecedented move," "sent
-  ripples," "the AI landscape," "game-changer," "a new era," etc.
+- Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
+  "game-changer," "a new era," etc.
 
 ## The content engine (`scripts/ai_news/`)
 
-Already pivoted to Alex Prompts; see `scripts/CLAUDE.md`. Two-pass Gemini pipeline:
-reporter brief (grounded fact-finding) → writer pass (house style). Emits a **newsletter
-draft** + a **short-form script queue** and emails them to Alex via Resend for manual
-edit/publish. The legacy dental pipeline is retired under `scripts/_archive/` — do not
-revive it.
+See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** A GitHub Action
+(`collect-signal.yml`) collects and scores the week's signal (`collect.py` + the
+`digest.py` collector) and commits it; the **Saturday Claude routine**
+(`scripts/ai_news/routine/`, an orchestrator plus isolated Opus passes) reads that signal
+and writes the weekly draft, delivering it to Google Drive and Gmail. The legacy dental
+pipeline is retired under `scripts/_archive/` — do not revive it.
+
+> NOTE: the routine still describes the old frontier-news brand. The site is repositioned
+> to AI how-to education (see `src/lib/site.ts`); reframing the routine to produce how-to
+> guide scaffolding is a pending follow-up.
 
 ## Site structure
 
@@ -128,10 +133,6 @@ replace the `TODO(alex)` values.
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Used by `/api/publish`. |
 | `PUBLISH_SECRET` | Shared secret for `/review` + `/api/publish` + `/api/review/save`. |
-| `GEMINI_API_KEY` | Content engine (`scripts/ai_news/`). |
-| `RESEND_API_KEY` | Emails the weekly draft to Alex. |
-| `NOTIFICATION_EMAIL` | Draft recipient (`jsteryous@gmail.com`). |
-| `MAIL_FROM` | Resend sender on a verified domain (see `scripts/CLAUDE.md`). |
 | `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication base (subdomain or custom domain, NOT the `/@handle` profile). Drives the Subscribe button (`/subscribe`) and the archive RSS mirror (`/feed`). Defaults to `https://alexprompts.substack.com` — confirm. |
 | `SUBSTACK_FEED_URL` | Optional override for the feed URL. Defaults to `${NEXT_PUBLIC_SUBSTACK_URL}/feed`. |
 | `CRON_SECRET` | Authorizes the Vercel cron call to `/api/sync-substack` (sent as `Authorization: Bearer …`). Manual runs use `?token=${PUBLISH_SECRET}`. |

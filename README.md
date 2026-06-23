@@ -1,13 +1,12 @@
 # Alex Prompts
 
-The website + content engine for **Alex Prompts**, a personal media brand covering the
-companies building the future (frontier AI labs + hard tech). Frontier tech, translated.
+The website + content engine for **Alex Prompts**, an AI education brand that shows
+curious, non-technical people how to actually use AI. Do more with AI than you think you can.
 
-- **Site:** Next.js 16 home base — homepage, `/about`, and the `/archive` of newsletter
-  issues. Built to grow an audience and convert viewers into email subscribers.
-- **Content engine:** `scripts/ai_news/` — a Python pipeline that sources the week's
-  frontier-tech news, drafts the newsletter + short-form scripts with Gemini, and emails
-  them to Alex for edit/publish.
+- **Site:** Next.js 16 home base — homepage, `/about`, and the `/archive` of guides.
+  Built to grow an audience and convert viewers into email subscribers.
+- **Content engine:** `scripts/ai_news/` — a Python signal collector feeding a weekly
+  Claude routine that drafts the newsletter. Gemini was removed; Claude routines only.
 
 See `CLAUDE.md` for full context, voice, and architecture.
 

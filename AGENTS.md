@@ -20,15 +20,14 @@ A personal media brand by Alex Steryous covering the companies building the futu
 - **Website** (`src/`) — Next.js 16 home base: `/`, `/about`, `/archive`
   (`/archive/[slug]`), and the token-gated `/review` publish flow. Edit brand details in
   `src/lib/site.ts`.
-- **Content engine** (`scripts/ai_news/`) — the active Python pipeline. Sources the
-  week's frontier-tech news, runs a two-pass Gemini draft, and emails Alex a newsletter
-  draft + short-form script queue. See `scripts/CLAUDE.md`. **Do not touch the Python
-  scripts as part of website work** unless explicitly asked.
+- **Content engine** (`scripts/ai_news/`) — a Python signal collector feeding a weekly
+  Claude routine that drafts the newsletter (Gemini was removed). See `scripts/CLAUDE.md`.
+  **Do not touch the Python scripts as part of website work** unless explicitly asked.
 
 ## Working agreements
 
 - Match the house voice in all copy: no em dashes, no fragments, plain English, grounded
-  optimism. The canonical voice is `scripts/ai_news/digest.py` (`WRITER_PROMPT`).
+  optimism. The canonical voice is `scripts/ai_news/routine/pass3_writer.md`.
 - Keep `src/lib/site.ts` the single source of truth for brand/links. It holds
   `TODO(alex)` placeholders (domain + social handles) to confirm before launch.
 - After deleting/renaming routes, `rm -rf .next` before `npm run build` (stale typed
