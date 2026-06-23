@@ -6,7 +6,7 @@ import { useState } from "react";
 import { newsletterUrl, site } from "@/lib/site";
 
 const links = [
-  { href: "/archive", label: "Archive" },
+  { href: "/archive", label: "Guides" },
   { href: "/about", label: "About" },
   { href: "/#follow", label: "Follow" },
 ];

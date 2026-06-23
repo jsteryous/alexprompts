@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { site, socials, coverage } from "@/lib/site";
+import { site, socials, tools } from "@/lib/site";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -41,19 +41,16 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
         <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
-          We cover
+          Tools we teach
         </p>
         <p className="theme-text-muted text-sm leading-relaxed max-w-3xl">
-          {coverage.join(" · ")}
+          {tools.join(" · ")}
         </p>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pb-8">
         <p className="theme-text-muted text-xs">
           &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
-        </p>
-        <p className="theme-text-muted text-xs mt-1 opacity-70">
-          Space imagery: NASA / public domain.
         </p>
       </div>
     </footer>

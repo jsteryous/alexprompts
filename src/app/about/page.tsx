@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, socials, coverage, newsletterUrl, principles } from "@/lib/site";
+import { site, socials, outcomes, newsletterUrl, principles } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Who writes ${site.name} and the framework behind it. ${site.oneLiner}`,
+  description: `Who writes ${site.name} and the approach behind it. ${site.oneLiner}`,
   alternates: { canonical: `${site.url}/about` },
 };
 
@@ -33,14 +33,13 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">About</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
-            Change is the only constant.
+            I help you do the things AI just made possible.
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed">
-            Understanding technology has become as essential as reading was two
-            hundred years ago. If you can&apos;t read, you&apos;re shut out of modern
-            society. If you don&apos;t understand the forces shaping the next ten to
-            thirty years, you&apos;re increasingly shut out of economic opportunity,
-            political decisions, and personal control over your life.
+            Powerful AI tools arrive every month, built by engineers and documented for
+            engineers, and quietly out of reach for everyone else. I take those tools, figure
+            them out, and show you how to use them in plain English. You will not need to
+            write code, and nothing is assumed.
           </p>
           <p className="theme-text-muted text-sm mt-8 border-t theme-border pt-5">
             Written by {site.author}.
@@ -53,76 +52,61 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">The problem</Eyebrow>
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-6">
-            It is not AI. It is the noise about it.
+            You are not locked out because you are slow.
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              Open any feed and you get a miracle and an apocalypse in the same thirty
-              seconds. AI just cured a disease. AI is coming for your job. Buy this. Fear
-              that. The feed does not want you informed, because an informed person closes
-              the app. It wants you scrolling, so it sells you a feeling instead of an
-              understanding, and you go to bed wired, worried, and no smarter than you woke
-              up.
+              Open the app everyone is talking about and you hit a wall in the first five
+              minutes. A setting you have never heard of. A word that means nothing to you. An
+              instruction that assumes you already know the thing it is supposed to teach. So
+              you close the tab and decide this must not be for you. It is for you. The tool
+              was just never explained to a person starting from zero, which is most people.
             </p>
           </div>
           <blockquote className="theme-card-accent border rounded-2xl p-7 md:p-8 mt-8">
             <p className="theme-text-primary text-xl md:text-2xl font-semibold tracking-tight leading-snug">
-              Hype and doom look like enemies. They are business partners.
+              The wall is real. It is also short, once someone shows you where the footholds are.
             </p>
             <p className="theme-text-secondary text-base leading-relaxed mt-3">
-              Both trade your attention for a take you will have forgotten by morning.
+              Standing at the bottom of that wall, calmly pointing out the next foothold, is
+              the entire job here.
             </p>
           </blockquote>
         </div>
       </section>
 
-      {/* ── The stance ── */}
+      {/* ── Why I do this ── */}
       <section className="theme-section-contrast py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
-          <Eyebrow className="mb-5">The stance</Eyebrow>
+          <Eyebrow className="mb-5">Why I do this</Eyebrow>
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-6">
-            We don&apos;t build the future. We listen to the people who are.
+            I taught myself the scary version, then made it simple.
           </h2>
-          <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-10">
-            Alan Kay said it in 1971. &ldquo;The best way to predict the future is to
-            invent it.&rdquo; We are not the ones inventing it. We watch closely. The
-            people building it talk constantly about what they are making and what they
-            expect to happen next. We take those predictions apart, give the
-            counterarguments their due, and ask what is actually worth acting on.
+          <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-6">
+            I am genuinely fascinated by these tools, so I go places most people would not
+            bother to go. I taught myself one of the most intimidating corners of AI, the kind
+            that lives in a command line and looks like it was built to keep normal people
+            out. Then I made a plain walkthrough of it. No fast cuts, no music, no
+            performance. Just here is the thing, here is exactly what to do, and you can do
+            this too.
           </p>
-
-          <div className="grid gap-4 sm:grid-cols-2 mb-10">
-            <div className="theme-card-strong border theme-border rounded-xl p-6">
-              <p className="theme-text-primary text-lg font-semibold leading-snug mb-3">
-                &ldquo;Work will become optional.&rdquo;
-              </p>
-              <p className="theme-text-muted text-sm font-medium">Elon Musk</p>
-            </div>
-            <div className="theme-card-strong border theme-border rounded-xl p-6">
-              <p className="theme-text-primary text-lg font-semibold leading-snug mb-3">
-                Serious warnings about what happens to jobs.
-              </p>
-              <p className="theme-text-muted text-sm font-medium">Dario Amodei</p>
-            </div>
-          </div>
-
           <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
-            These are not pundits. They are the builders, and the surest way to predict the
-            future is to build it, so I take them seriously. I just do not take them as
-            settled. When someone says work will be optional, the right response is not
-            applause or panic. It is a better question. Optional for whom? On what timeline?
-            Paid how? That is the work {site.name} does.
+            It helped people. Real, non-technical people who had tried and bounced off. That
+            told me two things at once. The hunger to actually use this stuff is everywhere,
+            and the thing standing in the way is almost never intelligence. It is that nobody
+            slowed down and showed them. So that is what I do now, every week, with whatever
+            the tools just made newly possible.
           </p>
         </div>
       </section>
 
-      {/* ── The method ── */}
+      {/* ── The approach ── */}
       <section className="theme-section py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-2xl mb-10">
-            <Eyebrow className="mb-4">The method</Eyebrow>
+            <Eyebrow className="mb-4">How every guide works</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
-              Every issue runs the same way. Five steps, every time.
+              The same calm, careful approach every time.
             </h2>
           </div>
           <ol className="grid gap-5 md:grid-cols-2">
@@ -150,40 +134,45 @@ export default function AboutPage() {
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              The AI prompts, and prompting real discussion. Every article, video, and post
-              is built to do one thing. Ask a simple question that turns out to be hard, the
-              kind that gets the most opinionated person in the room to actually say what
-              they think. I am not here to hand you a conclusion. I am here to give you the
-              facts, the strongest version of every side, my honest read, and then the
-              question worth arguing about.
+              A prompt is what you type to tell an AI what you want, and learning to write good
+              ones is half the skill. A prompt is also a nudge, the small push to finally make
+              the thing you have been putting off. Alex Prompts is built to do both. I teach
+              you what to say to the machine, and I prompt you to go and actually do it.
             </p>
             <p>
-              None of this is investment advice. It is a grounded belief that groundbreaking
-              technology is how new work, new industries, and stronger economies get made,
-              paired with a refusal to pretend the hard parts are not real.
+              These tools are changing what is possible faster than anyone can keep up, so
+              every guide leaves a little room for the bigger question underneath. Not only how
+              to do the thing, but what it means that you suddenly can.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── What I cover ── */}
-      <section className="theme-section-muted border-y theme-border py-14 md:py-20">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <Eyebrow className="mb-6">What I cover</Eyebrow>
-          <div className="flex flex-wrap justify-center gap-2.5 mb-6">
-            {coverage.map((c) => (
-              <span
-                key={c}
-                className="theme-card-strong theme-text-secondary border theme-border text-sm font-medium px-4 py-2 rounded-full"
-              >
-                {c}
-              </span>
-            ))}
+      {/* ── What you'll learn ── */}
+      <section className="theme-section-muted border-y theme-border py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-2xl mb-10">
+            <Eyebrow className="mb-4">What you&apos;ll learn</Eyebrow>
+            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+              Real things you can finish, not tools you have to study.
+            </h2>
           </div>
-          <p className="theme-text-muted text-base leading-relaxed">
-            And how to reason strategically about the future. The content is always free. I
-            appreciate any support you send my way. I appreciate you joining the argument
-            even more.
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {outcomes.map((o) => (
+              <li
+                key={o.title}
+                className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
+              >
+                <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                  {o.title}
+                </h3>
+                <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="theme-text-muted text-base leading-relaxed mt-8">
+            New guides every week, always free. I appreciate any support you send my way. I
+            appreciate you finally making the thing even more.
           </p>
         </div>
       </section>
@@ -192,10 +181,10 @@ export default function AboutPage() {
       <section className="theme-section-contrast py-20 md:py-28">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight mb-4">
-            Prompt the future. Pontificate with us.
+            Start with one thing you have always wanted to do.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            Subscribe for the weekly issue, or follow the clips wherever you watch.
+            Subscribe for a new walkthrough each week, or follow the short ones wherever you watch.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a
@@ -208,7 +197,7 @@ export default function AboutPage() {
               <ArrowIcon />
             </a>
             <Link href="/archive" className="theme-link inline-flex items-center gap-2 font-medium px-5 py-3.5 text-sm">
-              Browse the archive <ArrowIcon className="w-3.5 h-3.5" />
+              Browse the guides <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
           <p className="theme-text-muted text-sm mt-8">

@@ -2,8 +2,9 @@
  * Single source of truth for Alex Prompts brand + links + voice.
  *
  * Edit handles/URLs here and every page (nav, footer, JSON-LD, sitemap) updates.
- * Voice + coverage mirror scripts/ai_news/ (WRITER_PROMPT + collect.py ENTITIES);
- * keep them in sync when the editorial brand shifts.
+ * Voice mirrors scripts/ai_news/ (WRITER_PROMPT). NOTE: the site is repositioned
+ * to AI how-to education; the scripts/ pipeline + brand docs still describe the
+ * old frontier-news brand and lag this file.
  *
  * TODO(alex): confirm the contact email. The `tagline` is a placeholder you're
  * still refining — swapping it is a one-line change here.
@@ -31,27 +32,24 @@ export const site = {
   email: "hello@alexprompts.com", // TODO(alex): confirm contact inbox
   url: SITE_URL,
 
-  // The brand spine. The job: read what the builders say about the future (what
-  // they're building AND what they predict), measure it against the present,
-  // make the honest case for the upside, steelman the skeptics against history's
-  // track record, then end on the questions worth arguing about.
-  tagline: "The future, in the builders' own words.",
+  // The brand spine. The job: take the powerful AI tools that feel built for
+  // engineers, and show curious non-technical people how to actually use them.
+  // Start from a real outcome, go slow, no jargon, no hype. The frontier-watching
+  // is the engine (we find the new thing you can now do); the how-to is the product.
+  tagline: "Do more with AI than you think you can.",
   oneLiner:
-    "AI hype and doom keep you anxious and no smarter. Alex Prompts turns the biggest story from the people building the future into plain English each week, so you can see where this is heading and decide from understanding, not fear.",
+    "Powerful AI tools feel like they were built for engineers. Alex Prompts shows curious, non-technical people how to actually use them, one real project at a time, with no jargon and no hype.",
   description:
-    "Alex Prompts covers the companies building the future. We take what the tech leaders " +
-    "say, both what they are building and what they predict, and translate it into plain " +
-    "English. We measure the claim against the present, make the honest case for why it " +
-    "could be good for people, give the skeptics their due against history's track record, " +
-    "and end on a few real questions worth arguing about. The name is a double meaning: the " +
-    "AI prompts, and prompting the reader.",
+    "Alex Prompts helps curious, non-technical people do real things with AI. We take the " +
+    "powerful tools that feel locked behind a wall built for engineers, and we show you how " +
+    "to use them, calmly and step by step. We start from a real outcome you want, we go slow " +
+    "enough that nothing is assumed, and we skip the hype. The name is a double meaning: the " +
+    "AI prompts, and the questions worth asking about where this is all going.",
 
-  // The touchstone idea. NOTE: the canonical line "The best way to predict the
-  // future is to invent it" is Alan Kay (1971); the "create it" variant is
-  // misattributed all over (Lincoln, Drucker, Bezos). A truth-first brand should
-  // not stamp a shaky citation on its homepage, so we use it unattributed.
+  // The touchstone idea. The tools keep outrunning the instructions, so the
+  // scarce thing is someone who stands in the gap and shows you across.
   creed:
-    "The surest way to predict the future is to build it. We are not building it. We are listening to the people who are, and arguing about what it means.",
+    "The tools keep getting more powerful, and the gap between what they can do and what a normal person can actually access keeps getting wider. We stand in that gap. We find the new thing you can now do, and we show you exactly how to do it.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */
@@ -86,97 +84,89 @@ export const socials = [
 /** The Subscribe button target: Substack's one-click subscribe page. */
 export const newsletterUrl = `${SUBSTACK_URL}/subscribe`;
 
-/** Companies covered. Mirrors collect.py ENTITIES (the discovery/scoring set). */
-export const coverage = [
-  "Anthropic",
-  "OpenAI",
-  "Google DeepMind",
-  "xAI",
-  "Meta AI",
-  "Nvidia",
-  "Tesla",
-  "SpaceX",
-  "Neuralink",
+/** The tools the guides teach. Renders in the footer; signals what you'll learn
+ *  to use and doubles as search-friendly terms. Edit freely as coverage shifts. */
+export const tools = [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity",
+  "Midjourney",
+  "Suno",
+  "NotebookLM",
 ] as const;
 
 /**
- * The method, in order. Renders as the homepage "how it works" strip and the
- * About page. This IS the editorial promise; keep it in sync with the voice in
- * scripts/ai_news/digest.py (WRITER_PROMPT).
+ * The teaching approach, in order. Renders as the homepage "how every guide
+ * works" strip and the About page. This IS the promise to the reader; keep the
+ * voice in sync with scripts/ai_news/digest.py (WRITER_PROMPT).
  */
 export const principles = [
   {
-    title: "Start with the builders",
-    body: "We begin with what the people building the future are actually saying and shipping, from AI datacenters in orbit to “work will be optional.” Their words and their work are the raw material.",
+    title: "Start from a real outcome",
+    body: "We begin with something you actually want to make or do, not a tour of buttons. The goal comes first and the tool comes second.",
   },
   {
-    title: "Measure it against today",
-    body: "We hold the claim up against the present. What exists right now, what would have to change for the promise to land, and the honest distance between the keynote and the demo.",
+    title: "Assume nothing",
+    body: "We go slow enough for someone who has never opened the app. Every step is shown in plain words, with nothing skipped and no jargon left undefined.",
   },
   {
-    title: "Make the case for the upside",
-    body: "Where the evidence supports it, we say plainly why this is good for people, economically and socially. Optimism is a finding, not a reflex. When the facts turn, so do we.",
+    title: "Skip the hype",
+    body: "No big music, no breathless promises, no selling. Just the honest steps, including the fiddly parts and the places the tool still falls short.",
   },
   {
-    title: "Then call the skeptics",
-    body: "We give the strongest version of the doubt its due, and we check it against history, where confident predictions about technology have a famously bad track record.",
+    title: "Leave you able to do it again",
+    body: "The point is not to watch. The point is that you can do it yourself afterward, and the next thing too, because you learned the fundamentals and not just the recipe.",
   },
   {
-    title: "And we prompt you",
-    body: "Every piece ends on a few genuine questions worth arguing about, the kind a thoughtful person could answer either way. That is the point. Alex Prompts.",
+    title: "Stay at the frontier for you",
+    body: "The tools change every month. We stay out at the edge so we can show you the new thing you can now do, often before you knew to ask for it.",
   },
 ] as const;
 
 /**
- * The "what we're about" blurb. Prose, not bullets. It demonstrates the value
- * (orientation) instead of claiming it: shows the reader why frontier tech is
- * worth tracking, why specific predictions fail, and why synthesizing the old
- * and long-form against the news leaves you better oriented than chasing it.
- * Voice = house style (no em dashes, no fragments). Anchor quote is Alan Kay,
- * 1971, exact wording "invent it" (the "create it" version is a misquote).
+ * The proof of the promise: concrete things a non-technical person can learn to
+ * do. Renders as the homepage "what you'll learn" grid, replacing the old
+ * lab-logo coverage chips as the value display. Keep each one an OUTCOME (a thing
+ * you finish), never a tool (a thing you tour).
+ */
+export const outcomes = [
+  {
+    title: "Build your own website",
+    body: "Put a real personal site online with no coding experience, letting AI do the heavy lifting.",
+  },
+  {
+    title: "Organize the mess",
+    body: "Sort the years of photos, files, and notes you have been avoiding, with AI doing the sorting.",
+  },
+  {
+    title: "Make something personal",
+    body: "A custom kids' book, a birthday video, or a gift made just for one person, finished in an afternoon.",
+  },
+  {
+    title: "Research a big decision",
+    body: "A car, a house, or a medical question, worked through with AI without getting fooled by it.",
+  },
+  {
+    title: "Automate the boring parts",
+    body: "The repetitive admin of a job, a side hustle, or a household, set up once and handled for you.",
+  },
+  {
+    title: "Plan something real",
+    body: "A two-week trip, an event, or a budget, turned from a vague idea into a concrete plan.",
+  },
+] as const;
+
+/**
+ * The "what we're about" blurb. Prose, not bullets. It demonstrates the promise
+ * (we make locked-away AI usable for normal people) instead of claiming it: the
+ * wall is real but short, the job is to show you across, and the frontier-watching
+ * is the engine that keeps finding the next thing you can now do.
+ * Voice = house style (no em dashes, no fragments).
  * Rendered as paragraphs; the first reads as the lead.
  */
 export const manifesto = [
-  `Technology is one of the few forces that reliably reshapes the basic conditions of life, often within a single career or lifetime. If you’re making decisions with long time horizons, like what to study, what skills to build, where to invest, what to build a company around, which companies to join, or how to think about your kids’ future, then having an informed sense of where things are heading helps you avoid betting on a dying paradigm or missing an emerging one.`,
-  `Alan Kay famously said, “The best way to predict the future is to invent it,” so we analyze what the builders are predicting and the actions they are taking. But specific predictions are usually wrong, especially on timing. People who confidently called the direction of the internet often badly missed the shape (we got social media and ad surveillance, not the decentralized utopia many expected). The useful skill is less “knowing what happens” and more developing good intuitions about how change propagates, what bottlenecks are real, and how to distinguish hype cycles from genuine inflection points.`,
-  `Unfortunately, following frontier-tech discourse can become a consumption habit that feels like insight but mostly produces anxiety and a sense of falling behind. Depth in one thing you can actually act on usually beats shallow awareness of everything. This type of information decays in days. Alex Prompts aims to avoid that by synthesizing older long-form pieces and qualitative studies with present-day news. Counterintuitively, going slower and older often leaves you better oriented, because you’re learning structure instead of tracking noise.`,
-] as const;
-
-/**
- * The track record. Verified, famous misfires by very smart people betting
- * against technology. The recurring brand device behind "doubt the consensus."
- * Framing (carried in the section copy, not here): this does NOT prove every
- * optimist right. It raises the bar for "this time is different."
- * Keep these VERIFIED. Do not add apocryphal ones (the "five computers" Watson
- * quote, the Western Union telephone memo, the Gates "640K" line are all myths).
- */
-export const trackRecord = [
-  {
-    who: "Irving Fisher",
-    role: "Yale economist",
-    year: "1929",
-    quote: "Stock prices have reached what looks like a permanently high plateau.",
-    aftermath: "Days later, the market crashed into the Great Depression.",
-  },
-  {
-    who: "Paul Krugman",
-    role: "economist",
-    year: "1998",
-    quote: "By 2005 or so, it will become clear that the Internet's impact on the economy has been no greater than the fax machine's.",
-    aftermath: "The internet reshaped the entire economy.",
-  },
-  {
-    who: "Steve Ballmer",
-    role: "Microsoft CEO",
-    year: "2007",
-    quote: "There's no chance that the iPhone is going to get any significant market share.",
-    aftermath: "The iPhone went on to define the modern phone.",
-  },
-  {
-    who: "Robert Metcalfe",
-    role: "co-inventor of Ethernet",
-    year: "1995",
-    quote: "The Internet will soon go spectacularly supernova and in 1996 catastrophically collapse.",
-    aftermath: "In 1997 he blended a copy of the column and ate it on stage.",
-  },
+  `Powerful AI is here, and most people are locked out of it. Not because they are not smart enough, but because the tools were built by engineers for engineers, and the instructions assume things nobody ever taught you. The gap is not your ability. It is that no one has shown you, calmly and from the beginning.`,
+  `That is the whole job here. We take a real thing you want to do, and we walk it one step at a time, slow enough that nothing is assumed and plain enough that nothing needs a second read. There is no hype, because hype makes you feel behind. There is no jargon, because jargon makes you feel dumb. There are just the actual steps, including the fiddly parts most tutorials quietly skip.`,
+  `The tools get more powerful every month, and every jump opens a new wave of things a normal person can suddenly do, if someone shows them how. That is where we live. We stay out at the frontier, we find the next thing you can now do, and we bring it back in plain English so you can do it too. You came to watch one walkthrough. You stay because the locked rooms keep opening.`,
 ] as const;

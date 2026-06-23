@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import { socials, newsletterUrl, manifesto } from "@/lib/site";
+import { socials, newsletterUrl, manifesto, outcomes, principles } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
 
 export const revalidate = 300;
@@ -27,6 +26,15 @@ function SubscribeButton({ className = "" }: { className?: string }) {
   );
 }
 
+function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={`theme-label inline-block text-xs font-semibold uppercase tracking-[0.2em] ${className}`}>
+      <span className="opacity-50">{"> "}</span>
+      {children}
+    </span>
+  );
+}
+
 function FeaturedStory({ post }: { post: ArchivePost }) {
   return (
     <Link
@@ -35,7 +43,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
     >
       <div className="flex items-center gap-3 mb-4">
         <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-          Latest issue
+          Latest guide
         </span>
         {post.published_at && (
           <time className="theme-text-muted text-xs uppercase tracking-widest">
@@ -52,7 +60,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
         </p>
       )}
       <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
-        Read the issue <ArrowIcon className="w-3.5 h-3.5" />
+        Read the guide <ArrowIcon className="w-3.5 h-3.5" />
       </span>
     </Link>
   );
@@ -62,26 +70,17 @@ function EmptyLead() {
   return (
     <div className="theme-card border theme-border rounded-2xl p-8 md:p-12 text-center">
       <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-        Issue 001 incoming
+        First guide incoming
       </span>
       <h3 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
-        The first issue is loading.
+        The first walkthrough is on its way.
       </h3>
       <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-7">
         Subscribe now and the very first one lands in your inbox the day it ships.
-        No spam. No filler. One read a week.
+        You will get one clear walkthrough at a time, and nothing else.
       </p>
       <SubscribeButton className="px-7 py-3.5" />
     </div>
-  );
-}
-
-function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span className={`theme-label inline-block text-xs font-semibold uppercase tracking-[0.2em] ${className}`}>
-      <span className="opacity-50">{"> "}</span>
-      {children}
-    </span>
   );
 }
 
@@ -92,62 +91,105 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="theme-section-contrast relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src="/img/hero-earth-limb.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(8,10,14,0.94) 0%, rgba(8,10,14,0.78) 48%, rgba(8,10,14,0.4) 100%), linear-gradient(0deg, rgba(8,10,14,0.95) 0%, rgba(8,10,14,0) 45%)",
-            }}
-          />
-        </div>
+      <section className="theme-page relative overflow-hidden pt-32 md:pt-40 pb-16 md:pb-24">
+        <span
+          className="prompt-watermark absolute -right-8 top-8 text-[16rem] md:text-[24rem] hidden sm:block select-none"
+          aria-hidden
+        >
+          {">"}
+        </span>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-5">Frontier Takes.</Eyebrow>
+          <Eyebrow className="mb-5">Learn AI by doing</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
-            The consensus on AI is usually wrong. The builders will tell you why.
+            Do more with AI than you think you can.
             <span className="caret" aria-hidden>▌</span>
           </h1>
-          <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            The crowd panics, the headlines chase clicks, and the loudest takes age the worst.
-            Alex Prompts does the opposite. I start with the people actually building the frontier,
-            from Dario Amodei&apos;s papers to Elon Musk&apos;s timelines, I measure what they claim
-            against what exists today, and I give the skeptics their strongest case before landing anywhere.
-
-            You get one clear read a week on where this is heading, and the question worth arguing about.
-            You leave oriented instead of anxious.
+          <p className="theme-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
+            Powerful AI tools feel like they were built for engineers, because they were.
+            Alex Prompts shows you how to actually use them, one real project at a time. You
+            will not need to write code, decode jargon, or wade through hype, because every
+            step is shown plainly and slow enough that nothing is assumed.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
             <Link
-              href="/archive"
+              href="#learn"
               className="theme-link inline-flex items-center gap-2 font-medium px-2 py-3.5 text-sm"
             >
-              Read the latest issue <ArrowIcon className="w-3.5 h-3.5" />
+              See what you&apos;ll learn <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Top content ── */}
-      <section className="theme-section pt-10 md:pt-12 pb-16">
+      {/* ── What you'll learn (outcomes) ── */}
+      <section id="learn" className="theme-section py-20 md:py-28 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
-          <Eyebrow className="mb-6">Fresh off the wire</Eyebrow>
+          <div className="max-w-2xl mb-12">
+            <Eyebrow className="mb-4">What you&apos;ll learn to do</Eyebrow>
+            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+              Real things you can finish, not tools you have to study.
+            </h2>
+            <p className="theme-text-secondary text-lg leading-relaxed mt-4">
+              Every guide starts from an outcome you actually want and walks you all the way
+              to it. Here is the kind of thing you will be able to do.
+            </p>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {outcomes.map((o) => (
+              <li
+                key={o.title}
+                className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
+              >
+                <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                  {o.title}
+                </h3>
+                <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── How every guide works (the approach) ── */}
+      <section className="theme-section-muted border-y theme-border py-20 md:py-28">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-2xl mb-12">
+            <Eyebrow className="mb-4">How every guide works</Eyebrow>
+            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+              The same calm, careful approach every time.
+            </h2>
+          </div>
+          <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {principles.map((p, i) => (
+              <li
+                key={p.title}
+                className="theme-card-strong border theme-border rounded-xl p-6 flex gap-4"
+              >
+                <span className="theme-label text-sm font-bold tabular-nums pt-0.5">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="theme-text-primary text-base font-semibold mb-1.5">{p.title}</h3>
+                  <p className="theme-text-muted text-sm leading-relaxed">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── Latest guides ── */}
+      <section className="theme-section py-20 md:py-28">
+        <div className="max-w-5xl mx-auto px-6">
+          <Eyebrow className="mb-6">Fresh from the newsletter</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
 
           {rest.length > 0 && (
             <>
               <div className="flex items-end justify-between mt-12 mb-6 gap-4">
                 <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
-                  More issues
+                  More guides
                 </h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
                   Full archive <ArrowIcon className="w-3.5 h-3.5" />
@@ -183,7 +225,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── What we're about ── */}
-      <section className="theme-section py-20 md:py-28">
+      <section className="theme-section py-20 md:py-28 border-t theme-border">
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-8">What we&apos;re about</Eyebrow>
           <div className="space-y-5 md:space-y-6">
@@ -193,7 +235,7 @@ export default async function HomePage() {
                 className={`leading-relaxed ${
                   i === 0
                     ? "theme-text-primary text-xl md:text-2xl font-medium tracking-tight"
-                    : "theme-text-contrast-muted text-base md:text-lg"
+                    : "theme-text-secondary text-base md:text-lg"
                 }`}
               >
                 {para}
@@ -204,12 +246,12 @@ export default async function HomePage() {
       </section>
 
       {/* ── Follow ── */}
-      <section id="follow" className="theme-section py-16 md:py-24">
+      <section id="follow" className="theme-section py-16 md:py-24 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-8">
             <Eyebrow className="mb-4">Where to find us</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight max-w-2xl">
-              Short clips during the week. The full argument in your inbox.
+              Short walkthroughs during the week. The full guide in your inbox.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -230,29 +272,13 @@ export default async function HomePage() {
       </section>
 
       {/* ── Subscribe CTA ── */}
-      <section className="theme-section-contrast relative overflow-hidden py-24 md:py-32">
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src="/img/falcon-heavy-plume.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(53, 72, 108, 0.88) 0%, rgba(53, 72, 108, 0.55) 52%, rgba(53, 72, 108, 0.8) 100%)",
-            }}
-          />
-        </div>
-        <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
+      <section className="theme-section-contrast py-24 md:py-32">
+        <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            The Big picture of AI.
+            Learn to actually use AI.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            And what to do about it.
+            One real walkthrough at a time, free in your inbox.
           </p>
           <SubscribeButton className="px-8 py-4" />
         </div>

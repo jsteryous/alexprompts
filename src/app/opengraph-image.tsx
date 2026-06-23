@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Frontier tech, translated.";
+export const alt = "Alex Prompts: Do more with AI than you think you can.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +35,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
-          ALEX PROMPTS · FRONTIER TECH, WEEKLY
+          ALEX PROMPTS · LEARN AI BY DOING
         </div>
 
         {/* Main headline */}
@@ -52,9 +52,9 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          The companies building
+          Do more with AI than
           <br />
-          the future, in plain English.
+          you think you can.
         </div>
 
         {/* Sub */}
@@ -67,8 +67,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          Every week, the biggest story from the AI labs and hard-tech companies,
-          translated. The facts, the open questions, and grounded optimism.
+          Powerful AI tools, explained for normal people. Real projects, step by
+          step, with no code, no jargon, and no hype.
         </div>
 
         {/* Bottom bar */}
@@ -106,7 +106,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              NEW ISSUE WEEKLY
+              NEW GUIDE WEEKLY
             </span>
           </div>
         </div>

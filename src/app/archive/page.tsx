@@ -5,7 +5,7 @@ import { getPublishedPosts, formatDate } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "Archive",
-  description: `Every issue of ${site.name}. Frontier AI and hard tech, translated into plain English.`,
+  description: `Every guide from ${site.name}. Learn to actually use AI, step by step, with no code and no jargon.`,
   alternates: { canonical: `${site.url}/archive` },
 };
 
@@ -22,10 +22,10 @@ export default async function ArchivePage() {
             The archive
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Every issue, in one place
+            Every guide, in one place
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            The week&apos;s biggest frontier-tech story, translated. Read the back
+            Step-by-step walkthroughs for doing real things with AI. Read the back
             catalog here, or get the next one in your inbox.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default async function ArchivePage() {
             </ul>
           ) : (
             <div className="theme-card border theme-border rounded-xl p-10 text-center">
-              <p className="theme-text-secondary text-lg mb-2">No issues published yet.</p>
+              <p className="theme-text-secondary text-lg mb-2">No guides published yet.</p>
               <p className="theme-text-muted text-sm mb-6">
                 Subscribe and you&apos;ll get the very first one.
               </p>

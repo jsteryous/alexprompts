@@ -127,12 +127,11 @@ export default async function ArchivePost({ params }: Props) {
             {site.name}
           </span>
           <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-4">
-            See the next one coming.
+            Get the next guide in your inbox.
           </h2>
           <p className="theme-text-contrast-muted mb-8 leading-relaxed">
-            One read a week. The biggest story from the frontier, the facts split from the
-            sales pitch, and the honest open question at the end. Free. You walk away
-            oriented, not anxious.
+            Every week I send one clear walkthrough, free. It is a real thing you can do with
+            AI, shown step by step, with nothing assumed and no jargon left undefined.
           </p>
           <a
             href={newsletterUrl}
