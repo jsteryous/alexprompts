@@ -106,7 +106,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              NEW GUIDE WEEKLY
+              LEARN AI BY DOING
             </span>
           </div>
         </div>

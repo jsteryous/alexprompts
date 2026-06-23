@@ -116,7 +116,7 @@ export default async function ArticleView({
             Get the next one in your inbox.
           </h2>
           <p className="theme-text-contrast-muted mb-8 leading-relaxed">
-            Every week I send one clear walkthrough, free. It is a real thing you can do with
+            I send clear walkthroughs, free. Each one is a real thing you can do with
             AI, shown step by step, with nothing assumed and no jargon left undefined.
           </p>
           <a

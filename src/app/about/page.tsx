@@ -94,7 +94,7 @@ export default function AboutPage() {
             It helped people. Real, non-technical people who had tried and bounced off. That
             told me two things at once. The hunger to actually use this stuff is everywhere,
             and the thing standing in the way is almost never intelligence. It is that nobody
-            slowed down and showed them. So that is what I do now, every week, with whatever
+            slowed down and showed them. So that is what I do now with whatever
             the tools just made newly possible.
           </p>
         </div>
@@ -171,8 +171,7 @@ export default function AboutPage() {
             ))}
           </ul>
           <p className="theme-text-muted text-base leading-relaxed mt-8">
-            New guides every week, always free. I appreciate any support you send my way. I
-            appreciate you finally making the thing even more.
+            New guides frequently, always free. I appreciate any support you send my way.
           </p>
         </div>
       </section>
@@ -184,7 +183,7 @@ export default function AboutPage() {
             Start with one thing you have always wanted to do.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            Subscribe for a new walkthrough each week, or follow the short ones wherever you watch.
+            Subscribe for new walkthroughs, or follow the short ones wherever you watch.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a

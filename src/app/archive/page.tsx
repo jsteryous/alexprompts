@@ -26,7 +26,7 @@ export default async function ArchivePage() {
             Every issue, in one place
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            The weekly newsletter, issue by issue. Read the back catalog here, or get the
+            The newsletter, issue by issue. Read the back catalog here, or get the
             next one in your inbox. For the step-by-step how-tos, see the{" "}
             <Link href="/guides" className="theme-link underline">guides</Link>.
           </p>
