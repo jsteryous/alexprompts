@@ -4,7 +4,7 @@
  * Reads the publication RSS feed (`<publication>/feed`), which carries the FULL
  * post HTML in `content:encoded` (images included), and converts each post into
  * the same Markdown shape the manual publish flow stores in `blog_posts.body_md`.
- * That keeps ONE render pipeline: marked -> DOMPurify -> theme-prose.
+ * That keeps ONE render pipeline: marked -> sanitize-html -> theme-prose.
  *
  * Pure functions (parse/convert) are kept separate from the network fetch so they
  * can be reasoned about and tested without a live feed. Called only server-side by
@@ -36,7 +36,7 @@ td.remove(["script", "style"]);
 
 // Substack wraps images as <figure><img><figcaption>. Emit raw <figure> HTML so
 // the caption survives as a real <figcaption> (marked passes block HTML through,
-// DOMPurify keeps figure/figcaption/img, and the typography `prose` styles them).
+// sanitize-html keeps figure/figcaption/img, and the typography `prose` styles them).
 td.addRule("figure", {
   filter: "figure",
   replacement: (_content, node) => {

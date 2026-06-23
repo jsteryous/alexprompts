@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { marked } from "marked";
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site, newsletterUrl } from "@/lib/site";
@@ -8,22 +8,13 @@ import { getPost, formatDate } from "@/lib/posts";
 
 interface Props {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  // TEMP DIAGNOSTIC: don't let a getPost failure here 500 the page before the
-  // component's try/catch can surface it. Remove with the rest of the diagnostic.
-  let post: Awaited<ReturnType<typeof getPost>> = null;
-  try {
-    post = await getPost(slug);
-  } catch (e) {
-    console.error("generateMetadata getPost failed", { slug, err: e });
-    return { title: "Issue" };
-  }
+  const post = await getPost(slug);
   if (!post) return { title: "Not found" };
   return {
     title: post.title,
@@ -38,40 +29,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ArchivePost({ params, searchParams }: Props) {
+export default async function ArchivePost({ params }: Props) {
   const { slug } = await params;
+  const post = await getPost(slug);
+  if (!post) notFound();
 
-  // TEMP DIAGNOSTIC: surface the real production error (Next redacts server
-  // error messages to a digest in prod). Logged server-side always; the stack
-  // is only rendered when ?token=<PUBLISH_SECRET> matches, never to the public.
-  // Remove this whole try/catch once the root cause is found.
-  let post: Awaited<ReturnType<typeof getPost>> = null;
-  let bodyHtml = "";
-  let stage = "getPost";
-  try {
-    post = await getPost(slug);
-    if (!post) notFound();
-    stage = "marked";
-    const md = await marked(post.body_md ?? "");
-    stage = "sanitize";
-    bodyHtml = DOMPurify.sanitize(md);
-  } catch (e) {
-    if (e && typeof e === "object" && "digest" in e && String((e as { digest?: string }).digest).startsWith("NEXT_")) {
-      throw e; // notFound()/redirect signals must propagate
-    }
-    console.error("archive post render failed", { stage, slug, err: e });
-    const token = (await searchParams)?.token;
-    const secret = process.env.PUBLISH_SECRET;
-    if (secret && token === secret) {
-      return (
-        <pre style={{ whiteSpace: "pre-wrap", padding: 40, paddingTop: 120, fontSize: 13 }}>
-          {`DIAGNOSTIC — failed at stage: ${stage}\nslug: ${slug}\n\n${String(e)}\n\n${(e as Error)?.stack ?? "(no stack)"}`}
-        </pre>
-      );
-    }
-    throw e; // public visitors get the normal redacted error page
-  }
-
+  // body_md is first-party (Substack mirror + token-gated publish), but sanitize
+  // anyway as defense-in-depth against a tampered row. sanitize-html is pure JS
+  // (no jsdom), so it loads cleanly in the serverless runtime — isomorphic-dompurify
+  // pulled in jsdom, whose ESM/CJS dep chain crashed the route on Vercel.
+  const bodyHtml = sanitizeHtml(await marked(post.body_md ?? ""), {
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "h1", "h2"],
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ["src", "alt", "loading", "width", "height"],
+      a: ["href", "name", "target", "rel"],
+    },
+  });
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
 
