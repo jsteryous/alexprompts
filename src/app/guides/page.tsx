@@ -4,41 +4,40 @@ import { site, newsletterUrl } from "@/lib/site";
 import { getPublishedPosts, formatDate } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: "Archive",
-  description: `The ${site.name} newsletter archive. Every issue, in plain English. Read the back catalog or subscribe for the next one.`,
-  alternates: { canonical: `${site.url}/archive` },
+  title: "Guides",
+  description: `How-to guides from ${site.name}. Learn to actually use AI, step by step, with no code and no jargon.`,
+  alternates: { canonical: `${site.url}/guides` },
 };
 
 export const revalidate = 300;
 
-export default async function ArchivePage() {
-  const posts = await getPublishedPosts(undefined, "newsletter");
+export default async function GuidesPage() {
+  const guides = await getPublishedPosts(undefined, "guide");
 
   return (
     <>
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            The newsletter
+            The guides
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Every issue, in one place
+            Every guide, in one place
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            The weekly newsletter, issue by issue. Read the back catalog here, or get the
-            next one in your inbox. For the step-by-step how-tos, see the{" "}
-            <Link href="/guides" className="theme-link underline">guides</Link>.
+            Step-by-step walkthroughs for doing real things with AI. No code, no jargon.
+            Start anywhere, follow along, and you will be able to do it yourself.
           </p>
         </div>
       </section>
 
       <section className="theme-section py-16">
         <div className="max-w-3xl mx-auto px-6">
-          {posts.length > 0 ? (
+          {guides.length > 0 ? (
             <ul className="divide-y theme-border">
-              {posts.map((p) => (
+              {guides.map((p) => (
                 <li key={p.id} className="py-7 first:pt-0">
-                  <Link href={`/archive/${p.slug}`} className="group block">
+                  <Link href={`/guides/${p.slug}`} className="group block">
                     {p.published_at && (
                       <time className="theme-text-muted text-xs uppercase tracking-widest">
                         {formatDate(p.published_at)}
@@ -56,9 +55,9 @@ export default async function ArchivePage() {
             </ul>
           ) : (
             <div className="theme-card border theme-border rounded-xl p-10 text-center">
-              <p className="theme-text-secondary text-lg mb-2">No issues published yet.</p>
+              <p className="theme-text-secondary text-lg mb-2">The first guides are on the way.</p>
               <p className="theme-text-muted text-sm mb-6">
-                Subscribe and you&apos;ll get the very first one.
+                Subscribe and you&apos;ll get each new walkthrough as it ships.
               </p>
               <a
                 href={newsletterUrl}

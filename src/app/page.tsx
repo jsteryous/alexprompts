@@ -43,7 +43,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
     >
       <div className="flex items-center gap-3 mb-4">
         <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-          Latest guide
+          Latest issue
         </span>
         {post.published_at && (
           <time className="theme-text-muted text-xs uppercase tracking-widest">
@@ -60,7 +60,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
         </p>
       )}
       <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
-        Read the guide <ArrowIcon className="w-3.5 h-3.5" />
+        Read the issue <ArrowIcon className="w-3.5 h-3.5" />
       </span>
     </Link>
   );
@@ -70,10 +70,10 @@ function EmptyLead() {
   return (
     <div className="theme-card border theme-border rounded-2xl p-8 md:p-12 text-center">
       <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-        First guide incoming
+        First issue incoming
       </span>
       <h3 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
-        The first walkthrough is on its way.
+        The first issue is on its way.
       </h3>
       <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-7">
         Subscribe now and the very first one lands in your inbox the day it ships.
@@ -85,7 +85,7 @@ function EmptyLead() {
 }
 
 export default async function HomePage() {
-  const posts = await getPublishedPosts(7);
+  const posts = await getPublishedPosts(7, "newsletter");
   const [featured, ...rest] = posts;
 
   return (
@@ -148,6 +148,12 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
+          <Link
+            href="/guides"
+            className="theme-link inline-flex items-center gap-2 font-medium mt-8 text-sm"
+          >
+            Browse all guides <ArrowIcon className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </section>
 
@@ -189,7 +195,7 @@ export default async function HomePage() {
             <>
               <div className="flex items-end justify-between mt-12 mb-6 gap-4">
                 <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
-                  More guides
+                  More issues
                 </h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
                   Full archive <ArrowIcon className="w-3.5 h-3.5" />

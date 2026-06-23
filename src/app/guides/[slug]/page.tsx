@@ -12,24 +12,24 @@ export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug, "newsletter");
+  const post = await getPost(slug, "guide");
   if (!post) return { title: "Not found" };
   return {
     title: post.title,
     description: post.summary ?? undefined,
-    alternates: { canonical: `${site.url}/archive/${post.slug}` },
+    alternates: { canonical: `${site.url}/guides/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.summary ?? undefined,
       type: "article",
-      url: `${site.url}/archive/${post.slug}`,
+      url: `${site.url}/guides/${post.slug}`,
     },
   };
 }
 
-export default async function ArchivePostPage({ params }: Props) {
+export default async function GuidePage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug, "newsletter");
+  const post = await getPost(slug, "guide");
   if (!post) notFound();
-  return <ArticleView post={post} section={{ label: "Archive", basePath: "/archive" }} />;
+  return <ArticleView post={post} section={{ label: "Guides", basePath: "/guides" }} />;
 }
