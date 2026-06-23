@@ -129,32 +129,40 @@ export const principles = [
  * The proof of the promise: concrete things a non-technical person can learn to
  * do. Renders as the homepage "what you'll learn" grid, replacing the old
  * lab-logo coverage chips as the value display. Keep each one an OUTCOME (a thing
- * you finish), never a tool (a thing you tour).
+ * you finish), never a tool (a thing you tour). `art` maps to a flat scene in
+ * components/OutcomeArt.tsx — outcome imagery (a finished site, sorted photos),
+ * never technology imagery. Swap to a photo later by replacing that scene.
  */
 export const outcomes = [
   {
     title: "Build your own website",
     body: "Put a real personal site online with no coding experience, letting AI do the heavy lifting.",
+    art: "website",
   },
   {
     title: "Organize the mess",
     body: "Sort the years of photos, files, and notes you have been avoiding, with AI doing the sorting.",
+    art: "organize",
   },
   {
     title: "Make something personal",
     body: "A custom kids' book, a birthday video, or a gift made just for one person, finished in an afternoon.",
+    art: "gift",
   },
   {
     title: "Research a big decision",
     body: "A car, a house, or a medical question, worked through with AI without getting fooled by it.",
+    art: "research",
   },
   {
     title: "Automate the boring parts",
     body: "The repetitive admin of a job, a side hustle, or a household, set up once and handled for you.",
+    art: "automate",
   },
   {
     title: "Plan something real",
     body: "A two-week trip, an event, or a budget, turned from a vague idea into a concrete plan.",
+    art: "plan",
   },
 ] as const;
 

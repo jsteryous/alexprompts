@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
   for (const p of posts) {
     const { data: existing, error: readErr } = await client
       .from("blog_posts")
-      .select("id, body_md, status")
+      .select("id, body_md, status, cover_image")
       .eq("slug", p.slug)
       .maybeSingle();
     if (readErr) {
@@ -60,6 +60,7 @@ export async function GET(req: NextRequest) {
       slug: p.slug,
       summary: p.summary,
       body_md: p.body_md,
+      cover_image: p.cover_image,
       tags: p.tags ?? [],
       author: p.author ?? site.author,
       published_at: p.published_at,
@@ -71,7 +72,11 @@ export async function GET(req: NextRequest) {
       if (error) return NextResponse.json({ error: error.message, slug: p.slug }, { status: 500 });
       created++;
       changed.push(p.slug);
-    } else if (existing.body_md !== p.body_md || existing.status !== "PUBLISHED") {
+    } else if (
+      existing.body_md !== p.body_md ||
+      existing.status !== "PUBLISHED" ||
+      existing.cover_image !== p.cover_image
+    ) {
       const { error } = await client.from("blog_posts").update(row).eq("id", existing.id);
       if (error) return NextResponse.json({ error: error.message, slug: p.slug }, { status: 500 });
       updated++;

@@ -119,8 +119,11 @@ replace the `TODO(alex)` values.
 - Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, RLS-guarded).
   `SUPABASE_SERVICE_KEY` for the publish route only.
 - **`blog_posts`** is the only table the site uses now. Columns used: `id`, `title`,
-  `slug`, `summary`, `body_md`, `tags`, `status` (`DRAFT`/`PUBLISHED`), `published_at`,
-  `created_at`, `author`. Public SELECT via RLS on `status = PUBLISHED`. The dental
+  `slug`, `summary`, `body_md`, `cover_image`, `tags`, `status` (`DRAFT`/`PUBLISHED`),
+  `published_at`, `created_at`, `author`. Public SELECT via RLS on `status = PUBLISHED`.
+  `cover_image` holds the post card hero (set during the Substack sync from the RSS
+  `<enclosure>`); reads fall back to the first body image when it is null, so the site
+  works even before the column is added. The dental
   `cluster` column is ignored (taxonomy dropped); other dental tables
   (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
   the old project — unused by this site.

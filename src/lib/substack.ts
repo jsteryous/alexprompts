@@ -21,6 +21,9 @@ export interface SubstackPost {
   published_at: string | null;
   author: string | null;
   tags: string[] | null;
+  /** Substack's designated post cover, from the RSS <enclosure> tag. null when
+   *  a post has none; the read side then falls back to the first body image. */
+  cover_image: string | null;
 }
 
 // ── HTML -> Markdown ──────────────────────────────────────────────────────────
@@ -64,10 +67,23 @@ function escapeHtml(s: string): string {
 // ── Feed parsing ──────────────────────────────────────────────────────────────
 
 const parser = new XMLParser({
-  ignoreAttributes: true,
+  // Attributes are kept (prefixed `@_`) so we can read the <enclosure url="...">
+  // cover image. Text-only CDATA elements (title, link, content:encoded, ...)
+  // still parse to plain strings, so asText() is unaffected.
+  ignoreAttributes: false,
+  attributeNamePrefix: "@_",
   // content:encoded / dc:creator keep their namespaced keys (default behaviour).
   isArray: (name) => name === "item" || name === "category",
 });
+
+/** The post's cover image from its RSS <enclosure url="...">, if any. */
+function enclosureUrl(item: Record<string, unknown>): string | null {
+  const enc = item.enclosure;
+  const one = Array.isArray(enc) ? enc[0] : enc;
+  const url =
+    one && typeof one === "object" ? (one as Record<string, unknown>)["@_url"] : null;
+  return typeof url === "string" && /^https?:\/\//i.test(url) ? url : null;
+}
 
 function asText(v: unknown): string {
   if (v == null) return "";
@@ -140,6 +156,7 @@ export function parseSubstackFeed(xmlText: string): SubstackPost[] {
       published_at: toIso(asText(item.pubDate)),
       author: asText(item["dc:creator"]).trim() || null,
       tags: tags && tags.length ? Array.from(new Set(tags)) : null,
+      cover_image: enclosureUrl(item),
     });
   }
   return posts;

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { socials, newsletterUrl, manifesto, outcomes, principles } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
+import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
+import { PostCover } from "@/components/PostCover";
 
 export const revalidate = 300;
 
@@ -39,29 +41,37 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
   return (
     <Link
       href={`/archive/${post.slug}`}
-      className="theme-card border theme-border rounded-2xl p-8 md:p-10 block group"
+      className="theme-card border theme-border rounded-2xl overflow-hidden block group"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-          Latest issue
-        </span>
-        {post.published_at && (
-          <time className="theme-text-muted text-xs uppercase tracking-widest">
-            {formatDate(post.published_at)}
-          </time>
+      <PostCover
+        src={post.cover_image}
+        alt={post.title}
+        priority
+        className="aspect-[2/1] w-full border-b theme-border"
+      />
+      <div className="p-8 md:p-10">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+            Latest walkthrough
+          </span>
+          {post.published_at && (
+            <time className="theme-text-muted text-xs uppercase tracking-widest">
+              {formatDate(post.published_at)}
+            </time>
+          )}
+        </div>
+        <h3 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-4 group-hover:opacity-80">
+          {post.title}
+        </h3>
+        {post.summary && (
+          <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mb-5">
+            {post.summary}
+          </p>
         )}
+        <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
+          Read the walkthrough <ArrowIcon className="w-3.5 h-3.5" />
+        </span>
       </div>
-      <h3 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-4 group-hover:opacity-80">
-        {post.title}
-      </h3>
-      {post.summary && (
-        <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mb-5">
-          {post.summary}
-        </p>
-      )}
-      <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
-        Read the issue <ArrowIcon className="w-3.5 h-3.5" />
-      </span>
     </Link>
   );
 }
@@ -70,10 +80,10 @@ function EmptyLead() {
   return (
     <div className="theme-card border theme-border rounded-2xl p-8 md:p-12 text-center">
       <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-        First issue incoming
+        First walkthrough incoming
       </span>
       <h3 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
-        The first issue is on its way.
+        The first walkthrough is on its way.
       </h3>
       <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-7">
         Subscribe now and the very first one lands in your inbox the day it ships.
@@ -99,16 +109,16 @@ export default async function HomePage() {
           {">"}
         </span>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-5">Learn AI by doing</Eyebrow>
+          <Eyebrow className="mb-5">Made for the curious, not the technical</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
             Do more with AI than you think you can.
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            Powerful AI tools feel like they were built for engineers, because they were.
-            Alex Prompts shows you how to actually use them, one real project at a time. You
-            will not need to write code, decode jargon, or wade through hype, because every
-            step is shown plainly and slow enough that nothing is assumed.
+            If you have opened ChatGPT and quietly felt it was not really meant for you, that
+            feeling is not your fault. These tools were built by engineers, for engineers.
+            Alex Prompts shows you how to actually use them, one real project at a time, with
+            no code to write, no jargon to decode, and nothing skipped.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
@@ -139,12 +149,23 @@ export default async function HomePage() {
             {outcomes.map((o) => (
               <li
                 key={o.title}
-                className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
+                className="theme-card-strong border theme-border rounded-xl overflow-hidden h-full flex flex-col"
               >
-                <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
-                  {o.title}
-                </h3>
-                <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+                <div
+                  className="flex items-center justify-center aspect-[16/9]"
+                  style={{ background: "var(--accent-soft)" }}
+                >
+                  <OutcomeArt
+                    slug={o.art as OutcomeArtSlug}
+                    className="theme-label w-24 h-24"
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                    {o.title}
+                  </h3>
+                  <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -195,7 +216,7 @@ export default async function HomePage() {
             <>
               <div className="flex items-end justify-between mt-12 mb-6 gap-4">
                 <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
-                  More issues
+                  More walkthroughs
                 </h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
                   Full archive <ArrowIcon className="w-3.5 h-3.5" />
@@ -206,21 +227,28 @@ export default async function HomePage() {
                   <li key={p.id}>
                     <Link
                       href={`/archive/${p.slug}`}
-                      className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col hover:opacity-90 transition-opacity"
+                      className="theme-card border theme-border rounded-xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity"
                     >
-                      {p.published_at && (
-                        <time className="theme-text-muted text-xs uppercase tracking-widest mb-3">
-                          {formatDate(p.published_at)}
-                        </time>
-                      )}
-                      <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
-                        {p.title}
-                      </h3>
-                      {p.summary && (
-                        <p className="theme-text-muted text-sm leading-relaxed line-clamp-3">
-                          {p.summary}
-                        </p>
-                      )}
+                      <PostCover
+                        src={p.cover_image}
+                        alt={p.title}
+                        className="aspect-[16/9] w-full border-b theme-border"
+                      />
+                      <div className="p-6 flex flex-col flex-1">
+                        {p.published_at && (
+                          <time className="theme-text-muted text-xs uppercase tracking-widest mb-3">
+                            {formatDate(p.published_at)}
+                          </time>
+                        )}
+                        <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                          {p.title}
+                        </h3>
+                        {p.summary && (
+                          <p className="theme-text-muted text-sm leading-relaxed line-clamp-3">
+                            {p.summary}
+                          </p>
+                        )}
+                      </div>
                     </Link>
                   </li>
                 ))}
