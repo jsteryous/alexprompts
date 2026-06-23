@@ -113,16 +113,17 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <Eyebrow className="mb-5">Frontier Takes.</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
-            AI is a force worth understanding.
+            The consensus on AI is usually wrong. The builders will tell you why.
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-contrast-muted text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            Most AI content is just noise and recycled headlines.
+            The crowd panics, the headlines chase clicks, and the loudest takes age the worst.
+            Alex Prompts does the opposite. I start with the people actually building the frontier,
+            from Dario Amodei&apos;s papers to Elon Musk&apos;s timelines, I measure what they claim
+            against what exists today, and I give the skeptics their strongest case before landing anywhere.
 
-            Alex Prompts is the filter. I track the people actually building the frontier, covering everything from Dario Amodei&apos;s papers to Elon Musk&apos;s timelines
-            and break down where AI is actually headed every single week. The goal is to leave you feeling informed and oriented so you can position yourself strategically.
-
-            In 1993, ignoring the internet was easy. By 2010, it was a mistake. Don&apos;t make the same mistake with AI.
+            You get one clear read a week on where this is heading, and the question worth arguing about.
+            You leave oriented instead of anxious.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
