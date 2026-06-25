@@ -1,13 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" rx="7" fill="#4f46e5"/>
-  <text
-    x="16"
-    y="23"
-    font-family="ui-sans-serif, system-ui, -apple-system, sans-serif"
-    font-size="21"
-    font-weight="700"
-    fill="#ffffff"
-    text-anchor="middle"
-    dominant-baseline="auto"
-  >A</text>
+  <path transform="translate(7.469 25.500) scale(0.02484 -0.02484)" fill="#ffffff" d="M-24 0V10Q-5 12 14.5 28.5Q34 45 51.0 70.0Q68 95 77 119L341 765H350L610 119Q654 10 708 10H711V0H391V10H395Q440 10 455.5 37.5Q471 65 451 114L391 263H150L94 124Q76 81 98.5 46.5Q121 12 171 10V0ZM155 276H386L272 564Z"/>
 </svg>
