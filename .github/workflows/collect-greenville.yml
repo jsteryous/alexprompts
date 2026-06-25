@@ -8,9 +8,10 @@ name: Greenville RE Signal Collector
 
 on:
   schedule:
-    # Friday 08:00 UTC (4am EDT / 3am EST). Run BEFORE you schedule the routine so
-    # its STEP 0 reads fresh signal, with the weekend free for filming/posting.
-    - cron: '0 8 * * 5'
+    # Daily 06:00 UTC (about 1 to 2am ET). Runs BEFORE the overnight routine so its
+    # STEP 0 reads fresh signal. The routine itself decides most nights that nothing
+    # new cleared the bar and posts nothing, so daily collection is cheap insurance.
+    - cron: '0 6 * * *'
   workflow_dispatch: # manual trigger from the GitHub UI
 
 permissions:

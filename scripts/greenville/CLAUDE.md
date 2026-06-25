@@ -1,9 +1,9 @@
 # Greenville real-estate engine — `scripts/greenville/`
 
 A second content vertical, separate from `ai_news/`. It sources and scores
-**Greenville, SC real-estate news**, and a Claude routine turns the biggest story
-into an article plus a short video script, framed as **both sides, no forced
-verdict** (consensus vs devil's advocate). See root `CLAUDE.md` for env/deploy and
+**Greenville, SC real-estate news**, and a Claude routine turns the biggest UNCOVERED
+story into WRITTEN content for the **website and X** (no video), framed as **both
+sides, no forced verdict** (consensus vs devil's advocate). See root `CLAUDE.md` and
 `scripts/CLAUDE.md` for the sibling `ai_news/` engine; this package reuses the same
 conventions (graceful network degradation, defusedxml RSS parsing, JSON signal
 hand-off, isolated routine passes) and the same `requirements-ai-news.txt`.
@@ -34,11 +34,26 @@ python -m unittest scripts.tests.test_greenville -v
 
 ## Automation
 
-- **`.github/workflows/collect-greenville.yml`** (Friday 08:00 UTC) collects from a
+- **`.github/workflows/collect-greenville.yml`** (DAILY 06:00 UTC) collects from a
   non-blocked runner IP and commits the signal. No secrets needed (free sources).
-- The **routine** runs as a scheduled Claude cloud agent pointed at
-  `routine/orchestrator.md`, after the collector. It delivers drafts to Google Drive
-  and Gmail and pushes a copy to the `greenville-drafts` branch for next-week recall.
+- The **routine** runs nightly as a scheduled Claude cloud agent pointed at
+  `routine/orchestrator.md`, after the collector. It dedups against the live site,
+  posts NOTHING on a quiet night, and on a real story creates a `blog_posts` DRAFT
+  (tagged `greenville`) plus a Gmail/Drive packet with the article and the X post.
+  See `routine/README.md`.
+
+## Publishing + dedup
+
+- The routine writes posts via the **Supabase connector** (there is no generic
+  create-post API; `/api/publish` only flips status). New posts are **DRAFT** so a
+  human verifies the numbers and fair-housing language before they go public, and
+  because the live `/archive` is currently Claude-only. Flip STEP 4 to `PUBLISHED`
+  only after a dedicated real-estate section exists.
+- **Dedup** keys on a `source_url` column. Add it once:
+  `alter table blog_posts add column if not exists source_url text;`
+  Without it the routine dedups on title only.
+- **X** has no auto-poster (no X connector); the routine drafts the X post and emails
+  it for manual posting.
 
 ## Tuning
 
