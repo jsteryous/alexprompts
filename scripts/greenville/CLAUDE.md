@@ -45,10 +45,12 @@ python -m unittest scripts.tests.test_greenville -v
 ## Publishing + dedup
 
 - The routine writes posts via the **Supabase connector** (there is no generic
-  create-post API; `/api/publish` only flips status). New posts are **DRAFT** so a
-  human verifies the numbers and fair-housing language before they go public, and
-  because the live `/archive` is currently Claude-only. Flip STEP 4 to `PUBLISHED`
-  only after a dedicated real-estate section exists.
+  create-post API; `/api/publish` only flips status). New posts are **PUBLISHED**
+  live to `/real-estate` (the dedicated section). Auto-publish is safe because the
+  pass guardrails (fair-housing language, not-advice, sourced numbers) plus dedup do
+  the gating, and a verify email still goes out for after-the-fact spot-checks. If
+  dedup is unavailable on a run, that run falls back to DRAFT. Set STEP 4 back to
+  `DRAFT` to require human review again.
 - **Dedup** keys on a `source_url` column. Add it once:
   `alter table blog_posts add column if not exists source_url text;`
   Without it the routine dedups on title only.

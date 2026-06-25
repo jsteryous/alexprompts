@@ -4,7 +4,7 @@ This routine produces WRITTEN content only, for two places: the WEBSITE (a post)
 
 You run in the cloud with a fresh checkout of the repo and zero prior context. Each pass's detailed spec lives in its own file under scripts/greenville/routine/. When a step says to, read that file and hand its FULL contents to the sub-agent for that pass.
 
-PUBLISH MODE: **draft** (recommended). New posts are created as DRAFT so a human verifies the housing numbers and fair-housing language before anything goes public (see STEP 5). To auto-publish instead, change `DRAFT` to `PUBLISHED` and set `published_at` to now in STEP 4. Do not auto-publish until a dedicated site section exists; the live /archive is currently Claude-only content.
+PUBLISH MODE: **publish** (live). New posts are created as PUBLISHED and go live at /real-estate without waiting for a human. The guardrails that make this safe live in the passes (fair-housing-safe language, not-advice, every number traced to a real source) and in the dedup step. The verify email still goes out (STEP 5) so a human can spot-check after the fact and unpublish if needed. EXCEPTION: if dedup could not run (Supabase unavailable in STEP 0B), fall back to status DRAFT for that run, because without dedup you cannot guarantee you are not republishing a covered story. To return to human review, change `PUBLISHED` back to `DRAFT` in STEP 4.
 
 WORKSPACE. Do ALL scratch work in /tmp/gv (run: mkdir -p /tmp/gv). Write every intermediate there (signal.txt, covered.txt, pass1_brief.md, pass2_sides.md, pass3_final.md). NEVER write scratch files into the git working tree and NEVER edit .gitignore. The only repo commands you run are reading the signal in STEP 0 and reading the pass spec files.
 
@@ -28,7 +28,7 @@ STEP 2, PASS 2, TWO SIDES. Read scripts/greenville/routine/pass2_sides.md. Hand 
 
 STEP 3, PASS 3, WRITER. Read scripts/greenville/routine/pass3_writer.md. Hand its full contents plus /tmp/gv/pass1_brief.md (for facts, image, sources, MUST-VERIFY) and /tmp/gv/pass2_sides.md to a fresh sub-agent. Save to /tmp/gv/pass3_final.md. It contains three labeled blocks: ## METADATA, ## ARTICLE, ## X.
 
-STEP 4, PUBLISH TO THE WEBSITE (as a DRAFT). Parse the ## METADATA block from /tmp/gv/pass3_final.md (title, slug, summary, tags, cover_image, source_url) and take the ## ARTICLE markdown as the body. Using the Supabase connector, INSERT one row into `blog_posts`:
+STEP 4, PUBLISH TO THE WEBSITE (LIVE). Parse the ## METADATA block from /tmp/gv/pass3_final.md (title, slug, summary, tags, cover_image, source_url) and take the ## ARTICLE markdown as the body. Using the Supabase connector, INSERT one row into `blog_posts`:
   - title = METADATA title
   - slug = METADATA slug (if a row with that slug already exists, append "-<YYYY-MM-DD>")
   - summary = METADATA summary
@@ -37,13 +37,14 @@ STEP 4, PUBLISH TO THE WEBSITE (as a DRAFT). Parse the ## METADATA block from /t
   - tags = a Postgres text array of the METADATA tags, e.g. '{"greenville","real estate"}' (must include "greenville" so dedup and the section filter find it; must NOT include "guide")
   - source_url = METADATA source_url (omit this column if it does not exist in the schema)
   - author = 'Alex Steryous'
-  - status = 'DRAFT'  (PUBLISH MODE; see top)
+  - status = 'PUBLISHED'  (PUBLISH MODE; see top. Use 'DRAFT' instead ONLY if dedup was unavailable this run.)
+  - published_at = now()
   - created_at = now()
-  Confirm the insert returned a row id and record it. If the Supabase connector is unavailable or the insert fails, skip publishing and rely on STEP 5 delivery so the human can paste it in manually; report the failure.
+  Confirm the insert returned a row id and record it. The post is live at /real-estate/<slug> within about 5 minutes (the section revalidates every 300s; there is no manual revalidation hook). If the Supabase connector is unavailable or the insert fails, skip publishing and rely on STEP 5 delivery so the human can paste it in manually; report the failure.
 
-STEP 5, DELIVER THE HUMAN PACKET (always, even after publishing). Build ONE document in this order: FIRST "BEFORE YOU PUBLISH, VERIFY THESE" with the MUST-VERIFY list from /tmp/gv/pass1_brief.md, plus the standing line: "Not investment, legal, or financial advice. Check fair-housing language before posting. The website post was saved as a DRAFT, review and publish it at /review." Then three dashes; then "WEBSITE ARTICLE" and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (this is what you copy-paste to X, since there is no X auto-poster); then three dashes; then "Editor notes" with the LEAD SELECTION rationale and SOURCES from /tmp/gv/pass1_brief.md, and the draft post id from STEP 4. Deliver to BOTH places independently:
+STEP 5, DELIVER THE HUMAN PACKET (always, even after publishing live). Build ONE document in this order: FIRST "VERIFY THESE (POST IS ALREADY LIVE)" with the MUST-VERIFY list from /tmp/gv/pass1_brief.md, plus the standing line: "Not investment, legal, or financial advice. This post was published live at /real-estate/<slug>. Spot-check the flagged numbers and the fair-housing language, and unpublish at /review if anything is wrong." Then three dashes; then "WEBSITE ARTICLE (live)" and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (copy-paste this to X yourself, there is no X auto-poster); then three dashes; then "Editor notes" with the LEAD SELECTION rationale and SOURCES from /tmp/gv/pass1_brief.md, and the published post id and slug from STEP 4. Deliver to BOTH places independently:
   (a) EMAIL via mcp Gmail create_draft: to ["jsteryous@gmail.com"], subject "Greenville RE draft — <headline>", body the full document. Send it if a send tool exists, otherwise note a draft was created.
   (b) GOOGLE DRIVE via mcp create_file: a Google Doc titled "Greenville RE draft - <YYYY-MM-DD> - <headline>", text_content the document, content_mime_type "text/plain", do not disable conversion.
   Do them independently so one failing does not block the other.
 
-STEP 6, REPORT. State: collector path used (fresh CI / live fallback / COLLECTOR FAILED), whether a story cleared the daily bar or you returned NO NEW STORY, the story chosen and the runners-up, the website draft id (or why publishing was skipped), and where the human packet was delivered.
+STEP 6, REPORT. State: collector path used (fresh CI / live fallback / COLLECTOR FAILED), whether a story cleared the daily bar or you returned NO NEW STORY, the story chosen and the runners-up, the published post id and slug (or DRAFT fallback, or why publishing was skipped), and where the human packet was delivered.

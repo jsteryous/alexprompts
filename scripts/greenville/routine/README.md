@@ -35,11 +35,12 @@ article, and the X post to copy-paste).
 - **Routine:** runs **nightly** as a scheduled Claude cloud agent (`/schedule`)
   pointed at `orchestrator.md`, after the collector. Most nights it posts nothing.
 - **Website:** the routine inserts a `blog_posts` row tagged `greenville` as
-  **DRAFT**. Review and publish it at `/review`. It is DRAFT on purpose: a human
-  should check the housing numbers and fair-housing language, and the live `/archive`
-  is currently Claude-only, so decide placement before going public. Flip to
-  auto-publish later (one word in the orchestrator STEP 4) once a dedicated section
-  exists.
+  **PUBLISHED** and it goes live at `/real-estate` within about 5 minutes (no human
+  step). The guardrails that make auto-publish safe are in the passes (fair-housing
+  language, not-advice, every number sourced) and in dedup. The verify email still
+  goes out so you can spot-check and unpublish at `/review` if needed. If dedup could
+  not run (Supabase down), that run falls back to DRAFT. To return to human review,
+  set STEP 4 back to `DRAFT`.
 - **X:** there is no X auto-poster (no X connector wired), so the routine drafts the
   X post and delivers it in the email packet for you to post by hand.
 
