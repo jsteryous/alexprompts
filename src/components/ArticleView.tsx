@@ -6,8 +6,11 @@ import { formatDate, type FullPost } from "@/lib/posts";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
-  label: string; // "Archive" | "Guides"
-  basePath: string; // "/archive" | "/guides"
+  label: string; // "Archive" | "Guides" | "Real Estate"
+  basePath: string; // "/archive" | "/guides" | "/real-estate"
+  /** Section-specific line for the footer subscribe box. Falls back to the
+   *  general Claude blurb when omitted. */
+  blurb?: string;
 }
 
 /**
@@ -37,6 +40,9 @@ export default async function ArticleView({
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
+  const subscribeBlurb =
+    section.blurb ??
+    "I send clear walkthroughs, free. Each one is a real thing you can do with Claude, shown step by step, with nothing assumed and no jargon left undefined.";
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -116,8 +122,7 @@ export default async function ArticleView({
             Get the next one in your inbox.
           </h2>
           <p className="theme-text-contrast-muted mb-8 leading-relaxed">
-            I send clear walkthroughs, free. Each one is a real thing you can do with
-            AI, shown step by step, with nothing assumed and no jargon left undefined.
+            {subscribeBlurb}
           </p>
           <a
             href={newsletterUrl}

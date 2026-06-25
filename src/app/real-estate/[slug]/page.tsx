@@ -31,5 +31,15 @@ export default async function RealEstatePostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getPost(slug, "realestate");
   if (!post) notFound();
-  return <ArticleView post={post} section={{ label: "Real Estate", basePath: "/real-estate" }} />;
+  return (
+    <ArticleView
+      post={post}
+      section={{
+        label: "Real Estate",
+        basePath: "/real-estate",
+        blurb:
+          "I send free, step-by-step walkthroughs on putting Claude to work in real estate. The listings, the market research, the deal analysis, and the follow-up, shown plainly so you can do them yourself.",
+      }}
+    />
+  );
 }
