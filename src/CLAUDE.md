@@ -18,10 +18,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `sameAs`), `newsletterUrl`, `coverage` (covered-company chips). `SITE_URL` reads
   `NEXT_PUBLIC_SITE_URL`. **Editing handles/domain here updates every surface.** Holds
   `TODO(alex)` placeholders — confirm before launch.
-- **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?)`,
-  `getPost(slug)`, `formatDate()`. Returns `[]`/`null` when Supabase env is unset so the
-  site builds and renders an empty archive (not a crash). Used by `/`, `/archive`,
-  `/archive/[slug]`, `sitemap.ts`.
+- **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
+  `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **three
+  sections split by tag**: `guide` → `/guides`, `greenville` → `/real-estate` (set by the
+  `scripts/greenville` routine), everything else → `/archive` (newsletter). `sectionOf()`
+  is the single source of that mapping; `getPublishedPosts("newsletter")` excludes guide
+  and real-estate posts so they never leak onto the homepage/archive. Returns `[]`/`null`
+  when Supabase env is unset so the site builds (not a crash). Used by `/`, `/archive`,
+  `/guides`, `/real-estate`, their `[slug]` routes, `sitemap.ts`.
 - **`src/lib/substack.ts`** — Substack RSS -> markdown converter (`parseSubstackFeed`,
   `fetchSubstackPosts`). `content:encoded` HTML -> markdown via turndown; images kept as
   raw `<figure>`/`<figcaption>` so they render through the same `marked` + `theme-prose`
@@ -31,9 +35,12 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: hero →
   what-this-is → coverage chips → latest 3 issues → `#follow` (social cards) → subscribe
   CTA. No shared section components (the old `HomeSections.tsx` was dental-only, deleted).
-- **`src/app/archive/`** — issue index + `[slug]` article. Article carries `Article` +
-  `BreadcrumbList` JSON-LD; canonical is self-referential (see root CLAUDE.md for the
-  Substack-canonical option).
+- **`src/app/archive/`**, **`src/app/guides/`**, **`src/app/real-estate/`** — the three
+  section index + `[slug]` routes. All three `[slug]` pages render the shared
+  `components/ArticleView.tsx` (markdown → sanitize → `Article` + `BreadcrumbList`
+  JSON-LD), differing only in the `section` prop and the post `type` they request.
+  Canonical is self-referential per section. `/real-estate` holds the Greenville posts
+  the `scripts/greenville` routine creates (as DRAFT) and you publish via `/review`.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` (token-gated editor; the fixed
   nav covered its sticky Publish button). Both derive links from `site.ts`. Nav CTA is
   *Subscribe* → `newsletterUrl`.

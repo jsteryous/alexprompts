@@ -25,6 +25,9 @@ export default function Footer() {
           <Link href="/archive" className="theme-link text-sm">
             Archive
           </Link>
+          <Link href="/real-estate" className="theme-link text-sm">
+            Real Estate
+          </Link>
           <Link href="/about" className="theme-link text-sm">
             About
           </Link>

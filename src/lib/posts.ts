@@ -1,17 +1,23 @@
 /**
  * Post data access — published Alex Prompts content stored in Supabase
- * `blog_posts` (mirrored from Substack). One table holds two kinds of content,
- * split by tag: a post tagged `guide` is a how-to GUIDE (-> /guides); everything
- * else is a NEWSLETTER issue (-> /archive). Returns [] / null when env is unset
- * so the site builds and renders without a database (empty lists, not a crash).
+ * `blog_posts`. One table holds three kinds of content, split by tag:
+ *   - tagged `guide`      -> how-to GUIDE       (-> /guides)
+ *   - tagged `greenville` -> REAL-ESTATE post   (-> /real-estate)
+ *   - everything else     -> NEWSLETTER issue   (-> /archive)
+ * Returns [] / null when env is unset so the site builds and renders without a
+ * database (empty lists, not a crash).
  */
 import { createClient } from "@supabase/supabase-js";
 
-/** Content kind, derived from tags. "guide" -> /guides, "newsletter" -> /archive. */
-export type PostType = "newsletter" | "guide";
+/** Content kind, derived from tags. Each post lives at exactly one section. */
+export type PostType = "newsletter" | "guide" | "realestate";
 
-/** A post tagged this (case-insensitive, set on Substack) is a how-to guide. */
+/** A post tagged this (case-insensitive) is a how-to guide. */
 export const GUIDE_TAG = "guide";
+
+/** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
+ *  the scripts/greenville routine. */
+export const REALESTATE_TAG = "greenville";
 
 export interface ArchivePost {
   id: string;
@@ -31,8 +37,24 @@ export interface FullPost extends ArchivePost {
   author: string | null;
 }
 
+function hasTag(post: { tags: string[] | null }, tag: string): boolean {
+  return (post.tags ?? []).some((t) => t.toLowerCase() === tag);
+}
+
 export function isGuide(post: { tags: string[] | null }): boolean {
-  return (post.tags ?? []).some((t) => t.toLowerCase() === GUIDE_TAG);
+  return hasTag(post, GUIDE_TAG);
+}
+
+export function isRealEstate(post: { tags: string[] | null }): boolean {
+  return hasTag(post, REALESTATE_TAG);
+}
+
+/** The single section a post belongs to. Guide wins over real-estate if both tags
+ *  are somehow present; everything untagged falls through to the newsletter. */
+export function sectionOf(post: { tags: string[] | null }): PostType {
+  if (isGuide(post)) return "guide";
+  if (isRealEstate(post)) return "realestate";
+  return "newsletter";
 }
 
 /**
@@ -106,7 +128,7 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
       cover_image: cover_image ?? coverImageFromBody(body_md),
     }),
   );
-  if (type) rows = rows.filter((r) => isGuide(r) === (type === "guide"));
+  if (type) rows = rows.filter((r) => sectionOf(r) === type);
   return limit ? rows.slice(0, limit) : rows;
 }
 
@@ -125,7 +147,7 @@ export async function getPost(slug: string, type?: PostType): Promise<FullPost |
     .eq("status", "PUBLISHED")
     .single();
   if (!data) return null;
-  if (type && isGuide(data) !== (type === "guide")) return null;
+  if (type && sectionOf(data) !== type) return null;
   return { ...data, cover_image: coverImageFromBody(data.body_md) } as FullPost;
 }
 
