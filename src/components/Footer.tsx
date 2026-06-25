@@ -44,7 +44,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
         <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
-          Tools we teach
+          Parts of Claude we cover
         </p>
         <p className="theme-text-muted text-sm leading-relaxed max-w-3xl">
           {tools.join(" · ")}

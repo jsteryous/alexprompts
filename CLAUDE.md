@@ -9,6 +9,15 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 
 ## What this is
 
+> **CURRENT POSITIONING (June 2026): Claude-only.** The live site is narrowed to a
+> single tool. The whole brand exists to help people **get more out of Claude**, and the
+> homepage is built so a visitor understands that in under 3 seconds (hero headline:
+> "Get more out of Claude."). Site copy is Claude-only: do **not** reintroduce other tools
+> (ChatGPT, Gemini, Perplexity, etc.) into any site/social/OG copy. The brand
+> single-source-of-truth (`src/lib/site.ts`) reflects this. The frontier-news and
+> multi-tool how-to descriptions below are **legacy** and describe the analytical engine
+> (`scripts/ai_news/`), which still lags the site.
+
 **Alex Prompts** is a personal media brand by Alex Steryous covering the companies
 building the future: the frontier AI labs and hard-tech companies (Anthropic, OpenAI,
 Google DeepMind, xAI, Meta AI, Nvidia, Tesla, SpaceX, Neuralink, and others actually

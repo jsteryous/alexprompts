@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Do more with AI than you think you can.";
+export const alt = "Alex Prompts: Get more out of Claude.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +35,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
-          ALEX PROMPTS · LEARN AI BY DOING
+          ALEX PROMPTS · GET MORE OUT OF CLAUDE
         </div>
 
         {/* Main headline */}
@@ -52,9 +52,9 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Do more with AI than
+          Get more out
           <br />
-          you think you can.
+          of Claude.
         </div>
 
         {/* Sub */}
@@ -67,8 +67,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          Powerful AI tools, explained for normal people. Real projects, step by
-          step, with no code, no jargon, and no hype.
+          You are using a sliver of Claude. Real projects, step by step, with no
+          code, no jargon, and no hype.
         </div>
 
         {/* Bottom bar */}
@@ -106,7 +106,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              LEARN AI BY DOING
+              CLAUDE, MADE USABLE
             </span>
           </div>
         </div>

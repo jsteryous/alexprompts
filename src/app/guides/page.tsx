@@ -6,7 +6,7 @@ import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
   title: "Guides",
-  description: `How-to guides from ${site.name}. Learn to actually use AI, step by step, with no code and no jargon.`,
+  description: `How-to guides from ${site.name}. Get more out of Claude, step by step, with no code and no jargon.`,
   alternates: { canonical: `${site.url}/guides` },
 };
 
@@ -26,7 +26,7 @@ export default async function GuidesPage() {
             Every guide, in one place
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            Step-by-step walkthroughs for doing real things with AI. No code, no jargon.
+            Step-by-step walkthroughs for doing real things with Claude. No code, no jargon.
             Start anywhere, follow along, and you will be able to do it yourself.
           </p>
         </div>
