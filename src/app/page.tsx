@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { socials, newsletterUrl, manifesto, outcomes, principles } from "@/lib/site";
+import { socials, newsletterUrl, manifesto, outcomes, realEstateOutcomes, principles } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
 import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
 import { PostCover } from "@/components/PostCover";
@@ -109,16 +109,16 @@ export default async function HomePage() {
           {">"}
         </span>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-5">For everyone who uses Claude, or wants to</Eyebrow>
+          <Eyebrow className="mb-5">For real estate agents and investors</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
-            Get more out of Claude.
+            Claude for real estate agents and investors.
             <span className="caret" aria-hidden>▌</span>
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            You are paying for Claude and using a sliver of what it can do. Most people type one
-            question and stop. Claude can build, organize, research, and automate real things for
-            you. Alex Prompts shows you exactly how, one project at a time, with no code to write,
-            no jargon to decode, and nothing skipped.
+            Most agents and investors use Claude like a search box. It can do far more. Alex
+            Prompts shows you how to make it write your listings, run your market research,
+            analyze a deal, and handle the follow-up, in plain English, with no code to write
+            and nothing skipped.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
@@ -132,17 +132,52 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── What you'll learn (outcomes) ── */}
+      {/* ── What you'll do in real estate (primary value) ── */}
       <section id="learn" className="theme-section py-20 md:py-28 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
-            <Eyebrow className="mb-4">What you&apos;ll learn to do</Eyebrow>
+            <Eyebrow className="mb-4">What you&apos;ll do with Claude</Eyebrow>
             <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
-              Real things you can finish, not features you have to study.
+              Point Claude at the work your week is already full of.
             </h2>
             <p className="theme-text-secondary text-lg leading-relaxed mt-4">
-              Every guide starts from an outcome you actually want and walks you all the way to
-              it in Claude. Here is the kind of thing you will be able to do.
+              Not a tour of buttons. The actual jobs an agent or investor does, shown step by
+              step, so you can do them in a fraction of the time.
+            </p>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {realEstateOutcomes.map((o) => (
+              <li
+                key={o.title}
+                className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
+              >
+                <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                  {o.title}
+                </h3>
+                <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/guides"
+            className="theme-link inline-flex items-center gap-2 font-medium mt-8 text-sm"
+          >
+            Browse all guides <ArrowIcon className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Not in real estate? (the "helps anyone" set) ── */}
+      <section className="theme-section py-20 md:py-28 border-t theme-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-2xl mb-12">
+            <Eyebrow className="mb-4">Not active in real estate? No problem</Eyebrow>
+            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+              A lot of what we cover adds value to just about anyone.
+            </h2>
+            <p className="theme-text-secondary text-lg leading-relaxed mt-4">
+              The same Claude skills reach well beyond real estate. Here is the kind of thing you
+              will be able to do, whatever your line of work.
             </p>
           </div>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -169,12 +204,6 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/guides"
-            className="theme-link inline-flex items-center gap-2 font-medium mt-8 text-sm"
-          >
-            Browse all guides <ArrowIcon className="w-3.5 h-3.5" />
-          </Link>
         </div>
       </section>
 
@@ -309,10 +338,10 @@ export default async function HomePage() {
       <section className="theme-section-contrast py-24 md:py-32">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Get more out of Claude.
+            Put Claude to work in your business.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            One real Claude walkthrough at a time, free in your inbox.
+            One real walkthrough at a time, free in your inbox.
           </p>
           <SubscribeButton className="px-8 py-4" />
         </div>

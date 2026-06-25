@@ -36,19 +36,19 @@ export const site = {
   email: "hello@alexprompts.com", // TODO(alex): confirm contact inbox
   url: SITE_URL,
 
-  // The brand spine. The job: take one tool, Claude, and show people how to get
-  // far more out of it than they currently do. Start from a real outcome, go slow,
-  // no jargon, no hype. We stay on top of every Claude update so we can show you
-  // the new thing it can now do; the how-to is the product.
-  tagline: "Get more out of Claude.",
+  // The brand spine. The job: show real estate agents and investors how to point
+  // Claude at their actual work. Listings, market research, deal analysis, lead
+  // follow-up, marketing. Plain English, no code, no hype. Not in real estate? A
+  // lot of it helps anyone, and we say so. The how-to is the product.
+  tagline: "Claude for real estate agents and investors.",
   oneLiner:
-    "You are paying for Claude and using a sliver of what it can do. Alex Prompts shows you how to do the real things it is capable of, one project at a time, with no code to write and no jargon to decode.",
+    "Most agents and investors use Claude like a search box. Alex Prompts shows real estate pros how to make it write listings, run market research, analyze deals, and handle the follow-up, with no code and no jargon. Not in real estate? A lot of it helps anyone.",
   description:
-    "Alex Prompts helps you get more out of Claude. Most people type one question and stop, " +
-    "and they never see what the tool can actually do. We take a real thing you want to make " +
-    "or solve, and we show you how to do it in Claude, calmly and step by step. We go slow " +
-    "enough that nothing is assumed, and we skip the hype. The name is a double meaning: the " +
-    "prompts you type into Claude, and the questions worth asking about where this is all going.",
+    "Alex Prompts helps real estate agents and investors get real work out of Claude. Most pros " +
+    "type one question and stop, and never see that the same tool can write their listings, pull " +
+    "market research into a client-ready summary, analyze a deal, and keep the follow-up moving. " +
+    "We show you exactly how, calmly and step by step, with no code and no hype. Not active in " +
+    "real estate? A lot of what we cover adds value to just about anyone.",
 
   // The touchstone idea. Claude keeps getting more capable, and most people keep
   // using it the same shallow way. The scarce thing is someone who closes that gap.
@@ -130,12 +130,44 @@ export const principles = [
 ] as const;
 
 /**
- * The proof of the promise: concrete things a non-technical person can learn to
- * do. Renders as the homepage "what you'll learn" grid, replacing the old
- * lab-logo coverage chips as the value display. Keep each one an OUTCOME (a thing
- * you finish), never a tool (a thing you tour). `art` maps to a flat scene in
- * components/OutcomeArt.tsx — outcome imagery (a finished site, sorted photos),
- * never technology imagery. Swap to a photo later by replacing that scene.
+ * The PRIMARY value display: concrete real-estate jobs Claude can do for an agent
+ * or investor. Renders as the homepage "what you'll do in real estate" grid (text
+ * cards, no art). Keep each an OUTCOME a pro recognizes from their week, and keep
+ * the promise in the Claude lane (how to use the tool), not a claim of real-estate
+ * mastery. Fair-housing and not-advice caveats are baked into the copy on purpose.
+ */
+export const realEstateOutcomes = [
+  {
+    title: "Write listings that sell",
+    body: "Turn property details into clean, fair-housing-safe listing copy in minutes instead of an hour.",
+  },
+  {
+    title: "Run the market research",
+    body: "Pull comps, trends, and neighborhood notes into a client-ready summary you can actually hand over.",
+  },
+  {
+    title: "Analyze a deal fast",
+    body: "Work through rent, ROI, and the what-ifs on a property without wrestling a spreadsheet.",
+  },
+  {
+    title: "Never drop a lead",
+    body: "Draft the follow-up emails and texts, and keep your pipeline moving, so nobody falls through the cracks.",
+  },
+  {
+    title: "Market yourself",
+    body: "Generate a week of posts, captions, and emails in your own voice, so you actually stay visible.",
+  },
+  {
+    title: "Make sense of the paperwork",
+    body: "Get a plain-English read on a contract or clause before you call your broker. Information, not legal advice.",
+  },
+] as const;
+
+/**
+ * The "helps anyone" set, for the "not active in real estate? no problem" section.
+ * Concrete things any normal person can learn to do with Claude. Renders as a
+ * homepage grid. Keep each one an OUTCOME (a thing you finish), never a tool (a
+ * thing you tour). `art` maps to a flat scene in components/OutcomeArt.tsx.
  */
 export const outcomes = [
   {

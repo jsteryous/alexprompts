@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Get more out of Claude.";
+export const alt = "Alex Prompts: Claude for real estate agents and investors.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +35,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
-          ALEX PROMPTS · GET MORE OUT OF CLAUDE
+          ALEX PROMPTS · CLAUDE FOR REAL ESTATE
         </div>
 
         {/* Main headline */}
@@ -52,9 +52,9 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Get more out
+          Claude for
           <br />
-          of Claude.
+          real estate.
         </div>
 
         {/* Sub */}
@@ -67,8 +67,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          You are using a sliver of Claude. Real projects, step by step, with no
-          code, no jargon, and no hype.
+          For agents and investors. Listings, market research, deal analysis, and
+          follow-up. Plain English, no code.
         </div>
 
         {/* Bottom bar */}
@@ -106,7 +106,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              CLAUDE, MADE USABLE
+              AGENTS &amp; INVESTORS
             </span>
           </div>
         </div>
