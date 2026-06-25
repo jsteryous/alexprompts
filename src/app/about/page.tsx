@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, socials, outcomes, newsletterUrl, principles } from "@/lib/site";
+import { site, socials, realEstateOutcomes, newsletterUrl, principles } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -33,12 +33,13 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">About</Eyebrow>
           <h1 className="theme-text-primary text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
-            I help you get more out of Claude.
+            I help real estate pros put Claude to work.
           </h1>
           <p className="theme-text-secondary text-lg md:text-xl leading-relaxed">
-            Claude is one of the most capable tools ever put in front of a normal person, and
-            most people use a sliver of it. I figure out everything it can do, then show you how
-            to use it in plain English. You will not need to write code, and nothing is assumed.
+            I am fascinated by what Claude can do, and I am in real estate, so I put the two
+            together. I work out how to make it write listings, run market research, analyze
+            deals, and handle the busywork, then I show you in plain English. You will not need
+            to write code, and nothing is assumed.
           </p>
           <p className="theme-text-muted text-sm mt-8 border-t theme-border pt-5">
             Written by {site.author}.
@@ -55,11 +56,11 @@ export default function AboutPage() {
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              You open Claude, you ask it a question, you get a good answer, and you stop. That
-              is where almost everyone stops. Nobody ever showed you that the same box can build
-              a working website, sort a decade of files, run research for you, or handle the
-              admin you dread. The depth is there. It was just never explained to a person
-              starting from a blank chat, which is most people.
+              You open Claude, you ask it a question, you get a good answer, and you stop. Almost
+              every agent and investor stops there. Nobody showed you that the same box can draft
+              a fair-housing-safe listing in minutes, turn comps into a summary your client will
+              actually read, pressure-test a deal, or answer the leads sitting in your inbox. The
+              depth is there. It was just never explained for the work you actually do.
             </p>
           </div>
           <blockquote className="theme-card-accent border rounded-2xl p-7 md:p-8 mt-8">
@@ -67,8 +68,8 @@ export default function AboutPage() {
               The depth is real. It is also reachable, once someone shows you where to look.
             </p>
             <p className="theme-text-secondary text-base leading-relaxed mt-3">
-              Standing next to you, calmly pointing out the next thing Claude can do, is the
-              entire job here.
+              Standing next to you, calmly pointing out the next thing Claude can do for your
+              business, is the entire job here.
             </p>
           </blockquote>
         </div>
@@ -79,7 +80,7 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-5">Why I do this</Eyebrow>
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-6">
-            I taught myself the scary version, then made it simple.
+            I taught myself the scary version, then aimed it at real estate.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-6">
             I am genuinely fascinated by Claude, so I go places most people would not bother to
@@ -89,11 +90,12 @@ export default function AboutPage() {
             to do, and you can do this too.
           </p>
           <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
-            It helped people. Real, non-technical people who had tried and bounced off. That
-            told me two things at once. The hunger to actually use this tool is everywhere, and
-            the thing standing in the way is almost never intelligence. It is that nobody slowed
-            down and showed them. So that is what I do now with every part of Claude, from the
-            first chat to the features most people never find.
+            It helped people who had tried and bounced off. That told me two things at once. The
+            hunger to actually use this tool is everywhere, and the thing in the way is almost
+            never intelligence. It is that nobody slowed down and showed them. I work in real
+            estate, so that is where I aim it first. The listings, the research, the deals, the
+            follow-up. If you are not in real estate, most of it still travels, and I will say so
+            when it does.
           </p>
         </div>
       </section>
@@ -152,11 +154,11 @@ export default function AboutPage() {
           <div className="max-w-2xl mb-10">
             <Eyebrow className="mb-4">What you&apos;ll learn</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-snug">
-              Real things you can finish, not features you have to study.
+              The real jobs from your week, done step by step.
             </h2>
           </div>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {outcomes.map((o) => (
+            {realEstateOutcomes.map((o) => (
               <li
                 key={o.title}
                 className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
@@ -169,7 +171,8 @@ export default function AboutPage() {
             ))}
           </ul>
           <p className="theme-text-muted text-base leading-relaxed mt-8">
-            New guides frequently, always free. I appreciate any support you send my way.
+            Not active in real estate? A lot of these skills travel. New guides frequently,
+            always free. I appreciate any support you send my way.
           </p>
         </div>
       </section>
@@ -178,7 +181,7 @@ export default function AboutPage() {
       <section className="theme-section-contrast py-20 md:py-28">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight mb-4">
-            Start with one thing you have always wanted to do.
+            Start with one job you do every week.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
             Subscribe for new walkthroughs, or follow the short ones wherever you watch.
