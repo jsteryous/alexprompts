@@ -4,7 +4,7 @@ Make any direct address to the audience sound like a real person genuinely askin
 
 Cut any throat-clearing or signpost phrasing that survived ("Here is what we know," "Here is what is confirmed," "Now sit with this for a second," "Here is the part most coverage is leaving out"). A person telling a good story does not announce their next sentence; they just say it. If a line only labels what is coming, delete it and let the next line carry.
 
-Examples to fix: clunky transitions like "Here is the strongest case against my read, argued honestly"; process-leakage like "I flag that those figures are reported and still need confirmation against the S-1" becomes natural speech like "those numbers are not confirmed yet, so hold them loosely."
+Examples to fix: clunky transitions like "Here is the strongest case against my read, argued honestly"; process-leakage like "I flag that those figures are reported and still need confirmation against the original filing" becomes natural speech like "those numbers are not confirmed yet, so hold them loosely."
 
 Keep every fact, the angle, the spine question, the structure, and the rules (no em dashes, no fragments, no filler, plain unescaped markdown). Do not add new facts.
 

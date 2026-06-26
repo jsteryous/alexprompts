@@ -45,5 +45,7 @@ deliver (script + article + notes)  → Google Drive + email
 - Change one pass: edit its file, commit to the default branch. The next Saturday
   run picks it up from the fresh checkout. No routine-config change needed.
 - Change the flow itself (add/remove a pass, reorder): edit `orchestrator.md`.
-- The voice rules here mirror `scripts/ai_news/digest.py` (`WRITER_PROMPT`) and the
-  root `CLAUDE.md`. Keep them in sync.
+- The voice rules here are the canonical copy (the Gemini-era `WRITER_PROMPT` is
+  gone); the root `CLAUDE.md` Voice section mirrors them. Keep the two in sync.
+- Audience + domain: this routine serves real-estate **agents and investors** (AI
+  for their work), fed by the AI-for-real-estate collector. See `scripts/CLAUDE.md`.
