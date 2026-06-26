@@ -1,13 +1,15 @@
 """
-Tests for scripts/ai_news/ pure functions.
+Tests for scripts/ai_news/ pure functions (the beat+corroboration collector).
 
 Run from the repo root:
     python -m unittest scripts.tests.test_ai_news -v
 
 Covers the functions that silently break when query/parse/scoring is tweaked:
-  - collect.alias_query / google_news_url
-  - collect.parse_news_rss / hn_hit_matches / parse_hn_hits / parse_reddit
-  - collect.story_attention / entity_attention / pick_biggest
+  - collect.google_news_url / parse_news_rss
+  - collect.is_finance_noise / is_seo_farm / is_noise   (the two noise filters)
+  - collect.normalize_title / cluster_headlines / cluster_score / rank_clusters
+  - collect.pick_biggest
+  - collect.to_json / from_json round-trip + render_payload
 """
 
 from __future__ import annotations
@@ -20,25 +22,18 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
-from ai_news import collect, digest  # noqa: E402
-from ai_news.collect import Collection, EntityReport, Story  # noqa: E402
+from ai_news import collect  # noqa: E402
+from ai_news.collect import Collection, Headline, StoryCluster  # noqa: E402
 
 
 # ── query building ────────────────────────────────────────────────────────────
 
 class TestQueryBuilding(unittest.TestCase):
-    def test_alias_query_wraps_or_group(self):
-        self.assertEqual(collect.alias_query(["Anthropic", "Claude"]),
-                         '("Anthropic" OR "Claude")')
-
-    def test_alias_query_single(self):
-        self.assertEqual(collect.alias_query(["Neuralink"]), '("Neuralink")')
-
     def test_google_news_url_encodes_and_bounds_window(self):
-        url = collect.google_news_url('("xAI" OR "Grok")', when_days=7)
+        url = collect.google_news_url('(Zillow OR Redfin) (AI)', when_days=7)
         self.assertTrue(url.startswith("https://news.google.com/rss/search?q="))
         self.assertIn("when%3A7d", url)        # 'when:7d' url-encoded
-        self.assertIn("xAI", url)
+        self.assertIn("Zillow", url)
         self.assertIn("ceid=US:en", url)
 
 
@@ -47,13 +42,13 @@ class TestQueryBuilding(unittest.TestCase):
 _RSS = """<?xml version="1.0"?>
 <rss version="2.0"><channel>
   <item>
-    <title>Anthropic ships Claude update - The Verge</title>
+    <title>Brokerage AI adoption rises, productivity gains remain uneven - HousingWire</title>
     <link>https://example.com/a</link>
     <pubDate>Mon, 09 Jun 2025 10:00:00 GMT</pubDate>
-    <source url="https://theverge.com">The Verge</source>
+    <source url="https://housingwire.com">HousingWire</source>
   </item>
   <item>
-    <title>Second story - TechCrunch</title>
+    <title>Second story - The Real Deal</title>
     <link>https://example.com/b</link>
   </item>
 </channel></rss>"""
@@ -63,9 +58,7 @@ class TestRssParsing(unittest.TestCase):
     def test_parses_items(self):
         items = collect.parse_news_rss(_RSS)
         self.assertEqual(len(items), 2)
-        self.assertEqual(items[0]["title"], "Anthropic ships Claude update - The Verge")
-        self.assertEqual(items[0]["link"], "https://example.com/a")
-        self.assertEqual(items[0]["source"], "The Verge")
+        self.assertEqual(items[0]["source"], "HousingWire")
         self.assertEqual(items[1]["source"], "")        # no <source> element
         self.assertIsNone(items[1]["published"])
 
@@ -80,80 +73,79 @@ class TestRssParsing(unittest.TestCase):
         self.assertEqual(collect.parse_news_rss("<not xml"), [])
 
 
-# ── HN / Reddit parsing ───────────────────────────────────────────────────────
+# ── noise filters ─────────────────────────────────────────────────────────────
 
-class TestHackerNews(unittest.TestCase):
-    def test_hn_hit_matches_domain(self):
-        self.assertTrue(collect.hn_hit_matches({"url": "https://www.anthropic.com/news/x"},
-                                               ["anthropic.com"]))
+class TestNoiseFilters(unittest.TestCase):
+    def test_finance_noise_drops_ipo(self):
+        self.assertTrue(collect.is_finance_noise(
+            "San Francisco AI giant Anthropic files for IPO after $965 billion valuation"))
 
-    def test_hn_hit_rejects_offtopic(self):
-        self.assertFalse(collect.hn_hit_matches({"url": "https://reddit.com/r/x"},
-                                                ["anthropic.com"]))
+    def test_finance_noise_drops_stock_chatter(self):
+        self.assertTrue(collect.is_finance_noise("Which Funds Are Best For AI Exposure?  shares jump"))
 
-    def test_hn_hit_rejects_empty_url(self):
-        self.assertFalse(collect.hn_hit_matches({"url": ""}, ["anthropic.com"]))
+    def test_finance_noise_keeps_home_valuation_story(self):
+        # "home value" must NOT trip the finance filter (no IPO/stock terms).
+        self.assertFalse(collect.is_finance_noise(
+            "New AI tool claims it can analyze any home value in 30 seconds"))
 
-    def test_parse_hn_hits_filters_and_maps(self):
-        payload = {"hits": [
-            {"title": "On topic", "url": "https://anthropic.com/p", "points": 120, "num_comments": 45},
-            {"title": "Off topic", "url": "https://other.com/p", "points": 999, "num_comments": 1},
-        ]}
-        stories = collect.parse_hn_hits(payload, "Anthropic", ["anthropic.com"])
-        self.assertEqual(len(stories), 1)
-        self.assertEqual(stories[0].hn_points, 120)
-        self.assertEqual(stories[0].hn_comments, 45)
-        self.assertEqual(stories[0].source, "hackernews")
+    def test_seo_farm_matches_known_domain(self):
+        self.assertTrue(collect.is_seo_farm("appinventiv.com"))
 
+    def test_seo_farm_rejects_real_outlet(self):
+        self.assertFalse(collect.is_seo_farm("HousingWire"))
 
-class TestReddit(unittest.TestCase):
-    def test_parse_reddit_applies_floor(self):
-        payload = {"data": {"children": [
-            {"data": {"title": "Big", "url": "https://x/1", "score": 500}},
-            {"data": {"title": "Tiny", "url": "https://x/2", "score": 3}},
-        ]}}
-        stories = collect.parse_reddit(payload, "OpenAI", min_score=25)
-        self.assertEqual(len(stories), 1)
-        self.assertEqual(stories[0].reddit_score, 500)
-        self.assertEqual(stories[0].source, "reddit")
-
-    def test_parse_reddit_prefers_overridden_dest(self):
-        payload = {"data": {"children": [
-            {"data": {"title": "x", "url": "https://reddit.com/comments/1",
-                      "url_overridden_by_dest": "https://openai.com/blog", "score": 99}},
-        ]}}
-        self.assertEqual(collect.parse_reddit(payload, "OpenAI")[0].url,
-                         "https://openai.com/blog")
+    def test_is_noise_combines_both(self):
+        self.assertTrue(collect.is_noise("Anthropic files for IPO", "BBC"))
+        self.assertTrue(collect.is_noise("16 Applications of AI in Real Estate", "appinventiv.com"))
+        self.assertFalse(collect.is_noise("How AI may be messing with home prices", "CNBC"))
 
 
-# ── scoring ───────────────────────────────────────────────────────────────────
+# ── normalization + clustering ────────────────────────────────────────────────
 
-class TestScoring(unittest.TestCase):
-    def test_story_attention_weights(self):
-        s = Story("OpenAI", "t", "u", "hackernews", hn_points=100, hn_comments=50)
-        # 1.0*100 + 2.0*50 = 200
-        self.assertEqual(collect.story_attention(s), 200.0)
+class TestNormalize(unittest.TestCase):
+    def test_strips_publisher_suffix_and_punctuation(self):
+        self.assertEqual(
+            collect.normalize_title("AI Reshapes the Agent - Forbes"),
+            "ai reshapes the agent",
+        )
 
-    def test_comments_outweigh_points(self):
-        a = Story("x", "t", "u", "hackernews", hn_points=0, hn_comments=100)
-        b = Story("x", "t", "u", "hackernews", hn_points=100, hn_comments=0)
-        self.assertGreater(collect.story_attention(a), collect.story_attention(b))
+    def test_same_story_different_publisher_same_key(self):
+        a = collect.normalize_title("How AI may be messing with home prices - CNBC")
+        b = collect.normalize_title("How AI may be messing with home prices - Yahoo")
+        self.assertEqual(a, b)
 
-    def test_entity_attention_includes_news_volume(self):
-        stories = [Story("x", "t", "u", "reddit", reddit_score=10)]
-        # 8.0*3 news + 1.5*10 reddit = 39
-        self.assertEqual(collect.entity_attention(3, stories), 39.0)
 
-    def test_pick_biggest_returns_highest(self):
-        stories = [
-            Story("A", "low", "u1", "hackernews", hn_points=10),
-            Story("B", "high", "u2", "hackernews", hn_points=10, hn_comments=200),
+class TestClustering(unittest.TestCase):
+    def _headlines(self) -> list[Headline]:
+        # Same story surfaced by two beats and two outlets, plus a singleton.
+        return [
+            Headline("AI prices homes - CNBC", "u1", "CNBC", None, "Valuation"),
+            Headline("AI prices homes - Yahoo", "u2", "Yahoo", None, "Agent tools"),
+            Headline("Zillow ships AI search - HousingWire", "u3", "HousingWire", None, "Portals"),
         ]
-        self.assertEqual(collect.pick_biggest(stories).title, "high")
 
-    def test_pick_biggest_skips_empty_titles(self):
-        stories = [Story("A", "", "u1", "hackernews", hn_points=9999)]
-        self.assertIsNone(collect.pick_biggest(stories))
+    def test_clusters_merge_by_normalized_title(self):
+        clusters = collect.cluster_headlines(self._headlines())
+        self.assertEqual(len(clusters), 2)
+        big = max(clusters, key=collect.cluster_score)
+        self.assertEqual(sorted(big.beats), ["Agent tools", "Valuation"])
+        self.assertEqual(sorted(big.outlets), ["CNBC", "Yahoo"])
+        self.assertEqual(big.appearances, 2)
+
+    def test_cluster_score_weights_beats_over_outlets(self):
+        # 2 beats (3.0*2) + 2 outlets (2.0*2) + 2 appearances (1.0*2) = 12
+        c = StoryCluster("t", "u", "CNBC", None,
+                         beats=["Valuation", "Agent tools"], outlets=["CNBC", "Yahoo"], appearances=2)
+        self.assertEqual(collect.cluster_score(c), 12.0)
+
+    def test_rank_and_pick_biggest(self):
+        clusters = collect.cluster_headlines(self._headlines())
+        ranked = collect.rank_clusters(clusters)
+        self.assertEqual(collect.normalize_title(ranked[0].title), "ai prices homes")
+        self.assertEqual(collect.pick_biggest(clusters).title, "AI prices homes - CNBC")
+
+    def test_pick_biggest_skips_empty(self):
+        self.assertIsNone(collect.pick_biggest([StoryCluster("", "", "", None)]))
 
     def test_pick_biggest_empty(self):
         self.assertIsNone(collect.pick_biggest([]))
@@ -163,50 +155,41 @@ class TestScoring(unittest.TestCase):
 
 class TestSerialization(unittest.TestCase):
     def _sample(self) -> Collection:
-        big = Story("OpenAI", "high", "u2", "hackernews", hn_points=10, hn_comments=200)
+        big = StoryCluster("AI prices homes", "u1", "CNBC", "Mon",
+                           beats=["Valuation", "Agent tools"], outlets=["CNBC", "Yahoo"], appearances=2)
+        other = StoryCluster("Zillow ships AI search", "u3", "HousingWire", "Tue",
+                             beats=["Portals"], outlets=["HousingWire"], appearances=1)
         return Collection(
-            entities=[
-                EntityReport(
-                    entity="Anthropic",
-                    headlines=[{"title": "Claude ships", "link": "https://x/1",
-                                "source": "The Verge", "published": "Mon"}],
-                    stories=[Story("Anthropic", "t", "https://x/2", "reddit", reddit_score=80)],
-                ),
-                EntityReport(entity="OpenAI", headlines=[], stories=[big]),
-            ],
+            clusters=[big, other],
             biggest=big,
-            generated_at="2026-06-15 12:00 UTC",
+            beat_counts={"Valuation": 5, "Agent tools": 4, "Portals": 3},
+            generated_at="2026-06-26 12:00 UTC",
         )
 
     def test_round_trips_losslessly(self):
         c = self._sample()
         back = collect.from_json(collect.to_json(c))
         self.assertEqual(back.generated_at, c.generated_at)
-        self.assertEqual([e.entity for e in back.entities], ["Anthropic", "OpenAI"])
-        self.assertEqual(back.entities[0].headlines, c.entities[0].headlines)
-        self.assertEqual(back.entities[0].stories[0].reddit_score, 80)
-        self.assertEqual(back.biggest.title, "high")
-        # Derived properties recompute on the rebuilt object.
-        self.assertEqual(back.entities[0].news_count, 1)
-        self.assertEqual(back.entities[1].attention, c.entities[1].attention)
+        self.assertEqual(back.beat_counts, c.beat_counts)
+        self.assertEqual(back.biggest.title, "AI prices homes")
+        self.assertEqual([s.title for s in back.clusters],
+                         ["AI prices homes", "Zillow ships AI search"])
+        # score is a derived property; it recomputes on the rebuilt object.
+        self.assertEqual(back.biggest.score, c.biggest.score)
 
     def test_round_trips_none_biggest(self):
-        c = Collection(entities=[], biggest=None, generated_at="2026-06-15 12:00 UTC")
+        c = Collection(clusters=[], biggest=None, beat_counts={}, generated_at="2026-06-26 12:00 UTC")
         back = collect.from_json(collect.to_json(c))
         self.assertIsNone(back.biggest)
-        self.assertEqual(back.entities, [])
+        self.assertEqual(back.clusters, [])
 
     def test_payload_renders_from_rebuilt_collection(self):
-        # The cloud routine renders the rebuilt collection; it must not error.
+        # The routine renders the rebuilt collection; it must not error.
         back = collect.from_json(collect.to_json(self._sample()))
-        payload = digest.render_payload(back)
-        self.assertIn("Collected 2026-06-15 12:00 UTC", payload)
-        self.assertIn("Anthropic", payload)
-
-
-# Gemini-era style-guardrail and short-form tests were removed with the Gemini
-# pipeline (digest.strip_em_dashes / find_fluff / _first_headline, shorts.*).
-# The Claude routine now owns drafting + house-style enforcement.
+        payload = collect.render_payload(back)
+        self.assertIn("Collected 2026-06-26 12:00 UTC", payload)
+        self.assertIn("BIGGEST STORY", payload)
+        self.assertIn("AI prices homes", payload)
 
 
 if __name__ == "__main__":

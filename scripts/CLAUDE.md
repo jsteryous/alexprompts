@@ -34,39 +34,46 @@ python -m unittest scripts.tests.test_ai_news -v
 
 ### `collect.py` — source + score the week
 
-Per entity (Anthropic, OpenAI, Google DeepMind, xAI, Meta AI, SpaceX, Tesla AI,
-Neuralink — edit the `ENTITIES` list to change coverage):
+**Reoriented June 2026** from a frontier-lab feed to a national **AI-for-real-estate**
+brief for agents + investors (audience decided with Alex; see memory
+[[greenville-realestate-vertical]] and the sibling `greenville/collect.py`). It now
+uses the **beat + corroboration** model, NOT the old entity/HN/Reddit one:
 
-- **Google News RSS** (`when:7d`) — headlines + coverage volume. Free, no key.
-- **Hacker News (Algolia)** — builder-crowd engagement (points + comments). The real
-  attention signal. Free, no key.
-- **Reddit search JSON** — best-effort; Reddit now 403s unauthenticated cloud
-  requests, so it degrades to empty and HN carries the weight. Not a bug.
+- **Google News RSS** (`when:7d`) across six AI-x-real-estate **beats** (`BEATS` at the
+  top of the file): Valuation, Agent tools, Portals, Mortgage, Investor/proptech,
+  Assistant how-to. Each query lives in the *intersection* (an AI term AND a real-estate
+  term) so neither generic AI nor generic real-estate news floods the lane. Free, no key.
+- **Scoring is corroboration** (no upvote signal exists for trade press): cluster
+  headlines by normalized title, then score by how many distinct **beats** and **outlets**
+  surfaced the story (`W_BEATS`, `W_OUTLETS`, `W_APPEARANCES`). The biggest cluster is the
+  lead. Trade outlets (HousingWire, Inman, RISMedia, The Real Deal) are the target signal.
+- **Two noise filters** the signal probe proved we need: `FINANCE_NOISE_RE` drops
+  AI-company IPO/stock items that ride in on the word "valuation"; `SEO_FARM_SOURCES`
+  drops content-marketing listicle domains. Both are tunable, like Greenville's
+  `LISTING_RE`. (Beat queries spell out "automated valuation model"; never the bare
+  acronym "AVM", which collides with arteriovenous malformation and pulls medical hits.)
 
-**Datacenter-IP blocking + the CI hand-off.** From a *datacenter* IP, all three
-sources can 403 (Google News and HN challenge datacenter ranges; Reddit always does),
-not just Reddit. GitHub-hosted runners are not blocked; the Claude Code cloud *script
-routine* sandbox is. So the routine does NOT collect for itself. Instead
-`.github/workflows/collect-signal.yml` (Saturday 05:00 UTC, before the routine) runs
-`python -m ai_news.digest --collect-only --json-out` from the runner's good IP and
-commits the scored signal to `scripts/ai_news/data/` (`signal-latest.json` + the
-rendered `signal-latest.txt`). The routine's STEP 0 reads that committed file; live
-collection is only a fallback. The serialization round-trips through `collect.to_json` /
-`collect.from_json` (unit-tested); `--from-json PATH` replays a saved snapshot with no
-network.
+**Datacenter-IP blocking + the CI hand-off.** From a *datacenter* IP Google News can 403;
+GitHub-hosted runners are not blocked, the Claude Code cloud *script routine* sandbox is.
+So the routine does NOT collect for itself. `.github/workflows/collect-signal.yml`
+(Saturday 05:00 UTC, before the routine) runs `python -m ai_news.digest --collect-only
+--json-out` from the runner's good IP and commits the scored signal to
+`scripts/ai_news/data/` (`signal-latest.json` + the rendered `signal-latest.txt`). The
+routine's STEP 0 reads that committed file; live collection is only a fallback. The
+serialization round-trips through `collect.to_json` / `collect.from_json` (unit-tested);
+`--from-json PATH` replays a saved snapshot with no network.
 
-All network fns degrade gracefully (log + return `[]`, never raise). RSS is parsed
-with **defusedxml** (XXE/billion-laughs hardening; falls back to stdlib if absent).
-"Attention" is builder/tech-crowd by design, not mainstream virality. The biggest
-story is the single highest-engagement item; weights (`W_HN_*`, `W_REDDIT`,
-`W_NEWS_COUNT`) live at the top of the file. Pure fns are unit-tested.
+All network fns degrade gracefully (log + return `[]`, never raise). RSS is parsed with
+**defusedxml** (XXE/billion-laughs hardening; falls back to stdlib if absent). Pure fns
+are unit-tested in `tests/test_ai_news.py`.
 
 ### `digest.py` — the collector CLI
 
 A thin wrapper over `collect.py`: collects (or replays `--from-json`), optionally writes
-the scored JSON (`--json-out`), and prints the human-readable signal (`render_payload`,
-which produces `signal-latest.txt`). No Gemini, no email. `--collect-only` is kept as a
-no-op alias so `collect-signal.yml` and the routine's STEP 0 command keep working.
+the scored JSON (`--json-out`), and prints the human-readable signal via
+`collect.render_payload` (which produces `signal-latest.txt`). No Gemini, no email.
+`--collect-only` is a no-op alias and `--news-limit` is a kept alias for `--per-beat`, so
+`collect-signal.yml` and the routine's STEP 0 command keep working unchanged.
 
 ### `ai_news/routine/` — the Claude routine (writes the draft)
 
@@ -78,10 +85,14 @@ performer → article and delivers ONE story in two renderings (a 6–10 min voi
 and a Substack article) to Google Drive and Gmail. House style (no em dashes, no
 fragments, steelman-then-resolve) lives in the pass specs, not in Python anymore.
 
-> **Repositioning note:** the routine still frames Alex Prompts as a frontier-tech NEWS
-> channel. The site is now AI how-to **education** (see `src/lib/site.ts`). Reframing the
-> routine to find beginner demand and scaffold how-to guides (titles, hooks, outlines for
-> Alex to fill by actually doing the task) is the pending follow-up.
+> **Repositioning note (in progress):** the **collector** is now AI-for-real-estate
+> (above), but the routine **passes** (reporter → angle → writer → editor → performer →
+> article) still frame Alex Prompts as a frontier-tech NEWS channel. Re-aiming those
+> passes at the agent/investor reader is the **next step**; the output **format** (keep the
+> 6–10 min voiceover script, or go shorter/more practical) is an open decision to make
+> after seeing real collected signal. Until the passes are re-aimed, the collector signal
+> and the draft framing are intentionally out of sync — don't rely on a clean Saturday run
+> mid-pivot.
 
 ### Automation
 
