@@ -2,58 +2,70 @@
 
 This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
 - **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
-- **`scripts/CLAUDE.md`** — the Python content engine (`ai_news/`): newsletter + short-form scripts.
+- **`scripts/CLAUDE.md`** — the Python content engines: the national AI-for-real-estate
+  signal collector + Saturday script routine (`ai_news/`) and the Greenville local
+  real-estate engine (`greenville/`).
 - **`BRAND.md`** — the StoryBrand BrandScript (villain = the noise, hero = the reader, guide
   = Alex). Drives all *positioning* copy (site, welcome email, bios, CTAs). Stays OUT of the
   truth-seeking writer method by design.
 
 ## What this is
 
-> **CURRENT POSITIONING (June 2026): Claude-only.** The live site is narrowed to a
-> single tool. The whole brand exists to help people **get more out of Claude**, and the
-> homepage is built so a visitor understands that in under 3 seconds (hero headline:
-> "Get more out of Claude."). Site copy is Claude-only: do **not** reintroduce other tools
-> (ChatGPT, Gemini, Perplexity, etc.) into any site/social/OG copy. The brand
-> single-source-of-truth (`src/lib/site.ts`) reflects this. The frontier-news and
-> multi-tool how-to descriptions below are **legacy** and describe the analytical engine
-> (`scripts/ai_news/`), which still lags the site.
+> **CURRENT POSITIONING (June 2026): Claude for real-estate agents and investors.** The
+> brand is **Claude-only** and aimed at **real-estate professionals**. The site +
+> newsletter teach agents and investors how to point Claude at their actual work
+> (listings, market research, deal analysis, lead follow-up, marketing), in plain English,
+> no code, no hype. "Not active in real estate? A lot of it helps anyone" is the secondary
+> promise. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline: *"Claude for
+> real estate agents and investors."*). Do **not** reintroduce other tools (ChatGPT,
+> Gemini, Perplexity, etc.) into any site/social/OG copy, and do **not** revive the old
+> frontier-tech-news framing.
 
-**Alex Prompts** is a personal media brand by Alex Steryous covering the companies
-building the future: the frontier AI labs and hard-tech companies (Anthropic, OpenAI,
-Google DeepMind, xAI, Meta AI, Nvidia, Tesla, SpaceX, Neuralink, and others actually
-moving the frontier). It publishes on **TikTok, YouTube, X, and Substack**; the goal is
-to build an audience and monetize on the internet.
+**Alex Prompts** is a personal media brand by Alex Steryous. Alex is a real-estate agent;
+the brand helps agents and investors get real work out of Claude, and keeps them current
+on how AI is changing their field. It publishes on **Substack (the newsletter and home
+base), YouTube, TikTok, and X**; the goal is to build an audience and monetize on the
+internet.
 
-**The job:** ingest the week's highest-signal frontier-tech news, translate the facts
-into plain English, separate confirmed facts from claims, and lay out the trajectory we
-are on. Optimistic about technology and people, honest about the hard parts.
+**The job has two modes, one audience (agents + investors):**
+1. **HOW-TO education** — the site + newsletter's core product. Take a real task from a
+   pro's week and walk it step by step inside Claude, slow enough that nothing is assumed.
+   "The how-to is the product." This is what `src/lib/site.ts` describes.
+2. **NEWS + analysis** — how AI is changing real estate, for the same reader. The Saturday
+   national video + article (`scripts/ai_news/`) and the Greenville local engine
+   (`scripts/greenville/`). These keep the audience current; they do not replace the how-to.
 
 **The name is a double meaning:** the *AI prompts*, and *prompting real discussion*. Every
 piece (article, video, TikTok, X post) exists to stimulate discussion. It asks a simple
 question that turns out to be hard, the kind that gets opinionated people to say what they
 actually think.
 
-### Editorial framework (the brand's POV — drives all copy)
+### Editorial framework (the POV behind the NEWS/analysis content)
 
-The method, in order (mirrored in `src/lib/site.ts` `principles` and the homepage):
+This is the method for the news/analysis pieces (the Saturday national engine and the
+Greenville local engine). The how-to teaching approach for the site + newsletter is a
+SEPARATE thing and lives in `src/lib/site.ts` `principles` (start from a real outcome,
+assume nothing, skip the hype, leave you able to do it again). Do not conflate the two.
+
+The news method, in order:
 1. **Inform clearly** — what actually happened, plain English, no hype/doom.
-2. **Read the builders** — take the people building the future at their word, then
-   pressure-test it. "The easiest way to predict the future is to build it," so start from
-   what the builders are actually saying.
+2. **Read the builders** — take the people building the tools at their word, then
+   pressure-test it. Start from what the companies actually shipped and said.
 3. **Steelman the skeptic** — the strongest version of the other side, argued honestly
    before landing anywhere.
-4. **A grounded take, then a prompt** — a clear, logical read (NOT investment advice), then
-   the hard question worth arguing about.
+4. **A grounded take, then a prompt** — a clear, logical read (NOT investment, legal, or
+   financial advice), then the hard question worth arguing about.
 
 The stance, stated honestly:
-- **Contrarian / Thiel-esque:** the crowd, especially legacy media, is confidently wrong
-  often enough that the consensus is worth doubting. The house lean on AI-and-jobs is that
-  groundbreaking tech *creates* new work, new industries, stronger economies, rather than
-  ending work. Held loosely and always paired with the steelman.
-- **Held in honest tension with the builders.** This lean runs into Musk ("work will be
-  optional") and Amodei (job-loss warnings). Do not resolve that by cheering or panicking.
-  Resolve it by asking a better question (optional for whom, on what timeline, paid how).
-  Take builders seriously, never as settled.
+- **Contrarian / Thiel-esque:** the crowd, including real-estate and tech media, swings
+  between "AI makes agents obsolete" doom and "it's a fad" dismissal, and is confidently
+  wrong often enough that the consensus is worth doubting. The house lean is that AI
+  *reshapes and raises the bar* for the agent's and investor's work rather than ending it,
+  and the pros who adopt it win. Held loosely and always paired with the steelman.
+- **Held in honest tension.** Take the strongest "agents are obsolete" case seriously
+  (iBuyers, AI valuation, direct-to-consumer tools), never wave it off. Resolve it by
+  asking a better question (obsolete for which task, on what timeline, replaced by whom),
+  not by cheering or panicking.
 - Grounded optimism, never blind optimism. The hard parts are real and named.
 
 ### Brand strategy (the model the site is built around)
@@ -88,27 +100,33 @@ The canonical voice lives in the Claude routine's writer pass
 - Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
   "game-changer," "a new era," etc.
 
-## The content engine (`scripts/ai_news/`)
+## The content engines (`scripts/ai_news/` + `scripts/greenville/`)
 
-See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** A GitHub Action
-(`collect-signal.yml`) collects and scores the week's signal (`collect.py` + the
-`digest.py` collector) and commits it; the **Saturday Claude routine**
-(`scripts/ai_news/routine/`, an orchestrator plus isolated Opus passes) reads that signal
-and writes the weekly draft, delivering it to Google Drive and Gmail. The legacy dental
-pipeline is retired under `scripts/_archive/` — do not revive it.
+See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Two siblings, both
+serving real-estate agents and investors:
 
-> NOTE: the routine still describes the old frontier-news brand. The site is repositioned
-> to AI how-to education (see `src/lib/site.ts`); reframing the routine to produce how-to
-> guide scaffolding is a pending follow-up.
+- **`ai_news/`** — the **national AI-for-real-estate** engine. A GitHub Action
+  (`collect-signal.yml`) scores the week's signal across AI-x-real-estate beats
+  (`collect.py` + `digest.py`) and commits it; the **Saturday Claude routine**
+  (`scripts/ai_news/routine/`, an orchestrator plus isolated Opus passes) reads it and
+  writes one story in two renderings (a 6–10 min voiceover video script + a Substack
+  article), delivered to Google Drive and Gmail.
+- **`greenville/`** — the **local Greenville, SC** engine. A daily routine that turns the
+  biggest local real-estate story into a both-sides website post (`/real-estate`) + an X
+  post. See `scripts/greenville/CLAUDE.md`.
+
+Both were reoriented from the old frontier-tech-news brand in June 2026; the legacy dental
+pipeline is retired under `scripts/_archive/` — do not revive either.
 
 ## Site structure
 
-- `/` — **content-first landing page** (a magazine front page, not a marketing splash):
-  compact masthead → featured latest issue + recent-issues grid → the editorial method →
-  coverage → follow → subscribe. Top content sits high on purpose. Money model is ads
-  later; content is free, so the homepage's job is to put the best content in front of a
-  visitor immediately.
-- `/about` — who Alex is, the editorial framework, the contrarian stance, the name.
+- `/` — **Claude-for-real-estate how-to landing.** Built so the 3-second scan reads
+  "Claude for your real-estate work": hero tagline → the concrete real-estate outcomes
+  Claude can do for a pro (`realEstateOutcomes`) → the "helps anyone" outcomes
+  (`outcomes`) → how every guide works (`principles`) → the manifesto → follow →
+  subscribe. The dominant CTA is *Subscribe*; content is free, money model is later.
+- `/about` — who Alex is, the how-to promise (the manifesto in real-estate terms), the
+  teaching method, and the name.
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
   **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
   reads the publication RSS feed, converts each post's HTML to markdown via
@@ -118,10 +136,11 @@ pipeline is retired under `scripts/_archive/` — do not revive it.
   drive the manual publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate
   `/archive`). Kept for engine-generated drafts; the Substack mirror is the live path.
 
-**`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, social
-links, covered-company list). Edit handles/domain there and nav/footer/JSON-LD/sitemap
-update together. It currently holds **placeholder** social URLs and domain — confirm and
-replace the `TODO(alex)` values.
+**`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, oneLiner,
+description, social links, and the Claude-for-real-estate teaching content: `tools`,
+`principles`, `realEstateOutcomes`, `outcomes`, `manifesto`). Edit handles/domain there and
+nav/footer/JSON-LD/sitemap update together. One `TODO(alex)` remains: confirm the contact
+email.
 
 ## Supabase
 

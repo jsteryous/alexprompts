@@ -6,9 +6,12 @@ This version has breaking changes -- APIs, conventions, and file structure may a
 
 ## Project: Alex Prompts
 
-A personal media brand by Alex Steryous covering the companies building the future
-(frontier AI labs + hard tech). Publishes on TikTok, YouTube, X, and Substack. See
-`CLAUDE.md` (root), `src/CLAUDE.md`, and `scripts/CLAUDE.md` for full context.
+A personal media brand by Alex Steryous: **Claude for real-estate agents and investors**.
+The site + newsletter teach real-estate pros how to point Claude at their actual work
+(listings, market research, deal analysis, lead follow-up); two content engines add
+AI-for-real-estate news (national + local Greenville). Claude-only. Publishes on Substack,
+YouTube, TikTok, and X. See `CLAUDE.md` (root), `src/CLAUDE.md`, and `scripts/CLAUDE.md`
+for full context.
 
 > This repo previously housed "REBB Advisors," a dental-website cleanup business. That
 > project was fully removed from the website in June 2026. Its Python tooling lives,
@@ -17,12 +20,14 @@ A personal media brand by Alex Steryous covering the companies building the futu
 
 ## What's live
 
-- **Website** (`src/`) — Next.js 16 home base: `/`, `/about`, `/archive`
-  (`/archive/[slug]`), and the token-gated `/review` publish flow. Edit brand details in
-  `src/lib/site.ts`.
-- **Content engine** (`scripts/ai_news/`) — a Python signal collector feeding a weekly
-  Claude routine that drafts the newsletter (Gemini was removed). See `scripts/CLAUDE.md`.
-  **Do not touch the Python scripts as part of website work** unless explicitly asked.
+- **Website** (`src/`) — Next.js 16 home base: `/`, `/about`, `/archive`, `/guides`,
+  `/real-estate` (each with `[slug]`), and the token-gated `/review` publish flow. Edit
+  brand details in `src/lib/site.ts`.
+- **Content engines** (`scripts/`) — two Python signal collectors feeding Claude routines
+  (Gemini was removed): `ai_news/` (national AI-for-real-estate, a weekly Saturday script +
+  article) and `greenville/` (local Greenville real-estate, a daily both-sides post). See
+  `scripts/CLAUDE.md`. **Do not touch the Python scripts as part of website work** unless
+  explicitly asked.
 
 ## Working agreements
 

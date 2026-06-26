@@ -15,7 +15,8 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 
 - **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, author, tagline,
   oneLiner, description, email, url), `socials` (the follow row + footer + JSON-LD
-  `sameAs`), `newsletterUrl`, `coverage` (covered-company chips). `SITE_URL` reads
+  `sameAs`), `newsletterUrl`, and the Claude-for-real-estate teaching content
+  (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`). `SITE_URL` reads
   `NEXT_PUBLIC_SITE_URL`. **Editing handles/domain here updates every surface.** Holds
   `TODO(alex)` placeholders — confirm before launch.
 - **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
@@ -32,9 +33,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   pipeline. Pure parse split from the fetch. Called only by `/api/sync-substack` (daily
   Vercel cron in `vercel.json`), which upserts posts into `blog_posts` as `PUBLISHED`.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
-- **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: hero →
-  what-this-is → coverage chips → latest 3 issues → `#follow` (social cards) → subscribe
-  CTA. No shared section components (the old `HomeSections.tsx` was dental-only, deleted).
+- **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: hero
+  (Claude for real-estate agents and investors) → real-estate outcomes grid → "helps
+  anyone" outcomes → how every guide works (`principles`) → manifesto → latest issues →
+  `#follow` (social cards) → subscribe CTA. No shared section components (the old
+  `HomeSections.tsx` was dental-only, deleted).
 - **`src/app/archive/`**, **`src/app/guides/`**, **`src/app/real-estate/`** — the three
   section index + `[slug]` routes. All three `[slug]` pages render the shared
   `components/ArticleView.tsx` (markdown → sanitize → `Article` + `BreadcrumbList`

@@ -13,9 +13,10 @@ reference only, nothing there runs on a schedule anymore.
 
 ## What lives in `scripts/`
 
-- **`ai_news/`** — the weekly signal collector. `collect.py` (and the thin
-  `digest.py` CLI) source and score the week's frontier signal; the **Claude routine**
-  under `ai_news/routine/` reads that signal and writes the draft.
+- **`ai_news/`** — the national **AI-for-real-estate** signal collector. `collect.py`
+  (and the thin `digest.py` CLI) source and score the week's AI-x-real-estate signal
+  (beats + corroboration); the **Saturday Claude routine** under `ai_news/routine/` reads
+  that signal and writes the draft for agents and investors.
 - **`ai_news/routine/`** — the Claude routine: an `orchestrator.md` plus isolated Opus
   passes (reporter → angle → writer → editor → performer → article). It runs weekly in
   the cloud, reads the committed signal, and delivers the draft to Google Drive + Gmail.
@@ -85,14 +86,12 @@ performer → article and delivers ONE story in two renderings (a 6–10 min voi
 and a Substack article) to Google Drive and Gmail. House style (no em dashes, no
 fragments, steelman-then-resolve) lives in the pass specs, not in Python anymore.
 
-> **Repositioning note (in progress):** the **collector** is now AI-for-real-estate
-> (above), but the routine **passes** (reporter → angle → writer → editor → performer →
-> article) still frame Alex Prompts as a frontier-tech NEWS channel. Re-aiming those
-> passes at the agent/investor reader is the **next step**; the output **format** (keep the
-> 6–10 min voiceover script, or go shorter/more practical) is an open decision to make
-> after seeing real collected signal. Until the passes are re-aimed, the collector signal
-> and the draft framing are intentionally out of sync — don't rely on a clean Saturday run
-> mid-pivot.
+> **Reorientation note (June 2026):** the whole `ai_news/` engine, collector AND passes,
+> now serves real-estate agents and investors. The collector scores AI-x-real-estate
+> beats; the passes (reporter, angle, writer, editor, performer, article) write for the
+> agent/investor reader. The format was kept: a 6 to 10 minute voiceover video script plus
+> a Substack article. The Greenville daily engine (`scripts/greenville/`) is the separate
+> local sibling.
 
 ### Automation
 
