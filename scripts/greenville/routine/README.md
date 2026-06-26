@@ -12,10 +12,12 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
 ## The pipeline
 
 1. **`pass1_reporter.md`** — establishes the verified facts, finds the real
-   publisher article behind Google News's opaque redirect link, grabs a lead image
-   (the article's `og:image`), separates CONFIRMED from REPORTED, dedups against
-   what the site already covered, and lists what a human must verify. On a quiet day
-   it returns `NO NEW STORY TODAY` and the run stops.
+   publisher article behind Google News's opaque redirect link, names the central
+   place by its proper name and pulls a freely-licensed lead image of it from
+   Wikimedia Commons (url + author + license, never the publisher's copyrighted
+   photo), separates CONFIRMED from REPORTED, dedups against what the site already
+   covered, and lists what a human must verify. On a quiet day it returns
+   `NO NEW STORY TODAY` and the run stops.
 2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
    THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
    reader's question. Takes no stance.
@@ -73,5 +75,6 @@ python -m unittest scripts.tests.test_greenville -v
   for." The writer pass bans demographic-targeting language.
 - **Attribution + an image credit.** Every number traces to a real publisher
   article; the post ends with a source credit; the delivered packet leads with a
-  MUST-VERIFY list.
+  MUST-VERIFY list. The lead image is a Wikimedia Commons photo, credited inline as
+  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition).
 - **Restraint.** Daily cadence, but the reporter posts nothing on a quiet day.
