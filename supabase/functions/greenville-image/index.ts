@@ -35,6 +35,13 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
+/** Remove the Google API key from any string before it leaves the function. A failed
+ *  fetch can echo the full request URL (which carries `&key=...`) in its error
+ *  message, so every error we return to the caller must be scrubbed first. */
+function scrub(s: string, key: string): string {
+  return s.split(key).join("***").replace(/([?&]key=)[^&\s"']+/gi, "$1***");
+}
+
 /** Upload PNG bytes to the public bucket and return the public URL. Uses the
  *  supabase-js client so it works regardless of the project's key format. */
 async function upload(
@@ -93,7 +100,7 @@ Deno.serve(async (req: Request) => {
       `${GMAPS}/geocode/json?address=${encodeURIComponent(address)}&key=${key}`,
     ).then((r) => r.json());
     if (geo.status !== "OK" || !geo.results?.length) {
-      return json({ ok: false, error: `geocode ${geo.status}: ${geo.error_message ?? ""}` }, 422);
+      return json({ ok: false, error: scrub(`geocode ${geo.status}: ${geo.error_message ?? ""}`, key) }, 422);
     }
     const { lat, lng } = geo.results[0].geometry.location as { lat: number; lng: number };
     const formatted = geo.results[0].formatted_address as string;
@@ -132,6 +139,7 @@ Deno.serve(async (req: Request) => {
 
     return json({ ok: true, lat, lng, formatted, cover, aerial, streetview });
   } catch (e) {
-    return json({ ok: false, error: String(e instanceof Error ? e.message : e) }, 500);
+    const msg = String(e instanceof Error ? e.message : e);
+    return json({ ok: false, error: scrub(msg, key) }, 500);
   }
 });
