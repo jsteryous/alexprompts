@@ -2,146 +2,80 @@
 ======================================================================
 COLLECTED SIGNAL
 ======================================================================
-Collected 2026-06-20 18:26 UTC.
+AI-FOR-REAL-ESTATE SIGNAL (national; audience: agents + investors)
+Collected 2026-06-27 07:48 UTC
 
-FLAGGED HIGHEST-ENGAGEMENT STORY (score 401):
-  "Claude Corps" [Anthropic]
-  https://www.anthropic.com/news/claude-corps
-  hn_points=163 hn_comments=119 reddit=0
+BEAT COVERAGE (headlines found per beat):
+  Valuation            15
+  Agent tools          13
+  Portals              14
+  Mortgage             15
+  Investor/proptech    15
+  Assistant how-to     15
 
+BIGGEST STORY (most corroborated, the lead to write up):
+  Build an AI-powered real estate assistant on WhatsApp using Strands Agents SDK and AWS End User Messaging - Amazon Web Services (AWS)
+  https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaDd1eW5fZk1DSG9tUFdoc1AzUnlhWnNBUlk3TldWN0YtcnBab1lkN2lNM3BZWDBOQXY0MS0ycnphRFBLZEZCWkszajlrVE85Ukl4YXZjaHIwYkRUamQ0aWl6aGhLWG94bDJBYnpRaURWSXAwWUZjeE5XblRiWm41ZkdrRHZOUWNHZnZyTVp0SGVnTWhsZU1JX2FpaVdMb3h2ZGxRcmZoWFBpMmJuUE1KeG5qdGJqUTViMkFKTThZSTlxdXByVDZ4NVA1RUZiemZEYzFwRHRFWHBOa2RPSFJFMkhucGtydURsT2llYWFzaWU?oc=5
+  beats=Valuation, Assistant how-to | outlets=Amazon Web Services (AWS) | appearances=2 | score=10
 
-### Anthropic  (attention 798, 8 news items)
-  - Agentic coding and persistent returns to expertise - Anthropic — Anthropic
-    https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lM0p2cGtZWWJ4aE9Ocy05NEU1SXFraWl1V1gwNmxwdGpMWkg3N2Z3WGF6eFFMZXlWMGZEeGZZVGxmcGJyVlBSLXlCUXhma0lWRm1SNllTSVlmNXlTMFEzLTZIMFIwSDA?oc=5
-  - Why Anthropic Is Sounding the Alarm on the Next Generation of AI - Council on Foreign Relations — Council on Foreign Relations
-    https://news.google.com/rss/articles/CBMimAFBVV95cUxOSEFBZGphQ2loamYwOWhBQTAwLTNZa1pRQ1V6bmdEdjNOQlMyV1NiQUhHWHJ1Q0VCWG9RYmRvZkRFX1ZjMEhaNjVIeFBaWlZMeEM1MmhQdVk2WC02d1JrQnRYWWI3MEtLaElKMHMyY1IxUGQ0SFF4UkRoSnVFNWVuWk9jNmdEX0Q2M1hsWE8zSDlZY1JXRk5uUg?oc=5
-  - The Department of Commerce Restricted Access to Anthropic’s Latest Models. What Comes Next? - CSIS | Center for Strategic and International Studies — CSIS | Center for Strategic and International Studies
-    https://news.google.com/rss/articles/CBMirAFBVV95cUxOdHdWR19xN0liMFpabFhzMDMyX2xGbURCS0VfaWRodlZtS2xRVmdmb3JJMDNRQm5aanFvVFpGQmhQZnc5ZVhHNkQ2ZjJtSElScFJmZ2xHclFxRUlnTXdsazdMaHRHaUNEMjMyS1hLOUY1ZHNBLUxiOHBVWHltbDdCb2l0ay04NE5LMnU2T3dsc3RDOHplcFlIUzRSS1FIY1lSZUktRjltOUFKQy1x?oc=5
-  - How Powerful is Claude Fable (Mythos) 5 for Coding? - Towards Data Science — Towards Data Science
-    https://news.google.com/rss/articles/CBMihwFBVV95cUxQemtmODFpbUd5V0g4OEVaaTItbWxNb3p4VGpFTElNeGVfcG1QV0xNU0lCT0RRd0RUNTBqc1RaZnRoMGdudERzMnBicy1qWE43UEFtaVRXdjRPMHlPdTktbk94cjVKY0ppNUxrMnJ1UnhTMm5Da2ZQVFR3aElENFUwRHU1amxnVmc?oc=5
-  - Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs — Endor Labs
-    https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5
-  - Introducing Claude Agent for Jira - Atlassian — Atlassian
-    https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5
-  - [hackernews hn 163/119] Claude Corps
-    https://www.anthropic.com/news/claude-corps
-  - [hackernews hn 94/91] Making Claude a Chemist
-    https://www.anthropic.com/research/making-claude-a-chemist
-  - [hackernews hn 15/4] Agentic coding and persistent returns to expertise
-    https://www.anthropic.com/research/claude-code-expertise
-  - [hackernews hn 8/3] Agentic coding and persistent returns to expertise
-    https://www.anthropic.com/research/claude-code-expertise
-
-### OpenAI  (attention 218, 8 news items)
-  - Improving health intelligence in ChatGPT - OpenAI — OpenAI
-    https://news.google.com/rss/articles/CBMidEFVX3lxTE5vcjB4NGtoanAzaElMUVhXZEZydkl4M3F0Mk96ZWoyRHNGMG1xT0RMeHRwTVFNbG1NVzd1LVVMaWFmQ0NYRWtWYll2Skc3YU43TmlzbS0tRlJVTFB2RDNfV3dSQmgwMkhsZEhaUTMwVXFaZGpi?oc=5
-  - Visa and OpenAI integrate Visa's secure global payment directly into ChatGPT - NPR — NPR
-    https://news.google.com/rss/articles/CBMivAFBVV95cUxONDZuX3ItQ1lKMmlRbEd5VWxlVjZDQXNRdDRybGFWN0N0T3hQSW4zZUxQNWV1clI5VVE1dGhsMHIwNTlmZUFwcklaWFZmNzB5aUduVGJneU9naC1Wb3VoWnpYUG9QdTRmdHZVMXU0dC04NkpGZUtwSHNnWHV4ZzFjcVR6dHdHYkdqWVFKTVpsblR1V0E0aURYeFdISTdlVzJSMlhqUnFqVFJWSHNtc0FreW9fZ1RoUkxMMWgtNQ?oc=5
-  - State Attorneys General Are Investigating OpenAI - The New York Times — The New York Times
-    https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5
-  - Exclusive: Ha Thai departs Meta to lead comms for OpenAI devices - Axios — Axios
-    https://news.google.com/rss/articles/CBMiZkFVX3lxTE1fZjFWVU9UM0w1WjItb1oyOXkwaVhKaUJ2Y0pxNmlXQ0k0OUpoaDNMbWYyYjAxa2Y5bHMtSENrdHhMbXBFZExULW5qeC11VFJaMzlrTlpSWG5fYWRXT3V0eWF1cjRyUQ?oc=5
-  - OpenAI hit with multistate probe into possible user harm as its IPO looms - AP News — AP News
-    https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTDJsQlNzM0JtUFpBTUJkalVSS3htd0ZEUVVsOFhYOGhYbFBkNkV6RkZfcERSWV9ZVngzRUYyN29uUXgycFBrek1ZUllLM3MtVzNCY1BUNXBoXzVWbEYtS2pzTFNBUVFKOXZRWlBCN2VoNkxFa0FSWEVGN18xZmRyM3N1ODNwOERDd0ZFa2ozQTNrM3o1Mjc2M3JRODlxN2t6cWsxOUI1WE5QNWc?oc=5
-  - ChatGPT’s market share slips below 50% for first time - TechCrunch — TechCrunch
-    https://news.google.com/rss/articles/CBMijwFBVV95cUxQRzJUMmlQOUlIWVVXUWJpUTJxem1pb1NNYjR5NG81TDB5WTdfeXhjOUlyZm15eElhOU5rdUJmb3Y2MUZWbUNFV1Y1N1lrRWJZVWpOOHBqNzNlMjRIWndla0NOMWpFckNDTUtGS0RfLUhfNUp4T3dMVFZGenVweU94QmVfUGp3MDZWQ0JjVEpZUQ?oc=5
-  - [hackernews hn 58/20] Using AI to improve a challenging reaction in medicinal chemistry
-    https://openai.com/index/ai-chemist-improves-reaction/
-  - [hackernews hn 3/2] Designing delightful front ends with GPT-5.4
-    https://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4
-  - [hackernews hn 4/1] Using AI to help physicians diagnose rare genetic diseases affecting children
-    https://openai.com/index/diagnose-rare-childhood-diseases/
-  - [hackernews hn 6/0] Codex Is Down
-    https://status.openai.com/incidents/01KV7ZT644J4V94GSXMFPY2ANR
-
-### Google DeepMind  (attention 95, 8 news items)
-  - How we’re securing internal systems against increasingly capable and imperfectly aligned AI - Google DeepMind — Google DeepMind
-    https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbVhyR04tNjU3OFI5RHI4TWVqQjVxeUQ5OTVTSHkybWpPc3UwRkhWVnRfRkFSTUZEREhadFE0TWpkZnFYMGJFR1BsVGJhaXQwSkw3eDhPR1lYM1lRX2doTS1rajFzQXV3eXVBWS1IQQ?oc=5
-  - Google Gemini co-lead Noam Shazeer leaves for OpenAI - CNBC — CNBC
-    https://news.google.com/rss/articles/CBMikwFBVV95cUxNOFk4aXNWVHM1WGRKVjh5a0t6NVQ0bkVrazFyRmZtbTB1cHZrazJMVHV4ZTNHWHc0NVdvb2NMRl9UNG15MDlxblVjVkl2NzJ3SHhkMy02Nk1oMGFrLURGMmNtVzdFQjlMNkdRYWxkRGJtaXJMQW85eF9VRjdOckJvWUQyWXV2NFVDNTVGNy1pVktnUEXSAZgBQVVfeXFMTlo0bGE0T0JyeEJTMVltX3RVdHBFYlB6VGVaSlpHRkdReGs2aHc4eHBvQ2lBb19BNlNSakV2ZmZsMndkcDdBQkRyT2NHNk5fa0E5VDdzSXFHLXZid0cyZUFuRHNKNXozNVFyb3BEcE1nQW5MVVB0aU5rVmE5ZVhXWjhHUDRLQjdSRDdBSFRfb3VPVldESE5qVVQ?oc=5
-  - How Target is Shaping Shopping Experiences in Conversational AI - Target — Target
-    https://news.google.com/rss/articles/CBMie0FVX3lxTE13MDZCM3VvN2NwZHR2T005ZF91OTQtUm9FcXRxN3V5a1BBVlZaRnJsMGFMd1poNlRvSXBNZUozVFpjMkFWd0p1ZzF4RF9DOVhqbXlfd2piczE5NTl5MC1ZelFwdzBuVkhaTEE1S2NCbk9wN1g5Z1UyeHpJbw?oc=5
-  - Meet the new Google Home Speaker, built for Gemini - blog.google — blog.google
-    https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmNNMTByMGR2azV3SE5FR0RJVzRQTnB2VWtoSS1kWHh0dXJ0MkFycWZxNjhlZ1E2UFlKX252ei1SenoxX0lKdVMyT0tqQ2RHS0dMdEVQbVdWVEN4aU5zSHVfbjhkVS10MlNVeVd1QmY3TnhwR1RLcF96NmdQbWtsWUtNWHNFNWU3Y0pONWp0SnFvQ3VWYV9MUHVVSV9DZ1N3?oc=5
-  - Google DeepMind unveils a plan to protect itself from its own rogue AI agents - Fortune — Fortune
-    https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTy10VmVENVdzSG00VjRXOUxLSHhWNkwzU2JmMGtybzNRdTY4MXE3R0tfV2JLcEZfM05va21rLWV6RWFKQVZzc3V5enFNWTBQNHY3c2JnbVB3c2lidmkxcVhjVU03QUs1em9Hc2tYbG9SZHJNOWhWd044cVY0SFU0S2FfNXB4NDVHUWxvU1FtQUVKX2RCekc0ZlVTaXllR3BjM3UwOHhBeFV0S3c?oc=5
-  - The first Google Home Speaker in years has Gemini, costs $99, and arrives soon - Mashable — Mashable
-    https://news.google.com/rss/articles/CBMidkFVX3lxTE5KWUVZbVFUQzI3bm5QamdhV255RVNYUlVQbU9QcEdmNnZ5b2R2Tk9seEpNNGZMM3lHZFhKd1pNRHlwZGlPb2U3RlZ2bWxrcnRwUXozR0ZmZFBRMDNZR3BYVmNrb0J2ZUVIMUY4ZnBFOHVLM0JlS3c?oc=5
-  - [hackernews hn 14/4] Securing the Future of AI Agents
-    https://deepmind.google/blog/securing-the-future-of-ai-agents/
-  - [hackernews hn 5/2] From AGI to ASI
-    https://deepmind.google/research/publications/239142/
-
-### xAI  (attention 72, 8 news items)
-  - Grok Imagine Video 1.5 - xAI — xAI
-    https://news.google.com/rss/articles/CBMiUkFVX3lxTE5pcjI5WlFfWUlkbWttZHJsVGJCNEI1RldHWWtMeGprRVJ6VXFkUzItTzVOamJGVWliZ2RmWWJReDk4ZEtZNWRua1Z3N3JsZkZ1emc?oc=5
-  - Trump Administration Attempts Massive Power Grab in Defense of Musk’s xAI - Earthjustice — Earthjustice
-    https://news.google.com/rss/articles/CBMirAFBVV95cUxPMjdQN0ZUdnUtM2xKQ1Fmd0liRjZNU3FyXzNXUGsxa1VLMlJEUXQ3dWlaZXpuanV2RF95czZDdFlVakloNXJBYlFYZFotNDhvTTBhT1BQZVlZR05DS21GbXFPb2Y3S1piZU83NjJheXV5VDlZVkhiTVNCR0YzdnZiamFCUEYwSy0wNTdOVjJqU0lZbnY5UThCM2lvbHYxVU9lcENvVGppT01Nbi1h?oc=5
-  - DOJ intervenes on behalf of xAI in data center gas turbine lawsuit - Utility Dive — Utility Dive
-    https://news.google.com/rss/articles/CBMilgFBVV95cUxPcHhFZElmVW5SSnhpcVZsd2Q1QmNpcGJTc1YwQ0YtOXE3UVp1ODRqNXY5TWxrdVFQaFBfSUFydGU4bzJsaVNpd24xSFFsU1VuM1lvbWVBVHZ6a3Q3LU0td1VvWFdsR1JubE5rNDhidkVDaGt6eWEzRkJ4SjJsNnZRVmI5ZVZhMHR0NzJ3SFV4TzhvbTg1bVE?oc=5
-  - Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer — The Ringer
-    https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5
-  - Godfather of AI blasts Musk's xAI as 'failure,' says labs are risking a 'big bubble explosion' - CNBC — CNBC
-    https://news.google.com/rss/articles/CBMikwFBVV95cUxQZ0xtN2k3bkpySVpWLWlMQVBIWWcwdWE5eXlMWE9IbGUxekRtVjBXblN0dXZKOWFOeDd1MmJfalhOR01VWGJma1JOZVZIa1VRNlBNeFgxREFxLVRHdm5QX0REd1JVamo5Q0Z2ZEZ1S0tFT1FFWXNMRHZwZEJsaEVTZm1rcmd5aGg0STM2QllTc2hJOTTSAZgBQVVfeXFMUHRzdl9sS0JnNlVScnNPV2NVUHVud1o1QmVqRDd2OXdQZTBuWF8yMFJRVTIwTWpqSTBXS0lnNFh0MUcwaVVvaHN6QkRPZE5OaW9DR254cWRDYl82ZThGWTV2UnpBR1lLZVVJYTlEamdyVmlJRlI5M1A2ZzZiQTNMb2ZyeUlmcEFFdWV6SkdSTkFnb0FWWlZzWkg?oc=5
-  - DOJ Defends Musk’s xAI in Data-Center Pollution Lawsuit - WSJ — WSJ
-    https://news.google.com/rss/articles/CBMirAFBVV95cUxPazJvUmd5b0UtelEtNnR4SG94SlZvWDJKWmQ0QllNZE9kcVhkenpYRXpjaGE0di1JUTczMEZDWVdkcGo1b0hreWhMREhLUmRkRUFmOUdrUnRtNDRqQTgyYVdubms0TVRYd1BqdFI3cjMwcnZ3TC14Z2ZIejRvRnI1RTNvbzgtbmFuUzB4bFhFTTdodkY1U2dtTlBHZkZSMThqdTlhOHFuVVpoTWhH?oc=5
-  - [hackernews hn 5/0] Grok Imagine Video 1.5
-    https://x.ai/news/grok-imagine-video-1-5
-  - [hackernews hn 3/0] Grok models are now available via Amazon Bedrock
-    https://x.ai/news/grok-amazon-bedrock
-
-### Meta AI  (attention 64, 8 news items)
-  - What — and who — will be at the Great American State Fair? Here's a primer - NPR — NPR
-    https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5
-  - Storm damages Omaha Art Fair, destroys 17 booths - WOWT — WOWT
-    https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5
-  - Wawa Welcome America Day 2: First day of Philly Fair 250 and Free Museum Days - NBC10 Philadelphia — NBC10 Philadelphia
-    https://news.google.com/rss/articles/CBMi9AFBVV95cUxOWjd6czhUcnhRekZBT2hIWlBXQnFzNmJOMW9xS2E1NUxiT0dTSHltYmFmak41bkdQV2ktV0p2eVhvZkxVaVVqOHU4TGcyZC0tNUwxZ0FLSFQzSTk3bXlNWnhiT01UZjJ5WjBIRDFzTHFoSmFGTkhyaGN3ckoyYTFIVnBJVU85ZzI1a2doYy0wSDZadkZ0Z0Y3U1RKZ3R0ekcxOUpodG01bEYyMkpXYjlFT2ktQlRLY0hVTmQtTDFDV29EZ0FnNGo5OXZ3eWxkbzRVRlQ2UC0zNVhCRDVFZUp0bnZKT0RMN0Z4YmRlQmd0d3N2Y3Ry0gH8AUFVX3lxTE5sNnlxbDMzeFJMdEdBaWtHeWU0cGNEUG44bGhLX2VhU25SZG5SLU5sbGZ4MGpCenFEOG1RUEFveTNUVkpKb2lEMzhmbUlqX2d5eFJkWVpRVEhEX0JpY0tTb1piVHRXU1B3aUtfWDc1QzV1bV9welVXMVA1eTFTNV95NzB1RUdjLUtURElCLTJ5N2dweWozYk5uSGo5VzFsRG1fMWNUTHQ2aVROalhnQmYzbXY1Q3ZNbEZpSkpzSkdxekRka3hWNGtlMHVrNS1PenpzWGM0ZWw0UWRBbHZpOU5CQlp2Z2s1RzZpX1dGQWwyZEg0MUFqMTJJOVJFNg?oc=5
-  - Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair — Vanity Fair
-    https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5
-  - How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review — Harvard Business Review
-    https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5
-  - Neshoba County Fair: Your guide to Mississippi’s Giant House Party - SuperTalk Mississippi Media — SuperTalk Mississippi Media
-    https://news.google.com/rss/articles/CBMilAFBVV95cUxPdmkzZjEyYzM2aGxPMjh4bl9aaFp5b2tEZGpxMVhwSjFjZnpCdmxhMU1CU29yczJON2k4a0x6MFhEMGlmTGpGZm1jYjlxRFNUVUxSY0FnS3Vrc3NKWkFSLUlaRjBrQkozeTlJYVRrSlNTYkxwVWJZcGpoWnlEUmNXXzJMUWhFNXA1MUswYjEtbFZjZHlp?oc=5
-
-### SpaceX  (attention 64, 8 news items)
-  - Bluebird 8-10 Mission - SpaceX — SpaceX
-    https://news.google.com/rss/articles/CBMiV0FVX3lxTE83US1jV3pyVko3RTVxOFdqQWowMG5kT1FRVGFTRmpZeWxyRXNub3JsODEyalViajVsbDI4YV9Jc1M5X2pZRExya2habHgxRmVMVkNMV2RKdw?oc=5
-  - Before SpaceX IPO, Investors in China Secretly Acquired Stakes - ProPublica — ProPublica
-    https://news.google.com/rss/articles/CBMihgFBVV95cUxNVHU0WFBmb0NMOUVwZ0ZxcDV0Ukoybzdsb0Foa2dLZklHYjllWkUxbk5VTGlyYVJySHV0cDN2LTloNWdyT09ELW8zLUdGdExoQTdwbFNvZUV0WTFVWXFJbkMzYkF3Qk0xOXdVb2RSczgtM3hyWFFVb2pwWHNnUk16UlUxSWpwZw?oc=5
-  - The riskiest SpaceX stock trade of all had a big first week - CNBC — CNBC
-    https://news.google.com/rss/articles/CBMicEFVX3lxTFBRMFpFeENNVHlmdFRFSG40ZWo1dnZMbktNaFFaaTFlbklTWnRhWVdXTm5ERURKdHJVRjBkQ1p5dXZ3N0JYYUNaRHotdmJmbEFTSHJqV3RnWmloelVMNVBZbDl3cmpVaHdmZF9nMUgwSk_SAXZBVV95cUxPWlhDNzU5S0VfQkRiUUhGd25Ha3FiMWF1TW9WeXRJdlFORWN1eTloWVktZVhnQkdwVnZwS0dsbF80aU5fOERIV3YtNHJLOGUzZmtmRkVSSTJKdjZwTDlBWEQzanBRYzJNR001cVhPSFVxVm1NS2pn?oc=5
-  - SpaceX launches its first Falcon 9 rocket since Nasdaq debut - Spaceflight Now — Spaceflight Now
-    https://news.google.com/rss/articles/CBMitAFBVV95cUxOWHZNYlhZc01MV2RqUWsxOHk5bm5PUzJoZEROTFNob2FmWWQ0ZldJSnBOZFVTSE00ZWV2akNxclRrZFVXZDBYMWpOXzR2eExjYXlvS1pIWFNzY1JLMWZlQm9NWURBSEVWMXNDeENYSzFoYTlsWHlwYmVPdS1YUURQSVV2ejlhN19SNTgwa18zbmNmN3Y1WUFiNjVMbk1JZnpaQzNKaWNMRmtoS0xTbHpYZC16cWM?oc=5
-  - Elon Musk Becomes World’s First Trillionaire on SpaceX’s First Day of Trading - The New York Times — The New York Times
-    https://news.google.com/rss/articles/CBMieEFVX3lxTFBZcWVuUGwzMTNybzJfS1pSQWxFRDByb1JhYzJqQ3lKc0JQd00yNXduRGR6NE4zMm9uT2xPTFFsb3FPd3Fyd2ZLd3RJTS0tNkpjRGNvSE1rLVVTeXU4M2JzU2ZNYmlLTHl5RDAyTURvUzFIbldCRVE5bg?oc=5
-  - The Myth of SpaceX - The Atlantic — The Atlantic
-    https://news.google.com/rss/articles/CBMingFBVV95cUxNVkg2NmZkNm4wdm5rbFJLVk9jVzVMTk1jOTBRVnJpbWlUdm1RblpOZTJmYVNjVXJxby02ZXBvMEhJUTNQdm83aGRQREFJLWdzTTl0RDlCcEt6dkRHdVkyUnYxa1VLaFJyU2RieUpXblFxX01XRllUc0hsN3J5aUtMdlY5TXVfTi01NlJLNjNxTFNmMzZUZlpOQlVsVXVodw?oc=5
-
-### Tesla AI  (attention 64, 8 news items)
-  - Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App — Not a Tesla App
-    https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5
-  - Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance — Yahoo Finance
-    https://news.google.com/rss/articles/CBMiogFBVV95cUxNdm9uSnU1Zk41Z3RBanJmS3prdk5JbGI5NUhVWlE5ekVMdXEtTFN0ZF9QRUlZRHFyZFdVakl1dUR3d00wRTZBTmJ2RHktRXJ6RWh4OF9uSU5BdTFLb21tTFlyWEEzQTFtWU1Pc2tzRTZjeG9SZkVMd0ZCSHl3Snp3ZmFxWFlRSnRlWW5oc3FHS2prbGlhd19sUWNQYi1yZTBMSWc?oc=5
-  - Musk Shares Video Of Tesla's Optimus Robot Performing Household Chores - NDTV — NDTV
-    https://news.google.com/rss/articles/CBMixwJBVV95cUxNMEE5ZkJWNUJfNy14Tmg5aGo0XzZpajBremZPdUU1STJhN1V4YWhSYVFPLXZEYnBiZU93b0lYZm52bnU5c1N2VGdLZWJTM1BKZlNlSFV2cUNldUJxdjNXVjYweHdlUmE5bDkyQkp6Z2xqRDRsei1oZElzTTdaZXZhdmI2QW9ITmN6NXNaSXQ5dnpjU2I5WlRyWXhGTnRMMjFfTWNPT2s0aFBQTXdwU3FoWGZrLW9RT0dUVUliaEs2ZzVWbEpudTlaVUo0Tk5zamhfLTZSaVBGMDVLS29Sby0weVpVbkRLRGFtdUhsUkdFcmZpQ0poNVFyWnNnNVkwcXdick16cTY3ZWpnZ1Q4ZGVjYkJ1NjN2aVVMa3duamFHcVN0eU90ZXRMVS1IQVUtS1FiSmNDaXY1NUZnbUNOamJWV2lSTWVuNDQ?oc=5
-  - OpenAI Robotics Expansion: Could It Challenge Tesla's Optimus? - News and Statistics - IndexBox — IndexBox
-    https://news.google.com/rss/articles/CBMimgFBVV95cUxOeDJJNFppMG5yQmRLSWJIYV9DRnFidGVxTGxLcExuZk5aTGhMcGVvOU1jaUNRY2VrSzZOcURLNkNkTEJfRlZlUmlOOHFvRm9YRTVSZVhERVZpS1prNVVZUWx4MDRvX0RvbnhnQ1UzVDE3aTd3WDY0TGhoLUZJRVpNbFB6Wl9vR2ROUVNiY1hoUWd0VzExQ21KVDdn?oc=5
-  - TSLA Stock In Focus: Could Optimus Be The Missing Link Between Tesla And SpaceX? - TradingView — TradingView
-    https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRXlQYnB0S1F4S1pJTjdwdHk2RExRM3puMXpXdWZEZWh4TDMtelBUY2pKYlp5S2xsb292c0N2NzNjams3MEJYYTFONXRqSkVTOHIwSXVLOXlPelctaUIya3N0SnFMZjJqdUszWTdRMFpsSVdaQzBHOXBlWFA0dlF4ckt3ZVNZdk05aWdfS2NfeEE0dV93SjhPdnRtUnJtblk5UTdoWVB3RUlDSWlNbkVFbUFaZFlyVDRmd3pURTVpeFJJeExnWlRacF9wV3BsMFQ3OTYxaVZ3?oc=5
-  - Tesla's AI5 Chip Recently Completed Tape-Out. Here's Why This Could Be the Most Important Development in the Company's Transition From Automaker to AI Giant. - The Globe and Mail — The Globe and Mail
-    https://news.google.com/rss/articles/CBMi2AJBVV95cUxPc0dtRkpzdncwMmh5SUROb0RIQUtHXzNiYnhWcWdNS3lydnBBbWlmV3hDTHdzNmJycll1cTBKWnhzM2h4TmtidEdlTmw1QjEtX184RXMtejk0UTZmaXJnVHROTzNWMThuWWZYdmR3TjRPZEl0RVRqVU9IZFRLRTJubFhpd3lHMFNKUGd3N19jR0llUS1VcmxPLXpHUUlUWHBPRzZwU1UtTjBkYzdSU09DcTAwWkI4S3lEZm1pSWRyeG1LVWxvSHd6aGppeXBTNmFSQUREaU5QVzUxYmV1TnlTbVRZSU9uOWd1cFVkeGhQVkpWbldiSDVUSlJ4UnpNNEVDSmN4VnU1RnY1VGh0OUJCR2laeDlpQ0xHMGtoT1ZVVlJZQXVzV01QTXpfNThoVUVMSTBHek45Zzdma2k3TkRvM0RqaVBGcE80ODIzWFZpSm1mcURoczRmeg?oc=5
-
-### Neuralink  (attention 64, 8 news items)
-  - Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global — KED Global
-    https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5
-  - Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider — Business Insider
-    https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5
-  - China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India — The Times of India
-    https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5
-  - Samsung and Neuralink are working on a fourth-generation chip - Root-Nation.com — Root-Nation.com
-    https://news.google.com/rss/articles/CBMikAFBVV95cUxQbkFkX29Hd3RfQkcyQXNqNlFwVnBialBGS25BUHJVNEZvcmt3TThxZTctdDZZRHdQMUlmeE9SS2cwOTRjWk1GSS1wSm1qTFkxSmU2V0NuRENaYlBseGhYN01RQTNKQmI2N3Jzbm1QNlZtelhWMWpVQWk4TWJXRlB2TFpkLVdaLWplTkFEMmZVU0M?oc=5
-  - Samsung to build Neuralink's next-gen brain chip on 4nm process - MSN — MSN
-    https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcnpwX3FqbFdvYy1rRlBFSjVHdWVIRjl0d3hGeF93S2x6Q1JWLVhQREVsNml6RUhROHJHMFNMYTJaNWVZOFFMR3RFdVV0UWVNdGhCS2Q3MkxVZ1RMbUFLT2xWWGV2NEhReEhDd0d3ZHZkYnpaSnFTMldtOWxtaXROc2EyWjk0MnNLdGlIdEt2WlJ4ZERnNEdycnNsOFRyUGpOcEJWOTZYUkY1RklObUdYMWVXTzg2bTVRMGtablZFbXlRd3dlR1Bua0lWLWItcGRORkJEMVlXX2pKSGNleVJ5azViVlRWNlp5V0t1RDN4X3lhZHZfa3hyag?oc=5
-  - China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com — bgr.com
-    https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5
+RANKED STORIES (top 20 of 83):
+  1. [  10] Build an AI-powered real estate assistant on WhatsApp using Strands Agents SDK and AWS End User Messaging - Amazon Web Services (AWS) (Thu, 25 Jun 2026 16:30:51 GMT)
+      https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaDd1eW5fZk1DSG9tUFdoc1AzUnlhWnNBUlk3TldWN0YtcnBab1lkN2lNM3BZWDBOQXY0MS0ycnphRFBLZEZCWkszajlrVE85Ukl4YXZjaHIwYkRUamQ0aWl6aGhLWG94bDJBYnpRaURWSXAwWUZjeE5XblRiWm41ZkdrRHZOUWNHZnZyTVp0SGVnTWhsZU1JX2FpaVdMb3h2ZGxRcmZoWFBpMmJuUE1KeG5qdGJqUTViMkFKTThZSTlxdXByVDZ4NVA1RUZiemZEYzFwRHRFWHBOa2RPSFJFMkhucGtydURsT2llYWFzaWU?oc=5
+      beats=Valuation, Assistant how-to | outlets=Amazon Web Services (AWS)
+  2. [  10] Why AI Is Reshaping – Not Replacing – The Real Estate Agent - Forbes (Tue, 23 Jun 2026 04:15:00 GMT)
+      https://news.google.com/rss/articles/CBMirgFBVV95cUxPOTNaOXNaRUJRSHlpdG5Zc29RZ2NVam0zSnF5QzFoN2cyQUt4ZUtiaTZxOVFCUEkycWNpbGxiOFZCRE9IdVB0eVRJek04YlpHWmFPeVI2YXJCUG8yOGs4UlhzTS12RVA5VG9ac24teU1IOW9Da3JpNjdVSkhWTUExLTYzY0xJUnNySXRGZWZlS2p1SmxpZWFOWGhwVkUyZWNGeDg2dlpJQ3dLNXp2Smc?oc=5
+      beats=Valuation, Agent tools | outlets=Forbes
+  3. [  10] Americans Are Using ChatGPT to Price Their Homes—Why That Could Backfire - Newsweek (Mon, 22 Jun 2026 13:32:00 GMT)
+      https://news.google.com/rss/articles/CBMijgFBVV95cUxNVmZOVnBNb2pHaTJvcmI3OHZGWlNuWVR2QWtCZ3R1emk1OFJCdXRyQVExWjQxaGRxNV9NeEdOdGVwYk5xZGd2UFpVMW1rNU1Id09hSUQzSHp4SjZSZk8zNXFBWXJKT1R4NEhsejNhd3pMaXdRYUVTT0hEMEhxVVdKMmh5dmNaV1BnaENGTlRR?oc=5
+      beats=Valuation, Assistant how-to | outlets=Newsweek
+  4. [  10] Most AI-altered listings go undisclosed, California law bans it - HousingWire (Wed, 24 Jun 2026 17:18:40 GMT)
+      https://news.google.com/rss/articles/CBMiogFBVV95cUxQWUpJdVJUMnVFNFFWVUVCdnlkUTNsRVdzSU0wUng5OWYxaG1sUDFFN1I1UW1zUWJYX3FTRnZHcnpIek5GNnlHY3RDS0FCMTRtSFZxZm1TdUtFMGdVdWIzRWpOVC14TUI5eDloVzVGRkRlOWtoOGFhYXRKd29mcUtJemY1czNvYkx1V2tfWVNaa0xNZ3ZGMXZaODN2Rm5VejZuZ2c?oc=5
+      beats=Agent tools, Portals | outlets=HousingWire
+  5. [   6] Arlington adopts new AI guidelines as Texas law takes effect - Fort Worth Report (Thu, 25 Jun 2026 20:15:42 GMT)
+      https://news.google.com/rss/articles/CBMiogFBVV95cUxQSGZpS2xNWEU1MTZ0Q3JmQU5fQlRoeFNVRWJxRXVCS0JSYkRJRmI0Ykl3MnpHSTVvVHBwWGFwaDQ5ajVBOW1GWHlyYXk0UkxGSWRJb3FqY3lJdmlPT0txR215TFJ1WmN4cHFpRkFPNkhVY1c0NW40cXJCbDdHRmxLeWFQczFEamUtMElYQjA0Qk5LWUdOcE9RcEFsVHU0WUExQXc?oc=5
+      beats=Valuation | outlets=Fort Worth Report
+  6. [   6] Clean data, smart decisions: Implementing AI successfully in CRE - The Daily Reporter (Fri, 26 Jun 2026 14:29:57 GMT)
+      https://news.google.com/rss/articles/CBMinwFBVV95cUxOWGFXd2ttb1dQdkZSRUhfcE8wTHRvVVlzdTlZUTlyb0syZVBjVUFTUTJSa1JWZ0Q2emFwTEtybmg2SlNua0tvdFVJSmpiTWFjbFZFQVl0Y1NBZkRzM21YcjN6dE5Ka1dkeXlGUnpDRk1ScnI3ZDQ5amU0b1RKTnRQc1B5RnBxcnZDQkF2dzdndTZOMkx4Zk9UVjVsM3N4YlE?oc=5
+      beats=Valuation | outlets=The Daily Reporter
+  7. [   6] Opinion | What if Trump is right to pump the brakes on the most advanced AI? - The Washington Post (Fri, 26 Jun 2026 17:15:00 GMT)
+      https://news.google.com/rss/articles/CBMikwFBVV95cUxOVnNZXzBCaGQ4akRyMjVhOFJ2XzJfSDJDSlpaTW00LU9aN2NDVDRubVowZWp1a0RGOFZrN1dKOWtDWHlLdUM1UmNoWXZJcDlDdjg0aEhNUFR1V0NZY09RZjNDd2t2cm5BZDdWcndEZzJzT1NFOUpSVHFwdVllcExOYkxRS0d5LTBXbzJXRkg2aFBuOEE?oc=5
+      beats=Valuation | outlets=The Washington Post
+  8. [   6] AI Data Centers Could Be Hurting Your Home Value—Here’s What Real Estate Experts Say - AOL.com (Mon, 22 Jun 2026 06:57:00 GMT)
+      https://news.google.com/rss/articles/CBMifkFVX3lxTFA5Z2M3a1lmQzBUc080ZGxtWTM3eVBkOFB0WUZDUUZmUTV6c2ZUZkMzN2RnRXVWQzBZa1oyX3J6TjFYa3hSRGdrX2xCQ2ZSODdTNVFIb2t0V3VTRU9iZE5jbm9zOHVMcmtzNXBpdHZocWRLS0NGb1R1RC1pTVVJUQ?oc=5
+      beats=Valuation | outlets=AOL.com
+  9. [   6] Beyond ethics and aesthetics: perceived lay theory violations and agency disruption in AI-generated art - Frontiers (Sun, 21 Jun 2026 07:00:00 GMT)
+      https://news.google.com/rss/articles/CBMicEFVX3lxTE1EYXBqcFktSEFjZzhVV0ZCN0c2cnJObk9hT3M2UnJiMHZJeERNempqNnRYbHJENlhiYkNid0xxSDNzaGk0T1RCdWdkQXAtLTR6U3Y3Nk4tZjhIRmxzUUpPbkRVZC1UV0V0WVRBa0MtWmw?oc=5
+      beats=Valuation | outlets=Frontiers
+ 10. [   6] Michigan Court of Appeals Clarifies Role of Deed Restrictions in Property Valuation - The National Law Review (Tue, 23 Jun 2026 20:29:34 GMT)
+      https://news.google.com/rss/articles/CBMiqwFBVV95cUxQV0dEbHBpV2lOYjFzaGtBblprakRmS080akF2aWhxX3plMHhaOGRQaXVFSktwbXZiOFI5c0hDdG9Qa29tUFlkS00xc19lMDZKS0FIUWFSX3R2SDZaV1BrYndqTnh3QVdoV3l5ZEJpSHRRWlkzUnRYZDhfYXJRc3ZsODVfRGZ1TGZBa1JCd3kxVjBnY0ZYR2l4UHpoaU9ETE9zRV8wWWEwNHFrRzDSAbABQVVfeXFMT1U4VkxSbElzdWZKTmx6SHRXRTM3ckRBekVERzZkVEJiRXpJY2NZUWdicU5fS0VYMkV1d0xjNHdSSE83UVlIbVlVQm5vcU4tb24xWkZLUjhnOXpPREFKdVRoOVM0OVZoSUM5Z2kxQ0FZSE91X01YbnVjMk9oemU0TFRzdUVzWXpDbU5CS20tSFhHekZ6UVVRUDhfV2d1c25ETVd5ZEt0Z0xSaUdEdGhFMC0?oc=5
+      beats=Valuation | outlets=The National Law Review
+ 11. [   6] MUR: Bubale oil discovery in Côte d'Ivoire accelerates appraisal and boosts growth outlook - TradingView (Tue, 23 Jun 2026 20:29:47 GMT)
+      https://news.google.com/rss/articles/CBMihwJBVV95cUxQaGpvbjBqb3JDLUR5WjVpNzViUmpfLVlwenBQNXVZdzZ6b0d2SGRBdXRJd196QXczYTFMeXA5LS0zVExrZTBPN01oZnE5bUU4emJRamJoOEM3c0ZVcm5PNHVaVENGS2FGWWtvLVBKOHBkZlZHMGxBRUE2RklvZ3owTnVzTmx3SUY5MVlobG9zMHRoSnMzd3k4N2c0WFB1dG9zaW1uZnF4QjB6OExOMlJxYkNyVnpaQ3FmU1gzVHdpcFZ2RXdxU2d3ZjB1ZWw4M1lnRWRuN3NBbmhSYk1QRXdWc1gzLS1ld3BaSzhHVGN0dnVoc1BwTU5WRDR6bTYzTEh1UGFKSUFTaw?oc=5
+      beats=Valuation | outlets=TradingView
+ 12. [   6] Should Murphy Oil’s New Bubale-1X Offshore Discovery Reshape the Risk-Reward View for MUR Investors? - simplywall.st (Wed, 24 Jun 2026 12:59:49 GMT)
+      https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYlRuVS13cE4xbWhDTXRyd0JCUzlDTTFxWVl3bFN5ZzRVN3o4LUdNZ1R4OFBtekgxQTBBLUczbW5QdnlEZWRZLVZYM3Q5bldCX2t3R0g5eEpTRnhjWkpxMlRmYzU5Ymk0b2JWYTYwTjFLVzBkVElQcG1ucTJXdEM3UFVJVi1aX0VwYldKaDlKYk9XdFdkS21GMDliVmFqdkcxQUh4R1lPb3NVdDU4UEpxamRWUVUybkR1WUh1eU1Ya07SAcYBQVVfeXFMUFdldW15MHZpZ3FFeXQ0RmltbU82MlJBOHFncVc4SUhVUktaVmsxVnExMjIzOHdhcUJ5ZEM0UFE2Q0N4S25aeXNrTUNqOEVyaEJTZDZUOGo5cXJSa0FJTmt1eFBxdnl1MGVFU21GbDF5UTFnNFBfSU1NaHM4ZktXb0QxdzM2ZEgzbmdyaDNvQ2JFR2wwSGN4T1hsT3RNSEFsTFdQM3BBMjlXVFNucGpvWXFFSk1hMDRUZThsZzNRMXBWX3dLc3lB?oc=5
+      beats=Valuation | outlets=simplywall.st
+ 13. [   6] AI Enables Unrealistic Virtual Staging in Rental Listings - Let's Data Science (Mon, 22 Jun 2026 20:00:55 GMT)
+      https://news.google.com/rss/articles/CBMioAFBVV95cUxNUVpNUFhIWThlTm1CeGJsUVlYRUJfdmxNZnpMbXVsTDZ5aVZiclhwbWhhVk9IM0VyRFBReG9BYThaRlNUT0J3R1hkb1pDTFFuRXZDYjhDMmlzdFI5aUxXenU4NFN6UzJTbWdHcHBTUl9JM1J6X3hINjFBUTBBemVYQWd0WW1yNE5oaEc4dGZGdm5PRGs2WTNRckMxME1UUzRi?oc=5
+      beats=Valuation | outlets=Let's Data Science
+ 14. [   6] Would you trust AI to do a valuation on your property? - Domain (Tue, 23 Jun 2026 18:59:00 GMT)
+      https://news.google.com/rss/articles/CBMihwFBVV95cUxNWFBWbHJqM0UtMzZtY1VjSXI1Z2JlVzR1M3h6bHlLV2F1dnZLOWV1Q1Vub0xZVWpmN01DdUFsRS01R0pfSWhZSkxBMzlhV2hTR3kzcVdtQVpRXzlMR0xvY1RfcXdNZ1lHcjh1ZEstNVpVbVVCZzFRTFUxbTdQbVkteWdKYk1sNDA?oc=5
+      beats=Valuation | outlets=Domain
+ 15. [   6] How appraisal data can improve your workforce planning - RSM UK (Thu, 25 Jun 2026 07:00:00 GMT)
+      https://news.google.com/rss/articles/CBMivAFBVV95cUxOWDM2ZUZyejQtaUNFWlVmTW9BaWlPS0VfaUFCVHdDM19oZFV4cXJvdldFRThmU3J6N0E2QXV0b1dsYkdOTzFqS29UVEFEbmFxbTNaM2hsQ0RLY2lDOEFsWWVWU1docEZ6akxSV3BVeHRpdWg3dUlwZzluQWtDekROVnlUc0JWMnFLLW5oUDVMN2NYNXZ3aVdwYld3cjlTc0w1cGtndm1HNWl3clh2SzA1WUs3YmNCd2VPQTJwTg?oc=5
+      beats=Valuation | outlets=RSM UK
+ 16. [   6] Korea Patent Attorneys Association Proposes Confidentiality Right - 조선일보 (Fri, 26 Jun 2026 12:40:48 GMT)
+      https://news.google.com/rss/articles/CBMiiAFBVV95cUxOY1RrQmtZVm5PUnI0VVJnX0h1bjZmNXVrMTF3WFhQempGYWNnSHpGRndGckhLaU9xcTc4QTk0Z3N6NXZGUncxNk15S251YWZRSzNXcnZrRTc3eEIxT09uZExJZ2NUNHhuYklXT25ULXpSelUtS044dXM3enB5TVBsaEpoWl82c3Fu?oc=5
+      beats=Valuation | outlets=조선일보
+ 17. [   6] Which AI is right for your insurance brokerage? A practical guide to the models that matter in 2026 - Insurance Business (Mon, 22 Jun 2026 10:02:32 GMT)
+      https://news.google.com/rss/articles/CBMi-gFBVV95cUxNdlU2SWVEQ2g5SzVabkJnZ3E5N0hfaHUzakVSMXJCU05IY0s3Tm9FM3FmSzlDb0lqeWpHVUVMaEFEcmZITkpEd1JQYmlfUEpjczV4NEthbGl4WGcyeldxNC11LUNuV1VfVVdMUTdocFVzN29YS2duNE9rallHQXh0dUl4VnpWazFtTjBnYUNUbjJuVk5sNmJVcUxNM1M1Y3lndWJtUmVXTWJoQzl0Y0k2TVBRa0JLeDFNSzlocEpRSXVjejRIMDhNM2N4Sjl2RE9nYW9EMkQ3RVM5WWVmcVAtSnRUR0d1dExoMXhvaV92dGE0NDEzeFo4RjJ3?oc=5
+      beats=Agent tools | outlets=Insurance Business
+ 18. [   6] The Human Advantage in an AI-Powered Marketing World - ADWEEK (Thu, 25 Jun 2026 14:19:06 GMT)
+      https://news.google.com/rss/articles/CBMilwFBVV95cUxPdzRMejU5THlxUUR1ZzJlT2NoTXpqeHhBNGFvWUpoU0JEbHRwLWlZR0c3U0FqbjJzYlF0eUlGWmFnbmx0a2tUZkxfUzJkaHd6RFZERGltX1Y1emdEdmJuRTFzRGRIWWhiN29IQkFWZG1rc3NRbXl3T0dNdnZ1RXViUWRwaHJQR1daX0JTZ1ZFeDg3SzlLUWFj?oc=5
+      beats=Agent tools | outlets=ADWEEK
+ 19. [   6] NAR to MLSs: ‘Help us protect the Realtor brand’ - RealEstateNews.com (Thu, 25 Jun 2026 20:32:54 GMT)
+      https://news.google.com/rss/articles/CBMikAFBVV95cUxNbUNlYWxrdjZpMDZxSl9hWkt3TVFySEJaYVRsc0lqYl9SWWtXcHZyd3NFRUNhX2VCbTFwOGN5WVpabmE5bUZsTDhwSzF1WFg0UzJreVg4cGlsbnlobmhud2FOX0pPT0lWQ2tFWURqbF9wenFKTFVHcEp6YURpX1pVSTFqdnhxLWdxQ2pKbTdCZ3k?oc=5
+      beats=Agent tools | outlets=RealEstateNews.com
+ 20. [   6] Why brokerage tech upgrades fail without culture and leadership - HousingWire (Tue, 23 Jun 2026 15:13:41 GMT)
+      https://news.google.com/rss/articles/CBMie0FVX3lxTFB3V1J4cmVJZl9iNXRFVDZPRHhSRnV2bW1UekJ2UmtUb2lfbDJ1N3hzNjFTdGFKVEFQeHBlLWVxNFJPT3BnVlRBRUhqRU0wMDBwVXFnTVRuRXhwV2k2V0hsUl9Db3hfTjE2RTlBTG9UbDNUVXFqT0VLNGV3NA?oc=5
+      beats=Agent tools | outlets=HousingWire

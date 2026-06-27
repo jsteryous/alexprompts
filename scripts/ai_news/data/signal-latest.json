@@ -1,771 +1,1110 @@
 {
-  "generated_at": "2026-06-20 18:26 UTC",
-  "biggest": {
-    "entity": "Anthropic",
-    "title": "Claude Corps",
-    "url": "https://www.anthropic.com/news/claude-corps",
-    "source": "hackernews",
-    "published": null,
-    "hn_points": 163,
-    "hn_comments": 119,
-    "reddit_score": 0
+  "generated_at": "2026-06-27 07:48 UTC",
+  "beat_counts": {
+    "Valuation": 15,
+    "Agent tools": 13,
+    "Portals": 14,
+    "Mortgage": 15,
+    "Investor/proptech": 15,
+    "Assistant how-to": 15
   },
-  "entities": [
+  "biggest": {
+    "title": "Build an AI-powered real estate assistant on WhatsApp using Strands Agents SDK and AWS End User Messaging - Amazon Web Services (AWS)",
+    "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaDd1eW5fZk1DSG9tUFdoc1AzUnlhWnNBUlk3TldWN0YtcnBab1lkN2lNM3BZWDBOQXY0MS0ycnphRFBLZEZCWkszajlrVE85Ukl4YXZjaHIwYkRUamQ0aWl6aGhLWG94bDJBYnpRaURWSXAwWUZjeE5XblRiWm41ZkdrRHZOUWNHZnZyTVp0SGVnTWhsZU1JX2FpaVdMb3h2ZGxRcmZoWFBpMmJuUE1KeG5qdGJqUTViMkFKTThZSTlxdXByVDZ4NVA1RUZiemZEYzFwRHRFWHBOa2RPSFJFMkhucGtydURsT2llYWFzaWU?oc=5",
+    "source": "Amazon Web Services (AWS)",
+    "published": "Thu, 25 Jun 2026 16:30:51 GMT",
+    "beats": [
+      "Valuation",
+      "Assistant how-to"
+    ],
+    "outlets": [
+      "Amazon Web Services (AWS)"
+    ],
+    "appearances": 2
+  },
+  "clusters": [
     {
-      "entity": "Anthropic",
-      "headlines": [
-        {
-          "title": "Agentic coding and persistent returns to expertise - Anthropic",
-          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lM0p2cGtZWWJ4aE9Ocy05NEU1SXFraWl1V1gwNmxwdGpMWkg3N2Z3WGF6eFFMZXlWMGZEeGZZVGxmcGJyVlBSLXlCUXhma0lWRm1SNllTSVlmNXlTMFEzLTZIMFIwSDA?oc=5",
-          "source": "Anthropic",
-          "published": "Tue, 16 Jun 2026 19:29:35 GMT"
-        },
-        {
-          "title": "Why Anthropic Is Sounding the Alarm on the Next Generation of AI - Council on Foreign Relations",
-          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOSEFBZGphQ2loamYwOWhBQTAwLTNZa1pRQ1V6bmdEdjNOQlMyV1NiQUhHWHJ1Q0VCWG9RYmRvZkRFX1ZjMEhaNjVIeFBaWlZMeEM1MmhQdVk2WC02d1JrQnRYWWI3MEtLaElKMHMyY1IxUGQ0SFF4UkRoSnVFNWVuWk9jNmdEX0Q2M1hsWE8zSDlZY1JXRk5uUg?oc=5",
-          "source": "Council on Foreign Relations",
-          "published": "Thu, 18 Jun 2026 19:07:41 GMT"
-        },
-        {
-          "title": "The Department of Commerce Restricted Access to Anthropic’s Latest Models. What Comes Next? - CSIS | Center for Strategic and International Studies",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdHdWR19xN0liMFpabFhzMDMyX2xGbURCS0VfaWRodlZtS2xRVmdmb3JJMDNRQm5aanFvVFpGQmhQZnc5ZVhHNkQ2ZjJtSElScFJmZ2xHclFxRUlnTXdsazdMaHRHaUNEMjMyS1hLOUY1ZHNBLUxiOHBVWHltbDdCb2l0ay04NE5LMnU2T3dsc3RDOHplcFlIUzRSS1FIY1lSZUktRjltOUFKQy1x?oc=5",
-          "source": "CSIS | Center for Strategic and International Studies",
-          "published": "Tue, 16 Jun 2026 20:30:59 GMT"
-        },
-        {
-          "title": "How Powerful is Claude Fable (Mythos) 5 for Coding? - Towards Data Science",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQemtmODFpbUd5V0g4OEVaaTItbWxNb3p4VGpFTElNeGVfcG1QV0xNU0lCT0RRd0RUNTBqc1RaZnRoMGdudERzMnBicy1qWE43UEFtaVRXdjRPMHlPdTktbk94cjVKY0ppNUxrMnJ1UnhTMm5Da2ZQVFR3aElENFUwRHU1amxnVmc?oc=5",
-          "source": "Towards Data Science",
-          "published": "Thu, 18 Jun 2026 16:30:00 GMT"
-        },
-        {
-          "title": "Claude Fable 5, take two: same model, different harness, and a very different result - Endor Labs",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdENhZHVLYmpxcU5oNnp0R3U5X2taMDlVaFBINFBBUFE2OGVBcFllRW92VUJtODV5anZ3eHVJTnJFZHJaUXF0NHl5eXFWN3lfblQ5VFZQNmxQX0NTdkRkNEJNNDc0VkdzamdBMGhXWGI4TEowRURPSDY0dkdnbDY4dzdVVHQ3NTJRdVlsVFdBRmhLOGM1Yk5GUUpGeUN1T1ZSU1NiQzZ3U3pkUzVuX0VZanBR?oc=5",
-          "source": "Endor Labs",
-          "published": "Wed, 17 Jun 2026 23:40:56 GMT"
-        },
-        {
-          "title": "Introducing Claude Agent for Jira - Atlassian",
-          "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE81RWxLeDdZZ0h3RHB4RU5ISFZYVjROTldWdnloRmloOXVNUXNvU0Eyc2xhQjVjNDNMclRDSTNhbUxlNlFMSzZnb0JiTWFRTE9iTU5CUF9YZHNBZURRaHZCQWd4SG1XWUpxdmV2eEVKOTBKTjg?oc=5",
-          "source": "Atlassian",
-          "published": "Thu, 18 Jun 2026 15:55:00 GMT"
-        },
-        {
-          "title": "Anthropic asked for regulation. Washington went much further - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE56Z2JfUVJpNDBXRVFoTDB0V2E4ZDdEbHIxNDF1YXBUS1dOaTZPY3NZaHJ6b1VrY2VySzRWaHN4TXN3M21XWEo5RGtxZ1hBckhVTDkxY0NLNExpQVAtRXpuQk1wanMzQjdlbDBhcktUVWM0cFFq0gF6QVVfeXFMTzg3d3lndGR4Z2Q5Q200RVpnSm82dFBfMmp5d2xkcEFOUVJ1VGZQUUhXOTczTVpyTVVkU3JjbUlvNktvLUVyV3QxU1ZEaW5HeGtQSm5XeWVFMmF3VExuRGxzaHl5eW5Xbzk0V2V1MFJFdnA1cTRvc1Fycnc?oc=5",
-          "source": "CNBC",
-          "published": "Wed, 17 Jun 2026 12:30:16 GMT"
-        },
-        {
-          "title": "Anthropic Invests $150 Million To Launch 1,000 Claude Corps Fellowships - Forbes",
-          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMmplakZsUTBhenBnb1ViN2xXQmZjdjdhN09PSFBrLW1oYXdra3JINjVVa2FjODc3ekRraEw4VndFNmI0TENKVzloaFhROUVCYVNWam1MWmJ5dm8zeEs5WkF2WFl4VmVwUkx5RkZrYzdEcUp2VU42ZTQ1Yi1RVXd6OTJwbGEwalFkNnV0NWpHdzZaUFlINjNnb3pfQ2NkTEdyOUhuZ0dQb3hLZWd0aGZVU09sR2dPSXR1aGRKS0ZYZWJhVEY3?oc=5",
-          "source": "Forbes",
-          "published": "Thu, 18 Jun 2026 10:06:12 GMT"
-        }
+      "title": "Build an AI-powered real estate assistant on WhatsApp using Strands Agents SDK and AWS End User Messaging - Amazon Web Services (AWS)",
+      "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaDd1eW5fZk1DSG9tUFdoc1AzUnlhWnNBUlk3TldWN0YtcnBab1lkN2lNM3BZWDBOQXY0MS0ycnphRFBLZEZCWkszajlrVE85Ukl4YXZjaHIwYkRUamQ0aWl6aGhLWG94bDJBYnpRaURWSXAwWUZjeE5XblRiWm41ZkdrRHZOUWNHZnZyTVp0SGVnTWhsZU1JX2FpaVdMb3h2ZGxRcmZoWFBpMmJuUE1KeG5qdGJqUTViMkFKTThZSTlxdXByVDZ4NVA1RUZiemZEYzFwRHRFWHBOa2RPSFJFMkhucGtydURsT2llYWFzaWU?oc=5",
+      "source": "Amazon Web Services (AWS)",
+      "published": "Thu, 25 Jun 2026 16:30:51 GMT",
+      "beats": [
+        "Valuation",
+        "Assistant how-to"
       ],
-      "stories": [
-        {
-          "entity": "Anthropic",
-          "title": "Project Fetch: Phase Two",
-          "url": "https://www.anthropic.com/research/project-fetch-phase-two",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Agentic coding and persistent returns to expertise",
-          "url": "https://www.anthropic.com/research/claude-code-expertise",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 15,
-          "hn_comments": 4,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Updated Anthropic Privacy Policy (effective 7/8/26)",
-          "url": "https://www.anthropic.com/legal/privacy",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Agentic coding and persistent returns to expertise",
-          "url": "https://www.anthropic.com/research/claude-code-expertise",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Agentic coding and persistent returns to expertise",
-          "url": "https://www.anthropic.com/research/claude-code-expertise",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 8,
-          "hn_comments": 3,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Claude Corps",
-          "url": "https://www.anthropic.com/news/claude-corps",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 163,
-          "hn_comments": 119,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Measuring LLMs' impact on N-day exploits",
-          "url": "https://red.anthropic.com/2026/n-days/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Making Claude a Chemist",
-          "url": "https://www.anthropic.com/research/making-claude-a-chemist",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 94,
-          "hn_comments": 91,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Anthropic's Economic Policy Framework [pdf]",
-          "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/9ea607a5dd67c168093829b701f3a0a6d21156d5.pdf",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Anthropic",
-          "title": "Policy on the AI Exponential",
-          "url": "https://www.anthropic.com/policy-on-the-ai-exponential/epf",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 0,
-          "reddit_score": 0
-        }
-      ]
+      "outlets": [
+        "Amazon Web Services (AWS)"
+      ],
+      "appearances": 2
     },
     {
-      "entity": "OpenAI",
-      "headlines": [
-        {
-          "title": "Improving health intelligence in ChatGPT - OpenAI",
-          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5vcjB4NGtoanAzaElMUVhXZEZydkl4M3F0Mk96ZWoyRHNGMG1xT0RMeHRwTVFNbG1NVzd1LVVMaWFmQ0NYRWtWYll2Skc3YU43TmlzbS0tRlJVTFB2RDNfV3dSQmgwMkhsZEhaUTMwVXFaZGpi?oc=5",
-          "source": "OpenAI",
-          "published": "Wed, 17 Jun 2026 19:20:33 GMT"
-        },
-        {
-          "title": "Visa and OpenAI integrate Visa's secure global payment directly into ChatGPT - NPR",
-          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxONDZuX3ItQ1lKMmlRbEd5VWxlVjZDQXNRdDRybGFWN0N0T3hQSW4zZUxQNWV1clI5VVE1dGhsMHIwNTlmZUFwcklaWFZmNzB5aUduVGJneU9naC1Wb3VoWnpYUG9QdTRmdHZVMXU0dC04NkpGZUtwSHNnWHV4ZzFjcVR6dHdHYkdqWVFKTVpsblR1V0E0aURYeFdISTdlVzJSMlhqUnFqVFJWSHNtc0FreW9fZ1RoUkxMMWgtNQ?oc=5",
-          "source": "NPR",
-          "published": "Tue, 16 Jun 2026 08:46:26 GMT"
-        },
-        {
-          "title": "State Attorneys General Are Investigating OpenAI - The New York Times",
-          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNeDdPdDNQRGVKMXIxVGNLWURkQjZLZExOZ1JabldULVQyV3lOZ1lYWlhpYzA1eWpCZ2dVNTEzSk8xd2Z1ZzVob2hwVHBJMV9uZlFYcVZWMEVfRFdRWTdhek5ENGMyUjN2NWs1U1FlSXN2Q0RJSnlXZ0NGaS1wcnJqekFsaDA?oc=5",
-          "source": "The New York Times",
-          "published": "Sat, 13 Jun 2026 23:25:44 GMT"
-        },
-        {
-          "title": "Exclusive: Ha Thai departs Meta to lead comms for OpenAI devices - Axios",
-          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1fZjFWVU9UM0w1WjItb1oyOXkwaVhKaUJ2Y0pxNmlXQ0k0OUpoaDNMbWYyYjAxa2Y5bHMtSENrdHhMbXBFZExULW5qeC11VFJaMzlrTlpSWG5fYWRXT3V0eWF1cjRyUQ?oc=5",
-          "source": "Axios",
-          "published": "Fri, 19 Jun 2026 11:11:23 GMT"
-        },
-        {
-          "title": "OpenAI hit with multistate probe into possible user harm as its IPO looms - AP News",
-          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTDJsQlNzM0JtUFpBTUJkalVSS3htd0ZEUVVsOFhYOGhYbFBkNkV6RkZfcERSWV9ZVngzRUYyN29uUXgycFBrek1ZUllLM3MtVzNCY1BUNXBoXzVWbEYtS2pzTFNBUVFKOXZRWlBCN2VoNkxFa0FSWEVGN18xZmRyM3N1ODNwOERDd0ZFa2ozQTNrM3o1Mjc2M3JRODlxN2t6cWsxOUI1WE5QNWc?oc=5",
-          "source": "AP News",
-          "published": "Sat, 13 Jun 2026 19:17:00 GMT"
-        },
-        {
-          "title": "ChatGPT’s market share slips below 50% for first time - TechCrunch",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRzJUMmlQOUlIWVVXUWJpUTJxem1pb1NNYjR5NG81TDB5WTdfeXhjOUlyZm15eElhOU5rdUJmb3Y2MUZWbUNFV1Y1N1lrRWJZVWpOOHBqNzNlMjRIWndla0NOMWpFckNDTUtGS0RfLUhfNUp4T3dMVFZGenVweU94QmVfUGp3MDZWQ0JjVEpZUQ?oc=5",
-          "source": "TechCrunch",
-          "published": "Tue, 16 Jun 2026 10:30:00 GMT"
-        },
-        {
-          "title": "OpenAI hires former Trump AI official Dean Ball - Politico",
-          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOSVcyTmUwcURQTi1oUzkyNjRHYjlPMUpPMFZWTnczZXM4dzlvNTkxQXEwZzFQZXUtMUZGYzdBSi1NengwUnVaSDVvMGVmNnEyQlhBZjVWdXBoUXlxSGp3aDFlbjF2UFRPekllTGhVM3BxdUhxME1rUW9ZcTZ1a0lKRXotV29PZVJSUGRVbVZRYm5tVEhhQnNfMTRIRkhlUQ?oc=5",
-          "source": "Politico",
-          "published": "Thu, 18 Jun 2026 15:35:59 GMT"
-        },
-        {
-          "title": "OpenAI spending hit $34 billion last year ahead of planned IPO, FT reports - Reuters",
-          "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxObG14cjl0dTdRdWhUWmROcmN1WXhXM2RnZ25TczRBdDNsUW43a0tSR25MLTdXcmF5bE1wRXh5Wk1TWmVpMWt0N0ZGQjBEbmpmajcwT1JqQWdvdTNpWklmOGstQlMzWFlVSkZmQ1hndFpnRG5FUVB4RG5NV1BMR2VYSExIY3ZHVW14UE9JREI3QmswbE8yanNueWNRbXBLNnEyUGpZVEFBRzdlbXhEUmd2aW5SeFRRZ3lHVTRVVVpqVDhIR0U?oc=5",
-          "source": "Reuters",
-          "published": "Tue, 16 Jun 2026 03:41:00 GMT"
-        }
+      "title": "Why AI Is Reshaping – Not Replacing – The Real Estate Agent - Forbes",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOTNaOXNaRUJRSHlpdG5Zc29RZ2NVam0zSnF5QzFoN2cyQUt4ZUtiaTZxOVFCUEkycWNpbGxiOFZCRE9IdVB0eVRJek04YlpHWmFPeVI2YXJCUG8yOGs4UlhzTS12RVA5VG9ac24teU1IOW9Da3JpNjdVSkhWTUExLTYzY0xJUnNySXRGZWZlS2p1SmxpZWFOWGhwVkUyZWNGeDg2dlpJQ3dLNXp2Smc?oc=5",
+      "source": "Forbes",
+      "published": "Tue, 23 Jun 2026 04:15:00 GMT",
+      "beats": [
+        "Valuation",
+        "Agent tools"
       ],
-      "stories": [
-        {
-          "entity": "OpenAI",
-          "title": "Scheduled Tasks in ChatGPT",
-          "url": "https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
-          "url": "https://openai.com/index/diagnose-rare-childhood-diseases/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 4,
-          "hn_comments": 1,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Introducing ChatGPT (2022)",
-          "url": "https://openai.com/index/chatgpt/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 4,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Reinforcement learning towards broadly and persistently beneficial models",
-          "url": "https://alignment.openai.com/beneficial-rl/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 1,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Designing delightful front ends with GPT-5.4",
-          "url": "https://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 2,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Catching bad LLM behavior: OpenAI's new Deployment Simulation",
-          "url": "https://openai.com/index/deployment-simulation/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 1,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "LifeSciBench: Evaluating LLMs on Expert-Level Tasks in the Life Sciences [pdf]",
-          "url": "https://cdn.openai.com/pdf/b4299379-0a97-4ffa-8b9b-c3fbb299caa9/lifescibench_preprint.pdf",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 1,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "LifeSciBench",
-          "url": "https://openai.com/index/introducing-life-sci-bench/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Using AI to improve a challenging reaction in medicinal chemistry",
-          "url": "https://openai.com/index/ai-chemist-improves-reaction/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 58,
-          "hn_comments": 20,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Flexible Rate Limit Resets for Codex (bank rate limit resets)",
-          "url": "https://community.openai.com/t/flexible-rate-limit-resets-for-codex-and-a-method-to-get-a-reset/1383470",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Predicting model behavior before release by simulating deployment",
-          "url": "https://openai.com/index/deployment-simulation/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Codex Is Down",
-          "url": "https://status.openai.com/incidents/01KV7ZT644J4V94GSXMFPY2ANR",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 6,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Generative Models (2016)",
-          "url": "https://openai.com/index/generative-models/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 1,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "OpenAI requires face scan to use o3 (June 2025)",
-          "url": "https://community.openai.com/t/has-openai-lost-its-mind-face-scan-required-to-use-o3/1286152",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 1,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "OpenAI Partner Network",
-          "url": "https://openai.com/index/introducing-openai-partner-network/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 4,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "Dreaming: Better memory for a more helpful ChatGPT",
-          "url": "https://openai.com/index/chatgpt-memory-dreaming/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 2,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "How an astrophysicist uses Codex to help simulate black holes",
-          "url": "https://openai.com/index/using-codex-to-simulate-black-holes/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "OpenAI",
-          "title": "SchemaFlow: Agentic Database Change Impact Analysis, SQL Gen and Eval Guardrails",
-          "url": "https://developers.openai.com/cookbook/examples/partners/schemaflow_design_guide/schemaflow_cookbook",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        }
-      ]
+      "outlets": [
+        "Forbes"
+      ],
+      "appearances": 2
     },
     {
-      "entity": "Google DeepMind",
-      "headlines": [
-        {
-          "title": "How we’re securing internal systems against increasingly capable and imperfectly aligned AI - Google DeepMind",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbVhyR04tNjU3OFI5RHI4TWVqQjVxeUQ5OTVTSHkybWpPc3UwRkhWVnRfRkFSTUZEREhadFE0TWpkZnFYMGJFR1BsVGJhaXQwSkw3eDhPR1lYM1lRX2doTS1rajFzQXV3eXVBWS1IQQ?oc=5",
-          "source": "Google DeepMind",
-          "published": "Thu, 18 Jun 2026 13:01:46 GMT"
-        },
-        {
-          "title": "Google Gemini co-lead Noam Shazeer leaves for OpenAI - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNOFk4aXNWVHM1WGRKVjh5a0t6NVQ0bkVrazFyRmZtbTB1cHZrazJMVHV4ZTNHWHc0NVdvb2NMRl9UNG15MDlxblVjVkl2NzJ3SHhkMy02Nk1oMGFrLURGMmNtVzdFQjlMNkdRYWxkRGJtaXJMQW85eF9VRjdOckJvWUQyWXV2NFVDNTVGNy1pVktnUEXSAZgBQVVfeXFMTlo0bGE0T0JyeEJTMVltX3RVdHBFYlB6VGVaSlpHRkdReGs2aHc4eHBvQ2lBb19BNlNSakV2ZmZsMndkcDdBQkRyT2NHNk5fa0E5VDdzSXFHLXZid0cyZUFuRHNKNXozNVFyb3BEcE1nQW5MVVB0aU5rVmE5ZVhXWjhHUDRLQjdSRDdBSFRfb3VPVldESE5qVVQ?oc=5",
-          "source": "CNBC",
-          "published": "Thu, 18 Jun 2026 03:21:00 GMT"
-        },
-        {
-          "title": "How Target is Shaping Shopping Experiences in Conversational AI - Target",
-          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE13MDZCM3VvN2NwZHR2T005ZF91OTQtUm9FcXRxN3V5a1BBVlZaRnJsMGFMd1poNlRvSXBNZUozVFpjMkFWd0p1ZzF4RF9DOVhqbXlfd2piczE5NTl5MC1ZelFwdzBuVkhaTEE1S2NCbk9wN1g5Z1UyeHpJbw?oc=5",
-          "source": "Target",
-          "published": "Thu, 18 Jun 2026 11:00:00 GMT"
-        },
-        {
-          "title": "Meet the new Google Home Speaker, built for Gemini - blog.google",
-          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmNNMTByMGR2azV3SE5FR0RJVzRQTnB2VWtoSS1kWHh0dXJ0MkFycWZxNjhlZ1E2UFlKX252ei1SenoxX0lKdVMyT0tqQ2RHS0dMdEVQbVdWVEN4aU5zSHVfbjhkVS10MlNVeVd1QmY3TnhwR1RLcF96NmdQbWtsWUtNWHNFNWU3Y0pONWp0SnFvQ3VWYV9MUHVVSV9DZ1N3?oc=5",
-          "source": "blog.google",
-          "published": "Wed, 17 Jun 2026 13:03:48 GMT"
-        },
-        {
-          "title": "Google DeepMind unveils a plan to protect itself from its own rogue AI agents - Fortune",
-          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPTy10VmVENVdzSG00VjRXOUxLSHhWNkwzU2JmMGtybzNRdTY4MXE3R0tfV2JLcEZfM05va21rLWV6RWFKQVZzc3V5enFNWTBQNHY3c2JnbVB3c2lidmkxcVhjVU03QUs1em9Hc2tYbG9SZHJNOWhWd044cVY0SFU0S2FfNXB4NDVHUWxvU1FtQUVKX2RCekc0ZlVTaXllR3BjM3UwOHhBeFV0S3c?oc=5",
-          "source": "Fortune",
-          "published": "Thu, 18 Jun 2026 13:00:00 GMT"
-        },
-        {
-          "title": "The first Google Home Speaker in years has Gemini, costs $99, and arrives soon - Mashable",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5KWUVZbVFUQzI3bm5QamdhV255RVNYUlVQbU9QcEdmNnZ5b2R2Tk9seEpNNGZMM3lHZFhKd1pNRHlwZGlPb2U3RlZ2bWxrcnRwUXozR0ZmZFBRMDNZR3BYVmNrb0J2ZUVIMUY4ZnBFOHVLM0JlS3c?oc=5",
-          "source": "Mashable",
-          "published": "Wed, 17 Jun 2026 13:01:20 GMT"
-        },
-        {
-          "title": "US scientist John Jumper to leave Google DeepMind for Anthropic - Reuters",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQWlJJNjNtbk1wb0l5aXZZNzMwOHNJNnFnam1NTWY0dFFES1o0VG15ZDVuYTB1dGs4dlQtUnp6RWM2U19kcVRZOHJ3NEh3RTk1clIta3hQX0pKampSdHo5bnNrNmhoWUJtbEswamhoOXVxRXNOdnRKM2pVeUZjN3gtWVZZN0JWbXAxcHZMYUNSRUlVR1g1UmFtaHRleUJKNXNmOEhmQkhR?oc=5",
-          "source": "Reuters",
-          "published": "Fri, 19 Jun 2026 22:12:38 GMT"
-        },
-        {
-          "title": "Google bets on Gemini to reinvent the smart home speaker - TechCrunch",
-          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNdjJNbU0zUDdsb1VhemZVY19vRzlMNmRxcS14b3J2RzNFOUhPcXhpU1V4ZGtoMzlOdVFMdUFjNXZSdFJHRldUajBQLXZwNXl1blJaTkJoVzNxTXFyWFRLLUJhNGRjckdyUnpZeDZYVWJZajZrSzFBV05FS1hoVXgwTERHZmlkY1lCMVJLS195a3lFZDR4WkE?oc=5",
-          "source": "TechCrunch",
-          "published": "Wed, 17 Jun 2026 16:30:09 GMT"
-        }
+      "title": "Americans Are Using ChatGPT to Price Their Homes—Why That Could Backfire - Newsweek",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVmZOVnBNb2pHaTJvcmI3OHZGWlNuWVR2QWtCZ3R1emk1OFJCdXRyQVExWjQxaGRxNV9NeEdOdGVwYk5xZGd2UFpVMW1rNU1Id09hSUQzSHp4SjZSZk8zNXFBWXJKT1R4NEhsejNhd3pMaXdRYUVTT0hEMEhxVVdKMmh5dmNaV1BnaENGTlRR?oc=5",
+      "source": "Newsweek",
+      "published": "Mon, 22 Jun 2026 13:32:00 GMT",
+      "beats": [
+        "Valuation",
+        "Assistant how-to"
       ],
-      "stories": [
-        {
-          "entity": "Google DeepMind",
-          "title": "Securing the Future of AI Agents",
-          "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 14,
-          "hn_comments": 4,
-          "reddit_score": 0
-        },
-        {
-          "entity": "Google DeepMind",
-          "title": "From AGI to ASI",
-          "url": "https://deepmind.google/research/publications/239142/",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 2,
-          "reddit_score": 0
-        }
-      ]
+      "outlets": [
+        "Newsweek"
+      ],
+      "appearances": 2
     },
     {
-      "entity": "xAI",
-      "headlines": [
-        {
-          "title": "Grok Imagine Video 1.5 - xAI",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5pcjI5WlFfWUlkbWttZHJsVGJCNEI1RldHWWtMeGprRVJ6VXFkUzItTzVOamJGVWliZ2RmWWJReDk4ZEtZNWRua1Z3N3JsZkZ1emc?oc=5",
-          "source": "xAI",
-          "published": "Wed, 17 Jun 2026 02:55:32 GMT"
-        },
-        {
-          "title": "Trump Administration Attempts Massive Power Grab in Defense of Musk’s xAI - Earthjustice",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPMjdQN0ZUdnUtM2xKQ1Fmd0liRjZNU3FyXzNXUGsxa1VLMlJEUXQ3dWlaZXpuanV2RF95czZDdFlVakloNXJBYlFYZFotNDhvTTBhT1BQZVlZR05DS21GbXFPb2Y3S1piZU83NjJheXV5VDlZVkhiTVNCR0YzdnZiamFCUEYwSy0wNTdOVjJqU0lZbnY5UThCM2lvbHYxVU9lcENvVGppT01Nbi1h?oc=5",
-          "source": "Earthjustice",
-          "published": "Tue, 16 Jun 2026 16:58:30 GMT"
-        },
-        {
-          "title": "DOJ intervenes on behalf of xAI in data center gas turbine lawsuit - Utility Dive",
-          "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPcHhFZElmVW5SSnhpcVZsd2Q1QmNpcGJTc1YwQ0YtOXE3UVp1ODRqNXY5TWxrdVFQaFBfSUFydGU4bzJsaVNpd24xSFFsU1VuM1lvbWVBVHZ6a3Q3LU0td1VvWFdsR1JubE5rNDhidkVDaGt6eWEzRkJ4SjJsNnZRVmI5ZVZhMHR0NzJ3SFV4TzhvbTg1bVE?oc=5",
-          "source": "Utility Dive",
-          "published": "Thu, 18 Jun 2026 15:38:29 GMT"
-        },
-        {
-          "title": "Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer",
-          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5",
-          "source": "The Ringer",
-          "published": "Wed, 17 Jun 2026 10:30:00 GMT"
-        },
-        {
-          "title": "Godfather of AI blasts Musk's xAI as 'failure,' says labs are risking a 'big bubble explosion' - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQZ0xtN2k3bkpySVpWLWlMQVBIWWcwdWE5eXlMWE9IbGUxekRtVjBXblN0dXZKOWFOeDd1MmJfalhOR01VWGJma1JOZVZIa1VRNlBNeFgxREFxLVRHdm5QX0REd1JVamo5Q0Z2ZEZ1S0tFT1FFWXNMRHZwZEJsaEVTZm1rcmd5aGg0STM2QllTc2hJOTTSAZgBQVVfeXFMUHRzdl9sS0JnNlVScnNPV2NVUHVud1o1QmVqRDd2OXdQZTBuWF8yMFJRVTIwTWpqSTBXS0lnNFh0MUcwaVVvaHN6QkRPZE5OaW9DR254cWRDYl82ZThGWTV2UnpBR1lLZVVJYTlEamdyVmlJRlI5M1A2ZzZiQTNMb2ZyeUlmcEFFdWV6SkdSTkFnb0FWWlZzWkg?oc=5",
-          "source": "CNBC",
-          "published": "Thu, 18 Jun 2026 11:11:11 GMT"
-        },
-        {
-          "title": "DOJ Defends Musk’s xAI in Data-Center Pollution Lawsuit - WSJ",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPazJvUmd5b0UtelEtNnR4SG94SlZvWDJKWmQ0QllNZE9kcVhkenpYRXpjaGE0di1JUTczMEZDWVdkcGo1b0hreWhMREhLUmRkRUFmOUdrUnRtNDRqQTgyYVdubms0TVRYd1BqdFI3cjMwcnZ3TC14Z2ZIejRvRnI1RTNvbzgtbmFuUzB4bFhFTTdodkY1U2dtTlBHZkZSMThqdTlhOHFuVVpoTWhH?oc=5",
-          "source": "WSJ",
-          "published": "Wed, 17 Jun 2026 16:35:00 GMT"
-        },
-        {
-          "title": "Musk’s Grok AI tool helped guide US strikes on Iran, legal briefing shows - The Times of Israel",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbVN4S0cyYzhsS0NmSFFfUWRlT2RiM2ZXazNaRGgtLU5UMjBDQ2VpNWpXdXQ3bUpyOG9nODFqWEZTTGdYelhMdTBNVHhad3NHbG90amRZU3pUUmp1R1FoQ0h0c04weVRDWGNTZ0dySEt5dTZGOHBVYVU4MGk0WHlON0wtNGRjMm9oUklkZlhuMEpNb2FrVEh5NFNmcmVPT2RmMmFNcNIBqgFBVV95cUxQblRHQWFxYm80YXh6dEVFaC1NRVQ3d0c2WXE4UUVoQUp4eEstRHJ2dTVIb3NXcGI3MlVfM1RoOEI5RlJScmRoeXhmWi1rWTFoMlFwUmd3eHFxNk5Pb0dhankwYTM5Q3BtUGNxR1FhSlRXNFQ5YkhrME1iTnJrRnNsaXhjTkQwMFFyOG9DQ0RnOUphbk1oT2JrQ3NRdlE0NUNLbmczOXNYdmpjUQ?oc=5",
-          "source": "The Times of Israel",
-          "published": "Wed, 17 Jun 2026 07:28:00 GMT"
-        },
-        {
-          "title": "Top analyst: 71% of SpaceX’s $2 trillion value rests on AI. Grok’s numbers are ‘almost comical’ by comparison - Fortune",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUEhrQ1VuaEc5VENjNEh5a0NmVEhpdTRzS2l2LThfVzgxQlROUlc0VTYyWVJkRm5mWWFJT1doSldQbmhDUHZlTGFqQTJUN2pQU2ZjQXhaZm0zVDM0OXNZall0UU1EZDhOTUVXVldQQ2MxRHM2U1lSVUhvRU53SE1jQldQeHFIRjB1WE5QUmd3OA?oc=5",
-          "source": "Fortune",
-          "published": "Mon, 15 Jun 2026 19:58:00 GMT"
-        }
+      "title": "Most AI-altered listings go undisclosed, California law bans it - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQWUpJdVJUMnVFNFFWVUVCdnlkUTNsRVdzSU0wUng5OWYxaG1sUDFFN1I1UW1zUWJYX3FTRnZHcnpIek5GNnlHY3RDS0FCMTRtSFZxZm1TdUtFMGdVdWIzRWpOVC14TUI5eDloVzVGRkRlOWtoOGFhYXRKd29mcUtJemY1czNvYkx1V2tfWVNaa0xNZ3ZGMXZaODN2Rm5VejZuZ2c?oc=5",
+      "source": "HousingWire",
+      "published": "Wed, 24 Jun 2026 17:18:40 GMT",
+      "beats": [
+        "Agent tools",
+        "Portals"
       ],
-      "stories": [
-        {
-          "entity": "xAI",
-          "title": "Grok Imagine Video 1.5",
-          "url": "https://x.ai/news/grok-imagine-video-1-5",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 5,
-          "hn_comments": 0,
-          "reddit_score": 0
-        },
-        {
-          "entity": "xAI",
-          "title": "Grok models are now available via Amazon Bedrock",
-          "url": "https://x.ai/news/grok-amazon-bedrock",
-          "source": "hackernews",
-          "published": null,
-          "hn_points": 3,
-          "hn_comments": 0,
-          "reddit_score": 0
-        }
-      ]
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 2
     },
     {
-      "entity": "Meta AI",
-      "headlines": [
-        {
-          "title": "What — and who — will be at the Great American State Fair? Here's a primer - NPR",
-          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOc2c3akd6V2ZNUklmaG9lTG1KbzJSaUlycWtuQURFb0tyZXVGdDNCWE1ObGpDa1BlMzhBaUdSdmN6UzBGS21ocjFocHJXTWtQSkF2OHloZFExaEZDQWw4dkREbUN2djl5QXZXdDB1dHdkejBoS0pxRERqQlNRVUFXTUhYbDF4VHFkNGhFVVdSWnA5ZThDNkU4Y1dFNDYxQQ?oc=5",
-          "source": "NPR",
-          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
-        },
-        {
-          "title": "Storm damages Omaha Art Fair, destroys 17 booths - WOWT",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUlGOGZHa0UwMDMyVXpNdkVjRXpjRWZUeXZrREg2anJGRGo0UEtxWHdleFU0X2x6amlaSF83M2ZvaGV1ZTFqbzdTaXkwOFozaEpVMEM1bm5yMWt1bXZ2eHJXZXU0Y3ZFdnF1V25zOWpzX0tWVkEwZGZoek43SG5NYlM1MS1EMDjSAZsBQVVfeXFMTWxsNDlqRWxJVHpzc0N2VTA5UXYwMVRiMnJCZzZmZVNRVWQ5aU1BQ0kwZkliQTZkZFc4dTFJakd6QXVGb3pCbW44dVhpS3RuaEpMNzhBSTdYZDBxNlI2UEVxcTNmM18xaTIybm9qMmJiZGhRQmpMcFprck9KbkRZRUJYY1RNTTA5TzV2RjB2WFJQRjNmYW40dlRTWHM?oc=5",
-          "source": "WOWT",
-          "published": "Sun, 14 Jun 2026 17:07:00 GMT"
-        },
-        {
-          "title": "Wawa Welcome America Day 2: First day of Philly Fair 250 and Free Museum Days - NBC10 Philadelphia",
-          "link": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOWjd6czhUcnhRekZBT2hIWlBXQnFzNmJOMW9xS2E1NUxiT0dTSHltYmFmak41bkdQV2ktV0p2eVhvZkxVaVVqOHU4TGcyZC0tNUwxZ0FLSFQzSTk3bXlNWnhiT01UZjJ5WjBIRDFzTHFoSmFGTkhyaGN3ckoyYTFIVnBJVU85ZzI1a2doYy0wSDZadkZ0Z0Y3U1RKZ3R0ekcxOUpodG01bEYyMkpXYjlFT2ktQlRLY0hVTmQtTDFDV29EZ0FnNGo5OXZ3eWxkbzRVRlQ2UC0zNVhCRDVFZUp0bnZKT0RMN0Z4YmRlQmd0d3N2Y3Ry0gH8AUFVX3lxTE5sNnlxbDMzeFJMdEdBaWtHeWU0cGNEUG44bGhLX2VhU25SZG5SLU5sbGZ4MGpCenFEOG1RUEFveTNUVkpKb2lEMzhmbUlqX2d5eFJkWVpRVEhEX0JpY0tTb1piVHRXU1B3aUtfWDc1QzV1bV9welVXMVA1eTFTNV95NzB1RUdjLUtURElCLTJ5N2dweWozYk5uSGo5VzFsRG1fMWNUTHQ2aVROalhnQmYzbXY1Q3ZNbEZpSkpzSkdxekRka3hWNGtlMHVrNS1PenpzWGM0ZWw0UWRBbHZpOU5CQlp2Z2s1RzZpX1dGQWwyZEg0MUFqMTJJOVJFNg?oc=5",
-          "source": "NBC10 Philadelphia",
-          "published": "Sat, 20 Jun 2026 10:24:59 GMT"
-        },
-        {
-          "title": "Exclusive: Taika Waititi on ‘Klara and the Sun,’ His Most Dramatic Movie Yet - Vanity Fair",
-          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTGNGYW16aUl6UjA0ZHpicVFJdEVGenBsSHBpdjYxMDh5bmRPWUMwNzFEV1NBTUp4NTRacFRfLUY1UmV5MDZGSTNaT25udkZqUXZVSU8yaTFpMlBmTlFQc3pNX3IyLS1xT284a2k3SEt4YlZfVVJYZkliZUlPYjVZUWNMOEdFY2w4TFluTG5FY2d6Zw?oc=5",
-          "source": "Vanity Fair",
-          "published": "Thu, 18 Jun 2026 13:44:40 GMT"
-        },
-        {
-          "title": "How AI Companies Can Pay Fair Rates for the Content They Need - Harvard Business Review",
-          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWDFkRzRpUXhtdFVUOTROSG0yc1pPdHltc2w0cndxTUhKZlhyYXVGbVVxWUsxbDRPSlNqYS14bldXNHllbEtNaDEyUlhwV2dWTXhWaTRUQzJoTGNrdEFUdXZ0RG5tX0hUT2ZudWtKTzZzOXc2Mmt1RkU5S3F5ZkRteFF0a2VSck44OGwtZFBn?oc=5",
-          "source": "Harvard Business Review",
-          "published": "Mon, 15 Jun 2026 12:11:58 GMT"
-        },
-        {
-          "title": "Neshoba County Fair: Your guide to Mississippi’s Giant House Party - SuperTalk Mississippi Media",
-          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPdmkzZjEyYzM2aGxPMjh4bl9aaFp5b2tEZGpxMVhwSjFjZnpCdmxhMU1CU29yczJON2k4a0x6MFhEMGlmTGpGZm1jYjlxRFNUVUxSY0FnS3Vrc3NKWkFSLUlaRjBrQkozeTlJYVRrSlNTYkxwVWJZcGpoWnlEUmNXXzJMUWhFNXA1MUswYjEtbFZjZHlp?oc=5",
-          "source": "SuperTalk Mississippi Media",
-          "published": "Fri, 19 Jun 2026 19:20:06 GMT"
-        },
-        {
-          "title": "Perry Hall Town Fair returns for 29th year with live music, kids zone, and America's 250th celebration - WMAR 2 News Baltimore",
-          "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOODRNRmRoQXlaZnNTQm81bjlDNjYyMmdvVW9ESzhpVjA1VC1vVGgwbmFJempCX2JCcUZ1dUxZSUlueTFnZEs1Q0licFFRbFA5bUVmNmFDekNaLVgwNTE2YjJYMDJlNTVVdi0xTVBKZEdhcGlIWVZfNDV0dnhDOVJsRFF0UFFNcklPVVNlQngwckxhRktZaFJzVGNSREFUSHdLcXdxWmZIZWdBOXh6V2NnbHpzV1B4MEdQTnZSaDdHamItMHlIREg1TllRRmwyRGRfWlVXTzltRDBscTJuUElfQmw1cU94SzMtakE?oc=5",
-          "source": "WMAR 2 News Baltimore",
-          "published": "Fri, 19 Jun 2026 06:59:08 GMT"
-        },
-        {
-          "title": "NYS Fair announces funk festival lineup with two major headliners - Syracuse.com",
-          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcGZfUnRTa2s4T3lOaldrbks5d1Fod3BsWnRXZWMtd0Q4TGxiTTFtWTBNVjhWZkhadzVJU1JrcW5NOG13Wm1acmFQVFQ3a3JrTVdsdXdHc3hzd1JCbUhHV1NhVlJReEJOMFV1eDZtOW9sZzF3cVRiOU5TU0pqcDRSUDdBbW0zWjBhTUJuZVdIYWd6OVRVb3Z2R0FHQ3Zsei1PY0txT181Zk5kVmZTU3V4VlQzWdIBxwFBVV95cUxNS25UWTlfa0pTbDI3ZlY4MmY1V2RMekhQS1ZncXBtVi1iZXdfUUFGRXJHLUNTckRPZXBYcFM5Q2ZqYW8tVlpQeGlnV0ZkYVREU3NJRGRHbVItRXZVVmkyd1NHYlo4UVJaSE1IckpYa1pVaDFzWTNOcmVWVm11SlI5MGVwR18wdXB2M0JoV2UtTTF1dmpraWVJRWJ3MG1YMEhSRXM2SmpBMERMc21qcUFQNVpVMWttU19VSmpXdEZDd09WRl8yTlV3?oc=5",
-          "source": "Syracuse.com",
-          "published": "Mon, 15 Jun 2026 14:11:00 GMT"
-        }
+      "title": "Arlington adopts new AI guidelines as Texas law takes effect - Fort Worth Report",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQSGZpS2xNWEU1MTZ0Q3JmQU5fQlRoeFNVRWJxRXVCS0JSYkRJRmI0Ykl3MnpHSTVvVHBwWGFwaDQ5ajVBOW1GWHlyYXk0UkxGSWRJb3FqY3lJdmlPT0txR215TFJ1WmN4cHFpRkFPNkhVY1c0NW40cXJCbDdHRmxLeWFQczFEamUtMElYQjA0Qk5LWUdOcE9RcEFsVHU0WUExQXc?oc=5",
+      "source": "Fort Worth Report",
+      "published": "Thu, 25 Jun 2026 20:15:42 GMT",
+      "beats": [
+        "Valuation"
       ],
-      "stories": []
+      "outlets": [
+        "Fort Worth Report"
+      ],
+      "appearances": 1
     },
     {
-      "entity": "SpaceX",
-      "headlines": [
-        {
-          "title": "Bluebird 8-10 Mission - SpaceX",
-          "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE83US1jV3pyVko3RTVxOFdqQWowMG5kT1FRVGFTRmpZeWxyRXNub3JsODEyalViajVsbDI4YV9Jc1M5X2pZRExya2habHgxRmVMVkNMV2RKdw?oc=5",
-          "source": "SpaceX",
-          "published": "Wed, 17 Jun 2026 07:00:00 GMT"
-        },
-        {
-          "title": "Before SpaceX IPO, Investors in China Secretly Acquired Stakes - ProPublica",
-          "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNVHU0WFBmb0NMOUVwZ0ZxcDV0Ukoybzdsb0Foa2dLZklHYjllWkUxbk5VTGlyYVJySHV0cDN2LTloNWdyT09ELW8zLUdGdExoQTdwbFNvZUV0WTFVWXFJbkMzYkF3Qk0xOXdVb2RSczgtM3hyWFFVb2pwWHNnUk16UlUxSWpwZw?oc=5",
-          "source": "ProPublica",
-          "published": "Thu, 18 Jun 2026 09:00:00 GMT"
-        },
-        {
-          "title": "The riskiest SpaceX stock trade of all had a big first week - CNBC",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBRMFpFeENNVHlmdFRFSG40ZWo1dnZMbktNaFFaaTFlbklTWnRhWVdXTm5ERURKdHJVRjBkQ1p5dXZ3N0JYYUNaRHotdmJmbEFTSHJqV3RnWmloelVMNVBZbDl3cmpVaHdmZF9nMUgwSk_SAXZBVV95cUxPWlhDNzU5S0VfQkRiUUhGd25Ha3FiMWF1TW9WeXRJdlFORWN1eTloWVktZVhnQkdwVnZwS0dsbF80aU5fOERIV3YtNHJLOGUzZmtmRkVSSTJKdjZwTDlBWEQzanBRYzJNR001cVhPSFVxVm1NS2pn?oc=5",
-          "source": "CNBC",
-          "published": "Fri, 19 Jun 2026 15:31:43 GMT"
-        },
-        {
-          "title": "SpaceX launches its first Falcon 9 rocket since Nasdaq debut - Spaceflight Now",
-          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOWHZNYlhZc01MV2RqUWsxOHk5bm5PUzJoZEROTFNob2FmWWQ0ZldJSnBOZFVTSE00ZWV2akNxclRrZFVXZDBYMWpOXzR2eExjYXlvS1pIWFNzY1JLMWZlQm9NWURBSEVWMXNDeENYSzFoYTlsWHlwYmVPdS1YUURQSVV2ejlhN19SNTgwa18zbmNmN3Y1WUFiNjVMbk1JZnpaQzNKaWNMRmtoS0xTbHpYZC16cWM?oc=5",
-          "source": "Spaceflight Now",
-          "published": "Sun, 14 Jun 2026 23:30:11 GMT"
-        },
-        {
-          "title": "Elon Musk Becomes World’s First Trillionaire on SpaceX’s First Day of Trading - The New York Times",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBZcWVuUGwzMTNybzJfS1pSQWxFRDByb1JhYzJqQ3lKc0JQd00yNXduRGR6NE4zMm9uT2xPTFFsb3FPd3Fyd2ZLd3RJTS0tNkpjRGNvSE1rLVVTeXU4M2JzU2ZNYmlLTHl5RDAyTURvUzFIbldCRVE5bg?oc=5",
-          "source": "The New York Times",
-          "published": "Mon, 15 Jun 2026 07:00:00 GMT"
-        },
-        {
-          "title": "The Myth of SpaceX - The Atlantic",
-          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVkg2NmZkNm4wdm5rbFJLVk9jVzVMTk1jOTBRVnJpbWlUdm1RblpOZTJmYVNjVXJxby02ZXBvMEhJUTNQdm83aGRQREFJLWdzTTl0RDlCcEt6dkRHdVkyUnYxa1VLaFJyU2RieUpXblFxX01XRllUc0hsN3J5aUtMdlY5TXVfTi01NlJLNjNxTFNmMzZUZlpOQlVsVXVodw?oc=5",
-          "source": "The Atlantic",
-          "published": "Sat, 20 Jun 2026 11:00:00 GMT"
-        },
-        {
-          "title": "How SpaceX's arrival impacts the stock market - Axios",
-          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9jM0hlSDgzQnlKQXVpOTJCUElqdGZLRFJpZTBadTNOTUZ4ejMzNG1WaURad19XWVFxYVd5SUZweWNHNGx1T2V5ZkJnSmFZX09Yc1hOS2dTTkgyU1VLN2E5WnM1cEdDNEU?oc=5",
-          "source": "Axios",
-          "published": "Mon, 15 Jun 2026 19:05:04 GMT"
-        },
-        {
-          "title": "Is SpaceX Really Worth Trillions? Let Grok Explain. - The Ringer",
-          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaVZDRmxqV1F5MWx2ZHhLa2I4WXJXaEM0UlplbUdhWmRCaVk1eFlHdkJIdjY2WFlhSW9KTGlKN0V6YXpRSlVsT2JzUjdZV1ViVGlOamJHZ3NpdC11cXVFRTF6V2poT0VFWU5GMmMteDdJeGFqUVNsR2ZWZWhwb3hvTGNESkpqQ2N2N2U2Mk1CbHE0TUZveW5tUkU2NWI?oc=5",
-          "source": "The Ringer",
-          "published": "Wed, 17 Jun 2026 10:30:00 GMT"
-        }
+      "title": "Clean data, smart decisions: Implementing AI successfully in CRE - The Daily Reporter",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWGFXd2ttb1dQdkZSRUhfcE8wTHRvVVlzdTlZUTlyb0syZVBjVUFTUTJSa1JWZ0Q2emFwTEtybmg2SlNua0tvdFVJSmpiTWFjbFZFQVl0Y1NBZkRzM21YcjN6dE5Ka1dkeXlGUnpDRk1ScnI3ZDQ5amU0b1RKTnRQc1B5RnBxcnZDQkF2dzdndTZOMkx4Zk9UVjVsM3N4YlE?oc=5",
+      "source": "The Daily Reporter",
+      "published": "Fri, 26 Jun 2026 14:29:57 GMT",
+      "beats": [
+        "Valuation"
       ],
-      "stories": []
+      "outlets": [
+        "The Daily Reporter"
+      ],
+      "appearances": 1
     },
     {
-      "entity": "Tesla AI",
-      "headlines": [
-        {
-          "title": "Musk discusses details and cost of Optimus robot, working prototype this year - Not a Tesla App",
-          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPcmIzdkx3UktySFdpWXVZS3R1SmJRZno0bXF1T3VoY1AxbldiSXVtMEFTMF9wOFNxRThWLTd2NGoxWFE0bUdid1ZSdHhLXzVUSDhSdmhWWTFmZ3RBdEFfcFVzLTFhbHd2UEhkTE92cVVLRDlSR01FM3Mxb0tEVDlqSWVjenN0RHBwZE9PMDUyWVU5dzhvajczOFlkek5NQ3RheHFYRUdUZzRZTmI2TGhqZDJUM1RWSHBhUlE?oc=5",
-          "source": "Not a Tesla App",
-          "published": "Thu, 18 Jun 2026 14:57:51 GMT"
-        },
-        {
-          "title": "Tesla's Optimus Could Drive Huge Revenue Upside, Analyst Says - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNdm9uSnU1Zk41Z3RBanJmS3prdk5JbGI5NUhVWlE5ekVMdXEtTFN0ZF9QRUlZRHFyZFdVakl1dUR3d00wRTZBTmJ2RHktRXJ6RWh4OF9uSU5BdTFLb21tTFlyWEEzQTFtWU1Pc2tzRTZjeG9SZkVMd0ZCSHl3Snp3ZmFxWFlRSnRlWW5oc3FHS2prbGlhd19sUWNQYi1yZTBMSWc?oc=5",
-          "source": "Yahoo Finance",
-          "published": "Mon, 15 Jun 2026 12:00:57 GMT"
-        },
-        {
-          "title": "Musk Shares Video Of Tesla's Optimus Robot Performing Household Chores - NDTV",
-          "link": "https://news.google.com/rss/articles/CBMixwJBVV95cUxNMEE5ZkJWNUJfNy14Tmg5aGo0XzZpajBremZPdUU1STJhN1V4YWhSYVFPLXZEYnBiZU93b0lYZm52bnU5c1N2VGdLZWJTM1BKZlNlSFV2cUNldUJxdjNXVjYweHdlUmE5bDkyQkp6Z2xqRDRsei1oZElzTTdaZXZhdmI2QW9ITmN6NXNaSXQ5dnpjU2I5WlRyWXhGTnRMMjFfTWNPT2s0aFBQTXdwU3FoWGZrLW9RT0dUVUliaEs2ZzVWbEpudTlaVUo0Tk5zamhfLTZSaVBGMDVLS29Sby0weVpVbkRLRGFtdUhsUkdFcmZpQ0poNVFyWnNnNVkwcXdick16cTY3ZWpnZ1Q4ZGVjYkJ1NjN2aVVMa3duamFHcVN0eU90ZXRMVS1IQVUtS1FiSmNDaXY1NUZnbUNOamJWV2lSTWVuNDQ?oc=5",
-          "source": "NDTV",
-          "published": "Fri, 19 Jun 2026 02:04:52 GMT"
-        },
-        {
-          "title": "OpenAI Robotics Expansion: Could It Challenge Tesla's Optimus? - News and Statistics - IndexBox",
-          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOeDJJNFppMG5yQmRLSWJIYV9DRnFidGVxTGxLcExuZk5aTGhMcGVvOU1jaUNRY2VrSzZOcURLNkNkTEJfRlZlUmlOOHFvRm9YRTVSZVhERVZpS1prNVVZUWx4MDRvX0RvbnhnQ1UzVDE3aTd3WDY0TGhoLUZJRVpNbFB6Wl9vR2ROUVNiY1hoUWd0VzExQ21KVDdn?oc=5",
-          "source": "IndexBox",
-          "published": "Sun, 14 Jun 2026 12:40:00 GMT"
-        },
-        {
-          "title": "TSLA Stock In Focus: Could Optimus Be The Missing Link Between Tesla And SpaceX? - TradingView",
-          "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPRXlQYnB0S1F4S1pJTjdwdHk2RExRM3puMXpXdWZEZWh4TDMtelBUY2pKYlp5S2xsb292c0N2NzNjams3MEJYYTFONXRqSkVTOHIwSXVLOXlPelctaUIya3N0SnFMZjJqdUszWTdRMFpsSVdaQzBHOXBlWFA0dlF4ckt3ZVNZdk05aWdfS2NfeEE0dV93SjhPdnRtUnJtblk5UTdoWVB3RUlDSWlNbkVFbUFaZFlyVDRmd3pURTVpeFJJeExnWlRacF9wV3BsMFQ3OTYxaVZ3?oc=5",
-          "source": "TradingView",
-          "published": "Wed, 17 Jun 2026 09:17:33 GMT"
-        },
-        {
-          "title": "Tesla's AI5 Chip Recently Completed Tape-Out. Here's Why This Could Be the Most Important Development in the Company's Transition From Automaker to AI Giant. - The Globe and Mail",
-          "link": "https://news.google.com/rss/articles/CBMi2AJBVV95cUxPc0dtRkpzdncwMmh5SUROb0RIQUtHXzNiYnhWcWdNS3lydnBBbWlmV3hDTHdzNmJycll1cTBKWnhzM2h4TmtidEdlTmw1QjEtX184RXMtejk0UTZmaXJnVHROTzNWMThuWWZYdmR3TjRPZEl0RVRqVU9IZFRLRTJubFhpd3lHMFNKUGd3N19jR0llUS1VcmxPLXpHUUlUWHBPRzZwU1UtTjBkYzdSU09DcTAwWkI4S3lEZm1pSWRyeG1LVWxvSHd6aGppeXBTNmFSQUREaU5QVzUxYmV1TnlTbVRZSU9uOWd1cFVkeGhQVkpWbldiSDVUSlJ4UnpNNEVDSmN4VnU1RnY1VGh0OUJCR2laeDlpQ0xHMGtoT1ZVVlJZQXVzV01QTXpfNThoVUVMSTBHek45Zzdma2k3TkRvM0RqaVBGcE80ODIzWFZpSm1mcURoczRmeg?oc=5",
-          "source": "The Globe and Mail",
-          "published": "Tue, 16 Jun 2026 22:28:00 GMT"
-        },
-        {
-          "title": "Musk cautions on automation as Tesla’s Optimus nears rollout - MSN",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOZ2RBMFktdGNnME1jSjd4OFl0cVdqWnkxbm1vR0FFSUhJQ09LTlQwVVkyZnliU2kyMzh4cFRZdXVjQ2hvNnlmZnFWZGhzT2Fra0NPTlBsTi1NTXFNU0phMGVkejc0bFpEOUVZdEc5dmhfcmkzb0JnSlZXTTJ5WXRZNFE0bjkwLXU4cGwxZkFwc1hiYjdobUljNVk2eWNMVXlLM2NKd0U0Z0RxN2Fy?oc=5",
-          "source": "MSN",
-          "published": "Fri, 19 Jun 2026 09:27:55 GMT"
-        },
-        {
-          "title": "SpaceX’s Newest $60 Billion Bet Might Be Its Best Chance to Surpass Nvidia - 24/7 Wall St.",
-          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeGpqcDFFS3FDS0wxbEpyR0VOaF9Fa0FFTTB5RFI4UzdIMnl2Q0Y2a1JpUTM4M3lPQjVVcU1SOGtyTVZpcVpKcC1HMVRGRVZ2UFdQUkZ6blI2TXFkN19GSENJeXBSUFRaVHpxcUVKanFjd2NUYXFOTVJ0ekhobG9CZExpUGF1VzlCd003M2IzeWVIQ24xdjVpOGYzeWRJZkdua1cyeHQyempLbXFXTVJDYnRRUXJhdlE?oc=5",
-          "source": "24/7 Wall St.",
-          "published": "Thu, 18 Jun 2026 14:30:52 GMT"
-        }
+      "title": "Opinion | What if Trump is right to pump the brakes on the most advanced AI? - The Washington Post",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOVnNZXzBCaGQ4akRyMjVhOFJ2XzJfSDJDSlpaTW00LU9aN2NDVDRubVowZWp1a0RGOFZrN1dKOWtDWHlLdUM1UmNoWXZJcDlDdjg0aEhNUFR1V0NZY09RZjNDd2t2cm5BZDdWcndEZzJzT1NFOUpSVHFwdVllcExOYkxRS0d5LTBXbzJXRkg2aFBuOEE?oc=5",
+      "source": "The Washington Post",
+      "published": "Fri, 26 Jun 2026 17:15:00 GMT",
+      "beats": [
+        "Valuation"
       ],
-      "stories": []
+      "outlets": [
+        "The Washington Post"
+      ],
+      "appearances": 1
     },
     {
-      "entity": "Neuralink",
-      "headlines": [
-        {
-          "title": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5",
-          "source": "KED Global",
-          "published": "Mon, 15 Jun 2026 14:23:00 GMT"
-        },
-        {
-          "title": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
-          "source": "Business Insider",
-          "published": "Wed, 17 Jun 2026 13:00:00 GMT"
-        },
-        {
-          "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
-          "link": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5",
-          "source": "The Times of India",
-          "published": "Sun, 14 Jun 2026 06:16:00 GMT"
-        },
-        {
-          "title": "Samsung and Neuralink are working on a fourth-generation chip - Root-Nation.com",
-          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQbkFkX29Hd3RfQkcyQXNqNlFwVnBialBGS25BUHJVNEZvcmt3TThxZTctdDZZRHdQMUlmeE9SS2cwOTRjWk1GSS1wSm1qTFkxSmU2V0NuRENaYlBseGhYN01RQTNKQmI2N3Jzbm1QNlZtelhWMWpVQWk4TWJXRlB2TFpkLVdaLWplTkFEMmZVU0M?oc=5",
-          "source": "Root-Nation.com",
-          "published": "Mon, 15 Jun 2026 15:20:48 GMT"
-        },
-        {
-          "title": "Samsung to build Neuralink's next-gen brain chip on 4nm process - MSN",
-          "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcnpwX3FqbFdvYy1rRlBFSjVHdWVIRjl0d3hGeF93S2x6Q1JWLVhQREVsNml6RUhROHJHMFNMYTJaNWVZOFFMR3RFdVV0UWVNdGhCS2Q3MkxVZ1RMbUFLT2xWWGV2NEhReEhDd0d3ZHZkYnpaSnFTMldtOWxtaXROc2EyWjk0MnNLdGlIdEt2WlJ4ZERnNEdycnNsOFRyUGpOcEJWOTZYUkY1RklObUdYMWVXTzg2bTVRMGtablZFbXlRd3dlR1Bua0lWLWItcGRORkJEMVlXX2pKSGNleVJ5azViVlRWNlp5V0t1RDN4X3lhZHZfa3hyag?oc=5",
-          "source": "MSN",
-          "published": "Tue, 16 Jun 2026 03:27:06 GMT"
-        },
-        {
-          "title": "China Just Beat Neuralink With A Commercial Brain Chip That Can Be Added To Health Insurance - bgr.com",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOdExNdkplWHNhTV85QWdESWxCLW5IVjQwN1pfNmJBWFRNLVFYYjVGWWd4OVhTMlJFTXY2VUlYTTNhTEwxZl8ydlVEcER6OUZKMTlIUHlBWkpyWDVaRnJ4dUdhXzk2b3NpaWpaRE9oZXJCUGdqUHFYRDQ0NXdnTkI1SG42b2FDRXlxLWdDZk9fNFpyZ0RFRDc1NUhPT18xUXplZWNsZ1FB?oc=5",
-          "source": "bgr.com",
-          "published": "Sun, 14 Jun 2026 21:17:00 GMT"
-        },
-        {
-          "title": "Samsung To Manufacture Elon Musk’s Next-Gen Neuralink Brain Chip - Ubergizmo",
-          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBSc3I3MXQycV9TNnFvd2tlQkpVTlBPSEJIQ0FSVGxSM1E2Z200YkhMYnlZNXk3VEIzZnAweV9LWVBlLUw1eEMzLVFrbTZtUW5oZGVkTE1mVWFYNHBURUJqbDFMU1EyS281aXdmT2dBZm9URWhVakx5ZHFEdw?oc=5",
-          "source": "Ubergizmo",
-          "published": "Tue, 16 Jun 2026 10:32:38 GMT"
-        },
-        {
-          "title": "Neuralink co-founder Max Hodak on why U.S. science needs reform - Yahoo",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1xLTVwdzBWdGUyTWo3N1lHeVRsNHBPeHJBSVJKa2x3VzNwNVN1MkVEUzF1V2RaTk5xQVdpZTdHaFlJdVpwZEgzRmJRalpST25CeEtrZ2loMlRUN3YzMkw0eHl6VVY5YlNRa2pvWWZGODl4YmE5SFBN?oc=5",
-          "source": "Yahoo",
-          "published": "Tue, 16 Jun 2026 07:00:00 GMT"
-        }
+      "title": "AI Data Centers Could Be Hurting Your Home Value—Here’s What Real Estate Experts Say - AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA5Z2M3a1lmQzBUc080ZGxtWTM3eVBkOFB0WUZDUUZmUTV6c2ZUZkMzN2RnRXVWQzBZa1oyX3J6TjFYa3hSRGdrX2xCQ2ZSODdTNVFIb2t0V3VTRU9iZE5jbm9zOHVMcmtzNXBpdHZocWRLS0NGb1R1RC1pTVVJUQ?oc=5",
+      "source": "AOL.com",
+      "published": "Mon, 22 Jun 2026 06:57:00 GMT",
+      "beats": [
+        "Valuation"
       ],
-      "stories": []
+      "outlets": [
+        "AOL.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Beyond ethics and aesthetics: perceived lay theory violations and agency disruption in AI-generated art - Frontiers",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1EYXBqcFktSEFjZzhVV0ZCN0c2cnJObk9hT3M2UnJiMHZJeERNempqNnRYbHJENlhiYkNid0xxSDNzaGk0T1RCdWdkQXAtLTR6U3Y3Nk4tZjhIRmxzUUpPbkRVZC1UV0V0WVRBa0MtWmw?oc=5",
+      "source": "Frontiers",
+      "published": "Sun, 21 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "Frontiers"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Michigan Court of Appeals Clarifies Role of Deed Restrictions in Property Valuation - The National Law Review",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQV0dEbHBpV2lOYjFzaGtBblprakRmS080akF2aWhxX3plMHhaOGRQaXVFSktwbXZiOFI5c0hDdG9Qa29tUFlkS00xc19lMDZKS0FIUWFSX3R2SDZaV1BrYndqTnh3QVdoV3l5ZEJpSHRRWlkzUnRYZDhfYXJRc3ZsODVfRGZ1TGZBa1JCd3kxVjBnY0ZYR2l4UHpoaU9ETE9zRV8wWWEwNHFrRzDSAbABQVVfeXFMT1U4VkxSbElzdWZKTmx6SHRXRTM3ckRBekVERzZkVEJiRXpJY2NZUWdicU5fS0VYMkV1d0xjNHdSSE83UVlIbVlVQm5vcU4tb24xWkZLUjhnOXpPREFKdVRoOVM0OVZoSUM5Z2kxQ0FZSE91X01YbnVjMk9oemU0TFRzdUVzWXpDbU5CS20tSFhHekZ6UVVRUDhfV2d1c25ETVd5ZEt0Z0xSaUdEdGhFMC0?oc=5",
+      "source": "The National Law Review",
+      "published": "Tue, 23 Jun 2026 20:29:34 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "The National Law Review"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "MUR: Bubale oil discovery in Côte d'Ivoire accelerates appraisal and boosts growth outlook - TradingView",
+      "link": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQaGpvbjBqb3JDLUR5WjVpNzViUmpfLVlwenBQNXVZdzZ6b0d2SGRBdXRJd196QXczYTFMeXA5LS0zVExrZTBPN01oZnE5bUU4emJRamJoOEM3c0ZVcm5PNHVaVENGS2FGWWtvLVBKOHBkZlZHMGxBRUE2RklvZ3owTnVzTmx3SUY5MVlobG9zMHRoSnMzd3k4N2c0WFB1dG9zaW1uZnF4QjB6OExOMlJxYkNyVnpaQ3FmU1gzVHdpcFZ2RXdxU2d3ZjB1ZWw4M1lnRWRuN3NBbmhSYk1QRXdWc1gzLS1ld3BaSzhHVGN0dnVoc1BwTU5WRDR6bTYzTEh1UGFKSUFTaw?oc=5",
+      "source": "TradingView",
+      "published": "Tue, 23 Jun 2026 20:29:47 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "TradingView"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Should Murphy Oil’s New Bubale-1X Offshore Discovery Reshape the Risk-Reward View for MUR Investors? - simplywall.st",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYlRuVS13cE4xbWhDTXRyd0JCUzlDTTFxWVl3bFN5ZzRVN3o4LUdNZ1R4OFBtekgxQTBBLUczbW5QdnlEZWRZLVZYM3Q5bldCX2t3R0g5eEpTRnhjWkpxMlRmYzU5Ymk0b2JWYTYwTjFLVzBkVElQcG1ucTJXdEM3UFVJVi1aX0VwYldKaDlKYk9XdFdkS21GMDliVmFqdkcxQUh4R1lPb3NVdDU4UEpxamRWUVUybkR1WUh1eU1Ya07SAcYBQVVfeXFMUFdldW15MHZpZ3FFeXQ0RmltbU82MlJBOHFncVc4SUhVUktaVmsxVnExMjIzOHdhcUJ5ZEM0UFE2Q0N4S25aeXNrTUNqOEVyaEJTZDZUOGo5cXJSa0FJTmt1eFBxdnl1MGVFU21GbDF5UTFnNFBfSU1NaHM4ZktXb0QxdzM2ZEgzbmdyaDNvQ2JFR2wwSGN4T1hsT3RNSEFsTFdQM3BBMjlXVFNucGpvWXFFSk1hMDRUZThsZzNRMXBWX3dLc3lB?oc=5",
+      "source": "simplywall.st",
+      "published": "Wed, 24 Jun 2026 12:59:49 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "simplywall.st"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI Enables Unrealistic Virtual Staging in Rental Listings - Let's Data Science",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNUVpNUFhIWThlTm1CeGJsUVlYRUJfdmxNZnpMbXVsTDZ5aVZiclhwbWhhVk9IM0VyRFBReG9BYThaRlNUT0J3R1hkb1pDTFFuRXZDYjhDMmlzdFI5aUxXenU4NFN6UzJTbWdHcHBTUl9JM1J6X3hINjFBUTBBemVYQWd0WW1yNE5oaEc4dGZGdm5PRGs2WTNRckMxME1UUzRi?oc=5",
+      "source": "Let's Data Science",
+      "published": "Mon, 22 Jun 2026 20:00:55 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "Let's Data Science"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Would you trust AI to do a valuation on your property? - Domain",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWFBWbHJqM0UtMzZtY1VjSXI1Z2JlVzR1M3h6bHlLV2F1dnZLOWV1Q1Vub0xZVWpmN01DdUFsRS01R0pfSWhZSkxBMzlhV2hTR3kzcVdtQVpRXzlMR0xvY1RfcXdNZ1lHcjh1ZEstNVpVbVVCZzFRTFUxbTdQbVkteWdKYk1sNDA?oc=5",
+      "source": "Domain",
+      "published": "Tue, 23 Jun 2026 18:59:00 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "Domain"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "How appraisal data can improve your workforce planning - RSM UK",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWDM2ZUZyejQtaUNFWlVmTW9BaWlPS0VfaUFCVHdDM19oZFV4cXJvdldFRThmU3J6N0E2QXV0b1dsYkdOTzFqS29UVEFEbmFxbTNaM2hsQ0RLY2lDOEFsWWVWU1docEZ6akxSV3BVeHRpdWg3dUlwZzluQWtDekROVnlUc0JWMnFLLW5oUDVMN2NYNXZ3aVdwYld3cjlTc0w1cGtndm1HNWl3clh2SzA1WUs3YmNCd2VPQTJwTg?oc=5",
+      "source": "RSM UK",
+      "published": "Thu, 25 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "RSM UK"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Korea Patent Attorneys Association Proposes Confidentiality Right - 조선일보",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOY1RrQmtZVm5PUnI0VVJnX0h1bjZmNXVrMTF3WFhQempGYWNnSHpGRndGckhLaU9xcTc4QTk0Z3N6NXZGUncxNk15S251YWZRSzNXcnZrRTc3eEIxT09uZExJZ2NUNHhuYklXT25ULXpSelUtS044dXM3enB5TVBsaEpoWl82c3Fu?oc=5",
+      "source": "조선일보",
+      "published": "Fri, 26 Jun 2026 12:40:48 GMT",
+      "beats": [
+        "Valuation"
+      ],
+      "outlets": [
+        "조선일보"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Which AI is right for your insurance brokerage? A practical guide to the models that matter in 2026 - Insurance Business",
+      "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNdlU2SWVEQ2g5SzVabkJnZ3E5N0hfaHUzakVSMXJCU05IY0s3Tm9FM3FmSzlDb0lqeWpHVUVMaEFEcmZITkpEd1JQYmlfUEpjczV4NEthbGl4WGcyeldxNC11LUNuV1VfVVdMUTdocFVzN29YS2duNE9rallHQXh0dUl4VnpWazFtTjBnYUNUbjJuVk5sNmJVcUxNM1M1Y3lndWJtUmVXTWJoQzl0Y0k2TVBRa0JLeDFNSzlocEpRSXVjejRIMDhNM2N4Sjl2RE9nYW9EMkQ3RVM5WWVmcVAtSnRUR0d1dExoMXhvaV92dGE0NDEzeFo4RjJ3?oc=5",
+      "source": "Insurance Business",
+      "published": "Mon, 22 Jun 2026 10:02:32 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "Insurance Business"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "The Human Advantage in an AI-Powered Marketing World - ADWEEK",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPdzRMejU5THlxUUR1ZzJlT2NoTXpqeHhBNGFvWUpoU0JEbHRwLWlZR0c3U0FqbjJzYlF0eUlGWmFnbmx0a2tUZkxfUzJkaHd6RFZERGltX1Y1emdEdmJuRTFzRGRIWWhiN29IQkFWZG1rc3NRbXl3T0dNdnZ1RXViUWRwaHJQR1daX0JTZ1ZFeDg3SzlLUWFj?oc=5",
+      "source": "ADWEEK",
+      "published": "Thu, 25 Jun 2026 14:19:06 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "ADWEEK"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "NAR to MLSs: ‘Help us protect the Realtor brand’ - RealEstateNews.com",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNbUNlYWxrdjZpMDZxSl9hWkt3TVFySEJaYVRsc0lqYl9SWWtXcHZyd3NFRUNhX2VCbTFwOGN5WVpabmE5bUZsTDhwSzF1WFg0UzJreVg4cGlsbnlobmhud2FOX0pPT0lWQ2tFWURqbF9wenFKTFVHcEp6YURpX1pVSTFqdnhxLWdxQ2pKbTdCZ3k?oc=5",
+      "source": "RealEstateNews.com",
+      "published": "Thu, 25 Jun 2026 20:32:54 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "RealEstateNews.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Why brokerage tech upgrades fail without culture and leadership - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFB3V1J4cmVJZl9iNXRFVDZPRHhSRnV2bW1UekJ2UmtUb2lfbDJ1N3hzNjFTdGFKVEFQeHBlLWVxNFJPT3BnVlRBRUhqRU0wMDBwVXFnTVRuRXhwV2k2V0hsUl9Db3hfTjE2RTlBTG9UbDNUVXFqT0VLNGV3NA?oc=5",
+      "source": "HousingWire",
+      "published": "Tue, 23 Jun 2026 15:13:41 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Clearly Sold Offers Phoenix Sellers Four Flexible Ways to Close - The Malone Telegram",
+      "link": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxOS21zOXA0N2JUYmlDcnZkU0xFT0pDTHprYkN6TlVZa2drWTcyWTgzVXpzMnp5SzlzOWZ4VTRLV2tRRmduenF1VXRfcWE5QmNOWlpyV3Y3dXNSaEJVWGladkwxM1BKTzhpaU84Z1d0Q0tlbWZmRllqZEVBZzh2RHBIYVBNZ1BOQTNDN0RHaEpCTzkxTWhEbXhXUFZGT3pZQXhrUlFMNm5jaHdVeXJOQV9MNHNqclV6SDF0Ql9SZm4wa2E5dXUyTTFkT2k4bk9MTGxoOFhfU3g4UjVQZEZxLU5ZWmp4WWxET2NidmpsbDJ5bEF0YWVONENvbmwwYU1lVE1naFd2c05NTUY?oc=5",
+      "source": "The Malone Telegram",
+      "published": "Fri, 26 Jun 2026 13:05:00 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "The Malone Telegram"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Brokers tap AI to chase growth as rates fall - businessinsurance.com",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOQkZlUS03b2p2SVVYZEdvM1ptdnQ5ako0ZWZIUXpsQlRrZFF1U0pGQTZZVUZYbjVqWElNS0Rwci1mNnlqZUtHV2tObDcweThjX3Fadk5hbERmRWF1VkhpNkZLb25FS0M4STdYaEFuR05wRXY3Q1ZPekVCampoMHVfMDZwX2FiUQ?oc=5",
+      "source": "businessinsurance.com",
+      "published": "Fri, 26 Jun 2026 12:20:24 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "businessinsurance.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI booking agent aims to give freight brokers an ‘Iron Man suit’ - FreightWaves",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNQXZDdzROMEg2S1ZTbGNoSDFqb3lkSTM3Q0EyT1REbm8yYlJvbkp1YXdwYjBvNVNRcW4wZ2g5bk1SUUk5elZTdVI3ZmJOSWZNUlN5Z0tyY0tLNFp0MXNpU2d1aU5zeHczbkVhb1dxVGpsMlNtTmEzdlJwVGlfVGF0bW1rejFoYlRoX3QxUS1ILWRrMUhUeU14MjR0a2o?oc=5",
+      "source": "FreightWaves",
+      "published": "Fri, 26 Jun 2026 11:00:00 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "FreightWaves"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Singer Pat Boone Is Selling His Beverly Hills Home of 66 Years for $22 Million - Realtor.com",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOOVBuRlVZRmZ0Zm9CREFUcWFvdmNKNlJGd1JvWVFISGp3Wk9wWms3OVJWVXhneUZKTVVmVEt5WFdPZHFNYVlfekpJNWRtWmpTWWxndWF5c01fbGlETlQ1QlppX3ZBUngyLXVhbTRpSHU2Q01VdVd5Yy1uT2d0Sl9LNWhGeXU3TTI1dnJObzk3RW1ZeTRDVHFwZmlYRXYyVHREcXhNRm9jQzdPdVAzbHBTR2k4X1BiT1VBNTZpYQ?oc=5",
+      "source": "Realtor.com",
+      "published": "Wed, 24 Jun 2026 15:36:43 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "Realtor.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "“When AI Is a Black Box, Traders Either Distrust It Completely or Trust It Far Too Much”: Insights from FM Singapore Summit 2026 - TradingView",
+      "link": "https://news.google.com/rss/articles/CBMimAJBVV95cUxQaDRiQ294bXdEamlteERGbkZ5dHVGc09yY2pJaGxnV3dZYWRmZUpaNDQzY0tMcWs4MW05bUwyTUNZUmZkQkNnV0RnSmhzcFN0Z0s2dldhcDh4cUpjRTVrNmpIcXR1aUR2X0o5TzNTTTZ2ZlpLcDFUendQX25tOXJkS1pFWnd5TGJQN1oyY2tWMmRHVURFM0pEUUhzTmpRQXBiR3BZdUx6UkxpQ3R2enoyT2Y5d3l4MzVlVXZoRWEyWlRjOXFRY1VxTlJMNU90N0pWdEZTbDFUdXNNUVpRSmQ1Q2pHNDRQQ3lBTk1fb3lPZFF0VXdxa1F5ZUY0NW51VEl0dVd1cGYxM1B0RVltSTlMdXhvNzVYeWpo?oc=5",
+      "source": "TradingView",
+      "published": "Mon, 22 Jun 2026 16:37:25 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "TradingView"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Why lower commissions have never been the answer - RealEstateNews.com",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQRmpxejRicnFuN3NmVHFhdmxZUmhZTVBFcEVXNUlVamRMVXZsLVdXeG5Nb0JpU1FDVTNkWWw4VHlZVUUtRG90MGxvSHlVMUVCV1pnR0hpa2FMT2dJUlk3TFF2c2NWeXlSY3F1cGRQNFJGekNScmlpcDRZcDQ0SGh2MWpXWXRsMG9rYi1KNnEzbzNLTmt5?oc=5",
+      "source": "RealEstateNews.com",
+      "published": "Thu, 25 Jun 2026 18:36:11 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "RealEstateNews.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "The portal and brokerage buying spree has one goal, control the stack - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQUm9LSnBoLXZWTnM1Nmt0RTY1N0FDeEJWLVZZcVBGUUN0UjFJZkVXM19PM2lBZ21mRlgxd0ZkMUFuZDdHTDNOUjJ1Y29FVkdzQm5nRXlUS3JiTS13WXhhamxzTUM3dGU0aDI2VDVySGpURE5LR2h0enRUMmxJQ05wVjJWQQ?oc=5",
+      "source": "HousingWire",
+      "published": "Fri, 26 Jun 2026 16:06:09 GMT",
+      "beats": [
+        "Agent tools"
+      ],
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Should CoStar’s Apartments.com Ai Push and Board Backing Require Action From CoStar Group (CSGP) Investors? - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUFg2WXUyeV9PYkRkczd6U0JoY2paWi02Qjh5dDdPMXUyRjdoVGtzQ0h6bDBVdG9neE9UaEFJT3BOVDhXYlZGSFYxX0x1cDhpVF9HX2RfeWZ4SEVtTXJxcERsXzRmbTJNSzBoVmNoLTA4SUpTejFuNEo0MEIyVjFTc19mci1RejhyeDYxY3JvNDNLM2dEQzNVVi13?oc=5",
+      "source": "Yahoo Finance",
+      "published": "Sat, 27 Jun 2026 03:10:00 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "Yahoo Finance"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "News | Real estate's new center of gravity: Data centers - CoStar",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxObVVLbm1XSVV1VlJBN05zY0Y5eEpRYzZaMUYwVmR6dUEyY3lLemJPelNDaGZHQXJtUmdVSGV4bTlhc3RXYk11dkR3cTUtVFRrSE1jZnBGdUF4REliOGpTRkdoemEyaVd4bW54RDdKRWNSbnhhSm5NQlRTcVNBRGhEUkpncWlFa1g5eVJwOS0xM3UzSXc?oc=5",
+      "source": "CoStar",
+      "published": "Tue, 23 Jun 2026 01:28:02 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "CoStar"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Zillow Expands Into Mortgage Workflow With New Buyer Hub - National Mortgage Professional",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZnF0ZnJNbkM4S29ncThHb19YQW9QYUQ5cjFzalpfSEphLUdGbzRjeVRRNzhPemRYZDRzcURPTDZmYjRIV2h6RTBrSmZSSkFSREVHT3ZMS1RieHVpcjg3R2NiejRmNVZKeWt0dTBjUklpeTg2TkMwRmhMNk1BckFIRXgtX1VpWnlYQ0ozNThpT2hIaVhjY2RB?oc=5",
+      "source": "National Mortgage Professional",
+      "published": "Wed, 24 Jun 2026 12:34:48 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "National Mortgage Professional"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Zillow rolls out personalized homebuying hub - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBNcHQtRVp0LV9YbzdzeFBaZDBvSFZ1d1ZKUHoyaWtOXy1XNXkxbEJPNUd2X2tFSjZRbEZ2LXNJbXBsZ3o3VUFHdEpvZVZMWFk4R2s3b1RtY0szRFdxSlZrZFV1akxzY21sVHUwY0ppaw?oc=5",
+      "source": "HousingWire",
+      "published": "Tue, 23 Jun 2026 15:38:41 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Is CoStar Group’s (CSGP) Apartments.com Ai Rollout Quietly Rewiring Its Competitive Moat? - simplywall.st",
+      "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQb2pUanhQSjZKaGJRSXNWZTllNkpNeHpKOFJyOFNtTThxSmc0NEpkMHg2elJpNzl4WmxKYUZzc3VhcEVCTWJ6QVN0QU5YNnRsUFJ6UGxpTTZudll2TDF0VVpOWG1TTWtHTl9jTXFyUUFTMGs0NjdBZEpnMnhtYWdCOE1kaURtSEZsOWRHTGlMS0JhMTk0Q21pX2VSREZkS2d0WU9oMGdyV3JTWFV5VDd3U3c3SkdVYzVjLXFfeG5qYmt3Yi1kVE8yUjdySVRJa3IzYjNPN3dsTHNnVFBVMnVadXhUNUh4WXR3UGF4MGdpUTJfTnfSAfgBQVVfeXFMTVRPV3BGTkozNXZpbWFKT2lrRUZoem1FVG1kVnI5R0o2YWFSaEVTZDgtLVpLOW55aVZYcVQzdU1OWlMtaHRBbWpGeTV3RkxyTV9ZajN1Q19aSGhfSlFjUXItWDZwWHhBeFhOM3d4enoxX0JKTDRWTmw4U092SHpxZER2M1BJUFpPdnFvb3IzN3FyVXBCSzZrNmEtRlBtSU12M2VHVWtxdGotd1k0THEyTF9iMnRfUzctTnRNS0NGUkNoV2lSeEdrMlFTN2E0Ui12T2lVeTJLYjlQLVZsWHV2V2JBQWtxelNfel9lb2J6NWZRSFQzY2xLbU0?oc=5",
+      "source": "simplywall.st",
+      "published": "Wed, 24 Jun 2026 12:47:59 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "simplywall.st"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Homeowners Can’t Find Contractors or Electricians. The AI Boom Is To Blame. - Realtor.com",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQYU0zUVpDZERSX2MwV2FhOFgzWDV2Vm9NRjNFM1o2ZGFqLVZfeEdadzB1TzkxZ3h3ZFBFd2xVVnpRcVkwYVBQVERLZ2dwcHZ5SUFTY1lKMV82LTZGQXJGVUI4bzM2Wm9mQXY4dndSRVlqbHQ0SmJ0MXBzcmlqR0RqUGFhU3RYR2Jpbk1WYzMxR1VzZEk4eEE?oc=5",
+      "source": "Realtor.com",
+      "published": "Mon, 22 Jun 2026 18:54:34 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "Realtor.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Zillow launches a personalized hub that guides home buyers from first search to closing - PR Newswire",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNOFFBeDRYTFpYcE8zazBRNWRYaFQtOXRjc3RGUVg4RTdXYmlFUm5ncXhOSFY1MnZJMVFRTkF5NkxwVGxNaWdLd2I5TlU0dmtSbVNJLURwRVRncURhNEk1ZFI3aURlLW5GZUhSS3lQcGdwMzJGaV9fWlNyeTlidWpaVWQtbFRHN0pQRjY3ekFsWVZUNzR5N2lsd3U5S1VWQXhNS19QN2hXYVZVYUlSeURzcFA0aXZ3anFvUldrU2xnVEFIdXhvQmhLX1FZTmZhMGZweFJ4eFVKeDFRYXM?oc=5",
+      "source": "PR Newswire",
+      "published": "Tue, 23 Jun 2026 10:00:00 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "PR Newswire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "People to Know in Commercial Real Estate: Lisa McNatt - The Business Journals",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPWFB6aGpqbmV0d3ROWldKa3NmSm01cF96VURHdG05c1hfY1J3Tk1aWHFnUFJKTkFsXzBoandMcVBaZWR2aXMxQU1ueEM4SGhiNzgzYkdpZGFUbDRVTTRINTltNEF5cUxlNHc1TlZ1ZlhuRUg2OTBSVGZQODg2RVl0MVctSmZvMGJOV0E5WTJINFNQeENQZ21z?oc=5",
+      "source": "The Business Journals",
+      "published": "Wed, 24 Jun 2026 16:56:00 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "The Business Journals"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Judge orders stay in RESPA case involving Zillow, Real and eXp - RealEstateNews.com",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPN2tLakQtcE5yMkVuX24wT1ZXeGNNcjJLb2JLRkhFTlhZVHZMRWlnRnFTUk1kcVhkMDNrM2RBUFdfYW0wRkNEZVpseDFtdjdkV0c5R3o0dnBGRE9MRWFmVTluMFJVaWJTT1VmU1o1NjVzd04yR3BqV0ZaakNra0kyRlV0bWh3UEppN2RkQkVwLUJyMkhLRllYRHduTjVXOEV4OXdUQk5B?oc=5",
+      "source": "RealEstateNews.com",
+      "published": "Tue, 23 Jun 2026 23:02:27 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "RealEstateNews.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Should Opendoor’s AI-Driven Home Buying Surge and CEO Pay Shift Require Action From OPEN Investors? - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNbHpVX3d2dTlfSDU3MkJQTmF1dUZkdnFXOUhfbWhzYVlxaXl0dXVmVWc2eU51ZDlRcUtCRm9fWE0yYWpqbTJicXh5NlhTRmxPRy0tanhCb0x6T0dHX1hDMlA0V2xJMl9uNWZUbVRfdXQ0TEpTS2l2bnNTS01Ta0FtSzhaS251ZFdYNWJIM1FqRXFJQnRqb1g0?oc=5",
+      "source": "Yahoo Finance",
+      "published": "Thu, 25 Jun 2026 22:09:10 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "Yahoo Finance"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "News | Artificial intelligence company signs full-building industrial lease in Glendale, Arizona - CoStar",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNaHlzMWsxTHcwSU1mQ1M4Nmo1TXQ3UmFPSm5rcE5FQy1CMFNNcEhJZ3Z4dUd5WFR3QWNwV1BXVDFBdmhvMWNOOGhDWGxqRVA2Ul93Ry1iVUk4SnVtb3pXaDEyQk1LLXJ3SDRHd25HSktPVTFGb21nbzhOdkJsQURYa1NSOC1CNldaR3BONnh4TFBNNmRWY084Q253R3F6OGw3Y1FYcGRVSlRrTzdaNDJCRUlubGgxOGVGb0lfZkxwX2dhSjZyODdMYQ?oc=5",
+      "source": "CoStar",
+      "published": "Fri, 26 Jun 2026 19:31:37 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "CoStar"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Is Opendoor Technologies (OPEN) Fairly Valued After Its AI Reset And Layoffs? - simplywall.st",
+      "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQZmV2M0JoU3FRS3BORzd2WWZaV0xHSS1jMldfLUJRYUFDOHU1UndKcVZMU1NuQ2NmcTFGcTQtcV9sb2dVMnQ5ZGxqdE4tVFJDbllGcEtuWjNaRk1ZajM3QS1ESWdMMl9nbVZ0NEU0S1BIbDdjbEVhQ1BXNi1IeW1heTd0ek9PLWJQWVJHdDhBejNZVjEwUTFXTnI1SWxiemRlcGN5UHJZTTg3anJPSGt2OC1iWlZ5ZVpNckM2U0d1cUN6S2F1TTcxTDRpdTQ2eGh5TjIwZ0FjZ2lRZzFUcHlCSGluWHl2bWF3blcxUzdaNV8xTmJjVkhLNnJpcE9tMzF4bU50a9IBhAJBVV95cUxQZmV2M0JoU3FRS3BORzd2WWZaV0xHSS1jMldfLUJRYUFDOHU1UndKcVZMU1NuQ2NmcTFGcTQtcV9sb2dVMnQ5ZGxqdE4tVFJDbllGcEtuWjNaRk1ZajM3QS1ESWdMMl9nbVZ0NEU0S1BIbDdjbEVhQ1BXNi1IeW1heTd0ek9PLWJQWVJHdDhBejNZVjEwUTFXTnI1SWxiemRlcGN5UHJZTTg3anJPSGt2OC1iWlZ5ZVpNckM2U0d1cUN6S2F1TTcxTDRpdTQ2eGh5TjIwZ0FjZ2lRZzFUcHlCSGluWHl2bWF3blcxUzdaNV8xTmJjVkhLNnJpcE9tMzF4bU50aw?oc=5",
+      "source": "simplywall.st",
+      "published": "Thu, 25 Jun 2026 07:31:55 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "simplywall.st"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "CoStar stockholders back directors, approve pay plan - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE91ZGRFRVdNam5mYkl5b1c5ck4wYXRJamhKdWNiQXNySy1ubXdUYVNLTWtRczUzZVhRcGFkTE1WeUxnTl8xMXl1UG15Tlp2cjBYV1B0OGtZb19aTnBjNnh0VHdUTHdramppa3pEWnlIaGc?oc=5",
+      "source": "HousingWire",
+      "published": "Thu, 25 Jun 2026 17:28:52 GMT",
+      "beats": [
+        "Portals"
+      ],
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI roundup: 16 mortgage tech updates lenders should know - National Mortgage News",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZ3NtbENZS254dTRIUkNFaUdOcTZ6bkhET2JZSTktSlJYRnNDNmR3bDdad3FEeEQ2ejFhLXBaMzBKYk5nZndUclBrOENfMTJQYUUyS25EVkZJd3MxZjdTbDJ3YS01ZGVFTzZPVWxRbVhyOVpCN3hsZTNzSzVFTTBzd0liMlM5Mm44RFFXc0w2bnVCTlNWOGc3SmgtSWxRdw?oc=5",
+      "source": "National Mortgage News",
+      "published": "Fri, 26 Jun 2026 20:23:38 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "National Mortgage News"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Mortgage rate predictions for the next five years: How the market looks through 2030 - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPUWxOdnc1bGg5Q3c1Zl9ZMWlRRkJUMzh0ODh0eHVEelZRWHRXbUQwZHpQVEUzeUpTbDI2YlpuVkpJNUhoX1ZGeXRSSDhkaWRXaFJGMTZTRC1qV2FpcERpaDBrRFQ1SDBOdDlsWjQwZWJzTy02Y1NGZlF3SG03ZUY2YmtaQjNtMVVaQkFMMEdIdDFyX05KMU9TRE5nbmU1X2VaLThtNjJVR2F5bmFTNmhhM2t3MW41ZVQzWWJlYWZob2NCX0p2NjI4REgwcWRPZGs2dGpMYW9PX1VZX3p0bFE4MjFET2FDZ0tLLUd3TTEyUmg?oc=5",
+      "source": "Yahoo Finance",
+      "published": "Wed, 24 Jun 2026 18:24:41 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "Yahoo Finance"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "The future of underwriting: From momentum to meaningful execution - munichre.com",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOMGxIVG56Wmwwc2M4SklZWDBmelpWNWRpU0VLSzJLNEtIQ29vVnNVRHlCbFBEamU1a3ExWVFmNnJ0TXhoZjNKZUR6R3c4bmZuUlVpMWd2UE96NE1JVExQY3BwMTZJdkg1Uk5DTzl3U1JJcUFCaHZfaTIyc1p2UkNuVWk2dEE4ZlZNcUdwRnVfSlFYemhTcDd6MWl4UnVCWWxUYzFYUERRS2Foall3eEFxTTNkMmpIeTU2eXlFSjFBMlFwUXFsaF9BdQ?oc=5",
+      "source": "munichre.com",
+      "published": "Thu, 25 Jun 2026 21:46:24 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "munichre.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "From Fragmentation to ‘Architecting Survival’—the Mortgage Industry’s Next Operating Model - MBA Newslink",
+      "link": "https://news.google.com/rss/articles/CBMigAJBVV95cUxNRTZmQWZmXzBIWThIdlBPdDlMdHd5UXhlNHRDRzA5V3Y5d0p0VV95LWNTRVRUSm1qZ1hsejlEemZadm9NQks1UFgxZ3MwenAzaUUtY00xQzhkcy1YUE1hVS1GeXRTRl9DN1oyX25hT3d3bGtUWkJWaTAzSHQ2Yk01MmhmMW9oSTcyaFctTUlLelRPblQybnNlbGw4TXB3aFpzeVFVeFpic3hjVjNsM0RmNGE1Qi1iN09yZlcxTWs0d2J2TnNIcTBlaGk4aG1CTUhtdHhnVFowOE9ZVWpwbUNPX2lmV2xXRG9rWGtOV0tBVXBRQURGZ1lqTTQtVXVBbVBX?oc=5",
+      "source": "MBA Newslink",
+      "published": "Tue, 23 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "MBA Newslink"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "7 Profit-Boosting Lessons From NMP Ignite's 'Lean, Mean Mortgage Machine' - National Mortgage Professional",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQLTM1bzdhYUh3T3J2aUtzUkd3VElEbnRpRmZOQXJsNXdCY1RUZWd1T21xQXpKdFNHZEFHNW05dUtBY1o0OGRIbVhyRHZTOTdRRmxkWEwyOURET2Ezcm14Ry1keS1pYk1YWnlac0xhUkZhYXBWU2F6ZU9jQnJ1Z1pwZ1hqZUtUelp2dUhXTEU3My1sbnJXbi0zcWRFZFVrUUxmdHpmdHdHc1NlYWtiLU1z?oc=5",
+      "source": "National Mortgage Professional",
+      "published": "Wed, 24 Jun 2026 13:51:53 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "National Mortgage Professional"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Why underwriting is changing – and why it matters more than ever - Genpact",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQYWRrNUtyWUpQc3ZmMF9YcmIyOXVQZzFDMFViMWJOcEhXZmx2VlIwa2lHMXktbjM2MHhmOU93RHJlSG9KalROc1hyQ2hHU3FpRm1weFpwOHZBS0FDS1daMTRiLVBac09oeHUxR0ZVUTNVX2h5V0VrbUJPYnNlcGZKamRyTzV5WVozRUkyTl96czQ4bDFhbjdRX19R?oc=5",
+      "source": "Genpact",
+      "published": "Fri, 26 Jun 2026 15:52:36 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "Genpact"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI-mortgage broker Ralo opens, raises $2.9M; AI-generated lawsuits cause servicers pain - LinkedIn",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQaWU5ZVA1emxpN2VJSFdCMDlGcy1Pd3F0cm91a1JWNzN4RUI1QVVJWEE0LTJoQ0lfTDBXeTY2MjNCTFd5QkZsYzNpdTNsNUNzSWpSd1VLU0o3UmZuUk51Mk1MRzBNUFg1VV9nSXBmRG5uLTVmczM0cU41OE5NdVoteU9lcEplclVZVnNqWm5CNTVzTGJu?oc=5",
+      "source": "LinkedIn",
+      "published": "Tue, 23 Jun 2026 10:00:02 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "LinkedIn"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Convr® Delivers AI Underwriting Across Guidewire, Duck Creek, Sapiens, and Beyond - PR Newswire",
+      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPQmI5X3pUTFJObWRmX21CbF9JdmRSRzBXWG5Wa1Jhc09xNTJXcTMxX1dQYnZJbnhubTVYTnJZbmFGWHdVVmdNd2RwRWlXbGNfQkdtbmZqU2FGbGxVSFVUSHpPeXUtbGttR2ZSVWdNQVctZ083TTRTUHNqRmdVWXNHbkp3U3Z2UVZfbXNxa1VVX1FOcHVLbGpvM3BGYjRhNXdtSlFNb2xXSFZNdWFZZ0FnbC1mS3hUcUZnd0VIcHhJUGpyLTRwTkNsZzdic1p5QQ?oc=5",
+      "source": "PR Newswire",
+      "published": "Tue, 23 Jun 2026 17:28:00 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "PR Newswire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Lama AI raises $10M to accelerate automated loan originations - SiliconANGLE",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZ3FmekYzcmFLWFNqV1Q3SkU4aEVac2RCM0pkT2x1MWtrclhCX19ETDJXdWVjWDNmS01Ic0dzcWVKb3doT1FXNVB2Y290MW9aZmNwb1J5M0w4ekNsUFNaUkYxOUpXTFhnUDVibkc2OEtzV1dmcmRRdzBEQkF1ZTJKeVB0cmQtX2o2bi1TU0RTUFJFdWgwX3JTRUVR?oc=5",
+      "source": "SiliconANGLE",
+      "published": "Tue, 23 Jun 2026 13:00:43 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "SiliconANGLE"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "How to Improve Small Commercial Property Underwriting - Carrier Management",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5jbTZzRnBOQUFhQWpQX25IYlA4UUc0VUZQZ3hrN1g5VGdGUkVsVkUyNi10ZmVhXzB0Q0gzX3FGR0IyTlNULXR4RzVZeUptX0MycHZObXB3UDlQNDh1R29HRU1LeFVYa0kta01GcnQ5eE5vZw?oc=5",
+      "source": "Carrier Management",
+      "published": "Wed, 24 Jun 2026 08:38:52 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "Carrier Management"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Best AI-Native Loan Origination Platforms in 2026: By Tobias Pfuetze - Finextra Research",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNFlKM2VVMURwaEVHTmhuYnF1SC1uUDJIeWFjM1dJTTljN2JrZ1o1M2dJb0Y0UEFSM09Uc09sZUF1VmlOeDBIWDNJcUJqYkgxOTdFM0REQm5zRU9wN0l2VVdMc3ZvM0RCNGdiZTdZRkdUZEx6V0s2RHNRNy1KR1FtalFXczZNdWxLdXhyWW1mcXIyQTNZRlFj?oc=5",
+      "source": "Finextra Research",
+      "published": "Thu, 25 Jun 2026 13:51:45 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "Finextra Research"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Verification Letter, AI Compliance, Retention, Decisioning Tools; Fix-and-Flip Trends - Mortgage News Daily",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE9LLVJpcHlPNW5zaFJnODRsajBMQ294Snl1WGdENHRXRGEzMm9DeS1HRWpvblNKa3NyTDBYVzNFVlVKV3JSUmN0aWU3Q05sLVZUZ1JfOFJ4UzREZFhmNDktSVBWMnFjRmQ4YXBRSnBfNklDQdIBdEFVX3lxTFBHUTFnQnF3d1htY2JSTS1FZm14MHFJSkRKQzFLcXJoYXBoOHRJcHRuTWR5OWdOTnNTbFMycUpHcnVVQ3p1a3U1S2Y5dG5kemU0R3QwVkVhRzFZMHZHZFg1TEYzaVlDb04zc21OR0x5d3duTldo?oc=5",
+      "source": "Mortgage News Daily",
+      "published": "Mon, 22 Jun 2026 15:51:52 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "Mortgage News Daily"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Mortgage payments rise 2.2% in May as rates, loan sizes grow - HousingWire",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9aeXVGcENVX0xQV1VtTWs3RUxwYU9ma040dDQzaGpOcjBVbHoxSTc4WkN4Wkh5MW5MRDVBOTFRX2VKcklmd0FwMWcxbDhueUZTajBFa19VSFNhRWpKSVBzMmFuZUJCSFk?oc=5",
+      "source": "HousingWire",
+      "published": "Thu, 25 Jun 2026 15:46:19 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "HousingWire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI is making fraud cheaper and faster, and half your borrowers have been targeted - mpamag.com",
+      "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPemNsYk9rN2tQRU56MmoyTmRlU0hieHFyaWUwal9aVGJsanJZY0xkY3JuZzlzNXcybGdmX01TUGs1SkI4NXRGdFVubGVldFlQbldSMjktdWRKd1B4bXk5SmxwSGE4UGtGUmY4ZXZQdXpEbzUwcWdGMHBjSEhQLUZmSXlEdjlxU21WU0tUQUVqVWI3VnVKN0s2Qm9zbUlZaF96M2sxWEppbmtBcklsM2g3Zm5hdVlWb2ZjbFo1SXlmc19EQ1pQNmtLdzFBQXZNTmhkLTQ3dzlfTGZuNjg4V2txbw?oc=5",
+      "source": "mpamag.com",
+      "published": "Mon, 22 Jun 2026 23:43:01 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "mpamag.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "A surge of AI-generated lawsuits is causing servicers pain - National Mortgage News",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPMkVoRlNiYi1PNXMxcmhObkpXR09NY0swWENhcHFBU1pEdkdudXBTMFh5X1VOVllBZUR3c2xHcjNMTldlNDBJS1hieUluZzVxMW1wRURFR3JYYUFsTWlwUERIQzlEeXp5bjBZaVZrTGVkVExybXpFOXE5OHJmUEI2MzA4cEFLRkhrbEFkWE5xVElWaUZ3Y2h4dV81X1FYU0k0R0E?oc=5",
+      "source": "National Mortgage News",
+      "published": "Mon, 22 Jun 2026 10:00:00 GMT",
+      "beats": [
+        "Mortgage"
+      ],
+      "outlets": [
+        "National Mortgage News"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Is your landlord a robot? - wearethemeteor.com",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOMVQ5S1ktempEaGlJeTEwdWNUMXRZQmNpbzRmMXBicVBoZmJvcm1tbFZOZXNCTXpvOE9YWnFFRGxsVmR5R0RfajZZUlN1OXRtRmdQZF9HU19WSmJjU2ZkdGs3d09uQlIyT3JwNU5MdDJCVVRHendWb2padVdUUnh5bDdJSEFWMTNY?oc=5",
+      "source": "wearethemeteor.com",
+      "published": "Tue, 23 Jun 2026 22:16:43 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "wearethemeteor.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Oregon reaches $7 million settlement with property management company for hiking rent prices - Oregon Capital Chronicle",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOaEFOdTNEWjhzZmtQNmNpcUltLW1TTGM5Q2dqdFJnMFlENWNxVFZXVGdxRXI5M2tUbzVJMmsyelpDQ3ZOSkE0Ry1BZk5VSzB6Vy1MeHdqS0w3NUc1amxhSWhXTkt4VnVDVVNIQTBEbjVad1dDQ0J3R2d5RkxDWFNoc0hLc0M0eloyelRJMWxxakI2Vi1NY2o4Wm55Vnc1Y2JYblhNZGpSQ2lRZEdTZWlaMmFiYms4U0ZIQVYtSEtyMmJxWElPaU9JOWphdFpMMEJUbWxSbg?oc=5",
+      "source": "Oregon Capital Chronicle",
+      "published": "Mon, 22 Jun 2026 20:31:48 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Oregon Capital Chronicle"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Oregon reaches $7 million settlement with property management company for hiking rent prices - Oregon Public Broadcasting - OPB",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNLUI0R0Voell6UG5mZXM5MGt6MU5iU0RpWkJWd1ZPcjZoclhXaXBHaGhjeXdKRENtV0FBdUJhaHhoc2l3YXA3MmhnRWRkMkozMlZhbEFIajdaaTU1NmgzT2Fpb3JBU01VdURUVUdaUENYVWtlVFNidXUyLWJRMFd5TGNCaU9DbUtrU2c?oc=5",
+      "source": "Oregon Public Broadcasting - OPB",
+      "published": "Tue, 23 Jun 2026 22:11:03 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Oregon Public Broadcasting - OPB"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "FreeAgent Unveils New AI Tool for Landlords - Finovate",
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE93TXdobTl3X3hmMnBMRERHM0RIc014emRoT1VqY0JLV2dlLUYyd2thRVJRMHhOSENBVWdvNmJZZFYwTmw0ZjMxcF9fSmJmTHdDNVJwNklOVkh5X1VrUk5UaGpYZHNqSVlXQnBsMlZmN3RLdFU?oc=5",
+      "source": "Finovate",
+      "published": "Tue, 23 Jun 2026 14:01:39 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Finovate"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Streamline Expands Leo AI Agent, Bringing Agentic AI Across Its Property Management, Website, and Digital Marketing Platform - PR Newswire",
+      "link": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxNblJiVWFiRklaTGowdy0yV3M1UUFpYXFRSjZwSjU3dWhFMkI0OGFReUtNYU5TR1R1YVNaV2NOa181dVZQVlVxbjNzbVZSR1lYUTJVVDlzakZCS3VIZWYwNVY5c1ZVMEFGLW5KT28yN19GS1VLWGxuNFNIaHR6aFFneVl0anZxV3NEejRJTk9RZWZfQ3FwQ3RmbmoxUEZZSmV2bnIxRWpncFVockdBTGlrZ2t1THZJcnVQTmplcVhjV284akZhOEowYjNQaUFyM1ZORURLT1czQk1tUmNWSGJtc0tiVEFVaFhudmNLWWZ3RlNYRVo3Y2Q5bE9zUFpSZTNuN2JRbVMxRS0?oc=5",
+      "source": "PR Newswire",
+      "published": "Fri, 26 Jun 2026 21:37:00 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "PR Newswire"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI landlord targeted for £12bn takeover - Yahoo Finance Singapore",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOU2JYT3BKSFBRbF9HSTRxQmhXWG5qRXBucnNNRGxPOGtLTDRwN01pR3BiRDJvN2N0Qk5Ray1xTXVPR0xmTmZDNDVJUzRmdWsxbk15SlpoSTZFUWpCQWRIVEZaRU5RTlZReHdkUWR1SnJEWmY1cjdQSEluTkxrZHlaTFZCNkZkSG84aWo0?oc=5",
+      "source": "Yahoo Finance Singapore",
+      "published": "Wed, 24 Jun 2026 11:35:21 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Yahoo Finance Singapore"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Op-ed: Why Pricing rules for affordable rental housing backfire - Crain's New York",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNWFp6SVFGVEpsanBFN3BqSUR0SFY0d1l2Z3JPdk9INlFOWi1SeU9oSXZMM1RnZjB5YkFYRmpIc0ZTQjJoNWpjN2d6V1dJU09yRE5kekxGOXk0UVR1ZHZNbEhqTWE4MTFwR2pUVVUxblFmMVhUYjFfLTE2ckg4cDZlaDhUaVN3ejZHWUZoSmdZcW8?oc=5",
+      "source": "Crain's New York",
+      "published": "Wed, 24 Jun 2026 15:00:00 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Crain's New York"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI and algorithms can influence biased housing decisions - South Bend Tribune",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNM0xVakc4WU16dFhURWxQM0x4aGd3RURYUHJYX1JIS01TSFBhWFlpcks2dWZlWmFXX3NBUEpTcjkwMGlhbDBqSU1YeTBQUzFHdnZac3RiZGRCQXJoa0xKMjg2bHpnX1pfQ2VoU0JoRVlCUGYydjBzcUExSFFORzhhMVFqaWVNZGlHYWF0c2V5bjk4Q3ZEVl9Wd0FESE1Dd21ZclpJUlA1VDNUdWtXUUhJRnhHQ1VwZjl0?oc=5",
+      "source": "South Bend Tribune",
+      "published": "Sat, 20 Jun 2026 09:02:00 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "South Bend Tribune"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI Accelerates Across Multifamily Tech Stack - Multifamily Executive",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPdnRCWXQtVUktTHVFQTk3Q0ZGYkhvZ2dhRmlRZTRQSGtOOFVtZjBtc1paQjBaaTBXV0g3U1h4ZGM0bU9IaU5XUDh3LURlYU5Sa005SjAxMUViSF8xZk80N1VVR2NGTGFFT2RpWFN3TDFXdExVNndpbDBody1leS1rQ2dPemNQWThUMGw4OF8tdTgwN3dZME0w?oc=5",
+      "source": "Multifamily Executive",
+      "published": "Tue, 23 Jun 2026 18:01:51 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Multifamily Executive"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Are algorithms manipulating rent prices in North Carolina? Here’s what to know - Raleigh News & Observer",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPVFFkU2RtR29QZ3I1b3Jxb2V3UG00QnJ0RmRyR1NIVHZPekVnRktVbTI1Y1ptNVUtcGl5RjhTdGlGZjROS1hmemtjRl81TFROY2xNaFFNU3BQTVpReE5qX01wc2NRU05hVHRQWFdBR3pGTGZONmgtcDZnZDA0dGpFRmp1elFYSDN3akF1M3ItaS1LQWVI0gGUAUFVX3lxTFBXX0R0VFh3YnpVWDE3NjRRaEpxUmxmemN4Ql9yR3hueGRHSXNaNmxRVVM3Zl9FT0R1Q1J5eUNUa1pELUJOa0I3WG9sYUlEOGlRR1dnMVBjWEZzS2EtMVR2bklrNXJMdUs5VzF6ZzVEbTNRT2J0RVpXZkJRa19MQzFKYXI4TzVxNVRSTHBUUzU5WnV4aHE?oc=5",
+      "source": "Raleigh News & Observer",
+      "published": "Fri, 26 Jun 2026 13:53:21 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Raleigh News & Observer"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Homesage.ai Brings Institutional Real Estate Data to Individual Investors - EIN News",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPOFlHWnNlYklTS3pMUDJkM2Jqb3RMQUQwSFhQeHU5aDVtLTFtQVRvcXVCdkNrdXdQTDBMY1lwVjREcXVjYmNlZXlQUklsMmg0R2FmNy0xY2s5X2g1b0pMZ2VoWG45bjNlV0plRzZLdE9fQlVwRG1ZdmJjZWt5QVpzejhRSGNiSXowZ2ZwQUhYQi1CS05LQ1hGSHF1T2RDZW1vZ3BLb0JLYUVRUU1WZUZ3UHV3X0dFMFHSAbwBQVVfeXFMUG9pWTlrZkNBQm85N3pfMWdISG95U19yQVFJNjdPeEZoR1B4NGIyZ21ZakU1NFk2R2FJMjhDYnliM09PNzh5UGlYdkhNSWNXekNvbi1MME9va1BKY2lwQTY1VWFtWkluS2NTUHRHTVNEckd2TmptQXMySFlBYWJEZmY2dldBbE43a2xfYWl1eXAxUUpuaVJYQjh5RHA0c3FqQlZKbmw4cjJiOWxRZzFrNVcwTkZDODFzMGhQX3g?oc=5",
+      "source": "EIN News",
+      "published": "Wed, 24 Jun 2026 14:19:06 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "EIN News"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "MRI Software Expands Data Platform Under New CIO Nihar Malik - Commercial Observer",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNUXp4MnJsYzVoR1RNUjBLQVVzN2FOSDNRVlFzdmlnNEFvcjJBTWFPNGtjSlpQNjBKVDFGMzZ5N3RLSTQ2REEwcl9ESldyYWc1UmtrcTUycGJDVU1IaWpBN1A5MklaaGo2WVNxQnF6Rk1Oci1odHVaaGNaMXhzZXRXa2R0NlZsUQ?oc=5",
+      "source": "Commercial Observer",
+      "published": "Thu, 25 Jun 2026 14:00:22 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "Commercial Observer"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Opinion: California legislators must ban landlord price-fixing software and shorten construction timelines - The Mercury News",
+      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQRVV0bVJ4S1IxYTVVM0RNOHhPQlRXbjZodUV4YklpaDhoRm9KeFNXX2dFR2lnNW9SNlRfbXpZZlJuTWphQngzOEJWWThMakxfbUVvenlMeTFkOUh4Sm9TaEd4MjRacGpQSndERVJtYml3VjJrQWt4TWZ3S0RRMXZvTnBheEw1MGdZd0ZHaHJSM1p6VDBrc25iUi10aHpQSllyd1RsLWVueEh2cXZfMXlIWjk1U0FhUG9VVVdpVXhJSExUNlYteERrejhHMmphYmFBbzJsLVp6aEFsb3M2Nl9MOE16Y9IB4wFBVV95cUxQRVV0bVJ4S1IxYTVVM0RNOHhPQlRXbjZodUV4YklpaDhoRm9KeFNXX2dFR2lnNW9SNlRfbXpZZlJuTWphQngzOEJWWThMakxfbUVvenlMeTFkOUh4Sm9TaEd4MjRacGpQSndERVJtYml3VjJrQWt4TWZ3S0RRMXZvTnBheEw1MGdZd0ZHaHJSM1p6VDBrc25iUi10aHpQSllyd1RsLWVueEh2cXZfMXlIWjk1U0FhUG9VVVdpVXhJSExUNlYteERrejhHMmphYmFBbzJsLVp6aEFsb3M2Nl9MOE16Yw?oc=5",
+      "source": "The Mercury News",
+      "published": "Fri, 26 Jun 2026 19:24:30 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "The Mercury News"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Product Roundup: Hemnet, ZigBang, Domclick, Zillow, Rentals.ca And Hogangnono - onlinemarketplaces.com",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPdXFpUU9DYWxWZ2c0UDhkdEQyX0NoNmNMTXZuYUdWQm5DYmRvcTBQYTNISUZ3YUVCMkYyUWxWUURvWEpKMXdWbW5ONkRPNVBnaTZmN3doU3BuOF9FVHA1LWdwZWpQU0VZVjA5NTlUZHF0b202aDRYeVZTX2hLeEVKYWpYQ24tWUZic1VUa2daT1V3RDM4V1VjQlVrSkVWeG9xNlVRV0JIWnBwTjdPWVZLOEd3a0tjaTA1?oc=5",
+      "source": "onlinemarketplaces.com",
+      "published": "Fri, 26 Jun 2026 12:06:11 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "onlinemarketplaces.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "PropTech's New Playbook: MRI Software Unleashes AI Agents for Real Estate - BriefGlance",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNd1NYcU5BSFRHM2s3YnRiaVR2bEJzRHdVWHVKbEJ6ZVVhSHBrSzlnekQ4OHExRmpVdXpOamZPZUNfbmFLNEI3dzFUMldPcXZBZ1VoVHJUNUdYS3lCM0cwV01tekhRaW9EMzdnUEd6QzBJSEx0RWhhR1BxNEwxbGNiWlVTZ25WbFJSaE9maENSN2F5S0FBWk1TelZlNXhpX1VmbGljaWRxbw?oc=5",
+      "source": "BriefGlance",
+      "published": "Thu, 25 Jun 2026 13:30:00 GMT",
+      "beats": [
+        "Investor/proptech"
+      ],
+      "outlets": [
+        "BriefGlance"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "I Used Generative AI Responsibly For Legal Work. You Can Too. - Above the Law",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQLXhGOHY0MENWZmpDZTlIakc3MXVoanFoZVBuTkVHMG5LalVuRUg0R1pGSGlSN3djcHN3ZnpQNmxhbmdXMXdiN2xETUtEczVuWnZMbkpmRlpUencxWkdnMGVfc1VsUFdQb0l6azVubWFaRU5NYV8xMF9VY0FlQ2doMEFkZW12THBkbF9fUHdqSlJGdmZnNWgw?oc=5",
+      "source": "Above the Law",
+      "published": "Thu, 25 Jun 2026 15:01:00 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Above the Law"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Google's Deep Dive On Google Search Generative AI Controls - Search Engine Roundtable",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOLTFKU2dEZmdLLUNOVS1Fdl9VMUhraUhtdXFLNXNuRU1lbkgtUkhGTWsySV9RX0ZOWGRTbWE1SVhmMGp6SkxBRTd1dzUxRVVNRDB1ZU9GMDNBQnhXSGVNX19YZE1FS3p0SWcweGVuWjFYM3M5cktwNFh6SndkSWV3OVRvd2YwLTNQLTYyYUpR?oc=5",
+      "source": "Search Engine Roundtable",
+      "published": "Thu, 25 Jun 2026 11:51:00 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Search Engine Roundtable"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Claude, ChatGPT now free for UT community - The Daily Texan",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVUlMR3plbVNsZEFlaWRVVVlHRVktRkd1OGdoS0FtSWdPeWgyWE1uUXprVWxZLWxBYURIQVVQOU9jR192aDA1VHFiN2VxWDBfSzRtbTUyaUotN0lmRWhHejVFOXNUOWl3eWVpREtKY0oxZmJialh0aEt2NjdxWmdvZzhFazc?oc=5",
+      "source": "The Daily Texan",
+      "published": "Tue, 23 Jun 2026 04:21:51 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "The Daily Texan"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Contempo Themes Launches AI-First Real Estate CRM with CRM-Wide AI Assistant - USA Today",
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNOThFOU9KTkw4RGFSLVR3ZlRFeDdwWHFFcjRubGxjbGNkdjZDMTZwN3NLYS1jbmg2MWlYcmdRRktrc2J1VGpuM3hEUHNiZ2M4MDJhRnRKd2NCUjZUSUpoZXBSY3FENmdGQVNiQmpnUlJKYURzdVpmV2tHYy1ja053MjhWQ2hDMFNnUEpYWHlDZ0Q3VDlFZlhOVm1tUkMwTVo1QW5VbzJJelZWaS0yQXhTVjR6V2tUN3VKbW1CbXRYTFNYeTFtUmhr?oc=5",
+      "source": "USA Today",
+      "published": "Sun, 21 Jun 2026 07:50:07 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "USA Today"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Europe Just Connected Real Estate Listings Directly To ChatGPT And Claude - Inman Real Estate News",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUzhiNlBqSnZKM0stc09YOG1qMXpyWERJc0VXN2M1T1RZZ2xXX3kyOV9nOHZHNVZMQ09hOU15R2NYNzFKY3NlR2xmWmp5a0ZEdjkyNTROSmprelA0eUNOQTNUWkc0ZDcxcXZqWE5fZmJPUXE5UFZzcWI5UlhmR1VZVlVVaTRpRGY1azJXZjdQVWhtZ1VUaDBEOW9LdmVTNXpBcFFZQmh3?oc=5",
+      "source": "Inman Real Estate News",
+      "published": "Fri, 26 Jun 2026 09:05:40 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Inman Real Estate News"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "How Generative AI is Changing the Game for Deal Lawyers - Law.com",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNQzRQekRLMTRWREhWVVN3OHQ3dW9TRjgtN0pQc3BmUUVlVGdSLWRMRjBVbml3b1M4WW1kVzh2Z0dILWlYREFYVFFyVWhTWk1zUUJYM1U1R3d6azhRSFI2NHhfbF9WMEhPaDROR3VINjgyUTRmTjh2aW10Y0kzYnVsZVVQOFZEYkZLdTRUQjZTNXNIVVRYUmpwU1cxUHhRUm5QUjVV?oc=5",
+      "source": "Law.com",
+      "published": "Mon, 22 Jun 2026 12:30:00 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Law.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Cal State faculty push to prevent AI tools from replacing them as schools and staff experiment - Times of San Diego",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNR2txd3dJZW5pVERoRFZZZUcybC15X2ZKY2lZTDZfdjBFc2tLemtiS0k3YzFDeXdUUlJaQ09nTDVJbWtGY3pGVE0wVDJUeTBMbVBTTEVVZ2x0c21CUXdqdFN5ZjN6NGg5YjNFVTZSaDlQQTVUUnBXVUlsOF9VS1NzNzBn?oc=5",
+      "source": "Times of San Diego",
+      "published": "Sun, 21 Jun 2026 22:00:00 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Times of San Diego"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "My husband and I aren't hiding our AI use from our kids. We are helping them learn how to use it. - Business Insider",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTVpBSnUwTjc0bk9yTXlqWmU0MlBidnZSaFotNXJJcHdXR2diTkJwZThmNUd2TjViNkRCLXQtYUVmdkNjclpwVnp5VFhSQ0dsZzZpZHE4WndnYkZhQ0JrMHkwdGlhek1vblZPUUhDaTFtUG42Q0JqQ3Q4Rms4QWFfc0pNbkhULXQ1MU02ZDZ5cV9odXhHWHNwTXRkSE5vS3hFWHJ3OHNwaEI?oc=5",
+      "source": "Business Insider",
+      "published": "Wed, 24 Jun 2026 12:44:00 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Business Insider"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI Agents 101: How to Make ChatGPT Do Actual Work - Columbus Underground",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPSnE2UG5jT2M0d0hOQVI2STVHWmo0TFhUQ2w1RkVjY3R0NEZ5X00xZ1NYRjNGdGdFQnBuTFF5akhVNDk3TGpYZkhLOTh0ZDlDYXV4V3NFZjBOUmxBbmFoV0hWQ2w0MENxYUN2NjZXUGV6eXF5dFRtN3VBN0Y5WmdTQnh2UnJsTlBSMXFLN3Zvc0lDQQ?oc=5",
+      "source": "Columbus Underground",
+      "published": "Mon, 22 Jun 2026 06:11:37 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Columbus Underground"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Can the Cold War Teach Us How to Slow Down AI? - Time Magazine",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBXNWtqSGhfZFQ0QVUtV1M2WXl5QmN3cVVaTy1MRkpDcTBYS0xLS085a3ZkemlSZDE5MS1QeHNZZ1A4VzBOdmdWX3lQUGowU1JHM0dyQ3NXXzB4aEduckoxRURPbS1NdGJFcU9hVk5YdzAwSndPNlVfejl3?oc=5",
+      "source": "Time Magazine",
+      "published": "Tue, 23 Jun 2026 11:20:53 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Time Magazine"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Who's suing AI and who's signing: Collective of US local newspapers sue OpenAI and Microsoft - Press Gazette",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNbmlBOGF2YlY3cWZ0dXBrNWU2WV8yMGtJVjFCRUx2eUs3b0NNTzBsenpyOEloaVppUlpMOGxOMWtRX3BJYkcxbV9mZ1d5VzZLMmMzM1RNcXUycnRRTGpKV21FT3dJVkpuYTdQeEdJbzgwdUpJcV9kMEVwbkN3VDZKUVV1RlNEVVI5ZGN4eA?oc=5",
+      "source": "Press Gazette",
+      "published": "Fri, 26 Jun 2026 18:23:41 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "Press Gazette"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "AI-created images in insurance fraud and the impacts on clients, advisors - InsuranceNewsNet",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZF83aExMMEN5djRlQ3VnVmd0eVQyOXFTc21kSW9Na2tDdW5RbTNiUl9kU0EyZGl3aG1jbmNaT3Bwbk1WVVlYb1ByS1cyRVB1b2NWcXJXOFpDSEZ1cEU3R2tfSXRLMUs0QUdIdzVuejh1MFljSVBIQlVEZURfZ1h1YmNiY2s5RGFyWkg1RE40WUZlc2JjVDVRRUVlOU0zM0l6a1E5MTVoQVVOeDBWbVZTWmhn?oc=5",
+      "source": "InsuranceNewsNet",
+      "published": "Thu, 25 Jun 2026 12:20:42 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "InsuranceNewsNet"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Claude Code isn't good at everything, but it's amazing at these 5 tasks - How-To Geek",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOTldrM3c5dWxjTVlxdExjaHl3UjRZOWNsVkh1c2FmVjJiUkd4eDI3RkVYM1ZnaVEzX3lrNnFzQjVueXA2bHVqZGRHTUd0UnM5RGFLamY0MGVsc3JCd0RiWW01NURCU256YnlNNEpuTHp5WmlZUjhKUDdSZE9WYWU2TDJRdG9KZGxvYnNHczN1VnpIREQtVU9aUlJ4OEY?oc=5",
+      "source": "How-To Geek",
+      "published": "Tue, 23 Jun 2026 20:30:18 GMT",
+      "beats": [
+        "Assistant how-to"
+      ],
+      "outlets": [
+        "How-To Geek"
+      ],
+      "appearances": 1
     }
   ]
 }
