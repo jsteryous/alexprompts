@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { site } from "@/lib/site";
 import { getTool } from "@/lib/tools";
 import { isConfigured } from "@/lib/areaScan";
@@ -18,6 +19,10 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default function AreaScanPage() {
+  // Dark until launch: the page 404s while the tool is `soon`, matching the
+  // gated /api/area-scan route, so nothing about the paid tool is reachable yet.
+  if (tool.status !== "live") notFound();
+
   return (
     <ToolShell
       tool={tool}

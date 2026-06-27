@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runAreaScan, type ScanErrorCode, type ScanRadius } from "@/lib/areaScan";
+import { getTool } from "@/lib/tools";
 
 // POST /api/area-scan  { address, competitorType, radius }
 // Server-only proxy for the area-scan tool. The Google key never reaches the
@@ -22,6 +23,13 @@ function clientIp(req: NextRequest): string {
 }
 
 export async function POST(req: NextRequest) {
+  // `soon` means truly off: the paid endpoint is unreachable until the tool is
+  // flipped to `live` in src/lib/tools.ts, so there are zero possible Google
+  // calls before launch.
+  if (getTool("area-scan")?.status !== "live") {
+    return NextResponse.json({ ok: false, code: "not_configured", message: "Not available." }, { status: 404 });
+  }
+
   let body: { address?: string; competitorType?: string; radius?: number };
   try {
     body = await req.json();
