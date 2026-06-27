@@ -68,6 +68,8 @@ export type ScanErrorCode =
   | "geocode_failed"
   | "upstream_error";
 
+export type LatLng = { lat: number; lng: number };
+
 export type CategoryResult = {
   key: string;
   label: string;
@@ -75,6 +77,8 @@ export type CategoryResult = {
   /** True when the count hit the 20 cap, so it is "20+". */
   capped: boolean;
   examples: string[];
+  /** Coordinates of each found place, for the heatmap. */
+  points: LatLng[];
 };
 
 export type Saturation = "sparse" | "moderate" | "crowded";
@@ -182,15 +186,17 @@ async function geocode(address: string): Promise<{ formattedAddress: string; lat
   return out;
 }
 
+type NearbyResult = { count: number; capped: boolean; examples: string[]; points: LatLng[] };
+
 async function nearby(
   lat: number,
   lng: number,
   radius: number,
   types: readonly string[],
-): Promise<{ count: number; capped: boolean; examples: string[] }> {
+): Promise<NearbyResult> {
   // Round coords so nearby lookups for the same block share a cache entry.
   const ck = `nb:${lat.toFixed(3)},${lng.toFixed(3)}:${radius}:${[...types].sort().join(",")}`;
-  const cached = cacheGet<{ count: number; capped: boolean; examples: string[] }>(ck);
+  const cached = cacheGet<NearbyResult>(ck);
   if (cached) return cached;
 
   if (!reserveCall()) throw new ScanError("daily_cap", "Daily scan limit reached.");
@@ -199,8 +205,9 @@ async function nearby(
     headers: {
       "Content-Type": "application/json",
       "X-Goog-Api-Key": API_KEY as string,
-      // Minimal field mask keeps the request in the cheaper Nearby Search SKU.
-      "X-Goog-FieldMask": "places.displayName",
+      // displayName + location stay in the same Nearby Search SKU; location feeds
+      // the heatmap.
+      "X-Goog-FieldMask": "places.displayName,places.location",
     },
     body: JSON.stringify({
       includedTypes: types,
@@ -210,15 +217,21 @@ async function nearby(
     }),
   });
   if (!res.ok) throw new ScanError("upstream_error", "Places service error.");
-  const json = (await res.json()) as { places?: { displayName?: { text?: string } }[] };
+  const json = (await res.json()) as {
+    places?: { displayName?: { text?: string }; location?: { latitude: number; longitude: number } }[];
+  };
   const places = json.places ?? [];
-  const out = {
+  const out: NearbyResult = {
     count: places.length,
     capped: places.length >= MAX_RESULTS,
     examples: places
       .map((p) => p.displayName?.text)
       .filter((t): t is string => Boolean(t))
       .slice(0, 3),
+    points: places
+      .map((p) => p.location)
+      .filter((l): l is { latitude: number; longitude: number } => Boolean(l))
+      .map((l) => ({ lat: l.latitude, lng: l.longitude })),
   };
   cacheSet(ck, out);
   return out;

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { COMPETITOR_TYPES } from "@/lib/areaScan";
+import { AreaScanMap } from "@/components/tools/AreaScanMap";
 
 /**
  * Area scan UI (Tier 2). Posts an address + competitor type to /api/area-scan and
@@ -12,7 +13,8 @@ import { COMPETITOR_TYPES } from "@/lib/areaScan";
  * yet" state when GOOGLE_PLACES_API_KEY is missing, instead of a failing fetch.
  */
 
-type CategoryResult = { key: string; label: string; count: number; capped: boolean; examples: string[] };
+type Pt = { lat: number; lng: number };
+type CategoryResult = { key: string; label: string; count: number; capped: boolean; examples: string[]; points: Pt[] };
 type Saturation = "sparse" | "moderate" | "crowded";
 type ScanData = {
   location: { formattedAddress: string; lat: number; lng: number };
@@ -44,6 +46,13 @@ export function AreaScan({ configured }: { configured: boolean }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<ScanData | null>(null);
+
+  // Combine every amenity point into one heat layer (stable per scan). Declared
+  // before any early return so the hook order never changes.
+  const heatPoints = useMemo(
+    () => (data ? data.categories.flatMap((c) => c.points) : []),
+    [data],
+  );
 
   const inputCls = "theme-field w-full px-3 py-2.5 text-sm";
 
@@ -150,6 +159,20 @@ export function AreaScan({ configured }: { configured: boolean }) {
             Within {RADII.find((r) => r.value === data.radiusMeters)?.label ?? ""} of{" "}
             <span className="theme-text-secondary font-medium">{data.location.formattedAddress}</span>
           </p>
+
+          {/* Heatmap of everything nearby */}
+          {heatPoints.length > 0 && (
+            <div className="mb-6">
+              <AreaScanMap
+                center={{ lat: data.location.lat, lng: data.location.lng }}
+                radiusMeters={data.radiusMeters}
+                points={heatPoints}
+              />
+              <p className="theme-text-muted text-xs mt-2">
+                Warmer areas have more going on nearby. The pin is your address.
+              </p>
+            </div>
+          )}
 
           {/* Competitor saturation headline */}
           <div className="theme-card-strong border theme-border rounded-2xl p-6 mb-6">
