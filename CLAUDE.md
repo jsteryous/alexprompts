@@ -180,6 +180,7 @@ email.
 | `CRON_SECRET` | Authorizes the Vercel cron call to `/api/sync-substack` (sent as `Authorization: Bearer …`). Manual runs use `?token=${PUBLISH_SECRET}`. |
 | `GOOGLE_PLACES_API_KEY` | Server-only key for the `/tools/area-scan` tool. Uses **Places API (New) only** — Text Search (geocode the address) + Nearby Search (counts), so no separate Geocoding API setup is needed. Never exposed to the client. **Unset = the tool renders a clean "not configured" state**, so the site runs fine without it. Set hard per-API daily QUOTAs (`SearchTextRequest`, `SearchNearbyRequest`) in Google Cloud Console below the free tier — that quota, not the code, is what prevents any invoice. |
 | `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
+| `CENSUS_API_KEY` | Optional. The area-scan "neighborhood profile" pulls free US Census/ACS data (`src/lib/census.ts`) — a government API with **no billing, ever**. Works without a key at low volume; set this only to raise the anonymous rate limit. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
 > to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.

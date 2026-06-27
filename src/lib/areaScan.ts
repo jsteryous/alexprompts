@@ -18,6 +18,8 @@
  * GOOGLE_PLACES_API_KEY and never leaves the server.
  */
 
+import { getDemographics, type Demographics } from "./census";
+
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 
 /** Daily ceiling on real Google calls (geocode + each nearby search counts as 1).
@@ -90,6 +92,8 @@ export type ScanResult = {
   radiusMeters: number;
   categories: CategoryResult[];
   competitor: CategoryResult & { saturation: Saturation };
+  /** Free Census/ACS profile of the area. null when unavailable (non-US, no data). */
+  demographics: Demographics | null;
 };
 
 export type ScanResponse =
@@ -265,17 +269,17 @@ export async function runAreaScan(
 
   try {
     const location = await geocode(address);
-    const categories: CategoryResult[] = [];
-    for (const cat of SCAN_CATEGORIES) {
-      const r = await nearby(location.lat, location.lng, radius, cat.types);
-      categories.push({ key: cat.key, label: cat.label, ...r });
-    }
-    const compRaw = await nearby(location.lat, location.lng, radius, [comp.value]);
-    return {
-      ok: true,
-      data: {
-        location,
-        radiusMeters: radius,
+
+    // The Google place scan and the free Census lookup don't depend on each
+    // other, so run them in parallel. Census never throws (returns null).
+    const scanPlaces = async () => {
+      const categories: CategoryResult[] = [];
+      for (const cat of SCAN_CATEGORIES) {
+        const r = await nearby(location.lat, location.lng, radius, cat.types);
+        categories.push({ key: cat.key, label: cat.label, ...r });
+      }
+      const compRaw = await nearby(location.lat, location.lng, radius, [comp.value]);
+      return {
         categories,
         competitor: {
           key: comp.value,
@@ -283,6 +287,22 @@ export async function runAreaScan(
           ...compRaw,
           saturation: saturationOf(compRaw.count, compRaw.capped),
         },
+      };
+    };
+
+    const [places, demographics] = await Promise.all([
+      scanPlaces(),
+      getDemographics(location.lat, location.lng),
+    ]);
+
+    return {
+      ok: true,
+      data: {
+        location,
+        radiusMeters: radius,
+        categories: places.categories,
+        competitor: places.competitor,
+        demographics,
       },
     };
   } catch (e) {

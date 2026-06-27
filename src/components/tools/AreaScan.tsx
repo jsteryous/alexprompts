@@ -16,11 +16,23 @@ import { AreaScanMap } from "@/components/tools/AreaScanMap";
 type PlaceItem = { name: string; lat: number; lng: number };
 type CategoryResult = { key: string; label: string; count: number; capped: boolean; places: PlaceItem[] };
 type Saturation = "sparse" | "moderate" | "crowded";
+type Demographics = {
+  geography: string;
+  year: number;
+  population?: number;
+  populationGrowthPct?: number;
+  medianHouseholdIncome?: number;
+  medianHomeValue?: number;
+  medianGrossRent?: number;
+  ownerPct?: number;
+  renterPct?: number;
+};
 type ScanData = {
   location: { formattedAddress: string; lat: number; lng: number };
   radiusMeters: number;
   categories: CategoryResult[];
   competitor: CategoryResult & { saturation: Saturation };
+  demographics: Demographics | null;
 };
 
 const RADII = [
@@ -42,6 +54,30 @@ function fmtCount(c: { count: number; capped: boolean }): string {
 /** Open the place on Google Maps by name + coordinates. */
 function mapsUrl(p: PlaceItem): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.lat},${p.lng}`)}`;
+}
+
+const usd0 = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+/** The demographic stats to show, in order, derived from a Demographics object. */
+function demoStats(d: Demographics): { label: string; value: string; hint?: string }[] {
+  const out: { label: string; value: string; hint?: string }[] = [];
+  if (d.medianHouseholdIncome != null)
+    out.push({ label: "Median income", value: usd0(d.medianHouseholdIncome), hint: "per household" });
+  if (d.medianHomeValue != null)
+    out.push({ label: "Median home value", value: usd0(d.medianHomeValue) });
+  if (d.medianGrossRent != null)
+    out.push({ label: "Median rent", value: `${usd0(d.medianGrossRent)}/mo` });
+  if (d.ownerPct != null && d.renterPct != null)
+    out.push({ label: "Owner / renter", value: `${d.ownerPct}% / ${d.renterPct}%`, hint: "of occupied homes" });
+  if (d.population != null) {
+    const growth =
+      d.populationGrowthPct != null
+        ? `${d.populationGrowthPct >= 0 ? "+" : ""}${d.populationGrowthPct}% over ~5 yrs`
+        : undefined;
+    out.push({ label: "Population", value: d.population.toLocaleString("en-US"), hint: growth });
+  }
+  return out;
 }
 
 export function AreaScan({ configured }: { configured: boolean }) {
@@ -187,6 +223,30 @@ export function AreaScan({ configured }: { configured: boolean }) {
               />
               <p className="theme-text-muted text-xs mt-2">
                 Warmer areas have more going on nearby. The pin is your address.
+              </p>
+            </div>
+          )}
+
+          {/* Neighborhood profile (free Census/ACS data) */}
+          {data.demographics && demoStats(data.demographics).length > 0 && (
+            <div className="mb-6">
+              <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-3">
+                Neighborhood profile
+              </div>
+              <ul className="grid gap-4 grid-cols-2 lg:grid-cols-3">
+                {demoStats(data.demographics).map((s) => (
+                  <li key={s.label} className="theme-card-muted border theme-border rounded-xl p-4">
+                    <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest">
+                      {s.label}
+                    </div>
+                    <div className="theme-text-primary text-xl font-bold tabular-nums mt-1">{s.value}</div>
+                    {s.hint && <div className="theme-text-muted text-xs mt-0.5">{s.hint}</div>}
+                  </li>
+                ))}
+              </ul>
+              <p className="theme-text-muted text-xs mt-2">
+                Source: US Census ACS {data.demographics.year} 5-year estimates, {data.demographics.geography}.
+                Estimates, not exact.
               </p>
             </div>
           )}

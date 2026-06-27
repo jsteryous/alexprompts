@@ -26,7 +26,7 @@ export default function AreaScanPage() {
   return (
     <ToolShell
       tool={tool}
-      note="A quick read on what is already nearby, not a market study. Counts come from Google Places, top out at 20 per category, and miss anything Google has not mapped. Use it to form a question, not to make the call."
+      note="A quick read on an area, not a market study. Place counts come from Google Places (top out at 20 per category and miss anything Google has not mapped); the neighborhood profile is US Census ACS 5-year estimates at the tract level, which carry margins of error. Use it to form a question, not to make the call."
     >
       <AreaScan configured={isConfigured()} />
     </ToolShell>
