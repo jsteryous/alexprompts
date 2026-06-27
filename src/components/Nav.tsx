@@ -6,11 +6,11 @@ import { useState } from "react";
 import { newsletterUrl, site } from "@/lib/site";
 
 const links = [
+  { href: "/tools", label: "Tools" },
   { href: "/guides", label: "Guides" },
-  { href: "/archive", label: "Archive" },
   { href: "/real-estate", label: "Real Estate" },
+  { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
-  { href: "/#follow", label: "Follow" },
 ];
 
 export default function Nav() {

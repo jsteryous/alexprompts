@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import { site } from "@/lib/site";
+import { getTool } from "@/lib/tools";
+import { isConfigured } from "@/lib/areaScan";
+import { ToolShell } from "@/components/ToolShell";
+import { AreaScan } from "@/components/tools/AreaScan";
+
+const tool = getTool("area-scan")!;
+
+export const metadata: Metadata = {
+  title: tool.title,
+  description: tool.blurb,
+  alternates: { canonical: `${site.url}/tools/${tool.slug}` },
+};
+
+// Reads the key on the server only, to render the right state. No key -> the tool
+// shows a clean "not configured" panel instead of a failing scan.
+export const dynamic = "force-dynamic";
+
+export default function AreaScanPage() {
+  return (
+    <ToolShell
+      tool={tool}
+      note="A quick read on what is already nearby, not a market study. Counts come from Google Places, top out at 20 per category, and miss anything Google has not mapped. Use it to form a question, not to make the call."
+    >
+      <AreaScan configured={isConfigured()} />
+    </ToolShell>
+  );
+}

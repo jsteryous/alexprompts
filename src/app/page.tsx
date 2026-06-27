@@ -1,8 +1,32 @@
 import Link from "next/link";
 import { socials, newsletterUrl, manifesto, outcomes, realEstateOutcomes, principles } from "@/lib/site";
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
+import { liveTools, audienceLabel } from "@/lib/tools";
 import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
 import { PostCover } from "@/components/PostCover";
+
+/** The three content pillars, surfaced at the top so a first visit "gets into it"
+ *  immediately instead of reading a brochure. */
+const pillars = [
+  {
+    href: "/tools",
+    label: "Free tools",
+    title: "Run the numbers",
+    body: "A rental deal analyzer, a mortgage calculator, and a Claude listing prompt builder. No sign-up.",
+  },
+  {
+    href: "/guides",
+    label: "Guides",
+    title: "Do it with Claude",
+    body: "Step-by-step walkthroughs for real estate work, slow enough that nothing is assumed.",
+  },
+  {
+    href: "/real-estate",
+    label: "Local",
+    title: "Greenville real estate",
+    body: "The biggest local real-estate story, both sides, in plain English.",
+  },
+] as const;
 
 export const revalidate = 300;
 
@@ -123,12 +147,125 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
             <SubscribeButton className="px-7 py-3.5" />
             <Link
-              href="#learn"
+              href="/tools"
               className="theme-link inline-flex items-center gap-2 font-medium px-2 py-3.5 text-sm"
             >
-              See what you&apos;ll learn <ArrowIcon className="w-3.5 h-3.5" />
+              Try the free tools <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── Start here: the three pillars, above the fold ── */}
+      <section className="theme-section pb-4 md:pb-8">
+        <div className="max-w-5xl mx-auto px-6">
+          <ul className="grid gap-5 md:grid-cols-3">
+            {pillars.map((p) => (
+              <li key={p.href}>
+                <Link
+                  href={p.href}
+                  className="theme-card-strong border theme-border rounded-2xl p-7 h-full flex flex-col group hover:opacity-90 transition-opacity"
+                >
+                  <span className="theme-label text-xs font-semibold uppercase tracking-[0.2em] mb-3">
+                    {p.label}
+                  </span>
+                  <h2 className="theme-text-primary text-xl font-bold tracking-tight mb-2">{p.title}</h2>
+                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{p.body}</p>
+                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-5">
+                    Open <ArrowIcon className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── Tools spotlight: actual, usable tools right on the homepage ── */}
+      <section className="theme-section py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div className="max-w-2xl">
+              <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
+              <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                Useful the second you land.
+              </h2>
+            </div>
+            <Link href="/tools" className="theme-link hidden sm:inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
+              All tools <ArrowIcon className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {liveTools().map((t) => (
+              <li key={t.slug}>
+                <Link
+                  href={`/tools/${t.slug}`}
+                  className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
+                >
+                  <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded self-start mb-3">
+                    {audienceLabel[t.audience]}
+                  </span>
+                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">{t.title}</h3>
+                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
+                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
+                    {t.cta} <ArrowIcon className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── Fresh from the newsletter (promoted up) ── */}
+      <section className="theme-section py-16 md:py-20 border-t theme-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <Eyebrow className="mb-6">Fresh from the newsletter</Eyebrow>
+          {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
+
+          {rest.length > 0 && (
+            <>
+              <div className="flex items-end justify-between mt-12 mb-6 gap-4">
+                <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
+                  More walkthroughs
+                </h2>
+                <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
+                  Full archive <ArrowIcon className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {rest.map((p) => (
+                  <li key={p.id}>
+                    <Link
+                      href={`/archive/${p.slug}`}
+                      className="theme-card border theme-border rounded-xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity"
+                    >
+                      <PostCover
+                        src={p.cover_image}
+                        alt={p.title}
+                        className="aspect-[16/9] w-full border-b theme-border"
+                      />
+                      <div className="p-6 flex flex-col flex-1">
+                        {p.published_at && (
+                          <time className="theme-text-muted text-xs uppercase tracking-widest mb-3">
+                            {formatDate(p.published_at)}
+                          </time>
+                        )}
+                        <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                          {p.title}
+                        </h3>
+                        {p.summary && (
+                          <p className="theme-text-muted text-sm leading-relaxed line-clamp-3">
+                            {p.summary}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       </section>
 
@@ -232,58 +369,6 @@ export default async function HomePage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* ── Latest guides ── */}
-      <section className="theme-section py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <Eyebrow className="mb-6">Fresh from the newsletter</Eyebrow>
-          {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
-
-          {rest.length > 0 && (
-            <>
-              <div className="flex items-end justify-between mt-12 mb-6 gap-4">
-                <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
-                  More walkthroughs
-                </h2>
-                <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
-                  Full archive <ArrowIcon className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {rest.map((p) => (
-                  <li key={p.id}>
-                    <Link
-                      href={`/archive/${p.slug}`}
-                      className="theme-card border theme-border rounded-xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity"
-                    >
-                      <PostCover
-                        src={p.cover_image}
-                        alt={p.title}
-                        className="aspect-[16/9] w-full border-b theme-border"
-                      />
-                      <div className="p-6 flex flex-col flex-1">
-                        {p.published_at && (
-                          <time className="theme-text-muted text-xs uppercase tracking-widest mb-3">
-                            {formatDate(p.published_at)}
-                          </time>
-                        )}
-                        <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
-                          {p.title}
-                        </h3>
-                        {p.summary && (
-                          <p className="theme-text-muted text-sm leading-relaxed line-clamp-3">
-                            {p.summary}
-                          </p>
-                        )}
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
         </div>
       </section>
 

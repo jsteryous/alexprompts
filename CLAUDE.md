@@ -120,11 +120,22 @@ pipeline is retired under `scripts/_archive/` — do not revive either.
 
 ## Site structure
 
-- `/` — **Claude-for-real-estate how-to landing.** Built so the 3-second scan reads
-  "Claude for your real-estate work": hero tagline → the concrete real-estate outcomes
-  Claude can do for a pro (`realEstateOutcomes`) → the "helps anyone" outcomes
-  (`outcomes`) → how every guide works (`principles`) → the manifesto → follow →
-  subscribe. The dominant CTA is *Subscribe*; content is free, money model is later.
+- `/` — **utility-first landing.** Reordered June 2026 to "get into it immediately":
+  hero → **Start here** pillars (Tools / Guides / Local) → **tools spotlight** (the live
+  tools, clickable, driven by `liveTools()`) → **fresh from the newsletter** (latest issue
+  + recent) → real-estate outcomes (`realEstateOutcomes`) → "helps anyone" (`outcomes`) →
+  how every guide works (`principles`) → manifesto → follow → subscribe. Utility leads,
+  the *Subscribe* CTA still rides along (utility is the hook, email is the catch). Content
+  is free, money model is later.
+- `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
+  source being `src/lib/tools.ts` (`toolCatalog`). Live: `deal-analyzer` (rental cash
+  flow / cap rate / cash-on-cash), `mortgage` (payment + affordability), `listing-prompt`
+  (builds a fair-housing-safe Claude prompt, copy + "Open in Claude" deep link). All are
+  pure client-side, no API, no cost. `area-scan` (Google Places neighborhood/saturation)
+  is registered as `soon` — Tier 2, needs a server proxy + caching + rate limits before it
+  ships. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
+  note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
+  footer, and sitemap, so a tool ships in one place and appears everywhere.
 - `/about` — who Alex is, the how-to promise (the manifesto in real-estate terms), the
   teaching method, and the name.
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
@@ -167,10 +178,13 @@ email.
 | `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication base (subdomain or custom domain, NOT the `/@handle` profile). Drives the Subscribe button (`/subscribe`) and the archive RSS mirror (`/feed`). Defaults to `https://alexprompts.substack.com` — confirm. |
 | `SUBSTACK_FEED_URL` | Optional override for the feed URL. Defaults to `${NEXT_PUBLIC_SUBSTACK_URL}/feed`. |
 | `CRON_SECRET` | Authorizes the Vercel cron call to `/api/sync-substack` (sent as `Authorization: Bearer …`). Manual runs use `?token=${PUBLISH_SECRET}`. |
+| `GOOGLE_PLACES_API_KEY` | Server-only key for the `/tools/area-scan` tool (Geocoding API + Places API New). Never exposed to the client. **Unset = the tool renders a clean "not configured" state**, so the site runs fine without it. Set a hard per-API daily QUOTA in Google Cloud Console below the free tier — that quota, not the code, is what prevents any invoice. |
+| `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
 
-> The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `GOOGLE_PLACES_API_KEY`,
-> `TESSERACT_CMD`, etc.) belong only to `scripts/_archive/` and are not needed to run
-> this site or the `ai_news` engine.
+> The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
+> to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.
+> (`GOOGLE_PLACES_API_KEY` is now also used by the site's area-scan tool, above; the
+> retired archive used the same name for its own Places scraping.)
 
 ## Deployment
 

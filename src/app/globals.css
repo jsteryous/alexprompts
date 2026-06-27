@@ -355,6 +355,25 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 .tone-cool-text   { color: var(--tone-cool-fg); }
 .tone-good-text   { color: var(--tone-good-fg); }
 
+/* Form fields for the /tools calculators and builders. One class on an
+   input/select/textarea gives the house look in both themes. */
+.theme-field {
+  background: var(--surface-strong);
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+  border-radius: 0.625rem;
+}
+
+.theme-field::placeholder {
+  color: var(--foreground-muted);
+}
+
+.theme-field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
 .theme-toggle {
   background: color-mix(in srgb, var(--surface-inverse) 68%, var(--background) 32%);
   border-color: color-mix(in srgb, var(--accent) 28%, transparent);

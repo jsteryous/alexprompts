@@ -27,6 +27,16 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   and real-estate posts so they never leak onto the homepage/archive. Returns `[]`/`null`
   when Supabase env is unset so the site builds (not a crash). Used by `/`, `/archive`,
   `/guides`, `/real-estate`, their `[slug]` routes, `sitemap.ts`.
+- **`src/lib/tools.ts`** — single source for the free `/tools` (`toolCatalog`,
+  `liveTools()`, `getTool()`, `audienceLabel`). Drives the `/tools` hub, the homepage
+  tools spotlight + Start-here pillars, nav, footer, and `sitemap.ts`. Each entry has a
+  `status` (`live`/`soon`); a `live` tool needs a route at `src/app/tools/<slug>/page.tsx`
+  (server page: sets metadata, renders `<ToolShell tool={getTool(slug)!}>` around the
+  interactive client component in `src/components/tools/`). Current tools: `deal-analyzer`,
+  `mortgage`, `listing-prompt` (live, client-side, no API); `area-scan` (soon, Tier 2
+  Google Places, needs server proxy + cache + rate-limit). `components/ToolShell.tsx` is
+  the shared chrome (header, not-advice note, subscribe capture). Add `.theme-field` to
+  form inputs (defined in `globals.css`).
 - **`src/lib/substack.ts`** — Substack RSS -> markdown converter (`parseSubstackFeed`,
   `fetchSubstackPosts`). `content:encoded` HTML -> markdown via turndown; images kept as
   raw `<figure>`/`<figcaption>` so they render through the same `marked` + `theme-prose`
