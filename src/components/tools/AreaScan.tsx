@@ -13,8 +13,8 @@ import { AreaScanMap } from "@/components/tools/AreaScanMap";
  * yet" state when GOOGLE_PLACES_API_KEY is missing, instead of a failing fetch.
  */
 
-type Pt = { lat: number; lng: number };
-type CategoryResult = { key: string; label: string; count: number; capped: boolean; examples: string[]; points: Pt[] };
+type PlaceItem = { name: string; lat: number; lng: number };
+type CategoryResult = { key: string; label: string; count: number; capped: boolean; places: PlaceItem[] };
 type Saturation = "sparse" | "moderate" | "crowded";
 type ScanData = {
   location: { formattedAddress: string; lat: number; lng: number };
@@ -35,8 +35,13 @@ const SATURATION_COPY: Record<Saturation, { label: string; tone: string; note: s
   crowded: { label: "Crowded", tone: "tone-hot", note: "Already well served. Differentiation matters." },
 };
 
-function fmtCount(c: CategoryResult): string {
+function fmtCount(c: { count: number; capped: boolean }): string {
   return c.capped ? `${c.count}+` : String(c.count);
+}
+
+/** Open the place on Google Maps by name + coordinates. */
+function mapsUrl(p: PlaceItem): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.lat},${p.lng}`)}`;
 }
 
 export function AreaScan({ configured }: { configured: boolean }) {
@@ -46,13 +51,24 @@ export function AreaScan({ configured }: { configured: boolean }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<ScanData | null>(null);
+  // Which category/competitor list is expanded, by key (null = none).
+  const [openKey, setOpenKey] = useState<string | null>(null);
 
   // Combine every amenity point into one heat layer (stable per scan). Declared
   // before any early return so the hook order never changes.
   const heatPoints = useMemo(
-    () => (data ? data.categories.flatMap((c) => c.points) : []),
+    () => (data ? data.categories.flatMap((c) => c.places.map((p) => ({ lat: p.lat, lng: p.lng }))) : []),
     [data],
   );
+
+  // The currently expanded group (a category or the competitor), for the list panel.
+  const openGroup = useMemo(() => {
+    if (!data || !openKey) return null;
+    if (openKey === data.competitor.key) return data.competitor;
+    return data.categories.find((c) => c.key === openKey) ?? null;
+  }, [data, openKey]);
+
+  const toggle = (k: string) => setOpenKey((prev) => (prev === k ? null : k));
 
   const inputCls = "theme-field w-full px-3 py-2.5 text-sm";
 
@@ -60,6 +76,7 @@ export function AreaScan({ configured }: { configured: boolean }) {
     setError(null);
     setLoading(true);
     setData(null);
+    setOpenKey(null);
     try {
       const res = await fetch("/api/area-scan", {
         method: "POST",
@@ -174,8 +191,14 @@ export function AreaScan({ configured }: { configured: boolean }) {
             </div>
           )}
 
-          {/* Competitor saturation headline */}
-          <div className="theme-card-strong border theme-border rounded-2xl p-6 mb-6">
+          {/* Competitor saturation headline (click to list them) */}
+          <button
+            type="button"
+            onClick={() => toggle(data.competitor.key)}
+            aria-expanded={openKey === data.competitor.key}
+            className="theme-card-strong border theme-border rounded-2xl p-6 mb-6 w-full text-left block"
+            style={openKey === data.competitor.key ? openCardStyle : undefined}
+          >
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-1">
@@ -193,29 +216,103 @@ export function AreaScan({ configured }: { configured: boolean }) {
               </span>
             </div>
             <p className="theme-text-muted text-sm mt-3">{sat.note}</p>
-            {data.competitor.examples.length > 0 && (
-              <p className="theme-text-muted text-xs mt-2">
-                e.g. {data.competitor.examples.join(", ")}
-              </p>
+            {data.competitor.count > 0 && (
+              <span className="theme-label text-xs font-semibold inline-flex items-center gap-1 mt-3">
+                {openKey === data.competitor.key ? "Hide the list" : "See the list"}
+                <Chevron open={openKey === data.competitor.key} />
+              </span>
             )}
-          </div>
+          </button>
 
-          {/* Neighborhood amenity counts */}
+          {/* Neighborhood amenity counts (click a card to list them) */}
           <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-3">
             What is already nearby
           </div>
           <ul className="grid gap-4 grid-cols-2 sm:grid-cols-3">
-            {data.categories.map((c) => (
-              <li key={c.key} className="theme-card-muted border theme-border rounded-xl p-4">
-                <div className="theme-text-primary text-2xl font-bold tabular-nums">{fmtCount(c)}</div>
-                <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mt-1">
-                  {c.label}
-                </div>
-              </li>
-            ))}
+            {data.categories.map((c) => {
+              const open = openKey === c.key;
+              return (
+                <li key={c.key}>
+                  <button
+                    type="button"
+                    onClick={() => toggle(c.key)}
+                    aria-expanded={open}
+                    disabled={c.count === 0}
+                    className="theme-card-muted border theme-border rounded-xl p-4 w-full text-left block h-full disabled:opacity-60"
+                    style={open ? openCardStyle : undefined}
+                  >
+                    <div className="theme-text-primary text-2xl font-bold tabular-nums">{fmtCount(c)}</div>
+                    <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mt-1 flex items-center justify-between gap-1">
+                      {c.label}
+                      {c.count > 0 && <Chevron open={open} />}
+                    </div>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
+
+          {/* Detail panel: the actual places in the open category/competitor */}
+          {openGroup && openGroup.places.length > 0 && (
+            <div className="theme-card-strong border theme-border rounded-2xl p-6 mt-6">
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <h3 className="theme-text-primary text-lg font-semibold">
+                  {openGroup.label}{" "}
+                  <span className="theme-text-muted font-normal">({fmtCount(openGroup)})</span>
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setOpenKey(null)}
+                  className="theme-text-muted text-xs font-semibold uppercase tracking-widest"
+                >
+                  Close
+                </button>
+              </div>
+              <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
+                {openGroup.places.map((p, i) => (
+                  <li key={`${p.name}-${i}`}>
+                    <a
+                      href={mapsUrl(p)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="theme-link text-sm py-1.5 inline-flex items-baseline gap-2 hover:underline"
+                    >
+                      <span className="theme-text-muted tabular-nums text-xs w-5 shrink-0">{i + 1}.</span>
+                      {p.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {openGroup.capped && (
+                <p className="theme-text-muted text-xs mt-4">
+                  Showing the 20 closest. There may be more in this radius.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
+  );
+}
+
+const openCardStyle: React.CSSProperties = {
+  borderColor: "var(--accent)",
+  boxShadow: "0 0 0 1px var(--accent)",
+};
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={3}
+      className={`transition-transform ${open ? "rotate-180" : ""}`}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+    </svg>
   );
 }

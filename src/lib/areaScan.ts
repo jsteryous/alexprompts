@@ -70,15 +70,17 @@ export type ScanErrorCode =
 
 export type LatLng = { lat: number; lng: number };
 
+/** A single found place: its name and coordinates (for the list + heatmap). */
+export type PlaceItem = { name: string; lat: number; lng: number };
+
 export type CategoryResult = {
   key: string;
   label: string;
   count: number;
   /** True when the count hit the 20 cap, so it is "20+". */
   capped: boolean;
-  examples: string[];
-  /** Coordinates of each found place, for the heatmap. */
-  points: LatLng[];
+  /** Every place found in this category (name + coordinates). */
+  places: PlaceItem[];
 };
 
 export type Saturation = "sparse" | "moderate" | "crowded";
@@ -186,7 +188,7 @@ async function geocode(address: string): Promise<{ formattedAddress: string; lat
   return out;
 }
 
-type NearbyResult = { count: number; capped: boolean; examples: string[]; points: LatLng[] };
+type NearbyResult = { count: number; capped: boolean; places: PlaceItem[] };
 
 async function nearby(
   lat: number,
@@ -220,18 +222,17 @@ async function nearby(
   const json = (await res.json()) as {
     places?: { displayName?: { text?: string }; location?: { latitude: number; longitude: number } }[];
   };
-  const places = json.places ?? [];
+  const raw = json.places ?? [];
+  // Keep places that have coordinates (needed for the heatmap + map link).
+  const items: PlaceItem[] = raw
+    .filter((p): p is { displayName?: { text?: string }; location: { latitude: number; longitude: number } } =>
+      Boolean(p.location),
+    )
+    .map((p) => ({ name: p.displayName?.text ?? "Unnamed place", lat: p.location.latitude, lng: p.location.longitude }));
   const out: NearbyResult = {
-    count: places.length,
-    capped: places.length >= MAX_RESULTS,
-    examples: places
-      .map((p) => p.displayName?.text)
-      .filter((t): t is string => Boolean(t))
-      .slice(0, 3),
-    points: places
-      .map((p) => p.location)
-      .filter((l): l is { latitude: number; longitude: number } => Boolean(l))
-      .map((l) => ({ lat: l.latitude, lng: l.longitude })),
+    count: items.length,
+    capped: raw.length >= MAX_RESULTS,
+    places: items,
   };
   cacheSet(ck, out);
   return out;
