@@ -1,28 +1,43 @@
 {
-  "generated_at": "2026-06-26 08:52 UTC",
+  "generated_at": "2026-06-27 08:28 UTC",
   "beat_counts": {
-    "Market": 8,
+    "Market": 11,
     "Development": 12,
-    "Rentals": 7,
+    "Rentals": 9,
     "Policy": 11,
     "Upstate": 12
   },
   "biggest": {
-    "title": "This $5M historic home in SC just broke a sales record. Take a look - The State",
-    "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5BbmtKbzJjUHNnNUh0ZnlRVUhwdV82OVJIV2NPWXBsOUlEYnZyd1B1U191STFTSkpETXdOOEN3ODZCUXdnNnN4TGhmbm1HS0ZDQ0xuVEctc296NUd0c05ZX3l5a08yc0VTeTliN2ZkY2JfLXc0eGFGS21sMUPSAXxBVV95cUxOMVQyUFFSdm9WbTFSakpqczVLNHNOUmttazBOdVVNaFNZQTN6dmQ1WnV0ZVhtUjkzSFpQaF94a2FfWGNYdzZENmg4WW5HS3BleGN0Vy1qTzlRN2lQTDZTZ2FvWEFGMHBHZWFZX0lPS1V0YVdLNnNlVHVJMXlZ?oc=5",
-    "source": "The State",
-    "published": "Tue, 16 Jun 2026 07:00:00 GMT",
+    "title": "Affordable senior housing opens near Five Forks in Greenville County - Post and Courier",
+    "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5",
+    "source": "Post and Courier",
+    "published": "Fri, 26 Jun 2026 09:00:00 GMT",
     "beats": [
       "Market",
-      "Development",
-      "Upstate"
+      "Rentals",
+      "Policy"
     ],
     "outlets": [
-      "The State"
+      "Post and Courier"
     ],
     "appearances": 3
   },
   "clusters": [
+    {
+      "title": "Affordable senior housing opens near Five Forks in Greenville County - Post and Courier",
+      "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5",
+      "source": "Post and Courier",
+      "published": "Fri, 26 Jun 2026 09:00:00 GMT",
+      "beats": [
+        "Market",
+        "Rentals",
+        "Policy"
+      ],
+      "outlets": [
+        "Post and Courier"
+      ],
+      "appearances": 3
+    },
     {
       "title": "This $5M historic home in SC just broke a sales record. Take a look - The State",
       "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5BbmtKbzJjUHNnNUh0ZnlRVUhwdV82OVJIV2NPWXBsOUlEYnZyd1B1U191STFTSkpETXdOOEN3ODZCUXdnNnN4TGhmbm1HS0ZDQ0xuVEctc296NUd0c05ZX3l5a08yc0VTeTliN2ZkY2JfLXc0eGFGS21sMUPSAXxBVV95cUxOMVQyUFFSdm9WbTFSakpqczVLNHNOUmttazBOdVVNaFNZQTN6dmQ1WnV0ZVhtUjkzSFpQaF94a2FfWGNYdzZENmg4WW5HS3BleGN0Vy1qTzlRN2lQTDZTZ2FvWEFGMHBHZWFZX0lPS1V0YVdLNnNlVHVJMXlZ?oc=5",
@@ -39,35 +54,6 @@
       "appearances": 3
     },
     {
-      "title": "Hailed as the swankiest new homes in Greenville, unpaid bills leave The McDaniel in financial crisis - Post and Courier",
-      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdGR6Wjc5eHVaYy1PYS1RYWU5WnNueDExZk03LUdOcm56Z0hvX2tGNVFYeWNCTzR5dTNhQ1dYbGNlUkplU204OFpKV1lkU1JBUUdUWGdGb2pyMWM3X1luNzZjbUF4ZkFtbURFU1RNZlNuazJyVDl3MGRWMkZBT0djZENXRTRTNFVkU0JLSDVoMG93Z0NUTU92dGVYWmtkZFBTUEVFOEduQ21xUm91Vm40SFpWOUhyQ0QtVi04TG1nN2dZb1RVdnhqUXJYOVpHQmNKUHdjaW93Y0RtdEU?oc=5",
-      "source": "Post and Courier",
-      "published": "Sun, 21 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Market",
-        "Development",
-        "Rentals"
-      ],
-      "outlets": [
-        "Post and Courier"
-      ],
-      "appearances": 3
-    },
-    {
-      "title": "Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine",
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQLUFEM2NCUF9BYUNCLXdjM2VXY2owTjJRRTB2NWVUd3BkYzM1RFFNWkNSMVh5dklsbEZVeVhLemdNUU4zN2pfZWwyeTUzeWJoenJJYmVTb0Job2cxRGN2ZUxHWVhmVmVyYUVSaV9mUzFNSUg2WkxtWllUb2puekppY0h2d2EwS2JuUms0TzdGM3l1MTU3bWk5M09iSHJGMEpzRkZ6ckVrVHBQR2ZQY3ZoX1N1dUcyekFQdEtvX1NNWQ?oc=5",
-      "source": "Greenville Business Magazine",
-      "published": "Thu, 25 Jun 2026 18:12:38 GMT",
-      "beats": [
-        "Market",
-        "Policy"
-      ],
-      "outlets": [
-        "Greenville Business Magazine"
-      ],
-      "appearances": 2
-    },
-    {
       "title": "Greenville County passes $475M budget, skirting controversy while considering new sales tax - Post and Courier",
       "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPRnRzVHU4MDJhOEt4eUd5cV9yR1hkSWlRMU5WNmxLLWdncHc4UnMtbXl3UTQwanI2Q3ZTSkptQTFDN0FpcDI0Yk9BaGNsVndrTTVyemRtT3ZtSEFnQ2x6bHRDSnNETnRVNkt6VFFzOHhmTGZDZ2puSTRJY0FLYmRURHNPYmN2bkE0cmlZQlV2c3lrN0E0N19fb2lUQUFsSEt4TDZ5QXJ3RERMb0ppQXFtRDRnbTNRN25jLUxUeVhxRjRaeG1FQklBQ3FYTU9ZQTJWcEJpemVBeWM4anR4UXlOcw?oc=5",
       "source": "Post and Courier",
@@ -75,6 +61,20 @@
       "beats": [
         "Market",
         "Policy"
+      ],
+      "outlets": [
+        "Post and Courier"
+      ],
+      "appearances": 2
+    },
+    {
+      "title": "Hailed as the swankiest new homes in Greenville, unpaid bills leave The McDaniel in financial crisis - Post and Courier",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdGR6Wjc5eHVaYy1PYS1RYWU5WnNueDExZk03LUdOcm56Z0hvX2tGNVFYeWNCTzR5dTNhQ1dYbGNlUkplU204OFpKV1lkU1JBUUdUWGdGb2pyMWM3X1luNzZjbUF4ZkFtbURFU1RNZlNuazJyVDl3MGRWMkZBT0djZENXRTRTNFVkU0JLSDVoMG93Z0NUTU92dGVYWmtkZFBTUEVFOEduQ21xUm91Vm40SFpWOUhyQ0QtVi04TG1nN2dZb1RVdnhqUXJYOVpHQmNKUHdjaW93Y0RtdEU?oc=5",
+      "source": "Post and Courier",
+      "published": "Sun, 21 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Development",
+        "Rentals"
       ],
       "outlets": [
         "Post and Courier"
@@ -109,6 +109,32 @@
       "appearances": 1
     },
     {
+      "title": "Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQLUFEM2NCUF9BYUNCLXdjM2VXY2owTjJRRTB2NWVUd3BkYzM1RFFNWkNSMVh5dklsbEZVeVhLemdNUU4zN2pfZWwyeTUzeWJoenJJYmVTb0Job2cxRGN2ZUxHWVhmVmVyYUVSaV9mUzFNSUg2WkxtWllUb2puekppY0h2d2EwS2JuUms0TzdGM3l1MTU3bWk5M09iSHJGMEpzRkZ6ckVrVHBQR2ZQY3ZoX1N1dUcyekFQdEtvX1NNWQ?oc=5",
+      "source": "Greenville Business Magazine",
+      "published": "Thu, 25 Jun 2026 18:12:38 GMT",
+      "beats": [
+        "Market"
+      ],
+      "outlets": [
+        "Greenville Business Magazine"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "NEW AFFORDABLE HOUSING - FOX Carolina News",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE84eGFyWXdkdUhRZEJqSGRScDJsRG8xMU5kV29kSGUyVGZVTURib0RWTk1nbGIzUXdJazNyWVRvNEFyRnc5RmVIX0ZOaVQyMGRtLWJDNzZzLWtVR0dCaHBrVjZWX0RVNXFoS1hPT25CMHhyMjhHakpN?oc=5",
+      "source": "FOX Carolina News",
+      "published": "Fri, 26 Jun 2026 20:46:00 GMT",
+      "beats": [
+        "Market"
+      ],
+      "outlets": [
+        "FOX Carolina News"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "Constance Nodine Obituary - Greenville, SC - Dignity Memorial",
       "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdFNTZmdnUmExSk5pV1YzZlIwZTBWTzZ2R3Q1NExqX3dlbUlGVUdFNk1PNXpCSnk2ZmhuSTRaRXJJT1hiUHJ6NUdUSUgySm5yWFo4UUN3aDJ2N0RhQ25HM1pZczl0U29ZbHpnWVR4OFFtR0UycE9FaS1ORUF4cTA5bGsxOHNwZzlBSHc?oc=5",
       "source": "Dignity Memorial",
@@ -118,6 +144,19 @@
       ],
       "outlets": [
         "Dignity Memorial"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "New affordable housing complex opens in Greenville - FOX Carolina News",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOUUVCUlhrSVByUGJUQXg1aE1NOTllODRhWEpzMUpiWnZjTVVfWWxqVjh6Y3FXaDBEQ3pxWlUtQURub3FEam5ncVhZaHdkT1p1eGU2azhyNVBudEpsQ2poaU0xc1p2YnZudTRqeUpRSEV3RXc2QXFONDFHR1NQV3lyRGtNZEd5ay1ibkJ6cERoeV9zTUNWVTVhUQ?oc=5",
+      "source": "FOX Carolina News",
+      "published": "Fri, 26 Jun 2026 20:46:00 GMT",
+      "beats": [
+        "Market"
+      ],
+      "outlets": [
+        "FOX Carolina News"
       ],
       "appearances": 1
     },
@@ -139,6 +178,19 @@
       "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNYVJyTWY4NTYtN3VwRTFneTBxTWVhaGkxVFloTUpvQkJXSEUwY0ZMdUZSRmt0Z0RJVkxUSU4zTGZYeFh3V0xGTUhTYTRQSFFlaUFRZW1CckNTbmFER0pTNzJoSk9tNEpNQkNYZU1IcW5pVkR5TW9xZVFNaVdYdndBdmJVUUtKMmZBMGZGR0pLc3p3U1R3dTVLMHVCS1NLNU9abkhiZ0FveW9FdGQzem5DRGJEMEFDQTUtQWVaUEhwRl9Tanc4N3Y4WUQ2M01pZzh1?oc=5",
       "source": "Post and Courier",
       "published": "Sat, 20 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Market"
+      ],
+      "outlets": [
+        "Post and Courier"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier",
+      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNS2NmRVlzY1JwMy1XRHZPS3FkRFZfRkFMMG1HQlVVWmZLYTN1YzVpVUNIMHVUOE9VX0p6S180M0w3YVZJaDQxN2dOaHFhVUxjYk80UmNSdFllQWZEX1B5ZGhBV1VwZkRDNXNRNmZyMWllUlVETlZpdGlzai12OFNZSUxoUk9QRWRRR3VqYndzSjM2OHNBWlFIM2E1ZmdGcTFWWW1EYWdWMkJKM3puazIyOUNvVENOVmR3UXIzWnJwclR4SDVENUNJd3picGVaNnBFVmxOdFowajVMZGdpbUpFNTZQMA?oc=5",
+      "source": "Post and Courier",
+      "published": "Fri, 26 Jun 2026 19:30:00 GMT",
       "beats": [
         "Market"
       ],
@@ -174,10 +226,10 @@
       "appearances": 1
     },
     {
-      "title": "U.S. 29 bridge along Church Street reopens at 12:17 p.m. with improvements - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNQXhmVnl4bm9uODJoNkd2Q2NlQnFCQ3hWT2hRLXd6WFNJLWlQNGQtS1JoZkJscEM2T05zbU1MU0dHTnlGTEd3eUNNaC04amdfODB5MXI0T2IwS0hBdFhzc0J5eFgyWW40NGNSaEVoajJZN3A1SUJTVmhObW9PTlc2eGJUM3lXZlRTNGwxVG1jcnljY0tmMzN1aS1HXzJKZWFUWElxcFN3YW50YS0tWDZ2bXd2MU9USjdjbjloS3M3YUYydDM4ZE00Wk1DYVR4eXg1VUtrVkp1eUhjZ3d3S25R?oc=5",
+      "title": "Greenville Pride festival returns with march, drag show, music - Greenville Online",
+      "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNekhnelFrbWUtN2xVWVhmZXd6QlhCc3c0TDRyUEZGNUVmbFhONU1lbVpKb1pSdVE1UG04YnVObHA2MzlXdm1rMWhKcGswZGt0aVkxSktxWGpKMjFUazRMMmZhQTB5UlJLRXlLUVc1blUxMFBKdjhHajV6T1c0Rld4enNUOVVvaVVQLW9GbHI4cHBOb2o4RzNOYjR4Z1ZmLTRYaS1FQTUwZmNuWEhWbnE5S3dMV04tTkZncmZYRUlyZUg2QzE0UlFFQkJyM0I?oc=5",
       "source": "Greenville Online",
-      "published": "Tue, 16 Jun 2026 12:03:00 GMT",
+      "published": "Fri, 26 Jun 2026 15:07:00 GMT",
       "beats": [
         "Development"
       ],
@@ -187,10 +239,10 @@
       "appearances": 1
     },
     {
-      "title": "Outdoor Music: Free Concerts in Greenville, SC (2026) - Kidding Around Greenville",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5Lb0Y5Tk1NYnlQakJ5eXVFRFF0d295U2oxSEVPMzVZckNoR0JnVFI5LV9FXzlXMnB5Z0Z5Skg0bjFTOXZZU05VSWw2MjhmSElWS1hyS0M5cDNBLTQ4WVE?oc=5",
+      "title": "10 Hidden Gems in Greenville, SC You Need to Visit! - Kidding Around Greenville",
+      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBzRXVQdk1SVS1nTUU5RVEyNE9JSGJuSkdmRDN2UWNoUTB2VDhxdG4xc1NvYlRTWjZIRzlRU284cmRVZmN4QV9hYXdkZTl1Z25DRzU1VWE1dU5OZWV2T1VUaWxORmVWemhua2FnbWllS2Mwbm1jWm1yXw?oc=5",
       "source": "Kidding Around Greenville",
-      "published": "Sun, 14 Jun 2026 07:00:00 GMT",
+      "published": "Fri, 19 Jun 2026 07:00:00 GMT",
       "beats": [
         "Development"
       ],
@@ -239,6 +291,32 @@
       "appearances": 1
     },
     {
+      "title": "U.S. 29 bridge along Church Street reopens at 12:17 p.m. with improvements - Greenville Online",
+      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNQXhmVnl4bm9uODJoNkd2Q2NlQnFCQ3hWT2hRLXd6WFNJLWlQNGQtS1JoZkJscEM2T05zbU1MU0dHTnlGTEd3eUNNaC04amdfODB5MXI0T2IwS0hBdFhzc0J5eFgyWW40NGNSaEVoajJZN3A1SUJTVmhObW9PTlc2eGJUM3lXZlRTNGwxVG1jcnljY0tmMzN1aS1HXzJKZWFUWElxcFN3YW50YS0tWDZ2bXd2MU9USjdjbjloS3M3YUYydDM4ZE00Wk1DYVR4eXg1VUtrVkp1eUhjZ3d3S25R?oc=5",
+      "source": "Greenville Online",
+      "published": "Tue, 16 Jun 2026 12:03:00 GMT",
+      "beats": [
+        "Development"
+      ],
+      "outlets": [
+        "Greenville Online"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Outdoor Music: Free Concerts in Greenville, SC (2026) - Kidding Around Greenville",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5Lb0Y5Tk1NYnlQakJ5eXVFRFF0d295U2oxSEVPMzVZckNoR0JnVFI5LV9FXzlXMnB5Z0Z5Skg0bjFTOXZZU05VSWw2MjhmSElWS1hyS0M5cDNBLTQ4WVE?oc=5",
+      "source": "Kidding Around Greenville",
+      "published": "Sun, 14 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Development"
+      ],
+      "outlets": [
+        "Kidding Around Greenville"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "Church Street Bridge in Greenville reopens with new improvements - FOX Carolina News",
       "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOcmxoR3RPZjJON1ZnSUJWTW5HUnNCeGgxU0t2MC1SWmxBT2twWkktVzFIMEVnaUlyUVd3QVNqZTFacFdycTVLekVpeEhKN05BclRIdDFLSUx1dVBKYW0zRmV4ZWExSnctOFplcXBoYk5aTXpGUU1fQUIzMjB0QWNKbURVMER5QzdQZGdMa0RUQWZ4MUQxbFUybHJVRDloSkZfbTh30gG3AUFVX3lxTE1sSmhpQ2ptM2RiNmNrNnZzZkd6MldBVUZfVVJvak94OGU2UUNfaHNMakdlRXRndHpuald3MWNxM0s3a1NHeVBaOWZ5bms1Y3Y5OTdSSTBncTNISU1Ra09VdGx6cTQ3Um5ENzIycWozUTh0TTJoSTdOVjAtSmVDUVg2ZDFodGxjX1NLLWRxSTk1MXRUQy1nc0VWS2FlbHdXLWhUYjQtTlFrWlFXTjhJZEh2VVdEVTNOZw?oc=5",
       "source": "FOX Carolina News",
@@ -248,32 +326,6 @@
       ],
       "outlets": [
         "FOX Carolina News"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "As Novant Health finishes first Greenville campus, $132M hospital crosses construction milestone - Post and Courier",
-      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQeXhha2kzWFh4aS1sSGhDb1pyQjVZWFZLY1dhUEVqcU1YQ3BaV29lS05Pa2Q3QllrckRBU0ZfamhsbFBsRXNKV1Y4WnJRbzA5N3B5YkFhWkhERU5EVC1qbXZjYS05WFcxczh3LVJXZXZhbDdlbklrV3RVUnphemhMRFZ0d0xPMFJwNm1UM1NvREhsYk16Mk5WSlVNTzBXSkk0Rk56NVBvRHVHdlBrVFpaeUo4dzJrd1Z3Zjh4aXB6RHFNakNOZzBiTE9ybHN6bW8tLVNzM3NLcjRxcEtQMDFtZ2t1cnBHWGxjZlE?oc=5",
-      "source": "Post and Courier",
-      "published": "Tue, 16 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Development"
-      ],
-      "outlets": [
-        "Post and Courier"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "4 The Record: Greenville Area Development Corporation - WYFF",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQUdNMlUxdmZsdjA0ZFBJSVplZ1d2Y19FTlFBUDVJVU1hTmdsWXhfME4zbkEwTVZTN3FRTm9EaVhvaTdkNm9zZ09yVWlxNnNuWlM0RkQ4WGVxaU1fRkF6ZWtvN0t1dUFvd0tZcEVDTW5xRmJROGxOb0VRUjY5NnE3Vk5zQThDYVhnRzN2MUZ3UWFCMnlHQWc?oc=5",
-      "source": "WYFF",
-      "published": "Mon, 15 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Development"
-      ],
-      "outlets": [
-        "WYFF"
       ],
       "appearances": 1
     },
@@ -304,6 +356,19 @@
       "appearances": 1
     },
     {
+      "title": "Rent Kayaks & Paddleboards on Lake Jocassee: Eclectic Sun - Kidding Around Greenville",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9QTkNYQ1EtR1pNdTEwd0Y5NWM1clYyMjE2YnFEQzM0WU93OUQweXVZNlBYRWgxdWpJWlB5X2w0N2I2RUFlS2EyQ0ZFM1hQdlZUa25wNGZOVXpwVFJsNUtQTk02T3VVb3MxMHc?oc=5",
+      "source": "Kidding Around Greenville",
+      "published": "Sun, 21 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Rentals"
+      ],
+      "outlets": [
+        "Kidding Around Greenville"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "Man accused of firing shots near pool at Greenville County apartment complex, deputies say - WYFF",
       "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9WNEx3UGpYVGFZaTZCMUt0V1dMeF8xTGVrQURzVkdxdWhIUk1FcllnX0t5bDlGdmkyQlh0aGdWUkllLWZTWVAzMXdod0dQcnBjQ21fa1NaMFVuS0VXS1dwMzd0QnpTNERmOWVYOXN2RUk1d0JIMWVjTGpXNA?oc=5",
       "source": "WYFF",
@@ -317,28 +382,28 @@
       "appearances": 1
     },
     {
-      "title": "Doors Off, Top Down: We Rented a Jeep in Gatlinburg, TN and Explored the Smoky Mountains - Kidding Around Greenville",
-      "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5RU0VNZjNxR21OVXpkS1FjLXpTRklrUTltVG1OX3phZHc2NUtkc2hUc2xGWUM1NFR1T19MLU9fOWdVR0JJSW81aENRVkNDc1psRmZ1bTFyN01Sak9MdVFtNER5TTZRaGVTdHdRM3pocw?oc=5",
-      "source": "Kidding Around Greenville",
-      "published": "Sat, 20 Jun 2026 22:07:16 GMT",
+      "title": "Man arrested for firing shots near Greenville Co. apartment pool - Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPMU9JZ3hPaWZib2dteUFlcjlCYnMybmpVMUxYb1VoSVY1TEExNVU3NFdFMGt4Wmo0S2VDTUVvTmRyU29vWUVFejVJdUl3YXBSNk5hRGZMMTlnUGdQcU9GRGhSeXJZbWp5N2loOGwxdWhKOU5EeGtkeldwLXJyZFNHaEpKTllaSzkyWDlpSVZPYlhUT21qR3hXT0tTRDYzdw?oc=5",
+      "source": "Yahoo",
+      "published": "Mon, 22 Jun 2026 02:35:00 GMT",
       "beats": [
         "Rentals"
       ],
       "outlets": [
-        "Kidding Around Greenville"
+        "Yahoo"
       ],
       "appearances": 1
     },
     {
-      "title": "Top 25 Best Places to Live in the Southeast - Livability.com",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQWG96MFNrWkVnc25tLXlNTWlha094a3Fxem5wOEFxYWd6OVE5LWdvNlpMS2ZWbzZxQmFKNzNscV9SY2xMVkwwNHREdXpXdkd6MDA1UkVyeGFta19pZHliX185XzNTSXotLXVtVkNVemJ5andmWm9NZURhT3BCWG55MlRSTm5acXp3WVFvVGFQMlRhZEtuREE?oc=5",
-      "source": "Livability.com",
-      "published": "Tue, 23 Jun 2026 07:00:00 GMT",
+      "title": "Lakeside fun just outside Downtown Greenville - FOX Carolina News",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPU2pNQ3ZTMnY0U2szdzkxMWM3NTRmcXVqQVpfYWRXeE1fNUlkY1pmZkhtNDJyaDdoOWlZcDBBajl1T2ZTUGFDdDM0SlpTZ3hHVGwtQWRnalhqdnRubFB0Q2doYjlJQWdIYnN1b0tVNFhfeklKSU1td1NKNkZPeXd4Yk9pMVhhWVZXeU83TnVrZnRfSkRDLUE?oc=5",
+      "source": "FOX Carolina News",
+      "published": "Thu, 25 Jun 2026 16:07:00 GMT",
       "beats": [
         "Rentals"
       ],
       "outlets": [
-        "Livability.com"
+        "FOX Carolina News"
       ],
       "appearances": 1
     },
@@ -359,7 +424,7 @@
       "title": "Greenville County approves $473M budget, advances penny sales tax referendum: County Council notes - Greenville Journal",
       "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQMWN1bENUOFQxVU9scGdGOUVWNXBYbWt0c3J4VGhoWmcxcDZTUndzVzRSTkNRb3hmS3NaS0pyMm4tMW9uMG8tNW1pcDdBc2hQMkgzczdjcnBjWldoUElzSmJOTzVSVmtNQXNzZ3N2Qm0xYUNYSWltWFRaWE9ZTnJzNXJUM0d5QldWX051MTdfNjhla3pndENKQzZRUmUwWERyTFdobWI2WjJ4a0IxaEw0b1pQRUxaVk1iYWY5WkswN0RkenhBbnBCQW1KMkN3M1JReThR?oc=5",
       "source": "Greenville Journal",
-      "published": "Wed, 17 Jun 2026 14:14:51 GMT",
+      "published": "Wed, 17 Jun 2026 07:00:00 GMT",
       "beats": [
         "Policy"
       ],
@@ -382,19 +447,6 @@
       "appearances": 1
     },
     {
-      "title": "Understanding what's going on with the penny tax in the City of Greenville and Greenville County - 6AM City",
-      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE0ySE03TUVRU01IbnZCNzQyMjZETk9tRDVBRzhxb0drNVg2V3JzcDJGZll1RXVQc0RmYnRVMjRuVDVIcmFWMkVvcjdFN3p2WnFmRkpHRUl4UlM1YUhNZW5yQkIyVHF6RHBYa0NtdjFmVkc?oc=5",
-      "source": "6AM City",
-      "published": "Tue, 23 Jun 2026 18:02:30 GMT",
-      "beats": [
-        "Policy"
-      ],
-      "outlets": [
-        "6AM City"
-      ],
-      "appearances": 1
-    },
-    {
       "title": "Senior affordable housing complex opens off Woodruff Road in Greenville - Greenville Journal",
       "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPTUgxdGkxUkR6UGc3QkJCY0ZRRk9abi1YeHBoNXJTZWs5RkRFSUctMU5SczgxX0YzNVlIWlpOdmhPZVNBODBsOFNEbkdrMnpNd1FOMERWeEM0ZklpUzd2YVk2cEhZanZ2cHFJT1NjVkRCajFZNTJqQkdQWDZPY3dJaVQ0b2FxWHhKMUJES0FyQ1V1QkdlaElZVDBjTlJPWm9neGZ0N3Z2RzZwUXl1TFotNWxEZVRYeVNENWtUZUZR?oc=5",
       "source": "Greenville Journal",
@@ -408,15 +460,15 @@
       "appearances": 1
     },
     {
-      "title": "Simpsonville city leaders discuss possible 1% sales tax - FOX Carolina News",
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPNldZUjJTMXdzb1p1RzRVUnF0LS1HOWNBY1F3X09OelQya1pWVkpRT2hvZkU4SDNxTHljMWtEQlFuYUYwalNiS29zcVRiRE83RW5GUXE5Q2dhQXJ5RmZnOGVVY0xWRkFWbXNWenpYMWhhRnhkYVVXekJWMkFIUlctUG1HUjhVdjZ4aEVIUG1lY0YzclVKSFBXa1VyTm9GSFUxYkI2UVJ5VW9saGFmTlHSAa4BQVVfeXFMTzZXWVIyUzF3c29adUc0VVJxdC0tRzljQWNRd19PTnpUMmtaVlZKUU9ob2ZFOEgzcUx5YzFrREJRbmFGMGpTYktvc3FUYkRPN0VuRlFxOUNnYUFyeUZmZzhlVWNMVkZBVm1zVnp6WDFoYUZ4ZGFVV3pCVjJBSFJXLVBtR1I4VXY2eGhFSFBtZWNGM3JVSkhQV2tVck5vRkhVMWJCNlFSeVVvbGhhZk5R?oc=5",
-      "source": "FOX Carolina News",
-      "published": "Wed, 24 Jun 2026 10:36:00 GMT",
+      "title": "Greenville County settles lawsuit over budget process - WSPA 7NEWS",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObF9ReTVfamQ4OTBGV3RIaHo0ckxRRkpmSTJSR21fQmFCVlJRQnlLTnZfRGZGbmdtTVhIR216bG1DbWJ0WDNuLVMyM3RpZkpzbm5tdHNwTUZxaVhVRHBtNV9MUmY0eDh3SW5uY2l1bk5DQ0JaLXNOY1QzdE81Y0x3S3NEbmNyd294MkJZdms0eVJ3MXRIV2ZFVkU5c9IBmwFBVV95cUxObF9ReTVfamQ4OTBGV3RIaHo0ckxRRkpmSTJSR21fQmFCVlJRQnlLTnZfRGZGbmdtTVhIR216bG1DbWJ0WDNuLVMyM3RpZkpzbm5tdHNwTUZxaVhVRHBtNV9MUmY0eDh3SW5uY2l1bk5DQ0JaLXNOY1QzdE81Y0x3S3NEbmNyd294MkJZdms0eVJ3MXRIV2ZFVkU5cw?oc=5",
+      "source": "WSPA 7NEWS",
+      "published": "Fri, 26 Jun 2026 10:21:32 GMT",
       "beats": [
         "Policy"
       ],
       "outlets": [
-        "FOX Carolina News"
+        "WSPA 7NEWS"
       ],
       "appearances": 1
     },
@@ -430,6 +482,19 @@
       ],
       "outlets": [
         "Greenville Online"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Photos: Homes of Hope holds workforce program graduation - Greenville Journal",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQNlhLQUtFdHowZ1pLQldWT3VVYkU4VzhhYjNvUm9lZ3BGMlB5TTFrdG1ZdW9CYmY4SDVsSUNlcWN4NkpNdF84bFd6M3hBU2ZldDk0SHQ4SXR6d3lNUEY5SXJodWdfRXZOcFRvc1RIOURrQmxKOXZMTy1icnhqLTFDQU5jQjBoSzBHZkNTME5uMmdDa0Q4alhOYXlPcFg?oc=5",
+      "source": "Greenville Journal",
+      "published": "Fri, 26 Jun 2026 16:04:38 GMT",
+      "beats": [
+        "Policy"
+      ],
+      "outlets": [
+        "Greenville Journal"
       ],
       "appearances": 1
     },
@@ -499,32 +564,6 @@
       "appearances": 1
     },
     {
-      "title": "Bank of America Names Chip McLeod President of Upstate South Carolina - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQLXpSSDNSYW1Sb0ZPb1lhMlUzaU5FM1U1eVNLaVpobk00U1N6eThhRXBqUkt1QThobFZxVlF2NjZrOFFfWVpoN2tkUEVuLUFFVjUyQ19oajAySldCREpkbG15WGRpWGdwcWE2MGlLeE5CZDNhSThoMGNoWEpObnQzMzBxU1owb2Vfb1VlMVpFRFpYQ3VhQVdfT1hVcw?oc=5",
-      "source": "Yahoo Finance",
-      "published": "Sat, 13 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Upstate"
-      ],
-      "outlets": [
-        "Yahoo Finance"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "6-year-old drowns at Upstate South Carolina birthday party: Coroner - Queen City News",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUGJLbUZHODlvZG5HeUlFOTZ1dFpVZEtoMHJ0MW9sTlVSLUdsa0ptWFVIRldCMWVXa1RqNE5aRjA4QW5TZmpLMld0Z09YMWV0WjRvZXhPSFYtSG91ZURwNFk4bFhCR1FNeUJDQk9CUDJuUW1LVkYyNTRNRC1GNDNsSVAwdTYybEVVODhtWXl6WXQ5djRNNlY2MnpEeGRHdjR1?oc=5",
-      "source": "Queen City News",
-      "published": "Mon, 15 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Upstate"
-      ],
-      "outlets": [
-        "Queen City News"
-      ],
-      "appearances": 1
-    },
-    {
       "title": "Juneteenth events planned across the Upstate this week - Post and Courier",
       "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOeU92aVR5Q2huaUNLWmxSRG5ha1BGZU56Ml91VENYanAwU2QwY3VtTTRmVnBJX1hRb3VYY2hvMDZpWlZ5WjJIMU9NQUE2SWtEMVhVS1Btd0Z6R1RSZXhFbndNM3BjZHdTaHgyeUdhNUtjclA0djZXY1lhd2Vtbnc0V19KWjg4Q3p0V3RId2tVeVFKR0Z0Q2E5aExRai15OG93cWNGX016czhPcGMtLUI4N0s3SmZtQ0NlMnFDZ1FmWXJ1MkgzbmlfSmhENFBnMmJfMS1VemkzNGJBSlN6REw4Y2tR?oc=5",
       "source": "Post and Courier",
@@ -564,6 +603,19 @@
       "appearances": 1
     },
     {
+      "title": "Where Trump's refusal to sign Sen. Scott's housing bill leaves deal - Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPSE9ENGROOWtlYnRra3V5cTNmcnA4TDhidTBTTkJmbVVaLU4xZXdRcFBmcHViNVRWN2p0MlFvbTMwdnNVVlpFUVItVVlJN1BhSGQwUE1KYndtaWdfYkVHeUlpSl9aS0hjX2JVZ2twR0JVbHdHNXR1WkZGS3JtZXl1X2xlaDRmWU1KWTJDalI2LVJiNkU?oc=5",
+      "source": "Yahoo",
+      "published": "Fri, 26 Jun 2026 16:48:44 GMT",
+      "beats": [
+        "Upstate"
+      ],
+      "outlets": [
+        "Yahoo"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "SC could see heat index soar above 100 as heat dome settles over - Greenville Online",
       "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQYmt6MFI4YlJfUHRucV9CeG9Ocm1uUHdhS1JuQUVMTm41UHZlTVdOOHJrRFdoSlhFZjRIMWRLeGJpX1RMWERCRFJMSFRjdlVsTjhBTkRpaEwzQlpZcE5wdlJIMVVHVW96SWlwakJTRkNFS1N1bXNoZUJjUFZtZ0tUZ1YzNHZvMGdidGl4clhSSnp5cDlLZ2xReXBrUUVfUDRRdFU1WjhkUVV1SnNoS284Y1VFQjRjQXlCUDJkaE9iZEFGSnNieGtaOXd5eGp2TEhL?oc=5",
       "source": "Greenville Online",
@@ -573,6 +625,19 @@
       ],
       "outlets": [
         "Greenville Online"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Contemporary showpiece home on Lake Hartwell lists for nearly $5 million - Post and Courier",
+      "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQTWFOdndYRnVJTVFvdF9CSFJjU2VzWXhjbWZyYklObDF1cWN0STFYUnpzLXFkLURFWDB3WXgxNGVLRHNJMDk3eVc3cG1tSVNKTVFIWHpobWlqbUl0ZkxsejYwLTAxakIzcEgyM3dEWFVFZGw5Uk1EbG1tajRKd3dTZ285WkdQSEQta1o1THpxSEtYaGJZUURSOFVlRVBMNzdNanhzSFM0OTZkSUtuX1VOUm5qWTRUSmdVaThid2VvcjUySG9FcFR4LXRDOTRPSnkyWEh5NzBJQzVMM2w2TXZtalZ6QVFNTXdaSUtJ?oc=5",
+      "source": "Post and Courier",
+      "published": "Fri, 19 Jun 2026 09:00:00 GMT",
+      "beats": [
+        "Upstate"
+      ],
+      "outlets": [
+        "Post and Courier"
       ],
       "appearances": 1
     },

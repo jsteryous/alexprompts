@@ -1,79 +1,79 @@
 
 ======================================================================
 GREENVILLE, SC REAL-ESTATE SIGNAL
-Collected 2026-06-26 08:52 UTC
+Collected 2026-06-27 08:28 UTC
 
 BEAT COVERAGE (headlines found per beat):
-  Market       8
+  Market       11
   Development  12
-  Rentals      7
+  Rentals      9
   Policy       11
   Upstate      12
 
 BIGGEST STORY (most corroborated, the lead to write up):
-  This $5M historic home in SC just broke a sales record. Take a look - The State
-  https://news.google.com/rss/articles/CBMifEFVX3lxTE5BbmtKbzJjUHNnNUh0ZnlRVUhwdV82OVJIV2NPWXBsOUlEYnZyd1B1U191STFTSkpETXdOOEN3ODZCUXdnNnN4TGhmbm1HS0ZDQ0xuVEctc296NUd0c05ZX3l5a08yc0VTeTliN2ZkY2JfLXc0eGFGS21sMUPSAXxBVV95cUxOMVQyUFFSdm9WbTFSakpqczVLNHNOUmttazBOdVVNaFNZQTN6dmQ1WnV0ZVhtUjkzSFpQaF94a2FfWGNYdzZENmg4WW5HS3BleGN0Vy1qTzlRN2lQTDZTZ2FvWEFGMHBHZWFZX0lPS1V0YVdLNnNlVHVJMXlZ?oc=5
-  beats=Market, Development, Upstate | outlets=The State | appearances=3 | score=14
+  Affordable senior housing opens near Five Forks in Greenville County - Post and Courier
+  https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
+  beats=Market, Rentals, Policy | outlets=Post and Courier | appearances=3 | score=14
 
-RANKED STORIES (top 20 of 43):
-  1. [  14] This $5M historic home in SC just broke a sales record. Take a look - The State (Tue, 16 Jun 2026 07:00:00 GMT)
+RANKED STORIES (top 20 of 48):
+  1. [  14] Affordable senior housing opens near Five Forks in Greenville County - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
+      https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
+      beats=Market, Rentals, Policy | outlets=Post and Courier
+  2. [  14] This $5M historic home in SC just broke a sales record. Take a look - The State (Tue, 16 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMifEFVX3lxTE5BbmtKbzJjUHNnNUh0ZnlRVUhwdV82OVJIV2NPWXBsOUlEYnZyd1B1U191STFTSkpETXdOOEN3ODZCUXdnNnN4TGhmbm1HS0ZDQ0xuVEctc296NUd0c05ZX3l5a08yc0VTeTliN2ZkY2JfLXc0eGFGS21sMUPSAXxBVV95cUxOMVQyUFFSdm9WbTFSakpqczVLNHNOUmttazBOdVVNaFNZQTN6dmQ1WnV0ZVhtUjkzSFpQaF94a2FfWGNYdzZENmg4WW5HS3BleGN0Vy1qTzlRN2lQTDZTZ2FvWEFGMHBHZWFZX0lPS1V0YVdLNnNlVHVJMXlZ?oc=5
       beats=Market, Development, Upstate | outlets=The State
-  2. [  14] Hailed as the swankiest new homes in Greenville, unpaid bills leave The McDaniel in financial crisis - Post and Courier (Sun, 21 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdGR6Wjc5eHVaYy1PYS1RYWU5WnNueDExZk03LUdOcm56Z0hvX2tGNVFYeWNCTzR5dTNhQ1dYbGNlUkplU204OFpKV1lkU1JBUUdUWGdGb2pyMWM3X1luNzZjbUF4ZkFtbURFU1RNZlNuazJyVDl3MGRWMkZBT0djZENXRTRTNFVkU0JLSDVoMG93Z0NUTU92dGVYWmtkZFBTUEVFOEduQ21xUm91Vm40SFpWOUhyQ0QtVi04TG1nN2dZb1RVdnhqUXJYOVpHQmNKUHdjaW93Y0RtdEU?oc=5
-      beats=Market, Development, Rentals | outlets=Post and Courier
-  3. [  10] Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine (Thu, 25 Jun 2026 18:12:38 GMT)
-      https://news.google.com/rss/articles/CBMivwFBVV95cUxQLUFEM2NCUF9BYUNCLXdjM2VXY2owTjJRRTB2NWVUd3BkYzM1RFFNWkNSMVh5dklsbEZVeVhLemdNUU4zN2pfZWwyeTUzeWJoenJJYmVTb0Job2cxRGN2ZUxHWVhmVmVyYUVSaV9mUzFNSUg2WkxtWllUb2puekppY0h2d2EwS2JuUms0TzdGM3l1MTU3bWk5M09iSHJGMEpzRkZ6ckVrVHBQR2ZQY3ZoX1N1dUcyekFQdEtvX1NNWQ?oc=5
-      beats=Market, Policy | outlets=Greenville Business Magazine
-  4. [  10] Greenville County passes $475M budget, skirting controversy while considering new sales tax - Post and Courier (Thu, 18 Jun 2026 09:00:00 GMT)
+  3. [  10] Greenville County passes $475M budget, skirting controversy while considering new sales tax - Post and Courier (Thu, 18 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi4AFBVV95cUxPRnRzVHU4MDJhOEt4eUd5cV9yR1hkSWlRMU5WNmxLLWdncHc4UnMtbXl3UTQwanI2Q3ZTSkptQTFDN0FpcDI0Yk9BaGNsVndrTTVyemRtT3ZtSEFnQ2x6bHRDSnNETnRVNkt6VFFzOHhmTGZDZ2puSTRJY0FLYmRURHNPYmN2bkE0cmlZQlV2c3lrN0E0N19fb2lUQUFsSEt4TDZ5QXJ3RERMb0ppQXFtRDRnbTNRN25jLUxUeVhxRjRaeG1FQklBQ3FYTU9ZQTJWcEJpemVBeWM4anR4UXlOcw?oc=5
       beats=Market, Policy | outlets=Post and Courier
+  4. [  10] Hailed as the swankiest new homes in Greenville, unpaid bills leave The McDaniel in financial crisis - Post and Courier (Sun, 21 Jun 2026 07:00:00 GMT)
+      https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdGR6Wjc5eHVaYy1PYS1RYWU5WnNueDExZk03LUdOcm56Z0hvX2tGNVFYeWNCTzR5dTNhQ1dYbGNlUkplU204OFpKV1lkU1JBUUdUWGdGb2pyMWM3X1luNzZjbUF4ZkFtbURFU1RNZlNuazJyVDl3MGRWMkZBT0djZENXRTRTNFVkU0JLSDVoMG93Z0NUTU92dGVYWmtkZFBTUEVFOEduQ21xUm91Vm40SFpWOUhyQ0QtVi04TG1nN2dZb1RVdnhqUXJYOVpHQmNKUHdjaW93Y0RtdEU?oc=5
+      beats=Development, Rentals | outlets=Post and Courier
   5. [   9] Greenville County just passed a $473M budget — here’s what changed - Greenville Online (Wed, 17 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi0wFBVV95cUxQNDNlRFJQQlFqZTFJalFvdGNUSGVDal85eFlteXNCcmFvX29ZSmxpQnJtRnVvb3lUN3FWc19BTkVLOW5JRUJPQlhXOXNLVndySThJZXByMXdKSVZEdkdENW1RX0s3NGFXX1RZNjVDUXdHd0wwSnFOQ0ZmUE15dWs5RFJnR0hZcmZzR1pzQk04OUxjU2xQXzd1NE1faV9IbnBvb1kwSjRpYldxWlZqQnJYa0RCVUpzSWU1SG4yNm1OU2xkbjFkeVpsLXNzbGNILU5JVkU0?oc=5
       beats=Policy | outlets=Greenville Online, AOL.com
   6. [   6] Exclusive: DLH Properties Completes $61M Sale in South Carolina - Multifamily Housing News (Thu, 18 Jun 2026 10:24:20 GMT)
       https://news.google.com/rss/articles/CBMilAFBVV95cUxNTXhSOXZyMXcxdHFlbjNhZm91TXRQMjBJQWVTSlFWMEtkaHgxUk5pZjlwZ3owelBGaVRrdk1JLXo1NFhTZDJZTUEzUmVlTjJWbE9oQmZodEJnZTFtUmEzOXJRWE82cGpzVThCRUV3bHR6WHVLcmFNbG12UXJobTJKVHItb0V4bmxRTGlGSzhyNGxsMkxl?oc=5
       beats=Market | outlets=Multifamily Housing News
-  7. [   6] Constance Nodine Obituary - Greenville, SC - Dignity Memorial (Wed, 24 Jun 2026 07:00:00 GMT)
+  7. [   6] Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine (Thu, 25 Jun 2026 18:12:38 GMT)
+      https://news.google.com/rss/articles/CBMivwFBVV95cUxQLUFEM2NCUF9BYUNCLXdjM2VXY2owTjJRRTB2NWVUd3BkYzM1RFFNWkNSMVh5dklsbEZVeVhLemdNUU4zN2pfZWwyeTUzeWJoenJJYmVTb0Job2cxRGN2ZUxHWVhmVmVyYUVSaV9mUzFNSUg2WkxtWllUb2puekppY0h2d2EwS2JuUms0TzdGM3l1MTU3bWk5M09iSHJGMEpzRkZ6ckVrVHBQR2ZQY3ZoX1N1dUcyekFQdEtvX1NNWQ?oc=5
+      beats=Market | outlets=Greenville Business Magazine
+  8. [   6] NEW AFFORDABLE HOUSING - FOX Carolina News (Fri, 26 Jun 2026 20:46:00 GMT)
+      https://news.google.com/rss/articles/CBMid0FVX3lxTE84eGFyWXdkdUhRZEJqSGRScDJsRG8xMU5kV29kSGUyVGZVTURib0RWTk1nbGIzUXdJazNyWVRvNEFyRnc5RmVIX0ZOaVQyMGRtLWJDNzZzLWtVR0dCaHBrVjZWX0RVNXFoS1hPT25CMHhyMjhHakpN?oc=5
+      beats=Market | outlets=FOX Carolina News
+  9. [   6] Constance Nodine Obituary - Greenville, SC - Dignity Memorial (Wed, 24 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMiigFBVV95cUxNdFNTZmdnUmExSk5pV1YzZlIwZTBWTzZ2R3Q1NExqX3dlbUlGVUdFNk1PNXpCSnk2ZmhuSTRaRXJJT1hiUHJ6NUdUSUgySm5yWFo4UUN3aDJ2N0RhQ25HM1pZczl0U29ZbHpnWVR4OFFtR0UycE9FaS1ORUF4cTA5bGsxOHNwZzlBSHc?oc=5
       beats=Market | outlets=Dignity Memorial
-  8. [   6] Tudor, with a twist: Timeless, modern meet at $2.3 million Greenville listing - Post and Courier (Fri, 19 Jun 2026 09:00:00 GMT)
+ 10. [   6] New affordable housing complex opens in Greenville - FOX Carolina News (Fri, 26 Jun 2026 20:46:00 GMT)
+      https://news.google.com/rss/articles/CBMimAFBVV95cUxOUUVCUlhrSVByUGJUQXg1aE1NOTllODRhWEpzMUpiWnZjTVVfWWxqVjh6Y3FXaDBEQ3pxWlUtQURub3FEam5ncVhZaHdkT1p1eGU2azhyNVBudEpsQ2poaU0xc1p2YnZudTRqeUpRSEV3RXc2QXFONDFHR1NQV3lyRGtNZEd5ay1ibkJ6cERoeV9zTUNWVTVhUQ?oc=5
+      beats=Market | outlets=FOX Carolina News
+ 11. [   6] Tudor, with a twist: Timeless, modern meet at $2.3 million Greenville listing - Post and Courier (Fri, 19 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi7AFBVV95cUxPblU3TDhnb1RZZnRERlM1MVZwU0dLNFlaQUJFTVlzbzhqNTlkdmVhRnBaUVQwc0tEQ1FjNHhCVzQwaTk1Uk5YemxqVXBDNUZkZzFsWkZINjRiVWRUU2tkTEZ5YXd2UjJubDgtYTZPVF9xRnhaVXd2QUM3b3RfRndfX0VSeGNYdmMzbmdOSEpCdzdyeS1pUUJ6MmhleEdkSkRVdlFnV2wyT0ltNW5pNGFtTERaTWpLRHhUeUN2S0NGUzNHMEdwUmttaFZLZXdOS3VHZDhVaDJTOWJqbnF6b0Eta1ZlSWgzckFId2pPWg?oc=5
       beats=Market | outlets=Post and Courier
-  9. [   6] 2 hospitalized in shooting at Greenville’s Haywood Mall, shoppers evacuated - Post and Courier (Sat, 20 Jun 2026 07:00:00 GMT)
+ 12. [   6] 2 hospitalized in shooting at Greenville’s Haywood Mall, shoppers evacuated - Post and Courier (Sat, 20 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi0AFBVV95cUxNYVJyTWY4NTYtN3VwRTFneTBxTWVhaGkxVFloTUpvQkJXSEUwY0ZMdUZSRmt0Z0RJVkxUSU4zTGZYeFh3V0xGTUhTYTRQSFFlaUFRZW1CckNTbmFER0pTNzJoSk9tNEpNQkNYZU1IcW5pVkR5TW9xZVFNaVdYdndBdmJVUUtKMmZBMGZGR0pLc3p3U1R3dTVLMHVCS1NLNU9abkhiZ0FveW9FdGQzem5DRGJEMEFDQTUtQWVaUEhwRl9Tanc4N3Y4WUQ2M01pZzh1?oc=5
       beats=Market | outlets=Post and Courier
- 10. [   6] Greenville design board approves next steps for $282 million downtown projects - FOX Carolina News (Fri, 19 Jun 2026 15:35:00 GMT)
+ 13. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
+      https://news.google.com/rss/articles/CBMi4wFBVV95cUxNS2NmRVlzY1JwMy1XRHZPS3FkRFZfRkFMMG1HQlVVWmZLYTN1YzVpVUNIMHVUOE9VX0p6S180M0w3YVZJaDQxN2dOaHFhVUxjYk80UmNSdFllQWZEX1B5ZGhBV1VwZkRDNXNRNmZyMWllUlVETlZpdGlzai12OFNZSUxoUk9QRWRRR3VqYndzSjM2OHNBWlFIM2E1ZmdGcTFWWW1EYWdWMkJKM3puazIyOUNvVENOVmR3UXIzWnJwclR4SDVENUNJd3picGVaNnBFVmxOdFowajVMZGdpbUpFNTZQMA?oc=5
+      beats=Market | outlets=Post and Courier
+ 14. [   6] Greenville design board approves next steps for $282 million downtown projects - FOX Carolina News (Fri, 19 Jun 2026 15:35:00 GMT)
       https://news.google.com/rss/articles/CBMiswFBVV95cUxQNDRILUlhZV9yRm4zaEstSU1mc25aMHRfN1Y4LUJhZEplMFJsSUplclM2ZV9QbUhuOUQ4N1UzZ2R0N0dWaVB1aGFfOHcyVXhORllwMUtpRzl3MlV4RXV0WXpDcHBoVTZLZ3AxaXZ6c08xYVdnd3JPc1FKbVFpckJDb082VkV6aUlMX1BheVJmZTl3R3lMM0E5dUkxWGVHclRHNXV4N1QxMFh1WlFlZzg0anFOZ9IBxwFBVV95cUxNMEhVTWpkWDBGbEd5X0g4a2dXWlplMWtadkUzM1lCZ3hlcTlNZU5XN243RkdlN01MdHpxOGVMRlNpNnY5bDdPVUQ2MFRUT3lWV2hlVlJSdnloVWgwSDlEVkk1SUo3bDlwalBhMzE2T2hBa3RRcHRLX3Mzeno5UXY3WlViSHhxMDUyb1FDdXhCd3hHUW5pbUwwQ1dKWjQ1R1kwd0Nnemo0akNiQmlmeW9tWEJMZXpPOVhablJCZlNIYldrT0g1Mkx3?oc=5
       beats=Development | outlets=FOX Carolina News
- 11. [   6] Downtown Greenville bar announces closure - WYFF (Tue, 16 Jun 2026 07:00:00 GMT)
+ 15. [   6] Downtown Greenville bar announces closure - WYFF (Tue, 16 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMifkFVX3lxTE01TFloZGRWN3dRNmx6VXd2MFY5RVJaZy1XWDY3TGNsdjFreFNfY05FZTlYQXpJOHZQTzJVamNuMFcxWVVsRS1scnBOVlduVEhVdUh6TFk5T2dFalN2bURTdlU0anJNSk1ZRDctVjJublZrR1EtZG9xNmtKeXNmdw?oc=5
       beats=Development | outlets=WYFF
- 12. [   6] U.S. 29 bridge along Church Street reopens at 12:17 p.m. with improvements - Greenville Online (Tue, 16 Jun 2026 12:03:00 GMT)
-      https://news.google.com/rss/articles/CBMi3wFBVV95cUxNQXhmVnl4bm9uODJoNkd2Q2NlQnFCQ3hWT2hRLXd6WFNJLWlQNGQtS1JoZkJscEM2T05zbU1MU0dHTnlGTEd3eUNNaC04amdfODB5MXI0T2IwS0hBdFhzc0J5eFgyWW40NGNSaEVoajJZN3A1SUJTVmhObW9PTlc2eGJUM3lXZlRTNGwxVG1jcnljY0tmMzN1aS1HXzJKZWFUWElxcFN3YW50YS0tWDZ2bXd2MU9USjdjbjloS3M3YUYydDM4ZE00Wk1DYVR4eXg1VUtrVkp1eUhjZ3d3S25R?oc=5
+ 16. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 15:07:00 GMT)
+      https://news.google.com/rss/articles/CBMizAFBVV95cUxNekhnelFrbWUtN2xVWVhmZXd6QlhCc3c0TDRyUEZGNUVmbFhONU1lbVpKb1pSdVE1UG04YnVObHA2MzlXdm1rMWhKcGswZGt0aVkxSktxWGpKMjFUazRMMmZhQTB5UlJLRXlLUVc1blUxMFBKdjhHajV6T1c0Rld4enNUOVVvaVVQLW9GbHI4cHBOb2o4RzNOYjR4Z1ZmLTRYaS1FQTUwZmNuWEhWbnE5S3dMV04tTkZncmZYRUlyZUg2QzE0UlFFQkJyM0I?oc=5
       beats=Development | outlets=Greenville Online
- 13. [   6] Outdoor Music: Free Concerts in Greenville, SC (2026) - Kidding Around Greenville (Sun, 14 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiXkFVX3lxTE5Lb0Y5Tk1NYnlQakJ5eXVFRFF0d295U2oxSEVPMzVZckNoR0JnVFI5LV9FXzlXMnB5Z0Z5Skg0bjFTOXZZU05VSWw2MjhmSElWS1hyS0M5cDNBLTQ4WVE?oc=5
+ 17. [   6] 10 Hidden Gems in Greenville, SC You Need to Visit! - Kidding Around Greenville (Fri, 19 Jun 2026 07:00:00 GMT)
+      https://news.google.com/rss/articles/CBMieEFVX3lxTFBzRXVQdk1SVS1nTUU5RVEyNE9JSGJuSkdmRDN2UWNoUTB2VDhxdG4xc1NvYlRTWjZIRzlRU284cmRVZmN4QV9hYXdkZTl1Z25DRzU1VWE1dU5OZWV2T1VUaWxORmVWemhua2FnbWllS2Mwbm1jWm1yXw?oc=5
       beats=Development | outlets=Kidding Around Greenville
- 14. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
+ 18. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
       https://news.google.com/rss/articles/CBMingFBVV95cUxPOWZiVHBuNXpsXzk0ZkRjZ0hiejFxaktZY1lUTFRRelVyNEozbFVUeF9qRlBKX2NidEVvaDNGR0pQQ0ZvOHFwdm54bF9SS1AxYVFQQmtibUNuaU84VEU0b2NvUjFScUYzTk5SZmpub1pRTG1weTVhcktxUjlDelp1WGlaazBZYTFVTi1ER012QTBQb3NDUjJGbGlnS0wxZ9IBswFBVV95cUxQRzk4V3R5V0dwQ0w2eWt4QnNTT2tkOHU5M0l1OWNJbzhkXzg2UmMzQTFxckozUnlSdE1jNDB0VnVqLXlvOVRMRlpUVVRwOThxQnlrTzUwT2RsZS1IOTRWVzBIdGxqNVc0Rl84dmVBSFhVenpMMlFrdlF5LV9KanlLMGZFREYxWVRYWUo3am5jb1EtbkgtUmQ2dlVSWVRsWW8za1I4SmtVSnE1MF9HMnJib0t6aw?oc=5
       beats=Development | outlets=FOX Carolina News
- 15. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
+ 19. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi4AFBVV95cUxNUnZJTFJPSmRiSGFuOElKZ2h3U19hYTgzNGJGU2ZEYTlpb1Brb0V5MjAzeF9aaTNBd3d3TXU4NEVGNzhMZExFWUlOTEkycXRIUVlCMjRDZkdoRFBENXZKbUtqbDJBUWZYeGpNbV96bFdtV2RnUjVKRmdwZ29qMklLNzZSMjdtcEdpZDJwVjV3Rnk0SEZvU3BRbDRoczV2NHZENWI3RF8xeW1oWmNFa19UUUNKQXZwa1ZHTlZ5cXpmald2X3hhLVJ4RGRMNmVSR3hBaVNuT2JPdWoycUVKYVhKNw?oc=5
       beats=Development | outlets=Post and Courier
- 16. [   6] SCDOT: Church Street bridge set to reopen this week - WYFF (Mon, 15 Jun 2026 07:00:00 GMT)
+ 20. [   6] SCDOT: Church Street bridge set to reopen this week - WYFF (Mon, 15 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMijgFBVV95cUxPbG9BR0J6WGZJdXBTZ3Z2d2ptVFU0UE1fUEJpNDR2Vk9yNXhoYnNKYUdLemhmNENONlNLU2xjVFczc3RZaXhURE1pVlhkTmFXcDNoMW1QU3JiSjdxb0N3UUlSYjZtelhtUUxZT085YVdSbDJIbVBUbjg5NzVnUVdaZTZWRnk4Y3liMGt5djBB?oc=5
       beats=Development | outlets=WYFF
- 17. [   6] Church Street Bridge in Greenville reopens with new improvements - FOX Carolina News (Mon, 15 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiowFBVV95cUxOcmxoR3RPZjJON1ZnSUJWTW5HUnNCeGgxU0t2MC1SWmxBT2twWkktVzFIMEVnaUlyUVd3QVNqZTFacFdycTVLekVpeEhKN05BclRIdDFLSUx1dVBKYW0zRmV4ZWExSnctOFplcXBoYk5aTXpGUU1fQUIzMjB0QWNKbURVMER5QzdQZGdMa0RUQWZ4MUQxbFUybHJVRDloSkZfbTh30gG3AUFVX3lxTE1sSmhpQ2ptM2RiNmNrNnZzZkd6MldBVUZfVVJvak94OGU2UUNfaHNMakdlRXRndHpuald3MWNxM0s3a1NHeVBaOWZ5bms1Y3Y5OTdSSTBncTNISU1Ra09VdGx6cTQ3Um5ENzIycWozUTh0TTJoSTdOVjAtSmVDUVg2ZDFodGxjX1NLLWRxSTk1MXRUQy1nc0VWS2FlbHdXLWhUYjQtTlFrWlFXTjhJZEh2VVdEVTNOZw?oc=5
-      beats=Development | outlets=FOX Carolina News
- 18. [   6] As Novant Health finishes first Greenville campus, $132M hospital crosses construction milestone - Post and Courier (Tue, 16 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMi6gFBVV95cUxQeXhha2kzWFh4aS1sSGhDb1pyQjVZWFZLY1dhUEVqcU1YQ3BaV29lS05Pa2Q3QllrckRBU0ZfamhsbFBsRXNKV1Y4WnJRbzA5N3B5YkFhWkhERU5EVC1qbXZjYS05WFcxczh3LVJXZXZhbDdlbklrV3RVUnphemhMRFZ0d0xPMFJwNm1UM1NvREhsYk16Mk5WSlVNTzBXSkk0Rk56NVBvRHVHdlBrVFpaeUo4dzJrd1Z3Zjh4aXB6RHFNakNOZzBiTE9ybHN6bW8tLVNzM3NLcjRxcEtQMDFtZ2t1cnBHWGxjZlE?oc=5
-      beats=Development | outlets=Post and Courier
- 19. [   6] 4 The Record: Greenville Area Development Corporation - WYFF (Mon, 15 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMilgFBVV95cUxNQUdNMlUxdmZsdjA0ZFBJSVplZ1d2Y19FTlFBUDVJVU1hTmdsWXhfME4zbkEwTVZTN3FRTm9EaVhvaTdkNm9zZ09yVWlxNnNuWlM0RkQ4WGVxaU1fRkF6ZWtvN0t1dUFvd0tZcEVDTW5xRmJROGxOb0VRUjY5NnE3Vk5zQThDYVhnRzN2MUZ3UWFCMnlHQWc?oc=5
-      beats=Development | outlets=WYFF
- 20. [   6] Witnesses report law enforcement presence at Upstate apartments Sunday night - WYFF (Mon, 22 Jun 2026 11:19:00 GMT)
-      https://news.google.com/rss/articles/CBMirgFBVV95cUxPalJ4ZU5fY2xjLXBYT2lqT1FxLTF5Ukg0eVB2NmlUMndXQU9xSHUyVE9QMWJyNGFkSDJ3N1gwc09XXzEzaWdudF9UUmlqTzlpOUVzY1I3cGUxZlhvRl83V3J4X2FyRHc3R1h1TVU1d3plakc0bDN0UG94REpfc2R4ajFPV0FrZFJhbjFieHdrTUsySlFKZTBQMl95MjlpcVFxUmVJQk9ZdGNGa1lVWGc?oc=5
-      beats=Rentals | outlets=WYFF
 ======================================================================
