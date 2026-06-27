@@ -8,6 +8,7 @@
  * database (empty lists, not a crash).
  */
 import { createClient } from "@supabase/supabase-js";
+import { SITE_URL } from "@/lib/site";
 
 /** Content kind, derived from tags. Each post lives at exactly one section. */
 export type PostType = "newsletter" | "guide" | "realestate";
@@ -149,6 +150,17 @@ export async function getPost(slug: string, type?: PostType): Promise<FullPost |
   if (!data) return null;
   if (type && sectionOf(data) !== type) return null;
   return { ...data, cover_image: coverImageFromBody(data.body_md) } as FullPost;
+}
+
+/**
+ * The share-card image for an article (Open Graph + Twitter). Prefers the post's
+ * own lead image so a link shared over iMessage/SMS, Slack, or X shows the real
+ * story photo; falls back to the branded site card when the post has no image.
+ * The root `app/opengraph-image.tsx` is NOT inherited by the [slug] routes, so
+ * each article must set this explicitly or it ships with no preview image at all.
+ */
+export function articleOgImage(post: { cover_image: string | null }): string {
+  return post.cover_image ?? `${SITE_URL}/opengraph-image`;
 }
 
 export function formatDate(iso: string | null): string {

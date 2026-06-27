@@ -50,8 +50,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **`/review` + `/api/publish` + `/api/review/save`** — the publish flow. Edit a draft,
   Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
   `revalidatePath("/archive")`). All gated by `PUBLISH_SECRET`.
-- **`app/opengraph-image.tsx`** — edge Satori OG image, auto-injected. Do NOT set
-  `openGraph.images` in page metadata — it conflicts.
+- **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
+  It is auto-injected on the root/static pages but is **NOT inherited by the
+  `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`
+  themselves or they ship with no share thumbnail (link previews over iMessage/SMS/
+  X show nothing). All three `[slug]` routes call `articleOgImage(post)` (in
+  `posts.ts`) which prefers the post's own lead image and falls back to
+  `/opengraph-image`. Do NOT set `openGraph.images` on the root/static pages — there
+  it conflicts with the auto-injected file.
 - **`app/layout.tsx`** — root metadata + `WebSite`/`Person` JSON-LD from `site.ts`. The
   inline `<head>` script sets the `dark` class pre-hydration from the
   `alexprompts-theme` localStorage key (must match `ThemeProvider.tsx`).
