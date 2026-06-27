@@ -13,11 +13,12 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
 
 1. **`pass1_reporter.md`** — establishes the verified facts, finds the real
    publisher article behind Google News's opaque redirect link, names the central
-   place by its proper name and pulls a freely-licensed lead image of it from
-   Wikimedia Commons (url + author + license, never the publisher's copyrighted
-   photo), separates CONFIRMED from REPORTED, dedups against what the site already
-   covered, and lists what a human must verify. On a quiet day it returns
-   `NO NEW STORY TODAY` and the run stops.
+   place by its proper name, separates CONFIRMED from REPORTED, dedups against what
+   the site already covered, and lists what a human must verify. It also decides the
+   lead image via a **cascade**: a Wikimedia Commons photo only if one genuinely
+   depicts the subject (never a generic skyline), otherwise a `map` of the location
+   (it hands off a geocodable LOCATION + an AERIAL yes/no), else `none`. On a quiet
+   day it returns `NO NEW STORY TODAY` and the run stops.
 2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
    THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
    reader's question. Takes no stance.
@@ -30,6 +31,15 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
 against the live site, and on a real story: creates the website post as a **DRAFT**
 in Supabase `blog_posts`, then emails + Drives the human packet (verify list, the
 article, and the X post to copy-paste).
+
+Between the two-sides pass and the writer, **STEP 2B** renders the lead image when the
+reporter chose `map`: it POSTs the LOCATION to the **`greenville-image` Supabase Edge
+Function** (`supabase/functions/greenville-image/`), which geocodes it, renders a
+map-with-pin (and an aerial when asked), uploads them to the public `post-images`
+bucket, and returns hosted urls. The Google key lives only as the function's
+`GOOGLE_MAPS_KEY` secret, so the cloud agent and the public site never see it; the
+agent authenticates with the public anon key. If the call fails the run still
+publishes, just without the image.
 
 ## Cadence and where it posts
 
@@ -75,6 +85,7 @@ python -m unittest scripts.tests.test_greenville -v
   for." The writer pass bans demographic-targeting language.
 - **Attribution + an image credit.** Every number traces to a real publisher
   article; the post ends with a source credit; the delivered packet leads with a
-  MUST-VERIFY list. The lead image is a Wikimedia Commons photo, credited inline as
-  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition).
+  MUST-VERIFY list. The lead image is credited inline per its kind: a Commons photo as
+  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition), a map
+  as `*Map data © Google.*`, an aerial as `*Satellite imagery © Google.*`.
 - **Restraint.** Daily cadence, but the reporter posts nothing on a quiet day.

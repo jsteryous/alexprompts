@@ -57,6 +57,32 @@ python -m unittest scripts.tests.test_greenville -v
 - **X** has no auto-poster (no X connector); the routine drafts the X post and emails
   it for manual posting.
 
+## Images (the lead-image cascade)
+
+The lead image must be SPECIFIC to the story, never a generic stock photo. The
+reporter (`pass1_reporter.md` STEP 3) works a cascade and the writer renders the
+result:
+
+1. **Wikimedia Commons** only if a photo genuinely depicts the subject (the actual
+   building, venue, park, or development). A generic skyline is rejected.
+2. **Map of the location** otherwise (the common case). The reporter hands off a
+   geocodable LOCATION + an AERIAL yes/no; it does NOT render anything itself.
+3. **none** only when there is no specific place at all (rare for real estate).
+
+For a map, orchestrator **STEP 2B** POSTs `{address, aerial}` to the
+**`greenville-image` Supabase Edge Function** (`supabase/functions/greenville-image/`).
+The function geocodes the address, renders a roadmap-with-pin (the cover) and, when
+`aerial` is true, a hybrid satellite of the site, uploads both to the public
+**`post-images`** Storage bucket, and returns the hosted urls. The writer puts the map
+first (credit `*Map data © Google.*`) and, if an aerial came back, one mid-article
+aerial (credit `*Satellite imagery © Google.*`).
+
+**Keys.** The Google Maps key lives ONLY as the function's `GOOGLE_MAPS_KEY` secret
+(Supabase → Edge Functions → Secrets), so neither the cloud agent nor the public HTML
+ever holds it. The agent calls the function with the public anon key. The function needs
+**Maps Static, Geocoding, and Street View Static** enabled on that Google key. See
+memory [[greenville-lead-image-cascade]].
+
 ## Tuning
 
 - **Coverage:** edit the `BEATS` list in `collect.py` (each beat is a name + a Google

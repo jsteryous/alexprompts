@@ -12,14 +12,22 @@ STEP 1, PICK THE LEAD. Start from the signal's BIGGEST STORY. Reject it and move
 
 STEP 2, VERIFY. Using web search, confirm the load-bearing facts from at least two independent sources where possible. Pin down the specifics: the numbers (prices, percentages, unit counts, dollar figures, dates), who is involved, where exactly (neighborhood, corridor, county versus city), and what actually changed versus what is proposed or predicted. Note any figure you could find only once, and anything sources disagree on.
 
-STEP 3, GRAB A FREELY-LICENSED IMAGE FROM WIKIMEDIA COMMONS. The lead image must be one anyone can reuse: a freely-licensed real photo from Wikimedia Commons. Do NOT scrape the publisher's photo or its `og:image`; news photos are copyrighted by the outlet or a wire service and are not ours to republish.
-  1. NAME THE SUBJECT. Identify the one place, building, venue, or development the story centers on, and its PROPER NAME, the name people recognize on sight (e.g. "Bon Secours Wellness Arena", "Falls Park", "Unity Park", "Greenville-Spartanburg International Airport"), NOT its street address. That name is both what the writer leads with and what you search.
-  2. SEARCH COMMONS by that name. Query the Commons API for files, for example:
-     `https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=10&gsrsearch=Bon%20Secours%20Wellness%20Arena&prop=imageinfo&iiprop=url|extmetadata|mime&iiurlwidth=1600`
-     Replace `gsrsearch` with the proper name. If the exact place has no clean photo, broaden once to the neighborhood, corridor, or a recognizable Greenville landmark the story actually involves. Do not force an unrelated image to fill the slot.
-  3. PICK ONE clean, relevant, landscape-ish photo (`mime` image/jpeg or image/png), decent resolution, that genuinely depicts the subject. Skip logos, maps, low-res thumbnails, and anything not clearly the place.
-  4. RECORD three things, exactly as Commons gives them, for the required attribution: the absolute https image URL (use the scaled `thumburl` around 1600px wide so the file is not huge, else the full `url`); the AUTHOR (the `Artist` field in `extmetadata`, stripped of HTML; if it is public domain with no author, write the source); and the LICENSE (`LicenseShortName`, e.g. "CC BY-SA 4.0", or "Public domain"). Attribution is a license condition, so all three are required when IMAGE is not "none".
-  5. If Commons has nothing clean and relevant for the subject or its surroundings, set IMAGE to "none" and move on. A missing image is fine; a wrong or unlicensed one is not.
+STEP 3, GET A LEAD IMAGE (a cascade: a genuinely relevant Commons photo first, otherwise a map of the location). The image must be one anyone can reuse. NEVER scrape the publisher's photo or its `og:image`; news photos are copyrighted by the outlet or a wire service and are not ours to republish. Work the cascade in order and stop at the first option that yields a genuinely relevant image. The whole point is that the image actually relates to THIS story, so a generic stock photo is never acceptable.
+
+  A. WIKIMEDIA COMMONS, but only when it genuinely depicts the subject.
+     1. NAME THE SUBJECT. Identify the one place, building, venue, or development the story centers on, and its PROPER NAME, the name people recognize on sight (e.g. "Bon Secours Wellness Arena", "Falls Park", "Unity Park", "Greenville-Spartanburg International Airport"), NOT its street address. That name is both what the writer leads with and what you search.
+     2. SEARCH COMMONS by that name. Query the Commons API for files, for example:
+        `https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=10&gsrsearch=Bon%20Secours%20Wellness%20Arena&prop=imageinfo&iiprop=url|extmetadata|mime&iiurlwidth=1600`
+        Replace `gsrsearch` with the proper name.
+     3. Accept a Commons photo ONLY if it clearly and specifically depicts THIS subject: the actual building, venue, park, or development the story is about. A generic city skyline, a downtown stock shot, or an unrelated landmark does NOT count and must be rejected, even if it is "of Greenville". Skip logos, maps, low-res thumbnails, anything not clearly the place. If nothing on Commons specifically depicts the subject, do NOT broaden to a generic landmark. Go to option B instead.
+     4. If you accept one, RECORD three things exactly as Commons gives them, for the required attribution: the absolute https image URL (the scaled `thumburl` around 1600px wide, else the full `url`); the AUTHOR (the `Artist` field in `extmetadata`, HTML stripped; if public domain with no author, the source); and the LICENSE (`LicenseShortName`, e.g. "CC BY-SA 4.0", or "Public domain"). Set IMAGE = commons. Done with this step.
+
+  B. MAP OF THE LOCATION (the default when Commons has nothing specific). A real-estate story is tied to a place, so a map pinned on that place is almost always the right, specific image. Do NOT fetch, render, or geocode anything yourself; the orchestrator does that through a service. You only hand off the location:
+     - Set IMAGE = map.
+     - Provide LOCATION: the most precise geocodable string for the story's site. Prefer a street address or an intersection ("McDaniel Avenue and East McBee Street, Greenville, SC"); otherwise the proper place name plus city ("Bon Secours Wellness Arena, Greenville, SC"). Always include "Greenville" (or the correct Upstate town) and "SC".
+     - Provide AERIAL: "yes" when seeing the actual site from above helps the reader (a specific building, development, construction site, parcel, or land deal), "no" for diffuse stories (county-wide prices, mortgage rates, broad policy) where an overhead view adds nothing.
+
+  C. NONE. Only if the story has no specific place at all and no usable location (rare for real estate). Set IMAGE = none; the article opens on text. A missing image is fine; a generic, wrong, or unlicensed one is not.
 
 STEP 4, WRITE THE BRIEF. Output these sections, tight and factual:
 
@@ -30,10 +38,15 @@ STEP 4, WRITE THE BRIEF. Output these sections, tight and factual:
 - WHO IT AFFECTS: buyers, sellers, renters, a neighborhood, agents, the county budget. Be specific about who wins and who loses if it is clear, and say if it is not.
 - CONTEXT: the 2 to 4 facts a newcomer needs to understand why this matters locally. Verifiable only.
 - QUESTIONS THE STORY RAISES: 2 to 4 genuine open questions reasonable locals would argue about. These feed the two-sides pass.
-- IMAGE: the freely-licensed Wikimedia Commons photo, as three labeled values on their own lines, or "none":
-    - url: <absolute https image url, the ~1600px thumburl or the full url>
-    - author: <the Artist/author from Commons, plain text; or the source if public domain>
-    - license: <the LicenseShortName, e.g. "CC BY-SA 4.0", or "Public domain">
+- IMAGE: the cascade result from STEP 3. The first line is the kind: `commons`, `map`, or `none`.
+    - If `commons`, add three labeled lines:
+        - url: <absolute https image url, the ~1600px thumburl or the full url>
+        - author: <the Artist/author from Commons, plain text; or the source if public domain>
+        - license: <the LicenseShortName, e.g. "CC BY-SA 4.0", or "Public domain">
+    - If `map`, add two labeled lines:
+        - location: <precise geocodable string, including Greenville or the Upstate town, plus SC>
+        - aerial: <yes|no>
+    - If `none`, nothing else.
 - FACT VS SPECULATION: which load-bearing points are confirmed versus inference or forecast.
 - MUST-VERIFY: the short list of specific claims a human should double-check before publishing (any single-source number, any name, any "will happen" claim).
 - SOURCES: the real publisher article URLs you actually read (NOT Google News redirects), with the outlet name for each. The FIRST one is the primary source.

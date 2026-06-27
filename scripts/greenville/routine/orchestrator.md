@@ -26,7 +26,21 @@ STEP 1, PASS 1, REPORTER. Read scripts/greenville/routine/pass1_reporter.md. Han
 
 STEP 2, PASS 2, TWO SIDES. Read scripts/greenville/routine/pass2_sides.md. Hand its full contents plus ONLY /tmp/gv/pass1_brief.md to a fresh sub-agent. Save to /tmp/gv/pass2_sides.md.
 
-STEP 3, PASS 3, WRITER. Read scripts/greenville/routine/pass3_writer.md. Hand its full contents plus /tmp/gv/pass1_brief.md (for facts, image, sources, MUST-VERIFY) and /tmp/gv/pass2_sides.md to a fresh sub-agent. Save to /tmp/gv/pass3_final.md. It contains three labeled blocks: ## METADATA, ## ARTICLE, ## X.
+STEP 2B, RENDER THE LOCATION IMAGE (only when the reporter chose a map). Read the IMAGE section of /tmp/gv/pass1_brief.md.
+  - If IMAGE is `commons` or `none`: write two lines to /tmp/gv/images.txt: `COVER: none` and `AERIAL: none`. The writer will use the Commons image from the brief, or open on text. Skip the rest of this step.
+  - If IMAGE is `map`: call the `greenville-image` edge function to geocode the LOCATION, render a map-with-pin (plus an aerial when AERIAL is "yes"), and host the images in Supabase Storage. The function holds the Google key; you do not. Run:
+      ```
+      curl -s -X POST "https://ykuenmwfxecmmqichwit.supabase.co/functions/v1/greenville-image" \
+        -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrdWVubXdmeGVjbW1xaWNod2l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5MTAxMzAsImV4cCI6MjA4MzQ4NjEzMH0.MoJO92cIHwVXKGj7A9NXtCZW-JaKKAPrxxoch_Ga1Qk" \
+        -H "Content-Type: application/json" \
+        -d '{"address":"<the LOCATION from the brief>","aerial":<true if AERIAL is yes, else false>}'
+      ```
+      That bearer token is the project's PUBLIC anon key (the same one the website ships to browsers); it is safe to use here, and the function plus RLS guard access. Parse the JSON response. If it has `"ok":true`, write to /tmp/gv/images.txt:
+        - `COVER: <the "cover" url>`
+        - `AERIAL: <the "aerial" url, or "none" if it is null>`
+      If the call fails, times out, or returns `"ok":false`, write `COVER: none` and `AERIAL: none` to /tmp/gv/images.txt and continue. Never block the post on the image, and never substitute a generic or unlicensed one.
+
+STEP 3, PASS 3, WRITER. Read scripts/greenville/routine/pass3_writer.md. Hand its full contents plus /tmp/gv/pass1_brief.md (for facts, the IMAGE decision, sources, MUST-VERIFY), /tmp/gv/pass2_sides.md, and /tmp/gv/images.txt (the hosted COVER and AERIAL urls, when the image is a map) to a fresh sub-agent. Save to /tmp/gv/pass3_final.md. It contains three labeled blocks: ## METADATA, ## ARTICLE, ## X.
 
 STEP 4, PUBLISH TO THE WEBSITE (LIVE). Parse the ## METADATA block from /tmp/gv/pass3_final.md (title, slug, summary, tags, cover_image, source_url) and take the ## ARTICLE markdown as the body. Using the Supabase connector, INSERT one row into `blog_posts`:
   - title = METADATA title
