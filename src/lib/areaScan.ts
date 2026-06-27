@@ -147,29 +147,36 @@ class ScanError extends Error {
   }
 }
 
+// Resolve an address to coordinates via Places API (New) Text Search, so the whole
+// tool stays under the Places-New quotas (SearchText + SearchNearby) and needs no
+// separate Geocoding API setup. Same {formattedAddress, lat, lng} result.
 async function geocode(address: string): Promise<{ formattedAddress: string; lat: number; lng: number }> {
   const key = `geo:${address.toLowerCase().trim()}`;
   const cached = cacheGet<{ formattedAddress: string; lat: number; lng: number }>(key);
   if (cached) return cached;
 
   if (!reserveCall()) throw new ScanError("daily_cap", "Daily scan limit reached.");
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-    address,
-  )}&key=${API_KEY}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new ScanError("upstream_error", "Geocoding service error.");
+  const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Goog-Api-Key": API_KEY as string,
+      "X-Goog-FieldMask": "places.formattedAddress,places.location",
+    },
+    body: JSON.stringify({ textQuery: address, maxResultCount: 1 }),
+  });
+  if (!res.ok) throw new ScanError("upstream_error", "Lookup service error.");
   const json = (await res.json()) as {
-    status: string;
-    results?: { formatted_address: string; geometry: { location: { lat: number; lng: number } } }[];
+    places?: { formattedAddress?: string; location?: { latitude: number; longitude: number } }[];
   };
-  const first = json.results?.[0];
-  if (json.status !== "OK" || !first) {
+  const first = json.places?.[0];
+  if (!first?.location) {
     throw new ScanError("geocode_failed", "Could not find that address.");
   }
   const out = {
-    formattedAddress: first.formatted_address,
-    lat: first.geometry.location.lat,
-    lng: first.geometry.location.lng,
+    formattedAddress: first.formattedAddress ?? address,
+    lat: first.location.latitude,
+    lng: first.location.longitude,
   };
   cacheSet(key, out);
   return out;
