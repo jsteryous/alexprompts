@@ -62,8 +62,8 @@ export const toolCatalog: ToolEntry[] = [
     blurb:
       "Drop an address and get a 60-second read on what is already nearby: amenities, density, and how crowded a category is.",
     audience: "investors",
-    status: "soon",
-    cta: "Coming soon",
+    status: "live",
+    cta: "Scan an area",
   },
 ];
 
