@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { toolCatalog, audienceLabel } from "@/lib/tools";
+import { ToolIcon } from "@/components/ToolIcon";
 
 export const metadata: Metadata = {
   title: "Tools",
@@ -47,15 +48,23 @@ export default function ToolsPage() {
                     live ? "group-hover:opacity-90 transition-opacity" : "opacity-70"
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-                      {audienceLabel[t.audience]}
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <span
+                      className="inline-flex items-center justify-center w-12 h-12 rounded-xl shrink-0"
+                      style={{ background: "var(--accent-soft)" }}
+                    >
+                      <ToolIcon slug={t.slug} className="theme-label w-7 h-7" />
                     </span>
-                    {!live && (
-                      <span className="theme-warn-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-                        Coming soon
+                    <div className="flex flex-wrap items-center gap-2 justify-end">
+                      <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+                        {audienceLabel[t.audience]}
                       </span>
-                    )}
+                      {!live && (
+                        <span className="theme-warn-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+                          Coming soon
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <h2 className="theme-text-primary text-xl font-bold tracking-tight mb-2">{t.title}</h2>
                   <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>

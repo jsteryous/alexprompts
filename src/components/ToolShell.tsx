@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { newsletterUrl } from "@/lib/site";
 import { audienceLabel, type ToolEntry } from "@/lib/tools";
+import { ToolIcon } from "@/components/ToolIcon";
 
 /**
  * Shared chrome for every /tools page: the header (audience chip, title, blurb),
@@ -32,9 +33,17 @@ export function ToolShell({
             </svg>
             All tools
           </Link>
-          <span className="theme-badge inline-block text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-4">
-            {audienceLabel[tool.audience]}
-          </span>
+          <div className="flex items-center gap-4 mb-4">
+            <span
+              className="inline-flex items-center justify-center w-14 h-14 rounded-2xl shrink-0"
+              style={{ background: "var(--accent-soft)" }}
+            >
+              <ToolIcon slug={tool.slug} className="theme-label w-8 h-8" />
+            </span>
+            <span className="theme-badge inline-block text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+              {audienceLabel[tool.audience]}
+            </span>
+          </div>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
             {tool.title}
           </h1>

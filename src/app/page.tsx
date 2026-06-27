@@ -3,6 +3,7 @@ import { socials, newsletterUrl, manifesto, outcomes, realEstateOutcomes, princi
 import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel } from "@/lib/tools";
 import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
+import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
 
 /** The three content pillars, surfaced at the top so a first visit "gets into it"
@@ -202,9 +203,17 @@ export default async function HomePage() {
                   href={`/tools/${t.slug}`}
                   className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
                 >
-                  <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded self-start mb-3">
-                    {audienceLabel[t.audience]}
-                  </span>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="inline-flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
+                      style={{ background: "var(--accent-soft)" }}
+                    >
+                      <ToolIcon slug={t.slug} className="theme-label w-6 h-6" />
+                    </span>
+                    <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+                      {audienceLabel[t.audience]}
+                    </span>
+                  </div>
                   <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">{t.title}</h3>
                   <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
                   <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
