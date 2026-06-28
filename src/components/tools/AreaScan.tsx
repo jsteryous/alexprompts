@@ -97,12 +97,13 @@ export function AreaScan({ configured }: { configured: boolean }) {
     [data],
   );
 
-  // The currently expanded group (a category or the competitor), for the list panel.
-  const openGroup = useMemo(() => {
-    if (!data || !openKey) return null;
-    if (openKey === data.competitor.key) return data.competitor;
-    return data.categories.find((c) => c.key === openKey) ?? null;
-  }, [data, openKey]);
+  // The expanded category for the panel under the grid. The competitor list
+  // expands inline inside its own card, so it is intentionally not handled here
+  // (keeps the disclosure next to whatever you clicked).
+  const openCategory = useMemo(
+    () => (data && openKey ? data.categories.find((c) => c.key === openKey) ?? null : null),
+    [data, openKey],
+  );
 
   const toggle = (k: string) => setOpenKey((prev) => (prev === k ? null : k));
 
@@ -251,38 +252,50 @@ export function AreaScan({ configured }: { configured: boolean }) {
             </div>
           )}
 
-          {/* Competitor saturation headline (click to list them) */}
-          <button
-            type="button"
-            onClick={() => toggle(data.competitor.key)}
-            aria-expanded={openKey === data.competitor.key}
-            className="theme-card-strong border theme-border rounded-2xl p-6 mb-6 w-full text-left block"
+          {/* Subject result: the business type searched. The list expands inline
+              inside this card, right under the toggle, so it appears on click
+              without scrolling. */}
+          <div
+            className="theme-card-strong border theme-border rounded-2xl p-6 mb-6"
             style={openKey === data.competitor.key ? openCardStyle : undefined}
           >
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <div>
-                <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-1">
-                  {data.competitor.label}
+            <button
+              type="button"
+              onClick={() => toggle(data.competitor.key)}
+              aria-expanded={openKey === data.competitor.key}
+              disabled={data.competitor.count === 0}
+              className="w-full text-left block"
+            >
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div>
+                  <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-1">
+                    {data.competitor.label}
+                  </div>
+                  <div className="theme-text-primary text-3xl font-bold tabular-nums">
+                    {fmtCount(data.competitor)}
+                    <span className="theme-text-muted text-base font-normal"> nearby</span>
+                  </div>
                 </div>
-                <div className="theme-text-primary text-3xl font-bold tabular-nums">
-                  {fmtCount(data.competitor)}
-                  <span className="theme-text-muted text-base font-normal"> nearby</span>
-                </div>
+                <span
+                  className={`${sat.tone} border text-sm font-semibold uppercase tracking-widest px-3 py-1.5 rounded-lg`}
+                >
+                  {sat.label}
+                </span>
               </div>
-              <span
-                className={`${sat.tone} border text-sm font-semibold uppercase tracking-widest px-3 py-1.5 rounded-lg`}
-              >
-                {sat.label}
-              </span>
-            </div>
-            <p className="theme-text-muted text-sm mt-3">{sat.note}</p>
-            {data.competitor.count > 0 && (
-              <span className="theme-label text-xs font-semibold inline-flex items-center gap-1 mt-3">
-                {openKey === data.competitor.key ? "Hide the list" : "See the list"}
-                <Chevron open={openKey === data.competitor.key} />
-              </span>
+              <p className="theme-text-muted text-sm mt-3">{sat.note}</p>
+              {data.competitor.count > 0 && (
+                <span className="theme-label text-xs font-semibold inline-flex items-center gap-1 mt-3">
+                  {openKey === data.competitor.key ? "Hide the list" : "See the list"}
+                  <Chevron open={openKey === data.competitor.key} />
+                </span>
+              )}
+            </button>
+            {openKey === data.competitor.key && data.competitor.places.length > 0 && (
+              <div className="mt-5 pt-5 border-t theme-border">
+                <PlaceList places={data.competitor.places} capped={data.competitor.capped} />
+              </div>
             )}
-          </button>
+          </div>
 
           {/* Neighborhood amenity counts (click a card to list them) */}
           <div className="theme-text-muted text-xs font-semibold uppercase tracking-widest mb-3">
@@ -312,13 +325,13 @@ export function AreaScan({ configured }: { configured: boolean }) {
             })}
           </ul>
 
-          {/* Detail panel: the actual places in the open category/competitor */}
-          {openGroup && openGroup.places.length > 0 && (
+          {/* Detail panel for the open amenity category, directly under the grid. */}
+          {openCategory && openCategory.places.length > 0 && (
             <div className="theme-card-strong border theme-border rounded-2xl p-6 mt-6">
               <div className="flex items-center justify-between gap-3 mb-4">
                 <h3 className="theme-text-primary text-lg font-semibold">
-                  {openGroup.label}{" "}
-                  <span className="theme-text-muted font-normal">({fmtCount(openGroup)})</span>
+                  {openCategory.label}{" "}
+                  <span className="theme-text-muted font-normal">({fmtCount(openCategory)})</span>
                 </h3>
                 <button
                   type="button"
@@ -328,26 +341,7 @@ export function AreaScan({ configured }: { configured: boolean }) {
                   Close
                 </button>
               </div>
-              <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
-                {openGroup.places.map((p, i) => (
-                  <li key={`${p.name}-${i}`}>
-                    <a
-                      href={mapsUrl(p)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="theme-link text-sm py-1.5 inline-flex items-baseline gap-2 hover:underline"
-                    >
-                      <span className="theme-text-muted tabular-nums text-xs w-5 shrink-0">{i + 1}.</span>
-                      {p.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {openGroup.capped && (
-                <p className="theme-text-muted text-xs mt-4">
-                  Showing the 20 closest. There may be more in this radius.
-                </p>
-              )}
+              <PlaceList places={openCategory.places} capped={openCategory.capped} />
             </div>
           )}
         </div>
@@ -360,6 +354,35 @@ const openCardStyle: React.CSSProperties = {
   borderColor: "var(--accent)",
   boxShadow: "0 0 0 1px var(--accent)",
 };
+
+/** A numbered, two-column list of places, each linking out to Google Maps.
+ *  Shared by the competitor card (inline) and the category panel. */
+function PlaceList({ places, capped }: { places: PlaceItem[]; capped: boolean }) {
+  return (
+    <>
+      <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
+        {places.map((p, i) => (
+          <li key={`${p.name}-${i}`}>
+            <a
+              href={mapsUrl(p)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="theme-link text-sm py-1.5 inline-flex items-baseline gap-2 hover:underline"
+            >
+              <span className="theme-text-muted tabular-nums text-xs w-5 shrink-0">{i + 1}.</span>
+              {p.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {capped && (
+        <p className="theme-text-muted text-xs mt-4">
+          Showing the 20 closest. There may be more in this radius.
+        </p>
+      )}
+    </>
+  );
+}
 
 function Chevron({ open }: { open: boolean }) {
   return (
