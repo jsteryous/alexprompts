@@ -1,13 +1,13 @@
 
 ======================================================================
 GREENVILLE, SC REAL-ESTATE SIGNAL
-Collected 2026-06-27 08:28 UTC
+Collected 2026-06-28 08:42 UTC
 
 BEAT COVERAGE (headlines found per beat):
-  Market       11
+  Market       12
   Development  12
   Rentals      9
-  Policy       11
+  Policy       12
   Upstate      12
 
 BIGGEST STORY (most corroborated, the lead to write up):
@@ -15,14 +15,14 @@ BIGGEST STORY (most corroborated, the lead to write up):
   https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
   beats=Market, Rentals, Policy | outlets=Post and Courier | appearances=3 | score=14
 
-RANKED STORIES (top 20 of 48):
+RANKED STORIES (top 20 of 51):
   1. [  14] Affordable senior housing opens near Five Forks in Greenville County - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
       beats=Market, Rentals, Policy | outlets=Post and Courier
-  2. [  14] This $5M historic home in SC just broke a sales record. Take a look - The State (Tue, 16 Jun 2026 07:00:00 GMT)
+  2. [  10] This $5M historic home in SC just broke a sales record. Take a look - The State (Tue, 16 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMifEFVX3lxTE5BbmtKbzJjUHNnNUh0ZnlRVUhwdV82OVJIV2NPWXBsOUlEYnZyd1B1U191STFTSkpETXdOOEN3ODZCUXdnNnN4TGhmbm1HS0ZDQ0xuVEctc296NUd0c05ZX3l5a08yc0VTeTliN2ZkY2JfLXc0eGFGS21sMUPSAXxBVV95cUxOMVQyUFFSdm9WbTFSakpqczVLNHNOUmttazBOdVVNaFNZQTN6dmQ1WnV0ZVhtUjkzSFpQaF94a2FfWGNYdzZENmg4WW5HS3BleGN0Vy1qTzlRN2lQTDZTZ2FvWEFGMHBHZWFZX0lPS1V0YVdLNnNlVHVJMXlZ?oc=5
-      beats=Market, Development, Upstate | outlets=The State
-  3. [  10] Greenville County passes $475M budget, skirting controversy while considering new sales tax - Post and Courier (Thu, 18 Jun 2026 09:00:00 GMT)
+      beats=Market, Development | outlets=The State
+  3. [  10] Greenville County passes $475M budget, skirting controversy while considering new sales tax - Post and Courier (Thu, 18 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi4AFBVV95cUxPRnRzVHU4MDJhOEt4eUd5cV9yR1hkSWlRMU5WNmxLLWdncHc4UnMtbXl3UTQwanI2Q3ZTSkptQTFDN0FpcDI0Yk9BaGNsVndrTTVyemRtT3ZtSEFnQ2x6bHRDSnNETnRVNkt6VFFzOHhmTGZDZ2puSTRJY0FLYmRURHNPYmN2bkE0cmlZQlV2c3lrN0E0N19fb2lUQUFsSEt4TDZ5QXJ3RERMb0ppQXFtRDRnbTNRN25jLUxUeVhxRjRaeG1FQklBQ3FYTU9ZQTJWcEJpemVBeWM4anR4UXlOcw?oc=5
       beats=Market, Policy | outlets=Post and Courier
   4. [  10] Hailed as the swankiest new homes in Greenville, unpaid bills leave The McDaniel in financial crisis - Post and Courier (Sun, 21 Jun 2026 07:00:00 GMT)
@@ -31,12 +31,12 @@ RANKED STORIES (top 20 of 48):
   5. [   9] Greenville County just passed a $473M budget — here’s what changed - Greenville Online (Wed, 17 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi0wFBVV95cUxQNDNlRFJQQlFqZTFJalFvdGNUSGVDal85eFlteXNCcmFvX29ZSmxpQnJtRnVvb3lUN3FWc19BTkVLOW5JRUJPQlhXOXNLVndySThJZXByMXdKSVZEdkdENW1RX0s3NGFXX1RZNjVDUXdHd0wwSnFOQ0ZmUE15dWs5RFJnR0hZcmZzR1pzQk04OUxjU2xQXzd1NE1faV9IbnBvb1kwSjRpYldxWlZqQnJYa0RCVUpzSWU1SG4yNm1OU2xkbjFkeVpsLXNzbGNILU5JVkU0?oc=5
       beats=Policy | outlets=Greenville Online, AOL.com
-  6. [   6] Exclusive: DLH Properties Completes $61M Sale in South Carolina - Multifamily Housing News (Thu, 18 Jun 2026 10:24:20 GMT)
+  6. [   6] Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine (Thu, 25 Jun 2026 18:12:38 GMT)
+      https://news.google.com/rss/articles/CBMiwAFBVV95cUxPTHFvSVFFSERPZXF0cnEtSTRyek5IaFBncng4UzE0VG1XeC1HZ2s2aHZKZ3JFN0xSZnhBN2JmbWNPbUZOWGdpdVc1NW11bTZ3Y2tCWGhmcG1rVjFUMi1kUzY0Q0ZOZGktVUdRU0pGdkdBUUh1Q1l6SzVZVFpITVZseWFPZ2VWNXd6NHUwcS00Q2w4Q2x5clJRMkw3Vkg4MVhFQXQ0eUNDWXc5d3I1RmJmUHktUTV0dHdDSm5vdkExUnM?oc=5
+      beats=Market | outlets=Greenville Business Magazine
+  7. [   6] Exclusive: DLH Properties Completes $61M Sale in South Carolina - Multifamily Housing News (Thu, 18 Jun 2026 10:24:20 GMT)
       https://news.google.com/rss/articles/CBMilAFBVV95cUxNTXhSOXZyMXcxdHFlbjNhZm91TXRQMjBJQWVTSlFWMEtkaHgxUk5pZjlwZ3owelBGaVRrdk1JLXo1NFhTZDJZTUEzUmVlTjJWbE9oQmZodEJnZTFtUmEzOXJRWE82cGpzVThCRUV3bHR6WHVLcmFNbG12UXJobTJKVHItb0V4bmxRTGlGSzhyNGxsMkxl?oc=5
       beats=Market | outlets=Multifamily Housing News
-  7. [   6] Southpointe Senior Brings 90 Affordable Homes for Seniors to Greenville - Greenville Business Magazine (Thu, 25 Jun 2026 18:12:38 GMT)
-      https://news.google.com/rss/articles/CBMivwFBVV95cUxQLUFEM2NCUF9BYUNCLXdjM2VXY2owTjJRRTB2NWVUd3BkYzM1RFFNWkNSMVh5dklsbEZVeVhLemdNUU4zN2pfZWwyeTUzeWJoenJJYmVTb0Job2cxRGN2ZUxHWVhmVmVyYUVSaV9mUzFNSUg2WkxtWllUb2puekppY0h2d2EwS2JuUms0TzdGM3l1MTU3bWk5M09iSHJGMEpzRkZ6ckVrVHBQR2ZQY3ZoX1N1dUcyekFQdEtvX1NNWQ?oc=5
-      beats=Market | outlets=Greenville Business Magazine
   8. [   6] NEW AFFORDABLE HOUSING - FOX Carolina News (Fri, 26 Jun 2026 20:46:00 GMT)
       https://news.google.com/rss/articles/CBMid0FVX3lxTE84eGFyWXdkdUhRZEJqSGRScDJsRG8xMU5kV29kSGUyVGZVTURib0RWTk1nbGIzUXdJazNyWVRvNEFyRnc5RmVIX0ZOaVQyMGRtLWJDNzZzLWtVR0dCaHBrVjZWX0RVNXFoS1hPT25CMHhyMjhHakpN?oc=5
       beats=Market | outlets=FOX Carolina News
@@ -55,25 +55,25 @@ RANKED STORIES (top 20 of 48):
  13. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
       https://news.google.com/rss/articles/CBMi4wFBVV95cUxNS2NmRVlzY1JwMy1XRHZPS3FkRFZfRkFMMG1HQlVVWmZLYTN1YzVpVUNIMHVUOE9VX0p6S180M0w3YVZJaDQxN2dOaHFhVUxjYk80UmNSdFllQWZEX1B5ZGhBV1VwZkRDNXNRNmZyMWllUlVETlZpdGlzai12OFNZSUxoUk9QRWRRR3VqYndzSjM2OHNBWlFIM2E1ZmdGcTFWWW1EYWdWMkJKM3puazIyOUNvVENOVmR3UXIzWnJwclR4SDVENUNJd3picGVaNnBFVmxOdFowajVMZGdpbUpFNTZQMA?oc=5
       beats=Market | outlets=Post and Courier
- 14. [   6] Greenville design board approves next steps for $282 million downtown projects - FOX Carolina News (Fri, 19 Jun 2026 15:35:00 GMT)
+ 14. [   6] Live updates: Many Greenville County polling sites report slow turnout in primary runoff - Post and Courier (Tue, 23 Jun 2026 11:00:00 GMT)
+      https://news.google.com/rss/articles/CBMi4AFBVV95cUxPYXJHQU1SNjFQcUpNV2lEMDdvWDFPX0o4SlJDMzFIVVoyajNDd29sSjNqeGs2UVVGWlFrb1NSQmNWbldvVDdRRnhsWVhVLVhHYWJSYlFMSTl4V0Q3SGhUcXRidkVyZ2lYOFptZjgwNTlBc09xMWgyN29abTViMkdIRW4wYU45YU1lYnBZSHpWU3daWFNvc1BQWFptWF9jdVZHOE1WSEF2cHJ1ME5qRkhWX0ZXQmI4R2FEeHRjX1Rsc3QxQTdmMDg0SHR4UG45bkFoWV81QzI0VGVxVTJkLWU1cA?oc=5
+      beats=Market | outlets=Post and Courier
+ 15. [   6] Greenville design board approves next steps for $282 million downtown projects - FOX Carolina News (Fri, 19 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMiswFBVV95cUxQNDRILUlhZV9yRm4zaEstSU1mc25aMHRfN1Y4LUJhZEplMFJsSUplclM2ZV9QbUhuOUQ4N1UzZ2R0N0dWaVB1aGFfOHcyVXhORllwMUtpRzl3MlV4RXV0WXpDcHBoVTZLZ3AxaXZ6c08xYVdnd3JPc1FKbVFpckJDb082VkV6aUlMX1BheVJmZTl3R3lMM0E5dUkxWGVHclRHNXV4N1QxMFh1WlFlZzg0anFOZ9IBxwFBVV95cUxNMEhVTWpkWDBGbEd5X0g4a2dXWlplMWtadkUzM1lCZ3hlcTlNZU5XN243RkdlN01MdHpxOGVMRlNpNnY5bDdPVUQ2MFRUT3lWV2hlVlJSdnloVWgwSDlEVkk1SUo3bDlwalBhMzE2T2hBa3RRcHRLX3Mzeno5UXY3WlViSHhxMDUyb1FDdXhCd3hHUW5pbUwwQ1dKWjQ1R1kwd0Nnemo0akNiQmlmeW9tWEJMZXpPOVhablJCZlNIYldrT0g1Mkx3?oc=5
       beats=Development | outlets=FOX Carolina News
- 15. [   6] Downtown Greenville bar announces closure - WYFF (Tue, 16 Jun 2026 07:00:00 GMT)
+ 16. [   6] Downtown Greenville bar announces closure - WYFF (Tue, 16 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMifkFVX3lxTE01TFloZGRWN3dRNmx6VXd2MFY5RVJaZy1XWDY3TGNsdjFreFNfY05FZTlYQXpJOHZQTzJVamNuMFcxWVVsRS1scnBOVlduVEhVdUh6TFk5T2dFalN2bURTdlU0anJNSk1ZRDctVjJublZrR1EtZG9xNmtKeXNmdw?oc=5
       beats=Development | outlets=WYFF
- 16. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 15:07:00 GMT)
+ 17. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 15:07:00 GMT)
       https://news.google.com/rss/articles/CBMizAFBVV95cUxNekhnelFrbWUtN2xVWVhmZXd6QlhCc3c0TDRyUEZGNUVmbFhONU1lbVpKb1pSdVE1UG04YnVObHA2MzlXdm1rMWhKcGswZGt0aVkxSktxWGpKMjFUazRMMmZhQTB5UlJLRXlLUVc1blUxMFBKdjhHajV6T1c0Rld4enNUOVVvaVVQLW9GbHI4cHBOb2o4RzNOYjR4Z1ZmLTRYaS1FQTUwZmNuWEhWbnE5S3dMV04tTkZncmZYRUlyZUg2QzE0UlFFQkJyM0I?oc=5
       beats=Development | outlets=Greenville Online
- 17. [   6] 10 Hidden Gems in Greenville, SC You Need to Visit! - Kidding Around Greenville (Fri, 19 Jun 2026 07:00:00 GMT)
+ 18. [   6] 10 Hidden Gems in Greenville, SC You Need to Visit! - Kidding Around Greenville (Fri, 19 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMieEFVX3lxTFBzRXVQdk1SVS1nTUU5RVEyNE9JSGJuSkdmRDN2UWNoUTB2VDhxdG4xc1NvYlRTWjZIRzlRU284cmRVZmN4QV9hYXdkZTl1Z25DRzU1VWE1dU5OZWV2T1VUaWxORmVWemhua2FnbWllS2Mwbm1jWm1yXw?oc=5
       beats=Development | outlets=Kidding Around Greenville
- 18. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
+ 19. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
       https://news.google.com/rss/articles/CBMingFBVV95cUxPOWZiVHBuNXpsXzk0ZkRjZ0hiejFxaktZY1lUTFRRelVyNEozbFVUeF9qRlBKX2NidEVvaDNGR0pQQ0ZvOHFwdm54bF9SS1AxYVFQQmtibUNuaU84VEU0b2NvUjFScUYzTk5SZmpub1pRTG1weTVhcktxUjlDelp1WGlaazBZYTFVTi1ER012QTBQb3NDUjJGbGlnS0wxZ9IBswFBVV95cUxQRzk4V3R5V0dwQ0w2eWt4QnNTT2tkOHU5M0l1OWNJbzhkXzg2UmMzQTFxckozUnlSdE1jNDB0VnVqLXlvOVRMRlpUVVRwOThxQnlrTzUwT2RsZS1IOTRWVzBIdGxqNVc0Rl84dmVBSFhVenpMMlFrdlF5LV9KanlLMGZFREYxWVRYWUo3am5jb1EtbkgtUmQ2dlVSWVRsWW8za1I4SmtVSnE1MF9HMnJib0t6aw?oc=5
       beats=Development | outlets=FOX Carolina News
- 19. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
+ 20. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi4AFBVV95cUxNUnZJTFJPSmRiSGFuOElKZ2h3U19hYTgzNGJGU2ZEYTlpb1Brb0V5MjAzeF9aaTNBd3d3TXU4NEVGNzhMZExFWUlOTEkycXRIUVlCMjRDZkdoRFBENXZKbUtqbDJBUWZYeGpNbV96bFdtV2RnUjVKRmdwZ29qMklLNzZSMjdtcEdpZDJwVjV3Rnk0SEZvU3BRbDRoczV2NHZENWI3RF8xeW1oWmNFa19UUUNKQXZwa1ZHTlZ5cXpmald2X3hhLVJ4RGRMNmVSR3hBaVNuT2JPdWoycUVKYVhKNw?oc=5
       beats=Development | outlets=Post and Courier
- 20. [   6] SCDOT: Church Street bridge set to reopen this week - WYFF (Mon, 15 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMijgFBVV95cUxPbG9BR0J6WGZJdXBTZ3Z2d2ptVFU0UE1fUEJpNDR2Vk9yNXhoYnNKYUdLemhmNENONlNLU2xjVFczc3RZaXhURE1pVlhkTmFXcDNoMW1QU3JiSjdxb0N3UUlSYjZtelhtUUxZT085YVdSbDJIbVBUbjg5NzVnUVdaZTZWRnk4Y3liMGt5djBB?oc=5
-      beats=Development | outlets=WYFF
 ======================================================================
