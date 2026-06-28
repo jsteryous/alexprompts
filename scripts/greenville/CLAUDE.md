@@ -84,17 +84,27 @@ result:
 
 1. **Wikimedia Commons** only if a photo genuinely depicts the subject (the actual
    building, venue, park, or development). A generic skyline is rejected.
-2. **Map of the location** otherwise (the common case). The reporter hands off a
-   geocodable LOCATION + an AERIAL yes/no; it does NOT render anything itself.
-3. **none** only when there is no specific place at all (rare for real estate).
+2. **A render of the location** otherwise, and this is the FLOOR: every real-estate
+   story happens somewhere, so unless the story is genuinely placeless (step 3) the
+   reporter must choose `map` and hand off a geocodable LOCATION + an AERIAL yes/no. It
+   does NOT render anything itself. `none` is almost never correct; a brand-new building
+   not yet on Commons is a `map`, not a `none` (this is exactly the gap that shipped a
+   senior-community story imageless in June 2026).
+3. **none** only when the story has no building, road, neighborhood, or town to pin at
+   all (a pure rate or county-budget item). This should be vanishingly rare.
 
-For a map, orchestrator **STEP 2B** POSTs `{address, aerial}` to the
+For a map, orchestrator **STEP 2B** POSTs `{address, aerial, streetview}` to the
 **`greenville-image` Supabase Edge Function** (`supabase/functions/greenville-image/`).
-The function geocodes the address, renders a roadmap-with-pin (the cover) and, when
-`aerial` is true, a hybrid satellite of the site, uploads both to the public
-**`post-images`** Storage bucket, and returns the hosted urls. The writer puts the map
-first (credit `*Map data © Google.*`) and, if an aerial came back, one mid-article
-aerial (credit `*Satellite imagery © Google.*`).
+The function geocodes the address and picks the cover by a sub-cascade: a **Street View
+photo of the site** when Google has imagery there (so `/real-estate` is not wall-to-wall
+red-pin maps), otherwise a **roadmap-with-pin**. It also renders a hybrid satellite when
+`aerial` is true. It uploads them to the public **`post-images`** bucket and returns
+`cover`, `coverKind`, `coverCredit` (the exact credit line), `map`, `aerial`, and
+`streetview`. The orchestrator requests `streetview` whenever AERIAL is "yes". The writer
+puts `cover` first with `coverCredit` verbatim and, if an aerial came back, one
+mid-article aerial (credit `*Satellite imagery © Google.*`). If the call fails it is
+retried once; if it still fails the post ships imageless but the run **flags it loudly**,
+so a placed story never silently loses its image without a trace.
 
 **Keys.** The Google Maps key lives ONLY as the function's `GOOGLE_MAPS_KEY` secret
 (Supabase → Edge Functions → Secrets), so neither the cloud agent nor the public HTML

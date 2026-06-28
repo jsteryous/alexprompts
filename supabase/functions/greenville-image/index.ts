@@ -3,10 +3,11 @@
 // the public site never exposes one.
 //
 // The routine's image cascade is: a genuinely relevant Wikimedia Commons photo
-// (decided in pass1, no key needed) -> THIS function for a map-with-pin (+ optional
-// aerial / Street View) -> "none" only as a true last resort. This function owns the
-// keyed half: geocode an address, render the images via Google Static Maps / Street
-// View, upload them to the public `post-images` bucket, and return the hosted URLs.
+// (decided in pass1, no key needed) -> THIS function for a Street-View-or-map cover
+// (+ optional aerial) -> "none" only when the story has no physical location at all.
+// This function owns the keyed half: geocode an address, render a Street View photo of
+// the site when Google has imagery there (else a map-with-pin) plus an optional aerial,
+// upload them to the public `post-images` bucket, and return the hosted URLs.
 //
 // Secrets live HERE, not in the repo or on the agent:
 //   - GOOGLE_MAPS_KEY        custom secret (set in Supabase -> Edge Functions -> Secrets),
@@ -18,10 +19,13 @@
 // key is already shipped to browsers, so it is safe to hardcode in the routine.
 //
 // POST JSON: { "address": string, "aerial"?: boolean, "streetview"?: boolean }
-// 200 JSON:  { ok, lat, lng, formatted, cover, aerial, streetview }
-//   cover     = roadmap map-with-pin URL (always; this is the post cover)
-//   aerial    = hybrid satellite URL, or null (only when requested)
-//   streetview= Street View URL, or null (only when requested AND imagery exists)
+// 200 JSON:  { ok, lat, lng, formatted, cover, coverKind, coverCredit, map, aerial, streetview }
+//   cover      = the chosen cover URL: the Street View photo when one exists, else the map
+//   coverKind  = "streetview" | "map" (what `cover` actually is)
+//   coverCredit= the exact italic credit line for `cover` ("*Street View © Google.*" / "*Map data © Google.*")
+//   map        = roadmap map-with-pin URL (always rendered; the cover fallback)
+//   aerial     = hybrid satellite URL, or null (only when requested; the optional 2nd image)
+//   streetview = Street View URL, or null (only when requested AND imagery exists)
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient, SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
@@ -110,22 +114,16 @@ Deno.serve(async (req: Request) => {
     const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
     const dir = `greenville/${stamp}-${crypto.randomUUID().slice(0, 8)}`;
 
-    // 2. Cover: roadmap with a pin, wide for the card hero. Always produced.
+    // 2. Map: roadmap with a pin, wide for the card hero. Always produced. It is the
+    //    cover FALLBACK and, for sites with no Street View, the cover itself.
     const mapUrl =
       `${GMAPS}/staticmap?center=${ll}&zoom=16&size=1200x675&scale=2` +
       `&markers=color:red%7C${ll}&key=${key}`;
-    const cover = await upload(supabase, `${dir}/map.png`, await fetchImage(mapUrl));
+    const map = await upload(supabase, `${dir}/map.png`, await fetchImage(mapUrl));
 
-    // 3. Aerial: hybrid (satellite + street labels) of the site, when asked for.
-    let aerial: string | null = null;
-    if (body.aerial) {
-      const aerialUrl =
-        `${GMAPS}/staticmap?center=${ll}&zoom=18&size=1200x675&scale=2&maptype=hybrid` +
-        `&markers=color:red%7C${ll}&key=${key}`;
-      aerial = await upload(supabase, `${dir}/aerial.png`, await fetchImage(aerialUrl));
-    }
-
-    // 4. Street View: only if Google actually has imagery at the point.
+    // 3. Street View: only if Google actually has imagery at the point. When it does it
+    //    BECOMES the cover. A street-level photo of the real building looks like a photo,
+    //    not a red-pin map, so the /real-estate section does not turn into a wall of maps.
     let streetview: string | null = null;
     if (body.streetview) {
       const meta = await fetch(
@@ -137,7 +135,23 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    return json({ ok: true, lat, lng, formatted, cover, aerial, streetview });
+    // 4. Aerial: hybrid (satellite + street labels) of the site, when asked for. This is
+    //    the optional SECOND image the writer drops mid-article, never the cover.
+    let aerial: string | null = null;
+    if (body.aerial) {
+      const aerialUrl =
+        `${GMAPS}/staticmap?center=${ll}&zoom=18&size=1200x675&scale=2&maptype=hybrid` +
+        `&markers=color:red%7C${ll}&key=${key}`;
+      aerial = await upload(supabase, `${dir}/aerial.png`, await fetchImage(aerialUrl));
+    }
+
+    // 5. Pick the cover: the Street View photo when it exists, else the map. Hand the
+    //    writer the exact credit line so attribution is never guessed.
+    const cover = streetview ?? map;
+    const coverKind = streetview ? "streetview" : "map";
+    const coverCredit = streetview ? "*Street View © Google.*" : "*Map data © Google.*";
+
+    return json({ ok: true, lat, lng, formatted, cover, coverKind, coverCredit, map, aerial, streetview });
   } catch (e) {
     const msg = String(e instanceof Error ? e.message : e);
     return json({ ok: false, error: scrub(msg, key) }, 500);

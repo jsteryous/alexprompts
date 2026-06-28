@@ -17,8 +17,10 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
    the site already covered, and lists what a human must verify. It also decides the
    lead image via a **cascade**: a Wikimedia Commons photo only if one genuinely
    depicts the subject (never a generic skyline), otherwise a `map` of the location
-   (it hands off a geocodable LOCATION + an AERIAL yes/no), else `none`. On a quiet
-   day it returns `NO NEW STORY TODAY` and the run stops.
+   (it hands off a geocodable LOCATION + an AERIAL yes/no). A render of the location is
+   the FLOOR, so `none` is reserved for a truly placeless story (a pure rate or budget
+   item) and should be vanishingly rare. On a quiet day it returns `NO NEW STORY TODAY`
+   and the run stops.
 2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
    THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
    reader's question. Takes no stance.
@@ -34,12 +36,16 @@ article, and the X post to copy-paste).
 
 Between the two-sides pass and the writer, **STEP 2B** renders the lead image when the
 reporter chose `map`: it POSTs the LOCATION to the **`greenville-image` Supabase Edge
-Function** (`supabase/functions/greenville-image/`), which geocodes it, renders a
-map-with-pin (and an aerial when asked), uploads them to the public `post-images`
-bucket, and returns hosted urls. The Google key lives only as the function's
-`GOOGLE_MAPS_KEY` secret, so the cloud agent and the public site never see it; the
-agent authenticates with the public anon key. If the call fails the run still
-publishes, just without the image.
+Function** (`supabase/functions/greenville-image/`), which geocodes it and picks the
+cover by a sub-cascade. A **Street View photo** of the site when Google has imagery there
+(so the section is not wall-to-wall red-pin maps), otherwise a **map-with-pin**, plus an
+aerial when asked. It uploads them to the public `post-images` bucket and returns the
+hosted urls and the exact credit line. The orchestrator requests Street View whenever
+AERIAL is "yes". The Google key lives only as the function's `GOOGLE_MAPS_KEY` secret, so
+the cloud agent and the public site never see it; the agent authenticates with the public
+anon key. If the call fails it is **retried once**, and if it still fails the run
+publishes without the image but **flags it loudly** so a placed story never silently
+loses its cover.
 
 ## Cadence and where it posts
 
@@ -86,6 +92,7 @@ python -m unittest scripts.tests.test_greenville -v
 - **Attribution + an image credit.** Every number traces to a real publisher
   article; the post ends with a source credit; the delivered packet leads with a
   MUST-VERIFY list. The lead image is credited inline per its kind: a Commons photo as
-  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition), a map
-  as `*Map data © Google.*`, an aerial as `*Satellite imagery © Google.*`.
+  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition), a Street
+  View photo as `*Street View © Google.*`, a map as `*Map data © Google.*`, an aerial as
+  `*Satellite imagery © Google.*`.
 - **Restraint.** Daily cadence, but the reporter posts nothing on a quiet day.

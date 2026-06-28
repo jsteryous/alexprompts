@@ -27,18 +27,19 @@ STEP 1, PASS 1, REPORTER. Read scripts/greenville/routine/pass1_reporter.md. Han
 STEP 2, PASS 2, TWO SIDES. Read scripts/greenville/routine/pass2_sides.md. Hand its full contents plus ONLY /tmp/gv/pass1_brief.md to a fresh sub-agent. Save to /tmp/gv/pass2_sides.md.
 
 STEP 2B, RENDER THE LOCATION IMAGE (only when the reporter chose a map). Read the IMAGE section of /tmp/gv/pass1_brief.md.
-  - If IMAGE is `commons` or `none`: write two lines to /tmp/gv/images.txt: `COVER: none` and `AERIAL: none`. The writer will use the Commons image from the brief, or open on text. Skip the rest of this step.
-  - If IMAGE is `map`: call the `greenville-image` edge function to geocode the LOCATION, render a map-with-pin (plus an aerial when AERIAL is "yes"), and host the images in Supabase Storage. The function holds the Google key; you do not. Run:
+  - If IMAGE is `commons` or `none`: write three lines to /tmp/gv/images.txt: `COVER: none`, `COVER_CREDIT: none`, and `AERIAL: none`. The writer will use the Commons image from the brief, or open on text. Skip the rest of this step.
+  - If IMAGE is `map`: call the `greenville-image` edge function to geocode the LOCATION and render the cover, hosting the images in Supabase Storage. The function picks the cover by a sub-cascade: a Street View PHOTO of the site when Google has imagery there (so /real-estate is not wall-to-wall red-pin maps), otherwise a roadmap-with-pin. It also renders an aerial when AERIAL is "yes". Request `streetview` whenever AERIAL is "yes": a specific, street-addressable site is exactly where a real photo beats a map. The function holds the Google key; you do not. Run:
       ```
-      curl -s -X POST "https://ykuenmwfxecmmqichwit.supabase.co/functions/v1/greenville-image" \
+      curl -s --max-time 60 -X POST "https://ykuenmwfxecmmqichwit.supabase.co/functions/v1/greenville-image" \
         -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrdWVubXdmeGVjbW1xaWNod2l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5MTAxMzAsImV4cCI6MjA4MzQ4NjEzMH0.MoJO92cIHwVXKGj7A9NXtCZW-JaKKAPrxxoch_Ga1Qk" \
         -H "Content-Type: application/json" \
-        -d '{"address":"<the LOCATION from the brief>","aerial":<true if AERIAL is yes, else false>}'
+        -d '{"address":"<the LOCATION from the brief>","aerial":<true if AERIAL is yes, else false>,"streetview":<true if AERIAL is yes, else false>}'
       ```
       That bearer token is the project's PUBLIC anon key (the same one the website ships to browsers); it is safe to use here, and the function plus RLS guard access. Parse the JSON response. If it has `"ok":true`, write to /tmp/gv/images.txt:
         - `COVER: <the "cover" url>`
+        - `COVER_CREDIT: <the "coverCredit" string verbatim, e.g. *Street View © Google.* or *Map data © Google.*>`
         - `AERIAL: <the "aerial" url, or "none" if it is null>`
-      If the call fails, times out, or returns `"ok":false`, write `COVER: none` and `AERIAL: none` to /tmp/gv/images.txt and continue. Never block the post on the image, and never substitute a generic or unlicensed one.
+      If the call fails, times out, or returns `"ok":false`, RETRY it ONCE (the function cold-starts and Google can hiccup). If the retry ALSO fails, write `COVER: none`, `COVER_CREDIT: none`, and `AERIAL: none`, and because this is a placed story that SHOULD have had an image, flag it: add a line to your STEP 6 report and to the STEP 5 packet reading "IMAGE RENDER FAILED for <LOCATION>; post shipped without a cover; check the greenville-image function." Never block the post on the image, and never substitute a generic or unlicensed one. A `map` story must never silently lose its image without that flag.
 
 STEP 3, PASS 3, WRITER. Read scripts/greenville/routine/pass3_writer.md. Hand its full contents plus /tmp/gv/pass1_brief.md (for facts, the IMAGE decision, sources, MUST-VERIFY), /tmp/gv/pass2_sides.md, and /tmp/gv/images.txt (the hosted COVER and AERIAL urls, when the image is a map) to a fresh sub-agent. Save to /tmp/gv/pass3_final.md. It contains three labeled blocks: ## METADATA, ## ARTICLE, ## X.
 
