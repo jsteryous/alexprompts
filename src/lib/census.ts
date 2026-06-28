@@ -6,8 +6,12 @@
  * population with a rough ~5-year growth read.
  *
  * Everything is best-effort: any failure returns null or partial data so the
- * area scan never breaks. No key is required; set CENSUS_API_KEY to raise the
- * anonymous rate limit.
+ * area scan never breaks. The Census *data* API requires a free key (the
+ * geocoder does not). Without CENSUS_API_KEY the data query redirects to a
+ * "Missing Key" page, every lookup returns null, and the neighborhood profile
+ * simply does not render. The key is free (no billing account), so this keeps
+ * the zero-billing guarantee. Get one at:
+ *   https://api.census.gov/data/key_signup.html
  */
 
 const KEY = process.env.CENSUS_API_KEY;
