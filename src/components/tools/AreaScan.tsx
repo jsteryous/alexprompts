@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { COMPETITOR_TYPES } from "@/lib/areaScan";
 import { AreaScanMap } from "@/components/tools/AreaScanMap";
 
@@ -14,6 +14,7 @@ import { AreaScanMap } from "@/components/tools/AreaScanMap";
  */
 
 type PlaceItem = { name: string; lat: number; lng: number };
+type Suggestion = { description: string; placeId: string };
 type CategoryResult = { key: string; label: string; count: number; capped: boolean; places: PlaceItem[] };
 type Saturation = "sparse" | "moderate" | "crowded";
 type Demographics = {
@@ -89,6 +90,11 @@ export function AreaScan({ configured }: { configured: boolean }) {
   const [data, setData] = useState<ScanData | null>(null);
   // Which category/competitor list is expanded, by key (null = none).
   const [openKey, setOpenKey] = useState<string | null>(null);
+  // Address autocomplete state.
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [showSug, setShowSug] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Combine every amenity point into one heat layer (stable per scan). Declared
   // before any early return so the hook order never changes.
@@ -109,11 +115,70 @@ export function AreaScan({ configured }: { configured: boolean }) {
 
   const inputCls = "theme-field w-full px-3 py-2.5 text-sm";
 
+  async function fetchSuggestions(v: string) {
+    try {
+      const res = await fetch("/api/area-autocomplete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: v }),
+      });
+      const json = await res.json();
+      if (json.ok && json.suggestions.length) {
+        setSuggestions(json.suggestions);
+        setShowSug(true);
+      } else {
+        setSuggestions([]);
+        setShowSug(false);
+      }
+    } catch {
+      setSuggestions([]);
+      setShowSug(false);
+    }
+  }
+
+  function onAddressChange(v: string) {
+    setAddress(v);
+    setActiveIndex(-1);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (v.trim().length < 3) {
+      setSuggestions([]);
+      setShowSug(false);
+      return;
+    }
+    debounceRef.current = setTimeout(() => fetchSuggestions(v), 280);
+  }
+
+  function pickSuggestion(s: Suggestion) {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    setAddress(s.description);
+    setSuggestions([]);
+    setShowSug(false);
+    setActiveIndex(-1);
+  }
+
+  function onAddressKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!showSug || suggestions.length === 0) return; // let Enter submit the scan
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => (i + 1) % suggestions.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => (i <= 0 ? suggestions.length - 1 : i - 1));
+    } else if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      pickSuggestion(suggestions[activeIndex]);
+    } else if (e.key === "Escape") {
+      setShowSug(false);
+      setActiveIndex(-1);
+    }
+  }
+
   async function scan() {
     setError(null);
     setLoading(true);
     setData(null);
     setOpenKey(null);
+    setShowSug(false);
     try {
       const res = await fetch("/api/area-scan", {
         method: "POST",
@@ -155,12 +220,61 @@ export function AreaScan({ configured }: { configured: boolean }) {
       >
         <label className="block sm:col-span-2">
           <span className="theme-text-secondary text-sm font-medium">Address or place</span>
-          <input
-            className={`${inputCls} mt-1.5`}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="123 Main St, Greenville SC"
-          />
+          <div className="relative mt-1.5">
+            <input
+              className={inputCls}
+              value={address}
+              onChange={(e) => onAddressChange(e.target.value)}
+              onKeyDown={onAddressKeyDown}
+              onFocus={() => suggestions.length > 0 && setShowSug(true)}
+              onBlur={() => setTimeout(() => setShowSug(false), 120)}
+              placeholder="123 Main St, Greenville SC"
+              role="combobox"
+              aria-expanded={showSug}
+              aria-controls="address-suggestions"
+              aria-autocomplete="list"
+              aria-activedescendant={activeIndex >= 0 ? `addr-opt-${activeIndex}` : undefined}
+              autoComplete="off"
+            />
+            {showSug && suggestions.length > 0 && (
+              <ul
+                id="address-suggestions"
+                role="listbox"
+                className="theme-card-strong border theme-border rounded-xl absolute z-20 left-0 right-0 mt-1 py-1 overflow-hidden max-h-72 overflow-y-auto"
+              >
+                {suggestions.map((s, i) => (
+                  <li
+                    key={s.placeId || s.description}
+                    id={`addr-opt-${i}`}
+                    role="option"
+                    aria-selected={i === activeIndex}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      pickSuggestion(s);
+                    }}
+                    onMouseEnter={() => setActiveIndex(i)}
+                    className={`px-3 py-2.5 text-sm cursor-pointer flex items-start gap-2 ${
+                      i === activeIndex ? "theme-card-accent" : ""
+                    }`}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      className="theme-label shrink-0 mt-0.5"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" />
+                      <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                    <span className="theme-text-secondary">{s.description}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </label>
         <label className="block">
           <span className="theme-text-secondary text-sm font-medium">Business type to size up</span>

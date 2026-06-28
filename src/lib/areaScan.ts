@@ -28,6 +28,8 @@ const DAILY_CALL_CAP = Number(process.env.AREA_SCAN_DAILY_CAP ?? 250);
 /** Per-IP scans allowed inside the rolling window. */
 const RATE_LIMIT = Number(process.env.AREA_SCAN_RATE_LIMIT ?? 6);
 const RATE_WINDOW_MS = 60_000;
+/** Autocomplete fires while typing, so it gets a higher per-IP ceiling. */
+const AC_RATE_LIMIT = Number(process.env.AREA_AUTOCOMPLETE_RATE_LIMIT ?? 40);
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 /** Nearby search caps results at 20; that is plenty for a "how crowded" signal. */
 const MAX_RESULTS = 20;
@@ -107,6 +109,7 @@ export function isConfigured(): boolean {
 // ── soft, in-memory guardrail + cache state (per serverless instance) ──────────
 const cache = new Map<string, { at: number; value: unknown }>();
 const ipHits = new Map<string, number[]>();
+const acIpHits = new Map<string, number[]>();
 const dayCounter = { day: "", count: 0 };
 
 function todayKey(): string {
@@ -125,16 +128,20 @@ function reserveCall(): boolean {
   return true;
 }
 
-function rateLimited(ip: string): boolean {
+function limited(map: Map<string, number[]>, ip: string, max: number): boolean {
   const now = Date.now();
-  const hits = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
-  if (hits.length >= RATE_LIMIT) {
-    ipHits.set(ip, hits);
+  const hits = (map.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (hits.length >= max) {
+    map.set(ip, hits);
     return true;
   }
   hits.push(now);
-  ipHits.set(ip, hits);
+  map.set(ip, hits);
   return false;
+}
+
+function rateLimited(ip: string): boolean {
+  return limited(ipHits, ip, RATE_LIMIT);
 }
 
 function cacheGet<T>(key: string): T | undefined {
@@ -308,5 +315,51 @@ export async function runAreaScan(
   } catch (e) {
     if (e instanceof ScanError) return { ok: false, code: e.code, message: e.message };
     return { ok: false, code: "upstream_error", message: "Something went wrong. Try again." };
+  }
+}
+
+export type Suggestion = { description: string; placeId: string };
+
+export type AutocompleteResponse =
+  | { ok: true; suggestions: Suggestion[] }
+  | { ok: false; code: ScanErrorCode; message: string };
+
+/**
+ * Address type-ahead via Places Autocomplete (New). Server-side so the key stays
+ * hidden. Billed on its own SKU (AutocompletePlacesRequest), separate from the
+ * scan quota; cached per query to dedupe keystrokes. Returns an empty list for
+ * short input instead of calling Google.
+ */
+export async function autocompleteAddress(input: string, ip: string): Promise<AutocompleteResponse> {
+  if (!API_KEY) return { ok: false, code: "not_configured", message: "Not configured." };
+  const q = input.trim();
+  if (q.length < 3) return { ok: true, suggestions: [] };
+  if (limited(acIpHits, ip, AC_RATE_LIMIT)) {
+    return { ok: false, code: "rate_limited", message: "Slow down a moment." };
+  }
+
+  const ck = `ac:${q.toLowerCase()}`;
+  const cached = cacheGet<Suggestion[]>(ck);
+  if (cached) return { ok: true, suggestions: cached };
+
+  try {
+    const res = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Goog-Api-Key": API_KEY as string },
+      body: JSON.stringify({ input: q, includedRegionCodes: ["us"] }),
+    });
+    if (!res.ok) return { ok: false, code: "upstream_error", message: "Lookup failed." };
+    const json = (await res.json()) as {
+      suggestions?: { placePrediction?: { placeId?: string; text?: { text?: string } } }[];
+    };
+    const suggestions: Suggestion[] = (json.suggestions ?? [])
+      .map((s) => s.placePrediction)
+      .filter((p): p is { placeId?: string; text?: { text?: string } } => Boolean(p))
+      .map((p) => ({ description: p.text?.text ?? "", placeId: p.placeId ?? "" }))
+      .filter((s) => s.description);
+    cacheSet(ck, suggestions);
+    return { ok: true, suggestions };
+  } catch {
+    return { ok: false, code: "upstream_error", message: "Lookup failed." };
   }
 }
