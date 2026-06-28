@@ -366,3 +366,40 @@ ALTER TABLE blog_posts
 CREATE INDEX IF NOT EXISTS blog_posts_cluster_idx
   ON blog_posts (cluster, published_at DESC NULLS LAST)
   WHERE status = 'PUBLISHED';
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Owned email list — subscribers
+-- ─────────────────────────────────────────────────────────────────────────────
+-- The list we control, separate from Substack. It lets us email people about
+-- site-only posts (Greenville /real-estate, /guides) that never go to Substack.
+-- Reached only with the service key (RLS denies anon/auth). Flow is double
+-- opt-in: a signup is `pending` with a confirm_token; confirming the email link
+-- flips it to `confirmed`; only confirmed rows receive broadcasts. unsub_token is
+-- the per-recipient token carried in every broadcast's unsubscribe link.
+-- Driven by src/lib/subscribers.ts + /api/subscribe, /confirm, /unsubscribe.
+
+CREATE TABLE IF NOT EXISTS subscribers (
+  id              uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  email           text        NOT NULL,
+  status          text        NOT NULL DEFAULT 'pending'
+                              CHECK (status IN ('pending', 'confirmed', 'unsubscribed')),
+  confirm_token   uuid,                                   -- double opt-in link token (cleared on confirm)
+  unsub_token     uuid        NOT NULL DEFAULT gen_random_uuid(),  -- per-recipient unsubscribe token
+  source          text,                                   -- where they signed up, e.g. "tool:deal-analyzer"
+  created_at      timestamptz NOT NULL DEFAULT now(),
+  confirmed_at    timestamptz,
+  unsubscribed_at timestamptz
+);
+
+-- One row per address, case-insensitive (we also store it lowercased in code).
+CREATE UNIQUE INDEX IF NOT EXISTS subscribers_email_key ON subscribers (lower(email));
+CREATE INDEX IF NOT EXISTS subscribers_status_idx ON subscribers (status);
+
+-- No public access. The service key (server routes) bypasses RLS; anon/auth get
+-- nothing, so the list is never readable from the client.
+ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
+
+-- Broadcast dedup: stamped when a post is emailed to the list (see /api/broadcast),
+-- so a stray re-trigger does not double-send. Override with &force=1.
+ALTER TABLE blog_posts
+  ADD COLUMN IF NOT EXISTS last_broadcast_at timestamptz;

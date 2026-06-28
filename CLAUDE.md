@@ -171,8 +171,20 @@ email.
 ## Supabase
 
 - Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, RLS-guarded).
-  `SUPABASE_SERVICE_KEY` for the publish route only.
-- **`blog_posts`** is the only table the site uses now. Columns used: `id`, `title`,
+  `SUPABASE_SERVICE_KEY` for the publish route, the Substack sync, and the owned email list.
+- **`subscribers`** is the **owned email list** (the asset we control, separate from
+  Substack). Service-key only (RLS denies anon). Double opt-in: a signup is `pending` with
+  a `confirm_token`, the email link flips it to `confirmed`, and only confirmed rows get
+  broadcasts. `unsub_token` is the per-recipient unsubscribe token. Driven by
+  `src/lib/subscribers.ts` + `/api/subscribe`, `/api/subscribe/confirm`, `/api/unsubscribe`.
+  Sending is `/api/broadcast?id=<postId>&token=<PUBLISH_SECRET>` (Resend via `src/lib/email.ts`),
+  which emails a published post to the list. This is the channel for **site-only content**
+  (Greenville `/real-estate`, `/guides`) that never goes to Substack. `blog_posts.last_broadcast_at`
+  stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
+  on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
+  stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`
+  column from `supabase/schema.sql` to be applied.**
+- **`blog_posts`** is the only content table the site uses. Columns used: `id`, `title`,
   `slug`, `summary`, `body_md`, `cover_image`, `tags`, `status` (`DRAFT`/`PUBLISHED`),
   `published_at`, `created_at`, `author`. Public SELECT via RLS on `status = PUBLISHED`.
   `cover_image` holds the post card hero (set during the Substack sync from the RSS
@@ -196,6 +208,9 @@ email.
 | `GOOGLE_PLACES_API_KEY` | Server-only key for the `/tools/area-scan` tool. Uses **Places API (New) only** — Text Search (geocode the address) + Nearby Search (counts), so no separate Geocoding API setup is needed. Never exposed to the client. **Unset = the tool renders a clean "not configured" state**, so the site runs fine without it. Set hard per-API daily QUOTAs (`SearchTextRequest`, `SearchNearbyRequest`) in Google Cloud Console below the free tier — that quota, not the code, is what prevents any invoice. |
 | `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
 | `CENSUS_API_KEY` | **Required for the area-scan "neighborhood profile."** The Census *data* API needs a free key (the geocoder does not); without it the profile degrades to hidden (the rest of the scan still works). The key is free with no billing account, so the zero-billing guarantee holds. Sign up: https://api.census.gov/data/key_signup.html |
+| `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
+| `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Alex Prompts <alex@alexprompts.com>`. Required alongside `RESEND_API_KEY` for sending. |
+| `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
 > to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.

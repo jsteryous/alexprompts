@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { newsletterUrl } from "@/lib/site";
 import { audienceLabel, type ToolEntry } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 /**
  * Shared chrome for every /tools page: the header (audience chip, title, blurb),
@@ -59,26 +59,16 @@ export function ToolShell({
         </div>
       </section>
 
-      {/* Soft subscribe capture: utility is the hook, email is the catch. */}
+      {/* Soft subscribe capture: utility is the hook, email is the catch. Owned
+          list (Supabase) so a reader is caught on-site, not bounced to Substack. */}
       <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-3">
-            Want to do this with Claude instead?
-          </h2>
-          <p className="theme-text-contrast-muted text-base mb-7 leading-relaxed">
-            We send one real walkthrough at a time, free, on getting work like this out of Claude.
-          </p>
-          <a
-            href={newsletterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
-          >
-            Subscribe free
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+        <div className="max-w-2xl mx-auto px-6">
+          <SubscribeForm
+            source={`tool:${tool.slug}`}
+            heading="Want to do this with Claude instead?"
+            blurb="Get a real walkthrough when one goes up, free, on getting work like this out of Claude, plus the local Greenville posts and guides."
+            cta="Subscribe free"
+          />
         </div>
       </section>
     </>

@@ -1,8 +1,9 @@
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
-import { site, newsletterUrl } from "@/lib/site";
-import { formatDate, type FullPost } from "@/lib/posts";
+import { site } from "@/lib/site";
+import { formatDate, sectionOf, type FullPost } from "@/lib/posts";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
@@ -118,23 +119,12 @@ export default async function ArticleView({
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
             {site.name}
           </span>
-          <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-4">
-            Get the next one in your inbox.
-          </h2>
-          <p className="theme-text-contrast-muted mb-8 leading-relaxed">
-            {subscribeBlurb}
-          </p>
-          <a
-            href={newsletterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl"
-          >
-            Subscribe free
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+          <SubscribeForm
+            source={`article:${sectionOf(post)}`}
+            heading="Get the next one in your inbox."
+            blurb={subscribeBlurb}
+            cta="Subscribe free"
+          />
         </div>
       </section>
     </>
