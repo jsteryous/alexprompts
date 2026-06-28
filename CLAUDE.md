@@ -177,8 +177,9 @@ email.
   a `confirm_token`, the email link flips it to `confirmed`, and only confirmed rows get
   broadcasts. `unsub_token` is the per-recipient unsubscribe token. Driven by
   `src/lib/subscribers.ts` + `/api/subscribe`, `/api/subscribe/confirm`, `/api/unsubscribe`.
-  Sending is `/api/broadcast?id=<postId>&token=<PUBLISH_SECRET>` (Resend via `src/lib/email.ts`),
-  which emails a published post to the list. This is the channel for **site-only content**
+  Sending is `/api/broadcast?id=<postId>` (Resend via `src/lib/email.ts`), authed with
+  `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
+  click, and it emails a published post to the list. This is the channel for **site-only content**
   (Greenville `/real-estate`, `/guides`) that never goes to Substack. `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
   on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
@@ -211,6 +212,7 @@ email.
 | `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
 | `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Alex Prompts <alex@alexprompts.com>`. Required alongside `RESEND_API_KEY` for sending. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
+| `SUBSCRIBE_RATE_LIMIT` | Optional. Per-IP signups/hour allowed on `/api/subscribe` (default 5). Plus a hardcoded per-address cap of 3 confirmation sends/hour. Soft, in-memory (`src/lib/rateLimit.ts`, resets on cold start); blunts signup spam and confirmation-email bombing. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
 > to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.

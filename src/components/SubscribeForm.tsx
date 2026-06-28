@@ -14,7 +14,7 @@ import { newsletterUrl } from "@/lib/site";
  * "article:greenville") so we can see which surfaces convert.
  */
 
-type State = "idle" | "submitting" | "pending" | "already" | "error";
+type State = "idle" | "submitting" | "done" | "error";
 
 export function SubscribeForm({
   source,
@@ -46,14 +46,15 @@ export function SubscribeForm({
       });
       const json = await res.json();
       if (res.ok && json.ok) {
-        if (json.status === "already") {
-          setState("already");
-        } else {
-          setState("pending");
-          if (json.note === "email_not_configured") {
-            setMessage("You're on the list. Confirmation email is not wired up yet, so you're all set.");
-          }
+        // Uniform success: the API never reveals whether the address was already
+        // subscribed, so the message stays neutral and covers both cases.
+        setState("done");
+        if (json.note === "email_not_configured") {
+          setMessage("You're on the list. Confirmation email is not wired up yet, so you're all set.");
         }
+      } else if (res.status === 429) {
+        setState("error");
+        setMessage("Too many tries. Give it a minute and try again.");
       } else {
         setState("error");
         setMessage(json.error === "invalid_email" ? "That email does not look right." : "Something went wrong. Try again.");
@@ -64,7 +65,7 @@ export function SubscribeForm({
     }
   }
 
-  if (state === "pending" || state === "already") {
+  if (state === "done") {
     return (
       <div className="max-w-md mx-auto text-center">
         <div
@@ -75,13 +76,10 @@ export function SubscribeForm({
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="theme-text-primary font-semibold text-lg mb-1">
-          {state === "already" ? "You're already subscribed" : "Almost there"}
-        </p>
+        <p className="theme-text-primary font-semibold text-lg mb-1">Almost there</p>
         <p className="theme-text-contrast-muted text-sm leading-relaxed">
-          {state === "already"
-            ? "This email is already on the list. Nothing more to do."
-            : message || "Check your inbox and tap the link to confirm. It takes a second."}
+          {message ||
+            "Check your inbox and tap the link to confirm. If you are already subscribed, you are all set."}
         </p>
       </div>
     );

@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getConfirmedSubscribers, subscribersConfigured } from "@/lib/subscribers";
 import { sendEmail } from "@/lib/email";
@@ -17,23 +18,39 @@ import { SITE_URL } from "@/lib/site";
  *   &dry=1                 report the recipient count without sending
  *   &force=1               resend even if this post was already broadcast
  *
- * Gated by PUBLISH_SECRET (same secret as the publish flow). Deliberately manual,
- * not auto-on-publish, so a send is always an explicit action.
+ * Auth (PUBLISH_SECRET, same secret as the publish flow): send it as
+ * `Authorization: Bearer <secret>` (preferred, keeps it out of logs) or, for a
+ * manual click, as `?token=<secret>`. Note the query form lands in server/proxy
+ * logs and browser history, so prefer the header for anything scripted.
+ * Deliberately manual, not auto-on-publish, so a send is always explicit.
  */
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
+/** Constant-time secret compare (avoids leaking the secret via timing). */
+function secretMatches(provided: string | null, secret: string): boolean {
+  if (!provided) return false;
+  const a = Buffer.from(provided);
+  const b = Buffer.from(secret);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
-  const token = searchParams.get("token");
   const test = searchParams.get("test");
   const dry = searchParams.get("dry") === "1";
   const force = searchParams.get("force") === "1";
 
+  const auth = req.headers.get("authorization");
+  const headerToken = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
+  const provided = headerToken ?? searchParams.get("token");
+
   const secret = process.env.PUBLISH_SECRET;
   if (!secret) return NextResponse.json({ ok: false, error: "PUBLISH_SECRET not set" }, { status: 500 });
-  if (token !== secret) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 403 });
+  if (!secretMatches(provided, secret)) {
+    return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 403 });
+  }
   if (!id) return NextResponse.json({ ok: false, error: "missing id" }, { status: 400 });
   if (!subscribersConfigured()) {
     return NextResponse.json({ ok: false, error: "supabase not configured" }, { status: 503 });
