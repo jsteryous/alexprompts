@@ -31,30 +31,38 @@ internet.
 1. **HOW-TO education** — the site + newsletter's core product. Take a real task from a
    pro's week and walk it step by step inside Claude, slow enough that nothing is assumed.
    "The how-to is the product." This is what `src/lib/site.ts` describes.
-2. **NEWS + analysis** — how AI is changing real estate, for the same reader. The Saturday
-   national video + article (`scripts/ai_news/`) and the Greenville local engine
-   (`scripts/greenville/`). These keep the audience current; they do not replace the how-to.
+2. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
+   investment, for the same reader. The Saturday national video + article (`scripts/ai_news/`)
+   has Claude research one useful, evergreen question against real public data; the Greenville
+   local engine (`scripts/greenville/`) covers the biggest local story, both sides. These make
+   the audience smarter; they do not replace the how-to.
 
 **The name is a double meaning:** the *AI prompts*, and *prompting real discussion*. Every
 piece (article, video, TikTok, X post) exists to stimulate discussion. It asks a simple
 question that turns out to be hard, the kind that gets opinionated people to say what they
 actually think.
 
-### Editorial framework (the POV behind the NEWS/analysis content)
+### Editorial framework (the POV behind the RESEARCH + analysis content)
 
-This is the method for the news/analysis pieces (the Saturday national engine and the
-Greenville local engine). The how-to teaching approach for the site + newsletter is a
+This is the method for the analysis pieces (the Saturday national research engine and the
+Greenville local news engine). The how-to teaching approach for the site + newsletter is a
 SEPARATE thing and lives in `src/lib/site.ts` `principles` (start from a real outcome,
 assume nothing, skip the hype, leave you able to do it again). Do not conflate the two.
 
-The news method, in order:
-1. **Inform clearly** — what actually happened, plain English, no hype/doom.
-2. **Read the builders** — take the people building the tools at their word, then
-   pressure-test it. Start from what the companies actually shipped and said.
-3. **Steelman the skeptic** — the strongest version of the other side, argued honestly
-   before landing anywhere.
-4. **A grounded take, then a prompt** — a clear, logical read (NOT investment, legal, or
-   financial advice), then the hard question worth arguing about.
+The **Saturday research method** (`scripts/ai_news/`), in order:
+1. **Pick a real question** — one useful, evergreen, decision-relevant question, anchored in
+   a real place or decision (Greenville, North Main, a real asset class).
+2. **Research it with real data** — pull primary public sources (Census, FRED, FHFA, Zillow,
+   county records, peer-reviewed studies); state every figure with its source and caveat.
+3. **Hunt the confounder** — never read a correlation as a cause; name the selection effects
+   and what a clean answer would require; separate confirmed from contested from unknown.
+4. **A grounded take, then a prompt** — a clear, calibrated read (NOT investment, legal, or
+   financial advice) plus the concrete practitioner takeaway, then the hard question worth
+   arguing about.
+
+The **Greenville news method** (`scripts/greenville/`), in order: inform clearly (what
+happened, plain English, no hype/doom); read the builders, then pressure-test; steelman the
+skeptic; a grounded take, then the prompt.
 
 The stance, stated honestly:
 - **Contrarian / Thiel-esque:** the crowd, including real-estate and tech media, swings
@@ -92,8 +100,9 @@ The canonical voice lives in the Claude routine's writer pass
 - **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (The routine
   enforces this in its passes; the website has no automated backstop, so do not introduce
   dashes in copy.)
-- **No sentence fragments.** Every sentence has a subject and a verb.
-- Punch comes from short sentences and strong verbs, not dashes or fragments.
+- **No sentence fragments.** Every sentence has a subject and a verb, never a clipped burst for effect.
+- **Flowing, complete sentences**, the way a person explains something out loud. Vary sentence length naturally. Clarity carries the weight, not punchiness or staccato.
+- **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff" construction; a colon only introduces a genuine list. Restructure into a full sentence where you can.
 - Open cold and concrete. Lead with a fact, a scene, or a number.
 - Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
 - **Grounded optimism.** Steelman the strongest opposing view before resolving.
@@ -105,12 +114,14 @@ The canonical voice lives in the Claude routine's writer pass
 See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Two siblings, both
 serving real-estate agents and investors:
 
-- **`ai_news/`** — the **national AI-for-real-estate** engine. A GitHub Action
-  (`collect-signal.yml`) scores the week's signal across AI-x-real-estate beats
-  (`collect.py` + `digest.py`) and commits it; the **Saturday Claude routine**
-  (`scripts/ai_news/routine/`, an orchestrator plus isolated Opus passes) reads it and
-  writes one story in two renderings (a 6–10 min voiceover video script + a Substack
-  article), delivered to Google Drive and Gmail.
+- **`ai_news/`** — the **national Saturday research engine** (directory name is legacy; no
+  longer news). Two committed inputs (`questions.md`, the question bank; `sources.md`, the
+  primary-data registry) drive the **Saturday Claude routine** (`scripts/ai_news/routine/`,
+  an orchestrator plus isolated Opus passes: researcher → thesis → writer → editor →
+  performer → article), which has Claude research one useful, evergreen real-estate question
+  against real public data and writes it in two renderings (a 6–10 min voiceover video script
+  + a Substack article), delivered to Google Drive and Gmail. No collector: the data APIs are
+  not IP-blocked, so the routine fetches live.
 - **`greenville/`** — the **local Greenville, SC** engine. A daily routine that turns the
   biggest local real-estate story into a both-sides website post (`/real-estate`) + an X
   post. See `scripts/greenville/CLAUDE.md`.

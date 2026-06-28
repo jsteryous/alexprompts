@@ -6,97 +6,77 @@ workflows) was retired in June 2026 and lives under **`scripts/_archive/`** —
 reference only, nothing there runs on a schedule anymore.
 
 > **Gemini was removed (June 2026). The content engine is Claude routines only.**
-> The old two-pass Gemini drafting (`digest.py` reporter/writer), `shorts.py`, the
-> shared `llm.py`, and the `ai-news.yml` / `email-draft.yml` workflows are gone.
-> What remains is the **signal collector** (this file) feeding the **Saturday Claude
-> routine** under `ai_news/routine/`, which writes the draft.
+> The old two-pass Gemini drafting, `shorts.py`, the shared `llm.py`, and the
+> `ai-news.yml` / `email-draft.yml` workflows are gone.
+>
+> **The Saturday national engine was rebuilt (June 2026) from AI-news into research.**
+> Alex stopped filming the news scripts: scored by how many outlets covered a story, they
+> kept landing on regulation and frontier-AI politics, with nothing a working agent could
+> use. The old **signal collector** (`collect.py`, `digest.py`, `collect-signal.yml`, the
+> committed signal, `test_ai_news.py`) is retired to `scripts/_archive/ai_news_collector/`.
+> The Saturday routine now answers ONE useful, evergreen real-estate question with real
+> public data. See [[saturday-research-engine]] in memory.
 
 ## What lives in `scripts/`
 
-- **`ai_news/`** — the national **AI-for-real-estate** signal collector. `collect.py`
-  (and the thin `digest.py` CLI) source and score the week's AI-x-real-estate signal
-  (beats + corroboration); the **Saturday Claude routine** under `ai_news/routine/` reads
-  that signal and writes the draft for agents and investors.
+- **`ai_news/`** — the national **Saturday research engine** (the directory name is legacy;
+  it is no longer news). Two committed inputs drive it: **`questions.md`** (the question
+  bank, seeded by Alex, status-tracked `queued` / `done <date>`) and **`sources.md`** (the
+  primary-data registry: Census, FRED, FHFA, Zillow/Redfin, Lincoln Institute, Strong Towns,
+  LBNL solar, Greenville ArcGIS, academic). The **Saturday Claude routine** under
+  `ai_news/routine/` reads them and writes the deep-dive.
 - **`ai_news/routine/`** — the Claude routine: an `orchestrator.md` plus isolated Opus
-  passes (reporter → angle → writer → editor → performer → article). It runs weekly in
-  the cloud, reads the committed signal, and delivers the draft to Google Drive + Gmail.
-- **`tests/test_ai_news.py`** — unit tests for the pure functions.
-- **`requirements-ai-news.txt`** — deps (no Gemini, no Supabase/Playwright/Places).
+  passes (researcher → thesis → writer → editor → performer → article). It runs weekly in
+  the cloud, pulls the data live, and delivers the draft to Google Drive + Gmail.
+- **`ai_news/demand.py`** — a separate prototype radar for the GUIDES track (mines Google +
+  YouTube autocomplete for beginner AI how-to demand). Standalone, not part of the Saturday
+  routine. Run from a normal IP.
+- **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Still
+  used by the **Greenville** collector (`greenville/routine/` installs it); keep it.
 
-## `ai_news/` pipeline
+## The Saturday research engine (`ai_news/`)
 
-```bash
-cd scripts
-python -m ai_news.digest --collect-only                          # print the week's signal
-python -m ai_news.digest --collect-only --json-out signal.json   # + scored JSON (CI hand-off)
-python -m ai_news.digest --from-json signal.json                 # replay a saved snapshot, no network
-python -m unittest scripts.tests.test_ai_news -v
-```
+**Rebuilt June 2026.** Instead of chasing the week's AI headlines, each Saturday the routine
+takes ONE genuinely useful question about real estate, development, or investment and has
+Claude research it hard against real public data, until we actually understand it. Claude is
+the **visible** method: the piece is openly "I pointed Claude at this question, here is what
+the data says." The audience is working agents and investors, plus developers and planners.
+The format is unchanged: a 6 to 10 minute voiceover video script PLUS a Substack article
+rendering of the same piece, forking only at the final render.
 
-### `collect.py` — source + score the week
+### The inputs
 
-**Reoriented June 2026** from a frontier-lab feed to a national **AI-for-real-estate**
-brief for agents + investors (audience decided with Alex; see memory
-[[greenville-realestate-vertical]] and the sibling `greenville/collect.py`). It now
-uses the **beat + corroboration** model, NOT the old entity/HN/Reddit one:
-
-- **Google News RSS** (`when:7d`) across six AI-x-real-estate **beats** (`BEATS` at the
-  top of the file): Valuation, Agent tools, Portals, Mortgage, Investor/proptech,
-  Assistant how-to. Each query lives in the *intersection* (an AI term AND a real-estate
-  term) so neither generic AI nor generic real-estate news floods the lane. Free, no key.
-- **Scoring is corroboration** (no upvote signal exists for trade press): cluster
-  headlines by normalized title, then score by how many distinct **beats** and **outlets**
-  surfaced the story (`W_BEATS`, `W_OUTLETS`, `W_APPEARANCES`). The biggest cluster is the
-  lead. Trade outlets (HousingWire, Inman, RISMedia, The Real Deal) are the target signal.
-- **Two noise filters** the signal probe proved we need: `FINANCE_NOISE_RE` drops
-  AI-company IPO/stock items that ride in on the word "valuation"; `SEO_FARM_SOURCES`
-  drops content-marketing listicle domains. Both are tunable, like Greenville's
-  `LISTING_RE`. (Beat queries spell out "automated valuation model"; never the bare
-  acronym "AVM", which collides with arteriovenous malformation and pulls medical hits.)
-
-**Datacenter-IP blocking + the CI hand-off.** From a *datacenter* IP Google News can 403;
-GitHub-hosted runners are not blocked, the Claude Code cloud *script routine* sandbox is.
-So the routine does NOT collect for itself. `.github/workflows/collect-signal.yml`
-(Saturday 05:00 UTC, before the routine) runs `python -m ai_news.digest --collect-only
---json-out` from the runner's good IP and commits the scored signal to
-`scripts/ai_news/data/` (`signal-latest.json` + the rendered `signal-latest.txt`). The
-routine's STEP 0 reads that committed file; live collection is only a fallback. The
-serialization round-trips through `collect.to_json` / `collect.from_json` (unit-tested);
-`--from-json PATH` replays a saved snapshot with no network.
-
-All network fns degrade gracefully (log + return `[]`, never raise). RSS is parsed with
-**defusedxml** (XXE/billion-laughs hardening; falls back to stdlib if absent). Pure fns
-are unit-tested in `tests/test_ai_news.py`.
-
-### `digest.py` — the collector CLI
-
-A thin wrapper over `collect.py`: collects (or replays `--from-json`), optionally writes
-the scored JSON (`--json-out`), and prints the human-readable signal via
-`collect.render_payload` (which produces `signal-latest.txt`). No Gemini, no email.
-`--collect-only` is a no-op alias and `--news-limit` is a kept alias for `--per-beat`, so
-`collect-signal.yml` and the routine's STEP 0 command keep working unchanged.
+- **`questions.md`** — the question bank. Each good question clears five bars (useful,
+  answerable with real public data, non-obvious/contested, decision-relevant, evergreen) and
+  is **anchored in a real place or decision** (Greenville, SC; North Main, where Alex lives,
+  no HOA; a real asset class or deal). STEP 0 of the routine picks the top question still
+  `queued`; after delivery it marks that question `done <date>` on the `drafts` branch so it
+  is not repeated. The routine may append `proposed` candidates; only Alex promotes them.
+- **`sources.md`** — the primary-data registry handed to the researcher every week, with
+  access notes and honesty caveats. Reachability was confirmed from a sandbox like the
+  routine's: FHFA, Zillow, and FRED's keyless CSV return 200; Census and the FRED JSON API
+  are key-gated (the free `CENSUS_API_KEY` is already in env), not blocked. Unlike the old
+  Google-News collector, these data APIs are **not** datacenter-IP-blocked, so the routine
+  fetches them live and there is **no pre-fetch collector or GitHub Action** anymore. The
+  one exception is the NREL solar API, which did not connect from the sandbox; for solar,
+  fall back to cited published figures.
 
 ### `ai_news/routine/` — the Claude routine (writes the draft)
 
-`orchestrator.md` runs each pass as a fresh sub-agent (the isolation is the quality
-lever: the fact-finder must not know the angle; the writer sees only the verified brief).
-It reads the committed signal in STEP 0, recalls last week's draft from the `drafts`
-branch (so it does not repeat a topic), then runs reporter → angle → writer → editor →
-performer → article and delivers ONE story in two renderings (a 6–10 min voiceover script
-and a Substack article) to Google Drive and Gmail. House style (no em dashes, no
-fragments, steelman-then-resolve) lives in the pass specs, not in Python anymore.
+`orchestrator.md` runs each pass as a fresh sub-agent (isolation is the quality lever: the
+researcher must not know the thesis; the writer sees only the verified brief). STEP 0 picks
+the question and loads the sources; STEP 0B recalls what is already done so it never repeats.
+Then researcher → thesis → writer → editor → performer → article, delivering ONE deep-dive in
+two renderings to Google Drive and Gmail, and marking the question done.
 
-> **Reorientation note (June 2026):** the whole `ai_news/` engine, collector AND passes,
-> now serves real-estate agents and investors. The collector scores AI-x-real-estate
-> beats; the passes (reporter, angle, writer, editor, performer, article) write for the
-> agent/investor reader. The format was kept: a 6 to 10 minute voiceover video script plus
-> a Substack article. The Greenville daily engine (`scripts/greenville/`) is the separate
-> local sibling.
+The engine's spine is **intellectual honesty**: the researcher hunts the confounder before
+reporting the effect (the worked example: "HOA homes sell for more" is a selection effect,
+not proof an HOA causes appreciation); the editor enforces no-causation-from-correlation,
+confidence-matches-data, and caveats-present. House style (no em/en dashes, no fragments,
+grounded optimism not threat, steelman-then-resolve) lives in the pass specs. See
+`ai_news/routine/README.md` for the per-pass table.
 
-### Automation
-
-**`collect-signal.yml`** (Saturday 05:00 UTC, before the routine) is the only scheduled
-workflow here now. It installs `requirements-ai-news.txt`, runs the collector from a
-non-blocked runner IP, and commits the refreshed signal. No secrets needed (collection
-hits no paid APIs). Draft delivery is handled inside the Claude routine via its Google
-Drive + Gmail connectors, so there is no longer a Resend email workflow.
+> **Reorientation note (June 2026):** the whole `ai_news/` engine serves real-estate agents
+> and investors, plus developers and planners, anchored in Greenville / North Main where the
+> question allows. The Greenville daily engine (`scripts/greenville/`) is the separate local
+> sibling and still uses its own live collector.

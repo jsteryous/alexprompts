@@ -23,13 +23,15 @@ Brand details (name, tagline, social handles, domain, covered companies) live in
 `src/lib/site.ts` — edit there and every surface updates. Confirm the `TODO(alex)`
 placeholders before launch.
 
-## Content engine
+## Content engines
 
-```bash
-cd scripts
-python -m ai_news.digest           # collect -> reporter -> writer -> shorts, print
-python -m ai_news.digest --email   # email the weekly draft + short-form queue
-```
+Two Claude routines, no local CLI to run:
+
+- **Saturday research engine** (`scripts/ai_news/`) — each week Claude researches one useful,
+  evergreen real-estate question (`questions.md`) against real public data (`sources.md`) and
+  writes a video script + Substack article.
+- **Greenville daily engine** (`scripts/greenville/`) — the biggest local real-estate story,
+  both sides, as a website post + an X post.
 
 See `scripts/CLAUDE.md` for the full pipeline.
 
