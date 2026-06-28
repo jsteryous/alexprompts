@@ -65,6 +65,15 @@ export const toolCatalog: ToolEntry[] = [
     status: "live",
     cta: "Scan an area",
   },
+  {
+    slug: "buyers-list",
+    title: "Greenville commercial buyers",
+    blurb:
+      "See who has actually been buying commercial property in Greenville County, with the price, date, and address. Real public records, no sign-up.",
+    audience: "both",
+    status: "live",
+    cta: "See recent buyers",
+  },
 ];
 
 export function liveTools(): ToolEntry[] {

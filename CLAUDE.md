@@ -130,8 +130,12 @@ pipeline is retired under `scripts/_archive/` — do not revive either.
 - `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
   source being `src/lib/tools.ts` (`toolCatalog`). Live: `deal-analyzer` (rental cash
   flow / cap rate / cash-on-cash), `mortgage` (payment + affordability), `listing-prompt`
-  (builds a fair-housing-safe Claude prompt, copy + "Open in Claude" deep link). All are
-  pure client-side, no API, no cost. `area-scan` (Google Places neighborhood/saturation)
+  (builds a fair-housing-safe Claude prompt, copy + "Open in Claude" deep link). Those
+  three are pure client-side, no API, no cost. `buyers-list` (Greenville County commercial
+  sales: buyer/LLC, price, date, address) is also live: it reads a committed JSON dataset
+  (`src/data/commercialSales.json`) built by `scripts/greenville/commercial.py` from the
+  county's free public ArcGIS service, so the page is statically generated with no runtime
+  API or cost either. `area-scan` (Google Places neighborhood/saturation)
   is registered as `soon` — Tier 2, needs a server proxy + caching + rate limits before it
   ships. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
   note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,

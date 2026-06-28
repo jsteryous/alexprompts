@@ -81,11 +81,29 @@ function AreaScan() {
   );
 }
 
+function BuyersList() {
+  // A ledger of transactions: rows of records with a price coin. The list of
+  // who bought what.
+  return (
+    <>
+      <rect x={9} y={8} width={24} height={32} rx={3} {...soft} />
+      <rect x={9} y={8} width={24} height={32} rx={3} {...stroke} />
+      <line x1={14} y1={16} x2={24} y2={16} {...stroke} />
+      <line x1={14} y1={22} x2={28} y2={22} {...stroke} />
+      <line x1={14} y1={28} x2={22} y2={28} {...stroke} />
+      <circle cx={34} cy={32} r={7} {...soft} />
+      <circle cx={34} cy={32} r={7} {...stroke} />
+      <path d="M34 28.5 v7 M32 30 h3 a1.6 1.6 0 0 1 0 3 h-2 a1.6 1.6 0 0 0 0 3 h3" {...stroke} />
+    </>
+  );
+}
+
 const icons: Record<string, () => React.ReactElement> = {
   "deal-analyzer": DealAnalyzer,
   mortgage: Mortgage,
   "listing-prompt": ListingPrompt,
   "area-scan": AreaScan,
+  "buyers-list": BuyersList,
 };
 
 export function ToolIcon({ slug, className = "" }: { slug: string; className?: string }) {

@@ -16,6 +16,14 @@ hand-off, isolated routine passes) and the same `requirements-ai-news.txt`.
   by normalized title. Scoring is **corroboration**: how many beats and outlets
   surfaced the same story, since local news has no upvote signal. The top cluster
   is the lead. Pure functions are unit-tested in `tests/test_greenville.py`.
+- **`commercial.py`** — a separate DATA collector (not news). Pulls recent
+  Greenville County **commercial property sales** straight from the county's public
+  ArcGIS service (`GreenvilleJS/Map_Layers_JS` layer 2, "Commercial") and writes a
+  lean JSON the site reads. No scraper, no key: it is the same endpoint the county
+  parcel viewer calls. Powers the `/tools/buyers-list` "buyer's list" (buyer/LLC,
+  price, date, address). Output goes to **`src/data/commercialSales.json`** (NOT
+  `data/`, because the Next app imports it), so the page is statically generated.
+  Pure functions are unit-tested in `tests/test_commercial.py`.
 - **`data/`** — CI hand-off (`signal-latest.json` + `.txt`), committed by the
   workflow; the routine reads it. Generated, do not hand-edit.
 - **`routine/`** — orchestrator + three isolated passes (reporter, two-sides,
@@ -30,12 +38,23 @@ python -m greenville.collect --json-out signal.json   # + scored JSON (CI hand-o
 python -m greenville.collect --from-json signal.json  # replay a snapshot, no network
 python -m greenville.collect --when-days 21 --limit 15
 python -m unittest scripts.tests.test_greenville -v
+
+# commercial sales (the buyer's list) — separate data collector
+python -m greenville.commercial                                       # print a summary
+python -m greenville.commercial --min-price 1000000 --months 24 \
+  --json-out ../src/data/commercialSales.json                         # refresh the site dataset
+python -m greenville.commercial --from-json snapshot.json             # replay, no network
+python -m unittest scripts.tests.test_commercial -v
 ```
 
 ## Automation
 
 - **`.github/workflows/collect-greenville.yml`** (DAILY 06:00 UTC) collects from a
   non-blocked runner IP and commits the signal. No secrets needed (free sources).
+- **`.github/workflows/collect-commercial.yml`** (WEEKLY Mon 07:00 UTC) runs
+  `greenville.commercial` and commits `src/data/commercialSales.json`. No secrets
+  (the county ArcGIS service is public + free). The push redeploys the statically
+  generated `/tools/buyers-list` page with fresh sales.
 - The **routine** runs nightly as a scheduled Claude cloud agent pointed at
   `routine/orchestrator.md`, after the collector. It dedups against the live site,
   posts NOTHING on a quiet night, and on a real story creates a `blog_posts` DRAFT
