@@ -134,6 +134,33 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
 }
 
 /**
+ * The homepage "fresh" feed: newsletter issues AND Greenville real-estate posts,
+ * newest first, merged into one stream. Guides are excluded (they have their own
+ * hub and the homepage already links to them via the Start-here pillars). This is
+ * what the homepage shows so the latest local real-estate post can lead alongside
+ * the newsletter, not only `/archive` issues.
+ */
+export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
+  const all = await getPublishedPosts();
+  const feed = all.filter((p) => sectionOf(p) !== "guide");
+  return limit ? feed.slice(0, limit) : feed;
+}
+
+/** The canonical route a post lives at, derived from its section. Used by the
+ *  homepage feed, which mixes sections and must link each card to the right page. */
+export function postHref(post: { tags: string[] | null; slug: string }): string {
+  const section = sectionOf(post);
+  const base = section === "guide" ? "/guides" : section === "realestate" ? "/real-estate" : "/archive";
+  return `${base}/${post.slug}`;
+}
+
+/** Short, human label for a post's section, for a card badge. */
+export function sectionLabel(post: { tags: string[] | null }): string {
+  const section = sectionOf(post);
+  return section === "guide" ? "Guide" : section === "realestate" ? "Greenville" : "Newsletter";
+}
+
+/**
  * One published post by slug. Pass `type` to enforce its canonical section:
  * a guide requested as a newsletter issue (or vice versa) returns null, so each
  * post lives at exactly one route (/guides/... or /archive/...).

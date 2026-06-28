@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { socials, newsletterUrl, manifesto, outcomes, realEstateOutcomes, principles } from "@/lib/site";
-import { getPublishedPosts, formatDate, type ArchivePost } from "@/lib/posts";
+import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel } from "@/lib/tools";
 import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
 import { ToolIcon } from "@/components/ToolIcon";
@@ -65,7 +65,7 @@ function Eyebrow({ children, className = "" }: { children: React.ReactNode; clas
 function FeaturedStory({ post }: { post: ArchivePost }) {
   return (
     <Link
-      href={`/archive/${post.slug}`}
+      href={postHref(post)}
       className="theme-card border theme-border rounded-2xl overflow-hidden block group"
     >
       <PostCover
@@ -77,7 +77,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
       <div className="p-8 md:p-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-            Latest walkthrough
+            {sectionLabel(post)}
           </span>
           {post.published_at && (
             <time className="theme-text-muted text-xs uppercase tracking-widest">
@@ -94,7 +94,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
           </p>
         )}
         <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
-          Read the walkthrough <ArrowIcon className="w-3.5 h-3.5" />
+          Read it <ArrowIcon className="w-3.5 h-3.5" />
         </span>
       </div>
     </Link>
@@ -120,46 +120,28 @@ function EmptyLead() {
 }
 
 export default async function HomePage() {
-  const posts = await getPublishedPosts(7, "newsletter");
+  const posts = await getFeedPosts(7);
   const [featured, ...rest] = posts;
 
   return (
     <>
-      {/* ── Hero ── */}
-      <section className="theme-page relative overflow-hidden pt-32 md:pt-40 pb-16 md:pb-24">
+      {/* ── Lead: straight into the useful parts (tools, guides, local) ── */}
+      <section className="theme-page relative overflow-hidden pt-32 pb-4 md:pb-8">
         <span
-          className="prompt-watermark absolute -right-8 top-8 text-[16rem] md:text-[24rem] hidden sm:block select-none"
+          className="prompt-watermark absolute -right-8 top-8 text-[16rem] md:text-[20rem] hidden sm:block select-none"
           aria-hidden
         >
           {">"}
         </span>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-5">For real estate agents and investors</Eyebrow>
-          <h1 className="theme-text-primary text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.04] max-w-4xl">
-            Claude for real estate agents and investors.
-            <span className="caret" aria-hidden>▌</span>
+          <Eyebrow className="mb-4">Start here</Eyebrow>
+          <h1 className="theme-text-primary text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] max-w-3xl mb-3">
+            Free tools and plain-English guides for getting real work out of Claude.
           </h1>
-          <p className="theme-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mt-6">
-            Most agents and investors use Claude like a search box. It can do far more. Alex
-            Prompts shows you how to make it write your listings, run your market research,
-            analyze a deal, and handle the follow-up, in plain English, with no code to write
-            and nothing skipped.
+          <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-2xl mb-10">
+            Run a deal, size up a mortgage, build a listing prompt, or read the latest. No
+            sign-up, nothing to install.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mt-8">
-            <SubscribeButton className="px-7 py-3.5" />
-            <Link
-              href="/tools"
-              className="theme-link inline-flex items-center gap-2 font-medium px-2 py-3.5 text-sm"
-            >
-              Try the free tools <ArrowIcon className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Start here: the three pillars, above the fold ── */}
-      <section className="theme-section pb-4 md:pb-8">
-        <div className="max-w-5xl mx-auto px-6">
           <ul className="grid gap-5 md:grid-cols-3">
             {pillars.map((p) => (
               <li key={p.href}>
@@ -226,17 +208,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Fresh from the newsletter (promoted up) ── */}
+      {/* ── Latest reads: newsletter issues + local real-estate posts, merged ── */}
       <section className="theme-section py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
-          <Eyebrow className="mb-6">Fresh from the newsletter</Eyebrow>
+          <Eyebrow className="mb-6">Fresh from Alex Prompts</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
 
           {rest.length > 0 && (
             <>
               <div className="flex items-end justify-between mt-12 mb-6 gap-4">
                 <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
-                  More walkthroughs
+                  More to read
                 </h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
                   Full archive <ArrowIcon className="w-3.5 h-3.5" />
@@ -246,7 +228,7 @@ export default async function HomePage() {
                 {rest.map((p) => (
                   <li key={p.id}>
                     <Link
-                      href={`/archive/${p.slug}`}
+                      href={postHref(p)}
                       className="theme-card border theme-border rounded-xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity"
                     >
                       <PostCover
@@ -255,11 +237,16 @@ export default async function HomePage() {
                         className="aspect-[16/9] w-full border-b theme-border"
                       />
                       <div className="p-6 flex flex-col flex-1">
-                        {p.published_at && (
-                          <time className="theme-text-muted text-xs uppercase tracking-widest mb-3">
-                            {formatDate(p.published_at)}
-                          </time>
-                        )}
+                        <div className="flex items-center gap-2.5 mb-3">
+                          <span className="theme-badge text-[0.65rem] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded">
+                            {sectionLabel(p)}
+                          </span>
+                          {p.published_at && (
+                            <time className="theme-text-muted text-xs uppercase tracking-widest">
+                              {formatDate(p.published_at)}
+                            </time>
+                          )}
+                        </div>
                         <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
                           {p.title}
                         </h3>
