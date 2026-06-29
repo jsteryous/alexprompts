@@ -1,13 +1,13 @@
 
 ======================================================================
 GREENVILLE, SC REAL-ESTATE SIGNAL
-Collected 2026-06-28 08:42 UTC
+Collected 2026-06-29 10:26 UTC
 
 BEAT COVERAGE (headlines found per beat):
   Market       12
   Development  12
-  Rentals      9
-  Policy       12
+  Rentals      10
+  Policy       11
   Upstate      12
 
 BIGGEST STORY (most corroborated, the lead to write up):
@@ -70,10 +70,10 @@ RANKED STORIES (top 20 of 51):
  18. [   6] 10 Hidden Gems in Greenville, SC You Need to Visit! - Kidding Around Greenville (Fri, 19 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMieEFVX3lxTFBzRXVQdk1SVS1nTUU5RVEyNE9JSGJuSkdmRDN2UWNoUTB2VDhxdG4xc1NvYlRTWjZIRzlRU284cmRVZmN4QV9hYXdkZTl1Z25DRzU1VWE1dU5OZWV2T1VUaWxORmVWemhua2FnbWllS2Mwbm1jWm1yXw?oc=5
       beats=Development | outlets=Kidding Around Greenville
- 19. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
-      https://news.google.com/rss/articles/CBMingFBVV95cUxPOWZiVHBuNXpsXzk0ZkRjZ0hiejFxaktZY1lUTFRRelVyNEozbFVUeF9qRlBKX2NidEVvaDNGR0pQQ0ZvOHFwdm54bF9SS1AxYVFQQmtibUNuaU84VEU0b2NvUjFScUYzTk5SZmpub1pRTG1weTVhcktxUjlDelp1WGlaazBZYTFVTi1ER012QTBQb3NDUjJGbGlnS0wxZ9IBswFBVV95cUxQRzk4V3R5V0dwQ0w2eWt4QnNTT2tkOHU5M0l1OWNJbzhkXzg2UmMzQTFxckozUnlSdE1jNDB0VnVqLXlvOVRMRlpUVVRwOThxQnlrTzUwT2RsZS1IOTRWVzBIdGxqNVc0Rl84dmVBSFhVenpMMlFrdlF5LV9KanlLMGZFREYxWVRYWUo3am5jb1EtbkgtUmQ2dlVSWVRsWW8za1I4SmtVSnE1MF9HMnJib0t6aw?oc=5
-      beats=Development | outlets=FOX Carolina News
- 20. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
+ 19. [   6] Embattled Greenville developer fights back in legal dispute over swanky McDaniel townhomes project - Post and Courier (Mon, 22 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi4AFBVV95cUxNUnZJTFJPSmRiSGFuOElKZ2h3U19hYTgzNGJGU2ZEYTlpb1Brb0V5MjAzeF9aaTNBd3d3TXU4NEVGNzhMZExFWUlOTEkycXRIUVlCMjRDZkdoRFBENXZKbUtqbDJBUWZYeGpNbV96bFdtV2RnUjVKRmdwZ29qMklLNzZSMjdtcEdpZDJwVjV3Rnk0SEZvU3BRbDRoczV2NHZENWI3RF8xeW1oWmNFa19UUUNKQXZwa1ZHTlZ5cXpmald2X3hhLVJ4RGRMNmVSR3hBaVNuT2JPdWoycUVKYVhKNw?oc=5
       beats=Development | outlets=Post and Courier
+ 20. [   6] SC business leader, Clemson alumnus receives Order of the Palmetto - FOX Carolina News (Mon, 22 Jun 2026 15:47:00 GMT)
+      https://news.google.com/rss/articles/CBMinwFBVV95cUxQZnRZRUMxUkpBb0lxTExDckxkUUl1RDdDSW15SWo0NUkxb0ZlVUxQWU5YczVpYmFyNnR4VGNScWIxeUVjVUk1Y3pRQW9uRFVmcVV4M18wdlhiU2w1MHdfWmtvLWdHZElIcTZxNG85TzdFeld1UzJMR3U3c3l6YnBfa0pLaDVsR3R1NWo1ZTRTQms0dW9rNzJlaDY1NkhpZkHSAbMBQVVfeXFMUEc5OFd0eVdHcENMNnlreEJzU09rZDh1OTNJdTljSW84ZF84NlJjM0ExcXJKM1J5UnRNYzQwdFZ1ai15bzlUTEZaVFVUcDk4cUJ5a081ME9kbGUtSDk0VlcwSHRsajVXNEZfOHZlQUhYVXp6TDJRa3ZReS1fSmp5SzBmRURGMVlUWFlKN2puY29RLW5ILVJkNnZVUllUbFlvM2tSOEprVUpxNTBfRzJyYm9Lems?oc=5
+      beats=Development | outlets=FOX Carolina News
 ======================================================================
