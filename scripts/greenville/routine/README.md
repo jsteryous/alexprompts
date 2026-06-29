@@ -18,8 +18,10 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
    lead image via a **cascade**: a Wikimedia Commons photo only if one genuinely
    depicts the subject (never a generic skyline), otherwise a `map` of the location
    (it hands off a geocodable LOCATION + an AERIAL yes/no). A render of the location is
-   the FLOOR, so `none` is reserved for a truly placeless story (a pure rate or budget
-   item) and should be vanishingly rare. On a quiet day it returns `NO NEW STORY TODAY`
+   the FLOOR: even a diffuse civic story (a county/city tax, bond, zoning, or policy
+   decision) is a `map` pinned on the named corridor, the deciding body's seat, or the
+   county, so `none` is reserved for a story with no SC place at all and should
+   effectively never fire. On a quiet day it returns `NO NEW STORY TODAY`
    and the run stops.
 2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
    THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
@@ -30,9 +32,9 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
    orchestrator uses to create the post.
 
 `orchestrator.md` wires them as cold sub-agents, reads the committed signal, dedups
-against the live site, and on a real story: creates the website post as a **DRAFT**
-in Supabase `blog_posts`, then emails + Drives the human packet (verify list, the
-article, and the X post to copy-paste).
+against the live site, and on a real story: creates the website post in
+Supabase `blog_posts`, then emails the human packet (verify list, the
+article, and the X post to copy-paste). No Google Drive copy.
 
 Between the two-sides pass and the writer, **STEP 2B** renders the lead image when the
 reporter chose `map`: it POSTs the LOCATION to the **`greenville-image` Supabase Edge
@@ -59,6 +61,12 @@ loses its cover.
   goes out so you can spot-check and unpublish at `/review` if needed. If dedup could
   not run (Supabase down), that run falls back to DRAFT. To return to human review,
   set STEP 4 back to `DRAFT`.
+- **Owned email list:** after a successful live publish, **STEP 4B** GETs
+  `/api/broadcast?id=<postId>` (Bearer `PUBLISH_SECRET`) so the post emails every
+  confirmed subscriber. Greenville posts never go to Substack, so this is the only
+  channel that reaches readers; publishing the row alone emails no one. Skipped on a
+  DRAFT fallback, never blocks the post. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`)
+  configured on the site.
 - **X:** there is no X auto-poster (no X connector wired), so the routine drafts the
   X post and delivers it in the email packet for you to post by hand.
 

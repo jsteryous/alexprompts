@@ -57,8 +57,8 @@ python -m unittest scripts.tests.test_commercial -v
   generated `/tools/buyers-list` page with fresh sales.
 - The **routine** runs nightly as a scheduled Claude cloud agent pointed at
   `routine/orchestrator.md`, after the collector. It dedups against the live site,
-  posts NOTHING on a quiet night, and on a real story creates a `blog_posts` DRAFT
-  (tagged `greenville`) plus a Gmail/Drive packet with the article and the X post.
+  posts NOTHING on a quiet night, and on a real story creates a `blog_posts` row
+  (tagged `greenville`) plus a Gmail packet with the article and the X post.
   See `routine/README.md`.
 
 ## Publishing + dedup
@@ -68,7 +68,17 @@ python -m unittest scripts.tests.test_commercial -v
   live to `/real-estate` (the dedicated section). Auto-publish is safe because the
   pass guardrails (fair-housing language, not-advice, sourced numbers) plus dedup do
   the gating, and a verify email still goes out for after-the-fact spot-checks. If
-  dedup is unavailable on a run, that run falls back to DRAFT. Set STEP 4 back to
+  dedup is unavailable on a run, that run falls back to DRAFT.
+- **Emailing the owned list (orchestrator STEP 4B).** Greenville posts never go to
+  Substack, so the owned `subscribers` list is the only channel that reaches readers.
+  Publishing the row does NOT email anyone, so after a successful LIVE publish the
+  orchestrator GETs `/api/broadcast?id=<postId>` with `Authorization: Bearer
+  $PUBLISH_SECRET`; the route emails every CONFIRMED subscriber and stamps
+  `last_broadcast_at` so a re-run never double-sends. It is skipped on a DRAFT fallback
+  (nothing live to announce) and never blocks the post. Needs `PUBLISH_SECRET` on the
+  scheduled agent and Resend (`RESEND_API_KEY` + `EMAIL_FROM`) on the site; without
+  Resend the post still ships and the run flags that 0 mail went out. See the owned-list
+  section in the root `CLAUDE.md`. Set STEP 4 back to
   `DRAFT` to require human review again.
 - **Dedup** keys on a `source_url` column. Add it once:
   `alter table blog_posts add column if not exists source_url text;`
@@ -90,8 +100,13 @@ result:
    does NOT render anything itself. `none` is almost never correct; a brand-new building
    not yet on Commons is a `map`, not a `none` (this is exactly the gap that shipped a
    senior-community story imageless in June 2026).
-3. **none** only when the story has no building, road, neighborhood, or town to pin at
-   all (a pure rate or county-budget item). This should be vanishingly rare.
+3. **none** effectively never. A diffuse civic story (a county/city tax, bond, budget,
+   zoning rule, or housing-policy decision) is still a `map`: the reporter pins the named
+   corridor, else the deciding body's seat (Greenville County Square, City Hall), else the
+   county itself, with AERIAL "no". `none` is reserved for a story with no SC place to pin
+   at all, which for a local Greenville real-estate engine should not happen. The June 2026
+   penny-road-tax post shipped imageless because the old rule let a "county-budget item"
+   fall to `none`; that hole is closed.
 
 For a map, orchestrator **STEP 2B** POSTs `{address, aerial, streetview}` to the
 **`greenville-image` Supabase Edge Function** (`supabase/functions/greenville-image/`).
