@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { site, socials, tools } from "@/lib/site";
+import { site, socials } from "@/lib/site";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -49,15 +49,6 @@ export default function Footer() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
-        <p className="theme-label text-xs font-semibold uppercase tracking-widest mb-3">
-          Parts of Claude we cover
-        </p>
-        <p className="theme-text-muted text-sm leading-relaxed max-w-3xl">
-          {tools.join(" · ")}
-        </p>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 pb-8">
         <p className="theme-text-muted text-xs">
           &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
         </p>

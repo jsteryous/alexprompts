@@ -1,33 +1,9 @@
 import Link from "next/link";
-import { socials, newsletterUrl, manifesto, outcomes, realEstateOutcomes, principles } from "@/lib/site";
+import { socials, newsletterUrl, realEstateOutcomes } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel } from "@/lib/tools";
-import { OutcomeArt, type OutcomeArtSlug } from "@/components/OutcomeArt";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
-
-/** The three content pillars, surfaced at the top so a first visit "gets into it"
- *  immediately instead of reading a brochure. */
-const pillars = [
-  {
-    href: "/tools",
-    label: "Free tools",
-    title: "Run the numbers",
-    body: "A rental deal analyzer, a mortgage calculator, and a Claude listing prompt builder. No sign-up.",
-  },
-  {
-    href: "/guides",
-    label: "Guides",
-    title: "Do it with Claude",
-    body: "Step-by-step walkthroughs for real estate work, slow enough that nothing is assumed.",
-  },
-  {
-    href: "/real-estate",
-    label: "Local",
-    title: "Greenville real estate",
-    body: "The biggest local real-estate story, both sides, in plain English.",
-  },
-] as const;
 
 export const revalidate = 300;
 
@@ -125,8 +101,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Lead: straight into the useful parts (tools, guides, local) ── */}
-      <section className="theme-page relative overflow-hidden pt-32 pb-4 md:pb-8">
+      {/* ── Lead: fresh reads first (newsletter issues + local real-estate posts) ── */}
+      <section className="theme-page relative overflow-hidden pt-32 pb-16 md:pb-20">
         <span
           className="prompt-watermark absolute -right-8 top-8 text-[16rem] md:text-[20rem] hidden sm:block select-none"
           aria-hidden
@@ -134,83 +110,6 @@ export default async function HomePage() {
           {">"}
         </span>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-4">Start here</Eyebrow>
-          <h1 className="theme-text-primary text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] max-w-3xl mb-3">
-            Free tools and plain-English guides for getting real work out of Claude.
-          </h1>
-          <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-2xl mb-10">
-            Run a deal, size up a mortgage, build a listing prompt, or read the latest. No
-            sign-up, nothing to install.
-          </p>
-          <ul className="grid gap-5 md:grid-cols-3">
-            {pillars.map((p) => (
-              <li key={p.href}>
-                <Link
-                  href={p.href}
-                  className="theme-card-strong border theme-border rounded-2xl p-7 h-full flex flex-col group hover:opacity-90 transition-opacity"
-                >
-                  <span className="theme-label text-xs font-semibold uppercase tracking-[0.2em] mb-3">
-                    {p.label}
-                  </span>
-                  <h2 className="theme-text-primary text-xl font-bold tracking-tight mb-2">{p.title}</h2>
-                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{p.body}</p>
-                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-5">
-                    Open <ArrowIcon className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── Tools spotlight: actual, usable tools right on the homepage ── */}
-      <section className="theme-section py-16 md:py-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex items-end justify-between gap-4 mb-8">
-            <div className="max-w-2xl">
-              <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
-              <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
-                Useful the second you land.
-              </h2>
-            </div>
-            <Link href="/tools" className="theme-link hidden sm:inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
-              All tools <ArrowIcon className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {liveTools().map((t) => (
-              <li key={t.slug}>
-                <Link
-                  href={`/tools/${t.slug}`}
-                  className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="inline-flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
-                      style={{ background: "var(--accent-soft)" }}
-                    >
-                      <ToolIcon slug={t.slug} className="theme-label w-6 h-6" />
-                    </span>
-                    <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-                      {audienceLabel[t.audience]}
-                    </span>
-                  </div>
-                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">{t.title}</h3>
-                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
-                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
-                    {t.cta} <ArrowIcon className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── Latest reads: newsletter issues + local real-estate posts, merged ── */}
-      <section className="theme-section py-16 md:py-20 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
           <Eyebrow className="mb-6">Fresh from Alex Prompts</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
 
@@ -265,6 +164,50 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Tools spotlight: actual, usable tools right on the homepage ── */}
+      <section className="theme-section py-16 md:py-20 border-t theme-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div className="max-w-2xl">
+              <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
+              <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                Useful the second you land.
+              </h2>
+            </div>
+            <Link href="/tools" className="theme-link hidden sm:inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
+              All tools <ArrowIcon className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {liveTools().map((t) => (
+              <li key={t.slug}>
+                <Link
+                  href={`/tools/${t.slug}`}
+                  className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="inline-flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
+                      style={{ background: "var(--accent-soft)" }}
+                    >
+                      <ToolIcon slug={t.slug} className="theme-label w-6 h-6" />
+                    </span>
+                    <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
+                      {audienceLabel[t.audience]}
+                    </span>
+                  </div>
+                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">{t.title}</h3>
+                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
+                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
+                    {t.cta} <ArrowIcon className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── What you'll do in real estate (primary value) ── */}
       <section id="learn" className="theme-section py-20 md:py-28 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
@@ -300,102 +243,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Not in real estate? (the "helps anyone" set) ── */}
-      <section className="theme-section py-20 md:py-28 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
-            <Eyebrow className="mb-4">Not active in real estate? No problem</Eyebrow>
-            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
-              A lot of what we cover adds value to just about anyone.
-            </h2>
-            <p className="theme-text-secondary text-lg leading-relaxed mt-4">
-              The same Claude skills reach well beyond real estate. Here is the kind of thing you
-              will be able to do, whatever your line of work.
-            </p>
-          </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {outcomes.map((o) => (
-              <li
-                key={o.title}
-                className="theme-card-strong border theme-border rounded-xl overflow-hidden h-full flex flex-col"
-              >
-                <div
-                  className="flex items-center justify-center aspect-[16/9]"
-                  style={{ background: "var(--accent-soft)" }}
-                >
-                  <OutcomeArt
-                    slug={o.art as OutcomeArtSlug}
-                    className="theme-label w-24 h-24"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
-                    {o.title}
-                  </h3>
-                  <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── How every guide works (the approach) ── */}
-      <section className="theme-section-muted border-y theme-border py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
-            <Eyebrow className="mb-4">How every guide works</Eyebrow>
-            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
-              The same calm, careful approach every time.
-            </h2>
-          </div>
-          <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {principles.map((p, i) => (
-              <li
-                key={p.title}
-                className="theme-card-strong border theme-border rounded-xl p-6 flex gap-4"
-              >
-                <span className="theme-label text-sm font-bold tabular-nums pt-0.5">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="theme-text-primary text-base font-semibold mb-1.5">{p.title}</h3>
-                  <p className="theme-text-muted text-sm leading-relaxed">{p.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ── What we're about ── */}
-      <section className="theme-section py-20 md:py-28 border-t theme-border">
-        <div className="max-w-3xl mx-auto px-6">
-          <Eyebrow className="mb-8">What we&apos;re about</Eyebrow>
-          <div className="space-y-5 md:space-y-6">
-            {manifesto.map((para, i) => (
-              <p
-                key={i}
-                className={`leading-relaxed ${
-                  i === 0
-                    ? "theme-text-primary text-xl md:text-2xl font-medium tracking-tight"
-                    : "theme-text-secondary text-base md:text-lg"
-                }`}
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Follow ── */}
       <section id="follow" className="theme-section py-16 md:py-24 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-8">
             <Eyebrow className="mb-4">Where to find us</Eyebrow>
             <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight max-w-2xl">
-              Short walkthroughs during the week. The full guide in your inbox.
+              Follow along during the week, or get it all in your inbox.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -419,10 +273,10 @@ export default async function HomePage() {
       <section className="theme-section-contrast py-24 md:py-32">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Put Claude to work in your business.
+            Get it in your inbox.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
-            One real walkthrough at a time, free in your inbox.
+            The newsletter, free. Unsubscribe anytime.
           </p>
           <SubscribeButton className="px-8 py-4" />
         </div>

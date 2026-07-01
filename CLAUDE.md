@@ -131,13 +131,17 @@ pipeline is retired under `scripts/_archive/` — do not revive either.
 
 ## Site structure
 
-- `/` — **utility-first landing.** Reordered June 2026 to "get into it immediately":
-  hero → **Start here** pillars (Tools / Guides / Local) → **tools spotlight** (the live
-  tools, clickable, driven by `liveTools()`) → **fresh from the newsletter** (latest issue
-  + recent) → real-estate outcomes (`realEstateOutcomes`) → "helps anyone" (`outcomes`) →
-  how every guide works (`principles`) → manifesto → follow → subscribe. Utility leads,
-  the *Subscribe* CTA still rides along (utility is the hook, email is the catch). Content
-  is free, money model is later.
+- `/` — **content-first landing.** Slimmed July 2026 to lead with the writing, not a
+  brochure: **fresh from Alex Prompts** (featured latest issue + recent, driven by
+  `getFeedPosts`) is now the lead section → **tools spotlight** (the live tools, clickable,
+  driven by `liveTools()`) → real-estate outcomes (`realEstateOutcomes`) → follow →
+  subscribe. The old "Start here" hero/pillars, the "helps anyone" (`outcomes`) grid, the
+  "how every guide works" (`principles`) strip, and the manifesto (`what we're about`)
+  section were **removed** to cut the monotone and to de-emphasize the "guide for Claude"
+  framing while the value prop is still being figured out. Their data still lives in
+  `site.ts` (`outcomes`, `principles`, `manifesto`, `tools`) and `principles`/
+  `realEstateOutcomes` still render on `/about`; the rest are currently unused but kept for
+  reuse. The *Subscribe* CTA still rides along. Content is free, money model is later.
 - `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
   source being `src/lib/tools.ts` (`toolCatalog`). Live: `deal-analyzer` (rental cash
   flow / cap rate / cash-on-cash), `mortgage` (payment + affordability), `listing-prompt`
