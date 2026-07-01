@@ -403,3 +403,16 @@ ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
 -- so a stray re-trigger does not double-send. Override with &force=1.
 ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS last_broadcast_at timestamptz;
+
+-- Card/hero/OG cover image. Set by the Substack sync (from the RSS enclosure) and by
+-- the Greenville finalize cron (rendered from image_address). Reads fall back to the
+-- first body image when NULL (see src/lib/posts.ts), so the site works before this runs.
+ALTER TABLE blog_posts
+  ADD COLUMN IF NOT EXISTS cover_image text;
+
+-- Greenville lead-image pin. The nightly routine cannot render images from its sandbox,
+-- so it stores the reporter's geocodable location here and leaves cover_image NULL; the
+-- /api/finalize-greenville cron geocodes this, renders a Street-View-or-map cover, and
+-- fills cover_image. NULL = no place to pin (the post stays cover-less).
+ALTER TABLE blog_posts
+  ADD COLUMN IF NOT EXISTS image_address text;

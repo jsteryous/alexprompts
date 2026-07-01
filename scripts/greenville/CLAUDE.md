@@ -69,63 +69,60 @@ python -m unittest scripts.tests.test_commercial -v
   pass guardrails (fair-housing language, not-advice, sourced numbers) plus dedup do
   the gating, and a verify email still goes out for after-the-fact spot-checks. If
   dedup is unavailable on a run, that run falls back to DRAFT.
-- **Emailing the owned list (orchestrator STEP 4B).** Greenville posts never go to
-  Substack, so the owned `subscribers` list is the only channel that reaches readers.
-  Publishing the row does NOT email anyone, so after a successful LIVE publish the
-  orchestrator GETs `/api/broadcast?id=<postId>` with `Authorization: Bearer
-  $PUBLISH_SECRET`; the route emails every CONFIRMED subscriber and stamps
-  `last_broadcast_at` so a re-run never double-sends. It is skipped on a DRAFT fallback
-  (nothing live to announce) and never blocks the post. Needs `PUBLISH_SECRET` on the
-  scheduled agent and Resend (`RESEND_API_KEY` + `EMAIL_FROM`) on the site; without
-  Resend the post still ships and the run flags that 0 mail went out. See the owned-list
-  section in the root `CLAUDE.md`. Set STEP 4 back to
-  `DRAFT` to require human review again.
+- **Emailing the owned list (the finalize cron, not the agent).** Greenville posts never
+  go to Substack, so the owned `subscribers` list is the only channel that reaches readers.
+  The agent cannot send it (no HTTP egress from the sandbox), so the same
+  `/api/finalize-greenville` cron that renders the cover also broadcasts: for any PUBLISHED
+  `greenville` post with `last_broadcast_at` NULL it emails every CONFIRMED subscriber (via
+  the shared `broadcastPost` in `src/lib/broadcast.ts`, the core `/api/broadcast` also uses)
+  and stamps `last_broadcast_at`, so it sends exactly once. A DRAFT fallback is never
+  emailed because the cron only touches PUBLISHED rows. The render and the broadcast are
+  independent, so a failed image never blocks the email. Needs Resend (`RESEND_API_KEY` +
+  `EMAIL_FROM`) on the site; without it the post still ships and the run records 0 mail sent.
+  See the owned-list section in the root `CLAUDE.md`. Set STEP 4 back to `DRAFT` to require
+  human review again.
 - **Dedup** keys on a `source_url` column. Add it once:
   `alter table blog_posts add column if not exists source_url text;`
   Without it the routine dedups on title only.
 - **X** has no auto-poster (no X connector); the routine drafts the X post and emails
   it for manual posting.
 
-## Images (the lead-image cascade)
+## Images (rendered after publish, off the agent)
 
-The lead image must be SPECIFIC to the story, never a generic stock photo. The
-reporter (`pass1_reporter.md` STEP 3) works a cascade and the writer renders the
-result:
+The lead image must be SPECIFIC to the story, never a generic stock photo. It is
+NOT rendered by the routine. The cloud agent runs in a sandbox that reaches the
+world only through MCP connectors (Supabase, Gmail), so it cannot call Google or
+the Storage API over HTTP. Instead the reporter names a place and the site renders
+the cover afterward:
 
-1. **Wikimedia Commons** only if a photo genuinely depicts the subject (the actual
-   building, venue, park, or development). A generic skyline is rejected.
-2. **A render of the location** otherwise, and this is the FLOOR: every real-estate
-   story happens somewhere, so unless the story is genuinely placeless (step 3) the
-   reporter must choose `map` and hand off a geocodable LOCATION + an AERIAL yes/no. It
-   does NOT render anything itself. `none` is almost never correct; a brand-new building
-   not yet on Commons is a `map`, not a `none` (this is exactly the gap that shipped a
-   senior-community story imageless in June 2026).
-3. **none** effectively never. A diffuse civic story (a county/city tax, bond, budget,
-   zoning rule, or housing-policy decision) is still a `map`: the reporter pins the named
-   corridor, else the deciding body's seat (Greenville County Square, City Hall), else the
-   county itself, with AERIAL "no". `none` is reserved for a story with no SC place to pin
-   at all, which for a local Greenville real-estate engine should not happen. The June 2026
-   penny-road-tax post shipped imageless because the old rule let a "county-budget item"
-   fall to `none`; that hole is closed.
+1. **The reporter names a location** (`pass1_reporter.md` STEP 3): a geocodable
+   LOCATION string, almost always. A story happens somewhere, so this is the FLOOR.
+   A diffuse civic story (a county/city tax, bond, zoning rule, or housing-policy
+   decision) still gets a `map`, pinned on the named corridor, else the deciding
+   body's seat (Greenville County Square, City Hall), else the county. `none` is
+   reserved for a story with no SC place to pin at all, which should not happen.
+2. **The orchestrator stores that string** in `blog_posts.image_address` on the row
+   it publishes (STEP 4), leaving `cover_image` NULL. There is no image step in the
+   routine and no `images.txt`.
+3. **The finalize cron renders it** (`/api/finalize-greenville`, daily, after the
+   routine; see the site's `src/lib/greenvilleImage.ts`). It geocodes the address and
+   picks a **Street View photo of the site** when Google has imagery there (so
+   `/real-estate` is not wall-to-wall red-pin maps), otherwise a **roadmap-with-pin**,
+   uploads it to the public **`post-images`** bucket, and sets `cover_image`. Both
+   image kinds carry Google's own watermark, so no separate credit line is needed. The
+   article page renders `cover_image` as the hero above the text-only body. If a render
+   fails it simply retries on the next daily run (idempotent: it only acts while
+   `cover_image` is NULL, within a 3-day window), then ages out.
 
-For a map, orchestrator **STEP 2B** POSTs `{address, aerial, streetview}` to the
-**`greenville-image` Supabase Edge Function** (`supabase/functions/greenville-image/`).
-The function geocodes the address and picks the cover by a sub-cascade: a **Street View
-photo of the site** when Google has imagery there (so `/real-estate` is not wall-to-wall
-red-pin maps), otherwise a **roadmap-with-pin**. It also renders a hybrid satellite when
-`aerial` is true. It uploads them to the public **`post-images`** bucket and returns
-`cover`, `coverKind`, `coverCredit` (the exact credit line), `map`, `aerial`, and
-`streetview`. The orchestrator requests `streetview` whenever AERIAL is "yes". The writer
-puts `cover` first with `coverCredit` verbatim and, if an aerial came back, one
-mid-article aerial (credit `*Satellite imagery © Google.*`). If the call fails it is
-retried once; if it still fails the post ships imageless but the run **flags it loudly**,
-so a placed story never silently loses its image without a trace.
+There is no longer a Wikimedia Commons branch or an `aerial` second image; Street View
+of the actual site covers the "real photo" case, and dropping them removed the
+credit/licensing bookkeeping and the body-image mutation. The old `greenville-image`
+Supabase Edge Function is retired (its work moved into the site's finalize route).
 
-**Keys.** The Google Maps key lives ONLY as the function's `GOOGLE_MAPS_KEY` secret
-(Supabase → Edge Functions → Secrets), so neither the cloud agent nor the public HTML
-ever holds it. The agent calls the function with the public anon key. The function needs
-**Maps Static, Geocoding, and Street View Static** enabled on that Google key. See
-memory [[greenville-lead-image-cascade]].
+**Keys.** Rendering now runs on Vercel, so it uses the site's existing
+`GOOGLE_PLACES_API_KEY` (Maps Static, Geocoding, Street View Static must be enabled on
+it) plus `SUPABASE_SERVICE_KEY` for the Storage upload. No agent-held key, no separate
+function secret. See memory [[greenville-lead-image-cascade]].
 
 ## Tuning
 

@@ -2,7 +2,7 @@ import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { formatDate, sectionOf, type FullPost } from "@/lib/posts";
+import { coverImageFromBody, formatDate, sectionOf, type FullPost } from "@/lib/posts";
 import { SubscribeForm } from "@/components/SubscribeForm";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
@@ -110,6 +110,21 @@ export default async function ArticleView({
 
       <section className="theme-section py-16">
         <div className="max-w-2xl mx-auto px-6">
+          {/* Show the stored cover as a hero only when the body does not already
+              lead with an image. New Greenville posts have a text-only body (the
+              cover is rendered into cover_image by the finalize cron), so the hero
+              belongs here. Substack/guide bodies and older Greenville posts embed
+              their image inline, so adding a hero would print it twice. */}
+          {post.cover_image && !coverImageFromBody(post.body_md) && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={post.cover_image}
+              alt={post.title}
+              loading="eager"
+              decoding="async"
+              className="theme-border mb-10 w-full rounded-xl border"
+            />
+          )}
           <div className="theme-prose prose max-w-none" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
         </div>
       </section>

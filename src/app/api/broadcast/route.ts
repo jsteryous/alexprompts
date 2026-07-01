@@ -1,11 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { getConfirmedSubscribers, subscribersConfigured } from "@/lib/subscribers";
-import { sendEmail } from "@/lib/email";
-import { postBroadcastEmail } from "@/lib/emailTemplates";
-import { postHref } from "@/lib/posts";
-import { SITE_URL } from "@/lib/site";
+import { subscribersConfigured } from "@/lib/subscribers";
+import { broadcastPost } from "@/lib/broadcast";
 
 /**
  * GET /api/broadcast?id=<postId>&token=<PUBLISH_SECRET>
@@ -57,72 +54,6 @@ export async function GET(req: NextRequest) {
   }
 
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
-
-  const { data: post, error: postErr } = await db
-    .from("blog_posts")
-    .select("id, title, slug, summary, tags, status, last_broadcast_at")
-    .eq("id", id)
-    .maybeSingle();
-  if (postErr) return NextResponse.json({ ok: false, error: postErr.message }, { status: 500 });
-  if (!post) return NextResponse.json({ ok: false, error: "post not found" }, { status: 404 });
-  if (post.status !== "PUBLISHED") {
-    return NextResponse.json({ ok: false, error: "post is not published" }, { status: 409 });
-  }
-  if (post.last_broadcast_at && !force && !test) {
-    return NextResponse.json(
-      { ok: false, error: "already broadcast", last_broadcast_at: post.last_broadcast_at, hint: "add &force=1 to resend" },
-      { status: 409 },
-    );
-  }
-
-  const postUrl = `${SITE_URL}${postHref(post)}`;
-
-  // Preview send: one email to the tester, no list, no stamp.
-  if (test) {
-    const mail = postBroadcastEmail({
-      title: post.title,
-      summary: post.summary,
-      postUrl,
-      unsubUrl: `${SITE_URL}/api/unsubscribe?token=preview`,
-    });
-    const r = await sendEmail({ to: test, subject: mail.subject, html: mail.html, text: mail.text });
-    return NextResponse.json({ ok: r.ok, mode: "test", to: test, error: r.error });
-  }
-
-  const recipients = await getConfirmedSubscribers();
-  if (dry) {
-    return NextResponse.json({ ok: true, mode: "dry", recipients: recipients.length, post: post.slug });
-  }
-
-  let sent = 0;
-  const failed: { email: string; error?: string }[] = [];
-  for (const r of recipients) {
-    const unsubUrl = `${SITE_URL}/api/unsubscribe?token=${r.unsub_token}`;
-    const mail = postBroadcastEmail({ title: post.title, summary: post.summary, postUrl, unsubUrl });
-    const res = await sendEmail({
-      to: r.email,
-      subject: mail.subject,
-      html: mail.html,
-      text: mail.text,
-      headers: {
-        "List-Unsubscribe": `<${unsubUrl}>`,
-        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-      },
-    });
-    if (res.ok) sent++;
-    else failed.push({ email: r.email, error: res.error });
-  }
-
-  // Stamp the post so a stray re-trigger does not double-send (override with force).
-  await db.from("blog_posts").update({ last_broadcast_at: new Date().toISOString() }).eq("id", post.id);
-
-  return NextResponse.json({
-    ok: true,
-    mode: "broadcast",
-    post: post.slug,
-    recipients: recipients.length,
-    sent,
-    failed: failed.length,
-    failures: failed.slice(0, 10),
-  });
+  const { status, body } = await broadcastPost(db, id, { test, dry, force });
+  return NextResponse.json(body, { status });
 }

@@ -168,15 +168,25 @@ export function sectionLabel(post: { tags: string[] | null }): string {
 export async function getPost(slug: string, type?: PostType): Promise<FullPost | null> {
   const c = client();
   if (!c) return null;
-  const { data } = await c
+  // Prefer the stored cover_image (set by the Substack sync or the Greenville
+  // finalize cron); fall back to the first body image. The two-query dance mirrors
+  // getPublishedPosts: degrade gracefully if the cover_image column is missing
+  // (42703 = undefined_column) instead of returning null for the whole article.
+  const cols = "id, title, slug, summary, body_md, tags, published_at, created_at, author";
+  const primary = await c
     .from("blog_posts")
-    .select("id, title, slug, summary, body_md, tags, published_at, created_at, author")
+    .select(`${cols}, cover_image`)
     .eq("slug", slug)
     .eq("status", "PUBLISHED")
     .single();
+  const { data } =
+    primary.error?.code === "42703"
+      ? await c.from("blog_posts").select(cols).eq("slug", slug).eq("status", "PUBLISHED").single()
+      : primary;
   if (!data) return null;
   if (type && sectionOf(data) !== type) return null;
-  return { ...data, cover_image: coverImageFromBody(data.body_md) } as FullPost;
+  const row = data as FullPost & { cover_image?: string | null };
+  return { ...row, cover_image: row.cover_image ?? coverImageFromBody(row.body_md) } as FullPost;
 }
 
 /**

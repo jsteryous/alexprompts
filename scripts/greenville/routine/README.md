@@ -14,40 +14,36 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
 1. **`pass1_reporter.md`** — establishes the verified facts, finds the real
    publisher article behind Google News's opaque redirect link, names the central
    place by its proper name, separates CONFIRMED from REPORTED, dedups against what
-   the site already covered, and lists what a human must verify. It also decides the
-   lead image via a **cascade**: a Wikimedia Commons photo only if one genuinely
-   depicts the subject (never a generic skyline), otherwise a `map` of the location
-   (it hands off a geocodable LOCATION + an AERIAL yes/no). A render of the location is
-   the FLOOR: even a diffuse civic story (a county/city tax, bond, zoning, or policy
-   decision) is a `map` pinned on the named corridor, the deciding body's seat, or the
-   county, so `none` is reserved for a story with no SC place at all and should
-   effectively never fire. On a quiet day it returns `NO NEW STORY TODAY`
-   and the run stops.
+   the site already covered, and lists what a human must verify. It also names the
+   **lead-image location**: a geocodable LOCATION string the finalize cron later renders
+   a cover from. A location is the FLOOR: even a diffuse civic story (a county/city tax,
+   bond, zoning, or policy decision) gets a `map` pinned on the named corridor, the
+   deciding body's seat, or the county, so `none` is reserved for a story with no SC
+   place at all and should effectively never fire. On a quiet day it returns
+   `NO NEW STORY TODAY` and the run stops.
 2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
    THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
    reader's question. Takes no stance.
-3. **`pass3_writer.md`** — renders the website article (markdown, image first) and
-   the X post in house voice (no em dashes, no fragments, plain English), with
-   fair-housing and not-advice guardrails. Emits a `## METADATA` block the
-   orchestrator uses to create the post.
+3. **`pass3_writer.md`** — renders the website article (text-only markdown; the cover
+   is added later by the finalize cron) and the X post in house voice (no em dashes, no
+   fragments, plain English), with fair-housing and not-advice guardrails. Emits a
+   `## METADATA` block the orchestrator uses to create the post.
 
 `orchestrator.md` wires them as cold sub-agents, reads the committed signal, dedups
 against the live site, and on a real story: creates the website post in
 Supabase `blog_posts`, then emails the human packet (verify list, the
 article, and the X post to copy-paste). No Google Drive copy.
 
-Between the two-sides pass and the writer, **STEP 2B** renders the lead image when the
-reporter chose `map`: it POSTs the LOCATION to the **`greenville-image` Supabase Edge
-Function** (`supabase/functions/greenville-image/`), which geocodes it and picks the
-cover by a sub-cascade. A **Street View photo** of the site when Google has imagery there
-(so the section is not wall-to-wall red-pin maps), otherwise a **map-with-pin**, plus an
-aerial when asked. It uploads them to the public `post-images` bucket and returns the
-hosted urls and the exact credit line. The orchestrator requests Street View whenever
-AERIAL is "yes". The Google key lives only as the function's `GOOGLE_MAPS_KEY` secret, so
-the cloud agent and the public site never see it; the agent authenticates with the public
-anon key. If the call fails it is **retried once**, and if it still fails the run
-publishes without the image but **flags it loudly** so a placed story never silently
-loses its cover.
+The routine does NOT render the lead image. The cloud agent's sandbox reaches the world
+only through MCP connectors, so it cannot call Google or Supabase Storage over HTTP. The
+reporter just names a geocodable LOCATION, the orchestrator stores it in
+`blog_posts.image_address` (leaving `cover_image` NULL), and the site's
+**`/api/finalize-greenville`** cron renders the cover afterward (`src/lib/greenvilleImage.ts`):
+a **Street View photo** of the site when Google has imagery there, otherwise a
+**map-with-pin**, uploaded to the public `post-images` bucket and written back to
+`cover_image`. Both carry Google's watermark, so no credit line is needed. Rendering is
+idempotent (it acts only while `cover_image` is NULL, within a 3-day window), so a failed
+run just retries next time. The old `greenville-image` edge function is retired.
 
 ## Cadence and where it posts
 
@@ -61,12 +57,13 @@ loses its cover.
   goes out so you can spot-check and unpublish at `/review` if needed. If dedup could
   not run (Supabase down), that run falls back to DRAFT. To return to human review,
   set STEP 4 back to `DRAFT`.
-- **Owned email list:** after a successful live publish, **STEP 4B** GETs
-  `/api/broadcast?id=<postId>` (Bearer `PUBLISH_SECRET`) so the post emails every
-  confirmed subscriber. Greenville posts never go to Substack, so this is the only
-  channel that reaches readers; publishing the row alone emails no one. Skipped on a
-  DRAFT fallback, never blocks the post. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`)
-  configured on the site.
+- **Owned email list:** the agent cannot send it (no HTTP egress), so the same
+  **`/api/finalize-greenville`** cron that renders the cover also broadcasts: any
+  PUBLISHED `greenville` post with `last_broadcast_at` NULL is emailed to every confirmed
+  subscriber (shared `broadcastPost` in `src/lib/broadcast.ts`) and stamped, so it sends
+  once. Greenville posts never go to Substack, so this is the only channel that reaches
+  readers. A DRAFT fallback is never emailed (the cron only touches PUBLISHED). Needs
+  Resend (`RESEND_API_KEY` + `EMAIL_FROM`) configured on the site.
 - **X:** there is no X auto-poster (no X connector wired), so the routine drafts the
   X post and delivers it in the email packet for you to post by hand.
 
