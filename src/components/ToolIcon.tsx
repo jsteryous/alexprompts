@@ -98,12 +98,32 @@ function BuyersList() {
   );
 }
 
+function Taraform() {
+  // A CRM pipeline board: columns of deal cards, the last one accented, moving
+  // an acquisition toward close.
+  return (
+    <>
+      <rect x={7} y={9} width={34} height={30} rx={3} {...soft} />
+      <rect x={7} y={9} width={34} height={30} rx={3} {...stroke} />
+      <line x1={7} y1={15} x2={41} y2={15} {...stroke} />
+      <line x1={18.3} y1={15} x2={18.3} y2={39} {...stroke} />
+      <line x1={29.6} y1={15} x2={29.6} y2={39} {...stroke} />
+      <rect x={10} y={19} width={5.5} height={4} rx={1} {...stroke} />
+      <rect x={10} y={26} width={5.5} height={4} rx={1} {...stroke} />
+      <rect x={21.3} y={19} width={5.5} height={4} rx={1} {...stroke} />
+      <rect x={32.6} y={19} width={5.5} height={4} rx={1.2} {...soft} />
+      <rect x={32.6} y={19} width={5.5} height={4} rx={1.2} {...stroke} />
+    </>
+  );
+}
+
 const icons: Record<string, () => React.ReactElement> = {
   "deal-analyzer": DealAnalyzer,
   mortgage: Mortgage,
   "listing-prompt": ListingPrompt,
   "area-scan": AreaScan,
   "buyers-list": BuyersList,
+  taraform: Taraform,
 };
 
 export function ToolIcon({ slug, className = "" }: { slug: string; className?: string }) {

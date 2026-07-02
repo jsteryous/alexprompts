@@ -26,6 +26,13 @@ export interface ToolEntry {
   status: ToolStatus;
   /** Card button label for live tools. */
   cta: string;
+  /**
+   * Absolute URL to a separate live app (its own repo/domain). When set, the
+   * card links out in a new tab instead of to an in-repo /tools/<slug> page,
+   * and the sitemap skips it (it is not one of our routes). Still needs a
+   * `slug` for the React key and its ToolIcon.
+   */
+  external?: string;
 }
 
 export const toolCatalog: ToolEntry[] = [
@@ -74,7 +81,25 @@ export const toolCatalog: ToolEntry[] = [
     status: "live",
     cta: "See recent buyers",
   },
+  {
+    slug: "taraform",
+    title: "Taraform CRM",
+    blurb:
+      "A custom CRM for land acquisition. Track your offers, pipeline, and accepted deals in one place, with dashboards that show what is pending and what is closing. Sign in with Google to start.",
+    audience: "investors",
+    status: "live",
+    cta: "Open Taraform",
+    external: "https://taraform.org",
+  },
 ];
+
+/**
+ * Where a tool's card links: out to its own app when `external` is set,
+ * otherwise the in-repo /tools/<slug> page.
+ */
+export function toolHref(t: ToolEntry): string {
+  return t.external ?? `/tools/${t.slug}`;
+}
 
 export function liveTools(): ToolEntry[] {
   return toolCatalog.filter((t) => t.status === "live");

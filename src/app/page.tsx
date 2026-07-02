@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { socials, newsletterUrl, realEstateOutcomes } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
-import { liveTools, audienceLabel } from "@/lib/tools";
+import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
 
@@ -182,7 +182,8 @@ export default async function HomePage() {
             {liveTools().map((t) => (
               <li key={t.slug}>
                 <Link
-                  href={`/tools/${t.slug}`}
+                  href={toolHref(t)}
+                  {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
                 >
                   <div className="flex items-center gap-3 mb-3">

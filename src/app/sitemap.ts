@@ -15,7 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
   ];
 
-  const toolRoutes: MetadataRoute.Sitemap = liveTools().map((t) => ({
+  const toolRoutes: MetadataRoute.Sitemap = liveTools()
+    .filter((t) => !t.external)
+    .map((t) => ({
     url: `${SITE_URL}/tools/${t.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,

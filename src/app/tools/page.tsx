@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { toolCatalog, audienceLabel } from "@/lib/tools";
+import { toolCatalog, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 
 export const metadata: Metadata = {
@@ -81,7 +81,11 @@ export default function ToolsPage() {
               return (
                 <li key={t.slug}>
                   {live ? (
-                    <Link href={`/tools/${t.slug}`} className="group block h-full">
+                    <Link
+                      href={toolHref(t)}
+                      {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="group block h-full"
+                    >
                       {card}
                     </Link>
                   ) : (
