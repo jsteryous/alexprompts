@@ -5,6 +5,7 @@
  * sender stays swappable and the build stays lean. Configure with two env vars:
  *   - RESEND_API_KEY  — the API key (never exposed to the client)
  *   - EMAIL_FROM      — a verified sender, e.g. "Alex Prompts <alex@alexprompts.com>"
+ *                       (MAIL_FROM is accepted as a legacy alias)
  *   - EMAIL_REPLY_TO  — optional reply-to address
  *
  * Until those are set, sending is a no-op that reports "not_configured" so the
@@ -15,6 +16,13 @@
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
+/** The verified sender address. Reads EMAIL_FROM, falling back to the legacy
+ *  MAIL_FROM name (still used in some deploy envs) so a naming drift does not
+ *  silently disable all outgoing mail. */
+function fromAddress(): string | undefined {
+  return process.env.EMAIL_FROM ?? process.env.MAIL_FROM;
+}
+
 export interface SendResult {
   ok: boolean;
   /** "not_configured" when env is missing; otherwise a provider error string. */
@@ -22,9 +30,9 @@ export interface SendResult {
   id?: string;
 }
 
-/** True when RESEND_API_KEY + EMAIL_FROM are both set. */
+/** True when RESEND_API_KEY + a sender (EMAIL_FROM/MAIL_FROM) are both set. */
 export function emailConfigured(): boolean {
-  return !!process.env.RESEND_API_KEY && !!process.env.EMAIL_FROM;
+  return !!process.env.RESEND_API_KEY && !!fromAddress();
 }
 
 export interface SendOptions {
@@ -41,7 +49,7 @@ export interface SendOptions {
  *  so callers can keep a pending subscriber row without treating it as a failure. */
 export async function sendEmail(opts: SendOptions): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM;
+  const from = fromAddress();
   if (!apiKey || !from) return { ok: false, error: "not_configured" };
 
   try {

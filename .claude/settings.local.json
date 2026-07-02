@@ -200,7 +200,8 @@
       "mcp__claude_ai_Gmail__search_threads",
       "PowerShell(npx tsc --noEmit 2>&1 | Select-Object -First 20)",
       "Bash(curl -s --max-time 60 -X POST https://ykuenmwfxecmmqichwit.supabase.co/functions/v1/greenville-image -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrdWVubXdmeGVjbW1xaWNod2l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5MTAxMzAsImV4cCI6MjA4MzQ4NjEzMH0.MoJO92cIHwVXKGj7A9NXtCZW-JaKKAPrxxoch_Ga1Qk' -H 'Content-Type: application/json' -d '{\"address\":\"Greenville County Square, Greenville, SC\",\"aerial\":false,\"streetview\":false}')",
-      "Bash(echo \"EXIT=$?\")"
+      "Bash(echo \"EXIT=$?\")",
+      "mcp__claude_ai_Vercel__get_runtime_logs"
     ]
   }
 }

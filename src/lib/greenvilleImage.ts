@@ -14,8 +14,12 @@
  * out of the image path entirely now, so the key can live in Vercel env alongside
  * the one area-scan already uses, with no separate function or secret.
  *
- * Env (all server-only, already present for other features):
- *   - GOOGLE_PLACES_API_KEY (or GOOGLE_MAPS_KEY) — Maps Static, Geocoding, Street View Static
+ * Env (all server-only):
+ *   - GOOGLE_MAPS_KEY — Geocoding, Maps Static, Street View Static. This must be a
+ *     Maps-Platform key with those three APIs enabled. It is intentionally SEPARATE
+ *     from GOOGLE_PLACES_API_KEY (which area-scan uses and is locked to Places API
+ *     New only), so each key can be quota-capped to just the APIs it needs. Falls
+ *     back to GOOGLE_PLACES_API_KEY only for a single-key setup.
  *   - NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_KEY — for the Storage upload
  */
 import { createClient } from "@supabase/supabase-js";
@@ -29,7 +33,10 @@ export interface RenderResult {
 }
 
 function googleKey(): string | undefined {
-  return process.env.GOOGLE_PLACES_API_KEY ?? process.env.GOOGLE_MAPS_KEY;
+  // The image cascade uses Maps Platform APIs (Geocoding, Maps Static, Street View
+  // Static), NOT Places. Prefer the maps-scoped key; fall back to the Places key only
+  // for a single-key setup (where one key has every API enabled).
+  return process.env.GOOGLE_MAPS_KEY ?? process.env.GOOGLE_MAPS_API_KEY ?? process.env.GOOGLE_PLACES_API_KEY;
 }
 
 /** True when both the Google key and the service-key Supabase env are set. */
@@ -68,7 +75,7 @@ export async function renderCover(address: string): Promise<RenderResult> {
   const key = googleKey();
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_KEY;
-  if (!key) throw new Error("no Google key (GOOGLE_PLACES_API_KEY / GOOGLE_MAPS_KEY)");
+  if (!key) throw new Error("no Google key (GOOGLE_MAPS_KEY / GOOGLE_PLACES_API_KEY)");
   if (!supabaseUrl || !serviceKey) throw new Error("Supabase service env missing");
 
   const supabase = createClient(supabaseUrl, serviceKey);

@@ -98,19 +98,27 @@ export async function broadcastPost(
     else failed.push({ email: r.email, error: res.error });
   }
 
-  // Stamp the post so a stray re-trigger does not double-send (override with force).
-  await db.from("blog_posts").update({ last_broadcast_at: new Date().toISOString() }).eq("id", post.id);
+  // A total wipeout (recipients existed but nothing sent) means a misconfiguration,
+  // e.g. Resend/sender env unset or the domain unverified. Do NOT stamp in that case:
+  // stamping would mark the post "already broadcast" and permanently mask the failure,
+  // so the finalize cron would never retry it. Surface it instead and leave it retryable.
+  const totalFailure = recipients.length > 0 && sent === 0;
+  if (!totalFailure) {
+    // Stamp so a stray re-trigger does not double-send (override with force).
+    await db.from("blog_posts").update({ last_broadcast_at: new Date().toISOString() }).eq("id", post.id);
+  }
 
   return {
-    status: 200,
+    status: totalFailure ? 502 : 200,
     body: {
-      ok: true,
+      ok: !totalFailure,
       mode: "broadcast",
       post: post.slug,
       recipients: recipients.length,
       sent,
       failed: failed.length,
       failures: failed.slice(0, 10),
+      ...(totalFailure ? { error: "no emails sent (check RESEND_API_KEY + sender/domain)", stamped: false } : {}),
     },
   };
 }
