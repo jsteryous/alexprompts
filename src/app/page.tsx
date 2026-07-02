@@ -31,7 +31,7 @@ function SubscribeButton({ className = "" }: { className?: string }) {
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span className={`theme-label inline-block text-xs font-semibold uppercase tracking-[0.2em] ${className}`}>
+    <span className={`theme-label type-eyebrow inline-block ${className}`}>
       <span className="opacity-50">{"> "}</span>
       {children}
     </span>
@@ -61,11 +61,11 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
             </time>
           )}
         </div>
-        <h3 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-4 group-hover:opacity-80">
+        <h3 className="theme-text-primary type-h2 mb-4 group-hover:opacity-80">
           {post.title}
         </h3>
         {post.summary && (
-          <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mb-5">
+          <p className="theme-text-secondary type-body-lg max-w-3xl mb-5">
             {post.summary}
           </p>
         )}
@@ -83,10 +83,10 @@ function EmptyLead() {
       <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
         First walkthrough incoming
       </span>
-      <h3 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight leading-tight mt-5 mb-4">
+      <h3 className="theme-text-primary type-h2 mt-5 mb-4">
         The first walkthrough is on its way.
       </h3>
-      <p className="theme-text-secondary text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-7">
+      <p className="theme-text-secondary type-body-lg max-w-xl mx-auto mb-7">
         Subscribe now and the very first one lands in your inbox the day it ships.
         You will get one clear walkthrough at a time, and nothing else.
       </p>
@@ -116,7 +116,7 @@ export default async function HomePage() {
           {rest.length > 0 && (
             <>
               <div className="flex items-end justify-between mt-12 mb-6 gap-4">
-                <h2 className="theme-text-primary text-xl md:text-2xl font-bold tracking-tight">
+                <h2 className="theme-text-primary type-h3">
                   More to read
                 </h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
@@ -146,11 +146,11 @@ export default async function HomePage() {
                             </time>
                           )}
                         </div>
-                        <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                        <h3 className="theme-text-primary type-title mb-2">
                           {p.title}
                         </h3>
                         {p.summary && (
-                          <p className="theme-text-muted text-sm leading-relaxed line-clamp-3">
+                          <p className="theme-text-muted type-small line-clamp-3">
                             {p.summary}
                           </p>
                         )}
@@ -170,7 +170,7 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-4 mb-8">
             <div className="max-w-2xl">
               <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
-              <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+              <h2 className="theme-text-primary type-h2">
                 Useful the second you land.
               </h2>
             </div>
@@ -196,8 +196,8 @@ export default async function HomePage() {
                       {audienceLabel[t.audience]}
                     </span>
                   </div>
-                  <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">{t.title}</h3>
-                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
+                  <h3 className="theme-text-primary type-title mb-2">{t.title}</h3>
+                  <p className="theme-text-muted type-small flex-1">{t.blurb}</p>
                   <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
                     {t.cta} <ArrowIcon className="w-3.5 h-3.5" />
                   </span>
@@ -213,10 +213,10 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <Eyebrow className="mb-4">What you&apos;ll do with Claude</Eyebrow>
-            <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+            <h2 className="theme-text-primary type-h2">
               Point Claude at the work your week is already full of.
             </h2>
-            <p className="theme-text-secondary text-lg leading-relaxed mt-4">
+            <p className="theme-text-secondary type-body-lg mt-4">
               Not a tour of buttons. The actual jobs an agent or investor does, shown step by
               step, so you can do them in a fraction of the time.
             </p>
@@ -227,10 +227,10 @@ export default async function HomePage() {
                 key={o.title}
                 className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
               >
-                <h3 className="theme-text-primary text-lg font-semibold leading-snug mb-2">
+                <h3 className="theme-text-primary type-title mb-2">
                   {o.title}
                 </h3>
-                <p className="theme-text-muted text-sm leading-relaxed">{o.body}</p>
+                <p className="theme-text-muted type-small">{o.body}</p>
               </li>
             ))}
           </ul>
@@ -248,7 +248,7 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-8">
             <Eyebrow className="mb-4">Where to find us</Eyebrow>
-            <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight max-w-2xl">
+            <h2 className="theme-text-primary type-h2 max-w-2xl">
               Follow along during the week, or get it all in your inbox.
             </h2>
           </div>
@@ -272,10 +272,10 @@ export default async function HomePage() {
       {/* ── Subscribe CTA ── */}
       <section className="theme-section-contrast py-24 md:py-32">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="theme-text-primary text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="theme-text-primary type-h2 mb-4">
             Get it in your inbox.
           </h2>
-          <p className="theme-text-contrast-muted text-base md:text-lg mb-8 leading-relaxed">
+          <p className="theme-text-contrast-muted type-body-lg mb-8">
             The newsletter, free. Unsubscribe anytime.
           </p>
           <SubscribeButton className="px-8 py-4" />

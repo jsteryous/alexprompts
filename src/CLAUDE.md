@@ -86,9 +86,17 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`,
   `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`,
   `theme-section-muted`, `theme-page`).
-- **Tokens:** cool-neutral base (light bg `#fafafb`, dark bg `#0a0c10`) with an
-  **electric indigo accent** (`#4f46e5` light / `#818cf8` dark). This replaced the old
-  dental cream+green palette — do not regress to green/cream.
+- **Tokens:** Apple-style **cool-neutral** base (light bg `#f5f5f7`, surface `#ffffff`,
+  text `#1d1d1f`, muted `#6e6e73`; dark bg near-black neutral `#101012`, surface `#1c1c1e`,
+  text `#f5f5f7`) with a **refined indigo accent** (`#4f46e5` light / `#818cf8` dark). The
+  neutrals are true-cool on purpose so nothing clashes with the accent or the `tone-*`
+  chips — do NOT reintroduce a warm/cream base (the old dental cream+green is gone) or mix
+  warm greys in. All neutrals live in `globals.css` tokens; retune there, never per-page.
+- **Type scale = single source of truth.** `@theme` defines `--text-display/h1/h2/h3/title/
+  body-lg/body/small/eyebrow` (fluid `clamp()`), consumed via the `.type-*` utility classes
+  (size + line-height + weight + tracking together; color still comes from `theme-text-*`).
+  Prefer `.type-h2` etc. over ad-hoc `text-3xl md:text-4xl font-bold tracking-tight`. Homepage,
+  `/about`, and the `/tools` pages + `ToolShell` are converted; other pages migrate over time.
 - **Dark mode:** class-based (`html.dark`). `ThemeProvider` → `localStorage` key
   `alexprompts-theme`. `suppressHydrationWarning` on `<html>` + the inline `layout.tsx`
   script prevent the flash.
@@ -98,7 +106,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - Sections `py-20 md:py-28`, max-width `max-w-5xl`/`max-w-6xl`, articles `max-w-2xl`.
 - Article body: `prose theme-prose max-w-none` + `dangerouslySetInnerHTML` (first-party
   author content from the gated publish flow).
-- Direction: Stripe / Linear aesthetic — whitespace, strong type scale, minimal decoration.
+- Direction: **Apple-quiet** — generous whitespace, strong type scale, minimal decoration.
+  The one signature flourish is the terminal-caret motif (`.caret`, faint `.prompt-watermark`).
+  Keep gradients/blur/textures restrained; do not add back the dotted-grid page texture.
 
 ## SEO
 

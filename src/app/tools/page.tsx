@@ -24,13 +24,13 @@ export default function ToolsPage() {
     <>
       <section className="theme-page pt-32 pb-16 border-b theme-border">
         <div className="max-w-3xl mx-auto px-6">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="theme-label type-eyebrow inline-block mb-4">
             <span className="opacity-50">{"> "}</span>Free tools
           </span>
-          <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
+          <h1 className="theme-text-primary type-h1 mb-4">
             Tools you can use right now
           </h1>
-          <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
+          <p className="theme-text-muted type-body-lg max-w-xl">
             No sign-up, nothing to install. Run a deal, size up a payment, or build a listing prompt
             for Claude. Free, and yours to use as often as you like.
           </p>
@@ -66,8 +66,8 @@ export default function ToolsPage() {
                       )}
                     </div>
                   </div>
-                  <h2 className="theme-text-primary text-xl font-bold tracking-tight mb-2">{t.title}</h2>
-                  <p className="theme-text-muted text-sm leading-relaxed flex-1">{t.blurb}</p>
+                  <h2 className="theme-text-primary type-h3 mb-2">{t.title}</h2>
+                  <p className="theme-text-muted type-small flex-1">{t.blurb}</p>
                   <span
                     className={`inline-flex items-center gap-1.5 text-sm font-semibold mt-5 ${
                       live ? "theme-text-primary" : "theme-text-muted"

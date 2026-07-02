@@ -44,10 +44,10 @@ export function ToolShell({
               {audienceLabel[tool.audience]}
             </span>
           </div>
-          <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
+          <h1 className="theme-text-primary type-h1 mb-4">
             {tool.title}
           </h1>
-          <p className="theme-text-muted text-lg max-w-xl leading-relaxed">{tool.blurb}</p>
+          <p className="theme-text-muted type-body-lg max-w-xl">{tool.blurb}</p>
         </div>
       </section>
 
