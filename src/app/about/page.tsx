@@ -58,13 +58,14 @@ export default function AboutPage() {
               <p className="theme-text-secondary text-lg leading-relaxed mb-5">
                 I have spent about eight years in business development and sales. I started in
                 IT recruiting, moved into SaaS sales, and most recently worked in land
-                acquisitions. Technology is the part that has always pulled me in, so at some
-                point I stopped just reading about what AI could do and started building with it.
+                acquisitions and real estate - I even got my realtor's license. 
+                Technology, however broad, is where I have always been most passionate. 
+                Career-wise, I aim to be back in tech sales, and this website is something I can share beyond just a resume.
               </p>
               <p className="theme-text-secondary text-lg leading-relaxed">
-                Alex Prompts is what came out of that. The writing, the tools, and the site
-                itself were all built with Claude. It is the clearest way I know to show what
-                I mean rather than just say it.
+                Alex Prompts serves to provide a commentary on Greenville real estate developments and news. 
+                Using Claude, I(?) also built basic tools for RE: mortgage calculator, rental deal analyzer, listing prompt builder, neighborhood area scan for investors, and a scanner of GVL commercial buyers.
+                Additionally, I built a custom CRM. I call it Taraform. It's free to use if you'd like to create an account: taraform.org
               </p>
             </div>
           </div>
@@ -76,13 +77,11 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">What gets me going</Eyebrow>
           <h2 className="theme-text-primary text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-6">
-            A salesperson who actually builds with the tools.
+            A tech salesperson who actually understands tech.
           </h2>
           <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed mb-6">
-            Most people in sales can talk about a product. I wanted to know what it feels like
-            to build one. So I taught myself to work with Claude and put it to real use, and
-            this site is where that ended up. The tools here are not mockups. They run, and
-            people use them.
+            I'm truly passionate about technology, and I understand technology is a very broad term. But it's true. I read about the stuff changing the world in my free time, and I'm fascinated by it.
+            I'll read about anything from solar panels to underwater sea cables to mainstream stuff like Tesla's FSD cars or Anduril's autonomous drones. 
           </p>
           <p className="theme-text-contrast-muted text-base md:text-lg leading-relaxed">
             That same curiosity is what makes me good in a sales seat. When I understand how a
@@ -102,15 +101,15 @@ export default function AboutPage() {
           <div className="theme-prose prose max-w-none">
             <p>
               It is a small commentary outlet on real estate in Greenville, South Carolina,
-              plus a handful of free tools. I built it mostly to show what is possible when you
-              build with Claude, and to keep myself sharp on the technology I want to sell.
+              plus a handful of free tools. I built it mostly to to have a personal site I can share with hiring managers,
+              and also show what is possible when building with AI.
             </p>
             <p>
-              The tools are real and free to use. There is a rental deal analyzer, a mortgage
+              The tools on here are real and free to use. There is a rental deal analyzer, a mortgage
               and affordability calculator, a listing prompt builder, and a commercial buyers
               list pulled from public county records. The writing takes a local real estate
               story and works through both sides of it in plain English, without the hype or
-              the doom.
+              the doom found in most social media posts or publications, and aims to make you think at the end. Hence, Alex "Prompts."
             </p>
           </div>
           <div className="flex flex-wrap gap-3 mt-8">
@@ -131,9 +130,8 @@ export default function AboutPage() {
             Want a site like this one?
           </h2>
           <p className="theme-text-muted text-base leading-relaxed">
-            This whole thing runs on Claude, and I am putting together a plain walkthrough of
-            how it was built, start to finish, with no coding background assumed. If that is
-            something you want, say hi below and I will send it your way when it is ready.
+            Want your own custom domain and layout? I can teach you how to do it for free, or I can build one for you.
+            My email is below.
           </p>
         </div>
       </section>
