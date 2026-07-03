@@ -28,8 +28,8 @@ export default function Footer() {
           <Link href="/real-estate" className="theme-link text-sm">
             Real Estate
           </Link>
-          <Link href="/guides" className="theme-link text-sm">
-            Guides
+          <Link href="/find-an-agent" className="theme-link text-sm">
+            Find an Agent
           </Link>
           <Link href="/archive" className="theme-link text-sm">
             Archive

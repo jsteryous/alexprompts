@@ -66,7 +66,7 @@ export function ToolShell({
           <SubscribeForm
             source={`tool:${tool.slug}`}
             heading="Want to do this with Claude instead?"
-            blurb="Get a real walkthrough when one goes up, free, on getting work like this out of Claude, plus the local Greenville posts and guides."
+            blurb="Get a real walkthrough when one goes up, free, on getting work like this out of Claude, plus the local Greenville posts and the Lab deep-dives."
             cta="Subscribe free"
           />
         </div>

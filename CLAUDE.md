@@ -19,8 +19,10 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > `content-two-track-strategy`. Content is moving to **two tracks**: **real-estate pieces as
 > vertical proof** (about 2/week, "I can take a technology and go deep on one industry's
 > real problems") and **tech deep-dives in Alex's own voice** (1 to 2/week, each on one
-> AI/SaaS capability: what it actually does in plain English, the concrete business value in
-> a real vertical, and the honest limits). Depth beats volume here, because a hiring manager
+> technology capability, broadly scoped: AI, but also dev tools, automation, data infra,
+> security, fintech, robotics, energy, hardware, anything a business buys or adopts. What it
+> actually does in plain English, the concrete business value in a real vertical, and the
+> honest limits). Depth beats volume here, because a hiring manager
 > reads two or three pieces, not a feed. The public site copy described below still presents
 > the brand as Claude-for-real-estate for now; that RE-facing framing is retained
 > deliberately and re-messaging the site is a separate, later call.
@@ -145,7 +147,7 @@ strategic-direction and two-track notes above.
   an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
   scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs
   autonomously without going dry. Routine (`tech/routine/`, orchestrator plus isolated passes:
-  scout → researcher → angle → writer → editor) takes ONE AI/software capability apart in
+  scout → researcher → angle → writer → editor) takes ONE technology capability apart in
   **Alex's own first-person voice**, grounds it with web search, and names the honest limits,
   then publishes a `blog_posts` row tagged `tech` **live** to **`/lab`** (autonomous, same as
   the Greenville engine; a verify email still goes out for after-the-fact spot-check, and a
@@ -186,12 +188,26 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
 - `/about` — who Alex is, the how-to promise (the manifesto in real-estate terms), the
   teaching method, and the name.
 - `/lab` + `/lab/[slug]` — the **Lab**, the tech track (added July 2026 for the portfolio
-  pivot). First-person deep-dives that take ONE AI/software capability apart, show its real
+  pivot). First-person deep-dives that take ONE technology capability apart (AI, but also dev
+  tools, automation, data infra, security, fintech, robotics, energy, hardware), show its real
   business value, and name the honest limits. Backed by Supabase `blog_posts` tagged `tech`
-  (the fourth tag-routed section in `src/lib/posts.ts` `sectionOf`), published **live**
+  (a tag-routed section in `src/lib/posts.ts` `sectionOf`), published **live**
   (autonomous) by the `scripts/tech/` Lab routine, with a verify email for after-the-fact
   spot-check and unpublish at `/review`. Text-forward index, no cover images. The
   `getFeedPosts` homepage stream includes Lab posts.
+- `/find-an-agent` — the **real-estate referral connector** (added July 2026, replaced the
+  removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
+  became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
+  the play is to capture legit buyer/seller intent and **refer it to active agents for a
+  referral fee** (referrals are not local: relocation leads to any market count, which fits the
+  national Alex Prompts audience). Deliberately NOT a listings page: a new domain cannot
+  out-rank the portals on listing searches, and Alex cannot service clients. The page is
+  honest connector copy (Greenville + relocating anywhere) plus an email **capture**
+  (`SubscribeForm`, `source="agent-referral"`) that Alex follows up on and hands to a vetted
+  agent. Static, not Supabase-backed, low-maintenance by design. Keep it light: the site's #1
+  job is the tech-sales portfolio, referrals are a side stream. (The eXp BoldTrail IDX site
+  Alex set up is not used here; if he goes referral-only to save active dues he loses it, and
+  this model does not need it.)
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
   **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
   reads the publication RSS feed, converts each post's HTML to markdown via
@@ -219,7 +235,7 @@ email.
   Sending is `/api/broadcast?id=<postId>` (Resend via `src/lib/email.ts`), authed with
   `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
   click, and it emails a published post to the list. This is the channel for **site-only content**
-  (Greenville `/real-estate`, `/guides`) that never goes to Substack. `blog_posts.last_broadcast_at`
+  (Greenville `/real-estate`, Lab `/lab`) that never goes to Substack. `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
   on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
   stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`

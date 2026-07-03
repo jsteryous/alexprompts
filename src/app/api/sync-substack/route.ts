@@ -89,12 +89,8 @@ export async function GET(req: NextRequest) {
   if (changed.length) {
     revalidatePath("/");
     revalidatePath("/archive");
-    revalidatePath("/guides");
-    // A post is a guide or a newsletter issue depending on its tags; revalidate
-    // both routes for each changed slug (the non-matching one is a cheap no-op).
     for (const slug of changed) {
       revalidatePath(`/archive/${slug}`);
-      revalidatePath(`/guides/${slug}`);
     }
   }
 

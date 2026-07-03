@@ -10,9 +10,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/`, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/lab`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/guides`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/archive`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/real-estate`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/find-an-agent`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
   ];
 
@@ -25,18 +25,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // Each post lives at exactly one route, by tag: guides under /guides, Greenville
-  // real-estate posts under /real-estate, the rest (newsletter) under /archive.
-  const guides = await getPublishedPosts(undefined, "guide");
+  // Each post lives at exactly one route, by tag: Greenville real-estate posts under
+  // /real-estate, Lab deep-dives under /lab, the rest (newsletter) under /archive.
   const issues = await getPublishedPosts(undefined, "newsletter");
   const realEstate = await getPublishedPosts(undefined, "realestate");
   const lab = await getPublishedPosts(undefined, "lab");
-  const guideRoutes: MetadataRoute.Sitemap = guides.map((p) => ({
-    url: `${SITE_URL}/guides/${p.slug}`,
-    lastModified: p.published_at ? new Date(p.published_at) : new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
   const issueRoutes: MetadataRoute.Sitemap = issues.map((p) => ({
     url: `${SITE_URL}/archive/${p.slug}`,
     lastModified: p.published_at ? new Date(p.published_at) : new Date(),
@@ -56,5 +49,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...guideRoutes, ...issueRoutes, ...realEstateRoutes, ...labRoutes];
+  return [...staticRoutes, ...toolRoutes, ...issueRoutes, ...realEstateRoutes, ...labRoutes];
 }

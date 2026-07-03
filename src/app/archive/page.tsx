@@ -27,8 +27,7 @@ export default async function ArchivePage() {
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
             The newsletter, issue by issue. Read the back catalog here, or get the
-            next one in your inbox. For the step-by-step how-tos, see the{" "}
-            <Link href="/guides" className="theme-link underline">guides</Link>.
+            next one in your inbox.
           </p>
         </div>
       </section>

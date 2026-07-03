@@ -7,18 +7,17 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
-  label: string; // "Archive" | "Guides" | "Real Estate"
-  basePath: string; // "/archive" | "/guides" | "/real-estate"
+  label: string; // "Archive" | "Real Estate" | "Lab"
+  basePath: string; // "/archive" | "/real-estate" | "/lab"
   /** Section-specific line for the footer subscribe box. Falls back to the
    *  general Claude blurb when omitted. */
   blurb?: string;
 }
 
 /**
- * Shared renderer for a single post, used by both /archive/[slug] and
- * /guides/[slug]. The two routes differ only in which `section` (and which post
- * type) they pass; the heavy markdown -> sanitize -> JSON-LD pipeline lives here
- * once.
+ * Shared renderer for a single post, used by /archive/[slug], /real-estate/[slug],
+ * and /lab/[slug]. The routes differ only in which `section` (and which post type)
+ * they pass; the heavy markdown -> sanitize -> JSON-LD pipeline lives here once.
  */
 export default async function ArticleView({
   post,
@@ -113,7 +112,7 @@ export default async function ArticleView({
           {/* Show the stored cover as a hero only when the body does not already
               lead with an image. New Greenville posts have a text-only body (the
               cover is rendered into cover_image by the finalize cron), so the hero
-              belongs here. Substack/guide bodies and older Greenville posts embed
+              belongs here. Substack bodies and older Greenville posts embed
               their image inline, so adding a hero would print it twice. */}
           {post.cover_image && !coverImageFromBody(post.body_md) && (
             // eslint-disable-next-line @next/next/no-img-element

@@ -235,12 +235,6 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/guides"
-            className="theme-link inline-flex items-center gap-2 font-medium mt-8 text-sm"
-          >
-            Browse all guides <ArrowIcon className="w-3.5 h-3.5" />
-          </Link>
         </div>
       </section>
 

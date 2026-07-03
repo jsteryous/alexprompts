@@ -1,7 +1,6 @@
 /**
  * Post data access — published Alex Prompts content stored in Supabase
- * `blog_posts`. One table holds four kinds of content, split by tag:
- *   - tagged `guide`      -> how-to GUIDE       (-> /guides)
+ * `blog_posts`. One table holds three kinds of content, split by tag:
  *   - tagged `greenville` -> REAL-ESTATE post   (-> /real-estate)
  *   - tagged `tech`       -> LAB deep-dive       (-> /lab)
  *   - everything else     -> NEWSLETTER issue   (-> /archive)
@@ -12,10 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 import { SITE_URL } from "@/lib/site";
 
 /** Content kind, derived from tags. Each post lives at exactly one section. */
-export type PostType = "newsletter" | "guide" | "realestate" | "lab";
-
-/** A post tagged this (case-insensitive) is a how-to guide. */
-export const GUIDE_TAG = "guide";
+export type PostType = "newsletter" | "realestate" | "lab";
 
 /** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
  *  the scripts/greenville routine. */
@@ -47,10 +43,6 @@ function hasTag(post: { tags: string[] | null }, tag: string): boolean {
   return (post.tags ?? []).some((t) => t.toLowerCase() === tag);
 }
 
-export function isGuide(post: { tags: string[] | null }): boolean {
-  return hasTag(post, GUIDE_TAG);
-}
-
 export function isRealEstate(post: { tags: string[] | null }): boolean {
   return hasTag(post, REALESTATE_TAG);
 }
@@ -59,10 +51,9 @@ export function isLab(post: { tags: string[] | null }): boolean {
   return hasTag(post, LAB_TAG);
 }
 
-/** The single section a post belongs to. Guide wins over real-estate wins over lab
- *  if tags somehow overlap; everything untagged falls through to the newsletter. */
+/** The single section a post belongs to. Real-estate wins over lab if tags somehow
+ *  overlap; everything untagged falls through to the newsletter. */
 export function sectionOf(post: { tags: string[] | null }): PostType {
-  if (isGuide(post)) return "guide";
   if (isRealEstate(post)) return "realestate";
   if (isLab(post)) return "lab";
   return "newsletter";
@@ -99,8 +90,8 @@ function client() {
 }
 
 /**
- * Published posts, newest first. Pass `type` to get only guides or only
- * newsletter issues. The tag split is done in JS (the set is small and a
+ * Published posts, newest first. Pass `type` to get only one section (e.g. only
+ * newsletter issues). The tag split is done in JS (the set is small and a
  * Postgres "array does not contain" filter mishandles null-tag rows).
  */
 export async function getPublishedPosts(limit?: number, type?: PostType): Promise<ArchivePost[]> {
@@ -145,15 +136,13 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
 
 /**
  * The homepage "fresh" feed: newsletter issues, Greenville real-estate posts, AND
- * Lab tech deep-dives, newest first, merged into one stream. Only guides are
- * excluded (they have their own hub). This is what the homepage shows so the latest
- * real-estate post or Lab piece can lead alongside the newsletter, not only
- * `/archive` issues.
+ * Lab tech deep-dives, newest first, merged into one stream. Every published post
+ * belongs to one of those three sections, so the feed is simply all of them. This is
+ * what the homepage shows so the latest real-estate post or Lab piece can lead
+ * alongside the newsletter, not only `/archive` issues.
  */
 export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
-  const all = await getPublishedPosts();
-  const feed = all.filter((p) => sectionOf(p) !== "guide");
-  return limit ? feed.slice(0, limit) : feed;
+  return getPublishedPosts(limit);
 }
 
 /** The canonical route a post lives at, derived from its section. Used by the
@@ -161,32 +150,28 @@ export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
 export function postHref(post: { tags: string[] | null; slug: string }): string {
   const section = sectionOf(post);
   const base =
-    section === "guide"
-      ? "/guides"
-      : section === "realestate"
-        ? "/real-estate"
-        : section === "lab"
-          ? "/lab"
-          : "/archive";
+    section === "realestate"
+      ? "/real-estate"
+      : section === "lab"
+        ? "/lab"
+        : "/archive";
   return `${base}/${post.slug}`;
 }
 
 /** Short, human label for a post's section, for a card badge. */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
-  return section === "guide"
-    ? "Guide"
-    : section === "realestate"
-      ? "Greenville"
-      : section === "lab"
-        ? "Lab"
-        : "Newsletter";
+  return section === "realestate"
+    ? "Greenville"
+    : section === "lab"
+      ? "Lab"
+      : "Newsletter";
 }
 
 /**
  * One published post by slug. Pass `type` to enforce its canonical section:
- * a guide requested as a newsletter issue (or vice versa) returns null, so each
- * post lives at exactly one route (/guides/... or /archive/...).
+ * a real-estate post requested as a newsletter issue (or vice versa) returns null,
+ * so each post lives at exactly one route (/real-estate/... or /archive/...).
  */
 export async function getPost(slug: string, type?: PostType): Promise<FullPost | null> {
   const c = client();

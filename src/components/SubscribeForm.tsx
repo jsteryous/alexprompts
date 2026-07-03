@@ -19,7 +19,7 @@ type State = "idle" | "submitting" | "done" | "error";
 export function SubscribeForm({
   source,
   heading = "Get new posts by email",
-  blurb = "One email when something new goes up on the site, including the local Greenville posts and guides that never hit Substack. Free, and you can leave any time.",
+  blurb = "One email when something new goes up on the site, including the local Greenville posts and the Lab deep-dives that never hit Substack. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

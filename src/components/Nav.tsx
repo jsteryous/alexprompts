@@ -9,7 +9,7 @@ const links = [
   { href: "/tools", label: "Tools" },
   { href: "/lab", label: "Lab" },
   { href: "/real-estate", label: "Real Estate" },
-  { href: "/guides", label: "Guides" },
+  { href: "/find-an-agent", label: "Find an Agent" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];

@@ -28,14 +28,16 @@ reference only, nothing there runs on a schedule anymore.
 - **`ai_news/routine/`** — the Claude routine: an `orchestrator.md` plus isolated Opus
   passes (researcher → thesis → writer → editor → performer → article). It runs weekly in
   the cloud, pulls the data live, and delivers the draft to Google Drive + Gmail.
-- **`ai_news/demand.py`** — a separate prototype radar for the GUIDES track (mines Google +
-  YouTube autocomplete for beginner AI how-to demand). Standalone, not part of the Saturday
-  routine. Run from a normal IP.
+- **`ai_news/demand.py`** — a separate prototype radar (mines Google + YouTube autocomplete
+  for beginner AI how-to demand). Standalone, not part of the Saturday routine. It fed the
+  old GUIDES track, which was removed July 2026 (the `/guides` section is gone), so it is now
+  orphaned; kept for reference only. Run from a normal IP.
 - **`tech/`** — the **Lab engine** (the tech track). No collector; **self-sourcing**: an
   optional steering bank (`tech/topics.md`) plus a web-search scout (`pass0_scout.md`) that
   picks its own topic when the bank is empty, so it never runs dry. A Claude routine
   (`tech/routine/`, orchestrator plus isolated passes: scout → researcher → angle → writer →
-  editor) takes ONE AI/software capability apart in Alex's own first-person voice, grounds it
+  editor) takes ONE technology capability apart (AI, dev tools, automation, data infra,
+  security, fintech, robotics, energy, hardware) in Alex's own first-person voice, grounds it
   with web search, and above all names the honest limits, then publishes a `blog_posts` row
   tagged `tech` **live** to `/lab` (autonomous; verify email for spot-check). See
   `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.

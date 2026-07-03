@@ -62,7 +62,7 @@ const jsonLd = {
       email: site.email,
       jobTitle: "Writer",
       description:
-        "Writes Alex Prompts, helping real estate agents and investors get real work out of Claude through plain, step-by-step guides.",
+        "Writes Alex Prompts, helping real estate agents and investors get real work out of Claude through plain, step-by-step walkthroughs.",
       sameAs: socials.map((s) => s.url),
     },
   ],
