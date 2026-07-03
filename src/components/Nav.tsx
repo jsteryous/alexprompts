@@ -7,8 +7,9 @@ import { newsletterUrl, site } from "@/lib/site";
 
 const links = [
   { href: "/tools", label: "Tools" },
-  { href: "/guides", label: "Guides" },
+  { href: "/lab", label: "Lab" },
   { href: "/real-estate", label: "Real Estate" },
+  { href: "/guides", label: "Guides" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];

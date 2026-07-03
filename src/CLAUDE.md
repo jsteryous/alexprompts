@@ -20,13 +20,15 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `NEXT_PUBLIC_SITE_URL`. **Editing handles/domain here updates every surface.** Holds
   `TODO(alex)` placeholders — confirm before launch.
 - **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
-  `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **three
+  `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **four
   sections split by tag**: `guide` → `/guides`, `greenville` → `/real-estate` (set by the
-  `scripts/greenville` routine), everything else → `/archive` (newsletter). `sectionOf()`
-  is the single source of that mapping; `getPublishedPosts("newsletter")` excludes guide
-  and real-estate posts so they never leak onto the homepage/archive. Returns `[]`/`null`
+  `scripts/greenville` routine), `tech` → `/lab` (set by the `scripts/tech` Lab routine),
+  everything else → `/archive` (newsletter). `sectionOf()` is the single source of that
+  mapping; `getPublishedPosts("newsletter")` excludes guide, real-estate, and lab posts so
+  they never leak onto the archive. `getFeedPosts` (homepage) includes everything except
+  guides, so newsletter, real-estate, and lab posts all lead there. Returns `[]`/`null`
   when Supabase env is unset so the site builds (not a crash). Used by `/`, `/archive`,
-  `/guides`, `/real-estate`, their `[slug]` routes, `sitemap.ts`.
+  `/guides`, `/real-estate`, `/lab`, their `[slug]` routes, `sitemap.ts`.
 - **`src/lib/tools.ts`** — single source for the free `/tools` (`toolCatalog`,
   `liveTools()`, `getTool()`, `audienceLabel`). Drives the `/tools` hub, the homepage
   tools spotlight + Start-here pillars, nav, footer, and `sitemap.ts`. Each entry has a
@@ -55,12 +57,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   monotone and soften the "guide for Claude" tone; `outcomes`/`manifesto` (site.ts) and the
   `OutcomeArt` component are now unused but kept. No shared section components (the old
   `HomeSections.tsx` was dental-only, deleted).
-- **`src/app/archive/`**, **`src/app/guides/`**, **`src/app/real-estate/`** — the three
-  section index + `[slug]` routes. All three `[slug]` pages render the shared
-  `components/ArticleView.tsx` (markdown → sanitize → `Article` + `BreadcrumbList`
-  JSON-LD), differing only in the `section` prop and the post `type` they request.
-  Canonical is self-referential per section. `/real-estate` holds the Greenville posts
-  the `scripts/greenville` routine creates (as DRAFT) and you publish via `/review`.
+- **`src/app/archive/`**, **`src/app/guides/`**, **`src/app/real-estate/`**,
+  **`src/app/lab/`** — the four section index + `[slug]` routes. All four `[slug]` pages
+  render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
+  `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
+  request. Canonical is self-referential per section. `/real-estate` holds the Greenville
+  posts the `scripts/greenville` routine creates; `/lab` holds the tech deep-dives the
+  `scripts/tech` routine creates (both as DRAFT, published via `/review`). The `/lab` index
+  is text-forward (no cover thumbnails) since Lab pieces have no photo.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` (token-gated editor; the fixed
   nav covered its sticky Publish button). Both derive links from `site.ts`. Nav CTA is
   *Subscribe* → `newsletterUrl`.

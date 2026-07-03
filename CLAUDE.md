@@ -124,10 +124,11 @@ The canonical voice lives in the Claude routine's writer pass
 - Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
   "game-changer," "a new era," etc.
 
-## The content engines (`scripts/ai_news/` + `scripts/greenville/`)
+## The content engines (`scripts/ai_news/` + `scripts/greenville/` + `scripts/tech/`)
 
-See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Two siblings, both
-serving real-estate agents and investors:
+See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Three engines: the
+two real-estate siblings (the vertical-proof track) plus the Lab (the tech track). See the
+strategic-direction and two-track notes above.
 
 - **`ai_news/`** — the **national Saturday research engine** (directory name is legacy; no
   longer news). Two committed inputs (`questions.md`, the question bank; `sources.md`, the
@@ -136,13 +137,22 @@ serving real-estate agents and investors:
   performer → article), which has Claude research one useful, evergreen real-estate question
   against real public data and writes it in two renderings (a 6–10 min voiceover video script
   + a Substack article), delivered to Google Drive and Gmail. No collector: the data APIs are
-  not IP-blocked, so the routine fetches live.
+  not IP-blocked, so the routine fetches live. **Objective third-person voice.**
 - **`greenville/`** — the **local Greenville, SC** engine. A daily routine that turns the
   biggest local real-estate story into a both-sides website post (`/real-estate`) + an X
   post. See `scripts/greenville/CLAUDE.md`.
+- **`tech/`** — the **Lab engine** (the tech track). No collector: a curated topic bank
+  (`tech/topics.md`) drives a routine (`tech/routine/`, orchestrator plus isolated passes:
+  researcher → angle → writer → editor) that takes ONE AI/software capability apart in
+  **Alex's own first-person voice**, grounds it with web search, and names the honest limits,
+  then inserts a `blog_posts` row tagged `tech` as a DRAFT for **`/lab`** (Alex publishes it
+  at `/review`). Its job is proof-of-work for the tech-sales portfolio: it shows Alex
+  understands the technology and can translate a capability into business value. Target
+  cadence 1–2/week. See `scripts/tech/routine/README.md`.
 
-Both were reoriented from the old frontier-tech-news brand in June 2026; the legacy dental
-pipeline is retired under `scripts/_archive/` — do not revive either.
+The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
+Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is retired under
+`scripts/_archive/` — do not revive it.
 
 ## Site structure
 
@@ -172,6 +182,12 @@ pipeline is retired under `scripts/_archive/` — do not revive either.
   footer, and sitemap, so a tool ships in one place and appears everywhere.
 - `/about` — who Alex is, the how-to promise (the manifesto in real-estate terms), the
   teaching method, and the name.
+- `/lab` + `/lab/[slug]` — the **Lab**, the tech track (added July 2026 for the portfolio
+  pivot). First-person deep-dives that take ONE AI/software capability apart, show its real
+  business value, and name the honest limits. Backed by Supabase `blog_posts` tagged `tech`
+  (the fourth tag-routed section in `src/lib/posts.ts` `sectionOf`), written by the
+  `scripts/tech/` Lab routine as a DRAFT and published by Alex at `/review`. Text-forward
+  index, no cover images. The `getFeedPosts` homepage stream includes Lab posts.
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
   **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
   reads the publication RSS feed, converts each post's HTML to markdown via

@@ -31,6 +31,13 @@ reference only, nothing there runs on a schedule anymore.
 - **`ai_news/demand.py`** — a separate prototype radar for the GUIDES track (mines Google +
   YouTube autocomplete for beginner AI how-to demand). Standalone, not part of the Saturday
   routine. Run from a normal IP.
+- **`tech/`** — the **Lab engine** (the tech track). No collector: a curated topic bank
+  (`tech/topics.md`) drives a Claude routine (`tech/routine/`, an orchestrator plus isolated
+  passes: researcher → angle → writer → editor) that takes ONE AI/software capability apart
+  in Alex's own first-person voice, grounds it with web search, and above all names the
+  honest limits, then inserts a `blog_posts` row tagged `tech` as a DRAFT for `/lab`. See
+  `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
+- **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
 - **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Still
   used by the **Greenville** collector (`greenville/routine/` installs it); keep it.
 

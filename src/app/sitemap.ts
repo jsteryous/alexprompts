@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/lab`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/guides`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/archive`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/real-estate`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
@@ -29,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const guides = await getPublishedPosts(undefined, "guide");
   const issues = await getPublishedPosts(undefined, "newsletter");
   const realEstate = await getPublishedPosts(undefined, "realestate");
+  const lab = await getPublishedPosts(undefined, "lab");
   const guideRoutes: MetadataRoute.Sitemap = guides.map((p) => ({
     url: `${SITE_URL}/guides/${p.slug}`,
     lastModified: p.published_at ? new Date(p.published_at) : new Date(),
@@ -47,6 +49,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
+  const labRoutes: MetadataRoute.Sitemap = lab.map((p) => ({
+    url: `${SITE_URL}/lab/${p.slug}`,
+    lastModified: p.published_at ? new Date(p.published_at) : new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
-  return [...staticRoutes, ...toolRoutes, ...guideRoutes, ...issueRoutes, ...realEstateRoutes];
+  return [...staticRoutes, ...toolRoutes, ...guideRoutes, ...issueRoutes, ...realEstateRoutes, ...labRoutes];
 }

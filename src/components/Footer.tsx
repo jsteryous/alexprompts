@@ -22,14 +22,17 @@ export default function Footer() {
           <Link href="/tools" className="theme-link text-sm">
             Tools
           </Link>
+          <Link href="/lab" className="theme-link text-sm">
+            Lab
+          </Link>
+          <Link href="/real-estate" className="theme-link text-sm">
+            Real Estate
+          </Link>
           <Link href="/guides" className="theme-link text-sm">
             Guides
           </Link>
           <Link href="/archive" className="theme-link text-sm">
             Archive
-          </Link>
-          <Link href="/real-estate" className="theme-link text-sm">
-            Real Estate
           </Link>
           <Link href="/about" className="theme-link text-sm">
             About

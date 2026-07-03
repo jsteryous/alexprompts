@@ -1,8 +1,9 @@
 /**
  * Post data access — published Alex Prompts content stored in Supabase
- * `blog_posts`. One table holds three kinds of content, split by tag:
+ * `blog_posts`. One table holds four kinds of content, split by tag:
  *   - tagged `guide`      -> how-to GUIDE       (-> /guides)
  *   - tagged `greenville` -> REAL-ESTATE post   (-> /real-estate)
+ *   - tagged `tech`       -> LAB deep-dive       (-> /lab)
  *   - everything else     -> NEWSLETTER issue   (-> /archive)
  * Returns [] / null when env is unset so the site builds and renders without a
  * database (empty lists, not a crash).
@@ -11,7 +12,7 @@ import { createClient } from "@supabase/supabase-js";
 import { SITE_URL } from "@/lib/site";
 
 /** Content kind, derived from tags. Each post lives at exactly one section. */
-export type PostType = "newsletter" | "guide" | "realestate";
+export type PostType = "newsletter" | "guide" | "realestate" | "lab";
 
 /** A post tagged this (case-insensitive) is a how-to guide. */
 export const GUIDE_TAG = "guide";
@@ -19,6 +20,10 @@ export const GUIDE_TAG = "guide";
 /** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
  *  the scripts/greenville routine. */
 export const REALESTATE_TAG = "greenville";
+
+/** A post tagged this (case-insensitive) is a Lab tech deep-dive. Set by the
+ *  scripts/tech routine. The tag is `tech`; the section/route is `/lab`. */
+export const LAB_TAG = "tech";
 
 export interface ArchivePost {
   id: string;
@@ -50,11 +55,16 @@ export function isRealEstate(post: { tags: string[] | null }): boolean {
   return hasTag(post, REALESTATE_TAG);
 }
 
-/** The single section a post belongs to. Guide wins over real-estate if both tags
- *  are somehow present; everything untagged falls through to the newsletter. */
+export function isLab(post: { tags: string[] | null }): boolean {
+  return hasTag(post, LAB_TAG);
+}
+
+/** The single section a post belongs to. Guide wins over real-estate wins over lab
+ *  if tags somehow overlap; everything untagged falls through to the newsletter. */
 export function sectionOf(post: { tags: string[] | null }): PostType {
   if (isGuide(post)) return "guide";
   if (isRealEstate(post)) return "realestate";
+  if (isLab(post)) return "lab";
   return "newsletter";
 }
 
@@ -134,11 +144,11 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
 }
 
 /**
- * The homepage "fresh" feed: newsletter issues AND Greenville real-estate posts,
- * newest first, merged into one stream. Guides are excluded (they have their own
- * hub and the homepage already links to them via the Start-here pillars). This is
- * what the homepage shows so the latest local real-estate post can lead alongside
- * the newsletter, not only `/archive` issues.
+ * The homepage "fresh" feed: newsletter issues, Greenville real-estate posts, AND
+ * Lab tech deep-dives, newest first, merged into one stream. Only guides are
+ * excluded (they have their own hub). This is what the homepage shows so the latest
+ * real-estate post or Lab piece can lead alongside the newsletter, not only
+ * `/archive` issues.
  */
 export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
   const all = await getPublishedPosts();
@@ -150,14 +160,27 @@ export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
  *  homepage feed, which mixes sections and must link each card to the right page. */
 export function postHref(post: { tags: string[] | null; slug: string }): string {
   const section = sectionOf(post);
-  const base = section === "guide" ? "/guides" : section === "realestate" ? "/real-estate" : "/archive";
+  const base =
+    section === "guide"
+      ? "/guides"
+      : section === "realestate"
+        ? "/real-estate"
+        : section === "lab"
+          ? "/lab"
+          : "/archive";
   return `${base}/${post.slug}`;
 }
 
 /** Short, human label for a post's section, for a card badge. */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
-  return section === "guide" ? "Guide" : section === "realestate" ? "Greenville" : "Newsletter";
+  return section === "guide"
+    ? "Guide"
+    : section === "realestate"
+      ? "Greenville"
+      : section === "lab"
+        ? "Lab"
+        : "Newsletter";
 }
 
 /**
