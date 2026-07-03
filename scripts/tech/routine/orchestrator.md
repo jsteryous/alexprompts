@@ -7,11 +7,13 @@ Its job is to show that Alex understands technology and can translate a capabili
 value, which is proof-of-work for a tech-sales career as much as it is content.
 
 This routine produces ONE written piece for the WEBSITE: a Lab essay published at /lab,
-plus a short X post drafted for manual posting. There is NO video and NO collector; the
-input is the curated topic bank (`scripts/tech/topics.md`). You run in the cloud with a
-fresh checkout of the repo and zero prior context. Each pass's spec lives in its own file
-under scripts/tech/routine/. When a step says to, read that file and hand its FULL contents
-to the sub-agent for that pass.
+plus a short X post drafted for manual posting. There is NO video and NO collector. The
+routine is SELF-SOURCING: it prefers a topic Alex queued in the optional priority bank
+(`scripts/tech/topics.md`), and when the bank is empty it scouts its own topic with web
+search, so it runs autonomously without ever going dry. You run in the cloud with a fresh
+checkout of the repo and zero prior context. Each pass's spec lives in its own file under
+scripts/tech/routine/. When a step says to, read that file and hand its FULL contents to the
+sub-agent for that pass.
 
 PUBLISH MODE: **publish** (live). The Lab post is inserted as PUBLISHED and goes live at
 /lab without waiting for a human, the same as the Greenville engine. The guardrails that
@@ -41,12 +43,20 @@ brief. Save each pass output to its /tmp/lab file before starting the next. If y
 spawn sub-agents, do the passes yourself as clean rooms: finish and save one file before
 reading anything for the next, and never let a later pass rewrite an earlier file.
 
-STEP 0, PICK THE TOPIC. Run: mkdir -p /tmp/lab. Read scripts/tech/topics.md. Under
-"## queued", take the FIRST topic that is NOT already marked done (cross-check the done-log
-from STEP 0B). That is THIS RUN'S topic. Copy its full text (the capability, the anchor,
-the vertical, and the flagged limit) to /tmp/lab/topic.txt. If every queued topic is done,
-pick the least-recently-covered theme and note it; never invent a brand-new topic yourself,
-prefer the bank. Record which topic you chose and report it in STEP 7.
+STEP 0, PICK THE TOPIC (bank first, then self-source). Run: mkdir -p /tmp/lab. Do STEP 0B
+first so you know what is already covered, then:
+  1. BANK PATH (Alex's steer). Read scripts/tech/topics.md. Under "## queued", take the FIRST
+     topic that is NOT already on the ALREADY COVERED list from STEP 0B. If one exists, that
+     is THIS RUN'S topic: copy its full text (the capability, the anchor, the vertical, and
+     the flagged limit) to /tmp/lab/topic.txt.
+  2. SCOUT PATH (autonomous fallback). If the bank has NO queued topic left that is not
+     already covered, run PASS 0, the scout: read scripts/tech/routine/pass0_scout.md and hand
+     its full contents plus /tmp/lab/done.txt (and the bank's "## proposed" list, if any) to a
+     fresh sub-agent. It finds one worthwhile, current, uncovered capability and outputs it in
+     the bank-entry shape. Save that to /tmp/lab/topic.txt. If the scout reports that nothing
+     clears the five bars, do NOT proceed: report it and end the run cleanly rather than ship
+     a weak piece.
+  Record which path you used and which topic you chose, and report it in STEP 7.
 
 STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never repeat a piece:
   1. DRAFTS BRANCH (the done-log). Run: git fetch origin drafts (ignore any failure). List
@@ -121,11 +131,14 @@ published post id and slug from STEP 5.
       Lab — <headline>", body the full document. Send it if a send tool exists, otherwise
       note a draft was created.
   (b) DRAFTS BRANCH (done-log + recall). Write the same document to
-      drafts/lab-<YYYY-MM-DD>.md. THEN edit scripts/tech/topics.md TWICE: (1) mark this
-      run's topic done by moving it under a "## done" heading with the date, or appending
-      "done <YYYY-MM-DD>" inline; and (2) append any strong follow-up capability ideas the
-      research surfaced under "## proposed" (verbatim, each with a one-line why and a
-      what-to-ground note), so the bank refills. Commit both:
+      drafts/lab-<YYYY-MM-DD>.md. THEN edit scripts/tech/topics.md TWICE: (1) record this
+      run's topic as done under a "## done" heading with the date. If it came from the BANK
+      path, move that queued entry under "## done" (or append "done <YYYY-MM-DD>" inline). If
+      it came from the SCOUT path, ADD a new one-line entry under "## done" with the topic and
+      the date, since it was never in the bank, so future dedup on the done-log catches it.
+      (2) Append fresh candidates under "## proposed" (verbatim, each with a one-line why and
+      a what-to-ground note): any strong follow-up ideas the research surfaced, plus the
+      scout's ALSO-RANS when the scout path was used, so the bank refills itself. Commit both:
       git checkout -B drafts && git add drafts/lab-<YYYY-MM-DD>.md scripts/tech/topics.md && git commit -m "Alex Prompts Lab <YYYY-MM-DD>" && git push -f origin drafts
       (Push to the drafts branch ONLY, never to main. Alex promotes a proposed topic to
       queued on main when he wants it.)

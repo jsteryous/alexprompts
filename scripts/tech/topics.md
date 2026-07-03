@@ -1,14 +1,19 @@
 # Lab topic bank
 
-The input for the **Lab** engine (`scripts/tech/`). Each entry is ONE thing AI or
-modern software can now do, worth taking apart in a deep-dive that shows real
-understanding and says honestly where it still falls short. This is the tech track
-of the two-track content plan: it exists to show a hiring manager that Alex genuinely
-understands the technology and can translate a capability into business value.
+An OPTIONAL priority queue for the **Lab** engine (`scripts/tech/`), not a hard
+dependency. Each entry is ONE thing AI or modern software can now do, worth taking
+apart in a deep-dive that shows real understanding and says honestly where it still
+falls short. This is the tech track of the two-track content plan: it exists to show a
+hiring manager that Alex genuinely understands the technology and can translate a
+capability into business value.
 
-The routine reads this file, takes the first topic still `queued`, and writes the
-piece. After delivery it marks that topic `done <date>` on the `drafts` branch so it
-is not repeated, and may append `proposed` candidates for Alex to promote.
+**The engine is self-sourcing.** Each run prefers the first topic still `queued` here,
+so this file is how Alex STEERS what gets covered. When the bank is empty, the routine
+scouts its own topic with web search (`routine/pass0_scout.md`) and keeps going, so it
+never runs dry and needs no manual refill. After delivery it records the topic under
+`## done` on the `drafts` branch so it is not repeated, and appends `proposed`
+candidates (including the scout's runners-up) for Alex to promote. So seed a `queued`
+topic when you want a specific one covered; leave it empty to let the engine choose.
 
 ## What makes a good topic (all five bars)
 

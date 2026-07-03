@@ -141,9 +141,11 @@ strategic-direction and two-track notes above.
 - **`greenville/`** — the **local Greenville, SC** engine. A daily routine that turns the
   biggest local real-estate story into a both-sides website post (`/real-estate`) + an X
   post. See `scripts/greenville/CLAUDE.md`.
-- **`tech/`** — the **Lab engine** (the tech track). No collector: a curated topic bank
-  (`tech/topics.md`) drives a routine (`tech/routine/`, orchestrator plus isolated passes:
-  researcher → angle → writer → editor) that takes ONE AI/software capability apart in
+- **`tech/`** — the **Lab engine** (the tech track). No collector; it is **self-sourcing**:
+  an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
+  scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs
+  autonomously without going dry. Routine (`tech/routine/`, orchestrator plus isolated passes:
+  scout → researcher → angle → writer → editor) takes ONE AI/software capability apart in
   **Alex's own first-person voice**, grounds it with web search, and names the honest limits,
   then publishes a `blog_posts` row tagged `tech` **live** to **`/lab`** (autonomous, same as
   the Greenville engine; a verify email still goes out for after-the-fact spot-check, and a
