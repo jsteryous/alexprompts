@@ -1,6 +1,6 @@
 # Lab routine (`scripts/tech/`)
 
-A Claude routine that turns ONE AI or software capability into a **first-person Lab
+A Claude routine that turns ONE technology capability into a **first-person Lab
 deep-dive** published at **`/lab`** on the website, plus a short X post drafted for
 manual posting. No video, no collector. This is the **tech track** of the two-track
 content plan: real-estate content proves Alex can go deep on a vertical, and the Lab
@@ -33,8 +33,10 @@ collector, a curated input bank) but is its own engine with its own voice.
 ## The pipeline
 
 0. **`pass0_scout.md`** — runs ONLY when the bank has no queued topic. Surveys what is
-   genuinely current in AI and practical software with web search, screens candidates against
-   the same five bars and the already-covered list, and picks the single best one (with the
+   genuinely current across technology (AI, developer tools, automation, data infrastructure,
+   security, fintech, robotics, energy, hardware, anything a business buys or adopts) with web
+   search, screens candidates against the same five bars and the already-covered list, and
+   picks the single best one (with the
    sharpest honest limit), handing it off in the bank-entry shape. This is what makes the
    engine autonomous instead of dependent on Alex refilling the bank. It is deliberately NOT a
    news feed: a launch is a fine anchor only if the piece would still be worth reading in six

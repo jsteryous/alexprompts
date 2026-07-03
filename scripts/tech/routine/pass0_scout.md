@@ -11,21 +11,28 @@ INPUTS you were handed:
 - Optionally, the bank's `## proposed` candidates, if any were passed to you. Prefer promoting
   a strong one of these over inventing a brand-new subject, since they reflect Alex's steer.
 
-THIS IS NOT A NEWS FEED. The Lab is about what a capability can DO, explained with real
-understanding, not about what got announced this week. A model or product launch is a fine
-anchor, but only if the piece would be about the capability and would still be worth reading
-in six months. Reject "X company released Y" items whose only substance is that they happened.
+SCOPE. The Lab covers technology broadly, not just AI: AI is fair game, but so are developer
+tools, automation, data infrastructure, security, fintech, robotics, energy, hardware, and
+any other category a business actually buys or adopts. Stay on technology a company would
+purchase or deploy; skip pure science with no near-term buyer (deep biology, physics for its
+own sake), because the point is to show Alex understands what businesses adopt and why.
 
-HOW YOU WORK. Use web search to survey what is genuinely current and interesting in AI and
-practical software: real capability shifts, notable new features or tools, things that
-changed what is now possible for an ordinary business. Good hunting grounds are primary
-sources (model cards, product docs, changelogs, release notes, credible technical write-ups),
-not press-release aggregators. You are looking for a capability with a real, non-obvious
-limit worth being honest about, because that honest-limits beat is the whole point of the Lab.
+THIS IS NOT A NEWS FEED. The Lab is about what a capability can DO, explained with real
+understanding, not about what got announced this week. A launch is a fine anchor, but only if
+the piece would be about the capability and would still be worth reading in six months. Reject
+"X company released Y" items whose only substance is that they happened.
+
+HOW YOU WORK. Use web search to survey what is genuinely current and interesting across
+technology: real capability shifts, notable new features or tools, things that changed what is
+now possible for an ordinary business. Good hunting grounds are primary sources (product docs,
+model cards, changelogs, release notes, spec sheets, credible technical write-ups), not
+press-release aggregators. You are looking for a capability with a real, non-obvious limit
+worth being honest about, because that honest-limits beat is the whole point of the Lab.
 
 THE FIVE BARS. A candidate earns the slot only if it clears all five (the same bars as the
 bank in scripts/tech/topics.md):
-1. One concrete capability, named plainly. Not "AI in general," not "the future of X."
+1. One concrete capability, named plainly. Not "AI in general," not "technology," not "the
+   future of X."
 2. Groundable in real specifics you can point at and check (a real product, real pricing, a
    real benchmark, documented behavior).
 3. A real, non-obvious limit: a place it genuinely breaks or something it cannot do yet that

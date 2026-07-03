@@ -1,11 +1,13 @@
 # Lab topic bank
 
 An OPTIONAL priority queue for the **Lab** engine (`scripts/tech/`), not a hard
-dependency. Each entry is ONE thing AI or modern software can now do, worth taking
-apart in a deep-dive that shows real understanding and says honestly where it still
-falls short. This is the tech track of the two-track content plan: it exists to show a
-hiring manager that Alex genuinely understands the technology and can translate a
-capability into business value.
+dependency. Each entry is ONE genuinely interesting thing technology can now do, worth
+taking apart in a deep-dive that shows real understanding and says honestly where it
+still falls short. Scope is technology broadly, not just AI: AI counts, but so do
+developer tools, automation, data infrastructure, security, fintech, robotics, energy,
+and hardware, as long as it is something a business actually buys or adopts. This is the
+tech track of the two-track content plan: it exists to show a hiring manager that Alex
+genuinely understands the technology and can translate a capability into business value.
 
 **The engine is self-sourcing.** Each run prefers the first topic still `queued` here,
 so this file is how Alex STEERS what gets covered. When the bank is empty, the routine
@@ -20,7 +22,8 @@ topic when you want a specific one covered; leave it empty to let the engine cho
 A topic earns a slot only if it clears all five:
 
 1. **One concrete capability.** A specific thing, named plainly: a model feature, an
-   agent pattern, a product's mechanism. Not "AI in general," not "the future of X."
+   agent pattern, a product's mechanism, a hardware or infrastructure shift. Not "AI in
+   general," not "technology," not "the future of X."
 2. **Groundable in real specifics.** You can point at the actual product, the real
    pricing, a real benchmark, or documented behavior, and check it. No vibes.
 3. **A real, non-obvious limit.** There is something it genuinely cannot do yet, or a
@@ -62,6 +65,14 @@ Saturday engine. See `scripts/tech/routine/pass3_writer.md`.
 - **On-device vs cloud AI: what actually runs on your phone now.** Anchor: a specific
   on-device model. Value: privacy-sensitive work, offline use. The limit: the size and
   quality gap versus the frontier, stated with real numbers.
+- **Passkeys are quietly replacing passwords, and how they actually work.** Anchor: a
+  real sign-in you can do today with Face ID or a security key instead of a password.
+  Value: the small business that stops getting phished and stops resetting passwords.
+  The limit: account recovery and device loss, the ugly part nobody demos.
+- **Stripe-style embedded payments: how a non-bank starts moving money in an afternoon.**
+  Anchor: a few API calls that take a card and pay out a third party. Value: a
+  marketplace or SaaS that adds payments without becoming a bank. The limit: chargebacks,
+  compliance (KYC, PCI), and who eats the fraud when it goes wrong.
 
 ## proposed
 
