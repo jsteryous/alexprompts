@@ -63,8 +63,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
   request. Canonical is self-referential per section. `/real-estate` holds the Greenville
   posts the `scripts/greenville` routine creates; `/lab` holds the tech deep-dives the
-  `scripts/tech` routine creates (both as DRAFT, published via `/review`). The `/lab` index
-  is text-forward (no cover thumbnails) since Lab pieces have no photo.
+  `scripts/tech` routine creates. Both engines **auto-publish live** (status `PUBLISHED`,
+  with a verify email for after-the-fact spot-check + unpublish at `/review`; a run falls
+  back to DRAFT only when dedup is unavailable). The `/lab` index is text-forward (no cover
+  thumbnails) since Lab pieces have no photo.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` (token-gated editor; the fixed
   nav covered its sticky Publish button). Both derive links from `site.ts`. Nav CTA is
   *Subscribe* → `newsletterUrl`.

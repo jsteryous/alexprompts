@@ -47,18 +47,22 @@ collector, a curated input bank) but is its own engine with its own voice.
 
 `orchestrator.md` wires them as cold sub-agents, picks the topic, dedups against the drafts
 log and the live site, and on a good topic inserts a `blog_posts` row tagged `tech` as
-**DRAFT**, then emails the human packet (verify list, the essay, the X post) and pushes the
-done-log to the `drafts` branch.
+**PUBLISHED** (live), then emails the human packet (verify list, the essay, the X post) and
+pushes the done-log to the `drafts` branch.
 
 ## Cadence and where it posts
 
 - **Routine:** runs as a scheduled Claude cloud agent (`/schedule`) pointed at
   `orchestrator.md`. Target cadence is 1 to 2 Lab pieces per week (see the two-track plan
   in the root `CLAUDE.md`). There is no collector to run first.
-- **Website:** the routine inserts a `blog_posts` row tagged `tech` as **DRAFT**. It is NOT
-  live until Alex reviews and publishes it at `/review`; publishing routes it to
-  `/lab/<slug>` via `sectionOf` in `src/lib/posts.ts`. To auto-publish later, change STEP 5
-  and the PUBLISH MODE note in the orchestrator from `DRAFT` to `PUBLISHED`.
+- **Website:** the routine inserts a `blog_posts` row tagged `tech` as **PUBLISHED**, live at
+  `/lab/<slug>` within about 5 minutes, the same autonomous model as the Greenville engine.
+  The `tech` tag routes it via `sectionOf` in `src/lib/posts.ts`. Auto-publish is safe because
+  the guardrails are in the passes (web-grounded claims, the editor's fact-check against the
+  brief, the mandatory honest-limits beat, not-advice) and in dedup; the verify email still
+  goes out so Alex can spot-check and unpublish at `/review`. If the Supabase site-dedup could
+  not run, that run falls back to DRAFT. To require human review of every piece, set STEP 5
+  back to `DRAFT`.
 - **No image.** Lab pieces have no cover photo. The `/lab` index is text-forward and the
   article renders without a hero, so there is no image step and no finalize cron (unlike the
   Greenville engine).

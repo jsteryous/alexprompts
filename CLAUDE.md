@@ -145,10 +145,11 @@ strategic-direction and two-track notes above.
   (`tech/topics.md`) drives a routine (`tech/routine/`, orchestrator plus isolated passes:
   researcher → angle → writer → editor) that takes ONE AI/software capability apart in
   **Alex's own first-person voice**, grounds it with web search, and names the honest limits,
-  then inserts a `blog_posts` row tagged `tech` as a DRAFT for **`/lab`** (Alex publishes it
-  at `/review`). Its job is proof-of-work for the tech-sales portfolio: it shows Alex
-  understands the technology and can translate a capability into business value. Target
-  cadence 1–2/week. See `scripts/tech/routine/README.md`.
+  then publishes a `blog_posts` row tagged `tech` **live** to **`/lab`** (autonomous, same as
+  the Greenville engine; a verify email still goes out for after-the-fact spot-check, and a
+  run falls back to DRAFT only if dedup was unavailable). Its job is proof-of-work for the
+  tech-sales portfolio: it shows Alex understands the technology and can translate a
+  capability into business value. Target cadence 1–2/week. See `scripts/tech/routine/README.md`.
 
 The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
 Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is retired under
@@ -185,9 +186,10 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
 - `/lab` + `/lab/[slug]` — the **Lab**, the tech track (added July 2026 for the portfolio
   pivot). First-person deep-dives that take ONE AI/software capability apart, show its real
   business value, and name the honest limits. Backed by Supabase `blog_posts` tagged `tech`
-  (the fourth tag-routed section in `src/lib/posts.ts` `sectionOf`), written by the
-  `scripts/tech/` Lab routine as a DRAFT and published by Alex at `/review`. Text-forward
-  index, no cover images. The `getFeedPosts` homepage stream includes Lab posts.
+  (the fourth tag-routed section in `src/lib/posts.ts` `sectionOf`), published **live**
+  (autonomous) by the `scripts/tech/` Lab routine, with a verify email for after-the-fact
+  spot-check and unpublish at `/review`. Text-forward index, no cover images. The
+  `getFeedPosts` homepage stream includes Lab posts.
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
   **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
   reads the publication RSS feed, converts each post's HTML to markdown via

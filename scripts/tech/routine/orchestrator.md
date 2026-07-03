@@ -13,11 +13,18 @@ fresh checkout of the repo and zero prior context. Each pass's spec lives in its
 under scripts/tech/routine/. When a step says to, read that file and hand its FULL contents
 to the sub-agent for that pass.
 
-PUBLISH MODE: **draft** (human review). The Lab post is inserted as DRAFT and does NOT go
-live until Alex reviews and publishes it at /review. This is on purpose: Lab pieces are
-first-person and portfolio-critical, so a human reads every one before it ships. To switch
-to auto-publish later, change `DRAFT` to `PUBLISHED` in STEP 5 (the pass guardrails on
-honesty and not-advice are the same ones the Greenville engine trusts to auto-publish).
+PUBLISH MODE: **publish** (live). The Lab post is inserted as PUBLISHED and goes live at
+/lab without waiting for a human, the same as the Greenville engine. The guardrails that
+make this safe live in the passes (the researcher grounds every claim in web sources and
+labels vendor claims as claims; the editor fact-checks every figure against the brief,
+enforces the mandatory honest-limits beat, and blocks any overclaim or not-advice slip) and
+in dedup. Because the Lab is first-person and portfolio-critical, the editor's fact-check
+discipline is the real backstop; treat a fabricated number or an overclaim as a failure as
+serious as a broken build. The verify email still goes out (STEP 6) so Alex can spot-check
+after the fact and unpublish at /review if anything is wrong. EXCEPTION: if dedup could not
+run (the Supabase site-check was unavailable in STEP 0B), fall back to status DRAFT for that
+run, because without it you cannot be sure you are not republishing a covered topic. To
+return to human review for every piece, change `PUBLISHED` back to `DRAFT` in STEP 5.
 
 WORKSPACE. Do ALL scratch work in /tmp/lab (run: mkdir -p /tmp/lab). Write every
 intermediate there (topic.txt, done.txt, pass1_brief.md, pass2_angle.md, pass3_draft.md,
@@ -50,7 +57,9 @@ STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never rep
   2. THE LIVE SITE. Using the Supabase connector (mcp tool), query the project's blog_posts:
      `select title, slug, status, created_at from blog_posts where 'tech' = any(tags) and created_at > now() - interval '120 days' order by created_at desc;`
      Append the titles to /tmp/lab/done.txt. If the connector is unavailable, note it and
-     continue; dedup then rests on the drafts-branch log alone.
+     continue on the drafts-branch log alone, but you MUST then publish as a DRAFT in STEP 5:
+     without the live-site check you cannot fully guarantee you are not repeating a topic, so
+     a human confirms that run before it goes live.
   Use /tmp/lab/done.txt in STEP 0 to skip an already-covered topic.
 
 STEP 1, PASS 1, RESEARCHER. Read scripts/tech/routine/pass1_researcher.md. Hand its full
@@ -72,7 +81,7 @@ STEP 4, PASS 4, EDITOR. Read scripts/tech/routine/pass4_editor.md. Hand its full
 plus /tmp/lab/pass3_draft.md and /tmp/lab/pass1_brief.md to a fresh sub-agent. Save the
 corrected three-block output to /tmp/lab/pass4_final.md.
 
-STEP 5, CREATE THE POST (DRAFT). Parse the ## METADATA block from /tmp/lab/pass4_final.md
+STEP 5, PUBLISH THE POST (LIVE). Parse the ## METADATA block from /tmp/lab/pass4_final.md
 (title, slug, summary, tags, source_url) and take the ## ARTICLE markdown as the body.
 Using the Supabase connector, INSERT one row into blog_posts:
   - title = METADATA title
@@ -86,26 +95,31 @@ Using the Supabase connector, INSERT one row into blog_posts:
     sectionOf in src/lib/posts.ts)
   - source_url = METADATA source_url (omit this column if it does not exist in the schema)
   - author = 'Alex Steryous'
-  - status = 'DRAFT'  (PUBLISH MODE draft; see top. Change to 'PUBLISHED' only if you have
-    switched the routine to auto-publish.)
-  - created_at = now()  (leave published_at NULL until Alex publishes at /review)
-  Confirm the insert returned a row id and record it. If the Supabase connector is
-  unavailable or the insert fails, skip this and rely on STEP 6 delivery so Alex can paste
-  the piece in manually; report the failure.
+  - status = 'PUBLISHED'  (PUBLISH MODE publish; see top. Use 'DRAFT' instead ONLY if the
+    Supabase site-dedup was unavailable this run, per STEP 0B; a human then publishes it at
+    /review.)
+  - published_at = now()  (or NULL if you fell back to DRAFT)
+  - created_at = now()
+  Confirm the insert returned a row id and record it. The post is live at /lab/<slug> within
+  about 5 minutes (the section revalidates every 300s; there is no manual revalidation hook).
+  If the Supabase connector is unavailable or the insert fails, skip this and rely on STEP 6
+  delivery so Alex can paste the piece in manually; report the failure.
 
-STEP 6, DELIVER THE HUMAN PACKET. Build ONE document in this order: FIRST "BEFORE YOU
-PUBLISH, VERIFY THESE" with the MUST-VERIFY list from /tmp/lab/pass1_brief.md, plus the
-standing line: "Not investment, legal, or financial advice. This Lab piece is a DRAFT at
-/review. Read it, spot-check the flagged numbers and capability claims against the sources,
-then publish it at /review to send it live at /lab/<slug>." Then three dashes; then "LAB
-ESSAY (draft)" and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block
-(copy-paste this to X yourself, there is no X auto-poster); then three dashes; then "Editor
-notes" with the topic you covered, the key SOURCES from the brief, the CONFIDENCE NOTE from
-the angle, and the draft post id and slug from STEP 5.
+STEP 6, DELIVER THE HUMAN PACKET (always, even after publishing live). Build ONE document
+in this order: FIRST "VERIFY THESE (POST IS ALREADY LIVE)" with the MUST-VERIFY list from
+/tmp/lab/pass1_brief.md, plus the standing line: "Not investment, legal, or financial
+advice. This Lab piece was published live at /lab/<slug>. Spot-check the flagged numbers and
+capability claims against the sources, and unpublish it at /review if anything is wrong."
+(If you fell back to DRAFT because dedup was unavailable, say so instead: the piece is a
+DRAFT at /review awaiting a human publish.) Then three dashes; then "LAB ESSAY (live)" and
+the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (copy-paste this to
+X yourself, there is no X auto-poster); then three dashes; then "Editor notes" with the topic
+you covered, the key SOURCES from the brief, the CONFIDENCE NOTE from the angle, and the
+published post id and slug from STEP 5.
   Deliver to BOTH places, independently so one failing does not block the other:
   (a) EMAIL via mcp Gmail create_draft: to ["jsteryous@gmail.com"], subject "Alex Prompts
-      Lab draft — <headline>", body the full document. Send it if a send tool exists,
-      otherwise note a draft was created.
+      Lab — <headline>", body the full document. Send it if a send tool exists, otherwise
+      note a draft was created.
   (b) DRAFTS BRANCH (done-log + recall). Write the same document to
       drafts/lab-<YYYY-MM-DD>.md. THEN edit scripts/tech/topics.md TWICE: (1) mark this
       run's topic done by moving it under a "## done" heading with the date, or appending
@@ -117,7 +131,8 @@ the angle, and the draft post id and slug from STEP 5.
       queued on main when he wants it.)
 
 STEP 7, REPORT. State: the topic you chose and the runners-up you skipped and why; whether
-the topic cleared the researcher's bar or the run stopped on a thin topic; the draft post id
-and slug (or why the insert was skipped); where the human packet was delivered (email and
-drafts branch); and any source you could not reach, so Alex knows where the evidence is thin.
-Remember the post is a DRAFT: it is not live until Alex publishes it at /review.
+the topic cleared the researcher's bar or the run stopped on a thin topic; the published post
+id and slug (or the DRAFT fallback and why, or why the insert was skipped); where the human
+packet was delivered (email and drafts branch); and any source you could not reach, so Alex
+knows where the evidence is thin. The post is LIVE at /lab/<slug> unless you fell back to
+DRAFT, in which case it awaits a human publish at /review.
