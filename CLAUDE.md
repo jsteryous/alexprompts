@@ -11,6 +11,20 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 
 ## What this is
 
+> **STRATEGIC DIRECTION (July 2026): this site is Alex's tech-sales portfolio first.** Its
+> real job is proof-of-work that lands Alex a SaaS / tech-sales role: evidence that a
+> non-engineer salesperson genuinely understands AI and can ship with it. The audience that
+> matters most is a **hiring manager**, not a real-estate lead; the tools and articles are
+> that evidence, not a real-estate business. See memory `alexprompts-portfolio-pivot` and
+> `content-two-track-strategy`. Content is moving to **two tracks**: **real-estate pieces as
+> vertical proof** (about 2/week, "I can take a technology and go deep on one industry's
+> real problems") and **tech deep-dives in Alex's own voice** (1 to 2/week, each on one
+> AI/SaaS capability: what it actually does in plain English, the concrete business value in
+> a real vertical, and the honest limits). Depth beats volume here, because a hiring manager
+> reads two or three pieces, not a feed. The public site copy described below still presents
+> the brand as Claude-for-real-estate for now; that RE-facing framing is retained
+> deliberately and re-messaging the site is a separate, later call.
+
 > **CURRENT POSITIONING (June 2026): Claude for real-estate agents and investors.** The
 > brand is **Claude-only** and aimed at **real-estate professionals**. The site +
 > newsletter teach agents and investors how to point Claude at their actual work
@@ -24,8 +38,9 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 **Alex Prompts** is a personal media brand by Alex Steryous. Alex is a real-estate agent;
 the brand helps agents and investors get real work out of Claude, and keeps them current
 on how AI is changing their field. It publishes on **Substack (the newsletter and home
-base), YouTube, TikTok, and X**; the goal is to build an audience and monetize on the
-internet.
+base), YouTube, TikTok, and X**. Building an audience and monetizing is the long-term
+ambition, but the near-term job is the tech-sales portfolio described in the strategic
+direction note above.
 
 **The job has two modes, one audience (agents + investors):**
 1. **HOW-TO education** — the site + newsletter's core product. Take a real task from a
