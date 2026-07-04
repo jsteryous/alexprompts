@@ -8,10 +8,11 @@ for a **website post** and an **X post / short thread** (no video):
   what happened, give the consensus, steelman the devil's advocate, then hand the reader the
   question. Timely, ranks briefly.
 - **Evergreen local-SEO track** (the productive no-news outcome): writes ONE substantial,
-  data-grounded local resource piece from `../topics.md` for a winnable long-tail local query,
-  and closes by pointing relocation/buyer leads to `/find-an-agent`. This is the compounding
-  search library. Cadence guard keeps it to about two a week. See the two-track note in
-  `../CLAUDE.md`.
+  data-grounded local resource piece for a winnable long-tail local query, and closes by
+  pointing relocation/buyer leads to `/find-an-agent`. This is the compounding search library.
+  **Self-sourcing:** it prefers a topic from the optional bank (`../topics.md`) and scouts its
+  own with web search when the bank is empty, so it never runs dry. Cadence guard keeps it to
+  about two a week. See the two-track note in `../CLAUDE.md`.
 
 It mirrors the `ai_news/routine/` pattern (an orchestrator plus isolated passes). The news
 track is three passes (a local explainer, not a deep-dive); the evergreen track is one
@@ -37,21 +38,28 @@ self-researching pass.
    fragments, plain English), with fair-housing and not-advice guardrails. Emits a
    `## METADATA` block the orchestrator uses to create the post.
 
-The evergreen track uses a single pass instead of the three above:
+The evergreen track uses up to two passes instead of the three above:
 
-4. **`pass_evergreen.md`** — the self-researching evergreen writer. Given ONE topic from
-   `../topics.md`, it web-searches for current local specifics, grounds every load-bearing
-   number in a cited source (Census ACS, FHFA Greenville MSA, county Assessor/ArcGIS, Zillow,
-   local publishers), and writes an 800 to 1400 word local resource article in house voice.
-   Strict fair-housing rules (describe housing by objective attributes, never steer a protected
-   class), internal links to the site's tools, and a `/find-an-agent` lead-capture close. Emits
-   its own `## METADATA` and `## IMAGE` blocks (there is no reporter to name the location), so
-   the orchestrator publishes it through the same STEP 4 path as a news post.
+0. **`pass0_scout.md`** — runs ONLY when the topic bank is empty. It web-searches for ONE
+   winnable, evergreen, uncovered local Greenville query (the five bars + fair-housing reframe),
+   dedups against already-published evergreen titles, and outputs it in the bank-entry shape so
+   the writer consumes it unchanged. Mirrors the Lab's `tech/routine/pass0_scout.md`. Its
+   runners-up ride along in the verify email for Alex to promote into `topics.md`; the engine
+   never auto-commits them (unlike the Lab, the Greenville engine does not write to the repo).
+4. **`pass_evergreen.md`** — the self-researching evergreen writer. Given ONE topic (from
+   `../topics.md` or the scout), it web-searches for current local specifics, grounds every
+   load-bearing number in a cited source (Census ACS, FHFA Greenville MSA, county Assessor/ArcGIS,
+   Zillow, local publishers), and writes an 800 to 1400 word local resource article in house
+   voice. Strict fair-housing rules (describe housing by objective attributes, never steer a
+   protected class), internal links to the site's tools, and a `/find-an-agent` lead-capture
+   close. Emits its own `## METADATA` and `## IMAGE` blocks (there is no reporter to name the
+   location), so the orchestrator publishes it through the same STEP 4 path as a news post.
 
 `orchestrator.md` wires the passes as cold sub-agents and reads the committed signal. Every
 run it also prepares the evergreen fallback (STEP 0C: cadence guard + topic dedup + pick the
-next queued topic). If the reporter finds news, it runs the news track; if not and the cadence
-allows, it runs the evergreen track; otherwise it posts nothing. Either published track creates
+next queued topic, or flag the scout when the bank is empty). If the reporter finds news, it
+runs the news track; if not and the cadence allows, it runs the evergreen track (bank topic or
+self-sourced by the scout); otherwise it posts nothing. Either published track creates
 the website post in Supabase `blog_posts`, then emails the human verify packet (the article and
 the X post to copy-paste). No Google Drive copy.
 

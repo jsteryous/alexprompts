@@ -142,10 +142,12 @@ strategic-direction and two-track notes above.
   not IP-blocked, so the routine fetches live. **Objective third-person voice.**
 - **`greenville/`** — the **local Greenville, SC** engine. A daily two-track routine: on a
   real-news night it turns the biggest local story into a both-sides website post
-  (`/real-estate`) + an X post; on a no-news night it instead writes an **evergreen local-SEO**
-  guide from `greenville/topics.md` (the compounding search library, targeting winnable
-  long-tail local queries and funneling relocation/buyer leads to `/find-an-agent`), at about
-  two a week. See `scripts/greenville/CLAUDE.md`.
+  (`/real-estate`) + an X post; on a no-news night it instead writes a **self-sourcing
+  evergreen local-SEO** guide (the compounding search library, targeting winnable long-tail
+  local queries and funneling relocation/buyer leads to `/find-an-agent`), at about two a week.
+  The evergreen track prefers the optional `greenville/topics.md` bank and scouts its own topic
+  with web search (`pass0_scout.md`, mirroring the Lab) when the bank is empty, so it never runs
+  dry. See `scripts/greenville/CLAUDE.md`.
 - **`tech/`** — the **Lab engine** (the tech track). No collector; it is **self-sourcing**:
   an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
   scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs

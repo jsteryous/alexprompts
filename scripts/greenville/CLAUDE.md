@@ -6,9 +6,11 @@ tracks** (it picks one per night):
 1. **News track.** Sources and scores **Greenville, SC real-estate news**, and turns the
    biggest UNCOVERED story into a both-sides WRITTEN post for the **website and X** (no
    video, consensus vs devil's advocate, no forced verdict). Timely, ranks for about a week.
-2. **Evergreen local-SEO track (added July 2026).** On the many no-news nights (the reporter
-   says most nights), instead of going idle the routine writes ONE substantial, data-grounded
-   local resource piece from a committed topic bank (`topics.md`) via `pass_evergreen.md`.
+2. **Evergreen local-SEO track (added July 2026, self-sourcing).** On the many no-news nights
+   (the reporter says most nights), instead of going idle the routine writes ONE substantial,
+   data-grounded local resource piece via `pass_evergreen.md`. It prefers a topic from the
+   optional bank (`topics.md`) and, when the bank is empty, scouts its own with web search
+   (`pass0_scout.md`, mirroring the Lab), so it never runs dry and needs no manual refill.
    This is the search library that actually ranks and compounds on winnable local long-tail
    queries ("moving to Greenville SC neighborhoods," "cost of living in Greenville SC"), and
    each piece ends by pointing relocation and buyer leads to `/find-an-agent`. It runs at a
@@ -39,12 +41,16 @@ isolated routine passes) and the same `requirements-ai-news.txt`.
   Pure functions are unit-tested in `tests/test_commercial.py`.
 - **`data/`** — CI hand-off (`signal-latest.json` + `.txt`), committed by the
   workflow; the routine reads it. Generated, do not hand-edit.
-- **`topics.md`** — the **evergreen topic bank** (the local-SEO track's input, and doubles as
-  the site's Greenville keyword map). A `queued` list of winnable long-tail local queries,
-  each with a `target_query`, a stable `target_slug` (the dedup key + URL), an anchor, and the
-  data to ground it. Alex-maintained; the routine reads it, dedups queued topics against
-  already-published `evergreen` slugs, and never writes to it. Mirrors `ai_news/questions.md`.
-- **`routine/`** — orchestrator + the news passes (reporter, two-sides, writer) plus
+- **`topics.md`** — the **evergreen topic bank** (the local-SEO track's OPTIONAL priority
+  queue, and doubles as the site's Greenville keyword map). A `queued` list of winnable
+  long-tail local queries, each with a `target_query`, a stable `target_slug` (the dedup key +
+  URL), an anchor, and the data to ground it. The track is **self-sourcing**: the routine
+  prefers a `queued` topic, and when the bank is empty it scouts its own with web search, so
+  the file is optional (seed it to steer, leave it empty to let the engine choose). The routine
+  reads it, dedups against already-published `evergreen` slugs + titles, and never writes to it.
+  Mirrors `ai_news/questions.md` and the Lab's `tech/topics.md`.
+- **`routine/`** — orchestrator + the news passes (reporter, two-sides, writer) plus the
+  evergreen track's `pass0_scout.md` (self-sources a topic when the bank is empty) and
   `pass_evergreen.md` (the self-researching evergreen writer for the no-news nights). See
   `routine/README.md`.
 

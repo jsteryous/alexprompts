@@ -41,20 +41,32 @@ This bank is where the site actually competes for search.
    price index, Census ACS tract figures. Real numbers are what make a local page rank and
    earn trust.
 
+## This bank is OPTIONAL: the engine is self-sourcing
+
+You do not have to keep this file full. It is a **priority queue for steering**, not a hard
+dependency. On a cadence-eligible no-news night the routine prefers the first `queued` topic
+here, and **when the bank is empty it scouts its own topic with web search**
+(`routine/pass0_scout.md`, mirroring the Lab engine), so the evergreen track never runs dry and
+needs no manual refill. So: seed a `queued` topic when you want a specific one covered next;
+leave the bank empty to let the engine choose. The scout emails you its runners-up after a
+self-sourced run, so you can promote any you like into `queued` without touching anything else.
+
 ## How the routine uses this file
 
 1. On a night the news track finds NO NEW STORY and the evergreen cadence allows a run (see
    the orchestrator's cadence guard: at most about two evergreen pieces a week, so this is
    depth over volume, not a daily content mill), pick the FIRST topic under `queued` whose
    `target_slug` is NOT already published on the site (the orchestrator dedups against
-   `blog_posts`).
-2. Hand that topic to `pass_evergreen.md`, research it live, and write it.
+   `blog_posts`). If no queued topic remains, the scout self-sources one instead.
+2. Hand that topic (from the bank or the scout) to `pass_evergreen.md`, research it live, and
+   write it.
 3. Publish it exactly like a news post (tagged `greenville` so it routes to `/real-estate`,
    plus `evergreen` so the cadence guard can find it), with a lead-image LOCATION so the
    finalize cron renders a cover and broadcasts it.
-4. The routine does NOT edit this file (the Greenville engine never writes to the repo).
-   Dedup by `target_slug` against the live site is what prevents repeats. Alex prunes or
-   reorders this bank by hand, and adds new topics under `queued`.
+4. The routine does NOT edit this file (the Greenville engine never writes to the repo, so
+   unlike the Lab there is no auto-commit of runners-up). Dedup by `target_slug` and title
+   against the live site is what prevents repeats. Alex prunes, reorders, or refills this bank
+   by hand whenever he wants to steer; otherwise the scout keeps it running.
 
 ## What makes a good evergreen topic (all five bars)
 
