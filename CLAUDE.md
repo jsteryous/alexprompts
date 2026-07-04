@@ -16,13 +16,17 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > non-engineer salesperson genuinely understands AI and can ship with it. The audience that
 > matters most is a **hiring manager**, not a real-estate lead; the tools and articles are
 > that evidence, not a real-estate business. See memory `alexprompts-portfolio-pivot` and
-> `content-two-track-strategy`. Content is moving to **two tracks**: **real-estate pieces as
+> `content-two-track-strategy`. Content runs on **two tracks**: **real-estate pieces as
 > vertical proof** (about 2/week, "I can take a technology and go deep on one industry's
-> real problems") and **tech deep-dives in Alex's own voice** (1 to 2/week, each on one
-> technology capability, broadly scoped: AI, but also dev tools, automation, data infra,
-> security, fintech, robotics, energy, hardware, anything a business buys or adopts. What it
-> actually does in plain English, the concrete business value in a real vertical, and the
-> honest limits). Depth beats volume here, because a hiring manager
+> real problems") and **Greenville Works, first-person deep-dives in Alex's own voice** (1 to
+> 2/week; renamed from the national "Lab" tech track in July 2026). Each takes ONE thing
+> reshaping Greenville and the Upstate apart (development, roads, infrastructure, utilities,
+> manufacturing, data centers, population growth, government decisions, and technology when it
+> touches the Upstate), explains how it works in plain English, shows what it means for where
+> we live, work, and invest, and names the honest trade-offs. Refocusing the tech track from
+> national to local unifies the site around one promise, wins winnable local SEO, and funnels
+> referral leads, while still proving Alex can take a real system apart and translate it into
+> business value. Depth beats volume here, because a hiring manager
 > reads two or three pieces, not a feed. The public site copy described below still presents
 > the brand as Claude-for-real-estate for now; that RE-facing framing is retained
 > deliberately and re-messaging the site is a separate, later call.
@@ -30,8 +34,8 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
 > real-estate agents and investors" teaching framing (the "voice 3" how-to product) was
 > **removed in July 2026**. The site is now Alex's personal place with two kinds of content,
-> honest plain-English writing on **Greenville real estate** and on **technology** more
-> broadly (the Lab), plus the free **real-estate tools** he built. It serves two real goals:
+> honest plain-English writing on **Greenville real estate** and on **how the Upstate is
+> changing** (Greenville Works), plus the free **real-estate tools** he built. It serves two real goals:
 > a **build-in-public portfolio** that showcases Alex to hiring managers (see `/about`), and
 > a **referral connector** that captures buyer/seller leads to hand to vetted agents (see
 > `/find-an-agent`). The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
@@ -47,7 +51,7 @@ lead stream are the longer-term goals.
 
 **The content is RESEARCH + analysis, not how-to.** (The old third mode, "HOW-TO education"
 that taught agents to point Claude at their work, was the removed voice 3; do not bring it
-back.) The two live tracks are the real-estate vertical proof and the Lab tech track:
+back.) The two live tracks are the real-estate vertical proof and the Greenville Works local-change track:
 1. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
    investment, for the same reader. The Saturday national video + article (`scripts/ai_news/`)
    has Claude research one useful, evergreen question against real public data; the Greenville
@@ -130,7 +134,7 @@ The canonical voice lives in the Claude routine's writer pass
 ## The content engines (`scripts/ai_news/` + `scripts/greenville/` + `scripts/tech/`)
 
 See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Three engines: the
-two real-estate siblings (the vertical-proof track) plus the Lab (the tech track). See the
+two real-estate siblings (the vertical-proof track) plus Greenville Works (the local-change track). See the
 strategic-direction and two-track notes above.
 
 - **`ai_news/`** — the **national Saturday research engine** (directory name is legacy; no
@@ -146,25 +150,31 @@ strategic-direction and two-track notes above.
   data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
   query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
-  mirroring the Lab) when the bank is empty. The old daily both-sides **news** track was retired
+  mirroring Greenville Works) when the bank is empty. The old daily both-sides **news** track was retired
   July 2026 (its passes + Google-News collector remain in the repo, unwired, so it is
   reversible); the separate `commercial.py` collector for the buyers-list stays live. See
   `scripts/greenville/CLAUDE.md`.
-- **`tech/`** — the **Lab engine** (the tech track). No collector; it is **self-sourcing**:
-  an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
-  scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs
-  autonomously without going dry. Routine (`tech/routine/`, orchestrator plus isolated passes:
-  scout → researcher → angle → writer → editor) takes ONE technology capability apart in
-  **Alex's own first-person voice**, grounds it with web search, and names the honest limits,
-  then publishes a `blog_posts` row tagged `tech` **live** to **`/lab`** (autonomous, same as
-  the Greenville engine; a verify email still goes out for after-the-fact spot-check, and a
-  run falls back to DRAFT only if dedup was unavailable). Its job is proof-of-work for the
-  tech-sales portfolio: it shows Alex understands the technology and can translate a
-  capability into business value. Target cadence 1–2/week. See `scripts/tech/routine/README.md`.
+- **`tech/`** — the **Greenville Works engine** (the local-change track; renamed from the
+  national "Lab" tech track in July 2026, directory kept as `tech/`). No collector; it is
+  **self-sourcing**: an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics)
+  plus a web-search scout (`pass0_scout.md`) that picks its own topic when the bank is empty,
+  so it runs autonomously without going dry. Routine (`tech/routine/`, orchestrator plus
+  isolated passes: scout → researcher → angle → writer → editor) takes ONE thing reshaping
+  Greenville and the Upstate apart (a road, a subdivision, a data center, a factory, the grid,
+  fiber, water capacity, a government decision, and the technology behind local change) in
+  **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
+  and funnels relocation/buyer leads to `/find-an-agent` where the topic fits, then publishes a
+  `blog_posts` row tagged `greenville works` **live** to **`/greenville-works`** (autonomous,
+  same as the Greenville engine; a verify email still goes out for after-the-fact spot-check,
+  and a run falls back to DRAFT only if dedup was unavailable). Its job is twofold: unify the
+  site around one local promise (better SEO and referral leads) and still prove Alex can take a
+  real system apart and translate it into what it means for a business. Target cadence 1–2/week.
+  See `scripts/tech/routine/README.md`.
 
 The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
-Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is retired under
-`scripts/_archive/` — do not revive it.
+Lab was added July 2026 for the portfolio pivot, then refocused into Greenville Works later in
+July 2026 to unify the site around the local vertical. The legacy dental pipeline is retired
+under `scripts/_archive/` — do not revive it.
 
 ## Site structure
 
@@ -197,14 +207,18 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
   free tiers) framed as proof he is a self-taught builder who genuinely enjoys tech, then a
   LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
   exports). Serves everyone, not only hiring managers, so it never literally addresses them.
-- `/lab` + `/lab/[slug]` — the **Lab**, the tech track (added July 2026 for the portfolio
-  pivot). First-person deep-dives that take ONE technology capability apart (AI, but also dev
-  tools, automation, data infra, security, fintech, robotics, energy, hardware), show its real
-  business value, and name the honest limits. Backed by Supabase `blog_posts` tagged `tech`
-  (a tag-routed section in `src/lib/posts.ts` `sectionOf`), published **live**
-  (autonomous) by the `scripts/tech/` Lab routine, with a verify email for after-the-fact
+- `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
+  track (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
+  from national tech to Greenville-local later that month). First-person deep-dives that take
+  ONE thing reshaping the Upstate apart (development, roads, infrastructure, utilities,
+  manufacturing, data centers, population growth, government decisions, and technology when it
+  touches Greenville), explain how it works, show what it means for where we live, work, and
+  invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
+  `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
+  `PostType` key `works`, distinct from the `greenville` real-estate tag), published **live**
+  (autonomous) by the `scripts/tech/` routine, with a verify email for after-the-fact
   spot-check and unpublish at `/review`. Text-forward index, no cover images. The
-  `getFeedPosts` homepage stream includes Lab posts.
+  `getFeedPosts` homepage stream includes Greenville Works posts.
 - `/find-an-agent` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
@@ -246,7 +260,7 @@ email.
   Sending is `/api/broadcast?id=<postId>` (Resend via `src/lib/email.ts`), authed with
   `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
   click, and it emails a published post to the list. This is the channel for **site-only content**
-  (Greenville `/real-estate`, Lab `/lab`) that never goes to Substack. `blog_posts.last_broadcast_at`
+  (Greenville `/real-estate`, Greenville Works `/greenville-works`) that never goes to Substack. `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
   on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
   stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`

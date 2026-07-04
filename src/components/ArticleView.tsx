@@ -7,8 +7,8 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
-  label: string; // "Archive" | "Real Estate" | "Lab"
-  basePath: string; // "/archive" | "/real-estate" | "/lab"
+  label: string; // "Archive" | "Real Estate" | "Greenville Works"
+  basePath: string; // "/archive" | "/real-estate" | "/greenville-works"
   /** Section-specific line for the footer subscribe box. Falls back to the
    *  general Claude blurb when omitted. */
   blurb?: string;
@@ -16,7 +16,7 @@ export interface ArticleSection {
 
 /**
  * Shared renderer for a single post, used by /archive/[slug], /real-estate/[slug],
- * and /lab/[slug]. The routes differ only in which `section` (and which post type)
+ * and /greenville-works/[slug]. The routes differ only in which `section` (and which post type)
  * they pass; the heavy markdown -> sanitize -> JSON-LD pipeline lives here once.
  */
 export default async function ArticleView({

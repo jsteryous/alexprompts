@@ -7,7 +7,7 @@
  *
  * Positioning (July 2026): Alex Prompts is Alex Steryous's personal site. Two
  * kinds of content live here, honest plain-English writing on Greenville real
- * estate and on technology more broadly (the Lab), plus the free real-estate
+ * estate and on how the Upstate is changing (Greenville Works), plus the free real-estate
  * tools he built himself. It doubles as a build-in-public portfolio (see /about)
  * and a referral connector (see /find-an-agent). The earlier "Claude for real
  * estate agents and investors" teaching framing was removed in July 2026; do NOT

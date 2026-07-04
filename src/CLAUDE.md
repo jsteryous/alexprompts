@@ -23,13 +23,17 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
   `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **three
   sections split by tag**: `greenville` → `/real-estate` (set by the `scripts/greenville`
-  routine), `tech` → `/lab` (set by the `scripts/tech` Lab routine), everything else →
-  `/archive` (newsletter). `sectionOf()` is the single source of that mapping;
-  `getPublishedPosts("newsletter")` excludes real-estate and lab posts so they never leak
-  onto the archive. `getFeedPosts` (homepage) is simply all published posts, so newsletter,
-  real-estate, and lab posts all lead there. Returns `[]`/`null` when Supabase env is unset
-  so the site builds (not a crash). Used by `/`, `/archive`, `/real-estate`, `/lab`, their
-  `[slug]` routes, `sitemap.ts`. (The old `guide` → `/guides` section was removed July 2026.)
+  routine), `greenville works` → `/greenville-works` (set by the `scripts/tech` engine;
+  internal `PostType` key is `works`), everything else → `/archive` (newsletter).
+  `sectionOf()` is the single source of that mapping; the `greenville works` tag is
+  deliberately distinct from the `greenville` real-estate tag so the two never collide.
+  `getPublishedPosts("newsletter")` excludes real-estate and Greenville Works posts so they
+  never leak onto the archive. `getFeedPosts` (homepage) is simply all published posts, so
+  newsletter, real-estate, and Greenville Works posts all lead there. Returns `[]`/`null`
+  when Supabase env is unset so the site builds (not a crash). Used by `/`, `/archive`,
+  `/real-estate`, `/greenville-works`, their `[slug]` routes, `sitemap.ts`. (The old `guide`
+  → `/guides` section was removed July 2026; the `tech` → `/lab` "Lab" section was renamed to
+  Greenville Works July 2026.)
 - **`src/lib/tools.ts`** — single source for the free `/tools` (`toolCatalog`,
   `liveTools()`, `getTool()`, `audienceLabel`). Drives the `/tools` hub, the homepage
   tools spotlight + Start-here pillars, nav, footer, and `sitemap.ts`. Each entry has a

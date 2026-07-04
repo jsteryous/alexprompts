@@ -32,20 +32,23 @@ reference only, nothing there runs on a schedule anymore.
   for beginner AI how-to demand). Standalone, not part of the Saturday routine. It fed the
   old GUIDES track, which was removed July 2026 (the `/guides` section is gone), so it is now
   orphaned; kept for reference only. Run from a normal IP.
-- **`tech/`** — the **Lab engine** (the tech track). No collector; **self-sourcing**: an
-  optional steering bank (`tech/topics.md`) plus a web-search scout (`pass0_scout.md`) that
-  picks its own topic when the bank is empty, so it never runs dry. A Claude routine
-  (`tech/routine/`, orchestrator plus isolated passes: scout → researcher → angle → writer →
-  editor) takes ONE technology capability apart (AI, dev tools, automation, data infra,
-  security, fintech, robotics, energy, hardware) in Alex's own first-person voice, grounds it
-  with web search, and above all names the honest limits, then publishes a `blog_posts` row
-  tagged `tech` **live** to `/lab` (autonomous; verify email for spot-check). See
-  `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
+- **`tech/`** — the **Greenville Works engine** (the local-change track; renamed from the
+  national "Lab" tech track in July 2026, directory kept as `tech/`). No collector;
+  **self-sourcing**: an optional steering bank (`tech/topics.md`) plus a web-search scout
+  (`pass0_scout.md`) that picks its own topic when the bank is empty, so it never runs dry. A
+  Claude routine (`tech/routine/`, orchestrator plus isolated passes: scout → researcher →
+  angle → writer → editor) takes ONE thing reshaping Greenville and the Upstate apart (a road,
+  a subdivision, a data center, a factory, the grid, fiber, water capacity, a government
+  decision, and the technology behind local change) in Alex's own first-person voice, grounds
+  it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
+  to `/find-an-agent` where the topic fits, then publishes a `blog_posts` row tagged
+  `greenville works` **live** to `/greenville-works` (autonomous; verify email for spot-check).
+  See `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
   A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
   it writes one substantial, data-grounded local guide targeting a winnable long-tail local
   query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
-  `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like the Lab) when the
+  `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like Greenville Works) when the
   bank is empty. The old daily both-sides **news** track was retired July 2026 (its passes +
   collector remain, unwired). The separate `commercial.py` collector (buyers-list data) stays.
   `greenville/cover_ingest.py` is a separate **monthly** utility (a GitHub Action, not the nightly

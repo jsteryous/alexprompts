@@ -1,25 +1,31 @@
 /**
  * Post data access — published Alex Prompts content stored in Supabase
  * `blog_posts`. One table holds three kinds of content, split by tag:
- *   - tagged `greenville` -> REAL-ESTATE post   (-> /real-estate)
- *   - tagged `tech`       -> LAB deep-dive       (-> /lab)
- *   - everything else     -> NEWSLETTER issue   (-> /archive)
+ *   - tagged `greenville`       -> REAL-ESTATE post        (-> /real-estate)
+ *   - tagged `greenville works` -> GREENVILLE WORKS piece  (-> /greenville-works)
+ *   - everything else           -> NEWSLETTER issue        (-> /archive)
  * Returns [] / null when env is unset so the site builds and renders without a
  * database (empty lists, not a crash).
  */
 import { createClient } from "@supabase/supabase-js";
 import { SITE_URL } from "@/lib/site";
 
-/** Content kind, derived from tags. Each post lives at exactly one section. */
-export type PostType = "newsletter" | "realestate" | "lab";
+/** Content kind, derived from tags. Each post lives at exactly one section. The
+ *  `works` key is the internal discriminator for the "Greenville Works" section
+ *  (route /greenville-works), set by the scripts/tech routine. */
+export type PostType = "newsletter" | "realestate" | "works";
 
 /** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
  *  the scripts/greenville routine. */
 export const REALESTATE_TAG = "greenville";
 
-/** A post tagged this (case-insensitive) is a Lab tech deep-dive. Set by the
- *  scripts/tech routine. The tag is `tech`; the section/route is `/lab`. */
-export const LAB_TAG = "tech";
+/** A post tagged this (case-insensitive) is a Greenville Works piece (how the
+ *  region is changing: development, infrastructure, utilities, manufacturing,
+ *  transportation, and technology when it touches the Upstate). Set by the
+ *  scripts/tech routine. The tag is `greenville works`; the route is
+ *  `/greenville-works`. Distinct from REALESTATE_TAG (`greenville`) so the two
+ *  sections never collide. */
+export const WORKS_TAG = "greenville works";
 
 export interface ArchivePost {
   id: string;
@@ -50,15 +56,15 @@ export function isRealEstate(post: { tags: string[] | null }): boolean {
   return hasTag(post, REALESTATE_TAG);
 }
 
-export function isLab(post: { tags: string[] | null }): boolean {
-  return hasTag(post, LAB_TAG);
+export function isWorks(post: { tags: string[] | null }): boolean {
+  return hasTag(post, WORKS_TAG);
 }
 
-/** The single section a post belongs to. Real-estate wins over lab if tags somehow
- *  overlap; everything untagged falls through to the newsletter. */
+/** The single section a post belongs to. Real-estate wins over Greenville Works if
+ *  tags somehow overlap; everything untagged falls through to the newsletter. */
 export function sectionOf(post: { tags: string[] | null }): PostType {
   if (isRealEstate(post)) return "realestate";
-  if (isLab(post)) return "lab";
+  if (isWorks(post)) return "works";
   return "newsletter";
 }
 
@@ -139,10 +145,10 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
 
 /**
  * The homepage "fresh" feed: newsletter issues, Greenville real-estate posts, AND
- * Lab tech deep-dives, newest first, merged into one stream. Every published post
+ * Greenville Works pieces, newest first, merged into one stream. Every published post
  * belongs to one of those three sections, so the feed is simply all of them. This is
- * what the homepage shows so the latest real-estate post or Lab piece can lead
- * alongside the newsletter, not only `/archive` issues.
+ * what the homepage shows so the latest real-estate post or Greenville Works piece can
+ * lead alongside the newsletter, not only `/archive` issues.
  */
 export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
   return getPublishedPosts(limit);
@@ -155,8 +161,8 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
   const base =
     section === "realestate"
       ? "/real-estate"
-      : section === "lab"
-        ? "/lab"
+      : section === "works"
+        ? "/greenville-works"
         : "/archive";
   return `${base}/${post.slug}`;
 }
@@ -166,8 +172,8 @@ export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
     ? "Greenville"
-    : section === "lab"
-      ? "Lab"
+    : section === "works"
+      ? "Greenville Works"
       : "Newsletter";
 }
 

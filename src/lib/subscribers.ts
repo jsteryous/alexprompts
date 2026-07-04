@@ -2,7 +2,7 @@
  * Owned email-list data access. The list lives in Supabase `subscribers` (see
  * supabase/schema.sql), reached with the service key so it is server-only and
  * never exposed through RLS. This is the asset we own, separate from Substack:
- * it lets us email people about site-only posts (Greenville /real-estate, Lab /lab)
+ * it lets us email people about site-only posts (Greenville /real-estate, Greenville Works /greenville-works)
  * that never go to Substack.
  *
  * Flow is double opt-in: a signup creates a `pending` row with a confirm token and

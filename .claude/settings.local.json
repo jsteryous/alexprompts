@@ -232,7 +232,8 @@
       "Bash(python -m greenville.cover_ingest --help)",
       "WebFetch(domain:www.gspairport.com)",
       "WebFetch(domain:greenvillerec.com)",
-      "WebFetch(domain:www.fallspark.com)"
+      "WebFetch(domain:www.fallspark.com)",
+      "Bash(echo \"---EXIT:$?---\")"
     ]
   }
 }

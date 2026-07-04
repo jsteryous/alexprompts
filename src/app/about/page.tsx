@@ -169,7 +169,7 @@ export default function AboutPage() {
               </p>
             </li>
             <li>
-              <h3 className="theme-text-primary type-title mb-1">Built solo, for almost nothing</h3>
+              <h3 className="theme-text-primary type-title mb-1">Built solo, for free</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
                 I designed, wrote, and run all of it myself, and I kept the whole system
                 inside free tiers, so it costs essentially nothing to operate. That constraint
@@ -178,9 +178,8 @@ export default function AboutPage() {
             </li>
           </ul>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mt-8">
-            None of that is the job I am applying for. It is proof of the thing under the job.
-            When I understand how a product really works, I can sell it honestly, and I learn
-            the hard parts fast because I actually enjoy them.
+            Last thing: a big purpose behind this website is to meet new people and establish great relationships.
+            If you are in tech, real estate, or an adjacent industry, please let me know!
           </p>
         </div>
       </section>

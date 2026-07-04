@@ -12,18 +12,18 @@ export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug, "lab");
+  const post = await getPost(slug, "works");
   if (!post) return { title: "Not found" };
   const image = articleOgImage(post);
   return {
     title: post.title,
     description: post.summary ?? undefined,
-    alternates: { canonical: `${site.url}/lab/${post.slug}` },
+    alternates: { canonical: `${site.url}/greenville-works/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.summary ?? undefined,
       type: "article",
-      url: `${site.url}/lab/${post.slug}`,
+      url: `${site.url}/greenville-works/${post.slug}`,
       images: [image],
     },
     twitter: {
@@ -35,18 +35,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function LabPostPage({ params }: Props) {
+export default async function GreenvilleWorksPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug, "lab");
+  const post = await getPost(slug, "works");
   if (!post) notFound();
   return (
     <ArticleView
       post={post}
       section={{
-        label: "The Lab",
-        basePath: "/lab",
+        label: "Greenville Works",
+        basePath: "/greenville-works",
         blurb:
-          "I take apart one thing AI can now do, work out what it is actually good for, and say plainly where it still falls short. If that is useful to you, the next one lands in your inbox.",
+          "I dig into how Greenville is changing, one road, subdivision, factory, or piece of infrastructure at a time, and what it means for where we live, work, and invest. Subscribe and the next one lands in your inbox.",
       }}
     />
   );

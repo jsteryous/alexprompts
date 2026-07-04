@@ -7,7 +7,7 @@ import { broadcastPost } from "@/lib/broadcast";
 /**
  * GET /api/broadcast?id=<postId>&token=<PUBLISH_SECRET>
  *   Email a published post to the confirmed owned list. This is the path that
- *   reaches people about site-only content (Greenville /real-estate, Lab /lab)
+ *   reaches people about site-only content (Greenville /real-estate, Greenville Works /greenville-works)
  *   that never goes to Substack.
  *
  * Optional params:
