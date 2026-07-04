@@ -46,7 +46,7 @@ export default async function RealEstatePostPage({ params }: Props) {
         label: "Real Estate",
         basePath: "/real-estate",
         blurb:
-          "I send free, step-by-step walkthroughs on putting Claude to work in real estate. The listings, the market research, the deal analysis, and the follow-up, shown plainly so you can do them yourself.",
+          "I write honest, plain-English guides to buying, selling, and living in Greenville, South Carolina, grounded in real local data. Subscribe and I will send the next one straight to your inbox.",
       }}
     />
   );
