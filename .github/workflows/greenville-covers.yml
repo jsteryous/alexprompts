@@ -2,18 +2,24 @@ name: Greenville Cover Library
 
 # Grows the curated Greenville cover library that the /real-estate evergreen
 # engine uses for lead images. Searches Wikimedia Commons for new freely-licensed,
-# landscape, high-resolution Greenville photos, scores each with a cheap Claude
-# vision call (is it an attractive, on-subject hero with no watermark?), commits
-# the accepted ones into public/greenville/library/, and updates
-# src/lib/greenvilleCovers.json + CREDITS.md. Opens a PR rather than pushing to
-# main, so a human eyeballs the additions before they go live.
+# landscape, high-resolution Greenville photos, commits the best candidates into
+# public/greenville/library/, and updates src/lib/greenvilleCovers.json +
+# CREDITS.md. It opens a PR rather than pushing to main, so a human eyeballs (and
+# is the real quality gate for) every addition before it goes live.
+#
+# FREE BY DEFAULT: runs with --no-vision, so it needs NO API key and costs nothing
+# (keeping the site's zero-billing guarantee). The candidates are filtered by
+# license, orientation, and resolution; the human PR review catches watermarks and
+# duds. OPTIONAL sharper pre-filter: set the ANTHROPIC_API_KEY repo secret and drop
+# --no-vision to have a cheap Claude Haiku vision call score each candidate first
+# (that path is metered API usage, ~a few cents per run — off by default on purpose).
 #
 # See scripts/greenville/cover_ingest.py and scripts/greenville/CLAUDE.md.
 
 on:
   schedule:
     # Monthly, the 3rd at 08:00 UTC. Commons' Greenville depth is finite, so a
-    # run adds a few good photos at most — monthly is plenty and keeps cost tiny.
+    # run proposes a few good photos at most — monthly is plenty.
     - cron: '0 8 3 * *'
   workflow_dispatch:
     inputs:
@@ -43,28 +49,28 @@ jobs:
           cache-dependency-path: scripts/requirements-ai-news.txt
 
       - name: Install dependencies
-        run: pip install -r scripts/requirements-ai-news.txt anthropic
+        run: pip install -r scripts/requirements-ai-news.txt
 
-      - name: Grow the cover library (vision-gated)
+      - name: Propose new covers (free, human-reviewed in the PR)
         working-directory: scripts
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          python -m greenville.cover_ingest --max-new "${{ github.event.inputs.max_new || '3' }}"
+          python -m greenville.cover_ingest --no-vision \
+            --max-new "${{ github.event.inputs.max_new || '3' }}"
 
-      - name: Open a pull request with the new covers
+      - name: Open a pull request with the proposed covers
         uses: peter-evans/create-pull-request@v6
         with:
           branch: greenville-covers/auto
-          commit-message: 'feat(greenville): add vision-vetted covers to the library'
-          title: 'Greenville covers: new vision-vetted photos'
+          commit-message: 'feat(greenville): add covers to the library'
+          title: 'Greenville covers: new candidate photos'
           body: |
             Automated by `.github/workflows/greenville-covers.yml`.
 
-            New Wikimedia Commons photos that passed the Claude vision gate
-            (attractive, on-subject, watermark-free). Skim the images in
-            `public/greenville/library/`, confirm the attribution in
-            `CREDITS.md`, and merge if they look good. Close if not.
+            New freely-licensed, landscape, high-resolution Wikimedia Commons
+            photos for the cover library. **You are the quality gate**: open each
+            image in `public/greenville/library/`, drop any with a watermark,
+            overlaid text, or that just look bad, confirm the attribution in
+            `CREDITS.md`, and merge what's left. Close the PR if none are good.
           add-paths: |
             public/greenville/library/**
             src/lib/greenvilleCovers.json

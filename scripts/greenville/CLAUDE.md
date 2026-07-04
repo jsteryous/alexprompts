@@ -137,14 +137,18 @@ the writer's `## IMAGE` vocabulary in `pass_evergreen.md`.
 **Growing it, autonomously (`cover_ingest.py`).** A monthly GitHub Action
 (`.github/workflows/greenville-covers.yml`) runs `python -m greenville.cover_ingest`: for each
 existing subject it searches Wikimedia Commons for new freely-licensed, landscape, high-res
-candidates it does not already have, scores each with a cheap Claude **vision** call (Haiku: is it
-an attractive, on-subject hero with no watermark or overlaid text?), commits the winners into the
-library, and appends them to `greenvilleCovers.json` + `CREDITS.md` (attribution pulled from the
-Commons metadata). It **opens a PR**, so a human eyeballs the additions before they go live, and it
-only grows existing subjects (never invents one). Needs `ANTHROPIC_API_KEY` as a repo secret. Flags:
-`--dry-run` (list candidates, no writes/vision), `--no-vision`, `--max-new`, `--per-subject`,
-`--subject`. The vision gate is the automated version of the human eyeball pass; Commons' Greenville
-depth is finite, so expect a few good photos per run, not dozens.
+candidates it does not already have, commits the best ones into the library, appends them to
+`greenvilleCovers.json` + `CREDITS.md` (attribution pulled from the Commons metadata), and **opens a
+PR**. It only grows existing subjects (never invents one). **The PR is the quality gate:** a human
+skims the images and drops any watermarked or weak ones before merge.
+
+**It runs FREE by default** (`--no-vision`, no key), to keep the site's zero-billing guarantee. The
+script also has an OPTIONAL Claude **vision** pre-filter (Haiku: attractive? on-subject? no
+watermark/overlaid text?) that scores each candidate before it reaches the PR. That path is metered
+Anthropic API usage (a few cents per run), so it is opt-in: set the `ANTHROPIC_API_KEY` repo secret
+and remove `--no-vision` from the workflow. Flags: `--dry-run` (list candidates, no writes), and
+`--no-vision` / `--max-new` / `--per-subject` / `--subject`. Commons' Greenville depth is finite, so
+expect a few good photos per run, not dozens.
 
 **Keys.** The curated-library path needs NO key (the photos are served from `/public`). Only the
 Google fallback uses `GOOGLE_PLACES_API_KEY` / `GOOGLE_MAPS_KEY` (Maps Static, Geocoding, Street
