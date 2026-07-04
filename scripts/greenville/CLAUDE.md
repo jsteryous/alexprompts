@@ -1,12 +1,25 @@
 # Greenville real-estate engine — `scripts/greenville/`
 
-A second content vertical, separate from `ai_news/`. It sources and scores
-**Greenville, SC real-estate news**, and a Claude routine turns the biggest UNCOVERED
-story into WRITTEN content for the **website and X** (no video), framed as **both
-sides, no forced verdict** (consensus vs devil's advocate). See root `CLAUDE.md` and
-`scripts/CLAUDE.md` for the sibling `ai_news/` engine; this package reuses the same
-conventions (graceful network degradation, defusedxml RSS parsing, JSON signal
-hand-off, isolated routine passes) and the same `requirements-ai-news.txt`.
+A second content vertical, separate from `ai_news/`. A daily Claude routine with **two
+tracks** (it picks one per night):
+
+1. **News track.** Sources and scores **Greenville, SC real-estate news**, and turns the
+   biggest UNCOVERED story into a both-sides WRITTEN post for the **website and X** (no
+   video, consensus vs devil's advocate, no forced verdict). Timely, ranks for about a week.
+2. **Evergreen local-SEO track (added July 2026).** On the many no-news nights (the reporter
+   says most nights), instead of going idle the routine writes ONE substantial, data-grounded
+   local resource piece from a committed topic bank (`topics.md`) via `pass_evergreen.md`.
+   This is the search library that actually ranks and compounds on winnable local long-tail
+   queries ("moving to Greenville SC neighborhoods," "cost of living in Greenville SC"), and
+   each piece ends by pointing relocation and buyer leads to `/find-an-agent`. It runs at a
+   depth-over-volume cadence (about two a week, enforced by a cadence guard in the
+   orchestrator), never a daily content mill. See memory [[greenville-evergreen-seo-track]].
+
+Both tracks publish the same way (a `greenville`-tagged `blog_posts` row, live to
+`/real-estate`, cover + broadcast rendered afterward by the finalize cron). See root
+`CLAUDE.md` and `scripts/CLAUDE.md` for the sibling `ai_news/` engine; this package reuses the
+same conventions (graceful network degradation, defusedxml RSS parsing, JSON signal hand-off,
+isolated routine passes) and the same `requirements-ai-news.txt`.
 
 ## Layout
 
@@ -26,8 +39,14 @@ hand-off, isolated routine passes) and the same `requirements-ai-news.txt`.
   Pure functions are unit-tested in `tests/test_commercial.py`.
 - **`data/`** — CI hand-off (`signal-latest.json` + `.txt`), committed by the
   workflow; the routine reads it. Generated, do not hand-edit.
-- **`routine/`** — orchestrator + three isolated passes (reporter, two-sides,
-  writer). See `routine/README.md`.
+- **`topics.md`** — the **evergreen topic bank** (the local-SEO track's input, and doubles as
+  the site's Greenville keyword map). A `queued` list of winnable long-tail local queries,
+  each with a `target_query`, a stable `target_slug` (the dedup key + URL), an anchor, and the
+  data to ground it. Alex-maintained; the routine reads it, dedups queued topics against
+  already-published `evergreen` slugs, and never writes to it. Mirrors `ai_news/questions.md`.
+- **`routine/`** — orchestrator + the news passes (reporter, two-sides, writer) plus
+  `pass_evergreen.md` (the self-researching evergreen writer for the no-news nights). See
+  `routine/README.md`.
 
 ## Commands
 
@@ -56,10 +75,12 @@ python -m unittest scripts.tests.test_commercial -v
   (the county ArcGIS service is public + free). The push redeploys the statically
   generated `/tools/buyers-list` page with fresh sales.
 - The **routine** runs nightly as a scheduled Claude cloud agent pointed at
-  `routine/orchestrator.md`, after the collector. It dedups against the live site,
-  posts NOTHING on a quiet night, and on a real story creates a `blog_posts` row
-  (tagged `greenville`) plus a Gmail packet with the article and the X post.
-  See `routine/README.md`.
+  `routine/orchestrator.md`, after the collector. It dedups against the live site. On a real
+  news story it creates a both-sides `blog_posts` row (tagged `greenville`, `real estate`); on
+  a no-news night, if the cadence guard allows (about two a week), it writes an evergreen local
+  piece instead (tagged `greenville`, `evergreen`); if there is neither, it posts nothing. Each
+  published post also produces a Gmail verify packet with the article and the X post. See
+  `routine/README.md`.
 
 ## Publishing + dedup
 

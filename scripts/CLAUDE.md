@@ -42,6 +42,9 @@ reference only, nothing there runs on a schedule anymore.
   tagged `tech` **live** to `/lab` (autonomous; verify email for spot-check). See
   `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
+  Two-track daily routine: a both-sides **news** post when there is real local news, else an
+  **evergreen local-SEO** guide from `greenville/topics.md` (the search library that targets
+  winnable long-tail local queries and funnels relocation/buyer leads to `/find-an-agent`).
 - **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Still
   used by the **Greenville** collector (`greenville/routine/` installs it); keep it.
 

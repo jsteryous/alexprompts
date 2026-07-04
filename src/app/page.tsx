@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { socials, newsletterUrl, realEstateOutcomes } from "@/lib/site";
+import { socials, newsletterUrl } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
@@ -209,32 +209,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── What you'll do in real estate (primary value) ── */}
-      <section id="learn" className="theme-section py-20 md:py-28 border-t theme-border">
+      {/* ── Who's behind this (nod to /about) ── */}
+      <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
-            <Eyebrow className="mb-4">What you&apos;ll do with Claude</Eyebrow>
-            <h2 className="theme-text-primary type-h2">
-              Point Claude at the work your week is already full of.
-            </h2>
-            <p className="theme-text-secondary type-body-lg mt-4">
-              Not a tour of buttons. The actual jobs an agent or investor does, shown step by
-              step, so you can do them in a fraction of the time.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="max-w-2xl">
+              <Eyebrow className="mb-4">Who&apos;s behind this</Eyebrow>
+              <h2 className="theme-text-primary type-h2 mb-4">
+                One person built and writes all of this.
+              </h2>
+              <p className="theme-text-contrast-muted type-body-lg">
+                Alex Steryous, a salesperson who taught himself to build with AI. The writing,
+                the tools, and the systems that publish them are all his. That is the whole
+                point of the site.
+              </p>
+            </div>
+            <Link
+              href="/about"
+              className="theme-cta inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm whitespace-nowrap self-start md:self-auto"
+            >
+              Meet Alex <ArrowIcon className="w-4 h-4" />
+            </Link>
           </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {realEstateOutcomes.map((o) => (
-              <li
-                key={o.title}
-                className="theme-card-strong border theme-border rounded-xl p-6 h-full flex flex-col"
-              >
-                <h3 className="theme-text-primary type-title mb-2">
-                  {o.title}
-                </h3>
-                <p className="theme-text-muted type-small">{o.body}</p>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 

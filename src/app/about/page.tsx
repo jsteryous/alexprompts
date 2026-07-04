@@ -58,14 +58,18 @@ export default function AboutPage() {
               <p className="theme-text-secondary type-body-lg mb-5">
                 I have spent about eight years in business development and sales. I started in
                 IT recruiting, moved into SaaS sales, and most recently worked in land
-                acquisitions and real estate - I even got my realtor's license. 
-                Technology, however broad, is where I have always been most passionate. 
-                Career-wise, I aim to be back in tech sales, and this website is something I can share beyond just a resume.
+                acquisitions and real estate, where I even got my realtor&apos;s license.
+                Technology, however broad, is where I have always been most passionate.
+                Career-wise, I aim to be back in tech sales, and this website is something I can
+                share beyond just a resume.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                Alex Prompts serves to provide a commentary on Greenville real estate developments and news. 
-                Using Claude, I(?) also built basic tools for RE: mortgage calculator, rental deal analyzer, listing prompt builder, neighborhood area scan for investors, and a scanner of GVL commercial buyers.
-                Additionally, I built a custom CRM. I call it Taraform. It's free to use if you'd like to create an account: taraform.org
+                Alex Prompts is my commentary on Greenville real estate developments and news.
+                Using AI, I also built a set of basic tools for real estate: a mortgage
+                calculator, a rental deal analyzer, a listing prompt builder, a neighborhood
+                area scan for investors, and a scanner of Greenville commercial buyers. I also
+                built a custom CRM. I call it Taraform, and it is free to use if you would like
+                to create an account at taraform.org.
               </p>
             </div>
           </div>
@@ -101,8 +105,8 @@ export default function AboutPage() {
           <div className="theme-prose prose max-w-none">
             <p>
               It is a small commentary outlet on real estate in Greenville, South Carolina,
-              plus a handful of free tools. I built it mostly to to have a personal site I can share with hiring managers,
-              and also show what is possible when building with AI.
+              plus a handful of free tools. I built it mostly to have a personal site I can
+              share with hiring managers, and to show what is possible when you build with AI.
             </p>
             <p>
               The tools on here are real and free to use. There is a rental deal analyzer, a mortgage
@@ -120,6 +124,62 @@ export default function AboutPage() {
               Read the real estate coverage <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── Under the hood: the technical build ── */}
+      <section className="theme-section-contrast py-20 md:py-28">
+        <div className="max-w-2xl mx-auto px-6">
+          <Eyebrow className="mb-5">Under the hood</Eyebrow>
+          <h2 className="theme-text-primary type-h2 mb-6">
+            How this site actually works, since I built all of it.
+          </h2>
+          <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
+            I am not an engineer by training. I taught myself every piece of this with AI,
+            because I wanted to see how far a curious salesperson could get. Here is what is
+            running behind the pages you are reading.
+          </p>
+          <ul className="space-y-5">
+            <li>
+              <h3 className="theme-text-primary type-title mb-1">The writing publishes itself</h3>
+              <p className="theme-text-contrast-muted type-body leading-relaxed">
+                Most of the posts are not hand-published one at a time. On a schedule, a set of
+                AI agents I wrote research a real Greenville story or a technology topic, draft
+                it in plain English, check their own facts against public data, and publish
+                straight to the site. I get an email afterward to spot-check, and I can pull
+                anything that misses.
+              </p>
+            </li>
+            <li>
+              <h3 className="theme-text-primary type-title mb-1">A real email system</h3>
+              <p className="theme-text-contrast-muted type-body leading-relaxed">
+                The subscribe box is genuine double opt-in. You confirm your address, every
+                message has a working unsubscribe, and the whole thing runs on scheduled jobs
+                and a Postgres database rather than a plugin.
+              </p>
+            </li>
+            <li>
+              <h3 className="theme-text-primary type-title mb-1">The tools and the data</h3>
+              <p className="theme-text-contrast-muted type-body leading-relaxed">
+                The calculators run entirely in your browser. The commercial buyers list is
+                pulled automatically from public county records, and the map and street-view
+                covers on the real estate posts are generated after each post goes live.
+              </p>
+            </li>
+            <li>
+              <h3 className="theme-text-primary type-title mb-1">Built solo, for almost nothing</h3>
+              <p className="theme-text-contrast-muted type-body leading-relaxed">
+                I designed, wrote, and now run all of it myself, and I kept the whole system
+                inside free tiers, so it costs essentially nothing to operate. That constraint
+                was half the fun and half the point.
+              </p>
+            </li>
+          </ul>
+          <p className="theme-text-contrast-muted type-body-lg leading-relaxed mt-8">
+            None of that is the job I am applying for. It is proof of the thing under the job.
+            When I understand how a product really works, I can sell it honestly, and I learn
+            the hard parts fast because I actually enjoy them.
+          </p>
         </div>
       </section>
 

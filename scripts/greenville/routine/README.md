@@ -1,13 +1,21 @@
 # Greenville Real Estate routine
 
-A Claude routine that turns the day's biggest **Greenville, SC real-estate** story
-into WRITTEN content for two places: a **website post** and an **X post / short
-thread**. No video. The editorial spine is **both sides, no forced verdict**:
-explain what happened, give the consensus, steelman the devil's advocate, then hand
-the reader the question.
+A daily Claude routine with **two tracks**, one chosen per night, producing WRITTEN content
+for a **website post** and an **X post / short thread** (no video):
 
-It mirrors the `ai_news/routine/` pattern (an orchestrator plus isolated passes) but
-is leaner: three passes, because the output is a local explainer, not a deep-dive.
+- **News track** (default when there is real news): turns the day's biggest **Greenville, SC
+  real-estate** story into a both-sides explainer. The spine is **no forced verdict**: explain
+  what happened, give the consensus, steelman the devil's advocate, then hand the reader the
+  question. Timely, ranks briefly.
+- **Evergreen local-SEO track** (the productive no-news outcome): writes ONE substantial,
+  data-grounded local resource piece from `../topics.md` for a winnable long-tail local query,
+  and closes by pointing relocation/buyer leads to `/find-an-agent`. This is the compounding
+  search library. Cadence guard keeps it to about two a week. See the two-track note in
+  `../CLAUDE.md`.
+
+It mirrors the `ai_news/routine/` pattern (an orchestrator plus isolated passes). The news
+track is three passes (a local explainer, not a deep-dive); the evergreen track is one
+self-researching pass.
 
 ## The pipeline
 
@@ -29,10 +37,23 @@ is leaner: three passes, because the output is a local explainer, not a deep-div
    fragments, plain English), with fair-housing and not-advice guardrails. Emits a
    `## METADATA` block the orchestrator uses to create the post.
 
-`orchestrator.md` wires them as cold sub-agents, reads the committed signal, dedups
-against the live site, and on a real story: creates the website post in
-Supabase `blog_posts`, then emails the human packet (verify list, the
-article, and the X post to copy-paste). No Google Drive copy.
+The evergreen track uses a single pass instead of the three above:
+
+4. **`pass_evergreen.md`** — the self-researching evergreen writer. Given ONE topic from
+   `../topics.md`, it web-searches for current local specifics, grounds every load-bearing
+   number in a cited source (Census ACS, FHFA Greenville MSA, county Assessor/ArcGIS, Zillow,
+   local publishers), and writes an 800 to 1400 word local resource article in house voice.
+   Strict fair-housing rules (describe housing by objective attributes, never steer a protected
+   class), internal links to the site's tools, and a `/find-an-agent` lead-capture close. Emits
+   its own `## METADATA` and `## IMAGE` blocks (there is no reporter to name the location), so
+   the orchestrator publishes it through the same STEP 4 path as a news post.
+
+`orchestrator.md` wires the passes as cold sub-agents and reads the committed signal. Every
+run it also prepares the evergreen fallback (STEP 0C: cadence guard + topic dedup + pick the
+next queued topic). If the reporter finds news, it runs the news track; if not and the cadence
+allows, it runs the evergreen track; otherwise it posts nothing. Either published track creates
+the website post in Supabase `blog_posts`, then emails the human verify packet (the article and
+the X post to copy-paste). No Google Drive copy.
 
 The routine does NOT render the lead image. The cloud agent's sandbox reaches the world
 only through MCP connectors, so it cannot call Google or Supabase Storage over HTTP. The
@@ -49,8 +70,10 @@ run just retries next time. The old `greenville-image` edge function is retired.
 
 - **Collector:** `.github/workflows/collect-greenville.yml`, **daily 06:00 UTC**.
 - **Routine:** runs **nightly** as a scheduled Claude cloud agent (`/schedule`)
-  pointed at `orchestrator.md`, after the collector. Most nights it posts nothing.
-- **Website:** the routine inserts a `blog_posts` row tagged `greenville` as
+  pointed at `orchestrator.md`, after the collector. On a no-news night it now writes an
+  evergreen local piece (cadence permitting, about two a week) instead of posting nothing.
+- **Website:** the routine inserts a `blog_posts` row tagged `greenville` (news posts also
+  tagged `real estate`, evergreen posts also tagged `evergreen`) as
   **PUBLISHED** and it goes live at `/real-estate` within about 5 minutes (no human
   step). The guardrails that make auto-publish safe are in the passes (fair-housing
   language, not-advice, every number sourced) and in dedup. The verify email still

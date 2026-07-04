@@ -15,10 +15,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 
 - **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, author, tagline,
   oneLiner, description, email, url), `socials` (the follow row + footer + JSON-LD
-  `sameAs`), `newsletterUrl`, and the Claude-for-real-estate teaching content
-  (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`). `SITE_URL` reads
-  `NEXT_PUBLIC_SITE_URL`. **Editing handles/domain here updates every surface.** Holds
-  `TODO(alex)` placeholders — confirm before launch.
+  `sameAs`), and `newsletterUrl`. `SITE_URL` reads `NEXT_PUBLIC_SITE_URL`. **Editing
+  handles/domain here updates every surface.** The Claude-for-real-estate teaching exports
+  (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`) were deleted in July
+  2026 with the voice-3 removal; do not reintroduce them. Holds one `TODO(alex)`: confirm the
+  contact email.
 - **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
   `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **three
   sections split by tag**: `greenville` → `/real-estate` (set by the `scripts/greenville`
@@ -48,15 +49,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   pipeline. Pure parse split from the fetch. Called only by `/api/sync-substack` (daily
   Vercel cron in `vercel.json`), which upserts posts into `blog_posts` as `PUBLISHED`.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
-- **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections, slimmed
-  July 2026: **fresh reads lead** (featured latest issue + more-to-read grid from
-  `getFeedPosts`, with the `>` prompt watermark) → tools spotlight (`liveTools()`) →
-  real-estate outcomes grid (`realEstateOutcomes`) → `#follow` (social cards) → subscribe
+- **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: **fresh
+  reads lead** (featured latest issue + more-to-read grid from `getFeedPosts`, with the `>`
+  prompt watermark) → tools spotlight (`liveTools()`) → `#follow` (social cards) → subscribe
   CTA. The old "Start here" hero/pillars, "helps anyone" (`outcomes` + `OutcomeArt`), "how
-  every guide works" (`principles`), and manifesto sections were removed to cut the
-  monotone and soften the "guide for Claude" tone; `outcomes`/`manifesto` (site.ts) and the
-  `OutcomeArt` component are now unused but kept. No shared section components (the old
-  `HomeSections.tsx` was dental-only, deleted).
+  every guide works" (`principles`), manifesto, and the "what you'll do with Claude"
+  (`realEstateOutcomes`) grid (removed July 2026 with the voice-3 removal) are all gone. Those
+  `site.ts` exports were deleted; the `OutcomeArt` component is now orphaned but kept. No
+  shared section components (the old `HomeSections.tsx` was dental-only, deleted).
 - **`src/app/archive/`**, **`src/app/real-estate/`**,
   **`src/app/lab/`** — the three section index + `[slug]` routes. All three `[slug]` pages
   render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +

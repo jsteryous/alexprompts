@@ -27,28 +27,28 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > the brand as Claude-for-real-estate for now; that RE-facing framing is retained
 > deliberately and re-messaging the site is a separate, later call.
 
-> **CURRENT POSITIONING (June 2026): Claude for real-estate agents and investors.** The
-> brand is **Claude-only** and aimed at **real-estate professionals**. The site +
-> newsletter teach agents and investors how to point Claude at their actual work
-> (listings, market research, deal analysis, lead follow-up, marketing), in plain English,
-> no code, no hype. "Not active in real estate? A lot of it helps anyone" is the secondary
-> promise. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline: *"Claude for
-> real estate agents and investors."*). Do **not** reintroduce other tools (ChatGPT,
-> Gemini, Perplexity, etc.) into any site/social/OG copy, and do **not** revive the old
-> frontier-tech-news framing.
+> **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
+> real-estate agents and investors" teaching framing (the "voice 3" how-to product) was
+> **removed in July 2026**. The site is now Alex's personal place with two kinds of content,
+> honest plain-English writing on **Greenville real estate** and on **technology** more
+> broadly (the Lab), plus the free **real-estate tools** he built. It serves two real goals:
+> a **build-in-public portfolio** that showcases Alex to hiring managers (see `/about`), and
+> a **referral connector** that captures buyer/seller leads to hand to vetted agents (see
+> `/find-an-agent`). The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
+> *"Real estate and technology, in plain English."*). Do **not** reintroduce the
+> single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
+> frontier-tech-news framing. See memory `alexprompts-portfolio-pivot`,
+> `content-two-track-strategy`, and `greenville-evergreen-seo-track`.
 
-**Alex Prompts** is a personal media brand by Alex Steryous. Alex is a real-estate agent;
-the brand helps agents and investors get real work out of Claude, and keeps them current
-on how AI is changing their field. It publishes on **Substack (the newsletter and home
-base), YouTube, TikTok, and X**. Building an audience and monetizing is the long-term
-ambition, but the near-term job is the tech-sales portfolio described in the strategic
-direction note above.
+**Alex Prompts** is a personal media brand by Alex Steryous. It publishes on **Substack (the
+newsletter and home base), YouTube, TikTok, and X**. The near-term job is the tech-sales
+portfolio described in the strategic direction note above; building an audience and a referral
+lead stream are the longer-term goals.
 
-**The job has two modes, one audience (agents + investors):**
-1. **HOW-TO education** — the site + newsletter's core product. Take a real task from a
-   pro's week and walk it step by step inside Claude, slow enough that nothing is assumed.
-   "The how-to is the product." This is what `src/lib/site.ts` describes.
-2. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
+**The content is RESEARCH + analysis, not how-to.** (The old third mode, "HOW-TO education"
+that taught agents to point Claude at their work, was the removed voice 3; do not bring it
+back.) The two live tracks are the real-estate vertical proof and the Lab tech track:
+1. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
    investment, for the same reader. The Saturday national video + article (`scripts/ai_news/`)
    has Claude research one useful, evergreen question against real public data; the Greenville
    local engine (`scripts/greenville/`) covers the biggest local story, both sides. These make
@@ -140,9 +140,12 @@ strategic-direction and two-track notes above.
   against real public data and writes it in two renderings (a 6–10 min voiceover video script
   + a Substack article), delivered to Google Drive and Gmail. No collector: the data APIs are
   not IP-blocked, so the routine fetches live. **Objective third-person voice.**
-- **`greenville/`** — the **local Greenville, SC** engine. A daily routine that turns the
-  biggest local real-estate story into a both-sides website post (`/real-estate`) + an X
-  post. See `scripts/greenville/CLAUDE.md`.
+- **`greenville/`** — the **local Greenville, SC** engine. A daily two-track routine: on a
+  real-news night it turns the biggest local story into a both-sides website post
+  (`/real-estate`) + an X post; on a no-news night it instead writes an **evergreen local-SEO**
+  guide from `greenville/topics.md` (the compounding search library, targeting winnable
+  long-tail local queries and funneling relocation/buyer leads to `/find-an-agent`), at about
+  two a week. See `scripts/greenville/CLAUDE.md`.
 - **`tech/`** — the **Lab engine** (the tech track). No collector; it is **self-sourcing**:
   an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
   scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs
@@ -161,17 +164,15 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
 
 ## Site structure
 
-- `/` — **content-first landing.** Slimmed July 2026 to lead with the writing, not a
-  brochure: **fresh from Alex Prompts** (featured latest issue + recent, driven by
-  `getFeedPosts`) is now the lead section → **tools spotlight** (the live tools, clickable,
-  driven by `liveTools()`) → real-estate outcomes (`realEstateOutcomes`) → follow →
-  subscribe. The old "Start here" hero/pillars, the "helps anyone" (`outcomes`) grid, the
-  "how every guide works" (`principles`) strip, and the manifesto (`what we're about`)
-  section were **removed** to cut the monotone and to de-emphasize the "guide for Claude"
-  framing while the value prop is still being figured out. Their data still lives in
-  `site.ts` (`outcomes`, `principles`, `manifesto`, `tools`) and `principles`/
-  `realEstateOutcomes` still render on `/about`; the rest are currently unused but kept for
-  reuse. The *Subscribe* CTA still rides along. Content is free, money model is later.
+- `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
+  Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
+  section → **tools spotlight** (the live tools, clickable, driven by `liveTools()`) →
+  follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
+  every guide works" strip, the manifesto, and the "what you'll do with Claude"
+  (`realEstateOutcomes`) grid were all **removed** (the last one in July 2026 with the voice-3
+  removal). The teaching-content exports they used (`tools`, `principles`, `realEstateOutcomes`,
+  `outcomes`, `manifesto`) were **deleted from `site.ts`**; do not reintroduce them. The
+  *Subscribe* CTA still rides along. Content is free, money model is later.
 - `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
   source being `src/lib/tools.ts` (`toolCatalog`). Live: `deal-analyzer` (rental cash
   flow / cap rate / cash-on-cash), `mortgage` (payment + affordability), `listing-prompt`
@@ -185,8 +186,13 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
   ships. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
   note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
   footer, and sitemap, so a tool ships in one place and appears everywhere.
-- `/about` — who Alex is, the how-to promise (the manifesto in real-estate terms), the
-  teaching method, and the name.
+- `/about` — the **hiring-manager front door** (link resumes/LinkedIn straight here, not to
+  `/`). Who Alex is (salesperson, ~8 yrs BD/sales, aiming back into tech sales), why he built
+  the site, an "Under the hood" technical teardown of how the site works (self-publishing AI
+  agents, the double-opt-in email system, the tools + auto-rendered covers, built solo inside
+  free tiers) framed as proof he is a self-taught builder who genuinely enjoys tech, then a
+  LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
+  exports). Serves everyone, not only hiring managers, so it never literally addresses them.
 - `/lab` + `/lab/[slug]` — the **Lab**, the tech track (added July 2026 for the portfolio
   pivot). First-person deep-dives that take ONE technology capability apart (AI, but also dev
   tools, automation, data infra, security, fintech, robotics, energy, hardware), show its real
@@ -218,8 +224,9 @@ Lab was added July 2026 for the portfolio pivot. The legacy dental pipeline is r
   `/archive`). Kept for engine-generated drafts; the Substack mirror is the live path.
 
 **`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, oneLiner,
-description, social links, and the Claude-for-real-estate teaching content: `tools`,
-`principles`, `realEstateOutcomes`, `outcomes`, `manifesto`). Edit handles/domain there and
+description, email, url, `socials`, `newsletterUrl`). The Claude-for-real-estate teaching
+exports (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`) were **deleted
+in July 2026** with the voice-3 removal; do not reintroduce them. Edit handles/domain there and
 nav/footer/JSON-LD/sitemap update together. One `TODO(alex)` remains: confirm the contact
 email.
 
