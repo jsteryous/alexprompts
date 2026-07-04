@@ -16,8 +16,12 @@
  * TODO(alex): confirm the contact email.
  */
 
+// Canonical host is www (July 2026): the apex 308-redirects to www at Vercel and
+// Cloudflare proxies www, so www is the real serving host. Everything canonical
+// (sitemap locs, per-page canonicals, OG, robots) derives from this one value, so
+// it MUST match where the site actually serves or Google gets mixed signals.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://alexprompts.com";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.alexprompts.com";
 
 // Substack publication base (NOT the profile page). Drives the Subscribe button
 // (-> /subscribe) and the archive RSS mirror (-> /feed, see lib/substack.ts).

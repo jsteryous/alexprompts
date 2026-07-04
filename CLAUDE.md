@@ -265,7 +265,7 @@ email.
 
 | Variable | Notes |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://alexprompts.com` (confirm). Drives canonical/sitemap/robots. |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.alexprompts.com` — **www is canonical** (the apex 308-redirects to www at Vercel; www is the real serving host). Drives canonical/sitemap/robots/OG. If this env var is set in Vercel it must be the www URL (or unset, to use the code default). |
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Used by `/api/publish`. |
 | `PUBLISH_SECRET` | Shared secret for `/review` + `/api/publish` + `/api/review/save`. |
