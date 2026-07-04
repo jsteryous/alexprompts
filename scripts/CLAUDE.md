@@ -48,6 +48,9 @@ reference only, nothing there runs on a schedule anymore.
   `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like the Lab) when the
   bank is empty. The old daily both-sides **news** track was retired July 2026 (its passes +
   collector remain, unwired). The separate `commercial.py` collector (buyers-list data) stays.
+  `greenville/cover_ingest.py` is a separate **monthly** utility (a GitHub Action, not the nightly
+  routine) that grows the curated cover library from Wikimedia Commons, gated by a Claude vision
+  call, and opens a PR. See `scripts/greenville/CLAUDE.md`.
 - **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Used by
   the Greenville `commercial.py` collector (the buyers-list data) and the retired `collect.py`;
   keep it. The nightly Greenville content routine no longer installs it (no collector, the

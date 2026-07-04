@@ -1,0 +1,70 @@
+name: Greenville Cover Library
+
+# Grows the curated Greenville cover library that the /real-estate evergreen
+# engine uses for lead images. Searches Wikimedia Commons for new freely-licensed,
+# landscape, high-resolution Greenville photos, scores each with a cheap Claude
+# vision call (is it an attractive, on-subject hero with no watermark?), commits
+# the accepted ones into public/greenville/library/, and updates
+# src/lib/greenvilleCovers.json + CREDITS.md. Opens a PR rather than pushing to
+# main, so a human eyeballs the additions before they go live.
+#
+# See scripts/greenville/cover_ingest.py and scripts/greenville/CLAUDE.md.
+
+on:
+  schedule:
+    # Monthly, the 3rd at 08:00 UTC. Commons' Greenville depth is finite, so a
+    # run adds a few good photos at most — monthly is plenty and keeps cost tiny.
+    - cron: '0 8 3 * *'
+  workflow_dispatch:
+    inputs:
+      max_new:
+        description: 'Max photos to add this run'
+        required: false
+        default: '3'
+
+permissions:
+  contents: write # create the branch
+  pull-requests: write # open the PR
+
+jobs:
+  grow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements-ai-news.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements-ai-news.txt anthropic
+
+      - name: Grow the cover library (vision-gated)
+        working-directory: scripts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python -m greenville.cover_ingest --max-new "${{ github.event.inputs.max_new || '3' }}"
+
+      - name: Open a pull request with the new covers
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: greenville-covers/auto
+          commit-message: 'feat(greenville): add vision-vetted covers to the library'
+          title: 'Greenville covers: new vision-vetted photos'
+          body: |
+            Automated by `.github/workflows/greenville-covers.yml`.
+
+            New Wikimedia Commons photos that passed the Claude vision gate
+            (attractive, on-subject, watermark-free). Skim the images in
+            `public/greenville/library/`, confirm the attribution in
+            `CREDITS.md`, and merge if they look good. Close if not.
+          add-paths: |
+            public/greenville/library/**
+            src/lib/greenvilleCovers.json

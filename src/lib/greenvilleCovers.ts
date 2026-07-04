@@ -8,6 +8,10 @@
  * set of genuinely attractive, freely-licensed Greenville photos and pick the one
  * that best fits the article's subject.
  *
+ * The data lives in greenvilleCovers.json (subject -> list of photos), edited by
+ * hand and grown autonomously by scripts/greenville/cover_ingest.py (a
+ * vision-gated Wikimedia Commons ingester that opens a PR). Keeping the data in
+ * JSON is what lets that pipeline append photos without touching this logic.
  * Each image is committed under /public/greenville/library and served by Vercel,
  * so there is no runtime API, no key, no cost, and no external dependency. The
  * finalize cron (src/lib/greenvilleImage.ts -> renderCover) consults this library
@@ -15,67 +19,37 @@
  * nothing here (which, for a Greenville piece, effectively never happens because
  * of the city-level default below).
  *
+ * When a subject has more than one photo, we pick one deterministically from a
+ * per-post seed (its slug), so a given post always shows the same cover but
+ * different posts on the same subject rotate through the set instead of all
+ * sharing one hero.
+ *
  * Licensing: images are Creative Commons or CC0 from Wikimedia Commons. CC-BY /
  * CC-BY-SA images carry a short `credit` line that ArticleView renders under the
- * hero; CC0 images need none. Full attribution with source + license links lives
- * in /public/greenville/library/CREDITS.md. When adding an image, add its full
- * record there too.
+ * hero; CC0 images have `credit: null` and need none. Full attribution with
+ * source + license links lives in /public/greenville/library/CREDITS.md.
  */
 import { SITE_URL } from "@/lib/site";
+import coversData from "@/lib/greenvilleCovers.json";
 
-/** A curated cover: the committed file, its alt text, and the on-page credit line
- *  (null for CC0, which needs no visible attribution). */
+/** A curated cover: the committed file, its alt text, the on-page credit line
+ *  (null for CC0), and the Commons source page it came from. */
 export interface CoverEntry {
   file: string;
   alt: string;
   credit: string | null;
+  source?: string;
 }
 
-/** Subject key -> curated cover. Keys are the vocabulary the evergreen writer
- *  picks from (see scripts/greenville/routine/pass_evergreen.md). `downtown-falls`
- *  is the city-level default any unmatched Greenville piece falls back to. */
-export const GREENVILLE_COVERS: Record<string, CoverEntry> = {
-  "downtown-falls": {
-    file: "downtown-falls.jpg",
-    alt: "Downtown Greenville, South Carolina, along the Reedy River walkway at RiverPlace.",
-    credit: "Photo: Tim (Atlanta), CC BY 2.0, via Wikimedia Commons",
-  },
-  "liberty-bridge": {
-    file: "liberty-bridge.jpg",
-    alt: "The Liberty Bridge over the Reedy River at Falls Park in downtown Greenville, South Carolina.",
-    credit: "Photo: Antony-22, CC BY-SA 4.0, via Wikimedia Commons",
-  },
-  "reedy-river": {
-    file: "reedy-river.jpg",
-    alt: "The Reedy River falls and the Liberty Bridge at Falls Park, Greenville, South Carolina.",
-    credit: "Photo: Nicolas Henderson, CC BY 2.0, via Wikimedia Commons",
-  },
-  "north-main": {
-    file: "north-main.jpg",
-    alt: "A tree-lined Main Street storefront block in downtown Greenville, South Carolina.",
-    credit: "Photo: P. Hughes, CC BY 4.0, via Wikimedia Commons",
-  },
-  "west-end": {
-    file: "west-end.jpg",
-    alt: "The West End of downtown Greenville, South Carolina, with office towers above the Reedy River.",
-    credit: "Photo: Spatms, CC BY-SA 4.0, via Wikimedia Commons",
-  },
-  "swamp-rabbit-trail": {
-    file: "swamp-rabbit-trail.jpg",
-    alt: "The Prisma Health Swamp Rabbit Trail greenway through the trees in Greenville, South Carolina.",
-    credit: null, // CC0
-  },
-  "travelers-rest": {
-    file: "travelers-rest.jpg",
-    alt: "The Main Street of Travelers Rest, South Carolina, a Swamp Rabbit Trail town north of Greenville.",
-    credit: null, // CC0
-  },
-};
+/** Subject key -> the photos available for it. Loaded from greenvilleCovers.json.
+ *  `downtown-falls` is the city-level default any unmatched Greenville piece
+ *  falls back to. */
+export const GREENVILLE_COVERS: Record<string, CoverEntry[]> = coversData.subjects;
 
 /** The subject any Greenville piece falls back to when nothing more specific
  *  matches. A wide, sunny downtown-along-the-river shot fits cost-of-living, tax,
  *  first-time-buyer, buy-timing, and generic relocation pieces alike. */
-export const DEFAULT_SUBJECT = "downtown-falls";
+export const DEFAULT_SUBJECT: string = coversData.default;
 
 /**
  * Keyword phrases -> subject, scanned in order (most specific first). Lets the
@@ -119,6 +93,17 @@ function coverUrl(file: string): string {
   return `${SITE_URL}/greenville/library/${file}`;
 }
 
+/** Small stable hash of a seed string, for choosing one photo from a subject's
+ *  set. Same seed always yields the same index; different seeds spread out. */
+function seedIndex(seed: string, len: number): number {
+  if (len <= 1) return 0;
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = (h * 31 + seed.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % len;
+}
+
 export interface ResolvedCover {
   url: string;
   alt: string;
@@ -132,13 +117,20 @@ export interface ResolvedCover {
  * back to Google). Match order: exact subject key -> keyword scan -> Greenville
  * default. Because any string naming Greenville or an Upstate town hits the
  * default, the Google fallback effectively only fires for a genuinely off-map pin.
+ *
+ * `seed` (typically the post slug) picks which photo when a subject has several,
+ * so a post's cover is stable but different posts rotate through the set.
  */
-export function resolveLibraryCover(address: string | null | undefined): ResolvedCover | null {
+export function resolveLibraryCover(
+  address: string | null | undefined,
+  seed?: string,
+): ResolvedCover | null {
   if (!address) return null;
   const norm = address.trim().toLowerCase();
 
   const pick = (subject: string): ResolvedCover => {
-    const entry = GREENVILLE_COVERS[subject] ?? GREENVILLE_COVERS[DEFAULT_SUBJECT];
+    const entries = GREENVILLE_COVERS[subject] ?? GREENVILLE_COVERS[DEFAULT_SUBJECT];
+    const entry = entries[seedIndex(seed ?? subject, entries.length)];
     return { url: coverUrl(entry.file), alt: entry.alt, credit: entry.credit, subject };
   };
 

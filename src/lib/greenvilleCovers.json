@@ -1,0 +1,61 @@
+{
+  "default": "downtown-falls",
+  "subjects": {
+    "downtown-falls": [
+      {
+        "file": "downtown-falls.jpg",
+        "alt": "Downtown Greenville, South Carolina, along the Reedy River walkway at RiverPlace.",
+        "credit": "Photo: Tim (Atlanta), CC BY 2.0, via Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:DowntownGreenvilleSC.jpg"
+      }
+    ],
+    "liberty-bridge": [
+      {
+        "file": "liberty-bridge.jpg",
+        "alt": "The Liberty Bridge over the Reedy River at Falls Park in downtown Greenville, South Carolina.",
+        "credit": "Photo: Antony-22, CC BY-SA 4.0, via Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Liberty_Bridge_at_Falls_Park_2017.jpg"
+      }
+    ],
+    "reedy-river": [
+      {
+        "file": "reedy-river.jpg",
+        "alt": "The Reedy River falls and the Liberty Bridge at Falls Park, Greenville, South Carolina.",
+        "credit": "Photo: Nicolas Henderson, CC BY 2.0, via Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Reedy_River,_Greenville,_SC_(27947815395).jpg"
+      }
+    ],
+    "north-main": [
+      {
+        "file": "north-main.jpg",
+        "alt": "A tree-lined Main Street storefront block in downtown Greenville, South Carolina.",
+        "credit": "Photo: P. Hughes, CC BY 4.0, via Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Greenvile_-_Buildings_along_North_Main_St.jpg"
+      }
+    ],
+    "west-end": [
+      {
+        "file": "west-end.jpg",
+        "alt": "The West End of downtown Greenville, South Carolina, with office towers above the Reedy River.",
+        "credit": "Photo: Spatms, CC BY-SA 4.0, via Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Eugenia_Duke_Bridge_and_Main_Street_Bridge_crossing_Reedy_River,_Downtown_Greenville,_SC.jpg"
+      }
+    ],
+    "swamp-rabbit-trail": [
+      {
+        "file": "swamp-rabbit-trail.jpg",
+        "alt": "The Prisma Health Swamp Rabbit Trail greenway through the trees in Greenville, South Carolina.",
+        "credit": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Swamp_Rabbit_Trail,_Greenville,_SC_June_2019.jpg"
+      }
+    ],
+    "travelers-rest": [
+      {
+        "file": "travelers-rest.jpg",
+        "alt": "The Main Street of Travelers Rest, South Carolina, a Swamp Rabbit Trail town north of Greenville.",
+        "credit": null,
+        "source": "https://commons.wikimedia.org/wiki/File:U.S._Route_276_in_Travelers_Rest,_SC_June_2019_1.jpg"
+      }
+    ]
+  }
+}

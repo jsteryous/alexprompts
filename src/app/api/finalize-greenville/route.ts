@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
     // to Google, which throws a clear error if its key is missing.
     if (!p.cover_image && p.image_address) {
       try {
-        const { cover, coverKind, credit } = await renderCover(p.image_address);
+        const { cover, coverKind, credit } = await renderCover(p.image_address, p.slug);
         // Write the cover and, when present, its credit. cover_credit may not be
         // migrated yet (42703 = undefined_column); degrade to cover-only so the
         // image still lands before the column exists.

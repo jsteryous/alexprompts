@@ -6,9 +6,11 @@ for the `/real-estate` evergreen guides. Picked for quality and relevance by
 `cover_image` and, for CC-BY images, writes the short credit line to `cover_credit`
 (shown under the article hero). CC0 images need no visible credit.
 
-When adding an image: download it into this folder, add its entry to
-`GREENVILLE_COVERS` in `src/lib/greenvilleCovers.ts`, and add its full record here.
-Prefer clean, landscape, watermark-free photos of recognizable Greenville subjects.
+When adding an image by hand: download it into this folder, append its entry to the subject's
+array in `src/lib/greenvilleCovers.json`, and add its full record here. Prefer clean, landscape,
+watermark-free photos of recognizable Greenville subjects. The monthly
+`scripts/greenville/cover_ingest.py` pipeline (a GitHub Action) does the same thing automatically,
+vision-gated, and appends its rows to the table below via a PR.
 
 | File | Subject | Source (Wikimedia Commons) | Author | License |
 |---|---|---|---|---|

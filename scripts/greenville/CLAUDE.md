@@ -64,6 +64,9 @@ python -m greenville.collect --limit 15
   `greenville.commercial` and commits `src/data/commercialSales.json`. No secrets (the county
   ArcGIS service is public + free). The push redeploys the statically generated
   `/tools/buyers-list` page with fresh sales. **Still live.**
+- **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
+  the cover library from Wikimedia Commons, vision-gated, and opens a PR with the new photos. Needs
+  the `ANTHROPIC_API_KEY` secret. See the Images section above.
 - **`.github/workflows/collect-greenville.yml`** (DAILY, news signal) is now **unused** (the
   news track is retired). It is harmless (it just commits a signal file nobody reads) and left
   in place for reversibility; safe to disable.
@@ -122,10 +125,26 @@ picks a hand-curated photo:
    (shown under the article hero; CC0 photos and Google covers need none). Idempotent: it only acts
    while `cover_image` is NULL, within a 3-day window, then ages out.
 
-**Growing the library.** Add a landscape, watermark-free, licensed Greenville photo to
-`public/greenville/library/`, register it in `src/lib/greenvilleCovers.ts`, add its full
-attribution to `public/greenville/library/CREDITS.md`, and (if it is a new subject) list it in the
-writer's `## IMAGE` vocabulary.
+**The library data** lives in `src/lib/greenvilleCovers.json` (subject -> a list of photos), which
+`src/lib/greenvilleCovers.ts` reads. Multiple photos per subject rotate by a per-post seed (the
+slug), so posts on the same subject do not all share one hero.
+
+**Growing it, by hand.** Add a landscape, watermark-free, licensed Greenville photo to
+`public/greenville/library/`, append it to the subject's array in `greenvilleCovers.json`, add its
+attribution to `public/greenville/library/CREDITS.md`, and (only if it is a NEW subject) list it in
+the writer's `## IMAGE` vocabulary in `pass_evergreen.md`.
+
+**Growing it, autonomously (`cover_ingest.py`).** A monthly GitHub Action
+(`.github/workflows/greenville-covers.yml`) runs `python -m greenville.cover_ingest`: for each
+existing subject it searches Wikimedia Commons for new freely-licensed, landscape, high-res
+candidates it does not already have, scores each with a cheap Claude **vision** call (Haiku: is it
+an attractive, on-subject hero with no watermark or overlaid text?), commits the winners into the
+library, and appends them to `greenvilleCovers.json` + `CREDITS.md` (attribution pulled from the
+Commons metadata). It **opens a PR**, so a human eyeballs the additions before they go live, and it
+only grows existing subjects (never invents one). Needs `ANTHROPIC_API_KEY` as a repo secret. Flags:
+`--dry-run` (list candidates, no writes/vision), `--no-vision`, `--max-new`, `--per-subject`,
+`--subject`. The vision gate is the automated version of the human eyeball pass; Commons' Greenville
+depth is finite, so expect a few good photos per run, not dozens.
 
 **Keys.** The curated-library path needs NO key (the photos are served from `/public`). Only the
 Google fallback uses `GOOGLE_PLACES_API_KEY` / `GOOGLE_MAPS_KEY` (Maps Static, Geocoding, Street

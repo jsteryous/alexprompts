@@ -84,12 +84,14 @@ async function fetchImage(url: string): Promise<ArrayBuffer> {
  * map-with-pin. Throws on a bad address or a Google/Storage failure so the caller
  * can leave cover_image null and retry on the next reconcile.
  */
-export async function renderCover(address: string): Promise<RenderResult> {
+export async function renderCover(address: string, seed?: string): Promise<RenderResult> {
   // 1. Curated library first. A hand-picked Greenville photo beats a geocoded
   //    Street View corner or a red-pin map, and needs no key or upload. Any
   //    Greenville-area address resolves here (city-level default), so the Google
-  //    branch below effectively only runs for a genuinely off-map pin.
-  const lib = resolveLibraryCover(address);
+  //    branch below effectively only runs for a genuinely off-map pin. `seed`
+  //    (the post slug) keeps a post's cover stable while rotating variety across
+  //    posts that share a subject.
+  const lib = resolveLibraryCover(address, seed);
   if (lib) return { cover: lib.url, coverKind: "library", credit: lib.credit };
 
   const key = googleKey();
