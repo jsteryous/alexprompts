@@ -37,6 +37,9 @@ export interface ArchivePost {
 export interface FullPost extends ArchivePost {
   body_md: string | null;
   author: string | null;
+  /** Attribution line for the cover, shown under the article hero. Set by the
+   *  Greenville finalize cron for curated (CC-BY) library covers; null otherwise. */
+  cover_credit: string | null;
 }
 
 function hasTag(post: { tags: string[] | null }, tag: string): boolean {
@@ -183,7 +186,7 @@ export async function getPost(slug: string, type?: PostType): Promise<FullPost |
   const cols = "id, title, slug, summary, body_md, tags, published_at, created_at, author";
   const primary = await c
     .from("blog_posts")
-    .select(`${cols}, cover_image`)
+    .select(`${cols}, cover_image, cover_credit`)
     .eq("slug", slug)
     .eq("status", "PUBLISHED")
     .single();
@@ -193,8 +196,12 @@ export async function getPost(slug: string, type?: PostType): Promise<FullPost |
       : primary;
   if (!data) return null;
   if (type && sectionOf(data) !== type) return null;
-  const row = data as FullPost & { cover_image?: string | null };
-  return { ...row, cover_image: row.cover_image ?? coverImageFromBody(row.body_md) } as FullPost;
+  const row = data as FullPost & { cover_image?: string | null; cover_credit?: string | null };
+  return {
+    ...row,
+    cover_image: row.cover_image ?? coverImageFromBody(row.body_md),
+    cover_credit: row.cover_credit ?? null,
+  } as FullPost;
 }
 
 /**

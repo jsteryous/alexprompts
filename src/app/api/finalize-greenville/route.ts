@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { broadcastPost } from "@/lib/broadcast";
-import { renderCover, greenvilleImageConfigured } from "@/lib/greenvilleImage";
+import { renderCover } from "@/lib/greenvilleImage";
 import { REALESTATE_TAG } from "@/lib/posts";
 
 /**
@@ -65,24 +65,27 @@ export async function GET(req: NextRequest) {
   for (const p of posts ?? []) {
     const r: Record<string, unknown> = { slug: p.slug };
 
-    // Sub-step 1: render + set the cover, when it is missing and we have a pin.
+    // Sub-step 1: resolve + set the cover, when it is missing and we have a pin.
+    // renderCover prefers the curated library (no key needed) and only falls back
+    // to Google, which throws a clear error if its key is missing.
     if (!p.cover_image && p.image_address) {
-      if (!greenvilleImageConfigured()) {
-        r.image = "skipped: renderer not configured";
-      } else {
-        try {
-          const { cover, coverKind } = await renderCover(p.image_address);
-          const { error: upErr } = await db
-            .from("blog_posts")
-            .update({ cover_image: cover })
-            .eq("id", p.id);
-          if (upErr) throw new Error(upErr.message);
-          r.image = `set (${coverKind})`;
-          revalidatePath(`/real-estate/${p.slug}`);
-          revalidatePath("/real-estate");
-        } catch (e) {
-          r.image = `failed: ${(e as Error).message}`;
+      try {
+        const { cover, coverKind, credit } = await renderCover(p.image_address);
+        // Write the cover and, when present, its credit. cover_credit may not be
+        // migrated yet (42703 = undefined_column); degrade to cover-only so the
+        // image still lands before the column exists.
+        const patch = credit ? { cover_image: cover, cover_credit: credit } : { cover_image: cover };
+        let upErr = (await db.from("blog_posts").update(patch).eq("id", p.id)).error;
+        if (upErr?.code === "42703" && credit) {
+          upErr = (await db.from("blog_posts").update({ cover_image: cover }).eq("id", p.id)).error;
+          if (!upErr) r.credit = "skipped: cover_credit column missing";
         }
+        if (upErr) throw new Error(upErr.message);
+        r.image = `set (${coverKind})`;
+        revalidatePath(`/real-estate/${p.slug}`);
+        revalidatePath("/real-estate");
+      } catch (e) {
+        r.image = `failed: ${(e as Error).message}`;
       }
     } else if (!p.cover_image) {
       r.image = "no image_address to render";

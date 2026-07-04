@@ -97,28 +97,40 @@ python -m greenville.collect --limit 15
 - **X** has no auto-poster (no X connector); the routine drafts the X post and emails it for
   manual posting.
 
-## Images (rendered after publish, off the agent)
+## Images (a curated Greenville photo library, set after publish, off the agent)
 
-The cover is NOT rendered by the routine. The cloud agent reaches the world only through MCP
-connectors (Supabase, Gmail), so it cannot call Google or the Storage API over HTTP. Instead the
-writer names a place and the site renders the cover afterward:
+The cover is NOT set by the routine. The cloud agent reaches the world only through MCP
+connectors (Supabase, Gmail), so it cannot fetch a photo or call the Storage API over HTTP.
+These pieces are, in effect, marketing Greenville to people deciding whether to move here, so
+the cover should be a beautiful, iconic Greenville photo (Falls Park, downtown, the Reedy),
+not a geocoded street corner or a red-pin map. So the writer names a SUBJECT and the site
+picks a hand-curated photo:
 
-1. **The evergreen writer names a location** (`pass_evergreen.md` emits a `## IMAGE` block; a
-   scout-sourced topic carries an anchor the writer pins). Every Greenville piece has a place to
-   pin (the neighborhood's center for a neighborhood guide, a recognizable landmark like Falls
-   Park for a city-level piece), so `none` should never fire.
-2. **The orchestrator stores that string** in `blog_posts.image_address` on the row it publishes
+1. **The evergreen writer names a subject** (`pass_evergreen.md` emits a `## IMAGE` block with a
+   `subject:` key from a fixed vocabulary: `downtown-falls` the default, `liberty-bridge`,
+   `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`, `travelers-rest`). It may give a
+   fallback `location:` string only when no subject fits (rare).
+2. **The orchestrator stores that value** in `blog_posts.image_address` on the row it publishes
    (STEP 3), leaving `cover_image` NULL.
-3. **The finalize cron renders it** (`/api/finalize-greenville`, daily, after the routine; see
-   `src/lib/greenvilleImage.ts`). It geocodes the address and picks a **Street View photo** when
-   Google has imagery there, otherwise a **roadmap-with-pin**, uploads it to the public
-   `post-images` bucket, and sets `cover_image`. Both carry Google's own watermark, so no credit
-   line is needed. If a render fails it retries on the next daily run (idempotent: it only acts
-   while `cover_image` is NULL, within a 3-day window), then ages out.
+3. **The finalize cron picks the cover** (`/api/finalize-greenville`, daily, after the routine; see
+   `src/lib/greenvilleImage.ts` -> `renderCover`, which consults `src/lib/greenvilleCovers.ts`).
+   The cascade: (a) the **curated library** first, a committed, freely-licensed photo under
+   `public/greenville/library/` matched to the subject (any Greenville-area address resolves to at
+   least the city-level default, so this is the normal path); (b) a **Google Street View** photo of
+   the geocoded point only for a non-Greenville pin; (c) a **map-with-pin** as the last resort. It
+   sets `cover_image`, and for a CC-BY library photo also writes the attribution to `cover_credit`
+   (shown under the article hero; CC0 photos and Google covers need none). Idempotent: it only acts
+   while `cover_image` is NULL, within a 3-day window, then ages out.
 
-**Keys.** Rendering runs on Vercel and uses the site's `GOOGLE_PLACES_API_KEY` (Maps Static,
-Geocoding, Street View Static enabled) plus `SUPABASE_SERVICE_KEY` for the Storage upload. See
-memory [[greenville-lead-image-cascade]].
+**Growing the library.** Add a landscape, watermark-free, licensed Greenville photo to
+`public/greenville/library/`, register it in `src/lib/greenvilleCovers.ts`, add its full
+attribution to `public/greenville/library/CREDITS.md`, and (if it is a new subject) list it in the
+writer's `## IMAGE` vocabulary.
+
+**Keys.** The curated-library path needs NO key (the photos are served from `/public`). Only the
+Google fallback uses `GOOGLE_PLACES_API_KEY` / `GOOGLE_MAPS_KEY` (Maps Static, Geocoding, Street
+View Static) plus `SUPABASE_SERVICE_KEY` for its upload, and it now effectively never runs for a
+Greenville piece. See memory [[greenville-lead-image-cascade]].
 
 ## Guardrails (enforced in the routine passes)
 

@@ -60,15 +60,17 @@ export default function AboutPage() {
                 IT recruiting, moved into SaaS sales, and most recently worked in land
                 acquisitions and real estate, where I even got my realtor&apos;s license.
                 Technology, however broad, is where I have always been most passionate.
-                Career-wise, I aim to be back in tech sales, and this website is something I can
+                Career-wise, I am a technical salesperson, and this website is something I can
                 share beyond just a resume.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                Alex Prompts is my commentary on Greenville real estate developments and news.
+                Alex Prompts is my commentary on tech. This site also serves as a 
+                sales funnel for real estate leads. Long-term, this site will rank first for certain Google searches,
+                which will drive traffic and generate leads I will refer to other agents.
                 Using AI, I also built a set of basic tools for real estate: a mortgage
                 calculator, a rental deal analyzer, a listing prompt builder, a neighborhood
                 area scan for investors, and a scanner of Greenville commercial buyers. I also
-                built a custom CRM. I call it Taraform, and it is free to use if you would like
+                built a custom CRM. I call it Taraform, and it is free to use if you are trying to build your own RE business and would like
                 to create an account at taraform.org.
               </p>
             </div>
@@ -81,7 +83,7 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">What gets me going</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            A tech salesperson who actually understands tech.
+            Tech is what drives the world forward.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
             I'm truly passionate about technology, and I understand technology is a very broad term. But it's true. I read about the stuff changing the world in my free time, and I'm fascinated by it.
@@ -104,16 +106,16 @@ export default function AboutPage() {
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              It is a small commentary outlet on real estate in Greenville, South Carolina,
-              plus a handful of free tools. I built it mostly to have a personal site I can
-              share with hiring managers, and to show what is possible when you build with AI.
+              Beyond demonstrating technical aptitude, this is a commentary outlet on real estate in Greenville, South Carolina,
+              plus a handful of free tools. Alex Prompts serves two functions:
+              first, it differentiates me as a sales professional by showcasing a true passion for technology instead of just saying so. 
+              It also serves as a lead generator. As a sales-minded professional, I understand that having inboud leads and building sales funnels are paramount to maintaining a pipeline and increasing deal volume.
             </p>
             <p>
               The tools on here are real and free to use. There is a rental deal analyzer, a mortgage
               and affordability calculator, a listing prompt builder, and a commercial buyers
-              list pulled from public county records. The writing takes a local real estate
-              story and works through both sides of it in plain English, without the hype or
-              the doom found in most social media posts or publications, and aims to make you think at the end. Hence, Alex "Prompts."
+              list pulled from public county records. The real estate writing is meant to inform potential buyers and sellers. The technical articles are mostly research based.
+              I share what I've been learning.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 mt-8">
@@ -169,7 +171,7 @@ export default function AboutPage() {
             <li>
               <h3 className="theme-text-primary type-title mb-1">Built solo, for almost nothing</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
-                I designed, wrote, and now run all of it myself, and I kept the whole system
+                I designed, wrote, and run all of it myself, and I kept the whole system
                 inside free tiers, so it costs essentially nothing to operate. That constraint
                 was half the fun and half the point.
               </p>
@@ -201,12 +203,10 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6 text-center">
           <Eyebrow className="mb-5">Let&apos;s talk</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-4">
-            I am looking for my next role in SaaS and tech sales.
+            I would love to introduce myself.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg mb-8">
-            I am especially drawn to companies building in real estate and proptech, where I
-            get to sell something I would actually use myself. If that sounds like a fit, or you
-            just want to talk shop, reach out.
+            Are you a sales professional? Do you share a passion for technology? Looking for a new home, or just want to talk about Greenville? Let me know!
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a

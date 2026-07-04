@@ -115,14 +115,21 @@ export default async function ArticleView({
               belongs here. Substack bodies and older Greenville posts embed
               their image inline, so adding a hero would print it twice. */}
           {post.cover_image && !coverImageFromBody(post.body_md) && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={post.cover_image}
-              alt={post.title}
-              loading="eager"
-              decoding="async"
-              className="theme-border mb-10 w-full rounded-xl border"
-            />
+            <figure className="mb-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.cover_image}
+                alt={post.title}
+                loading="eager"
+                decoding="async"
+                className="theme-border w-full rounded-xl border"
+              />
+              {post.cover_credit && (
+                <figcaption className="theme-text-muted mt-2 text-xs">
+                  {post.cover_credit}
+                </figcaption>
+              )}
+            </figure>
           )}
           <div className="theme-prose prose max-w-none" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
         </div>

@@ -410,6 +410,14 @@ ALTER TABLE blog_posts
 ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS cover_image text;
 
+-- Cover attribution line, shown under the article hero. Set by the Greenville finalize
+-- cron when it picks a curated CC-BY library photo (src/lib/greenvilleCovers.ts), e.g.
+-- "Photo: Antony-22, CC BY-SA 4.0, via Wikimedia Commons". NULL for CC0 library images,
+-- Substack covers, and Google Street-View/map covers (which carry their own watermark).
+-- Reads tolerate this column being absent (42703), so the site works before it is added.
+ALTER TABLE blog_posts
+  ADD COLUMN IF NOT EXISTS cover_credit text;
+
 -- Greenville lead-image pin. The nightly routine cannot render images from its sandbox,
 -- so it stores the reporter's geocodable location here and leaves cover_image NULL; the
 -- /api/finalize-greenville cron geocodes this, renders a Street-View-or-map cover, and

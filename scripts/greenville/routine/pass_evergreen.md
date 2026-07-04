@@ -47,12 +47,19 @@ You are describing neighborhoods to people deciding where to live. That is a fai
 - CLOSE with an honest, low-pressure offer that also captures the lead: a short paragraph noting that if the reader is moving to or within Greenville, Alex can connect them with a vetted local agent at no cost, linking `/find-an-agent`. This is the lead-generation job of the piece. Keep it human, not salesy.
 - End with a one-line sources note listing the data sources you used (with links), and the line: *Information only, not financial, legal, or investment advice. Figures are current as of <year> and change over time.*
 
-## LEAD IMAGE LOCATION (you name it, the cron renders it)
+## LEAD IMAGE SUBJECT (you name it, the site renders it)
 
-You do not fetch or render anything. You name ONE geocodable LOCATION and the finalize cron renders the cover (Street View of the place if Google has it, else a map pin), both carrying Google's own watermark, so no credit line is needed and you must NOT scrape any photo.
-- For a NEIGHBORHOOD piece, pin the neighborhood's recognizable center or main corridor (for North Main, "North Main Street and East Park Avenue, Greenville, SC"; for the West End, "Falls Park on the Reedy, Greenville, SC").
-- For a CITY-LEVEL piece (cost of living, comparison, first-time buyer, taxes, buy-timing), pin a recognizable Greenville landmark: "Falls Park on the Reedy, Greenville, SC" or "Main Street, Greenville, SC," or for a county-wide tax piece "Greenville County Square, Greenville, SC."
-- Always include "Greenville" (or the correct Upstate town) and "SC." Never choose `none` on this track; a Greenville piece always has a place to pin.
+You do not fetch or render anything, and you must NOT scrape or link any photo. The site keeps a curated set of beautiful, licensed Greenville photos and picks the one that fits your piece. You name ONE subject from this list, and the finalize cron sets that photo as the cover (with its credit line where required):
+
+- `downtown-falls` — downtown Greenville along the Reedy River at RiverPlace. The default. Use for any CITY-LEVEL piece: cost of living, taxes, first-time buyer, buy-timing, comparisons, or general relocation.
+- `liberty-bridge` — the Liberty Bridge at Falls Park. Use for Falls Park, the West End river district, or any piece that leans on downtown's signature landmark.
+- `reedy-river` — the Reedy River falls with the bridge behind. An alternative to `liberty-bridge` for Falls Park / river pieces.
+- `north-main` — a tree-lined Main Street storefront block. Use for a North Main or Main Street NEIGHBORHOOD piece, or a walkable-downtown-living piece.
+- `west-end` — the West End with office towers above the river. Use for a West End or downtown-condo/employment piece.
+- `swamp-rabbit-trail` — the Swamp Rabbit Trail greenway. Use for an outdoors, trail-access, or active-lifestyle piece.
+- `travelers-rest` — downtown Travelers Rest. Use ONLY for a Travelers Rest piece.
+
+Pick the single best-fitting subject. When in doubt, use `downtown-falls`. If (and only if) the piece is about an Upstate town or place with NO fitting subject above, you may instead name a geocodable `location` string (including the town and "SC") and the cron will fall back to a map or Street View of it; prefer a curated subject whenever one fits.
 
 ## OUTPUT FORMAT (exactly these four labeled blocks and nothing else)
 
@@ -64,7 +71,8 @@ You do not fetch or render anything. You name ONE geocodable LOCATION and the fi
 - source_url: <the single most important data source url you used, or leave blank if none is primary>
 
 ## IMAGE
-- location: <precise geocodable string, including Greenville or the Upstate town, plus SC>
+- subject: <one curated subject key from the list above, e.g. liberty-bridge; use downtown-falls if unsure>
+- location: <OPTIONAL, only when no subject fits: a precise geocodable string including the Upstate town plus SC>
 
 ## ARTICLE
 <the full markdown article, 800 to 1400 words, cold open, H2 subheads, internal links, the find-an-agent close, the sources-and-disclaimer line>
