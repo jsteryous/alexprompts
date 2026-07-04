@@ -46,10 +46,6 @@ This is deliberately NOT the objective third-person research voice of the Saturd
 
 ## queued
 
-- **Why data centers are being built in the Upstate, and what they draw on.** Anchor: a real or
-  proposed Upstate data-center project. Stakes: jobs and tax base versus the power and water they
-  pull. The tension: how much grid capacity and water a large facility needs, who pays for the
-  interconnection, and whether the promised jobs match the load.
 - **Why Greenville keeps widening the same roads, and why they fill back up.** Anchor: a specific
   named corridor (Woodruff Road, Wade Hampton, or a current SCDOT project). Stakes: commute times
   and where new subdivisions get approved. The tension: induced demand, and the fact that the
@@ -73,6 +69,12 @@ This is deliberately NOT the objective third-person research voice of the Saturd
   wait.** Anchor: a real Upstate fiber build or provider. Stakes: home values and remote-work
   viability by street. The tension: the economics of who gets wired first, and the households left
   on old copper.
+
+## done
+
+- **Why data centers are being built in the Upstate, and what they draw on.** done 2026-07-04
+  (published: northmark-data-center-kohler-spartanburg-upstate-power). Anchored on NorthMark's
+  ~$2.8B campus at the former Kohler plant in Spartanburg.
 
 ## proposed
 
