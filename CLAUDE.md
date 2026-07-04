@@ -51,8 +51,9 @@ back.) The two live tracks are the real-estate vertical proof and the Lab tech t
 1. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
    investment, for the same reader. The Saturday national video + article (`scripts/ai_news/`)
    has Claude research one useful, evergreen question against real public data; the Greenville
-   local engine (`scripts/greenville/`) covers the biggest local story, both sides. These make
-   the audience smarter; they do not replace the how-to.
+   local engine (`scripts/greenville/`) writes evergreen local-SEO guides to winnable long-tail
+   queries (its old both-sides news track was retired July 2026). These make the audience
+   smarter; they do not replace the how-to.
 
 **The name is a double meaning:** the *AI prompts*, and *prompting real discussion*. Every
 piece (article, video, TikTok, X post) exists to stimulate discussion. It asks a simple
@@ -140,14 +141,15 @@ strategic-direction and two-track notes above.
   against real public data and writes it in two renderings (a 6–10 min voiceover video script
   + a Substack article), delivered to Google Drive and Gmail. No collector: the data APIs are
   not IP-blocked, so the routine fetches live. **Objective third-person voice.**
-- **`greenville/`** — the **local Greenville, SC** engine. A daily two-track routine: on a
-  real-news night it turns the biggest local story into a both-sides website post
-  (`/real-estate`) + an X post; on a no-news night it instead writes a **self-sourcing
-  evergreen local-SEO** guide (the compounding search library, targeting winnable long-tail
-  local queries and funneling relocation/buyer leads to `/find-an-agent`), at about two a week.
-  The evergreen track prefers the optional `greenville/topics.md` bank and scouts its own topic
-  with web search (`pass0_scout.md`, mirroring the Lab) when the bank is empty, so it never runs
-  dry. See `scripts/greenville/CLAUDE.md`.
+- **`greenville/`** — the **local Greenville, SC** engine. A nightly **self-sourcing evergreen
+  local-SEO** engine: each eligible night (about two a week) it writes one substantial,
+  data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
+  query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
+  `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
+  mirroring the Lab) when the bank is empty. The old daily both-sides **news** track was retired
+  July 2026 (its passes + Google-News collector remain in the repo, unwired, so it is
+  reversible); the separate `commercial.py` collector for the buyers-list stays live. See
+  `scripts/greenville/CLAUDE.md`.
 - **`tech/`** — the **Lab engine** (the tech track). No collector; it is **self-sourcing**:
   an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics) plus a web-search
   scout (`pass0_scout.md`) that picks its own topic when the bank is empty, so it runs

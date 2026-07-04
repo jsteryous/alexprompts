@@ -42,13 +42,16 @@ reference only, nothing there runs on a schedule anymore.
   tagged `tech` **live** to `/lab` (autonomous; verify email for spot-check). See
   `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
-  Two-track daily routine: a both-sides **news** post when there is real local news, else a
-  **self-sourcing evergreen local-SEO** guide (the search library that targets winnable
-  long-tail local queries and funnels relocation/buyer leads to `/find-an-agent`). The evergreen
-  track prefers the optional `greenville/topics.md` bank and scouts its own topic
-  (`pass0_scout.md`, like the Lab) when the bank is empty, so it never runs dry.
-- **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Still
-  used by the **Greenville** collector (`greenville/routine/` installs it); keep it.
+  A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
+  it writes one substantial, data-grounded local guide targeting a winnable long-tail local
+  query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
+  `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like the Lab) when the
+  bank is empty. The old daily both-sides **news** track was retired July 2026 (its passes +
+  collector remain, unwired). The separate `commercial.py` collector (buyers-list data) stays.
+- **`requirements-ai-news.txt`** — shared deps (requests, defusedxml, python-dotenv). Used by
+  the Greenville `commercial.py` collector (the buyers-list data) and the retired `collect.py`;
+  keep it. The nightly Greenville content routine no longer installs it (no collector, the
+  evergreen passes use the agent's own web search).
 
 ## The Saturday research engine (`ai_news/`)
 

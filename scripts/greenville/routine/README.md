@@ -1,134 +1,98 @@
 # Greenville Real Estate routine
 
-A daily Claude routine with **two tracks**, one chosen per night, producing WRITTEN content
-for a **website post** and an **X post / short thread** (no video):
+A nightly Claude routine with ONE track: an **evergreen local-SEO** engine for the Greenville,
+SC market. Each eligible night it writes ONE substantial, data-grounded local resource article
+for a winnable long-tail local query (relocation, neighborhood, cost-of-living, first-time-buyer,
+local-investor), publishes it live to `/real-estate`, drafts an X post, and closes by pointing
+relocation/buyer leads to `/find-an-agent`. This is the compounding search library. Cadence
+guard keeps it to about two a week.
 
-- **News track** (default when there is real news): turns the day's biggest **Greenville, SC
-  real-estate** story into a both-sides explainer. The spine is **no forced verdict**: explain
-  what happened, give the consensus, steelman the devil's advocate, then hand the reader the
-  question. Timely, ranks briefly.
-- **Evergreen local-SEO track** (the productive no-news outcome): writes ONE substantial,
-  data-grounded local resource piece for a winnable long-tail local query, and closes by
-  pointing relocation/buyer leads to `/find-an-agent`. This is the compounding search library.
-  **Self-sourcing:** it prefers a topic from the optional bank (`../topics.md`) and scouts its
-  own with web search when the bank is empty, so it never runs dry. Cadence guard keeps it to
-  about two a week. See the two-track note in `../CLAUDE.md`.
+**The news track was retired in July 2026.** The engine used to also run a daily both-sides
+Greenville real-estate NEWS post. It was retired because news ranks briefly then dies, does not
+carry buyer/seller intent, and demanded live-publish spot-checking for little payoff. The news
+passes (`pass1_reporter.md`, `pass2_sides.md`, `pass3_writer.md`) and the collector remain in
+the repo, unwired, so it is reversible, but the orchestrator no longer calls them. See the note
+in `../CLAUDE.md`.
 
-It mirrors the `ai_news/routine/` pattern (an orchestrator plus isolated passes). The news
-track is three passes (a local explainer, not a deep-dive); the evergreen track is one
-self-researching pass.
+**Self-sourcing:** the routine prefers a topic from the optional bank (`../topics.md`) and
+scouts its own with web search when the bank is empty, so it never runs dry. Mirrors the Lab
+engine (`scripts/tech/`).
 
 ## The pipeline
 
-1. **`pass1_reporter.md`** — establishes the verified facts, finds the real
-   publisher article behind Google News's opaque redirect link, names the central
-   place by its proper name, separates CONFIRMED from REPORTED, dedups against what
-   the site already covered, and lists what a human must verify. It also names the
-   **lead-image location**: a geocodable LOCATION string the finalize cron later renders
-   a cover from. A location is the FLOOR: even a diffuse civic story (a county/city tax,
-   bond, zoning, or policy decision) gets a `map` pinned on the named corridor, the
-   deciding body's seat, or the county, so `none` is reserved for a story with no SC
-   place at all and should effectively never fire. On a quiet day it returns
-   `NO NEW STORY TODAY` and the run stops.
-2. **`pass2_sides.md`** — picks the single fault line, then builds THE CONSENSUS and
-   THE DEVIL'S ADVOCATE, both steelmanned, plus what would settle it and the
-   reader's question. Takes no stance.
-3. **`pass3_writer.md`** — renders the website article (text-only markdown; the cover
-   is added later by the finalize cron) and the X post in house voice (no em dashes, no
-   fragments, plain English), with fair-housing and not-advice guardrails. Emits a
-   `## METADATA` block the orchestrator uses to create the post.
+The orchestrator runs at most two passes per night:
 
-The evergreen track uses up to two passes instead of the three above:
-
-0. **`pass0_scout.md`** — runs ONLY when the topic bank is empty. It web-searches for ONE
-   winnable, evergreen, uncovered local Greenville query (the five bars + fair-housing reframe),
-   dedups against already-published evergreen titles, and outputs it in the bank-entry shape so
-   the writer consumes it unchanged. Mirrors the Lab's `tech/routine/pass0_scout.md`. Its
+0. **`pass0_scout.md`** — runs ONLY when the topic bank is empty. Web-searches for ONE winnable,
+   evergreen, uncovered local Greenville query (the five bars + fair-housing reframe), dedups
+   against already-published evergreen titles and slugs, and outputs it in the bank-entry shape
+   so the writer consumes it unchanged. Mirrors the Lab's `tech/routine/pass0_scout.md`. Its
    runners-up ride along in the verify email for Alex to promote into `topics.md`; the engine
    never auto-commits them (unlike the Lab, the Greenville engine does not write to the repo).
-4. **`pass_evergreen.md`** — the self-researching evergreen writer. Given ONE topic (from
+1. **`pass_evergreen.md`** — the self-researching evergreen writer. Given ONE topic (from
    `../topics.md` or the scout), it web-searches for current local specifics, grounds every
    load-bearing number in a cited source (Census ACS, FHFA Greenville MSA, county Assessor/ArcGIS,
    Zillow, local publishers), and writes an 800 to 1400 word local resource article in house
    voice. Strict fair-housing rules (describe housing by objective attributes, never steer a
    protected class), internal links to the site's tools, and a `/find-an-agent` lead-capture
-   close. Emits its own `## METADATA` and `## IMAGE` blocks (there is no reporter to name the
-   location), so the orchestrator publishes it through the same STEP 4 path as a news post.
+   close. Emits its own `## METADATA` and `## IMAGE` blocks, so the orchestrator publishes it.
 
-`orchestrator.md` wires the passes as cold sub-agents and reads the committed signal. Every
-run it also prepares the evergreen fallback (STEP 0C: cadence guard + topic dedup + pick the
-next queued topic, or flag the scout when the bank is empty). If the reporter finds news, it
-runs the news track; if not and the cadence allows, it runs the evergreen track (bank topic or
-self-sourced by the scout); otherwise it posts nothing. Either published track creates
-the website post in Supabase `blog_posts`, then emails the human verify packet (the article and
-the X post to copy-paste). No Google Drive copy.
+`orchestrator.md` wires the passes as cold sub-agents. STEP 1 picks the topic (cadence guard →
+dedup → bank first, else the scout). STEP 2 writes it. STEP 3 inserts the `blog_posts` row live.
+STEP 4 emails the human verify packet (the article + the X post to copy-paste, plus the scout's
+runners-up if it ran). On a cadence-cooldown night it posts nothing.
 
-The routine does NOT render the lead image. The cloud agent's sandbox reaches the world
-only through MCP connectors, so it cannot call Google or Supabase Storage over HTTP. The
-reporter just names a geocodable LOCATION, the orchestrator stores it in
+## Images (rendered after publish, off the agent)
+
+The routine does NOT render the cover. The cloud agent's sandbox reaches the world only through
+MCP connectors, so it cannot call Google or Supabase Storage over HTTP. The evergreen writer
+names a geocodable LOCATION (the `## IMAGE` block), the orchestrator stores it in
 `blog_posts.image_address` (leaving `cover_image` NULL), and the site's
 **`/api/finalize-greenville`** cron renders the cover afterward (`src/lib/greenvilleImage.ts`):
-a **Street View photo** of the site when Google has imagery there, otherwise a
-**map-with-pin**, uploaded to the public `post-images` bucket and written back to
-`cover_image`. Both carry Google's watermark, so no credit line is needed. Rendering is
-idempotent (it acts only while `cover_image` is NULL, within a 3-day window), so a failed
-run just retries next time. The old `greenville-image` edge function is retired.
+a **Street View photo** of the place when Google has imagery there, otherwise a **map-with-pin**,
+uploaded to the public `post-images` bucket and written back to `cover_image`. Both carry
+Google's watermark, so no credit line is needed. Rendering is idempotent (it acts only while
+`cover_image` is NULL, within a 3-day window), so a failed run just retries next time.
 
 ## Cadence and where it posts
 
-- **Collector:** `.github/workflows/collect-greenville.yml`, **daily 06:00 UTC**.
-- **Routine:** runs **nightly** as a scheduled Claude cloud agent (`/schedule`)
-  pointed at `orchestrator.md`, after the collector. On a no-news night it now writes an
-  evergreen local piece (cadence permitting, about two a week) instead of posting nothing.
-- **Website:** the routine inserts a `blog_posts` row tagged `greenville` (news posts also
-  tagged `real estate`, evergreen posts also tagged `evergreen`) as
-  **PUBLISHED** and it goes live at `/real-estate` within about 5 minutes (no human
-  step). The guardrails that make auto-publish safe are in the passes (fair-housing
-  language, not-advice, every number sourced) and in dedup. The verify email still
-  goes out so you can spot-check and unpublish at `/review` if needed. If dedup could
-  not run (Supabase down), that run falls back to DRAFT. To return to human review,
-  set STEP 4 back to `DRAFT`.
+- **Routine:** runs **nightly** as a scheduled Claude cloud agent (`/schedule`) pointed at
+  `orchestrator.md`. On an eligible night it writes an evergreen local piece (cadence permitting,
+  about two a week, the 3-day guard in STEP 1); otherwise it posts nothing.
+- **Website:** the routine inserts a `blog_posts` row tagged `greenville`, `evergreen` as
+  **PUBLISHED** and it goes live at `/real-estate` within about 5 minutes (no human step). The
+  guardrails that make auto-publish safe are in the passes (anti-thin-content bar, fair-housing
+  language, not-advice, every number sourced) and in dedup. The verify email still goes out so
+  you can spot-check and unpublish at `/review` if needed. If dedup could not run (Supabase
+  down), that run falls back to DRAFT. To return to human review for every piece, set STEP 3
+  back to `DRAFT`.
 - **Owned email list:** the agent cannot send it (no HTTP egress), so the same
-  **`/api/finalize-greenville`** cron that renders the cover also broadcasts: any
-  PUBLISHED `greenville` post with `last_broadcast_at` NULL is emailed to every confirmed
-  subscriber (shared `broadcastPost` in `src/lib/broadcast.ts`) and stamped, so it sends
-  once. Greenville posts never go to Substack, so this is the only channel that reaches
-  readers. A DRAFT fallback is never emailed (the cron only touches PUBLISHED). Needs
-  Resend (`RESEND_API_KEY` + `EMAIL_FROM`) configured on the site.
-- **X:** there is no X auto-poster (no X connector wired), so the routine drafts the
-  X post and delivers it in the email packet for you to post by hand.
+  **`/api/finalize-greenville`** cron that renders the cover also broadcasts: any PUBLISHED
+  `greenville` post with `last_broadcast_at` NULL is emailed to every confirmed subscriber
+  (shared `broadcastPost` in `src/lib/broadcast.ts`) and stamped, so it sends once. Greenville
+  posts never go to Substack, so this is the only channel that reaches readers. A DRAFT fallback
+  is never emailed. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`) configured on the site.
+- **X:** there is no X auto-poster (no X connector wired), so the routine drafts the X post and
+  delivers it in the email packet for you to post by hand.
 
-## Dedup (so a daily schedule never repeats a story)
+## Dedup (so the nightly schedule never repeats a topic)
 
-STEP 0B queries `blog_posts` for the last 30 days of `greenville`-tagged posts
-(published or draft) and hands the reporter that ALREADY-COVERED list. The reporter
-skips anything on it. Robust dedup keys on a `source_url` column; add it once with:
+STEP 1 queries `blog_posts` for the `slug` and `title` of every `evergreen`-tagged post and
+hands them to the topic picker and the scout, which skip anything already covered (exact or
+near-duplicate). The cadence guard uses the same tag. A `source_url` column is also used when
+present:
 
 ```sql
 alter table blog_posts add column if not exists source_url text;
 ```
 
-Without that column the routine dedups on title only (still works, just looser).
-
-## Running the collector locally
-
-Your home IP is not blocked, so you can dry-run the collector:
-
-```bash
-cd scripts
-python -m greenville.collect --limit 15
-python -m unittest scripts.tests.test_greenville -v
-```
-
 ## Guardrails (built into the passes)
 
 - **Not advice.** No buy/sell/hold calls. Information only.
-- **Fair housing.** Describe the property and the facts, never who a home is "right
-  for." The writer pass bans demographic-targeting language.
-- **Attribution + an image credit.** Every number traces to a real publisher
-  article; the post ends with a source credit; the delivered packet leads with a
-  MUST-VERIFY list. The lead image is credited inline per its kind: a Commons photo as
-  `*Photo: <author>, <license>, via Wikimedia Commons.*` (a license condition), a Street
-  View photo as `*Street View © Google.*`, a map as `*Map data © Google.*`, an aerial as
-  `*Satellite imagery © Google.*`.
-- **Restraint.** Daily cadence, but the reporter posts nothing on a quiet day.
+- **Fair housing (the headline risk).** This is relocation and neighborhood content, so describe
+  housing by objective, factual attributes only, never who a place is "right for," and never
+  steer a protected class. The evergreen pass enforces this and reframes any risky topic.
+- **Substantial, never thin.** 800 to 1400 words of real local specifics, because thin content
+  hurts rankings. Depth is the moat.
+- **Attribution.** Every load-bearing number traces to a cited public source; the post ends with
+  a sources line; the verify email leads with the figures to spot-check and a fair-housing
+  re-read.
