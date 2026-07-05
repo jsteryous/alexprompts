@@ -28,9 +28,13 @@ import { REALESTATE_TAG, WORKS_TAG, sectionOf } from "@/lib/posts";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-/** How far back to reconcile. A post older than this that still has no cover is
- *  treated as permanently place-less and left alone (flagged in the response). */
-const WINDOW_DAYS = 3;
+/** How far back to reconcile, measured from when a post went live (published_at),
+ *  not when the agent created the draft. Draft-first means a post can sit in review
+ *  for days before Alex publishes it, and the cover + broadcast must fire once it
+ *  does, so the window tracks publish time and is generous. A post published longer
+ *  ago than this that still has no cover is treated as permanently place-less and
+ *  left alone. */
+const WINDOW_DAYS = 7;
 
 export async function GET(req: NextRequest) {
   const auth = req.headers.get("authorization");
@@ -57,9 +61,9 @@ export async function GET(req: NextRequest) {
     .select("id, slug, tags, cover_image, image_address, last_broadcast_at")
     .eq("status", "PUBLISHED")
     .overlaps("tags", [REALESTATE_TAG, WORKS_TAG])
-    .gte("created_at", since)
+    .gte("published_at", since)
     .or("cover_image.is.null,last_broadcast_at.is.null")
-    .order("created_at", { ascending: false });
+    .order("published_at", { ascending: false });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
   const results: Record<string, unknown>[] = [];

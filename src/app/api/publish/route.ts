@@ -1,9 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { sectionOf } from "@/lib/posts";
+
+/** Public URL base for each section, so the confirmation link and the
+ *  revalidation path match where the post actually lives. */
+const SECTION_BASE = {
+  realestate: "/real-estate",
+  works: "/greenville-works",
+  newsletter: "/archive",
+} as const;
 
 // GET /api/publish?id=<uuid>&token=<secret>
-// Called from the "Publish" button in the draft review email.
+// Called from the "Publish" button in the draft review email. Works for every
+// section: newsletter drafts (/archive) and the draft-first Greenville
+// (/real-estate) and Greenville Works (/greenville-works) engine posts.
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id    = searchParams.get("id");
@@ -32,10 +43,10 @@ export async function GET(req: NextRequest) {
 
   const client = createClient(url, key);
 
-  // Fetch post first so we can show the title
+  // Fetch post first so we can show the title and route by section
   const { data: rows, error: fetchErr } = await client
     .from("blog_posts")
-    .select("id, title, slug, status")
+    .select("id, title, slug, status, tags")
     .eq("id", id)
     .single();
 
@@ -43,10 +54,13 @@ export async function GET(req: NextRequest) {
     return html("Not found", `No post found with ID: ${id}`, 404);
   }
 
+  const base = SECTION_BASE[sectionOf(rows)];
+  const path = `${base}/${rows.slug}`;
+
   if (rows.status === "PUBLISHED") {
     return html(
       "Already published",
-      `"${rows.title}" is already live at <a href="/archive/${rows.slug}" style="color:#4f46e5">/archive/${rows.slug}</a>.`,
+      `"${rows.title}" is already live at <a href="${path}" style="color:#4f46e5">${path}</a>.`,
       200,
     );
   }
@@ -61,12 +75,22 @@ export async function GET(req: NextRequest) {
     return html("Database error", updateErr.message, 500);
   }
 
-  // Bust the ISR cache so the archive shows the new issue immediately
-  revalidatePath("/archive");
+  // Bust the ISR cache so the section index + the post show the new issue
+  // immediately (otherwise it waits up to the 300s revalidate window).
+  revalidatePath(base);
+  revalidatePath(path);
+
+  // Greenville + Greenville Works posts get their cover and owned-list
+  // broadcast from the daily finalize cron once they are PUBLISHED; newsletter
+  // posts do not (those come from Substack).
+  const finalizeNote =
+    sectionOf(rows) === "newsletter"
+      ? ""
+      : " The cover photo and the subscriber email are sent by the daily finalize cron within a day.";
 
   return html(
     "Published",
-    `"${rows.title}" is now live at <a href="/archive/${rows.slug}" style="color:#4f46e5">/archive/${rows.slug}</a>.`,
+    `"${rows.title}" is now live at <a href="${path}" style="color:#4f46e5">${path}</a>.${finalizeNote}`,
     200,
   );
 }

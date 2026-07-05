@@ -72,20 +72,22 @@ python -m greenville.collect --limit 15
   in place for reversibility; safe to disable.
 - The **routine** runs nightly as a scheduled Claude cloud agent pointed at
   `routine/orchestrator.md`. Each eligible night (cadence permitting, about two a week) it picks
-  a topic (bank first, else the scout), writes an evergreen local guide, and creates a
-  `blog_posts` row tagged `greenville`, `evergreen`, live to `/real-estate`, plus a Gmail verify
-  packet with the article and the X post. On a cadence-cooldown night it posts nothing. See
-  `routine/README.md`.
+  a topic (bank first, else the scout), writes an evergreen local guide, and creates a **DRAFT**
+  `blog_posts` row tagged `greenville`, `evergreen` (draft-first as of July 2026, was live), plus
+  a Gmail review packet with the article, the X post, and a `/review` link Alex uses to publish.
+  On a cadence-cooldown night it posts nothing. See `routine/README.md`.
 
 ## Publishing + dedup
 
 - The routine writes posts via the **Supabase connector** (there is no generic create-post API;
-  `/api/publish` only flips status). New posts are **PUBLISHED** live to `/real-estate` (the
-  dedicated section). Auto-publish is safe because the pass guardrails (the evergreen writer's
-  anti-thin-content bar, fair-housing rules, not-advice, every number traced to a cited source)
-  plus dedup do the gating, and a verify email still goes out for after-the-fact spot-checks. If
-  dedup is unavailable on a run, that run falls back to DRAFT. Set STEP 3 back to `DRAFT` to
-  require human review for every piece again.
+  `/api/publish` only flips status). **Draft-first as of July 2026** (was auto-publish-live): new
+  posts are created as **DRAFT** and Alex reviews + publishes each one at `/review` (the routine's
+  email carries the post id and a `/review?id=..&token=..` link; one-click publish is
+  `/api/publish?id=..&token=..`). The pass guardrails (the evergreen writer's anti-thin-content
+  bar, fair-housing rules, not-advice, every number traced to a cited source) plus dedup still run,
+  but a human is now the final gate. Nothing is covered or broadcast until Alex publishes (the
+  finalize cron only touches PUBLISHED rows). To go back to auto-publish live, flip STEP 3
+  `DRAFT`→`PUBLISHED` (and `published_at NULL`→`now()`). See memory `publishing-draft-first`.
 - **Dedup** keys on the `evergreen` tag (cadence guard + already-published `slug` and `title`).
   A `source_url` column is also used when present; add it once with
   `alter table blog_posts add column if not exists source_url text;`.

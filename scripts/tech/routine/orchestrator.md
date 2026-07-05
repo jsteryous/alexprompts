@@ -19,19 +19,18 @@ of the repo and zero prior context. Each pass's spec lives in its own file under
 scripts/tech/routine/. When a step says to, read that file and hand its FULL contents to the
 sub-agent for that pass.
 
-PUBLISH MODE: **publish** (live). The Greenville Works post is inserted as PUBLISHED and goes live
-at /greenville-works without waiting for a human, the same as the Greenville real-estate engine.
-The guardrails that make this safe live in the passes (the researcher grounds every claim in real
-sources and labels official/vendor claims as claims; the editor fact-checks every figure against
-the brief, enforces the mandatory honest-trade-offs beat, holds the fair-housing line on anything
-that touches where people live, and blocks any overclaim or not-advice slip) and in dedup. Because
-the piece is first-person and portfolio-critical, the editor's fact-check discipline is the real
-backstop; treat a fabricated number or an overclaim as a failure as serious as a broken build. The
-verify email still goes out (STEP 6) so Alex can spot-check after the fact and unpublish at /review
-if anything is wrong. EXCEPTION: if dedup could not run (the Supabase site-check was unavailable in
-STEP 0B), fall back to status DRAFT for that run, because without it you cannot be sure you are not
-republishing a covered topic. To return to human review for every piece, change `PUBLISHED` back to
-`DRAFT` in STEP 5.
+PUBLISH MODE: **review** (draft-first). The Greenville Works post is inserted as **DRAFT** and does
+NOT go live on its own. Alex reviews every piece before it publishes: the STEP 6 email carries the
+post id and a /review link so he can read it, edit anything that looks off, and publish with one
+click. The pass guardrails still run (the researcher grounds every claim in real sources and labels
+official/vendor claims as claims; the editor fact-checks every figure against the brief, enforces
+the mandatory honest-trade-offs beat, holds the fair-housing line on anything that touches where
+people live, and blocks any overclaim or not-advice slip), and because the piece is first-person and
+portfolio-critical, the editor's fact-check discipline is still the substantive backstop, but a
+human is now the final gate. Treat a fabricated number or an overclaim as a failure as serious as a
+broken build. Nothing is broadcast or covered until Alex publishes: the finalize cron only touches
+PUBLISHED rows. To go back to auto-publish live, change `DRAFT` back to `PUBLISHED` (and
+`published_at = NULL` back to `now()`) in STEP 5.
 
 WORKSPACE. Do ALL scratch work in /tmp/gw (run: mkdir -p /tmp/gw). Write every intermediate there
 (topic.txt, done.txt, pass1_brief.md, pass2_angle.md, pass3_draft.md, pass4_final.md). NEVER write
@@ -128,35 +127,38 @@ markdown as the body. Using the Supabase connector, INSERT one row into blog_pos
     the bare word "greenville".
   - source_url = METADATA source_url (omit this column if it does not exist in the schema)
   - author = 'Alex Steryous'
-  - status = 'PUBLISHED'  (PUBLISH MODE publish; see top. Use 'DRAFT' instead ONLY if the
-    Supabase site-dedup was unavailable this run, per STEP 0B; a human then publishes it at
-    /review.)
-  - published_at = now()  (or NULL if you fell back to DRAFT)
+  - status = 'DRAFT'  (PUBLISH MODE review; see top. The post stays a DRAFT until Alex publishes
+    it at /review.)
+  - published_at = NULL  (set when Alex publishes at /review, not now)
   - created_at = now()
-  Confirm the insert returned a row id and record it. The post is live at /greenville-works/<slug>
-  within about 5 minutes (the section revalidates every 300s; there is no manual revalidation
-  hook). If the Supabase connector is unavailable or the insert fails, skip this and rely on STEP 6
+  Confirm the insert returned a row id and record it (STEP 6 needs it for the /review link). The
+  post is NOT live yet: it is a DRAFT awaiting Alex's review at /review?id=<id>. Once he publishes,
+  it appears at /greenville-works/<slug> within about 5 minutes (the section revalidates every
+  300s). If the Supabase connector is unavailable or the insert fails, skip this and rely on STEP 6
   delivery so Alex can paste the piece in manually; report the failure.
 
-STEP 6, DELIVER THE HUMAN PACKET (always, even after publishing live). Build ONE document
-in this order: FIRST "VERIFY THESE (POST IS ALREADY LIVE)" with the MUST-VERIFY list from
-/tmp/gw/pass1_brief.md, plus the standing line: "Not investment, legal, or financial
-advice. This Greenville Works piece was published live at /greenville-works/<slug>. Spot-check the
-flagged numbers and claims against the sources, re-read anything describing a neighborhood for the
-fair-housing line, and unpublish it at /review if anything is wrong. The cover photo and the
-owned-list email both go out automatically: the /api/finalize-greenville cron (daily, on Vercel)
-fills the cover from the curated Greenville library and broadcasts the piece to confirmed
-subscribers exactly once, so there is nothing to send by hand."
-(If you fell back to DRAFT because dedup was unavailable, say so instead: the piece is a
-DRAFT at /review awaiting a human publish.) Then three dashes; then "GREENVILLE WORKS ESSAY (live)"
+STEP 6, DELIVER THE REVIEW PACKET (the post is a DRAFT awaiting Alex). Build ONE document
+in this order: FIRST "REVIEW + PUBLISH THIS DRAFT" with the two action links (fill <id> with the
+STEP 5 post id; leave the token as the literal placeholder, since this routine does not hold
+PUBLISH_SECRET and Alex fills or bookmarks it):
+    - Edit + publish: https://www.alexprompts.com/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - One-click publish (if it reads clean): https://www.alexprompts.com/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
+  Then the MUST-VERIFY list from /tmp/gw/pass1_brief.md, plus the standing line: "Not investment,
+legal, or financial advice. This Greenville Works piece is a DRAFT at /greenville-works — it is NOT
+live until you publish it. Spot-check the flagged numbers and claims against the sources, re-read
+anything describing a neighborhood for the fair-housing line, fix anything off in /review, then
+publish (or just delete the draft to kill it). When you publish, the /api/finalize-greenville cron
+(daily, on Vercel) fills the cover from the curated Greenville library and broadcasts the piece to
+confirmed subscribers exactly once, so there is nothing to send by hand."
+Then three dashes; then "GREENVILLE WORKS ESSAY (draft)"
 and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (copy-paste this to
-X yourself, there is no X auto-poster); then three dashes; then "Editor notes" with the topic
+X yourself once the piece is live, there is no X auto-poster); then three dashes; then "Editor notes" with the topic
 you covered, the key SOURCES from the brief, the CONFIDENCE NOTE from the angle, and the
-published post id and slug from STEP 5.
+DRAFT post id and slug from STEP 5.
   Deliver to BOTH places, independently so one failing does not block the other:
   (a) EMAIL via mcp Gmail create_draft: to ["jsteryous@gmail.com"], subject "Alex Prompts
-      Greenville Works — <headline>", body the full document. Send it if a send tool exists,
-      otherwise note a draft was created.
+      Greenville Works (DRAFT — review) — <headline>", body the full document. Send it if a send
+      tool exists, otherwise note a draft was created.
   (b) DRAFTS BRANCH (done-log + recall). Write the same document to
       drafts/greenville-works-<YYYY-MM-DD>.md. THEN edit scripts/tech/topics.md TWICE: (1) record
       this run's topic as done under a "## done" heading with the date. If it came from the BANK
@@ -171,8 +173,8 @@ published post id and slug from STEP 5.
       queued on main when he wants it.)
 
 STEP 7, REPORT. State: the topic you chose and the runners-up you skipped and why; whether
-the topic cleared the researcher's bar or the run stopped on a thin topic; the published post
-id and slug (or the DRAFT fallback and why, or why the insert was skipped); where the human
-packet was delivered (email and drafts branch); and any source you could not reach, so Alex
-knows where the evidence is thin. The post is LIVE at /greenville-works/<slug> unless you fell
-back to DRAFT, in which case it awaits a human publish at /review.
+the topic cleared the researcher's bar or the run stopped on a thin topic; the DRAFT post
+id and slug (or why the insert was skipped); where the review packet was delivered (email and
+drafts branch); and any source you could not reach, so Alex knows where the evidence is thin.
+The post is a DRAFT at /greenville-works awaiting Alex's review and publish at /review; it does
+not go live until he publishes it.

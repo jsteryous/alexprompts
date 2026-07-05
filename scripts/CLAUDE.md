@@ -9,29 +9,23 @@ reference only, nothing there runs on a schedule anymore.
 > The old two-pass Gemini drafting, `shorts.py`, the shared `llm.py`, and the
 > `ai-news.yml` / `email-draft.yml` workflows are gone.
 >
-> **The Saturday national engine was rebuilt (June 2026) from AI-news into research.**
-> Alex stopped filming the news scripts: scored by how many outlets covered a story, they
-> kept landing on regulation and frontier-AI politics, with nothing a working agent could
-> use. The old **signal collector** (`collect.py`, `digest.py`, `collect-signal.yml`, the
-> committed signal, `test_ai_news.py`) is retired to `scripts/_archive/ai_news_collector/`.
-> The Saturday routine now answers ONE useful, evergreen real-estate question with real
-> public data. See [[saturday-research-engine]] in memory.
+> **The Saturday national engine was KILLED (July 5, 2026) and archived to
+> `scripts/_archive/ai_news/`.** It could not out-rank stronger players on national queries
+> (no traffic) and had no distribution (no audience, Alex stopped filming the videos), so it
+> served neither the referral-revenue north star nor audience growth. The whole `ai_news/`
+> directory now lives under `scripts/_archive/` (reversible). Its weekly run was a scheduled
+> Claude **cloud agent**, so that scheduled routine must also be deleted in the Claude scheduler.
+> Do NOT revive it. The two LOCAL Greenville engines below are the whole content operation now.
+> See [[saturday-research-engine]] in memory. (History: it was rebuilt from AI-news into a
+> research engine in June 2026 before being killed.)
 
 ## What lives in `scripts/`
 
-- **`ai_news/`** — the national **Saturday research engine** (the directory name is legacy;
-  it is no longer news). Two committed inputs drive it: **`questions.md`** (the question
-  bank, seeded by Alex, status-tracked `queued` / `done <date>`) and **`sources.md`** (the
-  primary-data registry: Census, FRED, FHFA, Zillow/Redfin, Lincoln Institute, Strong Towns,
-  LBNL solar, Greenville ArcGIS, academic). The **Saturday Claude routine** under
-  `ai_news/routine/` reads them and writes the deep-dive.
-- **`ai_news/routine/`** — the Claude routine: an `orchestrator.md` plus isolated Opus
-  passes (researcher → thesis → writer → editor → performer → article). It runs weekly in
-  the cloud, pulls the data live, and delivers the draft to Google Drive + Gmail.
-- **`ai_news/demand.py`** — a separate prototype radar (mines Google + YouTube autocomplete
-  for beginner AI how-to demand). Standalone, not part of the Saturday routine. It fed the
-  old GUIDES track, which was removed July 2026 (the `/guides` section is gone), so it is now
-  orphaned; kept for reference only. Run from a normal IP.
+- **`_archive/ai_news/`** — the retired **Saturday national research engine** (KILLED July 5,
+  2026; moved here from `scripts/ai_news/`). Its `questions.md`, `sources.md`, `routine/`
+  (orchestrator + researcher → thesis → writer → editor → performer → article passes), and the
+  orphaned `demand.py` radar all live under `scripts/_archive/ai_news/` now. Reference/reversible
+  only; nothing runs on a schedule. See [[saturday-research-engine]] in memory. Do NOT revive.
 - **`tech/`** — the **Greenville Works engine** (the local-change track; renamed from the
   national "Lab" tech track in July 2026, directory kept as `tech/`). No collector;
   **self-sourcing**: an optional steering bank (`tech/topics.md`) plus a web-search scout
@@ -41,9 +35,10 @@ reference only, nothing there runs on a schedule anymore.
   a subdivision, a data center, a factory, the grid, fiber, water capacity, a government
   decision, and the technology behind local change) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
-  to `/find-an-agent` where the topic fits, then publishes a `blog_posts` row tagged
-  `greenville works` **live** to `/greenville-works` (autonomous; verify email for spot-check).
-  See `tech/routine/README.md` and the two-track note in the root `CLAUDE.md`.
+  to `/find-an-agent` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
+  `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review
+  email carries the post id + a `/review` link Alex uses to publish). See `tech/routine/README.md`,
+  the two-track note in the root `CLAUDE.md`, and memory `publishing-draft-first`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
   A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
   it writes one substantial, data-grounded local guide targeting a winnable long-tail local
@@ -59,7 +54,11 @@ reference only, nothing there runs on a schedule anymore.
   keep it. The nightly Greenville content routine no longer installs it (no collector, the
   evergreen passes use the agent's own web search).
 
-## The Saturday research engine (`ai_news/`)
+## The Saturday research engine (`_archive/ai_news/`) — RETIRED
+
+> **KILLED July 5, 2026 and archived to `scripts/_archive/ai_news/`.** The rest of this section
+> is kept as HISTORY only; nothing here runs. See the top-of-file note and
+> [[saturday-research-engine]] in memory. Do NOT revive.
 
 **Rebuilt June 2026.** Instead of chasing the week's AI headlines, each Saturday the routine
 takes ONE genuinely useful question about real estate, development, or investment and has

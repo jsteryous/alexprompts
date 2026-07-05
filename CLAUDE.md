@@ -2,9 +2,9 @@
 
 This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
 - **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
-- **`scripts/CLAUDE.md`** — the Python content engines: the national AI-for-real-estate
-  signal collector + Saturday script routine (`ai_news/`) and the Greenville local
-  real-estate engine (`greenville/`).
+- **`scripts/CLAUDE.md`** — the Python content engines: the Greenville local real-estate
+  engine (`greenville/`) and Greenville Works (`tech/`), both draft-first. (The national
+  Saturday engine `ai_news/` was killed July 2026 and archived to `scripts/_archive/`.)
 - **`BRAND.md`** — the StoryBrand BrandScript (villain = the noise, hero = the reader, guide
   = Alex). Drives all *positioning* copy (site, welcome email, bios, CTAs). Stays OUT of the
   truth-seeking writer method by design.
@@ -77,12 +77,15 @@ actually think.
 
 ### Editorial framework (the POV behind the RESEARCH + analysis content)
 
-This is the method for the analysis pieces (the Saturday national research engine and the
-Greenville local news engine). The how-to teaching approach for the site + newsletter is a
-SEPARATE thing and lives in `src/lib/site.ts` `principles` (start from a real outcome,
-assume nothing, skip the hype, leave you able to do it again). Do not conflate the two.
+This is the method for the analysis pieces. NOTE: the **Saturday national research engine was
+killed July 5, 2026** (archived to `scripts/_archive/ai_news/`), and the Greenville local news
+track was retired July 2026, so the two methods below are kept as **reference for the research
+discipline** (honesty, hunt-the-confounder, steelman) that the LIVE local engines still inherit,
+not as descriptions of running engines. The how-to teaching approach for the site + newsletter is
+a SEPARATE thing and lives in `src/lib/site.ts` `principles` (start from a real outcome, assume
+nothing, skip the hype, leave you able to do it again). Do not conflate the two.
 
-The **Saturday research method** (`scripts/ai_news/`), in order:
+The **Saturday research method** (retired, `scripts/_archive/ai_news/`), in order:
 1. **Pick a real question** — one useful, evergreen, decision-relevant question, anchored in
    a real place or decision (Greenville, North Main, a real asset class).
 2. **Research it with real data** — pull primary public sources (Census, FRED, FHFA, Zillow,
@@ -125,10 +128,13 @@ The stance, stated honestly:
   site to be the SEO source of truth, add a `canonical_url` column to `blog_posts` and
   point article canonicals at the site instead of Substack.)
 
-## Voice (mirror of `scripts/ai_news` prompts — keep in sync)
+## Voice (mirror of the live engine writer passes — keep in sync)
 
-The canonical voice lives in the Claude routine's writer pass
-(`scripts/ai_news/routine/pass3_writer.md`). Site copy must match it:
+The canonical voice rules live in the live engines' writer/editor passes
+(`scripts/tech/routine/pass3_writer.md` for Greenville Works' first-person voice,
+`scripts/greenville/routine/pass_evergreen.md` for the evergreen guides). The retired Saturday
+engine's `pass3_writer.md` carried the same house style but now lives under
+`scripts/_archive/ai_news/`. Site copy must match these rules:
 
 - **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (The routine
   enforces this in its passes; the website has no automated backstop, so do not introduce
@@ -142,24 +148,23 @@ The canonical voice lives in the Claude routine's writer pass
 - Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
   "game-changer," "a new era," etc.
 
-## The content engines (`scripts/ai_news/` + `scripts/greenville/` + `scripts/tech/`)
+## The content engines (`scripts/greenville/` + `scripts/tech/`)
 
-See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Three engines: the
-two real-estate siblings (the vertical-proof track) plus Greenville Works (the local-change track). See the
-strategic-direction and two-track notes above.
+See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Two live engines, both
+LOCAL to Greenville: the evergreen `/real-estate` lead engine and Greenville Works (the
+local-change credibility track). Both are **draft-first** (they insert DRAFT; Alex reviews and
+publishes at `/review`; see memory `publishing-draft-first`). The old national Saturday research
+engine (`ai_news/`) was **KILLED July 5, 2026** and archived to `scripts/_archive/ai_news/`. See
+the strategic-direction and two-track notes above.
 
-- **`ai_news/`** — the **national Saturday research engine** (directory name is legacy; no
-  longer news). Two committed inputs (`questions.md`, the question bank; `sources.md`, the
-  primary-data registry) drive the **Saturday Claude routine** (`scripts/ai_news/routine/`,
-  an orchestrator plus isolated Opus passes: researcher → thesis → writer → editor →
-  performer → article), which has Claude research one useful, evergreen real-estate question
-  against real public data and writes it in two renderings (a 6–10 min voiceover video script
-  + a Substack article), delivered to Google Drive and Gmail. No collector: the data APIs are
-  not IP-blocked, so the routine fetches live. **Objective third-person voice.**
+- **`_archive/ai_news/`** — the **RETIRED** national Saturday research engine (killed July 5,
+  2026; couldn't out-rank national queries and had no distribution). Archived, reversible, nothing
+  scheduled. Its weekly cloud-agent routine must also be deleted in the Claude scheduler.
 - **`greenville/`** — the **local Greenville, SC** engine. A nightly **self-sourcing evergreen
   local-SEO** engine: each eligible night (about two a week) it writes one substantial,
   data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
+  query and funneling relocation/buyer leads to `/find-an-agent`. **Draft-first** (July 2026): it
+  inserts a DRAFT and Alex publishes it at `/review`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
   mirroring Greenville Works) when the bank is empty. The old daily both-sides **news** track was retired
   July 2026 (its passes + Google-News collector remain in the repo, unwired, so it is
@@ -174,10 +179,10 @@ strategic-direction and two-track notes above.
   Greenville and the Upstate apart (a road, a subdivision, a data center, a factory, the grid,
   fiber, water capacity, a government decision, and the technology behind local change) in
   **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
-  and funnels relocation/buyer leads to `/find-an-agent` where the topic fits, then publishes a
-  `blog_posts` row tagged `greenville works` **live** to **`/greenville-works`** (autonomous,
-  same as the Greenville engine; a verify email still goes out for after-the-fact spot-check,
-  and a run falls back to DRAFT only if dedup was unavailable). Its job is twofold: unify the
+  and funnels relocation/buyer leads to `/find-an-agent` where the topic fits, then inserts a
+  **DRAFT** `blog_posts` row tagged `greenville works` for **`/greenville-works`** (**draft-first**
+  as of July 2026, was live; the review email carries the post id + a `/review` link Alex uses to
+  publish, same manual flow as the Greenville engine). Its job is twofold: unify the
   site around one local promise (better SEO and referral leads) and still prove Alex can take a
   real system apart and translate it into what it means for a business. Target cadence about
   1/week, enforced in code by a STEP 0B cadence guard (skip if a `greenville works` post is under
@@ -232,9 +237,10 @@ under `scripts/_archive/` — do not revive it.
   touches Greenville), explain how it works, show what it means for where we live, work, and
   invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
   `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
-  `PostType` key `works`, distinct from the `greenville` real-estate tag), published **live**
-  (autonomous) by the `scripts/tech/` routine, with a verify email for after-the-fact
-  spot-check and unpublish at `/review`. The `/api/finalize-greenville` cron finalizes these
+  `PostType` key `works`, distinct from the `greenville` real-estate tag), written as a **DRAFT**
+  by the `scripts/tech/` routine (**draft-first** as of July 2026, was live) and published by Alex
+  at `/review` after he reviews the emailed piece. Once published, the `/api/finalize-greenville`
+  cron finalizes these
   posts too: it fills the article **cover photo** from the same curated Greenville library the
   `/real-estate` pieces use (the writer names a `subject:`, stored in `image_address`; no API key,
   no cost) and **broadcasts the piece to the owned email list** exactly once. The curated photo
