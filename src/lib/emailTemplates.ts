@@ -119,7 +119,7 @@ export function leadNotifyEmail(lead: {
     `<h1 style="font-size:21px;font-weight:700;margin:0 0 14px;color:${INK};">New referral lead</h1>
      <p style="margin:0 0 18px;color:${MUTED};">Someone asked to be matched with an agent through /find-an-agent. Reach out while it is warm.</p>
      <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">${rowsHtml}</table>
-     <p style="margin:22px 0 0;">${btn(`mailto:${lead.email}`, "Reply to this lead")}</p>`,
+     <p style="margin:22px 0 0;">${btn(`mailto:${escapeHtml(lead.email)}`, "Reply to this lead")}</p>`,
     `Sent from the ${site.name} referral form at ${site.url}/find-an-agent.`,
   );
 
