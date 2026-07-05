@@ -4,7 +4,7 @@ A local content vertical, separate from `ai_news/`. A nightly Claude routine tha
 track: an **evergreen local-SEO** engine for the Greenville, SC market. Each eligible night it
 writes ONE substantial, data-grounded local resource article (a relocation, neighborhood,
 cost-of-living, first-time-buyer, or local-investor guide), publishes it live to `/real-estate`,
-and ends it by pointing relocation and buyer leads to `/find-an-agent`. This is the search
+and ends it by pointing relocation and buyer leads to `/find-a-pro`. This is the search
 library that actually ranks and compounds on winnable local long-tail queries ("moving to
 Greenville SC neighborhoods," "cost of living in Greenville SC"). Depth over volume: about two
 pieces a week, enforced by a cadence guard. See memory [[greenville-evergreen-seo-track]].

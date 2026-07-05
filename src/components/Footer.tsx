@@ -28,8 +28,8 @@ export default function Footer() {
           <Link href="/greenville-works" className="theme-link text-sm">
             Greenville Works
           </Link>
-          <Link href="/find-an-agent" className="theme-link text-sm">
-            Find an Agent
+          <Link href="/find-a-pro" className="theme-link text-sm">
+            Find a Pro
           </Link>
           <Link href="/archive" className="theme-link text-sm">
             Archive

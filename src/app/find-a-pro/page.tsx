@@ -3,12 +3,13 @@ import { site } from "@/lib/site";
 import { ReferralForm } from "@/components/ReferralForm";
 
 export const metadata: Metadata = {
-  title: "Find an Agent",
+  title: "Find a Pro",
   description:
     "Buying or selling, in Greenville, SC or relocating anywhere? Tell me what you need and " +
-    "I will hand-pick a vetted agent worth your time and stay in your corner until it closes. " +
+    "I will hand-pick a vetted pro worth your time, the right agent plus the lender and " +
+    "closing attorney who make a deal go smoothly, and stay in your corner until it closes. " +
     "No cost to you.",
-  alternates: { canonical: `${site.url}/find-an-agent` },
+  alternates: { canonical: `${site.url}/find-a-pro` },
 };
 
 const steps = [
@@ -19,8 +20,8 @@ const steps = [
   },
   {
     n: "2",
-    title: "I hand-pick your agent",
-    body: "I reach out, learn a little more, and match you with an agent I would trust with my own family. Local here in Greenville, or in whatever city you are moving to.",
+    title: "I hand-pick your pro",
+    body: "I reach out, learn a little more, and match you with an agent I would trust with my own family. If you also need a good loan officer or a closing attorney, I know the ones who earn their keep. Local here in Greenville, or in whatever city you are moving to.",
   },
   {
     n: "3",
@@ -31,8 +32,8 @@ const steps = [
 
 const trust = [
   {
-    title: "A vetted agent, not a coin flip",
-    body: "The gap between a good agent and a bad one is thousands of dollars and a lot of stress. I hand-pick who you work with instead of leaving it to whoever answers a portal form first.",
+    title: "A vetted bench, not a coin flip",
+    body: "The gap between a good agent and a bad one is thousands of dollars and a lot of stress. The same is true of a lender who misses a deadline. I hand-pick the professionals you work with instead of leaving it to whoever answers a portal form first.",
   },
   {
     title: "Greenville, or wherever you are headed",
@@ -44,7 +45,7 @@ const trust = [
   },
 ];
 
-export default function FindAnAgentPage() {
+export default function FindAProPage() {
   return (
     <>
       <section className="theme-page theme-border pt-32 pb-16 border-b">
@@ -53,14 +54,15 @@ export default function FindAnAgentPage() {
             Real estate referrals · Greenville + anywhere
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Buying or selling? I&apos;ll match you with an agent worth your time.
+            Buying or selling? I&apos;ll connect you with a pro worth your time.
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
             I am a licensed real estate agent in South Carolina, but my day job is not showing
-            houses. What I am good at is knowing which agents actually earn their keep. Tell me what
-            you are trying to do, here in Greenville or in whatever city you are moving to, and I
-            will connect you with someone I would trust with my own family, then stay in your corner
-            until it closes. It costs you nothing.
+            houses. What I am good at is knowing which professionals actually earn their keep, the
+            agents who fight for their clients and the loan officers and closing attorneys who keep
+            a deal on track. Tell me what you are trying to do, here in Greenville or in whatever
+            city you are moving to, and I will connect you with someone I would trust with my own
+            family, then stay in your corner until it closes. It costs you nothing.
           </p>
         </div>
       </section>
@@ -94,7 +96,7 @@ export default function FindAnAgentPage() {
                 will not add you to any list.
               </p>
             </div>
-            <ReferralForm source="find-an-agent" />
+            <ReferralForm source="find-a-pro" />
           </div>
 
           <ul className="grid gap-5 sm:grid-cols-3 mt-16">

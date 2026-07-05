@@ -36,7 +36,7 @@ real-estate engine's local grounding and fair-housing care.
   Works covers the machinery around them: roads, infrastructure, utilities, manufacturing, data
   centers, government decisions, population growth.
 - **First person, not a guide.** It is an opinionated take, not a how-to resource, though it funnels
-  the same relocation/buyer leads to `/find-an-agent` where the topic touches where to live or buy.
+  the same relocation/buyer leads to `/find-a-pro` where the topic touches where to live or buy.
 
 ## The input (self-sourcing, with an optional steering bank)
 
@@ -69,7 +69,7 @@ real-estate engine's local grounding and fair-housing care.
 3. **`pass3_writer.md`** — writes the essay in Alex's first-person voice, following the spine (open
    cold on the change, plain-English mechanism, honest stakes, honest tension, takeaway then a real
    question), in house style (no em dashes, no fragments, plain English, no hype), with inline
-   citations and internal links, fair-housing care, and an optional `/find-an-agent` line where the
+   citations and internal links, fair-housing care, and an optional `/find-a-pro` line where the
    topic touches where to live or buy. Emits a `## METADATA` block plus `## ARTICLE` and `## X`.
 4. **`pass4_editor.md`** — audits against the brief: fact check, first-person voice, mandatory
    honest-trade-offs beat, stakes-not-hype, real mechanism, fair housing, links, style, fragments,

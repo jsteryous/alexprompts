@@ -4,7 +4,7 @@ A nightly Claude routine with ONE track: an **evergreen local-SEO** engine for t
 SC market. Each eligible night it writes ONE substantial, data-grounded local resource article
 for a winnable long-tail local query (relocation, neighborhood, cost-of-living, first-time-buyer,
 local-investor), publishes it live to `/real-estate`, drafts an X post, and closes by pointing
-relocation/buyer leads to `/find-an-agent`. This is the compounding search library. Cadence
+relocation/buyer leads to `/find-a-pro`. This is the compounding search library. Cadence
 guard keeps it to about two a week.
 
 **The news track was retired in July 2026.** The engine used to also run a daily both-sides
@@ -33,7 +33,7 @@ The orchestrator runs at most two passes per night:
    load-bearing number in a cited source (Census ACS, FHFA Greenville MSA, county Assessor/ArcGIS,
    Zillow, local publishers), and writes an 800 to 1400 word local resource article in house
    voice. Strict fair-housing rules (describe housing by objective attributes, never steer a
-   protected class), internal links to the site's tools, and a `/find-an-agent` lead-capture
+   protected class), internal links to the site's tools, and a `/find-a-pro` lead-capture
    close. Emits its own `## METADATA` and `## IMAGE` blocks, so the orchestrator publishes it.
 
 `orchestrator.md` wires the passes as cold sub-agents. STEP 1 picks the topic (cadence guard →

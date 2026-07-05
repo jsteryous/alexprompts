@@ -9,7 +9,7 @@ const links = [
   { href: "/tools", label: "Tools" },
   { href: "/real-estate", label: "Real Estate" },
   { href: "/greenville-works", label: "Greenville Works" },
-  { href: "/find-an-agent", label: "Find an Agent" },
+  { href: "/find-a-pro", label: "Find a Pro" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];

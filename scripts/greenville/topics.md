@@ -19,7 +19,7 @@ once:
 - That traffic carries the exact intent that feeds the referral goal. Someone searching "moving
   to Greenville SC neighborhoods" or "how to find a real estate agent in Greenville" is a
   relocation or transaction lead, and every evergreen piece ends by pointing them to
-  `/find-an-agent`, the site's #1 conversion surface.
+  `/find-a-pro`, the site's #1 conversion surface.
 
 Greenville Works (`scripts/tech/`) is a separate, lower-priority credibility track and is NOT the
 SEO lead play. This bank is where the site actually competes for search that turns into referrals.
@@ -121,7 +121,7 @@ A topic without a clean tool fit simply omits the line.
   - target_query: "how to find a real estate agent in Greenville SC"
   - target_slug: `how-to-find-a-real-estate-agent-greenville-sc`
   - Anchor: a genuinely useful buyer/seller guide to vetting an agent (what to ask, how commissions
-    and referrals actually work, red flags), ending honestly at `/find-an-agent`. Why it wins: it is
+    and referrals actually work, red flags), ending honestly at `/find-a-pro`. Why it wins: it is
     the closest-to-transaction query in the bank, and it maps one-to-one onto the referral offer.
     Ground it: the real questions to ask, how SC agency and referral fees work, what an agent does
     and does not do. Not a self-pitch, a real guide that earns the hand-off.
@@ -159,7 +159,7 @@ A topic without a clean tool fit simply omits the line.
     wins: seller intent is a referral just like buyer intent, and this query is durable and
     under-served honestly. Ground it: typical days-on-market and price levels (Zillow/Redfin cited),
     SC seller closing costs and the deed-recording fee, commission and net-proceeds framing. Ends at
-    `/find-an-agent` for a listing agent. Information, not financial advice.
+    `/find-a-pro` for a listing agent. Information, not financial advice.
 
 - **Is now a good time to buy a house in Greenville, SC? How to think about it**
   - target_query: "is it a good time to buy a house in Greenville SC"

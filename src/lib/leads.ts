@@ -6,7 +6,7 @@
  * This is the site's #1 revenue path: a buyer/seller/relocation lead Alex refers
  * to a vetted agent for a fee. It is deliberately separate from the newsletter
  * `subscribers` list (src/lib/subscribers.ts): a person filling out
- * /find-an-agent is a HOT lead asking to be contacted, not a newsletter signup,
+ * /find-a-pro is a HOT lead asking to be contacted, not a newsletter signup,
  * so there is no double opt-in. /api/refer stores the row here and emails Alex a
  * notification; storing succeeds even when email is not configured.
  */

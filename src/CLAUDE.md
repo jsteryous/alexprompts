@@ -67,7 +67,7 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
   request. The `section` prop carries an opt-in `showReferralCta` flag; the `/real-estate`
   route sets it so every real-estate article renders the `ReferralCta` block (links to
-  `/find-an-agent#connect`) after the body and BEFORE the newsletter box, since on a
+  `/find-a-pro#connect`) after the body and BEFORE the newsletter box, since on a
   referral-first site the buy/sell offer outranks audience growth. `/archive` and
   `/greenville-works` leave it off. Canonical is self-referential per section. `/real-estate` holds the Greenville
   posts the `scripts/greenville` routine creates; `/greenville-works` holds the local-change

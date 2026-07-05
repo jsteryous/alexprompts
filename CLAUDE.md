@@ -13,7 +13,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 
 > **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
 > site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
-> vetted agents for a referral fee** (`/find-an-agent`). Alex is a licensed SC agent who does
+> vetted agents for a referral fee** (`/find-a-pro`). Alex is a licensed SC agent who does
 > not practice, so he captures the intent and hands it off. This SUPERSEDES the earlier
 > "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
 > benefit**, not the driver. The `/about` page still works as a hiring-manager front door if
@@ -23,7 +23,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > Content runs on **two tracks**, now prioritized by their contribution to referral leads:
 > 1. **The lead engine: evergreen local-SEO real-estate guides** (`scripts/greenville/` →
 >    `/real-estate`, about 2/week). This is the track that carries buyer/relocation intent and
->    funnels to `/find-an-agent`. It is the priority; it is a slow-compounding SEO bet on a new
+>    funnels to `/find-a-pro`. It is the priority; it is a slow-compounding SEO bet on a new
 >    domain (6 to 18 months), so pair it with the relationship channel below.
 > 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
 >    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
@@ -47,7 +47,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > honest plain-English writing on **Greenville real estate** and on **how the Upstate is
 > changing** (Greenville Works), plus the free **real-estate tools** he built. Its primary
 > goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
-> vetted agents for a referral fee (see `/find-an-agent`). A **build-in-public portfolio** that
+> vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
 > the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
 > *"Real estate and technology, in plain English."*). Do **not** reintroduce the
@@ -163,7 +163,7 @@ the strategic-direction and two-track notes above.
 - **`greenville/`** — the **local Greenville, SC** engine. A nightly **self-sourcing evergreen
   local-SEO** engine: each eligible night (about two a week) it writes one substantial,
   data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/find-an-agent`. **Draft-first** (July 2026): it
+  query and funneling relocation/buyer leads to `/find-a-pro`. **Draft-first** (July 2026): it
   inserts a DRAFT and Alex publishes it at `/review`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
   mirroring Greenville Works) when the bank is empty. The old daily both-sides **news** track was retired
@@ -179,7 +179,7 @@ the strategic-direction and two-track notes above.
   Greenville and the Upstate apart (a road, a subdivision, a data center, a factory, the grid,
   fiber, water capacity, a government decision, and the technology behind local change) in
   **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
-  and funnels relocation/buyer leads to `/find-an-agent` where the topic fits, then inserts a
+  and funnels relocation/buyer leads to `/find-a-pro` where the topic fits, then inserts a
   **DRAFT** `blog_posts` row tagged `greenville works` for **`/greenville-works`** (**draft-first**
   as of July 2026, was live; the review email carries the post id + a `/review` link Alex uses to
   publish, same manual flow as the Greenville engine). Its job is twofold: unify the
@@ -247,7 +247,7 @@ under `scripts/_archive/` — do not revive it.
   shows as the article hero, an index thumbnail (`PostCover`, with the branded `>` placeholder
   when a cover is still pending), the homepage feed card, and the share/OG card. The `getFeedPosts`
   homepage stream includes Greenville Works posts.
-- `/find-an-agent` — the **real-estate referral connector** (added July 2026, replaced the
+- `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
   the play is to capture legit buyer/seller intent and **refer it to active agents for a
@@ -307,7 +307,7 @@ email.
   `cluster` column is ignored (taxonomy dropped); other dental tables
   (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
   the old project — unused by this site.
-- **`referral_leads`** is the **`/find-an-agent` conversion table** (the site's #1 revenue
+- **`referral_leads`** is the **`/find-a-pro` conversion table** (the site's #1 revenue
   path). Service-key only (RLS denies anon), deliberately separate from `subscribers`: a person
   who fills out the referral form is a HOT lead asking to be contacted, not a newsletter signup,
   so there is no double opt-in. Columns: `name`, `email`, `phone`, `intent` (buying/selling/both),

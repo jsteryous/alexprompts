@@ -60,7 +60,7 @@ outreach, not by search.
 
 ## Audience 2: the real-estate lead (secondary)
 
-Where it's applied: `/find-an-agent`, and the close of every evergreen Greenville piece
+Where it's applied: `/find-a-pro`, and the close of every evergreen Greenville piece
 (`scripts/greenville/topics.md` track).
 
 | Role | For a buyer, seller, or relocator |
@@ -86,7 +86,7 @@ question worth arguing about. No hype, no doom.
 
 - `/about` — audience 1 (the story, the "Under the hood" technical teardown, the connect CTA).
 - `/lab` — audience 1 (the running proof).
-- `/find-an-agent` and the evergreen Greenville pieces — audience 2.
+- `/find-a-pro` and the evergreen Greenville pieces — audience 2.
 - `src/lib/site.ts` `tagline`, `oneLiner`, `description` (page titles, meta descriptions, social
   cards, footer).
 - Welcome email (pasted into Substack settings, not in repo).

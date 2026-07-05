@@ -13,7 +13,7 @@ export interface ArticleSection {
   /** Section-specific line for the footer subscribe box. Falls back to the
    *  general Claude blurb when omitted. */
   blurb?: string;
-  /** Show the in-article referral CTA (links to /find-an-agent). On for the
+  /** Show the in-article referral CTA (links to /find-a-pro). On for the
    *  high-intent /real-estate section, where a reader is the best referral lead. */
   showReferralCta?: boolean;
 }

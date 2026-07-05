@@ -7,7 +7,7 @@ import { rateLimited } from "@/lib/rateLimit";
 import { site } from "@/lib/site";
 
 // POST /api/refer  { name?, email, phone?, intent?, location?, movingFrom?, timeframe?, message?, source? }
-// Public, referral-lead capture for /find-an-agent. Stores a qualified lead in
+// Public, referral-lead capture for /find-a-pro. Stores a qualified lead in
 // Supabase `referral_leads` (service key, server-side) and emails Alex a
 // notification so he can follow up warm. NOT the newsletter: no double opt-in.
 //
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
       ? (timeframeRaw as LeadTimeframe)
       : null,
     message: str(body.message, 2000),
-    source: str(body.source, 80) ?? "find-an-agent",
+    source: str(body.source, 80) ?? "find-a-pro",
     refSlug: str(body.refSlug, 200),
     referrer: str(body.referrer, 500),
     landingPath: str(body.landingPath, 300),

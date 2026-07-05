@@ -35,14 +35,14 @@ reference only, nothing there runs on a schedule anymore.
   a subdivision, a data center, a factory, the grid, fiber, water capacity, a government
   decision, and the technology behind local change) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
-  to `/find-an-agent` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
+  to `/find-a-pro` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
   `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review
   email carries the post id + a `/review` link Alex uses to publish). See `tech/routine/README.md`,
   the two-track note in the root `CLAUDE.md`, and memory `publishing-draft-first`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
   A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
   it writes one substantial, data-grounded local guide targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/find-an-agent`. It prefers the optional
+  query and funneling relocation/buyer leads to `/find-a-pro`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like Greenville Works) when the
   bank is empty. The old daily both-sides **news** track was retired July 2026 (its passes +
   collector remain, unwired). The separate `commercial.py` collector (buyers-list data) stays.

@@ -35,7 +35,7 @@ Cut or rewrite any line that crosses it. This is the headline legal risk on loca
 
 LINKS: confirm load-bearing facts and first-mentioned places are linked inline to primary or
 official sources, that no source is linked twice, and that no link points to a listing portal or a
-competing agent. Confirm any find-an-agent line appears only where the piece genuinely touches
+competing agent. Confirm any find-a-pro line appears only where the piece genuinely touches
 where to live, buy, or invest, and is absent on a pure civic-explainer piece.
 
 QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct speaker. Fix to the

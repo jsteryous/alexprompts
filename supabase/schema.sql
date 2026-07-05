@@ -426,7 +426,7 @@ ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS image_address text;
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- Referral leads — the /find-an-agent conversion surface
+-- Referral leads — the /find-a-pro conversion surface
 -- ─────────────────────────────────────────────────────────────────────────────
 -- The site's #1 revenue path: a buyer/seller/relocation lead Alex refers to a
 -- vetted agent for a referral fee. This is a HOT lead, deliberately separate from
@@ -446,7 +446,7 @@ CREATE TABLE IF NOT EXISTS referral_leads (
   moving_from  text,                 -- optional origin, when relocating
   timeframe    text,                 -- asap | 3_months | 6_months | exploring
   message      text,                 -- optional free text
-  source       text,                 -- e.g. "find-an-agent"
+  source       text,                 -- e.g. "find-a-pro"
   status       text        NOT NULL DEFAULT 'new',  -- new | contacted | placed | dead
   contacted_at timestamptz
 );

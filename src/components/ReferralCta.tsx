@@ -3,7 +3,7 @@ import Link from "next/link";
 /**
  * In-article referral CTA for the high-intent /real-estate pages. A reader on a
  * relocation or cost-of-living guide is the site's best referral lead, so every
- * such article ends with a styled offer that links to the /find-an-agent form,
+ * such article ends with a styled offer that links to the /find-a-pro form,
  * independent of whatever closing line the content engine happened to write.
  *
  * It links to the dedicated conversion page (with the qualifying form) rather than
@@ -13,9 +13,9 @@ export function ReferralCta({
   slug,
   heading = "Buying or selling in Greenville?",
   blurb = "I am a licensed South Carolina agent, and I match buyers and sellers with an agent I would trust with my own family, here or in whatever city you are moving to. It costs you nothing.",
-  cta = "Find an agent worth your time",
+  cta = "Find a pro worth your time",
 }: {
-  /** The article slug this CTA sits on, carried into /find-an-agent as ?ref= for
+  /** The article slug this CTA sits on, carried into /find-a-pro as ?ref= for
    *  first-party attribution (which article drove the lead). */
   slug?: string;
   heading?: string;
@@ -23,8 +23,8 @@ export function ReferralCta({
   cta?: string;
 }) {
   const href = slug
-    ? `/find-an-agent?ref=${encodeURIComponent(slug)}#connect`
-    : "/find-an-agent#connect";
+    ? `/find-a-pro?ref=${encodeURIComponent(slug)}#connect`
+    : "/find-a-pro#connect";
   return (
     <div className="theme-card-strong border theme-border rounded-2xl p-7 sm:p-9 text-center">
       <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-3">

@@ -63,7 +63,7 @@ THE SPINE (carry the angle's SPINE from open to close; do not drift into a meeti
 THE OFFER (only when it fits). If the piece genuinely touches where to live, buy, or invest (a
 neighborhood, a new development, prices, relocation), add ONE short, low-pressure line near the
 close noting that if the reader is moving to or within the Upstate, you can connect them with a
-vetted local agent at no cost, linking /find-an-agent. Keep it human, not salesy, and skip it
+vetted local agent at no cost, linking /find-a-pro. Keep it human, not salesy, and skip it
 entirely on a piece that is pure civic explanation (how the grid works, why a road is widening) with
 no buy-or-move angle. Do not force it.
 
@@ -125,7 +125,7 @@ OUTPUT FORMAT, exactly these labeled blocks and nothing else:
 
 ## ARTICLE
 <the full markdown essay, first person, opening cold, inline links on the load-bearing facts and
-places, the optional find-an-agent line only where it fits, ending with a short sources note that
+places, the optional find-a-pro line only where it fits, ending with a short sources note that
 links the primary source(s) and the line: *Information only, not financial, legal, or investment
 advice. Figures are current as of <year> and change over time.*>
 

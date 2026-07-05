@@ -14,7 +14,7 @@ interface Attribution {
 }
 
 /**
- * The /find-an-agent conversion form. Unlike SubscribeForm (email-only newsletter
+ * The /find-a-pro conversion form. Unlike SubscribeForm (email-only newsletter
  * double opt-in), this captures a QUALIFIED referral lead (intent + market +
  * timeframe) and POSTs to /api/refer, which stores it and emails Alex. The extra
  * fields are the difference between a warm follow-up and a cold one, so the small
@@ -37,7 +37,7 @@ const TIMEFRAMES = [
   { value: "exploring", label: "Just exploring for now" },
 ];
 
-export function ReferralForm({ source = "find-an-agent" }: { source?: string }) {
+export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -248,7 +248,7 @@ export function ReferralForm({ source = "find-an-agent" }: { source?: string }) 
         disabled={state === "submitting"}
         className="theme-cta-accent font-semibold px-6 py-3 rounded-xl disabled:opacity-60 w-full sm:w-auto"
       >
-        {state === "submitting" ? "Sending..." : "Connect me with an agent"}
+        {state === "submitting" ? "Sending..." : "Connect me with a pro"}
       </button>
 
       {state === "error" && <p className="tone-hot-text text-sm">{error}</p>}

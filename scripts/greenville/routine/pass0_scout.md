@@ -12,9 +12,22 @@ INPUTS you were handed:
 
 THE POINT OF THIS TRACK. These pieces exist to win LOCAL, LONG-TAIL, LOW-COMPETITION Google
 queries that carry real buyer or seller intent, and to funnel relocation and purchase leads to
-/find-an-agent. A brand-new domain cannot out-rank Zillow or the big brokerages on head terms
+/find-a-pro. A brand-new domain cannot out-rank Zillow or the big brokerages on head terms
 ("Greenville real estate," "homes for sale Greenville"), so do NOT pick those. You are hunting
 the specific, answerable, high-intent query that a portal does not answer well.
+
+SPEED IS THE POINT. This site is new and has almost no domain authority, so a query it can rank
+for in weeks is worth ten it might rank for in a year. Bias HARD toward the most specific,
+lowest-competition queries you can find that still carry real intent. The ideal target is a
+question a real person types that currently returns a page of weak, generic, or off-topic
+results (a portal category page, a national listicle that never mentions the actual place, an
+old forum thread), because that is a gap a genuinely useful local answer can jump into fast.
+Prefer, in rough order of winnability: a NAMED small place plus an attribute (a specific suburb,
+subdivision, corridor, or ZIP with a price, tax, commute, or school angle); a COMPARISON ("X vs
+Y" for two Upstate towns or neighborhoods); a precise COST or PROCESS question ("property taxes
+on a $400k home in Greer," "closing costs for a buyer in South Carolina"). Avoid anything even
+one step toward a head term. When two candidates both clear the bars, take the more specific,
+lower-competition one every time.
 
 THIS IS NOT A NEWS FEED. The daily news track already covers what happened this week. Your
 topic must be EVERGREEN: still true and searched in a year. Reject anything tied to a current
@@ -38,8 +51,14 @@ THE FIVE BARS. A candidate earns the slot only if it clears all five (the same b
 scripts/greenville/topics.md):
 1. Real search intent. People actually type this. Favor relocation, neighborhood,
    cost-of-living, first-time-buyer, and local-investor phrasings.
-2. Winnable. Long-tail and local, not a head term the portals own. A named neighborhood or a
-   specific question is winnable; a generic city-wide head term is not.
+2. Winnable FAST. Long-tail and local, not a head term the portals own. A named neighborhood or
+   a specific question is winnable; a generic city-wide head term is not. Judge competition
+   concretely: search the exact phrase and look at page one. It is winnable if page one is weak,
+   meaning it is dominated by portal CATEGORY pages, national listicles that barely mention the
+   place, thin auto-generated pages, or old forum threads, and NOT by a dedicated, well-written
+   local guide that already answers the query. If a strong local answer already ranks, the query
+   is taken, so move on. Favor queries specific enough that only a handful of pages even try to
+   answer them.
 3. Evergreen. Still true and useful in a year. Not a this-week event.
 4. Lead-relevant. The searcher could plausibly become a buyer or seller Alex can refer. Closer
    to a relocation or purchase decision is better.
