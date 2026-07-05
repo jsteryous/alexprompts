@@ -95,7 +95,13 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   it conflicts with the auto-injected file.
 - **`app/layout.tsx`** — root metadata + `WebSite`/`Person` JSON-LD from `site.ts`. The
   inline `<head>` script sets the `dark` class pre-hydration from the
-  `alexprompts-theme` localStorage key (must match `ThemeProvider.tsx`).
+  `alexprompts-theme` localStorage key (must match `ThemeProvider.tsx`). Also renders
+  **`<Analytics />`** (`@vercel/analytics/next`) for **Vercel Web Analytics** (traffic, the
+  page-view side of "is the SEO bet working"; lead attribution is the separate first-party
+  path in `referral_leads`). It is **cookieless, stores no PII, and needs no consent banner**,
+  so it fits the site's privacy ethos. Serves first-party from `/_vercel/insights`, is a no-op
+  locally, and **requires Web Analytics to be enabled for the project in the Vercel dashboard**
+  (Hobby free tier; no billing).
 
 ## Design System
 

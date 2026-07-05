@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -93,6 +94,10 @@ export default function RootLayout({
           <Footer />
           <DarkModeToggle />
         </ThemeProvider>
+        {/* Vercel Web Analytics: cookieless, no PII, no consent banner needed.
+            Serves first-party from /_vercel/insights; enable it for the project in
+            the Vercel dashboard (Hobby free tier). No-op locally / when disabled. */}
+        <Analytics />
       </body>
     </html>
   );
