@@ -77,6 +77,75 @@ export function postBroadcastEmail(opts: {
   return { subject, html, text };
 }
 
+/** Internal notification to Alex when a referral lead comes in via /find-an-agent.
+ *  This goes to Alex, not the lead, so it is plain and information-dense: it leads
+ *  with the qualifying details so he can follow up warm within a day. */
+export function leadNotifyEmail(lead: {
+  name: string | null;
+  email: string;
+  phone: string | null;
+  intent: string | null;
+  location: string | null;
+  movingFrom: string | null;
+  timeframe: string | null;
+  message: string | null;
+}): { subject: string; html: string; text: string } {
+  const who = lead.name?.trim() || lead.email;
+  const subject = `New referral lead: ${who}`;
+
+  const rows: Array<[string, string | null]> = [
+    ["Name", lead.name],
+    ["Email", lead.email],
+    ["Phone", lead.phone],
+    ["Looking to", prettyIntent(lead.intent)],
+    ["Market", lead.location],
+    ["Moving from", lead.movingFrom],
+    ["Timeframe", prettyTimeframe(lead.timeframe)],
+    ["Notes", lead.message],
+  ];
+
+  const rowsHtml = rows
+    .filter(([, v]) => v && v.trim())
+    .map(
+      ([label, v]) =>
+        `<tr>
+           <td style="padding:6px 12px 6px 0;color:${MUTED};font-size:14px;white-space:nowrap;vertical-align:top;">${label}</td>
+           <td style="padding:6px 0;color:${INK};font-size:14px;">${escapeHtml(v as string)}</td>
+         </tr>`,
+    )
+    .join("");
+
+  const html = shell(
+    `<h1 style="font-size:21px;font-weight:700;margin:0 0 14px;color:${INK};">New referral lead</h1>
+     <p style="margin:0 0 18px;color:${MUTED};">Someone asked to be matched with an agent through /find-an-agent. Reach out while it is warm.</p>
+     <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">${rowsHtml}</table>
+     <p style="margin:22px 0 0;">${btn(`mailto:${lead.email}`, "Reply to this lead")}</p>`,
+    `Sent from the ${site.name} referral form at ${site.url}/find-an-agent.`,
+  );
+
+  const text = rows
+    .filter(([, v]) => v && v.trim())
+    .map(([label, v]) => `${label}: ${v}`)
+    .join("\n");
+
+  return { subject, html, text: `New referral lead\n\n${text}` };
+}
+
+function prettyIntent(v: string | null): string | null {
+  if (v === "buying") return "Buy a home";
+  if (v === "selling") return "Sell a home";
+  if (v === "both") return "Buy and sell";
+  return v;
+}
+
+function prettyTimeframe(v: string | null): string | null {
+  if (v === "asap") return "As soon as possible";
+  if (v === "3_months") return "In the next 3 months";
+  if (v === "6_months") return "In the next 6 months";
+  if (v === "exploring") return "Just exploring";
+  return v;
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")

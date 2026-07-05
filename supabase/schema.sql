@@ -424,3 +424,36 @@ ALTER TABLE blog_posts
 -- fills cover_image. NULL = no place to pin (the post stays cover-less).
 ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS image_address text;
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Referral leads — the /find-an-agent conversion surface
+-- ─────────────────────────────────────────────────────────────────────────────
+-- The site's #1 revenue path: a buyer/seller/relocation lead Alex refers to a
+-- vetted agent for a referral fee. This is a HOT lead, deliberately separate from
+-- the newsletter `subscribers` list (no double opt-in): the person is asking to be
+-- contacted, so /api/refer stores the row here and emails Alex a notification. It
+-- is qualified at capture (intent + market + timeframe) so the follow-up is warm.
+-- Service key only (RLS denies anon/auth), same as `subscribers`.
+
+CREATE TABLE IF NOT EXISTS referral_leads (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at   timestamptz NOT NULL DEFAULT now(),
+  name         text,
+  email        text        NOT NULL,
+  phone        text,
+  intent       text,                 -- buying | selling | both
+  location     text,                 -- the market they are buying/selling in (or moving to)
+  moving_from  text,                 -- optional origin, when relocating
+  timeframe    text,                 -- asap | 3_months | 6_months | exploring
+  message      text,                 -- optional free text
+  source       text,                 -- e.g. "find-an-agent"
+  status       text        NOT NULL DEFAULT 'new',  -- new | contacted | placed | dead
+  contacted_at timestamptz
+);
+
+-- No public access. The service key (server route) bypasses RLS; anon/auth get
+-- nothing, so leads are never readable from the client.
+ALTER TABLE referral_leads ENABLE ROW LEVEL SECURITY;
+
+CREATE INDEX IF NOT EXISTS referral_leads_status_idx
+  ON referral_leads (status, created_at DESC);

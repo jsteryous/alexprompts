@@ -11,43 +11,53 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 
 ## What this is
 
-> **STRATEGIC DIRECTION (July 2026): this site is Alex's tech-sales portfolio first.** Its
-> real job is proof-of-work that lands Alex a SaaS / tech-sales role: evidence that a
-> non-engineer salesperson genuinely understands AI and can ship with it. The audience that
-> matters most is a **hiring manager**, not a real-estate lead; the tools and articles are
-> that evidence, not a real-estate business. See memory `alexprompts-portfolio-pivot` and
-> `content-two-track-strategy`. Content runs on **two tracks**: **real-estate pieces as
-> vertical proof** (about 2/week, "I can take a technology and go deep on one industry's
-> real problems") and **Greenville Works, first-person deep-dives in Alex's own voice** (1 to
-> 2/week; renamed from the national "Lab" tech track in July 2026). Each takes ONE thing
-> reshaping Greenville and the Upstate apart (development, roads, infrastructure, utilities,
-> manufacturing, data centers, population growth, government decisions, and technology when it
-> touches the Upstate), explains how it works in plain English, shows what it means for where
-> we live, work, and invest, and names the honest trade-offs. Refocusing the tech track from
-> national to local unifies the site around one promise, wins winnable local SEO, and funnels
-> referral leads, while still proving Alex can take a real system apart and translate it into
-> business value. Depth beats volume here, because a hiring manager
-> reads two or three pieces, not a feed. The public site copy described below still presents
-> the brand as Claude-for-real-estate for now; that RE-facing framing is retained
-> deliberately and re-messaging the site is a separate, later call.
+> **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
+> site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
+> vetted agents for a referral fee** (`/find-an-agent`). Alex is a licensed SC agent who does
+> not practice, so he captures the intent and hands it off. This SUPERSEDES the earlier
+> "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
+> benefit**, not the driver. The `/about` page still works as a hiring-manager front door if
+> Alex happens to share the site on a job board, but the site is no longer built *for* hiring
+> managers. See memory `alexprompts-portfolio-pivot` and `content-two-track-strategy`.
+>
+> Content runs on **two tracks**, now prioritized by their contribution to referral leads:
+> 1. **The lead engine: evergreen local-SEO real-estate guides** (`scripts/greenville/` →
+>    `/real-estate`, about 2/week). This is the track that carries buyer/relocation intent and
+>    funnels to `/find-an-agent`. It is the priority; it is a slow-compounding SEO bet on a new
+>    domain (6 to 18 months), so pair it with the relationship channel below.
+> 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
+>    `/greenville-works`, first-person deep-dives in Alex's own voice, 1 to 2/week; renamed
+>    from the national "Lab" tech track in July 2026). Each takes ONE thing reshaping Greenville
+>    and the Upstate apart (development, roads, infrastructure, utilities, manufacturing, data
+>    centers, population growth, government decisions, and technology when it touches the
+>    Upstate), explains how it works, and names the honest trade-offs. It builds local topical
+>    authority and makes Alex look legit, but it does NOT directly capture leads, so it is the
+>    lower-priority track and a candidate to pause or slow if effort is scarce.
+>
+> **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
+> faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
+> the solid agents he already knows). The site is the credibility layer that makes those
+> conversations land. The public site copy below still presents the brand as
+> Claude-for-real-estate; re-messaging the site is a separate, later call.
 
 > **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
 > real-estate agents and investors" teaching framing (the "voice 3" how-to product) was
 > **removed in July 2026**. The site is now Alex's personal place with two kinds of content,
 > honest plain-English writing on **Greenville real estate** and on **how the Upstate is
-> changing** (Greenville Works), plus the free **real-estate tools** he built. It serves two real goals:
-> a **build-in-public portfolio** that showcases Alex to hiring managers (see `/about`), and
-> a **referral connector** that captures buyer/seller leads to hand to vetted agents (see
-> `/find-an-agent`). The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
+> changing** (Greenville Works), plus the free **real-estate tools** he built. Its primary
+> goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
+> vetted agents for a referral fee (see `/find-an-agent`). A **build-in-public portfolio** that
+> showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
+> the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
 > *"Real estate and technology, in plain English."*). Do **not** reintroduce the
 > single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
 > frontier-tech-news framing. See memory `alexprompts-portfolio-pivot`,
 > `content-two-track-strategy`, and `greenville-evergreen-seo-track`.
 
 **Alex Prompts** is a personal media brand by Alex Steryous. It publishes on **Substack (the
-newsletter and home base), YouTube, TikTok, and X**. The near-term job is the tech-sales
-portfolio described in the strategic direction note above; building an audience and a referral
-lead stream are the longer-term goals.
+newsletter and home base), YouTube, TikTok, and X**. The job is the referral lead stream
+described in the strategic direction note above; building an audience is the supporting
+longer-term goal, and the tech-sales portfolio is an opportunistic side benefit via `/about`.
 
 **The content is RESEARCH + analysis, not how-to.** (The old third mode, "HOW-TO education"
 that taught agents to point Claude at their work, was the removed voice 3; do not bring it
@@ -200,8 +210,11 @@ under `scripts/_archive/` — do not revive it.
   ships. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
   note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
   footer, and sitemap, so a tool ships in one place and appears everywhere.
-- `/about` — the **hiring-manager front door** (link resumes/LinkedIn straight here, not to
-  `/`). Who Alex is (salesperson, ~8 yrs BD/sales, aiming back into tech sales), why he built
+- `/about` — the **opportunistic hiring-manager front door** (if Alex shares the site on a
+  job board he can link resumes/LinkedIn straight here, not to `/`). It is no longer what the
+  site is *for* (referral revenue is the north star), but it costs nothing to keep and catches
+  a hiring manager when one happens to look. Who Alex is (salesperson, ~8 yrs BD/sales, aiming
+  back into tech sales), why he built
   the site, an "Under the hood" technical teardown of how the site works (self-publishing AI
   agents, the double-opt-in email system, the tools + auto-rendered covers, built solo inside
   free tiers) framed as proof he is a self-taught builder who genuinely enjoys tech, then a
@@ -230,11 +243,16 @@ under `scripts/_archive/` — do not revive it.
   the play is to capture legit buyer/seller intent and **refer it to active agents for a
   referral fee** (referrals are not local: relocation leads to any market count, which fits the
   national Alex Prompts audience). Deliberately NOT a listings page: a new domain cannot
-  out-rank the portals on listing searches, and Alex cannot service clients. The page is
-  honest connector copy (Greenville + relocating anywhere) plus an email **capture**
-  (`SubscribeForm`, `source="agent-referral"`) that Alex follows up on and hands to a vetted
-  agent. Static, not Supabase-backed, low-maintenance by design. Keep it light: the site's #1
-  job is the tech-sales portfolio, referrals are a side stream. (The eXp BoldTrail IDX site
+  out-rank the portals on listing searches, and Alex cannot service clients. **This page is the
+  site's #1 conversion surface** now that referral revenue is the north star. It was rebuilt
+  July 2026 from a light email capture into a real conversion page: honest connector copy +
+  a "How this works" 3-step + trust cards, and a **qualifying lead form** (`ReferralForm`) that
+  captures intent (buy/sell/both), market, timeframe, and contact, then POSTs to **`/api/refer`**.
+  That route stores a row in the Supabase **`referral_leads`** table (service key, RLS-denied to
+  anon, NOT the newsletter `subscribers` list, so no double opt-in for a hot lead) and emails Alex
+  a notification (`leadNotifyEmail`) so he can follow up warm. The store succeeds even when Resend
+  is unconfigured (the row is the source of truth). **Requires the `referral_leads` table from
+  `supabase/schema.sql` to be applied.** (The eXp BoldTrail IDX site
   Alex set up is not used here; if he goes referral-only to save active dues he loses it, and
   this model does not need it.)
 - `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
@@ -279,6 +297,14 @@ email.
   `cluster` column is ignored (taxonomy dropped); other dental tables
   (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
   the old project — unused by this site.
+- **`referral_leads`** is the **`/find-an-agent` conversion table** (the site's #1 revenue
+  path). Service-key only (RLS denies anon), deliberately separate from `subscribers`: a person
+  who fills out the referral form is a HOT lead asking to be contacted, not a newsletter signup,
+  so there is no double opt-in. Columns: `name`, `email`, `phone`, `intent` (buying/selling/both),
+  `location`, `moving_from`, `timeframe`, `message`, `source`, `status` (new/contacted/placed/dead),
+  `contacted_at`. Written by `/api/refer` (via `src/lib/leads.ts`), which also emails Alex a
+  notification (`leadNotifyEmail`). **Requires the `referral_leads` table from
+  `supabase/schema.sql` to be applied.**
 
 ## Environment Variables
 
@@ -300,6 +326,8 @@ email.
 | `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Alex Prompts <alex@alexprompts.com>`. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
 | `SUBSCRIBE_RATE_LIMIT` | Optional. Per-IP signups/hour allowed on `/api/subscribe` (default 5). Plus a hardcoded per-address cap of 3 confirmation sends/hour. Soft, in-memory (`src/lib/rateLimit.ts`, resets on cold start); blunts signup spam and confirmation-email bombing. |
+| `LEADS_NOTIFY_TO` | Optional. Where `/api/refer` sends the referral-lead notification email. Falls back to `EMAIL_REPLY_TO`, then `site.email` (`hello@alexprompts.com`). Set this to the inbox Alex actually watches so a new lead pings him fast. The lead is stored in `referral_leads` regardless, so an unset/unverified inbox never loses a lead. |
+| `REFER_RATE_LIMIT` | Optional. Per-IP referral-form submits/hour on `/api/refer` (default 5). Soft, in-memory (same `rateLimit.ts` caveat). A real buyer submits once, so this only blunts abuse. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
 > to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.
