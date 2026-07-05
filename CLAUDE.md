@@ -26,13 +26,14 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 >    funnels to `/find-an-agent`. It is the priority; it is a slow-compounding SEO bet on a new
 >    domain (6 to 18 months), so pair it with the relationship channel below.
 > 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
->    `/greenville-works`, first-person deep-dives in Alex's own voice, 1 to 2/week; renamed
->    from the national "Lab" tech track in July 2026). Each takes ONE thing reshaping Greenville
+>    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
+>    from 1 to 2 via a code cadence guard, July 2026); renamed from the national "Lab" tech track
+>    in July 2026). Each takes ONE thing reshaping Greenville
 >    and the Upstate apart (development, roads, infrastructure, utilities, manufacturing, data
 >    centers, population growth, government decisions, and technology when it touches the
 >    Upstate), explains how it works, and names the honest trade-offs. It builds local topical
 >    authority and makes Alex look legit, but it does NOT directly capture leads, so it is the
->    lower-priority track and a candidate to pause or slow if effort is scarce.
+>    lower-priority track, deliberately slowed to about weekly.
 >
 > **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
 > faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
@@ -178,7 +179,10 @@ strategic-direction and two-track notes above.
   same as the Greenville engine; a verify email still goes out for after-the-fact spot-check,
   and a run falls back to DRAFT only if dedup was unavailable). Its job is twofold: unify the
   site around one local promise (better SEO and referral leads) and still prove Alex can take a
-  real system apart and translate it into what it means for a business. Target cadence 1–2/week.
+  real system apart and translate it into what it means for a business. Target cadence about
+  1/week, enforced in code by a STEP 0B cadence guard (skip if a `greenville works` post is under
+  6 days old): it is the lower-priority credibility track now that referral revenue is the north
+  star and the `/real-estate` evergreen engine is the lead engine.
   See `scripts/tech/routine/README.md`.
 
 The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the

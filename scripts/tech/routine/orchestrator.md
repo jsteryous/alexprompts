@@ -76,6 +76,13 @@ STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never rep
      continue on the drafts-branch log alone, but you MUST then publish as a DRAFT in STEP 5:
      without the live-site check you cannot fully guarantee you are not repeating a topic, so
      a human confirms that run before it goes live.
+  3. CADENCE GUARD (depth over volume, about one piece a week). From the same query, look at the
+     most recent `greenville works` row. If it exists and its created_at is within the last 6
+     days, STOP: post nothing tonight, report "NO RUN (cadence)", and end the run cleanly. This
+     is a normal, expected outcome. Greenville Works is the lower-priority credibility track now
+     that referral revenue is the north star (the /real-estate evergreen engine is the lead
+     engine), so it runs at most about weekly. If the connector was unavailable in check 2 you
+     cannot read cadence: proceed, but publish as a DRAFT in STEP 5 as that check already requires.
   Use /tmp/gw/done.txt in STEP 0 to skip an already-covered topic.
 
 STEP 1, PASS 1, RESEARCHER. Read scripts/tech/routine/pass1_researcher.md. Hand its full

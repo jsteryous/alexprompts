@@ -83,8 +83,11 @@ the X post) and pushes the done-log to the `drafts` branch.
 ## Cadence and where it posts
 
 - **Routine:** runs as a scheduled Claude cloud agent (`/schedule`) pointed at `orchestrator.md`.
-  Target cadence is 1 to 2 pieces per week (see the two-track plan in the root `CLAUDE.md`). There
-  is no collector to run first.
+  Target cadence is about ONE piece per week, enforced in code by the STEP 0B cadence guard (skip
+  the run if a `greenville works` post was created in the last 6 days). Greenville Works is the
+  lower-priority credibility track now that referral revenue is the north star and the `/real-estate`
+  evergreen engine is the lead engine (see the two-track plan in the root `CLAUDE.md`), so it is
+  deliberately slowed. There is no collector to run first.
 - **Website:** the routine inserts a `blog_posts` row tagged `greenville works` as **PUBLISHED**,
   live at `/greenville-works/<slug>` within about 5 minutes, the same autonomous model as the
   Greenville real-estate engine. The `greenville works` tag routes it via `sectionOf` in
