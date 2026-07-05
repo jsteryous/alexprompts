@@ -4,6 +4,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { coverImageFromBody, formatDate, sectionOf, type FullPost } from "@/lib/posts";
 import { SubscribeForm } from "@/components/SubscribeForm";
+import { ReferralCta } from "@/components/ReferralCta";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
@@ -12,6 +13,9 @@ export interface ArticleSection {
   /** Section-specific line for the footer subscribe box. Falls back to the
    *  general Claude blurb when omitted. */
   blurb?: string;
+  /** Show the in-article referral CTA (links to /find-an-agent). On for the
+   *  high-intent /real-estate section, where a reader is the best referral lead. */
+  showReferralCta?: boolean;
 }
 
 /**
@@ -132,6 +136,14 @@ export default async function ArticleView({
             </figure>
           )}
           <div className="theme-prose prose max-w-none" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+
+          {/* The referral CTA comes BEFORE the newsletter box on purpose: on a
+              referral-first site, the buy/sell offer outranks audience growth. */}
+          {section.showReferralCta && (
+            <div className="mt-14">
+              <ReferralCta />
+            </div>
+          )}
         </div>
       </section>
 

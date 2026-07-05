@@ -45,6 +45,7 @@ export default async function RealEstatePostPage({ params }: Props) {
       section={{
         label: "Real Estate",
         basePath: "/real-estate",
+        showReferralCta: true,
         blurb:
           "I write honest, plain-English guides to buying, selling, and living in Greenville, South Carolina, grounded in real local data. Subscribe and I will send the next one straight to your inbox.",
       }}

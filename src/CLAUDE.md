@@ -65,7 +65,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   **`src/app/greenville-works/`** — the three section index + `[slug]` routes. All three `[slug]`
   pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
-  request. Canonical is self-referential per section. `/real-estate` holds the Greenville
+  request. The `section` prop carries an opt-in `showReferralCta` flag; the `/real-estate`
+  route sets it so every real-estate article renders the `ReferralCta` block (links to
+  `/find-an-agent#connect`) after the body and BEFORE the newsletter box, since on a
+  referral-first site the buy/sell offer outranks audience growth. `/archive` and
+  `/greenville-works` leave it off. Canonical is self-referential per section. `/real-estate` holds the Greenville
   posts the `scripts/greenville` routine creates; `/greenville-works` holds the local-change
   deep-dives the `scripts/tech` routine creates. Both engines **auto-publish live** (status
   `PUBLISHED`, with a verify email for after-the-fact spot-check + unpublish at `/review`; a run
