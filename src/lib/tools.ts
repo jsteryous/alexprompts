@@ -73,6 +73,33 @@ export const toolCatalog: ToolEntry[] = [
     cta: "Scan an area",
   },
   {
+    slug: "cost-of-living",
+    title: "Greenville cost-of-living compare",
+    blurb:
+      "See how far your income goes in Greenville versus where you live now, using federal price data for 27 metros.",
+    audience: "both",
+    status: "live",
+    cta: "Compare your city",
+  },
+  {
+    slug: "property-tax",
+    title: "SC property tax estimator",
+    blurb:
+      "Estimate the yearly property tax on a Greenville home, and see why a primary residence pays far less than the same house as a rental.",
+    audience: "both",
+    status: "live",
+    cta: "Estimate the tax",
+  },
+  {
+    slug: "schools",
+    title: "Greenville school lookup",
+    blurb:
+      "Enter a Greenville address and jump straight to its zoned schools, ratings, and state report cards, from the official sources.",
+    audience: "both",
+    status: "live",
+    cta: "Find schools",
+  },
+  {
     slug: "buyers-list",
     title: "Greenville commercial buyers",
     blurb:
