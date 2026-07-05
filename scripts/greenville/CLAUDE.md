@@ -1,13 +1,16 @@
 # Greenville real-estate engine — `scripts/greenville/`
 
-A local content vertical, separate from `ai_news/`. A nightly Claude routine that runs ONE
-track: an **evergreen local-SEO** engine for the Greenville, SC market. Each eligible night it
+A local content vertical, separate from `ai_news/`. A scheduled Claude routine (a few nights a
+week, not nightly) that runs ONE
+track: an **evergreen local-SEO** engine for the Greenville, SC market. On each scheduled run it
 writes ONE substantial, data-grounded local resource article (a relocation, neighborhood,
 cost-of-living, first-time-buyer, or local-investor guide), publishes it live to `/real-estate`,
 and ends it by pointing relocation and buyer leads to `/find-a-pro`. This is the search
 library that actually ranks and compounds on winnable local long-tail queries ("moving to
-Greenville SC neighborhoods," "cost of living in Greenville SC"). Depth over volume: about two
-pieces a week, enforced by a cadence guard. See memory [[greenville-evergreen-seo-track]].
+Greenville SC neighborhoods," "cost of living in Greenville SC"). Depth over volume: about two to
+three pieces a week, set by the CLOUD SCHEDULE (a few nights, e.g. Mon/Wed/Fri), with an in-code
+safety guard as a backstop only (skip on a same-day duplicate run, or when 3+ evergreen drafts are
+already awaiting review). See memory [[greenville-evergreen-seo-track]].
 
 **The news track was RETIRED in July 2026.** The engine used to also run a daily both-sides
 Greenville real-estate NEWS post driven by a Google-News signal collector. It was retired
@@ -70,12 +73,14 @@ python -m greenville.collect --limit 15
 - **`.github/workflows/collect-greenville.yml`** (DAILY, news signal) is now **unused** (the
   news track is retired). It is harmless (it just commits a signal file nobody reads) and left
   in place for reversibility; safe to disable.
-- The **routine** runs nightly as a scheduled Claude cloud agent pointed at
-  `routine/orchestrator.md`. Each eligible night (cadence permitting, about two a week) it picks
+- The **routine** runs on a scheduled Claude cloud agent (a few nights a week, e.g. Mon/Wed/Fri,
+  NOT nightly, so it does not spin up and bail on cooldown nights) pointed at
+  `routine/orchestrator.md`. On each scheduled run it picks
   a topic (bank first, else the scout), writes an evergreen local guide, and creates a **DRAFT**
   `blog_posts` row tagged `greenville`, `evergreen` (draft-first as of July 2026, was live), plus
   a Gmail review packet with the article, the X post, and a `/review` link Alex uses to publish.
-  On a cadence-cooldown night it posts nothing. See `routine/README.md`.
+  The STEP 1 safety guard makes it post nothing on a same-day duplicate run or when 3+ evergreen
+  drafts are already awaiting review. See `routine/README.md`.
 
 ## Publishing + dedup
 

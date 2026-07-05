@@ -185,9 +185,10 @@ the strategic-direction and two-track notes above.
   publish, same manual flow as the Greenville engine). Its job is twofold: unify the
   site around one local promise (better SEO and referral leads) and still prove Alex can take a
   real system apart and translate it into what it means for a business. Target cadence about
-  1/week, enforced in code by a STEP 0B cadence guard (skip if a `greenville works` post is under
-  6 days old): it is the lower-priority credibility track now that referral revenue is the north
-  star and the `/real-estate` evergreen engine is the lead engine.
+  1/week, set by the CLOUD SCHEDULE (one night, e.g. Sunday), with a STEP 0B safety guard as a
+  backstop only (skip on a same-day duplicate run, or when 2+ Greenville Works drafts are already
+  awaiting review): it is the lower-priority credibility track now that referral revenue is the
+  north star and the `/real-estate` evergreen engine is the lead engine.
   See `scripts/tech/routine/README.md`.
 
 The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
