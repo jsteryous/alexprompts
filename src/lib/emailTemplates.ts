@@ -89,6 +89,11 @@ export function leadNotifyEmail(lead: {
   movingFrom: string | null;
   timeframe: string | null;
   message: string | null;
+  refSlug?: string | null;
+  referrer?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
 }): { subject: string; html: string; text: string } {
   const who = lead.name?.trim() || lead.email;
   const subject = `New referral lead: ${who}`;
@@ -102,6 +107,7 @@ export function leadNotifyEmail(lead: {
     ["Moving from", lead.movingFrom],
     ["Timeframe", prettyTimeframe(lead.timeframe)],
     ["Notes", lead.message],
+    ["Came from", leadSource(lead)],
   ];
 
   const rowsHtml = rows
@@ -129,6 +135,23 @@ export function leadNotifyEmail(lead: {
     .join("\n");
 
   return { subject, html, text: `New referral lead\n\n${text}` };
+}
+
+/** A human one-line "where did this lead come from" for the notification, from the
+ *  first-party attribution. Prefers the article that drove it, then a campaign tag,
+ *  then the raw referrer. */
+function leadSource(lead: {
+  refSlug?: string | null;
+  referrer?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+}): string | null {
+  if (lead.refSlug?.trim()) return `Article: ${lead.refSlug.trim()}`;
+  const utm = [lead.utmSource, lead.utmMedium, lead.utmCampaign].filter(Boolean).join(" / ");
+  if (utm) return `Campaign: ${utm}`;
+  if (lead.referrer?.trim()) return lead.referrer.trim();
+  return null;
 }
 
 function prettyIntent(v: string | null): string | null {

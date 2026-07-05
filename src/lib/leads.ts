@@ -36,6 +36,13 @@ export interface LeadInput {
   timeframe: LeadTimeframe | null;
   message: string | null;
   source: string | null;
+  /** First-party attribution (Phase 4): where the lead came from. */
+  refSlug: string | null; // article slug the in-article CTA carried in ?ref=
+  referrer: string | null; // document.referrer
+  landingPath: string | null; // path the form was submitted from
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
 }
 
 /** Insert one referral lead. Throws on a database error so the route can 500. */
@@ -51,6 +58,12 @@ export async function insertLead(lead: LeadInput): Promise<void> {
     timeframe: lead.timeframe,
     message: lead.message,
     source: lead.source,
+    ref_slug: lead.refSlug,
+    referrer: lead.referrer,
+    landing_path: lead.landingPath,
+    utm_source: lead.utmSource,
+    utm_medium: lead.utmMedium,
+    utm_campaign: lead.utmCampaign,
   });
   if (error) throw new Error(error.message);
 }

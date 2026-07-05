@@ -457,3 +457,20 @@ ALTER TABLE referral_leads ENABLE ROW LEVEL SECURITY;
 
 CREATE INDEX IF NOT EXISTS referral_leads_status_idx
   ON referral_leads (status, created_at DESC);
+
+-- First-party attribution (Phase 4). No third-party analytics: the referral form
+-- itself records where the lead came from so Alex can see which article or channel
+-- drives leads (is the SEO bet working?). ref_slug is the article slug the in-article
+-- CTA carried in ?ref=; referrer is document.referrer; landing_path is where the form
+-- was submitted; the utm_* fields carry campaign tags from social/paid links.
+ALTER TABLE referral_leads
+  ADD COLUMN IF NOT EXISTS ref_slug     text,
+  ADD COLUMN IF NOT EXISTS referrer     text,
+  ADD COLUMN IF NOT EXISTS landing_path text,
+  ADD COLUMN IF NOT EXISTS utm_source   text,
+  ADD COLUMN IF NOT EXISTS utm_medium   text,
+  ADD COLUMN IF NOT EXISTS utm_campaign text;
+
+-- Which articles drive leads: group by ref_slug over this index.
+CREATE INDEX IF NOT EXISTS referral_leads_ref_slug_idx
+  ON referral_leads (ref_slug);

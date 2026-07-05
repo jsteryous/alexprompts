@@ -306,9 +306,14 @@ email.
   who fills out the referral form is a HOT lead asking to be contacted, not a newsletter signup,
   so there is no double opt-in. Columns: `name`, `email`, `phone`, `intent` (buying/selling/both),
   `location`, `moving_from`, `timeframe`, `message`, `source`, `status` (new/contacted/placed/dead),
-  `contacted_at`. Written by `/api/refer` (via `src/lib/leads.ts`), which also emails Alex a
-  notification (`leadNotifyEmail`). **Requires the `referral_leads` table from
-  `supabase/schema.sql` to be applied.**
+  `contacted_at`, plus **first-party attribution** (Phase 4, no third-party analytics): `ref_slug`
+  (the article slug the in-article `ReferralCta` carried in `?ref=`), `referrer` (document.referrer),
+  `landing_path`, and `utm_source`/`utm_medium`/`utm_campaign`. `ReferralForm` captures these on
+  mount and posts them; `/api/refer` stores them and the notification (`leadNotifyEmail`) shows a
+  "Came from" line (article > campaign > referrer). To see which content drives leads, group by
+  `ref_slug`: `select ref_slug, count(*) from referral_leads group by ref_slug order by 2 desc;`.
+  Written by `/api/refer` (via `src/lib/leads.ts`), which also emails Alex a notification. **Requires
+  the `referral_leads` table + attribution columns from `supabase/schema.sql` to be applied.**
 
 ## Environment Variables
 

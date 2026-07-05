@@ -77,6 +77,12 @@ export async function POST(req: NextRequest) {
       : null,
     message: str(body.message, 2000),
     source: str(body.source, 80) ?? "find-an-agent",
+    refSlug: str(body.refSlug, 200),
+    referrer: str(body.referrer, 500),
+    landingPath: str(body.landingPath, 300),
+    utmSource: str(body.utmSource, 120),
+    utmMedium: str(body.utmMedium, 120),
+    utmCampaign: str(body.utmCampaign, 120),
   };
 
   try {

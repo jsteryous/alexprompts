@@ -1,6 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+/** First-party attribution captured once on mount from the URL and referrer, so we
+ *  can see which article or channel drove a lead without any third-party analytics. */
+interface Attribution {
+  refSlug: string | null;
+  referrer: string | null;
+  landingPath: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+}
 
 /**
  * The /find-an-agent conversion form. Unlike SubscribeForm (email-only newsletter
@@ -36,6 +47,22 @@ export function ReferralForm({ source = "find-an-agent" }: { source?: string }) 
   const [message, setMessage] = useState("");
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
+  const attribution = useRef<Attribution | null>(null);
+
+  // Capture attribution once, on mount. The in-article CTA passes ?ref=<slug>;
+  // document.referrer and any utm_* params cover organic, social, and paid.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const val = (k: string) => params.get(k)?.trim() || null;
+    attribution.current = {
+      refSlug: val("ref"),
+      referrer: document.referrer || null,
+      landingPath: window.location.pathname || null,
+      utmSource: val("utm_source"),
+      utmMedium: val("utm_medium"),
+      utmCampaign: val("utm_campaign"),
+    };
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -55,6 +82,7 @@ export function ReferralForm({ source = "find-an-agent" }: { source?: string }) 
           timeframe: timeframe || undefined,
           message,
           source,
+          ...attribution.current,
         }),
       });
       const json = await res.json().catch(() => ({}));

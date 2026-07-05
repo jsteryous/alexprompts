@@ -141,7 +141,7 @@ export default async function ArticleView({
               referral-first site, the buy/sell offer outranks audience growth. */}
           {section.showReferralCta && (
             <div className="mt-14">
-              <ReferralCta />
+              <ReferralCta slug={post.slug} />
             </div>
           )}
         </div>
