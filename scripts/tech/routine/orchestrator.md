@@ -99,15 +99,20 @@ plus /tmp/gw/pass3_draft.md and /tmp/gw/pass1_brief.md to a fresh sub-agent. Sav
 corrected three-block output to /tmp/gw/pass4_final.md.
 
 STEP 5, PUBLISH THE POST (LIVE). Parse the ## METADATA block from /tmp/gw/pass4_final.md
-(title, slug, summary, tags, source_url) and take the ## ARTICLE markdown as the body.
-Using the Supabase connector, INSERT one row into blog_posts:
+(title, slug, summary, tags, source_url), the ## IMAGE block (subject), and take the ## ARTICLE
+markdown as the body. Using the Supabase connector, INSERT one row into blog_posts:
   - title = METADATA title
   - slug = METADATA slug (if a row with that slug already exists, append "-<YYYY-MM-DD>")
   - summary = METADATA summary
   - body_md = the full ## ARTICLE markdown
-  - cover_image = NULL (Greenville Works pieces are text-forward; the /greenville-works list has
-    no thumbnails and the article renders without a hero. There is NO image step and NO finalize
-    cron for this section.)
+  - cover_image = NULL. Leave it null; the /api/finalize-greenville cron on Vercel fills it after
+    publish, because the agent's sandbox cannot render an image. The article then shows that photo
+    as its hero (ArticleView renders cover_image when the body has no lead image).
+  - image_address = the ## IMAGE subject key (e.g. 'downtown-falls'). This is what the finalize cron
+    maps to a curated Greenville library photo (src/lib/greenvilleCovers.ts), the SAME hand-picked,
+    licensed library the /real-estate pieces use, so the cover is always an attractive Upstate shot
+    and needs no API key. If the schema has no image_address column, skip this column and the cron
+    will simply leave the cover null.
   - tags = a Postgres text array that MUST include "greenville works" and must NOT include
     "guide" or the bare "greenville", e.g. '{"greenville works"}' (the "greenville works" tag is
     what routes the post to /greenville-works via sectionOf in src/lib/posts.ts; a bare
@@ -131,7 +136,10 @@ in this order: FIRST "VERIFY THESE (POST IS ALREADY LIVE)" with the MUST-VERIFY 
 /tmp/gw/pass1_brief.md, plus the standing line: "Not investment, legal, or financial
 advice. This Greenville Works piece was published live at /greenville-works/<slug>. Spot-check the
 flagged numbers and claims against the sources, re-read anything describing a neighborhood for the
-fair-housing line, and unpublish it at /review if anything is wrong."
+fair-housing line, and unpublish it at /review if anything is wrong. The cover photo and the
+owned-list email both go out automatically: the /api/finalize-greenville cron (daily, on Vercel)
+fills the cover from the curated Greenville library and broadcasts the piece to confirmed
+subscribers exactly once, so there is nothing to send by hand."
 (If you fell back to DRAFT because dedup was unavailable, say so instead: the piece is a
 DRAFT at /review awaiting a human publish.) Then three dashes; then "GREENVILLE WORKS ESSAY (live)"
 and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (copy-paste this to

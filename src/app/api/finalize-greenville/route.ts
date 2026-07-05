@@ -3,17 +3,19 @@ import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { broadcastPost } from "@/lib/broadcast";
 import { renderCover } from "@/lib/greenvilleImage";
-import { REALESTATE_TAG } from "@/lib/posts";
+import { REALESTATE_TAG, WORKS_TAG, sectionOf } from "@/lib/posts";
 
 /**
  * GET /api/finalize-greenville
  *
- * The reconciler for the nightly Greenville routine. The routine's Claude agent
- * runs in a sandbox that can only reach the world through MCP connectors, so it
- * publishes the /real-estate row (via the Supabase MCP) but cannot render the
- * cover image or send the owned-list broadcast, both of which need normal egress.
- * This job, on Vercel, does those two mechanical steps for any recently published
- * greenville post that still needs them.
+ * The reconciler for the nightly Greenville routines. Both the /real-estate
+ * (scripts/greenville) and Greenville Works (scripts/tech) Claude agents run in a
+ * sandbox that can only reach the world through MCP connectors, so each publishes
+ * its blog_posts row (via the Supabase MCP) but cannot render the cover image or
+ * send the owned-list broadcast, both of which need normal egress. This job, on
+ * Vercel, does those two mechanical steps for any recently published post in
+ * either section that still needs them. Greenville Works pieces use the same
+ * curated Greenville photo library for the cover, so the render path is identical.
  *
  * It is idempotent and self-healing: two independent sub-steps, each guarded by a
  * null check, so a failed render never blocks the email and a missed run is picked
@@ -52,9 +54,9 @@ export async function GET(req: NextRequest) {
 
   const { data: posts, error } = await db
     .from("blog_posts")
-    .select("id, slug, cover_image, image_address, last_broadcast_at")
+    .select("id, slug, tags, cover_image, image_address, last_broadcast_at")
     .eq("status", "PUBLISHED")
-    .contains("tags", [REALESTATE_TAG])
+    .overlaps("tags", [REALESTATE_TAG, WORKS_TAG])
     .gte("created_at", since)
     .or("cover_image.is.null,last_broadcast_at.is.null")
     .order("created_at", { ascending: false });
@@ -64,6 +66,10 @@ export async function GET(req: NextRequest) {
 
   for (const p of posts ?? []) {
     const r: Record<string, unknown> = { slug: p.slug };
+    // Route the revalidation to the post's own section: /real-estate for a
+    // `greenville` post, /greenville-works for a `greenville works` piece.
+    const base = sectionOf(p) === "works" ? "/greenville-works" : "/real-estate";
+    r.section = base;
 
     // Sub-step 1: resolve + set the cover, when it is missing and we have a pin.
     // renderCover prefers the curated library (no key needed) and only falls back
@@ -82,8 +88,8 @@ export async function GET(req: NextRequest) {
         }
         if (upErr) throw new Error(upErr.message);
         r.image = `set (${coverKind})`;
-        revalidatePath(`/real-estate/${p.slug}`);
-        revalidatePath("/real-estate");
+        revalidatePath(`${base}/${p.slug}`);
+        revalidatePath(base);
       } catch (e) {
         r.image = `failed: ${(e as Error).message}`;
       }

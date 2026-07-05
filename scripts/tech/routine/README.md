@@ -94,14 +94,26 @@ the X post) and pushes the done-log to the `drafts` branch.
   in dedup; the verify email still goes out so Alex can spot-check and unpublish at `/review`. If
   the Supabase site-dedup could not run, that run falls back to DRAFT. To require human review of
   every piece, set STEP 5 back to `DRAFT`.
-- **No image.** Greenville Works pieces have no cover photo. The `/greenville-works` index is
-  text-forward and the article renders without a hero, so there is no image step and no finalize
-  cron (unlike the Greenville real-estate engine).
+- **Cover photo (auto, after publish).** The writer names a `subject:` in a `## IMAGE` block, from
+  the same fixed vocabulary the Greenville real-estate engine uses (`downtown-falls` the default,
+  plus `liberty-bridge`, `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`,
+  `travelers-rest`). The orchestrator stores it in `blog_posts.image_address` and leaves
+  `cover_image` null. The shared `/api/finalize-greenville` cron then maps that subject to a
+  hand-picked, licensed photo from the **curated Greenville library** (`src/lib/greenvilleCovers.ts`,
+  served from `/public`, no API key, no cost) and writes `cover_image`. `ArticleView` renders it as
+  the article hero, and the `/greenville-works` index shows it as a per-row thumbnail (the shared
+  `PostCover`, which draws a branded `>` placeholder until the cover lands), the same as the
+  `/real-estate` index; the photo also shows on the homepage feed card and the share/OG card. There
+  is no Google Street View fallback in practice, because any Greenville subject resolves to a library
+  photo, which keeps the "high-quality photos only" bar.
 - **X:** no auto-poster; the routine drafts the X post and delivers it in the email packet for
   manual posting.
-- **Owned email list:** not auto-sent. Once Alex publishes a piece, he can broadcast it to the owned
-  list manually via `/api/broadcast?id=<postId>` if he wants (see the root `CLAUDE.md`); there is no
-  automatic broadcast for this section.
+- **Owned email list (auto, after publish).** The same `/api/finalize-greenville` cron broadcasts a
+  newly published Greenville Works piece to the confirmed owned list exactly once (via the shared
+  `broadcastPost` in `src/lib/broadcast.ts`) and stamps `last_broadcast_at`, the same mechanism the
+  Greenville real-estate posts use. The agent cannot send it itself (no HTTP egress from the
+  sandbox). A DRAFT-fallback run is never emailed. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`) on
+  the site; a manual resend is still available at `/api/broadcast?id=<postId>&force=1`.
 
 ## Dedup
 

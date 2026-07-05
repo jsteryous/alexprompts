@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getPublishedPosts, formatDate } from "@/lib/posts";
+import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
   title: "Greenville Works",
@@ -42,18 +43,28 @@ export default async function GreenvilleWorksPage() {
             <ul className="divide-y theme-border">
               {posts.map((p) => (
                 <li key={p.id} className="py-7 first:pt-0">
-                  <Link href={`/greenville-works/${p.slug}`} className="group block">
-                    {p.published_at && (
-                      <time className="theme-text-muted text-xs uppercase tracking-widest">
-                        {formatDate(p.published_at)}
-                      </time>
-                    )}
-                    <h2 className="theme-text-primary text-xl md:text-2xl font-semibold leading-snug mt-2 mb-2 group-hover:opacity-80">
-                      {p.title}
-                    </h2>
-                    {p.summary && (
-                      <p className="theme-text-muted text-base leading-relaxed">{p.summary}</p>
-                    )}
+                  <Link
+                    href={`/greenville-works/${p.slug}`}
+                    className="group grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-5"
+                  >
+                    <PostCover
+                      src={p.cover_image}
+                      alt={p.title}
+                      className="aspect-[16/9] w-full rounded-lg border theme-border"
+                    />
+                    <div>
+                      {p.published_at && (
+                        <time className="theme-text-muted text-xs uppercase tracking-widest">
+                          {formatDate(p.published_at)}
+                        </time>
+                      )}
+                      <h2 className="theme-text-primary text-xl md:text-2xl font-semibold leading-snug mt-2 mb-2 group-hover:opacity-80">
+                        {p.title}
+                      </h2>
+                      {p.summary && (
+                        <p className="theme-text-muted text-base leading-relaxed">{p.summary}</p>
+                      )}
+                    </div>
                   </Link>
                 </li>
               ))}

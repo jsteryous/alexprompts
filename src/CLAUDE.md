@@ -62,15 +62,19 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `site.ts` exports were deleted; the `OutcomeArt` component is now orphaned but kept. No
   shared section components (the old `HomeSections.tsx` was dental-only, deleted).
 - **`src/app/archive/`**, **`src/app/real-estate/`**,
-  **`src/app/lab/`** — the three section index + `[slug]` routes. All three `[slug]` pages
-  render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
+  **`src/app/greenville-works/`** — the three section index + `[slug]` routes. All three `[slug]`
+  pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
   request. Canonical is self-referential per section. `/real-estate` holds the Greenville
-  posts the `scripts/greenville` routine creates; `/lab` holds the tech deep-dives the
-  `scripts/tech` routine creates. Both engines **auto-publish live** (status `PUBLISHED`,
-  with a verify email for after-the-fact spot-check + unpublish at `/review`; a run falls
-  back to DRAFT only when dedup is unavailable). The `/lab` index is text-forward (no cover
-  thumbnails) since Lab pieces have no photo.
+  posts the `scripts/greenville` routine creates; `/greenville-works` holds the local-change
+  deep-dives the `scripts/tech` routine creates. Both engines **auto-publish live** (status
+  `PUBLISHED`, with a verify email for after-the-fact spot-check + unpublish at `/review`; a run
+  falls back to DRAFT only when dedup is unavailable), and the `/api/finalize-greenville` cron
+  fills each post's cover from the curated Greenville library and broadcasts it to the owned list.
+  Both `/real-estate` and `/greenville-works` index pages render a `PostCover` thumbnail per row
+  (branded `>` placeholder until the cover lands); the curated photo also shows as the article
+  hero (`ArticleView` renders `cover_image` when the body has no lead image), the homepage feed
+  card, and the share/OG card.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` (token-gated editor; the fixed
   nav covered its sticky Publish button). Both derive links from `site.ts`. Nav CTA is
   *Subscribe* → `newsletterUrl`.

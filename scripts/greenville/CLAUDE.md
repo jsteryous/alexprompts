@@ -96,7 +96,10 @@ python -m greenville.collect --limit 15
   `last_broadcast_at` NULL it emails every CONFIRMED subscriber (via the shared `broadcastPost`
   in `src/lib/broadcast.ts`) and stamps `last_broadcast_at`, so it sends exactly once. A DRAFT
   fallback is never emailed. The render and the broadcast are independent, so a failed image
-  never blocks the email. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`) on the site.
+  never blocks the email. Needs Resend (`RESEND_API_KEY` + `EMAIL_FROM`) on the site. **The same
+  cron now also finalizes `greenville works` posts** (the `scripts/tech/` engine): it renders their
+  cover from this same curated library and broadcasts them identically, so the cover + email path is
+  shared across both local sections.
 - **X** has no auto-poster (no X connector); the routine drafts the X post and emails it for
   manual posting.
 

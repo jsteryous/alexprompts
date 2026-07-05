@@ -217,8 +217,13 @@ under `scripts/_archive/` — do not revive it.
   `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
   `PostType` key `works`, distinct from the `greenville` real-estate tag), published **live**
   (autonomous) by the `scripts/tech/` routine, with a verify email for after-the-fact
-  spot-check and unpublish at `/review`. Text-forward index, no cover images. The
-  `getFeedPosts` homepage stream includes Greenville Works posts.
+  spot-check and unpublish at `/review`. The `/api/finalize-greenville` cron finalizes these
+  posts too: it fills the article **cover photo** from the same curated Greenville library the
+  `/real-estate` pieces use (the writer names a `subject:`, stored in `image_address`; no API key,
+  no cost) and **broadcasts the piece to the owned email list** exactly once. The curated photo
+  shows as the article hero, an index thumbnail (`PostCover`, with the branded `>` placeholder
+  when a cover is still pending), the homepage feed card, and the share/OG card. The `getFeedPosts`
+  homepage stream includes Greenville Works posts.
 - `/find-an-agent` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so

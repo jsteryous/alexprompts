@@ -64,6 +64,12 @@ METADATA: confirm the tags line is exactly `greenville works` (optionally one pl
 after it), and never the bare word `greenville`, which would misroute the post into the real-estate
 section.
 
+IMAGE: confirm the `## IMAGE` block is present with a single `subject:` key drawn ONLY from the
+allowed vocabulary (downtown-falls, liberty-bridge, reedy-river, north-main, west-end,
+swamp-rabbit-trail, travelers-rest). If it is missing, or the subject is off-list or does not fit
+where the change is happening, fix it (default to `downtown-falls` when nothing more specific fits).
+This value becomes the hero photo, so it must be one the library can serve.
+
 MARKDOWN: confirm it is plain and unescaped, with no backslash before # or [.
 
 Output the corrected piece only, in the same three-block format (## METADATA, ## ARTICLE, ## X).

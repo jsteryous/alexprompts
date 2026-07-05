@@ -94,6 +94,23 @@ Are Coming to Greenville."
 Aim for 800 to 1200 words. Depth is the point, but do not pad; every one has to be tight and worth
 it.
 
+COVER IMAGE. The piece gets a hero photo drawn from the site's curated, hand-picked, licensed
+Greenville photo library (the same one the /real-estate pieces use), so it is always a genuinely
+attractive Upstate shot and never a random street corner. You do not supply a photo; you name the
+best-fitting SUBJECT and the site renders it. Pick the ONE subject that most fits where this run's
+change is happening, from this fixed vocabulary only:
+  - downtown-falls    (default; downtown Greenville and Falls Park. Use for anything citywide,
+                       county-wide, or not tied to a specific corner of the Upstate, and for
+                       infrastructure, utilities, the grid, manufacturing, and data-center pieces
+                       with no better fit)
+  - liberty-bridge    (Falls Park / the Liberty Bridge)
+  - reedy-river       (the Reedy River)
+  - north-main        (North Main / Main Street corridor)
+  - west-end          (the West End / the stadium district)
+  - swamp-rabbit-trail (the Swamp Rabbit Trail / the greenway)
+  - travelers-rest    (Travelers Rest and the north end of the county)
+When in doubt, use `downtown-falls`. Do not invent a subject outside this list.
+
 OUTPUT FORMAT, exactly these labeled blocks and nothing else:
 ## METADATA
 - title: <the headline>
@@ -102,6 +119,9 @@ OUTPUT FORMAT, exactly these labeled blocks and nothing else:
   search snippet>
 - tags: greenville works
 - source_url: <the primary source url from the brief's SOURCES>
+
+## IMAGE
+- subject: <ONE subject key from the fixed vocabulary above, e.g. downtown-falls>
 
 ## ARTICLE
 <the full markdown essay, first person, opening cold, inline links on the load-bearing facts and
