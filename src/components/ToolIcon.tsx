@@ -117,11 +117,62 @@ function Taraform() {
   );
 }
 
+function CostOfLiving() {
+  // A balance scale: comparing what an income buys in two cities.
+  return (
+    <>
+      <circle cx={24} cy={12} r={2} {...soft} />
+      <circle cx={24} cy={12} r={2} {...stroke} />
+      <line x1={24} y1={12} x2={24} y2={38} {...stroke} />
+      <line x1={10} y1={14} x2={38} y2={14} {...stroke} />
+      <path d="M18 40 L24 38 L30 40" {...stroke} />
+      <line x1={15} y1={40} x2={33} y2={40} {...stroke} />
+      <path d="M10 14 L6 22 M10 14 L14 22" {...stroke} />
+      <path d="M5 22 Q10 28 15 22" {...soft} />
+      <path d="M5 22 Q10 28 15 22" {...stroke} />
+      <path d="M38 14 L34 22 M38 14 L42 22" {...stroke} />
+      <path d="M33 22 Q38 28 43 22" {...soft} />
+      <path d="M33 22 Q38 28 43 22" {...stroke} />
+    </>
+  );
+}
+
+function PropertyTax() {
+  // A house with a percent sign: the tax rate on a home, owner vs rental.
+  return (
+    <>
+      <path d="M9 23 L24 11 L39 23" {...stroke} />
+      <path d="M13 20 V39 H35 V20" {...soft} />
+      <path d="M13 20 V39 H35 V20" {...stroke} />
+      <circle cx={19} cy={28} r={2.2} {...stroke} />
+      <circle cx={29} cy={33} r={2.2} {...stroke} />
+      <line x1={30} y1={26} x2={18} y2={35} {...stroke} />
+    </>
+  );
+}
+
+function Schools() {
+  // A graduation cap: a home's zoned schools and their ratings.
+  return (
+    <>
+      <path d="M24 11 L42 18 L24 25 L6 18 Z" {...soft} />
+      <path d="M24 11 L42 18 L24 25 L6 18 Z" {...stroke} />
+      <path d="M14 21 V29 C14 32 34 32 34 29 V21" {...stroke} />
+      <line x1={42} y1={18} x2={42} y2={30} {...stroke} />
+      <circle cx={42} cy={31} r={1.7} {...soft} />
+      <circle cx={42} cy={31} r={1.7} {...stroke} />
+    </>
+  );
+}
+
 const icons: Record<string, () => React.ReactElement> = {
   "deal-analyzer": DealAnalyzer,
   mortgage: Mortgage,
   "listing-prompt": ListingPrompt,
   "area-scan": AreaScan,
+  "cost-of-living": CostOfLiving,
+  "property-tax": PropertyTax,
+  schools: Schools,
   "buyers-list": BuyersList,
   taraform: Taraform,
 };
