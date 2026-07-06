@@ -1,6 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import { sectionOf } from "@/lib/posts";
 import Editor from "./Editor";
+
+const SECTION_BASE: Record<string, string> = {
+  realestate: "/real-estate",
+  works: "/greenville-works",
+  newsletter: "/archive",
+};
 
 interface Props {
   searchParams: Promise<{ id?: string; token?: string }>;
@@ -42,6 +49,8 @@ export default async function ReviewPage({ searchParams }: Props) {
         initialBody={post.body_md ?? ""}
         status={post.status ?? "DRAFT"}
         slug={post.slug ?? ""}
+        backHref="/admin"
+        livePath={`${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`}
       />
     </div>
   );

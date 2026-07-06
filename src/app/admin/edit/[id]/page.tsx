@@ -1,7 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import { isAdmin } from "@/lib/adminAuth";
+import { sectionOf } from "@/lib/posts";
 import Editor from "@/app/review/Editor";
+
+const SECTION_BASE: Record<string, string> = {
+  realestate: "/real-estate",
+  works: "/greenville-works",
+  newsletter: "/archive",
+};
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -48,6 +55,7 @@ export default async function AdminEditPage({ params }: Props) {
 
   // No token prop: the Editor authenticates its Save/Publish calls with the
   // httpOnly admin cookie, so the secret never touches the URL.
+  const livePath = `${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`;
   return (
     <div className="min-h-screen bg-gray-50">
       <Editor
@@ -57,6 +65,8 @@ export default async function AdminEditPage({ params }: Props) {
         initialBody={post.body_md ?? ""}
         status={post.status ?? "DRAFT"}
         slug={post.slug ?? ""}
+        backHref="/admin"
+        livePath={livePath}
       />
     </div>
   );

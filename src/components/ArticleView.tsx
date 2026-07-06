@@ -1,7 +1,6 @@
-import { marked } from "marked";
-import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { site } from "@/lib/site";
+import { renderPostHtml } from "@/lib/renderMarkdown";
 import { coverImageFromBody, formatDate, sectionOf, type FullPost } from "@/lib/posts";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { ReferralCta } from "@/components/ReferralCta";
@@ -30,17 +29,8 @@ export default async function ArticleView({
   post: FullPost;
   section: ArticleSection;
 }) {
-  // body_md is first-party (Substack mirror + token-gated publish), but sanitize
-  // anyway as defense-in-depth against a tampered row. sanitize-html is pure JS
-  // (no jsdom), so it loads cleanly in the serverless runtime.
-  const bodyHtml = sanitizeHtml(await marked(post.body_md ?? ""), {
-    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "h1", "h2"],
-    allowedAttributes: {
-      ...sanitizeHtml.defaults.allowedAttributes,
-      img: ["src", "alt", "loading", "width", "height"],
-      a: ["href", "name", "target", "rel"],
-    },
-  });
+  // Shared markdown -> sanitized HTML pipeline (also used by the /admin preview).
+  const bodyHtml = await renderPostHtml(post.body_md ?? "");
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
