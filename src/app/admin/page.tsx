@@ -4,6 +4,7 @@ import { isAdmin } from "@/lib/adminAuth";
 import { sectionOf, formatDate } from "@/lib/posts";
 import LoginForm from "./LoginForm";
 import LogoutButton from "./LogoutButton";
+import PublishButton from "./PublishButton";
 
 // This is an authenticated, per-request view; never cache it.
 export const dynamic = "force-dynamic";
@@ -126,12 +127,7 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
           Edit
         </Link>
         {draft ? (
-          <a
-            href={`/api/publish?id=${post.id}`}
-            className="text-sm font-semibold text-black bg-green-500 px-4 py-2 rounded-lg hover:bg-green-400 transition-colors"
-          >
-            Publish
-          </a>
+          <PublishButton id={post.id} />
         ) : (
           <a
             href={live}

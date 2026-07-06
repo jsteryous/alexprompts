@@ -28,14 +28,33 @@ export default function Editor({
   const [summary, setSummary] = useState(initialSummary);
   const [body, setBody] = useState(initialBody);
   const [saving, startSave] = useTransition();
+  const [publishing, startPublish] = useTransition();
   const [message, setMessage] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
 
   const dirty =
     title !== initialTitle || summary !== initialSummary || body !== initialBody;
 
-  const publishUrl = token
-    ? `/api/publish?id=${id}&token=${token}`
-    : `/api/publish?id=${id}`;
+  function publish() {
+    setMessage(null);
+    startPublish(async () => {
+      try {
+        const resp = await fetch("/api/publish", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, token }),
+        });
+        const json = await resp.json().catch(() => ({}));
+        if (!resp.ok) {
+          setMessage({ kind: "err", text: json.error ?? `Publish failed (${resp.status})` });
+          return;
+        }
+        // Land on the now-live page.
+        window.location.href = json.path ?? "/";
+      } catch (exc) {
+        setMessage({ kind: "err", text: (exc as Error).message });
+      }
+    });
+  }
 
   function save() {
     setMessage(null);
@@ -97,15 +116,15 @@ export default function Editor({
             {saving ? "Saving…" : "Save changes"}
           </button>
           {status !== "PUBLISHED" && (
-            <a
-              href={publishUrl}
-              className={`inline-flex items-center gap-2 bg-green-500 text-black font-semibold text-sm px-5 py-2 rounded-lg hover:bg-green-400 transition-colors ${
-                dirty ? "opacity-50 pointer-events-none" : ""
-              }`}
+            <button
+              type="button"
+              onClick={publish}
+              disabled={dirty || publishing}
+              className="inline-flex items-center gap-2 bg-green-500 text-black font-semibold text-sm px-5 py-2 rounded-lg hover:bg-green-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title={dirty ? "Save first, then publish" : "Publish"}
             >
-              Publish Now →
-            </a>
+              {publishing ? "Publishing…" : "Publish Now →"}
+            </button>
           )}
           {status === "PUBLISHED" && (
             <a
