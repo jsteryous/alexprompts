@@ -8,7 +8,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Styling:** Tailwind CSS v4 (`@theme {}` in `globals.css`, not `tailwind.config.js`) + `@tailwindcss/typography`
 - **Language:** TypeScript / React 19
 - **Database:** Supabase (Postgres) — `blog_posts` only (see root CLAUDE.md)
-- **Markdown:** `marked` (server-side, `/archive/[slug]`, `/review`)
+- **Markdown:** `marked` + `sanitize-html`, factored into `src/lib/renderMarkdown.ts`
+  (`renderPostHtml`). Shared by `ArticleView` and the `/admin` live-preview route
+  (`/api/admin/preview`), so an editor preview is byte-identical to the published article.
 - **Auth:** none public. `/admin` is the draft review hub: password login (= `PUBLISH_SECRET`)
   sets an httpOnly `ap_admin` cookie (`src/lib/adminAuth.ts`). `/review` is the legacy
   token-in-query editor (the engine's email links). Neither uses Supabase Auth.
@@ -90,7 +92,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   draft, Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
   revalidate the section). Auth is `PUBLISH_SECRET`: the `ap_admin` cookie (constant-time,
   rate-limited login) or the legacy query/body token. `GET /api/publish` is token-only (not
-  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked).
+  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked). The editor has a
+  live site-accurate preview (`/api/admin/preview`), a markdown format toolbar, and image
+  paste/drag/upload (`/api/admin/upload` → the public `post-images` Storage bucket, under
+  `body/`, inserted as markdown at the cursor).
 - **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
   It is auto-injected on the root/static pages but is **NOT inherited by the
   `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`
