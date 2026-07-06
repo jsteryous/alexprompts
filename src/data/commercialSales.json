@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-29 11:57 UTC",
+  "generated_at": "2026-07-06 11:25 UTC",
   "source": "Greenville County GIS (GreenvilleJS/Map_Layers_JS, Commercial layer)",
   "source_url": "https://www.gcgis.org/arcgis/rest/services/GreenvilleJS/Map_Layers_JS/MapServer/2/query",
   "min_price": 1000000,
   "months": 24,
-  "count": 276,
+  "count": 273,
   "sales": [
     {
       "pin": "0279000201000",
@@ -4373,54 +4373,6 @@
       "sqft": null,
       "lat": 34.952812,
       "lng": -82.237242
-    },
-    {
-      "pin": "0539010101308",
-      "buyer": "LKN RENTAL LLC",
-      "seller": "CNOW PROPERTIES LLC",
-      "price": 1760000,
-      "saleDate": "2024-07-02",
-      "street": "Woodruff Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "0410",
-      "deedBook": 2723,
-      "deedPage": 4920,
-      "lotSize": 0.5,
-      "sqft": null,
-      "lat": 34.819255,
-      "lng": -82.260663
-    },
-    {
-      "pin": "0242040105400",
-      "buyer": "PALMETTO BAPTIST CHURCH",
-      "seller": "1305 PENDLETON LLC",
-      "price": 2500000,
-      "saleDate": "2024-07-01",
-      "street": "Anderson Ave",
-      "propType": "COMMERCIAL",
-      "landUse": "0810",
-      "deedBook": 2723,
-      "deedPage": 4447,
-      "lotSize": 13.1,
-      "sqft": null,
-      "lat": 34.813228,
-      "lng": -82.44602
-    },
-    {
-      "pin": "0061000304103",
-      "buyer": "32EBROADSTREET LLC",
-      "seller": "CAP CAMPERDOWN GVLLE NEW",
-      "price": 10700000,
-      "saleDate": "2024-06-28",
-      "street": "Falls St",
-      "propType": "COMMERCIAL",
-      "landUse": "0420",
-      "deedBook": 2723,
-      "deedPage": 3444,
-      "lotSize": 0.244,
-      "sqft": null,
-      "lat": 34.847058,
-      "lng": -82.399492
     }
   ]
 }
