@@ -17,7 +17,7 @@ const links = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  if (pathname?.startsWith("/review")) return null;
+  if (pathname?.startsWith("/review") || pathname?.startsWith("/admin")) return null;
 
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">

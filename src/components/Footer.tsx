@@ -6,7 +6,7 @@ import { site, socials } from "@/lib/site";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/review")) return null;
+  if (pathname?.startsWith("/review") || pathname?.startsWith("/admin")) return null;
 
   return (
     <footer className="theme-card-strong border-t">

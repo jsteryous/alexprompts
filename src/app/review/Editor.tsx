@@ -5,7 +5,9 @@ import { useState, useTransition } from "react";
 
 interface Props {
   id: string;
-  token: string;
+  /** Legacy query-token auth (the /review flow). Omit it under /admin, where
+   *  the httpOnly admin cookie authorizes the Save/Publish calls instead. */
+  token?: string;
   initialTitle: string;
   initialSummary: string;
   initialBody: string;
@@ -31,7 +33,9 @@ export default function Editor({
   const dirty =
     title !== initialTitle || summary !== initialSummary || body !== initialBody;
 
-  const publishUrl = `/api/publish?id=${id}&token=${token}`;
+  const publishUrl = token
+    ? `/api/publish?id=${id}&token=${token}`
+    : `/api/publish?id=${id}`;
 
   function save() {
     setMessage(null);

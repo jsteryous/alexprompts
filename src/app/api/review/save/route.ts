@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { isAuthorized } from "@/lib/adminAuth";
 
 // POST /api/review/save
 // Body: { id: string, token: string, title: string, summary: string, body_md: string }
@@ -27,7 +28,11 @@ export async function POST(req: NextRequest) {
 
   const { id, token, title, summary, body_md } = payload;
 
-  if (!id || !token || token !== secret) {
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+  // Authorize by the admin cookie (the /admin flow) or the legacy body token.
+  if (!isAuthorized(req, token)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
   if (typeof title !== "string" || typeof body_md !== "string") {

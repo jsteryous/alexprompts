@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { sectionOf } from "@/lib/posts";
+import { isAuthorized } from "@/lib/adminAuth";
 
 /** Public URL base for each section, so the confirmation link and the
  *  revalidation path match where the post actually lives. */
@@ -26,11 +27,12 @@ export async function GET(req: NextRequest) {
   if (!secret) {
     return html("Configuration error", "PUBLISH_SECRET is not set on the server.", 500);
   }
-  if (!id || !token) {
+  if (!id) {
     return html("Missing parameters", "The link is incomplete. Check the email.", 400);
   }
-  if (token !== secret) {
-    return html("Unauthorized", "Invalid token. This link may have been tampered with.", 403);
+  // Authorize by the admin cookie (the /admin flow) or the legacy ?token= link.
+  if (!isAuthorized(req, token)) {
+    return html("Unauthorized", "Log in at /admin, or use a valid publish link.", 403);
   }
 
   // ── Supabase ─────────────────────────────────────────────────────────────
