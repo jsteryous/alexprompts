@@ -271,9 +271,19 @@ under `scripts/_archive/` — do not revive it.
   reads the publication RSS feed, converts each post's HTML to markdown via
   `src/lib/substack.ts` (turndown; images kept as `<figure>`/`<figcaption>`), and upserts
   rows as `PUBLISHED`. So posting on Substack populates the site with no manual step.
-- `/review` — token-gated draft editor (not in nav). `/api/publish` + `/api/review/save`
-  drive the manual publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate
-  `/archive`). Kept for engine-generated drafts; the Substack mirror is the live path.
+- `/admin` — the **draft review hub** (not in nav; the primary way Alex reviews drafts).
+  Log in once with a password (= `PUBLISH_SECRET`); `/api/admin/login` sets an httpOnly
+  `ap_admin` cookie (rate-limited, constant-time compare), so the secret never rides in a URL.
+  `/admin` lists every DRAFT `blog_posts` row with Edit (`/admin/edit/[id]`, the shared
+  `review/Editor`) + one-click Publish, plus recently published. Auth lives in
+  `src/lib/adminAuth.ts`. This replaces the fragile `/review?token=` flow (URL-special chars in
+  the secret broke it) but that flow still works.
+- `/review` — token-gated draft editor (not in nav), the legacy per-draft link the engine
+  emails carry (`/review?id=..&token=..`). `/api/publish` + `/api/review/save` drive the manual
+  publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate the section). `GET
+  /api/publish?token=` is the routine's one-click email publish (token-only, never the cookie, so
+  it is not CSRF-able); `POST /api/publish` is the cookie-authed `/admin` publish. Kept for
+  engine-generated drafts; the Substack mirror is the live path for newsletter posts.
 
 **`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, oneLiner,
 description, email, url, `socials`, `newsletterUrl`). The Claude-for-real-estate teaching

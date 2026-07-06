@@ -9,7 +9,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Language:** TypeScript / React 19
 - **Database:** Supabase (Postgres) — `blog_posts` only (see root CLAUDE.md)
 - **Markdown:** `marked` (server-side, `/archive/[slug]`, `/review`)
-- **Auth:** none public. `/review` is gated by `PUBLISH_SECRET` (token in query), not Supabase Auth.
+- **Auth:** none public. `/admin` is the draft review hub: password login (= `PUBLISH_SECRET`)
+  sets an httpOnly `ap_admin` cookie (`src/lib/adminAuth.ts`). `/review` is the legacy
+  token-in-query editor (the engine's email links). Neither uses Supabase Auth.
 
 ## Project Structure — key couplings
 
@@ -79,12 +81,16 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   (branded `>` placeholder until the cover lands); the curated photo also shows as the article
   hero (`ArticleView` renders `cover_image` when the body has no lead image), the homepage feed
   card, and the share/OG card.
-- **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` (token-gated editor; the fixed
-  nav covered its sticky Publish button). Both derive links from `site.ts`. Nav CTA is
+- **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` and `/admin` (gated editors; the
+  fixed nav covered their sticky Publish button). Both derive links from `site.ts`. Nav CTA is
   *Subscribe* → `newsletterUrl`.
-- **`/review` + `/api/publish` + `/api/review/save`** — the publish flow. Edit a draft,
-  Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
-  `revalidatePath("/archive")`). All gated by `PUBLISH_SECRET`.
+- **`/admin` + `/review` + `/api/publish` + `/api/review/save`** — the publish flow. `/admin`
+  (cookie login via `/api/admin/login`, `src/lib/adminAuth.ts`) lists drafts and is the primary
+  review surface; `/admin/edit/[id]` and `/review` both render the shared `review/Editor`. Edit a
+  draft, Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
+  revalidate the section). Auth is `PUBLISH_SECRET`: the `ap_admin` cookie (constant-time,
+  rate-limited login) or the legacy query/body token. `GET /api/publish` is token-only (not
+  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked).
 - **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
   It is auto-injected on the root/static pages but is **NOT inherited by the
   `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`
