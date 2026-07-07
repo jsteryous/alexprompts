@@ -1,21 +1,21 @@
 
 ======================================================================
 GREENVILLE, SC REAL-ESTATE SIGNAL
-Collected 2026-07-06 09:59 UTC
+Collected 2026-07-07 09:27 UTC
 
 BEAT COVERAGE (headlines found per beat):
-  Market       10
+  Market       9
   Development  12
-  Rentals      9
-  Policy       10
-  Upstate      12
+  Rentals      10
+  Policy       9
+  Upstate      10
 
 BIGGEST STORY (most corroborated, the lead to write up):
   Affordable senior housing opens near Five Forks in Greenville County - Post and Courier
   https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
   beats=Market, Rentals, Policy | outlets=Post and Courier | appearances=3 | score=14
 
-RANKED STORIES (top 20 of 45):
+RANKED STORIES (top 20 of 44):
   1. [  14] Affordable senior housing opens near Five Forks in Greenville County - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
       beats=Market, Rentals, Policy | outlets=Post and Courier
@@ -28,48 +28,48 @@ RANKED STORIES (top 20 of 45):
   4. [  10] South Ridge - Greenville, SC Apartments | Realtor.com® - Realtor.com (Mon, 29 Jun 2026 14:11:01 GMT)
       https://news.google.com/rss/articles/CBMiigFBVV95cUxNVUstYlRkc3lzbmswWF9RdkhGY3A3UGxUWThERV9FelJmSndVTXFLcGdHUFZGbFVQMjNnLXphckFIN2RkaUJ6dFZKRDBHeG4xTlNfZU1IenUwdkZzMThEdWZVLVlsdzNnT21CR01QSlphRXJZUm54LXdXYkVOek9ub1BWZjFyaW9MOHc?oc=5
       beats=Market, Rentals | outlets=Realtor.com
-  5. [  10] This Southern city’s got what towns around the country crave - CNN (Wed, 01 Jul 2026 12:17:17 GMT)
-      https://news.google.com/rss/articles/CBMiggFBVV95cUxNYlIzRjhOdEVLQkF3Mlp1WjIyOVM0YTNBb3J0OFZvT1doQ0lWU3lDakUwMjdIem90UG83N0h0NlZhZ3RQU29SUHZ3bU9XUUc2WG10d2EtZ0JQWDBKUnJORnlpV0dQYUo2NjBNbmxBSmdkaFBBWnYwNTVUQ0tYcENjbkNB?oc=5
-      beats=Development, Rentals | outlets=CNN
-  6. [   9] Greenville County settles lawsuit over budget process - AOL.com (Fri, 26 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMihAFBVV95cUxPc2cyUHRGMkl1OWdJdWdNdWU2NlVwbWRFVGhBeUoxWFU4RU5GN1g1cW5sUFk2a3JYektLb05DT3RCLXRMV2w3RzN1WXhod09RdVBIR2JwcHR1N2oxU0IxOXQ4Y0p6ZUVIWnVyYk1oUkpjUmdDYU04bC01WlJuUlI0VFpjOHo?oc=5
-      beats=Policy | outlets=AOL.com, MSN
-  7. [   6] Concerns over proposed housing in Greenville - FOX Carolina News (Thu, 25 Jun 2026 22:26:00 GMT)
-      https://news.google.com/rss/articles/CBMikAFBVV95cUxOVmJYU01iRHRscHVoTmJPUUV1emRIVUZqTnVOOFVsYkhHYzJXLXVtMzZhSHJqLUJFWFRnNmpWTHlTbDh3ZWtqZGFSdkdsb0Z2b2RtVFoxRnh0Znpwa19Rc0dobEwteDZjMTBNVU9SN0RSUnVVdGpEMUxia2luc1c4UDRmZGVIN1A0c3NqOGlpVHg?oc=5
-      beats=Market | outlets=FOX Carolina News
-  8. [   6] Constance Nodine Obituary - Greenville, SC - Dignity Memorial (Wed, 24 Jun 2026 07:00:00 GMT)
+  5. [   6] Constance Nodine Obituary - Greenville, SC - Dignity Memorial (Wed, 24 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMiigFBVV95cUxNdFNTZmdnUmExSk5pV1YzZlIwZTBWTzZ2R3Q1NExqX3dlbUlGVUdFNk1PNXpCSnk2ZmhuSTRaRXJJT1hiUHJ6NUdUSUgySm5yWFo4UUN3aDJ2N0RhQ25HM1pZczl0U29ZbHpnWVR4OFFtR0UycE9FaS1ORUF4cTA5bGsxOHNwZzlBSHc?oc=5
       beats=Market | outlets=Dignity Memorial
-  9. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
+  6. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
       https://news.google.com/rss/articles/CBMi4wFBVV95cUxNS2NmRVlzY1JwMy1XRHZPS3FkRFZfRkFMMG1HQlVVWmZLYTN1YzVpVUNIMHVUOE9VX0p6S180M0w3YVZJaDQxN2dOaHFhVUxjYk80UmNSdFllQWZEX1B5ZGhBV1VwZkRDNXNRNmZyMWllUlVETlZpdGlzai12OFNZSUxoUk9QRWRRR3VqYndzSjM2OHNBWlFIM2E1ZmdGcTFWWW1EYWdWMkJKM3puazIyOUNvVENOVmR3UXIzWnJwclR4SDVENUNJd3picGVaNnBFVmxOdFowajVMZGdpbUpFNTZQMA?oc=5
       beats=Market | outlets=Post and Courier
- 10. [   6] A Discussion With the Palmetto State’s Economic Development Organizations - Greenville Business Magazine (Mon, 29 Jun 2026 19:49:21 GMT)
+  7. [   6] A Discussion With the Palmetto State’s Economic Development Organizations - Greenville Business Magazine (Mon, 29 Jun 2026 19:49:21 GMT)
       https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa0F4ZVFlOW5GZWt4YkRNWUZmM0hqdXlGRDFKMm94RHlWaFRMcjZMUkY3R1FHZ0ZiTkgyR3FpeENTdC16M3ZEVVp5ejU2YUdjLVVhVnlTdWtDNUllR2VsTk9oZnhkS1FHelAxXzdCZUFIaWVhUkxqcFFnQ1Q1QzU5NVZRNjRWdXVnOFRFWmVFMnQtZ0FLLUxjVWpnTTZyNFctWlhvNVYxYlR2TTNwaXpjcTliWjFOdVh1UUFlamdLQUdtZw?oc=5
       beats=Market | outlets=Greenville Business Magazine
- 11. [   6] Warm hues and skyline views: Behind record $2.75M sale in Greenville’s Montebello neighborhood - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
+  8. [   6] Warm hues and skyline views: Behind record $2.75M sale in Greenville’s Montebello neighborhood - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi7gFBVV95cUxOX3lBblNrSDBSRVN4NTdsUjMyOFh5c0IxaG1rVC1UOWd3M3UxOWJUaEhpb1hma0lXMWVTa3dtQ0J3ci1xbEx0VlVEdTVuc2llTTBpdHZOeUdnQWV5blJEOFpIM3ZhYUVzMUdxV0t5QVVGc1huY1NIVnBjWGdHZG9JN3NoQTEyTl9hOC1vcUxmbFg5SGVJS0JnX09BSEk2WVYtVHQybG5oc0tka2lpU052T0hNODZGTUpTcjBrVE1CSnFRanF1WTZJUGVMR0RsY2NBNXd4bnhBQWdsZlc5NVg1Q3FGOFlDdHJybFJGLVJR?oc=5
       beats=Market | outlets=Post and Courier
- 12. [   6] Listed for $7.9M, this Lake Keowee home has a private waterfall - Post and Courier (Fri, 03 Jul 2026 09:00:00 GMT)
-      https://news.google.com/rss/articles/CBMi8gFBVV95cUxQdFVuaE9yZWtBejY3Rk9xSG5iNHg3Q1AtMTNJbFQ5WHpmai1USlU4REpCNnBJeXcwNHRhTWFxTnZxSHdiR3Q0dWxOUEFFRWVFZndwcHI4QXg3VDJyVlZFY1JlN2otX2tIeGJaRnU3V0JxZW5YcDU1VHlXZmt4SmF0T2l4cGRuUC1ERkxKeHFfMmVqaDlKSmZ0VDFEWnhPc3ZWbkIzTGp5SkZqcDNlSWJvSk1seml2Qm8zWV9xSHUtcXdwam9xeDRTaldTcjJ0VzlfNHVjbGJPX1RVV0UyMENtX0dNMmZLSVNGSFJOM3hvei1BUQ?oc=5
+  9. [   6] ‘Pure country living’: Rural lifestyle endures on 96-acre Upstate farm with $1.38M listing - Post and Courier (Fri, 03 Jul 2026 09:00:00 GMT)
+      https://news.google.com/rss/articles/CBMi7gFBVV95cUxOV1ZzWkpiU2RjeW1YbDN2OFBBUThsWlBqYm9DRmFtWmhHY29UODRna3Q1ZUNqdTQ5QlR4dU0xLWNrYjN6b1pCcmJmNUJYeFprZ094bDFtM2M0T2xHTmd1Mi1rdXdzMUFwQ0gxczlVX1BYS3M4bmxIdTEzcG43Y1dLaFozamFqVFNrcjE0WU5Hd3lRMnBlNC0yT0NZeG94dm92WUNMUkh0MGY5MWtZMDEtZEFQbUR2Vkc2SU1GY1RQZlIxOThITzd4REE5UHhjRHFKQ1JBaTJCQkZDbGpmekk1aVlJQVpOT2d2SGF0WUpR?oc=5
       beats=Market | outlets=Post and Courier
- 13. [   6] Fireworks fly over Unity Park in Greenville during 4th of July celebration - FOX Carolina News (Thu, 02 Jul 2026 13:55:00 GMT)
+ 10. [   6] This Southern city’s got what towns around the country crave - CNN (Wed, 01 Jul 2026 12:17:17 GMT)
+      https://news.google.com/rss/articles/CBMiggFBVV95cUxNYlIzRjhOdEVLQkF3Mlp1WjIyOVM0YTNBb3J0OFZvT1doQ0lWU3lDakUwMjdIem90UG83N0h0NlZhZ3RQU29SUHZ3bU9XUUc2WG10d2EtZ0JQWDBKUnJORnlpV0dQYUo2NjBNbmxBSmdkaFBBWnYwNTVUQ0tYcENjbkNB?oc=5
+      beats=Development | outlets=CNN
+ 11. [   6] Fireworks fly over Unity Park in Greenville during 4th of July celebration - FOX Carolina News (Thu, 02 Jul 2026 13:55:00 GMT)
       https://news.google.com/rss/articles/CBMipAFBVV95cUxPX3RTcWlTY05LVUZ4ak9aNzFGX1hrc09mSnlIMFdUQkJvUEVWRjFvUnJqcW9WdkM5bXgxUzhydmxLY1k0ZXY3Mm1SNG5zUTMzLUduTzJxQkFWWmV4RUJ5UFh4UjFGTHVqNXFDRC1USjl3a2xuS3NTa0dfaFJWOEZfT19BeHdJdUtpWEVUNHVaUEpaSjhCak9mcy15bGZ5bHdIYmtlNNIBuAFBVV95cUxNbEdCQnYxTm03dEdQSEVYX29ObmRFRmIwbEVFY2Y5ZjFFYlBCUEhXX214YklzZC1RVEtmbU5pQ3VoQlloWjNBS3JhVkZEUlNLMmctckJuUHl2S2pBX1JTTUZjS3B6LU9BdDd4c3JIY2hWaWpCLUZpVTJ1Ml92ekhKNHJYd0RxTmJIX202RUxvRjJ0NGEwY2NJdVNkTnRQUTlMeDFURE1QZEdDZjVUSVpMMmdOTDJDaWEz?oc=5
       beats=Development | outlets=FOX Carolina News
- 14. [   6] Exclusive rooftop pool club will open in downtown Greenville this summer - Post and Courier (Thu, 25 Jun 2026 07:00:00 GMT)
+ 12. [   6] Exclusive rooftop pool club will open in downtown Greenville this summer - Post and Courier (Thu, 25 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi2AFBVV95cUxNeTRuSElPXzVOMXYyTXF0WlZJVEdSb3ROSUNwMi16b1VxRGdobWk5emdCc0J5bVFXRDFnTXg1aUowVWd1MXg3dmdkSmxKdHNMcHBVQXRWcEJSRUdMTEF3OTBKaTlUa2stLUZMMWtYTmlMZ01yMkdCQ2w0b2ZYVERYTTJQVkdlYWtTSlBScFYyaDdrVU41QmtreWN4V3dmVUZqY1JQR1pnVVNpQlhYVzNCS25xWnZKN3BRdUpzUktLS3RBMG9wR3oxNjZWVXh3cDRZdE1tM0ZzVnA?oc=5
       beats=Development | outlets=Post and Courier
- 15. [   6] Plane lands at Greenville Downtown Airport after nose gear failure - WYFF News 4 (Tue, 30 Jun 2026 22:16:00 GMT)
+ 13. [   6] Plane lands at Greenville Downtown Airport after nose gear failure - WYFF (Tue, 30 Jun 2026 22:16:00 GMT)
       https://news.google.com/rss/articles/CBMif0FVX3lxTE8wWFVmU3FEemxxZnZEWGZMN3p1d0xNSnlrQmdHNWFhY3phNGlBX2VoYVVZMExJWHN5Wng4MUNFTWUyODluX0ZrdHNKdy1PdTZZcEZvaWlWNld4dE9ORDJGSzZlMWNQNHc5TXFCVVdHTTNOZlpIWFRlZjEyTzAwTnM?oc=5
-      beats=Development | outlets=WYFF News 4
- 16. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 07:00:00 GMT)
+      beats=Development | outlets=WYFF
+ 14. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMizAFBVV95cUxNekhnelFrbWUtN2xVWVhmZXd6QlhCc3c0TDRyUEZGNUVmbFhONU1lbVpKb1pSdVE1UG04YnVObHA2MzlXdm1rMWhKcGswZGt0aVkxSktxWGpKMjFUazRMMmZhQTB5UlJLRXlLUVc1blUxMFBKdjhHajV6T1c0Rld4enNUOVVvaVVQLW9GbHI4cHBOb2o4RzNOYjR4Z1ZmLTRYaS1FQTUwZmNuWEhWbnE5S3dMV04tTkZncmZYRUlyZUg2QzE0UlFFQkJyM0I?oc=5
       beats=Development | outlets=Greenville Online
- 17. [   6] Things to Do This Month Near Greenville, SC - Kidding Around Greenville (Tue, 30 Jun 2026 07:00:00 GMT)
+ 15. [   6] Things to Do This Month Near Greenville, SC - Kidding Around Greenville (Tue, 30 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMiekFVX3lxTFBDdE1TcWlMLVU3bkZXQWRWSmVkVXJ3NmJONlBScnJRYVRKQ1ZkdWl3WU1wU1lSUDVRay16Mk9ITGRYM09MRmlzREFsY3BVNXFJdGtTRjZSOFN3NDhOdlNxVTNfR2lUNlJGOUUwc2FlZ2JmMndrYVNBYWpn?oc=5
       beats=Development | outlets=Kidding Around Greenville
- 18. [   6] Black bears are moving through downtown Greenville more than ever. Here’s why, biologists say - The State (Fri, 03 Jul 2026 10:00:00 GMT)
+ 16. [   6] Black bears are moving through downtown Greenville more than ever. Here’s why, biologists say - The State (Fri, 03 Jul 2026 10:00:00 GMT)
       https://news.google.com/rss/articles/CBMiaEFVX3lxTFBmdzNlMWtqZGFQckhRUWw1WG9JR1EtOXVsajJuQjZlcmZENHBJS1RQNmlmWi0wMDVQMzZUVVBKWmpUUVVJUXhFaWxhN3oxb2p5YkJCT1o1cW41UXJqQlRETnhpWFZ6R2NO0gFoQVVfeXFMTXNfZ0lNZE1wbXRRV2Y2RnN2OEtoVmJkR1FKcW5DYWhPc1Job1IyaDNTZ2J5OVJlVzFBVFpLd0VoZmZLeFJ0c0QzR18taFlXZ2h6UEJYM2k4aVpDNlRxc3J5Qlk1REVVUWs?oc=5
       beats=Development | outlets=The State
+ 17. [   6] Matthew James Conroy Obituary (2026) - Greenville, SC - Thomas McAfee Funeral Homes - Downtown Chapel - Legacy obituary (Mon, 06 Jul 2026 15:50:16 GMT)
+      https://news.google.com/rss/articles/CBMigwFBVV95cUxOaU83V3ZfNWFRcmpnRzRMdDBCazJWazkwamo3WEFfV1pLZDVhSWlsb2lLWjdMVmw3ZElfbkoyMV9peFhZcWJwV0RQRTB1Snh4eXpSMnVmTWNMTDd6R3poNmpuRkVhRnZZR1BVTUVDTC1HM3ZFOER1VjNyZ1d4RE51YkNPNA?oc=5
+      beats=Development | outlets=Legacy obituary
+ 18. [   6] Greenville’s Hotel Hartness transitions to owner management - Hotel Management (Tue, 30 Jun 2026 12:00:00 GMT)
+      https://news.google.com/rss/articles/CBMiqwFBVV95cUxORHZjMGFWaHdvNDBfWU13eHpXRjRjOE96YzhEdU41aTkzWlNBamxJR2xwUXp6Sm1FZlZ3M0x5aVlzWWpncmpPM2FRYy1yby1QSWdTQnpDMlAtWEFzNEEzMHFNMU11dEpNYmVDNHRWdW5HbjZfSkN4LUJ4ZC10YUJRTFg1WVBhMEJaa1NyZlMyU0JSNVUxNlUxeGYtTWs2MXJGdHFHZnVZU2tnZUU?oc=5
+      beats=Development | outlets=Hotel Management
  19. [   6] Plane lands at Greenville Downtown Airport after equipment failure - FOX Carolina News (Tue, 30 Jun 2026 18:06:00 GMT)
       https://news.google.com/rss/articles/CBMipgFBVV95cUxQZGNGTWdYNVhHZnlvQkZZLWZ1NlYxTlVVZVNQS0hGcEJuekc2TzBOVFFOeHF0XzhSUG12NDJUWEZhaHRkSGlEY0lQMjhFdGU2aTl3dXhxU0F1LVdNR01qSmJSazcyZzFMTk1WZXQybndicGw5dW92TVZNN0hpOUZYdEJRVThWYldEVmZXMHZ5TTk5dlpBOHVxYzJXeTZiWTE3Zll2Q1B30gG6AUFVX3lxTE5sSlV5RVM5SkZjZ1JSWTdiNXpiMUVKVWM0OGQyMTJlb3R3S2JKYjRtb1NFc3lwWVE2ZGJJeWVvUVFUdTd3Nm9fUGVEVkxuU3Z1Q2ZZejN2dFMwS1ROcmQ1UDg0THN0cmtSSzMyYXlac0gwVjNVU0pOdG1UXzljUlZLSkViTGd2VndFcm5DaGhyYnhKQzh1SUQzSkFwUml4aHpnbjBJQjZ1Nko3YzZMelJybDhzV2VIOW8xZw?oc=5
       beats=Development | outlets=FOX Carolina News

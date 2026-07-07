@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-06 09:59 UTC",
+  "generated_at": "2026-07-07 09:27 UTC",
   "beat_counts": {
-    "Market": 10,
+    "Market": 9,
     "Development": 12,
-    "Rentals": 9,
-    "Policy": 10,
-    "Upstate": 12
+    "Rentals": 10,
+    "Policy": 9,
+    "Upstate": 10
   },
   "biggest": {
     "title": "Affordable senior housing opens near Five Forks in Greenville County - Post and Courier",
@@ -82,47 +82,6 @@
       "appearances": 2
     },
     {
-      "title": "This Southern city’s got what towns around the country crave - CNN",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNYlIzRjhOdEVLQkF3Mlp1WjIyOVM0YTNBb3J0OFZvT1doQ0lWU3lDakUwMjdIem90UG83N0h0NlZhZ3RQU29SUHZ3bU9XUUc2WG10d2EtZ0JQWDBKUnJORnlpV0dQYUo2NjBNbmxBSmdkaFBBWnYwNTVUQ0tYcENjbkNB?oc=5",
-      "source": "CNN",
-      "published": "Wed, 01 Jul 2026 12:17:17 GMT",
-      "beats": [
-        "Development",
-        "Rentals"
-      ],
-      "outlets": [
-        "CNN"
-      ],
-      "appearances": 2
-    },
-    {
-      "title": "Greenville County settles lawsuit over budget process - AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPc2cyUHRGMkl1OWdJdWdNdWU2NlVwbWRFVGhBeUoxWFU4RU5GN1g1cW5sUFk2a3JYektLb05DT3RCLXRMV2w3RzN1WXhod09RdVBIR2JwcHR1N2oxU0IxOXQ4Y0p6ZUVIWnVyYk1oUkpjUmdDYU04bC01WlJuUlI0VFpjOHo?oc=5",
-      "source": "AOL.com",
-      "published": "Fri, 26 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Policy"
-      ],
-      "outlets": [
-        "AOL.com",
-        "MSN"
-      ],
-      "appearances": 2
-    },
-    {
-      "title": "Concerns over proposed housing in Greenville - FOX Carolina News",
-      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOVmJYU01iRHRscHVoTmJPUUV1emRIVUZqTnVOOFVsYkhHYzJXLXVtMzZhSHJqLUJFWFRnNmpWTHlTbDh3ZWtqZGFSdkdsb0Z2b2RtVFoxRnh0Znpwa19Rc0dobEwteDZjMTBNVU9SN0RSUnVVdGpEMUxia2luc1c4UDRmZGVIN1A0c3NqOGlpVHg?oc=5",
-      "source": "FOX Carolina News",
-      "published": "Thu, 25 Jun 2026 22:26:00 GMT",
-      "beats": [
-        "Market"
-      ],
-      "outlets": [
-        "FOX Carolina News"
-      ],
-      "appearances": 1
-    },
-    {
       "title": "Constance Nodine Obituary - Greenville, SC - Dignity Memorial",
       "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdFNTZmdnUmExSk5pV1YzZlIwZTBWTzZ2R3Q1NExqX3dlbUlGVUdFNk1PNXpCSnk2ZmhuSTRaRXJJT1hiUHJ6NUdUSUgySm5yWFo4UUN3aDJ2N0RhQ25HM1pZczl0U29ZbHpnWVR4OFFtR0UycE9FaS1ORUF4cTA5bGsxOHNwZzlBSHc?oc=5",
       "source": "Dignity Memorial",
@@ -175,8 +134,8 @@
       "appearances": 1
     },
     {
-      "title": "Listed for $7.9M, this Lake Keowee home has a private waterfall - Post and Courier",
-      "link": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQdFVuaE9yZWtBejY3Rk9xSG5iNHg3Q1AtMTNJbFQ5WHpmai1USlU4REpCNnBJeXcwNHRhTWFxTnZxSHdiR3Q0dWxOUEFFRWVFZndwcHI4QXg3VDJyVlZFY1JlN2otX2tIeGJaRnU3V0JxZW5YcDU1VHlXZmt4SmF0T2l4cGRuUC1ERkxKeHFfMmVqaDlKSmZ0VDFEWnhPc3ZWbkIzTGp5SkZqcDNlSWJvSk1seml2Qm8zWV9xSHUtcXdwam9xeDRTaldTcjJ0VzlfNHVjbGJPX1RVV0UyMENtX0dNMmZLSVNGSFJOM3hvei1BUQ?oc=5",
+      "title": "‘Pure country living’: Rural lifestyle endures on 96-acre Upstate farm with $1.38M listing - Post and Courier",
+      "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOV1ZzWkpiU2RjeW1YbDN2OFBBUThsWlBqYm9DRmFtWmhHY29UODRna3Q1ZUNqdTQ5QlR4dU0xLWNrYjN6b1pCcmJmNUJYeFprZ094bDFtM2M0T2xHTmd1Mi1rdXdzMUFwQ0gxczlVX1BYS3M4bmxIdTEzcG43Y1dLaFozamFqVFNrcjE0WU5Hd3lRMnBlNC0yT0NZeG94dm92WUNMUkh0MGY5MWtZMDEtZEFQbUR2Vkc2SU1GY1RQZlIxOThITzd4REE5UHhjRHFKQ1JBaTJCQkZDbGpmekk1aVlJQVpOT2d2SGF0WUpR?oc=5",
       "source": "Post and Courier",
       "published": "Fri, 03 Jul 2026 09:00:00 GMT",
       "beats": [
@@ -184,6 +143,19 @@
       ],
       "outlets": [
         "Post and Courier"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "This Southern city’s got what towns around the country crave - CNN",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNYlIzRjhOdEVLQkF3Mlp1WjIyOVM0YTNBb3J0OFZvT1doQ0lWU3lDakUwMjdIem90UG83N0h0NlZhZ3RQU29SUHZ3bU9XUUc2WG10d2EtZ0JQWDBKUnJORnlpV0dQYUo2NjBNbmxBSmdkaFBBWnYwNTVUQ0tYcENjbkNB?oc=5",
+      "source": "CNN",
+      "published": "Wed, 01 Jul 2026 12:17:17 GMT",
+      "beats": [
+        "Development"
+      ],
+      "outlets": [
+        "CNN"
       ],
       "appearances": 1
     },
@@ -214,15 +186,15 @@
       "appearances": 1
     },
     {
-      "title": "Plane lands at Greenville Downtown Airport after nose gear failure - WYFF News 4",
+      "title": "Plane lands at Greenville Downtown Airport after nose gear failure - WYFF",
       "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE8wWFVmU3FEemxxZnZEWGZMN3p1d0xNSnlrQmdHNWFhY3phNGlBX2VoYVVZMExJWHN5Wng4MUNFTWUyODluX0ZrdHNKdy1PdTZZcEZvaWlWNld4dE9ORDJGSzZlMWNQNHc5TXFCVVdHTTNOZlpIWFRlZjEyTzAwTnM?oc=5",
-      "source": "WYFF News 4",
+      "source": "WYFF",
       "published": "Tue, 30 Jun 2026 22:16:00 GMT",
       "beats": [
         "Development"
       ],
       "outlets": [
-        "WYFF News 4"
+        "WYFF"
       ],
       "appearances": 1
     },
@@ -266,6 +238,32 @@
       "appearances": 1
     },
     {
+      "title": "Matthew James Conroy Obituary (2026) - Greenville, SC - Thomas McAfee Funeral Homes - Downtown Chapel - Legacy obituary",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOaU83V3ZfNWFRcmpnRzRMdDBCazJWazkwamo3WEFfV1pLZDVhSWlsb2lLWjdMVmw3ZElfbkoyMV9peFhZcWJwV0RQRTB1Snh4eXpSMnVmTWNMTDd6R3poNmpuRkVhRnZZR1BVTUVDTC1HM3ZFOER1VjNyZ1d4RE51YkNPNA?oc=5",
+      "source": "Legacy obituary",
+      "published": "Mon, 06 Jul 2026 15:50:16 GMT",
+      "beats": [
+        "Development"
+      ],
+      "outlets": [
+        "Legacy obituary"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Greenville’s Hotel Hartness transitions to owner management - Hotel Management",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORHZjMGFWaHdvNDBfWU13eHpXRjRjOE96YzhEdU41aTkzWlNBamxJR2xwUXp6Sm1FZlZ3M0x5aVlzWWpncmpPM2FRYy1yby1QSWdTQnpDMlAtWEFzNEEzMHFNMU11dEpNYmVDNHRWdW5HbjZfSkN4LUJ4ZC10YUJRTFg1WVBhMEJaa1NyZlMyU0JSNVUxNlUxeGYtTWs2MXJGdHFHZnVZU2tnZUU?oc=5",
+      "source": "Hotel Management",
+      "published": "Tue, 30 Jun 2026 12:00:00 GMT",
+      "beats": [
+        "Development"
+      ],
+      "outlets": [
+        "Hotel Management"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "Plane lands at Greenville Downtown Airport after equipment failure - FOX Carolina News",
       "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQZGNGTWdYNVhHZnlvQkZZLWZ1NlYxTlVVZVNQS0hGcEJuekc2TzBOVFFOeHF0XzhSUG12NDJUWEZhaHRkSGlEY0lQMjhFdGU2aTl3dXhxU0F1LVdNR01qSmJSazcyZzFMTk1WZXQybndicGw5dW92TVZNN0hpOUZYdEJRVThWYldEVmZXMHZ5TTk5dlpBOHVxYzJXeTZiWTE3Zll2Q1B30gG6AUFVX3lxTE5sSlV5RVM5SkZjZ1JSWTdiNXpiMUVKVWM0OGQyMTJlb3R3S2JKYjRtb1NFc3lwWVE2ZGJJeWVvUVFUdTd3Nm9fUGVEVkxuU3Z1Q2ZZejN2dFMwS1ROcmQ1UDg0THN0cmtSSzMyYXlac0gwVjNVU0pOdG1UXzljUlZLSkViTGd2VndFcm5DaGhyYnhKQzh1SUQzSkFwUml4aHpnbjBJQjZ1Nko3YzZMelJybDhzV2VIOW8xZw?oc=5",
       "source": "FOX Carolina News",
@@ -288,32 +286,6 @@
       ],
       "outlets": [
         "Greenville Online"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "Downtown cocktail bar announces closure in Upstate - WYFF News 4",
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNTVBLNmF3NFg4VmZZcjM4aW9Zc0IzZDRqSkJ3dUdJMEUxRDVQRmRtWDBnYmg1eXNRTW1yeVVEZExGSGM5NzZiZTc1bzFac214bTNuR2VjZHlSR0pYb3UzaTFsMU9EWkFBYXpnTWdia0VfaEh6UUExSzZUV0MwQ25KYk1ONjh3UlU?oc=5",
-      "source": "WYFF News 4",
-      "published": "Fri, 26 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Development"
-      ],
-      "outlets": [
-        "WYFF News 4"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "James Michael \"Mike\" Stephens Obituary (1947 - 2026) - Greenville, SC - Post and Courier - Greenville - Post and Courier",
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOVkpiLTJkSzVxUGZNb2FtbWRRclBZUjhhTnltVlNReGdidmZHZlJtU2E5cW5RUDAyNmtfWFNUbGRGelh5elhWZ0hSTFdIbk8xbEg2YzcyY2hRUlZuN3VZUXhiQWhzQ0NJVDlUaGR3ODZuWXhCVzVvNndCYlA1ZWJYYTlLb0FJaE5JSjNHTjZxRnVNN2lQRXZZMTF5RzhqdlE?oc=5",
-      "source": "Post and Courier",
-      "published": "Wed, 24 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Development"
-      ],
-      "outlets": [
-        "Post and Courier"
       ],
       "appearances": 1
     },
@@ -344,6 +316,19 @@
       "appearances": 1
     },
     {
+      "title": "Greenville Zoo: Reviews, Events, and Our Complete Guide - Kidding Around Greenville",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE12dXNJamFpZi1iNkxIQ1AzOTVBY0E4cm1sYWFnMXZ4TGZrLTdnTVFBemlpWUxKWm94aHdreWVkQTdxQ056UWVYMXpYMkYyQlNERm01R1UyR0NOZTJIUkFz?oc=5",
+      "source": "Kidding Around Greenville",
+      "published": "Mon, 29 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Rentals"
+      ],
+      "outlets": [
+        "Kidding Around Greenville"
+      ],
+      "appearances": 1
+    },
+    {
       "title": "Apartment fire reported in Greenville - WSPA 7NEWS",
       "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPdjE4WXg3UnVVMmY0emIwZlkzSm55UVRoOWpIekktQkozdkJFTFhOdTJDVjRVcENCci0wYmhySjVyNjNmaWl4cjNqNzlqZlpXMFI5UEp1VllpUU9CY29HM3YtTUREU2xTUjFOazVyRDVIR0I0RmtYNmZNdHp6SHh4TDdVZUpVZ9IBhgFBVV95cUxPdjE4WXg3UnVVMmY0emIwZlkzSm55UVRoOWpIekktQkozdkJFTFhOdTJDVjRVcENCci0wYmhySjVyNjNmaWl4cjNqNzlqZlpXMFI5UEp1VllpUU9CY29HM3YtTUREU2xTUjFOazVyRDVIR0I0RmtYNmZNdHp6SHh4TDdVZUpVZw?oc=5",
       "source": "WSPA 7NEWS",
@@ -353,6 +338,19 @@
       ],
       "outlets": [
         "WSPA 7NEWS"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Delphin Burdette Obituary - Greenville, SC - Dignity Memorial",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPOHR5VlVFX3U4cTN2OW50TDIzUEtyS0xpMGdvckM5OTFJVnRpNkRIZzFTVi1jbFUxV191Y2dla2dmLTVqWEFYWlBKZUQzbV8zUy1WY1NzdVNkX1N0OVZsaGx1eEUtd25uejFmcWY3YllDSWhuOVpVa1R2T3FJMzc4RmQ2aUJFajdRTnc?oc=5",
+      "source": "Dignity Memorial",
+      "published": "Sun, 05 Jul 2026 07:00:00 GMT",
+      "beats": [
+        "Rentals"
+      ],
+      "outlets": [
+        "Dignity Memorial"
       ],
       "appearances": 1
     },
@@ -370,10 +368,10 @@
       "appearances": 1
     },
     {
-      "title": "CNN names Greenville in Top 3 best towns to visit in America in 2026 - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPOXE1aWU4ZU14c3hvSi1HcnN1V2lYSTdJQmprUEU3YWo5RjNITmZKcXdtS2g2bFQ5WVd3a09FYVdhXzdXS2lPcTNMVVV0Szl3OWh6MDRGU2lWUThaVlBadFJfUWFKaUFYYk94TEtCVTVOaEI2SDRQWTZtVU93VWVnYmdVdmcwQkNBdDUwTXZ5MnkxYm1rZkhjMXZyRllma0NOQS15bGRuS1dqQlJNTXh1Q3VRcVg5Q1U?oc=5",
+      "title": "Renovated mills honor Greenville's deep roots in textile industry - Greenville Online",
+      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNQlV4TDVta2hPTGk1Z3JuUkZmY0lFYklIQ3VsRS11bmwzdzRDUWd2VTlUamNOVXJkeTFMUkZKcFExWl9vTmtXZGZQcC1mdC1ya1ZuUU5rekE1NG1GYkpIajFRUjU2V3VZbzNVMlRZcHFtUThyR2FWd29HeUFmYS1jNU5OcWtIcl9TWk55ZUxkY1RQcW1DSk10NE50a3JhUTljelREOHZNTmVOT1A0UzlndVNDRFpvNDNoTS1JMHlNUGRvaWwtYlh6RVRoclA2SldYX1V5R1NR?oc=5",
       "source": "Greenville Online",
-      "published": "Fri, 03 Jul 2026 09:09:00 GMT",
+      "published": "Mon, 06 Jul 2026 09:00:00 GMT",
       "beats": [
         "Rentals"
       ],
@@ -383,41 +381,54 @@
       "appearances": 1
     },
     {
-      "title": "In an SC first, Greenville County voters may decide multiple penny tax initiatives - Greenville Journal",
+      "title": "In an SC first, Greenville County voters may decide multiple penny tax initiatives - greenville journal",
       "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPWGxCZDFHbEFrRVpkVlN1NTZCTXFlUnNBeDVMb3E0a0MtMU5WNmFzNVB0d0ZsMGVzTUJ1MXNQMlZJMTBVV3dER3E4TnJKdkRZYTlUWUVGbEhxM2huellpaTZ0ZFdocE5CVU5LOUJpOExGNHJ6Mk5zak1WdHhFNHVreV9YVEl5NUFQTF9TOFNjTWxzU3l4TlpieVFVMFFpQnFmTDF3aXdlTlNMWVEzZlVONTZBaXBKc2lV?oc=5",
-      "source": "Greenville Journal",
+      "source": "greenville journal",
       "published": "Thu, 02 Jul 2026 11:01:24 GMT",
       "beats": [
         "Policy"
       ],
       "outlets": [
-        "Greenville Journal"
+        "greenville journal"
       ],
       "appearances": 1
     },
     {
-      "title": "Greenville, Simpsonville consider 1% sales tax hike, bypassing county - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPdTRQeTBNUkxzcFR1emQwYnc0OVFScGpkOXppRGpOYWx3YmhEQ08yVmZVSTJ1djBNUmVYWTlWUDR3SnVDSGltTGxmdDRMbklqaXVNMlQzMjZ6UjU0em1IdTBxZFJwaXcyS2pQbXJBcmY3TC1BUHRremdKWGs1Z2dVbmRCWnFleVRGaW5CVFl2OXVpd3NNeEJFWVppb2Qzc2w5Vkt1OFNPN0pPemJQ?oc=5",
-      "source": "Greenville Online",
-      "published": "Tue, 23 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Policy"
-      ],
-      "outlets": [
-        "Greenville Online"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "Senior affordable housing complex opens off Woodruff Road in Greenville - Greenville Journal",
+      "title": "Senior affordable housing complex opens off Woodruff Road in Greenville - greenville journal",
       "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPTUgxdGkxUkR6UGc3QkJCY0ZRRk9abi1YeHBoNXJTZWs5RkRFSUctMU5SczgxX0YzNVlIWlpOdmhPZVNBODBsOFNEbkdrMnpNd1FOMERWeEM0ZklpUzd2YVk2cEhZanZ2cHFJT1NjVkRCajFZNTJqQkdQWDZPY3dJaVQ0b2FxWHhKMUJES0FyQ1V1QkdlaElZVDBjTlJPWm9neGZ0N3Z2RzZwUXl1TFotNWxEZVRYeVNENWtUZUZR?oc=5",
-      "source": "Greenville Journal",
+      "source": "greenville journal",
       "published": "Thu, 25 Jun 2026 17:30:39 GMT",
       "beats": [
         "Policy"
       ],
       "outlets": [
-        "Greenville Journal"
+        "greenville journal"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Greenville County settles lawsuit over budget process - AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPc2cyUHRGMkl1OWdJdWdNdWU2NlVwbWRFVGhBeUoxWFU4RU5GN1g1cW5sUFk2a3JYektLb05DT3RCLXRMV2w3RzN1WXhod09RdVBIR2JwcHR1N2oxU0IxOXQ4Y0p6ZUVIWnVyYk1oUkpjUmdDYU04bC01WlJuUlI0VFpjOHo?oc=5",
+      "source": "AOL.com",
+      "published": "Fri, 26 Jun 2026 07:00:00 GMT",
+      "beats": [
+        "Policy"
+      ],
+      "outlets": [
+        "AOL.com"
+      ],
+      "appearances": 1
+    },
+    {
+      "title": "Greenwood County faces dueling votes on data centers at Tuesday night meeting - FOX Carolina News",
+      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOUUdlSkROand3bmNMc0d4cmNQTGE5WDVPQTRoeHFReEFKN0NhMkFEeDNza0VmNVpGZXd5RXZRaldxWnlJTk1PU2I3RXBFUUZjQ1BRY3FYMjcyTmN0RW0wOGdvU1pZbm5RS1lNMnk4TnUwcnV0NjhBTUFnTmFPd3hXQ0tLd3pZMFpEX2FXalJGdXk4Si1IanFNYWJWYmVGU19BcGh2b19FdXNabEl2SW5wVlhvX2RaUC1ncjg2S01VVWNfb3pW0gHEAUFVX3lxTE5RR2VKRE5qd3duY0xzR3hyY1BMYTlYNU9BNGh4cVF4QUo3Q2EyQUR4M3NrRWY1WkZld3lFdlFqV3FaeUlOTU9TYjdFcEVRRmNDUFFjcVgyNzJOY3RFbTA4Z29TWllublFLWU0yeThOdTBydXQ2OEFNQWdOYU93eFdDS0t3elkwWkRfYVdqUkZ1eThKLUhqcU1hYlZiZUZTX0FwaHZvX0V1c1psSXZJbnBWWG9fZFpQLWdyODZLTVVVY19velY?oc=5",
+      "source": "FOX Carolina News",
+      "published": "Tue, 07 Jul 2026 02:56:00 GMT",
+      "beats": [
+        "Policy"
+      ],
+      "outlets": [
+        "FOX Carolina News"
       ],
       "appearances": 1
     },
@@ -435,54 +446,41 @@
       "appearances": 1
     },
     {
-      "title": "Photos: Homes of Hope holds workforce program graduation - Greenville Journal",
+      "title": "Photos: Homes of Hope holds workforce program graduation - greenville journal",
       "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQNlhLQUtFdHowZ1pLQldWT3VVYkU4VzhhYjNvUm9lZ3BGMlB5TTFrdG1ZdW9CYmY4SDVsSUNlcWN4NkpNdF84bFd6M3hBU2ZldDk0SHQ4SXR6d3lNUEY5SXJodWdfRXZOcFRvc1RIOURrQmxKOXZMTy1icnhqLTFDQU5jQjBoSzBHZkNTME5uMmdDa0Q4alhOYXlPcFg?oc=5",
-      "source": "Greenville Journal",
+      "source": "greenville journal",
       "published": "Fri, 26 Jun 2026 16:04:38 GMT",
       "beats": [
         "Policy"
       ],
       "outlets": [
-        "Greenville Journal"
+        "greenville journal"
       ],
       "appearances": 1
     },
     {
-      "title": "Simpsonville advances plans for penny sales tax referendum: City Council notes - Greenville Journal",
+      "title": "Simpsonville advances plans for penny sales tax referendum: City Council notes - greenville journal",
       "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPNWFfZ2VyeElYaFdDazlPSTdiTHpwTjh4UHdoUWdTQ3Rhbm5wbTViWVFOMTdKZ3NhT1dXejRUR3cxUHFMYk9VWHVGZ1dtd0czUjNCSnRqQjlZNHZPRXBjTlFhTHhoYllNNEJkeUQ5LW43bG0wLUtnVVRwX1JBTEVNTTJpZEcxalY5bUF3QjZ5RHh5RGlVMVh0WDhHdnlJbEMzbGp6MVZQNnF3M0xPOVRtMGFBaWZoeHFHd1dZ?oc=5",
-      "source": "Greenville Journal",
+      "source": "greenville journal",
       "published": "Wed, 24 Jun 2026 14:17:44 GMT",
       "beats": [
         "Policy"
       ],
       "outlets": [
-        "Greenville Journal"
+        "greenville journal"
       ],
       "appearances": 1
     },
     {
-      "title": "Severe storms predicted for Upstate South Carolina. Latest outlook - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQNE0weExLWFk0cVIxSkJpbVljLW5OaVlISDM5RkxRN2I1ZmZCVkJUVmRVSFFBQ0M4WUpPdTZmaUQ2UmpjQmxiVlkyQ2ZaeGFlb2V5WWV0bldUeU5iN0pLQzMwRG9JY09WQ09qWlFaOVZ2NW04dkZiSXRfSEtELVNTak1xUFFsSTdHdVI1RVRfaDJHY1p3WkJwUHc1ZVF6U0FnVDEwc2t0UmQ5U001TjdjQlAwWG5tY3pmNno3UVVFV1EtaHdVdTFwVHpDLVlxbnZYUUE5cE5aeEstSkM2WDhnag?oc=5",
+      "title": "Upstate SC hit with heat advisory for July 2 as heat index to hit 106 - Greenville Online",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQYi1mNHhnQ0hONk1xYU9jc1JDbnNMQk5SR1pWX1Y1TVdnZm5PTURiVk5UaFFCUFl6WmdPakx0aHF4YWNjWm4yS2VLdERCV0JqemhuMzB0VXl1ZW5pbzh6V2JLaWlrVUJSX2ZzTXlOejdSX0FJNXRfV3RTWEVOUE9mLV8yZ2NudjVxQUpoejZ3TkJZS19WNVY0eUs1YmdvRWN4OVhNb2puS3V5WEU2d09CbEM4TG1Ddkpz?oc=5",
       "source": "Greenville Online",
-      "published": "Mon, 22 Jun 2026 15:09:00 GMT",
+      "published": "Thu, 02 Jul 2026 15:09:00 GMT",
       "beats": [
         "Upstate"
       ],
       "outlets": [
         "Greenville Online"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "United Bank Welcomes Jimmy Kimbell as Greenville, South Carolina Market President - Greenville Business Magazine",
-      "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNTEhwX1JINHlhamNaeFRKSDc3S216M2Nhb1dxLVMyZG1pQ2pTcFMyUTVjcjNSVFNMaUZLZnlJRTU4ajNwU1l1LVc5SndHa3AtRFZXVkctNjFTeU5CdE50Z2x3U1Z3bmU4VGxKZU9xemFlaHI1d0dZX0QzTHNTeEE5UjZrSEJqM2RXTFVSU0doX0diNU9mVDVOZmVRUmhaVGJOVEtNQjhJMEZpZ3hpeGFVTDZnXzFKMzhwRDhNbkM2RElsVUEyWGVpU1dkck0?oc=5",
-      "source": "Greenville Business Magazine",
-      "published": "Tue, 23 Jun 2026 14:59:17 GMT",
-      "beats": [
-        "Upstate"
-      ],
-      "outlets": [
-        "Greenville Business Magazine"
       ],
       "appearances": 1
     },
@@ -539,10 +537,10 @@
       "appearances": 1
     },
     {
-      "title": "Upstate SC hit with heat advisory for July 2 as heat index to hit 106 - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQYi1mNHhnQ0hONk1xYU9jc1JDbnNMQk5SR1pWX1Y1TVdnZm5PTURiVk5UaFFCUFl6WmdPakx0aHF4YWNjWm4yS2VLdERCV0JqemhuMzB0VXl1ZW5pbzh6V2JLaWlrVUJSX2ZzTXlOejdSX0FJNXRfV3RTWEVOUE9mLV8yZ2NudjVxQUpoejZ3TkJZS19WNVY0eUs1YmdvRWN4OVhNb2puS3V5WEU2d09CbEM4TG1Ddkpz?oc=5",
+      "title": "Your complete guide to celebrating America's 250th in South Carolina - Greenville Online",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOcmhTM09Sb2VISUdLX1VMaVl1cjQ5X0kycUhlQjFLd2JmTURZWEU1bzktMVZQZVV0RWdFcXRVSFE1VFdUdmJDVy1lemJqbWhGOUVjTzZQcE5Xd2ZzTzBzWVd4WDQxN1kzSE15MkRBRllXbVhhNU9nSDRKcC02alFTX05ub3U1d2FtaGM1d19Yc2JzTEpqTG9mRFBvS3Q0dUlRWk1acXQ1M05hbmMtUmhaYU5sZ2Jyc0w5RU9v?oc=5",
       "source": "Greenville Online",
-      "published": "Thu, 02 Jul 2026 15:09:00 GMT",
+      "published": "Fri, 26 Jun 2026 07:00:00 GMT",
       "beats": [
         "Upstate"
       ],
@@ -561,19 +559,6 @@
       ],
       "outlets": [
         "Yahoo Finance"
-      ],
-      "appearances": 1
-    },
-    {
-      "title": "Your complete guide to celebrating America's 250th in South Carolina - Greenville Online",
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOcmhTM09Sb2VISUdLX1VMaVl1cjQ5X0kycUhlQjFLd2JmTURZWEU1bzktMVZQZVV0RWdFcXRVSFE1VFdUdmJDVy1lemJqbWhGOUVjTzZQcE5Xd2ZzTzBzWVd4WDQxN1kzSE15MkRBRllXbVhhNU9nSDRKcC02alFTX05ub3U1d2FtaGM1d19Yc2JzTEpqTG9mRFBvS3Q0dUlRWk1acXQ1M05hbmMtUmhaYU5sZ2Jyc0w5RU9v?oc=5",
-      "source": "Greenville Online",
-      "published": "Fri, 26 Jun 2026 07:00:00 GMT",
-      "beats": [
-        "Upstate"
-      ],
-      "outlets": [
-        "Greenville Online"
       ],
       "appearances": 1
     },
