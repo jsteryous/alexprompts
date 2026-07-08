@@ -15,10 +15,10 @@ already awaiting review). See memory [[greenville-evergreen-seo-track]].
 **The news track was RETIRED in July 2026.** The engine used to also run a daily both-sides
 Greenville real-estate NEWS post driven by a Google-News signal collector. It was retired
 because news ranks for a week then dies, does not carry buyer/seller intent, and demanded
-live-publish spot-checking for little payoff. The news pieces (`collect.py`, the
-`collect-greenville.yml` workflow, and the passes `pass1_reporter.md`, `pass2_sides.md`,
-`pass3_writer.md`) **remain in the repo, unwired**, so the decision is reversible, but the
-orchestrator no longer calls them. Do not treat them as live.
+live-publish spot-checking for little payoff. `collect.py` and its `collect-greenville.yml`
+workflow **remain in the repo, unwired**, and the three news passes were moved to
+`scripts/_archive/greenville_news/` (`pass1_reporter.md`, `pass2_sides.md`, `pass3_writer.md`), so
+the decision is reversible, but the orchestrator no longer calls them. Do not treat them as live.
 
 The **self-sourcing** design mirrors the Lab (`scripts/tech/`): the routine prefers a topic
 Alex queued in the optional bank (`topics.md`), and when the bank is empty it scouts its own
@@ -32,10 +32,12 @@ with web search (`pass0_scout.md`), so it never runs dry.
   to ground it. Self-sourcing: seed a `queued` topic to steer, leave it empty to let the scout
   choose. The routine reads it, dedups against already-published `evergreen` slugs + titles, and
   never writes to it. Mirrors `ai_news/questions.md` and the Lab's `tech/topics.md`.
-- **`routine/`** — the orchestrator plus the two live evergreen passes, `pass0_scout.md`
-  (self-sources a topic when the bank is empty) and `pass_evergreen.md` (the self-researching
-  evergreen writer). The retired news passes (`pass1_reporter.md`, `pass2_sides.md`,
-  `pass3_writer.md`) also live here, unwired. See `routine/README.md`.
+- **`routine/`** — the orchestrator plus the three live evergreen passes, `pass0_scout.md`
+  (self-sources a topic when the bank is empty), `pass_evergreen.md` (the self-researching
+  evergreen writer), and `pass_editor.md` (the de-generic quality gate, a fresh clean room that
+  runs the "Nashville test" on the draft, enforces local density and one un-copyable local asset,
+  fact-checks inline sources, and holds fair-housing/style before publish). The retired news passes
+  were moved to `scripts/_archive/greenville_news/`. See `routine/README.md`.
 - **`commercial.py`** — a separate DATA collector (NOT part of the content routine, still live).
   Pulls recent Greenville County **commercial property sales** from the county's public ArcGIS
   service (`GreenvilleJS/Map_Layers_JS` layer 2, "Commercial") into a lean JSON the site reads.
