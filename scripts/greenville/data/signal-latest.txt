@@ -1,12 +1,12 @@
 
 ======================================================================
 GREENVILLE, SC REAL-ESTATE SIGNAL
-Collected 2026-07-07 09:27 UTC
+Collected 2026-07-08 08:11 UTC
 
 BEAT COVERAGE (headlines found per beat):
-  Market       9
+  Market       12
   Development  12
-  Rentals      10
+  Rentals      11
   Policy       9
   Upstate      10
 
@@ -15,7 +15,7 @@ BIGGEST STORY (most corroborated, the lead to write up):
   https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
   beats=Market, Rentals, Policy | outlets=Post and Courier | appearances=3 | score=14
 
-RANKED STORIES (top 20 of 44):
+RANKED STORIES (top 20 of 45):
   1. [  14] Affordable senior housing opens near Five Forks in Greenville County - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWTRJUXNvYnpFRXZJUDBMLU9WcklZY2hnNTNiRHJtQmFWckl6QXFHa0ljSWpITnhHcjI5YmhpdnhGd0ZaVC12aXhLT2lxMzJtVTU2SkZzMFBMOVlMb0Zicks1R1dZcjlwanoyM3BDTGxZcWUtQ3V3Q0ZSenl1UHEyMk1oV0pJTjhyU291UUNRUXlUVHJPNzZ1UVdIbUQ4TmVBbHdwajBpYmhGSURCTklGRkRpTHVVOGk4a3ZFUEhaNGRYRVdVNk4yMDFqZ1pvVlB6a0hYQVpVU1k?oc=5
       beats=Market, Rentals, Policy | outlets=Post and Courier
@@ -25,55 +25,55 @@ RANKED STORIES (top 20 of 44):
   3. [  10] Greenville, SC, Has a Shortage of Homes for Middle-Income Earners - Realtor.com (Sun, 05 Jul 2026 15:42:00 GMT)
       https://news.google.com/rss/articles/CBMilAFBVV95cUxQb3hRM2lEY3NKdzdUSDBuQmtPTHAyTmNYcWctY2NDOVlKUFpqbGplZ2lNbUVPZHM3aU5pSmV2eHUxM3dmRUNNV2pNVGRYSlV3T1o4a2t1dVY2ZkFfeGxsOGZZczBCTEphVHlSdFd4WDJ3d2JZUElYcm0zTGZIcjBVMnpTaWFiWnNyWUE1dWUwd0dnc2Rx?oc=5
       beats=Market, Development | outlets=Realtor.com
-  4. [  10] South Ridge - Greenville, SC Apartments | Realtor.com® - Realtor.com (Mon, 29 Jun 2026 14:11:01 GMT)
+  4. [  10] Judge to hear arguments in Greenville County subdivision dispute that could reshape development approval process - FOX Carolina News (Wed, 08 Jul 2026 04:00:00 GMT)
+      https://news.google.com/rss/articles/CBMi8wFBVV95cUxNc21EZmkweFBacHkwblM4VGRzN3U0MXFFbjE3cXgzanZEM1M0ckUxM1RBRHYxTndreFhpU29VS3dPYlg4bmZTeFNaNV9MUTNrRHBaTU1neU5LQUtGY0pIQ0w1RGtGMzBMdl9rZ29HcFhodGVvNWJ3c2NKN3U2X2VmRk9TT3pzYVVuX2xzbDNOaVBaRXNZSFhiajBrb1Jld3k4ZGxWWjc4ck41dUlkb1g1RE9PcXpQMk5wRHpxNlZGbzVCbm5KX1Q4ZGFhdk5HQkNla3Q4MG5RSEI5X0tIRUdrRjdpNV9rZWNCS2FjX1lLT1VBWUnSAfMBQVVfeXFMTXNtRGZpMHhQWnB5MG5TOFRkczd1NDFxRW4xN3F4M2p2RDNTNHJFMTNUQUR2MU53a3hYaVNvVUt3T2JYOG5mU3hTWjVfTFEza0RwWk1NZ3lOS0FLRmNKSENMNURrRjMwTHZfa2dvR3BYaHRlbzVid3NjSjd1Nl9lZkZPU096c2FVbl9sc2wzTmlQWkVzWUhYYmowa29SZXd5OGRsVlo3OHJONXVJZG9YNURPT3F6UDJOcER6cTZWRm81Qm5uSl9UOGRhYXZOR0JDZWt0ODBuUUhCOV9LSEVHa0Y3aTVfa2VjQkthY19ZS09VQVlJ?oc=5
+      beats=Market, Policy | outlets=FOX Carolina News
+  5. [  10] South Ridge - Greenville, SC Apartments | Realtor.com® - Realtor.com (Mon, 29 Jun 2026 14:11:01 GMT)
       https://news.google.com/rss/articles/CBMiigFBVV95cUxNVUstYlRkc3lzbmswWF9RdkhGY3A3UGxUWThERV9FelJmSndVTXFLcGdHUFZGbFVQMjNnLXphckFIN2RkaUJ6dFZKRDBHeG4xTlNfZU1IenUwdkZzMThEdWZVLVlsdzNnT21CR01QSlphRXJZUm54LXdXYkVOek9ub1BWZjFyaW9MOHc?oc=5
       beats=Market, Rentals | outlets=Realtor.com
-  5. [   6] Constance Nodine Obituary - Greenville, SC - Dignity Memorial (Wed, 24 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiigFBVV95cUxNdFNTZmdnUmExSk5pV1YzZlIwZTBWTzZ2R3Q1NExqX3dlbUlGVUdFNk1PNXpCSnk2ZmhuSTRaRXJJT1hiUHJ6NUdUSUgySm5yWFo4UUN3aDJ2N0RhQ25HM1pZczl0U29ZbHpnWVR4OFFtR0UycE9FaS1ORUF4cTA5bGsxOHNwZzlBSHc?oc=5
-      beats=Market | outlets=Dignity Memorial
-  6. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
+  6. [  10] McShane Construction Delivers 262-Unit Apartment Development in Greenville - REBusinessOnline (Tue, 07 Jul 2026 15:01:01 GMT)
+      https://news.google.com/rss/articles/CBMipwFBVV95cUxNbU1pcHRxWGhXYVRwbktFUGVqc0pWMXpXelVMVk5WQzdyb3hwdTRhTVU4MGlEZUxtZ28yYVkwOEg5bG5GUU9tYjU5dGtSZDBUZGpRUm4xek5EZTN2aTRldFdTTDVXUk8tUjhIaDE1Mkp1ZDNiejRBbTVKVmdaUlFscmJYb2d3aWU0bndQbXVrY1k3UFlJbkZSWkZ2aWJXdmRVRUc1a1FGVQ?oc=5
+      beats=Development, Rentals | outlets=REBusinessOnline
+  7. [   7] Crews respond to fire at apartment complex in Greenville - FOX Carolina News (Mon, 06 Jul 2026 02:01:00 GMT)
+      https://news.google.com/rss/articles/CBMilwFBVV95cUxOLVgwREwxMXpCeDVFMXYwRnh4ZUgzdHZONXlXMmpBaEh0VVpSeGdweHVnSy13Vzk3dVFYSjh5T3NhYnQwWGx1cnF0bW81SG1EWUEyRlJObm9ETHpWazZnR2t2OVZvcE03Q0JkdGxBamlPWEVJNFU1YVVuWHlKQkZsczJNcWZpejNBSVVSX0xka1l6S1FSdXRv0gGrAUFVX3lxTE9VZVItVzctWkY4ZW9MOTk5WGtQUFd3VEV1NEt5cDdIMHlCRnhWcG5uaHdCTGF6V1piX1c2TTdCUmFZNTJFVUVGbHNoM2paelNiNmVRREtJSlpWZWYzLU9ZSUV6elp2MEVpelJfVzBzSHcyLUdLVWhOQWlwcEVLY3ZCYVR3LWlwRENBNUthUmUySHRsUFV3MmNwcVZEQVNsal9TZjliTkFTRVJ2UQ?oc=5
+      beats=Rentals | outlets=FOX Carolina News
+  8. [   6] SC: Man accused of refusing to allow woman to leave bedroom - WYFF (Mon, 29 Jun 2026 19:25:00 GMT)
+      https://news.google.com/rss/articles/CBMijAFBVV95cUxOeHpqamhqSVVBRXVGT2FHV0IxQkhBbEJXaDhIM0ZNX2FtRnBXZDBiWG5YeU5kRnlna25GdFVTX2dXNU95UTEyNlM1NFYyLXk4QmZHaEk5eWNTcmJiSEI4eUdnVWtNaWNMZ0hQZTJvcFFHWmFxOVp4UWswMUZ1eVpISnhSa1JuNi1Hd0kwWA?oc=5
+      beats=Market | outlets=WYFF
+  9. [   6] Greenville County settles lawsuit over government transparency, must pay attorneys who sued - Post and Courier (Fri, 26 Jun 2026 19:30:00 GMT)
       https://news.google.com/rss/articles/CBMi4wFBVV95cUxNS2NmRVlzY1JwMy1XRHZPS3FkRFZfRkFMMG1HQlVVWmZLYTN1YzVpVUNIMHVUOE9VX0p6S180M0w3YVZJaDQxN2dOaHFhVUxjYk80UmNSdFllQWZEX1B5ZGhBV1VwZkRDNXNRNmZyMWllUlVETlZpdGlzai12OFNZSUxoUk9QRWRRR3VqYndzSjM2OHNBWlFIM2E1ZmdGcTFWWW1EYWdWMkJKM3puazIyOUNvVENOVmR3UXIzWnJwclR4SDVENUNJd3picGVaNnBFVmxOdFowajVMZGdpbUpFNTZQMA?oc=5
       beats=Market | outlets=Post and Courier
-  7. [   6] A Discussion With the Palmetto State’s Economic Development Organizations - Greenville Business Magazine (Mon, 29 Jun 2026 19:49:21 GMT)
+ 10. [   6] Greenville’s economy, lifestyle, and affordability - MSN (Sat, 04 Jul 2026 04:48:49 GMT)
+      https://news.google.com/rss/articles/CBMipAFBVV95cUxQT2V6T3JudWVFR1JJcGdHaV83aW1QLThIX0QzUllQeEc0TVR2MmlNbmRYbTR3UWlSWGJJa09DUnhadU1uWFRoU0hEWHhDRUYxQVJqWHV0akk2dTFaY2xTMzFkTXBqUUdiamJlczFkNXBOWmZjWkdPRXZ6eXhDb29VX0Ywa2Uta1pUX1N5NU9qYTcxZERvY1JYUjUwaXlpdkdReUs4Qw?oc=5
+      beats=Market | outlets=MSN
+ 11. [   6] United Community Banks, Inc. Announces Date for Second Quarter 2026 Earnings Release and Conference Call - GlobeNewswire (Tue, 30 Jun 2026 20:34:00 GMT)
+      https://news.google.com/rss/articles/CBMihAJBVV95cUxQXzFOa3gxQ0xXSEZRVjhGaG9SbDhwbU9UTEdFckxnUk81dm5xSkZHUDcwZVJ1TTZOcTg3OWZTY0hZOFA3X3pqck1DVG9UX0Q1Qnd5ajhuOExFS3dET3AtWVNOSjJMOWhqNkJnM000TFg2MHhjNmNXZjg3Y0pVNjFDTVp0WENvU0puOHd0Z2VRbmhnNlpVOWE1bEt2SDRUOHBCdUlwM2dmS2k1bnJRdUtkcTJfYWpiWW1FdE5PWWNES0syT1JYQzVzUGFjTzZ0M1BITWFlbDlJdHJMTHNfNXplbVFSTVZkRDBRai1CVEtXUGhzOTFBUE1qSm12U1VKNFVpMHB2WQ?oc=5
+      beats=Market | outlets=GlobeNewswire
+ 12. [   6] A Discussion With the Palmetto State’s Economic Development Organizations - Greenville Business Magazine (Mon, 29 Jun 2026 19:49:21 GMT)
       https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa0F4ZVFlOW5GZWt4YkRNWUZmM0hqdXlGRDFKMm94RHlWaFRMcjZMUkY3R1FHZ0ZiTkgyR3FpeENTdC16M3ZEVVp5ejU2YUdjLVVhVnlTdWtDNUllR2VsTk9oZnhkS1FHelAxXzdCZUFIaWVhUkxqcFFnQ1Q1QzU5NVZRNjRWdXVnOFRFWmVFMnQtZ0FLLUxjVWpnTTZyNFctWlhvNVYxYlR2TTNwaXpjcTliWjFOdVh1UUFlamdLQUdtZw?oc=5
       beats=Market | outlets=Greenville Business Magazine
-  8. [   6] Warm hues and skyline views: Behind record $2.75M sale in Greenville’s Montebello neighborhood - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
+ 13. [   6] Warm hues and skyline views: Behind record $2.75M sale in Greenville’s Montebello neighborhood - Post and Courier (Fri, 26 Jun 2026 09:00:00 GMT)
       https://news.google.com/rss/articles/CBMi7gFBVV95cUxOX3lBblNrSDBSRVN4NTdsUjMyOFh5c0IxaG1rVC1UOWd3M3UxOWJUaEhpb1hma0lXMWVTa3dtQ0J3ci1xbEx0VlVEdTVuc2llTTBpdHZOeUdnQWV5blJEOFpIM3ZhYUVzMUdxV0t5QVVGc1huY1NIVnBjWGdHZG9JN3NoQTEyTl9hOC1vcUxmbFg5SGVJS0JnX09BSEk2WVYtVHQybG5oc0tka2lpU052T0hNODZGTUpTcjBrVE1CSnFRanF1WTZJUGVMR0RsY2NBNXd4bnhBQWdsZlc5NVg1Q3FGOFlDdHJybFJGLVJR?oc=5
       beats=Market | outlets=Post and Courier
-  9. [   6] ‘Pure country living’: Rural lifestyle endures on 96-acre Upstate farm with $1.38M listing - Post and Courier (Fri, 03 Jul 2026 09:00:00 GMT)
-      https://news.google.com/rss/articles/CBMi7gFBVV95cUxOV1ZzWkpiU2RjeW1YbDN2OFBBUThsWlBqYm9DRmFtWmhHY29UODRna3Q1ZUNqdTQ5QlR4dU0xLWNrYjN6b1pCcmJmNUJYeFprZ094bDFtM2M0T2xHTmd1Mi1rdXdzMUFwQ0gxczlVX1BYS3M4bmxIdTEzcG43Y1dLaFozamFqVFNrcjE0WU5Hd3lRMnBlNC0yT0NZeG94dm92WUNMUkh0MGY5MWtZMDEtZEFQbUR2Vkc2SU1GY1RQZlIxOThITzd4REE5UHhjRHFKQ1JBaTJCQkZDbGpmekk1aVlJQVpOT2d2SGF0WUpR?oc=5
-      beats=Market | outlets=Post and Courier
- 10. [   6] This Southern city’s got what towns around the country crave - CNN (Wed, 01 Jul 2026 12:17:17 GMT)
+ 14. [   6] Buying a Home in 2040: Raising a Future Homeowner Starts With the ‘Coffee Can’ Strategy - Realtor.com (Fri, 03 Jul 2026 16:32:00 GMT)
+      https://news.google.com/rss/articles/CBMiiwFBVV95cUxNY2pIaEw0R05VRmVJdmpwaGxkcTBjckwzNlExVEFxWTlNckk4cEUwSGVIQnRkZWw1V1pWYkJUNkttck9iX2FhQzg0aVo0T0NwakwyczFXTUhUR2VBSHByZ3JHeVNZaURtdVQtU0NCV211b0xMbmdBT2tzZzMyMWVoeEQ4RE55bzNtaEdN?oc=5
+      beats=Market | outlets=Realtor.com
+ 15. [   6] This Southern city’s got what towns around the country crave - CNN (Wed, 01 Jul 2026 12:17:17 GMT)
       https://news.google.com/rss/articles/CBMiggFBVV95cUxNYlIzRjhOdEVLQkF3Mlp1WjIyOVM0YTNBb3J0OFZvT1doQ0lWU3lDakUwMjdIem90UG83N0h0NlZhZ3RQU29SUHZ3bU9XUUc2WG10d2EtZ0JQWDBKUnJORnlpV0dQYUo2NjBNbmxBSmdkaFBBWnYwNTVUQ0tYcENjbkNB?oc=5
       beats=Development | outlets=CNN
- 11. [   6] Fireworks fly over Unity Park in Greenville during 4th of July celebration - FOX Carolina News (Thu, 02 Jul 2026 13:55:00 GMT)
+ 16. [   6] Fireworks fly over Unity Park in Greenville during 4th of July celebration - FOX Carolina News (Thu, 02 Jul 2026 13:55:00 GMT)
       https://news.google.com/rss/articles/CBMipAFBVV95cUxPX3RTcWlTY05LVUZ4ak9aNzFGX1hrc09mSnlIMFdUQkJvUEVWRjFvUnJqcW9WdkM5bXgxUzhydmxLY1k0ZXY3Mm1SNG5zUTMzLUduTzJxQkFWWmV4RUJ5UFh4UjFGTHVqNXFDRC1USjl3a2xuS3NTa0dfaFJWOEZfT19BeHdJdUtpWEVUNHVaUEpaSjhCak9mcy15bGZ5bHdIYmtlNNIBuAFBVV95cUxNbEdCQnYxTm03dEdQSEVYX29ObmRFRmIwbEVFY2Y5ZjFFYlBCUEhXX214YklzZC1RVEtmbU5pQ3VoQlloWjNBS3JhVkZEUlNLMmctckJuUHl2S2pBX1JTTUZjS3B6LU9BdDd4c3JIY2hWaWpCLUZpVTJ1Ml92ekhKNHJYd0RxTmJIX202RUxvRjJ0NGEwY2NJdVNkTnRQUTlMeDFURE1QZEdDZjVUSVpMMmdOTDJDaWEz?oc=5
       beats=Development | outlets=FOX Carolina News
- 12. [   6] Exclusive rooftop pool club will open in downtown Greenville this summer - Post and Courier (Thu, 25 Jun 2026 07:00:00 GMT)
+ 17. [   6] Exclusive rooftop pool club will open in downtown Greenville this summer - Post and Courier (Thu, 25 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMi2AFBVV95cUxNeTRuSElPXzVOMXYyTXF0WlZJVEdSb3ROSUNwMi16b1VxRGdobWk5emdCc0J5bVFXRDFnTXg1aUowVWd1MXg3dmdkSmxKdHNMcHBVQXRWcEJSRUdMTEF3OTBKaTlUa2stLUZMMWtYTmlMZ01yMkdCQ2w0b2ZYVERYTTJQVkdlYWtTSlBScFYyaDdrVU41QmtreWN4V3dmVUZqY1JQR1pnVVNpQlhYVzNCS25xWnZKN3BRdUpzUktLS3RBMG9wR3oxNjZWVXh3cDRZdE1tM0ZzVnA?oc=5
       beats=Development | outlets=Post and Courier
- 13. [   6] Plane lands at Greenville Downtown Airport after nose gear failure - WYFF (Tue, 30 Jun 2026 22:16:00 GMT)
+ 18. [   6] Plane lands at Greenville Downtown Airport after nose gear failure - WYFF (Tue, 30 Jun 2026 22:16:00 GMT)
       https://news.google.com/rss/articles/CBMif0FVX3lxTE8wWFVmU3FEemxxZnZEWGZMN3p1d0xNSnlrQmdHNWFhY3phNGlBX2VoYVVZMExJWHN5Wng4MUNFTWUyODluX0ZrdHNKdy1PdTZZcEZvaWlWNld4dE9ORDJGSzZlMWNQNHc5TXFCVVdHTTNOZlpIWFRlZjEyTzAwTnM?oc=5
       beats=Development | outlets=WYFF
- 14. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 07:00:00 GMT)
+ 19. [   6] New $180 million medical park in southern Greenville County starts construction - WSPA 7NEWS (Tue, 30 Jun 2026 18:34:59 GMT)
+      https://news.google.com/rss/articles/CBMitwFBVV95cUxPeVFtQ0h1TDNSTkdGYWUwcWswMGRvUW1jLVhiNWlvSlp1RGRfalVIS2JhZTBfNWVKd1NZVlVkdURxdmpqS2o0bWhfcXhKRkVkM3IwaE15Sk10NzFNWkFlRENTYXJzV2NUY2FPYjBqX05LZlk1UTNjNGVxV1RXTGpjYzRXMDFEaFo1aDBpOTBZZVJLQUMyYktDbmpub3ViSGV0Qlh2YnVVOUx6allVcU41X2J1XzhpQWPSAbwBQVVfeXFMTmZSeHNFWjdYYURNS0wxMHB4TkpQc0xWSDZZanF0Yl9IT1NLSFBYbXY4RHdhcFBZNkotSG40WjJRd1p2UThQSGQ4RDI3RWVPSmJjRkhIdm9OZV9KRFQxQTRWa2JucnFCYnhjNW9zZVNCMXR6WTdYMXdMSFFZV2ZObWZTZzd6UFRxTzF3M0FwVjBYSVRPZ01kX2NDTGhjWTNrdFhNaUlXb045VDhWZWFjakJlcDRRY2xzMXlHa3I?oc=5
+      beats=Development | outlets=WSPA 7NEWS
+ 20. [   6] Greenville Pride festival returns with march, drag show, music - Greenville Online (Fri, 26 Jun 2026 07:00:00 GMT)
       https://news.google.com/rss/articles/CBMizAFBVV95cUxNekhnelFrbWUtN2xVWVhmZXd6QlhCc3c0TDRyUEZGNUVmbFhONU1lbVpKb1pSdVE1UG04YnVObHA2MzlXdm1rMWhKcGswZGt0aVkxSktxWGpKMjFUazRMMmZhQTB5UlJLRXlLUVc1blUxMFBKdjhHajV6T1c0Rld4enNUOVVvaVVQLW9GbHI4cHBOb2o4RzNOYjR4Z1ZmLTRYaS1FQTUwZmNuWEhWbnE5S3dMV04tTkZncmZYRUlyZUg2QzE0UlFFQkJyM0I?oc=5
-      beats=Development | outlets=Greenville Online
- 15. [   6] Things to Do This Month Near Greenville, SC - Kidding Around Greenville (Tue, 30 Jun 2026 07:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiekFVX3lxTFBDdE1TcWlMLVU3bkZXQWRWSmVkVXJ3NmJONlBScnJRYVRKQ1ZkdWl3WU1wU1lSUDVRay16Mk9ITGRYM09MRmlzREFsY3BVNXFJdGtTRjZSOFN3NDhOdlNxVTNfR2lUNlJGOUUwc2FlZ2JmMndrYVNBYWpn?oc=5
-      beats=Development | outlets=Kidding Around Greenville
- 16. [   6] Black bears are moving through downtown Greenville more than ever. Here’s why, biologists say - The State (Fri, 03 Jul 2026 10:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiaEFVX3lxTFBmdzNlMWtqZGFQckhRUWw1WG9JR1EtOXVsajJuQjZlcmZENHBJS1RQNmlmWi0wMDVQMzZUVVBKWmpUUVVJUXhFaWxhN3oxb2p5YkJCT1o1cW41UXJqQlRETnhpWFZ6R2NO0gFoQVVfeXFMTXNfZ0lNZE1wbXRRV2Y2RnN2OEtoVmJkR1FKcW5DYWhPc1Job1IyaDNTZ2J5OVJlVzFBVFpLd0VoZmZLeFJ0c0QzR18taFlXZ2h6UEJYM2k4aVpDNlRxc3J5Qlk1REVVUWs?oc=5
-      beats=Development | outlets=The State
- 17. [   6] Matthew James Conroy Obituary (2026) - Greenville, SC - Thomas McAfee Funeral Homes - Downtown Chapel - Legacy obituary (Mon, 06 Jul 2026 15:50:16 GMT)
-      https://news.google.com/rss/articles/CBMigwFBVV95cUxOaU83V3ZfNWFRcmpnRzRMdDBCazJWazkwamo3WEFfV1pLZDVhSWlsb2lLWjdMVmw3ZElfbkoyMV9peFhZcWJwV0RQRTB1Snh4eXpSMnVmTWNMTDd6R3poNmpuRkVhRnZZR1BVTUVDTC1HM3ZFOER1VjNyZ1d4RE51YkNPNA?oc=5
-      beats=Development | outlets=Legacy obituary
- 18. [   6] Greenville’s Hotel Hartness transitions to owner management - Hotel Management (Tue, 30 Jun 2026 12:00:00 GMT)
-      https://news.google.com/rss/articles/CBMiqwFBVV95cUxORHZjMGFWaHdvNDBfWU13eHpXRjRjOE96YzhEdU41aTkzWlNBamxJR2xwUXp6Sm1FZlZ3M0x5aVlzWWpncmpPM2FRYy1yby1QSWdTQnpDMlAtWEFzNEEzMHFNMU11dEpNYmVDNHRWdW5HbjZfSkN4LUJ4ZC10YUJRTFg1WVBhMEJaa1NyZlMyU0JSNVUxNlUxeGYtTWs2MXJGdHFHZnVZU2tnZUU?oc=5
-      beats=Development | outlets=Hotel Management
- 19. [   6] Plane lands at Greenville Downtown Airport after equipment failure - FOX Carolina News (Tue, 30 Jun 2026 18:06:00 GMT)
-      https://news.google.com/rss/articles/CBMipgFBVV95cUxQZGNGTWdYNVhHZnlvQkZZLWZ1NlYxTlVVZVNQS0hGcEJuekc2TzBOVFFOeHF0XzhSUG12NDJUWEZhaHRkSGlEY0lQMjhFdGU2aTl3dXhxU0F1LVdNR01qSmJSazcyZzFMTk1WZXQybndicGw5dW92TVZNN0hpOUZYdEJRVThWYldEVmZXMHZ5TTk5dlpBOHVxYzJXeTZiWTE3Zll2Q1B30gG6AUFVX3lxTE5sSlV5RVM5SkZjZ1JSWTdiNXpiMUVKVWM0OGQyMTJlb3R3S2JKYjRtb1NFc3lwWVE2ZGJJeWVvUVFUdTd3Nm9fUGVEVkxuU3Z1Q2ZZejN2dFMwS1ROcmQ1UDg0THN0cmtSSzMyYXlac0gwVjNVU0pOdG1UXzljUlZLSkViTGd2VndFcm5DaGhyYnhKQzh1SUQzSkFwUml4aHpnbjBJQjZ1Nko3YzZMelJybDhzV2VIOW8xZw?oc=5
-      beats=Development | outlets=FOX Carolina News
- 20. [   6] Your guide to Greenville's Unity Park fireworks parking, food, more - Greenville Online (Thu, 02 Jul 2026 15:39:00 GMT)
-      https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGxSNDJ2VDlpSXNnbmxBOWNBLU5BZlQ5MXN1R2ZrY29nYTI4emZjT1JJVTdIcUFDdFdsbHBpZ1hMUXc3MnlJendza1ZOTTZTa2JpLVJ0SFVqVnJWd1UyUHJvMVRPVHdnM2hqbWpDQmhXRVYzak1oelh5emk0QTFJMHc3aDlGWFZNb3duTEx5QXkxemdLekwxU3lqSU9icVktQmlXXzFDLWNOdkZiRWVrcnRSNHlHMkJaRXIxbnJ1VFVxWVZXREE?oc=5
       beats=Development | outlets=Greenville Online
 ======================================================================
