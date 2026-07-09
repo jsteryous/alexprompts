@@ -239,18 +239,11 @@
       "PowerShell(npx tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 30)",
       "Bash(pkill -f \"next-server\")",
       "Bash(netstat -ano)",
-      "Bash(taskkill //PID 19716 //F)",
-      "Bash(taskkill //IM node.exe //F)",
       "WebFetch(domain:www.greenville.k12.sc.us)",
       "Bash(echo \"started dev, pid $!\")",
       "Bash(kill %1)",
       "WebFetch(domain:fred.stlouisfed.org)",
-      "WebFetch(domain:taxfoundation.org)",
-      "Bash(gh run *)",
-      "PowerShell(gh run *)",
-      "Bash(printf '{\"password\":\"wrong\"}')",
-      "Bash(echo \"login wrong pw: $\\(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' --data @/tmp/pw.json https://www.alexprompts.com/api/admin/login\\)  \\(expect 403\\)\")",
-      "Bash(echo \"login body: $\\(curl -s -X POST -H 'Content-Type: application/json' --data @/tmp/pw.json https://www.alexprompts.com/api/admin/login\\)\")"
+      "WebFetch(domain:taxfoundation.org)"
     ]
   }
 }
