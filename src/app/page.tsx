@@ -4,6 +4,7 @@ import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } fr
 import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 export const revalidate = 300;
 
@@ -266,16 +267,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Subscribe CTA ── */}
+      {/* ── Subscribe CTA: the owned list, led by the concrete Monday promise.
+          The Upstate Brief only goes out on the owned list (never Substack), so
+          this captures on-site instead of bouncing to a third party. ── */}
       <section className="theme-section-contrast py-24 md:py-32">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="theme-text-primary type-h2 mb-4">
-            Get it in your inbox.
-          </h2>
-          <p className="theme-text-contrast-muted type-body-lg mb-8">
-            The newsletter, free. Unsubscribe anytime.
-          </p>
-          <SubscribeButton className="px-8 py-4" />
+        <div className="max-w-2xl mx-auto px-6">
+          <SubscribeForm
+            source="home-cta"
+            heading="Get the Upstate Brief every Monday"
+            blurb="The week in Upstate real estate in a five-minute read. Rates, what sold, what got approved, and what to watch, every number linked to its source. Free, and you can leave any time."
+            cta="Subscribe free"
+          />
         </div>
       </section>
     </>

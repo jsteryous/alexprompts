@@ -65,8 +65,8 @@ export function ToolShell({
         <div className="max-w-2xl mx-auto px-6">
           <SubscribeForm
             source={`tool:${tool.slug}`}
-            heading="Get new posts by email"
-            blurb="One email when something new goes up, free, including the Greenville real-estate guides and the technology pieces on how the Upstate is changing. Neither hits Substack."
+            heading="Get the Upstate Brief every Monday"
+            blurb="The week in Upstate real estate in a five-minute read, plus the Greenville guides and the technology pieces when they ship. None of it hits Substack, and it is free."
             cta="Subscribe free"
           />
         </div>

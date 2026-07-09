@@ -41,6 +41,18 @@ reference only, nothing there runs on a schedule anymore.
   `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review
   email carries the post id + a `/review` link Alex uses to publish). See `tech/routine/README.md`,
   the two-track note in the root `CLAUDE.md`, and memory `publishing-draft-first`.
+- **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A Mondays-only cloud
+  routine (`briefing/routine/`, orchestrator plus collector → writer → editor; no scout, no
+  angle, the fixed format is the angle) that writes ONE weekly briefing for `/briefing` (tag
+  `briefing`): rates and money from primary sources, what sold from the committed
+  `src/data/commercialSales.json` (per-SF/per-acre math + repeat-`PURNAME` pattern flags),
+  projects and permits, one employer/capital item, and one concrete watch indicator. Inserts a
+  **DRAFT** and emails a review packet with `/review`, one-click publish, AND one-click
+  `/api/broadcast` links. **Monday-perishable**: publish + broadcast Monday morning or delete;
+  the orchestrator blocks while a briefing DRAFT is pending. Optional steer file
+  `briefing/watchlist.md`; done-log on the `drafts` branch (`drafts/upstate-brief-<date>.md`)
+  carries ITEMS COVERED + CARRY FORWARD for next week's recall. It took Greenville Works'
+  weekly slot (Works is now ~monthly). See `briefing/SPEC.md` + `briefing/routine/README.md`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
   A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
   it writes one substantial, data-grounded local guide targeting a winnable long-tail local

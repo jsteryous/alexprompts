@@ -19,6 +19,9 @@ export default function Footer() {
         </div>
 
         <nav className="flex flex-wrap gap-6">
+          <Link href="/briefing" className="theme-link text-sm">
+            Briefing
+          </Link>
           <Link href="/tools" className="theme-link text-sm">
             Tools
           </Link>

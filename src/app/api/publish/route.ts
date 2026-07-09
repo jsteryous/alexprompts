@@ -9,6 +9,7 @@ import { isAuthorized, tokenAuthorized } from "@/lib/adminAuth";
 const SECTION_BASE = {
   realestate: "/real-estate",
   works: "/greenville-works",
+  briefing: "/briefing",
   newsletter: "/archive",
 } as const;
 

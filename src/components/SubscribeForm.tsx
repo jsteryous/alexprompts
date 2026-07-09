@@ -18,8 +18,8 @@ type State = "idle" | "submitting" | "done" | "error";
 
 export function SubscribeForm({
   source,
-  heading = "Get new posts by email",
-  blurb = "One email when something new goes up on the site, including the Greenville real-estate guides and the technology pieces that never hit Substack. Free, and you can leave any time.",
+  heading = "Get the Upstate Brief every Monday",
+  blurb = "The week in Upstate real estate in a five-minute read, plus the Greenville guides and technology pieces when they ship. None of it hits Substack. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

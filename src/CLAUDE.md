@@ -25,10 +25,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   2026 with the voice-3 removal; do not reintroduce them. Holds one `TODO(alex)`: confirm the
   contact email.
 - **`src/lib/posts.ts`** — archive data access. `getPublishedPosts(limit?, type?)`,
-  `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **three
+  `getPost(slug, type?)`, `formatDate()`, `sectionOf()`. One `blog_posts` table, **four
   sections split by tag**: `greenville` → `/real-estate` (set by the `scripts/greenville`
   routine), `greenville works` → `/greenville-works` (set by the `scripts/tech` engine;
-  internal `PostType` key is `works`), everything else → `/archive` (newsletter).
+  internal `PostType` key is `works`), `briefing` → `/briefing` (the weekly Upstate Brief,
+  set by the `scripts/briefing` engine), everything else → `/archive` (newsletter).
   `sectionOf()` is the single source of that mapping; the `greenville works` tag is
   deliberately distinct from the `greenville` real-estate tag so the two never collide.
   `getPublishedPosts("newsletter")` excludes real-estate and Greenville Works posts so they
@@ -66,8 +67,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   (`realEstateOutcomes`) grid (removed July 2026 with the voice-3 removal) are all gone. Those
   `site.ts` exports were deleted; the `OutcomeArt` component is now orphaned but kept. No
   shared section components (the old `HomeSections.tsx` was dental-only, deleted).
-- **`src/app/archive/`**, **`src/app/real-estate/`**,
-  **`src/app/greenville-works/`** — the three section index + `[slug]` routes. All three `[slug]`
+- **`src/app/archive/`**, **`src/app/real-estate/`**, **`src/app/greenville-works/`**,
+  **`src/app/briefing/`** — the four section index + `[slug]` routes (`/briefing` is the weekly
+  Upstate Brief, added July 9, 2026; its index also carries an owned-list `SubscribeForm`
+  since the brief never goes to Substack). All four `[slug]`
   pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
   request. The `section` prop carries an opt-in `showReferralCta` flag; the `/real-estate`

@@ -1,6 +1,6 @@
 {
   "crons": [
     { "path": "/api/sync-substack", "schedule": "0 8 * * *" },
-    { "path": "/api/finalize-greenville", "schedule": "0 9 * * *" }
+    { "path": "/api/finalize-greenville", "schedule": "0 13 * * *" }
   ]
 }

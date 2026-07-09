@@ -1,8 +1,9 @@
 /**
  * Post data access — published Alex Prompts content stored in Supabase
- * `blog_posts`. One table holds three kinds of content, split by tag:
+ * `blog_posts`. One table holds four kinds of content, split by tag:
  *   - tagged `greenville`       -> REAL-ESTATE post        (-> /real-estate)
  *   - tagged `greenville works` -> GREENVILLE WORKS piece  (-> /greenville-works)
+ *   - tagged `briefing`         -> UPSTATE BRIEF issue     (-> /briefing)
  *   - everything else           -> NEWSLETTER issue        (-> /archive)
  * Returns [] / null when env is unset so the site builds and renders without a
  * database (empty lists, not a crash).
@@ -12,8 +13,9 @@ import { SITE_URL } from "@/lib/site";
 
 /** Content kind, derived from tags. Each post lives at exactly one section. The
  *  `works` key is the internal discriminator for the "Greenville Works" section
- *  (route /greenville-works), set by the scripts/tech routine. */
-export type PostType = "newsletter" | "realestate" | "works";
+ *  (route /greenville-works), set by the scripts/tech routine; `briefing` is the
+ *  weekly Upstate Brief (route /briefing), set by the scripts/briefing routine. */
+export type PostType = "newsletter" | "realestate" | "works" | "briefing";
 
 /** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
  *  the scripts/greenville routine. */
@@ -26,6 +28,11 @@ export const REALESTATE_TAG = "greenville";
  *  `/greenville-works`. Distinct from REALESTATE_TAG (`greenville`) so the two
  *  sections never collide. */
 export const WORKS_TAG = "greenville works";
+
+/** A post tagged this (case-insensitive) is a weekly Upstate Brief issue (the
+ *  Monday briefing: rates, what sold, projects and permits, one thing to watch).
+ *  Set by the scripts/briefing routine. The route is `/briefing`. */
+export const BRIEFING_TAG = "briefing";
 
 export interface ArchivePost {
   id: string;
@@ -60,11 +67,17 @@ export function isWorks(post: { tags: string[] | null }): boolean {
   return hasTag(post, WORKS_TAG);
 }
 
-/** The single section a post belongs to. Real-estate wins over Greenville Works if
- *  tags somehow overlap; everything untagged falls through to the newsletter. */
+export function isBriefing(post: { tags: string[] | null }): boolean {
+  return hasTag(post, BRIEFING_TAG);
+}
+
+/** The single section a post belongs to. Real-estate wins over Greenville Works,
+ *  which wins over the brief, if tags somehow overlap; everything untagged falls
+ *  through to the newsletter. */
 export function sectionOf(post: { tags: string[] | null }): PostType {
   if (isRealEstate(post)) return "realestate";
   if (isWorks(post)) return "works";
+  if (isBriefing(post)) return "briefing";
   return "newsletter";
 }
 
@@ -163,7 +176,9 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
       ? "/real-estate"
       : section === "works"
         ? "/greenville-works"
-        : "/archive";
+        : section === "briefing"
+          ? "/briefing"
+          : "/archive";
   return `${base}/${post.slug}`;
 }
 
@@ -176,7 +191,9 @@ export function sectionLabel(post: { tags: string[] | null }): string {
     ? "Real Estate"
     : section === "works"
       ? "Technology"
-      : "Newsletter";
+      : section === "briefing"
+        ? "Briefing"
+        : "Newsletter";
 }
 
 /**

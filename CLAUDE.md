@@ -2,9 +2,10 @@
 
 This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
 - **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
-- **`scripts/CLAUDE.md`** — the Python content engines: the Greenville local real-estate
-  engine (`greenville/`) and Greenville Works (`tech/`), both draft-first. (The national
-  Saturday engine `ai_news/` was killed July 2026 and archived to `scripts/_archive/`.)
+- **`scripts/CLAUDE.md`** — the content engines: the Greenville local real-estate
+  engine (`greenville/`), Greenville Works (`tech/`), and the weekly Upstate Brief
+  (`briefing/`), all draft-first. (The national Saturday engine `ai_news/` was killed July
+  2026 and archived to `scripts/_archive/`.)
 - **`BRAND.md`** — the StoryBrand BrandScript (villain = the noise, hero = the reader, guide
   = Alex). Drives all *positioning* copy (site, welcome email, bios, CTAs). Stays OUT of the
   truth-seeking writer method by design.
@@ -36,13 +37,23 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 >    differentiator (sharpened July 8, 2026); roads, water and sewer capacity, subdivisions, and
 >    rezonings are only a secondary, occasional beat, allowed when they carry a real tech, capital,
 >    or real-estate through-line. It builds local topical authority and makes Alex look legit, but
->    it does NOT directly capture leads, so it is the lower-priority track, deliberately slowed to
->    about weekly.
+>    it does NOT directly capture leads, so it is the lower-priority track, deliberately slowed:
+>    it gave up its weekly slot to the Upstate Brief in July 2026 and now runs about MONTHLY
+>    (a scheduler change; the engine is untouched).
+> 3. **The sphere artifact: the Upstate Brief** (`scripts/briefing/` → `/briefing`, added
+>    July 9, 2026). ONE fixed-format Monday briefing a Greenville-area professional reads in
+>    five minutes: rates, what actually sold in Greenville County (from the committed
+>    commercial-sales dataset, with per-unit math and repeat-LLC flags), projects and permits,
+>    one employer/capital note, one thing to watch. It exists for DISTRIBUTION: it is the
+>    recurring deliverable for Alex's sphere calls ("want me to add you to the Monday brief?"),
+>    the concrete promise behind the owned-list subscribe CTA, and it is Monday-perishable
+>    (publish Monday morning or delete; never late). See `scripts/briefing/SPEC.md` and memory
+>    `upstate-brief-weekly-engine`.
 >
 > **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
 > faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
 > the solid agents he already knows). The site is the credibility layer that makes those
-> conversations land. The public site copy below still presents the brand as
+> conversations land, and the Upstate Brief is the recurring excuse to be in their inbox. The public site copy below still presents the brand as
 > Claude-for-real-estate; re-messaging the site is a separate, later call.
 
 > **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
@@ -154,11 +165,12 @@ engine's `pass3_writer.md` carried the same house style but now lives under
 - Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
   "game-changer," "a new era," etc.
 
-## The content engines (`scripts/greenville/` + `scripts/tech/`)
+## The content engines (`scripts/greenville/` + `scripts/tech/` + `scripts/briefing/`)
 
-See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Two live engines, both
-LOCAL to Greenville: the evergreen `/real-estate` lead engine and Greenville Works (the
-local-change credibility track). Both are **draft-first** (they insert DRAFT; Alex reviews and
+See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Three live engines, all
+LOCAL to Greenville: the evergreen `/real-estate` lead engine, Greenville Works (the
+local-change credibility track), and the weekly Upstate Brief (the sphere/distribution
+artifact). All are **draft-first** (they insert DRAFT; Alex reviews and
 publishes at `/review`; see memory `publishing-draft-first`). The old national Saturday research
 engine (`ai_news/`) was **KILLED July 5, 2026** and archived to `scripts/_archive/ai_news/`. See
 the strategic-direction and two-track notes above.
@@ -195,8 +207,19 @@ the strategic-direction and two-track notes above.
   1/week, set by the CLOUD SCHEDULE (one night, e.g. Sunday), with a STEP 0B safety guard as a
   backstop only (skip on a same-day duplicate run, or when 2+ Greenville Works drafts are already
   awaiting review): it is the lower-priority credibility track now that referral revenue is the
-  north star and the `/real-estate` evergreen engine is the lead engine.
-  See `scripts/tech/routine/README.md`.
+  north star and the `/real-estate` evergreen engine is the lead engine. **July 9, 2026: its
+  weekly slot went to the Upstate Brief; reschedule the Works cloud routine to about MONTHLY**
+  (engine untouched). See `scripts/tech/routine/README.md`.
+- **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A **Mondays-only** cloud
+  routine (schedule ~08:00 UTC, after the 07:00 UTC commercial-sales data refresh) that writes
+  ONE fixed-format weekly briefing for `/briefing` (tag `briefing`): rates and money, what sold
+  (from `src/data/commercialSales.json`, with per-SF/per-acre math and repeat-`PURNAME` pattern
+  flags), projects and permits, one employer/capital item, one concrete watch indicator. No
+  scout or angle pass (the format is the angle): collector → writer → editor, then a **DRAFT**
+  insert and a review packet whose links include the one-click `/api/broadcast` send.
+  **Monday-perishable:** Alex publishes + broadcasts Monday morning or deletes the draft; the
+  orchestrator refuses to run while a briefing DRAFT is pending. Optional steer file
+  `briefing/watchlist.md`. See `scripts/briefing/SPEC.md` + `scripts/briefing/routine/README.md`.
 
 The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
 Lab was added July 2026 for the portfolio pivot, then refocused into Greenville Works later in
@@ -261,6 +284,14 @@ under `scripts/_archive/` — do not revive it.
   shows as the article hero, an index thumbnail (`PostCover`, with the branded `>` placeholder
   when a cover is still pending), the homepage feed card, and the share/OG card. The `getFeedPosts`
   homepage stream includes Greenville Works posts.
+- `/briefing` + `/briefing/[slug]` — the **Upstate Brief** (added July 9, 2026): one
+  fixed-format Monday post with the week in Upstate real estate in five minutes. Tag-routed via
+  `sectionOf` (tag `briefing`, internal `PostType` key `briefing`, section label "Briefing");
+  written as a DRAFT by `scripts/briefing/`, published + broadcast by Alex Monday morning
+  (one-click broadcast link in the packet; the 13:00 UTC finalize cron is the backstop for
+  cover + broadcast). The index page carries its own owned-list `SubscribeForm` because the
+  brief never goes to Substack. In nav as "Briefing". This is the site's subscribe promise
+  ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
 - `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
@@ -317,7 +348,8 @@ email.
   Sending is `/api/broadcast?id=<postId>` (Resend via `src/lib/email.ts`), authed with
   `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
   click, and it emails a published post to the list. This is the channel for **site-only content**
-  (Greenville `/real-estate`, Greenville Works `/greenville-works`) that never goes to Substack. `blog_posts.last_broadcast_at`
+  (Greenville `/real-estate`, Greenville Works `/greenville-works`, the Upstate Brief
+  `/briefing`) that never goes to Substack. `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
   on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
   stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`

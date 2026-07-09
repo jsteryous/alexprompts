@@ -3,19 +3,23 @@ import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { broadcastPost } from "@/lib/broadcast";
 import { renderCover } from "@/lib/greenvilleImage";
-import { REALESTATE_TAG, WORKS_TAG, sectionOf } from "@/lib/posts";
+import { BRIEFING_TAG, REALESTATE_TAG, WORKS_TAG, sectionOf } from "@/lib/posts";
 
 /**
  * GET /api/finalize-greenville
  *
  * The reconciler for the nightly Greenville routines. Both the /real-estate
- * (scripts/greenville) and Greenville Works (scripts/tech) Claude agents run in a
- * sandbox that can only reach the world through MCP connectors, so each publishes
- * its blog_posts row (via the Supabase MCP) but cannot render the cover image or
- * send the owned-list broadcast, both of which need normal egress. This job, on
- * Vercel, does those two mechanical steps for any recently published post in
- * either section that still needs them. Greenville Works pieces use the same
- * curated Greenville photo library for the cover, so the render path is identical.
+ * (scripts/greenville), Greenville Works (scripts/tech), and Upstate Brief
+ * (scripts/briefing) Claude agents run in a sandbox that can only reach the world
+ * through MCP connectors, so each publishes its blog_posts row (via the Supabase
+ * MCP) but cannot render the cover image or send the owned-list broadcast, both of
+ * which need normal egress. This job, on Vercel, does those two mechanical steps
+ * for any recently published post in those sections that still needs them. All
+ * three use the same curated Greenville photo library for the cover, so the render
+ * path is identical. The daily run is at 13:00 UTC (vercel.json) so a brief Alex
+ * publishes Monday morning ET still broadcasts the same day (Hobby allows only 2
+ * crons, so one daily run does double duty; the review packet's one-click
+ * broadcast link is the primary same-minute path).
  *
  * It is idempotent and self-healing: two independent sub-steps, each guarded by a
  * null check, so a failed render never blocks the email and a missed run is picked
@@ -60,7 +64,7 @@ export async function GET(req: NextRequest) {
     .from("blog_posts")
     .select("id, slug, tags, cover_image, image_address, last_broadcast_at")
     .eq("status", "PUBLISHED")
-    .overlaps("tags", [REALESTATE_TAG, WORKS_TAG])
+    .overlaps("tags", [REALESTATE_TAG, WORKS_TAG, BRIEFING_TAG])
     .gte("published_at", since)
     .or("cover_image.is.null,last_broadcast_at.is.null")
     .order("published_at", { ascending: false });
@@ -71,8 +75,11 @@ export async function GET(req: NextRequest) {
   for (const p of posts ?? []) {
     const r: Record<string, unknown> = { slug: p.slug };
     // Route the revalidation to the post's own section: /real-estate for a
-    // `greenville` post, /greenville-works for a `greenville works` piece.
-    const base = sectionOf(p) === "works" ? "/greenville-works" : "/real-estate";
+    // `greenville` post, /greenville-works for a `greenville works` piece,
+    // /briefing for an Upstate Brief issue.
+    const section = sectionOf(p);
+    const base =
+      section === "works" ? "/greenville-works" : section === "briefing" ? "/briefing" : "/real-estate";
     r.section = base;
 
     // Sub-step 1: resolve + set the cover, when it is missing and we have a pin.
