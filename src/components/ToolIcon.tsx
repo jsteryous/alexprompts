@@ -165,6 +165,17 @@ function Schools() {
   );
 }
 
+function WireSafety() {
+  // A shield with a check: verifying the domain before the money moves.
+  return (
+    <>
+      <path d="M24 7 L39 13 V23 C39 32.5 32 38.8 24 41.5 C16 38.8 9 32.5 9 23 V13 Z" {...soft} />
+      <path d="M24 7 L39 13 V23 C39 32.5 32 38.8 24 41.5 C16 38.8 9 32.5 9 23 V13 Z" {...stroke} />
+      <path d="M17.5 24 L22.5 29 L31 19" {...stroke} />
+    </>
+  );
+}
+
 const icons: Record<string, () => React.ReactElement> = {
   "deal-analyzer": DealAnalyzer,
   mortgage: Mortgage,
@@ -173,6 +184,7 @@ const icons: Record<string, () => React.ReactElement> = {
   "cost-of-living": CostOfLiving,
   "property-tax": PropertyTax,
   schools: Schools,
+  "wire-safety": WireSafety,
   "buyers-list": BuyersList,
   taraform: Taraform,
 };

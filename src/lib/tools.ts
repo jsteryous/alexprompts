@@ -100,6 +100,15 @@ export const toolCatalog: ToolEntry[] = [
     cta: "Find schools",
   },
   {
+    slug: "wire-safety",
+    title: "Wire-fraud safety check",
+    blurb:
+      "Before you wire closing money, check the domain behind your wiring instructions for missing spoofing protection, a brand-new registration, and live lookalike spellings.",
+    audience: "both",
+    status: "live",
+    cta: "Check a domain",
+  },
+  {
     slug: "buyers-list",
     title: "Greenville commercial buyers",
     blurb:
