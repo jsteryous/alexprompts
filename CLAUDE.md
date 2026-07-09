@@ -48,13 +48,15 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
 > real-estate agents and investors" teaching framing (the "voice 3" how-to product) was
 > **removed in July 2026**. The site is now Alex's personal place with two kinds of content,
-> honest plain-English writing on **Greenville real estate** and on **how the Upstate is
+> honest writing on **Greenville real estate** and on **how the Upstate is
 > changing** (Greenville Works), plus the free **real-estate tools** he built. Its primary
 > goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
 > vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
 > the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
-> *"Real estate and technology, in plain English."*). Do **not** reintroduce the
+> *"Where real estate meets technology."*; the phrase "in plain English" was dropped from
+> ALL site copy July 9, 2026 because Alex found it unpolished — do not reintroduce it in
+> user-facing copy). Do **not** reintroduce the
 > single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
 > frontier-tech-news framing. See memory `alexprompts-portfolio-pivot`,
 > `content-two-track-strategy`, and `greenville-evergreen-seo-track`.
@@ -205,8 +207,9 @@ under `scripts/_archive/` — do not revive it.
 
 - `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
-  section → **tools spotlight** (the live tools, clickable, driven by `liveTools()`) →
-  follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
+  section → **behind the site** (the one-person tech-stack blurb, moved up July 9, 2026 to
+  lean the first impression toward technology) → **tools spotlight** (the live tools,
+  clickable, driven by `liveTools()`, framed as engineering) → follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
   every guide works" strip, the manifesto, and the "what you'll do with Claude"
   (`realEstateOutcomes`) grid were all **removed** (the last one in July 2026 with the voice-3
   removal). The teaching-content exports they used (`tools`, `principles`, `realEstateOutcomes`,
@@ -236,7 +239,11 @@ under `scripts/_archive/` — do not revive it.
   LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
   exports). Serves everyone, not only hiring managers, so it never literally addresses them.
 - `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
-  track (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
+  track. **User-facing label is "Technology"** (July 9, 2026 tech-lean pass): the nav tab,
+  footer link, homepage feed badges (`sectionLabel`: real-estate posts read "Real Estate",
+  works posts read "Technology"), the page `<title>`, and the article breadcrumb all say
+  Technology; "Greenville Works" survives only as the series name in the index-page eyebrow.
+  URLs, the `greenville works` tag, and internal `works` keys are UNCHANGED (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
   from national tech to Greenville-local later that month, then niche-sharpened to the
   tech-and-capital-meets-real-estate intersection July 8, 2026). First-person deep-dives that take
   ONE thing where **technology or capital is reshaping the Upstate** apart (data centers, the grid

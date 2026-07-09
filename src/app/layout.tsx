@@ -65,7 +65,7 @@ const jsonLd = {
       email: site.email,
       jobTitle: "Writer",
       description:
-        "Writes Alex Prompts, honest plain-English writing on Greenville, South Carolina real estate and on technology, plus the free real-estate tools he builds himself.",
+        "Writes Alex Prompts, honest writing on Greenville, South Carolina real estate and the technology reshaping it, plus the free real-estate tools he builds himself.",
       sameAs: socials.map((s) => s.url),
     },
   ],

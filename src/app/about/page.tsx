@@ -147,9 +147,9 @@ export default function AboutPage() {
               <p className="theme-text-contrast-muted type-body leading-relaxed">
                 Most of the posts are not hand-published one at a time. On a schedule, a set of
                 AI agents I wrote research a real Greenville story or a technology topic, draft
-                it in plain English, check their own facts against public data, and publish
-                straight to the site. I get an email afterward to spot-check, and I can pull
-                anything that misses.
+                it, check their own facts against public data, and publish straight to the
+                site. I get an email afterward to spot-check, and I can pull anything that
+                misses.
               </p>
             </li>
             <li>

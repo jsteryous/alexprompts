@@ -59,8 +59,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
 - **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: **fresh
   reads lead** (featured latest issue + more-to-read grid from `getFeedPosts`, with the `>`
-  prompt watermark) → tools spotlight (`liveTools()`) → `#follow` (social cards) → subscribe
-  CTA. The old "Start here" hero/pillars, "helps anyone" (`outcomes` + `OutcomeArt`), "how
+  prompt watermark) → behind-the-site (the one-person stack blurb, second on purpose since the
+  July 9, 2026 tech-lean pass) → tools spotlight (`liveTools()`, framed as engineering) →
+  `#follow` (social cards) → subscribe CTA. The old "Start here" hero/pillars, "helps anyone" (`outcomes` + `OutcomeArt`), "how
   every guide works" (`principles`), manifesto, and the "what you'll do with Claude"
   (`realEstateOutcomes`) grid (removed July 2026 with the voice-3 removal) are all gone. Those
   `site.ts` exports were deleted; the `OutcomeArt` component is now orphaned but kept. No

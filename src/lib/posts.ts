@@ -167,13 +167,15 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
   return `${base}/${post.slug}`;
 }
 
-/** Short, human label for a post's section, for a card badge. */
+/** Short, human label for a post's section, for a card badge. The two tracks
+ *  read "Real Estate" and "Technology" so a first-time visitor sees the site's
+ *  two subjects at a glance (the internal tags/URLs keep the Greenville names). */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
-    ? "Greenville"
+    ? "Real Estate"
     : section === "works"
-      ? "Greenville Works"
+      ? "Technology"
       : "Newsletter";
 }
 

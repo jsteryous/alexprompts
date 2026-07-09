@@ -6,7 +6,7 @@ import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
   title: "Archive",
-  description: `The ${site.name} newsletter archive. Every issue, in plain English. Read the back catalog or subscribe for the next one.`,
+  description: `The ${site.name} newsletter archive. Every issue in one place. Read the back catalog or subscribe for the next one.`,
   alternates: { canonical: `${site.url}/archive` },
 };
 

@@ -26,7 +26,7 @@ export default function Footer() {
             Real Estate
           </Link>
           <Link href="/greenville-works" className="theme-link text-sm">
-            Greenville Works
+            Technology
           </Link>
           <Link href="/find-a-pro" className="theme-link text-sm">
             Find a Pro

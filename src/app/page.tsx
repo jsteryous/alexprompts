@@ -164,15 +164,46 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Behind the site (nod to /about) ── */}
+      <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="max-w-2xl">
+              <Eyebrow className="mb-4">Behind the site</Eyebrow>
+              <h2 className="theme-text-primary type-h2 mb-4">
+                Designed, engineered, and run by one person.
+              </h2>
+              <p className="theme-text-contrast-muted type-body-lg">
+                Alex Steryous built every layer of this operation himself: a Next.js and
+                TypeScript front end, a Postgres database, serverless jobs running on a cloud
+                schedule, and a pipeline of autonomous AI agents that research and draft the
+                articles from public data. He reviews and publishes every piece, and the free
+                tools are his work too.
+              </p>
+            </div>
+            <Link
+              href="/about"
+              className="theme-cta inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm whitespace-nowrap self-start md:self-auto"
+            >
+              Meet Alex <ArrowIcon className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Tools spotlight: actual, usable tools right on the homepage ── */}
       <section className="theme-section py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex items-end justify-between gap-4 mb-8">
             <div className="max-w-2xl">
               <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
-              <h2 className="theme-text-primary type-h2">
+              <h2 className="theme-text-primary type-h2 mb-3">
                 Useful the second you land.
               </h2>
+              <p className="theme-text-muted type-body-lg">
+                Free real-estate tools Alex engineered himself. The calculators run entirely
+                in your browser, and the data tools are built on public county records.
+              </p>
             </div>
             <Link href="/tools" className="theme-link hidden sm:inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
               All tools <ArrowIcon className="w-3.5 h-3.5" />
@@ -206,31 +237,6 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* ── Who's behind this (nod to /about) ── */}
-      <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div className="max-w-2xl">
-              <Eyebrow className="mb-4">Who&apos;s behind this</Eyebrow>
-              <h2 className="theme-text-primary type-h2 mb-4">
-                One person built and writes all of this.
-              </h2>
-              <p className="theme-text-contrast-muted type-body-lg">
-                Alex Steryous, a salesperson who taught himself to build with AI. The writing,
-                the tools, and the systems that publish them are all his. That is the whole
-                point of the site.
-              </p>
-            </div>
-            <Link
-              href="/about"
-              className="theme-cta inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm whitespace-nowrap self-start md:self-auto"
-            >
-              Meet Alex <ArrowIcon className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 

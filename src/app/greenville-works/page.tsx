@@ -5,11 +5,11 @@ import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
-  title: "Greenville Works",
+  title: "Technology",
   description:
-    "How Greenville is changing, and what those changes mean for where we live, work, and invest. " +
-    "Development, infrastructure, utilities, manufacturing, transportation, and the technology reshaping " +
-    "the Upstate, explained in plain English.",
+    "Greenville Works, the technology and capital reshaping the Upstate. Data centers, the power " +
+    "grid, fiber, manufacturing and automation, and who is buying and building, and what it all " +
+    "means for where we live, work, and invest.",
   alternates: { canonical: `${site.url}/greenville-works` },
 };
 
@@ -26,13 +26,13 @@ export default async function GreenvilleWorksPage() {
             Greenville Works
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            How Greenville is changing, and what it means
+            The technology and capital reshaping the Upstate
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            I take one thing that is reshaping the Upstate, a new subdivision, a widening road, a
-            data center, a factory, the power grid, or the technology behind them, and work out
-            how it actually works and what it means for where we live, work, and invest. Plain
-            English, no hype, and I name the trade-offs honestly.
+            I take one system at a time, a data center, the power grid, fiber, automation on a
+            factory floor, or the capital behind a wave of buying, and work out how it actually
+            works and what it means for where we live, work, and invest. I skip the hype and
+            name the trade-offs honestly.
           </p>
         </div>
       </section>

@@ -7,8 +7,8 @@ import { PostCover } from "@/components/PostCover";
 export const metadata: Metadata = {
   title: "Greenville Real Estate",
   description:
-    "Greenville, SC real estate, both sides. The week's local housing story in plain English, " +
-    "with the consensus and the strongest counter-case laid out so you can decide for yourself.",
+    "Greenville, SC real estate, both sides. The local housing story with the consensus " +
+    "and the strongest counter-case laid out so you can decide for yourself.",
   alternates: { canonical: `${site.url}/real-estate` },
 };
 
@@ -28,9 +28,9 @@ export default async function RealEstatePage() {
             Greenville real estate, both sides
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            The local housing story in plain English. What happened, what most people think,
-            and the strongest case for the other side. You get the whole argument, then you
-            decide. Information only, not financial advice.
+            The local housing story, what most people think, and the strongest case for the
+            other side. You get the whole argument, then you decide. Information only, not
+            financial advice.
           </p>
         </div>
       </section>

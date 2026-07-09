@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Claude for real estate agents and investors.";
+export const alt = "Alex Prompts: Where real estate meets technology.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +35,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
-          ALEX PROMPTS · CLAUDE FOR REAL ESTATE
+          ALEX PROMPTS
         </div>
 
         {/* Main headline */}
@@ -52,9 +52,9 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Claude for
+          Where real estate
           <br />
-          real estate.
+          meets technology.
         </div>
 
         {/* Sub */}
@@ -67,8 +67,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          For agents and investors. Listings, market research, deal analysis, and
-          follow-up. Plain English, no code.
+          Honest writing on Greenville real estate and the technology reshaping it,
+          plus free tools for buyers, sellers, and investors.
         </div>
 
         {/* Bottom bar */}
@@ -106,7 +106,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              AGENTS &amp; INVESTORS
+              GREENVILLE, SC
             </span>
           </div>
         </div>

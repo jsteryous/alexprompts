@@ -7,7 +7,7 @@ import { ToolIcon } from "@/components/ToolIcon";
 export const metadata: Metadata = {
   title: "Tools",
   description:
-    "Free tools for real estate agents and investors: a rental deal analyzer, a mortgage and affordability calculator, and a Claude listing prompt builder. No sign-up.",
+    "Free real-estate tools Alex Steryous engineered himself: a rental deal analyzer, a mortgage and affordability calculator, a listing prompt builder, and data tools built on public county records. No sign-up.",
   alternates: { canonical: `${site.url}/tools` },
 };
 
@@ -31,8 +31,9 @@ export default function ToolsPage() {
             Tools you can use right now
           </h1>
           <p className="theme-text-muted type-body-lg max-w-xl">
-            No sign-up, nothing to install. Run a deal, size up a payment, or build a listing prompt
-            for Claude. Free, and yours to use as often as you like.
+            I engineered every tool on this page myself. The calculators run entirely in your
+            browser, and the data tools are built on automated pipelines over public county
+            records. No sign-up, nothing to install, and yours to use as often as you like.
           </p>
         </div>
       </section>

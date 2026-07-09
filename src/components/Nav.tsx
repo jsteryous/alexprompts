@@ -8,7 +8,7 @@ import { newsletterUrl, site } from "@/lib/site";
 const links = [
   { href: "/tools", label: "Tools" },
   { href: "/real-estate", label: "Real Estate" },
-  { href: "/greenville-works", label: "Greenville Works" },
+  { href: "/greenville-works", label: "Technology" },
   { href: "/find-a-pro", label: "Find a Pro" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },

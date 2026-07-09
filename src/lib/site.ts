@@ -42,18 +42,19 @@ export const site = {
   email: "hello@alexprompts.com", // TODO(alex): confirm contact inbox
   url: SITE_URL,
 
-  // The brand spine, in plain English. What the site actually is: honest writing
-  // on Greenville real estate and on technology, plus the free tools Alex built.
-  // No hype, no doom. These strings drive the page titles, the meta descriptions,
+  // The brand spine. What the site actually is: honest writing on Greenville
+  // real estate and on technology, plus the free tools Alex built. No hype, no
+  // doom, and no "plain English" phrasing anywhere (dropped July 2026, it read
+  // as unpolished). These strings drive the page titles, the meta descriptions,
   // the OG cards, and the footer, so keep them true and tight.
-  tagline: "Real estate and technology, in plain English.",
+  tagline: "Where real estate meets technology.",
   oneLiner:
-    "Alex Prompts is where Alex Steryous writes about Greenville real estate and the technology reshaping the world, and shares the free tools he builds along the way.",
+    "Alex Prompts is where Alex Steryous writes about Greenville real estate and the technology reshaping it, and shares the free tools he builds along the way.",
   description:
-    "Alex Prompts is Alex Steryous's site for honest, plain-English writing on Greenville, " +
-    "South Carolina real estate and on technology more broadly, plus a handful of free " +
-    "real-estate tools he built himself. No hype and no doom, just a clear look at what is " +
-    "actually happening and why it matters.",
+    "Alex Prompts is Alex Steryous's site for clear, honest writing on Greenville, " +
+    "South Carolina real estate and the technology reshaping it, plus a suite of free " +
+    "real-estate tools he engineered himself. No hype and no doom, just a straight look " +
+    "at what is actually happening and why it matters.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */
@@ -68,20 +69,20 @@ export const socials = [
   {
     key: "youtube",
     label: "YouTube",
-    handle: "@alexprompts",
-    url: "https://www.youtube.com/@Alexprompts",
+    handle: "@alex_prompts",
+    url: "https://www.youtube.com/@alex_prompts",
   },
   {
     key: "tiktok",
     label: "TikTok",
-    handle: "@alexprompts",
+    handle: "@alex_prompts",
     url: "https://www.tiktok.com/@alex_prompts",
   },
   {
     key: "x",
     label: "X",
-    handle: "@alexprompts",
-    url: "https://x.com/alexpromptz",
+    handle: "@steryously",
+    url: "https://x.com/steryously",
   },
 ] as const;
 
