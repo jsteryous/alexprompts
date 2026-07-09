@@ -8,6 +8,7 @@ Thin, generic, template-with-the-town-name-swapped-in content does not rank anym
 - Write 800 to 1400 words of real substance. Depth is the whole point.
 - Every section must contain concrete, LOCAL specifics: real neighborhood names, real price ranges, real commute times, real school or tax figures, real streets and parks. If you cannot make a section locally specific, cut it.
 - Ground the numbers. Use web search to pull current figures from primary or reputable sources (US Census ACS, FHFA Greenville MSA house price index, Greenville County Assessor/Auditor, Greenville County ArcGIS, Zillow or Redfin market pages, SC Housing, local publishers like the Greenville Journal, Greenville News, GSA Business Report). State each load-bearing number with its source and the year it is from. Do not invent a figure. If you cannot verify a specific number, describe the range qualitatively and say it is approximate rather than fabricating precision.
+- Show the seams. When reputable sources disagree (Zillow, Redfin, and FHFA rarely match on a median price), do not average them and do not quietly pick the friendlier one; state the range and name both sources ("Redfin puts the median around $335,000 and Zillow around $350,000 as of 2026"). Visibly weighing the numbers is part of what makes the page trustworthy, and it is something a content farm never does.
 - Date the market-sensitive numbers ("as of 2026") so a later refresh is easy and the piece stays honest as an evergreen page.
 
 ## RESEARCH FIRST (before you write)
@@ -20,8 +21,9 @@ Use web search to gather the specifics the topic needs. Pull the concrete local 
 - No sentence fragments, ever, not even for effect. Every sentence has a subject and a finite verb.
 - Open cold and concrete. Lead with a real fact, number, or scene about Greenville. Never open with "Nestled in the foothills" or "The Greenville real-estate landscape."
 - Plain English. Translate any jargon (millage, assessment ratio, absorption) in one short sentence.
-- Calm, flowing, complete sentences, the way a knowledgeable local explains something out loud. Vary sentence length. Let clarity carry the weight, not punchiness.
-- First person is allowed and encouraged in the framing and the close (this is Alex talking to a reader), but the facts stay sourced and neutral. Do not oversell Greenville; name the trade-offs honestly. Grounded optimism, not a brochure.
+- Calm, flowing, complete sentences, the way a knowledgeable local explains something out loud. Vary sentence length. Let clarity carry the weight, not punchiness. The opposite failure is the overloaded sentence: when a sentence stacks three or more clauses on commas and asks the reader to hold them all, split it.
+- First person is allowed and encouraged in the framing and the close (this is Alex talking to a reader), but the facts stay sourced and neutral. Spend the first person on judgment and verification, not on logistics or effort: "I could not find a published figure for this, so treat it as approximate" earns trust; "I spent hours digging through county records" is performance. Do not oversell Greenville; name the trade-offs honestly. Grounded optimism, not a brochure.
+- No signposting. Never announce a transition ("Here is what you need to know," "So what does this mean for you," "Let's break it down"); open the paragraph directly on its content. An H2 phrased as the exact question a reader would search is fine and encouraged (that is structure, and it wins snippets), but in the body prose use a rhetorical question as a pivot at most once in the whole piece.
 - Banned fluff: "hidden gem," "nestled," "up-and-coming," "something for everyone," "vibrant," "game-changer," "a new era."
 
 ## FAIR HOUSING (this track is higher-risk than news, so be strict)

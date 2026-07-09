@@ -11,7 +11,9 @@ VOICE: confirm the piece is in Alex's FIRST-PERSON inquiry voice, a curious loca
 to understand the change, not a neutral meeting recap and not a booster press release. The first
 person must belong to the INQUIRY (what the reporting looked into and found, the questions asked),
 never to a fabricated inner life. If it reads like a summary, an economic-development brochure, or an
-objective research brief, send it back.
+objective research brief, send it back. The first person must be spent on judgment and verification,
+not logistics: keep "no source I found quantifies this, so I am not asserting it," and cut
+performative effort framing like "I spent a week trying to figure out."
 
 NO FABRICATED STANCE (a hard rule, strip on sight). The engine does not know Alex's opinion, feelings,
 memories, or where he "landed," so the draft may not invent any of it. Cut every manufactured
@@ -26,6 +28,20 @@ KEEP THE ANIMATING QUESTION INVISIBLE: the piece is driven by a real question (d
 better off, for whom, at what cost, at what risk) but must never STATE it as a thesis ("the real
 question is who pays"). If it announces the question, cut the announcement and let the sequencing
 raise it.
+
+NO SIGNPOSTING (strip on sight). The writer's spine beats are internal scaffolding; if any leaked
+into the prose as an announced transition ("Here is what is actually happening, in plain English,"
+"Here is what the region gets," "So what does this mean for you"), cut the announcement and open the
+paragraph directly on its content. Allow at most ONE rhetorical question used as a pivot in the
+whole piece (the closing question to the reader does not count); rewrite the rest as declarative
+openings.
+
+SHOW THE SEAMS. Where the brief marks a figure unverified, disputed, or a promoter's CLAIM, confirm
+the piece says so where the number appears. If the draft averaged conflicting numbers, quietly
+picked the friendlier one, or asserted an effect no source in the brief quantifies, that is a fact
+error; restore the visible gap ("one report says 150 jobs, the filing says 27, and that gap is
+unresolved in public"). The visible weighing of the numbers is the product; do not let the edit
+smooth it away.
 
 THE HONEST-TENSION BEAT IS MANDATORY. This is the core of the whole track. Confirm the piece has a
 real, specific section on the trade-off: who pays, what it costs, the constraint, the loser, or how
@@ -63,7 +79,10 @@ Cut or rewrite any line that crosses it. This is the headline legal risk on loca
 LINKS: confirm load-bearing facts and first-mentioned places are linked inline to primary or
 official sources, that no source is linked twice, and that no link points to a listing portal or a
 competing agent. Confirm any find-a-pro line appears only where the piece genuinely touches
-where to live, buy, or invest, and is absent on a pure civic-explainer piece.
+where to live, buy, or invest, and is absent on a pure civic-explainer piece. Confirm it sits in
+the BODY of the piece, never in the final two paragraphs; if it crowds the closing question, move
+it up to where the buyer or mover stakes are discussed, so the last thing the reader holds is the
+question, not a pitch.
 
 QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct speaker. Fix to the
 exact text or strip the marks and leave it as a paraphrase.
@@ -71,14 +90,19 @@ exact text or strip the marks and leave it as a paraphrase.
 STRUCTURE: confirm the spine (open cold on the change, plain-English mechanism, honest stakes,
 honest tension, takeaway then a real question) is carried from open to close, that the piece opens on
 the concrete local change and not on a framework or the comparison, and that the close is a genuine
-open question, not ragebait.
+open question, not ragebait, with nothing after it. Confirm the takeaway is pointed on the STANDARD
+even while neutral on the verdict: it should name a concrete yardstick the reader could judge the
+change by (jobs per incentive dollar, tax base against what residents give up), not just leave a
+question hanging with no frame. A named standard is analysis and is allowed; a personal verdict is
+not.
 
 LENGTH: confirm it lands in 800 to 1200 words. If it runs long, cut to the ceiling; do not pad if
 short.
 
 STYLE: remove every em or en dash; cut the colon-as-drumroll and any "Label: payoff" construction,
 allowing a colon only before a genuine list; break up staccato or telegraphic passages into calm,
-flowing, complete sentences; cut every banned phrase and every filler sentence; confirm it opens
+flowing, complete sentences; split any sentence that stacks three or more clauses on commas and
+makes the reader hold them all; cut every banned phrase and every filler sentence; confirm it opens
 cold and concrete and ends on a real open question.
 
 FRAGMENTS: read every sentence in isolation; if it lacks a subject or a finite verb, rewrite it

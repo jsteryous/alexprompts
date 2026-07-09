@@ -40,7 +40,9 @@ neutral encyclopedia. Confirm the piece has at least one place where a real poin
 genuine local read comes through, and that the framing and the close sound like a specific person
 rather than a content template. If the whole piece is voiceless recitation, flag it and sharpen the
 open and the close so a human is clearly behind it. Do NOT manufacture fake enthusiasm; the voice is
-calm, plain, and honest, and it names downsides.
+calm, plain, and honest, and it names downsides. The first person must be spent on judgment and
+verification, not logistics: keep "I could not find a published figure, so treat it as approximate,"
+and cut performative effort framing like "I spent hours digging through county records."
 
 ## FACT CHECK (there is no separate fact brief on this track, so check internally)
 
@@ -50,7 +52,10 @@ Flag any load-bearing figure that has NO source link, because an unsourced numbe
 page is a liability. Confirm each cited number is stated with the year it is from ("as of 2026") so
 the page ages honestly. If a figure reads suspiciously precise for something the writer could only
 estimate, demand it be sourced or softened to a qualitative range. Do not invent or "correct" a
-number yourself; if one is unsupported, cut it or mark it for the human to verify.
+number yourself; if one is unsupported, cut it or mark it for the human to verify. Where sources
+plausibly disagree (a median price from Zillow, Redfin, or FHFA), confirm the piece shows the range
+and names both sources rather than averaging them or quietly picking one; if the draft smoothed a
+real disagreement into a single confident number, restore the visible range.
 
 ## FAIR HOUSING (the headline legal risk on this track)
 
@@ -68,6 +73,10 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
   in the first paragraph, worded the way a person would say it, used cleanly and never stuffed.
 - Confirm the piece opens COLD on a real, specific Greenville fact or number, with no H1 at the top of
   the body and no "Nestled in the foothills" throat-clearing.
+- Strip announced transitions on sight ("Here is what you need to know," "So what does this mean for
+  you," "Let's break it down"); open the paragraph directly on its content. An H2 phrased as a real
+  search question is fine, but allow at most ONE rhetorical question used as a pivot in the body
+  prose; rewrite the rest as declarative openings.
 - If the topic is a question, confirm the first two or three sentences answer it directly and
   completely, so the page can win the featured snippet.
 - Confirm the H2 subheads are clear and descriptive, that internal links to the site's own tools and
@@ -81,7 +90,8 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
 Remove every em dash and en dash; use a period, a comma, or a rewrite. Read every sentence in
 isolation and rewrite any that lacks a subject or a finite verb into a complete sentence. Cut the
 colon-as-drumroll and any "Label: payoff" construction; a colon may only introduce a genuine list.
-Break up staccato bursts into calm, flowing, complete sentences, varying length naturally. Cut every
+Break up staccato bursts into calm, flowing, complete sentences, varying length naturally, and split
+any sentence that stacks three or more clauses on commas and makes the reader hold them all. Cut every
 banned phrase ("hidden gem," "nestled," "up-and-coming," "something for everyone," "vibrant,"
 "game-changer," "a new era," "in an unprecedented move," "it is worth noting," "dive into") and every
 filler sentence that carries no information. Emit plain, unescaped markdown; no backslash before # or

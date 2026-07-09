@@ -30,7 +30,10 @@ sell a one-sided story.
 
 STEP 4, THE SO-WHAT. One or two sentences: given all of that, what should a resident, a buyer, or
 an investor actually take from this. What to watch, what it changes, what it does not. Concrete,
-not "time will tell."
+not "time will tell." Include the STANDARD: the concrete yardstick a reader could judge this change
+by (jobs per incentive dollar, tax base gained against what residents give up, reuse of a dead site
+against building on a green one). Naming the standard is not taking a side; it gives the reader a
+frame to argue with instead of only a question to sit with.
 
 STEP 5, THE READER'S QUESTION. End with one genuine, open question worth arguing about, addressed
 to the reader, never rhetorical, never ragebait.
