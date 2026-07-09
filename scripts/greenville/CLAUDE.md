@@ -70,11 +70,13 @@ python -m greenville.collect --limit 15
   ArcGIS service is public + free). The push redeploys the statically generated
   `/tools/buyers-list` page with fresh sales. **Still live.**
 - **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
-  the cover library from Wikimedia Commons, vision-gated, and opens a PR with the new photos. Needs
-  the `ANTHROPIC_API_KEY` secret. See the Images section above.
-- **`.github/workflows/collect-greenville.yml`** (DAILY, news signal) is now **unused** (the
-  news track is retired). It is harmless (it just commits a signal file nobody reads) and left
-  in place for reversibility; safe to disable.
+  the cover library from Wikimedia Commons and opens a PR with the new photos. Runs **FREE by
+  default** (`--no-vision`, no key needed); the human PR review is the quality gate. Set the
+  `ANTHROPIC_API_KEY` secret and drop `--no-vision` ONLY for the optional Claude-vision
+  pre-filter. See the Images section above.
+- **`.github/workflows/collect-greenville.yml`** (news signal) is **RETIRED** (the news track is
+  gone; nothing reads its `signal-latest.json`). Its daily schedule was removed July 2026 so it no
+  longer pushes noise commits; it is now `workflow_dispatch`-only, kept for reversibility.
 - The **routine** runs on a scheduled Claude cloud agent (a few nights a week, e.g. Mon/Wed/Fri,
   NOT nightly, so it does not spin up and bail on cooldown nights) pointed at
   `routine/orchestrator.md`. On each scheduled run it picks

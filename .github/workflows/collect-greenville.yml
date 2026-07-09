@@ -1,18 +1,15 @@
 name: Greenville RE Signal Collector
 
-# Collects the week's Greenville, SC real-estate signal from a NON-BLOCKED IP and
-# commits it to the repo, so the cloud "Greenville Real Estate" routine can read it
-# instead of fetching live. The cloud sandbox IP is blocked (HTTP 403) by Google
-# News; GitHub-hosted runners are not. See scripts/greenville/CLAUDE.md and
-# scripts/greenville/routine/orchestrator.md STEP 0.
+# RETIRED (July 2026). This collected the week's Greenville, SC real-estate NEWS
+# signal (Google News RSS) for the old both-sides news track. That track was retired:
+# the live evergreen engine is self-sourcing and NOTHING reads signal-latest.json
+# anymore. The daily schedule was removed so it stops pushing noise commits (and
+# emailing GitHub infra failures) for a feed nobody consumes. Kept as a manual
+# workflow_dispatch only, so reviving the news track stays a one-click option. See
+# scripts/greenville/CLAUDE.md and scripts/greenville/routine/orchestrator.md.
 
 on:
-  schedule:
-    # Daily 06:00 UTC (about 1 to 2am ET). Runs BEFORE the overnight routine so its
-    # STEP 0 reads fresh signal. The routine itself decides most nights that nothing
-    # new cleared the bar and posts nothing, so daily collection is cheap insurance.
-    - cron: '0 6 * * *'
-  workflow_dispatch: # manual trigger from the GitHub UI
+  workflow_dispatch: # manual only; the daily schedule was retired with the news track
 
 permissions:
   contents: write # needed to push the refreshed signal back to the repo
