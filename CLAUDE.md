@@ -28,12 +28,16 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
 >    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
 >    from 1 to 2 via a code cadence guard, July 2026); renamed from the national "Lab" tech track
->    in July 2026). Each takes ONE thing reshaping Greenville
->    and the Upstate apart (development, roads, infrastructure, utilities, manufacturing, data
->    centers, population growth, government decisions, and technology when it touches the
->    Upstate), explains how it works, and names the honest trade-offs. It builds local topical
->    authority and makes Alex look legit, but it does NOT directly capture leads, so it is the
->    lower-priority track, deliberately slowed to about weekly.
+>    in July 2026). Each takes ONE thing where **technology or capital is reshaping the Upstate**
+>    apart (data centers, the power grid and energy, fiber and connectivity, manufacturing and
+>    automation at big employers, who is buying and with whose capital, and property technology
+>    where it touches buying/selling/investing), explains how it works, and names the honest
+>    trade-offs. That **tech-and-capital-meets-real-estate intersection is the niche** and the
+>    differentiator (sharpened July 8, 2026); roads, water and sewer capacity, subdivisions, and
+>    rezonings are only a secondary, occasional beat, allowed when they carry a real tech, capital,
+>    or real-estate through-line. It builds local topical authority and makes Alex look legit, but
+>    it does NOT directly capture leads, so it is the lower-priority track, deliberately slowed to
+>    about weekly.
 >
 > **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
 > faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
@@ -175,9 +179,10 @@ the strategic-direction and two-track notes above.
   **self-sourcing**: an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics)
   plus a web-search scout (`pass0_scout.md`) that picks its own topic when the bank is empty,
   so it runs autonomously without going dry. Routine (`tech/routine/`, orchestrator plus
-  isolated passes: scout → researcher → angle → writer → editor) takes ONE thing reshaping
-  Greenville and the Upstate apart (a road, a subdivision, a data center, a factory, the grid,
-  fiber, water capacity, a government decision, and the technology behind local change) in
+  isolated passes: scout → researcher → angle → writer → editor) takes ONE thing where
+  **technology or capital is reshaping the Upstate** apart (a data center, the grid, fiber,
+  automation at a factory, who is buying and why, proptech; with roads/water/subdivisions only as a
+  secondary beat that carries a tech/capital/real-estate through-line) in
   **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
   and funnels relocation/buyer leads to `/find-a-pro` where the topic fits, then inserts a
   **DRAFT** `blog_posts` row tagged `greenville works` for **`/greenville-works`** (**draft-first**
@@ -232,11 +237,12 @@ under `scripts/_archive/` — do not revive it.
   exports). Serves everyone, not only hiring managers, so it never literally addresses them.
 - `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
   track (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
-  from national tech to Greenville-local later that month). First-person deep-dives that take
-  ONE thing reshaping the Upstate apart (development, roads, infrastructure, utilities,
-  manufacturing, data centers, population growth, government decisions, and technology when it
-  touches Greenville), explain how it works, show what it means for where we live, work, and
-  invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
+  from national tech to Greenville-local later that month, then niche-sharpened to the
+  tech-and-capital-meets-real-estate intersection July 8, 2026). First-person deep-dives that take
+  ONE thing where **technology or capital is reshaping the Upstate** apart (data centers, the grid
+  and energy, fiber, manufacturing and automation, who is buying and with whose capital, proptech;
+  roads/water/subdivisions only as a secondary beat with a real through-line), explain how it works,
+  show what it means for where we live, work, and invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
   `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
   `PostType` key `works`, distinct from the `greenville` real-estate tag), written as a **DRAFT**
   by the `scripts/tech/` routine (**draft-first** as of July 2026, was live) and published by Alex

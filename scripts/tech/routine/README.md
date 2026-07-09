@@ -4,10 +4,14 @@ A Claude routine that turns ONE thing reshaping Greenville and the Upstate into 
 deep-dive** published at **`/greenville-works`** on the website, plus a short X post drafted for
 manual posting. No video, no collector. This is the **local-change track** of the two-track content
 plan: the real-estate engine proves Alex can go deep on the housing vertical, and Greenville Works
-proves he can take a real system apart, a road, a data center, a water constraint, a factory, the
-grid, and explain what it means for where people live, work, and invest. Technology is in scope when
-it touches the Upstate. The audience is a smart local (and, often, a hiring manager reading the
-work), so the writing is the proof.
+proves he can take a real system apart, a data center, the grid, a fiber build, an automated
+factory, and explain what it means for where people live, work, and invest. Its niche is the
+**tech-and-capital-meets-real-estate intersection** (sharpened July 8, 2026): data centers, the
+grid and energy, fiber and connectivity, manufacturing and automation, who is buying and with whose
+capital, and property technology. Roads, water and sewer capacity, subdivisions, and rezonings are
+only a secondary, occasional beat, and only with a real tech, capital, or real-estate through-line.
+The audience is a smart local (and, often, a hiring manager reading the work), so the writing is
+the proof.
 
 > **History (July 2026):** this engine was the national "Lab" tech track (broad tech deep-dives in
 > Alex's voice, published to `/lab`). It was refocused into **Greenville Works** to unify the site
@@ -32,18 +36,20 @@ real-estate engine's local grounding and fair-housing care.
 
 ## What makes it different from the Greenville real-estate engine
 
-- **Wider than housing.** The real-estate engine writes evergreen buyer/relocation guides. Greenville
-  Works covers the machinery around them: roads, infrastructure, utilities, manufacturing, data
-  centers, government decisions, population growth.
+- **Wider than housing, but sharply focused.** The real-estate engine writes evergreen
+  buyer/relocation guides. Greenville Works covers the tech-and-capital machinery reshaping the
+  place around them: data centers, the grid and energy, fiber, manufacturing and automation, the
+  capital and incentive deals, and proptech, with roads/water/subdivisions only as a secondary beat
+  that carries a through-line.
 - **First person, not a guide.** It is an opinionated take, not a how-to resource, though it funnels
   the same relocation/buyer leads to `/find-a-pro` where the topic touches where to live or buy.
 
 ## The input (self-sourcing, with an optional steering bank)
 
 - **`topics.md`** — an OPTIONAL priority queue, not a hard dependency. Each entry is one Greenville
-  change worth taking apart, clearing five bars (one concrete change, groundable in real local
+  change worth taking apart, clearing six bars (one concrete change, groundable in real local
   specifics, a real non-obvious tension, real relevance to living/working/investing here, not stale
-  in a week). STEP 0 prefers the first `queued` topic, so the bank is how Alex STEERS what gets
+  in a week, and on the tech-or-capital-meets-real-estate intersection). STEP 0 prefers the first `queued` topic, so the bank is how Alex STEERS what gets
   covered. When the bank is empty, the routine self-sources (see the scout below), so it never runs
   dry. After delivery the topic is recorded under `## done` on the `drafts` branch, and `proposed`
   candidates (including the scout's runners-up) are appended for Alex to promote.
@@ -51,9 +57,10 @@ real-estate engine's local grounding and fair-housing care.
 ## The pipeline
 
 0. **`pass0_scout.md`** — runs ONLY when the bank has no queued topic. Surveys what is genuinely
-   current and consequential in the Upstate (development, roads, infrastructure, utilities,
-   manufacturing, data centers, population, local business, government decisions) with web search
-   against primary and local sources, screens candidates against the five bars and the
+   current and consequential at the tech-and-capital-meets-real-estate intersection in the Upstate
+   (data centers, the grid and energy, fiber, manufacturing and automation, who is buying and why,
+   proptech; roads/water/subdivisions only with a through-line) with web search
+   against primary and local sources, screens candidates against the six bars and the
    already-covered list, and picks the single best one (with the sharpest honest tension). This is
    what makes the engine autonomous instead of dependent on Alex refilling the bank. It is
    deliberately NOT a news feed: a vote is a fine anchor only if the piece would still be worth
@@ -77,8 +84,10 @@ real-estate engine's local grounding and fair-housing care.
 
 `orchestrator.md` wires them as cold sub-agents, picks the topic (bank first, else scouted), dedups
 against the drafts log and the live site, and on a good topic inserts a `blog_posts` row tagged
-`greenville works` as **PUBLISHED** (live), then emails the human packet (verify list, the essay,
-the X post) and pushes the done-log to the `drafts` branch.
+`greenville works` as a **DRAFT** (not live), then emails the review packet (verify list, the essay,
+the X post, and the `/review` edit-and-publish link) and pushes the done-log to the `drafts` branch.
+Alex reviews and publishes each piece himself, either from the emailed `/review` link or from the
+`/admin` draft hub, which lists every DRAFT row.
 
 ## Cadence and where it posts
 
@@ -88,16 +97,19 @@ the X post) and pushes the done-log to the `drafts` branch.
   lower-priority credibility track now that referral revenue is the north star and the `/real-estate`
   evergreen engine is the lead engine (see the two-track plan in the root `CLAUDE.md`), so it is
   deliberately slowed. There is no collector to run first.
-- **Website:** the routine inserts a `blog_posts` row tagged `greenville works` as **PUBLISHED**,
-  live at `/greenville-works/<slug>` within about 5 minutes, the same autonomous model as the
-  Greenville real-estate engine. The `greenville works` tag routes it via `sectionOf` in
-  `src/lib/posts.ts` (distinct from the `greenville` real-estate tag so the two never collide).
-  Auto-publish is safe because the guardrails are in the passes (web-grounded claims, the editor's
+- **Website:** the routine inserts a `blog_posts` row tagged `greenville works` as a **DRAFT**
+  (`published_at = NULL`), so it is NOT live until Alex publishes it. This is **draft-first** as of
+  July 5, 2026 (it was previously auto-publish live). He publishes from the emailed
+  `/review?id=<id>&token=..` link or from the `/admin` draft hub (both open the same editor), which
+  flips the row to `PUBLISHED` and makes it live at `/greenville-works/<slug>`. The `greenville
+  works` tag routes it via `sectionOf` in `src/lib/posts.ts` (distinct from the `greenville`
+  real-estate tag so the two never collide). The pass guardrails (web-grounded claims, the editor's
   fact-check against the brief, the mandatory honest-trade-offs beat, fair housing, not-advice) and
-  in dedup; the verify email still goes out so Alex can spot-check and unpublish at `/review`. If
-  the Supabase site-dedup could not run, that run falls back to DRAFT. To require human review of
-  every piece, set STEP 5 back to `DRAFT`.
-- **Cover photo (auto, after publish).** The writer names a `subject:` in a `## IMAGE` block, from
+  dedup still run, but a human is now the final gate. STEP 0B also applies **draft backpressure**:
+  if 2 or more Greenville Works drafts are already awaiting review, the run stops so the engine
+  never outruns Alex. To go back to auto-publish live, set STEP 5's `DRAFT` back to `PUBLISHED` and
+  `published_at = NULL` back to `now()`.
+- **Cover photo (auto, after Alex publishes).** The writer names a `subject:` in a `## IMAGE` block, from
   the same fixed vocabulary the Greenville real-estate engine uses (`downtown-falls` the default,
   plus `liberty-bridge`, `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`,
   `travelers-rest`). The orchestrator stores it in `blog_posts.image_address` and leaves
@@ -111,7 +123,7 @@ the X post) and pushes the done-log to the `drafts` branch.
   photo, which keeps the "high-quality photos only" bar.
 - **X:** no auto-poster; the routine drafts the X post and delivers it in the email packet for
   manual posting.
-- **Owned email list (auto, after publish).** The same `/api/finalize-greenville` cron broadcasts a
+- **Owned email list (auto, after Alex publishes).** The same `/api/finalize-greenville` cron broadcasts a
   newly published Greenville Works piece to the confirmed owned list exactly once (via the shared
   `broadcastPost` in `src/lib/broadcast.ts`) and stamps `last_broadcast_at`, the same mechanism the
   Greenville real-estate posts use. The agent cannot send it itself (no HTTP egress from the

@@ -31,9 +31,11 @@ reference only, nothing there runs on a schedule anymore.
   **self-sourcing**: an optional steering bank (`tech/topics.md`) plus a web-search scout
   (`pass0_scout.md`) that picks its own topic when the bank is empty, so it never runs dry. A
   Claude routine (`tech/routine/`, orchestrator plus isolated passes: scout → researcher →
-  angle → writer → editor) takes ONE thing reshaping Greenville and the Upstate apart (a road,
-  a subdivision, a data center, a factory, the grid, fiber, water capacity, a government
-  decision, and the technology behind local change) in Alex's own first-person voice, grounds
+  angle → writer → editor) takes ONE thing where **technology or capital is reshaping the
+  Upstate** apart (a data center, the grid and energy, fiber, manufacturing and automation, who
+  is buying and with whose capital, proptech; with roads, water/sewer, subdivisions, and
+  rezonings only as a secondary, occasional beat that must carry a real tech/capital/real-estate
+  through-line) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
   to `/find-a-pro` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
   `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review

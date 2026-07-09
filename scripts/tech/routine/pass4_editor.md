@@ -7,17 +7,44 @@ anything that does not. A statistic or an "it will do X" claim with no source in
 fact error. Anything the brief marked CLAIM (from a developer, agency, or promoter) must be written
 as a claim, not stated as fact.
 
-VOICE: confirm the piece is genuinely in Alex's FIRST-PERSON voice, a curious local thinking out
-loud and landing on a view, not a neutral meeting recap and not a booster press release. If it
-reads like a summary, an economic-development brochure, or an objective research brief, send it
-back. There should be a clear point of view a reader could disagree with.
+VOICE: confirm the piece is in Alex's FIRST-PERSON inquiry voice, a curious local genuinely working
+to understand the change, not a neutral meeting recap and not a booster press release. The first
+person must belong to the INQUIRY (what the reporting looked into and found, the questions asked),
+never to a fabricated inner life. If it reads like a summary, an economic-development brochure, or an
+objective research brief, send it back.
+
+NO FABRICATED STANCE (a hard rule, strip on sight). The engine does not know Alex's opinion, feelings,
+memories, or where he "landed," so the draft may not invent any of it. Cut every manufactured
+interior: any "what surprised me," "I was struck by," "I'm not sure this is good," "I keep coming back
+to," "I lean toward," "where I landed," any claimed personal history or scene ("I drove past," "when I
+moved here"), and any personal verdict that the change is good or bad. Keep first-person sentences
+that only report the inquiry ("I went looking for the job numbers"). The honest default landing is the
+open question left standing; if the piece closes on a manufactured personal verdict, cut it back to
+the question. Alex adds any real take himself in review.
+
+KEEP THE ANIMATING QUESTION INVISIBLE: the piece is driven by a real question (does this make the area
+better off, for whom, at what cost, at what risk) but must never STATE it as a thesis ("the real
+question is who pays"). If it announces the question, cut the announcement and let the sequencing
+raise it.
 
 THE HONEST-TENSION BEAT IS MANDATORY. This is the core of the whole track. Confirm the piece has a
 real, specific section on the trade-off: who pays, what it costs, the constraint, the loser, or how
-it could go wrong, backed by the brief, with a plain statement of what the writer would watch. If
-the tension is vague, hand-waved, or missing, or if the piece boosts the change one-sidedly (or
-catastrophizes it) anywhere, reject it. Confirm it distinguishes a fundamental cost from a
-manageable one where the brief does.
+it could go wrong, backed by the brief, with a plain statement of what a resident, buyer, or investor
+should watch. Confirm it asks the risk in BOTH directions, the risk if the change goes through and the
+risk if it does not, since the cost of the thing not happening is real and usually skipped. Confirm it
+genuinely steelmans the opposition's best case (for example, the real reason residents are opposed)
+before anything leans either way, and allows that the opposition may be right. If the tension is
+vague, hand-waved, or missing, or if the piece boosts the change one-sidedly (or catastrophizes it)
+anywhere, reject it. Confirm it distinguishes a fundamental cost from a manageable one where the brief
+does.
+
+THE COMPARISON (only when the piece uses one). If the piece compares the Upstate to another place,
+confirm three things. It is EARNED: it arrives after the local mechanism is established, not as the
+lede or a framing device. It HUNTS THE CONFOUNDER: it asks why that place's outcome happened and which
+causes the Upstate shares or lacks, never a naive "they did it and grew, so we will." It stays
+BORROWED LIGHT: a beat in service of the local question, not a second essay about the other city, and
+every comp fact traces to the brief. If there is no comparison, do not treat its absence as a defect;
+a forced or unsupported comp is worse than none, so cut a weak one.
 
 STAKES, NOT HYPE: confirm the "what it means for where we live, work, and invest" section is
 concrete and honestly hedged, uses the brief's real numbers, and does not inflate past what the
@@ -42,8 +69,9 @@ QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct sp
 exact text or strip the marks and leave it as a paraphrase.
 
 STRUCTURE: confirm the spine (open cold on the change, plain-English mechanism, honest stakes,
-honest tension, takeaway then a real question) is carried from open to close, and that the close is
-a genuine open question, not ragebait.
+honest tension, takeaway then a real question) is carried from open to close, that the piece opens on
+the concrete local change and not on a framework or the comparison, and that the close is a genuine
+open question, not ragebait.
 
 LENGTH: confirm it lands in 800 to 1200 words. If it runs long, cut to the ceiling; do not pad if
 short.

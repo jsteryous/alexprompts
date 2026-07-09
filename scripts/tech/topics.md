@@ -1,16 +1,19 @@
 # Greenville Works topic bank
 
 An OPTIONAL priority queue for the **Greenville Works** engine (`scripts/tech/`), not a hard
-dependency. Each entry is ONE thing reshaping Greenville and the Upstate, worth taking apart in a
-deep-dive that shows how it actually works and what it means for where people live, work, and
-invest. Scope is the physical and economic change of the place: development and new subdivisions,
-roads and transportation, infrastructure (water, sewer, fiber, the power grid), utilities and
-energy, manufacturing and big employers, data centers and the technology behind local change,
-population growth, local business, and the government decisions that drive them. Technology counts
-when it TOUCHES the Upstate (why a data center is sited here, how fiber gets installed, why a plant
-automates, where the grid is strained). This is the local-change track: it exists to help a reader
-understand the place they live, and to show that Alex can take a real system apart and explain what
-it means.
+dependency. Each entry is ONE thing where TECHNOLOGY or CAPITAL is reshaping the Upstate, worth
+taking apart in a deep-dive that shows how it actually works and what it means for where people live,
+work, and invest. That intersection, technology-and-money meeting real estate, IS the niche and the
+differentiator; it is what makes this a complement to the real-estate track rather than a generic
+local-news blog. The center of the scope: data centers (why they land here and what they draw on),
+the power grid and energy, fiber and connectivity, manufacturing and automation at big employers,
+the capital and incentive deals behind where investment goes, and property technology where it
+touches buying, selling, or investing here. Roads, water and sewer capacity, subdivisions, and
+government decisions are the SECONDARY, occasional beat, in scope only when the piece carries a real
+technology, capital, or real-estate through-line (water and grid capacity as the true limit on where
+data centers and housing can grow, not a generic civic explainer). This track exists to help a
+reader understand the tech-and-capital forces remaking the place they live, and to show that Alex
+can take a real system apart and explain what it means.
 
 **The engine is self-sourcing.** Each run prefers the first topic still `queued` here, so this file
 is how Alex STEERS what gets covered. When the bank is empty, the routine scouts its own topic with
@@ -37,6 +40,11 @@ A topic earns a slot only if it clears all five:
 5. **Not stale in a week.** It explains a durable system or shift, not a news cycle. A vote or a
    groundbreaking is fine to anchor on, but the piece has to be about how the thing works and what
    it means, not that it was announced.
+6. **On the tech-or-capital-meets-real-estate intersection.** The best topics sit squarely there (a
+   data center, the grid, fiber, automation, who is buying and why). A pure civic-infrastructure item
+   (a road, a sewer study, a rezoning) earns a slot only when it carries a genuine tech, capital, or
+   real-estate through-line, and it should be the exception. This bar is what keeps the track a
+   differentiated complement to real estate instead of a general local blog.
 
 ## Voice reminder
 
@@ -46,29 +54,50 @@ This is deliberately NOT the objective third-person research voice of the Saturd
 
 ## queued
 
-- **Why Greenville keeps widening the same roads, and why they fill back up.** Anchor: a specific
-  named corridor (Woodruff Road, Wade Hampton, or a current SCDOT project). Stakes: commute times
-  and where new subdivisions get approved. The tension: induced demand, and the fact that the
-  developments a widening enables refill the road it was meant to unclog.
+The spine is the tech-and-capital-meets-real-estate intersection (bar 6). Lead with these; the
+civic-infrastructure items at the bottom are the occasional exception, and only with a through-line.
+
+- **What the Upstate's data centers actually draw on, and who pays for it.** Anchor: a named local
+  campus (NorthMark's Spartanburg site, or a newer Greenville-area filing). Stakes: power and water
+  demand, the tax deals that landed it, and what it does to the grid and to nearby land value. The
+  tension: a data center is capital-intensive and land-and-power-hungry but light on jobs, so the
+  Upstate trades real resources and incentives for a modest headcount, and the ratepayer or the next
+  developer can end up covering the new capacity.
 - **Where Greenville's electricity actually comes from, and whether the grid can keep up.** Anchor:
-  Duke Energy's Upstate generation and load. Stakes: reliability and bills as population and data
-  centers grow. The tension: the gap between new demand and new supply, and what fills it.
-- **How water and sewer capacity quietly decides where Greenville can grow.** Anchor: a real
-  Greenville Water or ReWa constraint or expansion. Stakes: which land can be developed and which
-  cannot. The tension: infrastructure lags rooftops, and the cost of catching up lands on rates and
-  new construction.
-- **Why manufacturers keep choosing South Carolina, and what the Upstate trades for it.** Anchor: a
-  named Upstate plant or expansion (BMW, an automotive supplier, a new site). Stakes: jobs, wages,
-  and the housing demand a plant creates. The tension: incentives and infrastructure costs versus
-  the tax base and jobs, and who actually gets the jobs.
-- **How a subdivision actually gets approved in Greenville County, from rezoning to rooftops.**
-  Anchor: a real recent approval and the process behind it. Stakes: where growth lands and what it
-  does to nearby prices and schools. The tension: the gap between what a rezoning promises and what
-  gets built, and how little say neighbors really have.
+  Duke Energy's Upstate generation, load growth, and interconnection queue. Stakes: reliability and
+  bills as population and data centers grow. The tension: the gap between new demand and new supply,
+  who funds the new capacity, and whether data-center load pushes costs onto ordinary ratepayers.
+- **Why manufacturers keep choosing the Upstate, and what automation is doing to the jobs.** Anchor:
+  a named plant or expansion (BMW, an automotive or EV supplier, a new site). Stakes: wages, the
+  housing demand a plant creates, and how many people a modern automated plant actually employs. The
+  tension: incentives and infrastructure costs versus the tax base, and automation quietly changing
+  what "a plant brought X jobs" really means.
 - **How fiber internet actually gets installed, and why some Upstate streets get it and others
   wait.** Anchor: a real Upstate fiber build or provider. Stakes: home values and remote-work
   viability by street. The tension: the economics of who gets wired first, and the households left
-  on old copper.
+  on old copper while nearby streets see a connectivity premium.
+- **Who is actually buying the Upstate, and with whose money.** Anchor: a real, checkable pattern
+  (out-of-state buyers, institutional or build-to-rent operators, a named development's capital
+  stack). Stakes: prices, rents, and what share of the market a local buyer is really competing with.
+  The tension: separating the real signal from the "Wall Street bought your neighborhood" panic, and
+  saying honestly where outside capital does and does not move the local market.
+- **How property technology is changing buying and selling in the Upstate.** Anchor: a concrete,
+  local hook (iBuyer activity here, an MLS or portal shift, an AI valuation tool applied to real
+  Greenville listings). Stakes: what it changes for a buyer, a seller, and an agent locally. The
+  tension: what the tool genuinely does well versus where it quietly fails on Upstate-specific
+  ground, held without the "agents are obsolete" hype or the "it's a fad" dismissal.
+
+Occasional civic-infrastructure beat (use sparingly, only with the tech/capital/real-estate hook):
+
+- **How water and sewer capacity quietly decides where Greenville can grow.** Anchor: a real
+  Greenville Water or ReWa constraint or expansion. Through-line: capacity as the true limit on where
+  data centers AND housing can land, not a generic utilities explainer. The tension: infrastructure
+  lags rooftops, and the cost of catching up lands on rates and new construction.
+- **Why Greenville keeps widening the same roads, and why they fill back up.** Anchor: a specific
+  named corridor (Woodruff Road, Wade Hampton, or a current SCDOT project). Through-line: the growth
+  and development the widening enables, and what that does to land value and where building goes next.
+  The tension: induced demand, and the fact that the developments a widening enables refill the road
+  it was meant to unclog.
 
 ## done
 
