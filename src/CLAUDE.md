@@ -60,8 +60,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
 - **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: **fresh
   reads lead** (featured latest issue + more-to-read grid from `getFeedPosts`, with the `>`
-  prompt watermark) → behind-the-site (the one-person stack blurb, second on purpose since the
-  July 9, 2026 tech-lean pass) → tools spotlight (`liveTools()`, framed as engineering) →
+  prompt watermark) → the mission (July 10, 2026: headline "Grow or die." + the one-sentence
+  mission "…change South Carolina's answer to growth from no to how.", replaced the
+  behind-the-site stack blurb; keeps the Meet Alex → `/about` link, and `/about` keeps the
+  full technical teardown) → tools spotlight (`liveTools()`, framed as engineering) →
   `#follow` (social cards) → subscribe CTA. The old "Start here" hero/pillars, "helps anyone" (`outcomes` + `OutcomeArt`), "how
   every guide works" (`principles`), manifesto, and the "what you'll do with Claude"
   (`realEstateOutcomes`) grid (removed July 2026 with the voice-3 removal) are all gone. Those

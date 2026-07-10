@@ -17,6 +17,14 @@ data centers and housing can grow, not a generic civic explainer). This track ex
 reader understand the tech-and-capital forces remaking the place they live, and to show that Alex
 can take a real system apart and explain what it means.
 
+**The animating question behind every topic:** what actually leads to greater prosperity in South
+Carolina, and which technologies help us get there? Public sentiment around these projects (data
+centers, new plants, new development) often runs overwhelmingly negative, and that one-sidedness is
+a SIGNAL, not a disqualifier: the topics where the popular read is loudest and least examined are
+exactly where an honest ledger is scarce and valuable. The piece weighs both sides for real and,
+where the evidence allows, says plainly whether the thing looks net good or net bad for the state,
+and under what terms that answer would flip.
+
 **The engine is self-sourcing.** Each run prefers the first topic still `queued` here, so this file
 is how Alex STEERS what gets covered. When the bank is empty, the routine scouts its own topic with
 web search (`routine/pass0_scout.md`) and keeps going, so it never runs dry and needs no manual
@@ -59,12 +67,19 @@ This is deliberately NOT the objective third-person research voice of the Saturd
 The spine is the tech-and-capital-meets-real-estate intersection (bar 6). Lead with these; the
 civic-infrastructure items at the bottom are the occasional exception, and only with a through-line.
 
-- **What the Upstate's data centers actually draw on, and who pays for it.** Anchor: a named local
-  campus (NorthMark's Spartanburg site, or a newer Greenville-area filing). Stakes: power and water
-  demand, the tax deals that landed it, and what it does to the grid and to nearby land value. The
-  tension: a data center is capital-intensive and land-and-power-hungry but light on jobs, so the
-  Upstate trades real resources and incentives for a modest headcount, and the ratepayer or the next
-  developer can end up covering the new capacity.
+- **Are data centers more good than bad for South Carolina? Run the full ledger.** Anchor: a named
+  campus (NorthMark's Spartanburg site or a newer filing), plus the state's longest-running
+  precedent, Google's Berkeley County campus. Stakes: public sentiment on SC data centers is almost
+  uniformly negative, so this piece runs the honest ledger both ways. The credit side: enormous
+  property tax base per acre with almost no demand for county services (no school kids, little
+  traffic), years of construction work, and an anchor load that can fund grid modernization if the
+  tariff makes the data center pay its own way. The debit side: very few permanent jobs per
+  incentive dollar, real water and land draw, and the big one, who pays for the new power, because a
+  deal that socializes grid costs onto residential ratepayers turns the project into a subsidy, and
+  V.C. Summer is why SC ratepayers do not extend trust here. The tension: the verdict is not
+  general, it lives in the deal terms (the power tariff, the fee-in-lieu agreement, the cooling
+  design), so the piece should say what a good deal looks like versus a bad one, not just that
+  trade-offs exist.
 - **Where Greenville's electricity actually comes from, and whether the grid can keep up.** Anchor:
   Duke Energy's Upstate generation, load growth, and interconnection queue. Stakes: reliability and
   bills as population and data centers grow. The tension: the gap between new demand and new supply,

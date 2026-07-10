@@ -234,8 +234,13 @@ under `scripts/_archive/` — do not revive it.
 
 - `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
-  section → **behind the site** (the one-person tech-stack blurb, moved up July 9, 2026 to
-  lean the first impression toward technology) → **tools spotlight** (the live tools,
+  section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
+  headline **"Grow or die."**, then the ONE-sentence mission (emphasized) "Alex Prompts exists
+  to change South Carolina's answer to growth from no to how.", then two short manifesto
+  paragraphs (growing-or-dying / wall-of-no; growth-built-everything / builders-not-blockers /
+  "Growth is good. Stagnation is death.") — the mission sentence always LEADS and the
+  explanation never repeats it; keeps the Meet Alex → `/about` link; the full under-the-hood
+  teardown still lives on `/about`; see memory `pro-growth-editorial-stance`) → **tools spotlight** (the live tools,
   clickable, driven by `liveTools()`, framed as engineering) → follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
   every guide works" strip, the manifesto, and the "what you'll do with Claude"
   (`realEstateOutcomes`) grid were all **removed** (the last one in July 2026 with the voice-3

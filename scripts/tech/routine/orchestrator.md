@@ -11,9 +11,11 @@ genuinely stronger Charleston, Columbia, Midlands, or Lowcountry story wins the 
 written in Alex's OWN first-person voice, which is deliberately different from the Saturday
 research engine's objective third person. Technology is in scope when it touches South Carolina
 (why a data center is built here, how fiber gets installed, why manufacturers automate, where the
-grid is strained, what the port moves). The job is to help a reader understand the state they live
-in and to show Alex can take a real system apart and explain what it means, which is proof-of-work
-for a tech-sales career as much as it is content.
+grid is strained, what the port moves). The track's animating question, which every run serves, is
+what actually leads to greater prosperity in South Carolina and which technologies help us get
+there; each piece adds one calibrated verdict to that answer, and the track keeps a running ledger
+of those verdicts so the essays build on each other instead of standing alone. Showing that Alex
+can take a real system apart and explain what it means is a welcome side effect, not the goal.
 
 This routine produces ONE written piece for the WEBSITE: a Greenville Works essay published at
 /greenville-works, plus a short X post drafted for manual posting. There is NO video and NO
@@ -73,7 +75,12 @@ STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never rep
      git ls-tree --name-only origin/drafts drafts/ 2>/dev/null . If a greenville-works done-log
      exists, read the topics already covered and write them to /tmp/gw/done.txt under "ALREADY
      COVERED". If the branch is missing or anything fails, write "ALREADY COVERED: none" and
-     continue.
+     continue. THEN build the TRACK LEDGER: run
+     `git show origin/drafts:scripts/tech/topics.md 2>/dev/null` (the drafts-branch copy carries
+     the authoritative "## done" list; fall back to the local scripts/tech/topics.md if that
+     fails) and copy every "## done" entry that carries a "VERDICT:" line to /tmp/gw/ledger.txt
+     under the heading "TRACK LEDGER: what this track has already concluded". If there are none
+     (older entries predate the ledger), write "TRACK LEDGER: empty" and continue.
   2. THE LIVE SITE. Using the Supabase connector (mcp tool), query the project's blog_posts:
      `select title, slug, status, created_at from blog_posts where 'greenville works' = any(tags) and created_at > now() - interval '180 days' order by created_at desc;`
      Append the titles to /tmp/gw/done.txt. If the connector is unavailable, note it and
@@ -110,7 +117,9 @@ real South Carolina specifics, hunts the honest trade-off, and writes the fact b
   queued, and end the run cleanly rather than shipping a hollow piece.
 
 STEP 2, PASS 2, ANGLE. Read scripts/tech/routine/pass2_angle.md. Hand its full contents plus
-ONLY /tmp/gw/pass1_brief.md to a fresh sub-agent. Save to /tmp/gw/pass2_angle.md.
+ONLY /tmp/gw/pass1_brief.md and /tmp/gw/ledger.txt (the TRACK LEDGER from STEP 0B, so the take
+can build on or explicitly update the track's prior verdicts) to a fresh sub-agent. Save to
+/tmp/gw/pass2_angle.md.
 
 STEP 3, PASS 3, WRITER. Read scripts/tech/routine/pass3_writer.md. Hand its full contents
 plus /tmp/gw/pass1_brief.md (full, including the numbers, the stakes, and the honest trade-offs),
@@ -187,6 +196,10 @@ DRAFT post id and slug from STEP 5.
       path, move that queued entry under "## done" (or append "done <YYYY-MM-DD>" inline). If
       it came from the SCOUT path, ADD a new one-line entry under "## done" with the topic and
       the date, since it was never in the bank, so future dedup on the done-log catches it.
+      EITHER WAY, append the piece's ledger line to the done entry: " VERDICT: <the one-line
+      VERDICT LINE from /tmp/gw/pass2_angle.md>". This is the track ledger future runs read in
+      STEP 0B, so never skip it; if the angle pass somehow produced no VERDICT LINE, write
+      "VERDICT: none rendered" so the gap is visible.
       (2) Append fresh candidates under "## proposed" (verbatim, each with a one-line why and
       a what-to-ground note): any strong follow-up ideas the research surfaced, plus the
       scout's ALSO-RANS when the scout path was used, so the bank refills itself. Commit both:

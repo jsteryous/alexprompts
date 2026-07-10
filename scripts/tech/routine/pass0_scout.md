@@ -14,7 +14,12 @@ SCOPE. The track covers where TECHNOLOGY and CAPITAL are physically reshaping SO
 what that does to where people live, work, and invest. That intersection is the whole point and
 the differentiator: this is not a general local-news feed about every council vote and road project,
 it is the one place that explains the tech-and-money forces remaking the state and what they mean for
-real estate here. The CENTER of the scope, where most pieces should land:
+real estate here. The track's animating question is what actually leads to greater prosperity in
+South Carolina and which technologies help us get there, so prefer the candidate whose answer would
+teach a reader something real about that. Overwhelmingly negative public sentiment around a project
+is a point in a candidate's FAVOR, not against it: where the popular read is loudest and least
+examined is exactly where an honest ledger is scarce and worth publishing. The CENTER of the scope,
+where most pieces should land:
 - Data centers: why they are sited here, and what they draw on (power, water, land, tax deals).
 - The power grid and energy: generation, load growth, interconnection, nuclear (V.C. Summer's
   legacy, small modular reactor talk), and who pays for new supply.

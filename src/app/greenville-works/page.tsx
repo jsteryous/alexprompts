@@ -7,9 +7,9 @@ import { PostCover } from "@/components/PostCover";
 export const metadata: Metadata = {
   title: "SC Technology",
   description:
-    "The technology and capital reshaping South Carolina. Data centers, the power grid, fiber, " +
-    "manufacturing and automation, the port, and who is buying and building, and what it all " +
-    "means for where we live, work, and invest.",
+    "The technology and capital reshaping South Carolina, and an honest look at whether each " +
+    "one makes us more prosperous. Data centers, the power grid, fiber, manufacturing and " +
+    "automation, the port, and who is buying and building.",
   alternates: { canonical: `${site.url}/greenville-works` },
 };
 
@@ -29,10 +29,11 @@ export default async function GreenvilleWorksPage() {
             The technology and capital reshaping South Carolina
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            I take one system at a time, a data center, the power grid, fiber, automation on a
-            factory floor, the port, or the capital behind a wave of buying, and work out how it
-            actually works and what it means for where we live, work, and invest. I skip the
-            hype and name the trade-offs honestly.
+            I want to know what actually makes South Carolina more prosperous, and which
+            technology helps us get there. So I take one system at a time, a data center, the
+            power grid, fiber, automation on a factory floor, the port, or the capital behind a
+            wave of buying, work out how it really works, and weigh honestly whether it leaves
+            us better off. I skip the hype and name the trade-offs.
           </p>
         </div>
       </section>

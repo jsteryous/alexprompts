@@ -13,8 +13,11 @@ is buying and with whose capital, and property technology. The Upstate is home t
 a genuinely stronger story anywhere in the state takes the slot. Roads, water and sewer capacity,
 subdivisions, and rezonings are only a secondary, occasional beat, and only with a real tech,
 capital, or real-estate through-line.
-The audience is a smart local (and, often, a hiring manager reading the work), so the writing is
-the proof.
+The audience is a smart local (and, occasionally, a hiring manager reading the work). The track's
+animating question is what actually leads to greater prosperity in South Carolina and which
+technologies help us get there; each piece renders one calibrated verdict on that question, and
+the verdicts accumulate in a **track ledger** (VERDICT lines on the `## done` entries in
+`topics.md`, drafts branch) so the essays build on each other instead of standing alone.
 
 > **History (July 2026):** this engine was the national "Lab" tech track (broad tech deep-dives in
 > Alex's voice, published to `/lab`). It was refocused into **Greenville Works** to unify the site
@@ -74,8 +77,11 @@ real-estate engine's local grounding and fair-housing care.
    contingent. Separates confirmed facts from promoter claims, flags fair-housing care, and lists
    MUST-VERIFY. Stops the run if the topic is thin.
 2. **`pass2_angle.md`** — turns research into judgment: the one sharp, honest SPINE, the stakes
-   earned, the tension respected, the so-what, and the reader's question. This is where the piece
-   gets a point of view instead of being a meeting recap.
+   earned, the tension respected, the so-what (with a calibrated net-good-or-bad verdict when the
+   evidence carries one), and the reader's question. This is where the piece gets a point of view
+   instead of being a meeting recap. It also reads the TRACK LEDGER (prior pieces' one-line
+   verdicts, from STEP 0B) so it can build on or explicitly update what the track already
+   concluded, and it emits this piece's own VERDICT LINE for the ledger.
 3. **`pass3_writer.md`** — writes the essay in Alex's first-person voice, following the spine (open
    cold on the change, plain-English mechanism, honest stakes, honest tension, takeaway then a real
    question), in house style (no em dashes, no fragments, plain English, no hype), with inline
@@ -88,7 +94,9 @@ real-estate engine's local grounding and fair-housing care.
 `orchestrator.md` wires them as cold sub-agents, picks the topic (bank first, else scouted), dedups
 against the drafts log and the live site, and on a good topic inserts a `blog_posts` row tagged
 `greenville works` as a **DRAFT** (not live), then emails the review packet (verify list, the essay,
-the X post, and the `/review` edit-and-publish link) and pushes the done-log to the `drafts` branch.
+the X post, and the `/review` edit-and-publish link) and pushes the done-log to the `drafts` branch,
+appending the piece's VERDICT line to its `## done` entry so the track ledger grows one line per
+piece.
 Alex reviews and publishes each piece himself, either from the emailed `/review` link or from the
 `/admin` draft hub, which lists every DRAFT row.
 

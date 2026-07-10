@@ -165,21 +165,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Behind the site (nod to /about) ── */}
+      {/* ── The mission (the pro-growth stance; /about keeps the full story) ── */}
       <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-2xl">
-              <Eyebrow className="mb-4">Behind the site</Eyebrow>
+              <Eyebrow className="mb-4">The mission</Eyebrow>
               <h2 className="theme-text-primary type-h2 mb-4">
-                Designed, engineered, and run by one person.
+                Grow or die.
               </h2>
+              <p className="theme-text-primary type-body-lg font-medium mb-4">
+                Alex Prompts exists to change South Carolina&rsquo;s answer to growth from no
+                to how.
+              </p>
+              <p className="theme-text-contrast-muted type-body-lg mb-4">
+                Every place is either growing or dying. There is no third option. South
+                Carolina is growing, and somewhere along the way we started treating that like
+                a threat. Every new proposal meets a wall of no, and nobody behind that wall
+                offers a plan beyond stopping things. Stopping things is how a place begins to
+                die.
+              </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Alex Steryous built every layer of this operation himself: a Next.js and
-                TypeScript front end, a Postgres database, serverless jobs running on a cloud
-                schedule, and a pipeline of autonomous AI agents that research and draft the
-                articles from public data. He reviews and publishes every piece, and the free
-                tools are his work too.
+                Growth built everything we love about this state, and growth is the only force
+                that will fix the things we do not. The problems it brings are real, and they
+                get solved by people who build, not by people who block. We make that case with
+                real data and honest math. Growth is good. Stagnation is death.
               </p>
             </div>
             <Link
