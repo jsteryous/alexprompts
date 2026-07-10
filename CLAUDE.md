@@ -276,11 +276,13 @@ under `scripts/_archive/` — do not revive it.
   `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
   `PostType` key `works`, distinct from the `greenville` real-estate tag), written as a **DRAFT**
   by the `scripts/tech/` routine (**draft-first** as of July 2026, was live) and published by Alex
-  at `/review` after he reviews the emailed piece. Once published, the `/api/finalize-greenville`
-  cron finalizes these
-  posts too: it fills the article **cover photo** from the same curated Greenville library the
-  `/real-estate` pieces use (the writer names a `subject:`, stored in `image_address`; no API key,
-  no cost) and **broadcasts the piece to the owned email list** exactly once. The curated photo
+  at `/review` after he reviews the emailed piece. On publish, `/api/publish` sets the article
+  **cover photo** immediately from the same curated Greenville library the `/real-estate` pieces
+  use (the writer names a `subject:`, stored in `image_address`, with the city-level default when
+  it is missing; no API key, no cost; the draft editors preview the resolved photo via
+  `src/lib/editorCover.ts` — added July 10, 2026, covers used to wait for the daily cron), and the
+  `/api/finalize-greenville` cron remains the backstop that also **broadcasts the piece to the
+  owned email list** exactly once. The curated photo
   shows as the article hero, an index thumbnail (`PostCover`, with the branded `>` placeholder
   when a cover is still pending), the homepage feed card, and the share/OG card. The `getFeedPosts`
   homepage stream includes Greenville Works posts.

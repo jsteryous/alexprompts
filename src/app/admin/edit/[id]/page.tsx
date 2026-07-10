@@ -1,12 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import { isAdmin } from "@/lib/adminAuth";
+import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "@/app/review/Editor";
 
 const SECTION_BASE: Record<string, string> = {
   realestate: "/real-estate",
   works: "/greenville-works",
+  briefing: "/briefing",
   newsletter: "/archive",
 };
 
@@ -21,7 +23,7 @@ async function getPost(id: string) {
   const client = createClient(url, key);
   const { data } = await client
     .from("blog_posts")
-    .select("id, title, slug, summary, body_md, status, tags")
+    .select("id, title, slug, summary, body_md, status, tags, cover_image, cover_credit, image_address")
     .eq("id", id)
     .single();
   return data;
@@ -67,6 +69,7 @@ export default async function AdminEditPage({ params }: Props) {
         slug={post.slug ?? ""}
         backHref="/admin"
         livePath={livePath}
+        cover={resolveEditorCover(post)}
       />
     </div>
   );

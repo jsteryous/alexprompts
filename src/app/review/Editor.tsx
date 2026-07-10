@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
+import type { EditorCover } from "@/lib/editorCover";
 
 interface Props {
   id: string;
@@ -17,6 +18,9 @@ interface Props {
   backHref?: string;
   /** Public URL of the post (e.g. /real-estate/<slug>), for the View link. */
   livePath?: string;
+  /** The cover this post has, or the curated library photo it will get the
+   *  moment it is published (resolved server-side by resolveEditorCover). */
+  cover?: EditorCover | null;
 }
 
 type Msg = { kind: "ok" | "err"; text: string } | null;
@@ -30,6 +34,7 @@ export default function Editor({
   status,
   backHref = "/admin",
   livePath,
+  cover,
 }: Props) {
   const [title, setTitle] = useState(initialTitle);
   const [summary, setSummary] = useState(initialSummary);
@@ -294,6 +299,26 @@ export default function Editor({
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 space-y-6">
+        {/* Cover preview: what the article hero will be, visible during review */}
+        {cover && (
+          <div className="flex items-center gap-4 border border-gray-200 rounded-lg bg-white p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={cover.url}
+              alt=""
+              className="h-16 w-28 object-cover rounded-md shrink-0"
+            />
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                {cover.label}
+              </p>
+              {cover.credit && (
+                <p className="text-xs text-gray-400 truncate mt-1">{cover.credit}</p>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Title + summary */}
         <label className="block">
           <span className="block text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">

@@ -1,11 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "./Editor";
 
 const SECTION_BASE: Record<string, string> = {
   realestate: "/real-estate",
   works: "/greenville-works",
+  briefing: "/briefing",
   newsletter: "/archive",
 };
 
@@ -20,7 +22,7 @@ async function getPost(id: string) {
   const client = createClient(url, key);
   const { data } = await client
     .from("blog_posts")
-    .select("id, title, slug, summary, body_md, status, created_at, topic, tags")
+    .select("id, title, slug, summary, body_md, status, created_at, topic, tags, cover_image, cover_credit, image_address")
     .eq("id", id)
     .single();
   return data;
@@ -51,6 +53,7 @@ export default async function ReviewPage({ searchParams }: Props) {
         slug={post.slug ?? ""}
         backHref="/admin"
         livePath={`${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`}
+        cover={resolveEditorCover(post)}
       />
     </div>
   );

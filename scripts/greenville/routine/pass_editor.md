@@ -79,9 +79,12 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
   prose; rewrite the rest as declarative openings.
 - If the topic is a question, confirm the first two or three sentences answer it directly and
   completely, so the page can win the featured snippet.
-- Confirm the H2 subheads are clear and descriptive, that internal links to the site's own tools and
-  hub are present where they genuinely help (two or three, not stuffed), and that the piece closes
-  with the honest, low-pressure `/find-a-pro` offer.
+- Confirm the H2 subheads are clear and descriptive, that internal links to the site's own tools,
+  hub, and related guides are present where they genuinely help (three to five, not stuffed), and
+  that the piece closes with the honest, low-pressure `/find-a-pro` offer. Site-internal links must
+  be root-relative (`/tools/...`, `/real-estate/...`, `/greenville-works/...`, `/find-a-pro`). Keep
+  the writer's links to sibling guides (the writer chose them from a verified list of live pages you
+  do not have); do not add new sibling-guide links yourself.
 - Confirm every inline link points to a primary or official source, that no source is linked twice,
   and that no link points to a listing portal's for-sale search or to a competing agent or brokerage.
 

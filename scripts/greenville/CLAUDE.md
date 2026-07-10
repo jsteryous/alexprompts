@@ -129,15 +129,21 @@ picks a hand-curated photo:
    fallback `location:` string only when no subject fits (rare).
 2. **The orchestrator stores that value** in `blog_posts.image_address` on the row it publishes
    (STEP 3), leaving `cover_image` NULL.
-3. **The finalize cron picks the cover** (`/api/finalize-greenville`, daily, after the routine; see
-   `src/lib/greenvilleImage.ts` -> `renderCover`, which consults `src/lib/greenvilleCovers.ts`).
-   The cascade: (a) the **curated library** first, a committed, freely-licensed photo under
-   `public/greenville/library/` matched to the subject (any Greenville-area address resolves to at
-   least the city-level default, so this is the normal path); (b) a **Google Street View** photo of
-   the geocoded point only for a non-Greenville pin; (c) a **map-with-pin** as the last resort. It
-   sets `cover_image`, and for a CC-BY library photo also writes the attribution to `cover_credit`
-   (shown under the article hero; CC0 photos and Google covers need none). Idempotent: it only acts
-   while `cover_image` is NULL, within a 3-day window, then ages out.
+3. **The publish route sets the cover the moment Alex publishes** (July 2026; `/api/publish`
+   calls `resolveLibraryCover` from `src/lib/greenvilleCovers.ts` directly, a pure lookup of a
+   committed `/public` URL, no key, no upload), so a local post never sits live cover-less
+   waiting on the daily cron. A row missing `image_address` still gets the city-level default.
+   The draft editors (`/admin/edit/[id]` + `/review`) show the same resolved photo as a preview
+   while the post is still a DRAFT (`src/lib/editorCover.ts`).
+4. **The finalize cron is the backstop** (`/api/finalize-greenville`, daily; see
+   `src/lib/greenvilleImage.ts` -> `renderCover`, which consults the same library). Its cascade:
+   (a) the **curated library** first (any Greenville-area address resolves to at least the
+   city-level default); (b) a **Google Street View** photo of the geocoded point only for a
+   non-Greenville pin; (c) a **map-with-pin** as the last resort. It sets `cover_image`, and for
+   a CC-BY library photo also writes the attribution to `cover_credit` (shown under the article
+   hero; CC0 photos and Google covers need none). Idempotent: it only acts while `cover_image`
+   is NULL, within a 7-day window from publish, then ages out. With publish-time covers it
+   effectively only handles the Google fallback and missed runs.
 
 **The library data** lives in `src/lib/greenvilleCovers.json` (subject -> a list of photos), which
 `src/lib/greenvilleCovers.ts` reads. Multiple photos per subject rotate by a per-post seed (the

@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { DEFAULT_SUBJECT, resolveLibraryCover } from "@/lib/greenvilleCovers";
 import { sectionOf } from "@/lib/posts";
 import { isAuthorized, tokenAuthorized } from "@/lib/adminAuth";
 
@@ -29,7 +30,7 @@ async function publishPost(id: string): Promise<PublishResult> {
 
   const { data: rows, error: fetchErr } = await client
     .from("blog_posts")
-    .select("id, title, slug, status, tags")
+    .select("id, title, slug, status, tags, cover_image, image_address")
     .eq("id", id)
     .single();
 
@@ -37,7 +38,8 @@ async function publishPost(id: string): Promise<PublishResult> {
     return { ok: false, status: 404, heading: "Not found", message: `No post found with ID: ${id}` };
   }
 
-  const base = SECTION_BASE[sectionOf(rows)];
+  const section = sectionOf(rows);
+  const base = SECTION_BASE[section];
   const path = `${base}/${rows.slug}`;
 
   if (rows.status === "PUBLISHED") {
@@ -53,18 +55,39 @@ async function publishPost(id: string): Promise<PublishResult> {
     return { ok: false, status: 500, heading: "Database error", message: updateErr.message };
   }
 
+  // Set the curated library cover NOW, not at the next daily finalize run, so
+  // the article never sits live cover-less. resolveLibraryCover is pure (a
+  // committed /public URL, no key, no upload). All three local sections are
+  // Greenville pieces, so a row missing image_address still earns the
+  // city-level default. Best-effort in its own update: a cover failure must
+  // never block publish, and the finalize cron stays the backstop (it also
+  // handles the rare non-Greenville pin that needs the Google fallback).
+  let coverSet = false;
+  if (section !== "newsletter" && !rows.cover_image) {
+    const lib = resolveLibraryCover(rows.image_address ?? DEFAULT_SUBJECT, rows.slug);
+    if (lib) {
+      const { error: coverErr } = await client
+        .from("blog_posts")
+        .update({ cover_image: lib.url, cover_credit: lib.credit })
+        .eq("id", id);
+      coverSet = !coverErr;
+    }
+  }
+
   // Bust the ISR cache so the section index + the post show the new issue
   // immediately (otherwise it waits up to the 300s revalidate window).
   revalidatePath(base);
   revalidatePath(path);
 
-  // Greenville + Greenville Works posts get their cover and owned-list
-  // broadcast from the daily finalize cron once they are PUBLISHED; newsletter
-  // posts do not (those come from Substack).
+  // Local-section posts get their owned-list broadcast from the daily finalize
+  // cron once they are PUBLISHED; newsletter posts do not (those come from
+  // Substack). The cover is normally set above at publish time.
   const finalizeNote =
-    sectionOf(rows) === "newsletter"
+    section === "newsletter"
       ? ""
-      : " The cover photo and the subscriber email are sent by the daily finalize cron within a day.";
+      : coverSet
+        ? " The cover photo is set; the subscriber email goes out with the daily finalize cron."
+        : " The cover photo and the subscriber email are sent by the daily finalize cron within a day.";
 
   return { ok: true, already: false, title: rows.title, path, finalizeNote };
 }

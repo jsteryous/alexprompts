@@ -247,7 +247,8 @@
       "PowerShell($p=[Environment]::GetEnvironmentVariable\\(\"ANTHROPIC_API_KEY\",\"Process\"\\); $u=[Environment]::GetEnvironmentVariable\\(\"ANTHROPIC_API_KEY\",\"User\"\\); $m=[Environment]::GetEnvironmentVariable\\(\"ANTHROPIC_API_KEY\",\"Machine\"\\); \"Process scope set: $\\([bool]$p\\)  \\(len $\\($p.Length\\)\\)\"; \"User scope set:    $\\([bool]$u\\)  \\(len $\\($u.Length\\)\\)\"; \"Machine scope set: $\\([bool]$m\\)  \\(len $\\($m.Length\\)\\)\"; \"Also ANTHROPIC_AUTH_TOKEN set: $\\([bool]$env:ANTHROPIC_AUTH_TOKEN\\)\")",
       "PowerShell($PROFILE.PSObject.Properties | ForEach-Object { $exists = Test-Path $_.Value; \"$\\($_.Name\\): exists=$exists  $\\($_.Value\\)\"; if \\($exists\\) { $hit = Select-String -Path $_.Value -Pattern \"ANTHROPIC_API_KEY|ANTHROPIC_AUTH_TOKEN\" -SimpleMatch -Quiet; \"   contains anthropic key: $hit\" } })",
       "PowerShell(git diff --stat | Select-Object -Last 3; git stash show --stat stash@{0} | Select-Object -Last 3; git stash drop stash@{0})",
-      "Skill(claude-in-chrome)"
+      "Skill(claude-in-chrome)",
+      "PowerShell(Get-Date *)"
     ]
   }
 }
