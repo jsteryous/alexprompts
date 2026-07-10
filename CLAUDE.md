@@ -292,6 +292,11 @@ under `scripts/_archive/` — do not revive it.
   cover + broadcast). The index page carries its own owned-list `SubscribeForm` because the
   brief never goes to Substack. In nav as "Briefing". This is the site's subscribe promise
   ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
+- **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
+  promise in the visitor's words. The `/real-estate` tab reads **"Moving to Greenville"**, the
+  `/find-a-pro` tab reads **"Find an Agent"** (routes and tags unchanged), and the `/archive`
+  newsletter mirror was DROPPED from the nav (footer only). The `/real-estate` index hero was
+  also rewritten then; it had still carried the retired news track's "both sides" copy.
 - `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so

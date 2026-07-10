@@ -13,7 +13,7 @@ export function ReferralCta({
   slug,
   heading = "Buying or selling in Greenville?",
   blurb = "I am a licensed South Carolina agent, and I match buyers and sellers with an agent I would trust with my own family, here or in whatever city you are moving to. It costs you nothing.",
-  cta = "Find a pro worth your time",
+  cta = "Find an agent worth your time",
 }: {
   /** The article slug this CTA sits on, carried into /find-a-pro as ?ref= for
    *  first-party attribution (which article drove the lead). */

@@ -43,7 +43,7 @@ export default async function RealEstatePostPage({ params }: Props) {
     <ArticleView
       post={post}
       section={{
-        label: "Real Estate",
+        label: "Moving to Greenville",
         basePath: "/real-estate",
         showReferralCta: true,
         blurb:

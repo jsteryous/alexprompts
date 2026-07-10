@@ -26,13 +26,13 @@ export default function Footer() {
             Tools
           </Link>
           <Link href="/real-estate" className="theme-link text-sm">
-            Real Estate
+            Moving to Greenville
           </Link>
           <Link href="/greenville-works" className="theme-link text-sm">
             Technology
           </Link>
           <Link href="/find-a-pro" className="theme-link text-sm">
-            Find a Pro
+            Find an Agent
           </Link>
           <Link href="/archive" className="theme-link text-sm">
             Archive

@@ -3,12 +3,11 @@ import { site } from "@/lib/site";
 import { ReferralForm } from "@/components/ReferralForm";
 
 export const metadata: Metadata = {
-  title: "Find a Pro",
+  title: "Find an Agent",
   description:
     "Buying or selling, in Greenville, SC or relocating anywhere? Tell me what you need and " +
-    "I will hand-pick a vetted pro worth your time, the right agent plus the lender and " +
-    "closing attorney who make a deal go smoothly, and stay in your corner until it closes. " +
-    "No cost to you.",
+    "I will hand-pick a vetted agent worth your time, plus the lender and closing attorney " +
+    "who make a deal go smoothly, and stay in your corner until it closes. No cost to you.",
   alternates: { canonical: `${site.url}/find-a-pro` },
 };
 

@@ -5,10 +5,10 @@ import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
-  title: "Greenville Real Estate",
+  title: "Moving to Greenville, SC",
   description:
-    "Greenville, SC real estate, both sides. The local housing story with the consensus " +
-    "and the strongest counter-case laid out so you can decide for yourself.",
+    "Honest guides to moving to and buying in Greenville, South Carolina. Neighborhoods, " +
+    "prices, commutes, property taxes, and the real trade-offs, grounded in current local data.",
   alternates: { canonical: `${site.url}/real-estate` },
 };
 
@@ -25,12 +25,13 @@ export default async function RealEstatePage() {
             Greenville, SC
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Greenville real estate, both sides
+            Honest guides to moving to and buying in Greenville
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            The local housing story, what most people think, and the strongest case for the
-            other side. You get the whole argument, then you decide. Information only, not
-            financial advice.
+            Where to live, what it really costs, and how buying here actually works. Every
+            guide is grounded in current local data with sources you can check, and every
+            figure is dated because prices move. When you are ready for a human in your
+            corner, I connect you with a vetted local agent at no cost.
           </p>
         </div>
       </section>
@@ -69,9 +70,10 @@ export default async function RealEstatePage() {
             </ul>
           ) : (
             <div className="theme-card border theme-border rounded-xl p-10 text-center">
-              <p className="theme-text-secondary text-lg mb-2">No posts yet.</p>
+              <p className="theme-text-secondary text-lg mb-2">The first guide is on its way.</p>
               <p className="theme-text-muted text-sm">
-                The first Greenville real-estate breakdown is on its way.
+                Honest, data-grounded guides to moving to and buying in Greenville, one
+                question at a time.
               </p>
             </div>
           )}

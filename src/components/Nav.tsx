@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { newsletterUrl, site } from "@/lib/site";
 
+// Nav clarity rule (July 2026): every label states its promise in the visitor's
+// words. The newsletter archive lives in the footer only, so the nav stays short.
 const links = [
   { href: "/briefing", label: "Briefing" },
   { href: "/tools", label: "Tools" },
-  { href: "/real-estate", label: "Real Estate" },
+  { href: "/real-estate", label: "Moving to Greenville" },
   { href: "/greenville-works", label: "Technology" },
-  { href: "/find-a-pro", label: "Find a Pro" },
-  { href: "/archive", label: "Archive" },
+  { href: "/find-a-pro", label: "Find an Agent" },
   { href: "/about", label: "About" },
 ];
 
