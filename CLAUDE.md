@@ -67,8 +67,9 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
 > vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
-> the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline:
-> *"Where real estate meets technology."*; the phrase "in plain English" was dropped from
+> the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline/slogan:
+> *"Growth is good."* since July 10, 2026, was "Where real estate meets technology."; it is
+> the pro-growth stance in three words and also headlines the OG share card; the phrase "in plain English" was dropped from
 > ALL site copy July 9, 2026 because Alex found it unpolished — do not reintroduce it in
 > user-facing copy). Do **not** reintroduce the
 > single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old

@@ -48,7 +48,10 @@ export const site = {
   // doom, and no "plain English" phrasing anywhere (dropped July 2026, it read
   // as unpolished). These strings drive the page titles, the meta descriptions,
   // the OG cards, and the footer, so keep them true and tight.
-  tagline: "Where real estate meets technology.",
+  // The slogan (July 10, 2026, was "Where real estate meets technology."):
+  // the brand's pro-growth stance in three words. See the homepage mission
+  // section ("Grow or die." / "from no to how") for the full statement.
+  tagline: "Growth is good.",
   oneLiner:
     "Alex Prompts is where Alex Steryous writes about Greenville real estate and the technology reshaping it, and shares the free tools he builds along the way.",
   description:
