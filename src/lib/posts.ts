@@ -182,17 +182,18 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
   return `${base}/${post.slug}`;
 }
 
-/** Short, human label for a post's section, for a card badge. The two tracks
- *  read "Real Estate" and "Technology" so a first-time visitor sees the site's
- *  two subjects at a glance (the internal tags/URLs keep the Greenville names). */
+/** Short, human label for a post's section, for a card badge. Labels match the
+ *  nav (July 2026 clarity pass): "Real Estate" stays a compact topic chip, the
+ *  works track reads "Upstate Technology", the brief carries its product name
+ *  (the internal tags/URLs keep the Greenville names). */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
     ? "Real Estate"
     : section === "works"
-      ? "Technology"
+      ? "Upstate Technology"
       : section === "briefing"
-        ? "Briefing"
+        ? "Upstate Brief"
         : "Newsletter";
 }
 

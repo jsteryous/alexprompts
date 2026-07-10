@@ -5,7 +5,7 @@ import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
-  title: "Technology",
+  title: "Upstate Technology",
   description:
     "Greenville Works, the technology and capital reshaping the Upstate. Data centers, the power " +
     "grid, fiber, manufacturing and automation, and who is buying and building, and what it all " +
@@ -23,7 +23,7 @@ export default async function GreenvilleWorksPage() {
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Greenville Works
+            Upstate Technology
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
             The technology and capital reshaping the Upstate

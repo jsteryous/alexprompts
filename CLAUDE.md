@@ -262,10 +262,10 @@ under `scripts/_archive/` — do not revive it.
   LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
   exports). Serves everyone, not only hiring managers, so it never literally addresses them.
 - `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
-  track. **User-facing label is "Technology"** (July 9, 2026 tech-lean pass): the nav tab,
-  footer link, homepage feed badges (`sectionLabel`: real-estate posts read "Real Estate",
-  works posts read "Technology"), the page `<title>`, and the article breadcrumb all say
-  Technology; "Greenville Works" survives only as the series name in the index-page eyebrow.
+  track. **User-facing label is "Upstate Technology"** (July 9, 2026 nav clarity pass; it was
+  briefly "Technology" earlier that same day): the nav tab, footer link, homepage feed badge,
+  the page `<title>`, the index eyebrow, and the article breadcrumb all say Upstate
+  Technology; "Greenville Works" survives as the engine/series name in docs and the tag.
   URLs, the `greenville works` tag, and internal `works` keys are UNCHANGED (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
   from national tech to Greenville-local later that month, then niche-sharpened to the
   tech-and-capital-meets-real-estate intersection July 8, 2026). First-person deep-dives that take
@@ -290,13 +290,17 @@ under `scripts/_archive/` — do not revive it.
   written as a DRAFT by `scripts/briefing/`, published + broadcast by Alex Monday morning
   (one-click broadcast link in the packet; the 13:00 UTC finalize cron is the backstop for
   cover + broadcast). The index page carries its own owned-list `SubscribeForm` because the
-  brief never goes to Substack. In nav as "Briefing". This is the site's subscribe promise
+  brief never goes to Substack. In nav as "Upstate Brief". This is the site's subscribe promise
   ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
 - **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
-  promise in the visitor's words. The `/real-estate` tab reads **"Moving to Greenville"**, the
-  `/find-a-pro` tab reads **"Find an Agent"** (routes and tags unchanged), and the `/archive`
-  newsletter mirror was DROPPED from the nav (footer only). The `/real-estate` index hero was
-  also rewritten then; it had still carried the retired news track's "both sides" copy.
+  promise in the visitor's words. The nav reads **Upstate Brief | Tools | Moving to
+  Greenville | Upstate Technology | Find an Agent | About** (routes and tags unchanged;
+  `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`), and the `/archive`
+  newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match
+  ("Upstate Brief", "Upstate Technology"; the real-estate badge stays the compact topic chip
+  "Real Estate" since investor/tax guides fit it better than "Moving to Greenville"). The
+  `/real-estate` index hero was also rewritten then; it had still carried the retired news
+  track's "both sides" copy.
 - `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so

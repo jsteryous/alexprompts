@@ -20,7 +20,7 @@ export default function Footer() {
 
         <nav className="flex flex-wrap gap-6">
           <Link href="/briefing" className="theme-link text-sm">
-            Briefing
+            Upstate Brief
           </Link>
           <Link href="/tools" className="theme-link text-sm">
             Tools
@@ -29,7 +29,7 @@ export default function Footer() {
             Moving to Greenville
           </Link>
           <Link href="/greenville-works" className="theme-link text-sm">
-            Technology
+            Upstate Technology
           </Link>
           <Link href="/find-a-pro" className="theme-link text-sm">
             Find an Agent
