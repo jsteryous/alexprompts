@@ -178,6 +178,11 @@ button {
   --foreground: #f5f5f7;
   --foreground-soft: #c7c7cc;
   --foreground-muted: #86868b;
+  /* --background and --surface-strong must flip with the foreground: .theme-cta
+     is fg-on-bg and .theme-field is fg-on-surface-strong, so leaving these at
+     the light-mode page values renders light-on-light inside this dark panel. */
+  --background: #101012;
+  --surface-strong: #1c1c1e;
   --border: rgba(255, 255, 255, 0.12);
   --border-strong: rgba(255, 255, 255, 0.2);
   --accent: #818cf8;
@@ -211,6 +216,8 @@ button {
   --foreground: #f5f5f7;
   --foreground-soft: #c7c7cc;
   --foreground-muted: #86868b;
+  --background: #101012;
+  --surface-strong: #1c1c1e;
   --border: rgba(255, 255, 255, 0.12);
   --border-strong: rgba(255, 255, 255, 0.2);
   --accent: #818cf8;
@@ -230,6 +237,8 @@ button {
   --foreground: #1d1d1f;
   --foreground-soft: #424245;
   --foreground-muted: #6e6e73;
+  --background: #f5f5f7;
+  --surface-strong: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.14);
   --accent: #4f46e5;
@@ -249,6 +258,8 @@ html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-ca
   --foreground: #f5f5f7;
   --foreground-soft: #c7c7cc;
   --foreground-muted: #86868b;
+  --background: #101012;
+  --surface-strong: #1c1c1e;
   --border: rgba(255, 255, 255, 0.12);
   --border-strong: rgba(255, 255, 255, 0.2);
   --accent: #818cf8;
