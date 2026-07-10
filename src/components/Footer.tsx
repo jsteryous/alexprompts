@@ -29,7 +29,7 @@ export default function Footer() {
             Moving to Greenville
           </Link>
           <Link href="/greenville-works" className="theme-link text-sm">
-            Upstate Technology
+            SC Technology
           </Link>
           <Link href="/find-a-pro" className="theme-link text-sm">
             Find an Agent

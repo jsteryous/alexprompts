@@ -5,10 +5,10 @@ import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
 export const metadata: Metadata = {
-  title: "Upstate Technology",
+  title: "SC Technology",
   description:
-    "Greenville Works, the technology and capital reshaping the Upstate. Data centers, the power " +
-    "grid, fiber, manufacturing and automation, and who is buying and building, and what it all " +
+    "The technology and capital reshaping South Carolina. Data centers, the power grid, fiber, " +
+    "manufacturing and automation, the port, and who is buying and building, and what it all " +
     "means for where we live, work, and invest.",
   alternates: { canonical: `${site.url}/greenville-works` },
 };
@@ -23,16 +23,16 @@ export default async function GreenvilleWorksPage() {
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Upstate Technology
+            SC Technology
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            The technology and capital reshaping the Upstate
+            The technology and capital reshaping South Carolina
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
             I take one system at a time, a data center, the power grid, fiber, automation on a
-            factory floor, or the capital behind a wave of buying, and work out how it actually
-            works and what it means for where we live, work, and invest. I skip the hype and
-            name the trade-offs honestly.
+            factory floor, the port, or the capital behind a wave of buying, and work out how it
+            actually works and what it means for where we live, work, and invest. I skip the
+            hype and name the trade-offs honestly.
           </p>
         </div>
       </section>
@@ -73,8 +73,8 @@ export default async function GreenvilleWorksPage() {
             <div className="theme-card border theme-border rounded-xl p-10 text-center">
               <p className="theme-text-secondary text-lg mb-2">The first pieces are on the way.</p>
               <p className="theme-text-muted text-sm">
-                Each one takes a single change reshaping Greenville apart and shows what it means
-                for where we live, work, and invest.
+                Each one takes a single change reshaping South Carolina apart and shows what it
+                means for where we live, work, and invest.
               </p>
             </div>
           )}

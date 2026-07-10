@@ -11,7 +11,7 @@ const links = [
   { href: "/briefing", label: "Upstate Brief" },
   { href: "/tools", label: "Tools" },
   { href: "/real-estate", label: "Moving to Greenville" },
-  { href: "/greenville-works", label: "Upstate Technology" },
+  { href: "/greenville-works", label: "SC Technology" },
   { href: "/find-a-pro", label: "Find an Agent" },
   { href: "/about", label: "About" },
 ];

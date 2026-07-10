@@ -1,9 +1,11 @@
 # Greenville Works topic bank
 
-An OPTIONAL priority queue for the **Greenville Works** engine (`scripts/tech/`), not a hard
-dependency. Each entry is ONE thing where TECHNOLOGY or CAPITAL is reshaping the Upstate, worth
-taking apart in a deep-dive that shows how it actually works and what it means for where people live,
-work, and invest. That intersection, technology-and-money meeting real estate, IS the niche and the
+An OPTIONAL priority queue for the **Greenville Works** engine (`scripts/tech/`; user-facing
+section label "SC Technology"), not a hard dependency. Each entry is ONE thing where TECHNOLOGY or
+CAPITAL is reshaping SOUTH CAROLINA (statewide since July 2026; the Upstate is home turf and wins
+ties, but a stronger Charleston, Columbia, or Lowcountry story takes the slot), worth taking apart
+in a deep-dive that shows how it actually works and what it means for where people live, work, and
+invest. That intersection, technology-and-money meeting real estate, IS the niche and the
 differentiator; it is what makes this a complement to the real-estate track rather than a generic
 local-news blog. The center of the scope: data centers (why they land here and what they draw on),
 the power grid and energy, fiber and connectivity, manufacturing and automation at big employers,

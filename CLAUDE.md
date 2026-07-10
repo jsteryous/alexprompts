@@ -29,10 +29,13 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
 >    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
 >    from 1 to 2 via a code cadence guard, July 2026); renamed from the national "Lab" tech track
->    in July 2026). Each takes ONE thing where **technology or capital is reshaping the Upstate**
->    apart (data centers, the power grid and energy, fiber and connectivity, manufacturing and
->    automation at big employers, who is buying and with whose capital, and property technology
->    where it touches buying/selling/investing), explains how it works, and names the honest
+>    in July 2026; **statewide South Carolina since July 10, 2026**, user-facing label "SC
+>    Technology"). Each takes ONE thing where **technology or capital is reshaping South
+>    Carolina** apart (data centers, the power grid and energy, fiber and connectivity,
+>    manufacturing and automation at big employers, the port and logistics, who is buying and
+>    with whose capital, and property technology
+>    where it touches buying/selling/investing; the Upstate is home turf and wins ties),
+>    explains how it works, and names the honest
 >    trade-offs. That **tech-and-capital-meets-real-estate intersection is the niche** and the
 >    differentiator (sharpened July 8, 2026); roads, water and sewer capacity, subdivisions, and
 >    rezonings are only a secondary, occasional beat, allowed when they carry a real tech, capital,
@@ -194,8 +197,9 @@ the strategic-direction and two-track notes above.
   plus a web-search scout (`pass0_scout.md`) that picks its own topic when the bank is empty,
   so it runs autonomously without going dry. Routine (`tech/routine/`, orchestrator plus
   isolated passes: scout → researcher → angle → writer → editor) takes ONE thing where
-  **technology or capital is reshaping the Upstate** apart (a data center, the grid, fiber,
-  automation at a factory, who is buying and why, proptech; with roads/water/subdivisions only as a
+  **technology or capital is reshaping South Carolina** apart (a data center, the grid, fiber,
+  automation at a factory, the port, who is buying and why, proptech; statewide since July 10,
+  2026 with the Upstate as home turf; roads/water/subdivisions only as a
   secondary beat that carries a tech/capital/real-estate through-line) in
   **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
   and funnels relocation/buyer leads to `/find-a-pro` where the topic fits, then inserts a
@@ -262,17 +266,21 @@ under `scripts/_archive/` — do not revive it.
   LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
   exports). Serves everyone, not only hiring managers, so it never literally addresses them.
 - `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
-  track. **User-facing label is "Upstate Technology"** (July 9, 2026 nav clarity pass; it was
-  briefly "Technology" earlier that same day): the nav tab, footer link, homepage feed badge,
-  the page `<title>`, the index eyebrow, and the article breadcrumb all say Upstate
-  Technology; "Greenville Works" survives as the engine/series name in docs and the tag.
+  track. **User-facing label is "SC Technology"** (July 10, 2026; was "Upstate Technology" from
+  the July 9 nav clarity pass, and briefly "Technology" earlier that same day): the nav tab,
+  footer link, homepage feed badge, the page `<title>`, the index eyebrow, the article
+  breadcrumb, and the `/admin` badge all say SC Technology; "Greenville Works" survives as the
+  engine/series name in docs and the tag.
   URLs, the `greenville works` tag, and internal `works` keys are UNCHANGED (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
   from national tech to Greenville-local later that month, then niche-sharpened to the
-  tech-and-capital-meets-real-estate intersection July 8, 2026). First-person deep-dives that take
-  ONE thing where **technology or capital is reshaping the Upstate** apart (data centers, the grid
-  and energy, fiber, manufacturing and automation, who is buying and with whose capital, proptech;
-  roads/water/subdivisions only as a secondary beat with a real through-line), explain how it works,
-  show what it means for where we live, work, and invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
+  tech-and-capital-meets-real-estate intersection July 8, 2026, then **widened to STATEWIDE South
+  Carolina July 10, 2026** because the Upstate alone may not carry the cadence and Alex wants the
+  whole state's tech story; the Upstate stays home turf and wins ties). First-person deep-dives
+  that take ONE thing where **technology or capital is reshaping South Carolina** apart (data
+  centers, the grid and energy, fiber, manufacturing and automation, the port and logistics, who
+  is buying and with whose capital, proptech; roads/water/subdivisions only as a secondary beat
+  with a real through-line), explain how it works, show what it means for where we live, work,
+  and invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
   `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
   `PostType` key `works`, distinct from the `greenville` real-estate tag), written as a **DRAFT**
   by the `scripts/tech/` routine (**draft-first** as of July 2026, was live) and published by Alex
@@ -296,10 +304,11 @@ under `scripts/_archive/` — do not revive it.
   ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
 - **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
   promise in the visitor's words. The nav reads **Upstate Brief | Tools | Moving to
-  Greenville | Upstate Technology | Find an Agent | About** (routes and tags unchanged;
-  `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`), and the `/archive`
+  Greenville | SC Technology | Find an Agent | About** (routes and tags unchanged;
+  `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`; the tech tab became "SC
+  Technology" July 10 with the statewide widening), and the `/archive`
   newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match
-  ("Upstate Brief", "Upstate Technology"; the real-estate badge stays the compact topic chip
+  ("Upstate Brief", "SC Technology"; the real-estate badge stays the compact topic chip
   "Real Estate" since investor/tax guides fit it better than "Moving to Greenville"). The
   `/real-estate` index hero was also rewritten then; it had still carried the retired news
   track's "both sides" copy.

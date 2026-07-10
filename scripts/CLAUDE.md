@@ -26,14 +26,17 @@ reference only, nothing there runs on a schedule anymore.
   (orchestrator + researcher → thesis → writer → editor → performer → article passes), and the
   orphaned `demand.py` radar all live under `scripts/_archive/ai_news/` now. Reference/reversible
   only; nothing runs on a schedule. See [[saturday-research-engine]] in memory. Do NOT revive.
-- **`tech/`** — the **Greenville Works engine** (the local-change track; renamed from the
-  national "Lab" tech track in July 2026, directory kept as `tech/`). No collector;
+- **`tech/`** — the **Greenville Works engine** (the local-change track; user-facing label
+  **"SC Technology"**; renamed from the national "Lab" tech track in July 2026, directory kept
+  as `tech/`; **statewide South Carolina since July 10, 2026**, the Upstate is home turf and
+  wins ties). No collector;
   **self-sourcing**: an optional steering bank (`tech/topics.md`) plus a web-search scout
   (`pass0_scout.md`) that picks its own topic when the bank is empty, so it never runs dry. A
   Claude routine (`tech/routine/`, orchestrator plus isolated passes: scout → researcher →
-  angle → writer → editor) takes ONE thing where **technology or capital is reshaping the
-  Upstate** apart (a data center, the grid and energy, fiber, manufacturing and automation, who
-  is buying and with whose capital, proptech; with roads, water/sewer, subdivisions, and
+  angle → writer → editor) takes ONE thing where **technology or capital is reshaping South
+  Carolina** apart (a data center, the grid and energy, fiber, manufacturing and automation,
+  the port, who is buying and with whose capital, proptech; with roads, water/sewer,
+  subdivisions, and
   rezonings only as a secondary, occasional beat that must carry a real tech/capital/real-estate
   through-line) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads

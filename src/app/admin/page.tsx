@@ -11,12 +11,14 @@ export const dynamic = "force-dynamic";
 
 const SECTION_LABEL: Record<string, string> = {
   realestate: "Real Estate",
-  works: "Greenville Works",
+  works: "SC Technology",
+  briefing: "Upstate Brief",
   newsletter: "Newsletter",
 };
 const SECTION_BASE: Record<string, string> = {
   realestate: "/real-estate",
   works: "/greenville-works",
+  briefing: "/briefing",
   newsletter: "/archive",
 };
 

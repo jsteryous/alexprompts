@@ -184,14 +184,14 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
 
 /** Short, human label for a post's section, for a card badge. Labels match the
  *  nav (July 2026 clarity pass): "Real Estate" stays a compact topic chip, the
- *  works track reads "Upstate Technology", the brief carries its product name
- *  (the internal tags/URLs keep the Greenville names). */
+ *  works track reads "SC Technology" (statewide since July 10, 2026), the brief
+ *  carries its product name (the internal tags/URLs keep the Greenville names). */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
     ? "Real Estate"
     : section === "works"
-      ? "Upstate Technology"
+      ? "SC Technology"
       : section === "briefing"
         ? "Upstate Brief"
         : "Newsletter";

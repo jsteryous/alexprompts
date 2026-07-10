@@ -54,10 +54,10 @@ vague, hand-waved, or missing, or if the piece boosts the change one-sidedly (or
 anywhere, reject it. Confirm it distinguishes a fundamental cost from a manageable one where the brief
 does.
 
-THE COMPARISON (only when the piece uses one). If the piece compares the Upstate to another place,
+THE COMPARISON (only when the piece uses one). If the piece compares South Carolina to another place,
 confirm three things. It is EARNED: it arrives after the local mechanism is established, not as the
 lede or a framing device. It HUNTS THE CONFOUNDER: it asks why that place's outcome happened and which
-causes the Upstate shares or lacks, never a naive "they did it and grew, so we will." It stays
+causes South Carolina shares or lacks, never a naive "they did it and grew, so we will." It stays
 BORROWED LIGHT: a beat in service of the local question, not a second essay about the other city, and
 every comp fact traces to the brief. If there is no comparison, do not treat its absence as a defect;
 a forced or unsupported comp is worse than none, so cut a weak one.
@@ -78,7 +78,10 @@ Cut or rewrite any line that crosses it. This is the headline legal risk on loca
 
 LINKS: confirm load-bearing facts and first-mentioned places are linked inline to primary or
 official sources, that no source is linked twice, and that no link points to a listing portal or a
-competing agent. Confirm any find-a-pro line appears only where the piece genuinely touches
+competing agent. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
+`/greenville-works/...`, `/find-a-pro`). Keep the writer's links to sibling pieces (the writer
+chose them from a verified list of live pages you do not have); do not add new sibling links
+yourself. Confirm any find-a-pro line appears only where the piece genuinely touches
 where to live, buy, or invest, and is absent on a pure civic-explainer piece. Confirm it sits in
 the BODY of the piece, never in the final two paragraphs; if it crowds the closing question, move
 it up to where the buyer or mover stakes are discussed, so the last thing the reader holds is the
@@ -116,11 +119,14 @@ METADATA: confirm the tags line is exactly `greenville works` (optionally one pl
 after it), and never the bare word `greenville`, which would misroute the post into the real-estate
 section.
 
-IMAGE: confirm the `## IMAGE` block is present with a single `subject:` key drawn ONLY from the
-allowed vocabulary (downtown-falls, liberty-bridge, reedy-river, north-main, west-end,
-swamp-rabbit-trail, travelers-rest). If it is missing, or the subject is off-list or does not fit
-where the change is happening, fix it (default to `downtown-falls` when nothing more specific fits).
-This value becomes the hero photo, so it must be one the library can serve.
+IMAGE: confirm the `## IMAGE` block is present with exactly one of the two allowed values. For an
+Upstate/Greenville piece, a single `subject:` key drawn ONLY from the allowed vocabulary
+(downtown-falls, liberty-bridge, reedy-river, north-main, west-end, swamp-rabbit-trail,
+travelers-rest); if it is off-list or does not fit, fix it (default `downtown-falls`). For a piece
+anchored elsewhere in South Carolina, a `location:` line with a precise geocodable string including
+the town plus "SC"; a Greenville subject key on a non-Upstate piece is wrong, replace it with the
+location. This value becomes the hero photo, so it must be servable (a library subject or a real,
+geocodable place).
 
 MARKDOWN: confirm it is plain and unescaped, with no backslash before # or [.
 

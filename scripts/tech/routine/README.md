@@ -1,15 +1,18 @@
 # Greenville Works routine (`scripts/tech/`)
 
-A Claude routine that turns ONE thing reshaping Greenville and the Upstate into a **first-person
-deep-dive** published at **`/greenville-works`** on the website, plus a short X post drafted for
-manual posting. No video, no collector. This is the **local-change track** of the two-track content
-plan: the real-estate engine proves Alex can go deep on the housing vertical, and Greenville Works
-proves he can take a real system apart, a data center, the grid, a fiber build, an automated
-factory, and explain what it means for where people live, work, and invest. Its niche is the
+A Claude routine that turns ONE thing reshaping South Carolina into a **first-person deep-dive**
+published at **`/greenville-works`** on the website (user-facing section label **"SC Technology"**,
+statewide since July 10, 2026, was Upstate-only), plus a short X post drafted for manual posting.
+No video, no collector. This is the **local-change track** of the two-track content plan: the
+real-estate engine proves Alex can go deep on the housing vertical, and Greenville Works proves he
+can take a real system apart, a data center, the grid, a fiber build, an automated factory, the
+port, and explain what it means for where people live, work, and invest. Its niche is the
 **tech-and-capital-meets-real-estate intersection** (sharpened July 8, 2026): data centers, the
-grid and energy, fiber and connectivity, manufacturing and automation, who is buying and with whose
-capital, and property technology. Roads, water and sewer capacity, subdivisions, and rezonings are
-only a secondary, occasional beat, and only with a real tech, capital, or real-estate through-line.
+grid and energy, fiber and connectivity, manufacturing and automation, the port and logistics, who
+is buying and with whose capital, and property technology. The Upstate is home turf and wins ties;
+a genuinely stronger story anywhere in the state takes the slot. Roads, water and sewer capacity,
+subdivisions, and rezonings are only a secondary, occasional beat, and only with a real tech,
+capital, or real-estate through-line.
 The audience is a smart local (and, often, a hiring manager reading the work), so the writing is
 the proof.
 
@@ -38,9 +41,9 @@ real-estate engine's local grounding and fair-housing care.
 
 - **Wider than housing, but sharply focused.** The real-estate engine writes evergreen
   buyer/relocation guides. Greenville Works covers the tech-and-capital machinery reshaping the
-  place around them: data centers, the grid and energy, fiber, manufacturing and automation, the
-  capital and incentive deals, and proptech, with roads/water/subdivisions only as a secondary beat
-  that carries a through-line.
+  state around them: data centers, the grid and energy, fiber, manufacturing and automation, the
+  port, the capital and incentive deals, and proptech, with roads/water/subdivisions only as a
+  secondary beat that carries a through-line.
 - **First person, not a guide.** It is an opinionated take, not a how-to resource, though it funnels
   the same relocation/buyer leads to `/find-a-pro` where the topic touches where to live or buy.
 
@@ -57,7 +60,7 @@ real-estate engine's local grounding and fair-housing care.
 ## The pipeline
 
 0. **`pass0_scout.md`** — runs ONLY when the bank has no queued topic. Surveys what is genuinely
-   current and consequential at the tech-and-capital-meets-real-estate intersection in the Upstate
+   current and consequential at the tech-and-capital-meets-real-estate intersection in South Carolina
    (data centers, the grid and energy, fiber, manufacturing and automation, who is buying and why,
    proptech; roads/water/subdivisions only with a through-line) with web search
    against primary and local sources, screens candidates against the six bars and the
@@ -109,18 +112,21 @@ Alex reviews and publishes each piece himself, either from the emailed `/review`
   if 2 or more Greenville Works drafts are already awaiting review, the run stops so the engine
   never outruns Alex. To go back to auto-publish live, set STEP 5's `DRAFT` back to `PUBLISHED` and
   `published_at = NULL` back to `now()`.
-- **Cover photo (auto, after Alex publishes).** The writer names a `subject:` in a `## IMAGE` block, from
-  the same fixed vocabulary the Greenville real-estate engine uses (`downtown-falls` the default,
-  plus `liberty-bridge`, `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`,
-  `travelers-rest`). The orchestrator stores it in `blog_posts.image_address` and leaves
-  `cover_image` null. The shared `/api/finalize-greenville` cron then maps that subject to a
-  hand-picked, licensed photo from the **curated Greenville library** (`src/lib/greenvilleCovers.ts`,
-  served from `/public`, no API key, no cost) and writes `cover_image`. `ArticleView` renders it as
-  the article hero, and the `/greenville-works` index shows it as a per-row thumbnail (the shared
-  `PostCover`, which draws a branded `>` placeholder until the cover lands), the same as the
-  `/real-estate` index; the photo also shows on the homepage feed card and the share/OG card. There
-  is no Google Street View fallback in practice, because any Greenville subject resolves to a library
-  photo, which keeps the "high-quality photos only" bar.
+- **Cover photo (set the moment Alex publishes).** For an Upstate/Greenville piece the writer names
+  a `subject:` in a `## IMAGE` block, from the same fixed vocabulary the Greenville real-estate
+  engine uses (`downtown-falls` the default, plus `liberty-bridge`, `reedy-river`, `north-main`,
+  `west-end`, `swamp-rabbit-trail`, `travelers-rest`); for a piece anchored elsewhere in South
+  Carolina (statewide since July 10, 2026) it gives a geocodable `location:` string instead. The
+  orchestrator stores that value in `blog_posts.image_address` and leaves `cover_image` null. On
+  publish, `/api/publish` maps a subject (or any Greenville-area string) to a hand-picked, licensed
+  photo from the **curated Greenville library** (`src/lib/greenvilleCovers.ts`, served from
+  `/public`, no API key, no cost) and writes `cover_image` immediately (the draft editors preview
+  the same photo via `src/lib/editorCover.ts`); a non-Upstate `location:` gets a Google Street View
+  or map cover from the daily `/api/finalize-greenville` cron instead (needs `GOOGLE_MAPS_KEY`).
+  `ArticleView` renders it as the article hero, and the `/greenville-works` index shows it as a
+  per-row thumbnail (the shared `PostCover`, which draws a branded `>` placeholder until the cover
+  lands), the same as the `/real-estate` index; the photo also shows on the homepage feed card and
+  the share/OG card.
 - **X:** no auto-poster; the routine drafts the X post and delivers it in the email packet for
   manual posting.
 - **Owned email list (auto, after Alex publishes).** The same `/api/finalize-greenville` cron broadcasts a
