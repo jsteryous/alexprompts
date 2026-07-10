@@ -76,6 +76,27 @@ project decision. State what it is, when it happens, and what each outcome would
 sources. This is an indicator, not an opinion. Also answer last week's CARRY FORWARD items in
 one line each (moved / no movement).
 
+SECTION F, THE DATA DIVE (the thin-week fallback; the opposite of filler). The rule: if
+Sections C AND D both came back NOTHING REAL, this section is MANDATORY; if exactly one of them
+is dry, it is allowed at your judgment; if both have real items, SKIP it so the brief stays
+tight. A quiet news week is the slot for the most CoStar-like thing this brief publishes: one
+AGGREGATE cut of the full commercialSales.json dataset that a professional could not casually
+assemble. Pick ONE dive from this menu, and never the same dive as last week's (done.txt notes
+the LAST DATA DIVE when there was one):
+  - Top buyers of the trailing quarter: purchase count and total dollars per normalized PURNAME,
+    top 5, with the properties behind the biggest one.
+  - Dollar volume by month: the trailing 6 months of total sale dollars and deal counts, and
+    whether the latest month is above or below the run rate.
+  - Land math: price per acre on land-heavy sales (LOTSIZE large, SQFEET 0/small) this year
+    versus the same period last year.
+  - Property-type mix: where the money went in the trailing quarter (retail vs industrial vs
+    office vs multifamily by LANDUSE/PROPTYPE), by dollars and count.
+  - Corridor rollup: total dollars and deal count on one street/corridor with 3+ trailing-year
+    sales, with the per-SF range.
+Show every step of the arithmetic, and state the dataset's honest limits with the numbers: deeds
+lag closings by days to weeks, the dataset has a minimum-price floor and a lookback window, and
+buyer names are as recorded on the deed. Source every line to "county ArcGIS dataset".
+
 FAIR HOUSING NOTE. Sales and projects touch neighborhoods. Describe places by objective facts
 only (price, size, zoning, use). Never characterize who lives somewhere or who a place is for.
 
@@ -99,6 +120,10 @@ none">
 
 ## E. THE WATCH
 <the indicator + the CARRY FORWARD answers>
+
+## F. DATA DIVE
+<the one aggregate cut with its arithmetic and honest limits, or "SKIPPED (full week)" when C
+and D both had real items, or "SKIPPED (used judgment)" when one was dry and you passed>
 
 ## MUST-VERIFY
 <the 3 to 6 facts a human should spot-check before publishing, each with its source link>

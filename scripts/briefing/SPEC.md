@@ -36,6 +36,14 @@ fast.
 6. **What I'd watch** — one concrete indicator worth watching and why, framed as what the
    reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
+**The data dive (the thin-week fallback).** When "Projects and permits" AND "Employers and
+capital" both come back dry, the collector must instead cut ONE aggregate view of the full
+24-month sales dataset (top buyers of the quarter, dollar volume by month, price per acre year
+over year, property-type mix, or a corridor rollup, rotating so no two thin weeks repeat a
+dive) and the brief carries it as its own section. A quiet news week is the slot for the most
+CoStar-like thing the brief publishes, so the thin-week floor is depth, not padding. The dry
+sections still get their honest one-line statements.
+
 Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
 
 ## The engine (`scripts/briefing/routine/`)

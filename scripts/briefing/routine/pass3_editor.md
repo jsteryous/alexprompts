@@ -18,9 +18,17 @@ boilerplate, not information).
 
 THE FIXED TEMPLATE: confirm the shape, in order: a cold one-or-two-sentence open with the week's
 lead number ABOVE the first heading, then exactly the sections "Rates and money," "What sold,"
-"Projects and permits," "Employers and capital," "What I'd watch" as ## headings, then the one
-quiet /find-a-pro line, then the italic not-advice footer with the "current as of <date>" note,
-and nothing after it. The open must state the number, not describe the brief.
+"Projects and permits," "Employers and capital," optionally "The data dive," "What I'd watch" as
+## headings, then the one quiet /find-a-pro line, then the italic not-advice footer with the
+"current as of <date>" note, and nothing after it. The open must state the number, not describe
+the brief.
+
+THE DATA DIVE (when present): it may appear ONLY when the fact sheet's Section F carries a dive
+(cut the section if the sheet says SKIPPED, and do not invent one if it is absent on a thin
+week; flag that instead). Every figure and every step of the arithmetic must trace to the
+sheet's Section F; re-do the math. Confirm the honest-limits sentence (deed lag, the dataset's
+price floor) survived the edit, and confirm the dive did not displace the dry sections' one-line
+statements, which stay regardless.
 
 NO FABRICATED STANCE (hard rule, strip on sight): the engine does not know Alex's opinions. In
 "What I'd watch" and everywhere else, cut any invented interior or verdict: "I think," "I'm

@@ -24,7 +24,10 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 1. **`pass1_collector.md`** — works the fixed checklist: rates and Fed items from primary
    sources via web search; the sales picks + per-unit math + repeat-`PURNAME` pattern flag from
    the committed dataset; county/city board actions and one employer-or-capital item via web
-   search; one concrete watch indicator. Marks dry sections `NOTHING REAL`. Reads the optional
+   search; one concrete watch indicator. Marks dry sections `NOTHING REAL`. On a thin week
+   (projects AND employers both dry) it must instead cut ONE aggregate **data dive** from the
+   full dataset (top buyers, monthly volume, price per acre, type mix, or a corridor rollup,
+   rotating via the done-log) so the thin-week floor is depth, not padding. Reads the optional
    `../watchlist.md` steer file and last week's done-log for carry-forward items.
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's
    lead number, then Rates and money / What sold / Projects and permits / Employers and capital

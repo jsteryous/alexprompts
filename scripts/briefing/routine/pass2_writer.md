@@ -35,6 +35,15 @@ The Section D item in two or three sentences, or, if the sheet says NOTHING REAL
 line such as "Quiet week from the big employers; nothing that clears the bar." Same rule for any
 dry section: one line, stated plainly, never padded.
 
+## The data dive
+ONLY when the fact sheet's Section F carries a dive (thin weeks; skip this heading entirely when
+Section F says SKIPPED). Render the one aggregate cut in a tight paragraph plus, where it helps,
+a short bullet list of the figures. Open with one sentence saying what was cut and over what
+window, give the numbers with the per-unit math, and close with the sheet's honest limits (deed
+lag, the dataset's price floor) in one sentence. This section exists because a quiet news week
+is the right slot for the deeper data nobody else publishes; keep it dense and let the numbers
+carry it. Do not re-link /tools/buyers-list if "What sold" already linked it.
+
 ## What I'd watch
 The Section E indicator: what it is, when it happens, and what each outcome would mean. First
 person is allowed here and belongs to the INQUIRY only: what the reporting points to as worth
@@ -70,7 +79,9 @@ standard markdown; do not backslash-escape characters. Bullets are allowed in "W
 "Projects and permits" only, and each bullet must still be complete sentences.
 
 LENGTH. 600 to 900 words on a normal week. A thin week lands shorter and that is correct; never
-pad a dry section to hit the range.
+pad a dry section to hit the range. When the data dive runs it may carry a thin week back into
+the range, which is fine because it is real information, not padding; the dry sections still get
+their one-line statements either way.
 
 HEADLINE. The title pattern is fixed: `Upstate Brief: <the week's lead, in plain words>
 (<Month D, YYYY>)`. The lead phrase is concrete and specific ("Upstate Brief: Rates Fall as a

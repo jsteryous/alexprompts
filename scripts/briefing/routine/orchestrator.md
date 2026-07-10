@@ -48,9 +48,10 @@ Run: mkdir -p /tmp/brief. Using the Supabase connector (mcp tool), query:
 STEP 0B, RECALL LAST WEEK. Run: git fetch origin drafts (ignore any failure), then
   git ls-tree --name-only origin/drafts drafts/ 2>/dev/null
 and read the most recent drafts/upstate-brief-*.md if one exists. Write its "ITEMS COVERED"
-list (and any "CARRY FORWARD" notes) to /tmp/brief/done.txt so the collector can say "as covered
-last week" instead of repeating an item cold, and can follow up on last week's watch item. If the
-branch or file is missing, write "ITEMS COVERED: none" and continue.
+list (plus any "CARRY FORWARD" notes and its "LAST DATA DIVE" line) to /tmp/brief/done.txt so
+the collector can say "as covered last week" instead of repeating an item cold, can follow up on
+last week's watch item, and never repeats last week's data dive. If the branch or file is
+missing, write "ITEMS COVERED: none" and continue.
 
 STEP 1, PASS 1, COLLECTOR. Read scripts/briefing/routine/pass1_collector.md. Hand its full
 contents plus /tmp/brief/done.txt, the full contents of src/data/commercialSales.json (from the
@@ -114,8 +115,9 @@ and the DRAFT post id and slug from STEP 4.
   (b) DRAFTS BRANCH (the done-log STEP 0B reads next week). Write to
       drafts/upstate-brief-<YYYY-MM-DD>.md the same document PLUS, at the top, an
       "ITEMS COVERED" list (one line per item mentioned in this brief: each deal, project,
-      and news item) and a "CARRY FORWARD" list (this week's watch item plus anything worth a
-      follow-up). Commit and push:
+      and news item), a "CARRY FORWARD" list (this week's watch item plus anything worth a
+      follow-up), and a "LAST DATA DIVE" line (which dive ran this week, or "none"). Commit
+      and push:
       git checkout -B drafts && git add drafts/upstate-brief-<YYYY-MM-DD>.md && git commit -m "Upstate Brief <YYYY-MM-DD>" && git push -f origin drafts
       (Push to the drafts branch ONLY, never to main.)
 
