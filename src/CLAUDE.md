@@ -157,6 +157,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - Direction: **Apple-quiet** — generous whitespace, strong type scale, minimal decoration.
   The one signature flourish is the terminal-caret motif (`.caret`, faint `.prompt-watermark`).
   Keep gradients/blur/textures restrained; do not add back the dotted-grid page texture.
+- **Cover library images are the homepage LCP** (`public/greenville/library/`). They MUST stay
+  web-sized: max 1400px wide, roughly 300KB, JPEG q≈75 (batch-resized July 10, 2026 from the
+  original 0.5–1.3MB Wikimedia files; originals were only in scratch, the repo keeps the sized
+  ones). Any new photo the monthly `cover_ingest` PR proposes must be downsized to this spec
+  BEFORE merging. `next.config.ts` `headers()` gives `/greenville/library/*` a 30-day
+  Cache-Control (Vercel's `/public` default is max-age=0). `PostCover` takes a `priority` prop
+  (eager + `fetchPriority="high"`) — the homepage featured card and article heroes set it; keep
+  it on whatever image is above the fold.
 
 ## SEO
 

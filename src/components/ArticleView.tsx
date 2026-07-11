@@ -115,6 +115,7 @@ export default async function ArticleView({
                 src={post.cover_image}
                 alt={post.title}
                 loading="eager"
+                fetchPriority="high"
                 decoding="async"
                 className="theme-border w-full rounded-xl border"
               />

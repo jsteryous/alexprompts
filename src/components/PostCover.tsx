@@ -28,6 +28,7 @@ export function PostCover({
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
