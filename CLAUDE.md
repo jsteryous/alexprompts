@@ -238,12 +238,15 @@ under `scripts/_archive/` — do not revive it.
 - `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
   section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
-  headline **"Growth is good."** (July 11, 2026, was "Grow or die."; the old slogan moved down
-  into the mission when the slogan became "Questions worth asking."), then the ONE-sentence
-  mission (emphasized) "Alex Prompts exists
-  to change South Carolina's answer to growth from an outright no to how.", then two short
-  manifesto paragraphs (growing-or-dying / opposition-without-a-plan; growth-built-everything /
-  builders-not-blockers / "Growth is good. Stagnation is death.") — the mission sentence always LEADS and the
+  REWRITTEN BY ALEX July 11, 2026: headline **"Questions worth asking."** (same as the slogan,
+  deliberately), then the ONE-sentence mission (emphasized) "Alex Prompts helps South
+  Carolinians understand the ideas, technologies, and decisions shaping our future, and asks
+  better questions about where we're headed.", then two one-line paragraphs ("Most media tells
+  people what to think." / "Alex Prompts asks questions worth thinking about."). The earlier
+  pro-growth manifesto ("Grow or die." then briefly "Growth is good." / "from no to how" /
+  "Stagnation is death.") was REMOVED from the homepage that same day; the pro-growth stance
+  still drives the engines' editorial method (see memory `pro-growth-editorial-stance`) but is
+  no longer stated as the homepage mission — the mission sentence always LEADS and the
   explanation never repeats it; keeps the Meet Alex → `/about` link; the full under-the-hood
   teardown still lives on `/about`; see memory `pro-growth-editorial-stance`) → **tools spotlight** (the live tools,
   clickable, driven by `liveTools()`, framed as engineering) → follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how

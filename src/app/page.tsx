@@ -48,6 +48,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
         src={post.cover_image}
         alt={post.title}
         priority
+        sizes="(max-width: 1024px) 100vw, 976px"
         className="aspect-[2/1] w-full border-b theme-border"
       />
       <div className="p-8 md:p-10">
@@ -133,6 +134,7 @@ export default async function HomePage() {
                       <PostCover
                         src={p.cover_image}
                         alt={p.title}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 312px"
                         className="aspect-[16/9] w-full border-b theme-border"
                       />
                       <div className="p-6 flex flex-col flex-1">
@@ -164,7 +166,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── The mission (the pro-growth stance; /about keeps the full story) ── */}
+      {/* ── The mission (the questions-worth-asking promise; /about keeps the full story) ── */}
       <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -177,11 +179,12 @@ export default async function HomePage() {
                 Questions worth asking.
               </h2>
               <p className="theme-text-primary type-body-lg font-medium mb-4">
-                Alex Prompts helps South Carolinians understand the ideas, technologies, and decisions shaping our future—and asks better questions about where we're headed.
+                Alex Prompts helps South Carolinians understand the ideas, technologies, and
+                decisions shaping our future, and asks better questions about where
+                we&rsquo;re headed.
               </p>
               <p className="theme-text-contrast-muted type-body-lg mb-4">
                 Most media tells people what to think.
-
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
                 Alex Prompts asks questions worth thinking about.

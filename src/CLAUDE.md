@@ -60,10 +60,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
 - **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: **fresh
   reads lead** (featured latest issue + more-to-read grid from `getFeedPosts`, with the `>`
-  prompt watermark) → the mission (July 11, 2026: headline "Growth is good.", was "Grow or
-  die."; the old slogan moved here when the site slogan became "Questions worth asking." + the
-  one-sentence mission "…change South Carolina's answer to growth from an outright no to
-  how.", replaced the
+  prompt watermark) → the mission (rewritten by Alex July 11, 2026: headline "Questions worth
+  asking." matching the slogan + the one-sentence mission "…helps South Carolinians understand
+  the ideas, technologies, and decisions shaping our future…" + two one-liners; the pro-growth
+  manifesto that briefly lived here was removed the same day, replaced the
   behind-the-site stack blurb; keeps the Meet Alex → `/about` link, and `/about` keeps the
   full technical teardown) → tools spotlight (`liveTools()`, framed as engineering) →
   `#follow` (social cards) → subscribe CTA. The old "Start here" hero/pillars, "helps anyone" (`outcomes` + `OutcomeArt`), "how
