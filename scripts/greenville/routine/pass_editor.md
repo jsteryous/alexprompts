@@ -40,7 +40,12 @@ neutral encyclopedia. Confirm the piece has at least one place where a real poin
 genuine local read comes through, and that the framing and the close sound like a specific person
 rather than a content template. If the whole piece is voiceless recitation, flag it and sharpen the
 open and the close so a human is clearly behind it. Do NOT manufacture fake enthusiasm; the voice is
-calm, plain, and honest, and it names downsides. The first person must be spent on judgment and
+calm, plain, and honest, and it names downsides. Where the piece weighs a genuine either-way decision
+(rent versus buy, one town against another, buy now or wait), confirm it walks the honest sequence:
+the strongest case each way, then a plain statement of what the data suggests, never a neutral shrug
+for the sake of balance. If the honest answer depends on the reader's situation, confirm the section
+names the specific question the reader has to answer for themselves rather than landing on a bare
+"it depends." The first person must be spent on judgment and
 verification, not logistics: keep "I could not find a published figure, so treat it as approximate,"
 and cut performative effort framing like "I spent hours digging through county records."
 

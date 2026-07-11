@@ -52,8 +52,14 @@ prosperity, and under what terms would that answer flip. Perpetual both-sides eq
 kind of dodge; the reader came for an honest read, not a shrug. When the evidence genuinely cannot
 carry a verdict, say exactly which missing fact would settle it.
 
-STEP 5, THE READER'S QUESTION. End with one genuine, open question worth arguing about, addressed
-to the reader, never rhetorical, never ragebait.
+STEP 5, THE READER'S QUESTION. End with one genuine, open question addressed to the reader, never
+rhetorical, never ragebait. This is the fourth beat of the method the whole piece walks: the
+strongest case against, the strongest case for, what the evidence actually suggests, and THEN the
+question still worth wrestling with. The question must be EARNED by that sequence: it is the
+specific thing the honest reasoning left open, not a generic "what do you think" and never a
+stand-in for a verdict the evidence could carry. If STEP 4 reached a calibrated read, the question
+probes past it (the terms, the timeline, the trade the reader would accept), it does not retract
+it. Ending on a question is not the same as refusing to conclude; do both.
 
 Output exactly these labeled sections: THE SPINE, THE STAKES, THE TENSION, THE SO-WHAT, THE
 READER'S QUESTION. Plus a one-line CONFIDENCE NOTE on how sure the brief lets you be, so the

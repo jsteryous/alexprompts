@@ -93,7 +93,12 @@ exact text or strip the marks and leave it as a paraphrase.
 STRUCTURE: confirm the spine (open cold on the change, plain-English mechanism, honest stakes,
 honest tension, takeaway then a real question) is carried from open to close, that the piece opens on
 the concrete local change and not on a framework or the comparison, and that the close is a genuine
-open question, not ragebait, with nothing after it. Confirm the takeaway is pointed on the STANDARD
+open question, not ragebait, with nothing after it. The closing question must be EARNED: the piece
+walks the four beats (the strongest case against, the strongest case for, what the evidence
+suggests, then the question), so confirm the question is the specific thing that reasoning left
+open. A closing question standing in for a conclusion the brief's evidence could carry is the
+both-sides dodge in disguise; if the angle's SO-WHAT reached a calibrated read, the piece must state
+it before asking, and the question probes past the read rather than retracting it. Confirm the takeaway is pointed on the STANDARD
 even while neutral on the verdict: it should name a concrete yardstick the reader could judge the
 change by (jobs per incentive dollar, tax base against what residents give up), not just leave a
 question hanging with no frame. A named standard is analysis and is allowed; a personal verdict is

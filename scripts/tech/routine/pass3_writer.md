@@ -107,7 +107,10 @@ THE SPINE (carry the angle's SPINE from open to close; do not drift into a meeti
    beats building on a green one), so they finish with a frame to argue with, not just a question to
    sit with. A standard is analysis, not a verdict, so it does not violate the no-stance rule. End on
    one genuine, open question to the reader, phrased for a real answer, the kind worth arguing about,
-   never "smash like and comment." The question is the last paragraph; nothing comes after it.
+   never "smash like and comment." The question must be EARNED: by this point the piece has made the
+   strongest case against, the strongest case for, and said what the evidence suggests, so the
+   closing question is the specific thing that reasoning left open, never a substitute for saying
+   what the evidence showed. The question is the last paragraph; nothing comes after it.
 
 THE SPINE IS SCAFFOLDING, NOT SCRIPT. The beat names above are internal; never write them, or any
 version of them, into the piece. Do not announce a transition ("Here is what is actually
