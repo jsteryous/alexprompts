@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Growth is good.";
+export const alt = "Alex Prompts: Questions worth asking.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -52,7 +52,7 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Growth is good.
+          Questions worth asking.
         </div>
 
         {/* Sub */}

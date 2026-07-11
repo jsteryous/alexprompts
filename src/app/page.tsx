@@ -174,24 +174,28 @@ export default async function HomePage() {
                 The mission
               </span>
               <h2 className="theme-text-primary type-h2 mb-4">
-                Grow or die.
+                Growth is good.
               </h2>
               <p className="theme-text-primary type-body-lg font-medium mb-4">
-                Alex Prompts exists to change South Carolina&rsquo;s answer to growth from no
+                Alex Prompts exists to change South Carolina&rsquo;s answer to growth from an outright no
                 to how.
               </p>
               <p className="theme-text-contrast-muted type-body-lg mb-4">
                 Every place is either growing or dying. There is no third option. South
-                Carolina is growing, and somewhere along the way we started treating that like
-                a threat. Every new proposal meets a wall of no, and nobody behind that wall
-                offers a plan beyond stopping things. Stopping things is how a place begins to
-                die.
+                Carolina is growing, and somewhere along the way public sentiment started
+                viewing growth as a bad thing. Every new proposal meets strong public
+                opposition, citing things like bad traffic. Instead of offering solutions that
+                complement growth, the overwhelmingly recommended solution appears to be to
+                simply halt projects and investments entirely. Stagnation is not an appealing
+                solution to increased traffic or poor infrastructure. Stagnation poses an
+                existential risk, leaving growth as the only option.
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Growth built everything we love about this state, and growth is the only force
-                that will fix the things we do not. The problems it brings are real, and they
-                get solved by people who build, not by people who block. We make that case with
-                real data and honest math. Growth is good. Stagnation is death.
+                Growth is the American way. Growth built everything we love about this state,
+                and growth is the only force that will fix the things we do not. The problems
+                it brings are real, and they get solved by people who build, not by people who
+                block. We make that case with real data and honest math. Growth is good.
+                Stagnation is death.
               </p>
             </div>
             <Link

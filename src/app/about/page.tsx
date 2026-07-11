@@ -87,8 +87,11 @@ export default function AboutPage() {
             Tech is what drives the world forward.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
-            I'm truly passionate about technology, and I understand technology is a very broad term. But it's true. I read about the stuff changing the world in my free time, and I'm fascinated by it.
-            I'll read about anything from solar panels to underwater sea cables to mainstream stuff like Tesla's FSD cars or Anduril's autonomous drones. 
+            I&rsquo;m truly passionate about technology, and I understand technology is a very
+            broad term. But it&rsquo;s true. I read about the stuff changing the world in my
+            free time, and I&rsquo;m fascinated by it. I&rsquo;ll read about anything from
+            solar panels to underwater sea cables to mainstream stuff like Tesla&rsquo;s FSD
+            cars or Anduril&rsquo;s autonomous drones.
           </p>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed">
             That same curiosity is what makes me good in a sales seat. When I understand how a
@@ -116,7 +119,7 @@ export default function AboutPage() {
               The tools on here are real and free to use. There is a rental deal analyzer, a mortgage
               and affordability calculator, a listing prompt builder, and a commercial buyers
               list pulled from public county records. The real estate writing is meant to inform potential buyers and sellers. The technical articles are mostly research based.
-              I share what I've been learning.
+              I share what I&rsquo;ve been learning.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 mt-8">

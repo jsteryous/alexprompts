@@ -48,10 +48,12 @@ export const site = {
   // doom, and no "plain English" phrasing anywhere (dropped July 2026, it read
   // as unpolished). These strings drive the page titles, the meta descriptions,
   // the OG cards, and the footer, so keep them true and tight.
-  // The slogan (July 10, 2026, was "Where real estate meets technology."):
-  // the brand's pro-growth stance in three words. See the homepage mission
-  // section ("Grow or die." / "from no to how") for the full statement.
-  tagline: "Growth is good.",
+  // The slogan (July 11, 2026, was "Growth is good.", before that "Where real
+  // estate meets technology."): the brand promise in three words, and the name's
+  // double meaning made explicit (prompting real discussion). The pro-growth
+  // stance moved to the homepage mission section, which now carries "Growth is
+  // good." as its headline ("from no to how" is the mission sentence).
+  tagline: "Questions worth asking.",
   oneLiner:
     "Alex Prompts is where Alex Steryous writes about Greenville real estate and the technology reshaping it, and shares the free tools he builds along the way.",
   description:

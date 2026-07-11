@@ -68,8 +68,10 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
 > the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline/slogan:
-> *"Growth is good."* since July 10, 2026, was "Where real estate meets technology."; it is
-> the pro-growth stance in three words and also headlines the OG share card; the phrase "in plain English" was dropped from
+> *"Questions worth asking."* since July 11, 2026, was "Growth is good." for one day, before
+> that "Where real estate meets technology."; it makes the brand name's double meaning explicit
+> (prompting real discussion) and also headlines the OG share card; "Growth is good." moved to
+> the homepage mission headline; the phrase "in plain English" was dropped from
 > ALL site copy July 9, 2026 because Alex found it unpolished — do not reintroduce it in
 > user-facing copy). Do **not** reintroduce the
 > single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
@@ -236,10 +238,12 @@ under `scripts/_archive/` — do not revive it.
 - `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
   section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
-  headline **"Grow or die."**, then the ONE-sentence mission (emphasized) "Alex Prompts exists
-  to change South Carolina's answer to growth from no to how.", then two short manifesto
-  paragraphs (growing-or-dying / wall-of-no; growth-built-everything / builders-not-blockers /
-  "Growth is good. Stagnation is death.") — the mission sentence always LEADS and the
+  headline **"Growth is good."** (July 11, 2026, was "Grow or die."; the old slogan moved down
+  into the mission when the slogan became "Questions worth asking."), then the ONE-sentence
+  mission (emphasized) "Alex Prompts exists
+  to change South Carolina's answer to growth from an outright no to how.", then two short
+  manifesto paragraphs (growing-or-dying / opposition-without-a-plan; growth-built-everything /
+  builders-not-blockers / "Growth is good. Stagnation is death.") — the mission sentence always LEADS and the
   explanation never repeats it; keeps the Meet Alex → `/about` link; the full under-the-hood
   teardown still lives on `/about`; see memory `pro-growth-editorial-stance`) → **tools spotlight** (the live tools,
   clickable, driven by `liveTools()`, framed as engineering) → follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
