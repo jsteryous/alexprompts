@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { socials, newsletterUrl } from "@/lib/site";
+import { socials } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
 import { SubscribeForm } from "@/components/SubscribeForm";
+import { PalmettoMark } from "@/components/PalmettoMark";
 
 export const revalidate = 300;
 
@@ -18,15 +19,13 @@ function ArrowIcon({ className = "" }: { className?: string }) {
 
 function SubscribeButton({ className = "" }: { className?: string }) {
   return (
-    <a
-      href={newsletterUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href="/subscribe"
       className={`theme-cta-accent inline-flex items-center gap-2 font-semibold rounded-xl ${className}`}
     >
       Subscribe free
       <ArrowIcon />
-    </a>
+    </Link>
   );
 }
 
@@ -170,7 +169,10 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-2xl">
-              <Eyebrow className="mb-4">The mission</Eyebrow>
+              <span className="theme-label type-eyebrow inline-flex items-center gap-2 mb-4">
+                <PalmettoMark className="w-4 h-4" />
+                The mission
+              </span>
               <h2 className="theme-text-primary type-h2 mb-4">
                 Grow or die.
               </h2>

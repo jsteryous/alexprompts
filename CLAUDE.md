@@ -317,7 +317,12 @@ under `scripts/_archive/` — do not revive it.
   ("Upstate Brief", "SC Technology"; the real-estate badge stays the compact topic chip
   "Real Estate" since investor/tax guides fit it better than "Moving to Greenville"). The
   `/real-estate` index hero was also rewritten then; it had still carried the retired news
-  track's "both sides" copy.
+  track's "both sides" copy. **July 10, 2026: the nav's Subscribe CTA now points at
+  `/subscribe`** (a dedicated owned-list capture page) instead of Substack, since the
+  subscribe promise (the Monday Brief) only ships on the owned list; the owned list is ONE
+  list, every confirmed subscriber gets every broadcast (Brief + Greenville guides + SC
+  Technology), no per-category segmentation by design. Substack is demoted to the form's
+  secondary link.
 - `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so

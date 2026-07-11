@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { newsletterUrl, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 // Nav clarity rule (July 2026): every label states its promise in the visitor's
 // words. The newsletter archive lives in the footer only, so the nav stays short.
@@ -35,14 +35,12 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <a
-            href={newsletterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/subscribe"
             className="theme-cta text-sm font-medium px-4 py-2 rounded-lg"
           >
             Subscribe
-          </a>
+          </Link>
         </nav>
 
         <button
@@ -72,15 +70,13 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <a
-            href={newsletterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/subscribe"
             className="theme-cta text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
             onClick={() => setOpen(false)}
           >
             Subscribe
-          </a>
+          </Link>
         </div>
       )}
     </header>

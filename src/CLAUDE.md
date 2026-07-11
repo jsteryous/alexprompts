@@ -91,7 +91,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   card, and the share/OG card.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` and `/admin` (gated editors; the
   fixed nav covered their sticky Publish button). Both derive links from `site.ts`. Nav CTA is
-  *Subscribe* → `newsletterUrl`.
+  *Subscribe* → **`/subscribe`** (July 10, 2026: the owned-list capture page,
+  `src/app/subscribe/page.tsx`, one `SubscribeForm`; it REPLACED the old `newsletterUrl`
+  Substack target because the site's promise, the Monday Brief, only ships on the owned list.
+  Substack remains the form's secondary "prefer Substack?" link. One list gets ALL broadcasts;
+  there is no per-category segmentation by design). The footer slogan and the homepage mission
+  eyebrow carry the small `PalmettoMark` (SC palmetto + crescent, single currentColor SVG in
+  `components/PalmettoMark.tsx`; deliberately NOT an American flag, keep it accent-colored and
+  minimal).
 - **`/admin` + `/review` + `/api/publish` + `/api/review/save`** — the publish flow. `/admin`
   (cookie login via `/api/admin/login`, `src/lib/adminAuth.ts`) lists drafts and is the primary
   review surface; `/admin/edit/[id]` and `/review` both render the shared `review/Editor`. Edit a

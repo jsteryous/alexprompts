@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site, socials } from "@/lib/site";
+import { PalmettoMark } from "@/components/PalmettoMark";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -15,7 +16,10 @@ export default function Footer() {
           <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight">
             {site.name}
           </Link>
-          <p className="theme-text-muted mt-1 text-sm">{site.tagline}</p>
+          <p className="theme-text-muted mt-1 text-sm inline-flex items-center gap-1.5">
+            <PalmettoMark className="theme-label w-3.5 h-3.5 shrink-0" />
+            {site.tagline}
+          </p>
         </div>
 
         <nav className="flex flex-wrap gap-6">
