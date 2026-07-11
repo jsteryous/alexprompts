@@ -8,19 +8,19 @@
 export function PalmettoMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      {/* crescent, upper left */}
+      {/* crescent, tucked into the upper-left corner, clear of the tree */}
       <path
-        d="M8.6 3.4 A 4.2 4.2 0 1 0 11.3 10.4 A 5.2 5.2 0 0 1 8.6 3.4 Z"
+        d="M6 2.8 A 3.15 3.15 0 1 0 8.03 8.05 A 3.9 3.9 0 0 1 6 2.8 Z"
         fill="currentColor"
       />
-      {/* palmetto: trunk + fronds */}
-      <g stroke="currentColor" strokeWidth={1.6} strokeLinecap="round">
-        <path d="M15.5 21 V12" />
-        <path d="M15.5 12 C15.5 9.5 15.5 8 15.5 6.5" />
-        <path d="M15.5 12 C15 9 13.5 7.5 11.5 7" />
-        <path d="M15.5 12 C16 9 17.5 7.5 19.5 7" />
-        <path d="M15.5 12 C14 10.5 12 10 10 10.5" />
-        <path d="M15.5 12 C17 10.5 19 10 21 10.5" />
+      {/* palmetto, right side: trunk + five drooping fronds from one crown */}
+      <g stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
+        <path d="M16.5 21 V9.5" />
+        <path d="M16.5 9.5 C16.5 8 16.5 6.6 16.5 5.2" />
+        <path d="M16.5 9.5 C15.8 7.3 14.4 6.1 12.8 6.3" />
+        <path d="M16.5 9.5 C17.2 7.3 18.6 6.1 20.2 6.3" />
+        <path d="M16.5 9.5 C14.8 8.7 13 8.9 11.7 10.3" />
+        <path d="M16.5 9.5 C18.2 8.7 20 8.9 21.3 10.3" />
       </g>
     </svg>
   );
