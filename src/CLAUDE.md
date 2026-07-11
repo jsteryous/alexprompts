@@ -164,9 +164,20 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   original 0.5–1.3MB Wikimedia files; originals were only in scratch, the repo keeps the sized
   ones). Any new photo the monthly `cover_ingest` PR proposes must be downsized to this spec
   BEFORE merging. `next.config.ts` `headers()` gives `/greenville/library/*` a 30-day
-  Cache-Control (Vercel's `/public` default is max-age=0). `PostCover` takes a `priority` prop
-  (eager + `fetchPriority="high"`) — the homepage featured card and article heroes set it; keep
-  it on whatever image is above the fold.
+  Cache-Control (Vercel's `/public` default is max-age=0). **July 11, 2026, the mobile-LCP
+  pass:** `PostCover` now routes same-origin covers (the library) AND Supabase-hosted covers
+  (old streetview PNGs) through **`next/image`** (responsive srcset, AVIF/WebP, ~50–75KB at
+  phone widths instead of the full file), keeping a plain `<img>` only for other remote hosts
+  (Substack CDN, whose hosts vary and would 400 an un-whitelisted `next/image`). Callers pass
+  `sizes` matching their layout plus `priority` on whatever is above the fold (the homepage
+  featured card and the `ArticleView` hero set it; the hero is also cropped to the same 2/1
+  box as the featured card now, which reserves layout space and killed the article-load CLS).
+  Body images in `renderPostHtml` get the same treatment (admin-editor uploads to Supabase ran
+  multi-MB): Supabase-hosted `<img>`s are rewritten to `/_next/image` srcsets, first image
+  eager + `fetchpriority=high` (it is the LCP on image-led articles), the rest lazy.
+  `next.config.ts` `images.remotePatterns` whitelists only the Supabase host (derived from
+  `NEXT_PUBLIC_SUPABASE_URL`); `minimumCacheTTL` is 30 days so transformation counts stay far
+  inside the Vercel Hobby free quota (zero-billing).
 
 ## SEO
 

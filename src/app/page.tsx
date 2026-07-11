@@ -48,6 +48,7 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
         src={post.cover_image}
         alt={post.title}
         priority
+        sizes="(max-width: 1024px) 100vw, 976px"
         className="aspect-[2/1] w-full border-b theme-border"
       />
       <div className="p-8 md:p-10">
@@ -133,6 +134,7 @@ export default async function HomePage() {
                       <PostCover
                         src={p.cover_image}
                         alt={p.title}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 312px"
                         className="aspect-[16/9] w-full border-b theme-border"
                       />
                       <div className="p-6 flex flex-col flex-1">

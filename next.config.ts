@@ -1,8 +1,39 @@
 import type { NextConfig } from "next";
 
+// The one remote host the image optimizer may fetch: the site's own Supabase
+// Storage (admin-editor body images, the old streetview covers). Derived from
+// env so a project move follows automatically; when the env is unset the
+// render pipeline also skips the rewrite, so the two stay consistent.
+const supabaseHost = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").hostname;
+  } catch {
+    return undefined;
+  }
+})();
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
+  },
+  // Same-origin covers (the committed library photos) render through
+  // next/image (see PostCover), which needs no remotePatterns because the
+  // component normalizes them to root-relative paths first. AVIF first for
+  // the smallest LCP bytes on mobile; a month of optimizer cache matches the
+  // library's own immutable-cache header and keeps transformation counts well
+  // inside the Vercel Hobby free tier (zero-billing guarantee).
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2592000,
+    remotePatterns: supabaseHost
+      ? [
+          {
+            protocol: "https" as const,
+            hostname: supabaseHost,
+            pathname: "/storage/v1/object/public/**",
+          },
+        ]
+      : [],
   },
   async headers() {
     return [

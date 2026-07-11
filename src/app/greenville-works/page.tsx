@@ -51,6 +51,7 @@ export default async function GreenvilleWorksPage() {
                     <PostCover
                       src={p.cover_image}
                       alt={p.title}
+                      sizes="(max-width: 640px) 100vw, 192px"
                       className="aspect-[16/9] w-full rounded-lg border theme-border"
                     />
                     <div>

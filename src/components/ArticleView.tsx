@@ -4,6 +4,7 @@ import { renderPostHtml } from "@/lib/renderMarkdown";
 import { coverImageFromBody, formatDate, sectionOf, type FullPost } from "@/lib/posts";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { ReferralCta } from "@/components/ReferralCta";
+import { PostCover } from "@/components/PostCover";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
@@ -110,14 +111,17 @@ export default async function ArticleView({
               their image inline, so adding a hero would print it twice. */}
           {post.cover_image && !coverImageFromBody(post.body_md) && (
             <figure className="mb-10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {/* PostCover (not a raw img) so the hero is the article's mobile
+                  LCP done right: responsive AVIF variants for library covers,
+                  priority preload, and a reserved 2/1 box (the natural-height
+                  img reserved no space, so the whole article shifted down when
+                  it arrived). 2/1 matches the homepage featured crop. */}
+              <PostCover
                 src={post.cover_image}
                 alt={post.title}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="theme-border w-full rounded-xl border"
+                priority
+                sizes="(max-width: 720px) 100vw, 624px"
+                className="theme-border aspect-[2/1] w-full rounded-xl border"
               />
               {post.cover_credit && (
                 <figcaption className="theme-text-muted mt-2 text-xs">
