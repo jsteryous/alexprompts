@@ -48,7 +48,6 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
         src={post.cover_image}
         alt={post.title}
         priority
-        sizes="(max-width: 1024px) 100vw, 976px"
         className="aspect-[2/1] w-full border-b theme-border"
       />
       <div className="p-8 md:p-10">
@@ -134,7 +133,6 @@ export default async function HomePage() {
                       <PostCover
                         src={p.cover_image}
                         alt={p.title}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 312px"
                         className="aspect-[16/9] w-full border-b theme-border"
                       />
                       <div className="p-6 flex flex-col flex-1">
@@ -176,28 +174,17 @@ export default async function HomePage() {
                 The mission
               </span>
               <h2 className="theme-text-primary type-h2 mb-4">
-                Growth is good.
+                Questions worth asking.
               </h2>
               <p className="theme-text-primary type-body-lg font-medium mb-4">
-                Alex Prompts exists to change South Carolina&rsquo;s answer to growth from an outright no
-                to how.
+                Alex Prompts helps South Carolinians understand the ideas, technologies, and decisions shaping our future—and asks better questions about where we're headed.
               </p>
               <p className="theme-text-contrast-muted type-body-lg mb-4">
-                Every place is either growing or dying. There is no third option. South
-                Carolina is growing, and somewhere along the way public sentiment started
-                viewing growth as a bad thing. Every new proposal meets strong public
-                opposition, citing things like bad traffic. Instead of offering solutions that
-                complement growth, the overwhelmingly recommended solution appears to be to
-                simply halt projects and investments entirely. Stagnation is not an appealing
-                solution to increased traffic or poor infrastructure. Stagnation poses an
-                existential risk, leaving growth as the only option.
+                Most media tells people what to think.
+
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Growth is the American way. Growth built everything we love about this state,
-                and growth is the only force that will fix the things we do not. The problems
-                it brings are real, and they get solved by people who build, not by people who
-                block. We make that case with real data and honest math. Growth is good.
-                Stagnation is death.
+                Alex Prompts asks questions worth thinking about.
               </p>
             </div>
             <Link
