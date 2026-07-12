@@ -5,7 +5,6 @@ import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
 import { SubscribeForm } from "@/components/SubscribeForm";
-import { PalmettoMark } from "@/components/PalmettoMark";
 
 export const revalidate = 300;
 
@@ -171,8 +170,7 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-2xl">
-              <span className="theme-label type-eyebrow inline-flex items-center gap-2 mb-4">
-                <PalmettoMark className="w-4 h-4" />
+              <span className="theme-label type-eyebrow inline-block mb-4">
                 The mission
               </span>
               <h2 className="theme-text-primary type-h2 mb-4">
@@ -187,7 +185,7 @@ export default async function HomePage() {
                 Most media tells people what to think.
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Alex Prompts asks questions worth thinking about.
+                Alex Prompts is driven by curiosity and questions worth asking, so you can develop well-grounded opinions of your own.
               </p>
             </div>
             <Link

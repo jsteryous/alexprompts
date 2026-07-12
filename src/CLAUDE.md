@@ -97,10 +97,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `src/app/subscribe/page.tsx`, one `SubscribeForm`; it REPLACED the old `newsletterUrl`
   Substack target because the site's promise, the Monday Brief, only ships on the owned list.
   Substack remains the form's secondary "prefer Substack?" link. One list gets ALL broadcasts;
-  there is no per-category segmentation by design). The footer slogan and the homepage mission
-  eyebrow carry the small `PalmettoMark` (SC palmetto + crescent, single currentColor SVG in
-  `components/PalmettoMark.tsx`; deliberately NOT an American flag, keep it accent-colored and
-  minimal).
+  there is no per-category segmentation by design). (The small `PalmettoMark` SC palmetto +
+  crescent SVG that decorated the footer slogan and the homepage mission eyebrow was REMOVED
+  July 12, 2026 at Alex's call; both are plain text now. Do not add a decorative mark back.)
 - **`/admin` + `/review` + `/api/publish` + `/api/review/save`** — the publish flow. `/admin`
   (cookie login via `/api/admin/login`, `src/lib/adminAuth.ts`) lists drafts and is the primary
   review surface; `/admin/edit/[id]` and `/review` both render the shared `review/Editor`. Edit a
