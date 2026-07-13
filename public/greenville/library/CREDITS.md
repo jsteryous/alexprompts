@@ -23,3 +23,6 @@ vision-gated, and appends its rows to the table below via a PR.
 | `travelers-rest.jpg` | Travelers Rest Main Street | [U.S. Route 276 in Travelers Rest, SC June 2019 1.jpg](https://commons.wikimedia.org/wiki/File:U.S._Route_276_in_Travelers_Rest,_SC_June_2019_1.jpg) | Thomson200 | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 Images are the Commons-generated 1920px-wide renderings, downloaded July 2026.
+| `downtown-falls-2.jpg` | downtown-falls | [source](https://commons.wikimedia.org/wiki/File:Greenville_-_Main_Street_Bridge_03.jpg) | P. Hughes | CC BY 4.0 |
+| `liberty-bridge-2.jpg` | liberty-bridge | [source](https://commons.wikimedia.org/wiki/File:Liberty_Bridge,_Falls_Park_on_the_Reedy,_Greenville_SC_20160701_2.jpg) | DXR | CC BY-SA 4.0 |
+| `reedy-river-2.jpg` | reedy-river | [source](https://commons.wikimedia.org/wiki/File:Greenville_Falls_Park_2021-04-25.jpg) | Yousef Abdul-Husain | CC BY-SA 4.0 |
