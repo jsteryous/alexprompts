@@ -12,7 +12,9 @@ this automates the eyeball pass a person would do:
      landscape, high-resolution candidates it does not already have.
   2. Score each candidate with a cheap Claude vision call (Haiku): is it an
      attractive, on-subject hero with no watermark or overlaid text?
-  3. Save the accepted ones into public/greenville/library/, append them to
+  3. Save the accepted ones into public/greenville/library/ re-encoded to the
+     site's web spec (max 1400px wide, JPEG q75 — these files are the homepage
+     LCP, so raw Commons sizes must never be committed), append them to
      greenvilleCovers.json and CREDITS.md (attribution pulled straight from the
      Commons metadata), so the resolver rotates them in.
 
@@ -37,10 +39,12 @@ import re
 import sys
 import time
 from html.parser import HTMLParser
+from io import BytesIO
 from pathlib import Path
 from urllib.parse import quote
 
 import requests
+from PIL import Image, ImageOps
 
 REPO = Path(__file__).resolve().parents[2]
 LIBRARY_DIR = REPO / "public" / "greenville" / "library"
@@ -64,7 +68,9 @@ SUBJECT_QUERIES: dict[str, list[str]] = {
 }
 
 MIN_WIDTH = 1600  # source pixels on the long edge; heroes need real resolution
-THUMB_WIDTH = 1600  # what we download and commit
+THUMB_WIDTH = 1600  # what we download (committed files are re-encoded to WEB_MAX_WIDTH)
+WEB_MAX_WIDTH = 1400  # committed width cap — the library spec (src/CLAUDE.md, homepage LCP)
+WEB_JPEG_QUALITY = 75  # committed JPEG quality — same spec, lands ~250-400KB per photo
 VISION_THUMB = 1024  # smaller render for the (cheap) vision call
 VISION_ACCEPT = 70  # minimum score to keep a candidate
 
@@ -163,6 +169,17 @@ def fetch(url: str) -> bytes:
     r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=60)
     r.raise_for_status()
     return r.content
+
+
+def websize(data: bytes) -> bytes:
+    """Re-encode a downloaded photo to the committed library spec (WEB_MAX_WIDTH,
+    JPEG q=WEB_JPEG_QUALITY, progressive, metadata stripped)."""
+    im = ImageOps.exif_transpose(Image.open(BytesIO(data)))
+    if im.width > WEB_MAX_WIDTH:
+        im = im.resize((WEB_MAX_WIDTH, round(im.height * WEB_MAX_WIDTH / im.width)), Image.LANCZOS)
+    out = BytesIO()
+    im.convert("RGB").save(out, "JPEG", quality=WEB_JPEG_QUALITY, optimize=True, progressive=True)
+    return out.getvalue()
 
 
 VISION_PROMPT = (
@@ -273,7 +290,7 @@ def main() -> int:
                 # allocate the next filename for this subject
                 n = len(covers["subjects"][subject]) + 1
                 fname = f"{subject}-{n}.jpg"
-                (LIBRARY_DIR / fname).write_bytes(fetch(info["thumburl"]))
+                (LIBRARY_DIR / fname).write_bytes(websize(fetch(info["thumburl"])))
                 entry = {
                     "file": fname,
                     "alt": SUBJECT_DESC[subject].capitalize() + ".",

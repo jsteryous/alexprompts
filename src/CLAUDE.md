@@ -161,8 +161,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Cover library images are the homepage LCP** (`public/greenville/library/`). They MUST stay
   web-sized: max 1400px wide, roughly 300KB, JPEG q≈75 (batch-resized July 10, 2026 from the
   original 0.5–1.3MB Wikimedia files; originals were only in scratch, the repo keeps the sized
-  ones). Any new photo the monthly `cover_ingest` PR proposes must be downsized to this spec
-  BEFORE merging. `next.config.ts` `headers()` gives `/greenville/library/*` a 30-day
+  ones). The monthly `cover_ingest` PR re-encodes every photo to this spec automatically before
+  committing (the `websize()` step, added July 13, 2026 after the first run shipped 1920px/1MB
+  files), so PR review is about looks and attribution, not file size — but if a library photo
+  ever arrives oversized anyway, downsize it BEFORE merging. `next.config.ts` `headers()` gives
+  `/greenville/library/*` a 30-day
   Cache-Control (Vercel's `/public` default is max-age=0). **July 11, 2026, the mobile-LCP
   pass:** `PostCover` now routes same-origin covers (the library) AND Supabase-hosted covers
   (old streetview PNGs) through **`next/image`** (responsive srcset, AVIF/WebP, ~50–75KB at

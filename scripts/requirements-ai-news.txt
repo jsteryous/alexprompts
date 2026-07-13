@@ -3,3 +3,4 @@
 python-dotenv==1.0.1
 requests==2.32.3
 defusedxml>=0.7.1   # safe RSS parsing (XXE / billion-laughs hardening)
+Pillow>=10.0        # cover_ingest: re-encode library photos to the web spec before commit
