@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-06 11:25 UTC",
+  "generated_at": "2026-07-13 10:22 UTC",
   "source": "Greenville County GIS (GreenvilleJS/Map_Layers_JS, Commercial layer)",
   "source_url": "https://www.gcgis.org/arcgis/rest/services/GreenvilleJS/Map_Layers_JS/MapServer/2/query",
   "min_price": 1000000,
   "months": 24,
-  "count": 273,
+  "count": 271,
   "sales": [
     {
       "pin": "0279000201000",
@@ -4341,38 +4341,6 @@
       "sqft": null,
       "lat": 34.911808,
       "lng": -82.430646
-    },
-    {
-      "pin": "0574060102500",
-      "buyer": "PALMETTO REAL ESTATE TRU",
-      "seller": "PELHAM LINKS PROPERTIES",
-      "price": 2875000,
-      "saleDate": "2024-07-11",
-      "street": "W Georgia Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "0410",
-      "deedBook": 2724,
-      "deedPage": 2838,
-      "lotSize": 0.697,
-      "sqft": null,
-      "lat": 34.735259,
-      "lng": -82.279362
-    },
-    {
-      "pin": "G019000100303",
-      "buyer": "FANNIE MAE",
-      "seller": "MANNING AID PROPCO LLC",
-      "price": 3356866,
-      "saleDate": "2024-07-09",
-      "street": "Companion Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "0141",
-      "deedBook": 2724,
-      "deedPage": 1835,
-      "lotSize": 2.217,
-      "sqft": null,
-      "lat": 34.952812,
-      "lng": -82.237242
     }
   ]
 }
