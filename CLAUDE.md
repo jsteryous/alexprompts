@@ -218,7 +218,7 @@ the strategic-direction and two-track notes above.
   weekly slot went to the Upstate Brief; reschedule the Works cloud routine to about MONTHLY**
   (engine untouched). See `scripts/tech/routine/README.md`.
 - **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A **Mondays-only** cloud
-  routine (schedule ~08:00 UTC, after the 07:00 UTC commercial-sales data refresh) that writes
+  routine (schedule ~08:00 UTC, after the Sunday 22:00 UTC commercial-sales data refresh) that writes
   ONE fixed-format weekly briefing for `/briefing` (tag `briefing`): rates and money, what sold
   (from `src/data/commercialSales.json`, with per-SF/per-acre math and repeat-`PURNAME` pattern
   flags), projects and permits, one employer/capital item, one concrete watch indicator. No
