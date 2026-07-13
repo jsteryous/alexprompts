@@ -54,8 +54,9 @@ scout and no angle pass, because the fixed format IS the angle.
 - `orchestrator.md` — guards, then collector → writer → editor, then a DRAFT insert tagged
   `briefing` and the review packet email.
 - `pass1_collector.md` — works the section checklist: rates via web search against primary
-  sources; transactions by reading `src/data/commercialSales.json` (refreshed Mondays
-  07:00 UTC by `.github/workflows/collect-commercial.yml`) and doing the per-SF / per-acre and
+  sources; transactions by reading `src/data/commercialSales.json` (refreshed Sundays
+  22:00 UTC by `.github/workflows/collect-commercial.yml`; moved July 13, 2026 from Mon 07:00
+  because GitHub cron delays made the Monday run land AFTER the brief) and doing the per-SF / per-acre and
   repeat-buyer math; projects and employer news via web search. Outputs a sourced fact sheet
   with MUST-VERIFY and explicit `NOTHING REAL` markers.
 - `pass2_writer.md` — renders the fact sheet into the fixed template in house style, plus
@@ -83,7 +84,7 @@ Draft-first like the other engines: the run inserts a DRAFT, the packet carries 
    project at 2 crons, so one daily run does double duty as the Monday 9am ET backstop), and
    `/api/finalize-greenville` also matches the `briefing` tag.
 
-Timeline: commercial data refreshes Mon 07:00 UTC → cloud agent runs Mon ~08:00 UTC (4am ET)
+Timeline: commercial data refreshes Sun 22:00 UTC (delay-tolerant) → cloud agent runs Mon ~08:00 UTC (4am ET)
 → packet in Alex's inbox by ~5am ET → he reviews with coffee, publishes and broadcasts by
 8am ET.
 

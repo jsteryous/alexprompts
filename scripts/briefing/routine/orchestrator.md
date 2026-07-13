@@ -55,7 +55,7 @@ missing, write "ITEMS COVERED: none" and continue.
 
 STEP 1, PASS 1, COLLECTOR. Read scripts/briefing/routine/pass1_collector.md. Hand its full
 contents plus /tmp/brief/done.txt, the full contents of src/data/commercialSales.json (from the
-repo checkout; it refreshes Mondays 07:00 UTC via a GitHub Action, before this run), and, if it
+repo checkout; it refreshes Sundays 22:00 UTC via a GitHub Action, before this run), and, if it
 exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent. It works the fixed
 section checklist with web search and the sales data, and writes the sourced fact sheet. Save to
 /tmp/brief/facts.md.

@@ -65,7 +65,8 @@ python -m greenville.collect --limit 15
 
 ## Automation
 
-- **`.github/workflows/collect-commercial.yml`** (WEEKLY Mon 07:00 UTC) runs
+- **`.github/workflows/collect-commercial.yml`** (WEEKLY Sun 22:00 UTC; moved July 13, 2026
+  from Mon 07:00 because GitHub cron delays pushed it past the Monday Upstate Brief run) runs
   `greenville.commercial` and commits `src/data/commercialSales.json`. No secrets (the county
   ArcGIS service is public + free). The push redeploys the statically generated
   `/tools/buyers-list` page with fresh sales. **Still live.**

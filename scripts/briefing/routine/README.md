@@ -12,8 +12,8 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 - **A briefing, not an essay.** Fixed sections, hard caps, information density over voice. The
   format is the angle, so there is no scout pass and no angle pass.
 - **It has a proprietary data section.** "What sold" is built from the committed
-  `src/data/commercialSales.json` (Greenville County commercial deeds, refreshed Mondays
-  07:00 UTC by `.github/workflows/collect-commercial.yml`), with per-SF / per-acre math and a
+  `src/data/commercialSales.json` (Greenville County commercial deeds, refreshed Sundays
+  22:00 UTC by `.github/workflows/collect-commercial.yml`), with per-SF / per-acre math and a
   repeat-buyer pattern flag. That data is the scarce part nobody else publishes.
 - **It is Monday-perishable.** The other tracks are evergreen; a stale brief is deleted, never
   published late. The orchestrator's backpressure guard blocks the next run while an unreviewed
@@ -47,7 +47,8 @@ post, and three links: `/review` edit, one-click publish, one-click broadcast) b
 ## Cadence and the Monday timeline
 
 Scheduled Claude cloud agent, **Mondays ~08:00 UTC** (4am ET), deliberately after the
-07:00 UTC commercial-sales data refresh. Packet is in Alex's inbox by ~5am ET; he reviews with
+Sunday 22:00 UTC commercial-sales data refresh (moved July 13, 2026 from Mon 07:00; GitHub
+cron delays made the Monday run land after the brief). Packet is in Alex's inbox by ~5am ET; he reviews with
 coffee, publishes, and clicks the broadcast link by ~8am ET. The daily finalize cron runs at
 **13:00 UTC** (moved from 09:00; Vercel Hobby caps a project at 2 crons, so the one daily run
 doubles as the Monday 9am ET cover + broadcast backstop), and the review packet's one-click
