@@ -9,9 +9,11 @@ name: Greenville Commercial Sales
 
 on:
   schedule:
-    # Weekly, Monday 07:00 UTC. Commercial sales move slowly and the county data
-    # lags recordings anyway, so weekly is plenty.
-    - cron: '0 7 * * 1'
+    # Weekly, Sunday 22:00 UTC. Nominally this ran Monday 07:00 UTC, but GitHub
+    # schedules fire hours late in practice, which meant the Monday-08:00-UTC
+    # Upstate Brief kept reading the PREVIOUS week's dataset. Sunday evening
+    # leaves a wide margin so even a delayed run lands before the brief drafts.
+    - cron: '0 22 * * 0'
   workflow_dispatch: # manual trigger from the GitHub UI
 
 permissions:
