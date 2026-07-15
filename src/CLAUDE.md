@@ -106,10 +106,17 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   draft, Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
   revalidate the section). Auth is `PUBLISH_SECRET`: the `ap_admin` cookie (constant-time,
   rate-limited login) or the legacy query/body token. `GET /api/publish` is token-only (not
-  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked). The editor has a
-  live site-accurate preview (`/api/admin/preview`), a markdown format toolbar, and image
-  paste/drag/upload (`/api/admin/upload` → the public `post-images` Storage bucket, under
-  `body/`, inserted as markdown at the cursor).
+  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked). The editor is
+  Substack-style (July 2026 rework): one centered article-width column, borderless
+  title/subtitle fields, a Write | Preview toggle whose preview is site-accurate
+  (`/api/admin/preview`), a ghost markdown toolbar, autosave for drafts (published posts save
+  manually so edits never go live mid-thought), Ctrl/Cmd+S, and image paste/drag/upload
+  (`/api/admin/upload` → the public `post-images` Storage bucket, `body/` for inline images,
+  `cover/` for covers). The **cover photo is editable at the top of the editor**: it shows
+  the exact 2/1 hero crop with the curated-library auto pick labeled as such, and Alex can
+  upload/drop/URL his own photo (stored in `cover_image` + optional `cover_credit` via
+  `/api/review/save`, which `/api/publish` and the finalize cron both respect and never
+  overwrite), edit the credit line, or remove it to fall back to the library.
 - **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
   It is auto-injected on the root/static pages but is **NOT inherited by the
   `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`

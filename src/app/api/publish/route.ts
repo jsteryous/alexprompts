@@ -62,7 +62,7 @@ async function publishPost(id: string): Promise<PublishResult> {
   // city-level default. Best-effort in its own update: a cover failure must
   // never block publish, and the finalize cron stays the backstop (it also
   // handles the rare non-Greenville pin that needs the Google fallback).
-  let coverSet = false;
+  let coverSet = Boolean(rows.cover_image); // a custom cover set in the editor counts
   if (section !== "newsletter" && !rows.cover_image) {
     const lib = resolveLibraryCover(rows.image_address ?? DEFAULT_SUBJECT, rows.slug);
     if (lib) {

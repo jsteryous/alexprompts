@@ -59,7 +59,7 @@ export default async function AdminEditPage({ params }: Props) {
   // httpOnly admin cookie, so the secret never touches the URL.
   const livePath = `${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`;
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Editor
         id={post.id}
         initialTitle={post.title ?? ""}
@@ -69,7 +69,9 @@ export default async function AdminEditPage({ params }: Props) {
         slug={post.slug ?? ""}
         backHref="/admin"
         livePath={livePath}
-        cover={resolveEditorCover(post)}
+        initialCoverImage={post.cover_image ?? null}
+        initialCoverCredit={post.cover_credit ?? null}
+        libraryCover={resolveEditorCover({ ...post, cover_image: null })}
       />
     </div>
   );

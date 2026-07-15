@@ -14,10 +14,13 @@ const EXT: Record<string, string> = {
   "image/avif": "avif",
 };
 
-// POST /api/admin/upload  (multipart form-data, field "file")  [?token=<secret>]
-// Uploads a pasted/dropped body image to Supabase Storage and returns its public
-// URL for the editor to insert as markdown. Cookie-authed (the /admin flow) or a
-// ?token= fallback (the /review flow). Same-origin, size- and type-checked.
+// POST /api/admin/upload  (multipart form-data, fields "file" + optional "kind")
+// [?token=<secret>]
+// Uploads a pasted/dropped image to Supabase Storage and returns its public URL.
+// kind=cover files the image under cover/ (the editor's cover-photo picker);
+// anything else lands under body/ (inserted as markdown). Cookie-authed (the
+// /admin flow) or a ?token= fallback (the /review flow). Same-origin, size- and
+// type-checked.
 export async function POST(req: NextRequest) {
   if (!process.env.PUBLISH_SECRET) {
     return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
@@ -38,10 +41,12 @@ export async function POST(req: NextRequest) {
   }
 
   let file: File | null = null;
+  let kind = "body";
   try {
     const form = await req.formData();
     const f = form.get("file");
     if (f instanceof File) file = f;
+    if (form.get("kind") === "cover") kind = "cover";
   } catch {
     return NextResponse.json({ error: "Invalid upload" }, { status: 400 });
   }
@@ -58,7 +63,7 @@ export async function POST(req: NextRequest) {
   }
 
   const bytes = Buffer.from(await file.arrayBuffer());
-  const name = `body/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const name = `${kind}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
   const supabase = createClient(url, key);
   const { error } = await supabase.storage

@@ -42,7 +42,7 @@ export default async function ReviewPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Editor
         id={post.id}
         token={token}
@@ -53,7 +53,9 @@ export default async function ReviewPage({ searchParams }: Props) {
         slug={post.slug ?? ""}
         backHref="/admin"
         livePath={`${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`}
-        cover={resolveEditorCover(post)}
+        initialCoverImage={post.cover_image ?? null}
+        initialCoverCredit={post.cover_credit ?? null}
+        libraryCover={resolveEditorCover({ ...post, cover_image: null })}
       />
     </div>
   );
