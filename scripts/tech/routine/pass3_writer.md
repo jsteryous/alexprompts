@@ -79,11 +79,16 @@ THE SPINE (carry the angle's SPINE from open to close; do not drift into a meeti
    real detail from the research, never an abstraction, never a framework or the comparison, and
    never "Greenville is booming." Make the reader see it in the first two sentences. The reader
    should not yet know this is an analysis piece; they should think they are reading about here.
-2. WHAT IS ACTUALLY HAPPENING, AND HOW IT WORKS, in plain English. Explain the mechanism the way
-   you would to a smart neighbor: why the road fails and how the fix is funded, why the data center
-   is sited here and what it draws on, how fiber actually gets pulled, why the water system caps
-   growth. Translate every term the moment you use it. This is the paragraph that proves you
-   understand it, so earn it: no hand-waving, no "officials say it will help."
+2. WHAT IS ACTUALLY HAPPENING, AND HOW THE TECHNOLOGY WORKS, in plain English. This is the
+   deep-tech heart of the piece and the section that makes it an SC Technology essay instead of
+   local news, so give it real room and go one level deeper than any other coverage would: not "it
+   makes its own power" but how many turbines, burning what, making how many megawatts, cooled by
+   what loop, and why the system needs exactly that. Use the brief's HOW THE TECHNOLOGY WORKS
+   material and build the explanation around the engineering constraint it names, because that
+   constraint is usually where the tension comes from. Explain it the way you would to a smart
+   neighbor and translate every term the moment you use it, but do not simplify past the mechanism:
+   the reader should finish this section able to explain the system to someone else. No
+   hand-waving, no "officials say it will help."
 3. WHAT IT MEANS FOR WHERE WE LIVE, WORK, AND INVEST. The concrete stakes, with the brief's real
    numbers: prices, commutes, taxes, jobs, bills, where growth goes next. Make the honest case for
    what it is worth, and if it is smaller or slower than the announcement says, say how much.

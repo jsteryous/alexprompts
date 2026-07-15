@@ -18,7 +18,12 @@ the ledger is empty or silent on this topic, proceed without it.
 THE JOB. A Greenville Works piece is not a recap of a project. It is a take: here is what is really
 happening, here is what it means for where we live, work, and invest, and here is the honest tension
 the boosters and the doomers both skip. Your output is that take, sharp enough to disagree with,
-plus the structure to carry it. This is the pass that turns research into judgment. The track's
+plus the structure to carry it. THE SPINE RUNS THROUGH THE TECHNOLOGY: this is a deep-tech track,
+so build the take on the brief's HOW THE TECHNOLOGY WORKS material, ideally on the engineering
+constraint it names, because the honest tension almost always grows out of what the system
+physically needs (power, water, land, labor, bandwidth) and who supplies it. If your spine would
+survive with the technology swapped out, it is the wrong spine for this track; sharpen it until the
+machine is load-bearing. This is the pass that turns research into judgment. The track's
 animating question is what actually leads to greater prosperity in South Carolina and which
 technologies help us get there; your take should leave the reader measurably closer to an answer.
 

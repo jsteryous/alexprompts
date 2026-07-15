@@ -38,7 +38,10 @@ reference only, nothing there runs on a schedule anymore.
   the port, who is buying and with whose capital, proptech; with roads, water/sewer,
   subdivisions, and
   rezonings only as a secondary, occasional beat that must carry a real tech/capital/real-estate
-  through-line) in Alex's own first-person voice, grounds
+  through-line; **deep-tech core since July 15, 2026**: every piece centers on a real technology or
+  engineered system, the researcher delivers a HOW THE TECHNOLOGY WORKS teardown with real specs and
+  the engineering constraint, and a topic whose technology could be swapped out without changing the
+  story fails the bank's bar 7) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
   to `/find-a-pro` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
   `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review

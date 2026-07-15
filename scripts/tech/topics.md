@@ -13,9 +13,14 @@ the capital and incentive deals behind where investment goes, and property techn
 touches buying, selling, or investing here. Roads, water and sewer capacity, subdivisions, and
 government decisions are the SECONDARY, occasional beat, in scope only when the piece carries a real
 technology, capital, or real-estate through-line (water and grid capacity as the true limit on where
-data centers and housing can grow, not a generic civic explainer). This track exists to help a
-reader understand the tech-and-capital forces remaking the place they live, and to show that Alex
-can take a real system apart and explain what it means.
+data centers and housing can grow, not a generic civic explainer). **The deep-tech core (sharpened
+July 15, 2026, Alex's steer):** every piece centers on a real technology, machine, or engineered
+system whose workings the piece takes apart, the turbines and the cooling loop, the interconnection
+queue, the robot line, the fiber, the crane, the reactor design, the pricing model. Capital,
+incentives, and politics are the lens the technology is read through, never the whole subject; a
+story whose technology could be swapped out without changing the argument does not get a slot. This
+track exists to help a reader understand the tech-and-capital forces remaking the place they live,
+and to show that Alex can take a real system apart and explain what it means.
 
 **The animating question behind every topic:** what actually leads to greater prosperity in South
 Carolina, and which technologies help us get there? Public sentiment around these projects (data
@@ -33,9 +38,9 @@ repeated, and appends `proposed` candidates (including the scout's runners-up) f
 So seed a `queued` topic when you want a specific one covered; leave it empty to let the engine
 choose.
 
-## What makes a good topic (all five bars)
+## What makes a good topic (all seven bars)
 
-A topic earns a slot only if it clears all five:
+A topic earns a slot only if it clears all seven:
 
 1. **One concrete change.** A specific thing, named plainly: a real project, a real road, a real
    filing, a real employer, a real infrastructure limit. Not "growth in general," not "the
@@ -51,10 +56,15 @@ A topic earns a slot only if it clears all five:
    groundbreaking is fine to anchor on, but the piece has to be about how the thing works and what
    it means, not that it was announced.
 6. **On the tech-or-capital-meets-real-estate intersection.** The best topics sit squarely there (a
-   data center, the grid, fiber, automation, who is buying and why). A pure civic-infrastructure item
-   (a road, a sewer study, a rezoning) earns a slot only when it carries a genuine tech, capital, or
-   real-estate through-line, and it should be the exception. This bar is what keeps the track a
-   differentiated complement to real estate instead of a general local blog.
+   data center, the grid, fiber, automation, the capital behind a named campus or plant). A pure
+   civic-infrastructure item (a road, a sewer study, a rezoning) earns a slot only when it carries a
+   genuine tech, capital, or real-estate through-line, and it should be the exception. This bar is
+   what keeps the track a differentiated complement to real estate instead of a general local blog.
+7. **A deep-tech core.** A real technology or engineered system sits at the center, and the piece can
+   explain how it actually works at a depth most local coverage never attempts (the mechanism, the
+   specs, the engineering constraint that drives the whole story). If the technology could be swapped
+   out without changing the story, the topic fails this bar; it belongs to the real-estate track or
+   the Brief instead.
 
 ## Voice reminder
 
@@ -93,11 +103,16 @@ civic-infrastructure items at the bottom are the occasional exception, and only 
   wait.** Anchor: a real Upstate fiber build or provider. Stakes: home values and remote-work
   viability by street. The tension: the economics of who gets wired first, and the households left
   on old copper while nearby streets see a connectivity premium.
-- **Who is actually buying the Upstate, and with whose money.** Anchor: a real, checkable pattern
-  (out-of-state buyers, institutional or build-to-rent operators, a named development's capital
-  stack). Stakes: prices, rents, and what share of the market a local buyer is really competing with.
-  The tension: separating the real signal from the "Wall Street bought your neighborhood" panic, and
-  saying honestly where outside capital does and does not move the local market.
+- **The machine that buys houses: how institutional and build-to-rent operators actually price and
+  buy in the Upstate.** Anchor: a real, checkable pattern (a named build-to-rent operator or
+  institutional buyer active here, a named development's capital stack), read through the TECHNOLOGY
+  they run on, the automated valuation models, buy-box algorithms, and market-data pipelines that
+  decide which Upstate houses get an offer. Stakes: prices, rents, and what share of the market a
+  local buyer is really competing with. The tension: separating the real signal from the "Wall
+  Street bought your neighborhood" panic, saying honestly where outside capital does and does not
+  move the local market, and where the pricing models systematically misread Upstate-specific
+  ground. (Deep-tech bar: the piece is about how the buying machine works; without that core it
+  belongs to the Brief.)
 - **How property technology is changing buying and selling in the Upstate.** Anchor: a concrete,
   local hook (iBuyer activity here, an MLS or portal shift, an AI valuation tool applied to real
   Greenville listings). Stakes: what it changes for a buyer, a seller, and an agent locally. The

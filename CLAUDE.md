@@ -37,7 +37,9 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 >    where it touches buying/selling/investing; the Upstate is home turf and wins ties),
 >    explains how it works, and names the honest
 >    trade-offs. That **tech-and-capital-meets-real-estate intersection is the niche** and the
->    differentiator (sharpened July 8, 2026); roads, water and sewer capacity, subdivisions, and
+>    differentiator (sharpened July 8, 2026; **deep-tech core sharpened July 15, 2026**: every piece
+>    centers on a real technology or engineered system and takes its workings apart one level deeper
+>    than local coverage, with capital and politics as the lens, never the whole subject); roads, water and sewer capacity, subdivisions, and
 >    rezonings are only a secondary, occasional beat, allowed when they carry a real tech, capital,
 >    or real-estate through-line. It builds local topical authority and makes Alex look legit, but
 >    it does NOT directly capture leads, so it is the lower-priority track, deliberately slowed:

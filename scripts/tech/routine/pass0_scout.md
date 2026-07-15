@@ -14,7 +14,13 @@ SCOPE. The track covers where TECHNOLOGY and CAPITAL are physically reshaping SO
 what that does to where people live, work, and invest. That intersection is the whole point and
 the differentiator: this is not a general local-news feed about every council vote and road project,
 it is the one place that explains the tech-and-money forces remaking the state and what they mean for
-real estate here. The track's animating question is what actually leads to greater prosperity in
+real estate here. THE DEEP-TECH CORE (sharpened July 2026): every piece centers on a real
+technology, machine, or engineered system whose workings the piece can genuinely take apart, the
+turbines and the cooling loop, the interconnection queue, the robot line, the fiber in the ground,
+the crane and the container flow, the reactor design, the pricing model. Capital, incentives, and
+politics are the LENS the piece reads that technology through, never the whole subject: if you could
+swap the technology out of a candidate without changing its story, it is a business or civics story,
+not an SC Technology piece, and it does not get the slot. The track's animating question is what actually leads to greater prosperity in
 South Carolina and which technologies help us get there, so prefer the candidate whose answer would
 teach a reader something real about that. Overwhelmingly negative public sentiment around a project
 is a point in a candidate's FAVOR, not against it: where the popular read is loudest and least
@@ -29,8 +35,12 @@ where most pieces should land:
   demand a plant creates.
 - The port and logistics: what the Port of Charleston moves, the inland ports, and the warehousing
   and land demand they create.
-- The capital and money flows: who is buying, the incentives and tax deals, and where investment lands.
-- Property technology where it touches buying, selling, or investing here.
+- The capital and money flows behind a specific technology or engineered asset: who is funding the
+  campus, the plant, or the build, on what deal terms, and where that investment lands. (A pure
+  who-is-buying-houses pattern with no technology at its core belongs to the real-estate track or
+  the Brief, not here.)
+- Property technology where it touches buying, selling, or investing here: what the tool or model
+  actually does under the hood, not just that it exists.
 Roads, water and sewer capacity, subdivisions, and government decisions are IN scope only as the
 SECONDARY, occasional beat, and only when a piece has a genuine technology, capital, or real-estate
 through-line (for example, water and grid capacity as the real constraint on where data centers and
@@ -58,7 +68,7 @@ Business Report, Upstate Business Journal, The Post and Courier, Charleston Regi
 Journal, Columbia Business Report, The State). You are looking for a change with a real, non-obvious tension
 worth being honest about, because that honest-trade-offs beat is the whole point.
 
-THE FIVE BARS. A candidate earns the slot only if it clears all five (the same bars as the
+THE SEVEN BARS. A candidate earns the slot only if it clears all seven (the same bars as the
 bank in scripts/tech/topics.md):
 1. One concrete change, named plainly. Not "growth in general," not "the economy," not "the future
    of Greenville."
@@ -69,9 +79,13 @@ bank in scripts/tech/topics.md):
 4. Real relevance to where people live, work, or invest in South Carolina, stated concretely.
 5. Not stale in a week: it explains a durable system or shift, not a news cycle.
 6. Sits at the technology-or-capital-meets-real-estate intersection. The best topics are squarely
-   there (a data center, the grid, fiber, automation, who is buying and why); a pure
-   civic-infrastructure item (a road, a sewer study, a rezoning) qualifies only when it carries a
-   genuine tech, capital, or real-estate through-line, and it should be the exception, not the norm.
+   there (a data center, the grid, fiber, automation, the capital behind a named campus or plant); a
+   pure civic-infrastructure item (a road, a sewer study, a rezoning) qualifies only when it carries
+   a genuine tech, capital, or real-estate through-line, and it should be the exception, not the norm.
+7. Has a DEEP-TECH core. A real technology or engineered system sits at the center of the candidate,
+   and the piece could explain how it actually works at a depth most local coverage never attempts
+   (the mechanism, the specs, the engineering constraint). If the technology could be swapped out
+   without changing the story, the candidate fails this bar.
 
 STEP 1, GATHER. Find 4 to 6 candidate changes that look like they could clear the bars.
 STEP 2, SCREEN. Drop any that are on ALREADY COVERED, are really just news, or plainly fail a

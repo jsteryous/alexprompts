@@ -23,11 +23,21 @@ WHAT IT ACTUALLY IS, AND HOW IT WORKS. Pin down the mechanism in plain terms: wh
 roughly HOW the underlying system works, at the level a smart resident needs to reason about it.
 Not the press-release framing ("a transformative investment in our community"), the mechanism
 ("the road is being widened because the intersection fails at peak, and the fix is funded by the
-2024 penny sales tax, which sunsets in eight years"). If the topic involves technology or
-infrastructure (a data center, fiber, the grid, water capacity, a plant's automation), explain the
-technology plainly: what it needs, why it is sited here, what it draws on. If you cannot explain the
+2024 penny sales tax, which sunsets in eight years"). If you cannot explain the
 mechanism from real sources, say so; a piece cannot claim understanding the researcher does not
 have.
+
+THE TECHNOLOGY, ONE LEVEL DEEPER. This track's differentiator is the deep-tech teardown, so the
+technology at the center of the topic gets researched as a first-class subject, not glossed. Go one
+level deeper than local coverage would: not "it burns gas for power" but which turbines, at what
+capacity, fueled and cooled how; not "an automated plant" but which steps are automated, with what
+equipment, and what the humans still do; not "fiber is coming" but how the strands get from the
+trunk to the house and why that last stretch is the expensive part. Pin down the real specs
+(megawatts, gallons, gigabits, cycle times, acres) and, above all, the ENGINEERING CONSTRAINT that
+drives the story, the thing the system physically needs that it cannot get for free, because that
+constraint is usually where the honest tension lives. Use manufacturer specs, permits, filings, and
+technical or trade sources; mark clearly what is confirmed versus the company's own claim. Depth
+with sources beats breadth with adjectives.
 
 HUNT THE TENSION, HARD. This is the most important part of the brief and the reason the piece is
 worth reading. Find the honest trade-off: who pays, who benefits, what it costs, what constraint it
@@ -54,6 +64,10 @@ OUTPUT these sections, tight and factual:
 - WHAT IT IS: 3 to 6 bullets on what is happening and the mechanism in plain English, each
   traceable to a source. Mark each CONFIRMED (official document, dataset, or credible report) or
   CLAIM (from a promoter or spokesperson).
+- HOW THE TECHNOLOGY WORKS: the deep-tech teardown, 4 to 8 bullets. The core system explained
+  mechanically with real specs and sources, and the engineering constraint that drives the story
+  named explicitly. This section is what makes the piece an SC Technology piece; if it is thin, say
+  so, because that means the topic is thin.
 - THE NUMBERS: the specific figures that matter (project cost, units, price levels, traffic counts,
   tax rates, jobs, megawatts, gallons, acres, dates), each with its unit, date, and source. Ranges
   where sources disagree.
