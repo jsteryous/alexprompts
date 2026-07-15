@@ -15,6 +15,24 @@ Thin, generic, template-with-the-town-name-swapped-in content does not rank anym
 
 Use web search to gather the specifics the topic needs. Pull the concrete local data named in the topic's "Ground it" note. Confirm anything load-bearing from a second source where you can. Keep a short internal list of the sources you actually used with their URLs; you will cite them. If the topic is a relocation, neighborhood, or comparison piece, get the real price levels, commute figures, and amenities right, because specificity is what makes it rank and what makes it trustworthy.
 
+SOURCE HIERARCHY (follow it; the sources you cite are part of the product). Work down this
+ladder and cite the highest rung that carries the fact:
+1. Government and official primary sources: Census/ACS, BLS, BEA (regional price parities),
+   FRED, Freddie Mac PMMS, FHFA, the SC Department of Revenue, Greenville County offices
+   (Assessor, Real Property Services, the tax estimator), the school district, SCDOT, and city
+   or county pages for places and programs.
+2. The named research portals for market data: Redfin Data Center and Zillow Research for
+   medians and inventory (name which one and date it; they measure different things), realtor.com
+   research where it fits.
+3. Credible local reporting for local facts the data sets do not carry.
+4. Aggregator and affiliate sites (BestPlaces, SmartAsset, tax-rates.org, DataUSA, Niche,
+   apartments.com cost-of-living pages) are a LAST resort, not a default. They repackage the same
+   public data the rungs above publish first-hand, often stale and with opaque methodology, and
+   they are what every content farm cites, so leaning on them erases the very trust and
+   differentiation this piece exists to earn. Before citing one, check whether the underlying
+   primary source (usually ACS or BEA) carries the figure and cite that instead. If an aggregator
+   is genuinely the only source, attribute it by name in the prose so the reader can weigh it.
+
 ## VOICE (house style, follow exactly)
 
 - No em dashes or en dashes, ever. Use periods, commas, or restructure.

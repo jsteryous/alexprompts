@@ -60,7 +60,13 @@ estimate, demand it be sourced or softened to a qualitative range. Do not invent
 number yourself; if one is unsupported, cut it or mark it for the human to verify. Where sources
 plausibly disagree (a median price from Zillow, Redfin, or FHFA), confirm the piece shows the range
 and names both sources rather than averaging them or quietly picking one; if the draft smoothed a
-real disagreement into a single confident number, restore the visible range.
+real disagreement into a single confident number, restore the visible range. Hold the writer's
+SOURCE HIERARCHY: where a load-bearing figure cites an aggregator or affiliate site (BestPlaces,
+SmartAsset, tax-rates.org, DataUSA, Niche) and the underlying primary source (ACS, BEA, FRED, the
+county, the SC DOR) plainly carries the same figure, swap the link to the primary source; if you
+cannot confirm the primary source yourself, flag the aggregator citation for the human instead of
+letting it pass silently, because citing what every content farm cites erases the differentiation
+this piece exists to earn.
 
 ## FAIR HOUSING (the headline legal risk on this track)
 
