@@ -36,6 +36,56 @@ function autosize(el: HTMLTextAreaElement | null) {
   el.style.height = `${el.scrollHeight}px`;
 }
 
+// Web-size an image in the browser BEFORE upload, mirroring the cover-library
+// spec (~1400px / ~300KB). next/image already serves stored covers as small
+// responsive variants, but the ORIGINAL file is what the OG/share card uses raw,
+// what the first transformation has to chew through, and what sits in storage,
+// so a full-size phone photo must never land there. GIFs pass through
+// (re-encoding would kill the animation); anything already small and within the
+// width cap passes through; the re-encode is kept only when it actually shrinks
+// the file.
+const COVER_MAX_W = 1600; // hero renders 624px wide; 1600 covers 2x retina with room
+const BODY_MAX_W = 1400; // same cap as the committed cover library
+const REENCODE_QUALITY = 0.82;
+const SKIP_BELOW_BYTES = 500 * 1024;
+
+async function websizeImage(file: File, maxWidth: number): Promise<File> {
+  if (file.type === "image/gif") return file;
+  let bmp: ImageBitmap;
+  try {
+    bmp = await createImageBitmap(file);
+  } catch {
+    return file; // browser cannot decode it here; let the server take the original
+  }
+  const scale = Math.min(1, maxWidth / bmp.width);
+  if (scale === 1 && file.size <= SKIP_BELOW_BYTES) {
+    bmp.close();
+    return file;
+  }
+  const w = Math.max(1, Math.round(bmp.width * scale));
+  const h = Math.max(1, Math.round(bmp.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    bmp.close();
+    return file;
+  }
+  // JPEG has no alpha; flatten any transparency onto white instead of black.
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, w, h);
+  ctx.drawImage(bmp, 0, 0, w, h);
+  bmp.close();
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", REENCODE_QUALITY),
+  );
+  if (!blob || blob.size >= file.size) return file;
+  return new File([blob], file.name.replace(/\.[^.]+$/, "") + ".jpg", {
+    type: "image/jpeg",
+  });
+}
+
 export default function Editor({
   id,
   token,
@@ -213,8 +263,9 @@ export default function Editor({
     setMessage(null);
     setCoverUploading(true);
     try {
+      const sized = await websizeImage(file, COVER_MAX_W);
       const fd = new FormData();
-      fd.append("file", file);
+      fd.append("file", sized);
       fd.append("kind", "cover");
       const resp = await fetch(`/api/admin/upload${authQuery}`, { method: "POST", body: fd });
       const json = await resp.json().catch(() => ({}));
@@ -325,8 +376,9 @@ export default function Editor({
     setUploading(true);
     for (const file of images) {
       try {
+        const sized = await websizeImage(file, BODY_MAX_W);
         const fd = new FormData();
-        fd.append("file", file);
+        fd.append("file", sized);
         const resp = await fetch(`/api/admin/upload${authQuery}`, { method: "POST", body: fd });
         const json = await resp.json().catch(() => ({}));
         if (!resp.ok) {
