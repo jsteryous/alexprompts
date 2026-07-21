@@ -44,6 +44,13 @@ with web search (`pass0_scout.md`), so it never runs dry.
   No scraper, no key. Powers the `/tools/buyers-list` (buyer/LLC, price, date, address). Output
   goes to **`src/data/commercialSales.json`** (the Next app imports it), so the page is
   statically generated. Pure functions unit-tested in `tests/test_commercial.py`.
+- **`housing.py`** — a second DATA collector (NOT part of the content routine, live since July
+  2026), the fresh counterpart to `commercial.py`. County deed records lag ~4 months, so the
+  Upstate Brief's "what sold" premise cannot carry the weekly read alone; this pulls the
+  Greenville, SC **residential pulse** from the free Zillow Research CSVs (ZHVI typical home
+  value + ZORI typical rent), each with the **national figure** so the brief can read the Upstate
+  against the country, and computes MoM/YoY. Monthly refresh (~3-week lag), no key. Output goes to
+  **`src/data/greenvilleHousing.json`**. Pure functions unit-tested in `tests/test_housing.py`.
 - **`collect.py`** — the retired news collector (Google News RSS across local real-estate
   beats). Unwired; kept for reference and reversibility. Its `data/` hand-off
   (`signal-latest.json` + `.txt`) is no longer read.
@@ -59,6 +66,11 @@ python -m greenville.commercial --min-price 1000000 --months 24 \
 python -m greenville.commercial --from-json snapshot.json             # replay, no network
 python -m unittest scripts.tests.test_commercial -v
 
+# residential pulse (Zillow ZHVI + ZORI) — the fresh weekly counterpart
+python -m greenville.housing                                          # print a summary
+python -m greenville.housing --json-out ../src/data/greenvilleHousing.json  # refresh the dataset
+python -m unittest scripts.tests.test_housing -v
+
 # retired news collector (unwired; reference only)
 python -m greenville.collect --limit 15
 ```
@@ -70,6 +82,11 @@ python -m greenville.collect --limit 15
   `greenville.commercial` and commits `src/data/commercialSales.json`. No secrets (the county
   ArcGIS service is public + free). The push redeploys the statically generated
   `/tools/buyers-list` page with fresh sales. **Still live.**
+- **`.github/workflows/collect-housing.yml`** (WEEKLY Sun 22:00 UTC, same slot as the commercial
+  refresh) runs `greenville.housing` and commits `src/data/greenvilleHousing.json`. No secrets
+  (the Zillow Research CSVs are public + free). Zillow refreshes monthly, so most weekly runs are
+  no-ops (the commit step skips when nothing changed); the point is to be fresh before the Monday
+  Upstate Brief drafts. **Live since July 2026.**
 - **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
   the cover library from Wikimedia Commons and opens a PR with the new photos. Runs **FREE by
   default** (`--no-vision`, no key needed); the human PR review is the quality gate. Set the

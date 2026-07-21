@@ -22,8 +22,8 @@ broken build.
 WORKSPACE. Do ALL scratch work in /tmp/brief (run: mkdir -p /tmp/brief). Write every intermediate
 there (facts.md, draft.md, final.md, done.txt). NEVER write scratch files into the git working
 tree and NEVER edit .gitignore. The only repo commands you run are reading input files (the pass
-specs, src/data/commercialSales.json, scripts/briefing/watchlist.md), and the STEP 6 delivery
-(the drafts-branch push).
+specs, src/data/greenvilleHousing.json, src/data/commercialSales.json, scripts/briefing/watchlist.md),
+and the STEP 6 delivery (the drafts-branch push).
 
 ISOLATION (the quality lever). Run each pass as a separate sub-agent (Task tool, subagent_type
 "general-purpose") so it starts cold and sees ONLY the input you hand it: its spec file plus the
@@ -54,14 +54,19 @@ last week's watch item, and never repeats last week's data dive. If the branch o
 missing, write "ITEMS COVERED: none" and continue.
 
 STEP 1, PASS 1, COLLECTOR. Read scripts/briefing/routine/pass1_collector.md. Hand its full
-contents plus /tmp/brief/done.txt, the full contents of src/data/commercialSales.json (from the
-repo checkout; it refreshes Sundays 22:00 UTC via a GitHub Action, before this run), and, if it
-exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent. It works the fixed
-section checklist with web search and the sales data, and writes the sourced fact sheet. Save to
-/tmp/brief/facts.md.
-  STOP CONDITION: if the collector reports that EVERY section came back NOTHING REAL (a genuinely
-  dead week, which should be rare), do not proceed; report it and end cleanly. One or two dry
-  sections are normal and fine; the writer states them in one line each.
+contents plus /tmp/brief/done.txt, the full contents of BOTH committed datasets from the repo
+checkout (they refresh Sundays 22:00 UTC via GitHub Actions, before this run):
+  - src/data/greenvilleHousing.json (the fresh residential pulse: Zillow ZHVI home values + ZORI
+    rents, Greenville vs national), and
+  - src/data/commercialSales.json (the lagging county commercial deed dataset),
+and, if it exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent. It works
+the fixed section checklist with web search plus the two datasets, and writes the sourced fact
+sheet. Save to /tmp/brief/facts.md.
+  STOP CONDITION: Sections A (pulse), B (who's buying), C (what traded), and E (rates) always have
+  material; only D (around town) may come back NOTHING REAL, and that is normal (the writer states
+  it in one line). The old "every section dead" stop can effectively never trigger now that the
+  pulse and the deed dataset are always present; proceed unless the collector reports it truly
+  cannot read either dataset.
 
 STEP 2, PASS 2, WRITER. Read scripts/briefing/routine/pass2_writer.md. Hand its full contents
 plus ONLY /tmp/brief/facts.md to a fresh sub-agent. Save its three-block output (## METADATA,

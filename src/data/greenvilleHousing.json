@@ -1,0 +1,233 @@
+{
+  "generated_at": "2026-07-21 15:59 UTC",
+  "source": "Zillow Research (ZHVI, ZORI), metro level",
+  "source_urls": {
+    "zhvi": "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
+    "zori": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv"
+  },
+  "metro": "Greenville, SC",
+  "home_value": {
+    "metric": "ZHVI (typical home value, all homes, smoothed & seasonally adjusted)",
+    "latest_month": "2026-06-30",
+    "greenville": {
+      "latest": 317097,
+      "mom_pct": -0.1,
+      "yoy_pct": 1.9
+    },
+    "national": {
+      "latest": 372995,
+      "mom_pct": -0.1,
+      "yoy_pct": 0.8
+    },
+    "series": [
+      {
+        "month": "2024-07-31",
+        "value": 310556
+      },
+      {
+        "month": "2024-08-31",
+        "value": 310623
+      },
+      {
+        "month": "2024-09-30",
+        "value": 310558
+      },
+      {
+        "month": "2024-10-31",
+        "value": 310408
+      },
+      {
+        "month": "2024-11-30",
+        "value": 310259
+      },
+      {
+        "month": "2024-12-31",
+        "value": 310481
+      },
+      {
+        "month": "2025-01-31",
+        "value": 311004
+      },
+      {
+        "month": "2025-02-28",
+        "value": 311420
+      },
+      {
+        "month": "2025-03-31",
+        "value": 311281
+      },
+      {
+        "month": "2025-04-30",
+        "value": 311034
+      },
+      {
+        "month": "2025-05-31",
+        "value": 311106
+      },
+      {
+        "month": "2025-06-30",
+        "value": 311212
+      },
+      {
+        "month": "2025-07-31",
+        "value": 311309
+      },
+      {
+        "month": "2025-08-31",
+        "value": 311281
+      },
+      {
+        "month": "2025-09-30",
+        "value": 311838
+      },
+      {
+        "month": "2025-10-31",
+        "value": 312550
+      },
+      {
+        "month": "2025-11-30",
+        "value": 313460
+      },
+      {
+        "month": "2025-12-31",
+        "value": 314197
+      },
+      {
+        "month": "2026-01-31",
+        "value": 314893
+      },
+      {
+        "month": "2026-02-28",
+        "value": 315764
+      },
+      {
+        "month": "2026-03-31",
+        "value": 316686
+      },
+      {
+        "month": "2026-04-30",
+        "value": 317355
+      },
+      {
+        "month": "2026-05-31",
+        "value": 317410
+      },
+      {
+        "month": "2026-06-30",
+        "value": 317097
+      }
+    ]
+  },
+  "rent": {
+    "metric": "ZORI (typical asking rent, all homes + multifamily, smoothed)",
+    "latest_month": "2026-06-30",
+    "greenville": {
+      "latest": 1570,
+      "mom_pct": 0.7,
+      "yoy_pct": 1.7
+    },
+    "national": {
+      "latest": 1965,
+      "mom_pct": 0.4,
+      "yoy_pct": 2.2
+    },
+    "series": [
+      {
+        "month": "2024-07-31",
+        "value": 1502
+      },
+      {
+        "month": "2024-08-31",
+        "value": 1503
+      },
+      {
+        "month": "2024-09-30",
+        "value": 1496
+      },
+      {
+        "month": "2024-10-31",
+        "value": 1500
+      },
+      {
+        "month": "2024-11-30",
+        "value": 1507
+      },
+      {
+        "month": "2024-12-31",
+        "value": 1518
+      },
+      {
+        "month": "2025-01-31",
+        "value": 1529
+      },
+      {
+        "month": "2025-02-28",
+        "value": 1540
+      },
+      {
+        "month": "2025-03-31",
+        "value": 1544
+      },
+      {
+        "month": "2025-04-30",
+        "value": 1546
+      },
+      {
+        "month": "2025-05-31",
+        "value": 1543
+      },
+      {
+        "month": "2025-06-30",
+        "value": 1544
+      },
+      {
+        "month": "2025-07-31",
+        "value": 1543
+      },
+      {
+        "month": "2025-08-31",
+        "value": 1544
+      },
+      {
+        "month": "2025-09-30",
+        "value": 1544
+      },
+      {
+        "month": "2025-10-31",
+        "value": 1543
+      },
+      {
+        "month": "2025-11-30",
+        "value": 1540
+      },
+      {
+        "month": "2025-12-31",
+        "value": 1540
+      },
+      {
+        "month": "2026-01-31",
+        "value": 1541
+      },
+      {
+        "month": "2026-02-28",
+        "value": 1551
+      },
+      {
+        "month": "2026-03-31",
+        "value": 1553
+      },
+      {
+        "month": "2026-04-30",
+        "value": 1556
+      },
+      {
+        "month": "2026-05-31",
+        "value": 1559
+      },
+      {
+        "month": "2026-06-30",
+        "value": 1570
+      }
+    ]
+  }
+}

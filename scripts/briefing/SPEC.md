@@ -1,8 +1,9 @@
 # Upstate Brief — spec
 
 **The Upstate Brief** is one published post every Monday morning that a Greenville-area
-professional can read in five minutes and start the week with a complete picture: rates, what
-actually sold, what moved through the county, and one calibrated thing to watch. It is the
+professional can read in five minutes and start the week with a complete picture: where the
+market stands (home values and rents, Upstate vs the nation), who is buying, what recently
+traded, what moved through the county, rates, and one calibrated thing to watch. It is the
 recurring artifact Alex hands his sphere ("want me to add you to the Monday brief?") and the
 first concrete reason to subscribe to the owned email list. It took over the weekly slot from
 Greenville Works (July 2026); the Works essays moved to an occasional/monthly cadence.
@@ -22,27 +23,38 @@ item is fact + source + one sentence of "so what." **A section with nothing real
 says so in one line.** The no-filler rule is enforced by the editor pass; a padded brief dies
 fast.
 
-1. **The week in one number** — the open. One lead stat or deal and why it matters.
-2. **Rates and money** (2 to 4 sentences) — Freddie Mac PMMS 30-year, the 10-year Treasury,
-   any Fed action or upcoming meeting. Primary sources via web search.
-3. **What sold** — 2 to 4 notable Greenville County commercial transactions from the committed
-   `src/data/commercialSales.json`, each with the denominator (per SF from `SQFEET`, per acre
-   from `LOTSIZE`) and buyer/seller. Plus, when the data shows it, a pattern flag: a buyer
-   (`PURNAME`) on its second or third purchase in the trailing months.
-4. **Projects and permits** — what moved this week: council and planning-commission actions,
-   rezonings, announced projects. Only items with a citable document or local report.
-5. **Employers and capital** (one item, optional) — BMW, Michelin, a data center, a fund
-   buying, an incentive deal.
-6. **What I'd watch** — one concrete indicator worth watching and why, framed as what the
-   reporting points to, never an invented personal verdict (Alex adds his own take in review).
+**Why this order (revised July 2026).** County commercial deeds lag closings by MONTHS, so
+they can no longer carry a "this week" read (an early version led with sales that had recorded
+in March, published in July). The brief now leads with what is genuinely FRESH (the residential
+pulse and rates) and treats the deed data as the trend and the players, not this week's news.
+The sections, in order:
 
-**The data dive (the thin-week fallback).** When "Projects and permits" AND "Employers and
-capital" both come back dry, the collector must instead cut ONE aggregate view of the full
-24-month sales dataset (top buyers of the quarter, dollar volume by month, price per acre year
-over year, property-type mix, or a corridor rollup, rotating so no two thin weeks repeat a
-dive) and the brief carries it as its own section. A quiet news week is the slot for the most
-CoStar-like thing the brief publishes, so the thin-week floor is depth, not padding. The dry
-sections still get their honest one-line statements.
+0. **The week in one number** — the open, no heading. One lead stat and why it matters; it may
+   come from any section (the pulse gap, a buyer pattern, a notable deed, a rate move).
+1. **The Upstate vs the country** — the fresh, differentiated lead. Greenville's typical home
+   value and rent with their year-over-year moves set beside the national figures, from the
+   committed `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI, refreshed weekly). The
+   Greenville-vs-national GAP stated as fact ("prices bid up faster than the nation while rents
+   run cooler"), never as a verdict. This is the sentiment read; Alex supplies any opinion in
+   review.
+2. **Who's buying** — the proprietary spine, STANDING every week (not a fallback). From
+   `src/data/commercialSales.json`: the active-buyer pattern flags (a `PURNAME` on its second or
+   third purchase in the trailing year) PLUS one rotating aggregate cut of the 24-month dataset
+   (top buyers of the quarter, dollar volume by month, price per acre year over year,
+   property-type mix, or a corridor rollup, never repeating last week's), with the arithmetic
+   shown and the honest limits stated. The most CoStar-like thing the brief publishes.
+3. **What traded** — 2 to 4 notable individual deals from the same dataset, each with the
+   denominator (per SF from `SQFEET`, per acre from `LOTSIZE`), buyer/seller, and its `SALEDATE`,
+   opened with the recency caveat so nobody mistakes a months-old deed for this week's news.
+4. **Around town** — the week's local development news: the notable Upstate real-estate,
+   development, and business-expansion stories (a new or broken-ground project, a major-employer
+   expansion, a big rezoning or approval, a capital move), pulled from local outlets plus official
+   sources. The news-digest part of the brief. Every item cites its source; promoter figures are
+   labeled CLAIM. The one section allowed to be `NOTHING REAL` in one line, though it rarely is.
+5. **Rates and money** — short (2 to 3 numbers), because every reader sees rates elsewhere.
+   Freddie Mac PMMS 30-year, the 10-year Treasury, any Fed action or upcoming meeting.
+6. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
+   reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
 Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
 
@@ -53,12 +65,15 @@ scout and no angle pass, because the fixed format IS the angle.
 
 - `orchestrator.md` — guards, then collector → writer → editor, then a DRAFT insert tagged
   `briefing` and the review packet email.
-- `pass1_collector.md` — works the section checklist: rates via web search against primary
-  sources; transactions by reading `src/data/commercialSales.json` (refreshed Sundays
-  22:00 UTC by `.github/workflows/collect-commercial.yml`; moved July 13, 2026 from Mon 07:00
-  because GitHub cron delays made the Monday run land AFTER the brief) and doing the per-SF / per-acre and
-  repeat-buyer math; projects and employer news via web search. Outputs a sourced fact sheet
-  with MUST-VERIFY and explicit `NOTHING REAL` markers.
+- `pass1_collector.md` — works the section checklist against TWO committed datasets plus web
+  search. The residential pulse comes from `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI,
+  Greenville vs national, built weekly by `.github/workflows/collect-housing.yml`); the
+  who's-buying analysis and the recently-traded deals come from `src/data/commercialSales.json`
+  (the county deed dataset, refreshed Sundays 22:00 UTC by
+  `.github/workflows/collect-commercial.yml`; both collectors share the Sunday-evening slot so the
+  data is fresh before the Monday run) with the per-SF / per-acre and repeat-buyer math; around-town
+  projects, permits, and employer news, plus rates, come via web search. Outputs a sourced fact
+  sheet with MUST-VERIFY and explicit `NOTHING REAL` markers (only Around town may be dry).
 - `pass2_writer.md` — renders the fact sheet into the fixed template in house style, plus
   `## METADATA`, `## IMAGE`, and `## X` blocks.
 - `pass3_editor.md` — audits against the fact sheet: every figure traced, the no-filler rule,

@@ -47,6 +47,7 @@ const trust = [
 export default function FindAProPage() {
   return (
     <>
+      {/* Form first: a curious visitor can act immediately and scroll for the rest. */}
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
@@ -56,20 +57,33 @@ export default function FindAProPage() {
             Buying or selling? I&apos;ll connect you with a pro worth your time.
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            I am a licensed real estate agent in South Carolina, but my day job is not showing
-            houses. What I am good at is knowing which professionals actually earn their keep, the
-            agents who fight for their clients and the loan officers and closing attorneys who keep
-            a deal on track. Tell me what you are trying to do, here in Greenville or in whatever
-            city you are moving to, and I will connect you with someone I would trust with my own
-            family, then stay in your corner until it closes. It costs you nothing.
+            I am a licensed real estate agent in South Carolina, and my edge is knowing which
+            professionals actually earn their keep. Tell me what you are trying to do, here in
+            Greenville or in whatever city you are moving to, and I will hand-pick an agent I would
+            trust with my own family, then stay in your corner until it closes. It costs you nothing.
           </p>
+
+          <div
+            id="connect"
+            className="theme-card-strong border theme-border rounded-2xl p-6 sm:p-9 scroll-mt-24 mt-10"
+          >
+            <div className="text-center max-w-lg mx-auto mb-8">
+              <h2 className="theme-text-primary type-h3 mb-2">Tell me what you need</h2>
+              <p className="theme-text-muted text-base leading-relaxed">
+                Takes about a minute. The more you share, the better the match. No obligation, and I
+                will not add you to any list.
+              </p>
+            </div>
+            <ReferralForm source="find-a-pro" />
+          </div>
         </div>
       </section>
 
+      {/* The reassurance, below the fold for anyone who wants to understand it first. */}
       <section className="theme-section py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="theme-text-primary type-h3 mb-8">How this works</h2>
-          <ol className="grid gap-6 sm:grid-cols-3 mb-16">
+          <ol className="grid gap-6 sm:grid-cols-3 mb-14">
             {steps.map((s) => (
               <li key={s.n} className="relative">
                 <div
@@ -84,21 +98,7 @@ export default function FindAProPage() {
             ))}
           </ol>
 
-          <div
-            id="connect"
-            className="theme-card-strong border theme-border rounded-2xl p-6 sm:p-9 scroll-mt-24"
-          >
-            <div className="text-center max-w-lg mx-auto mb-8">
-              <h2 className="theme-text-primary type-h3 mb-2">Tell me what you need</h2>
-              <p className="theme-text-muted text-base leading-relaxed">
-                Takes about a minute. The more you share, the better the match. No obligation, and I
-                will not add you to any list.
-              </p>
-            </div>
-            <ReferralForm source="find-a-pro" />
-          </div>
-
-          <ul className="grid gap-5 sm:grid-cols-3 mt-16">
+          <ul className="grid gap-5 sm:grid-cols-3">
             {trust.map((c) => (
               <li key={c.title} className="theme-card border theme-border rounded-xl p-6">
                 <h3 className="theme-text-primary type-title mb-2">{c.title}</h3>
