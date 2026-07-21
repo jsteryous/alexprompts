@@ -45,7 +45,8 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `status` (`live`/`soon`); a `live` tool needs a route at `src/app/tools/<slug>/page.tsx`
   (server page: sets metadata, renders `<ToolShell tool={getTool(slug)!}>` around the
   interactive client component in `src/components/tools/`). Current tools: `deal-analyzer`,
-  `mortgage`, `listing-prompt` (live, client-side, no API); `buyers-list` (live; the page
+  `mortgage` (live, client-side, no API; the `listing-prompt` builder was removed July 21,
+  2026 as an off-strategy agent tool); `buyers-list` (live; the page
   imports the committed `src/data/commercialSales.json` dataset that
   `scripts/greenville/commercial.py` builds from Greenville County's public ArcGIS service,
   so it is statically generated with no runtime API); `area-scan` (soon, Tier 2

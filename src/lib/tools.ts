@@ -27,6 +27,14 @@ export interface ToolEntry {
   /** Card button label for live tools. */
   cta: string;
   /**
+   * When true, the tool page closes with the /find-a-pro referral CTA instead of
+   * the default subscribe capture. Set it on the relocation/buyer-intent tools
+   * (cost-of-living, property-tax, schools) whose visitor is the site's best
+   * referral lead, so their intent goes to the money surface, not the email list.
+   * Everything else keeps the subscribe capture. See ToolShell.
+   */
+  leadCta?: boolean;
+  /**
    * Absolute URL to a separate live app (its own repo/domain). When set, the
    * card links out in a new tab instead of to an in-repo /tools/<slug> page,
    * and the sitemap skips it (it is not one of our routes). Still needs a
@@ -55,15 +63,6 @@ export const toolCatalog: ToolEntry[] = [
     cta: "Open calculator",
   },
   {
-    slug: "listing-prompt",
-    title: "Listing prompt builder",
-    blurb:
-      "Answer a few questions about the property and get a ready-to-paste Claude prompt that writes fair-housing-safe listing copy.",
-    audience: "agents",
-    status: "live",
-    cta: "Build the prompt",
-  },
-  {
     slug: "area-scan",
     title: "Neighborhood area scan",
     blurb:
@@ -80,6 +79,7 @@ export const toolCatalog: ToolEntry[] = [
     audience: "both",
     status: "live",
     cta: "Compare your city",
+    leadCta: true,
   },
   {
     slug: "property-tax",
@@ -89,6 +89,7 @@ export const toolCatalog: ToolEntry[] = [
     audience: "both",
     status: "live",
     cta: "Estimate the tax",
+    leadCta: true,
   },
   {
     slug: "schools",
@@ -98,6 +99,7 @@ export const toolCatalog: ToolEntry[] = [
     audience: "both",
     status: "live",
     cta: "Find schools",
+    leadCta: true,
   },
   {
     slug: "wire-safety",

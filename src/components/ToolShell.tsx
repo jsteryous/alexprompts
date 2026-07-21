@@ -2,6 +2,7 @@ import Link from "next/link";
 import { audienceLabel, type ToolEntry } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { SubscribeForm } from "@/components/SubscribeForm";
+import { ReferralCta } from "@/components/ReferralCta";
 
 /**
  * Shared chrome for every /tools page: the header (audience chip, title, blurb),
@@ -59,18 +60,30 @@ export function ToolShell({
         </div>
       </section>
 
-      {/* Soft subscribe capture: utility is the hook, email is the catch. Owned
-          list (Supabase) so a reader is caught on-site, not bounced to Substack. */}
-      <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
-        <div className="max-w-2xl mx-auto px-6">
-          <SubscribeForm
-            source={`tool:${tool.slug}`}
-            heading="Get the Upstate Brief every Monday"
-            blurb="The week in Upstate real estate in a five-minute read, plus the Greenville guides and the technology pieces when they ship. None of it hits Substack, and it is free."
-            cta="Subscribe free"
-          />
-        </div>
-      </section>
+      {/* The closing conversion surface. Relocation/buyer-intent tools (leadCta)
+          send that intent to the /find-a-pro referral form, the site's #1 revenue
+          path; everything else keeps the soft subscribe capture (utility is the
+          hook, email is the catch), owned-list so the reader is caught on-site. */}
+      {tool.leadCta ? (
+        <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
+          <div className="max-w-2xl mx-auto px-6">
+            {/* ?ref=tool:<slug> lands in referral_leads.ref_slug, so leads can be
+                grouped by which tool drove them. */}
+            <ReferralCta slug={`tool:${tool.slug}`} />
+          </div>
+        </section>
+      ) : (
+        <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
+          <div className="max-w-2xl mx-auto px-6">
+            <SubscribeForm
+              source={`tool:${tool.slug}`}
+              heading="Get the Upstate Brief every Monday"
+              blurb="The week in Upstate real estate in a five-minute read, plus the Greenville guides and the technology pieces when they ship. None of it hits Substack, and it is free."
+              cta="Subscribe free"
+            />
+          </div>
+        </section>
+      )}
     </>
   );
 }

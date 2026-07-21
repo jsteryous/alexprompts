@@ -52,21 +52,6 @@ function Mortgage() {
   );
 }
 
-function ListingPrompt() {
-  // Document being written, with an accent sparkle: a Claude-generated listing.
-  return (
-    <>
-      <path d="M15 8 H28 L33 13 V40 H15 Z" {...stroke} />
-      <path d="M28 8 V13 H33" {...stroke} />
-      <line x1={19} y1={21} x2={29} y2={21} {...stroke} />
-      <line x1={19} y1={26} x2={29} y2={26} {...stroke} />
-      <line x1={19} y1={31} x2={25} y2={31} {...stroke} />
-      <path d="M36 9 l1.3 3.2 3.2 1.3 -3.2 1.3 -1.3 3.2 -1.3 -3.2 -3.2 -1.3 3.2 -1.3 z" {...soft} fillOpacity={0.5} />
-      <path d="M36 9 l1.3 3.2 3.2 1.3 -3.2 1.3 -1.3 3.2 -1.3 -3.2 -3.2 -1.3 3.2 -1.3 z" {...stroke} />
-    </>
-  );
-}
-
 function AreaScan() {
   // Map pin over radius rings: a location and what surrounds it.
   return (
@@ -179,7 +164,6 @@ function WireSafety() {
 const icons: Record<string, () => React.ReactElement> = {
   "deal-analyzer": DealAnalyzer,
   mortgage: Mortgage,
-  "listing-prompt": ListingPrompt,
   "area-scan": AreaScan,
   "cost-of-living": CostOfLiving,
   "property-tax": PropertyTax,

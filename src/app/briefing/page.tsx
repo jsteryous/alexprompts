@@ -38,20 +38,6 @@ export default async function BriefingPage() {
         </div>
       </section>
 
-      {/* The brief goes out on the owned list only (never Substack), so the
-          capture lives right on the section page. */}
-      <section className="theme-section-contrast py-14 border-b theme-border">
-        <div className="max-w-2xl mx-auto px-6">
-          <SubscribeForm
-            source="briefing-index"
-            heading="Get it in your inbox on Mondays"
-            blurb="One email every Monday morning with the full brief. Free, and you can leave any time."
-            cta="Subscribe free"
-            showSubstackLink={false}
-          />
-        </div>
-      </section>
-
       <section className="theme-section py-16">
         <div className="max-w-3xl mx-auto px-6">
           {posts.length > 0 ? (
@@ -94,6 +80,21 @@ export default async function BriefingPage() {
               </p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* The brief goes out on the owned list only (never Substack), so the
+          capture lives right on the section page. It sits AFTER the archive so a
+          first-time visitor sees real content before being asked to subscribe. */}
+      <section className="theme-section-contrast py-14 border-t theme-border">
+        <div className="max-w-2xl mx-auto px-6">
+          <SubscribeForm
+            source="briefing-index"
+            heading="Get it in your inbox on Mondays"
+            blurb="One email every Monday morning with the full brief. Free, and you can leave any time."
+            cta="Subscribe free"
+            showSubstackLink={false}
+          />
         </div>
       </section>
     </>

@@ -110,7 +110,7 @@ Ordered by LEAD VALUE (proximity to a referral), highest first. Each entry: the 
 
 **Pair a piece to a tool where one fits (the `tool:` line).** The site's free tools
 (`/tools/mortgage`, `/tools/property-tax`, `/tools/cost-of-living`, `/tools/deal-analyzer`,
-`/tools/schools`, `/tools/buyers-list`, `/tools/listing-prompt`) are an SEO and conversion edge a
+`/tools/schools`, `/tools/buyers-list`) are an SEO and conversion edge a
 content farm cannot copy: an interactive calculator on the page answers the reader's next question,
 keeps them on the site, earns links, and is genuine unique value. When a topic names a `tool`, the
 writer must link that tool inline once, where the reader would naturally reach for it (e.g. a payment
@@ -153,8 +153,6 @@ A topic without a clean tool fit simply omits the line.
 - **Selling your house in Greenville, SC: what to expect, step by step**
   - target_query: "selling a house in Greenville SC"
   - target_slug: `selling-a-house-in-greenville-sc`
-  - tool: `/tools/listing-prompt` — a seller getting ready to list can generate a fair-housing-safe
-    description draft to bring to their agent.
   - Anchor: the seller side (the bank is buyer-heavy), the local process and real costs. Why it
     wins: seller intent is a referral just like buyer intent, and this query is durable and
     under-served honestly. Ground it: typical days-on-market and price levels (Zillow/Redfin cited),

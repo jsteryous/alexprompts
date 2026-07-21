@@ -56,7 +56,7 @@ export default function FindAProPage() {
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
             Buying or selling? I&apos;ll connect you with a pro worth your time.
           </h1>
-          <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
+          <p className="theme-text-muted text-lg max-w-xl leading-relaxed text-center mx-auto">
             I am a licensed real estate agent in South Carolina, and my edge is knowing which
             professionals actually earn their keep. Tell me what you are trying to do, here in
             Greenville or in whatever city you are moving to, and I will hand-pick an agent I would
