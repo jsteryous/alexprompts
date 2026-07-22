@@ -70,10 +70,13 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
 > the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline/slogan:
-> *"Questions worth asking."* since July 11, 2026, was "Growth is good." for one day, before
-> that "Where real estate meets technology."; it makes the brand name's double meaning explicit
-> (prompting real discussion) and also headlines the OG share card; "Growth is good." moved to
-> the homepage mission headline; the phrase "in plain English" was dropped from
+> *"Better real estate decisions."* since July 21, 2026, was *"Questions worth asking."* from
+> July 11, "Growth is good." for one day before that, and "Where real estate meets technology."
+> earlier; the slogan is now outcome-forward (it signals what the site is FOR and spans every
+> reader who makes a real-estate decision, buyer/seller/loan officer/agent) and headlines the OG
+> share card. "Questions worth asking." was a pun on the retired AI-prompts positioning, so it
+> was dropped; the homepage mission headline was reworked to match the new slogan the same day;
+> the phrase "in plain English" was dropped from
 > ALL site copy July 9, 2026 because Alex found it unpolished — do not reintroduce it in
 > user-facing copy). Do **not** reintroduce the
 > single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
@@ -240,11 +243,13 @@ under `scripts/_archive/` — do not revive it.
 - `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
   section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
-  REWRITTEN BY ALEX July 11, 2026: headline **"Questions worth asking."** (same as the slogan,
+  REWRITTEN BY ALEX July 11, 2026, then REWORKED July 21, 2026 to track the "Better real estate
+  decisions." slogan: headline **"Better real estate decisions."** (same as the slogan,
   deliberately), then the ONE-sentence mission (emphasized) "Alex Prompts helps South
-  Carolinians understand the ideas, technologies, and decisions shaping our future, and asks
-  better questions about where we're headed.", then two one-line paragraphs ("Most media tells
-  people what to think." / "Alex Prompts asks questions worth thinking about."). The earlier
+  Carolinians make smarter real estate decisions, with honest writing on the market, the
+  technology reshaping it, and free tools to run the numbers yourself.", then two one-line
+  paragraphs ("Most media tells people what to think." / "Alex Prompts gives you the facts, the
+  trade-offs, and the tools, so the call stays yours."). The earlier
   pro-growth manifesto ("Grow or die." then briefly "Growth is good." / "from no to how" /
   "Stagnation is death.") was REMOVED from the homepage that same day; the pro-growth stance
   still drives the engines' editorial method (see memory `pro-growth-editorial-stance`) but is

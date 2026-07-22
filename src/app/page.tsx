@@ -174,18 +174,19 @@ export default async function HomePage() {
                 The mission
               </span>
               <h2 className="theme-text-primary type-h2 mb-4">
-                Questions worth asking.
+                Better real estate decisions.
               </h2>
               <p className="theme-text-primary type-body-lg font-medium mb-4">
-                Alex Prompts helps South Carolinians understand the ideas, technologies, and
-                decisions shaping our future, and asks better questions about where
-                we&rsquo;re headed.
+                Alex Prompts helps South Carolinians make smarter real estate decisions,
+                with honest writing on the market, the technology reshaping it, and free
+                tools to run the numbers yourself.
               </p>
               <p className="theme-text-contrast-muted type-body-lg mb-4">
                 Most media tells people what to think.
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Alex Prompts is driven by curiosity and questions worth asking, so you can develop well-grounded opinions of your own.
+                Alex Prompts gives you the facts, the trade-offs, and the tools, so the
+                call stays yours.
               </p>
             </div>
             <Link
