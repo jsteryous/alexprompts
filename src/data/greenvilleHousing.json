@@ -1,9 +1,14 @@
 {
-  "generated_at": "2026-07-21 15:59 UTC",
-  "source": "Zillow Research (ZHVI, ZORI), metro level",
+  "generated_at": "2026-07-22 01:07 UTC",
+  "source": "Zillow Research (ZHVI, ZORI, and market-vitals metrics), metro level",
   "source_urls": {
     "zhvi": "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
-    "zori": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv"
+    "zori": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+    "days_to_pending": "https://files.zillowstatic.com/research/public_csvs/med_doz_pending/Metro_med_doz_pending_uc_sfrcondo_sm_month.csv",
+    "inventory": "https://files.zillowstatic.com/research/public_csvs/invt_fs/Metro_invt_fs_uc_sfrcondo_sm_month.csv",
+    "new_listings": "https://files.zillowstatic.com/research/public_csvs/new_listings/Metro_new_listings_uc_sfrcondo_sm_month.csv",
+    "price_cut_share": "https://files.zillowstatic.com/research/public_csvs/perc_listings_price_cut/Metro_perc_listings_price_cut_uc_sfrcondo_sm_month.csv",
+    "sale_to_list": "https://files.zillowstatic.com/research/public_csvs/mean_sale_to_list/Metro_mean_sale_to_list_uc_sfrcondo_sm_month.csv"
   },
   "metro": "Greenville, SC",
   "home_value": {
@@ -229,5 +234,372 @@
         "value": 1570
       }
     ]
+  },
+  "market_vitals": {
+    "days_to_pending": {
+      "metric": "Median days to pending (list to under contract)",
+      "unit": "days",
+      "latest_month": "2026-06-30",
+      "greenville": {
+        "latest": 22,
+        "prior_month": 19,
+        "prior_year": 17,
+        "mom_pct": 15.8,
+        "yoy_pct": 29.4
+      },
+      "national": {
+        "latest": 18,
+        "prior_month": 18,
+        "prior_year": 18,
+        "mom_pct": 0.0,
+        "yoy_pct": 0.0
+      },
+      "series": [
+        {
+          "month": "2025-06-30",
+          "value": 17
+        },
+        {
+          "month": "2025-07-31",
+          "value": 19
+        },
+        {
+          "month": "2025-08-31",
+          "value": 23
+        },
+        {
+          "month": "2025-09-30",
+          "value": 26
+        },
+        {
+          "month": "2025-10-31",
+          "value": 28
+        },
+        {
+          "month": "2025-11-30",
+          "value": 30
+        },
+        {
+          "month": "2025-12-31",
+          "value": 38
+        },
+        {
+          "month": "2026-01-31",
+          "value": 45
+        },
+        {
+          "month": "2026-02-28",
+          "value": 44
+        },
+        {
+          "month": "2026-03-31",
+          "value": 34
+        },
+        {
+          "month": "2026-04-30",
+          "value": 22
+        },
+        {
+          "month": "2026-05-31",
+          "value": 19
+        },
+        {
+          "month": "2026-06-30",
+          "value": 22
+        }
+      ]
+    },
+    "inventory": {
+      "metric": "For-sale inventory (active listings)",
+      "unit": "homes",
+      "latest_month": "2026-06-30",
+      "greenville": {
+        "latest": 4502,
+        "prior_month": 4340,
+        "prior_year": 3626,
+        "mom_pct": 3.7,
+        "yoy_pct": 24.2
+      },
+      "national": {
+        "latest": 1354792,
+        "prior_month": 1300700,
+        "prior_year": 1329558,
+        "mom_pct": 4.2,
+        "yoy_pct": 1.9
+      },
+      "series": [
+        {
+          "month": "2025-06-30",
+          "value": 3626
+        },
+        {
+          "month": "2025-07-31",
+          "value": 3784
+        },
+        {
+          "month": "2025-08-31",
+          "value": 3888
+        },
+        {
+          "month": "2025-09-30",
+          "value": 3945
+        },
+        {
+          "month": "2025-10-31",
+          "value": 4006
+        },
+        {
+          "month": "2025-11-30",
+          "value": 3970
+        },
+        {
+          "month": "2025-12-31",
+          "value": 3790
+        },
+        {
+          "month": "2026-01-31",
+          "value": 3606
+        },
+        {
+          "month": "2026-02-28",
+          "value": 3518
+        },
+        {
+          "month": "2026-03-31",
+          "value": 3731
+        },
+        {
+          "month": "2026-04-30",
+          "value": 4029
+        },
+        {
+          "month": "2026-05-31",
+          "value": 4340
+        },
+        {
+          "month": "2026-06-30",
+          "value": 4502
+        }
+      ]
+    },
+    "new_listings": {
+      "metric": "New listings for the month",
+      "unit": "homes",
+      "latest_month": "2026-06-30",
+      "greenville": {
+        "latest": 1359,
+        "prior_month": 1422,
+        "prior_year": 1278,
+        "mom_pct": -4.4,
+        "yoy_pct": 6.3
+      },
+      "national": {
+        "latest": 417776,
+        "prior_month": 411446,
+        "prior_year": 416872,
+        "mom_pct": 1.5,
+        "yoy_pct": 0.2
+      },
+      "series": [
+        {
+          "month": "2025-06-30",
+          "value": 1278
+        },
+        {
+          "month": "2025-07-31",
+          "value": 1244
+        },
+        {
+          "month": "2025-08-31",
+          "value": 1175
+        },
+        {
+          "month": "2025-09-30",
+          "value": 1123
+        },
+        {
+          "month": "2025-10-31",
+          "value": 1087
+        },
+        {
+          "month": "2025-11-30",
+          "value": 985
+        },
+        {
+          "month": "2025-12-31",
+          "value": 822
+        },
+        {
+          "month": "2026-01-31",
+          "value": 747
+        },
+        {
+          "month": "2026-02-28",
+          "value": 795
+        },
+        {
+          "month": "2026-03-31",
+          "value": 1072
+        },
+        {
+          "month": "2026-04-30",
+          "value": 1295
+        },
+        {
+          "month": "2026-05-31",
+          "value": 1422
+        },
+        {
+          "month": "2026-06-30",
+          "value": 1359
+        }
+      ]
+    },
+    "price_cut_share": {
+      "metric": "Share of active listings with a price cut",
+      "unit": "percent",
+      "latest_month": "2026-06-30",
+      "greenville": {
+        "latest": 30.4,
+        "prior_month": 28.9,
+        "prior_year": 30.2,
+        "mom_pct": 5.1,
+        "yoy_pct": 0.7
+      },
+      "national": {
+        "latest": 24.4,
+        "prior_month": 23.3,
+        "prior_year": 25.6,
+        "mom_pct": 4.5,
+        "yoy_pct": -4.8
+      },
+      "series": [
+        {
+          "month": "2025-06-30",
+          "value": 30.2
+        },
+        {
+          "month": "2025-07-31",
+          "value": 31.3
+        },
+        {
+          "month": "2025-08-31",
+          "value": 31.4
+        },
+        {
+          "month": "2025-09-30",
+          "value": 32.1
+        },
+        {
+          "month": "2025-10-31",
+          "value": 31.9
+        },
+        {
+          "month": "2025-11-30",
+          "value": 30.2
+        },
+        {
+          "month": "2025-12-31",
+          "value": 25.9
+        },
+        {
+          "month": "2026-01-31",
+          "value": 23.9
+        },
+        {
+          "month": "2026-02-28",
+          "value": 23.3
+        },
+        {
+          "month": "2026-03-31",
+          "value": 25.9
+        },
+        {
+          "month": "2026-04-30",
+          "value": 27.3
+        },
+        {
+          "month": "2026-05-31",
+          "value": 28.9
+        },
+        {
+          "month": "2026-06-30",
+          "value": 30.4
+        }
+      ]
+    },
+    "sale_to_list": {
+      "metric": "Mean sale-to-list ratio",
+      "unit": "percent",
+      "latest_month": "2026-05-31",
+      "greenville": {
+        "latest": 98.0,
+        "prior_month": 97.6,
+        "prior_year": 98.0,
+        "mom_pct": 0.4,
+        "yoy_pct": -0.1
+      },
+      "national": {
+        "latest": 98.6,
+        "prior_month": 98.2,
+        "prior_year": 98.7,
+        "mom_pct": 0.4,
+        "yoy_pct": -0.1
+      },
+      "series": [
+        {
+          "month": "2025-05-31",
+          "value": 98.0
+        },
+        {
+          "month": "2025-06-30",
+          "value": 98.1
+        },
+        {
+          "month": "2025-07-31",
+          "value": 98.1
+        },
+        {
+          "month": "2025-08-31",
+          "value": 97.8
+        },
+        {
+          "month": "2025-09-30",
+          "value": 97.5
+        },
+        {
+          "month": "2025-10-31",
+          "value": 97.3
+        },
+        {
+          "month": "2025-11-30",
+          "value": 97.3
+        },
+        {
+          "month": "2025-12-31",
+          "value": 97.4
+        },
+        {
+          "month": "2026-01-31",
+          "value": 97.1
+        },
+        {
+          "month": "2026-02-28",
+          "value": 97.0
+        },
+        {
+          "month": "2026-03-31",
+          "value": 97.1
+        },
+        {
+          "month": "2026-04-30",
+          "value": 97.6
+        },
+        {
+          "month": "2026-05-31",
+          "value": 98.0
+        }
+      ]
+    }
   }
 }

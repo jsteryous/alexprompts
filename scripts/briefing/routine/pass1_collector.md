@@ -16,8 +16,14 @@ DATA DIVE, so you do not repeat an item cold and you follow up where promised);
   - src/data/greenvilleHousing.json: the Greenville, SC RESIDENTIAL pulse from Zillow Research,
     refreshed weekly. Shape: home_value (Zillow ZHVI, typical home value) and rent (Zillow ZORI,
     typical asking rent), each with `latest_month`, a `greenville` block and a `national` block
-    (each {latest, mom_pct, yoy_pct}), and a 24-month `series` of {month, value}. All numbers are
-    already computed; you do arithmetic on them only to state the Greenville-vs-national gap.
+    (each {latest, mom_pct, yoy_pct}), and a 24-month `series` of {month, value}. PLUS
+    `market_vitals`, five buyer-versus-seller leverage metrics: `days_to_pending` (median days
+    from list to under contract), `inventory` (active listings for sale), `new_listings` (new
+    listings that month), `price_cut_share` (percent of active listings with a price cut), and
+    `sale_to_list` (mean sale-to-list ratio, as a percent). Each vitals block has `metric`,
+    `unit` ("days", "homes", or "percent"), `latest_month`, `greenville` and `national` blocks
+    (each {latest, prior_month, prior_year, mom_pct, yoy_pct}), and a 13-month `series`. All
+    numbers are already computed; you do arithmetic on them only to state a gap or a change.
   - src/data/commercialSales.json: Greenville County commercial DEED records from the county's
     public ArcGIS service, refreshed weekly; fields PURNAME buyer, SELLNAME seller, SALEPRICE,
     SALEDATE, street fields, PIN parcel, LANDUSE, PROPTYPE, DEEDBOOK/DEEDPAGE, LOTSIZE acres,
@@ -57,7 +63,22 @@ greenvilleHousing.json:
      as description ("prices are bid up faster than the nation while rents are running cooler than
      the nation"). No verdict, no advice, no prediction. This is the raw material for the brief's
      signature sentiment line; Alex supplies the opinion himself.
-  This section is never NOTHING REAL; the pulse data always exists.
+  4. MARKET VITALS (the buyer-versus-seller leverage read, feeds its own output block below). From
+     `market_vitals`, report all five metrics, each with the Greenville latest value, its move
+     versus a year ago (use prior_year for the absolute so a share reads as points, "30% versus
+     30% a year ago," and use yoy_pct for the count metrics, "inventory up 24%"), and the national
+     figure beside it. For each, add ONE factual line on what the metric MEASURES for each side of
+     a deal, as market mechanics and never as advice: days_to_pending is how fast a listing goes
+     under contract (rising means listings sit longer); inventory and new_listings are how much a
+     buyer has to choose among and a seller competes against; price_cut_share is how often sellers
+     are cutting to get a deal done; sale_to_list is how close to asking homes actually sell.
+     You MAY state the factual balance the five together describe ("more listings and a longer
+     days-to-pending than a year ago mean sellers face more competition than they did"), because
+     that is what the indicators measure. You may NOT say what anyone should DO ("buyers should
+     offer under asking"), and you may NOT invent a verdict or mood. Source every figure to
+     "Zillow Research (market vitals), <latest_month>". Note that sale_to_list may carry an older
+     latest_month than the others; use each block's own latest_month.
+  This section is never NOTHING REAL; the pulse and vitals data always exist.
 
 SECTION B, WHO'S BUYING (the commercial-data spine, your scarce material). This section is
 STANDING every week, not a fallback. From commercialSales.json, produce BOTH parts:
@@ -141,6 +162,12 @@ or a rate move.>
 ## A. THE UPSTATE PULSE
 <home value + rent, Greenville vs national, with the as-of month and the two factual gap lines,
 then the facts-only read>
+
+## MARKET VITALS
+<the five leverage metrics from market_vitals, each with the Greenville latest, the year-ago
+figure or YoY move, the national figure, and its own as-of month; plus the one factual
+mechanics line per metric and, optionally, the factual balance the five describe. No advice, no
+verdict.>
 
 ## B. WHO'S BUYING
 <the active-buyer pattern flags, then the ONE rotating aggregate cut with its arithmetic and honest

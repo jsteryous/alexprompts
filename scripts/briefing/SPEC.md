@@ -37,23 +37,33 @@ The sections, in order:
    Greenville-vs-national GAP stated as fact ("prices bid up faster than the nation while rents
    run cooler"), never as a verdict. This is the sentiment read; Alex supplies any opinion in
    review.
-2. **Who's buying** — the proprietary spine, STANDING every week (not a fallback). From
+2. **Buyer or seller's market** — the leverage read, and the section that most directly serves a
+   real decision (it cashes the "better real estate decisions" promise). Five Zillow market-vitals
+   metrics from the same `greenvilleHousing.json`: median days to pending, for-sale inventory, new
+   listings, the share of listings with a price cut, and the sale-to-list ratio, each with its
+   year-over-year move and the national figure beside it. One factual line per side on what the
+   numbers MEASURE (buyers read more inventory and longer days to pending as room to negotiate;
+   sellers read fast pending times and near-asking sales as pricing still moving), stated as market
+   mechanics, never as advice or a verdict. Fresh where the price level is nearly flat: inventory,
+   days on market, and price cuts actually move month to month, so this section gives the brief
+   something new to say each week. Never NOTHING REAL.
+3. **Who's buying** — the proprietary spine, STANDING every week (not a fallback). From
    `src/data/commercialSales.json`: the active-buyer pattern flags (a `PURNAME` on its second or
    third purchase in the trailing year) PLUS one rotating aggregate cut of the 24-month dataset
    (top buyers of the quarter, dollar volume by month, price per acre year over year,
    property-type mix, or a corridor rollup, never repeating last week's), with the arithmetic
    shown and the honest limits stated. The most CoStar-like thing the brief publishes.
-3. **What traded** — 2 to 4 notable individual deals from the same dataset, each with the
+4. **What traded** — 2 to 4 notable individual deals from the same dataset, each with the
    denominator (per SF from `SQFEET`, per acre from `LOTSIZE`), buyer/seller, and its `SALEDATE`,
    opened with the recency caveat so nobody mistakes a months-old deed for this week's news.
-4. **Around town** — the week's local development news: the notable Upstate real-estate,
+5. **Around town** — the week's local development news: the notable Upstate real-estate,
    development, and business-expansion stories (a new or broken-ground project, a major-employer
    expansion, a big rezoning or approval, a capital move), pulled from local outlets plus official
    sources. The news-digest part of the brief. Every item cites its source; promoter figures are
    labeled CLAIM. The one section allowed to be `NOTHING REAL` in one line, though it rarely is.
-5. **Rates and money** — short (2 to 3 numbers), because every reader sees rates elsewhere.
+6. **Rates and money** — short (2 to 3 numbers), because every reader sees rates elsewhere.
    Freddie Mac PMMS 30-year, the 10-year Treasury, any Fed action or upcoming meeting.
-6. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
+7. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
    reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
 Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
@@ -66,8 +76,10 @@ scout and no angle pass, because the fixed format IS the angle.
 - `orchestrator.md` — guards, then collector → writer → editor, then a DRAFT insert tagged
   `briefing` and the review packet email.
 - `pass1_collector.md` — works the section checklist against TWO committed datasets plus web
-  search. The residential pulse comes from `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI,
-  Greenville vs national, built weekly by `.github/workflows/collect-housing.yml`); the
+  search. The residential pulse AND the five buyer-versus-seller market-vitals metrics (days to
+  pending, inventory, new listings, price-cut share, sale-to-list ratio) come from
+  `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI + vitals, Greenville vs national, built
+  weekly by `.github/workflows/collect-housing.yml`); the
   who's-buying analysis and the recently-traded deals come from `src/data/commercialSales.json`
   (the county deed dataset, refreshed Sundays 22:00 UTC by
   `.github/workflows/collect-commercial.yml`; both collectors share the Sunday-evening slot so the

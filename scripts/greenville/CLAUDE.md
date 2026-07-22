@@ -49,7 +49,11 @@ with web search (`pass0_scout.md`), so it never runs dry.
   Upstate Brief's "what sold" premise cannot carry the weekly read alone; this pulls the
   Greenville, SC **residential pulse** from the free Zillow Research CSVs (ZHVI typical home
   value + ZORI typical rent), each with the **national figure** so the brief can read the Upstate
-  against the country, and computes MoM/YoY. Monthly refresh (~3-week lag), no key. Output goes to
+  against the country, and computes MoM/YoY. It also pulls five **market-vitals** leverage metrics
+  (median days to pending, for-sale inventory, new listings, price-cut share, sale-to-list ratio;
+  the last two scaled to whole percents) into a `market_vitals` block, so the brief can report a
+  buyer-versus-seller read that actually moves week to week even when the price level is flat.
+  Monthly refresh (~3-week lag), no key. Output goes to
   **`src/data/greenvilleHousing.json`**. Pure functions unit-tested in `tests/test_housing.py`.
 - **`collect.py`** — the retired news collector (Google News RSS across local real-estate
   beats). Unwired; kept for reference and reversibility. Its `data/` hand-off

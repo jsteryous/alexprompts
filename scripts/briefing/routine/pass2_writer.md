@@ -30,6 +30,21 @@ numbers say). State the divergence as fact. Do NOT render a verdict, a worry, or
 draws the conclusion. Link the home-value and rent figures to their Zillow source once each, and
 give the as-of month.
 
+## Buyer or seller's market
+From the MARKET VITALS block, the leverage read and the section that most directly serves a real
+decision. In four to six sentences, or a tight bullet each, give the five metrics with their
+Greenville numbers and their year-over-year move: days to pending (translate as "the median time
+from listing to going under contract"), for-sale inventory, new listings, the share of listings
+cutting price, and the sale-to-list ratio (translate as "how close to asking homes actually sell").
+Put the national figure beside at least the first two so the reader sees the Upstate against the
+country. Then ONE plain sentence per side, as market mechanics: what a buyer reads in these numbers
+(more inventory and longer days to pending mean more room to negotiate than a year ago) and what a
+seller reads (homes still going under contract in about three weeks and selling near asking mean
+sharp pricing still moves). Describe the mechanics only. Do NOT tell anyone what to do ("offer
+below asking," "list now"), and do NOT invent a verdict or a mood; the numbers describe the
+balance and the reader decides. Link the vitals figures to their Zillow Research source once. Use
+each metric's own as-of month, since the sale-to-list figure may lag the others by a month.
+
 ## Who's buying
 From Section B, the differentiated core. Lead with the active buyers: name each buyer with 2 or more
 recorded purchases in the trailing year and state the pattern in one or two neutral sentences
@@ -89,8 +104,8 @@ a drumroll; plain English with any term of art translated in one clause (millage
 points, ZHVI as "Zillow's typical home value"); no filler and no banned phrases (game-changer, a new
 era, sent ripples, hidden gem, nestled, up-and-coming, vibrant, the rise of, it is worth noting,
 dive into). Emit plain standard markdown; do not backslash-escape characters. Bullets are allowed in
-"Who's buying," "What traded," and "Around town" only, and each bullet must still be complete
-sentences.
+"Buyer or seller's market," "Who's buying," "What traded," and "Around town" only, and each bullet
+must still be complete sentences.
 
 LENGTH. 600 to 900 words on a normal week. The pulse and the who's-buying analysis carry the brief,
 so it should reach the range on real material, never on padding; a dry Around-town week lands

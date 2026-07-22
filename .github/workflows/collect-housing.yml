@@ -1,8 +1,10 @@
 name: Greenville Residential Pulse
 
 # Refreshes the Greenville, SC residential market pulse (Zillow ZHVI home values
-# + ZORI rents, metro vs national) that feeds the Upstate Brief's residential
-# section. Pulls the free public Zillow Research CSVs and commits the lean dataset
+# + ZORI rents, PLUS five buyer-vs-seller market-vitals metrics: days to pending,
+# for-sale inventory, new listings, price-cut share, sale-to-list ratio; all metro
+# vs national) that feeds the Upstate Brief's residential + leverage sections.
+# Pulls the free public Zillow Research CSVs and commits the lean dataset
 # JSON. Zillow updates monthly (~3-week lag), so most weekly runs are no-ops; the
 # commit step simply skips when nothing changed. No secrets, no paid API.
 # Sibling to collect-commercial.yml. See scripts/greenville/housing.py.
