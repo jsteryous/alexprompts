@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-19 22:44 UTC",
+  "generated_at": "2026-07-26 22:54 UTC",
   "source": "Greenville County GIS (GreenvilleJS/Map_Layers_JS, Commercial layer)",
   "source_url": "https://www.gcgis.org/arcgis/rest/services/GreenvilleJS/Map_Layers_JS/MapServer/2/query",
   "min_price": 1000000,
   "months": 24,
-  "count": 264,
+  "count": 262,
   "sales": [
     {
       "pin": "0279000201000",
@@ -4197,38 +4197,6 @@
       "sqft": null,
       "lat": 34.852568,
       "lng": -82.3889
-    },
-    {
-      "pin": "0239060100701",
-      "buyer": "RIVERVIEW MHC LLC",
-      "seller": "CLAYTON RIVERVIEW MOBILE",
-      "price": 3447500,
-      "saleDate": "2024-07-24",
-      "street": "Dandelion Dr",
-      "propType": "COMMERCIAL",
-      "landUse": "0130",
-      "deedBook": 2725,
-      "deedPage": 4777,
-      "lotSize": 20.521,
-      "sqft": null,
-      "lat": 34.830769,
-      "lng": -82.47857
-    },
-    {
-      "pin": "0282000402708",
-      "buyer": "GRAND AVENUE INVESTMENTS",
-      "seller": "1305 PENDLETON LLC",
-      "price": 1420000,
-      "saleDate": "2024-07-24",
-      "street": "Grand Ave",
-      "propType": "COMMERCIAL",
-      "landUse": "0421",
-      "deedBook": 2725,
-      "deedPage": 4912,
-      "lotSize": 0.065,
-      "sqft": null,
-      "lat": 34.853194,
-      "lng": -82.359576
     }
   ]
 }
