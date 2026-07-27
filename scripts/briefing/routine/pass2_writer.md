@@ -250,17 +250,26 @@ OUTPUT FORMAT, exactly these labeled blocks and nothing else:
 invented stance. Note "[link]" for the human to attach.>
 
 ## CLIPS
-<THREE standalone lines Alex can paste straight into X, Nextdoor, or a text to a client, so he never
-has to hunt through the brief for something quotable.
+<THREE standalone lines Alex can paste straight into a channel, so he never has to hunt through the
+piece for something quotable. They are CHANNEL-AWARE, because his channels want different material
+and a clip that lands on X usually dies on Nextdoor.
+
 HARD RULE: each clip is a sentence copied VERBATIM from the ## ARTICLE above, not a new sentence
-written for this block. Verbatim is what makes a clip safe, because the verifier and the editor
-checked the article and did not check this block; a clip you reword here is unverified copy leaving
-the building. If no sentence in the article is clippable as written, fix the sentence IN the article
-and then copy it, which is the point of the clippable test.
-Pick three that stand alone and carry different material, for example the lead number, one
-who's-buying or around-town fact, and one rate or watch item. Number them 1 to 3. After each, note
-the character count and the section it came from, like "(148 chars, from the open)". Nothing in a
-clip may need a heading or a prior sentence to make sense.
-NEXTDOOR NOTE: mark which single clip is the best fit for a neighborhood audience, meaning it is
-useful and neutral rather than promotional, since Nextdoor readers react badly to anything that
-reads like an ad.>
+written for this block. Verbatim is what makes a clip safe, because the earlier passes checked the
+article and nobody checks this block; a clip reworded here is unverified copy leaving the building.
+If no sentence in the article is clippable as written, fix the sentence IN the article and then copy
+it, which is the point of the clippable-leads rule. Each clip must carry its figures and baselines
+intact; a clip trimmed of its evidence to look punchy is a failure.
+
+1. NEIGHBOR (Nextdoor and Facebook). The line a homeowner cares about: what their house is worth, how fast homes are selling, how much they would compete with, or a civic decision like a tax, road, or development vote. Draw it from the pulse, the leverage read, or Around town, and NEVER from the who's-buying or what-traded deed material, which is investor and professional content that reads as noise to a neighbor.
+   It must be USEFUL AND NEUTRAL, never promotional, and it must not read like an agent advertising.
+   No call to action, no link to the referral page, no "let me know if you are thinking of selling."
+   These are neighborhood forums and readers there punish anything ad-shaped.
+2. CAPITAL (X). The scarce material a general audience cannot get elsewhere: who is buying, with whose capital, what the deed records show, or the infrastructure and money behind the growth. Draw it from Who's buying, What traded, or the capital item in Around town.
+3. GENERAL. The single best stat in the piece regardless of channel, for anywhere else.
+
+After each, note the character count and the section it came from, like "(187 chars, from the open)".
+Nothing in a clip may need a heading or a prior sentence to make sense.
+If a given week genuinely has no sentence that fits a channel, write "NEIGHBOR: nothing this week
+fits a neighborhood audience" rather than forcing a bad clip. A missing clip is fine; a stretched one
+costs Alex more than it earns.>

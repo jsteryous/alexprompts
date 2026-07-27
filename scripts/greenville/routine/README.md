@@ -44,7 +44,7 @@ The orchestrator runs up to three passes per night:
    (cut or localize anything that would read identically for another city), enforces a
    one-un-copyable-local-asset floor and a per-section local-density floor, fact-checks that every
    load-bearing number carries an inline source, holds the fair-housing and not-advice lines, and
-   fixes SEO/structure and style, then outputs the corrected four-block piece the orchestrator
+   fixes SEO/structure and style, then outputs the corrected piece (now including ## CLIPS) the orchestrator
    publishes. It can prepend an `EDITOR FLAG:` line when a piece is irredeemably thin, which the
    orchestrator surfaces at the top of the review packet.
 

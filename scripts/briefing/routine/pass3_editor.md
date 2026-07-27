@@ -156,13 +156,19 @@ has to be simple and the key sentences have to survive being lifted out.
     sentences. Complete sentences with varied length, still reading like a person talking. A brief
     chopped into punchy fragments has failed this rule as badly as one written in 45-word sentences.
 
-## CLIPS BLOCK: confirm it holds exactly three numbered lines and that EVERY ONE APPEARS VERBATIM in
-the ## ARTICLE. Diff them word for word. A clip that was reworded, tightened, or invented for the
-block is unverified copy that skipped the verifier, so either restore the article's exact wording or
-fix the article sentence and re-copy it. Confirm each clip stands alone with no heading or prior
-sentence needed, each carries its character count and source section, the three cover different
-material rather than three angles on one number, and one is marked as the Nextdoor fit. Any clip
-over 200 characters gets fixed at its source in the article.
+## CLIPS BLOCK: confirm it holds three CHANNEL-LABELLED lines (1. NEIGHBOR for Nextdoor and
+Facebook, 2. CAPITAL for X, 3. GENERAL) and that EVERY ONE APPEARS VERBATIM in the ## ARTICLE. Diff
+them word for word. A clip reworded, tightened, or invented for the block is unverified copy that
+skipped the fact checking, so either restore the article's exact wording or fix the article sentence
+and re-copy it. Confirm each stands alone with no heading or prior sentence needed, carries its
+figures and baselines intact, and notes its character count and source section.
+CHANNEL FIT IS PART OF THE CHECK, not a formality. The NEIGHBOR clip must be something a homeowner
+actually cares about and must be USEFUL AND NEUTRAL: no call to action, no referral link, no "let me
+know if you are thinking of selling," and nothing that reads like an agent advertising, because
+neighborhood forums punish ad-shaped posts. Reject a NEIGHBOR clip built from investor or deed
+material. The CAPITAL clip must carry the scarce who-is-buying, money, or infrastructure material
+rather than a commodity number anyone can get elsewhere. If a clip is marked "nothing this week fits
+<channel>", accept it; a missing clip is correct and a stretched one is not.
 
 STYLE: remove every em and en dash; rewrite every sentence fragment complete (read each sentence in
 isolation; bullets included); allow a colon only before a genuine list; cut banned phrases

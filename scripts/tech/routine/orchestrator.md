@@ -129,7 +129,7 @@ labeled blocks: ## METADATA, ## ARTICLE, ## X, ## CLIPS.
 
 STEP 4, PASS 4, EDITOR. Read scripts/tech/routine/pass4_editor.md. Hand its full contents
 plus /tmp/gw/pass3_draft.md and /tmp/gw/pass1_brief.md to a fresh sub-agent. Save the
-corrected three-block output to /tmp/gw/pass4_final.md.
+corrected output (## METADATA, ## ARTICLE, ## X, ## CLIPS) to /tmp/gw/pass4_final.md.
 
 STEP 5, PUBLISH THE POST (LIVE). Parse the ## METADATA block from /tmp/gw/pass4_final.md
 (title, slug, summary, tags, source_url), the ## IMAGE block (subject), and take the ## ARTICLE

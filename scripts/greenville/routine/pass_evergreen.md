@@ -97,7 +97,7 @@ You do not fetch or render anything, and you must NOT scrape or link any photo. 
 
 Pick the single best-fitting subject. When in doubt, use `downtown-falls`. If (and only if) the piece is about an Upstate town or place with NO fitting subject above, you may instead name a geocodable `location` string (including the town and "SC") and the cron will fall back to a map or Street View of it; prefer a curated subject whenever one fits.
 
-## OUTPUT FORMAT (exactly these four labeled blocks and nothing else)
+## OUTPUT FORMAT (exactly these five labeled blocks and nothing else)
 
 ## METADATA
 - title: <the article headline, includes the target query's key words naturally>
@@ -117,16 +117,26 @@ Pick the single best-fitting subject. When in doubt, use `downtown-falls`. If (a
 <a single post under 280 characters that states the most useful specific from the piece and links it, written to be genuinely helpful so locals share it; then a blank line, then an optional 2 to 4 post numbered thread for a meatier topic, the last post pointing to the full guide on the website>
 
 ## CLIPS
-<THREE standalone lines Alex can paste straight into X, Nextdoor, or a text, so he never has to
-hunt through the piece for something quotable.
+<THREE standalone lines Alex can paste straight into a channel, so he never has to hunt through the
+piece for something quotable. They are CHANNEL-AWARE, because his channels want different material
+and a clip that lands on X usually dies on Nextdoor.
+
 HARD RULE: each clip is a sentence copied VERBATIM from the ## ARTICLE above, not a new sentence
-written for this block. Verbatim is what makes a clip safe, because the editor checked the article
-and does not check this block; a clip reworded here is unverified copy leaving the building. If no
-sentence in the article is clippable as written, fix the sentence IN the article and then copy it,
-which is the point of the clippable-leads rule.
-Pick three that stand alone and carry DIFFERENT material, not three angles on one number. Number
-them 1 to 3. After each, note the character count and the section it came from, like "(187 chars,
-from the open)". Each must carry its figures and baselines intact; a clip trimmed of its evidence to
-look punchy is a failure. Nothing in a clip may need a heading or a prior sentence to make sense.
-NEXTDOOR NOTE: mark which single clip is the best fit for a neighborhood audience, meaning it is
-useful and neutral rather than promotional, since those readers react badly to anything ad-shaped.>
+written for this block. Verbatim is what makes a clip safe, because the earlier passes checked the
+article and nobody checks this block; a clip reworded here is unverified copy leaving the building.
+If no sentence in the article is clippable as written, fix the sentence IN the article and then copy
+it, which is the point of the clippable-leads rule. Each clip must carry its figures and baselines
+intact; a clip trimmed of its evidence to look punchy is a failure.
+
+1. NEIGHBOR (Nextdoor and Facebook). The single most useful local specific in the guide, the one a neighbor would actually thank you for: a tax figure, a real cost, a commute number, a deadline. This is the primary channel for the evergreen guides, so make it the strongest of the three, and note that the same self-contained answer shape is what wins a featured snippet.
+   It must be USEFUL AND NEUTRAL, never promotional, and it must not read like an agent advertising.
+   No call to action, no link to the referral page, no "let me know if you are thinking of selling."
+   These are neighborhood forums and readers there punish anything ad-shaped.
+2. CAPITAL (X). The number in the guide that a broader audience would find surprising or argue about, if there is one. An evergreen guide often has none, and "nothing this week fits X" is a fine answer here.
+3. GENERAL. The single best stat in the piece regardless of channel, for anywhere else.
+
+After each, note the character count and the section it came from, like "(187 chars, from the open)".
+Nothing in a clip may need a heading or a prior sentence to make sense.
+If a given week genuinely has no sentence that fits a channel, write "NEIGHBOR: nothing this week
+fits a neighborhood audience" rather than forcing a bad clip. A missing clip is fine; a stretched one
+costs Alex more than it earns.>

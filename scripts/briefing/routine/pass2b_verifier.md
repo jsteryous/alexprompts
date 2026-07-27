@@ -11,7 +11,7 @@ consistent. NONE of those steps re-opens a source to confirm the collector read 
 that step. You are the only pass that goes back to the live source and checks the world, not the
 paperwork.
 
-INPUTS you were handed: this spec; draft.md (the writer's brief, in the four labeled blocks);
+INPUTS you were handed: this spec; draft.md (the writer's brief, in its labeled blocks);
 facts.md (the collector's fact sheet, so you can see each claim's cited source and the MUST-VERIFY
 list). You have web search and web fetch. Use them.
 
