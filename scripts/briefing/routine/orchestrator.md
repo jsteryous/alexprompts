@@ -22,8 +22,9 @@ broken build.
 WORKSPACE. Do ALL scratch work in /tmp/brief (run: mkdir -p /tmp/brief). Write every intermediate
 there (facts.md, draft.md, verified.md, final.md, done.txt). NEVER write scratch files into the git working
 tree and NEVER edit .gitignore. The only repo commands you run are reading input files (the pass
-specs, src/data/greenvilleHousing.json, src/data/commercialSales.json, scripts/briefing/watchlist.md),
-and the STEP 6 delivery (the drafts-branch push).
+specs, src/data/greenvilleHousing.json, scripts/briefing/watchlist.md), and the STEP 6 delivery
+(the drafts-branch push). Note that src/data/commercialSales.json is NO LONGER an input: the two
+commercial-deed sections were cut in July 2026 (see the writer spec). Do not hand it to any pass.
 
 ISOLATION (the quality lever). Run each pass as a separate sub-agent (Task tool, subagent_type
 "general-purpose") so it starts cold and sees ONLY the input you hand it: its spec file plus the
@@ -52,11 +53,11 @@ memory; the drafts branch is not (its done-logs have not persisted). Using the S
 query:
   `select title, slug, body_md, created_at from blog_posts where 'briefing' = any(tags) order by created_at desc limit 3;`
 From those bodies, distill a COVERED LEDGER to /tmp/brief/done.txt with these parts:
-  - COVERED DEEDS: every individual deal reported (buyer + street + sale date + price), so the
-    collector never re-serves a deed already published.
-  - FLAGGED BUYERS: every "Who's buying" pattern-flagged buyer with the date first flagged.
-  - DIVES USED: which rotating aggregate cut each recent brief ran (dollar volume by month, top
-    buyers, land math, type mix, corridor rollup), so this week picks a different one.
+  - ANGLES USED: which rotating submarket angle each recent brief ran under "Where the leverage is"
+    (price band versus leverage, tightest and loosest, the city rollup, inside the city of
+    Greenville, where new supply landed), so this week picks a different one.
+  - SUBMARKETS LED: which ZIPs led the section or the open recently, so the brief does not open on
+    the same ZIP three weeks running when the data has not changed.
   - AROUND TOWN COVERED: the local-news items already reported, so one only returns if it MOVED.
   - CARRY FORWARD / WATCH: last week's watch item and any carry-forward promise, so the collector
     follows up.
@@ -66,13 +67,13 @@ If Supabase returns no prior briefs and no draft-log exists, write "COVERED LEDG
 brief)" and continue.
 
 STEP 1, PASS 1, COLLECTOR. Read scripts/briefing/routine/pass1_collector.md. Hand its full
-contents plus /tmp/brief/done.txt, the full contents of BOTH committed datasets from the repo
-checkout (they refresh Sundays 22:00 UTC via GitHub Actions, before this run):
-  - src/data/greenvilleHousing.json (the fresh residential pulse: Zillow ZHVI home values + ZORI
-    rents, Greenville vs national), and
-  - src/data/commercialSales.json (the lagging county commercial deed dataset),
+contents plus /tmp/brief/done.txt and the full contents of the committed dataset from the repo
+checkout (it refreshes Sundays 22:00 UTC via GitHub Actions, before this run):
+  - src/data/greenvilleHousing.json (the Zillow residential read: ZHVI home values + ZORI rents
+    Greenville vs national, the five market-vitals leverage metrics, AND the `submarkets` block,
+    the same metrics per ZIP for every ZIP in Greenville County),
 and, if it exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent WITH WEB
-ACCESS. It works the fixed section checklist with web search plus the two datasets, and writes the
+ACCESS. It works the fixed section checklist with web search plus that dataset, and writes the
 sourced fact sheet. Save to /tmp/brief/facts.md.
   The collector's FIRST job in Section A is fetching the GGAR MLS monthly indicators (the local
   source of record, a PDF at scr.stats.showingtime.com), because that is the instrument Alex's
@@ -80,12 +81,11 @@ sourced fact sheet. Save to /tmp/brief/facts.md.
   in the sheet rather than fall back silently. Every residential figure in the sheet must carry its
   instrument label ("GGAR MLS" or "Zillow metro series") and its exact source URL from the dataset's
   source_urls map; a figure without both is not usable downstream.
-  STOP CONDITION: Sections A (pulse), B (who's buying), and E (rates) always have material.
-  Section C (what traded) is CONDITIONAL and comes back `NOTHING NEW` most weeks (the deed file
-  advances only every few months); that is normal and the writer omits the section. Section D
-  (around town) may come back NOTHING REAL, also normal (the writer states it in one line). The old
-  "every section dead" stop can effectively never trigger now that the pulse and the deed dataset
-  are always present; proceed unless the collector reports it truly cannot read either dataset.
+  STOP CONDITION: Sections A (pulse), B (where the leverage is), and D (rates) always have
+  material. Section C (around town) may come back NOTHING REAL, which is normal and the writer
+  states it in one line. The old "every section dead" stop can effectively never trigger now that
+  the pulse and the submarket data are always present; proceed unless the collector reports it
+  truly cannot read the dataset.
 
 STEP 2, PASS 2, WRITER. Read scripts/briefing/routine/pass2_writer.md. Hand its full contents
 plus ONLY /tmp/brief/facts.md to a fresh sub-agent. Save its full labeled output (## METADATA,

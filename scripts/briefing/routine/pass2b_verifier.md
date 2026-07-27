@@ -24,10 +24,10 @@ web:
   - The watch item's dated events (a scheduled vote, an FOMC decision, a filing deadline) and any
     market-probability figure ("a roughly 35% chance of a hike").
   - Anything the fact sheet marked CLAIM or reported-not-established.
-You do NOT re-derive the committed-dataset VALUES. The residential pulse and market vitals (sourced
-to Zillow Research CSVs) and the county deed figures and who's-buying math (sourced to the committed
-dataset / /tools/buyers-list) are ground-truthed from files the repo commits, and the editor re-does
-that arithmetic. Do not spend fetches confirming that 30.4 is 30.4.
+You do NOT re-derive the committed-dataset VALUES. The residential pulse, the market vitals, and the
+per-ZIP submarket figures (all sourced to Zillow Research CSVs) are ground-truthed from a file the
+repo commits, and the editor re-does that arithmetic. Do not spend fetches confirming that 30.4 is
+30.4.
 
 BUT YOU DO VERIFY HOW EVERY DATASET FIGURE IS CHARACTERIZED, and this is not optional. A correctly
 transcribed number can still be a false statement about the world, and that is the exact failure
@@ -47,9 +47,14 @@ the SENTENCE around the number:
     the gap measures methodology rather than the market. Cut the cross-series comparison or rewrite
     it to compare within one series.
   - AS-OF MONTH PRESENT? A stale or missing month is CORRECTED.
+  - SUBMARKET FIGURES DOUBLY SO. The "Where the leverage is" section reports Zillow's modeled
+    ZIP-LEVEL series. Confirm the draft says so, never compares a ZIP figure to a GGAR MLS number
+    (different instrument, and the section is the likeliest place for that error), and gives every
+    ZIP its town name. A ZIP-level number written as a claim about a NEIGHBORHOOD, or about a town
+    whose boundaries do not match the ZIP, is CORRECTED to the ZIP.
 You may spend a small number of fetches here, and they are worth more than any other fetch you make:
 if the draft leads on a residential claim, open the GGAR MLS report the collector cited and confirm
-the lead figure reads as written. If a "pulse" or "deed" number is internally impossible, flag it.
+the lead figure reads as written. If a pulse or submarket number is internally impossible, flag it.
 
 EVERY LINK MUST RESOLVE TO THE SPECIFIC THING IT CLAIMS. Open every URL in the draft. A link that
 returns a directory listing, a homepage, a 404, or a page that does not contain the cited figure is

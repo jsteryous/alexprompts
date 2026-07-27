@@ -50,17 +50,22 @@ reference only, nothing there runs on a schedule anymore.
 - **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A Mondays-only cloud
   routine (`briefing/routine/`, orchestrator plus collector → writer → **verifier** → editor; no
   scout, no angle, the fixed format is the angle) that writes ONE weekly briefing for `/briefing`
-  (tag `briefing`): rates and money from primary sources, what sold from the committed
-  `src/data/commercialSales.json` (per-SF/per-acre math + repeat-`PURNAME` pattern flags),
-  projects and permits, one employer/capital item, and one concrete watch indicator. The verifier
+  (tag `briefing`). **Written for BUYERS and SELLERS** (settled July 27, 2026), not investors and
+  not separately for the professionals: loan officers, attorneys, and agents read the same brief and
+  forward it to their own clients, which is the distribution. Sections: the Upstate vs the country,
+  a buyer-versus-seller leverage read, **Where the leverage is** (the ZIP-level submarket cut),
+  around town, rates from primary sources, and one concrete watch indicator. The verifier
   (`pass2b_verifier.md`) re-opens every external web source and corrects or cuts what will not
   confirm before the editor sees it (the fix for a piece that shipped with unverified web claims).
-  "What traded" is CONDITIONAL: it appears only when the deed file advances with a deal no prior
-  brief covered, so it is absent most weeks; cross-week dedup and carry-forward recall come from
-  the last few PUBLISHED briefs via Supabase (the `drafts`-branch done-log proved unreliable).
-  Inserts a **DRAFT** and emails a review packet with `/review`, one-click publish, AND one-click
-  `/api/broadcast` links. **Monday-perishable**: publish + broadcast Monday morning or delete;
-  the orchestrator blocks while a briefing DRAFT is pending. Optional steer file
+  **The two commercial-deed sections ("Who's buying" and "What traded") were CUT July 27, 2026**:
+  they ran about a third of the brief on data months stale and served an investor audience the brief
+  does not write for. They were replaced by the submarket read, built from the `submarkets` block
+  `greenville/housing.py` now collects. `commercialSales.json` is untouched and still powers
+  `/tools/buyers-list`; do not reintroduce a commercial section. Cross-week dedup and carry-forward
+  recall come from the last few PUBLISHED briefs via Supabase (the `drafts`-branch done-log proved
+  unreliable). Inserts a **DRAFT** and emails a review packet with `/review`, one-click publish, AND
+  one-click `/api/broadcast` links. **Monday-perishable**: publish + broadcast Monday morning or
+  delete; the orchestrator blocks while a briefing DRAFT is pending. Optional steer file
   `briefing/watchlist.md`. It took Greenville Works'
   weekly slot (Works is now ~monthly). See `briefing/SPEC.md` + `briefing/routine/README.md`.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.

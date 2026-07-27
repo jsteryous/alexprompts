@@ -4,6 +4,10 @@ name: Greenville Residential Pulse
 # + ZORI rents, PLUS five buyer-vs-seller market-vitals metrics: days to pending,
 # for-sale inventory, new listings, price-cut share, sale-to-list ratio; all metro
 # vs national) that feeds the Upstate Brief's residential + leverage sections.
+# It ALSO pulls four ZIP-level series (July 2026) for every ZIP in Greenville
+# County, which back the brief's "Where the leverage is" submarket section. Those
+# national Zip files are ~10MB each, so a run downloads ~50MB and takes a couple of
+# minutes; that is why the timeout is generous.
 # Pulls the free public Zillow Research CSVs and commits the lean dataset
 # JSON. Zillow updates monthly (~3-week lag), so most weekly runs are no-ops; the
 # commit step simply skips when nothing changed. No secrets, no paid API.
@@ -23,7 +27,7 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository

@@ -45,14 +45,23 @@ with web search (`pass0_scout.md`), so it never runs dry.
   goes to **`src/data/commercialSales.json`** (the Next app imports it), so the page is
   statically generated. Pure functions unit-tested in `tests/test_commercial.py`.
 - **`housing.py`** — a second DATA collector (NOT part of the content routine, live since July
-  2026), the fresh counterpart to `commercial.py`. County deed records lag ~4 months, so the
-  Upstate Brief's "what sold" premise cannot carry the weekly read alone; this pulls the
+  2026), and now the **only** dataset the Upstate Brief reads. County deed records lag ~4 months, so
+  the Brief's old "what sold" premise could not carry the weekly read; this pulls the
   Greenville, SC **residential pulse** from the free Zillow Research CSVs (ZHVI typical home
   value + ZORI typical rent), each with the **national figure** so the brief can read the Upstate
   against the country, and computes MoM/YoY. It also pulls five **market-vitals** leverage metrics
   (median days to pending, for-sale inventory, new listings, price-cut share, sale-to-list ratio;
   the last two scaled to whole percents) into a `market_vitals` block, so the brief can report a
   buyer-versus-seller read that actually moves week to week even when the price level is flat.
+  **Since July 27, 2026 it also builds a `submarkets` block**: the same four core metrics (ZHVI,
+  inventory, days to pending, price-cut share) at **ZIP level** for every ZIP in Greenville County,
+  ranked by inventory, each entry carrying its `city` town name and a `thin` flag (under 25
+  listings, so its monthly move is noise and the writer may not headline it). That block replaced
+  the two cut commercial-deed sections and powers the Brief's "Where the leverage is." The Zip
+  files are national and ~10MB each, so a full run downloads ~50MB and takes a couple of minutes;
+  `--no-submarkets` skips them, and `--county` / `--state` retarget the filter. Column lookup on
+  the Zip schema is BY NAME (the Zip files add State/City/Metro/CountyName before the months), and
+  the county filter checks state too, since several states have a Greenville County.
   Monthly refresh (~3-week lag), no key. Output goes to
   **`src/data/greenvilleHousing.json`**. Pure functions unit-tested in `tests/test_housing.py`.
 - **`collect.py`** — the retired news collector (Google News RSS across local real-estate
@@ -70,9 +79,11 @@ python -m greenville.commercial --min-price 1000000 --months 24 \
 python -m greenville.commercial --from-json snapshot.json             # replay, no network
 python -m unittest scripts.tests.test_commercial -v
 
-# residential pulse (Zillow ZHVI + ZORI) — the fresh weekly counterpart
+# residential pulse (Zillow ZHVI + ZORI + vitals + ZIP submarkets) — the Brief's only dataset
 python -m greenville.housing                                          # print a summary
 python -m greenville.housing --json-out ../src/data/greenvilleHousing.json  # refresh the dataset
+python -m greenville.housing --no-submarkets                          # skip the ~50MB Zip files
+python -m greenville.housing --county "Spartanburg County"            # retarget the submarkets
 python -m unittest scripts.tests.test_housing -v
 
 # retired news collector (unwired; reference only)
@@ -90,7 +101,8 @@ python -m greenville.collect --limit 15
   refresh) runs `greenville.housing` and commits `src/data/greenvilleHousing.json`. No secrets
   (the Zillow Research CSVs are public + free). Zillow refreshes monthly, so most weekly runs are
   no-ops (the commit step skips when nothing changed); the point is to be fresh before the Monday
-  Upstate Brief drafts. **Live since July 2026.**
+  Upstate Brief drafts. **Live since July 2026.** Its timeout is 20 minutes because the July 27,
+  2026 submarket addition pulls four more national ZIP-level CSVs (~50MB total).
 - **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
   the cover library from Wikimedia Commons and opens a PR with the new photos. Runs **FREE by
   default** (`--no-vision`, no key needed); the human PR review is the quality gate. Set the

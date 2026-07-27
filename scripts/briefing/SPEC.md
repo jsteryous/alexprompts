@@ -23,14 +23,22 @@ item is fact + source + one sentence of "so what." **A section with nothing real
 says so in one line.** The no-filler rule is enforced by the editor pass; a padded brief dies
 fast.
 
+**Who it is written for (settled July 2026).** The reader is a person in the Upstate about to buy
+or sell a home, plus the loan officers, closing attorneys, and agents who advise them. It is
+written for the BUYER and the SELLER; the professionals read the same brief and forward it to
+their own clients, which IS the distribution, so there is no second audience and no investor
+audience. The test for every item is whether it changes how a person shops for, prices, or times
+a house in Greenville County.
+
 **Why this order (revised July 2026).** County commercial deeds lag closings by MONTHS, so
 they can no longer carry a "this week" read (an early version led with sales that had recorded
 in March, published in July). The brief now leads with what is genuinely FRESH (the residential
-pulse and rates) and treats the deed data as the trend and the players, not this week's news.
+pulse and rates) and answers the reader's real question, WHERE, in the middle.
 The sections, in order:
 
 0. **The week in one number** — the open, no heading. One lead stat and why it matters; it may
-   come from any section (the pulse gap, a buyer pattern, a notable deed, a rate move).
+   come from any section (a GGAR MLS figure, the pulse gap, a submarket spread or mover, an
+   around-town item, a rate move).
 1. **The Upstate vs the country** — the fresh, differentiated lead. Greenville's typical home
    value and rent with their year-over-year moves set beside the national figures, from the
    committed `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI, refreshed weekly). The
@@ -47,30 +55,38 @@ The sections, in order:
    mechanics, never as advice or a verdict. Fresh where the price level is nearly flat: inventory,
    days on market, and price cuts actually move month to month, so this section gives the brief
    something new to say each week. Never NOTHING REAL.
-3. **Who's buying** — the proprietary spine, STANDING every week (not a fallback). From
-   `src/data/commercialSales.json`: the active-buyer pattern flags (a `PURNAME` on its second or
-   third purchase in the trailing year) PLUS one rotating aggregate cut of the 24-month dataset
-   (top buyers of the quarter, dollar volume by month, price per acre year over year,
-   property-type mix, or a corridor rollup, never repeating last week's), with the arithmetic
-   shown and the honest limits stated. The most CoStar-like thing the brief publishes.
-4. **What traded** (CONDITIONAL) — 1 to 3 notable individual deals from the same dataset, each with
-   the denominator (per SF from `SQFEET`, per acre from `LOTSIZE`), buyer/seller, and its `SALEDATE`,
-   opened with the recency caveat so nobody mistakes a months-old deed for this week's news. This
-   section runs ONLY when the deed file has advanced with a deal no prior brief covered (deduped
-   against the COVERED LEDGER). The file advances every few months, so most weeks nothing is new and
-   the section is simply ABSENT (never padded with old deeds). "Who's buying" carries the deed data
-   the rest of the time.
-5. **Around town** — the week's local development news: the notable Upstate real-estate,
+3. **Where the leverage is** — the proprietary spine, STANDING every week, and the section that
+   most directly serves a real decision. The metro figures above say WHETHER the county is
+   loosening; they cannot say WHERE, and where is the question a buyer actually has. From the
+   `submarkets` block of `src/data/greenvilleHousing.json`, the same Zillow metrics one level down
+   for every ZIP in Greenville County: the county SPREAD (the two ends plus the median across
+   reporting ZIPs), the MOVERS (the ZIPs whose inventory and price-cut share moved most year over
+   year), and ONE rotating angle (price band versus leverage, tightest and loosest, the city
+   rollup, inside the city of Greenville, or where new supply landed, never repeating last week's),
+   with the arithmetic shown. Every ZIP carries its town name; any ZIP flagged `thin` (under 25
+   listings) may never be headlined. Nobody else publishes this for the Upstate.
+4. **Around town** — the week's local development news: the notable Upstate real-estate,
    development, and business-expansion stories (a new or broken-ground project, a major-employer
    expansion, a big rezoning or approval, a capital move), pulled from local outlets plus official
    sources. The news-digest part of the brief. Every item cites its source; promoter figures are
    labeled CLAIM. The one section allowed to be `NOTHING REAL` in one line, though it rarely is.
-6. **Rates and money** — short (2 to 3 numbers), because every reader sees rates elsewhere.
+5. **Rates and money** — short (2 to 3 numbers), because every reader sees rates elsewhere.
    Freddie Mac PMMS 30-year, the 10-year Treasury, any Fed action or upcoming meeting.
-7. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
+6. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
    reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
 Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
+
+**What was CUT (July 2026), and why it stays cut.** Two commercial-deed sections, **Who's buying**
+(repeat-LLC purchase patterns plus a rotating aggregate cut of the county deed file) and **What
+traded** (individual notable deals with per-SF and per-acre math), used to sit where the submarket
+section now is. Together they ran about a THIRD of the brief's length while containing nothing from
+the week: the July 27, 2026 issue spent 2,772 of 8,041 characters citing an October 2025 portfolio
+transfer, August 2025 buyer flags, and a newest deed dated March 23, 2026, and had to apologize for
+the staleness twice in its own text. They existed because the ArcGIS scraper existed, not because
+the reader wanted them, and a homebuyer does not care which entity bought a dental building last
+August. `src/data/commercialSales.json` is untouched and still powers **`/tools/buyers-list`**,
+which is the right home for complete-but-lagging data. Do not reintroduce a commercial section.
 
 ## The engine (`scripts/briefing/routine/`)
 
@@ -83,23 +99,19 @@ re-opens the source to check.
 - `orchestrator.md` — guards, then collector → writer → verifier → editor, then a DRAFT insert
   tagged `briefing` and the review packet email. STEP 0B builds the COVERED LEDGER by recalling the
   last few PUBLISHED briefs from Supabase (the drafts-branch done-log was unreliable), so the
-  collector can dedup deeds, buyer flags, and data dives across weeks.
-- `pass1_collector.md` — works the section checklist against TWO committed datasets plus web
-  search. The residential pulse AND the five buyer-versus-seller market-vitals metrics (days to
-  pending, inventory, new listings, price-cut share, sale-to-list ratio) come from
-  `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI + vitals, Greenville vs national, built
-  weekly by `.github/workflows/collect-housing.yml`); the
-  who's-buying analysis and the recently-traded deals come from `src/data/commercialSales.json`
-  (the county deed dataset, refreshed Sundays 22:00 UTC by
-  `.github/workflows/collect-commercial.yml`; both collectors share the Sunday-evening slot so the
-  data is fresh before the Monday run) with the per-SF / per-acre and repeat-buyer math; around-town
+  collector can rotate the submarket angle and avoid re-serving around-town items across weeks.
+- `pass1_collector.md` — works the section checklist against ONE committed dataset plus web
+  search. The residential pulse, the five buyer-versus-seller market-vitals metrics (days to
+  pending, inventory, new listings, price-cut share, sale-to-list ratio), AND the per-ZIP
+  submarket read all come from `src/data/greenvilleHousing.json` (Zillow ZHVI + ZORI + vitals +
+  `submarkets`, Greenville vs national, built weekly by
+  `.github/workflows/collect-housing.yml`, Sundays 22:00 UTC so the data is fresh before the Monday
+  run). The GGAR MLS monthly indicators are fetched live as the local source of record; around-town
   projects, permits, and employer news, plus rates, come via web search. Deduped against the
-  COVERED LEDGER so it never re-serves last week's deeds, buyer flags, or data dive. Outputs a
-  sourced fact sheet with MUST-VERIFY and explicit markers: Around town may be `NOTHING REAL`, and
-  What traded may be `NOTHING NEW` (the usual case, since deeds lag months).
+  COVERED LEDGER so it never re-runs last week's submarket angle. Outputs a sourced fact sheet with
+  MUST-VERIFY and one explicit marker: Around town may be `NOTHING REAL`.
 - `pass2_writer.md` — renders the fact sheet into the fixed template in house style, plus
-  `## METADATA`, `## IMAGE`, `## X`, and `## CLIPS` blocks. Omits the What-traded section when the
-  sheet says `NOTHING NEW`. Runs the CLIPPABLE TEST on the open and every section's first sentence
+  `## METADATA`, `## IMAGE`, `## X`, and `## CLIPS` blocks. Runs the CLIPPABLE TEST on the open and every section's first sentence
   (stands alone with the place and quantity named, under 200 characters, one main clause, a short
   source tag inside the clip and the methodology caveat in the next sentence) and general
   readability limits (break sentences over 35 words, one subordinate clause, active voice, concrete
@@ -111,9 +123,10 @@ re-opens the source to check.
   VALUES (the editor re-does that arithmetic) but it does check how each is CHARACTERIZED (instrument
   named, geography honest, comparison same-source, as-of month present) and resolves every link.
 - `pass3_editor.md` — audits against the fact sheet AND the verification ledger: every dataset
-  figure traced, per-unit math re-checked, no cut claim reappears, the no-filler rule, the
-  conditional What-traded shape, fair housing, style, the not-advice footer, the `briefing` tag.
-  Passes the ledger through so the review packet can surface it as MUST-VERIFY.
+  figure traced, every rank/median/band average re-derived, no cut claim reappears, the no-filler
+  rule, no commercial section, fair housing (now the brief's top legal risk, since the submarket
+  section ranks named places weekly), style, the not-advice footer, the `briefing` tag. Passes the
+  ledger through so the review packet can surface it as MUST-VERIFY.
 - `watchlist.md` — OPTIONAL steer file: ongoing items Alex wants tracked week to week. The
   collector reads it when present; empty or missing is fine.
 
@@ -135,7 +148,7 @@ Draft-first like the other engines: the run inserts a DRAFT, the packet carries 
    project at 2 crons, so one daily run does double duty as the Monday 9am ET backstop), and
    `/api/finalize-greenville` also matches the `briefing` tag.
 
-Timeline: commercial data refreshes Sun 22:00 UTC (delay-tolerant) → cloud agent runs Mon ~08:00 UTC (4am ET)
+Timeline: housing data refreshes Sun 22:00 UTC (delay-tolerant) → cloud agent runs Mon ~08:00 UTC (4am ET)
 → packet in Alex's inbox by ~5am ET → he reviews with coffee, publishes and broadcasts by
 8am ET.
 

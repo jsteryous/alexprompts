@@ -195,5 +195,100 @@ class TestVitals(unittest.TestCase):
         self.assertEqual(ds["market_vitals"]["sale_to_list"]["unit"], "percent")
 
 
+# A ZIP-level file in the real Zip schema: four extra metadata columns (State,
+# City, Metro, CountyName) before the months. Two Greenville County ZIPs, one
+# out-of-county ZIP that must be filtered out, and one out-of-state row that
+# shares the county NAME (a real collision: Greenville County exists in several
+# states), which is why the filter checks state as well.
+_Z_HEADER = ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName",
+             "State", "City", "Metro", "CountyName",
+             "2025-06-30", "2026-05-31", "2026-06-30"]
+_Z_CSV = "\n".join([
+    ",".join(_Z_HEADER),
+    '1,100,29681,zip,SC,SC,Simpsonville,"Greenville, SC",Greenville County,263,330,339',
+    '2,300,29690,zip,SC,SC,Travelers Rest,"Greenville, SC",Greenville County,94,125,131',
+    '3,400,29302,zip,SC,SC,Spartanburg,"Spartanburg, SC",Spartanburg County,80,90,95',
+    '4,500,29681,zip,TX,TX,Elsewhere,"Dallas, TX",Greenville County,10,11,12',
+])
+
+
+class TestSubmarkets(unittest.TestCase):
+    def setUp(self):
+        import csv, io
+        self.rows = list(csv.reader(io.StringIO(_Z_CSV)))
+
+    def test_column_index_by_name(self):
+        self.assertEqual(housing.column_index(_Z_HEADER, "CountyName"), 8)
+        self.assertEqual(housing.column_index(_Z_HEADER, "City"), 6)
+        self.assertIsNone(housing.column_index(_Z_HEADER, "NotAColumn"))
+
+    def test_county_rows_filters_county_and_state(self):
+        rows = housing.county_rows(self.rows[1:], _Z_HEADER, "Greenville County", "SC")
+        self.assertEqual([r[2] for r in rows], ["29681", "29690"])
+
+    def test_county_rows_empty_when_columns_absent(self):
+        # A Metro-schema header has no CountyName, so the submarket parse must
+        # degrade to nothing rather than mis-index into month data.
+        self.assertEqual(housing.county_rows(self.rows[1:], _HEADER, "Greenville County", "SC"), [])
+
+    def test_build_submarket_metric_keys_by_zip_and_carries_city(self):
+        table = housing.build_submarket_metric(_Z_CSV, "Greenville County", "SC", 0, 1)
+        self.assertEqual(set(table), {"29681", "29690"})
+        self.assertEqual(table["29681"]["city"], "Simpsonville")
+        self.assertEqual(table["29681"]["latest"], 339)
+        self.assertEqual(table["29681"]["latest_month"], "2026-06-30")
+
+    def test_build_submarket_metric_scales_percent_metrics(self):
+        table = housing.build_submarket_metric(_Z_CSV, "Greenville County", "SC", 1, 100)
+        self.assertEqual(table["29690"]["latest"], 13100.0)  # 131 * 100
+
+    def test_build_submarket_metric_degrades_on_empty(self):
+        self.assertEqual(housing.build_submarket_metric("", "Greenville County", "SC", 0, 1), {})
+
+    def test_build_submarkets_ranks_by_inventory(self):
+        texts = {key: _Z_CSV for key, *_rest in housing.SUBMARKET_METRICS}
+        block = housing.build_submarkets(texts, "Greenville County", "SC")
+        self.assertEqual([z["zip"] for z in block["zips"]], ["29681", "29690"])
+        self.assertEqual(block["zips"][0]["city"], "Simpsonville")
+        self.assertEqual(block["county"], "Greenville County")
+        self.assertEqual(block["latest_month"], "2026-06-30")
+
+    def test_build_submarkets_flags_thin_zips(self):
+        thin_csv = _Z_CSV.replace(
+            '2,300,29690,zip,SC,SC,Travelers Rest,"Greenville, SC",Greenville County,94,125,131',
+            '2,300,29690,zip,SC,SC,Travelers Rest,"Greenville, SC",Greenville County,9,10,11')
+        texts = {key: thin_csv for key, *_rest in housing.SUBMARKET_METRICS}
+        block = housing.build_submarkets(texts, "Greenville County", "SC")
+        by_zip = {z["zip"]: z for z in block["zips"]}
+        self.assertTrue(by_zip["29690"]["thin"])   # 11 listings, under the floor
+        self.assertFalse(by_zip["29681"]["thin"])  # 339 listings
+
+    def test_build_submarkets_keeps_zip_missing_one_metric(self):
+        # Only inventory reports for this county; the other three metrics are blank
+        # feeds. The ZIP must survive with None for what is missing.
+        texts = {key: ("" if key != "inventory" else _Z_CSV)
+                 for key, *_rest in housing.SUBMARKET_METRICS}
+        block = housing.build_submarkets(texts, "Greenville County", "SC")
+        top = block["zips"][0]
+        self.assertIsNotNone(top["inventory"])
+        self.assertIsNone(top["days_to_pending"])
+        self.assertIsNone(top["price_cut_share"])
+
+    def test_build_submarkets_empty_without_texts(self):
+        block = housing.build_submarkets({}, "Greenville County", "SC")
+        self.assertEqual(block["zips"], [])
+        self.assertIsNone(block["latest_month"])
+
+    def test_build_dataset_includes_submarkets(self):
+        texts = {key: _Z_CSV for key, *_rest in housing.SUBMARKET_METRICS}
+        ds = housing.build_dataset(_CSV, _CSV, "Greenville, SC", None, texts)
+        self.assertEqual(ds["submarkets"]["county"], "Greenville County")
+        self.assertEqual(len(ds["submarkets"]["zips"]), 2)
+
+    def test_build_dataset_without_submarket_texts(self):
+        ds = housing.build_dataset(_CSV, _CSV, "Greenville, SC")
+        self.assertEqual(ds["submarkets"]["zips"], [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -9,10 +9,10 @@ verifier's work is not undone.
 
 FACT CHECK (the core duty): every DATASET figure in the draft (home values, rents, the
 Greenville-vs-national gaps, the vitals metrics and their moves, days to pending, inventory and
-listing counts, price-cut share, sale-to-list ratio, prices, per-SF and per-acre numbers, acres,
-units, buyer and seller names, deed references) must trace to the fact sheet. RE-DO THE ARITHMETIC
-on every per-unit number and every stated gap against the sheet; a wrong denominator or a flipped
-year-over-year comparison in a brief that professionals forward is fatal. A dataset figure with no
+listing counts, price-cut share, sale-to-list ratio, and every per-ZIP submarket figure, rank,
+median, or band average) must trace to the fact sheet. RE-DO THE ARITHMETIC on every derived number
+and every stated gap, rank, or median against the sheet; a flipped year-over-year comparison or a
+mis-ranked ZIP in a brief that professionals forward is fatal. A dataset figure with no
 source in the sheet is a fact error: cut it or flag it. For the EXTERNAL claims, do not re-fetch
 (the verifier did); instead confirm the draft MATCHES the verification ledger: every value the
 ledger marked CORRECTED reads with the corrected number, and nothing the ledger cut as UNCONFIRMED
@@ -22,15 +22,15 @@ it.
 
 THE FIXED TEMPLATE: confirm the shape, in order: a cold one-or-two-sentence open with the week's
 lead number ABOVE the first heading, then these ## headings in this order: "The Upstate vs the
-country," "Buyer or seller's market," "Who's buying," ("What traded" ONLY if the sheet had new
-deals), "Around town," "Rates and money," "What I'd watch"; then the one quiet /find-a-pro line;
-then the italic not-advice footer with the "current as of <date>" note, and nothing after it.
-"What traded" is CONDITIONAL: when the fact sheet's Section C is `NOTHING NEW`, the section is
-correctly ABSENT, and its absence is not a defect. If the draft included a "What traded" section
-anyway while the sheet said NOTHING NEW, or re-listed deeds the verification ledger or a prior
-brief already covered, CUT it. Section
-order is otherwise not optional; a brief that leads with rates or with a months-old deal has
-regressed to the old shape and must be reordered.
+country," "Buyer or seller's market," "Where the leverage is," "Around town," "Rates and money,"
+"What I'd watch"; then the one quiet /find-a-pro line; then the italic not-advice footer with the
+"current as of <date>" note, and nothing after it. Section order is not optional; a brief that leads
+with rates has regressed and must be reordered.
+NO COMMERCIAL SECTION (July 2026). "Who's buying" and "What traded," the two county commercial-deed
+sections, were CUT: the deeds lag closings by months and served an investor audience this brief does
+not write for. If the draft contains either heading, or any passage built on deed records, LLC buyer
+names, per-SF or per-acre commercial math, or "recently recorded" sales, CUT IT ENTIRELY and say so
+in the report. That data lives at /tools/buyers-list and does not belong in the brief.
 
 THE OPEN (held tightest, because it is the sentence that gets quoted and checked). Audit it against
 three tests and fix any failure:
@@ -60,20 +60,27 @@ but STRIP any instruction to act ("offer below asking," "list now," "wait") and 
 verdict or mood; the numbers describe the leverage and the reader concludes. Confirm the vitals
 figures link to their Zillow Research source once, and that each metric's own as-of month is used.
 
-WHO'S BUYING (the standing spine, present every week): confirm it carries BOTH the active-buyer
-pattern flags AND one aggregate cut. Every figure and every step of the aggregate's arithmetic must
-trace to the sheet's Section B; re-do the math. Confirm the honest-limits sentence (deed lag, the
-dataset's price floor) survived the edit, that /tools/buyers-list is linked exactly once here, and
-that the pattern flags state only what the deed data shows (names, dates, prices, locations) with no
-speculation about identity, intent, or what a buyer will do next. If the sheet named a LAST DATA
-DIVE, confirm this week's cut is a DIFFERENT one.
-
-WHAT TRADED (conditional, honestly recent, not new): if present, confirm the section opens with the
-recency caveat (these are the most recent DEEDS ON RECORD, which lag closings by weeks to months)
-and that every deal carries its SALEDATE, and that every deal is genuinely new (not in the
-verification ledger's or a prior brief's coverage, and not already surfaced under "Who's buying").
-Cut any wording that implies a sale closed this week. Re-do each per-unit number. If the sheet
-marked Section C `NOTHING NEW`, confirm the section is absent, and do not add it.
+WHERE THE LEVERAGE IS (the standing spine, present every week): confirm it carries the county SPREAD
+(the two ends plus the county middle), the MOVERS, and ONE rotating angle. Every figure, rank,
+median, and band average must trace to the sheet's Section B; re-do the math, including the median
+across reporting ZIPs and any average you are shown. Then check these five, which are where this
+section fails:
+  1. EVERY ZIP CARRIES ITS TOWN NAME on first mention. A bare "29615" is unreadable to the audience
+     and gets the town added from the sheet.
+  2. NO THIN ZIP IS HEADLINED. Any ZIP the sheet marks `thin` must not lead the section, appear in
+     the movers list, or anchor a rank. If one is mentioned at all, the draft must say its listing
+     count is too small for the monthly move to mean much. Cut or requalify otherwise.
+  3. SHARES READ AS POINTS. A price-cut share stated as a change must match `prior_year` in points
+     ("33%, against 28% a year ago"), never a percent-of-a-percent from `yoy_pct`. This is the
+     easiest arithmetic error in the section; check every one.
+  4. THE LIMITS SURVIVED. The sentence naming these as Zillow's modeled ZIP-level series (not MLS
+     counts, never compared to a GGAR figure) and the note that a ZIP is not a neighborhood must
+     both still be present after the edit.
+  5. MECHANIC, NOT VERDICT. "29615 has the county's longest days to pending at 25" stays; "29615 is
+     where the deals are," "the west side is cooling off," or any steer toward or away from a place
+     comes out. This section names places, so it is also the highest fair-housing risk in the brief;
+     see below.
+If the sheet named a LAST ANGLE, confirm this week's is a DIFFERENT one.
 
 THE NO-FILLER RULE (strip on sight): "Around town" is the only section allowed to be one honest line
 when the sheet marked it NOTHING REAL; if the draft inflated it with generalities, background, or
@@ -90,15 +97,19 @@ may only report the inquiry ("the number I could not find is X, so I am not asse
 item must be a concrete, dated, checkable indicator with what each outcome would mean, not a
 prediction or a mood.
 
-FAIR HOUSING: sales, pulse, and projects touch neighborhoods. Confirm every place is described by
-objective facts only (price, size, zoning, use, commute) and never by who lives there, who it is for,
-or coded proxies ("good area," "safe," "family-friendly," "desirable"). Cut or rewrite any line that
-crosses this. It is the headline legal risk on local content.
+FAIR HOUSING (now the brief's highest legal risk, because "Where the leverage is" ranks named
+places every week). Confirm every place is described by objective facts only (price, size, supply,
+days on market, zoning, use, commute) and never by who lives there, who it is for, or coded proxies
+("good area," "safe," "family-friendly," "desirable," "up and coming," "the nice part of town").
+Read the submarket section twice against this. Ranking ZIPs on supply and price cuts is factual and
+fine; characterizing what a ZIP is LIKE, or who should look there, is steering and is not. A
+sentence that pairs a place with any human descriptor rather than a measurement gets cut or
+rewritten to the measurement.
 
 LINKS: confirm every load-bearing figure links inline to its source at first mention, no source
-linked twice, the two Zillow pulse figures each linked once, /tools/buyers-list linked once from
-"Who's buying," no links to listing portals or competing agents, and the /find-a-pro line present
-exactly once, in the close, one sentence, low-pressure. Additionally, confirm every Zillow URL is a
+linked twice, the two Zillow pulse figures each linked once, the ZIP-level figures linked once from
+"Where the leverage is," no links to listing portals or competing agents, and the /find-a-pro line
+present exactly once, in the close, one sentence, low-pressure. Additionally, confirm every Zillow URL is a
 SPECIFIC metric CSV matching the figure it anchors, taken verbatim from the fact sheet's source_urls
 map. A bare directory such as files.zillowstatic.com/research/public_csvs/ is a broken citation and
 has already shipped once; replace it with the exact metric URL, or strip the link and name the
@@ -165,9 +176,11 @@ figures and baselines intact, and notes its character count and source section.
 CHANNEL FIT IS PART OF THE CHECK, not a formality. The NEIGHBOR clip must be something a homeowner
 actually cares about and must be USEFUL AND NEUTRAL: no call to action, no referral link, no "let me
 know if you are thinking of selling," and nothing that reads like an agent advertising, because
-neighborhood forums punish ad-shaped posts. Reject a NEIGHBOR clip built from investor or deed
-material. The CAPITAL clip must carry the scarce who-is-buying, money, or infrastructure material
-rather than a commodity number anyone can get elsewhere. If a clip is marked "nothing this week fits
+neighborhood forums punish ad-shaped posts. A submarket line naming the reader's own town is the
+strongest NEIGHBOR clip and should be preferred when one is clean. The CAPITAL clip must carry
+scarce money or infrastructure material from Around town rather than a commodity number anyone can
+get elsewhere; since the deed sections were cut, some weeks have nothing capital-shaped, and a
+residential stat dressed up as capital is a defect. If a clip is marked "nothing this week fits
 <channel>", accept it; a missing clip is correct and a stretched one is not.
 
 STYLE: remove every em and en dash; rewrite every sentence fragment complete (read each sentence in
@@ -175,7 +188,7 @@ isolation; bullets included); allow a colon only before a genuine list; cut bann
 (game-changer, a new era, sent ripples, hidden gem, nestled, up-and-coming, vibrant, the rise of, it
 is worth noting, dive into) and any filler; confirm jargon is translated at first use (including ZHVI
 and ZORI, days to pending, and sale-to-list ratio); confirm plain unescaped markdown. Bullets only
-in "Buyer or seller's market," "Who's buying," "What traded," and "Around town."
+in "Buyer or seller's market," "Where the leverage is," and "Around town."
 
 LENGTH: 600 to 900 words on a full week; shorter is correct when Around town is dry. If it runs past
 900, cut the weakest items, never the sourcing or the seams.

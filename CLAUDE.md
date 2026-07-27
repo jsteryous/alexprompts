@@ -46,14 +46,17 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 >    it gave up its weekly slot to the Upstate Brief in July 2026 and now runs about MONTHLY
 >    (a scheduler change; the engine is untouched).
 > 3. **The sphere artifact: the Upstate Brief** (`scripts/briefing/` → `/briefing`, added
->    July 9, 2026). ONE fixed-format Monday briefing a Greenville-area professional reads in
->    five minutes: rates, what actually sold in Greenville County (from the committed
->    commercial-sales dataset, with per-unit math and repeat-LLC flags), projects and permits,
->    one employer/capital note, one thing to watch. It exists for DISTRIBUTION: it is the
->    recurring deliverable for Alex's sphere calls ("want me to add you to the Monday brief?"),
->    the concrete promise behind the owned-list subscribe CTA, and it is Monday-perishable
->    (publish Monday morning or delete; never late). See `scripts/briefing/SPEC.md` and memory
->    `upstate-brief-weekly-engine`.
+>    July 9, 2026). ONE fixed-format Monday briefing read in five minutes. **Written for BUYERS
+>    and SELLERS** (settled July 27, 2026), which is the same audience the referral funnel serves:
+>    where the market stands, a buyer-versus-seller leverage read, **which ZIPs in Greenville
+>    County have the room to negotiate** (the submarket cut), local development news, rates, and one
+>    thing to watch. The professionals in Alex's sphere (loan officers, attorneys, agents) read that
+>    same brief and forward it to their own clients, so there is no second version and no investor
+>    audience. It exists for DISTRIBUTION: it is the recurring deliverable for Alex's sphere calls
+>    ("want me to add you to the Monday brief?"), the concrete promise behind the owned-list
+>    subscribe CTA, and it is Monday-perishable (publish Monday morning or delete; never late).
+>    The two commercial-deed sections it launched with were cut July 27, 2026 (months-stale data,
+>    wrong audience). See `scripts/briefing/SPEC.md` and memory `upstate-brief-weekly-engine`.
 >
 > **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
 > faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
@@ -236,15 +239,18 @@ the strategic-direction and two-track notes above.
   weekly slot went to the Upstate Brief; reschedule the Works cloud routine to about MONTHLY**
   (engine untouched). See `scripts/tech/routine/README.md`.
 - **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A **Mondays-only** cloud
-  routine (schedule ~08:00 UTC, after the Sunday 22:00 UTC commercial-sales data refresh) that writes
-  ONE fixed-format weekly briefing for `/briefing` (tag `briefing`): rates and money, what sold
-  (from `src/data/commercialSales.json`, with per-SF/per-acre math and repeat-`PURNAME` pattern
-  flags), projects and permits, one employer/capital item, one concrete watch indicator. No
+  routine (schedule ~08:00 UTC, after the Sunday 22:00 UTC housing-data refresh) that writes
+  ONE fixed-format weekly briefing for `/briefing` (tag `briefing`), **for buyers and sellers**:
+  the Upstate vs the country, a buyer-versus-seller leverage read, **Where the leverage is** (the
+  ZIP-level submarket cut across Greenville County: the spread, the movers, one rotating angle),
+  around town, rates from primary sources, one concrete watch indicator. No
   scout or angle pass (the format is the angle), but it does add a dedicated **verifier** between
   the writer and the editor that re-opens every external web source and cuts what will not confirm:
   collector → writer → verifier → editor, then a **DRAFT** insert and a review packet whose links
-  include the one-click `/api/broadcast` send. "What traded" is CONDITIONAL (absent most weeks,
-  since deeds lag months); cross-week dedup recalls recent published briefs from Supabase.
+  include the one-click `/api/broadcast` send. Cross-week dedup recalls recent published briefs from
+  Supabase. **The commercial-deed sections were CUT July 27, 2026** ("Who's buying" + "What traded":
+  a third of the brief on months-stale data for an investor audience the brief does not serve);
+  `commercialSales.json` still powers `/tools/buyers-list` and must not come back into the brief.
   **Monday-perishable:** Alex publishes + broadcasts Monday morning or deletes the draft; the
   orchestrator refuses to run while a briefing DRAFT is pending. Optional steer file
   `briefing/watchlist.md`. See `scripts/briefing/SPEC.md` + `scripts/briefing/routine/README.md`.

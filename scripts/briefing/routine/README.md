@@ -11,15 +11,22 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 
 - **A briefing, not an essay.** Fixed sections, hard caps, information density over voice. The
   format is the angle, so there is no scout pass and no angle pass.
-- **It runs on two committed datasets.** The FRESH lead is the residential pulse from
-  `src/data/greenvilleHousing.json` (Zillow ZHVI home values + ZORI rents, Greenville vs
-  national, built weekly by `.github/workflows/collect-housing.yml`), which updates monthly and
-  anchors the "Upstate vs the country" sentiment read. The SCARCE middle is
-  `src/data/commercialSales.json` (Greenville County commercial deeds, refreshed Sundays 22:00
-  UTC by `.github/workflows/collect-commercial.yml`), which powers the standing "Who's buying"
-  analysis (repeat-buyer flags + a rotating aggregate cut) and the "What traded" deals. The deed
-  data lags months, so it is reported as the trend and the players, never as this week's news.
-  That split (fresh pulse up top, deep proprietary data in the middle) is the July 2026 reshape.
+- **It is written for buyers and sellers.** Not for investors, and not separately for the
+  professionals. Loan officers, closing attorneys, and agents read the same brief and forward it to
+  their own clients, which is the distribution. The test for any item is whether it changes how a
+  person shops for, prices, or times a house in Greenville County.
+- **It runs on one committed dataset.** `src/data/greenvilleHousing.json` (built weekly by
+  `.github/workflows/collect-housing.yml`, Sundays 22:00 UTC) carries all three layers: the FRESH
+  lead is the residential pulse (Zillow ZHVI home values + ZORI rents, Greenville vs national); the
+  middle is the five market-vitals leverage metrics; and the SCARCE part is the `submarkets` block,
+  the same metrics per ZIP for every ZIP in Greenville County, which powers "Where the leverage is."
+  Nobody else publishes a ZIP-level leverage read for the Upstate.
+- **The commercial-deed sections were CUT (July 2026).** "Who's buying" and "What traded" ran on
+  `src/data/commercialSales.json` and took about a THIRD of the brief while carrying nothing from
+  the week (the July 27 issue cited an October 2025 portfolio transfer and a March 2026 deed, and
+  apologized for the lag twice). They served an investor audience the brief does not write for.
+  The dataset is untouched and still powers `/tools/buyers-list`, which is the right home for
+  complete-but-lagging data. Do not reintroduce a commercial section.
 - **It is Monday-perishable.** The other tracks are evergreen; a stale brief is deleted, never
   published late. The orchestrator's backpressure guard blocks the next run while an unreviewed
   brief draft is pending.
@@ -30,19 +37,19 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
    (the local source of record, fetched from the ShowingTime PDF, and the preferred lead figure
    because it is what agents and loan officers see in their own systems; `GGAR: UNAVAILABLE` when
    the fetch fails, never a silent fallback); the residential pulse (Greenville vs
-   national home value + rent, with the gap stated as fact) from `greenvilleHousing.json`; the
-   standing **Who's buying** analysis from `commercialSales.json` (repeat-`PURNAME` pattern flags
-   PLUS one rotating aggregate cut, never repeating a recent brief's, chosen from top buyers /
-   monthly volume / price per acre / type mix / corridor rollup); the **What traded** deals with
-   per-unit math, labeled recently-recorded, CONDITIONAL and deduped against the COVERED LEDGER so
-   it is `NOTHING NEW` most weeks; **Around town** local development news (notable projects,
+   national home value + rent, with the gap stated as fact) and the five market-vitals leverage
+   metrics, all from `greenvilleHousing.json`; the standing **Where the leverage is** submarket
+   analysis from that file's `submarkets` block (the county SPREAD with its median, the MOVERS on
+   inventory and price-cut share, PLUS one rotating angle, never repeating a recent brief's, chosen
+   from price band versus leverage / tightest and loosest / city rollup / inside the city of
+   Greenville / where new supply landed); **Around town** local development news (notable projects,
    expansions, and capital moves from local outlets plus official sources) and **Rates** (primary
    sources only: Freddie Mac PMMS / FRED) via web search; one concrete watch indicator. Around town
-   may be `NOTHING REAL` and What traded may be `NOTHING NEW`. Reads the optional `../watchlist.md`
-   steer file and the COVERED LEDGER for carry-forward items and the last data dive.
+   is the only section that may be `NOTHING REAL`. Reads the optional `../watchlist.md`
+   steer file and the COVERED LEDGER for carry-forward items and the last submarket angle.
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's lead
-   number, then The Upstate vs the country / Buyer or seller's market / Who's buying / What traded
-   *only when new* / Around town / Rates and money / What I'd watch, then one quiet `/find-a-pro`
+   number, then The Upstate vs the country / Buyer or seller's market / Where the leverage is /
+   Around town / Rates and money / What I'd watch, then one quiet `/find-a-pro`
    line and the not-advice footer), 600 to 900 words, house style, inline source links. Runs a
    **clippable test** on the open and every section's first sentence (stands alone, under 200 chars,
    one main clause, short source tag inside the clip with the methodology caveat in the NEXT
@@ -60,11 +67,14 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
    every link in the draft, because a correctly transcribed number can still be a false statement
    about the world.
 4. **`pass3_editor.md`** — audits against the fact sheet AND the verification ledger: every dataset
-   figure traced (including the Greenville-vs-national gaps), the per-unit arithmetic re-done, no
-   cut claim reappears and every corrected value stuck, the fixed section order, the conditional
-   What-traded shape, the recency caveat on deeds, the no-filler rule (Around town is one line when
-   dry, Rates stays short), no fabricated stance, fair housing, links, style, the `briefing` tag
-   (never `greenville` / `greenville works`).
+   figure traced (including the Greenville-vs-national gaps and every submarket rank, median, and
+   band average), the arithmetic re-done, no cut claim reappears and every corrected value stuck,
+   the fixed section order, **no commercial section**, the five submarket checks (every ZIP carries
+   its town name, no `thin` ZIP is headlined, shares read as points, the limits sentence survived,
+   mechanic not verdict), the no-filler rule (Around town is one line when dry, Rates stays short),
+   no fabricated stance, **fair housing** (now the top legal risk, since the submarket section ranks
+   named places every week), links, style, the `briefing` tag (never `greenville` /
+   `greenville works`).
 
 `orchestrator.md` wires them as cold sub-agents, guards first (same-week dupe; stale-draft
 backpressure), builds the COVERED LEDGER by recalling the last few PUBLISHED briefs from Supabase
