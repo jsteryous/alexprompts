@@ -26,32 +26,46 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 
 ## The pipeline
 
-1. **`pass1_collector.md`** — works the fixed checklist: the residential pulse (Greenville vs
+1. **`pass1_collector.md`** — works the fixed checklist: the **GGAR MLS monthly indicators** first
+   (the local source of record, fetched from the ShowingTime PDF, and the preferred lead figure
+   because it is what agents and loan officers see in their own systems; `GGAR: UNAVAILABLE` when
+   the fetch fails, never a silent fallback); the residential pulse (Greenville vs
    national home value + rent, with the gap stated as fact) from `greenvilleHousing.json`; the
    standing **Who's buying** analysis from `commercialSales.json` (repeat-`PURNAME` pattern flags
-   PLUS one rotating aggregate cut, never repeating last week's, chosen from top buyers / monthly
-   volume / price per acre / type mix / corridor rollup); the **What traded** deals with per-unit
-   math, labeled recently-recorded; **Around town** local development news (notable projects,
-   expansions, and capital moves from local outlets plus official sources) and **Rates** via web
-   search; one concrete watch indicator. Only Around town may be `NOTHING REAL`. Reads the
-   optional `../watchlist.md` steer file and last week's done-log for carry-forward items and the
-   last data dive.
+   PLUS one rotating aggregate cut, never repeating a recent brief's, chosen from top buyers /
+   monthly volume / price per acre / type mix / corridor rollup); the **What traded** deals with
+   per-unit math, labeled recently-recorded, CONDITIONAL and deduped against the COVERED LEDGER so
+   it is `NOTHING NEW` most weeks; **Around town** local development news (notable projects,
+   expansions, and capital moves from local outlets plus official sources) and **Rates** (primary
+   sources only: Freddie Mac PMMS / FRED) via web search; one concrete watch indicator. Around town
+   may be `NOTHING REAL` and What traded may be `NOTHING NEW`. Reads the optional `../watchlist.md`
+   steer file and the COVERED LEDGER for carry-forward items and the last data dive.
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's lead
-   number, then The Upstate vs the country / Who's buying / What traded / Around town / Rates and
-   money / What I'd watch, then one quiet `/find-a-pro` line and the not-advice footer), 600 to
-   900 words, house style, inline source links. Emits `## METADATA`, `## IMAGE`, `## ARTICLE`,
-   `## X`.
-3. **`pass3_editor.md`** — audits against the fact sheet: every figure traced (including the
-   Greenville-vs-national gaps), the per-unit arithmetic re-done, the fixed section order,
-   the recency caveat on deeds, the no-filler rule (Around town is one line when dry, Rates stays
-   short), no fabricated stance, fair housing, links, style, the `briefing` tag (never
-   `greenville` / `greenville works`).
+   number, then The Upstate vs the country / Buyer or seller's market / Who's buying / What traded
+   *only when new* / Around town / Rates and money / What I'd watch, then one quiet `/find-a-pro`
+   line and the not-advice footer), 600 to 900 words, house style, inline source links. Emits
+   `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`.
+3. **`pass2b_verifier.md`** — the truth gate, between writer and editor. Independently re-opens
+   every EXTERNAL web source (rates, around-town items, watch dates, any CLAIM figure), confirms or
+   corrects each claim against the PRIMARY source, cuts what will not confirm, and appends a
+   `## VERIFICATION LEDGER`. Committed-dataset VALUES are ground truth and are left to the editor's
+   arithmetic re-check, but the verifier DOES check how each dataset figure is **characterized**
+   (instrument named, geography honest, comparison same-source, as-of month present) and resolves
+   every link in the draft, because a correctly transcribed number can still be a false statement
+   about the world.
+4. **`pass3_editor.md`** — audits against the fact sheet AND the verification ledger: every dataset
+   figure traced (including the Greenville-vs-national gaps), the per-unit arithmetic re-done, no
+   cut claim reappears and every corrected value stuck, the fixed section order, the conditional
+   What-traded shape, the recency caveat on deeds, the no-filler rule (Around town is one line when
+   dry, Rates stays short), no fabricated stance, fair housing, links, style, the `briefing` tag
+   (never `greenville` / `greenville works`).
 
 `orchestrator.md` wires them as cold sub-agents, guards first (same-week dupe; stale-draft
-backpressure), recalls last week's ITEMS COVERED from the `drafts` branch, inserts the post as a
-**DRAFT** tagged `briefing`, and delivers the review packet (MUST-VERIFY list, the brief, the X
-post, and three links: `/review` edit, one-click publish, one-click broadcast) by Gmail and to
-`drafts/upstate-brief-<date>.md`.
+backpressure), builds the COVERED LEDGER by recalling the last few PUBLISHED briefs from Supabase
+(the `drafts`-branch done-log proved unreliable, so recall no longer depends on it), inserts the
+post as a **DRAFT** tagged `briefing`, and delivers the review packet (the verification ledger's
+CHECK-THESE items and the MUST-VERIFY list, the brief, the X post, and three links: `/review` edit,
+one-click publish, one-click broadcast) by Gmail and to `drafts/upstate-brief-<date>.md`.
 
 ## Cadence and the Monday timeline
 

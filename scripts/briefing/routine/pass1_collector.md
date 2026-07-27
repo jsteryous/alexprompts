@@ -11,8 +11,15 @@ data as what it honestly is: the trend and the players, not this week's news. So
 spine is now "Who's buying" (a standing analysis of the deed dataset), and individual deals are
 reported as "recently recorded," never as if they closed last week.
 
-INPUTS you were handed: this spec; done.txt (last week's ITEMS COVERED, CARRY FORWARD, and LAST
-DATA DIVE, so you do not repeat an item cold and you follow up where promised);
+INPUTS you were handed: this spec; done.txt, the COVERED LEDGER built from the last few PUBLISHED
+briefs (the deeds already reported with their dates, the buyers already pattern-flagged with the
+date first flagged, the aggregate dives already run, the around-town items already covered, and
+last week's watch and CARRY FORWARD items). Treat everything in the ledger as already said: you
+follow up where a promise was made, and you do NOT re-serve a deed, a buyer flag, or a data dive
+that the ledger already shows, because a briefing that repeats last week reads as filler and
+professionals stop opening it. This matters most for the county deed dataset, which advances only
+every few months: most weeks it holds no new record, so the honest move is to say nothing new
+traded, never to re-list the same deeds;
   - src/data/greenvilleHousing.json: the Greenville, SC RESIDENTIAL pulse from Zillow Research,
     refreshed weekly. Shape: home_value (Zillow ZHVI, typical home value) and rent (Zillow ZORI,
     typical asking rent), each with `latest_month`, a `greenville` block and a `national` block
@@ -34,14 +41,37 @@ RULES THAT APPLY TO EVERY SECTION:
 - Every figure gets its source: the URL for a web item, "Zillow Research (ZHVI/ZORI), <latest_month>"
   for a pulse figure, or "county ArcGIS dataset (deed <DEEDBOOK>/<DEEDPAGE>)" for a sale. No number
   without a source, ever.
+- NAME THE PANEL, ALWAYS (the rule that exists because a brief shipped without it). Every residential
+  figure carries WHICH INSTRUMENT measured it and WHAT GEOGRAPHY it covers, in the fact sheet, so the
+  writer cannot render it as a bare fact about "Greenville." Zillow's series measure Zillow's modeled
+  panel for the "Greenville, SC" METRO AREA, which is wider than the county and wider than the MLS
+  territory. The GGAR MLS series measure closed and listed transactions inside the association's
+  territory. These are different instruments and they legitimately print different numbers for the
+  same month. Write "Zillow metro series" or "GGAR MLS" next to every figure. NEVER write a Zillow
+  panel figure as "Greenville's active listings" or "homes in Greenville," which is the phrasing that
+  makes a correct number look like a false one to any reader who checks the MLS.
+- SAME-SOURCE COMPARISONS ONLY (hard rule). A Greenville figure may only be compared against a
+  national figure FROM THE SAME SERIES, and a year-over-year move only against the same series' own
+  prior year. Never set a Zillow local number beside a Realtor.com, NAR, Redfin, or MLS national
+  number, and never set an MLS local number beside a Zillow national number. Those series use
+  different panels, denominators, and smoothing, so the gap between them measures the methodology
+  and not the market. When two instruments disagree about the same thing, REPORT BOTH with their
+  names and say the direction agrees and the magnitude does not; that is the honest move and it
+  reads as rigor rather than as a hedge.
+- PASS THE EXACT SOURCE URL THROUGH. greenvilleHousing.json carries a `source_urls` map with one
+  specific CSV URL per metric (zhvi, zori, days_to_pending, inventory, new_listings,
+  price_cut_share, sale_to_list). Copy the EXACT matching URL next to each figure you report. Do not
+  hand the writer a bare directory, a truncated path, or a homepage; the writer will link whatever
+  you give it, and a link that does not resolve to the specific series is treated as an unsourced
+  number by the verifier.
 - Prefer primary sources: FRED, Freddie Mac, Zillow Research, the county's agendas and filings,
   the city's official pages, SEC filings, the utility. Local outlets (Greenville News, Post and
   Courier Greenville, Upstate Business Journal, GSA Business Report) are fine for what happened;
   label their unverified figures as reported, not established.
 - Label promoter numbers (a developer's job count, an economic-development group's impact figure)
   as CLAIM.
-- Anything already in last week's ITEMS COVERED is only worth including if it MOVED this week, and
-  then note "covered last week; new development is X."
+- Anything already in the COVERED LEDGER is only worth including if it MOVED this week, and then
+  note "covered last week; new development is X."
 - NEVER fabricate a stance. You report what the numbers SHOW, including a divergence ("Greenville
   is up more than the national figure"); you never say whether that is good, worrying, or what
   anyone should do. Alex adds real interpretation in review.
@@ -51,8 +81,25 @@ RULES THAT APPLY TO EVERY SECTION:
 
 WORK THE CHECKLIST IN ORDER (this order matches the writer's template):
 
-SECTION A, THE UPSTATE PULSE (fresh, differentiated, the sentiment read). From
-greenvilleHousing.json:
+SECTION A, THE UPSTATE PULSE (fresh, differentiated, the sentiment read).
+
+  0. FIRST, THE LOCAL SOURCE OF RECORD. Before you touch the Zillow file, fetch the Greater
+     Greenville Association of REALTORS monthly indicators, which is the instrument Alex's readers
+     (agents, loan officers, attorneys) actually see and the one they will check you against:
+       https://scr.stats.showingtime.com/docs/mmi/x/MarketActivityfortheGreaterGreenvilleAssociationofREALTORS
+     It is a PDF of monthly MLS indicators. Pull the latest month's figures with their year-earlier
+     values and percent changes: inventory of homes for sale, new listings, pending sales, closed
+     sales, median sale price, average sale price, days on market until sale, percent of list price
+     received, and months supply. Note the report's "current as of" date and the month it covers.
+     Source every one to "GGAR MLS (via ShowingTime / South Carolina REALTORS), <month>". This is
+     the PREFERRED source for any claim about the Greenville market as a local professional
+     experiences it, and it should carry the brief's LEAD whenever it has a clean number.
+     If the PDF will not parse or the fetch fails, say so explicitly in the fact sheet under a
+     `GGAR: UNAVAILABLE` line with what you tried; the brief then leads on a Zillow figure that is
+     clearly labeled as Zillow's metro series. Do NOT silently fall back and leave the reader
+     thinking an MLS number was reported.
+
+  Then, from greenvilleHousing.json:
   1. Home value: state Greenville's latest ZHVI, its MoM and YoY, and the national ZHVI YoY beside
      it. Then the GAP in one factual line ("Greenville home values rose X% year over year versus
      Y% nationally, so the metro is appreciating faster than / in line with / slower than the
@@ -87,10 +134,15 @@ STANDING every week, not a fallback. From commercialSales.json, produce BOTH par
      every buyer with 2 or more purchases in the trailing 12 months, most active first: the buyer
      name, each purchase with date/price/street, and one neutral line on what the pattern looks
      like (assemblage on one corridor, a multi-property portfolio buyer, a lender taking property
-     back). Do NOT speculate about identity or motive beyond what the data shows. If, rarely, no
-     buyer has 2+, say so and lean the section on part 2.
+     back). Do NOT speculate about identity or motive beyond what the data shows. DEDUP against the
+     COVERED LEDGER: a buyer already flagged in a recent brief with NO new purchase since is not
+     re-reported in full; drop it, or compress it to one line ("<Buyer> remains active, as first
+     flagged <date>; no new deed since"). Lead with buyers that are new or newly active this week.
+     If, rarely, no buyer has 2+, say so and lean the section on part 2.
   2. ONE ROTATING AGGREGATE CUT (the most CoStar-like thing the brief publishes). Pick ONE dive
-     from this menu, and NEVER the same dive as last week's (done.txt notes the LAST DATA DIVE):
+     from this menu, and NEVER a dive the COVERED LEDGER shows a recent brief already ran (rotate
+     through the menu; if all were used recently, pick the one used longest ago and cut it on fresh
+     numbers):
        - Top buyers of the trailing quarter: purchase count and total dollars per normalized
          PURNAME, top 5, with the properties behind the biggest one.
        - Dollar volume by month: the trailing 6 months of total sale dollars and deal counts, and
@@ -105,18 +157,25 @@ STANDING every week, not a fallback. From commercialSales.json, produce BOTH par
      lag closings by weeks to months, the dataset has a minimum-price floor and a lookback window,
      and buyer names are as recorded on the deed. Source every line to "county ArcGIS dataset".
 
-SECTION C, WHAT TRADED (individual notable deals, honestly recent-not-new). From
-commercialSales.json:
-  1. List the newest sales not covered last week, sorted by SALEDATE descending. Pick the 2 to 4
-     most notable by price, buyer, or story (a big number, a known corridor, an out-of-state or
-     institutional-looking buyer, a price that looks high or low for the type). State plainly that
-     these are the most recent DEEDS ON RECORD and give each SALEDATE; do not imply they closed
-     this week.
-  2. For each: buyer (PURNAME), seller (SELLNAME), price, sale date, street, property type
-     (PROPTYPE/LANDUSE), and THE DENOMINATOR: price per SF when SQFEET > 0, price per acre when
-     LOTSIZE > 0. Show your arithmetic (e.g. "$4,200,000 / 48,000 SF = $87.50/SF"). If both fields
-     are 0 or missing, say "no size on record; no per-unit math."
-  A deal already surfaced under Section B's pattern flags does not need to be repeated here.
+SECTION C, WHAT TRADED (CONDITIONAL, individual notable deals, only when genuinely new). From
+commercialSales.json. This section runs ONLY when the dataset has advanced with a notable deed the
+brief has never reported. The deed data lags months, so most weeks it holds nothing new, and on
+those weeks this section is simply ABSENT, not padded with old deeds. Do NOT force 2 to 4 deals.
+  1. Sort sales by SALEDATE descending. Drop every deal that appears in the COVERED LEDGER (match on
+     buyer + street + sale date, or the deed reference). From what REMAINS, keep only deals notable
+     by price, buyer, or story (a big number, a known corridor, an out-of-state or
+     institutional-looking buyer, a price that looks high or low for the type), and never a deal
+     already surfaced under Section B's pattern flags this week.
+  2. If NOTHING new and notable remains after the ledger cut, write exactly `NOTHING NEW` under this
+     section with one line stating the newest deed date on record and that it is unchanged from a
+     prior brief. The writer will then OMIT the What-traded section entirely; that is the correct,
+     honest outcome and is expected most weeks.
+  3. When new deals DO remain, list the 1 to 3 most notable. State plainly that these are the most
+     recent DEEDS ON RECORD and give each SALEDATE; do not imply they closed this week. For each:
+     buyer (PURNAME), seller (SELLNAME), price, sale date, street, property type (PROPTYPE/LANDUSE),
+     and THE DENOMINATOR: price per SF when SQFEET > 0, price per acre when LOTSIZE > 0. Show your
+     arithmetic (e.g. "$4,200,000 / 48,000 SF = $87.50/SF"). If both fields are 0 or missing, say
+     "no size on record; no per-unit math."
 
 SECTION D, AROUND TOWN (the week's local development news; the news-digest part of the brief, and
 the only section that may be dry). Surface the notable Upstate real-estate, development, and
@@ -137,11 +196,17 @@ established. Include a story covered last week only if it MOVED. This section wi
 but if genuinely nothing cleared the bar, NOTHING REAL plus the one line on what you checked.
 
 SECTION E, RATES AND MONEY (short, commodity, but always fresh). Web search for: the current
-Freddie Mac PMMS 30-year fixed average (released Thursdays; cite freddiemac.com or FRED series
-MORTGAGE30US) and the change from last week; the 10-year Treasury yield (FRED DGS10 or
-treasury.gov); any Fed action this past week or FOMC meeting in the next two weeks
-(federalreserve.gov or a major wire). Keep it to the two or three numbers that matter, each dated
-and sourced. This section is never NOTHING REAL; rates always exist.
+Freddie Mac PMMS 30-year fixed average (released Thursdays) and the change from last week; the
+10-year Treasury yield; any Fed action this past week or FOMC meeting in the next two weeks. HARD
+SOURCE RULE, because the verifier will enforce it and cut a claim that fails it: the mortgage
+figure's source of record MUST be freddiemac.com/pmms or FRED series MORTGAGE30US, and the Treasury
+yield's MUST be FRED (DGS10) or treasury.gov. Do NOT source either to a press-release aggregator, a
+mortgage-marketing site, or a news roundup; if that is all a search surfaces, open the primary
+series and read the number there. Any market-probability figure (odds of a hike or cut) must carry
+a named source that actually prints that number (CME FedWatch or a wire quoting it); if you cannot
+find one, do not state a probability. Any Fed action or FOMC date comes from federalreserve.gov or
+a major wire, and confirm any day-of-week against the calendar. Keep it to the two or three numbers
+that matter, each dated and sourced. This section is never NOTHING REAL; rates always exist.
 
 SECTION F, THE WATCH. Propose ONE concrete, checkable indicator for next week or the coming weeks,
 grounded in what you found: a council vote scheduled, an FOMC decision, a filing deadline, a
@@ -160,8 +225,13 @@ leads. The lead may come from any section: the pulse gap, an active-buyer patter
 or a rate move.>
 
 ## A. THE UPSTATE PULSE
-<home value + rent, Greenville vs national, with the as-of month and the two factual gap lines,
-then the facts-only read>
+<FIRST the GGAR MLS block (the local source of record): the latest month's inventory, new listings,
+pending sales, median and average sale price, days on market until sale, percent of list price
+received, and months supply, each with its year-earlier value and percent change, the covered month,
+and the report's "current as of" date. Or `GGAR: UNAVAILABLE` plus what you tried.
+THEN home value + rent from the Zillow metro series, Greenville vs national, with the as-of month
+and the two factual gap lines, then the facts-only read. Every figure labeled with its instrument
+("GGAR MLS" or "Zillow metro series") and carrying its exact source URL.>
 
 ## MARKET VITALS
 <the five leverage metrics from market_vitals, each with the Greenville latest, the year-ago
@@ -174,7 +244,9 @@ verdict.>
 limits; note which dive you chose so done.txt can record it>
 
 ## C. WHAT TRADED
-<the 2 to 4 recent recorded deals with SALEDATE and per-unit math and deed refs>
+<either the 1 to 3 genuinely NEW recorded deals (not in the covered ledger) with SALEDATE and
+per-unit math and deed refs, or `NOTHING NEW` plus the one line on the newest deed date and that it
+is unchanged from a prior brief. Most weeks this is NOTHING NEW.>
 
 ## D. AROUND TOWN
 <the project/permit/capital items, or NOTHING REAL + what you checked>

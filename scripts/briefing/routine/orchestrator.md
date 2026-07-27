@@ -20,15 +20,17 @@ blocks the next run until Alex clears it. Treat a fabricated number as a failure
 broken build.
 
 WORKSPACE. Do ALL scratch work in /tmp/brief (run: mkdir -p /tmp/brief). Write every intermediate
-there (facts.md, draft.md, final.md, done.txt). NEVER write scratch files into the git working
+there (facts.md, draft.md, verified.md, final.md, done.txt). NEVER write scratch files into the git working
 tree and NEVER edit .gitignore. The only repo commands you run are reading input files (the pass
 specs, src/data/greenvilleHousing.json, src/data/commercialSales.json, scripts/briefing/watchlist.md),
 and the STEP 6 delivery (the drafts-branch push).
 
 ISOLATION (the quality lever). Run each pass as a separate sub-agent (Task tool, subagent_type
 "general-purpose") so it starts cold and sees ONLY the input you hand it: its spec file plus the
-named /tmp/brief input(s). The collector must establish the facts before anyone styles them; the
-writer renders only verified material; the editor audits against the fact sheet. Save each pass
+named /tmp/brief input(s). The collector establishes the facts before anyone styles them; the
+writer renders them; the verifier independently re-checks every external claim against its live
+source and corrects or cuts what fails; the editor then audits against the fact sheet and the
+verification ledger. Save each pass
 output to its /tmp/brief file before starting the next. If you cannot spawn sub-agents, do the
 passes yourself as clean rooms: finish and save one file before reading anything for the next,
 and never let a later pass rewrite an earlier file.
@@ -45,13 +47,23 @@ Run: mkdir -p /tmp/brief. Using the Supabase connector (mcp tool), query:
   If the Supabase connector is unavailable you cannot read either guard: STOP and report the
   connector failure rather than risk a duplicate; a missed week self-heals next Monday.
 
-STEP 0B, RECALL LAST WEEK. Run: git fetch origin drafts (ignore any failure), then
-  git ls-tree --name-only origin/drafts drafts/ 2>/dev/null
-and read the most recent drafts/upstate-brief-*.md if one exists. Write its "ITEMS COVERED"
-list (plus any "CARRY FORWARD" notes and its "LAST DATA DIVE" line) to /tmp/brief/done.txt so
-the collector can say "as covered last week" instead of repeating an item cold, can follow up on
-last week's watch item, and never repeats last week's data dive. If the branch or file is
-missing, write "ITEMS COVERED: none" and continue.
+STEP 0B, RECALL RECENT WEEKS (build the COVERED LEDGER). The published briefs are the reliable
+memory; the drafts branch is not (its done-logs have not persisted). Using the Supabase connector,
+query:
+  `select title, slug, body_md, created_at from blog_posts where 'briefing' = any(tags) order by created_at desc limit 3;`
+From those bodies, distill a COVERED LEDGER to /tmp/brief/done.txt with these parts:
+  - COVERED DEEDS: every individual deal reported (buyer + street + sale date + price), so the
+    collector never re-serves a deed already published.
+  - FLAGGED BUYERS: every "Who's buying" pattern-flagged buyer with the date first flagged.
+  - DIVES USED: which rotating aggregate cut each recent brief ran (dollar volume by month, top
+    buyers, land math, type mix, corridor rollup), so this week picks a different one.
+  - AROUND TOWN COVERED: the local-news items already reported, so one only returns if it MOVED.
+  - CARRY FORWARD / WATCH: last week's watch item and any carry-forward promise, so the collector
+    follows up.
+Then, best-effort and non-authoritative, also run: git fetch origin drafts (ignore any failure) and
+read the most recent drafts/upstate-brief-*.md if one exists, folding anything extra into done.txt.
+If Supabase returns no prior briefs and no draft-log exists, write "COVERED LEDGER: none (first
+brief)" and continue.
 
 STEP 1, PASS 1, COLLECTOR. Read scripts/briefing/routine/pass1_collector.md. Hand its full
 contents plus /tmp/brief/done.txt, the full contents of BOTH committed datasets from the repo
@@ -59,22 +71,40 @@ checkout (they refresh Sundays 22:00 UTC via GitHub Actions, before this run):
   - src/data/greenvilleHousing.json (the fresh residential pulse: Zillow ZHVI home values + ZORI
     rents, Greenville vs national), and
   - src/data/commercialSales.json (the lagging county commercial deed dataset),
-and, if it exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent. It works
-the fixed section checklist with web search plus the two datasets, and writes the sourced fact
-sheet. Save to /tmp/brief/facts.md.
-  STOP CONDITION: Sections A (pulse), B (who's buying), C (what traded), and E (rates) always have
-  material; only D (around town) may come back NOTHING REAL, and that is normal (the writer states
-  it in one line). The old "every section dead" stop can effectively never trigger now that the
-  pulse and the deed dataset are always present; proceed unless the collector reports it truly
-  cannot read either dataset.
+and, if it exists and has entries, scripts/briefing/watchlist.md, to a fresh sub-agent WITH WEB
+ACCESS. It works the fixed section checklist with web search plus the two datasets, and writes the
+sourced fact sheet. Save to /tmp/brief/facts.md.
+  The collector's FIRST job in Section A is fetching the GGAR MLS monthly indicators (the local
+  source of record, a PDF at scr.stats.showingtime.com), because that is the instrument Alex's
+  professional readers check the brief against. If that fetch fails it must say `GGAR: UNAVAILABLE`
+  in the sheet rather than fall back silently. Every residential figure in the sheet must carry its
+  instrument label ("GGAR MLS" or "Zillow metro series") and its exact source URL from the dataset's
+  source_urls map; a figure without both is not usable downstream.
+  STOP CONDITION: Sections A (pulse), B (who's buying), and E (rates) always have material.
+  Section C (what traded) is CONDITIONAL and comes back `NOTHING NEW` most weeks (the deed file
+  advances only every few months); that is normal and the writer omits the section. Section D
+  (around town) may come back NOTHING REAL, also normal (the writer states it in one line). The old
+  "every section dead" stop can effectively never trigger now that the pulse and the deed dataset
+  are always present; proceed unless the collector reports it truly cannot read either dataset.
 
 STEP 2, PASS 2, WRITER. Read scripts/briefing/routine/pass2_writer.md. Hand its full contents
 plus ONLY /tmp/brief/facts.md to a fresh sub-agent. Save its three-block output (## METADATA,
 ## IMAGE, ## ARTICLE, ## X) to /tmp/brief/draft.md.
 
+STEP 2B, PASS 2B, VERIFIER (the truth gate; do not skip it). Read
+scripts/briefing/routine/pass2b_verifier.md. Hand its full contents plus /tmp/brief/draft.md and
+/tmp/brief/facts.md to a fresh sub-agent WITH WEB ACCESS. It re-opens every external web source
+(rates, around-town items, the watch dates, any CLAIM figure), confirms or corrects each claim
+against the primary source, cuts what will not confirm, and appends a ## VERIFICATION LEDGER. Save
+its output (## METADATA, ## IMAGE, ## ARTICLE, ## X, ## VERIFICATION LEDGER) to
+/tmp/brief/verified.md. This pass exists because no other pass checks the world instead of the
+paperwork; treat a claim it marks FALSE that survives into the draft as a build failure.
+
 STEP 3, PASS 3, EDITOR. Read scripts/briefing/routine/pass3_editor.md. Hand its full contents
-plus /tmp/brief/draft.md and /tmp/brief/facts.md to a fresh sub-agent. Save the corrected output
-to /tmp/brief/final.md.
+plus /tmp/brief/verified.md and /tmp/brief/facts.md to a fresh sub-agent. It re-does the dataset
+arithmetic, enforces the format and style, and confirms the draft matches the verification ledger
+(no cut claim reappears; every corrected value stuck). Save the corrected output, WITH the
+## VERIFICATION LEDGER passed through, to /tmp/brief/final.md.
 
 STEP 4, INSERT THE DRAFT. Parse ## METADATA from /tmp/brief/final.md (title, slug, summary,
 tags), the ## IMAGE block (subject), and take the ## ARTICLE markdown as the body. Using the
@@ -104,7 +134,10 @@ placeholder, since this routine does not hold PUBLISH_SECRET):
     - Edit + publish: https://www.alexprompts.com/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
     - One-click publish: https://www.alexprompts.com/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
     - One-click broadcast (AFTER publishing): https://www.alexprompts.com/api/broadcast?id=<id>&token=<YOUR_PUBLISH_SECRET>
-  Then the MUST-VERIFY list from /tmp/brief/facts.md, plus the standing line: "Not investment,
+  Then the VERIFICATION SUMMARY: copy the ## VERIFICATION LEDGER from /tmp/brief/final.md, and put
+  its CORRECTED / UNCONFIRMED / FALSE lines FIRST under a "CHECK THESE" heading (these are the
+  claims the verifier could not cleanly confirm and most need Alex's eye before publish), then the
+  MUST-VERIFY list from /tmp/brief/facts.md. Then the standing line: "Not investment,
 legal, or financial advice. This Upstate Brief is a DRAFT and is Monday-perishable: publish it
 before mid-morning and click the broadcast link so the list gets it same day (a Monday 13:00 UTC
 cron is the backstop), or DELETE the draft at /admin; never publish it later in the week. Next
@@ -117,14 +150,16 @@ and the DRAFT post id and slug from STEP 4.
   (a) EMAIL via mcp Gmail create_draft: to ["jsteryous@gmail.com"], subject "Upstate Brief
       (DRAFT — publish Monday AM) — <the week's lead>", body the full document. Send it if a
       send tool exists, otherwise note a draft was created.
-  (b) DRAFTS BRANCH (the done-log STEP 0B reads next week). Write to
-      drafts/upstate-brief-<YYYY-MM-DD>.md the same document PLUS, at the top, an
+  (b) DRAFTS BRANCH (a secondary log; STEP 0B now recalls from Supabase, so this is best-effort).
+      Write to drafts/upstate-brief-<YYYY-MM-DD>.md the same document PLUS, at the top, an
       "ITEMS COVERED" list (one line per item mentioned in this brief: each deal, project,
       and news item), a "CARRY FORWARD" list (this week's watch item plus anything worth a
-      follow-up), and a "LAST DATA DIVE" line (which dive ran this week, or "none"). Commit
-      and push:
-      git checkout -B drafts && git add drafts/upstate-brief-<YYYY-MM-DD>.md && git commit -m "Upstate Brief <YYYY-MM-DD>" && git push -f origin drafts
-      (Push to the drafts branch ONLY, never to main.)
+      follow-up), and a "LAST DATA DIVE" line (which dive ran this week, or "none"). Commit and
+      push WITHOUT clobbering prior logs. Check out the REAL remote drafts branch first; never
+      rebuild it from main and force-push, which wipes earlier logs:
+      git fetch origin drafts && (git checkout -B drafts origin/drafts 2>/dev/null || git checkout -B drafts) && git add drafts/upstate-brief-<YYYY-MM-DD>.md && git commit -m "Upstate Brief <YYYY-MM-DD>" && git push origin drafts
+      (Push to the drafts branch ONLY, never to main. Do NOT use -f; if the push is rejected,
+      report it and move on, since recall no longer depends on this branch.)
 
 STEP 6, REPORT. State: which sections had real items and which were dry; the DRAFT post id and
 slug (or why the insert was skipped); where the packet was delivered; and any source you could

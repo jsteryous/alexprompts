@@ -227,8 +227,11 @@ the strategic-direction and two-track notes above.
   ONE fixed-format weekly briefing for `/briefing` (tag `briefing`): rates and money, what sold
   (from `src/data/commercialSales.json`, with per-SF/per-acre math and repeat-`PURNAME` pattern
   flags), projects and permits, one employer/capital item, one concrete watch indicator. No
-  scout or angle pass (the format is the angle): collector → writer → editor, then a **DRAFT**
-  insert and a review packet whose links include the one-click `/api/broadcast` send.
+  scout or angle pass (the format is the angle), but it does add a dedicated **verifier** between
+  the writer and the editor that re-opens every external web source and cuts what will not confirm:
+  collector → writer → verifier → editor, then a **DRAFT** insert and a review packet whose links
+  include the one-click `/api/broadcast` send. "What traded" is CONDITIONAL (absent most weeks,
+  since deeds lag months); cross-week dedup recalls recent published briefs from Supabase.
   **Monday-perishable:** Alex publishes + broadcasts Monday morning or deletes the draft; the
   orchestrator refuses to run while a briefing DRAFT is pending. Optional steer file
   `briefing/watchlist.md`. See `scripts/briefing/SPEC.md` + `scripts/briefing/routine/README.md`.

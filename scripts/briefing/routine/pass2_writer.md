@@ -21,14 +21,26 @@ THE FIXED TEMPLATE (use these exact section headings, as markdown ## headings, i
 Open, ABOVE the first heading, with one or two sentences on the week's lead: pick the strongest
 LEAD CANDIDATE from the fact sheet, state the number cold, and say in one sentence why it is the
 week's headline. No heading for the open.
+THE OPEN IS UNDER THE SAME RULES AS EVERY SECTION, and it is the sentence most likely to be
+screenshotted, quoted, and checked, so it is held tightest of all:
+  - It MUST carry an inline source link on its lead figure, and it MUST name the instrument
+    ("per the Greater Greenville Association of REALTORS MLS," "in Zillow's Greenville metro
+    series"). An unsourced, unattributed lead number is a defect, not a stylistic choice.
+  - It MUST NOT render a verdict or a comparative judgment. "The local market is loosening faster
+    than the country" is a conclusion and is banned here exactly as it is banned inside the pulse
+    section. State the number and the mechanics it describes, and stop. The reader concludes.
+  - Prefer the GGAR MLS figure for the lead when the fact sheet has one, because it is the number
+    Alex's professional readers see in their own systems.
 
 ## The Upstate vs the country
 From Section A. In three to five sentences: Greenville's typical home value with its year-over-year
 move set beside the national figure, then the same for rent, then the one plain line on what the
 two gaps show together (prices bid up faster than the nation while rents run cooler, or whatever the
 numbers say). State the divergence as fact. Do NOT render a verdict, a worry, or advice; the reader
-draws the conclusion. Link the home-value and rent figures to their Zillow source once each, and
-give the as-of month.
+draws the conclusion. Link the home-value and rent figures to their Zillow source once each, using
+the exact zhvi and zori URLs from the sheet, and give the as-of month. Close the section with one
+plain sentence noting that these are Zillow's modeled figures for the metro area, which covers more
+ground than the Greenville MLS and is a different instrument from the MLS median sale price.
 
 ## Buyer or seller's market
 From the MARKET VITALS block, the leverage read and the section that most directly serves a real
@@ -42,8 +54,15 @@ country. Then ONE plain sentence per side, as market mechanics: what a buyer rea
 seller reads (homes still going under contract in about three weeks and selling near asking mean
 sharp pricing still moves). Describe the mechanics only. Do NOT tell anyone what to do ("offer
 below asking," "list now"), and do NOT invent a verdict or a mood; the numbers describe the
-balance and the reader decides. Link the vitals figures to their Zillow Research source once. Use
-each metric's own as-of month, since the sale-to-list figure may lag the others by a month.
+balance and the reader decides. Use each metric's own as-of month, since the sale-to-list figure may
+lag the others by a month.
+Open this section with one sentence stating that the figures are Zillow's metro-level series unless
+the MLS is named, that the two run on different panels and footprints, and that both are reported
+where they disagree. Link the vitals once, to the EXACT metric CSV URL the sheet supplied (the
+inventory URL is the natural anchor), never to a directory path. Where the fact sheet carries a GGAR
+MLS figure for the same quantity (inventory, new listings, days, percent of list received), give the
+MLS number beside the Zillow one with its own name attached, so a reader checking their MLS finds
+their number in the brief instead of a contradiction.
 
 ## Who's buying
 From Section B, the differentiated core. Lead with the active buyers: name each buyer with 2 or more
@@ -55,11 +74,17 @@ and close with the honest-limits line (deeds lag closings by weeks to months; th
 price floor) in one sentence. Link "county deed records" to /tools/buyers-list once, here.
 
 ## What traded
-From Section C, one short paragraph or tight bullet each: buyer, price, street or corridor, property
-type, the SALE DATE, and the per-unit number. Open the section with one clause making the recency
-honest ("The most recent deeds on record in the county file, which lag closings by weeks to
-months, include:"), so no reader mistakes a months-old sale for this week's news. Do not re-link
-/tools/buyers-list if "Who's buying" already linked it.
+CONDITIONAL SECTION. If Section C of the fact sheet says `NOTHING NEW`, OMIT this heading and
+section entirely. Do not write a placeholder, a "nothing traded" line, or a re-list of old deeds;
+the brief simply has no What-traded section that week, and that is correct and expected most weeks
+because the county deed file advances only every few months. "Who's buying" already carries the
+deed data, so nothing is lost.
+Render this section ONLY when Section C lists genuinely new deals. Then, one short paragraph or
+tight bullet each: buyer, price, street or corridor, property type, the SALE DATE, and the per-unit
+number. Open the section with one clause making the recency honest ("The most recent deeds on
+record in the county file, which lag closings by weeks to months, include:"), so no reader mistakes
+a months-old sale for this week's news. Do not re-link /tools/buyers-list if "Who's buying" already
+linked it.
 
 ## Around town
 From Section D, the week's local development news: the notable Upstate real-estate, development, and
@@ -94,6 +119,20 @@ first mention only, the specific figure or noun rather than a whole sentence. An
 marks CLAIM is written as a claim. Anything marked reported-not-established says who reported it.
 SHOW THE SEAMS: if the sheet shows conflicting or unverified numbers, say so where the number
 appears; never average, never pick the friendlier one.
+
+LINK ONLY WHAT THE SHEET GAVE YOU. Use the EXACT source URL the fact sheet printed next to each
+figure. Never shorten it, never trim it to a directory, and above all NEVER construct a URL you
+think is probably right. If the sheet did not give you a URL for a number, write the number with its
+source NAMED in words and no link at all; an honest unlinked attribution is fine, and a fabricated
+link that resolves to a directory listing or a 404 is a serious defect that reads as fake sourcing.
+
+NAME THE INSTRUMENT ON EVERY RESIDENTIAL FIGURE. The fact sheet labels each one "GGAR MLS" or
+"Zillow metro series." Carry that label into the prose. Write "Zillow's typical home value for the
+Greenville metro area," never "Greenville's home value"; write "the Greenville MLS counted 6,269
+listings," never "there are 6,269 listings." Compare a figure ONLY against a number from its own
+series. When the sheet shows the MLS and the Zillow panel disagreeing on the same quantity, report
+BOTH with their names and say plainly that the two agree on direction and not on magnitude. Do not
+average them, do not pick one, and do not quietly drop the inconvenient one.
 
 FAIR HOUSING. Describe places by objective facts only: prices, sizes, zoning, use, commute. Never
 who lives there, who belongs there, or coded proxies ("good area," "safe," "family-friendly").

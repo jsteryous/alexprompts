@@ -53,9 +53,13 @@ The sections, in order:
    (top buyers of the quarter, dollar volume by month, price per acre year over year,
    property-type mix, or a corridor rollup, never repeating last week's), with the arithmetic
    shown and the honest limits stated. The most CoStar-like thing the brief publishes.
-4. **What traded** — 2 to 4 notable individual deals from the same dataset, each with the
-   denominator (per SF from `SQFEET`, per acre from `LOTSIZE`), buyer/seller, and its `SALEDATE`,
-   opened with the recency caveat so nobody mistakes a months-old deed for this week's news.
+4. **What traded** (CONDITIONAL) — 1 to 3 notable individual deals from the same dataset, each with
+   the denominator (per SF from `SQFEET`, per acre from `LOTSIZE`), buyer/seller, and its `SALEDATE`,
+   opened with the recency caveat so nobody mistakes a months-old deed for this week's news. This
+   section runs ONLY when the deed file has advanced with a deal no prior brief covered (deduped
+   against the COVERED LEDGER). The file advances every few months, so most weeks nothing is new and
+   the section is simply ABSENT (never padded with old deeds). "Who's buying" carries the deed data
+   the rest of the time.
 5. **Around town** — the week's local development news: the notable Upstate real-estate,
    development, and business-expansion stories (a new or broken-ground project, a major-employer
    expansion, a big rezoning or approval, a capital move), pulled from local outlets plus official
@@ -71,10 +75,15 @@ Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
 ## The engine (`scripts/briefing/routine/`)
 
 Mirrors the `scripts/tech/` pattern (orchestrator + cold, isolated passes) but simpler: no
-scout and no angle pass, because the fixed format IS the angle.
+scout and no angle pass, because the fixed format IS the angle. It does add one gate the essay
+engines do not need: a dedicated VERIFIER between the writer and the editor, because a briefing
+lives or dies on external figures (rates, votes, project numbers) being true, and no other pass
+re-opens the source to check.
 
-- `orchestrator.md` — guards, then collector → writer → editor, then a DRAFT insert tagged
-  `briefing` and the review packet email.
+- `orchestrator.md` — guards, then collector → writer → verifier → editor, then a DRAFT insert
+  tagged `briefing` and the review packet email. STEP 0B builds the COVERED LEDGER by recalling the
+  last few PUBLISHED briefs from Supabase (the drafts-branch done-log was unreliable), so the
+  collector can dedup deeds, buyer flags, and data dives across weeks.
 - `pass1_collector.md` — works the section checklist against TWO committed datasets plus web
   search. The residential pulse AND the five buyer-versus-seller market-vitals metrics (days to
   pending, inventory, new listings, price-cut share, sale-to-list ratio) come from
@@ -84,12 +93,22 @@ scout and no angle pass, because the fixed format IS the angle.
   (the county deed dataset, refreshed Sundays 22:00 UTC by
   `.github/workflows/collect-commercial.yml`; both collectors share the Sunday-evening slot so the
   data is fresh before the Monday run) with the per-SF / per-acre and repeat-buyer math; around-town
-  projects, permits, and employer news, plus rates, come via web search. Outputs a sourced fact
-  sheet with MUST-VERIFY and explicit `NOTHING REAL` markers (only Around town may be dry).
+  projects, permits, and employer news, plus rates, come via web search. Deduped against the
+  COVERED LEDGER so it never re-serves last week's deeds, buyer flags, or data dive. Outputs a
+  sourced fact sheet with MUST-VERIFY and explicit markers: Around town may be `NOTHING REAL`, and
+  What traded may be `NOTHING NEW` (the usual case, since deeds lag months).
 - `pass2_writer.md` — renders the fact sheet into the fixed template in house style, plus
-  `## METADATA`, `## IMAGE`, and `## X` blocks.
-- `pass3_editor.md` — audits against the fact sheet: every figure traced, the no-filler rule,
-  per-unit math re-checked, fair housing, style, the not-advice footer, the `briefing` tag.
+  `## METADATA`, `## IMAGE`, and `## X` blocks. Omits the What-traded section when the sheet says
+  `NOTHING NEW`.
+- `pass2b_verifier.md` — the truth gate. Independently re-opens every EXTERNAL web source (rates,
+  around-town items, watch dates, any CLAIM figure), confirms or corrects each claim against the
+  PRIMARY source (rates must resolve to Freddie Mac PMMS / FRED, not an aggregator), cuts what will
+  not confirm, and appends a `## VERIFICATION LEDGER`. It does not touch the committed-dataset
+  figures (the editor re-does that arithmetic).
+- `pass3_editor.md` — audits against the fact sheet AND the verification ledger: every dataset
+  figure traced, per-unit math re-checked, no cut claim reappears, the no-filler rule, the
+  conditional What-traded shape, fair housing, style, the not-advice footer, the `briefing` tag.
+  Passes the ledger through so the review packet can surface it as MUST-VERIFY.
 - `watchlist.md` — OPTIONAL steer file: ongoing items Alex wants tracked week to week. The
   collector reads it when present; empty or missing is fine.
 
