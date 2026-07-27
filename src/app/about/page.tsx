@@ -101,6 +101,49 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Why sales ── */}
+      <section className="theme-section-muted py-20 md:py-28">
+        <div className="max-w-2xl mx-auto px-6">
+          <Eyebrow className="mb-5">Why sales</Eyebrow>
+          <h2 className="theme-text-primary type-h2 mb-6">
+            Everyone is in sales.
+          </h2>
+          <div className="theme-prose prose max-w-none">
+            <p>
+              Everyone is in sales, whether they call it that or not. If you have ever
+              interviewed for a job, that was a sales motion. If you report to a boss, you are
+              almost certainly selling internally, whether you are pitching a project or
+              defending a budget. If you have ever been on a date, you were selling someone on
+              reasons to keep seeing you. I chose sales as a career because it is what I am best
+              at, and because I would rather do that work deliberately than pretend I am not
+              doing it at all.
+            </p>
+            <p>
+              I am extroverted and I genuinely like meeting new people, so the parts of the job
+              that drain other people tend to be the parts that energize me. I enjoy the chase. I
+              enjoy that a sales conversation rewards thinking on your feet, and that thinking on
+              your feet is a skill you can actually sharpen with reps rather than something you
+              either have or you do not.
+            </p>
+            <p>
+              Sales is also one of the more competitive fields you can work in, and I mean that
+              as the appeal rather than the warning. Your numbers are usually posted internally
+              where everyone can see them. The metrics are tracked closely. There is very little
+              ambiguity about whether you are performing, and there are concrete ways to get
+              better at it.
+            </p>
+            <p>
+              The part people tend to underestimate is the research. Finding the actual decision
+              maker inside a company is real work, and it often looks closer to intelligence work
+              than to pitching. Some of the most useful paths into an organization also come from
+              outside it, through someone in your network who happens to know a person on the
+              inside. Working that out is a creative problem, and it is one of my favorite parts
+              of the job.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── What Alex Prompts is ── */}
       <section className="theme-section py-16 md:py-24">
         <div className="max-w-2xl mx-auto px-6">
