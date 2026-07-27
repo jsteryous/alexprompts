@@ -88,23 +88,26 @@ sourced fact sheet. Save to /tmp/brief/facts.md.
   are always present; proceed unless the collector reports it truly cannot read either dataset.
 
 STEP 2, PASS 2, WRITER. Read scripts/briefing/routine/pass2_writer.md. Hand its full contents
-plus ONLY /tmp/brief/facts.md to a fresh sub-agent. Save its three-block output (## METADATA,
-## IMAGE, ## ARTICLE, ## X) to /tmp/brief/draft.md.
+plus ONLY /tmp/brief/facts.md to a fresh sub-agent. Save its full labeled output (## METADATA,
+## IMAGE, ## ARTICLE, ## X, ## CLIPS) to /tmp/brief/draft.md.
 
 STEP 2B, PASS 2B, VERIFIER (the truth gate; do not skip it). Read
 scripts/briefing/routine/pass2b_verifier.md. Hand its full contents plus /tmp/brief/draft.md and
 /tmp/brief/facts.md to a fresh sub-agent WITH WEB ACCESS. It re-opens every external web source
 (rates, around-town items, the watch dates, any CLAIM figure), confirms or corrects each claim
 against the primary source, cuts what will not confirm, and appends a ## VERIFICATION LEDGER. Save
-its output (## METADATA, ## IMAGE, ## ARTICLE, ## X, ## VERIFICATION LEDGER) to
+its output (## METADATA, ## IMAGE, ## ARTICLE, ## X, ## CLIPS, ## VERIFICATION LEDGER) to
 /tmp/brief/verified.md. This pass exists because no other pass checks the world instead of the
 paperwork; treat a claim it marks FALSE that survives into the draft as a build failure.
 
 STEP 3, PASS 3, EDITOR. Read scripts/briefing/routine/pass3_editor.md. Hand its full contents
 plus /tmp/brief/verified.md and /tmp/brief/facts.md to a fresh sub-agent. It re-does the dataset
-arithmetic, enforces the format and style, and confirms the draft matches the verification ledger
-(no cut claim reappears; every corrected value stuck). Save the corrected output, WITH the
-## VERIFICATION LEDGER passed through, to /tmp/brief/final.md.
+arithmetic, enforces the format and style, runs the readability and clippability pass (the open and
+every section's first sentence must stand alone under 200 characters; sentences over 35 words get
+split), and confirms the draft matches the verification ledger (no cut claim reappears; every
+corrected value stuck) and that each ## CLIPS line still appears VERBATIM in the article. Save the
+corrected output, WITH the ## CLIPS and ## VERIFICATION LEDGER blocks passed through, to
+/tmp/brief/final.md.
 
 STEP 4, INSERT THE DRAFT. Parse ## METADATA from /tmp/brief/final.md (title, slug, summary,
 tags), the ## IMAGE block (subject), and take the ## ARTICLE markdown as the body. Using the
@@ -144,6 +147,9 @@ cron is the backstop), or DELETE the draft at /admin; never publish it later in 
 Monday's run will refuse to start while this draft is pending."
   Then three dashes; then "UPSTATE BRIEF (draft)" and the ## ARTICLE block; then three dashes;
 then "X POST" and the ## X block (copy-paste to X manually once live); then three dashes; then
+  "CLIPS (paste-ready)" and the ## CLIPS block, which is three verbatim lines from the brief with
+  their character counts and the one marked as the Nextdoor fit, so Alex can post without rereading
+  the piece; then three dashes; then
 "Notes" with the sections that came back NOTHING REAL, the CARRY FORWARD items for next week,
 and the DRAFT post id and slug from STEP 4.
   Deliver to BOTH places, independently so one failing does not block the other:

@@ -43,8 +43,14 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's lead
    number, then The Upstate vs the country / Buyer or seller's market / Who's buying / What traded
    *only when new* / Around town / Rates and money / What I'd watch, then one quiet `/find-a-pro`
-   line and the not-advice footer), 600 to 900 words, house style, inline source links. Emits
-   `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`.
+   line and the not-advice footer), 600 to 900 words, house style, inline source links. Runs a
+   **clippable test** on the open and every section's first sentence (stands alone, under 200 chars,
+   one main clause, short source tag inside the clip with the methodology caveat in the NEXT
+   sentence) plus general readability limits (break sentences over 35 words, one subordinate clause,
+   active voice, concrete over index-language), while still banning fragments and staccato. Emits
+   `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`, and `## CLIPS` (three paste-ready lines for
+   X/Nextdoor, each copied **verbatim** from the article so it inherits the fact-checking, with
+   character counts and one marked as the Nextdoor fit).
 3. **`pass2b_verifier.md`** — the truth gate, between writer and editor. Independently re-opens
    every EXTERNAL web source (rates, around-town items, watch dates, any CLAIM figure), confirms or
    corrects each claim against the PRIMARY source, cuts what will not confirm, and appends a

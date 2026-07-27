@@ -119,6 +119,12 @@ kept or re-sourced to primary, UNCONFIRMED/FALSE claims cut or softened per the 
 ## X
 <the writer's X post, corrected only if it carried a claim you had to fix or cut>
 
+## CLIPS
+<the writer's three clips, passed through. Correct a clip ONLY when the article sentence it quotes
+was corrected or cut, in which case the clip must be updated to match the corrected article wording
+verbatim, or replaced with another verbatim sentence when its source sentence is gone. A clip is
+never left quoting a sentence you removed.>
+
 ## VERIFICATION LEDGER
 <one line per external claim you checked, in this shape:
   [VERDICT] <the claim as written> -> <what the source shows> | <source URL>

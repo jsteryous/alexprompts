@@ -116,6 +116,35 @@ sheet carried both a GGAR MLS and a Zillow figure for the same quantity, confirm
 their names and that the draft says the two agree on direction and not on magnitude, rather than
 averaging them or quietly dropping one.
 
+READABILITY AND CLIPPABILITY (the smoothing pass; enforce it, do not merely prefer it). The brief
+is read in five minutes on a Monday and its best lines get pasted into X and Nextdoor, so the prose
+has to be simple and the key sentences have to survive being lifted out.
+  - THE OPEN AND THE FIRST SENTENCE OF EVERY SECTION must pass the clippable test. Each one stands
+    alone (it names the place and the quantity, and never opens with a backward-pointing "this,"
+    "that," "it," "those figures," or "the metro"), runs under 200 characters, carries one main
+    clause with at most one subordinate clause, and keeps a SHORT source tag inside it ("per the
+    Greenville MLS," "per Zillow") while the methodology caveat sits in the following sentence.
+    Rewrite any that fails. Count the characters on the open.
+  - SENTENCE LENGTH: break any sentence over 35 words into two. Cut stacked subordinate clauses down
+    to one. Prefer the active voice and a concrete verb over a nominalization ("homes sat 52 days"
+    over "days on market increased to 52").
+  - ABSTRACTION: replace restated-in-index-language conclusions with concrete ones. "The two gaps
+    move in opposite directions against the national benchmark" gets rewritten to say plainly that
+    Greenville home values are rising faster than the country's while Greenville rents are rising
+    slower. After a term of art is translated once, the plain words are used for the rest of the
+    piece.
+  - BUT NOT STACCATO: this does not license fragments, clipped bursts, or a run of five-word
+    sentences. Complete sentences with varied length, still reading like a person talking. A brief
+    chopped into punchy fragments has failed this rule as badly as one written in 45-word sentences.
+
+## CLIPS BLOCK: confirm it holds exactly three numbered lines and that EVERY ONE APPEARS VERBATIM in
+the ## ARTICLE. Diff them word for word. A clip that was reworded, tightened, or invented for the
+block is unverified copy that skipped the verifier, so either restore the article's exact wording or
+fix the article sentence and re-copy it. Confirm each clip stands alone with no heading or prior
+sentence needed, each carries its character count and source section, the three cover different
+material rather than three angles on one number, and one is marked as the Nextdoor fit. Any clip
+over 200 characters gets fixed at its source in the article.
+
 STYLE: remove every em and en dash; rewrite every sentence fragment complete (read each sentence in
 isolation; bullets included); allow a colon only before a genuine list; cut banned phrases
 (game-changer, a new era, sent ripples, hidden gem, nestled, up-and-coming, vibrant, the rise of, it
@@ -140,5 +169,6 @@ X POST: confirm it is under 280 characters, carries the week's best stat, invent
 notes "[link]".
 
 Output the corrected piece only, in the same block format: ## METADATA, ## IMAGE, ## ARTICLE, ## X,
-then the ## VERIFICATION LEDGER passed through UNCHANGED from the verifier's output (do not edit,
-shorten, or drop it; the orchestrator reads it to build the human's MUST-VERIFY list).
+## CLIPS, then the ## VERIFICATION LEDGER passed through UNCHANGED from the verifier's output (do
+not edit, shorten, or drop it; the orchestrator reads it to build the human's MUST-VERIFY list). If
+you rewrote an article sentence that a clip quoted, update that clip so it stays verbatim.

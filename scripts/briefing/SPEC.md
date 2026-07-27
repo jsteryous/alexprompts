@@ -98,13 +98,18 @@ re-opens the source to check.
   sourced fact sheet with MUST-VERIFY and explicit markers: Around town may be `NOTHING REAL`, and
   What traded may be `NOTHING NEW` (the usual case, since deeds lag months).
 - `pass2_writer.md` — renders the fact sheet into the fixed template in house style, plus
-  `## METADATA`, `## IMAGE`, and `## X` blocks. Omits the What-traded section when the sheet says
-  `NOTHING NEW`.
+  `## METADATA`, `## IMAGE`, `## X`, and `## CLIPS` blocks. Omits the What-traded section when the
+  sheet says `NOTHING NEW`. Runs the CLIPPABLE TEST on the open and every section's first sentence
+  (stands alone with the place and quantity named, under 200 characters, one main clause, a short
+  source tag inside the clip and the methodology caveat in the next sentence) and general
+  readability limits (break sentences over 35 words, one subordinate clause, active voice, concrete
+  phrasing over index language), while still banning fragments, staccato, and dashes.
 - `pass2b_verifier.md` — the truth gate. Independently re-opens every EXTERNAL web source (rates,
   around-town items, watch dates, any CLAIM figure), confirms or corrects each claim against the
   PRIMARY source (rates must resolve to Freddie Mac PMMS / FRED, not an aggregator), cuts what will
-  not confirm, and appends a `## VERIFICATION LEDGER`. It does not touch the committed-dataset
-  figures (the editor re-does that arithmetic).
+  not confirm, and appends a `## VERIFICATION LEDGER`. It does not re-derive committed-dataset
+  VALUES (the editor re-does that arithmetic) but it does check how each is CHARACTERIZED (instrument
+  named, geography honest, comparison same-source, as-of month present) and resolves every link.
 - `pass3_editor.md` — audits against the fact sheet AND the verification ledger: every dataset
   figure traced, per-unit math re-checked, no cut claim reappears, the no-filler rule, the
   conditional What-traded shape, fair housing, style, the not-advice footer, the `briefing` tag.

@@ -31,6 +31,39 @@ screenshotted, quoted, and checked, so it is held tightest of all:
     section. State the number and the mechanics it describes, and stop. The reader concludes.
   - Prefer the GGAR MLS figure for the lead when the fact sheet has one, because it is the number
     Alex's professional readers see in their own systems.
+  - It MUST pass the CLIPPABLE TEST below. The open is the sentence most likely to be copied into an
+    X post or a Nextdoor thread, so it has to work with nothing around it.
+
+THE CLIPPABLE TEST (applies to the open and to the FIRST sentence of every section). A clippable
+sentence is one a reader can highlight, paste somewhere else, and have it still make sense and still
+be true. Write these sentences to pass all six:
+  1. IT STANDS ALONE. It names the place and the thing measured. No sentence-opening "this," "that,"
+     "it," "those figures," or "the metro," because a pointer to a previous sentence breaks the
+     moment the sentence is lifted. A reader who sees only this sentence should know what market and
+     what quantity it describes.
+  2. IT FITS. Under 200 characters, so it still leaves room for a link in a 280-character post.
+     Count them. If it runs long, split it into two sentences rather than trimming the attribution.
+  3. ONE IDEA. Subject and verb inside the first six words, one main clause, at most one subordinate
+     clause. A sentence carrying three commas and a "while" is not clippable no matter how true.
+  4. CONCRETE VERB, HUMAN SUBJECT. "Homes sat on the market 52 days" beats "days on market increased
+     to 52." "Buyers have 6,269 homes to choose from" beats "inventory reached 6,269 units." Use the
+     abstract index-style phrasing only when no plain version is accurate.
+  5. THE SOURCE RIDES ALONG, COMPRESSED. A short attributive tag stays inside the clip ("per the
+     Greenville MLS," "per Zillow"). The full methodology caveat does NOT; it goes in the NEXT
+     sentence. This is how the brief keeps its provenance discipline without writing unclippable
+     sentences: the clip carries WHO measured it, the following sentence carries HOW.
+  6. STILL HOUSE STYLE. Complete sentence, no fragment, no em or en dash, no colon drumroll, no
+     "Label: payoff" construction. Clippable does not mean punchy-for-its-own-sake, and a clipped
+     burst is a style violation even when it would perform well.
+
+READABILITY, THE WHOLE BRIEF. Smooth and simple beats dense and impressive. Keep most sentences
+under 30 words and break any sentence that passes 35 into two. Allow one subordinate clause, not
+three stacked. Prefer the active voice. After you translate a term of art once, use the plain words
+for the rest of the piece rather than the index name. Say what a number MEANS in concrete terms
+instead of restating it abstractly: "Greenville home values are rising faster than the country's,
+and Greenville rents are rising slower" is readable, while "the two gaps move in opposite directions
+against the national benchmark" is not. Vary sentence length so the piece still reads like a person
+talking, and never chop it into a staccato list of short bursts.
 
 ## The Upstate vs the country
 From Section A. In three to five sentences: Greenville's typical home value with its year-over-year
@@ -176,3 +209,19 @@ OUTPUT FORMAT, exactly these labeled blocks and nothing else:
 ## X
 <one post under 280 characters that lands the week's single best stat and points to the brief; no
 invented stance. Note "[link]" for the human to attach.>
+
+## CLIPS
+<THREE standalone lines Alex can paste straight into X, Nextdoor, or a text to a client, so he never
+has to hunt through the brief for something quotable.
+HARD RULE: each clip is a sentence copied VERBATIM from the ## ARTICLE above, not a new sentence
+written for this block. Verbatim is what makes a clip safe, because the verifier and the editor
+checked the article and did not check this block; a clip you reword here is unverified copy leaving
+the building. If no sentence in the article is clippable as written, fix the sentence IN the article
+and then copy it, which is the point of the clippable test.
+Pick three that stand alone and carry different material, for example the lead number, one
+who's-buying or around-town fact, and one rate or watch item. Number them 1 to 3. After each, note
+the character count and the section it came from, like "(148 chars, from the open)". Nothing in a
+clip may need a heading or a prior sentence to make sense.
+NEXTDOOR NOTE: mark which single clip is the best fit for a neighborhood audience, meaning it is
+useful and neutral rather than promotional, since Nextdoor readers react badly to anything that
+reads like an ad.>
