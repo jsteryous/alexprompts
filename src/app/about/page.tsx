@@ -104,7 +104,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Why sales ── */}
-      <section className="theme-section-muted py-20 md:py-28">
+      <section className="theme-section py-20 md:py-28">
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">Why sales</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
@@ -153,7 +153,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── What Alex Prompts is ── */}
-      <section className="theme-section py-16 md:py-24">
+      {/* Follows "Why sales" on the same light surface, so a hairline rule marks the
+          break instead of a third background colour. */}
+      <section className="theme-section border-t theme-border py-16 md:py-24">
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">What this is</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
@@ -240,7 +242,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── Light "want one like this?" ── */}
-      <section className="theme-section-muted border-y theme-border py-14 md:py-16">
+      {/* A light strip between two dark panels, so the surfaces already separate it
+          and the old border-y was redundant. */}
+      <section className="theme-section py-14 md:py-16">
         <div className="max-w-2xl mx-auto px-6">
           <h2 className="theme-text-primary type-h3 mb-3">
             Want a site like this one?
