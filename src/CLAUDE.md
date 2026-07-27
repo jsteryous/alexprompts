@@ -146,8 +146,24 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Palette = CSS custom properties** in `globals.css` (`:root` light, `html.dark` dark).
   Do NOT hardcode hex — use the `.theme-*` utilities (`theme-text-primary/secondary/muted`,
   `theme-border`, `theme-card`, `theme-card-strong`, `theme-card-muted`, `theme-label`,
-  `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`,
-  `theme-section-muted`, `theme-page`).
+  `theme-cta`, `theme-cta-accent`, `theme-badge`, `theme-section-contrast`, `theme-page`).
+- **The surface scale is TWO surfaces, and only two** (enforced July 2026). A page alternates
+  between `theme-section` (the base, transparent) and `theme-section-contrast` (the dark
+  emphasis panel), with `theme-page` wrapping the route once to carry the accent bloom.
+  **`theme-section-muted` was DELETED**, not deprecated, so the affordance to re-drift does not
+  exist. It was a ~3.5% step over the light base, invisible alone and noisy beside a `#1d1d1f`
+  panel, and in dark mode it lifted to ~`#1a1a1c` while the contrast panel drops to `#0a0a0b`,
+  so a page stepped in BOTH directions away from its own background. Every route except
+  `/about` already ran two surfaces; `/about` had drifted to four and read as a patchwork.
+  **When two same-surface sections sit back to back and need a visible break, add
+  `border-t theme-border`**, a hairline that separates without adding a weight. This was
+  already the de-facto convention (`app/page.tsx` uses it on both same-surface joins,
+  `ToolShell` on its two adjacent contrast panels); it is written down now rather than
+  invented. Do not add a third background token. (The `--surface-muted` VARIABLE stays;
+  `theme-card-muted` still uses it. The cap is on section-level surfaces.)
+  Current per-route rhythm, all conforming: `/` PAGE·DARK·light·light·DARK, `/about`
+  PAGE·DARK·light·light·DARK·light·DARK, `/briefing` PAGE·light·DARK, `ToolShell`
+  PAGE·light·DARK·DARK, `ArticleView` PAGE·light·DARK.
 - **Tokens:** Apple-style **cool-neutral** base (light bg `#f5f5f7`, surface `#ffffff`,
   text `#1d1d1f`, muted `#6e6e73`; dark bg near-black neutral `#101012`, surface `#1c1c1e`,
   text `#f5f5f7`) with a **refined indigo accent** (`#4f46e5` light / `#818cf8` dark). The

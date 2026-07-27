@@ -156,6 +156,28 @@ button {
   color: var(--foreground);
 }
 
+/* ── The surface scale: TWO surfaces, and only two ──────────────────────────
+   A page alternates between exactly two backgrounds. That is the whole system.
+
+     .theme-page            the page wrapper, ONCE per route, carries the bloom
+     .theme-section         the base surface (transparent, sits on --background)
+     .theme-section-contrast  the dark panel, for emphasis beats
+
+   WHY ONLY TWO. A third surface was tried (.theme-section-muted) and removed in
+   July 2026. In light mode it was rgba(0,0,0,0.035) over #f5f5f7, about a 3.5%
+   step, invisible alone and pure noise beside a #1d1d1f panel. Dark mode was
+   worse: the base is #101012, the grey lifted to ~#1a1a1c and the contrast panel
+   drops to #0a0a0b, so a page stepped in BOTH directions away from its own
+   background across three weights. Every route except /about already ran two
+   surfaces; /about had drifted to four and read as a patchwork.
+
+   DO NOT ADD A THIRD. When two same-surface sections sit back to back and need a
+   visible break, use `border-t theme-border`, a hairline that separates without
+   adding a weight. That is the sanctioned move; a new background token is not.
+   The class is deleted rather than deprecated on purpose, so the affordance to
+   re-drift does not exist. (--surface-muted the VARIABLE stays; .theme-card-muted
+   still uses it. It is section-level surfaces that are capped at two.)          */
+
 .theme-page {
   position: relative;
   /* One barely-there accent bloom. No dotted grid, no second wash. */
@@ -163,15 +185,11 @@ button {
     radial-gradient(1100px 560px at 82% 8%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 60%);
 }
 
+/* Intentionally transparent. It is a semantic marker meaning "this section
+   deliberately sits on the base surface," and the hook if the base ever gains a
+   treatment. Do not delete it as a no-op. */
 .theme-section {
   background: transparent;
-}
-
-.theme-section-muted {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
-    var(--surface-muted);
-  border-color: var(--border);
 }
 
 .theme-section-contrast {
