@@ -69,8 +69,10 @@ export default function AboutPage() {
                 which will drive traffic and generate leads. I refer leads to my highly trusted network of professionals.
                 Using my sales skills, I have built and continue to build long-term relationships with competent loan officers, attorneys, and agents.
                 Using AI, I also built a set of basic tools for real estate: a mortgage
-                calculator, a rental deal analyzer, a listing prompt builder, a neighborhood
-                area scan for investors, a Greenville cost-of-living calculator, a wire-fraud safety checker, and a scanner of Greenville commercial buyers. I also
+                calculator, a rental deal analyzer, an SC property tax estimator, a Greenville
+                school lookup, a neighborhood area scan for investors, a Greenville
+                cost-of-living calculator, a wire-fraud safety checker, and a scanner of
+                Greenville commercial buyers. I also
                 built a custom CRM. I call it Taraform, and it is free to use if you are trying to build your own RE business and would like
                 to create an account at taraform.org
               </p>
@@ -160,7 +162,7 @@ export default function AboutPage() {
             </p>
             <p>
               The tools on here are real and free to use. There is a rental deal analyzer, a mortgage
-              and affordability calculator, a listing prompt builder, and a commercial buyers
+              and affordability calculator, an SC property tax estimator, and a commercial buyers
               list pulled from public county records. The real estate writing is meant to inform potential buyers and sellers. The technical articles are mostly research based.
               I share what I&rsquo;ve been learning.
             </p>

@@ -7,7 +7,7 @@ import { ToolIcon } from "@/components/ToolIcon";
 export const metadata: Metadata = {
   title: "Tools",
   description:
-    "Free real-estate tools Alex Steryous engineered himself: a rental deal analyzer, a mortgage and affordability calculator, a listing prompt builder, and data tools built on public county records. No sign-up.",
+    "Free real-estate tools Alex Steryous engineered himself: a rental deal analyzer, a mortgage and affordability calculator, an SC property tax estimator, and data tools built on public county records. No sign-up.",
   alternates: { canonical: `${site.url}/tools` },
 };
 
