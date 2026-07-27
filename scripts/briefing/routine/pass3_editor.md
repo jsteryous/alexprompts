@@ -119,20 +119,39 @@ averaging them or quietly dropping one.
 READABILITY AND CLIPPABILITY (the smoothing pass; enforce it, do not merely prefer it). The brief
 is read in five minutes on a Monday and its best lines get pasted into X and Nextdoor, so the prose
 has to be simple and the key sentences have to survive being lifted out.
-  - THE OPEN AND THE FIRST SENTENCE OF EVERY SECTION must pass the clippable test. Each one stands
-    alone (it names the place and the quantity, and never opens with a backward-pointing "this,"
-    "that," "it," "those figures," or "the metro"), runs under 200 characters, carries one main
-    clause with at most one subordinate clause, and keeps a SHORT source tag inside it ("per the
-    Greenville MLS," "per Zillow") while the methodology caveat sits in the following sentence.
-    Rewrite any that fails. Count the characters on the open.
+  - THE OPEN AND THE FIRST SENTENCE OF EVERY SECTION must pass the clippable test. The target shape
+    leads with the plain-language MECHANIC the figures measure, then stacks two or three figures that
+    earn it, each with its baseline, closing with a short source tag: "Greenville homebuyers have
+    more leverage than a year ago: inventory is up 12%, homes are taking 52 days to sell (vs. 43),
+    and the median sale price is still $330K, per the Greenville MLS." Each one must stand alone (it
+    names the place and the quantity, and never opens with a backward-pointing "this," "that," "it,"
+    "those figures," or "the metro"), target under 200 characters with a hard cap of 240, and keep
+    the source tag inside while the methodology caveat sits in the following sentence. Count the
+    characters on the open. Rewrite any that fails.
+  - DO NOT FIX LENGTH BY DELETING EVIDENCE. This is the failure mode to watch for hardest, because
+    it looks like good editing. If a sentence is over length, cut adjectives, hedges, and connective
+    filler. NEVER cut a figure, a year-ago baseline, a national comparison, or the source tag to get
+    under the count. A sentence that reads "Greenville home values are rising faster than the
+    country's" is worse than the longer version carrying 1.9% against 0.8%, because it discarded
+    what made the claim checkable. Restore any baseline or comparison figure that was dropped.
+  - MECHANIC IS ALLOWED, VERDICT IS NOT. "Homebuyers have more leverage than a year ago" names what
+    the indicators measure and stays. "The market is loosening faster than the country" judges the
+    market and gets cut. "Buyers should offer under asking" is advice and gets cut. The test: point
+    at the specific figures in the sentence that make the opening clause literally true. If you
+    cannot, it is a verdict.
+  - ONE INSTRUMENT PER STACKED SENTENCE. When a sentence stacks several figures under one source
+    tag, verify every figure in it actually comes from that source. A single "per the Greenville
+    MLS" must not appear to vouch for a Zillow figure sitting beside it. Split the sentence or tag
+    each figure. Stacking makes this error easy and it is the exact mistake that gets the brief
+    fact-checked in public.
   - SENTENCE LENGTH: break any sentence over 35 words into two. Cut stacked subordinate clauses down
     to one. Prefer the active voice and a concrete verb over a nominalization ("homes sat 52 days"
     over "days on market increased to 52").
-  - ABSTRACTION: replace restated-in-index-language conclusions with concrete ones. "The two gaps
-    move in opposite directions against the national benchmark" gets rewritten to say plainly that
-    Greenville home values are rising faster than the country's while Greenville rents are rising
-    slower. After a term of art is translated once, the plain words are used for the rest of the
-    piece.
+  - ABSTRACTION: replace restated-in-index-language conclusions with concrete ones, KEEPING the
+    figures. "The two gaps move in opposite directions against the national benchmark" gets
+    rewritten to "Greenville home values are up 1.9% over the year against 0.8% nationally, while
+    Greenville rents are up 1.7% against 2.2%, per Zillow." Plainer words, same evidence. After a
+    term of art is translated once, the plain words are used for the rest of the piece.
   - BUT NOT STACCATO: this does not license fragments, clipped bursts, or a run of five-word
     sentences. Complete sentences with varied length, still reading like a person talking. A brief
     chopped into punchy fragments has failed this rule as badly as one written in 45-word sentences.

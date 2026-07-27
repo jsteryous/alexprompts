@@ -61,6 +61,12 @@ You are describing neighborhoods to people deciding where to live. That is a fai
 - RANK FAST BY MATCHING THE QUERY EXACTLY. This site is new and wins low-competition queries on relevance, not authority, so make the page unmistakably about the exact phrase the topic targets. Put the target query, or a very close natural variant, in the TITLE, in the SLUG (already set by the topic), in an early H2, and once in the first paragraph, worded the way a person would actually say it. Do this naturally, never as keyword stuffing: one clean, human use in each spot beats ten forced ones. If the topic is a question ("how much are property taxes in Greer"), answer it directly and completely in the first two or three sentences, because a new site wins the featured snippet by giving the cleanest direct answer, not the longest page.
 - The TITLE states the answer to the query plainly and includes the query's key words naturally. It goes in METADATA only. Do NOT repeat it as an H1 at the top of the body.
 - The body opens COLD with a real, specific fact or number, no heading and no image on the first line. The cover is rendered separately by the finalize cron.
+- CLIPPABLE LEADS (the opening sentence and the first sentence under each H2; the rest of the guide keeps its normal flowing prose). These are the sentences a local pastes into Nextdoor, Facebook, or a text to a friend, and they are also the sentences Google lifts for a featured snippet, so the same shape wins twice. Write them to survive being read with nothing around them.
+  - THE SHAPE: answer the question in plain words first, then stack the two or three figures that support it, each with its baseline or unit, then a short source tag. As a template: "<A $300,000 owner-occupied home in <town>> costs about <$X> a year in property tax, versus <$Y> at the second-home rate, per <the county millage table>." Target under 200 characters, hard cap 240. Shorthand is preferred in these sentences: write "$1,850/yr", "4% vs 6%", "(vs. 43 in 2025)".
+  - COMPRESS THE PROSE, NEVER THE EVIDENCE. A clippable sentence is the same facts in tighter words, not fewer facts. If you are over length, cut adjectives, hedges, and connective throat-clearing. NEVER drop a number, a baseline, a unit, or the source tag to hit the count. A sentence that says "property taxes are lower for owner-occupants" is worse than the longer one carrying the two actual dollar figures, because it threw away what made the answer usable, and a stripped sentence also loses the snippet.
+  - ANSWER, NOT ADVICE. The opening clause states what the data shows and stops. It does not tell the reader what to do, and everything in COMPLIANCE below still applies at full strength. The test: point at the specific figures in the sentence that make your opening clause literally true.
+  - ONE SOURCE PER STACK. When you stack figures in one sentence they should come from the SAME source so one tag covers them; if you must mix, tag each figure. A single "per the county" must never appear to vouch for a number that came from somewhere else.
+  - A colon introducing a genuine list of figures is fine and is not the banned drumroll. Fragments and staccato remain banned; these are complete sentences, just tighter ones.
 - Use clear, descriptive H2 subheads (`## ...`) that a skimmer and a search engine both understand. Where the topic suits it, a short H2 phrased as the exact question a reader would ask helps you win a featured snippet.
 - Include the concrete local specifics in every section: named places, numbers, sources.
 - Be honest about trade-offs. A piece that only praises Greenville reads like an ad and ranks like one. Name the real downsides (traffic on a named corridor, price growth, whatever the data shows).
@@ -109,3 +115,18 @@ Pick the single best-fitting subject. When in doubt, use `downtown-falls`. If (a
 
 ## X
 <a single post under 280 characters that states the most useful specific from the piece and links it, written to be genuinely helpful so locals share it; then a blank line, then an optional 2 to 4 post numbered thread for a meatier topic, the last post pointing to the full guide on the website>
+
+## CLIPS
+<THREE standalone lines Alex can paste straight into X, Nextdoor, or a text, so he never has to
+hunt through the piece for something quotable.
+HARD RULE: each clip is a sentence copied VERBATIM from the ## ARTICLE above, not a new sentence
+written for this block. Verbatim is what makes a clip safe, because the editor checked the article
+and does not check this block; a clip reworded here is unverified copy leaving the building. If no
+sentence in the article is clippable as written, fix the sentence IN the article and then copy it,
+which is the point of the clippable-leads rule.
+Pick three that stand alone and carry DIFFERENT material, not three angles on one number. Number
+them 1 to 3. After each, note the character count and the section it came from, like "(187 chars,
+from the open)". Each must carry its figures and baselines intact; a clip trimmed of its evidence to
+look punchy is a failure. Nothing in a clip may need a heading or a prior sentence to make sense.
+NEXTDOOR NOTE: mark which single clip is the best fit for a neighborhood audience, meaning it is
+useful and neutral rather than promotional, since those readers react badly to anything ad-shaped.>

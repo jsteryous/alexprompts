@@ -28,42 +28,81 @@ screenshotted, quoted, and checked, so it is held tightest of all:
     series"). An unsourced, unattributed lead number is a defect, not a stylistic choice.
   - It MUST NOT render a verdict or a comparative judgment. "The local market is loosening faster
     than the country" is a conclusion and is banned here exactly as it is banned inside the pulse
-    section. State the number and the mechanics it describes, and stop. The reader concludes.
+    section. It MAY state the market MECHANIC the figures literally measure ("homebuyers have more
+    leverage than a year ago"), which is not the same thing; see the mechanic-versus-verdict line in
+    the clippable test below. State the numbers and the mechanic they describe, and stop. The reader
+    draws the conclusion.
   - Prefer the GGAR MLS figure for the lead when the fact sheet has one, because it is the number
     Alex's professional readers see in their own systems.
   - It MUST pass the CLIPPABLE TEST below. The open is the sentence most likely to be copied into an
     X post or a Nextdoor thread, so it has to work with nothing around it.
 
 THE CLIPPABLE TEST (applies to the open and to the FIRST sentence of every section). A clippable
-sentence is one a reader can highlight, paste somewhere else, and have it still make sense and still
-be true. Write these sentences to pass all six:
-  1. IT STANDS ALONE. It names the place and the thing measured. No sentence-opening "this," "that,"
+sentence is one a reader can highlight, paste into an X post or a Nextdoor thread, and have it still
+make sense and still be true.
+
+  THE MODEL SENTENCE. This is the shape to aim for:
+    "Greenville homebuyers have more leverage than a year ago: inventory is up 12%, homes are taking
+     52 days to sell (vs. 43), and the median sale price is still $330K, per the Greenville MLS."
+  It leads with what the numbers MEAN, then stacks three figures that earn it, keeps each baseline
+  in shorthand, and tags the source. That is 187 characters and it carries MORE information than the
+  long version it replaces.
+
+  COMPRESS THE PROSE, NEVER THE EVIDENCE. This is the rule that matters most, and the easiest one to
+  get backwards. A clip is not a shorter sentence with fewer facts in it; it is the same facts in
+  tighter words. Stripping "(vs. 43)" or dropping the national comparison to hit a character count
+  is a FAILURE, not a success, because the baseline is what makes the number mean anything. If you
+  are over length, cut adjectives, hedges, and connective throat-clearing. Never cut a number, a
+  baseline, or the source tag.
+
+  Write these sentences to pass all seven:
+  1. LEAD WITH THE MEANING, THEN THE EVIDENCE. Open on the plain-language mechanic the figures
+     describe ("homebuyers have more leverage than a year ago," "sellers are competing with more
+     listings than last summer"), then stack the two or three figures that support it. A bare number
+     with no frame is forgettable; a frame with no numbers is an opinion. The clip needs both.
+  2. MECHANIC, NOT VERDICT (the line to hold). A MECHANIC names what the indicators literally
+     measure and is ALLOWED: leverage, competition, time on market, negotiating room. A VERDICT
+     judges the market or predicts it and is BANNED: "the market is loosening faster than the
+     country," "conditions are deteriorating," "prices will fall this fall." ADVICE is also banned:
+     "buyers should offer under asking," "list now." If you cannot point at the specific figures
+     that make your opening clause literally true, it is a verdict and it comes out.
+  3. ONE INSTRUMENT PER STACK. When you stack figures in one sentence, they should all come from the
+     SAME source, so one tag covers all of them, as in the model sentence where inventory, days, and
+     median price are all GGAR MLS. If you must mix, tag each figure with its own source inside the
+     clip. Never let a single "per the Greenville MLS" appear to vouch for a Zillow number sitting
+     beside it; stacking makes that mistake easy and it is exactly the kind of error that gets the
+     brief fact-checked in public.
+  4. IT STANDS ALONE. It names the place and the thing measured. No sentence-opening "this," "that,"
      "it," "those figures," or "the metro," because a pointer to a previous sentence breaks the
-     moment the sentence is lifted. A reader who sees only this sentence should know what market and
-     what quantity it describes.
-  2. IT FITS. Under 200 characters, so it still leaves room for a link in a 280-character post.
-     Count them. If it runs long, split it into two sentences rather than trimming the attribution.
-  3. ONE IDEA. Subject and verb inside the first six words, one main clause, at most one subordinate
-     clause. A sentence carrying three commas and a "while" is not clippable no matter how true.
-  4. CONCRETE VERB, HUMAN SUBJECT. "Homes sat on the market 52 days" beats "days on market increased
-     to 52." "Buyers have 6,269 homes to choose from" beats "inventory reached 6,269 units." Use the
-     abstract index-style phrasing only when no plain version is accurate.
-  5. THE SOURCE RIDES ALONG, COMPRESSED. A short attributive tag stays inside the clip ("per the
+     moment the sentence is lifted.
+  5. IT FITS. Target under 200 characters, hard cap 240, which still leaves room for a link in a
+     280-character post. Count them. Shorthand is not only allowed here, it is preferred: write
+     "12%", "$330K", "(vs. 43)", "6,269 homes". Spell figures out in the body prose if you like, but
+     the clip is allowed to be compact.
+  6. THE SOURCE RIDES ALONG, COMPRESSED. A short attributive tag stays inside the clip ("per the
      Greenville MLS," "per Zillow"). The full methodology caveat does NOT; it goes in the NEXT
-     sentence. This is how the brief keeps its provenance discipline without writing unclippable
-     sentences: the clip carries WHO measured it, the following sentence carries HOW.
-  6. STILL HOUSE STYLE. Complete sentence, no fragment, no em or en dash, no colon drumroll, no
-     "Label: payoff" construction. Clippable does not mean punchy-for-its-own-sake, and a clipped
-     burst is a style violation even when it would perform well.
+     sentence. The clip carries WHO measured it, the following sentence carries HOW. This is how the
+     brief keeps its provenance discipline without writing unclippable sentences.
+  7. STILL HOUSE STYLE. Complete sentence, no fragment, no em or en dash. A colon IS allowed here
+     when it introduces a genuine list of figures, as the model sentence does, because that is a
+     real list and not the banned "Label: payoff" drumroll. A stacked list of parallel figures after
+     a colon is also NOT the banned overloaded sentence, which is a chain of three or more
+     subordinate clauses the reader has to hold at once; parallel figures read cleanly. Clippable
+     still does not mean punchy-for-its-own-sake, and a clipped fragment is a violation even when it
+     would perform well.
 
 READABILITY, THE WHOLE BRIEF. Smooth and simple beats dense and impressive. Keep most sentences
 under 30 words and break any sentence that passes 35 into two. Allow one subordinate clause, not
 three stacked. Prefer the active voice. After you translate a term of art once, use the plain words
 for the rest of the piece rather than the index name. Say what a number MEANS in concrete terms
-instead of restating it abstractly: "Greenville home values are rising faster than the country's,
-and Greenville rents are rising slower" is readable, while "the two gaps move in opposite directions
-against the national benchmark" is not. Vary sentence length so the piece still reads like a person
-talking, and never chop it into a staccato list of short bursts.
+instead of restating it abstractly, and KEEP THE FIGURES while you do it. "Greenville home values
+are up 1.9% over the year against 0.8% nationally, while Greenville rents are up 1.7% against 2.2%,
+per Zillow" is readable and complete. "The two gaps move in opposite directions against the national
+benchmark" is abstract and gets rewritten. "Greenville home values are rising faster than the
+country's" is readable but INCOMPLETE, because it threw away the numbers that make it checkable, and
+that is the more tempting failure of the two. Simpler wording, same evidence. Vary sentence length
+so the piece still reads like a person talking, and never chop it into a staccato list of short
+bursts.
 
 ## The Upstate vs the country
 From Section A. In three to five sentences: Greenville's typical home value with its year-over-year

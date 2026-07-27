@@ -135,4 +135,34 @@ geocodable place).
 
 MARKDOWN: confirm it is plain and unescaped, with no backslash before # or [.
 
-Output the corrected piece only, in the same three-block format (## METADATA, ## ARTICLE, ## X).
+CLIPPABLE LEADS AND READABILITY (the smoothing pass; enforce it, do not merely prefer it). The
+opening sentence and the first sentence under each major section must survive being lifted out of the
+piece and pasted into X or Nextdoor.
+  - THE SHAPE: lead with the concrete FINDING in plain words, then two or three figures that earn it with their baselines or units, then a
+    short source tag. Target under 200 characters, hard cap 240. Shorthand is preferred in these
+    sentences. Each must stand alone, naming the place and the thing measured, and must never open
+    with a backward-pointing "this," "that," "it," or "those figures."
+  - DO NOT FIX LENGTH BY DELETING EVIDENCE. This is the failure to watch for hardest, because it
+    looks like good editing. If a sentence runs long, cut adjectives, hedges, and connective filler.
+    NEVER cut a figure, a baseline, a unit, or the source tag to get under the count. A sentence
+    stripped of the numbers that made it checkable is worse than a slightly longer one, and it also loses the screenshot.
+  - FINDING, NOT VERDICT. The opening clause states what the reporting found and what the numbers literally measure, never what Alex concludes, whether the change is good or bad, or what anyone should do; every VOICE AND POV rule applies at full strength here, and a clippable sentence is the easiest place to smuggle in a stance. The test: point at the specific figures in the sentence that make the opening
+    clause literally true. If you cannot, it is a stance and it comes out.
+  - ONE SOURCE PER STACKED SENTENCE. When a sentence stacks several figures under one source tag,
+    verify every figure in it actually came from that source. Split the sentence or tag each figure.
+  - SENTENCE LENGTH elsewhere in the piece: break any sentence over 35 words into two, and cut
+    stacked subordinate clauses down to one. A colon introducing a genuine list of figures is fine
+    and is not the banned drumroll; a list of parallel figures is also not the banned overloaded
+    sentence, which is a chain of subordinate clauses. Fragments and staccato stay banned, so this
+    is not a license for clipped bursts.
+
+## CLIPS BLOCK: confirm it holds exactly three numbered lines and that EVERY ONE APPEARS VERBATIM in
+the ## ARTICLE. Diff them word for word. A clip reworded or invented for the block is unverified
+copy that skipped your fact check, so either restore the article's exact wording or fix the article
+sentence and re-copy it. Confirm each stands alone, carries its figures and baselines intact, notes
+its character count and source section, that the three cover different material, and that one is
+marked as the Nextdoor fit.
+
+Output the corrected piece only, in the same block format (## METADATA, ## ARTICLE, ## X,
+## CLIPS). If you rewrote an article sentence that a clip quoted, update that clip so it stays
+verbatim.

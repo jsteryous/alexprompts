@@ -125,7 +125,7 @@ STEP 3, PASS 3, WRITER. Read scripts/tech/routine/pass3_writer.md. Hand its full
 plus /tmp/gw/pass1_brief.md (full, including the numbers, the stakes, and the honest trade-offs),
 /tmp/gw/pass2_angle.md, AND /tmp/gw/published_pages.txt (label it "PUBLISHED PAGES", the live
 pages available for internal links) to a fresh sub-agent. Save to /tmp/gw/pass3_draft.md. It contains three
-labeled blocks: ## METADATA, ## ARTICLE, ## X.
+labeled blocks: ## METADATA, ## ARTICLE, ## X, ## CLIPS.
 
 STEP 4, PASS 4, EDITOR. Read scripts/tech/routine/pass4_editor.md. Hand its full contents
 plus /tmp/gw/pass3_draft.md and /tmp/gw/pass1_brief.md to a fresh sub-agent. Save the
@@ -182,7 +182,9 @@ curated Greenville library photo; a non-Upstate location gets its Street View or
 daily finalize cron instead), and the /api/finalize-greenville cron (daily, on Vercel) broadcasts
 the piece to confirmed subscribers exactly once, so there is nothing to send by hand."
 Then three dashes; then "GREENVILLE WORKS ESSAY (draft)"
-and the ## ARTICLE block; then three dashes; then "X POST" and the ## X block (copy-paste this to
+and the ## ARTICLE block; then three dashes; then "CLIPS (paste-ready)" and the ## CLIPS block,
+three verbatim lines from the piece with their character counts and the one marked as the Nextdoor
+fit, so Alex can post without rereading it; then three dashes; then "X POST" and the ## X block (copy-paste this to
 X yourself once the piece is live, there is no X auto-poster); then three dashes; then "Editor notes" with the topic
 you covered, the key SOURCES from the brief, the CONFIDENCE NOTE from the angle, and the
 DRAFT post id and slug from STEP 5.

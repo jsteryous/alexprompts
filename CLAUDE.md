@@ -169,6 +169,19 @@ engine's `pass3_writer.md` carried the same house style but now lives under
   dashes in copy.)
 - **No sentence fragments.** Every sentence has a subject and a verb, never a clipped burst for effect.
 - **Flowing, complete sentences**, the way a person explains something out loud. Vary sentence length naturally. Clarity carries the weight, not punchiness or staccato.
+- **Clippable leads** (added July 27, 2026, all three engines). The opening sentence and the first
+  sentence under each heading are written to survive being lifted out and pasted into X or Nextdoor:
+  they stand alone, name the place and the thing measured, lead with the plain-language meaning and
+  then stack two or three figures that earn it, keep a short source tag inside ("per the Greenville
+  MLS"), and target under 200 characters. The model sentence is *"Greenville homebuyers have more
+  leverage than a year ago: inventory is up 12%, homes are taking 52 days to sell (vs. 43), and the
+  median sale price is still $330K, per the Greenville MLS."* This does NOT relax the rule above:
+  those are complete sentences, not fragments, and the rest of the prose still flows. **Compress the
+  prose, never the evidence** is the governing rule; cutting a figure, a baseline, or the source tag
+  to hit a character count is a failure, not good editing. A colon introducing a genuine list of
+  figures is correct here and is not the banned drumroll. State the market MECHANIC the figures
+  measure ("more leverage"), never a verdict ("the market is loosening faster than the country") or
+  advice ("buyers should offer under asking").
 - **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff" construction; a colon only introduces a genuine list. Restructure into a full sentence where you can.
 - Open cold and concrete. Lead with a fact, a scene, or a number.
 - Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
