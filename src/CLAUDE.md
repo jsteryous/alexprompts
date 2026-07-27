@@ -49,8 +49,13 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   2026 as an off-strategy agent tool); `buyers-list` (live; the page
   imports the committed `src/data/commercialSales.json` dataset that
   `scripts/greenville/commercial.py` builds from Greenville County's public ArcGIS service,
-  so it is statically generated with no runtime API); `area-scan` (soon, Tier 2
-  Google Places, needs server proxy + cache + rate-limit). `components/ToolShell.tsx` is
+  so it is statically generated with no runtime API); `property-tax`, `schools`,
+  `cost-of-living`, and `wire-safety` (all live, zero-cost); `taraform` (live, an external
+  link to taraform.org, no local route); and `area-scan` (**live** since July 2026, was
+  `soon`; the ONE tool that calls a paid Google API, capped by console-side daily quotas Alex
+  confirmed July 27, 2026, and it fails safe to a "not configured" panel when
+  `GOOGLE_PLACES_API_KEY` is unset). `src/lib/tools.ts` is the only authority on tool status;
+  check it before describing the tools in copy or docs. `components/ToolShell.tsx` is
   the shared chrome (header, not-advice note, subscribe capture). Add `.theme-field` to
   form inputs (defined in `globals.css`).
 - **`src/lib/substack.ts`** — Substack RSS -> markdown converter (`parseSubstackFeed`,

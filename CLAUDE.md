@@ -279,17 +279,25 @@ under `scripts/_archive/` — do not revive it.
   `outcomes`, `manifesto`) were **deleted from `site.ts`**; do not reintroduce them. The
   *Subscribe* CTA still rides along. Content is free, money model is later.
 - `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
-  source being `src/lib/tools.ts` (`toolCatalog`). Live: `deal-analyzer` (rental cash
-  flow / cap rate / cash-on-cash) and `mortgage` (payment + affordability), both pure
-  client-side, no API, no cost. (The `listing-prompt` builder was removed July 21, 2026: it
-  served agents, the audience the site dropped with voice-3, so it did not fit the
-  referral-revenue north star.) `buyers-list` (Greenville County commercial
-  sales: buyer/LLC, price, date, address) is also live: it reads a committed JSON dataset
+  source being `src/lib/tools.ts` (`toolCatalog`), which is the ONLY authority on what is
+  live; check it before describing the tools anywhere in copy or docs. **Nine live as of July
+  27, 2026:** `deal-analyzer` (rental cash flow / cap rate / cash-on-cash), `mortgage`
+  (payment + affordability), `property-tax` (SC estimator), `schools` (Greenville lookup),
+  `cost-of-living` (BEA RPP compare), `wire-safety` (wire-fraud check), `buyers-list`
+  (Greenville County commercial sales: buyer/LLC, price, date, address), `area-scan` (Google
+  Places neighborhood/saturation), and `taraform` (the external CRM at taraform.org, no local
+  route). (The `listing-prompt` builder was removed July 21, 2026: it served agents, the
+  audience the site dropped with voice-3, so it did not fit the referral-revenue north star.
+  Three pieces of live copy still advertised it until July 27; when a tool ships or is
+  removed, grep `src/` for its name.) Every tool but `area-scan` costs nothing to run:
+  most are pure client-side with no API, and `buyers-list` reads a committed JSON dataset
   (`src/data/commercialSales.json`) built by `scripts/greenville/commercial.py` from the
-  county's free public ArcGIS service, so the page is statically generated with no runtime
-  API or cost either. `area-scan` (Google Places neighborhood/saturation)
-  is registered as `soon` — Tier 2, needs a server proxy + caching + rate limits before it
-  ships. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
+  county's free public ArcGIS service, so that page is statically generated. **`area-scan`
+  went LIVE (it was registered `soon`), and it is the one tool that calls a paid Google API.**
+  Alex confirmed the console-side daily quotas on July 27, 2026, and those quotas, not the
+  code, are what cap billing. The code still fails safe: with `GOOGLE_PLACES_API_KEY` unset,
+  `src/lib/areaScan.ts` returns `not_configured` and the page renders a clean "not configured"
+  panel. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
   note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
   footer, and sitemap, so a tool ships in one place and appears everywhere.
 - `/about` — the **opportunistic hiring-manager front door** (if Alex shares the site on a
