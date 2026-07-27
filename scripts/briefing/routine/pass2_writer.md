@@ -122,31 +122,44 @@ plain sentence noting that these are Zillow's modeled figures for the metro area
 ground than the Greenville MLS and is a different instrument from the MLS median sale price.
 
 ## Buyer or seller's market
-From the MARKET VITALS block, the leverage read and the section that most directly serves a real
-decision. In four to six sentences, or a tight bullet each, give the five metrics with their
-Greenville numbers and their year-over-year move: days to pending (translate as "the median time
-from listing to going under contract"), for-sale inventory, new listings, the share of listings
-cutting price, and the sale-to-list ratio (translate as "how close to asking homes actually sell").
-Put the national figure beside at least the first two so the reader sees the Upstate against the
-country. Then ONE plain sentence per side, as market mechanics: what a buyer reads in these numbers
-(more inventory and longer days to pending mean more room to negotiate than a year ago) and what a
-seller reads (homes still going under contract in about three weeks and selling near asking mean
-sharp pricing still moves). Describe the mechanics only. Do NOT tell anyone what to do ("offer
-below asking," "list now"), and do NOT invent a verdict or a mood; the numbers describe the
-balance and the reader decides. Use each metric's own as-of month, since the sale-to-list figure may
-lag the others by a month.
-Open this section with one sentence stating that the figures are Zillow's metro-level series unless
-the MLS is named, that the two run on different panels and footprints, and that both are reported
-where they disagree. Link the vitals once, to the EXACT metric CSV URL the sheet supplied (the
-inventory URL is the natural anchor), never to a directory path. Where the fact sheet carries a GGAR
-MLS figure for the same quantity (inventory, new listings, days, percent of list received), give the
-MLS number beside the Zillow one with its own name attached, so a reader checking their MLS finds
-their number in the brief instead of a contradiction.
+From the MARKET VITALS block. THIS SECTION HAS ONE JOB: how Greenville's leverage compares to the
+COUNTRY. It is not the full leverage read anymore; "Where the leverage is" below carries the local
+detail, and the two sections used to repeat each other's numbers until a reader was doing
+bookkeeping. Give this section the national gap and nothing else.
+
+Write THREE to FIVE flowing sentences, and do NOT use bullets here. That five-bullet block of
+dual-sourced figures was the densest, least readable thing in the brief and it is gone. Lead with
+the metric where the Greenville-versus-national gap is widest and most concrete, then give one or
+two more, then the sale-to-list line. Each figure carries the national number from THE SAME Zillow
+series beside it, plus the year-ago figure (a share in points, "30.4% against 30.2% a year ago"; a
+count as a percent, "inventory up 24.2%"). Translate "days to pending" as the median time from
+listing to going under contract, and "sale-to-list ratio" as how close to asking homes actually
+sell, once each.
+
+DROP what does not serve the national comparison: new listings gets a clause at most, and the
+metric-by-metric restatement of MLS figures is gone, because the open already led on the GGAR MLS
+numbers a local professional checks. Keep exactly ONE sentence naming the instrument split: these
+are Zillow's modeled metro-area figures, the MLS counts its own narrower territory, and the two
+agree on direction while disagreeing on magnitude. That single sentence discharges the provenance
+duty for the section.
+
+Close with one plain sentence per side, as market mechanics: what a buyer reads in the numbers
+(more inventory and a longer time to contract mean more room to negotiate than a year ago) and what
+a seller reads (homes still going under contract in about three weeks and selling near asking mean
+sharp pricing still moves). Describe mechanics only. Do NOT tell anyone what to do ("offer below
+asking," "list now"), and do NOT invent a verdict or a mood.
+
+Link the vitals once, to the EXACT metric CSV URL the sheet supplied, never a directory path. Use
+each metric's own as-of month, since sale-to-list may lag the others by a month.
 
 ## Where the leverage is
-From Section B, the differentiated core and the section a reader is most likely to act on. The
-sections above say whether the county is loosening; this says WHERE, which is the question someone
-shopping for a house actually has.
+From Section B, the differentiated core and the section a reader is most likely to act on. THIS
+SECTION HAS ONE JOB: WHERE inside the county, which is the question someone shopping for a house
+actually has. The section above owns the comparison to the country; this one owns the spread across
+Greenville County. A metric may appear in both ONLY when each appearance answers a different
+question ("22 days against 18 nationally" up there, "14 days in Greer to 25 in Simpsonville's
+29680" down here). Never restate a national comparison here, and never restate a ZIP figure up
+there.
 Open with one sentence naming the SPREAD, because that is the finding: the county middle against
 the two ends, with the ZIPs and their town names ("Simpsonville's 29681 carries 339 active listings
 against 25 in Marietta's 29661, per Zillow's ZIP-level series"). Always give a ZIP its town name on
@@ -221,8 +234,9 @@ a drumroll; plain English with any term of art translated in one clause (millage
 points, ZHVI as "Zillow's typical home value"); no filler and no banned phrases (game-changer, a new
 era, sent ripples, hidden gem, nestled, up-and-coming, vibrant, the rise of, it is worth noting,
 dive into). Emit plain standard markdown; do not backslash-escape characters. Bullets are allowed in
-"Buyer or seller's market," "Where the leverage is," and "Around town" only, and each bullet must
-still be complete sentences.
+"Where the leverage is" and "Around town" ONLY, and each bullet must still be complete sentences.
+"Buyer or seller's market" is prose now, deliberately; it is the one section where a bullet list
+made the brief harder to read rather than easier.
 
 LENGTH. 600 to 900 words on a normal week. The pulse and the submarket read carry the brief, so it
 should reach the range on real material, never on padding; a dry Around-town week lands shorter and

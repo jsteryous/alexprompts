@@ -50,7 +50,11 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's lead
    number, then The Upstate vs the country / Buyer or seller's market / Where the leverage is /
    Around town / Rates and money / What I'd watch, then one quiet `/find-a-pro`
-   line and the not-advice footer), 600 to 900 words, house style, inline source links. Runs a
+   line and the not-advice footer), 600 to 900 words, house style, inline source links. The two
+   leverage sections split by **altitude** (narrowed July 27, 2026): "Buyer or seller's market" is
+   the comparison to the COUNTRY, in three to five sentences of prose with no bullets; "Where the
+   leverage is" is the spread across the COUNTY. A metric appears in both only when each appearance
+   answers a different question, and the editor cuts cross-section repetition. Runs a
    **clippable test** on the open and every section's first sentence (stands alone, under 200 chars,
    one main clause, short source tag inside the clip with the methodology caveat in the NEXT
    sentence) plus general readability limits (break sentences over 35 words, one subordinate clause,

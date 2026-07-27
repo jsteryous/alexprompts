@@ -249,7 +249,10 @@ and the two factual gap lines, then the facts-only read. Every figure labeled wi
 <the five leverage metrics from market_vitals, each with the Greenville latest, the year-ago
 figure or YoY move, the national figure, and its own as-of month; plus the one factual
 mechanics line per metric and, optionally, the factual balance the five describe. No advice, no
-verdict.>
+verdict. RANK them for the writer: name which metric shows the WIDEST and most concrete
+Greenville-versus-national gap, because the writer's section is now the national comparison only
+(three to five sentences of prose, not five bullets) and leads on that metric. The local spread
+for these same metrics belongs to Section B, not here.>
 
 ## B. WHERE THE LEVERAGE IS
 <the county spread with its median arithmetic, then the movers on inventory and price-cut share,

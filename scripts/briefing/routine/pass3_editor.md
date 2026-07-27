@@ -50,15 +50,27 @@ both home value and rent, with the as-of month, and states the gap as FACT. Stri
 advice, or prediction ("this is a good sign," "buyers should," "concerning"); the section describes
 the divergence and stops. Confirm each of the two figures links to its Zillow source once.
 
-BUYER OR SELLER'S MARKET (the vitals): confirm it reports the five leverage metrics (days to
-pending, for-sale inventory, new listings, price-cut share, sale-to-list ratio) with their
-Greenville numbers and year-over-year moves, traced to the MARKET VITALS block; re-do each stated
-move (a share stated as points must match prior_year, a count stated as a percent must match
-yoy_pct). Confirm "days to pending" and "sale-to-list ratio" are each translated in one clause at
-first use. The section may state the factual balance the numbers describe (the market mechanics),
-but STRIP any instruction to act ("offer below asking," "list now," "wait") and any invented
-verdict or mood; the numbers describe the leverage and the reader concludes. Confirm the vitals
-figures link to their Zillow Research source once, and that each metric's own as-of month is used.
+BUYER OR SELLER'S MARKET (the NATIONAL comparison, and only that): this section's single job is how
+Greenville's leverage compares to the country. Confirm it is THREE to FIVE sentences of PROSE with
+NO bullet list; the old five-bullet dual-sourced block was the densest thing in the brief and is
+banned, so convert one back to prose if it reappears. Every figure must trace to the MARKET VITALS
+block and carry the national number from THE SAME Zillow series; re-do each stated move (a share
+stated as points must match prior_year, a count stated as a percent must match yoy_pct). Confirm
+"days to pending" and "sale-to-list ratio" are each translated in one clause at first use, and that
+each metric's own as-of month is used. Confirm exactly ONE sentence handles the instrument split
+(Zillow's modeled metro area versus the MLS's narrower territory, agreeing on direction and not
+magnitude); a metric-by-metric restatement of MLS figures is redundant with the open and gets cut.
+The section may state the factual balance the numbers describe (the market mechanics), but STRIP any
+instruction to act ("offer below asking," "list now," "wait") and any invented verdict or mood.
+Confirm the vitals figures link to their Zillow Research source once.
+
+NO CROSS-SECTION REPETITION (the check that keeps the two leverage sections distinct). "Buyer or
+seller's market" owns the comparison to the COUNTRY; "Where the leverage is" owns the spread across
+the COUNTY. A metric may appear in both ONLY when each appearance answers a different question. Cut
+any national comparison that reappears in the submarket section, any ZIP-level figure that appears
+in the metro section, and any figure stated twice at the same altitude. A reader who has to track
+the same number through three passes at two sources stops reading, which is what happened when the
+submarket section was added underneath the old five-bullet block.
 
 WHERE THE LEVERAGE IS (the standing spine, present every week): confirm it carries the county SPREAD
 (the two ends plus the county middle), the MOVERS, and ONE rotating angle. Every figure, rank,
@@ -188,7 +200,7 @@ isolation; bullets included); allow a colon only before a genuine list; cut bann
 (game-changer, a new era, sent ripples, hidden gem, nestled, up-and-coming, vibrant, the rise of, it
 is worth noting, dive into) and any filler; confirm jargon is translated at first use (including ZHVI
 and ZORI, days to pending, and sale-to-list ratio); confirm plain unescaped markdown. Bullets only
-in "Buyer or seller's market," "Where the leverage is," and "Around town."
+in "Where the leverage is" and "Around town" (never in "Buyer or seller's market," which is prose).
 
 LENGTH: 600 to 900 words on a full week; shorter is correct when Around town is dry. If it runs past
 900, cut the weakest items, never the sourcing or the seams.

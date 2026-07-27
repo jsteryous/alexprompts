@@ -45,16 +45,21 @@ The sections, in order:
    Greenville-vs-national GAP stated as fact ("prices bid up faster than the nation while rents
    run cooler"), never as a verdict. This is the sentiment read; Alex supplies any opinion in
    review.
-2. **Buyer or seller's market** — the leverage read, and the section that most directly serves a
-   real decision (it cashes the "better real estate decisions" promise). Five Zillow market-vitals
-   metrics from the same `greenvilleHousing.json`: median days to pending, for-sale inventory, new
-   listings, the share of listings with a price cut, and the sale-to-list ratio, each with its
-   year-over-year move and the national figure beside it. One factual line per side on what the
-   numbers MEASURE (buyers read more inventory and longer days to pending as room to negotiate;
-   sellers read fast pending times and near-asking sales as pricing still moving), stated as market
-   mechanics, never as advice or a verdict. Fresh where the price level is nearly flat: inventory,
-   days on market, and price cuts actually move month to month, so this section gives the brief
-   something new to say each week. Never NOTHING REAL.
+2. **Buyer or seller's market** — the **national comparison, and only that** (narrowed July 27,
+   2026). Three to five sentences of PROSE, no bullets, leading on whichever Zillow market-vitals
+   metric shows the widest Greenville-versus-national gap, each figure carrying the national number
+   from the same series and its year-ago baseline. One sentence handles the instrument split
+   (Zillow's modeled metro area versus the MLS's narrower territory, agreeing on direction and not
+   magnitude), since the open already led on the GGAR MLS numbers. Closes with one factual line per
+   side on what the numbers MEASURE (buyers read more inventory and longer days to pending as room
+   to negotiate; sellers read fast pending times and near-asking sales as pricing still moving),
+   stated as market mechanics, never as advice or a verdict. Never NOTHING REAL.
+   *Why it narrowed:* it used to carry all five metrics as a dual-sourced five-bullet block, the
+   densest thing in the brief. Once section 3 added the same metrics per ZIP, a reader met inventory
+   three times (MLS, Zillow metro, then 19 ZIPs) and days to pending three times. The two sections
+   now split by ALTITUDE: this one is Greenville versus the country, section 3 is the spread across
+   the county, and a metric may appear in both only when each appearance answers a different
+   question.
 3. **Where the leverage is** — the proprietary spine, STANDING every week, and the section that
    most directly serves a real decision. The metro figures above say WHETHER the county is
    loosening; they cannot say WHERE, and where is the question a buyer actually has. From the
