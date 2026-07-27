@@ -112,35 +112,41 @@ export default function AboutPage() {
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              Everyone is in sales, whether they call it that or not. If you have ever
-              interviewed for a job, that was a sales motion. If you report to a boss, you are
-              almost certainly selling internally, whether you are pitching a project or
-              defending a budget. If you have ever been on a date, you were selling someone on
-              reasons to keep seeing you. I chose sales as a career because it is what I am best
-              at, and because I would rather do that work deliberately than pretend I am not
-              doing it at all.
+              Everyone is in sales, whether they call it that or not. Every job interview is a
+              sales motion. Every internal pitch, every budget defense, every attempt to get
+              buy-in from a boss or a cross-functional team runs on the same skill. I chose sales
+              because it&rsquo;s the one field where that skill is out in the open, named
+              directly, and rewarded for what it actually is.
             </p>
             <p>
-              I am extroverted and I genuinely like meeting new people, so the parts of the job
-              that drain other people tend to be the parts that energize me. I enjoy the chase. I
-              enjoy that a sales conversation rewards thinking on your feet, and that thinking on
-              your feet is a skill you can actually sharpen with reps rather than something you
-              either have or you do not.
+              I&rsquo;m extroverted and I like people, genuinely, not as a professional
+              performance. That shows up differently depending on the stage of the relationship.
+              I have plenty of cold calling experience and I don&rsquo;t dread it the way a lot of
+              people do. I like the first conversation, the one where you have to earn attention
+              fast and think on your feet. But the part of the job I care about most is what
+              happens after the deal closes. I&rsquo;d rather grow an account over two years than
+              win one and move on. Renewals, expansions, and being the person a client actually
+              wants to call when something goes wrong, that&rsquo;s the work that keeps me
+              engaged, because it rewards patience and follow-through as much as it rewards a good
+              pitch.
             </p>
             <p>
-              Sales is also one of the more competitive fields you can work in, and I mean that
-              as the appeal rather than the warning. Your numbers are usually posted internally
-              where everyone can see them. The metrics are tracked closely. There is very little
-              ambiguity about whether you are performing, and there are concrete ways to get
-              better at it.
+              I&rsquo;m also drawn to how competitive this field is, and I mean that as a selling
+              point, not a warning. Sales is one of the few jobs where performance isn&rsquo;t up
+              for debate. Your numbers are posted, tracked, and visible to everyone around you.
+              There&rsquo;s no ambiguity about how you&rsquo;re doing, and no mystery about what to
+              work on next. I want to be somewhere my results speak for themselves, because I trust
+              what they&rsquo;ll say.
             </p>
             <p>
-              The part people tend to underestimate is the research. Finding the actual decision
-              maker inside a company is real work, and it often looks closer to intelligence work
-              than to pitching. Some of the most useful paths into an organization also come from
-              outside it, through someone in your network who happens to know a person on the
-              inside. Working that out is a creative problem, and it is one of my favorite parts
-              of the job.
+              What people tend to miss is how much relationship work happens quietly, outside the
+              calls that get tracked. Finding the actual decision-maker inside an account,
+              understanding what they&rsquo;re measured on internally, and knowing who else needs
+              to be looped in before a renewal or expansion conversation even starts, that&rsquo;s
+              closer to investigative work than to pitching. Some of the best openings come from a
+              warm path through someone in your network who knows a person on the inside, rather
+              than a cold list. Figuring out that path, and then doing the slower work of turning
+              it into a real relationship, is what I find most satisfying about this job.
             </p>
           </div>
         </div>
