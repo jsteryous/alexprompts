@@ -5,6 +5,7 @@ import { sectionOf, formatDate } from "@/lib/posts";
 import LoginForm from "./LoginForm";
 import LogoutButton from "./LogoutButton";
 import PublishButton from "./PublishButton";
+import DeleteButton from "./DeleteButton";
 
 // This is an authenticated, per-request view; never cache it.
 export const dynamic = "force-dynamic";
@@ -129,7 +130,10 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
           Edit
         </Link>
         {draft ? (
-          <PublishButton id={post.id} />
+          <>
+            <DeleteButton id={post.id} />
+            <PublishButton id={post.id} />
+          </>
         ) : (
           <a
             href={live}
