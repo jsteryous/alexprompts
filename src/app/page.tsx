@@ -165,7 +165,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── The mission (the questions-worth-asking promise; /about keeps the full story) ── */}
+      {/* ── The mission (headline tracks site.tagline; /about keeps the full story). The
+           closer names the handoff on purpose: "the call stays yours" alone told the reader
+           they never need anyone, which is the one thing the referral model needs. ── */}
       <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -185,8 +187,9 @@ export default async function HomePage() {
                 Most media tells people what to think.
               </p>
               <p className="theme-text-contrast-muted type-body-lg">
-                Alex Prompts gives you the facts, the trade-offs, and the tools, so the
-                call stays yours.
+                Alex Prompts gives you the facts and the trade-offs, so the call stays
+                yours. The last decision is who is in your corner, and that is the one I
+                help with directly.
               </p>
             </div>
             <Link
