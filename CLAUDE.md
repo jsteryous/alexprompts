@@ -269,9 +269,18 @@ under `scripts/_archive/` — do not revive it.
   decisions." slogan: headline **"Better real estate decisions."** (same as the slogan,
   deliberately), then the ONE-sentence mission (emphasized) "Alex Prompts helps South
   Carolinians make smarter real estate decisions, with honest writing on the market, the
-  technology reshaping it, and free tools to run the numbers yourself.", then two one-line
-  paragraphs ("Most media tells people what to think." / "Alex Prompts gives you the facts, the
-  trade-offs, and the tools, so the call stays yours."). The earlier
+  technology reshaping it, and free tools to run the numbers yourself.", then two closing
+  paragraphs ("Most media tells people what to think." / "Alex Prompts gives you the facts and
+  the trade-offs, so the call stays yours. The last decision is who is in your corner, and that
+  is the one I help with directly."). **The closer was extended July 29, 2026 to name the
+  handoff.** It used to end at "so the call stays yours", which read as a promise that the reader
+  never needs anyone, the one thing a referral business cannot tell people; the mission was
+  fulfillable without the reader ever making contact. The fix frames the introduction as the LAST
+  step of the decision rather than a bolted-on CTA, and it is honest because Alex is licensed and
+  does not compete for the client. The final clause is deliberately first person (the rest of the
+  block is third person) so a reader sees a person doing the handoff, not a form. Note the whole
+  site's copy is UNCONTRACTED ("who is", never "who's"); there is not one contraction anywhere in
+  `src/`, so keep it that way. The earlier
   pro-growth manifesto ("Grow or die." then briefly "Growth is good." / "from no to how" /
   "Stagnation is death.") was REMOVED from the homepage that same day; the pro-growth stance
   still drives the engines' editorial method (see memory `pro-growth-editorial-stance`) but is
@@ -425,7 +434,21 @@ email.
   `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
   click, and it emails a published post to the list. This is the channel for **site-only content**
   (Greenville `/real-estate`, Greenville Works `/greenville-works`, the Upstate Brief
-  `/briefing`) that never goes to Substack. `blog_posts.last_broadcast_at`
+  `/briefing`) that never goes to Substack. Useful params: `&test=you@example.com` sends ONE
+  preview and touches neither the list nor the stamp, `&dry=1` reports the recipient count
+  without sending, `&force=1` resends. **July 29, 2026: broadcasts carry the FULL ARTICLE**
+  (the Morning Brew model), not a title-plus-summary teaser. A click-through is friction on a
+  five-minute read, and the list is sphere professionals whose habit is the whole point.
+  `src/lib/emailMarkdown.ts` renders `body_md` to inline-styled email HTML; it is deliberately
+  SEPARATE from the site's `renderMarkdown.ts` because email clients drop classes and `<style>`
+  blocks, and because the site rewrites images to relative `/_next/image` URLs that cannot
+  resolve in an inbox. Rendered once per send, not per recipient. Worst case measured across all
+  24 published posts is 19KB, about 19% of Gmail's ~102KB clip threshold, so there is wide
+  headroom. Full-content sends widen the card to 600px and, on the `greenville` track only
+  (mirroring `ArticleView`'s `showReferralCta`), append the referral offer linking to
+  `/find-a-pro?ref=<slug>&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list`, so an
+  inbox-originated lead still attributes in `supabase/queries.sql`.
+  `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
   on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
   stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`
@@ -448,8 +471,11 @@ email.
   (the article slug the in-article `ReferralCta` carried in `?ref=`), `referrer` (document.referrer),
   `landing_path`, and `utm_source`/`utm_medium`/`utm_campaign`. `ReferralForm` captures these on
   mount and posts them; `/api/refer` stores them and the notification (`leadNotifyEmail`) shows a
-  "Came from" line (article > campaign > referrer). To see which content drives leads, group by
-  `ref_slug`: `select ref_slug, count(*) from referral_leads group by ref_slug order by 2 desc;`.
+  "Came from" line (article > campaign > referrer). The attribution queries live in
+  **`supabase/queries.sql`** (read-only, paste into the Supabase SQL editor): leads by article,
+  every published guide *including the zero-lead ones*, channel mix, capture surface, the funnel
+  by intent, weekly trend, response time, and the open work queue. All of them exclude
+  `status = 'dead'`, which is where test rows go, so a test submit never inflates a rate.
   Written by `/api/refer` (via `src/lib/leads.ts`), which also emails Alex a notification. **Requires
   the `referral_leads` table + attribution columns from `supabase/schema.sql` to be applied.**
 
@@ -472,6 +498,7 @@ email.
 | `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
 | `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Alex Prompts <alex@alexprompts.com>`. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
+| `EMAIL_POSTAL_ADDRESS` | The physical mailing address printed in the owned-list email footer. **CAN-SPAM requires one on commercial email**, and it matters most for contacts Alex ADDED BY HAND off a sphere call rather than through the form. Unset = the line is simply omitted (no placeholder ever ships), which leaves the one compliance gap open, so set it before the list grows past Alex's own addresses. Use a PO box, not a home address. Read in `src/lib/emailTemplates.ts`. |
 | `SUBSCRIBE_RATE_LIMIT` | Optional. Per-IP signups/hour allowed on `/api/subscribe` (default 5). Plus a hardcoded per-address cap of 3 confirmation sends/hour. Soft, in-memory (`src/lib/rateLimit.ts`, resets on cold start); blunts signup spam and confirmation-email bombing. |
 | `LEADS_NOTIFY_TO` | Optional. Where `/api/refer` sends the referral-lead notification email. Falls back to `EMAIL_REPLY_TO`, then `site.email` (`hello@alexprompts.com`). Set this to the inbox Alex actually watches so a new lead pings him fast. The lead is stored in `referral_leads` regardless, so an unset/unverified inbox never loses a lead. |
 | `REFER_RATE_LIMIT` | Optional. Per-IP referral-form submits/hour on `/api/refer` (default 5). Soft, in-memory (same `rateLimit.ts` caveat). A real buyer submits once, so this only blunts abuse. |

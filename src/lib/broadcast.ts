@@ -12,6 +12,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { getConfirmedSubscribers } from "@/lib/subscribers";
 import { sendEmail } from "@/lib/email";
 import { postBroadcastEmail } from "@/lib/emailTemplates";
+import { renderEmailBody } from "@/lib/emailMarkdown";
 import { postHref } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 
@@ -40,7 +41,7 @@ export async function broadcastPost(
 
   const { data: post, error: postErr } = await db
     .from("blog_posts")
-    .select("id, title, slug, summary, tags, status, last_broadcast_at")
+    .select("id, title, slug, summary, body_md, tags, status, last_broadcast_at")
     .eq("id", id)
     .maybeSingle();
   if (postErr) return { status: 500, body: { ok: false, error: postErr.message } };
@@ -62,6 +63,23 @@ export async function broadcastPost(
 
   const postUrl = `${SITE_URL}${postHref(post)}`;
 
+  // The whole article ships in the email. Rendered ONCE here, not per recipient:
+  // the HTML is identical for everyone, and on a growing list a per-recipient
+  // markdown parse would be the send loop's dominant cost for no benefit.
+  const bodyMd: string | null = post.body_md ?? null;
+  const bodyHtml = bodyMd ? await renderEmailBody(bodyMd) : null;
+
+  // Mirror the site's per-section choice rather than inventing a new policy:
+  // `ArticleView` sets showReferralCta for /real-estate only, leaving it off
+  // /greenville-works and /archive. Flip the condition here if the referral
+  // offer should ride along on the other tracks too.
+  const tags: string[] = Array.isArray(post.tags) ? post.tags : [];
+  const showReferral = tags.includes("greenville") && !tags.includes("greenville works");
+  const referralUrl = showReferral
+    ? `${SITE_URL}/find-a-pro?ref=${encodeURIComponent(post.slug)}` +
+      `&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list#connect`
+    : null;
+
   // Preview send: one email to the tester, no list, no stamp.
   if (test) {
     const mail = postBroadcastEmail({
@@ -69,6 +87,9 @@ export async function broadcastPost(
       summary: post.summary,
       postUrl,
       unsubUrl: `${SITE_URL}/api/unsubscribe?token=preview`,
+      bodyHtml,
+      bodyMd,
+      referralUrl,
     });
     const r = await sendEmail({ to: test, subject: mail.subject, html: mail.html, text: mail.text });
     return { status: 200, body: { ok: r.ok, mode: "test", to: test, error: r.error } };
@@ -83,7 +104,15 @@ export async function broadcastPost(
   const failed: { email: string; error?: string }[] = [];
   for (const r of recipients) {
     const unsubUrl = `${SITE_URL}/api/unsubscribe?token=${r.unsub_token}`;
-    const mail = postBroadcastEmail({ title: post.title, summary: post.summary, postUrl, unsubUrl });
+    const mail = postBroadcastEmail({
+      title: post.title,
+      summary: post.summary,
+      postUrl,
+      unsubUrl,
+      bodyHtml,
+      bodyMd,
+      referralUrl,
+    });
     const res = await sendEmail({
       to: r.email,
       subject: mail.subject,
