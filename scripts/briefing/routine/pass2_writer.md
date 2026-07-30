@@ -108,8 +108,27 @@ per Zillow" is readable and complete. "The two gaps move in opposite directions 
 benchmark" is abstract and gets rewritten. "Greenville home values are rising faster than the
 country's" is readable but INCOMPLETE, because it threw away the numbers that make it checkable, and
 that is the more tempting failure of the two. Simpler wording, same evidence. Vary sentence length
-so the piece still reads like a person talking, and never chop it into a staccato list of short
-bursts.
+only as far as the material requires, and never chop the brief into a staccato list of short bursts.
+
+TAKEAWAY FIRST, EVERYWHERE. The reader's question at every point in the brief is what the main idea
+is, so state it before the evidence for it. Each section opens with the plain-language takeaway in
+one sentence, then the figures that earn it, and the same order holds again inside the section
+wherever a new idea starts. Never build up to the point, never save it for the end of a paragraph,
+and never leave the reader to derive it from a row of numbers. This is the clippable-lead rule above
+applied to the WHOLE brief rather than only to the first sentence under each heading.
+
+PACK EVERY SENTENCE. The standard is as much information per sentence as the sentence can carry
+while staying simple to read. A sentence carrying a takeaway plus the two or three figures behind it
+is doing its job. A sentence carrying only a transition, a windup, a restatement of something
+already said, or a mood is padding, and the fix is to delete it rather than to shorten it. Because
+there is no word cap, the room this frees is spent on another real figure, never on making the brief
+shorter for its own sake.
+
+NOT AN ESSAY. This is an information product someone reads on a Monday morning, not a piece of
+writing meant to be admired. Do not write for rhythm, do not build a rhetorical arc across the
+sections, and do not reach for a closing line that lands. Plain and direct beats elegant every time
+the two compete. House style still binds: complete sentences, no fragments, no em or en dashes, and
+a colon only before a genuine list.
 
 ## The Upstate vs the country
 From Section A. In three to five sentences: Greenville's typical home value with its year-over-year
@@ -127,7 +146,7 @@ COUNTRY. It is not the full leverage read anymore; "Where the leverage is" below
 detail, and the two sections used to repeat each other's numbers until a reader was doing
 bookkeeping. Give this section the national gap and nothing else.
 
-Write THREE to FIVE flowing sentences, and do NOT use bullets here. That five-bullet block of
+Write FOUR to SIX flowing sentences, and do NOT use bullets here. That five-bullet block of
 dual-sourced figures was the densest, least readable thing in the brief and it is gone. Lead with
 the metric where the Greenville-versus-national gap is widest and most concrete, then give one or
 two more, then the sale-to-list line. Each figure carries the national number from THE SAME Zillow
@@ -136,7 +155,23 @@ count as a percent, "inventory up 24.2%"). Translate "days to pending" as the me
 listing to going under contract, and "sale-to-list ratio" as how close to asking homes actually
 sell, once each.
 
-DROP what does not serve the national comparison: new listings gets a clause at most, and the
+EVERY headline figure in this section also carries its DIRECTION, read from that metric's own
+`series` array in the sheet. A level plus a single year-ago number is a snapshot, and the reader is
+trying to work out where this is heading, which is the question a snapshot cannot answer. Say how
+the run of months went ("the price-cut share has risen in five of the last six months"), not only
+where the number sits today. One year-over-year move is not a trend and must never be written as
+one. The home-value and rent series are seasonally adjusted, so reading month-to-month direction
+there is safe; inventory, new listings, days to pending, the price-cut share, and sale-to-list are
+smoothed but NOT seasonally adjusted, so read those as each month against its own year-ago month
+along the series, and say so in the clause when the seasonal caveat is doing real work.
+
+NEW LISTINGS EARNS A FULL SENTENCE, because it is the leading indicator in this block and it
+separates two situations that a buyer and a seller read very differently. Inventory rising while new
+listings rise with it means more sellers are arriving. Inventory rising while new listings stay flat
+or fall means homes are sitting, which is demand cooling rather than supply arriving. Read the sheet
+and name which of the two it actually shows.
+
+DROP what serves neither the national comparison nor the direction: the
 metric-by-metric restatement of MLS figures is gone, because the open already led on the GGAR MLS
 numbers a local professional checks. Keep exactly ONE sentence naming the instrument split: these
 are Zillow's modeled metro-area figures, the MLS counts its own narrower territory, and the two
@@ -160,10 +195,20 @@ Greenville County. A metric may appear in both ONLY when each appearance answers
 question ("22 days against 18 nationally" up there, "14 days in Greer to 25 in Simpsonville's
 29680" down here). Never restate a national comparison here, and never restate a ZIP figure up
 there.
-Open with one sentence naming the SPREAD, because that is the finding: the county middle against
-the two ends, with the ZIPs and their town names ("Simpsonville's 29681 carries 339 active listings
-against 25 in Marietta's 29661, per Zillow's ZIP-level series"). Always give a ZIP its town name on
-first mention, because almost nobody thinks in ZIP codes and a bare number is unreadable.
+Open with the PRICE-BAND finding, because it is the one cut of this data that is normalized and so
+the one a reader can actually act on. Sort the reporting ZIPs by typical home value, group them into
+bands, and say which band absorbed the year's new supply and which is discounting most often, with
+the arithmetic shown. That sentence tells someone shopping at a given budget whether their own price
+range has loosened, which is the question they came with.
+
+NEVER open by comparing raw active-listing counts across ZIPs, and never present such a comparison
+as the spread. A large suburb will always carry more listings than a rural one, so that comparison
+measures ZIP population and not negotiating room, and it reads as a finding when it is not one. Raw
+counts appear only as the baseline underneath a normalized figure ("from 127 listings to 181, up
+42.5%"). The three measures that DO compare fairly across ZIPs are the year-over-year change, the
+days-to-pending median, and the price-cut share, so every cross-ZIP claim rests on one of those.
+Always give a ZIP its town name on first mention, because almost nobody thinks in ZIP codes and a
+bare number is unreadable.
 Then the movers, as a short bullet list: the ZIPs where inventory or the price-cut share moved most
 year over year, each with its town, its latest figure, and its year-ago baseline. Report a share in
 POINTS ("33% of listings cut, against 28% a year ago"), never as a percent of a percent.
@@ -238,9 +283,18 @@ dive into). Emit plain standard markdown; do not backslash-escape characters. Bu
 "Buyer or seller's market" is prose now, deliberately; it is the one section where a bullet list
 made the brief harder to read rather than easier.
 
-LENGTH. 600 to 900 words on a normal week. The pulse and the submarket read carry the brief, so it
-should reach the range on real material, never on padding; a dry Around-town week lands shorter and
-that is correct. Do not stretch to fill the space the two cut commercial sections used to take.
+LENGTH. There is NO word cap. Usefulness sets the length, and the brief runs as long as the week's
+genuinely decision-relevant material runs. If a figure, a baseline, a source tag, or the direction
+behind a number helps a buyer or seller decide something, it stays, even when that pushes the brief
+long. Never cut evidence to hit a number.
+This is not licence to pad. The no-filler rule still governs and it is the real constraint: every
+sentence carries a fact or the single so-what that follows a fact, and any sentence that would
+survive unchanged in another week's brief is boilerplate and comes out. A dry Around-town week lands
+shorter and that is correct. Do not stretch to fill the space the two cut commercial sections used
+to take.
+For calibration only, a full week now tends to run roughly 1,000 to 1,400 words, which still reads
+in about five minutes. Treat that as an observation about what real material weighs, not a target to
+hit and not a ceiling to respect.
 
 HEADLINE. The title pattern is fixed: `Upstate Brief: <the week's lead, in plain words> (<Month D,
 YYYY>)`. The lead phrase is concrete and specific ("Upstate Brief: Greenville Home Values Outrun the

@@ -141,6 +141,17 @@ SECTION A, THE UPSTATE PULSE (fresh, differentiated, the sentiment read).
      offer under asking"), and you may NOT invent a verdict or mood. Source every figure to
      "Zillow Research (market vitals), <latest_month>". Note that sale_to_list may carry an older
      latest_month than the others; use each block's own latest_month.
+     THEN, for each of the five, read its `series` array and hand the writer a DIRECTION, because a
+     latest value plus one year-ago number is a snapshot and the brief's reader is trying to work
+     out where this is heading. These five are smoothed but NOT seasonally adjusted, so do NOT
+     report a raw month-to-month run as the trend. Instead compare each month to its own year-ago
+     month along the series (the series carries 25 months, which gives 13 such points) and report
+     the run: how many of the last six months were above their own year-ago month, and the value
+     six and twelve months back. Write it as one line per metric, e.g. "price_cut_share: above its
+     year-ago month in 5 of the last 6; 30.4% now, 28.1% six months ago, 30.2% a year ago." Count
+     the run yourself from the series and state the count you actually counted; a miscounted streak
+     is a fabricated trend. If a series is too short or too gappy to support the run, say
+     "direction: insufficient series" for that metric rather than estimating one.
   This section is never NOTHING REAL; the pulse and vitals data always exist.
 
 SECTION B, WHERE THE LEVERAGE IS (the submarket cut; your scarce material and the section that
@@ -247,11 +258,13 @@ and the two factual gap lines, then the facts-only read. Every figure labeled wi
 
 ## MARKET VITALS
 <the five leverage metrics from market_vitals, each with the Greenville latest, the year-ago
-figure or YoY move, the national figure, and its own as-of month; plus the one factual
+figure or YoY move, the national figure, its own as-of month, AND its one-line DIRECTION read from
+the series (the year-over-year run across the last six months, plus the six-month-ago and
+year-ago values, or "direction: insufficient series"); plus the one factual
 mechanics line per metric and, optionally, the factual balance the five describe. No advice, no
 verdict. RANK them for the writer: name which metric shows the WIDEST and most concrete
 Greenville-versus-national gap, because the writer's section is now the national comparison only
-(three to five sentences of prose, not five bullets) and leads on that metric. The local spread
+(four to six sentences of prose, not five bullets) and leads on that metric. The local spread
 for these same metrics belongs to Section B, not here.>
 
 ## B. WHERE THE LEVERAGE IS

@@ -97,10 +97,14 @@ VITALS = [
      "mean_sale_to_list", "Metro_mean_sale_to_list_uc_sfrcondo_sm_month.csv", 1, 100),
 ]
 
-# A shorter tail for vitals than the price/rent series: 13 months is a clean YoY
-# plus a short trend line, and five extra metrics at 24 months would bloat the
-# committed JSON for little gain (the summary already carries the key deltas).
-VITALS_TAIL = 13
+# 25 months, so the brief can read a RUN of year-over-year moves rather than a
+# single one. These five vitals are smoothed but NOT seasonally adjusted, so a
+# raw month-to-month run partly measures the season; the honest trend is each
+# month against its own year-ago month, and that needs 13 YoY points, so 25
+# raw months. (Was 13, which yielded exactly one YoY point and left the brief
+# reporting snapshots.) The extra 12 months across five metrics cost a couple of
+# KB in the committed JSON, which is worth a real trend line.
+VITALS_TAIL = 25
 
 
 def vitals_url(subdir: str, filename: str) -> str:

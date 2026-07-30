@@ -16,12 +16,15 @@ brief is scarce (nobody publishes this for the Upstate), recurring (weekly touch
 inbox without asking for anything), and forwardable. The site's subscribe pitch becomes a
 specific promise instead of "subscribe for updates."
 
-## The editorial template (fixed sections, hard caps)
+## The editorial template (fixed sections, no word cap)
 
-Every issue is the same shape, 600 to 900 words total, so a reader learns to scan it. Every
-item is fact + source + one sentence of "so what." **A section with nothing real this week
-says so in one line.** The no-filler rule is enforced by the editor pass; a padded brief dies
-fast.
+Every issue is the same shape, so a reader learns to scan it. **There is no word cap** (the old
+600-to-900 range was dropped July 29, 2026): usefulness sets the length, and evidence is never cut
+to hit a count. Every item is fact + source + one sentence of "so what." **A section with nothing
+real this week says so in one line.** The no-filler rule is enforced by the editor pass and is the
+only real length control; a padded brief dies fast, and so does one that dropped the number a reader
+needed in order to stay short. A full week tends to land around 1,000 to 1,400 words, which is an
+observation and not a target.
 
 **Who it is written for (settled July 2026).** The reader is a person in the Upstate about to buy
 or sell a home, plus the loan officers, closing attorneys, and agents who advise them. It is
