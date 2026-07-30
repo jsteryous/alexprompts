@@ -83,11 +83,30 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   since the brief never goes to Substack). All four `[slug]`
   pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
-  request. The `section` prop carries an opt-in `showReferralCta` flag; the `/real-estate`
-  route sets it so every real-estate article renders the `ReferralCta` block (links to
-  `/find-a-pro#connect`) after the body and BEFORE the newsletter box, since on a
-  referral-first site the buy/sell offer outranks audience growth. `/archive` and
-  `/greenville-works` leave it off. Canonical is self-referential per section. `/real-estate` holds the Greenville
+  request. The `section` prop carries an opt-in `showReferralCta` flag; **`/real-estate` and
+  `/briefing` both set it** (both are written for buyers and sellers, the audience the referral
+  funnel serves). `/archive` and `/greenville-works` leave it off, since their readers came for
+  something else. **The CTA renders TWICE** (July 30, 2026): once mid-article and once after the
+  body and BEFORE the newsletter box, since on a referral-first site the buy/sell offer outranks
+  audience growth. The mid-article placement exists because the July 27 brief drew 11 visits with
+  its only offer sitting below the whole article, where a skimmer never reaches it.
+  `src/lib/articleCta.ts` `splitAtMidHeading()` picks the cut: the `<h2>` nearest the body's
+  midpoint, never the first (an offer above the value reads as an ad) and never the last (it
+  would collide with the closing block), returning null on short or flat articles so they render
+  in one piece with the closing CTA alone. **Deliberately no top-of-article CTA** — on editorial
+  content an offer above the first paragraph costs trust. The two placements use different
+  `ReferralCta` variants: `inline` (accent-tinted via `theme-card-accent`, built to interrupt a
+  skim) and `full` (the roomier closing block). **The copy is deliberately short and warm**
+  ("Thinking of making a move?" / "Let me know if you're thinking about selling, or if you're
+  looking to buy!"), shared verbatim with the email CTA in `emailTemplates.ts` `referralBlock()`
+  so the two never drift. It is an invitation, not an explanation; do not grow it back into a
+  paragraph, and **never reintroduce the "I do not practice" / "I do not take clients" framing**
+  (see the root `CLAUDE.md` note). **This CTA is the one deliberate exception to the site's
+  uncontracted-copy rule**: Alex wrote the contractions himself and confirmed them July 30, 2026,
+  because the block had been reading like a legal disclaimer. Do not "fix" them. Button copy is
+  **"Get in touch"** (Alex rejected "Tell me about your situation" as clinical). Keep the tag condition in
+  `src/lib/broadcast.ts` in sync with these section props, since the owned-list email mirrors the
+  same policy. Canonical is self-referential per section. `/real-estate` holds the Greenville
   posts the `scripts/greenville` routine creates; `/greenville-works` holds the local-change
   deep-dives the `scripts/tech` routine creates. Both engines **auto-publish live** (status
   `PUBLISHED`, with a verify email for after-the-fact spot-check + unpublish at `/review`; a run

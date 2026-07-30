@@ -91,13 +91,11 @@ export function confirmEmail(confirmUrl: string): { subject: string; html: strin
 function referralBlock(referralUrl: string): string {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
       <tr><td style="background:#f7f7fb;border:1px solid ${BORDER};border-radius:12px;padding:22px 24px;">
-        <div style="font-size:17px;font-weight:700;color:${INK};margin:0 0 8px;">Thinking about a move?</div>
+        <div style="font-size:17px;font-weight:700;color:${INK};margin:0 0 8px;">Thinking of making a move?</div>
         <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:${MUTED};">
-          I am a licensed South Carolina agent who does not practice, so I connect buyers and
-          sellers with agents I would hire myself. Tell me what you are trying to do and I will
-          make the introduction.
+          Let me know if you&rsquo;re thinking about selling, or if you&rsquo;re looking to buy!
         </p>
-        <div>${btn(referralUrl, "Find an agent")}</div>
+        <div>${btn(referralUrl, "Get in touch")}</div>
       </td></tr>
     </table>`;
 }

@@ -15,7 +15,13 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
 > site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
 > vetted agents for a referral fee** (`/find-a-pro`). Alex is a licensed SC agent who does
-> not practice, so he captures the intent and hands it off. This SUPERSEDES the earlier
+> not practice, so he captures the intent and hands it off. **That last fact is INTERNAL context
+> only. Never write "I do not practice" or "I do not take clients" into user-facing copy**
+> (removed everywhere July 30, 2026): it reads as a trust signal to us, but it disqualifies Alex
+> in the reader's head at the exact moment they are deciding whether he can help them, which is
+> the wrong signal to send a buyer or seller. State what he IS ("licensed real estate agent in
+> South Carolina"), keep the buy/sell invitation short and warm, and let the referral-fee
+> disclosure on `/find-a-pro` carry the rest. This SUPERSEDES the earlier
 > "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
 > benefit**, not the driver. The `/about` page still works as a hiring-manager front door if
 > Alex happens to share the site on a job board, but the site is no longer built *for* hiring
@@ -364,7 +370,13 @@ under `scripts/_archive/` — do not revive it.
   ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
 - **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
   promise in the visitor's words. The nav reads **Upstate Brief | Tools | Moving to
-  Greenville | SC Technology | Find an Agent | About** (routes and tags unchanged;
+  Greenville | SC Technology | Buying or Selling | About** (**"Find an Agent" became "Buying or
+  Selling" July 30, 2026**: the old label named the mechanism and assumed the visitor had already
+  decided they wanted an agent, when the site's actual job is to help buyers and sellers first
+  and hand the lead off second. The ROUTE stays `/find-a-pro` because renaming it would break
+  inbound links, the sitemap, and the `ref=` attribution already stored in `referral_leads`. The
+  same reframe hit the footer link, the `/find-a-pro` eyebrow and headline, and the `ReferralCta`
+  copy, which no longer opens on "Real estate referrals"; routes and tags unchanged;
   `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`; the tech tab became "SC
   Technology" July 10 with the statewide widening), and the `/archive`
   newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match

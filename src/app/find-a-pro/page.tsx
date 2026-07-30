@@ -50,11 +50,15 @@ export default function FindAProPage() {
       {/* Form first: a curious visitor can act immediately and scroll for the rest. */}
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
+          {/* Eyebrow and headline lead with the reader's situation, not the
+              referral mechanism (reframed July 30, 2026 alongside the nav label).
+              "Real estate referrals" described how Alex gets paid, which is not
+              what a buyer or seller showed up for. */}
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Real estate referrals · Greenville + anywhere
+            Buying or selling · Greenville + anywhere
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Buying or selling? I&apos;ll connect you with a pro worth your time.
+            Buying or selling? Let me point you in the right direction.
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed text-center mx-auto">
             I am a licensed real estate agent in South Carolina, and my edge is knowing which
