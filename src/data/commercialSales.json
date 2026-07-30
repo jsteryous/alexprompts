@@ -1,10 +1,12 @@
 {
-  "generated_at": "2026-07-26 22:54 UTC",
+  "generated_at": "2026-07-30 13:03 UTC",
   "source": "Greenville County GIS (GreenvilleJS/Map_Layers_JS, Commercial layer)",
   "source_url": "https://www.gcgis.org/arcgis/rest/services/GreenvilleJS/Map_Layers_JS/MapServer/2/query",
   "min_price": 1000000,
   "months": 24,
-  "count": 262,
+  "count": 250,
+  "excluded_non_market": 12,
+  "validated_count": 55,
   "sales": [
     {
       "pin": "0279000201000",
@@ -19,6 +21,8 @@
       "deedPage": 5974,
       "lotSize": 4.63,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.860812,
       "lng": -82.340213
     },
@@ -35,6 +39,8 @@
       "deedPage": 5599,
       "lotSize": 1.98,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.698326,
       "lng": -82.397134
     },
@@ -51,6 +57,8 @@
       "deedPage": 4785,
       "lotSize": 0.49,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.852502,
       "lng": -82.408347
     },
@@ -67,6 +75,8 @@
       "deedPage": 4839,
       "lotSize": 16.99,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.821982,
       "lng": -82.312963
     },
@@ -83,6 +93,8 @@
       "deedPage": 4847,
       "lotSize": 39.35,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.820936,
       "lng": -82.312507
     },
@@ -99,6 +111,8 @@
       "deedPage": 2263,
       "lotSize": 7.32,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.969071,
       "lng": -82.272375
     },
@@ -115,6 +129,8 @@
       "deedPage": 1199,
       "lotSize": 1.76,
       "sqft": 2161,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.959149,
       "lng": -82.439277
     },
@@ -131,6 +147,8 @@
       "deedPage": 5872,
       "lotSize": 2.31,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.856461,
       "lng": -82.270942
     },
@@ -147,6 +165,8 @@
       "deedPage": 4450,
       "lotSize": 0.74,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.966561,
       "lng": -82.442742
     },
@@ -163,6 +183,8 @@
       "deedPage": 4350,
       "lotSize": 4.209,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.818923,
       "lng": -82.254231
     },
@@ -179,6 +201,8 @@
       "deedPage": 2456,
       "lotSize": 1.07,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.900337,
       "lng": -82.414181
     },
@@ -195,6 +219,8 @@
       "deedPage": 1558,
       "lotSize": 1.24,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.845485,
       "lng": -82.30957
     },
@@ -211,6 +237,8 @@
       "deedPage": 1767,
       "lotSize": 22.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.857889,
       "lng": -82.451278
     },
@@ -227,6 +255,8 @@
       "deedPage": 5322,
       "lotSize": 0.09,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.807888,
       "lng": -82.27986
     },
@@ -243,6 +273,8 @@
       "deedPage": 5810,
       "lotSize": 2.03,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.697311,
       "lng": -82.397901
     },
@@ -259,6 +291,8 @@
       "deedPage": 5170,
       "lotSize": 0.943,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.70511,
       "lng": -82.454013
     },
@@ -275,6 +309,8 @@
       "deedPage": 3416,
       "lotSize": 2.49,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.877952,
       "lng": -82.437246
     },
@@ -291,6 +327,8 @@
       "deedPage": 1962,
       "lotSize": 0.045,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.853085,
       "lng": -82.399207
     },
@@ -307,6 +345,8 @@
       "deedPage": 2093,
       "lotSize": 1.02,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.852236,
       "lng": -82.318947
     },
@@ -323,6 +363,8 @@
       "deedPage": 1283,
       "lotSize": 6.34,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.870882,
       "lng": -82.465955
     },
@@ -339,6 +381,8 @@
       "deedPage": 348,
       "lotSize": 3.824,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.817024,
       "lng": -82.341097
     },
@@ -355,6 +399,8 @@
       "deedPage": 224,
       "lotSize": 0.31,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.869143,
       "lng": -82.256717
     },
@@ -371,6 +417,8 @@
       "deedPage": 4388,
       "lotSize": 4.548,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.838319,
       "lng": -82.36834
     },
@@ -387,6 +435,8 @@
       "deedPage": 2992,
       "lotSize": 19.52,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.825168,
       "lng": -82.303394
     },
@@ -403,6 +453,8 @@
       "deedPage": 3015,
       "lotSize": 0.07,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.849279,
       "lng": -82.317313
     },
@@ -419,6 +471,8 @@
       "deedPage": 1735,
       "lotSize": 0.245,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.848434,
       "lng": -82.38676
     },
@@ -435,6 +489,8 @@
       "deedPage": 1556,
       "lotSize": 1.67,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.863369,
       "lng": -82.270267
     },
@@ -451,6 +507,8 @@
       "deedPage": 4993,
       "lotSize": 0.501,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.860995,
       "lng": -82.39077
     },
@@ -467,6 +525,8 @@
       "deedPage": 2624,
       "lotSize": 9.886,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.847987,
       "lng": -82.337358
     },
@@ -483,6 +543,8 @@
       "deedPage": 1378,
       "lotSize": 7.651,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.891734,
       "lng": -82.291535
     },
@@ -499,6 +561,8 @@
       "deedPage": 1806,
       "lotSize": 0.66,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.884247,
       "lng": -82.355617
     },
@@ -515,6 +579,8 @@
       "deedPage": 1871,
       "lotSize": 1.01,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.966801,
       "lng": -82.441797
     },
@@ -531,6 +597,8 @@
       "deedPage": 5482,
       "lotSize": 2.9,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.740283,
       "lng": -82.384507
     },
@@ -547,6 +615,8 @@
       "deedPage": 4174,
       "lotSize": 13.08,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 35.045483,
       "lng": -82.51261
     },
@@ -563,6 +633,8 @@
       "deedPage": 4284,
       "lotSize": 1.35,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.803764,
       "lng": -82.374137
     },
@@ -579,6 +651,8 @@
       "deedPage": 4533,
       "lotSize": 0.76,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.845297,
       "lng": -82.322719
     },
@@ -595,6 +669,8 @@
       "deedPage": 3894,
       "lotSize": 0.365,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.848677,
       "lng": -82.39501
     },
@@ -611,6 +687,8 @@
       "deedPage": 908,
       "lotSize": 0.773,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.84644,
       "lng": -82.340838
     },
@@ -627,6 +705,8 @@
       "deedPage": 243,
       "lotSize": 4.723,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.948816,
       "lng": -82.443745
     },
@@ -643,6 +723,8 @@
       "deedPage": 193,
       "lotSize": 0.863,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.868157,
       "lng": -82.357727
     },
@@ -659,6 +741,8 @@
       "deedPage": 5065,
       "lotSize": 0.5,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.865765,
       "lng": -82.332121
     },
@@ -675,6 +759,8 @@
       "deedPage": 4143,
       "lotSize": 3.973,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.834016,
       "lng": -82.338302
     },
@@ -691,6 +777,8 @@
       "deedPage": 2549,
       "lotSize": 2.807,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.791769,
       "lng": -82.348234
     },
@@ -707,6 +795,8 @@
       "deedPage": 939,
       "lotSize": 0.031,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.850046,
       "lng": -82.400024
     },
@@ -723,6 +813,8 @@
       "deedPage": 1251,
       "lotSize": 0.27,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.868253,
       "lng": -82.358518
     },
@@ -739,6 +831,8 @@
       "deedPage": 5882,
       "lotSize": 2.2,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.966192,
       "lng": -82.43789
     },
@@ -755,6 +849,8 @@
       "deedPage": 4829,
       "lotSize": 3.72,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.800848,
       "lng": -82.3776
     },
@@ -771,6 +867,8 @@
       "deedPage": 4938,
       "lotSize": 1.96,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.964232,
       "lng": -82.430493
     },
@@ -787,6 +885,8 @@
       "deedPage": 2139,
       "lotSize": 0.95,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.89163,
       "lng": -82.402042
     },
@@ -803,6 +903,8 @@
       "deedPage": 2229,
       "lotSize": 0.976,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.837445,
       "lng": -82.335677
     },
@@ -819,6 +921,8 @@
       "deedPage": 2468,
       "lotSize": 3.2,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.704994,
       "lng": -82.252847
     },
@@ -835,6 +939,8 @@
       "deedPage": 2485,
       "lotSize": 0.45,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.837092,
       "lng": -82.405687
     },
@@ -851,6 +957,8 @@
       "deedPage": 2579,
       "lotSize": 11.169,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.803778,
       "lng": -82.347911
     },
@@ -867,6 +975,8 @@
       "deedPage": 1929,
       "lotSize": 0.56,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.83659,
       "lng": -82.36752
     },
@@ -883,6 +993,8 @@
       "deedPage": 791,
       "lotSize": 0.407,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.846834,
       "lng": -82.402984
     },
@@ -899,6 +1011,8 @@
       "deedPage": 3987,
       "lotSize": 1.85,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.716826,
       "lng": -82.256793
     },
@@ -915,6 +1029,8 @@
       "deedPage": 4111,
       "lotSize": 3.64,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844425,
       "lng": -82.324665
     },
@@ -931,6 +1047,8 @@
       "deedPage": 2385,
       "lotSize": 1.15,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.777663,
       "lng": -82.308352
     },
@@ -947,6 +1065,8 @@
       "deedPage": 4942,
       "lotSize": 7.27,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.841185,
       "lng": -82.31777
     },
@@ -963,6 +1083,8 @@
       "deedPage": 5008,
       "lotSize": 1.84,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.690185,
       "lng": -82.218464
     },
@@ -979,6 +1101,8 @@
       "deedPage": 3435,
       "lotSize": 1.89,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.769416,
       "lng": -82.386801
     },
@@ -995,6 +1119,8 @@
       "deedPage": 5727,
       "lotSize": 0.567,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844345,
       "lng": -82.363612
     },
@@ -1011,6 +1137,8 @@
       "deedPage": 4748,
       "lotSize": 20.8,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.70127,
       "lng": -82.322371
     },
@@ -1027,6 +1155,8 @@
       "deedPage": 3353,
       "lotSize": 2.59,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.941004,
       "lng": -82.247151
     },
@@ -1043,6 +1173,8 @@
       "deedPage": 2455,
       "lotSize": 2.371,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.850333,
       "lng": -82.340018
     },
@@ -1059,6 +1191,8 @@
       "deedPage": 2623,
       "lotSize": 0.73,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.847431,
       "lng": -82.393351
     },
@@ -1075,6 +1209,8 @@
       "deedPage": 5940,
       "lotSize": 0.353,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.846357,
       "lng": -82.367224
     },
@@ -1091,6 +1227,8 @@
       "deedPage": 98,
       "lotSize": 2.653,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.738429,
       "lng": -82.390441
     },
@@ -1107,6 +1245,8 @@
       "deedPage": 4079,
       "lotSize": 22.4,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.952458,
       "lng": -82.49408
     },
@@ -1123,6 +1263,8 @@
       "deedPage": 3149,
       "lotSize": 0.43,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844583,
       "lng": -82.408916
     },
@@ -1139,6 +1281,8 @@
       "deedPage": 795,
       "lotSize": 2.21,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.850065,
       "lng": -82.23083
     },
@@ -1155,6 +1299,8 @@
       "deedPage": 1078,
       "lotSize": 1.753,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.802498,
       "lng": -82.225794
     },
@@ -1171,6 +1317,8 @@
       "deedPage": 1132,
       "lotSize": 2.192,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.858233,
       "lng": -82.33811
     },
@@ -1187,6 +1335,8 @@
       "deedPage": 1180,
       "lotSize": 0.5,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.758633,
       "lng": -82.272137
     },
@@ -1203,6 +1353,8 @@
       "deedPage": 4947,
       "lotSize": 2.964,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.853448,
       "lng": -82.438753
     },
@@ -1219,6 +1371,8 @@
       "deedPage": 2377,
       "lotSize": 0.258,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861794,
       "lng": -82.386091
     },
@@ -1235,6 +1389,8 @@
       "deedPage": 2329,
       "lotSize": 1.8,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.960431,
       "lng": -82.308777
     },
@@ -1251,6 +1407,8 @@
       "deedPage": 664,
       "lotSize": 1.412,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.839326,
       "lng": -82.356179
     },
@@ -1267,6 +1425,8 @@
       "deedPage": 1251,
       "lotSize": 20.023,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.97721,
       "lng": -82.458685
     },
@@ -1283,6 +1443,8 @@
       "deedPage": 1283,
       "lotSize": 9.87,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.702238,
       "lng": -82.267883
     },
@@ -1299,6 +1461,8 @@
       "deedPage": 1292,
       "lotSize": 4.728,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.702711,
       "lng": -82.265738
     },
@@ -1315,6 +1479,8 @@
       "deedPage": 878,
       "lotSize": 2.789,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.796727,
       "lng": -82.220274
     },
@@ -1331,6 +1497,8 @@
       "deedPage": 5932,
       "lotSize": 0.75,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.848232,
       "lng": -82.401234
     },
@@ -1347,6 +1515,8 @@
       "deedPage": 607,
       "lotSize": 0.673,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.88471,
       "lng": -82.377035
     },
@@ -1363,6 +1533,8 @@
       "deedPage": 657,
       "lotSize": 0.716,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.82971,
       "lng": -82.401527
     },
@@ -1379,6 +1551,8 @@
       "deedPage": 5110,
       "lotSize": 0.9,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.943329,
       "lng": -82.257027
     },
@@ -1395,6 +1569,8 @@
       "deedPage": 2676,
       "lotSize": 1.1,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.800975,
       "lng": -82.285071
     },
@@ -1411,6 +1587,8 @@
       "deedPage": 3159,
       "lotSize": 0.676,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.839345,
       "lng": -82.403546
     },
@@ -1427,6 +1605,8 @@
       "deedPage": 946,
       "lotSize": 3.52,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.8129,
       "lng": -82.412657
     },
@@ -1443,6 +1623,8 @@
       "deedPage": 1351,
       "lotSize": 1.1,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.867859,
       "lng": -82.256179
     },
@@ -1459,6 +1641,8 @@
       "deedPage": 309,
       "lotSize": 0.75,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.687279,
       "lng": -82.197561
     },
@@ -1475,6 +1659,8 @@
       "deedPage": 5205,
       "lotSize": 0.23,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.814079,
       "lng": -82.272662
     },
@@ -1491,6 +1677,8 @@
       "deedPage": 5840,
       "lotSize": 0.43,
       "sqft": 1528,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.821971,
       "lng": -82.432562
     },
@@ -1507,6 +1695,8 @@
       "deedPage": 3360,
       "lotSize": 5.134,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.859537,
       "lng": -82.372398
     },
@@ -1523,6 +1713,8 @@
       "deedPage": 3065,
       "lotSize": 2.66,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.856274,
       "lng": -82.395884
     },
@@ -1539,6 +1731,8 @@
       "deedPage": 1957,
       "lotSize": 1.495,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.837375,
       "lng": -82.27863
     },
@@ -1555,6 +1749,8 @@
       "deedPage": 4163,
       "lotSize": 24.6,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.755342,
       "lng": -82.389974
     },
@@ -1571,6 +1767,8 @@
       "deedPage": 2697,
       "lotSize": 2.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.893399,
       "lng": -82.46377
     },
@@ -1587,6 +1785,8 @@
       "deedPage": 2855,
       "lotSize": 2.16,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.863789,
       "lng": -82.341877
     },
@@ -1603,6 +1803,8 @@
       "deedPage": 3196,
       "lotSize": 0.124,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861553,
       "lng": -82.273662
     },
@@ -1619,6 +1821,8 @@
       "deedPage": 2199,
       "lotSize": 0.779,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.851351,
       "lng": -82.231073
     },
@@ -1635,6 +1839,8 @@
       "deedPage": 2322,
       "lotSize": 2.66,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.855774,
       "lng": -82.329973
     },
@@ -1651,6 +1857,8 @@
       "deedPage": 206,
       "lotSize": 2.78,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.911965,
       "lng": -82.324594
     },
@@ -1667,6 +1875,8 @@
       "deedPage": 2522,
       "lotSize": 3.39,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.947557,
       "lng": -82.477875
     },
@@ -1683,6 +1893,8 @@
       "deedPage": 3873,
       "lotSize": 0.873,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.841726,
       "lng": -82.358713
     },
@@ -1699,6 +1911,8 @@
       "deedPage": 3912,
       "lotSize": 2.508,
       "sqft": 1162,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.809392,
       "lng": -82.382923
     },
@@ -1715,6 +1929,8 @@
       "deedPage": 1124,
       "lotSize": 4.672,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.840607,
       "lng": -82.365247
     },
@@ -1731,6 +1947,8 @@
       "deedPage": 5404,
       "lotSize": 34.15,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.746654,
       "lng": -82.395076
     },
@@ -1747,6 +1965,8 @@
       "deedPage": 4329,
       "lotSize": 1.152,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.821924,
       "lng": -82.284396
     },
@@ -1763,6 +1983,8 @@
       "deedPage": 3405,
       "lotSize": 0.7,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.875359,
       "lng": -82.22838
     },
@@ -1779,6 +2001,8 @@
       "deedPage": 2448,
       "lotSize": 0.994,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.70507,
       "lng": -82.243589
     },
@@ -1795,6 +2019,8 @@
       "deedPage": 2462,
       "lotSize": 0.605,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.803432,
       "lng": -82.31918
     },
@@ -1811,6 +2037,8 @@
       "deedPage": 2497,
       "lotSize": 3.97,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.756131,
       "lng": -82.264214
     },
@@ -1827,6 +2055,8 @@
       "deedPage": 2575,
       "lotSize": 0.141,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844841,
       "lng": -82.403991
     },
@@ -1843,6 +2073,8 @@
       "deedPage": 1211,
       "lotSize": 18.47,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.716177,
       "lng": -82.392998
     },
@@ -1859,6 +2091,8 @@
       "deedPage": 4234,
       "lotSize": 1.1,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.816774,
       "lng": -82.271253
     },
@@ -1875,6 +2109,8 @@
       "deedPage": 3991,
       "lotSize": 1.54,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.974155,
       "lng": -82.430073
     },
@@ -1891,6 +2127,8 @@
       "deedPage": 1019,
       "lotSize": 20.521,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.830769,
       "lng": -82.47857
     },
@@ -1907,6 +2145,8 @@
       "deedPage": 1391,
       "lotSize": 0.87,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.936366,
       "lng": -82.224088
     },
@@ -1923,6 +2163,8 @@
       "deedPage": 4063,
       "lotSize": 0.74,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.869157,
       "lng": -82.465397
     },
@@ -1939,6 +2181,8 @@
       "deedPage": 4626,
       "lotSize": 0.97,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.757933,
       "lng": -82.269882
     },
@@ -1955,6 +2199,8 @@
       "deedPage": 3795,
       "lotSize": 0.9,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.951332,
       "lng": -82.237325
     },
@@ -1971,6 +2217,8 @@
       "deedPage": 1010,
       "lotSize": 0.74,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.869157,
       "lng": -82.465397
     },
@@ -1987,6 +2235,8 @@
       "deedPage": 5938,
       "lotSize": 0.13,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.88872,
       "lng": -82.399545
     },
@@ -2003,6 +2253,8 @@
       "deedPage": 4290,
       "lotSize": 0.6,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.73139,
       "lng": -82.254667
     },
@@ -2019,6 +2271,8 @@
       "deedPage": 4416,
       "lotSize": 6.67,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.810747,
       "lng": -82.285071
     },
@@ -2035,6 +2289,8 @@
       "deedPage": 4913,
       "lotSize": 0.079,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.85254,
       "lng": -82.397961
     },
@@ -2051,6 +2307,8 @@
       "deedPage": 3668,
       "lotSize": 2.6,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.808197,
       "lng": -82.233868
     },
@@ -2067,6 +2325,8 @@
       "deedPage": 3891,
       "lotSize": 2.91,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.816234,
       "lng": -82.287351
     },
@@ -2083,6 +2343,8 @@
       "deedPage": 3105,
       "lotSize": 2.25,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.774655,
       "lng": -82.384043
     },
@@ -2099,6 +2361,8 @@
       "deedPage": 1812,
       "lotSize": 0.65,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.799309,
       "lng": -82.375138
     },
@@ -2115,6 +2379,8 @@
       "deedPage": 1557,
       "lotSize": 0.184,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.847996,
       "lng": -82.389031
     },
@@ -2131,6 +2397,8 @@
       "deedPage": 3375,
       "lotSize": 1.84,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.896081,
       "lng": -82.465472
     },
@@ -2147,6 +2415,8 @@
       "deedPage": 3564,
       "lotSize": 1.3,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.727958,
       "lng": -82.253609
     },
@@ -2163,6 +2433,8 @@
       "deedPage": 1604,
       "lotSize": 2.2,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861668,
       "lng": -82.254754
     },
@@ -2179,6 +2451,8 @@
       "deedPage": 5365,
       "lotSize": 3.5,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.818107,
       "lng": -82.275096
     },
@@ -2195,6 +2469,8 @@
       "deedPage": 5717,
       "lotSize": 1.008,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.857731,
       "lng": -82.327517
     },
@@ -2211,6 +2487,8 @@
       "deedPage": 3798,
       "lotSize": 0.95,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861835,
       "lng": -82.461687
     },
@@ -2227,6 +2505,8 @@
       "deedPage": 4050,
       "lotSize": 6.53,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.959378,
       "lng": -82.309048
     },
@@ -2243,6 +2523,8 @@
       "deedPage": 2207,
       "lotSize": 1.155,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.704944,
       "lng": -82.242946
     },
@@ -2259,6 +2541,8 @@
       "deedPage": 4176,
       "lotSize": 1.406,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.862023,
       "lng": -82.408293
     },
@@ -2275,6 +2559,8 @@
       "deedPage": 2952,
       "lotSize": 10.9,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.855348,
       "lng": -82.307383
     },
@@ -2291,6 +2577,8 @@
       "deedPage": 2017,
       "lotSize": 1.68,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861357,
       "lng": -82.338709
     },
@@ -2307,6 +2595,8 @@
       "deedPage": 2216,
       "lotSize": 0.411,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.776905,
       "lng": -82.308995
     },
@@ -2323,6 +2613,8 @@
       "deedPage": 2287,
       "lotSize": 1.82,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.730371,
       "lng": -82.388696
     },
@@ -2339,6 +2631,8 @@
       "deedPage": 964,
       "lotSize": 1.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.822475,
       "lng": -82.29358
     },
@@ -2355,6 +2649,8 @@
       "deedPage": 5083,
       "lotSize": null,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.776134,
       "lng": -82.282382
     },
@@ -2371,6 +2667,8 @@
       "deedPage": 3592,
       "lotSize": 0.2,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.850572,
       "lng": -82.401457
     },
@@ -2387,6 +2685,8 @@
       "deedPage": 2648,
       "lotSize": 3.6,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.836718,
       "lng": -82.313107
     },
@@ -2403,6 +2703,8 @@
       "deedPage": 4821,
       "lotSize": 1.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.853926,
       "lng": -82.455143
     },
@@ -2419,6 +2721,8 @@
       "deedPage": 4632,
       "lotSize": 1.53,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.856488,
       "lng": -82.457117
     },
@@ -2435,6 +2739,8 @@
       "deedPage": 5585,
       "lotSize": 25.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.722088,
       "lng": -82.20968
     },
@@ -2451,6 +2757,8 @@
       "deedPage": 4305,
       "lotSize": 0.5,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.861218,
       "lng": -82.262077
     },
@@ -2467,6 +2775,8 @@
       "deedPage": 2709,
       "lotSize": 3.512,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.79953,
       "lng": -82.378653
     },
@@ -2483,6 +2793,8 @@
       "deedPage": 1374,
       "lotSize": 4.03,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.817633,
       "lng": -82.341414
     },
@@ -2499,6 +2811,8 @@
       "deedPage": 1732,
       "lotSize": 0.75,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.940517,
       "lng": -82.261607
     },
@@ -2515,6 +2829,8 @@
       "deedPage": 4433,
       "lotSize": 0.272,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.849312,
       "lng": -82.374044
     },
@@ -2531,6 +2847,8 @@
       "deedPage": 2601,
       "lotSize": 0.09,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.84975,
       "lng": -82.317104
     },
@@ -2547,6 +2865,8 @@
       "deedPage": 5561,
       "lotSize": 0.884,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.882569,
       "lng": -82.357528
     },
@@ -2563,6 +2883,8 @@
       "deedPage": 5193,
       "lotSize": 10.37,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.800937,
       "lng": -82.353669
     },
@@ -2579,6 +2901,8 @@
       "deedPage": 3021,
       "lotSize": 0.97,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.830766,
       "lng": -82.304991
     },
@@ -2595,6 +2919,8 @@
       "deedPage": 1366,
       "lotSize": 294.45,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.645759,
       "lng": -82.29903
     },
@@ -2611,6 +2937,8 @@
       "deedPage": 5952,
       "lotSize": 2.996,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.85788,
       "lng": -82.396737
     },
@@ -2627,6 +2955,8 @@
       "deedPage": 5126,
       "lotSize": 0.287,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844799,
       "lng": -82.326493
     },
@@ -2643,6 +2973,8 @@
       "deedPage": 3133,
       "lotSize": 1.13,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.870076,
       "lng": -82.41714
     },
@@ -2659,6 +2991,8 @@
       "deedPage": 1470,
       "lotSize": 0.24,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.858412,
       "lng": -82.394648
     },
@@ -2675,6 +3009,8 @@
       "deedPage": 1293,
       "lotSize": 0.055,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.808862,
       "lng": -82.235876
     },
@@ -2691,6 +3027,8 @@
       "deedPage": 1483,
       "lotSize": 3.75,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.803277,
       "lng": -82.36905
     },
@@ -2707,6 +3045,8 @@
       "deedPage": 309,
       "lotSize": 6.03,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.889293,
       "lng": -82.372847
     },
@@ -2723,6 +3063,8 @@
       "deedPage": 728,
       "lotSize": 1.25,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.935501,
       "lng": -82.275725
     },
@@ -2739,6 +3081,8 @@
       "deedPage": 5473,
       "lotSize": 2.7,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.838378,
       "lng": -82.366447
     },
@@ -2755,6 +3099,8 @@
       "deedPage": 4854,
       "lotSize": 8.84,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.844292,
       "lng": -82.317799
     },
@@ -2771,6 +3117,8 @@
       "deedPage": 3633,
       "lotSize": 0.406,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.858536,
       "lng": -82.396129
     },
@@ -2787,6 +3135,8 @@
       "deedPage": 3868,
       "lotSize": 0.7,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.941811,
       "lng": -82.247037
     },
@@ -2803,6 +3153,8 @@
       "deedPage": 4154,
       "lotSize": 2.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.807694,
       "lng": -82.281126
     },
@@ -2819,6 +3171,8 @@
       "deedPage": 2349,
       "lotSize": 7.2,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.973402,
       "lng": -82.427463
     },
@@ -2835,6 +3189,8 @@
       "deedPage": 1358,
       "lotSize": 0.94,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.806047,
       "lng": -82.232528
     },
@@ -2851,6 +3207,8 @@
       "deedPage": 5858,
       "lotSize": 1.326,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.854961,
       "lng": -82.351285
     },
@@ -2867,6 +3225,8 @@
       "deedPage": 1570,
       "lotSize": 1.17,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.813107,
       "lng": -82.3422
     },
@@ -2883,6 +3243,8 @@
       "deedPage": 423,
       "lotSize": 0.9,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.863913,
       "lng": -82.332404
     },
@@ -2899,6 +3261,8 @@
       "deedPage": 603,
       "lotSize": 1.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.851903,
       "lng": -82.231683
     },
@@ -2915,6 +3279,8 @@
       "deedPage": 5117,
       "lotSize": 1.02,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.870369,
       "lng": -82.372725
     },
@@ -2931,6 +3297,8 @@
       "deedPage": 2165,
       "lotSize": 1.679,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.850109,
       "lng": -82.415697
     },
@@ -2947,6 +3315,8 @@
       "deedPage": 982,
       "lotSize": 0.13,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.849092,
       "lng": -82.394731
     },
@@ -2963,6 +3333,8 @@
       "deedPage": 1818,
       "lotSize": 1.0,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.702117,
       "lng": -82.218152
     },
@@ -2979,6 +3351,8 @@
       "deedPage": 1431,
       "lotSize": 0.88,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.759486,
       "lng": -82.273228
     },
@@ -2995,6 +3369,8 @@
       "deedPage": 2477,
       "lotSize": 1.66,
       "sqft": null,
+      "validated": false,
+      "saleType": "CASH (LAND)",
       "lat": 34.736806,
       "lng": -82.278756
     },
@@ -3011,6 +3387,8 @@
       "deedPage": 1179,
       "lotSize": 0.8,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.847485,
       "lng": -82.317184
     },
@@ -3027,6 +3405,8 @@
       "deedPage": 3553,
       "lotSize": 3.71,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.805267,
       "lng": -82.224857
     },
@@ -3043,6 +3423,8 @@
       "deedPage": 3690,
       "lotSize": 5.793,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.909152,
       "lng": -82.330225
     },
@@ -3059,6 +3441,8 @@
       "deedPage": 2674,
       "lotSize": 1.03,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.820314,
       "lng": -82.267369
     },
@@ -3075,6 +3459,8 @@
       "deedPage": 2516,
       "lotSize": 1.24,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.62929,
       "lng": -82.390769
     },
@@ -3091,6 +3477,8 @@
       "deedPage": 1576,
       "lotSize": 2.5,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.836931,
       "lng": -82.332743
     },
@@ -3107,6 +3495,8 @@
       "deedPage": 5619,
       "lotSize": 0.06,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.737643,
       "lng": -82.255719
     },
@@ -3123,6 +3513,8 @@
       "deedPage": 5944,
       "lotSize": 0.08,
       "sqft": null,
+      "validated": false,
+      "saleType": "UNKNOWN",
       "lat": 34.93842,
       "lng": -82.227228
     },
@@ -3139,6 +3531,8 @@
       "deedPage": 637,
       "lotSize": 0.46,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.842496,
       "lng": -82.361909
     },
@@ -3155,6 +3549,8 @@
       "deedPage": 5871,
       "lotSize": 2.0,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.719923,
       "lng": -82.2592
     },
@@ -3171,6 +3567,8 @@
       "deedPage": 5891,
       "lotSize": 1.39,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.815117,
       "lng": -82.274639
     },
@@ -3187,6 +3585,8 @@
       "deedPage": 5948,
       "lotSize": 11.2,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.723251,
       "lng": -82.251672
     },
@@ -3203,6 +3603,8 @@
       "deedPage": 5643,
       "lotSize": 12.1,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.692602,
       "lng": -82.223081
     },
@@ -3219,6 +3621,8 @@
       "deedPage": 4224,
       "lotSize": 1.03,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.894022,
       "lng": -82.40821
     },
@@ -3235,6 +3639,8 @@
       "deedPage": 3057,
       "lotSize": 1.21,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.899772,
       "lng": -82.255293
     },
@@ -3251,6 +3657,8 @@
       "deedPage": 3315,
       "lotSize": 0.105,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.8288,
       "lng": -82.331069
     },
@@ -3267,6 +3675,8 @@
       "deedPage": 3331,
       "lotSize": 5.5,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.83141,
       "lng": -82.318769
     },
@@ -3283,6 +3693,8 @@
       "deedPage": 5784,
       "lotSize": 2.78,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.911965,
       "lng": -82.324594
     },
@@ -3299,6 +3711,8 @@
       "deedPage": 5849,
       "lotSize": 0.54,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 35.087873,
       "lng": -82.457268
     },
@@ -3315,6 +3729,8 @@
       "deedPage": 4851,
       "lotSize": 5.6,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.825201,
       "lng": -82.345801
     },
@@ -3331,6 +3747,8 @@
       "deedPage": 3065,
       "lotSize": 7.225,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.84009,
       "lng": -82.360626
     },
@@ -3347,6 +3765,8 @@
       "deedPage": 2001,
       "lotSize": 0.28,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.942251,
       "lng": -82.252693
     },
@@ -3363,6 +3783,8 @@
       "deedPage": 1302,
       "lotSize": 0.26,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.828849,
       "lng": -82.330608
     },
@@ -3379,6 +3801,8 @@
       "deedPage": 1398,
       "lotSize": 0.062,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.853625,
       "lng": -82.392782
     },
@@ -3395,6 +3819,8 @@
       "deedPage": 1403,
       "lotSize": 0.062,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.85356,
       "lng": -82.392864
     },
@@ -3411,6 +3837,8 @@
       "deedPage": 1408,
       "lotSize": 0.062,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.853704,
       "lng": -82.392845
     },
@@ -3427,6 +3855,8 @@
       "deedPage": 1417,
       "lotSize": 0.478,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.853881,
       "lng": -82.392442
     },
@@ -3443,6 +3873,8 @@
       "deedPage": 2044,
       "lotSize": 0.97,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.757933,
       "lng": -82.269882
     },
@@ -3459,24 +3891,10 @@
       "deedPage": 2097,
       "lotSize": 0.05,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.735631,
       "lng": -82.258771
-    },
-    {
-      "pin": "0149000800200",
-      "buyer": "AC HAMPTON STATION OWNER",
-      "seller": "OCEANA RAPID LLC",
-      "price": 11049000,
-      "saleDate": "2024-11-26",
-      "street": "Hampton Avenue Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2737,
-      "deedPage": 1347,
-      "lotSize": 3.774,
-      "sqft": null,
-      "lat": 34.866958,
-      "lng": -82.416021
     },
     {
       "pin": "M015010100600",
@@ -3491,24 +3909,10 @@
       "deedPage": 3394,
       "lotSize": 1.21,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.805891,
       "lng": -82.378174
-    },
-    {
-      "pin": "0562010100200",
-      "buyer": "AMAZON.COM SERVICES LLC",
-      "seller": "ARMSTRONG RODNEY N JR AR",
-      "price": 12638960,
-      "saleDate": "2024-11-14",
-      "street": "Fairview Street Ext",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2735,
-      "deedPage": 5686,
-      "lotSize": 3.81,
-      "sqft": null,
-      "lat": 34.683059,
-      "lng": -82.221215
     },
     {
       "pin": "0540040100803",
@@ -3523,6 +3927,8 @@
       "deedPage": 5977,
       "lotSize": 7.7,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.861304,
       "lng": -82.283536
     },
@@ -3539,6 +3945,8 @@
       "deedPage": 171,
       "lotSize": 0.92,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.939212,
       "lng": -82.227329
     },
@@ -3555,40 +3963,10 @@
       "deedPage": 4606,
       "lotSize": 0.455,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.849177,
       "lng": -82.394966
-    },
-    {
-      "pin": "M006020103001",
-      "buyer": "LAVG LLC",
-      "seller": "HOWARD S HUNTER III",
-      "price": 1000000,
-      "saleDate": "2024-11-12",
-      "street": "New Neely Ferry Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2735,
-      "deedPage": 3816,
-      "lotSize": 0.77,
-      "sqft": null,
-      "lat": 34.768864,
-      "lng": -82.299876
-    },
-    {
-      "pin": "WG02030101408",
-      "buyer": "PKST GREENVILLE BRUCE LL",
-      "seller": "GREENVILLE TRUCKING TERM",
-      "price": 9970000,
-      "saleDate": "2024-11-06",
-      "street": "Bruce Way",
-      "propType": "COMMERCIAL",
-      "landUse": "0371",
-      "deedBook": 2735,
-      "deedPage": 2260,
-      "lotSize": 8.277,
-      "sqft": null,
-      "lat": 34.791037,
-      "lng": -82.39788
     },
     {
       "pin": "0266000128501",
@@ -3603,6 +3981,8 @@
       "deedPage": 335,
       "lotSize": 0.944,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.841808,
       "lng": -82.360726
     },
@@ -3619,6 +3999,8 @@
       "deedPage": 4866,
       "lotSize": 4.68,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.871788,
       "lng": -82.313536
     },
@@ -3635,6 +4017,8 @@
       "deedPage": 5185,
       "lotSize": 1.766,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.821726,
       "lng": -82.369729
     },
@@ -3651,6 +4035,8 @@
       "deedPage": 3292,
       "lotSize": 1.968,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.868155,
       "lng": -82.357223
     },
@@ -3667,6 +4053,8 @@
       "deedPage": 5839,
       "lotSize": 1.977,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.843104,
       "lng": -82.319633
     },
@@ -3683,6 +4071,8 @@
       "deedPage": 5819,
       "lotSize": 0.522,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.808341,
       "lng": -82.223902
     },
@@ -3699,6 +4089,8 @@
       "deedPage": 3644,
       "lotSize": 3.7,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.837755,
       "lng": -82.333189
     },
@@ -3715,6 +4107,8 @@
       "deedPage": 1384,
       "lotSize": 0.138,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.844448,
       "lng": -82.326428
     },
@@ -3731,24 +4125,10 @@
       "deedPage": 1443,
       "lotSize": 6.07,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.712053,
       "lng": -82.255176
-    },
-    {
-      "pin": "0547030105024",
-      "buyer": "GLOBAL LENDING SERVICES",
-      "seller": "R A GREENVILLE BROOKFIEL",
-      "price": 13940150,
-      "saleDate": "2024-10-16",
-      "street": "Brookfield Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "0420",
-      "deedBook": 2733,
-      "deedPage": 2115,
-      "lotSize": null,
-      "sqft": null,
-      "lat": 34.814036,
-      "lng": -82.28076
     },
     {
       "pin": "0331000100611",
@@ -3763,6 +4143,8 @@
       "deedPage": 1054,
       "lotSize": 1.422,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.705767,
       "lng": -82.246377
     },
@@ -3779,6 +4161,8 @@
       "deedPage": 5217,
       "lotSize": 0.24,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.693348,
       "lng": -82.199265
     },
@@ -3795,6 +4179,8 @@
       "deedPage": 5257,
       "lotSize": 1.22,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.775207,
       "lng": -82.304889
     },
@@ -3811,6 +4197,8 @@
       "deedPage": 2760,
       "lotSize": 0.528,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.850115,
       "lng": -82.337869
     },
@@ -3827,6 +4215,8 @@
       "deedPage": 5964,
       "lotSize": 1.13,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.870076,
       "lng": -82.41714
     },
@@ -3843,6 +4233,8 @@
       "deedPage": 5985,
       "lotSize": 29.22,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 35.007997,
       "lng": -82.419691
     },
@@ -3859,6 +4251,8 @@
       "deedPage": 14,
       "lotSize": 15.103,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.886262,
       "lng": -82.447594
     },
@@ -3875,6 +4269,8 @@
       "deedPage": 33,
       "lotSize": 19.88,
       "sqft": 1160,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.727781,
       "lng": -82.267798
     },
@@ -3891,24 +4287,10 @@
       "deedPage": 135,
       "lotSize": 19.0,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.898693,
       "lng": -82.456619
-    },
-    {
-      "pin": "G027000600100",
-      "buyer": "TMG VICTOR PARK OWNER L",
-      "seller": "CITY OF GREER",
-      "price": 1900000,
-      "saleDate": "2024-10-01",
-      "street": "E Cottonseed St",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2732,
-      "deedPage": 587,
-      "lotSize": 4.9,
-      "sqft": null,
-      "lat": 34.934446,
-      "lng": -82.22311
     },
     {
       "pin": "0547030104203",
@@ -3923,6 +4305,8 @@
       "deedPage": 764,
       "lotSize": 2.292,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.82038,
       "lng": -82.281908
     },
@@ -3939,6 +4323,8 @@
       "deedPage": 4823,
       "lotSize": 1.9,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.818238,
       "lng": -82.421845
     },
@@ -3955,6 +4341,8 @@
       "deedPage": 640,
       "lotSize": 1.07,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.938393,
       "lng": -82.24472
     },
@@ -3971,6 +4359,8 @@
       "deedPage": 4264,
       "lotSize": 1.29,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.935755,
       "lng": -82.238527
     },
@@ -3987,6 +4377,8 @@
       "deedPage": 3408,
       "lotSize": 0.241,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.805875,
       "lng": -82.436103
     },
@@ -4003,6 +4395,8 @@
       "deedPage": 4046,
       "lotSize": 0.788,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.828893,
       "lng": -82.369662
     },
@@ -4019,6 +4413,8 @@
       "deedPage": 1644,
       "lotSize": 2.5,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.941004,
       "lng": -82.247151
     },
@@ -4035,24 +4431,10 @@
       "deedPage": 42,
       "lotSize": 0.836,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.714922,
       "lng": -82.252177
-    },
-    {
-      "pin": "0535010103502",
-      "buyer": "CITY OF GREER",
-      "seller": "NEWSPRING CHURCH INC",
-      "price": 3861000,
-      "saleDate": "2024-08-30",
-      "street": "S Buncombe Rd",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2729,
-      "deedPage": 2715,
-      "lotSize": 11.701,
-      "sqft": null,
-      "lat": 34.916587,
-      "lng": -82.238803
     },
     {
       "pin": "0547030104002",
@@ -4067,24 +4449,10 @@
       "deedPage": 3873,
       "lotSize": 2.02,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.820936,
       "lng": -82.284382
-    },
-    {
-      "pin": "0266000131900",
-      "buyer": "MILVIAN BIZ LLC",
-      "seller": "PEA PROPERTIES LLC",
-      "price": 1350000,
-      "saleDate": "2024-08-22",
-      "street": "S Edgeworth Dr",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2728,
-      "deedPage": 3294,
-      "lotSize": 0.302,
-      "sqft": null,
-      "lat": 34.839804,
-      "lng": -82.36751
     },
     {
       "pin": "0543030105801",
@@ -4099,56 +4467,10 @@
       "deedPage": 1685,
       "lotSize": 1.766,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 34.853134,
       "lng": -82.330324
-    },
-    {
-      "pin": "0321000300100",
-      "buyer": "HTP REAL ESTATE LLC",
-      "seller": "MAINCREST INC",
-      "price": 1950000,
-      "saleDate": "2024-08-19",
-      "street": "Se Main St",
-      "propType": "COMMERCIAL",
-      "landUse": "0421",
-      "deedBook": 2728,
-      "deedPage": 775,
-      "lotSize": 0.7,
-      "sqft": null,
-      "lat": 34.729601,
-      "lng": -82.253701
-    },
-    {
-      "pin": "0150001600800",
-      "buyer": "DRB GROUP SOUTH CAROLINA",
-      "seller": "NORRIS BRAD",
-      "price": 6500000,
-      "saleDate": "2024-08-19",
-      "street": "Alexander St",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2728,
-      "deedPage": 1192,
-      "lotSize": 0.116,
-      "sqft": 1428,
-      "lat": 34.86586,
-      "lng": -82.410922
-    },
-    {
-      "pin": "0150001701200",
-      "buyer": "DRB GROUP SOUTH CAROLINA",
-      "seller": "NORRIS BRAD",
-      "price": 8040572,
-      "saleDate": "2024-08-19",
-      "street": "Buncombe Ave",
-      "propType": "COMMERCIAL",
-      "landUse": "6800",
-      "deedBook": 2728,
-      "deedPage": 1239,
-      "lotSize": 1.12,
-      "sqft": null,
-      "lat": 34.865394,
-      "lng": -82.410144
     },
     {
       "pin": "0284000201309",
@@ -4163,6 +4485,8 @@
       "deedPage": 5135,
       "lotSize": 0.708,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND)",
       "lat": 34.844927,
       "lng": -82.341035
     },
@@ -4179,24 +4503,10 @@
       "deedPage": 4610,
       "lotSize": 0.32,
       "sqft": null,
+      "validated": true,
+      "saleType": "CASH (LAND AND BUILDING)",
       "lat": 35.088259,
       "lng": -82.457309
-    },
-    {
-      "pin": "0040000101300",
-      "buyer": "CALLISON SHOALS LLC",
-      "seller": "TMBH PROPERTIES LLC",
-      "price": 2500000,
-      "saleDate": "2024-08-12",
-      "street": "E North St",
-      "propType": "COMMERCIAL",
-      "landUse": "0423",
-      "deedBook": 2727,
-      "deedPage": 3290,
-      "lotSize": 0.227,
-      "sqft": null,
-      "lat": 34.852568,
-      "lng": -82.3889
     }
   ]
 }

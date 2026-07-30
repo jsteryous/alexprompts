@@ -24,6 +24,15 @@ export interface Sale {
   deedPage: number | null;
   lotSize: number | null;
   sqft: number | null;
+  /**
+   * True when the county assessor has reviewed this deed and confirmed it as an
+   * arm's-length market sale. The review runs about two years behind recording,
+   * so recent sales are simply not reviewed yet, NOT suspect. Rows the county has
+   * actively flagged as non-market (quitclaims, intercompany transfers,
+   * multi-parcel deeds) are dropped by the collector and never reach this list.
+   */
+  validated?: boolean;
+  saleType?: string | null;
   lat: number | null;
   lng: number | null;
 }
@@ -34,6 +43,9 @@ export interface BuyersListData {
   min_price: number;
   months: number;
   count: number;
+  /** Non-market transfers the collector filtered out of this refresh. */
+  excluded_non_market?: number;
+  validated_count?: number;
   sales: Sale[];
 }
 

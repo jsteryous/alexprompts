@@ -1,0 +1,2881 @@
+{
+  "generated_at": "2026-07-30 13:02 UTC",
+  "source": "Greenville County GIS (GreenvilleJS/Map_Layers_JS, Commercial layer)",
+  "source_url": "https://www.gcgis.org/arcgis/rest/services/GreenvilleJS/Map_Layers_JS/MapServer/2/query",
+  "deed_rows": 12212,
+  "record_span": {
+    "first": "2008-01-02",
+    "last": "2026-03-30"
+  },
+  "method": {
+    "assembly": "3+ parcels within 0.8km, one entity, 2+ distinct dates, 6+ month span, active since 2021",
+    "portfolio": "8+ parcels countywide, one entity, active since 2021; adjacency irrelevant, spread reported",
+    "index": "same parcel sold twice, both sales assessor-confirmed arm's-length, 12+ month hold, construction pairs excluded",
+    "caveat": "Entity grouping is conservative (county truncates buyer names at 24 chars), so every position is a floor. The index ends ~2 years back because the assessor confirms sales on a ~2-year lag; unreviewed recent sales include lender takebacks and nominal transfers and are excluded."
+  },
+  "assembly": {
+    "count": 40,
+    "clusters": [
+      {
+        "entity": "VERDAE",
+        "displayName": "VERDAE PROPERTIES INC",
+        "names": [
+          "VERDAE GROUP LLC",
+          "VERDAE HOLDINGS LLC",
+          "VERDAE PROPERTIES INC",
+          "VERDAE PROPERTIES LLC"
+        ],
+        "parcels": 6,
+        "acres": 36.55,
+        "spend": 20,
+        "controlTransferOnly": true,
+        "firstBuy": "2014-02-10",
+        "lastBuy": "2025-05-29",
+        "spanMonths": 135,
+        "streets": [
+          "Green Heron Rd",
+          "None Ln",
+          "None Rd",
+          "Rd",
+          "Verdae Blvd",
+          "Woodruff Industrial Ln"
+        ],
+        "mktArea": "C00072",
+        "lat": 34.83092,
+        "lng": -82.3137,
+        "pins": [
+          "0545010102200",
+          "0545010102207",
+          "0545010102508",
+          "0547010100205",
+          "0547010100705",
+          "0547010100800"
+        ]
+      },
+      {
+        "entity": "LICAR",
+        "displayName": "LICAR LLC",
+        "names": [
+          "LICAR LLC"
+        ],
+        "parcels": 5,
+        "acres": 9.96,
+        "spend": 2724999,
+        "controlTransferOnly": false,
+        "firstBuy": "2008-01-28",
+        "lastBuy": "2023-09-28",
+        "spanMonths": 188,
+        "streets": [
+          "I-85/Laurens Blvd",
+          "Laurens Blvd",
+          "Laurens Rd",
+          "Research Dr"
+        ],
+        "mktArea": "C00095",
+        "lat": 34.81331,
+        "lng": -82.33005,
+        "pins": [
+          "0273000100409",
+          "0273000100501",
+          "0273000100503",
+          "M010060100200",
+          "M010060100222"
+        ]
+      },
+      {
+        "entity": "ENIGMA",
+        "displayName": "ENIGMA CORPORATION LLC",
+        "names": [
+          "ENIGMA CORP",
+          "ENIGMA CORP NEV CORP",
+          "ENIGMA CORPORATION",
+          "ENIGMA CORPORATION LLC",
+          "ENIGMA INC NEVADA CORP"
+        ],
+        "parcels": 5,
+        "acres": 5.79,
+        "spend": 897000,
+        "controlTransferOnly": false,
+        "firstBuy": "2009-12-31",
+        "lastBuy": "2024-02-28",
+        "spanMonths": 170,
+        "streets": [
+          "14 Rd",
+          "S Hwy 14",
+          "S Hwy 14 Hwy"
+        ],
+        "mktArea": "C00029",
+        "lat": 34.87441,
+        "lng": -82.22633,
+        "pins": [
+          "0529020101700",
+          "0529020101900",
+          "0529020101901",
+          "0529020102000",
+          "0529020102100"
+        ]
+      },
+      {
+        "entity": "LEON HIX REAL ESTATE",
+        "displayName": "LEON HIX REAL ESTATE LLC",
+        "names": [
+          "LEON HIX REAL ESTATE LLC"
+        ],
+        "parcels": 5,
+        "acres": 3.73,
+        "spend": 1625021,
+        "controlTransferOnly": false,
+        "firstBuy": "2017-09-07",
+        "lastBuy": "2024-04-02",
+        "spanMonths": 79,
+        "streets": [
+          "Middleton Way",
+          "W Poinsett St",
+          "W Wade Hampton Blvd",
+          "Wade Hampton St"
+        ],
+        "mktArea": "C00082",
+        "lat": 34.94487,
+        "lng": -82.24785,
+        "pins": [
+          "G011000201300",
+          "G011000201400",
+          "G012000100210",
+          "G019000102900",
+          "G019000123200"
+        ]
+      },
+      {
+        "entity": "OUTDOOR",
+        "displayName": "OUTDOOR PROPERTIES LLC",
+        "names": [
+          "OUTDOOR PROPERTIES LLC"
+        ],
+        "parcels": 5,
+        "acres": 0.43,
+        "spend": 1280010,
+        "controlTransferOnly": false,
+        "firstBuy": "2017-05-08",
+        "lastBuy": "2022-06-30",
+        "spanMonths": 61,
+        "streets": [
+          "Main St",
+          "N Depot St",
+          "N Main St",
+          "S Depot St",
+          "S Main St"
+        ],
+        "mktArea": "C00051",
+        "lat": 34.69341,
+        "lng": -82.19991,
+        "pins": [
+          "0346000101200",
+          "0346000101400",
+          "0346000101902",
+          "0346000102000",
+          "0357000200600"
+        ]
+      },
+      {
+        "entity": "LITTLE ROOM",
+        "displayName": "LITTLE ROOM LLC",
+        "names": [
+          "LITTLE ROOM LLC"
+        ],
+        "parcels": 5,
+        "acres": 0.13,
+        "spend": 1832000,
+        "controlTransferOnly": false,
+        "firstBuy": "2015-12-11",
+        "lastBuy": "2022-04-20",
+        "spanMonths": 76,
+        "streets": [
+          "S Main St"
+        ],
+        "mktArea": "C00082",
+        "lat": 34.84488,
+        "lng": -82.40338,
+        "pins": [
+          "0070000301001",
+          "0070000301005",
+          "0070000301006",
+          "0070000301007",
+          "0070000301008"
+        ]
+      },
+      {
+        "entity": "VERDAE",
+        "displayName": "VERDAE PROPERTIES INC",
+        "names": [
+          "VERDAE GROUP LLC",
+          "VERDAE HOLDINGS LLC",
+          "VERDAE PROPERTIES INC",
+          "VERDAE PROPERTIES LLC"
+        ],
+        "parcels": 4,
+        "acres": 29.95,
+        "spend": 800020,
+        "controlTransferOnly": false,
+        "firstBuy": "2016-09-26",
+        "lastBuy": "2024-10-15",
+        "spanMonths": 97,
+        "streets": [
+          "None 101491 Rd",
+          "Rocky Slope Rd",
+          "Woodruff St"
+        ],
+        "mktArea": "C00092",
+        "lat": 34.83541,
+        "lng": -82.3273,
+        "pins": [
+          "0260000101800",
+          "0261000102600",
+          "0262000100805",
+          "0262000100810"
+        ]
+      },
+      {
+        "entity": "WAREHOUSE SERVICES NO 5",
+        "displayName": "WAREHOUSE SERVICES NO 5",
+        "names": [
+          "WAREHOUSE SERVICES NO 5"
+        ],
+        "parcels": 4,
+        "acres": 25.55,
+        "spend": 6338857,
+        "controlTransferOnly": false,
+        "firstBuy": "2015-01-12",
+        "lastBuy": "2025-10-22",
+        "spanMonths": 129,
+        "streets": [
+          "Bruce Rd",
+          "Datastream Dr",
+          "White Horse Rd"
+        ],
+        "mktArea": "C00164",
+        "lat": 34.78878,
+        "lng": -82.41164,
+        "pins": [
+          "WG02010100900",
+          "WG03000601300",
+          "WG06010101600",
+          "WG06010101605"
+        ]
+      },
+      {
+        "entity": "WHITE OF GRE",
+        "displayName": "WHITE INVESTMENTS OF GRE",
+        "names": [
+          "WHITE INVESTMENTS OF GRE"
+        ],
+        "parcels": 4,
+        "acres": 9.89,
+        "spend": 3400000,
+        "controlTransferOnly": false,
+        "firstBuy": "2021-11-19",
+        "lastBuy": "2025-02-28",
+        "spanMonths": 39,
+        "streets": [
+          "Duvall Dr",
+          "Duvall Rd"
+        ],
+        "mktArea": "C00078",
+        "lat": 34.81395,
+        "lng": -82.34065,
+        "pins": [
+          "0272000101005",
+          "0272000101401",
+          "0272000101501",
+          "0272000104500"
+        ]
+      },
+      {
+        "entity": "BENSON FAMILY",
+        "displayName": "BENSON FAMILY PROPERTIES",
+        "names": [
+          "BENSON FAMILY PROPERTIES"
+        ],
+        "parcels": 4,
+        "acres": 4.28,
+        "spend": 1846457,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-06-05",
+        "lastBuy": "2025-01-13",
+        "spanMonths": 79,
+        "streets": [
+          "Caldwell Rd",
+          "Forest Street St",
+          "W Wade Hampton Blvd"
+        ],
+        "mktArea": "C00155",
+        "lat": 34.9491,
+        "lng": -82.23847,
+        "pins": [
+          "G014000503000",
+          "G019000103002",
+          "G019000103600",
+          "G019000109500"
+        ]
+      },
+      {
+        "entity": "VERDAE DEVELOPMENT",
+        "displayName": "VERDAE DEVELOPMENT INC",
+        "names": [
+          "VERDAE DEVELOPMENT INC"
+        ],
+        "parcels": 4,
+        "acres": 3.87,
+        "spend": 800010,
+        "controlTransferOnly": false,
+        "firstBuy": "2011-09-22",
+        "lastBuy": "2025-11-24",
+        "spanMonths": 170,
+        "streets": [
+          "Legacy Park Rd",
+          "Rocky Slope Rd"
+        ],
+        "mktArea": "C00072",
+        "lat": 34.82894,
+        "lng": -82.33135,
+        "pins": [
+          "0262000100909",
+          "0262000101413",
+          "0262000101414",
+          "0262000101419"
+        ]
+      },
+      {
+        "entity": "DRS REAL ESTATE",
+        "displayName": "DRS REAL ESTATE LLC",
+        "names": [
+          "DRS REAL ESTATE LLC"
+        ],
+        "parcels": 4,
+        "acres": 3.26,
+        "spend": 2137876,
+        "controlTransferOnly": false,
+        "firstBuy": "2013-11-01",
+        "lastBuy": "2024-11-22",
+        "spanMonths": 132,
+        "streets": [
+          "Augusta St",
+          "S Church St"
+        ],
+        "mktArea": "C00079",
+        "lat": 34.83635,
+        "lng": -82.40271,
+        "pins": [
+          "0091020400700",
+          "0091020401000",
+          "0094000400600",
+          "0094000401200"
+        ]
+      },
+      {
+        "entity": "SIMPLY EVERYTHING",
+        "displayName": "SIMPLY EVERYTHING LLC",
+        "names": [
+          "SIMPLY EVERYTHING LLC"
+        ],
+        "parcels": 4,
+        "acres": 0.54,
+        "spend": 2480000,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-04-11",
+        "lastBuy": "2026-03-23",
+        "spanMonths": 95,
+        "streets": [
+          "Poinsett St",
+          "Trade St",
+          "Victoria St"
+        ],
+        "mktArea": "C00061",
+        "lat": 34.93793,
+        "lng": -82.22671,
+        "pins": [
+          "G020000101000",
+          "G020000101101",
+          "G020000101300",
+          "G020000200600"
+        ]
+      },
+      {
+        "entity": "BON SECOURS ST FRANCIS H",
+        "displayName": "BON SECOURS ST FRANCIS H",
+        "names": [
+          "BON SECOURS ST FRANCIS H"
+        ],
+        "parcels": 3,
+        "acres": 15.45,
+        "spend": 5296760,
+        "controlTransferOnly": false,
+        "firstBuy": "2016-11-18",
+        "lastBuy": "2025-12-23",
+        "spanMonths": 109,
+        "streets": [
+          "Dr",
+          "Grandview Rd",
+          "Harrison Bridge Dr"
+        ],
+        "mktArea": "C00126",
+        "lat": 34.70698,
+        "lng": -82.24587,
+        "pins": [
+          "0331000100609",
+          "0331000100610",
+          "0331000100616"
+        ]
+      },
+      {
+        "entity": "NORTH GREENVILLE UNIVERS",
+        "displayName": "NORTH GREENVILLE UNIVERS",
+        "names": [
+          "NORTH GREENVILLE UNIVERS"
+        ],
+        "parcels": 3,
+        "acres": 14.6,
+        "spend": 1500005,
+        "controlTransferOnly": false,
+        "firstBuy": "2016-03-11",
+        "lastBuy": "2024-12-23",
+        "spanMonths": 105,
+        "streets": [
+          "Hunt Ave",
+          "Hunt St",
+          "Lancaster St"
+        ],
+        "mktArea": "C00083",
+        "lat": 34.93997,
+        "lng": -82.25385,
+        "pins": [
+          "G011000700300",
+          "G011000700301",
+          "G011000700302"
+        ]
+      },
+      {
+        "entity": "GRACE COMMUNITY CHURCH O",
+        "displayName": "GRACE COMMUNITY CHURCH O",
+        "names": [
+          "GRACE COMMUNITY CHURCH O"
+        ],
+        "parcels": 3,
+        "acres": 8.92,
+        "spend": 5956447,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-09-27",
+        "lastBuy": "2024-11-14",
+        "spanMonths": 74,
+        "streets": [
+          "Milestone Rd",
+          "Pelham Rd"
+        ],
+        "mktArea": "C00110",
+        "lat": 34.86224,
+        "lng": -82.27925,
+        "pins": [
+          "0533040101314",
+          "0533040101326",
+          "0540040100803"
+        ]
+      },
+      {
+        "entity": "LEON HIX REAL ESTATE",
+        "displayName": "LEON HIX REAL ESTATE LLC",
+        "names": [
+          "LEON HIX REAL ESTATE LLC"
+        ],
+        "parcels": 3,
+        "acres": 4.35,
+        "spend": 815001,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-11-28",
+        "lastBuy": "2022-04-21",
+        "spanMonths": 41,
+        "streets": [
+          "Main Ave",
+          "W Wade Hampton Blvd",
+          "Wade Hampton Dr"
+        ],
+        "mktArea": "C00156",
+        "lat": 34.94801,
+        "lng": -82.229,
+        "pins": [
+          "G015000200212",
+          "G016000500500",
+          "G017000201700"
+        ]
+      },
+      {
+        "entity": "ENIGMA",
+        "displayName": "ENIGMA CORPORATION LLC",
+        "names": [
+          "ENIGMA CORP",
+          "ENIGMA CORP NEV CORP",
+          "ENIGMA CORPORATION",
+          "ENIGMA CORPORATION LLC",
+          "ENIGMA INC NEVADA CORP"
+        ],
+        "parcels": 3,
+        "acres": 3.84,
+        "spend": 1545000,
+        "controlTransferOnly": false,
+        "firstBuy": "2011-05-17",
+        "lastBuy": "2022-11-04",
+        "spanMonths": 138,
+        "streets": [
+          "N Mauldin Rd",
+          "Pleasantburg Rd",
+          "S Pleasantburg Dr"
+        ],
+        "mktArea": "C00018",
+        "lat": 34.80169,
+        "lng": -82.37501,
+        "pins": [
+          "M015050100401",
+          "M015050100600",
+          "M015050100717"
+        ]
+      },
+      {
+        "entity": "INGILD",
+        "displayName": "INGILD PROPERTIES LLC",
+        "names": [
+          "INGILD PROPERTIES LLC"
+        ],
+        "parcels": 3,
+        "acres": 3.3,
+        "spend": 725501,
+        "controlTransferOnly": false,
+        "firstBuy": "2011-07-12",
+        "lastBuy": "2021-04-22",
+        "spanMonths": 117,
+        "streets": [
+          "N Poinsett Hwy",
+          "Poinsett Hwy",
+          "Poinsett St"
+        ],
+        "mktArea": "C00010",
+        "lat": 34.96919,
+        "lng": -82.43799,
+        "pins": [
+          "0490000402202",
+          "0490000402400",
+          "0490000500301"
+        ]
+      },
+      {
+        "entity": "TR UPSTATE DEVELOPMENT L",
+        "displayName": "TR UPSTATE DEVELOPMENT L",
+        "names": [
+          "TR UPSTATE DEVELOPMENT L"
+        ],
+        "parcels": 3,
+        "acres": 3.3,
+        "spend": 525010,
+        "controlTransferOnly": false,
+        "firstBuy": "2021-11-04",
+        "lastBuy": "2023-03-09",
+        "spanMonths": 16,
+        "streets": [
+          "Hilltop Dr",
+          "Tubbs Mtn Rd"
+        ],
+        "mktArea": "C00010",
+        "lat": 34.96591,
+        "lng": -82.43447,
+        "pins": [
+          "0491000300100",
+          "0491000300301",
+          "0491000302600"
+        ]
+      },
+      {
+        "entity": "CENTRAL REALTY",
+        "displayName": "CENTRAL REALTY HOLDINGS",
+        "names": [
+          "CENTRAL REALTY HOLDINGS"
+        ],
+        "parcels": 3,
+        "acres": 3.17,
+        "spend": 617843,
+        "controlTransferOnly": false,
+        "firstBuy": "2021-05-04",
+        "lastBuy": "2025-09-26",
+        "spanMonths": 52,
+        "streets": [
+          "Haywood Rd"
+        ],
+        "mktArea": "C00091",
+        "lat": 34.84222,
+        "lng": -82.3428,
+        "pins": [
+          "0259000100119",
+          "0259000114000",
+          "0284000201311"
+        ]
+      },
+      {
+        "entity": "HOLLY TREE FAMILY INVEST",
+        "displayName": "HOLLY TREE FAMILY INVEST",
+        "names": [
+          "HOLLY TREE FAMILY INVEST"
+        ],
+        "parcels": 3,
+        "acres": 3.09,
+        "spend": 865000,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-10-03",
+        "lastBuy": "2025-12-31",
+        "spanMonths": 86,
+        "streets": [
+          "Holly Center",
+          "Hwy 14"
+        ],
+        "mktArea": "C00004",
+        "lat": 34.79042,
+        "lng": -82.2566,
+        "pins": [
+          "0542010102702",
+          "0542010102705",
+          "0542010102712"
+        ]
+      },
+      {
+        "entity": "ARIC MCBEE",
+        "displayName": "ARIC MCBEE LLC",
+        "names": [
+          "ARIC MCBEE LLC"
+        ],
+        "parcels": 3,
+        "acres": 2.09,
+        "spend": 19850000,
+        "controlTransferOnly": false,
+        "firstBuy": "2015-01-29",
+        "lastBuy": "2024-01-09",
+        "spanMonths": 108,
+        "streets": [
+          "E Church Ave",
+          "E Mcbee Ave"
+        ],
+        "mktArea": "C00065",
+        "lat": 34.84765,
+        "lng": -82.3944,
+        "pins": [
+          "0062000200205",
+          "0062000200211",
+          "0062000200212"
+        ]
+      },
+      {
+        "entity": "BYRD 6",
+        "displayName": "BYRD 6 LLC",
+        "names": [
+          "BYRD 6 LLC"
+        ],
+        "parcels": 3,
+        "acres": 2.08,
+        "spend": 700005,
+        "controlTransferOnly": false,
+        "firstBuy": "2024-06-24",
+        "lastBuy": "2026-03-13",
+        "spanMonths": 21,
+        "streets": [
+          "Byrdland Ct",
+          "Byrdland Dr"
+        ],
+        "mktArea": "C00071",
+        "lat": 34.8488,
+        "lng": -82.34385,
+        "pins": [
+          "0284000201601",
+          "0284000201900",
+          "0284000202300"
+        ]
+      },
+      {
+        "entity": "HUCKS",
+        "displayName": "HUCKS PROPERTIES LLC",
+        "names": [
+          "HUCKS PROPERTIES LLC"
+        ],
+        "parcels": 3,
+        "acres": 1.82,
+        "spend": 742500,
+        "controlTransferOnly": false,
+        "firstBuy": "2015-01-26",
+        "lastBuy": "2022-09-26",
+        "spanMonths": 92,
+        "streets": [
+          "E Curtis St",
+          "S Main St",
+          "W Georgia Rd"
+        ],
+        "mktArea": "C00056",
+        "lat": 34.7375,
+        "lng": -82.25778,
+        "pins": [
+          "0306000100800",
+          "0308000200902",
+          "0315000200800"
+        ]
+      },
+      {
+        "entity": "JJ HUNTER",
+        "displayName": "JJ HUNTER PROPERTIES LLC",
+        "names": [
+          "JJ HUNTER PROPERTIES LLC"
+        ],
+        "parcels": 3,
+        "acres": 1.65,
+        "spend": 214000,
+        "controlTransferOnly": false,
+        "firstBuy": "2023-10-23",
+        "lastBuy": "2025-11-05",
+        "spanMonths": 25,
+        "streets": [
+          "Stenhouse Dr"
+        ],
+        "mktArea": "C00092",
+        "lat": 34.83931,
+        "lng": -82.32994,
+        "pins": [
+          "0260000101402",
+          "0260000101403",
+          "0260000101409"
+        ]
+      },
+      {
+        "entity": "CROWN",
+        "displayName": "CROWN PROPERTIES LLC",
+        "names": [
+          "CROWN PROPERTIES LLC"
+        ],
+        "parcels": 3,
+        "acres": 1.08,
+        "spend": 230001,
+        "controlTransferOnly": false,
+        "firstBuy": "2011-01-12",
+        "lastBuy": "2024-10-16",
+        "spanMonths": 165,
+        "streets": [
+          "E North St",
+          "Mckenna Commons Ct"
+        ],
+        "mktArea": "C00046",
+        "lat": 34.87726,
+        "lng": -82.31987,
+        "pins": [
+          "0541020100203",
+          "0541020102301",
+          "0541070100800"
+        ]
+      },
+      {
+        "entity": "K O B",
+        "displayName": "K O B ENTERPRISES LLC",
+        "names": [
+          "K O B ENTERPRISES LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.92,
+        "spend": 218020,
+        "controlTransferOnly": false,
+        "firstBuy": "2008-07-21",
+        "lastBuy": "2024-09-09",
+        "spanMonths": 194,
+        "streets": [
+          "Augusta St",
+          "E Faris Rd"
+        ],
+        "mktArea": "C00080",
+        "lat": 34.82491,
+        "lng": -82.39377,
+        "pins": [
+          "0204001101800",
+          "0204001101900",
+          "0204001102200"
+        ]
+      },
+      {
+        "entity": "MEADOW STREET OPPORTUNIT",
+        "displayName": "MEADOW STREET OPPORTUNIT",
+        "names": [
+          "MEADOW STREET OPPORTUNIT"
+        ],
+        "parcels": 3,
+        "acres": 0.85,
+        "spend": 468620,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-12-12",
+        "lastBuy": "2022-12-16",
+        "spanMonths": 48,
+        "streets": [
+          "Meadow St",
+          "S Hudson St"
+        ],
+        "mktArea": "C00067",
+        "lat": 34.85284,
+        "lng": -82.40991,
+        "pins": [
+          "0052000501000",
+          "0052000501001",
+          "0055000100101"
+        ]
+      },
+      {
+        "entity": "TAYLORS ENVOY",
+        "displayName": "TAYLORS ENVOY LLC",
+        "names": [
+          "TAYLORS ENVOY LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.84,
+        "spend": 220001,
+        "controlTransferOnly": false,
+        "firstBuy": "2025-03-20",
+        "lastBuy": "2025-11-25",
+        "spanMonths": 8,
+        "streets": [
+          "E Main St",
+          "Main Dr",
+          "W Main St"
+        ],
+        "mktArea": "C00109",
+        "lat": 34.91969,
+        "lng": -82.30332,
+        "pins": [
+          "T003000200800",
+          "T005000400200",
+          "T006001001401"
+        ]
+      },
+      {
+        "entity": "KAIROS III",
+        "displayName": "KAIROS HOLDINGS III LLC",
+        "names": [
+          "KAIROS HOLDINGS III LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.62,
+        "spend": 820654,
+        "controlTransferOnly": false,
+        "firstBuy": "2015-03-23",
+        "lastBuy": "2025-06-24",
+        "spanMonths": 123,
+        "streets": [
+          "S Antrim Dr",
+          "S Pleasantburg Dr",
+          "W Antrim Dr"
+        ],
+        "mktArea": "C00077",
+        "lat": 34.84158,
+        "lng": -82.3645,
+        "pins": [
+          "0266000127600",
+          "0266000127601",
+          "0266000127602"
+        ]
+      },
+      {
+        "entity": "SHAW RESOURCES",
+        "displayName": "SHAW RESOURCES INC",
+        "names": [
+          "SHAW RESOURCES INC"
+        ],
+        "parcels": 3,
+        "acres": 0.6,
+        "spend": 412500,
+        "controlTransferOnly": false,
+        "firstBuy": "2018-10-16",
+        "lastBuy": "2024-02-21",
+        "spanMonths": 64,
+        "streets": [
+          "N Pleasantburg Dr"
+        ],
+        "mktArea": "C00076",
+        "lat": 34.86717,
+        "lng": -82.35834,
+        "pins": [
+          "0280000200201",
+          "0280000200203",
+          "0280000200208"
+        ]
+      },
+      {
+        "entity": "PEACE CENTER FOUNDATION",
+        "displayName": "PEACE CENTER FOUNDATION",
+        "names": [
+          "PEACE CENTER FOUNDATION"
+        ],
+        "parcels": 3,
+        "acres": 0.54,
+        "spend": 1200010,
+        "controlTransferOnly": false,
+        "firstBuy": "2012-03-22",
+        "lastBuy": "2024-03-20",
+        "spanMonths": 144,
+        "streets": [
+          "S Japanese Dogwood St",
+          "S Main St",
+          "W Japanese Dogwood St"
+        ],
+        "mktArea": "C00064",
+        "lat": 34.8466,
+        "lng": -82.40154,
+        "pins": [
+          "0060000200200",
+          "0060000200700",
+          "0060000201400"
+        ]
+      },
+      {
+        "entity": "ROIB 101 NORTH MAIN",
+        "displayName": "ROIB 101 NORTH MAIN LLC",
+        "names": [
+          "ROIB 101 NORTH MAIN LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.28,
+        "spend": 23575000,
+        "controlTransferOnly": false,
+        "firstBuy": "2016-12-01",
+        "lastBuy": "2022-11-04",
+        "spanMonths": 71,
+        "streets": [
+          "N Coffee St",
+          "N Laurens St",
+          "W Washington Ave"
+        ],
+        "mktArea": "C00065",
+        "lat": 34.85193,
+        "lng": -82.40011,
+        "pins": [
+          "0049000400100",
+          "0049000400800",
+          "0049000400900"
+        ]
+      },
+      {
+        "entity": "ELEV8T FOUNTA",
+        "displayName": "ELEV8T PROPERTIES FOUNTA",
+        "names": [
+          "ELEV8T PROPERTIES FOUNTA"
+        ],
+        "parcels": 3,
+        "acres": 0.19,
+        "spend": 1635000,
+        "controlTransferOnly": false,
+        "firstBuy": "2021-11-16",
+        "lastBuy": "2022-08-19",
+        "spanMonths": 9,
+        "streets": [
+          "Main St",
+          "S Jones St"
+        ],
+        "mktArea": "C00051",
+        "lat": 34.69313,
+        "lng": -82.19912,
+        "pins": [
+          "0357000200500",
+          "0357000300501",
+          "0357000300600"
+        ]
+      },
+      {
+        "entity": "SPITRA",
+        "displayName": "SPITRA PROPERTIES LLC",
+        "names": [
+          "SPITRA PROPERTIES LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.1,
+        "spend": 721890,
+        "controlTransferOnly": false,
+        "firstBuy": "2021-02-26",
+        "lastBuy": "2023-09-12",
+        "spanMonths": 31,
+        "streets": [
+          "Davis Keats Dr",
+          "Parker Ivey Dr",
+          "Prado Dr"
+        ],
+        "mktArea": "C00140",
+        "lat": 34.81854,
+        "lng": -82.28421,
+        "pins": [
+          "0547100100900",
+          "0547100105000",
+          "0547100107200"
+        ]
+      },
+      {
+        "entity": "BUSTAMANTE WILFER",
+        "displayName": "BUSTAMANTE WILFER",
+        "names": [
+          "BUSTAMANTE WILFER"
+        ],
+        "parcels": 3,
+        "acres": 0.09,
+        "spend": 45005,
+        "controlTransferOnly": false,
+        "firstBuy": "2013-08-14",
+        "lastBuy": "2021-03-11",
+        "spanMonths": 91,
+        "streets": [
+          "Cedar Lane Rd"
+        ],
+        "mktArea": "C00037",
+        "lat": 34.8798,
+        "lng": -82.44875,
+        "pins": [
+          "B010000101700",
+          "B010000101800",
+          "B010000103800"
+        ]
+      },
+      {
+        "entity": "CATALYST DT",
+        "displayName": "CATALYST DT LLC",
+        "names": [
+          "CATALYST DT LLC"
+        ],
+        "parcels": 3,
+        "acres": 0.08,
+        "spend": 715000,
+        "controlTransferOnly": false,
+        "firstBuy": "2023-04-21",
+        "lastBuy": "2024-02-29",
+        "spanMonths": 10,
+        "streets": [
+          "N Main St",
+          "S Main St"
+        ],
+        "mktArea": "C00050",
+        "lat": 34.6934,
+        "lng": -82.19957,
+        "pins": [
+          "0346000100700",
+          "0357000300900",
+          "0357000301000"
+        ]
+      },
+      {
+        "entity": "DURHAM MARGARET H LIVING",
+        "displayName": "DURHAM MARGARET H LIVING",
+        "names": [
+          "DURHAM MARGARET H LIVING"
+        ],
+        "parcels": 3,
+        "acres": 0.07,
+        "spend": 1,
+        "controlTransferOnly": false,
+        "firstBuy": "2009-02-27",
+        "lastBuy": "2025-11-25",
+        "spanMonths": 201,
+        "streets": [
+          "N Laurens St",
+          "W North St"
+        ],
+        "mktArea": "C00065",
+        "lat": 34.85247,
+        "lng": -82.39899,
+        "pins": [
+          "0001000100204",
+          "0001000100205",
+          "0001000101300"
+        ]
+      },
+      {
+        "entity": "SK BUILDERS",
+        "displayName": "SK BUILDERS INC",
+        "names": [
+          "SK BUILDERS INC"
+        ],
+        "parcels": 3,
+        "acres": 0,
+        "spend": 589249,
+        "controlTransferOnly": false,
+        "firstBuy": "2013-09-03",
+        "lastBuy": "2021-11-01",
+        "spanMonths": 98,
+        "streets": [
+          "W Wade Hampton Blvd"
+        ],
+        "mktArea": "C00083",
+        "lat": 34.94409,
+        "lng": -82.25054,
+        "pins": [
+          "G011010100900",
+          "G011010101100",
+          "G011010102000"
+        ]
+      }
+    ],
+    "possible_merges": [
+      {
+        "token": "VERDAE",
+        "entities": [
+          "VERDAE",
+          "VERDAE DEVELOPMENT"
+        ],
+        "countyNames": [
+          "VERDAE DEVELOPMENT INC",
+          "VERDAE GROUP LLC",
+          "VERDAE HOLDINGS LLC",
+          "VERDAE PROPERTIES INC",
+          "VERDAE PROPERTIES LLC"
+        ]
+      }
+    ]
+  },
+  "portfolios": {
+    "count": 16,
+    "holders": [
+      {
+        "entity": "ENIGMA",
+        "displayName": "ENIGMA CORPORATION LLC",
+        "names": [
+          "ENIGMA CORP",
+          "ENIGMA CORP NEV CORP",
+          "ENIGMA CORPORATION",
+          "ENIGMA CORPORATION LLC",
+          "ENIGMA INC NEVADA CORP"
+        ],
+        "parcels": 32,
+        "acres": 56.92,
+        "spend": 14130474,
+        "firstBuy": "2009-12-31",
+        "lastBuy": "2025-12-16",
+        "spanMonths": 192,
+        "spreadKm": 51.4,
+        "areas": [
+          "001672",
+          "002075",
+          "002096",
+          "C00009",
+          "C00011",
+          "C00018",
+          "C00029",
+          "C00030"
+        ],
+        "pins": [
+          "0014000300600",
+          "0077000100500",
+          "0077000100700",
+          "0151001500102",
+          "0151001502000",
+          "0282000201300",
+          "0306000101401",
+          "0346000200400",
+          "0485000101306",
+          "0503020102909",
+          "0523010200200",
+          "0523030101300",
+          "0529020101700",
+          "0529020101900",
+          "0529020101901",
+          "0529020102000",
+          "0529020102100",
+          "0530010100701",
+          "0533040102300",
+          "0534010100923",
+          "0543030100739",
+          "0546010102210",
+          "0546010102211",
+          "0593040101320",
+          "0593040101329",
+          "0662030100608",
+          "0673040101804",
+          "B004010102900",
+          "M015050100401",
+          "M015050100600",
+          "M015050100717",
+          "T003000100200"
+        ]
+      },
+      {
+        "entity": "QUIKTRIP",
+        "displayName": "QUIKTRIP CORPORATION",
+        "names": [
+          "QUIKTRIP CORP",
+          "QUIKTRIP CORPORATION"
+        ],
+        "parcels": 22,
+        "acres": 44.03,
+        "spend": 34811665,
+        "firstBuy": "2011-03-25",
+        "lastBuy": "2022-04-28",
+        "spanMonths": 133,
+        "spreadKm": 33.5,
+        "areas": [
+          "C00024",
+          "C00030",
+          "C00056",
+          "C00073",
+          "C00074",
+          "C00077",
+          "C00096",
+          "C00099"
+        ],
+        "pins": [
+          "0011000100200",
+          "0074000401300",
+          "0237010505200",
+          "0282000100600",
+          "0306000200707",
+          "0333000100100",
+          "0349000100204",
+          "0380000200902",
+          "0529030101603",
+          "0533040101701",
+          "0546010100600",
+          "0547030104100",
+          "0547030104101",
+          "0547030104203",
+          "0593040102600",
+          "B015000102602",
+          "B015000102603",
+          "M008010101700",
+          "M010020100201",
+          "M015020201000",
+          "T016000204600",
+          "WG01010200300"
+        ]
+      },
+      {
+        "entity": "CROWN",
+        "displayName": "CROWN PROPERTIES LLC",
+        "names": [
+          "CROWN PROPERTIES LLC"
+        ],
+        "parcels": 13,
+        "acres": 21.71,
+        "spend": 2273874,
+        "firstBuy": "2009-08-27",
+        "lastBuy": "2024-10-16",
+        "spanMonths": 182,
+        "spreadKm": 45.5,
+        "areas": [
+          "001049",
+          "C00021",
+          "C00046",
+          "C00047",
+          "C00051",
+          "C00077",
+          "C00079",
+          "C00099"
+        ],
+        "pins": [
+          "0225000100200",
+          "0276000300502",
+          "0348000100705",
+          "0515000101801",
+          "0541020100203",
+          "0541020102301",
+          "0541070100800",
+          "0543030100745",
+          "M003020100604",
+          "M008010101943",
+          "T003000100200",
+          "T009050105100",
+          "T022000100900"
+        ]
+      },
+      {
+        "entity": "SPINKS",
+        "displayName": "SPINKS INVESTMENTS INC",
+        "names": [
+          "SPINKS INVESTMENTS INC"
+        ],
+        "parcels": 13,
+        "acres": 16.18,
+        "spend": 7195009,
+        "firstBuy": "2010-04-05",
+        "lastBuy": "2025-04-22",
+        "spanMonths": 180,
+        "spreadKm": 32.7,
+        "areas": [
+          "C00015",
+          "C00019",
+          "C00027",
+          "C00043",
+          "C00056",
+          "C00057",
+          "C00077",
+          "C00097"
+        ],
+        "pins": [
+          "0183030101700",
+          "0266000101113",
+          "0266000101127",
+          "0533020105400",
+          "0533040101501",
+          "0538040103200",
+          "0538040103304",
+          "0562010101501",
+          "0574040100105",
+          "0574040100108",
+          "0632010104500",
+          "M008030101008",
+          "T017010502108"
+        ]
+      },
+      {
+        "entity": "LEON HIX REAL ESTATE",
+        "displayName": "LEON HIX REAL ESTATE LLC",
+        "names": [
+          "LEON HIX REAL ESTATE LLC"
+        ],
+        "parcels": 13,
+        "acres": 12.31,
+        "spend": 3320062,
+        "firstBuy": "2017-09-07",
+        "lastBuy": "2025-03-31",
+        "spanMonths": 90,
+        "spreadKm": 21.5,
+        "areas": [
+          "001035",
+          "C00017",
+          "C00058",
+          "C00061",
+          "C00082",
+          "C00083",
+          "C00129",
+          "C00153"
+        ],
+        "pins": [
+          "0276010101800",
+          "0297000100809",
+          "G011000201300",
+          "G011000201400",
+          "G012000100210",
+          "G015000200212",
+          "G016000500500",
+          "G017000201700",
+          "G019000102900",
+          "G019000123200",
+          "G021000202100",
+          "T016000204607",
+          "T016000207300"
+        ]
+      },
+      {
+        "entity": "FLASH MARKET",
+        "displayName": "FLASH MARKET LLC",
+        "names": [
+          "FLASH MARKET LLC"
+        ],
+        "parcels": 12,
+        "acres": 13.97,
+        "spend": 3267155,
+        "firstBuy": "2019-07-29",
+        "lastBuy": "2021-03-15",
+        "spanMonths": 20,
+        "spreadKm": 41.2,
+        "areas": [
+          "001485",
+          "002057",
+          "C00043",
+          "C00051",
+          "C00089",
+          "C00132",
+          "C00148",
+          "C00152"
+        ],
+        "pins": [
+          "0137000100100",
+          "0300000200101",
+          "0349000100202",
+          "0498010103301",
+          "0632010103701",
+          "0635040102001",
+          "B006000100103",
+          "B014000101101",
+          "T009040102400",
+          "T031000400300",
+          "WG08000100107",
+          "WG11000200100"
+        ]
+      },
+      {
+        "entity": "VERDAE",
+        "displayName": "VERDAE PROPERTIES INC",
+        "names": [
+          "VERDAE GROUP LLC",
+          "VERDAE HOLDINGS LLC",
+          "VERDAE PROPERTIES INC",
+          "VERDAE PROPERTIES LLC"
+        ],
+        "parcels": 11,
+        "acres": 67.67,
+        "spend": 1850040,
+        "firstBuy": "2014-02-10",
+        "lastBuy": "2025-05-29",
+        "spanMonths": 135,
+        "spreadKm": 3.3,
+        "areas": [
+          "002323",
+          "002638",
+          "C00071",
+          "C00072",
+          "C00078",
+          "C00092"
+        ],
+        "pins": [
+          "0260000101800",
+          "0261000102600",
+          "0262000100805",
+          "0262000100810",
+          "0263000300211",
+          "0545010102200",
+          "0545010102207",
+          "0545010102508",
+          "0547010100205",
+          "0547010100705",
+          "0547010100800"
+        ]
+      },
+      {
+        "entity": "DMOF",
+        "displayName": "DMOF LLC",
+        "names": [
+          "DMOF LLC"
+        ],
+        "parcels": 11,
+        "acres": 7.65,
+        "spend": 5868000,
+        "firstBuy": "2008-03-20",
+        "lastBuy": "2022-08-18",
+        "spanMonths": 173,
+        "spreadKm": 31.9,
+        "areas": [
+          "C00027",
+          "C00043",
+          "C00046",
+          "C00053",
+          "C00057",
+          "C00070",
+          "C00103",
+          "C00153"
+        ],
+        "pins": [
+          "0284000100917",
+          "0351000100106",
+          "0399000105201",
+          "0538040100700",
+          "0538040102201",
+          "0538040102202",
+          "0574040100500",
+          "M006020102707",
+          "M006020102722",
+          "T017010102400",
+          "T022000102700"
+        ]
+      },
+      {
+        "entity": "CENTRAL REALTY",
+        "displayName": "CENTRAL REALTY HOLDINGS",
+        "names": [
+          "CENTRAL REALTY HOLDINGS"
+        ],
+        "parcels": 9,
+        "acres": 8.41,
+        "spend": 1530568,
+        "firstBuy": "2012-10-17",
+        "lastBuy": "2025-09-26",
+        "spanMonths": 155,
+        "spreadKm": 11.0,
+        "areas": [
+          "C00075",
+          "C00079",
+          "C00091",
+          "C00112",
+          "C00144"
+        ],
+        "pins": [
+          "0035000602000",
+          "0038000200100",
+          "0038000700100",
+          "0189011100900",
+          "0189011101000",
+          "0259000100119",
+          "0259000114000",
+          "0284000201311",
+          "0533210101200"
+        ]
+      },
+      {
+        "entity": "HUCKS",
+        "displayName": "HUCKS PROPERTIES LLC",
+        "names": [
+          "HUCKS PROPERTIES LLC"
+        ],
+        "parcels": 9,
+        "acres": 3.74,
+        "spend": 2392500,
+        "firstBuy": "2011-06-02",
+        "lastBuy": "2023-11-29",
+        "spanMonths": 149,
+        "spreadKm": 10.8,
+        "areas": [
+          "C00056",
+          "C00132",
+          "C00133",
+          "C00135",
+          "C00140"
+        ],
+        "pins": [
+          "0303000100413",
+          "0303000100414",
+          "0306000100800",
+          "0308000200902",
+          "0315000200800",
+          "0320000101003",
+          "0320000101608",
+          "0547100105200",
+          "0547100105300"
+        ]
+      },
+      {
+        "entity": "INGLES MARKETS INCORPORA",
+        "displayName": "INGLES MARKETS INCORPORA",
+        "names": [
+          "INGLES MARKETS INCORPORA"
+        ],
+        "parcels": 8,
+        "acres": 86.03,
+        "spend": 52341581,
+        "firstBuy": "2008-12-31",
+        "lastBuy": "2024-08-05",
+        "spanMonths": 188,
+        "spreadKm": 28.6,
+        "areas": [
+          "001037",
+          "C00009",
+          "C00041",
+          "C00099",
+          "C00125",
+          "C00158"
+        ],
+        "pins": [
+          "0173010600100",
+          "0503020103506",
+          "0601030100806",
+          "B013010109400",
+          "B013010109501",
+          "B015000200601",
+          "M006020100201",
+          "T019000201402"
+        ]
+      },
+      {
+        "entity": "FIRST BAPTIST CHURCH OF",
+        "displayName": "FIRST BAPTIST CHURCH OF",
+        "names": [
+          "FIRST BAPTIST CHURCH OF"
+        ],
+        "parcels": 8,
+        "acres": 30.04,
+        "spend": 450004,
+        "firstBuy": "2013-04-25",
+        "lastBuy": "2025-03-05",
+        "spanMonths": 143,
+        "spreadKm": 30.8,
+        "areas": [
+          "000031",
+          "000382",
+          "001370",
+          "001835",
+          "001922",
+          "C00094",
+          "C00132"
+        ],
+        "pins": [
+          "0263000200100",
+          "0292000101601",
+          "0315000300700",
+          "0315000400100",
+          "0316000100800",
+          "0395000100403",
+          "0604010101600",
+          "B006000105801"
+        ]
+      },
+      {
+        "entity": "BON SECOURS ST FRANCIS H",
+        "displayName": "BON SECOURS ST FRANCIS H",
+        "names": [
+          "BON SECOURS ST FRANCIS H"
+        ],
+        "parcels": 8,
+        "acres": 27.65,
+        "spend": 11222995,
+        "firstBuy": "2013-08-26",
+        "lastBuy": "2025-12-23",
+        "spanMonths": 148,
+        "spreadKm": 27.1,
+        "areas": [
+          "C00053",
+          "C00058",
+          "C00073",
+          "C00126",
+          "C00127",
+          "C00141"
+        ],
+        "pins": [
+          "0113000300500",
+          "0113000300700",
+          "0331000100609",
+          "0331000100610",
+          "0331000100616",
+          "0351000100302",
+          "0548020103207",
+          "G005000100700"
+        ]
+      },
+      {
+        "entity": "SPINX THE",
+        "displayName": "SPINX COMPANY INC THE",
+        "names": [
+          "SPINX COMPANY INC THE",
+          "SPINX COMPANY LLC THE"
+        ],
+        "parcels": 8,
+        "acres": 15.81,
+        "spend": 4527102,
+        "firstBuy": "2014-12-30",
+        "lastBuy": "2021-03-10",
+        "spanMonths": 75,
+        "spreadKm": 21.1,
+        "areas": [
+          "C00013",
+          "C00029",
+          "C00085",
+          "C00103",
+          "C00111",
+          "C00137",
+          "C00141",
+          "C00155"
+        ],
+        "pins": [
+          "0292000100701",
+          "0449000100200",
+          "0529020101700",
+          "0531020102508",
+          "0533040102000",
+          "0535030102719",
+          "G018000401110",
+          "T035000100106"
+        ]
+      },
+      {
+        "entity": "PATTON DEVELOPMENT LL",
+        "displayName": "PATTON DEVELOPMENT SC LL",
+        "names": [
+          "PATTON DEVELOPMENT SC LL"
+        ],
+        "parcels": 8,
+        "acres": 12.68,
+        "spend": 2035000,
+        "firstBuy": "2013-02-01",
+        "lastBuy": "2022-03-29",
+        "spanMonths": 109,
+        "spreadKm": 44.1,
+        "areas": [
+          "C00037",
+          "C00054",
+          "C00056",
+          "C00089",
+          "C00090",
+          "C00103",
+          "C00126"
+        ],
+        "pins": [
+          "0295000100109",
+          "0306000101100",
+          "0334000100307",
+          "0446000200102",
+          "0581010101302",
+          "0602020103406",
+          "B010000100400",
+          "WG08000100103"
+        ]
+      },
+      {
+        "entity": "JALIABAPA AND RADHA",
+        "displayName": "JALIABAPA AND RADHA LLC",
+        "names": [
+          "JALIABAPA AND RADHA",
+          "JALIABAPA AND RADHA LLC"
+        ],
+        "parcels": 8,
+        "acres": 6.59,
+        "spend": 2985005,
+        "firstBuy": "2014-10-03",
+        "lastBuy": "2023-05-12",
+        "spanMonths": 103,
+        "spreadKm": 18.7,
+        "areas": [
+          "C00014",
+          "C00036",
+          "C00139",
+          "C00158",
+          "C00161"
+        ],
+        "pins": [
+          "0230000507000",
+          "0242010203400",
+          "0242010203900",
+          "0248000201003",
+          "0424000400400",
+          "0547030104304",
+          "B015000100110",
+          "P010000201400"
+        ]
+      }
+    ]
+  },
+  "repeat_sale_index": {
+    "summary": {
+      "pairs": 829,
+      "medianAnnualPct": 7.6,
+      "p25AnnualPct": 1.6,
+      "p75AnnualPct": 17.8,
+      "lossSharePct": 18,
+      "lossCount": 150,
+      "medianHoldYears": 4.7
+    },
+    "excluded_built_on_between_sales": 48,
+    "by_year": [
+      {
+        "year": "2010",
+        "n": 10,
+        "medianAnnualPct": 10.4,
+        "lossSharePct": 40
+      },
+      {
+        "year": "2012",
+        "n": 14,
+        "medianAnnualPct": 3.0,
+        "lossSharePct": 29
+      },
+      {
+        "year": "2013",
+        "n": 19,
+        "medianAnnualPct": 1.3,
+        "lossSharePct": 47
+      },
+      {
+        "year": "2014",
+        "n": 26,
+        "medianAnnualPct": 5.6,
+        "lossSharePct": 15
+      },
+      {
+        "year": "2015",
+        "n": 31,
+        "medianAnnualPct": 6.3,
+        "lossSharePct": 23
+      },
+      {
+        "year": "2016",
+        "n": 41,
+        "medianAnnualPct": 4.5,
+        "lossSharePct": 20
+      },
+      {
+        "year": "2017",
+        "n": 55,
+        "medianAnnualPct": 3.0,
+        "lossSharePct": 29
+      },
+      {
+        "year": "2018",
+        "n": 77,
+        "medianAnnualPct": 5.3,
+        "lossSharePct": 25
+      },
+      {
+        "year": "2019",
+        "n": 67,
+        "medianAnnualPct": 6.7,
+        "lossSharePct": 19
+      },
+      {
+        "year": "2020",
+        "n": 73,
+        "medianAnnualPct": 3.1,
+        "lossSharePct": 18
+      },
+      {
+        "year": "2021",
+        "n": 115,
+        "medianAnnualPct": 7.8,
+        "lossSharePct": 16
+      },
+      {
+        "year": "2022",
+        "n": 101,
+        "medianAnnualPct": 10.1,
+        "lossSharePct": 11
+      },
+      {
+        "year": "2023",
+        "n": 83,
+        "medianAnnualPct": 12.0,
+        "lossSharePct": 11
+      },
+      {
+        "year": "2024",
+        "n": 111,
+        "medianAnnualPct": 9.4,
+        "lossSharePct": 13
+      }
+    ],
+    "notable_gains": [
+      {
+        "pin": "0535030102728",
+        "street": "Suber Dr",
+        "boughtOn": "2023-12-08",
+        "soldOn": "2024-12-20",
+        "heldYears": 1.0,
+        "buyPrice": 700000,
+        "sellPrice": 5575000,
+        "totalPct": 696.4,
+        "annualPct": 696.4,
+        "seller": "830 E SUBER LLC",
+        "buyer": "SAFA GREER LLC"
+      },
+      {
+        "pin": "0120000100300",
+        "street": "Lois Ave",
+        "boughtOn": "2016-02-12",
+        "soldOn": "2017-03-02",
+        "heldYears": 1.1,
+        "buyPrice": 150000,
+        "sellPrice": 780000,
+        "totalPct": 420.0,
+        "annualPct": 358.1,
+        "seller": "CB HOLDINGS AND INVESTME",
+        "buyer": "WINDWARD PARTNERS XVI LL"
+      },
+      {
+        "pin": "0242030200100",
+        "street": "S White Horse Rd",
+        "boughtOn": "2015-11-24",
+        "soldOn": "2016-11-30",
+        "heldYears": 1.0,
+        "buyPrice": 450000,
+        "sellPrice": 1900000,
+        "totalPct": 322.2,
+        "annualPct": 322.2,
+        "seller": "HUSKY WHITE HORSE LLC",
+        "buyer": "BLASI FAMILY LIMITED PAR"
+      },
+      {
+        "pin": "0266000128101",
+        "street": "Mcalister",
+        "boughtOn": "2015-07-29",
+        "soldOn": "2018-03-28",
+        "heldYears": 2.7,
+        "buyPrice": 470000,
+        "sellPrice": 10600000,
+        "totalPct": 2155.3,
+        "annualPct": 221.7,
+        "seller": "CK SPACEMAX GREENVILLE L",
+        "buyer": "NATCHEZ GREENVILLE LLC"
+      },
+      {
+        "pin": "0284000201309",
+        "street": "Haywood Rd",
+        "boughtOn": "2022-11-23",
+        "soldOn": "2024-08-15",
+        "heldYears": 1.8,
+        "buyPrice": 350000,
+        "sellPrice": 2475000,
+        "totalPct": 607.1,
+        "annualPct": 205.8,
+        "seller": "HAYWOOD ROAD 100 LLC",
+        "buyer": "GREENVILLE SC INVESTORS"
+      },
+      {
+        "pin": "0333000100100",
+        "street": "Harrison Bridge Ln",
+        "boughtOn": "2015-02-04",
+        "soldOn": "2016-08-04",
+        "heldYears": 1.5,
+        "buyPrice": 750000,
+        "sellPrice": 4000000,
+        "totalPct": 433.3,
+        "annualPct": 205.3,
+        "seller": "QUIKTRIP CORPORATION",
+        "buyer": "NATIONAL RETAIL PROPERTI"
+      },
+      {
+        "pin": "0096000700401",
+        "street": "Prentiss St",
+        "boughtOn": "2013-08-16",
+        "soldOn": "2014-09-17",
+        "heldYears": 1.1,
+        "buyPrice": 95000,
+        "sellPrice": 275000,
+        "totalPct": 189.5,
+        "annualPct": 166.7,
+        "seller": "MONTGOMERY HOLDINGS LLC",
+        "buyer": "CONSTANTINE PROPERTIES L"
+      },
+      {
+        "pin": "0547030100118",
+        "street": "Woodruff Rd",
+        "boughtOn": "2014-08-29",
+        "soldOn": "2016-10-13",
+        "heldYears": 2.2,
+        "buyPrice": 1099000,
+        "sellPrice": 9174500,
+        "totalPct": 734.8,
+        "annualPct": 166.3,
+        "seller": "85 LLC",
+        "buyer": "GREENVILLE RETAIL ASSOCI"
+      },
+      {
+        "pin": "0052000501000",
+        "street": "Meadow St",
+        "boughtOn": "2015-11-25",
+        "soldOn": "2016-12-21",
+        "heldYears": 1.1,
+        "buyPrice": 38000,
+        "sellPrice": 107000,
+        "totalPct": 181.6,
+        "annualPct": 160.0,
+        "seller": "FOOTHILLS SERVICES LLC",
+        "buyer": "DEZEN ANDREW C"
+      },
+      {
+        "pin": "WG08000100107",
+        "street": "Piedmont Hwy",
+        "boughtOn": "2021-03-12",
+        "soldOn": "2023-03-02",
+        "heldYears": 2.0,
+        "buyPrice": 304000,
+        "sellPrice": 1824372,
+        "totalPct": 500.1,
+        "annualPct": 145.0,
+        "seller": "FLASH MARKET LLC",
+        "buyer": "BENGAL PORTFOLIO OWNER L"
+      },
+      {
+        "pin": "P015030603100",
+        "street": "Wade Hampton Rd",
+        "boughtOn": "2012-10-02",
+        "soldOn": "2013-10-17",
+        "heldYears": 1.0,
+        "buyPrice": 545000,
+        "sellPrice": 1296000,
+        "totalPct": 137.8,
+        "annualPct": 137.8,
+        "seller": "ALL POINTS DEVELOPMENT L",
+        "buyer": "SJS BEACON IV LLC"
+      },
+      {
+        "pin": "0146000100211",
+        "street": "W Blue Ridge Dr",
+        "boughtOn": "2020-09-16",
+        "soldOn": "2022-11-08",
+        "heldYears": 2.2,
+        "buyPrice": 90000,
+        "sellPrice": 587000,
+        "totalPct": 552.2,
+        "annualPct": 137.6,
+        "seller": "GARCIA HECTOR MIGUEL SAN",
+        "buyer": "LAND & PROPERTIES LLC"
+      },
+      {
+        "pin": "0533210100901",
+        "street": "Pelham Rd",
+        "boughtOn": "2013-07-02",
+        "soldOn": "2015-02-12",
+        "heldYears": 1.6,
+        "buyPrice": 2066000,
+        "sellPrice": 7900000,
+        "totalPct": 282.4,
+        "annualPct": 133.3,
+        "seller": "PELHAM 100 LLC",
+        "buyer": "BOND STREET FUND 6 LLC"
+      },
+      {
+        "pin": "0273000100410",
+        "street": "Vision Rd",
+        "boughtOn": "2021-11-02",
+        "soldOn": "2023-04-03",
+        "heldYears": 1.4,
+        "buyPrice": 1245000,
+        "sellPrice": 4020000,
+        "totalPct": 222.9,
+        "annualPct": 128.7,
+        "seller": "HARMONY HOSPITALITY LLC",
+        "buyer": "SURYA HOTEL CORP"
+      },
+      {
+        "pin": "0143000105500",
+        "street": "Blue Ridge Cir",
+        "boughtOn": "2017-04-26",
+        "soldOn": "2018-08-15",
+        "heldYears": 1.3,
+        "buyPrice": 40000,
+        "sellPrice": 120000,
+        "totalPct": 200.0,
+        "annualPct": 128.0,
+        "seller": "HOLTZCLAW BRIAN",
+        "buyer": "BASILIO ARTURO RUIZ"
+      },
+      {
+        "pin": "0335000100401",
+        "street": "N Southchase Dr",
+        "boughtOn": "2012-07-25",
+        "soldOn": "2014-08-04",
+        "heldYears": 2.1,
+        "buyPrice": 225500,
+        "sellPrice": 1150000,
+        "totalPct": 410.0,
+        "annualPct": 118.6,
+        "seller": "BLUE CREEK CAPITAL LLC",
+        "buyer": "STONE MOUNTAIN INDUSTRIA"
+      },
+      {
+        "pin": "0543030100502",
+        "street": "Congaree Rd",
+        "boughtOn": "2020-05-14",
+        "soldOn": "2021-11-05",
+        "heldYears": 1.5,
+        "buyPrice": 1162500,
+        "sellPrice": 3650000,
+        "totalPct": 214.0,
+        "annualPct": 114.4,
+        "seller": "455 CONGAREE LLC",
+        "buyer": "455 CONGAREE ROAD LLC"
+      },
+      {
+        "pin": "0149000800100",
+        "street": "Buncombe Rd",
+        "boughtOn": "2016-03-10",
+        "soldOn": "2019-03-13",
+        "heldYears": 3.0,
+        "buyPrice": 50000,
+        "sellPrice": 491908,
+        "totalPct": 883.8,
+        "annualPct": 114.3,
+        "seller": "WATER TOWER GREENWAYS LL",
+        "buyer": "WATER DAGGER LLC"
+      },
+      {
+        "pin": "0237030201004",
+        "street": "White Horse Rd",
+        "boughtOn": "2013-02-19",
+        "soldOn": "2014-06-17",
+        "heldYears": 1.3,
+        "buyPrice": 82000,
+        "sellPrice": 225000,
+        "totalPct": 174.4,
+        "annualPct": 113.2,
+        "seller": "CAROLINA WALKER ENTERPRI",
+        "buyer": "MONEYLINE PROPERTIES LLC"
+      },
+      {
+        "pin": "WG05000100704",
+        "street": "White Horse Rd",
+        "boughtOn": "2017-09-28",
+        "soldOn": "2020-02-05",
+        "heldYears": 2.4,
+        "buyPrice": 309500,
+        "sellPrice": 1720000,
+        "totalPct": 455.7,
+        "annualPct": 103.3,
+        "seller": "GREENVILLE WHITE HORSE F",
+        "buyer": "GARRISON MARY SHAW MARIT"
+      },
+      {
+        "pin": "M011010100315",
+        "street": "Fairforest Way",
+        "boughtOn": "2020-06-12",
+        "soldOn": "2021-08-30",
+        "heldYears": 1.2,
+        "buyPrice": 2200000,
+        "sellPrice": 5000000,
+        "totalPct": 127.3,
+        "annualPct": 102.1,
+        "seller": "LML PROPERTIES LLC",
+        "buyer": "HUDSON OAK FAIRFOREST LL"
+      },
+      {
+        "pin": "M005010201603",
+        "street": "Service Bay Rd",
+        "boughtOn": "2019-10-24",
+        "soldOn": "2024-01-30",
+        "heldYears": 4.2,
+        "buyPrice": 250000,
+        "sellPrice": 4900000,
+        "totalPct": 1860.0,
+        "annualPct": 101.4,
+        "seller": "BRITT REAL ESTATE LLC",
+        "buyer": "CAROLINA SPORTS CLUB LLC"
+      },
+      {
+        "pin": "P015050100100",
+        "street": "Wade Hampton Blvd",
+        "boughtOn": "2016-04-22",
+        "soldOn": "2018-06-12",
+        "heldYears": 2.2,
+        "buyPrice": 800000,
+        "sellPrice": 3583333,
+        "totalPct": 347.9,
+        "annualPct": 99.8,
+        "seller": "FOUR SEASONS CAR WASH OF",
+        "buyer": "ZIPS 2900 WADE HAMPTON L"
+      },
+      {
+        "pin": "0280000105602",
+        "street": "N Pleasantburg Dr",
+        "boughtOn": "2021-03-26",
+        "soldOn": "2022-06-20",
+        "heldYears": 1.2,
+        "buyPrice": 870000,
+        "sellPrice": 2056074,
+        "totalPct": 136.3,
+        "annualPct": 99.0,
+        "seller": "AFG SR RE LLC",
+        "buyer": "BELVINA INVESTMENT GROUP"
+      },
+      {
+        "pin": "0189010100806",
+        "street": "Wade Hampton Blvd",
+        "boughtOn": "2014-08-08",
+        "soldOn": "2015-09-30",
+        "heldYears": 1.1,
+        "buyPrice": 150000,
+        "sellPrice": 315000,
+        "totalPct": 110.0,
+        "annualPct": 98.4,
+        "seller": "ROBERTS AMANDA C",
+        "buyer": "KDB PRINTING ENTERPRISES"
+      },
+      {
+        "pin": "0257000600102",
+        "street": "Laurens Dr",
+        "boughtOn": "2022-08-03",
+        "soldOn": "2024-01-29",
+        "heldYears": 1.4,
+        "buyPrice": 775000,
+        "sellPrice": 2015000,
+        "totalPct": 160.0,
+        "annualPct": 96.3,
+        "seller": "GEMCAP DEVELOPMENT LLC",
+        "buyer": "COLEMAN PAUL H JR REVOCA"
+      },
+      {
+        "pin": "0545010101701",
+        "street": "Woodruff Rd",
+        "boughtOn": "2016-01-25",
+        "soldOn": "2018-06-06",
+        "heldYears": 2.4,
+        "buyPrice": 505000,
+        "sellPrice": 2440000,
+        "totalPct": 383.2,
+        "annualPct": 91.9,
+        "seller": "CBH PROPERTIES GREENVILL",
+        "buyer": "PAPAIAHGARI LLC"
+      },
+      {
+        "pin": "0156001000100",
+        "street": "Blue Ridge Rd",
+        "boughtOn": "2013-08-08",
+        "soldOn": "2014-09-10",
+        "heldYears": 1.1,
+        "buyPrice": 50000,
+        "sellPrice": 100000,
+        "totalPct": 100.0,
+        "annualPct": 89.6,
+        "seller": "MANN GORDON E",
+        "buyer": "STARNES HOLLIE L"
+      },
+      {
+        "pin": "0072000100201",
+        "street": "S Main St",
+        "boughtOn": "2008-08-18",
+        "soldOn": "2009-09-04",
+        "heldYears": 1.1,
+        "buyPrice": 375000,
+        "sellPrice": 730000,
+        "totalPct": 94.7,
+        "annualPct": 84.9,
+        "seller": "MCM CORP",
+        "buyer": "URBAN CONCEPTS LLC"
+      },
+      {
+        "pin": "0593020501004",
+        "street": "Augusta Rd",
+        "boughtOn": "2009-04-30",
+        "soldOn": "2011-04-26",
+        "heldYears": 2.0,
+        "buyPrice": 456000,
+        "sellPrice": 1540928,
+        "totalPct": 237.9,
+        "annualPct": 83.8,
+        "seller": "SEA MOUNTAIN VENTURES LL",
+        "buyer": "ARC BJPDNSC001 LLC"
+      },
+      {
+        "pin": "0078000400900",
+        "street": "Pendleton Ave",
+        "boughtOn": "2021-07-29",
+        "soldOn": "2022-09-26",
+        "heldYears": 1.2,
+        "buyPrice": 200000,
+        "sellPrice": 395000,
+        "totalPct": 97.5,
+        "annualPct": 79.2,
+        "seller": "AUGUSTA VIEW LLC",
+        "buyer": "811 HOLDINGS LLC"
+      },
+      {
+        "pin": "0056000700200",
+        "street": "Payne St",
+        "boughtOn": "2016-10-26",
+        "soldOn": "2018-08-28",
+        "heldYears": 1.8,
+        "buyPrice": 1790000,
+        "sellPrice": 5150000,
+        "totalPct": 187.7,
+        "annualPct": 78.0,
+        "seller": "MILL VILLAGE LLC",
+        "buyer": "MERRILL GARDENS AT GREEN"
+      },
+      {
+        "pin": "0266000100100",
+        "street": "Pleasantburg Dr",
+        "boughtOn": "2022-02-17",
+        "soldOn": "2023-02-21",
+        "heldYears": 1.0,
+        "buyPrice": 1100000,
+        "sellPrice": 1950000,
+        "totalPct": 77.3,
+        "annualPct": 77.3,
+        "seller": "VAN 201 LLC",
+        "buyer": "HONDROS JOHN (JTWROS) HO"
+      },
+      {
+        "pin": "0260000107507",
+        "street": "Halton Village Cir",
+        "boughtOn": "2022-05-17",
+        "soldOn": "2024-10-16",
+        "heldYears": 2.4,
+        "buyPrice": 559000,
+        "sellPrice": 2180000,
+        "totalPct": 290.0,
+        "annualPct": 75.6,
+        "seller": "101MC LLC",
+        "buyer": "EDWARDS ROAD INVESTMENTS"
+      },
+      {
+        "pin": "0122000600100",
+        "street": "Main St",
+        "boughtOn": "2015-06-02",
+        "soldOn": "2018-08-01",
+        "heldYears": 3.2,
+        "buyPrice": 55000,
+        "sellPrice": 320000,
+        "totalPct": 481.8,
+        "annualPct": 74.4,
+        "seller": "GREENVILLE REVITALIZATIO",
+        "buyer": "GOODWILL INDUSTRIES OF U"
+      },
+      {
+        "pin": "G022000600400",
+        "street": "W Few St",
+        "boughtOn": "2021-06-16",
+        "soldOn": "2024-01-05",
+        "heldYears": 2.6,
+        "buyPrice": 65000,
+        "sellPrice": 270000,
+        "totalPct": 315.4,
+        "annualPct": 73.5,
+        "seller": "MIDHURST AND ADDLESTONE",
+        "buyer": "WATER TOWER PLACE LLC"
+      },
+      {
+        "pin": "0547030102510",
+        "street": "Woodruff Rd",
+        "boughtOn": "2021-03-26",
+        "soldOn": "2022-04-01",
+        "heldYears": 1.1,
+        "buyPrice": 850000,
+        "sellPrice": 1541403,
+        "totalPct": 81.3,
+        "annualPct": 73.2,
+        "seller": "AFG SR RE LLC",
+        "buyer": "DESAI SC HOLDINGS LLC"
+      },
+      {
+        "pin": "0533040101106",
+        "street": "Pelham Rd",
+        "boughtOn": "2016-09-02",
+        "soldOn": "2017-09-22",
+        "heldYears": 1.0,
+        "buyPrice": 1565000,
+        "sellPrice": 2710000,
+        "totalPct": 73.2,
+        "annualPct": 73.2,
+        "seller": "MREA 3 INVESTMENTS LLC",
+        "buyer": "SMITH ROBERT P"
+      },
+      {
+        "pin": "0005000302100",
+        "street": "W Stone Ave",
+        "boughtOn": "2020-09-28",
+        "soldOn": "2021-10-21",
+        "heldYears": 1.1,
+        "buyPrice": 346000,
+        "sellPrice": 620000,
+        "totalPct": 79.2,
+        "annualPct": 71.3,
+        "seller": "STONE PACK LLC",
+        "buyer": "WEST STONE INVESTORS LLC"
+      },
+      {
+        "pin": "0229000502100",
+        "street": "Easley Bridge Rd",
+        "boughtOn": "2021-08-19",
+        "soldOn": "2023-10-19",
+        "heldYears": 2.2,
+        "buyPrice": 130000,
+        "sellPrice": 415000,
+        "totalPct": 219.2,
+        "annualPct": 70.9,
+        "seller": "RODRIGUEZ FANDER",
+        "buyer": "OOB LLC"
+      }
+    ],
+    "notable_losses": [
+      {
+        "pin": "0324001000700",
+        "street": "W Curtis St",
+        "boughtOn": "2010-12-28",
+        "soldOn": "2017-10-12",
+        "heldYears": 6.8,
+        "buyPrice": 1550000,
+        "sellPrice": 200000,
+        "totalPct": -87.1,
+        "annualPct": -25.9,
+        "seller": "SIMPSONVILLE RE II LLC",
+        "buyer": "LAKEFIELD PROPERTIES LLC"
+      },
+      {
+        "pin": "M015050100721",
+        "street": "N Mauldin Ct",
+        "boughtOn": "2023-03-30",
+        "soldOn": "2024-08-06",
+        "heldYears": 1.4,
+        "buyPrice": 575000,
+        "sellPrice": 155125,
+        "totalPct": -73.0,
+        "annualPct": -60.3,
+        "seller": "MAULDIN ROAD STORAGE PAR",
+        "buyer": "MAULDIN ROAD STORAGE PAR"
+      },
+      {
+        "pin": "0195000501500",
+        "street": "E Laurens St",
+        "boughtOn": "2010-12-28",
+        "soldOn": "2016-05-27",
+        "heldYears": 5.4,
+        "buyPrice": 2940000,
+        "sellPrice": 875000,
+        "totalPct": -70.2,
+        "annualPct": -20.0,
+        "seller": "GREENVILLE RE LLC",
+        "buyer": "SPINHOWL LLC"
+      },
+      {
+        "pin": "0387000100100",
+        "street": "Augusta Dr",
+        "boughtOn": "2010-03-15",
+        "soldOn": "2017-04-21",
+        "heldYears": 7.1,
+        "buyPrice": 2478950,
+        "sellPrice": 900000,
+        "totalPct": -63.7,
+        "annualPct": -13.3,
+        "seller": "INTALIA LLC",
+        "buyer": "ARMOR MART L L C"
+      },
+      {
+        "pin": "G020000500100",
+        "street": "School St",
+        "boughtOn": "2008-08-27",
+        "soldOn": "2013-03-05",
+        "heldYears": 4.6,
+        "buyPrice": 200000,
+        "sellPrice": 75500,
+        "totalPct": -62.3,
+        "annualPct": -19.1,
+        "seller": "BALDREE HOLDINGS LLC",
+        "buyer": "DAVIS GEORGE D III"
+      },
+      {
+        "pin": "0269000101117",
+        "street": "S Winterberry Dr",
+        "boughtOn": "2013-08-01",
+        "soldOn": "2017-12-20",
+        "heldYears": 4.3,
+        "buyPrice": 88480,
+        "sellPrice": 35000,
+        "totalPct": -60.4,
+        "annualPct": -19.3,
+        "seller": "SMITH J DAVID REVOCABLE",
+        "buyer": "UNGER KEITH"
+      },
+      {
+        "pin": "0490000402702",
+        "street": "N State Park Hwy",
+        "boughtOn": "2013-04-18",
+        "soldOn": "2018-05-14",
+        "heldYears": 5.1,
+        "buyPrice": 1624216,
+        "sellPrice": 650000,
+        "totalPct": -60.0,
+        "annualPct": -16.5,
+        "seller": "ARC SBTVRSC001 LLC",
+        "buyer": "DWH JR PROPERTIES LLC"
+      },
+      {
+        "pin": "0001000300204",
+        "street": "Main St",
+        "boughtOn": "2008-03-10",
+        "soldOn": "2015-05-01",
+        "heldYears": 7.2,
+        "buyPrice": 350000,
+        "sellPrice": 141175,
+        "totalPct": -59.7,
+        "annualPct": -11.9,
+        "seller": "7 A1 LAURENS LLC",
+        "buyer": "6120 WHITE HORSE ROAD RC"
+      },
+      {
+        "pin": "0540020102407",
+        "street": "Riley Smith Rd",
+        "boughtOn": "2008-07-23",
+        "soldOn": "2012-10-02",
+        "heldYears": 4.2,
+        "buyPrice": 2825000,
+        "sellPrice": 1150000,
+        "totalPct": -59.3,
+        "annualPct": -19.1,
+        "seller": "LANFORD TERRY G",
+        "buyer": "PELHAM OAKS LLC"
+      },
+      {
+        "pin": "0240030200900",
+        "street": "New Easley Hwy",
+        "boughtOn": "2008-06-17",
+        "soldOn": "2010-10-14",
+        "heldYears": 2.3,
+        "buyPrice": 250000,
+        "sellPrice": 106000,
+        "totalPct": -57.6,
+        "annualPct": -30.8,
+        "seller": "GREENVILLE ACQUISITIONS",
+        "buyer": "TERRY CAPITAL INVESTMENT"
+      },
+      {
+        "pin": "B016000300400",
+        "street": "Farrs Bridge Rd",
+        "boughtOn": "2008-01-07",
+        "soldOn": "2022-06-03",
+        "heldYears": 14.4,
+        "buyPrice": 1735894,
+        "sellPrice": 750000,
+        "totalPct": -56.8,
+        "annualPct": -5.7,
+        "seller": "INLAND AMERICAN ST PORTF",
+        "buyer": "CYL HOLDINGS LLC"
+      },
+      {
+        "pin": "0377000100103",
+        "street": "Augusta Rd",
+        "boughtOn": "2014-05-12",
+        "soldOn": "2021-11-18",
+        "heldYears": 7.5,
+        "buyPrice": 1200000,
+        "sellPrice": 525000,
+        "totalPct": -56.2,
+        "annualPct": -10.4,
+        "seller": "VALLHAB KRUPA & KRUNAL L",
+        "buyer": "ROCKET GAS LLC"
+      },
+      {
+        "pin": "0046000302100",
+        "street": "Williams St",
+        "boughtOn": "2016-03-02",
+        "soldOn": "2019-12-31",
+        "heldYears": 3.8,
+        "buyPrice": 323400,
+        "sellPrice": 146200,
+        "totalPct": -54.8,
+        "annualPct": -19.1,
+        "seller": "CAINE REALTY HOLDINGS LL",
+        "buyer": "WILLIAMS 347 LLC EDGERTO"
+      },
+      {
+        "pin": "0547030103101",
+        "street": "Woodruff Rd",
+        "boughtOn": "2020-04-02",
+        "soldOn": "2023-07-17",
+        "heldYears": 3.2,
+        "buyPrice": 3750000,
+        "sellPrice": 1740000,
+        "totalPct": -53.6,
+        "annualPct": -21.0,
+        "seller": "COVE GREENVILLE 17 DST",
+        "buyer": "1405WR LLC"
+      },
+      {
+        "pin": "0135000101500",
+        "street": "W Blue Ridge Dr",
+        "boughtOn": "2010-08-27",
+        "soldOn": "2013-02-06",
+        "heldYears": 2.5,
+        "buyPrice": 165000,
+        "sellPrice": 80000,
+        "totalPct": -51.5,
+        "annualPct": -25.1,
+        "seller": "JALIABAPA 2 LLC",
+        "buyer": "M & J OF GREENVILLE INC"
+      },
+      {
+        "pin": "0409000100107",
+        "street": "Grove Reserve Pkwy",
+        "boughtOn": "2008-05-19",
+        "soldOn": "2023-12-01",
+        "heldYears": 15.6,
+        "buyPrice": 750000,
+        "sellPrice": 375000,
+        "totalPct": -50.0,
+        "annualPct": -4.4,
+        "seller": "DRP COMPANY INC",
+        "buyer": "HOTELS ENTERPRISE LLC"
+      },
+      {
+        "pin": "WG01010301206",
+        "street": "Grove Rd",
+        "boughtOn": "2009-09-21",
+        "soldOn": "2018-08-16",
+        "heldYears": 8.9,
+        "buyPrice": 2000000,
+        "sellPrice": 1000000,
+        "totalPct": -50.0,
+        "annualPct": -7.5,
+        "seller": "HTA-GREENVILLE CHOS LLC",
+        "buyer": "HCP VENTURES IX LLC"
+      },
+      {
+        "pin": "G013000102203",
+        "street": "W Wade Hampton Blvd",
+        "boughtOn": "2015-08-31",
+        "soldOn": "2022-11-14",
+        "heldYears": 7.2,
+        "buyPrice": 300000,
+        "sellPrice": 160000,
+        "totalPct": -46.7,
+        "annualPct": -8.3,
+        "seller": "ELLS HOLDINGS LLC",
+        "buyer": "NEHEMIAH COMMUNITY REVIT"
+      },
+      {
+        "pin": "0174020700200",
+        "street": "N Pleasantburg Dr",
+        "boughtOn": "2018-06-12",
+        "soldOn": "2022-01-25",
+        "heldYears": 3.6,
+        "buyPrice": 3583333,
+        "sellPrice": 1916666,
+        "totalPct": -46.5,
+        "annualPct": -16.0,
+        "seller": "ZIPS 3107 N PLEASANTBURG",
+        "buyer": "HECW 4 INC"
+      },
+      {
+        "pin": "0093001200500",
+        "street": "Augusta Ave",
+        "boughtOn": "2015-10-30",
+        "soldOn": "2018-07-20",
+        "heldYears": 2.8,
+        "buyPrice": 3710000,
+        "sellPrice": 2006285,
+        "totalPct": -45.9,
+        "annualPct": -20.0,
+        "seller": "BANK OF NORTH CAROLINA",
+        "buyer": "CPM FEDERAL CREDIT UNION"
+      },
+      {
+        "pin": "0306000101301",
+        "street": "Georgia Way",
+        "boughtOn": "2014-02-18",
+        "soldOn": "2017-03-30",
+        "heldYears": 3.1,
+        "buyPrice": 360000,
+        "sellPrice": 195000,
+        "totalPct": -45.8,
+        "annualPct": -18.0,
+        "seller": "TANGO ALPHA MANAGEMENT C",
+        "buyer": "REYES JACINTO M"
+      },
+      {
+        "pin": "0596010100501",
+        "street": "Old Hundred Rd",
+        "boughtOn": "2013-02-25",
+        "soldOn": "2020-11-19",
+        "heldYears": 7.8,
+        "buyPrice": 125000,
+        "sellPrice": 68000,
+        "totalPct": -45.6,
+        "annualPct": -7.6,
+        "seller": "RK MART L L C",
+        "buyer": "SONA SAI LLC"
+      },
+      {
+        "pin": "0070000301008",
+        "street": "S Main St",
+        "boughtOn": "2009-07-31",
+        "soldOn": "2012-10-31",
+        "heldYears": 3.2,
+        "buyPrice": 210500,
+        "sellPrice": 116500,
+        "totalPct": -44.7,
+        "annualPct": -16.6,
+        "seller": "BARTOSKI ANITA A",
+        "buyer": "BAZIL LINDA J"
+      },
+      {
+        "pin": "B008020101402",
+        "street": "Hunts Bridge Rd",
+        "boughtOn": "2008-01-31",
+        "soldOn": "2021-09-10",
+        "heldYears": 13.7,
+        "buyPrice": 207500,
+        "sellPrice": 115000,
+        "totalPct": -44.6,
+        "annualPct": -4.2,
+        "seller": "FRIEDLANDER SMADAR",
+        "buyer": "AA INVEST LLC"
+      },
+      {
+        "pin": "0485000101007",
+        "street": "Benton Rd",
+        "boughtOn": "2014-02-10",
+        "soldOn": "2017-07-31",
+        "heldYears": 3.4,
+        "buyPrice": 450000,
+        "sellPrice": 250000,
+        "totalPct": -44.4,
+        "annualPct": -15.8,
+        "seller": "DEL ENTERPRISES OF TR LL",
+        "buyer": "QUICK N CLEAN LLC"
+      },
+      {
+        "pin": "WG02030100601",
+        "street": "Bruce Ln",
+        "boughtOn": "2008-07-11",
+        "soldOn": "2015-03-20",
+        "heldYears": 6.7,
+        "buyPrice": 188239,
+        "sellPrice": 105000,
+        "totalPct": -44.2,
+        "annualPct": -8.4,
+        "seller": "WATTS KEITH",
+        "buyer": "TROIKA INVESTMENT GROUP"
+      },
+      {
+        "pin": "0548010100509",
+        "street": "Five Fork Plaza Ct",
+        "boughtOn": "2015-12-15",
+        "soldOn": "2021-12-07",
+        "heldYears": 6.0,
+        "buyPrice": 800000,
+        "sellPrice": 450000,
+        "totalPct": -43.8,
+        "annualPct": -9.1,
+        "seller": "FIVE FORKS EXPRESS WASH",
+        "buyer": "HIGH VELOCITY SUDS LLC"
+      },
+      {
+        "pin": "T009040200105",
+        "street": "Wade Hampton Blvd",
+        "boughtOn": "2018-06-12",
+        "soldOn": "2022-01-25",
+        "heldYears": 3.6,
+        "buyPrice": 3583333,
+        "sellPrice": 2066667,
+        "totalPct": -42.3,
+        "annualPct": -14.2,
+        "seller": "ZIPS 6050 WADE HAMPTON L",
+        "buyer": "HECW 4 INC"
+      },
+      {
+        "pin": "0260000100913",
+        "street": "Halton Rd",
+        "boughtOn": "2008-01-25",
+        "soldOn": "2018-06-18",
+        "heldYears": 10.4,
+        "buyPrice": 675000,
+        "sellPrice": 400000,
+        "totalPct": -40.7,
+        "annualPct": -4.9,
+        "seller": "H&E INNOVATION LLC",
+        "buyer": "FOSTER ERIN K"
+      },
+      {
+        "pin": "B014000200605",
+        "street": "White Horse Rd",
+        "boughtOn": "2008-03-20",
+        "soldOn": "2013-05-24",
+        "heldYears": 5.2,
+        "buyPrice": 1400000,
+        "sellPrice": 830000,
+        "totalPct": -40.7,
+        "annualPct": -9.6,
+        "seller": "DANG LE THUY THI",
+        "buyer": "TF1 PROPERTY LLC"
+      },
+      {
+        "pin": "0173020501203",
+        "street": "State Park Rd",
+        "boughtOn": "2015-05-05",
+        "soldOn": "2023-12-07",
+        "heldYears": 8.6,
+        "buyPrice": 750000,
+        "sellPrice": 450000,
+        "totalPct": -40.0,
+        "annualPct": -5.8,
+        "seller": "NICKS AT CHERRYDALE INC",
+        "buyer": "ST CAPITAL FUND I LLC"
+      },
+      {
+        "pin": "0237020104300",
+        "street": "White Horse Rd",
+        "boughtOn": "2008-05-06",
+        "soldOn": "2016-04-22",
+        "heldYears": 7.9,
+        "buyPrice": 90000,
+        "sellPrice": 54000,
+        "totalPct": -40.0,
+        "annualPct": -6.2,
+        "seller": "MADRID DIEGO",
+        "buyer": "MADRID LUIS FERNANDO"
+      },
+      {
+        "pin": "P015050100100",
+        "street": "Wade Hampton Blvd",
+        "boughtOn": "2018-06-12",
+        "soldOn": "2022-01-25",
+        "heldYears": 3.6,
+        "buyPrice": 3583333,
+        "sellPrice": 2216667,
+        "totalPct": -38.1,
+        "annualPct": -12.5,
+        "seller": "ZIPS 2900 WADE HAMPTON L",
+        "buyer": "HECW 4 INC"
+      },
+      {
+        "pin": "M009010100907",
+        "street": "Bi-Lo Ln",
+        "boughtOn": "2009-03-05",
+        "soldOn": "2014-01-13",
+        "heldYears": 4.8,
+        "buyPrice": 210000,
+        "sellPrice": 130000,
+        "totalPct": -38.1,
+        "annualPct": -9.4,
+        "seller": "SPARROW TECHNOLOGIES INC",
+        "buyer": "THOR PRECISION INC"
+      },
+      {
+        "pin": "0145000701001",
+        "street": "Cedar Lane St",
+        "boughtOn": "2008-09-04",
+        "soldOn": "2010-10-28",
+        "heldYears": 2.1,
+        "buyPrice": 55000,
+        "sellPrice": 35000,
+        "totalPct": -36.4,
+        "annualPct": -19.5,
+        "seller": "PATEL ASHOKKUMAR KANDAS",
+        "buyer": "PATEL ASHOKKUMAR KANDAS"
+      },
+      {
+        "pin": "0485000101003",
+        "street": "Benton Rd",
+        "boughtOn": "2008-01-28",
+        "soldOn": "2017-05-10",
+        "heldYears": 9.3,
+        "buyPrice": 548000,
+        "sellPrice": 350000,
+        "totalPct": -36.1,
+        "annualPct": -4.7,
+        "seller": "SPSM LTD",
+        "buyer": "CHICK-FIL-A INC"
+      },
+      {
+        "pin": "0284000100912",
+        "street": "Pelham Rd",
+        "boughtOn": "2009-04-06",
+        "soldOn": "2015-06-05",
+        "heldYears": 6.2,
+        "buyPrice": 1400000,
+        "sellPrice": 910000,
+        "totalPct": -35.0,
+        "annualPct": -6.7,
+        "seller": "713-715 SAN BRUNO AVENUE",
+        "buyer": "400 PELHAM PARK LLC"
+      },
+      {
+        "pin": "0535030102728",
+        "street": "Suber Dr",
+        "boughtOn": "2022-01-03",
+        "soldOn": "2023-12-08",
+        "heldYears": 1.9,
+        "buyPrice": 1050000,
+        "sellPrice": 700000,
+        "totalPct": -33.3,
+        "annualPct": -19.1,
+        "seller": "VAQUERO GREER PARTNERS L",
+        "buyer": "830 E SUBER LLC"
+      },
+      {
+        "pin": "0534450101800",
+        "street": "Parkway Commons Way",
+        "boughtOn": "2008-08-14",
+        "soldOn": "2010-09-13",
+        "heldYears": 2.1,
+        "buyPrice": 225000,
+        "sellPrice": 150000,
+        "totalPct": -33.3,
+        "annualPct": -17.7,
+        "seller": "28 PARKWAY COMMONS WAY L",
+        "buyer": "S & K LAND CO LLC"
+      },
+      {
+        "pin": "0655030101016",
+        "street": "Hwy 414",
+        "boughtOn": "2021-09-13",
+        "soldOn": "2023-12-27",
+        "heldYears": 2.2,
+        "buyPrice": 959599,
+        "sellPrice": 649000,
+        "totalPct": -32.4,
+        "annualPct": -16.0,
+        "seller": "PROPERTIES OF S&B LLC",
+        "buyer": "ACCL REALTY LLC"
+      }
+    ]
+  }
+}
