@@ -63,15 +63,24 @@ real-estate engine's local grounding and fair-housing care.
 
 ## The pipeline
 
-0. **`pass0_scout.md`** — runs ONLY when the bank has no queued topic. Surveys what is genuinely
-   current and consequential at the tech-and-capital-meets-real-estate intersection in South Carolina
-   (data centers, the grid and energy, fiber, manufacturing and automation, who is buying and why,
-   proptech; roads/water/subdivisions only with a through-line) with web search
-   against primary and local sources, screens candidates against the six bars and the
-   already-covered list, and picks the single best one (with the sharpest honest tension). This is
-   what makes the engine autonomous instead of dependent on Alex refilling the bank. It is
-   deliberately NOT a news feed: a vote is a fine anchor only if the piece would still be worth
-   reading in six months.
+0. **`pass0_scout.md`** — the QUESTION GENERATOR, and the normal path (it runs whenever the bank has
+   no queued topic, which is most runs). **Rewritten August 2026** from a news scout into a
+   curiosity engine, because the old version structurally could not ask the best questions this
+   track has: it required "one concrete change" and a "why now," so a plant running since 1973 was
+   never eligible and every candidate came from an announcement. It now crosses the systems
+   inventory (`scripts/tech/systems.md`) against FIVE QUESTION SHAPES (subtraction, the clock, the
+   dog that didn't bark, magnitude, the full ledger) to generate its own candidates, which is why it
+   never drains: a bank stores answers waiting to be written, a generator stores the procedure that
+   makes them, and one system supports a different question under each shape. THE BAR is Alex's:
+   pick the question where a smart local **has a prior and is simply ignorant**. Two gates keep the
+   generator honest, and both exist because a question generator fails in ways a news scout does not.
+   The FEASIBILITY GATE confirms the sources that would answer the question actually exist before it
+   goes into production, which is what prevents a piece that shrugs "no source quantifies this." The
+   PREMISE GATE verifies any asserted absence ("why is X rare here") against a real number before it
+   becomes a headline. Web search is used for two distinct jobs: prior detection (search the naive
+   question, read the follow-ups people ask, as evidence an assumption is widespread) and
+   feasibility checking (find the primary sources that settle it). It is deliberately NOT a news
+   feed: a vote or filing is a fine anchor, but the question comes first and the news serves it.
 1. **`pass1_researcher.md`** — grounds the change with web search: what is happening and how the
    system works (the mechanism, plainly), the real numbers, what it means for residents/buyers/
    investors, and above all THE HONEST TENSION, each with evidence and marked fundamental or

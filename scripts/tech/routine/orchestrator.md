@@ -60,13 +60,15 @@ you know what is already covered, then:
      topic that is NOT already on the ALREADY COVERED list from STEP 0B. If one exists, that
      is THIS RUN'S topic: copy its full text (the change, the anchor, the stakes, and the
      flagged tension) to /tmp/gw/topic.txt.
-  2. SCOUT PATH (autonomous fallback). If the bank has NO queued topic left that is not
-     already covered, run PASS 0, the scout: read scripts/tech/routine/pass0_scout.md and hand
-     its full contents plus /tmp/gw/done.txt (and the bank's "## proposed" list, if any) to a
-     fresh sub-agent. It finds one worthwhile, current, uncovered South Carolina change and
-     outputs it in the bank-entry shape. Save that to /tmp/gw/topic.txt. If the scout reports
-     that nothing clears the five bars, do NOT proceed: report it and end the run cleanly rather
-     than ship a weak piece.
+  2. SCOUT PATH (autonomous fallback, and the normal path). If the bank has NO queued topic left
+     that is not already covered, run PASS 0, the scout: read scripts/tech/routine/pass0_scout.md
+     AND scripts/tech/systems.md, and hand BOTH files' full contents plus /tmp/gw/done.txt (and
+     the bank's "## proposed" list, if any) to a fresh sub-agent. The scout is a QUESTION
+     generator, not a news scout: it crosses the systems inventory against five question shapes,
+     confirms the question can actually be answered from public sources, and outputs one question
+     plus the researcher-facing fields. Save that to /tmp/gw/topic.txt. If the scout reports that
+     nothing clears the bars and the gates, do NOT proceed: report it and end the run cleanly
+     rather than ship a weak piece.
   Record which path you used and which topic you chose, and report it in STEP 7.
 
 STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never repeat a piece:
