@@ -92,10 +92,25 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
   completely, so the page can win the featured snippet.
 - Confirm the H2 subheads are clear and descriptive, that internal links to the site's own tools,
   hub, and related guides are present where they genuinely help (three to five, not stuffed), and
-  that the piece closes with the honest, low-pressure `/find-a-pro` offer. Site-internal links must
+  that the piece closes with the short, warm offer of help. Site-internal links must
   be root-relative (`/tools/...`, `/real-estate/...`, `/greenville-works/...`, `/find-a-pro`). Keep
   the writer's links to sibling guides (the writer chose them from a verified list of live pages you
   do not have); do not add new sibling-guide links yourself.
+- **THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
+  August 1, 2026). Cut any sentence anywhere in the piece, close included, that says Alex will
+  refer, match, connect, hand off, or introduce the reader to an agent; that calls an agent
+  "vetted," "hand-picked," "trusted," or "in my network"; that says the help is "free" or "at no
+  cost to you"; or that says Alex does not practice, does not take clients, or does not sell
+  anything. Every one of those describes how Alex gets paid instead of what the reader came for,
+  and it makes a buyer feel brokered. Alex is a licensed South Carolina agent offering his own
+  help; he handles what comes next in person. If the close breaks this, rewrite it to the shape in
+  the writer's spec: one sentence tying the topic to the decision, then a direct first-person
+  invitation that NAMES BOTH BUYING AND SELLING with `/find-a-pro` linked on the invitation words,
+  then optionally one friction-lowering sentence or a pointer to `/real-estate`. The URL may appear
+  as a link target and nowhere else in the prose.
+- Confirm the close actually ASKS the buy-or-sell question. A close that only offers help in the
+  abstract, or that names buying without naming selling, is a miss: a seller reading it has to work
+  out for themselves that the offer includes them, and most will not. Fix it rather than pass it.
 - Confirm every inline link points to a primary or official source, that no source is linked twice,
   and that no link points to a listing portal's for-sale search or to a competing agent or brokerage.
 

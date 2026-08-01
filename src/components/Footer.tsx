@@ -32,7 +32,7 @@ export default function Footer() {
             SC Technology
           </Link>
           <Link href="/find-a-pro" className="theme-link text-sm">
-            Find an Agent
+            Buying or Selling
           </Link>
           <Link href="/archive" className="theme-link text-sm">
             Archive

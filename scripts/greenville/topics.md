@@ -121,10 +121,12 @@ A topic without a clean tool fit simply omits the line.
   - target_query: "how to find a real estate agent in Greenville SC"
   - target_slug: `how-to-find-a-real-estate-agent-greenville-sc`
   - Anchor: a genuinely useful buyer/seller guide to vetting an agent (what to ask, how commissions
-    and referrals actually work, red flags), ending honestly at `/find-a-pro`. Why it wins: it is
-    the closest-to-transaction query in the bank, and it maps one-to-one onto the referral offer.
-    Ground it: the real questions to ask, how SC agency and referral fees work, what an agent does
-    and does not do. Not a self-pitch, a real guide that earns the hand-off.
+    actually work, red flags), closing with the same short offer of Alex's help every guide ends on.
+    Why it wins: it is the closest-to-transaction query in the bank. Ground it: the real questions to
+    ask, how SC agency works, what an agent does and does not do. Not a self-pitch, a real guide.
+    NOTE: this is the topic most likely to tempt the writer into explaining Alex's business model,
+    which is banned (see the NEVER EXPLAIN THE BUSINESS MODEL rule in `routine/pass_evergreen.md`).
+    The guide teaches the reader to judge an agent; it never advertises that Alex will supply one.
 
 - **How much house can I afford in Greenville, SC?**
   - target_query: "how much house can I afford in Greenville SC"

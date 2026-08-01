@@ -37,7 +37,7 @@ export default function PublishButton({ id }: { id: string }) {
       >
         {pending ? "Publishing…" : "Publish"}
       </button>
-      {error && <span className="text-xs text-red-600">{error}</span>}
+      {error && <span className="text-xs tone-hot-text">{error}</span>}
     </div>
   );
 }

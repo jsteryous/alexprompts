@@ -31,7 +31,7 @@ export default async function RealEstatePage() {
             Where to live, what it really costs, and how buying here actually works. Every
             guide is grounded in current local data with sources you can check, and every
             figure is dated because prices move. When you are ready for a human in your
-            corner, I connect you with a vetted local agent at no cost.
+            corner, tell me what you are working on and I will help.
           </p>
         </div>
       </section>

@@ -47,8 +47,9 @@ real-estate engine's local grounding and fair-housing care.
   state around them: data centers, the grid and energy, fiber, manufacturing and automation, the
   port, the capital and incentive deals, and proptech, with roads/water/subdivisions only as a
   secondary beat that carries a through-line.
-- **First person, not a guide.** It is an opinionated take, not a how-to resource, though it funnels
-  the same relocation/buyer leads to `/find-a-pro` where the topic touches where to live or buy.
+- **First person, not a guide.** It is an opinionated take, not a how-to resource, though it carries
+  the same one-line buy-or-sell invitation (linked to `/find-a-pro`, never explaining the referral
+  mechanism) where the topic touches where to live or buy.
 
 ## The input (self-sourcing, with an optional steering bank)
 

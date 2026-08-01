@@ -5,7 +5,9 @@ week, not nightly) that runs ONE
 track: an **evergreen local-SEO** engine for the Greenville, SC market. On each scheduled run it
 writes ONE substantial, data-grounded local resource article (a relocation, neighborhood,
 cost-of-living, first-time-buyer, or local-investor guide), publishes it live to `/real-estate`,
-and ends it by pointing relocation and buyer leads to `/find-a-pro`. This is the search
+and ends it with a short, warm offer of Alex's help (linked to `/find-a-pro`; the copy NEVER
+explains that Alex refers or matches leads, and never says he does not practice. See the root
+`CLAUDE.md` strategic-direction note, tightened August 1, 2026). This is the search
 library that actually ranks and compounds on winnable local long-tail queries ("moving to
 Greenville SC neighborhoods," "cost of living in Greenville SC"). Depth over volume: about two to
 three pieces a week, set by the CLOUD SCHEDULE (a few nights, e.g. Mon/Wed/Fri), with an in-code
@@ -44,6 +46,37 @@ with web search (`pass0_scout.md`), so it never runs dry.
   No scraper, no key. Powers the `/tools/buyers-list` (buyer/LLC, price, date, address). Output
   goes to **`src/data/commercialSales.json`** (the Next app imports it), so the page is
   statically generated. Pure functions unit-tested in `tests/test_commercial.py`.
+  **July 2026 validity fix:** it used to filter on price alone, so about 6% of the rows on the
+  live page were quitclaims, intercompany transfers, family transfers, and multi-parcel deeds
+  (where the recorded price covers OTHER property, so the per-parcel price shown was simply
+  wrong) presented as market sales. It now reads the county's `TRUESALE` + `SALETYPE` flags and
+  drops anything flagged non-market (`is_market_sale()`, `NON_MARKET_SALE_TYPES`). **Critical
+  subtlety: the assessor reviews sales on a ~2-YEAR lag, so a blank `TRUESALE` means "not
+  reviewed yet", not "bad".** Blanks are 100% of the last two years and ~0% before, so treating
+  blank as invalid would empty the page. Each row carries `validated` (true only when the county
+  confirmed it) so the tool can be honest about which prices are confirmed; the dataset carries
+  `excluded_non_market` + `validated_count`.
+- **`records.py`** — a third DATA collector (NOT part of the content routine, added July 2026),
+  and the only one that ANALYZES rather than reports. Pulls the county's whole commercial deed
+  history (~12.4k rows, 2008 to now, no price floor) from the same ArcGIS layer and looks for
+  patterns no single sale shows, which is the part of this dataset nobody else in the market
+  publishes. Three findings, all **immune to the ~4-month recording lag** because they measure
+  multi-year patterns: (a) **parcel assembly**, one entity acquiring adjacent parcels over time,
+  which front-runs development instead of reporting it; (b) **countywide portfolios**, one entity
+  accumulating parcels anywhere in the county, which is the who-is-buying-with-whose-capital
+  question; (c) a **repeat-sale index**, actual appreciation on the SAME parcel sold twice, which
+  yields the number no local source reports: the share of commercial resales that LOST money.
+  Output goes to **`src/data/greenvilleRecords.json`**. Nothing on the site imports it; it is a
+  research input for picking a story. Pure functions unit-tested in `tests/test_records.py`.
+  **The honesty constraints are the whole design, so do not relax them:** the index uses
+  VALIDATED pairs only and therefore necessarily ends ~2 years back (allowing unreviewed sales
+  reaches the present but contaminates badly, spot-checking the resulting "90% losses" found
+  lender takebacks and $5 nominal transfers); pairs where the parcel was built on between sales
+  are dropped because that gain is construction, not the market; a single multi-parcel closing is
+  not assembly, so 2+ distinct dates and a 6-month span are required; and entity grouping is
+  deliberately CONSERVATIVE because the county truncates buyer names at 24 characters, so every
+  position reported is a FLOOR. `possible_merges` lists likely same-owner name groups for a human
+  to confirm, because publishing a wrong owner name is far worse than undercounting.
 - **`housing.py`** — a second DATA collector (NOT part of the content routine, live since July
   2026), and now the **only** dataset the Upstate Brief reads. County deed records lag ~4 months, so
   the Brief's old "what sold" premise could not carry the weekly read; this pulls the
@@ -79,6 +112,13 @@ python -m greenville.commercial --min-price 1000000 --months 24 \
 python -m greenville.commercial --from-json snapshot.json             # replay, no network
 python -m unittest scripts.tests.test_commercial -v
 
+# deed-record findings (assembly + portfolios + repeat-sale index) — analysis, not reporting
+python -m greenville.records                                          # print findings
+python -m greenville.records --json-out ../src/data/greenvilleRecords.json
+python -m greenville.records --min-parcels 4 --radius-km 0.5          # tighter assembly test
+python -m greenville.records --from-json snapshot.json                # replay, no network
+python -m unittest scripts.tests.test_records -v
+
 # residential pulse (Zillow ZHVI + ZORI + vitals + ZIP submarkets) — the Brief's only dataset
 python -m greenville.housing                                          # print a summary
 python -m greenville.housing --json-out ../src/data/greenvilleHousing.json  # refresh the dataset
@@ -103,6 +143,11 @@ python -m greenville.collect --limit 15
   no-ops (the commit step skips when nothing changed); the point is to be fresh before the Monday
   Upstate Brief drafts. **Live since July 2026.** Its timeout is 20 minutes because the July 27,
   2026 submarket addition pulls four more national ZIP-level CSVs (~50MB total).
+- **`.github/workflows/collect-records.yml`** (WEEKLY Sun 22:30 UTC, half an hour after the other
+  two so the pushes do not race) runs `greenville.records` and commits
+  `src/data/greenvilleRecords.json`. No secrets (same public county ArcGIS service). Nothing on
+  the site imports this file, so a refresh can never break a page; it feeds story selection.
+  Weekly is generous given the findings are multi-year patterns. **Live since July 2026.**
 - **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
   the cover library from Wikimedia Commons and opens a PR with the new photos. Runs **FREE by
   default** (`--no-vision`, no key needed); the human PR review is the quality gate. Set the

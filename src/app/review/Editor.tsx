@@ -431,33 +431,34 @@ export default function Editor({
 
   return (
     <>
-      {/* Sticky header: back, state, actions. Kept slim, Substack-style. */}
-      <div className="sticky top-0 z-20 h-14 bg-white/95 backdrop-blur border-b border-gray-200 px-4 md:px-6 flex items-center justify-between gap-4">
+      {/* Sticky header: back, state, actions. Kept slim, Substack-style.
+          All colors come from the `.theme-*` tokens: the editor renders outside
+          Nav/Footer and used to hardcode white + Tailwind grays, so it ignored
+          the site's dark toggle entirely (fixed August 1, 2026). */}
+      <div className="sticky top-0 z-20 h-14 theme-header border-b theme-border px-4 md:px-6 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <Link
             href={backHref}
-            className="text-sm text-gray-500 hover:text-black shrink-0 inline-flex items-center gap-1"
+            className="theme-link text-sm shrink-0 inline-flex items-center gap-1"
           >
             ← Drafts
           </Link>
           <span
             className={`text-xs px-2 py-0.5 rounded font-medium uppercase shrink-0 ${
-              status === "PUBLISHED"
-                ? "bg-green-50 text-green-700"
-                : "bg-amber-50 text-amber-700"
+              status === "PUBLISHED" ? "tone-good" : "tone-warm"
             }`}
           >
             {status}
           </span>
           <span
-            className={`text-xs shrink-0 ${dirty && !saving ? "text-amber-600 font-medium" : "text-gray-400"}`}
+            className={`text-xs shrink-0 ${dirty && !saving ? "tone-warm-text font-medium" : "theme-text-muted"}`}
           >
             {saveState}
           </span>
           {message && (
             <span
               className={`text-xs font-medium truncate ${
-                message.kind === "ok" ? "text-green-700" : "text-red-600"
+                message.kind === "ok" ? "tone-good-text" : "tone-hot-text"
               }`}
             >
               {message.text}
@@ -465,14 +466,14 @@ export default function Editor({
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <span className="hidden md:inline text-xs text-gray-400 pr-2">
+          <span className="hidden md:inline text-xs theme-text-muted pr-2">
             {words.toLocaleString()} words
           </span>
           <button
             type="button"
             onClick={save}
             disabled={!dirty || saving}
-            className="text-sm font-medium text-gray-600 hover:text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="text-sm font-medium theme-text-secondary hover:text-[var(--foreground)] px-3 py-2 rounded-lg hover:bg-[var(--surface-muted)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {saving ? "Saving…" : "Save"}
           </button>
@@ -489,7 +490,7 @@ export default function Editor({
           ) : (
             <a
               href={livePath ?? backHref}
-              className="inline-flex items-center gap-2 bg-black text-white font-semibold text-sm px-4 md:px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+              className="theme-cta inline-flex items-center gap-2 font-semibold text-sm px-4 md:px-5 py-2 rounded-lg transition-colors"
             >
               View →
             </a>
@@ -505,7 +506,7 @@ export default function Editor({
             <figure>
               <div
                 className={`relative group rounded-xl overflow-hidden border transition-colors ${
-                  coverDrag ? "border-indigo-500 border-2" : "border-gray-200"
+                  coverDrag ? "border-[var(--accent)] border-2" : "theme-border"
                 }`}
                 onDragOver={(e) => {
                   e.preventDefault();
@@ -531,13 +532,13 @@ export default function Editor({
                   {displayCover.custom && <CoverBtn label="Remove" onClick={resetCover} />}
                 </div>
                 {coverUploading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/60 text-sm font-medium text-gray-700">
+                  <div className="absolute inset-0 flex items-center justify-center bg-[var(--background)]/60 text-sm font-medium theme-text-secondary">
                     Uploading…
                   </div>
                 )}
               </div>
               <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
-                <span className="text-xs text-gray-400">
+                <span className="text-xs theme-text-muted">
                   {displayCover.custom
                     ? "Your cover. Publishes exactly as shown."
                     : `${libraryCover?.label ?? "Auto cover"}. Drop or upload a photo to use your own.`}
@@ -546,14 +547,14 @@ export default function Editor({
                   <button
                     type="button"
                     onClick={() => coverFileRef.current?.click()}
-                    className="text-gray-500 hover:text-black underline underline-offset-2"
+                    className="theme-link underline underline-offset-2"
                   >
                     Change
                   </button>
                   <button
                     type="button"
                     onClick={coverFromUrl}
-                    className="text-gray-500 hover:text-black underline underline-offset-2"
+                    className="theme-link underline underline-offset-2"
                   >
                     URL
                   </button>
@@ -561,7 +562,7 @@ export default function Editor({
                     <button
                       type="button"
                       onClick={resetCover}
-                      className="text-gray-500 hover:text-red-600 underline underline-offset-2"
+                      className="theme-text-muted hover:text-[var(--tone-hot-fg)] underline underline-offset-2"
                     >
                       Remove
                     </button>
@@ -574,11 +575,11 @@ export default function Editor({
                   value={coverCredit ?? ""}
                   onChange={(e) => setCoverCredit(e.target.value || null)}
                   placeholder="Photo credit (optional, shows under the hero)"
-                  className="mt-1 w-full text-xs text-gray-500 bg-transparent border-b border-transparent focus:border-gray-300 focus:outline-none py-1 placeholder-gray-300"
+                  className="mt-1 w-full text-xs theme-text-muted bg-transparent border-b border-transparent focus:border-[var(--border-strong)] focus:outline-none py-1 placeholder-[var(--foreground-muted)]"
                 />
               ) : (
                 displayCover.credit && (
-                  <p className="mt-1 text-xs text-gray-400">{displayCover.credit}</p>
+                  <p className="mt-1 text-xs theme-text-muted">{displayCover.credit}</p>
                 )
               )}
             </figure>
@@ -595,8 +596,8 @@ export default function Editor({
               disabled={coverUploading}
               className={`w-full aspect-[4/1] rounded-xl border-2 border-dashed flex items-center justify-center text-sm transition-colors ${
                 coverDrag
-                  ? "border-indigo-500 text-indigo-600 bg-indigo-50"
-                  : "border-gray-200 text-gray-400 hover:border-gray-400 hover:text-gray-600"
+                  ? "border-[var(--accent)] text-[var(--accent)] bg-[var(--accent-soft)]"
+                  : "theme-border theme-text-muted hover:border-[var(--border-strong)] hover:text-[var(--foreground-soft)]"
               }`}
             >
               {coverUploading ? "Uploading…" : "＋ Add a cover photo (click or drop an image)"}
@@ -623,7 +624,7 @@ export default function Editor({
           onChange={(e) => setTitle(e.target.value.replace(/\n/g, " "))}
           placeholder="Title"
           spellCheck
-          className="w-full resize-none overflow-hidden bg-transparent text-3xl md:text-4xl font-bold tracking-tight text-black placeholder-gray-300 focus:outline-none"
+          className="w-full resize-none overflow-hidden bg-transparent text-3xl md:text-4xl font-bold tracking-tight theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none"
         />
         <textarea
           ref={summaryRef}
@@ -632,19 +633,21 @@ export default function Editor({
           onChange={(e) => setSummary(e.target.value.replace(/\n/g, " "))}
           placeholder="Add a subtitle…"
           spellCheck
-          className="mt-3 w-full resize-none overflow-hidden bg-transparent text-lg md:text-xl text-gray-500 placeholder-gray-300 focus:outline-none"
+          className="mt-3 w-full resize-none overflow-hidden bg-transparent text-lg md:text-xl theme-text-muted placeholder-[var(--foreground-muted)] focus:outline-none"
         />
 
         {/* ── Write | Preview + formatting toolbar ─────────────────────────── */}
-        <div className="sticky top-14 z-10 mt-6 -mx-4 md:-mx-6 px-4 md:px-6 py-1.5 bg-white/95 backdrop-blur border-b border-gray-100 flex flex-wrap items-center gap-1">
-          <div className="inline-flex rounded-full bg-gray-100 p-0.5 mr-2">
+        <div className="sticky top-14 z-10 mt-6 -mx-4 md:-mx-6 px-4 md:px-6 py-1.5 theme-header border-b theme-border flex flex-wrap items-center gap-1">
+          <div className="inline-flex rounded-full bg-[var(--surface-muted)] p-0.5 mr-2">
             {(["write", "preview"] as const).map((m) => (
               <button
                 key={m}
                 type="button"
                 onClick={() => setMode(m)}
                 className={`px-3 py-1 text-xs font-semibold rounded-full capitalize transition-colors ${
-                  mode === m ? "bg-white text-black shadow-sm" : "text-gray-500 hover:text-black"
+                  mode === m
+                    ? "bg-[var(--surface-strong)] theme-text-primary shadow-sm"
+                    : "theme-link"
                 }`}
               >
                 {m}
@@ -702,14 +705,16 @@ export default function Editor({
             onDragLeave={() => setDragOver(false)}
             placeholder="Write in markdown. Paste or drop an image right in."
             spellCheck
-            className={`mt-6 w-full min-h-[55vh] resize-none overflow-hidden bg-transparent text-[17px] leading-relaxed text-gray-800 placeholder-gray-300 focus:outline-none rounded-lg ${
-              dragOver ? "ring-2 ring-indigo-400" : ""
+            className={`mt-6 w-full min-h-[55vh] resize-none overflow-hidden bg-transparent text-[17px] leading-relaxed theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none rounded-lg ${
+              dragOver ? "ring-2 ring-[var(--accent)]" : ""
             }`}
           />
         ) : (
           <article className="mt-8">
+            {/* theme-prose is what makes the preview readable in dark mode; the
+                bare `prose prose-neutral` it used to carry is hardcoded dark ink. */}
             <div
-              className="prose prose-neutral max-w-none"
+              className="prose theme-prose max-w-none"
               dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           </article>
@@ -733,7 +738,7 @@ function CoverBtn({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="bg-white/95 text-sm font-medium text-gray-800 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-colors disabled:opacity-60"
+      className="bg-[var(--surface-strong)] theme-text-primary text-sm font-medium px-3.5 py-1.5 rounded-full shadow-sm transition-colors disabled:opacity-60"
     >
       {label}
     </button>
@@ -763,7 +768,7 @@ function ToolBtn({
       title={title}
       onClick={onClick}
       disabled={disabled}
-      className={`h-8 ${wide ? "px-2.5" : "w-8"} inline-flex items-center justify-center text-sm text-gray-600 rounded-md hover:bg-gray-100 hover:text-black transition-colors disabled:opacity-40 ${
+      className={`h-8 ${wide ? "px-2.5" : "w-8"} inline-flex items-center justify-center text-sm theme-text-secondary rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] transition-colors disabled:opacity-40 ${
         bold ? "font-bold" : ""
       } ${italic ? "italic font-serif" : ""}`}
     >
@@ -773,5 +778,5 @@ function ToolBtn({
 }
 
 function Divider() {
-  return <span className="w-px h-5 bg-gray-200 mx-1" aria-hidden />;
+  return <span className="w-px h-5 bg-[var(--border-strong)] mx-1" aria-hidden />;
 }

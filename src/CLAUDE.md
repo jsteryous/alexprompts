@@ -83,11 +83,32 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   since the brief never goes to Substack). All four `[slug]`
   pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
   `BreadcrumbList` JSON-LD), differing only in the `section` prop and the post `type` they
-  request. The `section` prop carries an opt-in `showReferralCta` flag; the `/real-estate`
-  route sets it so every real-estate article renders the `ReferralCta` block (links to
-  `/find-a-pro#connect`) after the body and BEFORE the newsletter box, since on a
-  referral-first site the buy/sell offer outranks audience growth. `/archive` and
-  `/greenville-works` leave it off. Canonical is self-referential per section. `/real-estate` holds the Greenville
+  request. The `section` prop carries an opt-in `showReferralCta` flag; **`/real-estate` and
+  `/briefing` both set it** (both are written for buyers and sellers, the audience the referral
+  funnel serves). `/archive` and `/greenville-works` leave it off, since their readers came for
+  something else. **The CTA renders TWICE** (July 30, 2026): once mid-article and once after the
+  body and BEFORE the newsletter box, since on a referral-first site the buy/sell offer outranks
+  audience growth. The mid-article placement exists because the July 27 brief drew 11 visits with
+  its only offer sitting below the whole article, where a skimmer never reaches it.
+  `src/lib/articleCta.ts` `splitAtMidHeading()` picks the cut: the `<h2>` nearest the body's
+  midpoint, never the first (an offer above the value reads as an ad) and never the last (it
+  would collide with the closing block), returning null on short or flat articles so they render
+  in one piece with the closing CTA alone. **Deliberately no top-of-article CTA** — on editorial
+  content an offer above the first paragraph costs trust. The two placements use different
+  `ReferralCta` variants: `inline` (accent-tinted via `theme-card-accent`, built to interrupt a
+  skim) and `full` (the roomier closing block). **The copy is deliberately short and warm**
+  ("Thinking of making a move?" / "Let me know if you're thinking about selling, or if you're
+  looking to buy!"), shared verbatim with the email CTA in `emailTemplates.ts` `referralBlock()`
+  so the two never drift. It is an invitation, not an explanation; do not grow it back into a
+  paragraph, and **never explain the business model in it** — no referring, matching, connecting,
+  or introducing the reader to an agent, no "vetted"/"hand-picked" anyone, no "at no cost to you",
+  and no "I do not practice" / "I do not take clients" (see the root `CLAUDE.md` note, which was
+  extended to the whole mechanism August 1, 2026). **This CTA is the one deliberate exception to the site's
+  uncontracted-copy rule**: Alex wrote the contractions himself and confirmed them July 30, 2026,
+  because the block had been reading like a legal disclaimer. Do not "fix" them. Button copy is
+  **"Get in touch"** (Alex rejected "Tell me about your situation" as clinical). Keep the tag condition in
+  `src/lib/broadcast.ts` in sync with these section props, since the owned-list email mirrors the
+  same policy. Canonical is self-referential per section. `/real-estate` holds the Greenville
   posts the `scripts/greenville` routine creates; `/greenville-works` holds the local-change
   deep-dives the `scripts/tech` routine creates. Both engines **auto-publish live** (status
   `PUBLISHED`, with a verify email for after-the-fact spot-check + unpublish at `/review`; a run
@@ -123,6 +144,19 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   upload/drop/URL his own photo (stored in `cover_image` + optional `cover_credit` via
   `/api/review/save`, which `/api/publish` and the finalize cron both respect and never
   overwrite), edit the credit line, or remove it to fall back to the library.
+  **DARK MODE (fixed August 1, 2026).** These routes render outside `Nav`/`Footer`, and every one
+  of them had hardcoded `bg-white` / `bg-gray-50` / `text-gray-*` / `text-black`, so `/admin`, the
+  login screen, `/admin/edit/[id]`, `/review`, and the shared `Editor` all stayed white when the
+  site's `DarkModeToggle` flipped `html.dark`. (The toggle itself was never broken: it lives in the
+  root layout and DOES render on these routes, unlike Nav and Footer.) They now use the same
+  `.theme-*` tokens as the rest of the site, plus `hover:*-[var(--token)]` arbitrary values where a
+  hover state needed a token Tailwind cannot reach through a plain CSS class, and `tone-*` for the
+  DRAFT/PUBLISHED chips and error text. The editor preview switched from `prose prose-neutral`
+  (hardcoded dark ink, unreadable on a dark page) to `prose theme-prose`. **Do not add a raw
+  Tailwind gray or `bg-white` back to these files** — if a surface needs a color, it comes from a
+  token. Two hardcoded colors are deliberate and stay: the green Publish button (a deliberate
+  affordance, legible in both themes) and the `bg-black/35` hover scrim over the cover photo (a
+  scrim over a photo is black in both themes).
 - **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
   It is auto-injected on the root/static pages but is **NOT inherited by the
   `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`

@@ -4,6 +4,7 @@ import { renderPostHtml } from "@/lib/renderMarkdown";
 import { coverImageFromBody, formatDate, sectionOf, type FullPost } from "@/lib/posts";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { ReferralCta } from "@/components/ReferralCta";
+import { splitAtMidHeading } from "@/lib/articleCta";
 import { PostCover } from "@/components/PostCover";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
@@ -13,8 +14,10 @@ export interface ArticleSection {
   /** Section-specific line for the footer subscribe box. Falls back to the
    *  general Claude blurb when omitted. */
   blurb?: string;
-  /** Show the in-article referral CTA (links to /find-a-pro). On for the
-   *  high-intent /real-estate section, where a reader is the best referral lead. */
+  /** Show the buy/sell CTA (links to /find-a-pro), both mid-article and at the
+   *  close. On for the sections whose readers are buyers and sellers:
+   *  /real-estate and /briefing. Off for /archive and /greenville-works, whose
+   *  readers came for something else. */
   showReferralCta?: boolean;
 }
 
@@ -32,6 +35,9 @@ export default async function ArticleView({
 }) {
   // Shared markdown -> sanitized HTML pipeline (also used by the /admin preview).
   const bodyHtml = await renderPostHtml(post.body_md ?? "");
+  // Sections that carry the buy/sell offer get it mid-article too, not only at
+  // the end, so a skimmer cannot miss it. Null on short or flat pieces.
+  const midSplit = section.showReferralCta ? splitAtMidHeading(bodyHtml) : null;
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
@@ -130,7 +136,27 @@ export default async function ArticleView({
               )}
             </figure>
           )}
-          <div className="theme-prose prose max-w-none" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+          {/* Two placements, because one below the fold was missable (see
+              lib/articleCta.ts). The mid-body box catches the skimmer; the
+              closing box catches the finisher. splitAtMidHeading returns null on
+              short or flat articles, and then the body renders in one piece. */}
+          {midSplit ? (
+            <>
+              <div
+                className="theme-prose prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: midSplit.before }}
+              />
+              <div className="my-12">
+                <ReferralCta slug={post.slug} variant="inline" />
+              </div>
+              <div
+                className="theme-prose prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: midSplit.after }}
+              />
+            </>
+          ) : (
+            <div className="theme-prose prose max-w-none" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+          )}
 
           {/* The referral CTA comes BEFORE the newsletter box on purpose: on a
               referral-first site, the buy/sell offer outranks audience growth. */}

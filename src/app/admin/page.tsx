@@ -55,7 +55,7 @@ export default async function AdminPage() {
   if (posts === null) {
     return (
       <Shell>
-        <p className="text-sm text-red-600">
+        <p className="text-sm tone-hot-text">
           Supabase is not configured on the server (missing URL or service key).
         </p>
       </Shell>
@@ -68,11 +68,11 @@ export default async function AdminPage() {
   return (
     <Shell>
       <section className="mb-12">
-        <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-4">
+        <h2 className="text-sm font-semibold uppercase tracking-widest theme-text-muted mb-4">
           Drafts awaiting review ({drafts.length})
         </h2>
         {drafts.length === 0 ? (
-          <p className="text-sm text-gray-400">
+          <p className="text-sm theme-text-muted">
             Nothing waiting. The engines will drop new drafts here as they run.
           </p>
         ) : (
@@ -85,11 +85,11 @@ export default async function AdminPage() {
       </section>
 
       <section>
-        <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-4">
+        <h2 className="text-sm font-semibold uppercase tracking-widest theme-text-muted mb-4">
           Recently published
         </h2>
         {published.length === 0 ? (
-          <p className="text-sm text-gray-400">No published posts yet.</p>
+          <p className="text-sm theme-text-muted">No published posts yet.</p>
         ) : (
           <ul className="space-y-3">
             {published.map((p) => (
@@ -109,23 +109,23 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
   const date = formatDate(draft ? post.created_at : post.published_at);
 
   return (
-    <li className="bg-white border border-gray-200 rounded-xl p-4 flex items-start justify-between gap-4">
+    <li className="theme-card-strong border theme-border rounded-xl p-4 flex items-start justify-between gap-4">
       <div className="min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
+          <span className="theme-card-muted theme-text-muted text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded">
             {SECTION_LABEL[section]}
           </span>
-          <span className="text-xs text-gray-400">{date}</span>
+          <span className="text-xs theme-text-muted">{date}</span>
         </div>
-        <p className="text-sm font-semibold text-black truncate">
+        <p className="text-sm font-semibold theme-text-primary truncate">
           {post.title ?? "(untitled)"}
         </p>
-        <p className="text-xs text-gray-400 truncate">{post.slug}</p>
+        <p className="text-xs theme-text-muted truncate">{post.slug}</p>
       </div>
       <div className="flex items-center gap-2 shrink-0">
         <Link
           href={`/admin/edit/${post.id}`}
-          className="text-sm font-medium text-gray-700 border border-gray-200 px-4 py-2 rounded-lg hover:border-black transition-colors"
+          className="text-sm font-medium theme-text-secondary border theme-border px-4 py-2 rounded-lg hover:border-[var(--border-strong)] transition-colors"
         >
           Edit
         </Link>
@@ -137,7 +137,7 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
         ) : (
           <a
             href={live}
-            className="text-sm font-medium text-gray-700 border border-gray-200 px-4 py-2 rounded-lg hover:border-black transition-colors"
+            className="text-sm font-medium theme-text-secondary border theme-border px-4 py-2 rounded-lg hover:border-[var(--border-strong)] transition-colors"
           >
             View
           </a>
@@ -147,15 +147,22 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
   );
 }
 
+/**
+ * The admin chrome. Every color here comes from the `.theme-*` tokens rather
+ * than a Tailwind gray, because /admin sits outside Nav and Footer and used to
+ * hardcode `bg-gray-50` + `bg-white`. That made the page stay white when the
+ * site's dark toggle flipped `html.dark`, which is the one place the design
+ * system was not actually driving the design (fixed August 1, 2026).
+ */
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-widest text-green-600">
+    <div className="min-h-screen">
+      <div className="sticky top-0 z-10 theme-header border-b theme-border px-6 py-3 flex items-center justify-between">
+        <span className="theme-label text-xs font-semibold uppercase tracking-widest">
           Alex Prompts · Admin
         </span>
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-sm text-gray-500 hover:text-black">
+          <Link href="/" className="theme-link text-sm">
             ← Site
           </Link>
           <LogoutButton />

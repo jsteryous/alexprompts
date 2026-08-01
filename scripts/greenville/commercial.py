@@ -20,6 +20,14 @@ SALEPRICE (real integer), SALEDATE (epoch ms), STREET/STRPRE/STRTYP/STRSUF
 PROPTYPE, DEEDBOOK/DEEDPAGE (link back to the Register of Deeds), geometry
 (point; we request outSR=4326 so it comes back as lon/lat). maxRecordCount 5000.
 
+TRUESALE + SALETYPE are the validity flags, added July 2026 after an audit found
+the tool was publishing quitclaims, intercompany transfers, and multi-parcel deeds
+as if they were market sales (about 6% of rows). We now drop anything the county
+flags as non-market. Note the assessor reviews sales on a ~2-YEAR lag, so a blank
+TRUESALE means "not reviewed yet", not "bad"; every row from the last two years is
+blank, and treating blank as bad would empty the page. Each record carries
+`validated` so the page can be honest about which prices are confirmed.
+
 The output JSON is committed and read by the site tool at /tools/buyers-list.
 Same posture as the news collectors: pure helpers are unit-tested, every network
 call degrades gracefully (log + return empty, never raise), no secrets needed.
@@ -57,11 +65,32 @@ QUERY_URL = (
 OUT_FIELDS = [
     "PIN", "STREET", "STRPRE", "STRTYP", "STRSUF", "PROPTYPE", "LANDUSE",
     "SALEDATE", "SALEPRICE", "PURNAME", "SELLNAME", "DEEDBOOK", "DEEDPAGE",
-    "LOTSIZE", "SQFEET",
+    "LOTSIZE", "SQFEET", "TRUESALE", "SALETYPE",
 ]
 
 PAGE_SIZE = 1000          # well under the server's 5000 maxRecordCount
 MAX_RECORDS = 8000        # safety cap so a bad filter can never run away
+
+# Sale types where the recorded price is NOT this parcel's market price. Publishing
+# these as "sales" is wrong: a quitclaim or a family transfer carries a nominal
+# price, an intercompany transfer moves title without a market test, and a
+# "SALE DOES NOT MATCH" deed covers other property too, so the price shown against
+# this one parcel is really the total for several.
+NON_MARKET_SALE_TYPES = frozenset({
+    "QUITCLAIM",
+    "FAMILY TRANSFER",
+    "GIFT",
+    "LOVE AND AFFECTION",
+    "DEED OF DISTRIBUTION",
+    "PARTIAL INTEREST",
+    "CORRECTIVE DEED",
+    "INTERCOMPANY TRANSFER",
+    "MASTERS DEED AND ALL BANK FORCLOSURES",
+    "TAX SALE DEED",
+    "CONDEMNATION OR GOVERNMENTAL PURCHASE",
+    "EXCHANGE OF PROPERTY",
+    "SALE DOES NOT MATCH (MORE THAN ONE PROPERTY TRANSFERED OR MH IN DEED)",
+})
 
 
 # ── Pure helpers (side-effect free, unit-test friendly) ───────────────────────
@@ -116,15 +145,34 @@ def street_label(attrs: dict) -> str:
     return joined.title() if joined else ""
 
 
+def is_market_sale(attrs: dict) -> bool:
+    """True when the county has not told us this transfer is non-market.
+
+    Two independent signals, and we honor both:
+      TRUESALE ("Valid Sale") is the assessor's own verdict. 'NO' means reviewed
+      and rejected as a market sale. Blank means NOT YET REVIEWED, which is every
+      sale from roughly the last two years, so blank must NOT be treated as bad or
+      the tool would show nothing recent.
+      SALETYPE names the instrument. Some types are never a market price for this
+      parcel regardless of whether a human has reviewed the row yet.
+    """
+    if _clean(attrs.get("TRUESALE")).upper() == "NO":
+        return False
+    return _clean(attrs.get("SALETYPE")).upper() not in NON_MARKET_SALE_TYPES
+
+
 def parse_feature(feature: dict) -> dict | None:
     """One ArcGIS feature -> one lean sale record. None if it lacks the basics
-    (a buyer and a price), so junk rows never reach the site."""
+    (a buyer and a price) or if the county flags it as a non-market transfer, so
+    junk rows never reach the site."""
     attrs = feature.get("attributes") or {}
     geom = feature.get("geometry") or {}
 
     buyer = _clean(attrs.get("PURNAME"))
     price = attrs.get("SALEPRICE")
     if not buyer or not price:
+        return None
+    if not is_market_sale(attrs):
         return None
 
     lng = geom.get("x")
@@ -143,6 +191,10 @@ def parse_feature(feature: dict) -> dict | None:
         "deedPage": attrs.get("DEEDPAGE") or None,
         "lotSize": attrs.get("LOTSIZE") or None,
         "sqft": attrs.get("SQFEET") or None,
+        # The assessor confirms sales on a ~2-year lag, so most recent rows are
+        # "unreviewed" rather than confirmed. Surfaced so the page can say so.
+        "validated": _clean(attrs.get("TRUESALE")).upper() == "YES",
+        "saleType": _clean(attrs.get("SALETYPE")) or None,
         "lat": round(lat, 6) if isinstance(lat, (int, float)) else None,
         "lng": round(lng, 6) if isinstance(lng, (int, float)) else None,
     }
@@ -188,11 +240,12 @@ def _get_json(url: str) -> dict | None:
         return None
 
 
-def fetch_all(min_price: int, months: int) -> list[dict]:
+def fetch_all(min_price: int, months: int) -> tuple[list[dict], int]:
     """Page through the Commercial layer for recent sales >= min_price.
 
-    Stops when a page returns nothing, the transfer limit is not exceeded, or the
-    safety cap is hit. Returns [] on any failure (never raises)."""
+    Returns (sales, excluded_non_market). Stops when a page returns nothing, the
+    transfer limit is not exceeded, or the safety cap is hit. Returns ([], 0) on
+    any failure (never raises)."""
     where = build_where(min_price, cutoff_date(months))
     collected: list[dict] = []
     offset = 0
@@ -207,12 +260,20 @@ def fetch_all(min_price: int, months: int) -> list[dict]:
         if not data.get("exceededTransferLimit"):
             break
         offset += PAGE_SIZE
-    return parse_features(collected)
+
+    excluded = sum(
+        1 for f in collected if not is_market_sale(f.get("attributes") or {})
+    )
+    if excluded:
+        log.info("Excluded %d county-flagged non-market transfers", excluded)
+    return parse_features(collected), excluded
 
 
 # ── Dataset assembly + serialization ──────────────────────────────────────────
 
-def build_dataset(sales: list[dict], min_price: int, months: int) -> dict:
+def build_dataset(
+    sales: list[dict], min_price: int, months: int, excluded_non_market: int = 0
+) -> dict:
     """The committed JSON shape the site reads."""
     ordered = sort_sales(sales)
     return {
@@ -222,6 +283,8 @@ def build_dataset(sales: list[dict], min_price: int, months: int) -> dict:
         "min_price": min_price,
         "months": months,
         "count": len(ordered),
+        "excluded_non_market": excluded_non_market,
+        "validated_count": sum(1 for s in ordered if s.get("validated")),
         "sales": ordered,
     }
 
@@ -238,7 +301,9 @@ def render_summary(dataset: dict, limit: int = 15) -> str:
         "GREENVILLE COUNTY COMMERCIAL SALES",
         f"Collected {dataset.get('generated_at')}",
         f"Filter: price >= ${dataset.get('min_price'):,}, last {dataset.get('months')} months",
-        f"Found {dataset.get('count')} sales.",
+        f"Found {dataset.get('count')} sales "
+        f"({dataset.get('validated_count', 0)} assessor-confirmed, the rest not yet "
+        f"reviewed; {dataset.get('excluded_non_market', 0)} non-market transfers excluded).",
         "",
         f"MOST RECENT (top {min(limit, len(sales))}):",
     ]
@@ -270,8 +335,8 @@ def main() -> int:
         from pathlib import Path
         dataset = json.loads(Path(args.from_json).read_text(encoding="utf-8"))
     else:
-        sales = fetch_all(args.min_price, args.months)
-        dataset = build_dataset(sales, args.min_price, args.months)
+        sales, excluded = fetch_all(args.min_price, args.months)
+        dataset = build_dataset(sales, args.min_price, args.months, excluded)
 
     if args.json_out:
         from pathlib import Path

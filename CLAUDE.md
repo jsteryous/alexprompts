@@ -15,7 +15,22 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
 > site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
 > vetted agents for a referral fee** (`/find-a-pro`). Alex is a licensed SC agent who does
-> not practice, so he captures the intent and hands it off. This SUPERSEDES the earlier
+> not practice, so he captures the intent and hands it off. **THE ENTIRE MECHANISM IS INTERNAL
+> CONTEXT. It never appears in user-facing copy, on the site or in an article** (finished August 1,
+> 2026, extending the July 30 removal of "I do not practice"). Nothing anywhere may say Alex will
+> refer, match, connect, hand off, or introduce the reader to an agent; may call an agent "vetted,"
+> "hand-picked," "trusted," or "in my network"; may say the help is "free" or "at no cost to you";
+> or may say he does not practice or does not take clients. Two different failures, one cause:
+> "I do not practice" disqualifies Alex at the exact moment the reader is deciding whether he can
+> help, and "I will connect you with a vetted agent" makes the reader feel brokered before they have
+> said hello. Both describe how Alex gets paid instead of what the reader came for.
+> **The site's job is to earn a conversation with a qualified buyer or seller. Alex handles the
+> introduction himself, in that conversation, once he knows what they need.** State what he IS
+> ("licensed real estate agent in South Carolina"), keep the buy/sell invitation short and warm
+> ("let me know if you are looking to buy or thinking of selling"), and let the one-line licensee
+> disclosure in the `/find-a-pro` fine print be the only mention of a fee anywhere. The three
+> engines carry this as a NEVER EXPLAIN THE BUSINESS MODEL rule in their writer passes and as a
+> hard cut-gate in their editor passes. This SUPERSEDES the earlier
 > "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
 > benefit**, not the driver. The `/about` page still works as a hiring-manager front door if
 > Alex happens to share the site on a job board, but the site is no longer built *for* hiring
@@ -364,7 +379,19 @@ under `scripts/_archive/` — do not revive it.
   ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
 - **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
   promise in the visitor's words. The nav reads **Upstate Brief | Tools | Moving to
-  Greenville | SC Technology | Find an Agent | About** (routes and tags unchanged;
+  Greenville | SC Technology | Buying or Selling | About** (**"Find an Agent" became "Buying or
+  Selling" July 30, 2026**: the old label named the mechanism and assumed the visitor had already
+  decided they wanted an agent, when the site's actual job is to help buyers and sellers first
+  and hand the lead off second. The ROUTE stays `/find-a-pro` because renaming it would break
+  inbound links, the sitemap, and the `ref=` attribution already stored in `referral_leads`. The
+  same reframe hit the footer link, the `/find-a-pro` eyebrow and headline, and the `ReferralCta`
+  copy, which no longer opens on "Real estate referrals". **August 1, 2026 finished the job**: the
+  page `<title>` still read "Find an Agent" (so the BROWSER TAB said it even though the nav did
+  not), and the body still explained the mechanism. Title is now "Buying or Selling", the H1 is
+  "Buying or selling? Tell me what you are working on.", the three steps are tell me / we talk it
+  through / I stay in your corner, the trust cards lost "A vetted bench, not a coin flip" and the
+  commission-split card, and the `ReferralForm` submit button went from "Connect me with a pro" to
+  "Send it over"; routes and tags unchanged;
   `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`; the tech tab became "SC
   Technology" July 10 with the statewide widening), and the `/archive`
   newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match
@@ -385,8 +412,10 @@ under `scripts/_archive/` — do not revive it.
   national Alex Prompts audience). Deliberately NOT a listings page: a new domain cannot
   out-rank the portals on listing searches, and Alex cannot service clients. **This page is the
   site's #1 conversion surface** now that referral revenue is the north star. It was rebuilt
-  July 2026 from a light email capture into a real conversion page: honest connector copy +
-  a "How this works" 3-step + trust cards, and a **qualifying lead form** (`ReferralForm`) that
+  July 2026 from a light email capture into a real conversion page: honest first-person copy +
+  a "How this works" 3-step + trust cards (all of which were rewritten August 1, 2026 to stop
+  explaining the referral mechanism; see the strategic-direction note above, and the copy-rule
+  comment at the top of `src/app/find-a-pro/page.tsx`), and a **qualifying lead form** (`ReferralForm`) that
   captures intent (buy/sell/both), market, timeframe, and contact, then POSTs to **`/api/refer`**.
   That route stores a row in the Supabase **`referral_leads`** table (service key, RLS-denied to
   anon, NOT the newsletter `subscribers` list, so no double opt-in for a hot lead) and emails Alex

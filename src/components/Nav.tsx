@@ -12,7 +12,12 @@ const links = [
   { href: "/tools", label: "Tools" },
   { href: "/real-estate", label: "Moving to Greenville" },
   { href: "/greenville-works", label: "SC Technology" },
-  { href: "/find-a-pro", label: "Find an Agent" },
+  // "Find an Agent" until July 30, 2026. That named the mechanism and assumed the
+  // visitor had already decided they wanted an agent. The site's job is to help
+  // buyers and sellers first, so the label states their situation instead. The
+  // ROUTE stays /find-a-pro: renaming it would break inbound links, the sitemap,
+  // and the ref= attribution already stored in referral_leads.
+  { href: "/find-a-pro", label: "Buying or Selling" },
   { href: "/about", label: "About" },
 ];
 

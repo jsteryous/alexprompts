@@ -70,11 +70,13 @@ export async function broadcastPost(
   const bodyHtml = bodyMd ? await renderEmailBody(bodyMd) : null;
 
   // Mirror the site's per-section choice rather than inventing a new policy:
-  // `ArticleView` sets showReferralCta for /real-estate only, leaving it off
-  // /greenville-works and /archive. Flip the condition here if the referral
-  // offer should ride along on the other tracks too.
+  // `ArticleView` sets showReferralCta for /real-estate and /briefing (both are
+  // written for buyers and sellers), leaving it off /greenville-works and
+  // /archive. Keep this condition in sync with those section props.
   const tags: string[] = Array.isArray(post.tags) ? post.tags : [];
-  const showReferral = tags.includes("greenville") && !tags.includes("greenville works");
+  const showReferral =
+    (tags.includes("greenville") || tags.includes("briefing")) &&
+    !tags.includes("greenville works");
   const referralUrl = showReferral
     ? `${SITE_URL}/find-a-pro?ref=${encodeURIComponent(post.slug)}` +
       `&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list#connect`

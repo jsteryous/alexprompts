@@ -3,44 +3,57 @@ import { site } from "@/lib/site";
 import { ReferralForm } from "@/components/ReferralForm";
 
 export const metadata: Metadata = {
-  title: "Find an Agent",
+  title: "Buying or Selling",
   description:
-    "Buying or selling, in Greenville, SC or relocating anywhere? Tell me what you need and " +
-    "I will hand-pick a vetted agent worth your time, plus the lender and closing attorney " +
-    "who make a deal go smoothly, and stay in your corner until it closes. No cost to you.",
+    "Buying or selling in Greenville, SC, or moving here from somewhere else? Tell me what " +
+    "you are working on and I will help you figure out the real numbers, the right timing, " +
+    "and what has to happen first. It costs you nothing.",
   alternates: { canonical: `${site.url}/find-a-pro` },
 };
 
+/**
+ * Copy rule for this page (August 1, 2026): it never explains the referral
+ * mechanism. Earlier drafts led with "I hand-pick a vetted agent" and "the agent
+ * I refer you to shares part of their commission with me." That is Alex's
+ * business model, not the reader's situation, and reading it before you have
+ * even said what you need makes the page feel like a lead broker rather than a
+ * person who knows this market. The site's job is to earn the conversation with
+ * a buyer or seller. Alex handles the introduction himself, in that
+ * conversation, once he knows what they actually need.
+ *
+ * The one place compensation still appears is the fine print at the bottom,
+ * which is a licensee disclosure, not marketing copy. Keep it short and factual.
+ */
 const steps = [
   {
     n: "1",
     title: "Tell me what you need",
-    body: "A few quick details below. Buying or selling, where, and roughly when. That is enough for me to point you in the right direction.",
+    body: "A few quick details below. Buying or selling, where, and roughly when. That is enough for me to be useful on the first call.",
   },
   {
     n: "2",
-    title: "I hand-pick your pro",
-    body: "I reach out, learn a little more, and match you with an agent I would trust with my own family. If you also need a good loan officer or a closing attorney, I know the ones who earn their keep. Local here in Greenville, or in whatever city you are moving to.",
+    title: "We talk it through",
+    body: "I reach out, usually within a day. We go through what you are trying to do, what it realistically costs in this market right now, and what has to happen first. No pitch and no pressure, and if the honest answer is that you should wait, I will tell you that.",
   },
   {
     n: "3",
     title: "I stay in your corner",
-    body: "I am not handing you off and disappearing. I check that you are being taken care of, and I am a text away if anything feels off. It costs you nothing.",
+    body: "From there I make sure the whole thing is handled well, including the loan officer and the closing attorney if you need them. I am a text away until it closes.",
   },
 ];
 
 const trust = [
   {
-    title: "A vetted bench, not a coin flip",
-    body: "The gap between a good agent and a bad one is thousands of dollars and a lot of stress. The same is true of a lender who misses a deadline. I hand-pick the professionals you work with instead of leaving it to whoever answers a portal form first.",
+    title: "Straight answers, not a sales pitch",
+    body: "This is the biggest financial decision most people make, and it deserves a real number rather than an encouraging one. If the house is overpriced or the timing is wrong, that is what you will hear from me.",
   },
   {
     title: "Greenville, or wherever you are headed",
-    body: "I am local here in the Upstate, and if you are relocating I will find you a strong agent in that market too. Referrals are not limited to my zip code, and neither is my help.",
+    body: "I am local here in the Upstate and I know it well. If you are moving in from another state or heading out of one, I can help with that side too. My help is not limited to my zip code.",
   },
   {
     title: "Free to you, and no pressure",
-    body: "You never pay me. If your sale closes, the agent I refer you to shares part of their commission with me. So I only win when you are genuinely taken care of.",
+    body: "You never pay me anything, and there is no obligation at the end of the conversation. Ask your questions, get the real answer, and decide on your own timeline.",
   },
 ];
 
@@ -50,17 +63,23 @@ export default function FindAProPage() {
       {/* Form first: a curious visitor can act immediately and scroll for the rest. */}
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
+          {/* Eyebrow and headline lead with the reader's situation, not the
+              referral mechanism (reframed July 30, 2026 alongside the nav label,
+              finished August 1, 2026). "Real estate referrals" and "I hand-pick a
+              vetted agent" both described how Alex gets paid, which is not what a
+              buyer or seller showed up for. */}
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Real estate referrals · Greenville + anywhere
+            Buying or selling · Greenville + anywhere
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Buying or selling? I&apos;ll connect you with a pro worth your time.
+            Buying or selling? Tell me what you are working on.
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed text-center mx-auto">
-            I am a licensed real estate agent in South Carolina, and my edge is knowing which
-            professionals actually earn their keep. Tell me what you are trying to do, here in
-            Greenville or in whatever city you are moving to, and I will hand-pick an agent I would
-            trust with my own family, then stay in your corner until it closes. It costs you nothing.
+            I am a licensed real estate agent in South Carolina, and I write most of what is on
+            this site, so I spend my week in the actual Greenville numbers. Tell me what you are
+            trying to do, here or in whatever city you are moving to, and I will help you get the
+            real answer on what it costs, what it is worth, and what has to happen first. It costs
+            you nothing.
           </p>
 
           <div
@@ -107,11 +126,13 @@ export default function FindAProPage() {
             ))}
           </ul>
 
+          {/* Licensee disclosure, not marketing copy. It stays because Alex holds
+              an active SC license and may be compensated on a closed transaction;
+              it is deliberately the only place on the site that mentions a fee. */}
           <p className="theme-text-muted text-xs leading-relaxed mt-10 max-w-xl">
-            {site.author} is a licensed real estate agent with eXp Realty in South Carolina. If I
-            refer you to an agent and your sale closes, I may receive a referral fee from that agent,
-            at no cost to you. This page is information only and is not financial, legal, or
-            investment advice.
+            {site.author} is a licensed real estate agent with eXp Realty in South Carolina. I may
+            be compensated by a referral fee when a transaction closes, at no cost to you. This page
+            is information only and is not financial, legal, or investment advice.
           </p>
         </div>
       </section>

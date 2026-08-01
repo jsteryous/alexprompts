@@ -66,7 +66,7 @@ export default function AboutPage() {
               <p className="theme-text-secondary type-body-lg">
                 Alex Prompts is my commentary on how tech and real estate converge. This site also serves as a 
                 sales funnel for real estate leads. Long-term, this site will rank first for certain Google searches,
-                which will drive traffic and generate leads. I refer leads to my highly trusted network of professionals.
+                which will drive traffic and generate leads.
                 Using my sales skills, I have built and continue to build long-term relationships with competent loan officers, attorneys, and agents.
                 Using AI, I also built a set of basic tools for real estate: a mortgage
                 calculator, a rental deal analyzer, an SC property tax estimator, a Greenville
