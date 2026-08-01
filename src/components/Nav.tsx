@@ -12,14 +12,37 @@ const links = [
   { href: "/tools", label: "Tools" },
   { href: "/real-estate", label: "Moving to Greenville" },
   { href: "/greenville-works", label: "SC Technology" },
-  // "Find an Agent" until July 30, 2026. That named the mechanism and assumed the
-  // visitor had already decided they wanted an agent. The site's job is to help
-  // buyers and sellers first, so the label states their situation instead. The
-  // ROUTE stays /find-a-pro: renaming it would break inbound links, the sitemap,
-  // and the ref= attribution already stored in referral_leads.
-  { href: "/find-a-pro", label: "Buying or Selling" },
   { href: "/about", label: "About" },
 ];
+
+/**
+ * The nav's ONE button.
+ *
+ * Label history: "Find an Agent" until July 30, 2026 (it named the mechanism and
+ * assumed the visitor had already decided they wanted an agent), then "Buying or
+ * Selling", then the question mark on August 1, 2026. The question is the point.
+ * It turns a category into something the reader owes an answer to, and it is the
+ * same question every article close now asks ("Are you looking to buy, or are you
+ * thinking about selling?"), so the nav and the writing say one thing.
+ *
+ * Considered and rejected: "Get help" / "Get Assistance" (support-desk register,
+ * and both imply the reader is in trouble) and "Get in touch". That last one is
+ * the CTA button copy inside articles and works THERE only because "Thinking of
+ * making a move?" sits directly above it and supplies the subject. A nav has no
+ * such context, so it flattens into a generic contact link and draws recruiters
+ * and vendors instead of buyers and sellers. Keep the subject in the label.
+ *
+ * Why it is the button and Subscribe is not (swapped August 1, 2026): referral
+ * revenue is the north star and /find-a-pro is the site's #1 conversion surface,
+ * but it used to render as the fifth of six identical text links while the
+ * audience-growth CTA got the only visual emphasis. The hierarchy contradicted
+ * the strategy. Subscribe keeps a nav text link and still has dedicated capture
+ * on /subscribe, every article, the briefing index, and every tool page.
+ *
+ * The ROUTE stays /find-a-pro. Renaming it would break inbound links, the
+ * sitemap, and the ref= attribution already stored in referral_leads.
+ */
+const primaryCta = { href: "/find-a-pro", label: "Buying or Selling?" };
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -40,11 +63,14 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/subscribe"
-            className="theme-cta text-sm font-medium px-4 py-2 rounded-lg"
-          >
+          <Link href="/subscribe" className="theme-link text-sm">
             Subscribe
+          </Link>
+          <Link
+            href={primaryCta.href}
+            className="theme-cta-accent text-sm font-medium px-4 py-2 rounded-lg"
+          >
+            {primaryCta.label}
           </Link>
         </nav>
 
@@ -77,10 +103,17 @@ export default function Nav() {
           ))}
           <Link
             href="/subscribe"
-            className="theme-cta text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
+            className="theme-link text-sm py-2"
             onClick={() => setOpen(false)}
           >
             Subscribe
+          </Link>
+          <Link
+            href={primaryCta.href}
+            className="theme-cta-accent text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
+            onClick={() => setOpen(false)}
+          >
+            {primaryCta.label}
           </Link>
         </div>
       )}

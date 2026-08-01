@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { ReferralForm } from "@/components/ReferralForm";
 
 export const metadata: Metadata = {
-  title: "Buying or Selling",
+  title: "Buying or Selling?",
   description:
     "Buying or selling in Greenville, SC, or moving here from somewhere else? Tell me what " +
     "you are working on and I will help you figure out the real numbers, the right timing, " +
