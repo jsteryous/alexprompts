@@ -9,11 +9,13 @@ import Link from "next/link";
  * already decided they want an agent. The site does the work of FINDING buyers
  * and sellers first, so the copy opens on where the reader actually is.
  *
- * DO NOT reintroduce "I do not practice" / "I do not take clients" (removed
- * everywhere July 30, 2026). It was meant as a trust signal but it disqualifies
- * Alex in the reader's head at the exact moment they are deciding whether he can
- * help, which is the wrong signal to send a buyer or seller. The referral-fee
- * disclosure on /find-a-pro is the right and sufficient place for that context.
+ * THE RULE, finished August 1, 2026 and applying to every user-facing surface
+ * including the three engines' article closes: no copy anywhere explains that
+ * Alex refers or matches leads, and none of it says he does not practice or does
+ * not take clients. Both framings make a buyer feel handed off before they have
+ * even said hello. Alex qualifies the person first and handles the introduction
+ * himself once he knows what they need. The only surviving mention of a fee is
+ * the licensee disclosure in the /find-a-pro fine print.
  *
  * Keep this copy SHORT. It is an invitation, not an explanation.
  *

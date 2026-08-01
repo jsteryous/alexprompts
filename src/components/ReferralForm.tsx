@@ -15,10 +15,14 @@ interface Attribution {
 
 /**
  * The /find-a-pro conversion form. Unlike SubscribeForm (email-only newsletter
- * double opt-in), this captures a QUALIFIED referral lead (intent + market +
+ * double opt-in), this captures a QUALIFIED buyer or seller (intent + market +
  * timeframe) and POSTs to /api/refer, which stores it and emails Alex. The extra
  * fields are the difference between a warm follow-up and a cold one, so the small
  * added friction is worth it. Keep the field count tight to protect conversion.
+ *
+ * User-facing strings here never mention referrals, matching, or agents. This
+ * form's job is to start a conversation with Alex; what he does after that call
+ * is his to explain in person, not the page's to advertise.
  */
 
 type State = "idle" | "submitting" | "done" | "error";
@@ -127,7 +131,7 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
         <p className="theme-text-primary font-semibold text-lg mb-1">Got it, thank you.</p>
         <p className="theme-text-muted text-sm leading-relaxed max-w-md mx-auto">
           I read every one of these myself. I will reach out within a day or two to learn a
-          little more and line up an agent I trust. If it is urgent, just reply to my email.
+          little more about what you need. If it is urgent, just reply to my email.
         </p>
       </div>
     );
@@ -248,7 +252,7 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
         disabled={state === "submitting"}
         className="theme-cta-accent font-semibold px-6 py-3 rounded-xl disabled:opacity-60 w-full sm:w-auto"
       >
-        {state === "submitting" ? "Sending..." : "Connect me with a pro"}
+        {state === "submitting" ? "Sending..." : "Send it over"}
       </button>
 
       {state === "error" && <p className="tone-hot-text text-sm">{error}</p>}

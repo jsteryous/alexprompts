@@ -15,7 +15,7 @@ export default function LogoutButton() {
       type="button"
       onClick={logout}
       disabled={pending}
-      className="text-sm text-gray-500 hover:text-black disabled:opacity-40"
+      className="theme-link text-sm disabled:opacity-40"
     >
       {pending ? "…" : "Log out"}
     </button>

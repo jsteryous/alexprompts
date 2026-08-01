@@ -100,8 +100,10 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   ("Thinking of making a move?" / "Let me know if you're thinking about selling, or if you're
   looking to buy!"), shared verbatim with the email CTA in `emailTemplates.ts` `referralBlock()`
   so the two never drift. It is an invitation, not an explanation; do not grow it back into a
-  paragraph, and **never reintroduce the "I do not practice" / "I do not take clients" framing**
-  (see the root `CLAUDE.md` note). **This CTA is the one deliberate exception to the site's
+  paragraph, and **never explain the business model in it** — no referring, matching, connecting,
+  or introducing the reader to an agent, no "vetted"/"hand-picked" anyone, no "at no cost to you",
+  and no "I do not practice" / "I do not take clients" (see the root `CLAUDE.md` note, which was
+  extended to the whole mechanism August 1, 2026). **This CTA is the one deliberate exception to the site's
   uncontracted-copy rule**: Alex wrote the contractions himself and confirmed them July 30, 2026,
   because the block had been reading like a legal disclaimer. Do not "fix" them. Button copy is
   **"Get in touch"** (Alex rejected "Tell me about your situation" as clinical). Keep the tag condition in
@@ -142,6 +144,19 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   upload/drop/URL his own photo (stored in `cover_image` + optional `cover_credit` via
   `/api/review/save`, which `/api/publish` and the finalize cron both respect and never
   overwrite), edit the credit line, or remove it to fall back to the library.
+  **DARK MODE (fixed August 1, 2026).** These routes render outside `Nav`/`Footer`, and every one
+  of them had hardcoded `bg-white` / `bg-gray-50` / `text-gray-*` / `text-black`, so `/admin`, the
+  login screen, `/admin/edit/[id]`, `/review`, and the shared `Editor` all stayed white when the
+  site's `DarkModeToggle` flipped `html.dark`. (The toggle itself was never broken: it lives in the
+  root layout and DOES render on these routes, unlike Nav and Footer.) They now use the same
+  `.theme-*` tokens as the rest of the site, plus `hover:*-[var(--token)]` arbitrary values where a
+  hover state needed a token Tailwind cannot reach through a plain CSS class, and `tone-*` for the
+  DRAFT/PUBLISHED chips and error text. The editor preview switched from `prose prose-neutral`
+  (hardcoded dark ink, unreadable on a dark page) to `prose theme-prose`. **Do not add a raw
+  Tailwind gray or `bg-white` back to these files** — if a surface needs a color, it comes from a
+  token. Two hardcoded colors are deliberate and stay: the green Publish button (a deliberate
+  affordance, legible in both themes) and the `bg-black/35` hover scrim over the cover photo (a
+  scrim over a photo is black in both themes).
 - **`app/opengraph-image.tsx`** — edge Satori OG image, the branded fallback card.
   It is auto-injected on the root/static pages but is **NOT inherited by the
   `[slug]` article routes**, so those must set `openGraph.images`/`twitter.images`

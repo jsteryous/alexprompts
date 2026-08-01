@@ -11,8 +11,8 @@ INPUTS you were handed:
   already exists). Semantic duplicates are as bad as exact ones for SEO.
 
 THE POINT OF THIS TRACK. These pieces exist to win LOCAL, LONG-TAIL, LOW-COMPETITION Google
-queries that carry real buyer or seller intent, and to funnel relocation and purchase leads to
-/find-a-pro. A brand-new domain cannot out-rank Zillow or the big brokerages on head terms
+queries that carry real buyer or seller intent, and to turn relocation and purchase searches into
+people who write to Alex. A brand-new domain cannot out-rank Zillow or the big brokerages on head terms
 ("Greenville real estate," "homes for sale Greenville"), so do NOT pick those. You are hunting
 the specific, answerable, high-intent query that a portal does not answer well.
 

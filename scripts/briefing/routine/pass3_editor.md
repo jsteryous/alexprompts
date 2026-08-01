@@ -23,7 +23,7 @@ it.
 THE FIXED TEMPLATE: confirm the shape, in order: a cold one-or-two-sentence open with the week's
 lead number ABOVE the first heading, then these ## headings in this order: "The Upstate vs the
 country," "Buyer or seller's market," "Where the leverage is," "Around town," "Rates and money,"
-"What I'd watch"; then the one quiet /find-a-pro line; then the italic not-advice footer with the
+"What I'd watch"; then the one quiet buy-or-sell invitation; then the italic not-advice footer with the
 "current as of <date>" note, and nothing after it. Section order is not optional; a brief that leads
 with rates has regressed and must be reordered.
 NO COMMERCIAL SECTION (July 2026). "Who's buying" and "What traded," the two county commercial-deed
@@ -139,8 +139,22 @@ rewritten to the measurement.
 
 LINKS: confirm every load-bearing figure links inline to its source at first mention, no source
 linked twice, the two Zillow pulse figures each linked once, the ZIP-level figures linked once from
-"Where the leverage is," no links to listing portals or competing agents, and the /find-a-pro line
-present exactly once, in the close, one sentence, low-pressure. Additionally, confirm every Zillow URL is a
+"Where the leverage is," no links to listing portals or competing agents, and the buy-or-sell
+invitation present exactly once, in the close, one sentence, low-pressure.
+
+**THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
+August 1, 2026). Cut any sentence that says Alex will refer, match, connect, hand off, or introduce
+the reader to an agent; that calls an agent vetted, hand-picked, trusted, or part of a network;
+that says the help is free or at no cost; or that says Alex does not practice, does not take
+clients, or does not sell anything. Each one describes how Alex gets paid instead of what the
+reader came for, and it makes a buyer feel brokered. Rewrite the close to a direct first-person
+invitation that NAMES BOTH BUYING AND SELLING, with /find-a-pro linked on the invitation words, for
+example "If this week has you thinking about buying, or about listing, [tell me what you are
+working on](/find-a-pro) and I will help." A close that names buying without naming selling is a
+miss, because a seller has to work out for themselves that the offer includes them. The URL may
+appear as a link target and nowhere else in the prose.
+
+Additionally, confirm every Zillow URL is a
 SPECIFIC metric CSV matching the figure it anchors, taken verbatim from the fact sheet's source_urls
 map. A bare directory such as files.zillowstatic.com/research/public_csvs/ is a broken citation and
 has already shipped once; replace it with the exact metric URL, or strip the link and name the

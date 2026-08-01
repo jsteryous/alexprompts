@@ -81,11 +81,19 @@ official sources, that no source is linked twice, and that no link points to a l
 competing agent. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
 `/greenville-works/...`, `/find-a-pro`). Keep the writer's links to sibling pieces (the writer
 chose them from a verified list of live pages you do not have); do not add new sibling links
-yourself. Confirm any find-a-pro line appears only where the piece genuinely touches
+yourself. Confirm any buy-or-sell invitation appears only where the piece genuinely touches
 where to live, buy, or invest, and is absent on a pure civic-explainer piece. Confirm it sits in
 the BODY of the piece, never in the final two paragraphs; if it crowds the closing question, move
 it up to where the buyer or mover stakes are discussed, so the last thing the reader holds is the
 question, not a pitch.
+
+**THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
+August 1, 2026). Cut any sentence that says Alex will refer, match, connect, hand off, or introduce
+the reader to an agent; that calls an agent vetted, hand-picked, trusted, or part of a network;
+that says the help is free or at no cost; or that says Alex does not practice, does not take
+clients, or does not sell anything. Each one describes how Alex gets paid instead of what the
+reader came for. Rewrite the invitation to a plain first-person line with /find-a-pro linked on the
+invitation words, and let the URL appear as a link target and nowhere else in the prose.
 
 QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct speaker. Fix to the
 exact text or strip the marks and leave it as a paraphrase.

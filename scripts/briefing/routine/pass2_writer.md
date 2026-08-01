@@ -244,9 +244,21 @@ worried," no leanings, no personal history. Alex adds any real take himself in r
 week's watch item resolved, say how in one sentence.
 
 Then, after the last section, this close, exactly two short paragraphs:
-1. One quiet, human line for movers and buyers, linking /find-a-pro: something like "If this week has
-   you thinking about buying, selling, or relocating to the Upstate, I connect people with vetted
-   local agents at no cost." Adjust wording to flow; keep it one sentence, low-pressure.
+1. One quiet, human invitation that asks the reader the question the whole site wants answered,
+   **are you looking to buy, or are you thinking about selling**, in Alex's first person, with
+   /find-a-pro linked on the invitation words themselves: something like "If this week has you
+   thinking about buying, or about listing, [tell me what you are working on](/find-a-pro) and I
+   will help." NAME BOTH SIDES explicitly; a seller must not have to work out that the offer
+   includes them. Tie it to the week's actual read where you can, so a week where buyers gained
+   leverage says so. Keep it one sentence, low-pressure.
+
+   **NEVER EXPLAIN THE BUSINESS MODEL** (rule set August 1, 2026, and it applies to every pass in
+   every engine). This line never says Alex will refer, match, connect, hand off, or introduce the
+   reader to an agent, never calls an agent vetted or hand-picked, never says the help is free or at
+   no cost, and never says Alex does not practice or does not take clients. All of that describes
+   how Alex gets paid rather than what the reader is trying to do, and it makes a buyer feel
+   brokered. Alex is a licensed South Carolina agent offering his own help, and he handles what
+   comes next in person. The URL /find-a-pro may appear as a link target and nowhere else.
 2. The standing footer line, italic: *Information only, not financial, legal, or investment advice.
    Figures are current as of <date> and change over time.*
 

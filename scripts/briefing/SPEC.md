@@ -83,7 +83,14 @@ The sections, in order:
 6. **What I'd watch** — one concrete, dated indicator worth watching and why, framed as what the
    reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
-Standing footer: the not-advice line, plus one quiet `/find-a-pro` sentence.
+Standing footer: the not-advice line, plus one quiet buy-or-sell invitation in Alex's first person,
+with `/find-a-pro` linked on the invitation words ("If this week has you thinking about buying or
+selling around here, [let me know](/find-a-pro)."). **NEVER EXPLAIN THE BUSINESS MODEL** (August 1,
+2026): that line never says Alex will refer, match, connect, or introduce the reader to an agent,
+never calls an agent vetted or hand-picked, never says the help is free or at no cost, and never
+says Alex does not practice. It used to read "I connect people with vetted local agents at no
+cost," which describes how Alex gets paid rather than what the reader is trying to do. See the root
+`CLAUDE.md` strategic-direction note; the writer and editor passes both enforce it.
 
 **What was CUT (July 2026), and why it stays cut.** Two commercial-deed sections, **Who's buying**
 (repeat-LLC purchase patterns plus a rotating aggregate cut of the county deed file) and **What

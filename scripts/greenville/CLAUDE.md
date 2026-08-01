@@ -5,7 +5,9 @@ week, not nightly) that runs ONE
 track: an **evergreen local-SEO** engine for the Greenville, SC market. On each scheduled run it
 writes ONE substantial, data-grounded local resource article (a relocation, neighborhood,
 cost-of-living, first-time-buyer, or local-investor guide), publishes it live to `/real-estate`,
-and ends it by pointing relocation and buyer leads to `/find-a-pro`. This is the search
+and ends it with a short, warm offer of Alex's help (linked to `/find-a-pro`; the copy NEVER
+explains that Alex refers or matches leads, and never says he does not practice. See the root
+`CLAUDE.md` strategic-direction note, tightened August 1, 2026). This is the search
 library that actually ranks and compounds on winnable local long-tail queries ("moving to
 Greenville SC neighborhoods," "cost of living in Greenville SC"). Depth over volume: about two to
 three pieces a week, set by the CLOUD SCHEDULE (a few nights, e.g. Mon/Wed/Fri), with an in-code

@@ -16,6 +16,15 @@ reference only, nothing there runs on a schedule anymore.
 > directory now lives under `scripts/_archive/` (reversible). Its weekly run was a scheduled
 > Claude **cloud agent**, so that scheduled routine must also be deleted in the Claude scheduler.
 > Do NOT revive it. The two LOCAL Greenville engines below are the whole content operation now.
+>
+> **NEVER EXPLAIN THE BUSINESS MODEL (August 1, 2026), all three live engines.** Every piece may
+> offer Alex's help and link `/find-a-pro`, but no article may say he will refer, match, connect,
+> hand off, or introduce the reader to an agent; may call an agent "vetted" or "hand-picked"; may
+> say the help is "free" or "at no cost to you"; or may say he does not practice or does not take
+> clients. Each writer pass carries the rule and each editor pass carries a hard cut-gate for it.
+> The close is a plain first-person invitation ("let me know if you are looking to buy or thinking
+> of selling"), and `/find-a-pro` appears as a link target and nowhere else in the prose. See the
+> root `CLAUDE.md` strategic-direction note.
 > See [[saturday-research-engine]] in memory. (History: it was rebuilt from AI-news into a
 > research engine in June 2026 before being killed.)
 

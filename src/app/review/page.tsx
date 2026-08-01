@@ -42,7 +42,7 @@ export default async function ReviewPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Editor
         id={post.id}
         token={token}
@@ -63,11 +63,11 @@ export default async function ReviewPage({ searchParams }: Props) {
 
 function ErrorPage({ heading, body }: { heading: string; body: string }) {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
-      <div className="bg-white border border-gray-200 rounded-2xl p-12 max-w-md w-full text-center">
-        <h1 className="text-xl font-bold text-black mb-3">{heading}</h1>
-        <p className="text-sm text-gray-500">{body}</p>
-        <Link href="/" className="inline-block mt-6 text-sm text-gray-500 hover:text-black">
+    <div className="min-h-screen flex items-center justify-center px-6">
+      <div className="theme-card-strong border theme-border rounded-2xl p-12 max-w-md w-full text-center">
+        <h1 className="text-xl font-bold theme-text-primary mb-3">{heading}</h1>
+        <p className="text-sm theme-text-muted">{body}</p>
+        <Link href="/" className="theme-link inline-block mt-6 text-sm">
           ← alexprompts.com
         </Link>
       </div>
