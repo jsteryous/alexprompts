@@ -81,11 +81,22 @@ real-estate engine's local grounding and fair-housing care.
    question, read the follow-ups people ask, as evidence an assumption is widespread) and
    feasibility checking (find the primary sources that settle it). It is deliberately NOT a news
    feed: a vote or filing is a fine anchor, but the question comes first and the news serves it.
-1. **`pass1_researcher.md`** — grounds the change with web search: what is happening and how the
-   system works (the mechanism, plainly), the real numbers, what it means for residents/buyers/
-   investors, and above all THE HONEST TENSION, each with evidence and marked fundamental or
-   contingent. Separates confirmed facts from promoter claims, flags fair-housing care, and lists
-   MUST-VERIFY. Stops the run if the topic is thin.
+1. **`pass1_researcher.md`** — **ANSWERS the scout's question** (rewritten August 2026 alongside
+   pass 0; it used to survey a subject, which produced briefs whose conclusion could have been
+   written before the research started). The brief now LEADS with THE QUESTION, THE ANSWER, and
+   THE PRIOR TESTED, so the angle pass and the writer build on a finding instead of rummaging
+   through facts for one. The prior verdict is the most valuable output and has three publishable
+   outcomes: the prior was wrong (best), right for the wrong reason, or simply right (report it
+   plainly, never manufacture a twist). Carries a per-SHAPE method note, since the five question
+   shapes need genuinely different research. Carries THE ARITHMETIC RULE, because subtraction and
+   magnitude questions cannot be answered by quoting anyone and must be CALCULATED: every input
+   separately sourced, the steps shown, the result labeled a calculation rather than a sourced
+   figure, and every calculated figure auto-added to MUST-VERIFY. Still does the deep-tech
+   teardown, the CONFIRMED-versus-CLAIM split, the honest tension, and fair-housing flags. Three
+   kill conditions stop the run: UNANSWERABLE, FALSE PREMISE, and THIN. It is explicitly forbidden
+   to rescue a failed run by pivoting to a survey of the general subject.
+   **Handles both input paths**: a scout question, or a bank topic with no question (in which case
+   it writes the question and the prior itself before researching).
 2. **`pass2_angle.md`** — turns research into judgment: the one sharp, honest SPINE, the stakes
    earned, the tension respected, the so-what (with a calibrated net-good-or-bad verdict when the
    evidence carries one), and the reader's question. This is where the piece gets a point of view

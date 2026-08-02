@@ -111,12 +111,18 @@ STEP 0B, RECALL WHAT IS DONE + DEDUP THE SITE. Two cheap checks so you never rep
   Use /tmp/gw/done.txt in STEP 0 to skip an already-covered topic.
 
 STEP 1, PASS 1, RESEARCHER. Read scripts/tech/routine/pass1_researcher.md. Hand its full
-contents plus /tmp/gw/topic.txt to a fresh sub-agent. It uses web search to ground the change in
-real South Carolina specifics, hunts the honest trade-off, and writes the fact brief. Save to
-/tmp/gw/pass1_brief.md.
-  STOP CONDITION: if the researcher reports the topic is thin (no real, evidenced tension and
-  no groundable local specifics), do NOT proceed. Record which topic failed and why, leave it
-  queued, and end the run cleanly rather than shipping a hollow piece.
+contents plus /tmp/gw/topic.txt to a fresh sub-agent. It ANSWERS the question the scout handed it
+(or, on the bank path, the question it writes from the queued topic), grounds the system in real
+South Carolina specifics, reports what the evidence did to the prior, hunts the honest trade-off,
+and writes the fact brief. Save to /tmp/gw/pass1_brief.md.
+  STOP CONDITIONS: the researcher reports three named failures, and ANY of them ends the run. (1)
+  UNANSWERABLE: the sources that would settle the question do not exist or do not say what was
+  hoped. (2) FALSE PREMISE: a "why is X rare here" question asserted an absence that does not hold
+  up. (3) THIN: no real, evidenced tension and no groundable specifics. In every case do NOT
+  proceed. Record which question failed and why, leave the topic queued, and end the run cleanly.
+  A brief that pivots from the question to a general survey of the subject is itself a failure:
+  reject it and stop, since that is exactly how this track drifts back to broad pieces with
+  foregone conclusions.
 
 STEP 2, PASS 2, ANGLE. Read scripts/tech/routine/pass2_angle.md. Hand its full contents plus
 ONLY /tmp/gw/pass1_brief.md and /tmp/gw/ledger.txt (the TRACK LEDGER from STEP 0B, so the take
