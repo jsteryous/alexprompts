@@ -7,6 +7,20 @@ anything that does not. A statistic or an "it will do X" claim with no source in
 fact error. Anything the brief marked CLAIM (from a developer, agency, or promoter) must be written
 as a claim, not stated as fact.
 
+CALCULATED FIGURES (check this in BOTH directions, and do not skip it because the number looks
+sourced). Some questions cannot be answered by quoting anyone, so the brief carries a section called
+THE ARITHMETIC holding figures the researcher computed from sourced inputs. Two separate failures
+live here.
+  - A computed figure written as though an agency published it is a FACT ERROR, even though the
+    number is correct, because it tells the reader a source exists that does not. Every figure that
+    appears in the brief's THE ARITHMETIC must be attributed in the prose as the writer's own
+    arithmetic, with its inputs named ("no one publishes that figure, so I worked it out from Duke's
+    stated capacity factor and EIA generation data"). Restore the attribution; do not cut the number.
+  - A figure the piece presents as a calculation but that does NOT appear in the brief's THE
+    ARITHMETIC is invented. Cut it.
+  Also confirm the piece did not add precision the brief does not have, and that where the brief
+  gives a bounded range the piece gives the range rather than a single number.
+
 VOICE: confirm the piece is in Alex's FIRST-PERSON inquiry voice, a curious local genuinely working
 to understand the change, not a neutral meeting recap and not a booster press release. The first
 person must belong to the INQUIRY (what the reporting looked into and found, the questions asked),
@@ -24,17 +38,46 @@ that only report the inquiry ("I went looking for the job numbers"). The honest 
 open question left standing; if the piece closes on a manufactured personal verdict, cut it back to
 the question. Alex adds any real take himself in review.
 
-KEEP THE ANIMATING QUESTION INVISIBLE: the piece is driven by a real question (does this make the area
-better off, for whom, at what cost, at what risk) but must never STATE it as a thesis ("the real
-question is who pays"). If it announces the question, cut the announcement and let the sequencing
-raise it.
+THE QUESTION MUST BE NAMED AND ANSWERED (this REPLACES the old "keep the animating question
+invisible" rule, which was reversed in August 2026; if you find yourself about to cut a stated
+question, that instinct is the old rule and it is wrong now). Every piece runs on ONE specific
+question, which sits at the top of the brief. Confirm three things:
+  - The piece NAMES that question within the first two or three paragraphs, in the plain words a
+    person would ask it. If the question is only implied, the piece has lost its hook; send it back.
+  - The piece ANSWERS it early rather than withholding the answer for a reveal at the end. A reader
+    who stops halfway must already have the answer.
+  - The question in the piece is the question in the BRIEF. A piece that drifts to answering
+    something else discards the work of the two passes before it; reject it rather than patching it.
+Naming the question is still different from announcing a thesis, and the difference is the gate.
+"South Carolina has almost no wind power, which is strange for a state that hosts the largest
+turbine test facility in the world. I went looking for why" is naming the question and stays. "The
+real question here is who pays for this" announces the argument instead of making it; cut that and
+let the reporting carry it.
 
-NO SIGNPOSTING (strip on sight). The writer's spine beats are internal scaffolding; if any leaked
-into the prose as an announced transition ("Here is what is actually happening, in plain English,"
-"Here is what the region gets," "So what does this mean for you"), cut the announcement and open the
-paragraph directly on its content. Allow at most ONE rhetorical question used as a pivot in the
-whole piece (the closing question to the reader does not count); rewrite the rest as declarative
+THE PRIOR, IF THE PIECE USES IT. The brief's THE PRIOR TESTED is legitimate material, but it must be
+attributed to the COMMON VIEW ("the easy assumption is," "most people here would guess"), never to
+Alex. "I assumed this was a regulatory problem" invents his interior and is cut under NO FABRICATED
+STANCE below. And where the brief reports that the prior HELD UP, confirm the piece says so plainly
+instead of manufacturing a twist; an invented surprise the evidence does not support is a fact error,
+not a stylistic choice.
+
+SUBHEADS ARE REQUIRED (3 to 5 descriptive H2s). A piece with no subheads is a wall of prose and gets
+sent back, not patched over. Confirm there are 3 to 5 `## ` headings, that each says what its section
+establishes in a skimmer's words, and that none is a bare label ("Background," "Analysis," "What it
+means") or any version of the writer's internal beat names. An H2 phrased as the exact question a
+reader would ask is good and should be kept. If the piece has headings but they restate the
+paragraph beneath them word for word, tighten the heading rather than deleting it.
+
+NO SIGNPOSTING IN THE PROSE (strip on sight). The writer's spine beats are internal scaffolding; if
+any leaked into the prose as an announced transition ("Here is what is actually happening, in plain
+English," "Here is what the region gets," "So what does this mean for you"), cut the announcement and
+open the paragraph directly on its content. Allow at most ONE rhetorical question used as a pivot in
+the whole piece (the closing question to the reader does not count); rewrite the rest as declarative
 openings.
+  THIS BAN DOES NOT APPLY TO HEADINGS. A subhead is not a signpost and must never be cut as one: a
+  signpost sentence narrates the piece to the reader, while a subhead lets a skimmer skip to what
+  they came for. Cutting subheads under this rule is exactly how earlier pieces in this section
+  shipped as nine unbroken paragraphs.
 
 SHOW THE SEAMS. Where the brief marks a figure unverified, disputed, or a promoter's CLAIM, confirm
 the piece says so where the number appears. If the draft averaged conflicting numbers, quietly
@@ -42,6 +85,11 @@ picked the friendlier one, or asserted an effect no source in the brief quantifi
 error; restore the visible gap ("one report says 150 jobs, the filing says 27, and that gap is
 unresolved in public"). The visible weighing of the numbers is the product; do not let the edit
 smooth it away.
+  CUT BLANKET DISCLAIMERS. A general line like "these figures are as reported and several are worth
+  verifying against the final order" is not showing the seams, it is an admission that the piece did
+  not do its job, and it smears doubt over every number instead of the one that earned it. This has
+  shipped before. Cut it, and attach a caveat to the SPECIFIC figure the brief marked unverified. If
+  the brief marked a figure confirmed, the piece states it without hedging.
 
 THE HONEST-TENSION BEAT IS MANDATORY. This is the core of the whole track. Confirm the piece has a
 real, specific section on the trade-off: who pays, what it costs, the constraint, the loser, or how
@@ -81,11 +129,20 @@ official sources, that no source is linked twice, and that no link points to a l
 competing agent. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
 `/greenville-works/...`, `/find-a-pro`). Keep the writer's links to sibling pieces (the writer
 chose them from a verified list of live pages you do not have); do not add new sibling links
-yourself. Confirm any buy-or-sell invitation appears only where the piece genuinely touches
-where to live, buy, or invest, and is absent on a pure civic-explainer piece. Confirm it sits in
+yourself. Confirm it sits in
 the BODY of the piece, never in the final two paragraphs; if it crowds the closing question, move
 it up to where the buyer or mover stakes are discussed, so the last thing the reader holds is the
 question, not a pitch.
+
+THE BUY-OR-SELL OFFER: CUT IT UNLESS IT CLEARLY BELONGS. Ask one question, and default to cutting.
+Does this piece genuinely touch where to live, buy, or invest, meaning a neighborhood, a
+development, prices, or relocation? If it is civic or technical explanation (how the grid works, how
+a utility tariff is structured, how a reactor is decommissioned, why a road is widening), the answer
+is no and the invitation comes OUT, whole. This is not a close call and it is not a preference. A
+published piece in this section carried a buy-or-sell line inside an explainer about an electricity
+tariff docket, which reads as an agent advertising in the middle of infrastructure reporting and
+costs more trust than the link can earn. Most SC Technology pieces should carry no offer at all, so
+a piece arriving without one is correct and needs no fix.
 
 **THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
 August 1, 2026). Cut any sentence that says Alex will refer, match, connect, hand off, or introduce
@@ -98,9 +155,10 @@ invitation words, and let the URL appear as a link target and nowhere else in th
 QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct speaker. Fix to the
 exact text or strip the marks and leave it as a paraphrase.
 
-STRUCTURE: confirm the spine (open cold on the change, plain-English mechanism, honest stakes,
-honest tension, takeaway then a real question) is carried from open to close, that the piece opens on
-the concrete local change and not on a framework or the comparison, and that the close is a genuine
+STRUCTURE: confirm the spine (open on the finding with the question named and answered,
+plain-English mechanism, honest stakes, honest tension, takeaway then a real question) is carried
+from open to close, that the piece opens on something concrete and not on a framework or the
+comparison, and that the close is a genuine
 open question, not ragebait, with nothing after it. The closing question must be EARNED: the piece
 walks the four beats (the strongest case against, the strongest case for, what the evidence
 suggests, then the question), so confirm the question is the specific thing that reasoning left
@@ -111,6 +169,21 @@ even while neutral on the verdict: it should name a concrete yardstick the reade
 change by (jobs per incentive dollar, tax base against what residents give up), not just leave a
 question hanging with no frame. A named standard is analysis and is allowed; a personal verdict is
 not.
+  THE CLOSING QUESTION MAY NOT BE THE QUESTION THE PIECE ANSWERED. Check this explicitly against the
+  brief's THE QUESTION, because it is the easiest failure to read straight past: the closing question
+  is the spine of everything above it, so restating it feels like a satisfying bookend. It is not. A
+  piece that establishes why South Carolina has almost no wind power and then asks the reader why
+  South Carolina has no wind power has retracted its own work. Rewrite the close to take up what the
+  ANSWER opened: the trade-off the reader now weighs, the terms they would accept, or the thing the
+  evidence genuinely could not settle.
+
+HEADLINE: confirm it is the QUESTION the piece answers or the FINDING it establishes, stated
+concretely, and that it names the real place or thing so it reads well as a search result. HARD
+LIMITS: under 14 words, and AT MOST ONE hedge. This section has shipped a 20-word headline carrying
+two hedges ("can probably ... but only if ... unwritten"), which tells a reader the piece could not
+make up its mind and dies both as a search result and as a share. If the honest answer is
+conditional, move the condition into the summary and leave the headline clean. Rewrite it yourself
+rather than sending the piece back for it.
 
 LENGTH: confirm it lands in 800 to 1200 words. If it runs long, cut to the ceiling; do not pad if
 short.

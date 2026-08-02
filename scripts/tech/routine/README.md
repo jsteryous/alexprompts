@@ -143,7 +143,25 @@ real-estate engine's local grounding and fair-housing care.
    Emits `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`, and `## CLIPS`.
 4. **`pass4_editor.md`** — audits against the brief: fact check, first-person voice, mandatory
    honest-trade-offs beat, stakes-not-hype, real mechanism, fair housing, links, style, fragments,
-   not-advice, and the `greenville works` tag.
+   not-advice, the `greenville works` tag, clippable leads, and the CLIPS block. **Updated August
+   2026** to enforce the question-first rework, since until then every rule added in passes 0 to 3
+   was held up by the writer's good behavior alone. New or changed gates:
+   - **THE QUESTION MUST BE NAMED AND ANSWERED**, which REPLACES the old "keep the animating question
+     invisible" rule. That rule would have cut the named question on sight, so leaving it would have
+     silently undone the whole rework at the last pass. It now also checks the piece answers the
+     question in the BRIEF and has not drifted to a different one.
+   - **CALCULATED FIGURES**, checked in both directions: a computed figure written as though an
+     agency published it is a fact error even though the number is right, and a figure presented as a
+     calculation that is not in the brief's THE ARITHMETIC is invented.
+   - **SUBHEADS ARE REQUIRED** (3 to 5 descriptive H2s), plus an explicit carve-out saying the
+     no-signposting rule does NOT apply to headings, since conflating the two is what produced the
+     wall-of-prose pieces.
+   - **CUT BLANKET DISCLAIMERS** under show-the-seams; caveats attach to the specific figure.
+   - **THE PRIOR** attributed to the common view, never to Alex, and no manufactured twist when the
+     brief says the prior held.
+   - **The closing question may not be the question the piece answered**, checked against the brief.
+   - **HEADLINE** gate (there was none): the question or the finding, under 14 words, one hedge max.
+   - **The buy-or-sell offer defaults to CUT** on civic or technical explainers.
 
 `orchestrator.md` wires them as cold sub-agents, picks the topic (bank first, else scouted), dedups
 against the drafts log and the live site, and on a good topic inserts a `blog_posts` row tagged
