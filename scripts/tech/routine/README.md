@@ -117,11 +117,30 @@ real-estate engine's local grounding and fair-housing care.
    LEDGER from STEP 0B and emits this piece's VERDICT LINE, whose format now carries the question,
    the answer, and the hinge condition, so the ledger becomes a record of what the track has
    actually settled and doubles as dedup material for the scout.
-3. **`pass3_writer.md`** — writes the essay in Alex's first-person voice, following the spine (open
-   cold on the change, plain-English mechanism, honest stakes, honest tension, takeaway then a real
-   question), in house style (no em dashes, no fragments, plain English, no hype), with inline
-   citations and internal links, fair-housing care, and an optional `/find-a-pro` line where the
-   topic touches where to live or buy. Emits a `## METADATA` block plus `## ARTICLE` and `## X`.
+3. **`pass3_writer.md`** — writes the essay in Alex's first-person voice, in house style (no em
+   dashes, no fragments, plain English, no hype), with inline citations and internal links and
+   fair-housing care. **Reworked August 2026** for the question-first engine, at Alex's call:
+   - **NAME THE QUESTION, AND ANSWER IT.** This REVERSES the old "keep the animating question
+     invisible" rule. The piece states its question in the first two or three paragraphs and answers
+     it early rather than holding it for a reveal, because the question is why the piece exists and
+     why anyone shares it, and burying it cost the piece its hook and its headline. Naming the
+     question the reporting asked is still distinct from announcing a thesis, and the file draws
+     that line with examples.
+   - **Subheads are REQUIRED**: 3 to 5 descriptive H2s, which is what fixes the wall-of-prose
+     problem the section shipped with. They work now because the piece has an answer and the
+     subheads are its skeleton. The anti-signposting rule is rescoped to PROSE sentences, since a
+     subhead does the opposite job (a signpost narrates the piece, a subhead lets a skimmer skip).
+   - **THE PRIOR, carefully.** Uses the brief's prior gap as material, attributed to the common view
+     ("the easy assumption is...") and never to Alex, since inventing his interior is banned.
+   - **Calculations are not sourced figures.** The brief's computed numbers must be attributed as
+     arithmetic in the sentence where they appear, with inputs and assumption shown, never presented
+     as though an agency published them.
+   - **The closing question may not be the question the piece answered**, mirroring the guard in
+     pass 2.
+   - **Headline limits**: the question or the finding, under 14 words, at most one hedge.
+   - **The offer**: the skip-on-pure-civic rule is hardened after a tariff-docket piece shipped with
+     a buy-or-sell line in it. Most pieces in this section should carry no offer at all.
+   Emits `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`, and `## CLIPS`.
 4. **`pass4_editor.md`** — audits against the brief: fact check, first-person voice, mandatory
    honest-trade-offs beat, stakes-not-hype, real mechanism, fair housing, links, style, fragments,
    not-advice, and the `greenville works` tag.
