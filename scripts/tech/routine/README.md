@@ -97,12 +97,26 @@ real-estate engine's local grounding and fair-housing care.
    to rescue a failed run by pivoting to a survey of the general subject.
    **Handles both input paths**: a scout question, or a bank topic with no question (in which case
    it writes the question and the prior itself before researching).
-2. **`pass2_angle.md`** — turns research into judgment: the one sharp, honest SPINE, the stakes
-   earned, the tension respected, the so-what (with a calibrated net-good-or-bad verdict when the
-   evidence carries one), and the reader's question. This is where the piece gets a point of view
-   instead of being a meeting recap. It also reads the TRACK LEDGER (prior pieces' one-line
-   verdicts, from STEP 0B) so it can build on or explicitly update what the track already
-   concluded, and it emits this piece's own VERDICT LINE for the ledger.
+2. **`pass2_angle.md`** — turns the finding into a piece: the one sharp SPINE, the stakes earned,
+   the tension respected, the so-what (with a calibrated verdict when the evidence carries one),
+   and the reader's question. **Rewritten August 2026** to close the last link in the question-first
+   chain. Its governing rule is now **CARRY THE ANSWER**: the brief opens with one, and the spine is
+   built FROM it. The failure it guards is reading past the answer, picking some other interesting
+   true thing further down the brief, and building on that instead, which feels like editorial
+   judgment and silently throws away both prior passes. It also mines **THE PRIOR TESTED**, the gap
+   between what a reader walks in believing and what is true, with a different spine for each of the
+   three outcomes: prior wrong (the correction is the spine, the strongest piece available), prior
+   right for the wrong reason (the mechanism is the spine), prior right (the COST is the spine, and
+   manufacturing a twist is banned here exactly as it is in pass 1, since this is the more tempting
+   place to do it). The track's standing question about South Carolina's prosperity is now scoped
+   explicitly to the LEDGER and is no longer restated as though it were the question of the piece,
+   which is what made early pieces converge on the same conclusion regardless of subject. Keeps the
+   answer-versus-verdict distinction (a finding is factual, a verdict is judgment) so the writer
+   treats them differently. STEP 5 carries a hard guard: **the closing question may not be the
+   question the piece just answered**, since that retracts the piece's own work. Reads the TRACK
+   LEDGER from STEP 0B and emits this piece's VERDICT LINE, whose format now carries the question,
+   the answer, and the hinge condition, so the ledger becomes a record of what the track has
+   actually settled and doubles as dedup material for the scout.
 3. **`pass3_writer.md`** — writes the essay in Alex's first-person voice, following the spine (open
    cold on the change, plain-English mechanism, honest stakes, honest tension, takeaway then a real
    question), in house style (no em dashes, no fragments, plain English, no hype), with inline
