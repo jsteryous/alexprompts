@@ -26,3 +26,6 @@ Images are the Commons-generated 1920px-wide renderings, downloaded July 2026.
 | `downtown-falls-2.jpg` | downtown-falls | [source](https://commons.wikimedia.org/wiki/File:Greenville_-_Main_Street_Bridge_03.jpg) | P. Hughes | CC BY 4.0 |
 | `liberty-bridge-2.jpg` | liberty-bridge | [source](https://commons.wikimedia.org/wiki/File:Liberty_Bridge,_Falls_Park_on_the_Reedy,_Greenville_SC_20160701_2.jpg) | DXR | CC BY-SA 4.0 |
 | `reedy-river-2.jpg` | reedy-river | [source](https://commons.wikimedia.org/wiki/File:Greenville_Falls_Park_2021-04-25.jpg) | Yousef Abdul-Husain | CC BY-SA 4.0 |
+| `downtown-falls-3.jpg` | downtown-falls | [source](https://commons.wikimedia.org/wiki/File:Greenville_-_Main_Street_Bridge_2.jpg) | P. Hughes | CC BY-SA 4.0 |
+| `liberty-bridge-3.jpg` | liberty-bridge | [source](https://commons.wikimedia.org/wiki/File:Greenville_-_Liberty_Bridge_3.jpg) | P. Hughes | CC BY-SA 4.0 |
+| `reedy-river-3.jpg` | reedy-river | [source](https://commons.wikimedia.org/wiki/File:Greenville_-_Gardens,_Reedy_River_Falls_Park.jpg) | P. Hughes | CC BY 4.0 |
