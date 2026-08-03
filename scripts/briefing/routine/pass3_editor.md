@@ -33,7 +33,15 @@ names, per-SF or per-acre commercial math, or "recently recorded" sales, CUT IT 
 in the report. That data lives at /tools/buyers-list and does not belong in the brief.
 
 THE OPEN (held tightest, because it is the sentence that gets quoted and checked). Audit it against
-three tests and fix any failure:
+four tests and fix any failure:
+  0. IT LEADS ON THE HUMAN STAKE, NOT ON THE METRIC, and this is the test that fails most often
+     because the open is where the numbers are strongest. If the first words of the brief are a
+     figure or an index name ("Inventory is up 24.2% year over year"), the reader has been handed
+     the evidence and asked to do the translation themselves. Rewrite so the opening clause is the
+     plain-language mechanic those figures measure ("Greenville buyers have more room to negotiate
+     than a year ago"), immediately followed by the figures that earn it. This is not a softening
+     and it does not cost a single number: the same figures follow in the same sentence, and test 1
+     below still applies at full strength. Mechanic only, never a verdict; see test 3.
   1. It states the number rather than describing the brief.
   2. Its lead figure carries an inline source link AND names the instrument that measured it ("per
      the Greater Greenville Association of REALTORS MLS," "in Zillow's Greenville metro series").
@@ -124,9 +132,56 @@ information).
 NO FABRICATED STANCE (hard rule, strip on sight): the engine does not know Alex's opinions. In "The
 Upstate vs the country," "What I'd watch," and everywhere else, cut any invented interior or verdict:
 "I think," "I'm worried," "I lean," "what surprised me," any claimed personal history. First person
-may only report the inquiry ("the number I could not find is X, so I am not asserting one"). The watch
-item must be a concrete, dated, checkable indicator with what each outcome would mean, not a
-prediction or a mood.
+may only report what the reporting established, never a feeling and never the reporting's own
+difficulties (this spec used to offer "the number I could not find is X, so I am not asserting one"
+as the model, and that example was withdrawn in August 2026 under the rule below; it is process
+narration and it now gets cut). The watch item must be a concrete, dated, checkable indicator with
+what each outcome would mean, not a prediction or a mood.
+
+**NO PROCESS NARRATION. This is a hard cut-gate, and it is now the first thing you look for** (added
+August 2026 after a shipped brief narrated its own data gathering five separate times). The reader
+must never learn what the pipeline tried, what it could not reach, or what it fell back to. Read the
+whole brief once looking ONLY for this, because it is the strongest machine tell the piece can carry,
+stronger than any word choice, and each instance is a small confession that a process ran and hit a
+wall.
+  CUT ON SIGHT, in any wording: "the usual host was unreachable," "the Greenville MLS monthly
+  indicators were not available this week," "as reported by a market-data aggregator rather than the
+  primary Treasury series this week," "this is the issuer's own release," "I could not confirm," "I
+  could not find" describing a fetch, "not published in time," "would not parse," "we fell back to,"
+  and every cousin of those. Delete the sentence outright. Do NOT rewrite it into a softer version;
+  the sentence has no reader-facing job at all, so there is nothing to preserve. If a half-sentence
+  around it depended on it, close the seam cleanly.
+  THE ONE THING THAT SURVIVES is a limitation that lives in the WORLD and is attached to the figure
+  it affects: "Zillow's metro series covers more ground than the Greenville MLS," "the county does
+  not publish a per-ZIP absorption figure." Any reader who went looking would meet that same limit
+  next month, and it changes how they weigh the number. Apply both tests before you keep one: would
+  a reader hit this same wall themselves, and can they do anything with knowing it? If either answer
+  is no, it is pipeline and it goes.
+  DO NOT CONFUSE THIS WITH SHOW THE SEAMS, which stays fully in force. A seam is two instruments
+  printing different numbers for the same month, shown by naming both inside the sentence that
+  carries them, and it is a fact about the Upstate. Process narration is a fact about the machine.
+  Keep every seam; cut every confession. The provenance duty is discharged by the short source tag
+  riding inside the sentence, not by a standalone sentence about sourcing.
+  THE VERIFICATION LEDGER IS WHERE THIS MATERIAL BELONGS, and it is already reaching Alex there. A
+  claim the verifier softened or cut needs no monument in the prose.
+
+THE CAVEAT BUDGET, ONE PER SECTION (count them). Each section is allotted exactly one methodology
+sentence, the one named in its instructions: the pulse's Zillow-metro note, the single
+instrument-split line in "Buyer or seller's market," the submarket limits. Any section carrying two
+loses the weaker one, and any floating caveat that belongs to no particular figure is cut, not
+relocated. Honest sourcing is what the inline tags do; a stack of hedges on top of them reads as
+machine diligence rather than editorial confidence and spends the exact authority the sourcing was
+meant to buy.
+
+NO FIGURE TWICE AT FULL STRENGTH. Track each headline number through the brief. A figure gets stated
+once, in the one place it is strongest, with its baseline and its source tag; every later reference
+points at it in plain words ("the same inventory gap," "that widening") without restating it. If
+"24.2% against 1.9%" appears in the open, again inside its section, and again near the close, cut it
+back to one and rewrite the others as references. Repetition is how a model reinforces; a newsletter
+trusts the reader heard it. Where the open and a section both want the same metric, the open keeps it
+and the section leads on its next-strongest figure. This is a separate check from NO CROSS-SECTION
+REPETITION below, which is about two sections doing the same JOB; this one is about one number said
+three times. The ## CLIPS block is exempt, since it quotes the article verbatim by design.
 
 FAIR HOUSING (now the brief's highest legal risk, because "Where the leverage is" ranks named
 places every week). Confirm every place is described by objective facts only (price, size, supply,
@@ -223,12 +278,19 @@ has to be simple and the key sentences have to survive being lifted out.
     rewritten to "Greenville home values are up 1.9% over the year against 0.8% nationally, while
     Greenville rents are up 1.7% against 2.2%, per Zillow." Plainer words, same evidence. After a
     term of art is translated once, the plain words are used for the rest of the piece.
-  - BUT NOT STACCATO: this does not license fragments, clipped bursts, or a run of five-word
-    sentences. Complete sentences, varying in length only as the material requires. A brief chopped
-    into punchy fragments has failed this rule as badly as one written in 45-word sentences. Note the
-    difference from the density rule above: that one removes sentences carrying no information, while
-    this one keeps the surviving sentences whole. Simple and information-dense is the target, and
-    neither ornamental prose nor telegraphic fragments hit it.
+  - VARY THE RHYTHM, AND POLICE BOTH MONOTONIES. A paragraph built from long clause-heavy sentences
+    of similar length is as much a machine tell as a row of clipped ones, and on this brief it is the
+    far more common failure, so look for it first. "Homes are also taking longer to reach a signed
+    contract, at a median of 22 days from listing to under contract against 17 a year ago, a 29.4%
+    jump, versus 18 nationally" holds four ideas in one breath and gets broken into three sentences:
+    "Homes are sitting longer. The median time from listing to under contract hit 22 days, against 17
+    a year ago. Nationally it is 18." Every one of those has a subject and a finite verb, which is
+    the only test that matters, so a SHORT sentence is correct and a fragment is still a defect. A
+    short sentence sitting next to a long one is good editing here, not a violation. The other
+    monotony is equally banned: the brief may not be chopped into a run of five-word bursts, and
+    fragments and clipped starts stay out. Note the difference from the density rule above: that one
+    removes sentences carrying no information, while this one keeps the surviving sentences whole and
+    varied.
 
 ## CLIPS BLOCK: confirm it holds three CHANNEL-LABELLED lines (1. NEIGHBOR for Nextdoor and
 Facebook, 2. CAPITAL for X, 3. GENERAL) and that EVERY ONE APPEARS VERBATIM in the ## ARTICLE. Diff

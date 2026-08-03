@@ -25,6 +25,25 @@ reference only, nothing there runs on a schedule anymore.
 > The close is a plain first-person invitation ("let me know if you are looking to buy or thinking
 > of selling"), and `/find-a-pro` appears as a link target and nowhere else in the prose. See the
 > root `CLAUDE.md` strategic-direction note.
+>
+> **NEVER NARRATE THE PROCESS (August 3, 2026), all three live engines.** No piece may tell the
+> reader what the pipeline tried, what it could not reach, or what it fell back to: "the usual host
+> was unreachable," "the MLS indicators were not available this week," "as reported by an aggregator
+> rather than the primary series," "I could not confirm." A human columnist never writes these
+> because a human never experiences a failed fetch; they go to the other source and come back with
+> the number. Density of that narration was the strongest LLM fingerprint in a shipped Upstate Brief,
+> stronger than any word choice. **The line:** a limitation that lives in the WORLD may be stated
+> once, attached to the figure it affects ("no one publishes this figure, so treat it as
+> approximate," "Zillow's metro series covers more ground than the MLS"), because any reader who went
+> looking would meet the same wall. A limitation that exists only because one retrieval attempt
+> failed is cut without replacement. **The fix at the source:** each collector/researcher now works a
+> SOURCE LADDER (alternate publishers of the same number) instead of reporting a failure, treats its
+> own fact sheet as INTERNAL, and routes retrieval friction to the review packet under SOURCING
+> NOTES, which is where Alex reads about the machinery. Writers carry the rule, editors carry a hard
+> cut-gate. Shipped alongside three related anti-tell rules: **one caveat per section**, **state a
+> figure once** (repetition is model reinforcement; a newsletter trusts you heard it), and **vary
+> sentence rhythm in BOTH directions** (a run of long clause-heavy sentences is as much a tell as a
+> run of clipped ones; short COMPLETE sentences are correct, fragments stay banned).
 > See [[saturday-research-engine]] in memory. (History: it was rebuilt from AI-news into a
 > research engine in June 2026 before being killed.)
 

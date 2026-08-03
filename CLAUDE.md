@@ -186,7 +186,23 @@ engine's `pass3_writer.md` carried the same house style but now lives under
   enforces this in its passes; the website has no automated backstop, so do not introduce
   dashes in copy.)
 - **No sentence fragments.** Every sentence has a subject and a verb, never a clipped burst for effect.
-- **Flowing, complete sentences**, the way a person explains something out loud. Vary sentence length naturally. Clarity carries the weight, not punchiness or staccato.
+- **Flowing, complete sentences**, the way a person explains something out loud. Vary sentence length
+  naturally, **and in BOTH directions** (tightened August 3, 2026): a run of long clause-heavy
+  sentences of similar length is as much a machine tell as a run of clipped ones, and it is the more
+  common failure. Put a short sentence next to a long one on purpose. Short is allowed and often
+  better; the test is a subject and a finite verb, not a word count, so this is not a licence for
+  fragments. Clarity carries the weight, not punchiness or staccato.
+- **Never narrate the process** (August 3, 2026, all three engines). No piece tells the reader what
+  the pipeline tried, what it could not reach, or what it fell back to ("the usual host was
+  unreachable," "the MLS indicators were not available this week," "I could not confirm"). A human
+  columnist never writes these, because a human never experiences a failed fetch; they go to the
+  other source and come back with the number. This was the strongest LLM fingerprint in a shipped
+  Upstate Brief. A limitation that lives in the WORLD may be stated once, attached to the figure it
+  affects ("no one publishes this figure, so treat it as approximate"); one that exists only because
+  a retrieval attempt failed is cut. Human newsletters hide the plumbing. Two companion rules ship
+  with it: **one caveat per section** (hedging density reads as machine diligence, not editorial
+  confidence) and **state a figure once** (repeating "24.2% vs 1.9%" three times is model
+  reinforcement). See `scripts/CLAUDE.md` and memory `never-narrate-the-process`.
 - **Clippable leads** (added July 27, 2026, all three engines). The opening sentence and the first
   sentence under each heading are written to survive being lifted out and pasted into X or Nextdoor:
   they stand alone, name the place and the thing measured, lead with the plain-language meaning and

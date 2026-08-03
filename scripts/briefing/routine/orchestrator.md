@@ -77,8 +77,12 @@ ACCESS. It works the fixed section checklist with web search plus that dataset, 
 sourced fact sheet. Save to /tmp/brief/facts.md.
   The collector's FIRST job in Section A is fetching the GGAR MLS monthly indicators (the local
   source of record, a PDF at scr.stats.showingtime.com), because that is the instrument Alex's
-  professional readers check the brief against. If that fetch fails it must say `GGAR: UNAVAILABLE`
-  in the sheet rather than fall back silently. Every residential figure in the sheet must carry its
+  professional readers check the brief against. If that fetch fails the collector works its source
+  ladder (the alternate publishers of the same report) before declaring `GGAR: UNAVAILABLE` in the
+  sheet. That line is INTERNAL: it routes to the STEP 5 packet so Alex knows why the lead moved, and
+  it must never appear in the brief itself. The writer and editor are under a hard NEVER NARRATE THE
+  PROCESS rule, because a reader who is told "the MLS indicators were not available this week" learns
+  nothing they can use and everything about the machine. Every residential figure in the sheet must carry its
   instrument label ("GGAR MLS" or "Zillow metro series") and its exact source URL from the dataset's
   source_urls map; a figure without both is not usable downstream.
   STOP CONDITION: Sections A (pulse), B (where the leverage is), and D (rates) always have
@@ -151,7 +155,13 @@ then "X POST" and the ## X block (copy-paste to X manually once live); then thre
   their character counts and the one marked as the Nextdoor fit, so Alex can post without rereading
   the piece; then three dashes; then
 "Notes" with the sections that came back NOTHING REAL, the CARRY FORWARD items for next week,
-and the DRAFT post id and slug from STEP 4.
+and the DRAFT post id and slug from STEP 4; then a "SOURCING NOTES" line listing every source that
+would not open, every `GGAR: UNAVAILABLE`, and anything the collector had to take from a secondary
+source. THIS IS THE ONLY PLACE THAT MATERIAL EXISTS. The brief itself never mentions a source it
+could not reach or a fallback it took, because narrating the pipeline is the single strongest machine
+tell the piece can carry; the packet is where Alex reads about the machinery, and the page is where
+the reader reads about the Upstate. If you see any of it in the ## ARTICLE block, the editor missed
+a cut-gate: strike the sentence before you send.
   Deliver to BOTH places, independently so one failing does not block the other:
   (a) EMAIL via mcp Gmail create_draft: to ["jsteryous@gmail.com"], subject "Upstate Brief
       (DRAFT — publish Monday AM) — <the week's lead>", body the full document. Send it if a

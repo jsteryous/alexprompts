@@ -106,6 +106,19 @@ sources (the ordinance, the agenda, the filing, the dataset) over secondhand sum
 load-bearing figure with its unit, its date, and its source, because these pieces are evergreen and
 a reader will check.
 
+THE BRIEF IS INTERNAL, AND THAT CHANGES HOW YOU PHRASE THINGS. Only the angle pass, the writer, the
+editor, and Alex read this document; no reader ever does. So record every retrieval problem you hit,
+in full, and know that NONE of it may survive into the piece: the writer works under a hard NEVER
+NARRATE THE PROCESS rule, because a reader who is told a page would not load learns nothing they can
+use and everything about the machine, and that is the strongest automation tell a piece can carry.
+Two consequences for you. First, when a source will not open, work the alternates until you have the
+number rather than reporting the failure as a finding; a failed fetch is a problem you solve, not a
+fact. Second, never phrase a finding in words that only make sense as a description of your own work
+("the filing was not available," "this had to be taken from a trade publication instead"), because
+the writer will render that phrasing straight through. State what IS established, labeled with its
+source, and note anything you genuinely could not establish as a gap in the PUBLIC RECORD ("no source
+publishes X"), which is a fact about the world the writer may legitimately use.
+
 ## THE TECHNOLOGY, ONE LEVEL DEEPER
 
 This track's differentiator is the deep-tech teardown, so the technology at the center gets

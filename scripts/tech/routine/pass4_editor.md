@@ -26,8 +26,10 @@ to understand the change, not a neutral meeting recap and not a booster press re
 person must belong to the INQUIRY (what the reporting looked into and found, the questions asked),
 never to a fabricated inner life. If it reads like a summary, an economic-development brochure, or an
 objective research brief, send it back. The first person must be spent on judgment and verification,
-not logistics: keep "no source I found quantifies this, so I am not asserting it," and cut
-performative effort framing like "I spent a week trying to figure out."
+not logistics: keep "no source I found quantifies this, so I am not asserting it," which reports the
+state of the public record, and cut performative effort framing like "I spent a week trying to figure
+out." Also cut anything that reports the research run itself rather than the record; see NO PROCESS
+NARRATION below, which is the cut-gate for it.
 
 NO FABRICATED STANCE (a hard rule, strip on sight). The engine does not know Alex's opinion, feelings,
 memories, or where he "landed," so the draft may not invent any of it. Cut every manufactured
@@ -90,6 +92,34 @@ smooth it away.
   not do its job, and it smears doubt over every number instead of the one that earned it. This has
   shipped before. Cut it, and attach a caveat to the SPECIFIC figure the brief marked unverified. If
   the brief marked a figure confirmed, the piece states it without hedging.
+
+**NO PROCESS NARRATION. A hard cut-gate, and read the piece once looking only for it** (added August
+2026). The reader must never learn what the research run tried, what it could not reach, or what it
+fell back to. Cut on sight, in any wording: "the filing was unavailable," "that page was
+unreachable," "this had to be sourced from a trade publication rather than the commission docket,"
+"I could not confirm," "the figure was not published in time," and every cousin of those. Delete the
+sentence whole rather than softening it, because it has no reader-facing job to preserve, and close
+any seam it leaves. No human writer produces these sentences: a human does not experience a failed
+fetch, they go to the other source and come back with the number, so each instance reads as a machine
+confessing that a process hit a wall. It is the strongest automation tell a piece can carry.
+  KEEP THE TWO SENTENCES THAT LOOK LIKE IT AND ARE NOT. First, a statement about the PUBLIC RECORD
+  attached to a specific figure: "no source quantifies the effect on a typical Duke bill, so I am not
+  asserting one." Any reader who went looking would meet that same wall next month, and it changes
+  how they weigh the piece. Second, the calculated-figure attribution required above ("no one
+  publishes that figure, so I worked it out from Duke's stated capacity factor and EIA generation
+  data"), which is mandatory and must never be cut under this rule. Both describe the world. The
+  banned kind describes the pipeline. Two tests before you keep one: would a reader hit this same
+  wall themselves, and can they do anything with knowing it? If either answer is no, it goes.
+  SHOW THE SEAMS STAYS IN FORCE and does not conflict. A seam is two sources printing different
+  numbers for the same thing, shown by naming both where they appear. That is a fact about South
+  Carolina. Process narration is a fact about the machine. Keep every seam, cut every confession.
+
+NO FIGURE TWICE AT FULL STRENGTH. Track each headline number through the piece. It gets stated once,
+where it is strongest, with its baseline, unit, and source tag; later references point at it in plain
+words ("that same load," "the gap the filing showed") without restating it. If a figure appears at
+full strength in the open, again in the mechanism section, and again in the takeaway, cut it back to
+one and rewrite the others as references. Repetition is how a model reinforces; a piece worth reading
+trusts the reader caught it. The ## CLIPS block is exempt, since it quotes the article verbatim.
 
 THE HONEST-TENSION BEAT IS MANDATORY. This is the core of the whole track. Confirm the piece has a
 real, specific section on the trade-off: who pays, what it costs, the constraint, the loser, or how
@@ -193,6 +223,11 @@ allowing a colon only before a genuine list; break up staccato or telegraphic pa
 flowing, complete sentences; split any sentence that stacks three or more clauses on commas and
 makes the reader hold them all; cut every banned phrase and every filler sentence; confirm it opens
 cold and concrete and ends on a real open question.
+  POLICE BOTH MONOTONIES, not only the staccato one. A run of long clause-heavy sentences of similar
+  length is as much a machine tell as a run of short ones, and it is the more common failure on this
+  track. Where three sentences in a row all carry four ideas on commas, break one of them and let a
+  short complete sentence sit beside a long one. Short is allowed and often better; a fragment is
+  still a defect. The test is a subject and a finite verb, not a word count.
 
 FRAGMENTS: read every sentence in isolation; if it lacks a subject or a finite verb, rewrite it
 complete.

@@ -35,8 +35,10 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 
 1. **`pass1_collector.md`** — works the fixed checklist: the **GGAR MLS monthly indicators** first
    (the local source of record, fetched from the ShowingTime PDF, and the preferred lead figure
-   because it is what agents and loan officers see in their own systems; `GGAR: UNAVAILABLE` when
-   the fetch fails, never a silent fallback); the residential pulse (Greenville vs
+   because it is what agents and loan officers see in their own systems; on a failed fetch it works
+   a **source ladder** (the alternate publishers of the same report) before writing
+   `GGAR: UNAVAILABLE`, which is an INTERNAL routing line for the review packet and never reaches the
+   prose); the residential pulse (Greenville vs
    national home value + rent, with the gap stated as fact) and the five market-vitals leverage
    metrics, all from `greenvilleHousing.json`; the standing **Where the leverage is** submarket
    analysis from that file's `submarkets` block (the county SPREAD with its median, the MOVERS on
@@ -60,7 +62,13 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
    **clippable test** on the open and every section's first sentence (stands alone, under 200 chars,
    one main clause, short source tag inside the clip with the methodology caveat in the NEXT
    sentence) plus general readability limits (break sentences over 35 words, one subordinate clause,
-   active voice, concrete over index-language), while still banning fragments and staccato. Emits
+   active voice, concrete over index-language), while still banning fragments and staccato. Carries
+   the **no process narration** rule added August 2026 (the reader never learns what the pipeline
+   tried, could not reach, or fell back to; a world-limitation attached to a figure stays, a
+   confession about a failed fetch goes), a **one-caveat-per-section budget**, **state a figure
+   once**, and rhythm variation in BOTH directions (a run of long clause-heavy sentences is as much a
+   machine tell as a run of clipped ones; short complete sentences are correct, fragments are not).
+   Emits
    `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`, and `## CLIPS` (three paste-ready lines for
    X/Nextdoor, each copied **verbatim** from the article so it inherits the fact-checking, with
    character counts and one marked as the Nextdoor fit).
@@ -80,7 +88,11 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
    mechanic not verdict), the no-filler rule (Around town is one line when dry, Rates stays short),
    no fabricated stance, **fair housing** (now the top legal risk, since the submarket section ranks
    named places every week), links, style, the `briefing` tag (never `greenville` /
-   `greenville works`).
+   `greenville works`). Since August 2026 it also runs three hard cut-gates for the machine tells:
+   **no process narration** (delete any sentence about a source that would not open or a fallback
+   taken, whole, without softening), the **one-caveat-per-section budget**, and **no figure twice at
+   full strength**; plus an added open test that the lead clause is the plain-language mechanic
+   rather than a bare metric.
 
 `orchestrator.md` wires them as cold sub-agents, guards first (same-week dupe; stale-draft
 backpressure), builds the COVERED LEDGER by recalling the last few PUBLISHED briefs from Supabase
