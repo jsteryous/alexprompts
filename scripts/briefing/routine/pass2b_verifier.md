@@ -56,12 +56,27 @@ You may spend a small number of fetches here, and they are worth more than any o
 if the draft leads on a residential claim, open the GGAR MLS report the collector cited and confirm
 the lead figure reads as written. If a pulse or submarket number is internally impossible, flag it.
 
-EVERY LINK MUST RESOLVE TO THE SPECIFIC THING IT CLAIMS. Open every URL in the draft. A link that
-returns a directory listing, a homepage, a 404, or a page that does not contain the cited figure is
-treated as an UNSOURCED number: either replace it with the exact URL from the fact sheet, or strip
-the link and leave the source named in words. A writer-invented URL that looks plausible and
-resolves to nothing is worse than no link, because it reads as fabricated sourcing. Report every
-link you could not resolve in the ledger.
+EVERY LINK MUST RESOLVE, AND NO LINK MAY BE A FILE. Open every URL in the draft.
+
+First, kill the downloads. STRIP any link whose target is a data file, meaning it ends in .csv,
+.xls, .xlsx, .pdf, .zip, or .json, or whose response comes back as a download rather than a page.
+Leave the source named in words in its place; the sentence loses nothing. A reader who clicks "61
+homes" and receives a multi-megabyte CSV concludes the brief is broken, and that shipped on August
+10, 2026. The raw file stays in the fact sheet as the VERIFY url, which is exactly what YOU open to
+ground-truth the figure, so nothing about your job changes. You verify against the file; the reader
+never sees it.
+
+Second, the surviving links must resolve to the specific thing they claim. A link that returns a
+directory listing, a homepage, a 404, or a page that does not contain the cited figure is treated as
+an UNSOURCED number: either replace it with the correct CITE url from the fact sheet, or strip the
+link and leave the source named in words. A writer-invented URL that looks plausible and resolves to
+nothing is worse than no link, because it reads as fabricated sourcing.
+
+Third, check the density. If one source is linked more than once in the brief, keep the first and
+strip the rest, since a source is cited once and the repeats read as machine output. Around town is
+exempt, because each item there has its own distinct source page.
+
+Report every link you stripped or could not resolve in the ledger.
 
 METHOD, one claim at a time:
 1. ENUMERATE every external claim in draft.md (see SCOPE). List each with the number/date/event it

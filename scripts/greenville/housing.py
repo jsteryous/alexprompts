@@ -68,6 +68,23 @@ ZORI_URL = (
     "Metro_zori_uc_sfrcondomfr_sm_month.csv"
 )
 
+# The URL a READER may be sent to, which is NOT the URL we fetch. Every URL in
+# this file is a direct .csv, so linking one from an article hands a subscriber
+# a file download instead of a page. That shipped in the August 10, 2026 brief:
+# a dozen figures whose links each downloaded a multi-megabyte CSV. The two
+# roles are now split and must stay split.
+#   source_urls -> the exact file we FETCH. Internal. It is what the collector
+#                  pulls and what the verifier re-opens to ground-truth a
+#                  number, and it never appears as a link target in prose.
+#   cite_url    -> the human landing page a reader can click. Verified August
+#                  10, 2026: renders as a normal page ("Housing Data - Zillow
+#                  Research") and documents every series below (ZHVI, ZORI,
+#                  for-sale inventory, new listings, days to pending, share of
+#                  listings with a price cut, sale-to-list).
+# Zillow also warns on that page that it changes CSV download paths from time
+# to time, so the direct file links rot; the landing page does not.
+ZILLOW_CITE_URL = "https://www.zillow.com/research/data/"
+
 METRO_DEFAULT = "Greenville, SC"   # Zillow's RegionName for the Greenville MSA
 NATION = "United States"           # the country-level row present in every metro file
 
@@ -386,10 +403,13 @@ def build_submarkets(texts: dict[str, str | None], county: str,
         "level": "ZIP code (Zillow Zip-level series)",
         "min_inventory": SUBMARKET_MIN_INVENTORY,
         "latest_month": max(latest_months) if latest_months else None,
+        # Fetch/verify targets only, never a link target in prose. See
+        # ZILLOW_CITE_URL.
         "source_urls": {
             key: vitals_url(subdir, filename)
             for key, _unit, subdir, filename, _dec, _scale in SUBMARKET_METRICS
         },
+        "cite_url": ZILLOW_CITE_URL,
         "zips": zips,
     }
 
@@ -442,12 +462,15 @@ def build_dataset(zhvi_text: str | None, zori_text: str | None, metro: str,
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "source": ("Zillow Research (ZHVI, ZORI, and market-vitals metrics), "
                    "metro level plus ZIP-level submarkets"),
+        # Fetch/verify targets only, never a link target in prose. See
+        # ZILLOW_CITE_URL.
         "source_urls": {
             "zhvi": ZHVI_URL,
             "zori": ZORI_URL,
             **{key: vitals_url(subdir, filename)
                for key, _label, _unit, subdir, filename, _dec, _scale in VITALS},
         },
+        "cite_url": ZILLOW_CITE_URL,
         "metro": metro,
         "home_value": home_value,
         "rent": rent,

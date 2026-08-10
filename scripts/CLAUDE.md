@@ -26,6 +26,24 @@ reference only, nothing there runs on a schedule anymore.
 > of selling"), and `/find-a-pro` appears as a link target and nowhere else in the prose. See the
 > root `CLAUDE.md` strategic-direction note.
 >
+> **A LINK OPENS A PAGE, NEVER A DOWNLOAD (August 10, 2026), all three live engines.** No article
+> may link a URL ending in `.csv`, `.xls`, `.xlsx`, `.pdf`, `.zip`, or `.json`. The August 10 Upstate
+> Brief shipped with about a dozen figures linked to raw Zillow CSVs and its lead figure linked to a
+> half-megabyte ShowingTime PDF, so clicking "61 homes" downloaded a file. The cause was that the
+> engine treated the URL it FETCHES and the URL it CITES as one thing, and all three layers enforced
+> it: the collector passed the CSV through, the writer was told to link "the EXACT metric CSV URL,"
+> and the editor gate *confirmed* every Zillow link was a specific CSV. **The fix is the split.**
+> `greenville/housing.py` now emits `source_urls` (the exact files it fetches, INTERNAL, what the
+> verifier re-opens to ground-truth a figure) alongside `cite_url`
+> (`https://www.zillow.com/research/data/`, verified as a real landing page documenting every series
+> the brief uses). The collector labels every URL VERIFY or CITE, the writer may link only a CITE,
+> the verifier STRIPS any file link it finds, and the editor carries it as a hard gate. Where a
+> source publishes only a document (GGAR's monthly indicators, county budgets, planning agendas),
+> the figure is **attributed in words with no link**, which is complete sourcing. Two companion
+> rules: **one link per source per piece** at first mention (the brief now carries exactly one Zillow
+> link, since eleven links to one landing page reads as machine output), and **attribution is
+> required, a link is not**.
+>
 > **NEVER NARRATE THE PROCESS (August 3, 2026), all three live engines.** No piece may tell the
 > reader what the pipeline tried, what it could not reach, or what it fell back to: "the usual host
 > was unreachable," "the MLS indicators were not available this week," "as reported by an aggregator

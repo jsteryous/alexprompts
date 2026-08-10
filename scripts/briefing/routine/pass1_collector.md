@@ -74,12 +74,23 @@ RULES THAT APPLY TO EVERY SECTION:
   and not the market. When two instruments disagree about the same thing, REPORT BOTH with their
   names and say the direction agrees and the magnitude does not; that is the honest move and it
   reads as rigor rather than as a hedge.
-- PASS THE EXACT SOURCE URL THROUGH. greenvilleHousing.json carries a `source_urls` map with one
-  specific CSV URL per metric (zhvi, zori, days_to_pending, inventory, new_listings,
-  price_cut_share, sale_to_list). Copy the EXACT matching URL next to each figure you report. Do not
-  hand the writer a bare directory, a truncated path, or a homepage; the writer will link whatever
-  you give it, and a link that does not resolve to the specific series is treated as an unsourced
-  number by the verifier.
+- TWO KINDS OF URL, AND THEY ARE NOT INTERCHANGEABLE. Label every source URL you pass along as
+  either VERIFY or CITE, because the writer may only ever link a CITE url.
+    VERIFY: the exact file the number came out of. greenvilleHousing.json carries a `source_urls`
+    map with one specific CSV URL per metric (zhvi, zori, days_to_pending, inventory, new_listings,
+    price_cut_share, sale_to_list), plus one for the submarkets. Copy the EXACT matching URL next to
+    each figure you report, never a bare directory or a truncated path. This is what the verifier
+    re-opens to ground-truth the figure, and it is INTERNAL. It never becomes a link in the brief.
+    CITE: the human landing page for that source, which is what a reader may click. For everything
+    in greenvilleHousing.json that is the `cite_url` field, https://www.zillow.com/research/data/,
+    the page that documents all of these series.
+  NEVER PASS A FILE AS A CITE URL. A URL ending in .csv, .xls, .xlsx, .pdf, .zip, or .json
+  downloads a file instead of opening a page, and a brief that hands a subscriber a 40MB CSV when
+  they click "61 homes" looks broken and untrustworthy. That shipped on August 10, 2026 and is the
+  reason this rule exists. The GGAR/ShowingTime report is a PDF, so it is a VERIFY url too: cite
+  GGAR in words, never as a link.
+  If a source has no human landing page at all, say so and pass only the VERIFY url; the writer will
+  then name that source in words with no link, which is a perfectly good outcome.
 - Prefer primary sources: FRED, Freddie Mac, Zillow Research, the county's agendas and filings,
   the city's official pages, SEC filings, the utility. Local outlets (Greenville News, Post and
   Courier Greenville, Upstate Business Journal, GSA Business Report) are fine for what happened;
@@ -219,7 +230,8 @@ for a house actually needs.
      county at 25, against a county middle of 21"), never what they mean for a decision ("29615 is
      the place to buy") and never advice. The mechanic is yours; the opinion is Alex's.
   Source every figure to "Zillow Research (ZIP-level series), <latest_month>" with the exact
-  matching URL from the submarkets `source_urls` map. This section is never NOTHING REAL.
+  matching URL from the submarkets `source_urls` map as its VERIFY url, and the submarkets
+  `cite_url` as its CITE url. This section is never NOTHING REAL.
 
 SECTION C, AROUND TOWN (the week's local development news; the news-digest part of the brief, and
 the only section that may be dry). Surface the notable Upstate real-estate, development, and
@@ -285,7 +297,8 @@ received, and months supply, each with its year-earlier value and percent change
 and the report's "current as of" date. Or `GGAR: UNAVAILABLE` plus what you tried.
 THEN home value + rent from the Zillow metro series, Greenville vs national, with the as-of month
 and the two factual gap lines, then the facts-only read. Every figure labeled with its instrument
-("GGAR MLS" or "Zillow metro series") and carrying its exact source URL.>
+("GGAR MLS" or "Zillow metro series") and carrying its VERIFY url and its CITE url, labeled as
+such. GGAR has no CITE url, because the report is a PDF.>
 
 ## MARKET VITALS
 <the five leverage metrics from market_vitals, each with the Greenville latest, the year-ago

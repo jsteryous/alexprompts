@@ -43,9 +43,11 @@ four tests and fix any failure:
      and it does not cost a single number: the same figures follow in the same sentence, and test 1
      below still applies at full strength. Mechanic only, never a verdict; see test 3.
   1. It states the number rather than describing the brief.
-  2. Its lead figure carries an inline source link AND names the instrument that measured it ("per
-     the Greater Greenville Association of REALTORS MLS," "in Zillow's Greenville metro series").
-     An unsourced or unattributed lead number is a defect; add the attribution from the fact sheet
+  2. Its lead figure NAMES the instrument that measured it ("per the Greater Greenville Association
+     of REALTORS MLS," "in Zillow's Greenville metro series"). A link is not required and is wrong
+     when the source is a file: the usual lead source, the GGAR monthly indicators, is a PDF, so it
+     is named in words and never linked.
+     An unattributed lead number is a defect; add the attribution from the fact sheet
      or lead on a different figure that has one.
   3. It renders NO verdict and NO comparative judgment. "The local market is loosening faster than
      the country" is a conclusion and gets cut, exactly as it would inside the pulse section. The
@@ -56,7 +58,9 @@ four tests and fix any failure:
 THE PULSE (The Upstate vs the country): confirm it reports the Greenville and national figures for
 both home value and rent, with the as-of month, and states the gap as FACT. Strip any verdict, worry,
 advice, or prediction ("this is a good sign," "buyers should," "concerning"); the section describes
-the divergence and stops. Confirm each of the two figures links to its Zillow source once.
+the divergence and stops. This section carries the brief's ONE Zillow link, on the home-value
+figure, pointing at the Zillow Research landing page and never at a CSV; the rent figure beside it
+is attributed in words.
 
 BUYER OR SELLER'S MARKET (the NATIONAL comparison, and only that): this section's single job is how
 Greenville's leverage compares to the country. Confirm it is FOUR to SIX sentences of PROSE with
@@ -83,7 +87,8 @@ sitting (new listings flat or falling). If the draft demoted new listings to a c
 send it back; it is the leading indicator in this block.
 The section may state the factual balance the numbers describe (the market mechanics), but STRIP any
 instruction to act ("offer below asking," "list now," "wait") and any invented verdict or mood.
-Confirm the vitals figures link to their Zillow Research source once.
+Confirm the vitals figures carry NO links at all: Zillow was linked once above, so these are
+attributed in words ("per Zillow's metro series"). Strip any link you find here.
 
 NO CROSS-SECTION REPETITION (the check that keeps the two leverage sections distinct). "Buyer or
 seller's market" owns the comparison to the COUNTRY; "Where the leverage is" owns the spread across
@@ -192,10 +197,12 @@ fine; characterizing what a ZIP is LIKE, or who should look there, is steering a
 sentence that pairs a place with any human descriptor rather than a measurement gets cut or
 rewritten to the measurement.
 
-LINKS: confirm every load-bearing figure links inline to its source at first mention, no source
-linked twice, the two Zillow pulse figures each linked once, the ZIP-level figures linked once from
-"Where the leverage is," no links to listing portals or competing agents, and the buy-or-sell
-invitation present exactly once, in the close, one sentence, low-pressure.
+LINKS: confirm every load-bearing figure is ATTRIBUTED at first mention, by an inline link where its
+source has a human landing page and by naming the source in words otherwise (the GGAR MLS figures
+are always words, since that report is a PDF). Attribution is required; a link is not. Confirm no
+source is linked twice, no link points at a data file, no links to listing portals or competing
+agents, and the buy-or-sell invitation present exactly once, in the close, one sentence,
+low-pressure.
 
 **THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
 August 1, 2026). Cut any sentence that says Alex will refer, match, connect, hand off, or introduce
@@ -209,12 +216,20 @@ working on](/find-a-pro) and I will help." A close that names buying without nam
 miss, because a seller has to work out for themselves that the offer includes them. The URL may
 appear as a link target and nowhere else in the prose.
 
-Additionally, confirm every Zillow URL is a
-SPECIFIC metric CSV matching the figure it anchors, taken verbatim from the fact sheet's source_urls
-map. A bare directory such as files.zillowstatic.com/research/public_csvs/ is a broken citation and
-has already shipped once; replace it with the exact metric URL, or strip the link and name the
-source in words. If the verifier's ledger reports a link it could not resolve, that link must be
-fixed or gone.
+**NO LINK IN THE BRIEF MAY DOWNLOAD A FILE. This is a hard gate, not a preference** (added August
+10, 2026). Strip any link whose target ends in .csv, .xls, .xlsx, .pdf, .zip, or .json, and name
+the source in words where it stood. This gate REPLACES the old instruction to confirm every Zillow
+URL was a specific metric CSV, which is what caused the defect: the August 10, 2026 brief shipped
+with a dozen figures linked to Zillow CSV files and a lead figure linked to a half-megabyte
+ShowingTime PDF, so clicking "61 homes" downloaded a file. An article links to pages a reader can
+read. The raw files still live in the fact sheet as VERIFY urls for the verifier, and they belong
+nowhere else.
+
+Then confirm the density: exactly ONE link per source across the whole brief, at first mention, with
+Around town exempt because each item there has its own source page. Zillow gets one link in the
+brief, on the first Zillow figure, pointing at the `cite_url` landing page. Every later Zillow
+figure is attributed in words. If the verifier's ledger reports a link it stripped or could not
+resolve, that link must be gone.
 
 INSTRUMENT LABELS (the provenance check, and the reason a correct number can still read as false).
 Every residential figure must name whose measurement it is. Confirm that no Zillow panel figure is

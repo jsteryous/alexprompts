@@ -297,7 +297,11 @@
       "PowerShell(Remove-Item *)",
       "Bash(awk '{print \"  \"$5\"  \"$9}')",
       "PowerShell($c = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Write-Output \"killing PID $_\"; Stop-Process -Id $_ -Force } } else { Write-Output \"port 3000 free\" }; Start-Sleep -Seconds 1; if \\(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue\\) { Write-Output \"STILL BOUND\" } else { Write-Output \"port 3000 now free\" })",
-      "PowerShell($c = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force }; Write-Output \"server stopped\" } else { Write-Output \"already stopped\" })"
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force }; Write-Output \"server stopped\" } else { Write-Output \"already stopped\" })",
+      "PowerShell(Stop-Process *)",
+      "Bash(echo \"EXIT: $?\")",
+      "WebFetch(domain:www.zillow.com)",
+      "WebFetch(domain:dor.sc.gov)"
     ]
   }
 }

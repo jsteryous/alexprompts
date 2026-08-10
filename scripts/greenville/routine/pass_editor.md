@@ -79,8 +79,13 @@ references. Repetition is how a model reinforces; a guide worth reading trusts t
 
 Every load-bearing NUMBER (a price, a tax rate, a millage, a commute time, an income or rent figure,
 a date) must have an inline citation to a real primary or reputable source at the point it appears.
-Flag any load-bearing figure that has NO source link, because an unsourced number on an evergreen
-page is a liability. Confirm each cited number is stated with the year it is from ("as of 2026") so
+Flag any load-bearing figure that has NO source attribution, because an unsourced number on an
+evergreen page is a liability. **STRIP any link whose target is a data file** (a URL ending in
+`.csv`, `.xls`, `.xlsx`, `.pdf`, `.zip`, or `.json`) and replace it with the page that hosts the
+document, or with the source named in words where no such page exists (added August 10, 2026, after
+an Upstate Brief shipped a dozen CSV-download links). A figure attributed in words is properly
+sourced; a figure linked to a download is a defect, because clicking it downloads a file instead of
+opening a page. Confirm each cited number is stated with the year it is from ("as of 2026") so
 the page ages honestly. If a figure reads suspiciously precise for something the writer could only
 estimate, demand it be sourced or softened to a qualitative range. Do not invent or "correct" a
 number yourself; if one is unsupported, cut it or mark it for the human to verify. Where sources

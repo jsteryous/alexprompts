@@ -30,9 +30,13 @@ LEAD CANDIDATE from the fact sheet, state the number cold, and say in one senten
 week's headline. No heading for the open.
 THE OPEN IS UNDER THE SAME RULES AS EVERY SECTION, and it is the sentence most likely to be
 screenshotted, quoted, and checked, so it is held tightest of all:
-  - It MUST carry an inline source link on its lead figure, and it MUST name the instrument
-    ("per the Greater Greenville Association of REALTORS MLS," "in Zillow's Greenville metro
-    series"). An unsourced, unattributed lead number is a defect, not a stylistic choice.
+  - It MUST name the instrument that measured its lead figure ("per the Greater Greenville
+    Association of REALTORS MLS," "in Zillow's Greenville metro series"). An unattributed lead
+    number is a defect, not a stylistic choice. The ATTRIBUTION is the requirement; a link is not.
+    Link the lead figure only if its source has a CITE url, and the usual lead source, the GGAR
+    monthly indicators, does not, because that report is a PDF. Naming GGAR in the sentence is
+    complete sourcing on its own. Never link a PDF or a CSV to satisfy this rule; see LINK ONLY WHAT
+    THE SHEET GAVE YOU below.
   - It MUST NOT render a verdict or a comparative judgment. "The local market is loosening faster
     than the country" is a conclusion and is banned here exactly as it is banned inside the pulse
     section. It MAY state the market MECHANIC the figures literally measure ("homebuyers have more
@@ -197,8 +201,9 @@ From Section A. In three to five sentences: Greenville's typical home value with
 move set beside the national figure, then the same for rent, then the one plain line on what the
 two gaps show together (prices bid up faster than the nation while rents run cooler, or whatever the
 numbers say). State the divergence as fact. Do NOT render a verdict, a worry, or advice; the reader
-draws the conclusion. Link the home-value and rent figures to their Zillow source once each, using
-the exact zhvi and zori URLs from the sheet, and give the as-of month. Close the section with one
+draws the conclusion. THIS SECTION CARRIES THE BRIEF'S ONE ZILLOW LINK, on the home-value figure,
+pointing at the `cite_url` landing page from the sheet and never at a CSV. The rent figure beside it
+is attributed in words, not linked again. Give the as-of month. Close the section with one
 plain sentence noting that these are Zillow's modeled figures for the metro area, which covers more
 ground than the Greenville MLS and is a different instrument from the MLS median sale price.
 
@@ -246,8 +251,11 @@ a seller reads (homes still going under contract in about three weeks and sellin
 sharp pricing still moves). Describe mechanics only. Do NOT tell anyone what to do ("offer below
 asking," "list now"), and do NOT invent a verdict or a mood.
 
-Link the vitals once, to the EXACT metric CSV URL the sheet supplied, never a directory path. Use
-each metric's own as-of month, since sale-to-list may lag the others by a month.
+DO NOT LINK ANYTHING IN THIS SECTION. Zillow was already linked once above, and these figures come
+off the same source, so they are attributed in words ("per Zillow's metro series") and carry no
+link. Six figures each linked to the same landing page is the pattern that made the August 10, 2026
+brief read as machine output. Use each metric's own as-of month, since sale-to-list may lag the
+others by a month.
 
 ## Where the leverage is
 From Section B, the differentiated core and the section a reader is most likely to act on. THIS
@@ -281,8 +289,9 @@ neighborhood and its lines cross school and municipal boundaries. NEVER headline
 sheet marks `thin`; if you mention one at all, say its listing count is too small for the monthly
 move to mean much.
 State mechanics, never verdicts: "29615 has the county's longest days to pending at 25" is a fact,
-"29615 is where the deals are" is a verdict and comes out. Link the ZIP-level figures once to the
-exact URL the sheet supplied.
+"29615 is where the deals are" is a verdict and comes out. DO NOT LINK ANYTHING IN THIS SECTION
+either. The ZIP-level series is Zillow, already linked once at its first mention, so name it in
+words ("Zillow's ZIP-level series") and add no link.
 
 ## Around town
 From Section C, the week's local development news: the notable Upstate real-estate, development, and
@@ -339,11 +348,31 @@ sentence that carries them. It is never a report on the pipeline's own retrieval
 standalone caveat sentence; see NEVER NARRATE THE PROCESS above, which governs where the two rules
 appear to meet.
 
-LINK ONLY WHAT THE SHEET GAVE YOU. Use the EXACT source URL the fact sheet printed next to each
-figure. Never shorten it, never trim it to a directory, and above all NEVER construct a URL you
-think is probably right. If the sheet did not give you a URL for a number, write the number with its
-source NAMED in words and no link at all; an honest unlinked attribution is fine, and a fabricated
-link that resolves to a directory listing or a 404 is a serious defect that reads as fake sourcing.
+LINK ONLY WHAT THE SHEET GAVE YOU, AND NEVER LINK A FILE. Two rules govern every link in the brief.
+
+FIRST, A LINK MUST OPEN A PAGE, NEVER DOWNLOAD A FILE. The fact sheet labels each source URL VERIFY
+or CITE. You may only ever link a CITE url. A VERIFY url is the raw data file the figure came out
+of, it is internal, it exists so the verifier can re-open it and ground-truth the number, and it
+must never appear as a link target in the prose. Never link a URL ending in .csv, .xls, .xlsx,
+.pdf, .zip, or .json, whatever the sheet calls it. This is not a style preference. On August 10,
+2026 the brief shipped with a dozen figures linked to Zillow CSVs, so a reader who clicked the words
+"61 homes" got a multi-megabyte file download instead of a page, which reads as broken and makes
+honest sourcing look like a bug. Data files also move; Zillow states plainly that it changes its CSV
+paths from time to time, so those links rot while the landing page does not.
+
+SECOND, ONE LINK PER SOURCE PER BRIEF, AT FIRST MENTION. Not one per figure and not one per section.
+All the Zillow metro and ZIP series share a single landing page, so linking each of eleven figures
+to it produces eleven identical links and reads as machine output; a human columnist cites a source
+once and trusts you to remember. Link Zillow ONCE, on the first Zillow figure in the brief, and
+attribute every later Zillow figure in words alone. Around town is the exception, since each item
+has its own distinct source page, so link each one.
+
+Everything else keeps its source NAMED IN WORDS and carries no link, which is the normal case and a
+perfectly good outcome. GGAR is the important one: the monthly indicators report is a PDF, so the
+MLS figures the brief leads on are attributed as "per the Greater Greenville Association of REALTORS
+MLS" and never linked. NEVER construct a URL you think is probably right, and never promote a VERIFY
+url to a link because a figure felt like it needed one. A fabricated link that resolves to a
+directory listing or a 404 reads as fake sourcing, and an unlinked attribution never does.
 
 NAME THE INSTRUMENT ON EVERY RESIDENTIAL FIGURE. The fact sheet labels each one "GGAR MLS" or
 "Zillow metro series." Carry that label into the prose. Write "Zillow's typical home value for the

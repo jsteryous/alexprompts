@@ -216,6 +216,20 @@ engine's `pass3_writer.md` carried the same house style but now lives under
   figures is correct here and is not the banned drumroll. State the market MECHANIC the figures
   measure ("more leverage"), never a verdict ("the market is loosening faster than the country") or
   advice ("buyers should offer under asking").
+- **A link opens a page, never a download** (added August 10, 2026, all three engines). No link in
+  an article may point at a data file, meaning a URL ending in `.csv`, `.xls`, `.xlsx`, `.pdf`,
+  `.zip`, or `.json`. The August 10 Upstate Brief shipped with roughly a dozen figures linked to raw
+  Zillow CSVs and its lead figure linked to a half-megabyte ShowingTime PDF, so a reader who clicked
+  the words "61 homes" got a file download instead of a page. That reads as a broken site and it
+  makes real sourcing look like a bug. The fix is a split the engines now carry in their data and
+  their passes: the **verify URL** is the exact file a number came out of, it stays internal, and it
+  is what the verifier re-opens to ground-truth the figure; the **cite URL** is the human landing
+  page a reader may click (for every Zillow series that is `https://www.zillow.com/research/data/`,
+  which also documents them). Where a source publishes only a document, as GGAR's monthly indicators
+  and most county budgets and agendas do, the figure is **attributed in words with no link at all**,
+  which is complete sourcing and never a defect. Two companion rules ship with it: **one link per
+  source per piece**, at first mention (eleven figures pointing at one landing page reads as machine
+  output; a columnist cites a source once), and **attribution is required, a link is not**.
 - **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff" construction; a colon only introduces a genuine list. Restructure into a full sentence where you can.
 - Open cold and concrete. Lead with a fact, a scene, or a number.
 - Plain English. Translate any jargon in one sentence a smart 15-year-old understands.

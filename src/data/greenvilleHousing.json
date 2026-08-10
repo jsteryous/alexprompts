@@ -10,6 +10,7 @@
     "price_cut_share": "https://files.zillowstatic.com/research/public_csvs/perc_listings_price_cut/Metro_perc_listings_price_cut_uc_sfrcondo_sm_month.csv",
     "sale_to_list": "https://files.zillowstatic.com/research/public_csvs/mean_sale_to_list/Metro_mean_sale_to_list_uc_sfrcondo_sm_month.csv"
   },
+  "cite_url": "https://www.zillow.com/research/data/",
   "metro": "Greenville, SC",
   "home_value": {
     "metric": "ZHVI (typical home value, all homes, smoothed & seasonally adjusted)",
@@ -854,6 +855,7 @@
       "days_to_pending": "https://files.zillowstatic.com/research/public_csvs/med_doz_pending/Zip_med_doz_pending_uc_sfrcondo_sm_month.csv",
       "price_cut_share": "https://files.zillowstatic.com/research/public_csvs/perc_listings_price_cut/Zip_perc_listings_price_cut_uc_sfrcondo_sm_month.csv"
     },
+    "cite_url": "https://www.zillow.com/research/data/",
     "zips": [
       {
         "zip": "29681",

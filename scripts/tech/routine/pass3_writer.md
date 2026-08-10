@@ -116,6 +116,17 @@ it stays helpful, not spammy: link the FIRST mention only, never the same thing 
 specific figure or noun, not a whole sentence; aim for roughly one link every hundred-ish words
 where one genuinely helps; prefer primary and official sources (county, city, SCDOT, the utility,
 Census, the project's own page) over blogs; do NOT link to listing portals or to competing agents.
+
+**A LINK MUST OPEN A PAGE, NEVER DOWNLOAD A FILE** (added August 10, 2026). Never link a URL ending
+in .csv, .xls, .xlsx, .pdf, .zip, or .json. This bites hardest exactly where this engine works, on
+budget figures, agendas, filings, and datasets, because a county budget and a planning agenda are
+usually PDFs and a dataset is usually a CSV. A reader who clicks a figure and gets a file download
+instead of a page concludes the site is broken. Link the PAGE that hosts the document (the agenda
+listing, the department's budget page, the dataset's landing page) and not the document itself, and
+where no such page exists, name the source in words with no link at all ("in the county's adopted
+2026 budget"). An honest unlinked attribution is always an acceptable outcome; a download is not.
+An Upstate Brief shipped a dozen CSV-download links on August 10, 2026, which is why this is a rule
+in all three engines rather than a preference.
 Where it fits naturally, link to the site's own pages too, three kinds:
 - The FREE TOOLS, when the piece touches the job a tool does: mortgage or affordability math to
   /tools/mortgage, a property-tax figure to /tools/property-tax, a cost-of-living comparison to

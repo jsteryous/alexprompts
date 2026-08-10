@@ -156,7 +156,13 @@ Cut or rewrite any line that crosses it. This is the headline legal risk on loca
 
 LINKS: confirm load-bearing facts and first-mentioned places are linked inline to primary or
 official sources, that no source is linked twice, and that no link points to a listing portal or a
-competing agent. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
+competing agent. **STRIP any link whose target is a data file** (a URL ending in `.csv`, `.xls`,
+`.xlsx`, `.pdf`, `.zip`, or `.json`), because clicking it downloads a file instead of opening a
+page, which reads as a broken site (added August 10, 2026, after an Upstate Brief shipped a dozen
+CSV-download links). This track hits the problem constantly, since commission dockets, utility
+filings, budgets, and agendas are usually PDFs. Replace such a link with the page that hosts the
+document, or drop the link and leave the source named in words, which is fully sourced and never a
+defect. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
 `/greenville-works/...`, `/find-a-pro`). Keep the writer's links to sibling pieces (the writer
 chose them from a verified list of live pages you do not have); do not add new sibling links
 yourself. Confirm it sits in
