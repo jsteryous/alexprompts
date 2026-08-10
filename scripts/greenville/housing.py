@@ -595,6 +595,19 @@ def main() -> int:
         }
         dataset = build_dataset(zhvi, zori, args.metro, vitals_texts,
                                 submarket_texts, args.county, args.state)
+        # build_dataset degrades a missing feed to empty on purpose, so ONE dead
+        # vitals metric never fails the run. A dead headline series is different:
+        # ZHVI is the figure the Upstate Brief leads with, and this file is the
+        # only dataset the brief reads. Persisting a hollow version would strip
+        # the brief's numbers on the one morning it is allowed to publish, so the
+        # write is gated even though the in-process degradation stays intact.
+        if not (dataset.get("home_value") or {}).get("greenville"):
+            log.error(
+                "No Greenville home-value series came back from Zillow (%s). "
+                "Refusing to overwrite %s with an empty dataset; the committed "
+                "file stands.", ZHVI_URL, args.json_out or "the dataset",
+            )
+            return 1
 
     if args.json_out:
         from pathlib import Path

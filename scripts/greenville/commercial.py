@@ -45,6 +45,7 @@ import argparse
 import json
 import logging
 import sys
+import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 
@@ -54,6 +55,8 @@ log = logging.getLogger(__name__)
 
 USER_AGENT = "alex-prompts-greenville/0.1 (+https://alexprompts.com)"
 HTTP_TIMEOUT = 30
+HTTP_RETRIES = 3          # the county service blips; a blip should not lose a run
+RETRY_BACKOFF = 2.0       # seconds, multiplied by the attempt number
 
 QUERY_URL = (
     "https://www.gcgis.org/arcgis/rest/services/"
@@ -225,19 +228,31 @@ def sort_sales(sales: list[dict]) -> list[dict]:
 # ── Network (degrades gracefully) ─────────────────────────────────────────────
 
 def _get_json(url: str) -> dict | None:
-    try:
-        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=HTTP_TIMEOUT)
-        if resp.status_code != 200:
-            log.warning("GET %s -> %s", url, resp.status_code)
-            return None
-        data = resp.json()
-        if isinstance(data, dict) and data.get("error"):
-            log.warning("ArcGIS error: %s", data["error"])
-            return None
-        return data
-    except (requests.RequestException, ValueError) as exc:
-        log.warning("GET failed: %s", exc)
-        return None
+    """One ArcGIS query, retried on a transient failure. None when it stays down.
+
+    The county restarts this service often enough that a single blip should not
+    cost a whole weekly run, so a failed attempt is retried with a widening
+    pause. Note the failure mode worth retrying arrives as HTTP 200 with an error
+    body ({"error": {"code": 500, "message": "... not started"}}), not as a 5xx,
+    so the in-body error is retried the same as a transport error."""
+    last: str = "unknown"
+    for attempt in range(1, HTTP_RETRIES + 1):
+        try:
+            resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=HTTP_TIMEOUT)
+            if resp.status_code != 200:
+                last = f"HTTP {resp.status_code}"
+            else:
+                data = resp.json()
+                if not (isinstance(data, dict) and data.get("error")):
+                    return data
+                last = f"ArcGIS error: {data['error']}"
+        except (requests.RequestException, ValueError) as exc:
+            last = f"GET failed: {exc}"
+        if attempt < HTTP_RETRIES:
+            log.warning("%s (attempt %d/%d); retrying", last, attempt, HTTP_RETRIES)
+            time.sleep(RETRY_BACKOFF * attempt)
+    log.warning("%s (gave up after %d attempts): %s", last, HTTP_RETRIES, url)
+    return None
 
 
 def fetch_all(min_price: int, months: int) -> tuple[list[dict], int]:
@@ -337,6 +352,20 @@ def main() -> int:
     else:
         sales, excluded = fetch_all(args.min_price, args.months)
         dataset = build_dataset(sales, args.min_price, args.months, excluded)
+        # A live fetch that returns nothing means the county service is down, not
+        # that Greenville stopped trading commercial property. Writing that empty
+        # dataset would overwrite a good committed file, and because the weekly
+        # workflow commits whatever changed, it would silently blank the live
+        # /tools/buyers-list page while reporting success. It did exactly that on
+        # 2026-08-09, when the county's ArcGIS service was stopped. Stale data
+        # beats no data here, so fail loudly and leave the committed file alone.
+        if not sales:
+            log.error(
+                "No sales returned from the county ArcGIS service (%s). Refusing "
+                "to overwrite %s with an empty dataset; the committed file stands.",
+                QUERY_URL, args.json_out or "the dataset",
+            )
+            return 1
 
     if args.json_out:
         from pathlib import Path

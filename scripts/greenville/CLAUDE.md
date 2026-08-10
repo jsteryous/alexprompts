@@ -101,6 +101,25 @@ with web search (`pass0_scout.md`), so it never runs dry.
   beats). Unwired; kept for reference and reversibility. Its `data/` hand-off
   (`signal-latest.json` + `.txt`) is no longer read.
 
+**A collector NEVER overwrites a good dataset with an empty one (August 10, 2026).** Every
+collector here writes a file that is committed and read at build time, and every workflow commits
+whatever changed, so an empty write is a silent production edit. On August 9, 2026 the county
+stopped its `GreenvilleJS/Map_Layers_JS` ArcGIS service; `commercial.py` treated the failed fetch
+as "zero sales," wrote `count: 0`, **exited 0**, and the workflow committed it, so
+`/tools/buyers-list` went live empty while the run reported success. `records.py` hit the same
+outage and did the right thing: it refused to write and returned 1, which is why
+`greenvilleRecords.json` survived. That behavior is now the rule in all three. The gate lives in
+`main()`, at the WRITE, never in `build_dataset()`: the graceful in-process degradation is
+deliberate and unit-tested (`housing.build_dataset(None, None, ...)` must still return a shaped
+dict), so only persistence is gated. `commercial.py` fails when a live fetch yields zero sales;
+`housing.py` fails when the headline ZHVI series has no Greenville summary, while a single missing
+vitals metric still degrades quietly as designed. Stale data beats no data on all three, since the
+deed records already lag ~4 months and Zillow refreshes monthly. `_get_json` also retries three
+times with a widening pause; the retryable failure arrives as **HTTP 200 with an error body**
+(`{"error": {"code": 500, "message": "... not started"}}`), not as a 5xx, so status alone will not
+catch it. When a run fails this way the upstream is down, so the fix is to wait for the county, not
+to touch the collector.
+
 ## Commands
 
 ```bash
