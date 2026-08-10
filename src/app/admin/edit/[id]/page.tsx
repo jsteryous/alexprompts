@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import { isAdmin } from "@/lib/adminAuth";
 import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "@/app/review/Editor";
+
+// Gated editor, never a search result. See the note in /admin/page.tsx.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 const SECTION_BASE: Record<string, string> = {
   realestate: "/real-estate",

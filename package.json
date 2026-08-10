@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run check:canonicals",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint && npm run check:canonicals",
+    "check:canonicals": "node scripts/checks/canonicals.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.0",

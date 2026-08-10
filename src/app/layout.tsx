@@ -41,9 +41,14 @@ export const metadata: Metadata = {
     title: `${site.name}: ${site.tagline}`,
     description: site.oneLiner,
   },
-  alternates: {
-    canonical: site.url,
-  },
+  // NO `alternates.canonical` here, deliberately (August 2026). Next.js merges
+  // metadata shallowly down the tree, so a canonical set on the root layout is
+  // INHERITED by every page that does not set its own. A new route that forgot
+  // one would silently ship `canonical: https://www.alexprompts.com`, and Google
+  // would drop it from the index as "Alternate page with proper canonical tag"
+  // while reporting no error anywhere. Leaving it unset makes the failure mode
+  // safe instead: a page with no canonical self-canonicalizes by default.
+  // Every public page declares its own, enforced by `npm run check:canonicals`.
 };
 
 const jsonLd = {

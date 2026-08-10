@@ -248,6 +248,15 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 
 - Each page sets `title` (template `%s · Alex Prompts`), `description`, `openGraph`,
   `alternates.canonical`. `metadataBase` + canonicals come from `SITE_URL`.
+- **Every page route declares its OWN canonical, and a check enforces it**
+  (`scripts/checks/canonicals.mjs`, wired to `npm run lint` and to `prebuild`, so a
+  missing canonical fails the Vercel build). The root `layout.tsx` deliberately sets **no**
+  `alternates.canonical`: Next merges metadata shallowly, so a canonical there is inherited
+  by any page that forgets one, which would point a new route at the homepage and get it
+  dropped from the index as "Alternate page with proper canonical tag" with no error
+  anywhere. Unset means the failure mode is a self-canonical instead. A gated route opts out
+  with `robots: { index: false }` (`/admin`, `/admin/edit/[id]`, `/review` all do). Keep the
+  canonical literal in the page file; moving it into a helper defeats the text check.
 - JSON-LD: `WebSite` + `Person` in `layout.tsx`; `Article` + `BreadcrumbList` per issue.
 - `sitemap.ts` + `robots.ts` derive from `SITE_URL`. Sitemap lists `/`, `/archive`,
   `/about`, and every published issue.

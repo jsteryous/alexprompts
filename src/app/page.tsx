@@ -1,10 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { socials } from "@/lib/site";
+import { site, socials } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
 import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
 import { ToolIcon } from "@/components/ToolIcon";
 import { PostCover } from "@/components/PostCover";
 import { SubscribeForm } from "@/components/SubscribeForm";
+
+// The homepage used to inherit its canonical from the root layout. That
+// inheritance was the trap that could deindex any new route (see layout.tsx),
+// so it is gone and the homepage declares its own, like every other page.
+// (Next normalizes the root path, so this emits `https://www.alexprompts.com`
+// with no trailing slash, unchanged from what the layout used to produce.)
+export const metadata: Metadata = {
+  alternates: { canonical: `${site.url}/` },
+};
 
 export const revalidate = 300;
 

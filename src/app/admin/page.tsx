@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import { isAdmin } from "@/lib/adminAuth";
@@ -6,6 +7,14 @@ import LoginForm from "./LoginForm";
 import LogoutButton from "./LogoutButton";
 import PublishButton from "./PublishButton";
 import DeleteButton from "./DeleteButton";
+
+// A gated editor, never a search result. robots.txt already disallows /admin;
+// this is the second layer, for the case where the URL gets linked from
+// somewhere Google can reach. `noindex` is also how a page opts out of the
+// canonical guard (`npm run check:canonicals`).
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 // This is an authenticated, per-request view; never cache it.
 export const dynamic = "force-dynamic";
