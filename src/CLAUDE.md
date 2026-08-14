@@ -39,7 +39,17 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `/real-estate`, `/greenville-works`, their `[slug]` routes, `sitemap.ts`. (The old `guide`
   → `/guides` section was removed July 2026; the `tech` → `/lab` "Lab" section was renamed to
   Greenville Works July 2026.)
-- **`src/lib/tools.ts`** — single source for the free `/tools` (`toolCatalog`,
+- ~~**`src/lib/tools.ts`**~~ — **DELETED August 14, 2026 along with all nine tools.** Gone with
+  it: `src/app/tools/`, `src/components/tools/`, `ToolShell.tsx`, `ToolIcon.tsx`,
+  `src/lib/areaScan.ts`, `src/lib/wireSafety.ts`, `/api/area-scan`, and
+  `/api/area-autocomplete`. `/tools/*` 404s. They served the consumer buyer, which is the
+  audience the consolidation dropped (see the banner in the root `CLAUDE.md`). **Still live and
+  easy to mistake for orphans:** `src/lib/rateLimit.ts` (used by `/api/subscribe`,
+  `/api/refer`, and the admin login) and `src/data/commercialSales.json` (nothing in `src/`
+  imports it now; `scripts/greenville/commercial.py` still refreshes it on schedule as research
+  input for company pieces). Deleting a route also leaves a stale `.next/dev/types` that fails
+  the type check on the old path, so `rm -rf .next` before rebuilding. The paragraph below is
+  HISTORY: single source for the free `/tools` (`toolCatalog`,
   `liveTools()`, `getTool()`, `audienceLabel`). Drives the `/tools` hub, the homepage
   tools spotlight + Start-here pillars, nav, footer, and `sitemap.ts`. Each entry has a
   `status` (`live`/`soon`); a `live` tool needs a route at `src/app/tools/<slug>/page.tsx`
@@ -64,7 +74,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   pipeline. Pure parse split from the fetch. Called only by `/api/sync-substack` (daily
   Vercel cron in `vercel.json`), which upserts posts into `blog_posts` as `PUBLISHED`.
   Image styles live in `globals.css` (`.theme-prose img/figure/figcaption`).
-- **`src/app/page.tsx`** — homepage (`revalidate = 300`). Self-contained sections: **fresh
+- **`src/app/page.tsx`** — homepage (`revalidate = 300`). **RESTRUCTURED August 2026 to TWO
+  sections**, because the page now does exactly one job, which is to convince a qualified
+  stranger to hand over an email address: **standfirst + the ask** (masthead statement,
+  headline, two paragraphs on the company beat, and an inline `SubscribeForm`, all above the
+  fold) → **the work** (featured latest + "More to read" from `getFeedPosts`). The tools row,
+  the mission panel, and the social-card grid are all gone. The standfirst copy tracks the beat
+  in `scripts/publication/SPEC.md` and must stay in sync with `site.ts` and the `SubscribeForm`
+  default promise. The paragraph below is HISTORY: **fresh
   reads lead** (featured latest issue + more-to-read grid from `getFeedPosts`, with the `>`
   prompt watermark) → the mission (rewritten by Alex July 11, 2026: headline "Questions worth
   asking." matching the slogan + the one-sentence mission "…helps South Carolinians understand
@@ -191,13 +208,13 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `/about` already ran two surfaces; `/about` had drifted to four and read as a patchwork.
   **When two same-surface sections sit back to back and need a visible break, add
   `border-t theme-border`**, a hairline that separates without adding a weight. This was
-  already the de-facto convention (`app/page.tsx` uses it on both same-surface joins,
-  `ToolShell` on its two adjacent contrast panels); it is written down now rather than
-  invented. Do not add a third background token. (The `--surface-muted` VARIABLE stays;
+  already the de-facto convention (`app/page.tsx` used it on both same-surface joins, and
+  `/about` uses it between "Who it is for" and "Who writes it"); it is written down now rather
+  than invented. Do not add a third background token. (The `--surface-muted` VARIABLE stays;
   `theme-card-muted` still uses it. The cap is on section-level surfaces.)
-  Current per-route rhythm, all conforming: `/` PAGE·DARK·light·light·DARK, `/about`
-  PAGE·DARK·light·light·DARK·light·DARK, `/briefing` PAGE·light·DARK, `ToolShell`
-  PAGE·light·DARK·DARK, `ArticleView` PAGE·light·DARK.
+  Current per-route rhythm after the August 14, 2026 rebuilds, all conforming: `/`
+  PAGE·light, `/about` PAGE·DARK·light·light(rule)·DARK, `/briefing` PAGE·light·DARK,
+  `ArticleView` PAGE·light·DARK. (`ToolShell` was PAGE·light·DARK·DARK and is deleted.)
 - **Tokens (retuned in the August 2026 NEWSPAPER PASS):** near-neutral **paper** base
   (light bg `#fafaf9`, surface `#ffffff`, text `#16161a`, muted `#6b6b73`; dark bg
   `#101012`, surface `#1a1a1e`, text `#f5f5f7`) with an **editorial oxblood accent**
@@ -229,8 +246,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Type scale = single source of truth.** `@theme` defines `--text-display/h1/h2/h3/title/
   body-lg/body/small/eyebrow` (fluid `clamp()`), consumed via the `.type-*` utility classes
   (size + line-height + weight + tracking together; color still comes from `theme-text-*`).
-  Prefer `.type-h2` etc. over ad-hoc `text-3xl md:text-4xl font-bold tracking-tight`. Homepage,
-  `/about`, and the `/tools` pages + `ToolShell` are converted; other pages migrate over time.
+  Prefer `.type-h2` etc. over ad-hoc `text-3xl md:text-4xl font-bold tracking-tight`. The
+  homepage and `/about` are fully converted (both were rebuilt August 2026); other pages
+  migrate over time.
 - **Dark mode:** class-based (`html.dark`). `ThemeProvider` → `localStorage` key
   `alexprompts-theme`. `suppressHydrationWarning` on `<html>` + the inline `layout.tsx`
   script prevent the flash.

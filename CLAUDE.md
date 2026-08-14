@@ -307,12 +307,27 @@ under `scripts/_archive/` — do not revive it.
 
 ## Site structure
 
-> **CONSOLIDATION, August 12, 2026. Read `scripts/publication/SPEC.md` first; it outranks
-> this section wherever the two disagree.** Three content tracks became ONE publication about
-> **who pays for South Carolina's growth**, written for the PROFESSIONAL (loan officer,
-> closing attorney, agent, banker, developer) rather than the buyer, built on primary
-> documents, cadence about every two weeks and published ON FINDING. The signature move is
-> **going back and checking** what was promised against what the records show.
+> **CONSOLIDATION, August 12 to 14, 2026. Read `scripts/publication/SPEC.md` first; it
+> outranks this section wherever the two disagree.** Three content tracks became ONE
+> publication about **the South Carolina economy explained through its COMPANIES**, built on
+> primary documents, cadence about every two weeks and published ON FINDING. The question
+> every issue answers is **how does this company actually make money, and what would break
+> it**, and the hard rule is that every issue produces at least one number nobody had computed.
+>
+> **The beat moved once, on August 12.** The first spec was an ACCOUNTABILITY beat, going back
+> and checking announced promises against the record. Alex read it and said it was not
+> interesting to him and that he would rather the beat be business. That criterion is decisive
+> and is not to be re-argued: he writes this for years. Some site copy shipped on the old beat
+> before the rewrite caught up (the tagline "Who pays for South Carolina's growth.", the
+> homepage headline "Somebody should go back and check."); all of it was moved to the company
+> beat on August 14. If you find prose anywhere that sounds like a watchdog auditing promises,
+> it is a leftover and it is wrong.
+>
+> **The reader is the DEVELOPER and the real estate entrepreneur** (narrowed August 14, 2026
+> from the whole professional bench), with the loan officer, closing attorney, agent, banker,
+> and economic-development professional behind them. They still read and forward it; they are
+> just not what the piece is aimed at. Alex is NOT a developer and no copy may imply he is:
+> the authority comes from the documents, not the byline.
 > `scripts/briefing/` and the `scripts/greenville/` evergreen track STOP PRODUCING; their
 > published work and routes stay live and reachable from the footer under "Archives". The
 > engine evolves from `scripts/tech/`, so new pieces still carry the `greenville works` tag
@@ -324,9 +339,26 @@ under `scripts/_archive/` — do not revive it.
 > lands. Also settled: SEO is no longer a growth lever (zero-click search plus AI Overviews),
 > so the evergreen how-to guides are dead as a CATEGORY, not merely deprioritized.
 >
+> **THE NINE FREE TOOLS ARE DELETED (August 14, 2026), not hidden.** `/tools` and every
+> `/tools/<slug>` route 404s now, and `src/lib/tools.ts`, `src/components/tools/`,
+> `ToolShell`, `ToolIcon`, `areaScan.ts`, `wireSafety.ts`, `/api/area-scan`, and
+> `/api/area-autocomplete` are gone from the repo. They served the consumer buyer, the
+> audience this publication stopped serving, and a calculator suite under a masthead reads as
+> a lead-gen site rather than something you read. **This removes the operation's only paid API
+> surface**, so `GOOGLE_PLACES_API_KEY`, `CENSUS_API_KEY`, `AREA_SCAN_DAILY_CAP`, and
+> `AREA_SCAN_RATE_LIMIT` are now unused by the site (the env table below is stale on this).
+> `scripts/greenville/commercial.py` and `src/data/commercialSales.json` SURVIVE as engine
+> research input even though nothing in `src/` imports the dataset any more; do not delete the
+> collector for looking orphaned. `src/lib/rateLimit.ts` also stays (subscribe, refer, admin
+> login).
+>
+> **Nav is `Reporting | About` plus Subscribe and the Buying or Selling CTA.** The three
+> content tracks stopped being peers; `/briefing` and `/real-estate` keep every published
+> piece and moved to the footer under "Archives".
+>
 > **What follows is STALE where it describes the old three-track nav, the old five-section
-> homepage, and the "Better real estate decisions." tagline.** Kept for history; it gets
-> rewritten in one pass when the publication is named.
+> homepage, the nine tools, and the "Better real estate decisions." tagline.** Kept for
+> history; it gets rewritten in one pass when the publication is named.
 
 - `/` — **the front page (RESTRUCTURED August 2026).** Does ONE job, convince a qualified
   stranger to hand over an email address, in three sections: **standfirst + the ask** (a
@@ -371,7 +403,12 @@ under `scripts/_archive/` — do not revive it.
   removal). The teaching-content exports they used (`tools`, `principles`, `realEstateOutcomes`,
   `outcomes`, `manifesto`) were **deleted from `site.ts`**; do not reintroduce them. The
   *Subscribe* CTA still rides along. Content is free, money model is later.
-- `/tools` + `/tools/<slug>` — **free, no-sign-up tools for the audience**, the single
+- `/tools` + `/tools/<slug>` — **DELETED August 14, 2026. All nine tools are gone and these
+  routes 404.** See the consolidation banner at the top of this section. The paragraph below is
+  HISTORY, kept because it records what existed and why each tool cost nothing to run; do not
+  read it as a description of the live site, and do not rebuild any of it without a reason that
+  survives the "this publication is not a lead-gen site" test. HISTORY:
+  **free, no-sign-up tools for the audience**, the single
   source being `src/lib/tools.ts` (`toolCatalog`), which is the ONLY authority on what is
   live; check it before describing the tools anywhere in copy or docs. **Nine live as of July
   27, 2026:** `deal-analyzer` (rental cash flow / cap rate / cash-on-cash), `mortgage`
@@ -393,7 +430,22 @@ under `scripts/_archive/` — do not revive it.
   panel. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
   note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
   footer, and sitemap, so a tool ships in one place and appears everywhere.
-- `/about` — the **opportunistic hiring-manager front door** (if Alex shares the site on a
+- `/about` — **REWRITTEN August 14, 2026 as the publication's MASTHEAD.** It opens on the
+  reader's problem ("Announcements are not information."), spends its credibility section on
+  the METHOD (filings, job postings counted over time, permits and deeds, incentive agreements
+  and minutes) rather than on Alex, names who it is for, reaches the author last and briefly,
+  and closes by asking for tips and documents plus the short warm buy/sell invitation. **Three
+  things were deleted and must not return.** (1) The "under the hood" section that told readers
+  "a set of AI agents I wrote research a real Greenville story, draft it, check their own facts,
+  and publish straight to the site" — on a publication whose whole value is that a person read
+  the primary documents, that is fatal on contact. The engine still drafts and Alex still
+  reviews and publishes; that is a workflow detail, not a masthead claim. (2) The business
+  model, stated outright as "a sales funnel for real estate leads" and "a lead generator",
+  which also violates the NEVER EXPLAIN THE BUSINESS MODEL rule. (3) The credibility pitch, per
+  Alex's instruction to speak to the reader instead of hyping him; the eight years of BD, sales,
+  and land acquisition appear once, as the reason he knows how to do this work, never as a
+  boast. The "want a site like this?" side offer went too. The paragraph below is HISTORY:
+  the **opportunistic hiring-manager front door** (if Alex shares the site on a
   job board he can link resumes/LinkedIn straight here, not to `/`). It is no longer what the
   site is *for* (referral revenue is the north star), but it costs nothing to keep and catches
   a hiring manager when one happens to look. Who Alex is (salesperson, ~8 yrs BD/sales, aiming

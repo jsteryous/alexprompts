@@ -308,7 +308,9 @@
       "WebFetch(domain:screaltors.org)",
       "Bash(echo \"=== EXIT=$? ===\")",
       "mcp__claude_ai_Vercel__check_domain_availability_and_price",
-      "WebFetch(domain:reason.com)"
+      "WebFetch(domain:reason.com)",
+      "Bash(sed -i 's/Cross each against the six shapes/Cross each against the seven shapes/; s/SHAPE: <which of the six shapes it came from>/SHAPE: <which of the seven shapes it came from>/' scripts/publication/routine/pass0_scout.md)",
+      "Bash(sed -i 's/it crosses against the six question shapes/it crosses against the seven question shapes/; s/LIKELY SHAPES: which of the six question shapes fit best/LIKELY SHAPES: which of the seven question shapes fit best/' scripts/publication/companies.md)"
     ]
   }
 }

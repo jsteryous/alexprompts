@@ -66,9 +66,26 @@ sector by sector. Companies won on every axis:
 
 ## The reader
 
-**A professional whose living depends on knowing the market**: the loan officer, the closing
-attorney, the agent, the banker, the developer, the person in economic development. Settled
-August 12, 2026 and unchanged by the beat rewrite.
+**The developer and the real estate entrepreneur**, and behind them the professionals who work
+around a deal: the loan officer, the closing attorney, the agent, the banker, the person in
+economic development.
+
+**Narrowed to the developer August 14, 2026.** The August 12 version named the whole
+professional bench without ranking it, which is a reader list rather than a reader. The
+developer is the sharper center for three reasons. The beat already serves them, since WHY HERE
+is site, incentives, port, and labor shed, which is their entire working day. They transact
+themselves and at size, rather than only referring. And they are the reader for whom "what would
+break this company" is a live question about a tenant, a counterparty, or the employer filling a
+subdivision. The wider bench still reads it and still forwards it; they are simply no longer
+what the piece is aimed at.
+
+**On Alex's standing to write for them, since he raised it:** he is not a developer and the
+publication must never imply he is. It does not need to. The authority here comes from the
+documents, not the byline, which is exactly what the tone section below already says. A reporter
+on a defense beat is not a general. What he does bring is eight years of BD and sales discovery,
+including land acquisition, which is the trained habit of working out how a company makes money
+and who really decides, and that is the beat itself. Claiming to be a practitioner would be both
+false and unnecessary.
 
 The choice governs everything else:
 
@@ -238,7 +255,7 @@ only the inventory and the shapes are replaced.
    South Carolina companies worth taking apart: major employers, quiet giants, the ones
    attached to a recent capital move, the ones nobody can explain. Alex can seed it; the scout
    must also be able to harvest candidates so it never runs dry.
-2. **Six new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
+2. **Seven new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
    Each is a genuinely different analytical question, so one company supports several pieces
    across years, which is what keeps the generator from draining:
    - **THE REVENUE QUESTION** — what do they actually sell? The obvious answer is often wrong.
@@ -247,6 +264,17 @@ only the inventory and the shapes are replaced.
    - **THE BREAK** — concentration, a single input, a contract cycle, a technology shift.
    - **WHY HERE** — the site, the incentives, the port, the labor shed. Real estate lives here.
    - **THE QUIET GIANT** — enormous or critical, and nobody has heard of them.
+   - **THE COMPETITIVE QUESTION** (added August 14, 2026) — who are they beating, and who is
+     beating them? The rival the public would name and the rival that actually threatens the
+     company are rarely the same one. Added because the first six shapes explain a company in
+     isolation, and a developer's real question is comparative: is this tenant winning. It is
+     also the **only shape that compounds**. Four or five pieces under it inside one sector and
+     the sector map has written itself, at which point a landscape read across that sector is a
+     piece that has been EARNED. That landscape piece is the eventual form of the intelligence
+     briefing Alex described (a reader coming away with a real picture of the competitive
+     ground), and the sequencing matters: it is the payoff for having done the companies, never
+     the opening move. Asserting a landscape read before the underlying work exists is precisely
+     the standing problem that killed the governor's-desk alternative.
 3. **Two new gates**, alongside the existing FEASIBILITY and PREMISE gates:
    - **ACCESS INDEPENDENCE.** If the question cannot be answered from public sources, it fails
      before production. This is what prevents a stalled pipeline and the soft filler that
@@ -273,19 +301,43 @@ Nothing is deleted; published work keeps its URLs.
 - **`scripts/briefing/`** stops producing. The five published briefs and `/briefing` stay up,
   linked from the footer under "Archives".
 - **`scripts/greenville/`** evergreen track stops producing. Existing guides stay. Its
-  `commercial.py` collector STAYS: `/tools/buyers-list` depends on it and the deed data is a
-  genuine input to company pieces (who owns the building, what they paid).
+  `commercial.py` collector STAYS, though the reason narrowed on August 14, 2026: the tool that
+  consumed it is gone, so it survives purely as a RESEARCH INPUT to company pieces (who owns the
+  building, what they paid, when it changed hands). It still writes `src/data/commercialSales.json`
+  on its existing schedule, and nothing in `src/` imports that file any more. Do not delete the
+  collector on the grounds that the dataset looks orphaned; a company piece answering WHY HERE
+  wants exactly this.
+
+- **All nine free TOOLS are DELETED** (August 14, 2026), not hidden or deprecated. The routes,
+  the components, `src/lib/tools.ts`, `ToolShell`, `ToolIcon`, `areaScan.ts`, `wireSafety.ts`,
+  and the `/api/area-scan` and `/api/area-autocomplete` endpoints are removed, and
+  `/tools/*` now 404s. They were built for the consumer buyer, which is the audience this
+  publication deliberately stopped serving, and a calculator suite sitting under a masthead
+  reads as a lead-generation site rather than something a person reads. Deleting `area-scan`
+  also removes the operation's only paid API surface, so `GOOGLE_PLACES_API_KEY`,
+  `CENSUS_API_KEY`, `AREA_SCAN_DAILY_CAP`, and `AREA_SCAN_RATE_LIMIT` are now unused by the
+  site. `src/lib/rateLimit.ts` STAYS; `/api/subscribe`, `/api/refer`, and the admin login all
+  use it.
 - **`greenville/housing.py`** and `greenvilleHousing.json` STAY. The ZIP-level submarket data
   is the only proprietary dataset in the operation and belongs as a live data surface.
 - **Three scheduled cloud routines** get disabled.
 
 ## Open items
 
-- **The tagline is now off-beat.** `site.ts` carries "Who pays for South Carolina's growth.",
-  written for the accountability beat and left in place through the rewrite. It leans watchdog
-  for a publication that explains businesses. Needs Alex's call.
+- ~~**The tagline is off-beat.**~~ RESOLVED August 14, 2026. It is now **"How South Carolina
+  actually makes money."**, which is the issue-level question ("how does this company actually
+  make money") raised to the publication level. The homepage standfirst and the `SubscribeForm`
+  default promise were moved onto the company beat in the same pass; all three live in
+  `src/lib/site.ts`, `src/app/page.tsx`, and `src/components/SubscribeForm.tsx` and must stay in
+  sync, because a subscriber promised one beat and sent another unsubscribes.
 - **The publication is unnamed**, so `site.name` is still "Alex Prompts" and the nav label for
   the live section is the placeholder "Reporting". Both change in one place when the name
   lands. Revisit after three or four issues.
+- **Nothing has shipped under this spec yet.** The engine work in "The engine" above is written
+  down but not built past the scout: `companies.md` and `pass0_scout.md` exist, and the
+  researcher, angle, writer, verifier, editor, and orchestrator have not been ported from
+  `scripts/tech/`. Until they are, no issue can run, and every decision recorded here is
+  untested against a real piece. This is the next thing to do and it is worth more than any
+  further site work.
 - **The route stays `/greenville-works`** and new pieces keep the `greenville works` tag.
   Renaming breaks every published URL, the sitemap, and the tag the engine writes.

@@ -48,11 +48,11 @@ Apply it to yourself honestly. Before you pick, write down what you would guess 
 If you are confident and you turn out to be right, it is a weak question. If you are confident
 and the sources suggest you are wrong, it is an excellent one.
 
-## THE SIX SHAPES
+## THE SEVEN SHAPES
 
-Questions of this kind are not random. They come in six recognizable shapes. Point a shape at a
-company from the inventory and you have a candidate. This is your generator and it does not run
-out, because one company supports a different question under each shape, which is also why a
+Questions of this kind are not random. They come in seven recognizable shapes. Point a shape at
+a company from the inventory and you have a candidate. This is your generator and it does not
+run out, because one company supports a different question under each shape, which is also why a
 company stays in the inventory after it has been written about.
 
 1. **THE REVENUE QUESTION.** What do they actually sell? The obvious answer is frequently wrong:
@@ -75,6 +75,20 @@ company stays in the inventory after it has been written about.
 6. **THE QUIET GIANT.** Enormous or critical, and nobody has heard of them. Highest shareability
    on the list, because the reader's reaction is "that is headquartered HERE?" and that reaction
    is what gets forwarded.
+7. **THE COMPETITIVE QUESTION.** Who are they beating, and who is beating them? Nearly every
+   company has a rival the public would name and a rival that actually threatens it, and those
+   are rarely the same company. Chase where share is moving, who they lose deals to and on what
+   basis, which competitor has not entered the state yet, and whether the thing they compete on
+   is price, proximity, certification, or a relationship nobody can dislodge. Two cautions. The
+   answer must come from evidence a reader can check, meaning postings, filings, pricing, permits
+   and lost-contract records, never from a vibe about who seems to be winning. And a competitor's
+   weakness is subject to the same legal note as THE BREAK, so describe the mechanism and never
+   forecast anyone's death.
+
+Shape 7 is also the one that COMPOUNDS. Four or five pieces under it inside one sector and the
+sector map has effectively written itself, at which point a landscape read across the whole
+sector becomes a piece you have earned rather than one you asserted. Do not attempt that piece
+early. It is the payoff for having done the companies first.
 
 ## SCOPE
 
@@ -106,10 +120,14 @@ A candidate earns the slot only if it clears all six:
    dataset, a job posting, a named site, a real number.
 3. **A real, non-obvious tension.** A trade-off, a dependency, a vulnerability, a cost most
    coverage skips. This is the spine.
-4. **It matters to the reader**, who is a loan officer, closing attorney, agent, banker,
-   developer, or economic-development professional in South Carolina. These companies are their
-   prospects, their borrowers, and the employers behind their clients. State the relevance
-   concretely.
+4. **It matters to the reader**, who is a DEVELOPER or a REAL ESTATE ENTREPRENEUR in South
+   Carolina first, and the professionals around a deal second (loan officer, closing attorney,
+   agent, banker, economic development). The primary reader was narrowed to the developer in
+   August 2026, which sharpens this bar rather than merely renaming it: the test is now whether
+   the finding would change how someone reads a SITE, a submarket, or a counterparty. These
+   companies are the tenants, the employers behind the rooftops, and the buyers of the land.
+   State the relevance concretely and never as a generic "this matters to anyone in real
+   estate."
 5. **Durable.** As good in three years as today. A question anchored to an announcement passes
    only if the underlying business is what the piece would explain.
 6. **It can reach a defensible "what would break it."** See THE BREAK GATE.
@@ -194,7 +212,7 @@ company runs, which markets it is entering, and roughly what it pays. Read them 
 ## THE STEPS
 
 STEP 1, GENERATE. Pick 3 or 4 companies from the inventory the publication has not recently
-covered. Cross each against the six shapes and write out 8 to 12 candidate questions. Generate
+covered. Cross each against the seven shapes and write out 8 to 12 candidate questions. Generate
 broadly before judging; volume is the point at this stage.
 
 STEP 2, STATE YOUR PRIORS. For each candidate worth considering, one line on what you would
@@ -214,7 +232,7 @@ Exactly this shape. QUESTION, TOPIC, ANCHOR, STAKES, THE TENSION TO HUNT, and SO
 what the researcher consumes, so they are required and must stand on their own.
 
 QUESTION: <the question itself, in the plain words a person would ask it>
-SHAPE: <which of the six shapes it came from>
+SHAPE: <which of the seven shapes it came from>
 COMPANY: <name, city, and public or private>
 THE PRIOR: <what a smart local would confidently guess, and why the guess is worth testing>
 TOPIC: <the subject in one line, as a statement, for the researcher>
