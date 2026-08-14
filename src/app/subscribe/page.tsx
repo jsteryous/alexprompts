@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Subscribe",
   description:
     "A clear picture of real estate and business in South Carolina, about every other week. " +
-    "Claims from this market, tested against filings, permits, deeds, and county records.",
+    "How companies here are really doing, where the market is heading, and what is driving it.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
@@ -29,7 +29,7 @@ export default function SubscribePage() {
         <SubscribeForm
           source="subscribe-page"
           heading="A clear read on SC real estate and business"
-          blurb="About every other week I take something people in this market believe, or a company behind it, and check it against filings, permits, deeds, and county records. You get what the evidence supports and what it does not, with no advice attached. Free, and you can leave any time."
+          blurb="About every other week, one piece on how businesses in South Carolina are actually doing, where the market has been heading over years rather than quarters, or what is really driving a decision everybody else reported as news. Built on public records, with every number sourced. Free, and you can leave any time."
           cta="Subscribe free"
         />
       </div>

@@ -72,19 +72,21 @@ export const site = {
   // as a placeholder. When the name lands it changes HERE and every surface
   // follows, which is the entire point of this file.
   //
-  // The oneLiner and description carry the HOUSE STANCE, which is the thing to
-  // preserve if you rewrite them: claims circulating in this market are the raw
-  // material, the record is the test, and the piece reports what the evidence
-  // supports without telling the reader what to do about it.
+  // WHAT THE COPY IS FOR: a reader should learn immediately that they can get an
+  // insightful picture of how South Carolina businesses are doing, what the
+  // long-term trends are, and what the real estate market is doing and WHY.
+  // TRENDS and INCENTIVES are the spine. A draft that led on testing what people
+  // in the market claim was cut August 14, 2026; that is one input, not the job,
+  // and leading with it made the publication sound smaller than it is.
   tagline: "SC Real Estate & Business",
   oneLiner:
-    "Alex Steryous tests what people in South Carolina say about real estate and business against filings, permits, deeds, and county records.",
+    "Alex Steryous writes about how South Carolina businesses are actually doing, where the real estate market has been heading, and the incentives driving both.",
   description:
-    "People in South Carolina real estate and business say a lot of things. Greenville is " +
-    "turning into a luxury market. A corridor is overbuilt. An employer is about to expand. " +
-    "Alex Steryous takes those claims, and the companies and deals behind them, and tests " +
-    "them against filings, permits, deeds, job postings, and county records, then reports " +
-    "what the evidence actually supports.",
+    "Plenty of places report that a company added three hundred jobs or that a subdivision " +
+    "got approved. Alex Steryous writes the layer underneath: whether a business is durable, " +
+    "what years of sales have really done to a submarket, and which rule or tax structure is " +
+    "driving behavior that otherwise looks random. Built on public records, with every " +
+    "number sourced.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */

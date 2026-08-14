@@ -65,8 +65,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          What people in this market say, checked against filings, permits,
-          deeds, and county records.
+          How South Carolina businesses are actually doing, where the market is
+          heading, and what is driving both.
         </div>
 
         {/* Bottom bar */}

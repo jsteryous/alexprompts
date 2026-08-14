@@ -231,6 +231,29 @@ engine's `pass3_writer.md` carried the same house style but now lives under
   source per piece**, at first mention (eleven figures pointing at one landing page reads as machine
   output; a columnist cites a source once), and **attribution is required, a link is not**.
 - **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff" construction; a colon only introduces a genuine list. Restructure into a full sentence where you can.
+- **THE FOUR TELLS** (added August 14, 2026, after Alex read a homepage draft and said "it is so
+  obviously written by AI"). These are structural, not lexical, which is why they survive every
+  banned-word list. The offending paragraph was: *"Checking is the work here. I take the claims
+  moving around this market, and the companies and deals underneath them, and test them against
+  filings, permits, deeds, job postings, and county records. You get what the evidence supports,
+  what it does not, and where it is genuinely unclear."* Every sentence in it is true and the
+  paragraph is still unusable.
+  1. **The abstract-noun opener.** "Checking is the work here." Naming an activity as a subject
+     and predicating it is a construction almost nobody uses out loud. Start with a person doing
+     something, or with the concrete thing.
+  2. **The tricolon payoff.** "What the evidence supports, what it does not, and where it is
+     genuinely unclear." Three balanced parallel items closing a sentence is the single loudest
+     tell in the language. A list of three is fine when it is a real list of real things; it is
+     a tell when the three are rhetorically balanced and land as a flourish. **Break it: use
+     two, or four, or make one item a different shape from the others.**
+  3. **The noun pile as proof.** "Filings, permits, deeds, job postings, and county records."
+     Stacking five source types performs rigor instead of demonstrating it. Name one or two, or
+     name the specific document that actually mattered.
+  4. **Uniform sentence shape.** Not just length, which the existing rhythm rule covers, but
+     SHAPE: three sentences in a row that each open with a subject and run to a compound object.
+     Vary the construction, not only the word count.
+  The general test: read it aloud. If it sounds like it is being read from a card rather than
+  said, it is one of these four.
 - Open cold and concrete. Lead with a fact, a scene, or a number.
 - Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
 - **Grounded optimism.** Steelman the strongest opposing view before resolving.
@@ -322,12 +345,30 @@ under `scripts/_archive/` — do not revive it.
 > this company actually make money, and what would break it") is the sharpest recurring FORM
 > and is preferred when a good company is available, not the whole beat.
 >
-> **CLAIMS ARE RAW MATERIAL, and this is the signature mechanism.** An opinion held by someone
-> in this market is a fact about the market, so what people say is actively collected and then
-> tested against the record. Both halves get published: what is believed, and what is true.
-> Alex logs what he hears in **`scripts/publication/claims.md`**, which the scout prefers over
-> claims it finds online. Seeded with a working realtor's "Greenville is becoming the luxury
-> market, land and home prices are just that expensive."
+> **WHAT "A CLEAR PICTURE" MEANS, concretely.** A reader comes here to learn **how South
+> Carolina businesses are actually doing, what the long-term trends are, and what the real
+> estate market is doing and WHY.** Alex's own test, and the best one available: he lands on
+> his own site and immediately gets an insightful read on those three things. **He is a reader
+> of this publication, not only its author.** If a question would bore him, that is real
+> information about the question.
+>
+> **TWO STANDING COMMITMENTS** carry that promise, and they apply to every subject. **YEARS,
+> NOT QUARTERS**: a quarterly move is noise and is what everyone else already published, so the
+> default horizon is long, and note that a median can sit perfectly still on top of a
+> distribution that changed completely underneath. **INCENTIVES EXPLAIN BEHAVIOR**: when a
+> market or a company does something that looks arbitrary or like a matter of taste, there is
+> usually a tax structure, financing term, subsidy, assessment schedule, or zoning threshold
+> underneath making it rational, and finding it is the highest-value move available.
+>
+> **CLAIMS ARE ONE INPUT, NOT THE BEAT.** An opinion held by someone in this market is a fact
+> about the market, so what people say gets collected and tested against the record. Alex logs
+> what he hears in **`scripts/publication/claims.md`** (seeded with a working realtor's
+> "Greenville is becoming the luxury market, land and home prices are just that expensive"),
+> and the scout prefers those over claims it finds online. **But it runs at about one issue in
+> three and it is never the front-page promise.** An August 14, 2026 draft made claim-testing
+> the site's headline mechanism and Alex cut it: "the point isn't all about people's opinions,
+> that's just one little part of it." Leading with it made the publication sound smaller than
+> it is.
 >
 > **ASSESS, DO NOT ADVISE.** The posture is the intelligence analyst's, not the columnist's,
 > and the distinction is the easiest thing on the site to get wrong. **A piece DOES reach a

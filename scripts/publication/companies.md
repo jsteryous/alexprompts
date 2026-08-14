@@ -1,7 +1,7 @@
 # The companies inventory
 
 The scout's raw material. A durable list of South Carolina companies worth taking apart, which
-it crosses against the eight question shapes in `routine/pass0_scout.md` to generate candidates.
+it crosses against the ten question shapes in `routine/pass0_scout.md` to generate candidates.
 
 **This is an inventory, not a queue.** It does not get consumed. One company supports a
 different piece under each shape, so a name stays on the list after it has been written about
@@ -36,7 +36,7 @@ without a puzzle is a directory entry.
 SECTOR: one line
 PUBLIC/PRIVATE: and the ticker if public
 WHY IT EARNS A LOOK: the puzzle, in one or two sentences
-LIKELY SHAPES: which of the eight question shapes fit best
+LIKELY SHAPES: which of the ten question shapes fit best
 SOURCE FOOTHOLD: where the public record on this one starts
 ```
 

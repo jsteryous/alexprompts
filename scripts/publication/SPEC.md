@@ -24,58 +24,88 @@ the real estate and business landscape in South Carolina.**
 > is one recurring form, and it is still the best one, but a piece may be a pure real-estate
 > market question with no single company in it. The tagline is `SC Real Estate & Business`.
 >
-> The widening also introduced the publication's most distinctive mechanism, below: **what
-> people in this market believe is raw material.**
+> **Second pass the same day, after Alex read the site copy.** A draft had made claim-testing
+> the publication's signature mechanism, and he cut it: "the point isn't all about people's
+> opinions, that's just one little part of it." What he actually wants is **long-term trends and
+> the incentives that drive business and real estate behavior**, which now live below as TWO
+> STANDING COMMITMENTS and as shapes 8 and 9. Claims dropped to one input among several.
 
-Two things are true at once here, and the publication lives on both. Local business coverage
-announces things and never explains them: a company is expanding, three hundred jobs, a ribbon
-cutting, a rendering, and almost nobody writes what the company actually does, how it makes
-money, who its customers are, or what would break it. And the real estate side runs on
-confident assertion: Greenville is turning into a luxury market, that corridor is overbuilt,
-this employer is about to expand. Some of that is true and some of it is folklore repeated
-until it sounded like data, and almost nobody sorts the two.
+What "a clear picture" means, concretely, because the phrase is otherwise a slogan. A reader
+should come here to learn **how South Carolina businesses are actually doing, what the long-term
+trends are, and what the real estate market is doing and why.** Alex's own test, and the best
+one available: he lands on his own site and immediately gets an insightful read on those three
+things. **He is a reader of this publication, not only its author.** When a question would bore
+him, that is real information about the question.
+
+The gap it fills is that this state generates announcements and almost no analysis. A company
+expands, a subdivision gets approved, a quarter comes in up or down. Nobody writes the layer
+underneath, where you find out whether the business is durable, what five years actually did to
+a submarket, and which rule or tax structure is driving behavior that reads as taste.
 
 ## The question every issue answers
 
-**Is this true, and what does the record actually show?**
+**What is actually going on here, and what is driving it?**
 
-Applied to a company, that resolves to the sharpest version of the question and the one to
-prefer when a company is available: **how does this company actually make money, and what would
-break it?** Not a profile. The machine underneath.
+It resolves three ways, and all three are equally on-beat:
 
-Applied to a market claim, it resolves to: **who says this, what would have to be true for it
-to hold, and does the record support it?**
+- **Against a COMPANY**, the sharpest form and the one to prefer when a good subject is
+  available: *how does this company actually make money, and what would break it?* Not a
+  profile. The machine underneath.
+- **Against a MARKET**: *what has this actually done over years rather than quarters, and why?*
+- **Against a CLAIM circulating in the market**: *does the record support it?*
 
-## Claims are raw material
+## Two standing commitments
 
-The signature mechanism, and the reason the publication is not just another explainer.
+These are not shapes. They are how any subject gets treated, and together they are most of what
+makes a piece worth reading twice.
+
+**YEARS, NOT QUARTERS.** The default time horizon is long. A quarterly move is noise and it is
+also what everyone else already published. The interesting version of almost every question here
+is what the last five years did, because that is where a trend is either real or an artifact of
+where somebody started counting. A median that has not moved can sit on top of a distribution
+that changed completely underneath, and that gap is frequently the entire story.
+
+**INCENTIVES EXPLAIN BEHAVIOR.** When a market or a company does something that looks
+irrational, arbitrary, or like a matter of preference, there is usually a rule, a tax structure,
+a financing term, a subsidy, an assessment schedule, or a zoning threshold underneath it making
+that behavior the rational choice. Finding it is the single highest-value move available, it is
+almost always documented in public, and it is the thing local coverage never does. Ask what
+would have to be true for this decision to make sense to the person who made it.
+
+## Claims are one input
+
+**Not the beat.** An August 14, 2026 draft of the site elevated claim-testing to the publication's
+signature mechanism and Alex cut it: testing what people believe is one input among several, and
+leading with it made the publication sound smaller than it is. It stays because it is genuinely
+useful, at roughly one issue in three, and it is never the front-page promise.
 
 **An opinion held by someone in this market is a fact about the market.** A broker who believes
 a submarket has turned is telling you something real about how the people who set prices are
-behaving, whether or not the underlying claim survives contact with the record. Both halves are
-worth publishing: what is believed, and what is true.
+behaving, whether or not the claim survives contact with the record. Both halves are worth
+publishing.
 
-So claims are actively COLLECTED, not stumbled upon. Alex hears them at closings, on listing
-appointments, and in his sphere; more sit in public view on local forums, in trade press, in
-broker commentary, and in what economic development people say on the record. The example that
-prompted this, from a working realtor: *Greenville is becoming the luxury market, land and home
-prices are just that expensive.* That is a genuinely testable claim. Price distribution over
-time, the share of sales above a threshold, land cost per acre, and the price points of new
-construction all bear on it, and none of them are hard to reach.
+Claims are collected rather than stumbled upon. Alex hears them at closings and in his sphere
+and logs them in `claims.md`; more sit in public view in local forums, trade press, broker
+commentary, and on the record from economic development officials. The seed example, from a
+working realtor: *Greenville is becoming the luxury market, land and home prices are just that
+expensive.* Testable through price distribution over time, share of sales above successive
+thresholds, land cost per acre, and new-construction price points.
 
-The claim gets attributed, taken seriously, and then checked. Attribution can be a named person
-who agreed to be named, an unnamed but characterized source ("a broker who has been listing in
-this submarket for a decade"), or a public statement, and it must never be a strawman built to
-be knocked down. If a claim turns out to be right, saying so plainly is a finding.
+A claim gets attributed, taken seriously, and checked. Attribution can be a named person who
+agreed to be named, an honestly characterized unnamed source ("a broker who has been listing in
+this submarket for a decade"), or a public statement. Never a strawman. If the record confirms
+the claim, saying so plainly is a finding.
+
+### Inside the company form
 
 Three parts of it are reliably more interesting than a reader expects. **What they actually
-sell** is usually stranger than the public story (the well-known product is often not where
-the money is). **Who pays and why they keep paying** is rarely obvious, and it is where
+sell** is usually stranger than the public story, since the well-known product is often not
+where the money is. **Who pays and why they keep paying** is rarely obvious, and it is where
 switching costs, contracts, and lock-in live. **Why here** is where Alex's real estate
-knowledge stops being decoration and becomes analysis: the site, the footprint, the
-incentives, the port, the labor shed.
+knowledge stops being decoration and becomes analysis, through the site, the footprint, the
+incentives, the port, and the labor shed.
 
-### Why this beat and not the alternative
+### Why a business beat and not the alternative
 
 The live alternative was a governor's-desk brief on the state's economy, structural issues
 sector by sector. Companies won on every axis:
@@ -230,6 +260,29 @@ reporting back.
    piece that refuses to say whether a claim holds has failed. A piece that tells the reader
    what to do has overreached.
 
+### The four tells
+
+Added August 14, 2026, after Alex read a homepage draft and said "it is so obviously written by
+AI." These are STRUCTURAL, which is why they survive every banned-word list, and the writer and
+editor passes both need them. The paragraph that triggered it: *"Checking is the work here. I
+take the claims moving around this market, and the companies and deals underneath them, and test
+them against filings, permits, deeds, job postings, and county records. You get what the evidence
+supports, what it does not, and where it is genuinely unclear."* Every sentence is true and the
+paragraph is unusable.
+
+1. **The abstract-noun opener.** "Checking is the work here." Naming an activity as a subject and
+   predicating it is a construction almost nobody uses out loud.
+2. **The tricolon payoff.** Three balanced parallel items closing a sentence is the loudest tell
+   in the language. A real list of three real things is fine; the tell is when the three are
+   rhythmically balanced and land as a flourish. Break it with two, or four, or by making one
+   item a different shape.
+3. **The noun pile as proof.** Stacking five source types performs rigor instead of showing it.
+   Name the specific document that actually mattered.
+4. **Uniform sentence shape**, not just length. Three sentences that each open with a subject
+   and run to a compound object read as machine output even at varied word counts.
+
+Read it aloud. If it sounds read from a card rather than said, it is one of these.
+
 ### Unchanged
 
 No em or en dashes. No sentence fragments. Colons sparingly, never as a drumroll. Plain
@@ -322,7 +375,7 @@ only the inventory and the shapes are replaced.
    heard first-hand at a closing beats anything the scout can find on a forum: it is current,
    it is attributable, and he can speak to the context. Seeded with the realtor's luxury-market
    claim. The scout prefers these over claims it finds itself.
-2. **Eight new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
+2. **Ten new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
    Each is a genuinely different analytical question, so one company supports several pieces
    across years, which is what keeps the generator from draining:
    - **THE REVENUE QUESTION** — what do they actually sell? The obvious answer is often wrong.

@@ -28,52 +28,70 @@ INPUTS you were handed:
 ## THE SUBJECT
 
 The publication's goal is to be the go-to source for a clear picture of the **real estate and
-business landscape in South Carolina**. Every issue answers one question: **is this true, and
-what does the record actually show?**
+business landscape in South Carolina**. Every issue answers one question: **what is actually
+going on here, and what is driving it?**
+
+Concretely, a reader comes here to learn **how South Carolina businesses are actually doing,
+what the long-term trends are, and what the real estate market is doing and why.** Hold those
+three against any candidate you are considering. A question that serves none of them is off-beat
+no matter how clever it is.
 
 **REAL ESTATE AND BUSINESS ARE CO-EQUAL** (widened August 14, 2026). An earlier version of this
 page said real estate was a bonus and not a requirement. That is dead. A piece may be a pure
 real-estate market question with no single company in it, and it is just as on-beat as a
 company teardown.
 
-The question takes two forms and you may pick either:
+The question resolves three ways and you may pick any of them:
 
-**Against a COMPANY**, which is the sharpest form and the one to prefer when a good company is
-available: *how does this company actually make money, and what would break it?* Not a profile,
-not a news item, not an executive interview. The machine underneath. Local business coverage in
-this state announces expansions and never once explains the model, which is the whole opening.
-Three things are reliably more interesting than a reader expects here. What the company ACTUALLY
-SELLS, since the thing it is known for is often not where the money is. WHO PAYS AND WHY THEY
-KEEP PAYING, where switching costs and contracts live. And WHY HERE, which is where the site,
-the footprint, the incentives, the port, and the labor shed stop being background and become
-the answer.
+**Against a COMPANY**, the sharpest form and the one to prefer when a good subject is available:
+*how does this company actually make money, and what would break it?* Not a profile, not a news
+item, not an executive interview. The machine underneath. Local business coverage in this state
+announces expansions and never once explains the model, which is the whole opening.
 
-**Against a CLAIM circulating in the market**: *who says this, what would have to be true for it
-to hold, and does the record support it?* See SHAPE 8 and the section below.
+**Against a MARKET**: *what has this actually done over years rather than quarters, and why?*
 
-## CLAIMS ARE RAW MATERIAL
+**Against a CLAIM circulating in the market**: *does the record support it?* See SHAPE 10.
 
-The publication's signature mechanism, and the thing that separates it from an explainer blog.
+## TWO STANDING COMMITMENTS
 
-**An opinion held by someone in this market is a fact about the market.** A broker who believes
-a submarket has turned is telling you something real about how the people setting prices are
-behaving, whether or not the claim survives contact with the record. Both halves are worth
-publishing: what is believed, and what is true.
+Not shapes. These are how you treat ANY subject, and together they are most of what separates a
+piece worth reading from a summary.
 
-So you HUNT for claims rather than waiting for them. They sit in plain view in local forums and
-Nextdoor, in trade press and broker commentary, in what economic development officials say on
-the record, in agent and lender marketing, and in the steering file if Alex has dropped one in.
-A live example, from a working realtor: *Greenville is becoming the luxury market, land and home
-prices are just that expensive.* That is testable. Price distribution over time, the share of
-sales above a threshold, land cost per acre, and the price points of new construction all bear
-on it.
+**YEARS, NOT QUARTERS.** Default to a long horizon. A quarterly move is noise and it is also
+what everyone else already published. The interesting version of nearly every question here is
+what the last five years did, because that is where a trend turns out to be real or an artifact
+of where somebody started counting. **A median that has not moved can sit on top of a
+distribution that changed completely underneath**, and that gap is frequently the entire story.
 
-Three rules when you propose a claim-shaped question. **It must be genuinely held**, by a real
-identifiable person or a documented public statement, never invented so the piece has something
-to knock down. **It must be falsifiable from public data**, which is the ACCESS INDEPENDENCE
-gate doing its job. And **it must be able to come out either way**, because a claim you already
-know is wrong makes a smug piece, and a claim confirmed by the record is a perfectly good
-finding worth publishing.
+**INCENTIVES EXPLAIN BEHAVIOR.** When a market or a company does something that looks
+irrational, arbitrary, or like a matter of taste, there is usually a tax structure, a financing
+term, a subsidy, an assessment schedule, a zoning threshold, or a reimbursement rule underneath
+making it the rational choice. Ask what would have to be true for the decision to make sense to
+the person who made it. This is the highest-value move available to you, it is almost always
+documented in public, and local coverage never does it.
+
+## CLAIMS ARE ONE INPUT
+
+**Not the beat.** A draft of the site elevated claim-testing to the signature mechanism and Alex
+cut it: what people believe is one input among several. Use it at roughly one issue in three at
+most, and never treat it as the publication's promise.
+
+**An opinion held by someone in this market is still a fact about the market.** A broker who
+believes a submarket has turned tells you something real about how the people setting prices are
+behaving, whether or not the claim survives contact with the record.
+
+Claims sit in plain view in local forums, trade press, broker commentary, agent and lender
+marketing, and on the record from economic development officials. **Prefer the ones in
+`claims.md`**, which Alex heard first-hand. A live example from a working realtor: *Greenville is
+becoming the luxury market, land and home prices are just that expensive.* Testable through price
+distribution over time, share of sales above a threshold, land cost per acre, and new-construction
+price points.
+
+Three rules for a claim-shaped question. **Genuinely held**, by a real identifiable person or a
+documented public statement, never invented so the piece has something to knock down.
+**Falsifiable from public data**, which is the ACCESS INDEPENDENCE gate doing its job. And **able
+to come out either way**, because a claim you already know is wrong makes a smug piece, and a
+claim the record confirms is a perfectly good finding.
 
 ## THE BAR
 
@@ -87,12 +105,15 @@ Apply it to yourself honestly. Before you pick, write down what you would guess 
 If you are confident and you turn out to be right, it is a weak question. If you are confident
 and the sources suggest you are wrong, it is an excellent one.
 
-## THE EIGHT SHAPES
+## THE TEN SHAPES
 
-Questions of this kind are not random. They come in eight recognizable shapes. Point a shape at
-a company from the inventory and you have a candidate. This is your generator and it does not
-run out, because one company supports a different question under each shape, which is also why a
+Questions of this kind are not random. They come in ten recognizable shapes. Point a shape at a
+company from the inventory and you have a candidate. This is your generator and it does not run
+out, because one company supports a different question under each shape, which is also why a
 company stays in the inventory after it has been written about.
+
+**Shapes 1 through 7 need a company. Shapes 8, 9, and 10 do not**, and those three are where
+pure real-estate and market questions live.
 
 1. **THE REVENUE QUESTION.** What do they actually sell? The obvious answer is frequently wrong:
    the famous product is a loss leader, or the margin lives in service contracts, or the company
@@ -124,28 +145,52 @@ company stays in the inventory after it has been written about.
    weakness is subject to the same legal note as THE BREAK, so describe the mechanism and never
    forecast anyone's death.
 
-8. **THE CLAIM.** Is the thing everybody in this market repeats actually true? This is the one
-   shape that does NOT need a company, and it is where pure real-estate questions live. Take a
-   belief that is genuinely circulating, work out what would have to be true for it to hold,
-   and go to the record: sale price distributions, days on market by band, permit and
+8. **THE TREND.** What has this actually done over five years, and did the thing everyone
+   believes about it happen? No company required. Take a market, a submarket, a sector, a
+   corridor, or a category of employer and follow it back far enough that the shape becomes
+   visible. **The move that pays off most often is looking at the DISTRIBUTION rather than the
+   median**, because a median can sit perfectly still while everything underneath it changes,
+   and that gap is frequently the whole story. Also good: a ratio nobody computes, the same cut
+   run against a comparison market so a word like "expensive" has something to mean, and a
+   series that turns out to have been rising well before the event everybody credits for it.
+9. **THE INCENTIVE.** What rule is making this behavior rational? When a market or a company
+   does something that looks arbitrary, irrational, or like a matter of taste, there is usually
+   a tax structure, a financing term, an assessment schedule, a subsidy, a zoning threshold, or
+   a reimbursement rule underneath it. Find that and you have explained something nobody local
+   has explained. Ask what would have to be true for the decision to make sense to the person
+   who made it. **This is the highest-value shape on the list** and it is under-used everywhere:
+   it is almost always documented in public, it generalizes past the one subject, and it is the
+   difference between reporting that something happened and understanding why.
+10. **THE CLAIM.** Is the thing everybody in this market repeats actually true? Take a belief
+   that is genuinely circulating, work out what would have to be true for it to hold, and go to
+   the record: sale price distributions, days on market by band, permit and
    certificate-of-occupancy counts, land sales per acre, deed records, assessed values,
    absorption. The realtor's "Greenville is becoming the luxury market" is the model. Read
-   CLAIMS ARE RAW MATERIAL above before using this shape, because its three rules (genuinely
-   held, falsifiable, able to come out either way) are what keep it from producing strawmen.
+   CLAIMS ARE ONE INPUT above before using this shape, because its three rules (genuinely held,
+   falsifiable, able to come out either way) are what keep it from producing strawmen.
 
 Shape 7 is the one that COMPOUNDS. Four or five pieces under it inside one sector and the
 sector map has effectively written itself, at which point a landscape read across the whole
 sector becomes a piece you have earned rather than one you asserted. Do not attempt that piece
 early. It is the payoff for having done the companies first.
 
-Shape 8 is the one that keeps the publication CURRENT without making it a news scout. A claim is
-usually live right now, which gives a piece timeliness, but the claim is tested against durable
-records rather than reported as an event, so the piece still holds up in three years. If you
-find yourself reaching for news, reach for shape 8 instead.
+Shapes 8 and 9 are where PURE REAL-ESTATE questions live, and neither needs a company at all.
+They are also the two that most directly deliver what the publication promises on its front
+page, which is how things are actually doing, what the trends are, and what is driving them. If
+the last few runs have all been company teardowns, take one of these.
 
-**Do not let shape 8 crowd out the others.** It is the easiest to produce and the least
-defensible when done lazily, so it should run at roughly one issue in three, not most of them.
-Check ALREADY COVERED and prefer a company shape if the last piece was a claim.
+Shape 10 keeps the publication CURRENT without making it a news scout. A claim is usually live
+right now, which gives a piece timeliness, but it gets tested against durable records rather
+than reported as an event, so the piece still holds up in three years. If you find yourself
+reaching for news, reach for shape 10 instead.
+
+**Do not let shape 10 crowd out the others.** It is the easiest to produce and the least
+defensible when done lazily, so it runs at roughly one issue in three at most. Check ALREADY
+COVERED and prefer another shape if the last piece was a claim.
+
+**Shapes 8 and 9 also combine well with any company shape** and usually should. A company piece
+that puts the company's five-year trajectory next to its sector's, or that names the tax
+structure behind where it built, is better than one that does neither.
 
 ## SCOPE
 
@@ -269,7 +314,7 @@ company runs, which markets it is entering, and roughly what it pays. Read them 
 ## THE STEPS
 
 STEP 1, GENERATE. Pick 3 or 4 companies from the inventory the publication has not recently
-covered. Cross each against the eight shapes and write out 8 to 12 candidate questions. Generate
+covered. Cross each against the ten shapes and write out 8 to 12 candidate questions. Generate
 broadly before judging; volume is the point at this stage.
 
 STEP 2, STATE YOUR PRIORS. For each candidate worth considering, one line on what you would
@@ -289,7 +334,7 @@ Exactly this shape. QUESTION, TOPIC, ANCHOR, STAKES, THE TENSION TO HUNT, and SO
 what the researcher consumes, so they are required and must stand on their own.
 
 QUESTION: <the question itself, in the plain words a person would ask it>
-SHAPE: <which of the eight shapes it came from>
+SHAPE: <which of the ten shapes it came from>
 COMPANY: <name, city, and public or private>
 THE PRIOR: <what a smart local would confidently guess, and why the guess is worth testing>
 TOPIC: <the subject in one line, as a statement, for the researcher>

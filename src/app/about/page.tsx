@@ -73,19 +73,18 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-6">About</Eyebrow>
           <h1 className="theme-text-primary type-display mb-7">
-            Most of what circulates in this market is unchecked.
+            Knowing what is actually going on here is harder than it should be.
           </h1>
           <p className="theme-text-secondary type-body-lg mb-5">
-            Greenville is turning into a luxury market. That corridor is overbuilt. This
-            employer is about to expand and that one is quietly pulling back. You hear it
-            at closings, in listing appointments, and on every local forum, and some of it
-            is true. Some of it is folklore that got repeated confidently enough to sound
-            like data.
+            South Carolina produces a lot of announcements. A company expands, a
+            subdivision gets approved, a quarter comes in up or down. What is missing is
+            the layer underneath, where you find out whether a business is durable, what a
+            market has really done over five years instead of one quarter, and which rule
+            or tax break is driving behavior that otherwise looks like taste.
           </p>
           <p className="theme-text-secondary type-body-lg">
-            Nobody is doing the boring work of sorting the two, so that is the work here.
-            The goal is narrow and it is the whole thing: to be a reliable picture of the
-            real estate and business landscape in South Carolina.
+            That layer is what this is for. I started writing it because I wanted to read
+            it.
           </p>
         </div>
       </section>
@@ -96,15 +95,14 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">The method</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            A claim starts it. A document settles it.
+            It all comes out of the record.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
-            A piece usually begins with something someone said, because what this market
-            believes is worth taking seriously enough to check. Then it goes to the record.
-            The claim that a company is growing is worth nothing by itself. The forty
+            The word that a company is growing is worth nothing by itself. The forty
             engineering roles it posted in six months is worth something, because you can
-            go and count them. Every characterization in a piece is anchored to something
-            you could pull up yourself.
+            go and count them. Everything in a piece is anchored to something you could
+            pull up yourself, and most of it is more interesting than people expect once
+            you line it up over a few years.
           </p>
           <ul className="space-y-4 mb-8">
             <li>
@@ -145,14 +143,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── The stance. This section exists because the distinction it draws is
-          the easiest thing on the site to get wrong in a rewrite. A piece DOES
-          reach a conclusion about whether the evidence supports a claim; that is
-          the product. What it withholds is advocacy, meaning a recommendation
-          about what the reader should do or a personal preference about whether
-          something is good for the state. Assess, do not advise. Do not let this
+      {/* ── The stance. The distinction here is the easiest thing on the site to
+          get wrong in a rewrite. A piece DOES reach a conclusion; that is the
+          product. What it withholds is advocacy, meaning a recommendation about
+          what the reader should do. Assess, do not advise. Do not let this
           collapse back into "a buyer reads it this way, a seller reads it that
-          way", which is the both-sides mush that emptied the old weekly brief. ── */}
+          way", which is the both-sides mush that emptied the old weekly brief.
+
+          The market-opinion paragraph is deliberately LAST and short. An earlier
+          draft opened the whole site on it and Alex cut that: what people believe
+          is one input, not the job. ── */}
       <section className="theme-section py-20 md:py-28">
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">The stance</Eyebrow>
@@ -161,25 +161,23 @@ export default function AboutPage() {
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              An opinion held by someone in this market is a fact about the market, and it
-              is often the most useful thing in the room. A broker who thinks a submarket
-              has turned is telling you something real about how the people setting prices
-              are behaving, whether or not the underlying claim holds up. So those views
-              get quoted, attributed, and taken seriously here.
+              A piece here lands somewhere. If the numbers say a submarket has stalled, it
+              says that. Refusing to reach a conclusion is not neutrality, it is a waste of
+              your time, and there is already plenty of writing about this state that
+              carefully avoids saying anything. Where the record genuinely cannot settle a
+              question, I say so once and move on rather than hedging every paragraph.
             </p>
             <p>
-              They also get checked. If the evidence supports a claim, the piece says so.
-              If it does not, the piece says that just as plainly, because refusing to
-              reach a conclusion is not neutrality, it is just a waste of the reader&rsquo;s
-              time. Where the record genuinely cannot settle the question, that gets said
-              too, and it is said once rather than hedged through every paragraph.
+              What you will not get is a recommendation. Nothing about what you should buy,
+              sell, hold, or build, and no speeches about whether any of it is good for
+              South Carolina. You have the deal in front of you and the context I do not.
+              My job stops at handing you an accurate picture of the ground.
             </p>
             <p>
-              What you will not find is a recommendation. No calls on what you should buy,
-              sell, hold, or build, and no editorializing about whether any of it is good
-              for South Carolina. You are the one with the deal in front of you and the
-              context I do not have. The job here is to hand you an accurate picture of the
-              ground and let you make the call on it.
+              Opinions from people in the business show up here too, because what an
+              experienced broker believes is itself a fact about the market and worth
+              knowing. Those get attributed and then checked against the same records as
+              everything else.
             </p>
           </div>
         </div>
@@ -203,12 +201,11 @@ export default function AboutPage() {
               pulling back, you are the reader.
             </p>
             <p>
-              Local coverage answers the question of what happened. It rarely answers the
-              question you are actually holding, which is whether the thing is durable. A
-              company that looks enormous can rest on two customers. A submarket everyone
-              calls hot can be carried by a handful of sales at the top. Those are the
-              facts that move a decision, and most of them are sitting in public records
-              nobody reads.
+              Local coverage answers what happened. It rarely answers the question you are
+              actually holding, which is whether the thing is durable. A company that looks
+              enormous can rest on two customers. A submarket everyone calls hot can be
+              carried by a handful of sales at the top. Most of what settles those
+              questions is sitting in public records that nobody reads.
             </p>
             <p>
               It covers South Carolina rather than one county, because capital does not

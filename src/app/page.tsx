@@ -45,10 +45,22 @@ export const revalidate = 300;
  * and nobody says what the company does." (the company beat), each of which was
  * left stranded when the beat moved underneath it.
  *
- * The stance the copy is carrying, which is the thing to preserve if you rewrite
- * it: claims circulating in this market are the RAW MATERIAL, the public record
- * is the TEST, and the piece reports what the evidence supports without telling
- * the reader what to do about it.
+ * WHAT THE COPY IS FOR, and the thing to preserve if you rewrite it: a reader
+ * should learn in one screen that they can get an insightful picture of how
+ * South Carolina businesses are doing, what the long-term trends are, and what
+ * the real estate market is doing and WHY. Trends and incentives are the spine.
+ *
+ * An August 14, 2026 draft led on claim-testing ("people in this market say
+ * things... checking is the work here") and Alex cut it: testing what people
+ * believe is ONE input, not the job, and building the front page on it made the
+ * publication sound smaller than it is. Do not put it back at the top.
+ *
+ * That draft was also the site's worst prose, and the reasons are worth keeping
+ * because they recur. It opened on an abstract noun ("Checking is the work
+ * here."), it paid off in a tidy tricolon ("what the evidence supports, what it
+ * does not, and where it is genuinely unclear"), it piled five source types into
+ * one list to perform specificity, and every sentence ran the same length and
+ * shape. That combination reads as machine-written no matter how true it is.
  */
 
 function ArrowIcon({ className = "" }: { className?: string }) {
@@ -143,16 +155,17 @@ export default async function HomePage() {
                 A clear picture of real estate and business in South Carolina.
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                People in this market say things. Greenville is turning into a luxury
-                market. That corridor is overbuilt. This employer is about to expand. Some
-                of it is true, some of it is folklore that got repeated until it sounded
-                like data, and almost nobody checks which is which.
+                Finding out that a company added three hundred jobs is easy. Finding out
+                whether that company is healthy takes actual work, and so does learning what
+                five years of sales did to the submarket around it, or why the money landed
+                here instead of Charlotte.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                Checking is the work here. I take the claims moving around this market, and
-                the companies and deals underneath them, and test them against filings,
-                permits, deeds, job postings, and county records. You get what the evidence
-                supports, what it does not, and where it is genuinely unclear.
+                I write about the second part. How businesses in South Carolina are really
+                doing, where the market has been heading over years rather than quarters,
+                and the incentives behind decisions that look like preference until you find
+                the tax rule. It comes out of public records, and I say where every number
+                came from.
               </p>
             </div>
 

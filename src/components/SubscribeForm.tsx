@@ -30,7 +30,7 @@ type State = "idle" | "submitting" | "done" | "error";
 export function SubscribeForm({
   source,
   heading = "A clear read on SC real estate and business",
-  blurb = "Every other week I take something people in this market believe, or a company behind it, and check it against filings, permits, deeds, and county records. You get what the evidence supports and what it does not. Free, and you can leave any time.",
+  blurb = "Every other week, one piece on how businesses here are actually doing, where the market has been heading, or what is really driving a decision everybody else reported as news. Built on public records. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {
