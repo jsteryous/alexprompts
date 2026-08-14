@@ -301,7 +301,14 @@
       "PowerShell(Stop-Process *)",
       "Bash(echo \"EXIT: $?\")",
       "WebFetch(domain:www.zillow.com)",
-      "WebFetch(domain:dor.sc.gov)"
+      "WebFetch(domain:dor.sc.gov)",
+      "WebFetch(domain:searchhelp.exprealty.com)",
+      "WebFetch(domain:www.scstatehouse.gov)",
+      "WebFetch(domain:smartagentalliance.com)",
+      "WebFetch(domain:screaltors.org)",
+      "Bash(echo \"=== EXIT=$? ===\")",
+      "mcp__claude_ai_Vercel__check_domain_availability_and_price",
+      "WebFetch(domain:reason.com)"
     ]
   }
 }
