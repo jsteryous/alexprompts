@@ -31,9 +31,6 @@ export default function Footer() {
             <Link href="/greenville-works" className="theme-link text-sm">
               Reporting
             </Link>
-            <Link href="/tools" className="theme-link text-sm">
-              Tools
-            </Link>
             <Link href="/subscribe" className="theme-link text-sm">
               Subscribe
             </Link>

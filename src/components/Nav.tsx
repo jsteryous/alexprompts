@@ -23,9 +23,12 @@ import { site } from "@/lib/site";
 // sitemap, every published article URL, and the `greenville works` tag the engine
 // writes, for no reader benefit. Section labels have been changed independently
 // of routes here before ("Greenville Works" -> "SC Technology", July 2026).
+// The nine free tools were DELETED in August 2026, not hidden. They were built
+// for the consumer buyer, which is the audience this publication stopped
+// serving, and a calculator suite under a masthead reads as a lead-gen site
+// rather than something you read. Their routes now 404 on purpose.
 const links = [
   { href: "/greenville-works", label: "Reporting" },
-  { href: "/tools", label: "Tools" },
   { href: "/about", label: "About" },
 ];
 

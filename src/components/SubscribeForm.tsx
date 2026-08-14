@@ -21,11 +21,17 @@ type State = "idle" | "submitting" | "done" | "error";
 // the weekly brief was retired (it published weekly against monthly-refreshing
 // data and shipped the same figures three weeks running) and the publication that
 // replaced it runs about every other week, on finding. This default appears on
-// every tool page and every article, so it is the promise most readers see.
+// every article, so it is the promise most readers see.
+//
+// Rewritten a second time for the COMPANY beat. The first version promised "one
+// promise checked", which belonged to the accountability beat the spec replaced.
+// Keep this in sync with site.ts and the homepage standfirst; all three say the
+// same thing in different lengths, and a subscriber who is promised one beat and
+// sent another unsubscribes.
 export function SubscribeForm({
   source,
-  heading = "Every other week, one promise checked",
-  blurb = "South Carolina announces a lot. I go back through the permits, the grant agreements, and the county records to find out what actually happened, then write up what I find. Free, and you can leave any time.",
+  heading = "One South Carolina company, taken apart",
+  blurb = "Every other week I pick a company here and work out how it actually makes money, who pays it, why it sits where it sits, and what would break it. Built from filings, permits, and county records. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

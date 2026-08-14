@@ -48,31 +48,39 @@ export const site = {
   // and no "plain English" phrasing anywhere (dropped July 2026, it read as
   // unpolished).
   //
-  // REWRITTEN AUGUST 2026 for the consolidation. Three content tracks became one
-  // publication about WHO PAYS FOR SOUTH CAROLINA'S GROWTH, written for the
-  // professional (loan officer, closing attorney, agent, banker, developer) whose
-  // living depends on knowing the market, and built on primary documents. See
-  // scripts/publication/SPEC.md.
+  // REWRITTEN AUGUST 2026 for the consolidation, then AGAIN for the beat rewrite.
+  // Three content tracks became one publication about the South Carolina economy
+  // explained through its COMPANIES: how does this one actually make money, and
+  // what would break it. Written for the people who build and buy here, real
+  // estate entrepreneurs and developers first, and built on primary documents.
+  // See scripts/publication/SPEC.md.
   //
-  // "Better real estate decisions." (July 21, 2026) was retired because it no
-  // longer covers the work: a piece comparing two states' incentive grants is
-  // off-mission under it, and stretching every growth story until it lands on a
-  // property decision is how the writing gets weak. Earlier taglines, for the
-  // record: "Questions worth asking." (July 11, an orphaned pun on the retired
+  // "Who pays for South Carolina's growth." lasted two days. It was written for
+  // the accountability beat (going back and checking announced promises against
+  // the record) that Alex read and rejected as not interesting to him, and it
+  // survived the spec rewrite by accident. It leans watchdog for a publication
+  // that explains businesses.
+  //
+  // "Better real estate decisions." (July 21, 2026) went because it no longer
+  // covered the work: a piece on how a distributor makes its margin is
+  // off-mission under it, and stretching every business story until it lands on
+  // a property decision is how the writing gets weak. Earlier, for the record:
+  // "Questions worth asking." (July 11, an orphaned pun on the retired
   // AI-prompts positioning), "Growth is good." (one day), and "Where real estate
   // meets technology."
   //
   // The publication is deliberately still UNNAMED, so `name` stays "Alex Prompts"
   // as a placeholder. When the name lands it changes HERE and every surface
   // follows, which is the entire point of this file.
-  tagline: "Who pays for South Carolina's growth.",
+  tagline: "How South Carolina actually makes money.",
   oneLiner:
-    "Alex Steryous goes back through South Carolina's permits, grant agreements, and county records to find out what actually got built.",
+    "Alex Steryous takes one South Carolina company apart at a time, using filings, permits, and county records, to explain how it makes money and what would break it.",
   description:
-    "Every project in South Carolina arrives with a press release, a rendering, and a " +
-    "jobs number, and almost nobody goes back to check what happened. Alex Steryous does, " +
-    "using the permits, the grant agreements, the minutes, and the county records, and " +
-    "writes up what he finds. Plus a set of free real-estate tools he built himself.",
+    "Every expansion in South Carolina arrives with a ribbon cutting, a rendering, and a " +
+    "jobs number, and almost nobody writes how the company makes money, who its customers " +
+    "are, or why it picked that site. Alex Steryous takes one company apart at a time, " +
+    "using filings, permits, job postings, incentive agreements, and county records. " +
+    "Written for the people who build and buy in South Carolina.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
-import { liveTools, toolHref } from "@/lib/tools";
 import { PostCover } from "@/components/PostCover";
 import { SubscribeForm } from "@/components/SubscribeForm";
 
@@ -33,9 +32,16 @@ export const revalidate = 300;
  *
  * REMOVED and not to be re-added without a reason: the "mission" contrast panel
  * (folded into the standfirst, since a mission stated twice on one page is
- * stated badly) and the "Where to find us" social card grid (the footer already
+ * stated badly), the "Where to find us" social card grid (the footer already
  * carries every handle, and on a site whose owned list is the asset, a row of
- * links to other people's platforms was pointing the one job off-site).
+ * links to other people's platforms was pointing the one job off-site), and the
+ * free-tools row (the nine tools were deleted outright in August 2026; they
+ * served the consumer buyer this publication no longer writes for).
+ *
+ * The standfirst copy tracks the COMPANY beat in scripts/publication/SPEC.md. An
+ * earlier draft of this page led with "Somebody should go back and check.",
+ * which belonged to the accountability beat that spec replaced. If the beat
+ * moves again, this copy and site.ts move with it.
  */
 
 function ArrowIcon({ className = "" }: { className?: string }) {
@@ -127,18 +133,19 @@ export default async function HomePage() {
             <div className="max-w-2xl">
               <Eyebrow className="mb-6">{site.tagline}</Eyebrow>
               <h1 className="theme-text-primary type-display mb-6">
-                Somebody should go back and check.
+                Three hundred jobs, and nobody says what the company does.
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                Every project in South Carolina arrives with a press release, a rendering,
-                and a jobs number. The reporter moves on, the council turns over, and the
-                promise sits there unaudited.
+                Every expansion in South Carolina arrives the same way, with a ribbon
+                cutting, a rendering, and a jobs number. What almost nobody writes is how
+                the company makes money, who its customers are, why it picked that site,
+                or what would break it.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                I go back through the permits, the grant agreements, the minutes, and the
-                county records to find out what actually happened, then write up what I
-                find. Written by {site.author}, who is a licensed real estate agent in
-                South Carolina.
+                So I take one company apart at a time, using filings, permits, job
+                postings, incentive agreements, and county records. It is written for the
+                people who build and buy here, because the company behind an announcement
+                tells you more about what a site is worth than the announcement ever does.
               </p>
             </div>
 
@@ -200,33 +207,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Tools: a side door, deliberately demoted ──────────────────────
-          These used to be a nine-card grid with icons and audience badges,
-          which made them look like the point. They are not the point; they
-          are a useful surface that catches someone who arrived to run a
-          number. One line and a row of links. ── */}
-      <section className="theme-section py-12 md:py-14 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
-          <Eyebrow className="mb-5">Free tools, no sign-up</Eyebrow>
-          <p className="theme-text-muted type-body max-w-2xl mb-5">
-            Calculators that run entirely in your browser, and data tools built on public
-            county records. All free, all built here.
-          </p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
-            {liveTools().map((t) => (
-              <li key={t.slug}>
-                <Link
-                  href={toolHref(t)}
-                  {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="theme-link type-body underline decoration-1 underline-offset-4"
-                >
-                  {t.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </>
   );
 }
