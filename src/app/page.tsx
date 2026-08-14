@@ -38,10 +38,17 @@ export const revalidate = 300;
  * free-tools row (the nine tools were deleted outright in August 2026; they
  * served the consumer buyer this publication no longer writes for).
  *
- * The standfirst copy tracks the COMPANY beat in scripts/publication/SPEC.md. An
- * earlier draft of this page led with "Somebody should go back and check.",
- * which belonged to the accountability beat that spec replaced. If the beat
- * moves again, this copy and site.ts move with it.
+ * The standfirst copy tracks scripts/publication/SPEC.md and must stay in sync
+ * with site.ts and the SubscribeForm default promise. Two earlier drafts of this
+ * page are the reason that sync is called out: it led with "Somebody should go
+ * back and check." (the accountability beat) and then with "Three hundred jobs,
+ * and nobody says what the company does." (the company beat), each of which was
+ * left stranded when the beat moved underneath it.
+ *
+ * The stance the copy is carrying, which is the thing to preserve if you rewrite
+ * it: claims circulating in this market are the RAW MATERIAL, the public record
+ * is the TEST, and the piece reports what the evidence supports without telling
+ * the reader what to do about it.
  */
 
 function ArrowIcon({ className = "" }: { className?: string }) {
@@ -133,19 +140,19 @@ export default async function HomePage() {
             <div className="max-w-2xl">
               <Eyebrow className="mb-6">{site.tagline}</Eyebrow>
               <h1 className="theme-text-primary type-display mb-6">
-                Three hundred jobs, and nobody says what the company does.
+                A clear picture of real estate and business in South Carolina.
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                Every expansion in South Carolina arrives the same way, with a ribbon
-                cutting, a rendering, and a jobs number. What almost nobody writes is how
-                the company makes money, who its customers are, why it picked that site,
-                or what would break it.
+                People in this market say things. Greenville is turning into a luxury
+                market. That corridor is overbuilt. This employer is about to expand. Some
+                of it is true, some of it is folklore that got repeated until it sounded
+                like data, and almost nobody checks which is which.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                So I take one company apart at a time, using filings, permits, job
-                postings, incentive agreements, and county records. It is written for the
-                people who build and buy here, because the company behind an announcement
-                tells you more about what a site is worth than the announcement ever does.
+                Checking is the work here. I take the claims moving around this market, and
+                the companies and deals underneath them, and test them against filings,
+                permits, deeds, job postings, and county records. You get what the evidence
+                supports, what it does not, and where it is genuinely unclear.
               </p>
             </div>
 

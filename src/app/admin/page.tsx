@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic";
 
 const SECTION_LABEL: Record<string, string> = {
   realestate: "Real Estate",
-  works: "SC Technology",
+  works: "Business",
   briefing: "Upstate Brief",
   newsletter: "Newsletter",
 };

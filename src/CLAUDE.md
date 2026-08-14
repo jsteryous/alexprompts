@@ -94,8 +94,18 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   (`realEstateOutcomes`) grid (removed July 2026 with the voice-3 removal) are all gone. Those
   `site.ts` exports were deleted; the `OutcomeArt` component is now orphaned but kept. No
   shared section components (the old `HomeSections.tsx` was dental-only, deleted).
+- **`src/app/reporting/page.tsx`** — **NEW August 14, 2026, and the nav's "Reporting" target.**
+  Lists EVERY published post via `getPublishedPosts()` with no type filter, linking each card
+  through `postHref()` so it lands on its own canonical route. It replaced `/greenville-works`
+  as the nav target because that showed only `greenville works`-tagged posts, which made the
+  site's main tab a filter on one engine's output and hid the real-estate work. **It creates no
+  new article URLs and must not**; the per-section `[slug]` routes below are still where posts
+  live. `sectionLabel()` badges distinguish rows in the mixed list.
 - **`src/app/archive/`**, **`src/app/real-estate/`**, **`src/app/greenville-works/`**,
-  **`src/app/briefing/`** — the four section index + `[slug]` routes (`/briefing` is the weekly
+  **`src/app/briefing/`** — the four section index + `[slug]` routes (`/greenville-works` is
+  labelled **"Business"** as of August 14, 2026, was "SC Technology"; route and tag unchanged
+  because every published article URL hangs off them. It is no longer the nav target and is now
+  the narrow view, reached from article breadcrumbs, the sitemap, and search) (`/briefing` is the weekly
   Upstate Brief, added July 9, 2026; its index also carries an owned-list `SubscribeForm`
   since the brief never goes to Substack). All four `[slug]`
   pages render the shared `components/ArticleView.tsx` (markdown → sanitize → `Article` +
@@ -213,8 +223,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   than invented. Do not add a third background token. (The `--surface-muted` VARIABLE stays;
   `theme-card-muted` still uses it. The cap is on section-level surfaces.)
   Current per-route rhythm after the August 14, 2026 rebuilds, all conforming: `/`
-  PAGE·light, `/about` PAGE·DARK·light·light(rule)·DARK, `/briefing` PAGE·light·DARK,
-  `ArticleView` PAGE·light·DARK. (`ToolShell` was PAGE·light·DARK·DARK and is deleted.)
+  PAGE·light, `/about` PAGE·DARK·light(rule)·light(rule)·light(rule)·DARK, `/reporting`
+  PAGE·light, `/briefing` PAGE·light·DARK, `ArticleView` PAGE·light·DARK. (`ToolShell` was
+  PAGE·light·DARK·DARK and is deleted.)
 - **Tokens (retuned in the August 2026 NEWSPAPER PASS):** near-neutral **paper** base
   (light bg `#fafaf9`, surface `#ffffff`, text `#16161a`, muted `#6b6b73`; dark bg
   `#101012`, surface `#1a1a1e`, text `#f5f5f7`) with an **editorial oxblood accent**

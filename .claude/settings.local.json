@@ -310,7 +310,9 @@
       "mcp__claude_ai_Vercel__check_domain_availability_and_price",
       "WebFetch(domain:reason.com)",
       "Bash(sed -i 's/Cross each against the six shapes/Cross each against the seven shapes/; s/SHAPE: <which of the six shapes it came from>/SHAPE: <which of the seven shapes it came from>/' scripts/publication/routine/pass0_scout.md)",
-      "Bash(sed -i 's/it crosses against the six question shapes/it crosses against the seven question shapes/; s/LIKELY SHAPES: which of the six question shapes fit best/LIKELY SHAPES: which of the seven question shapes fit best/' scripts/publication/companies.md)"
+      "Bash(sed -i 's/it crosses against the six question shapes/it crosses against the seven question shapes/; s/LIKELY SHAPES: which of the six question shapes fit best/LIKELY SHAPES: which of the seven question shapes fit best/' scripts/publication/companies.md)",
+      "Bash(sed -i 's/## THE SEVEN SHAPES/## THE EIGHT SHAPES/; s/They come in seven recognizable shapes\\\\./They come in eight recognizable shapes./; s/Cross each against the seven shapes/Cross each against the eight shapes/; s/SHAPE: <which of the seven shapes it came from>/SHAPE: <which of the eight shapes it came from>/' scripts/publication/routine/pass0_scout.md)",
+      "Bash(sed -i 's/it crosses against the seven question shapes/it crosses against the eight question shapes/; s/LIKELY SHAPES: which of the seven question shapes fit best/LIKELY SHAPES: which of the eight question shapes fit best/' scripts/publication/companies.md)"
     ]
   }
 }

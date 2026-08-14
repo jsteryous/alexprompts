@@ -19,16 +19,21 @@ import { site } from "@/lib/site";
 // deliberately unnamed until a few issues exist (see scripts/publication/SPEC.md),
 // and this label is the first thing that should change when the name lands.
 //
-// The ROUTE stays /greenville-works. Renaming it would break inbound links, the
-// sitemap, every published article URL, and the `greenville works` tag the engine
-// writes, for no reader benefit. Section labels have been changed independently
-// of routes here before ("Greenville Works" -> "SC Technology", July 2026).
+// August 14, 2026: Reporting POINTS AT /reporting, which lists every published
+// piece regardless of tag. It used to point at /greenville-works, so the site's
+// main tab showed one engine's output and quietly hid the real-estate work. The
+// per-section indexes still exist and are linked from the footer under Archives.
+//
+// ARTICLE routes are untouched by that change and must stay that way. A piece
+// still lives at /greenville-works/<slug>, /real-estate/<slug>, /briefing/<slug>,
+// or /archive/<slug>. Renaming those would break inbound links, the sitemap,
+// every published URL, and the tags the engines write, for no reader benefit.
 // The nine free tools were DELETED in August 2026, not hidden. They were built
 // for the consumer buyer, which is the audience this publication stopped
 // serving, and a calculator suite under a masthead reads as a lead-gen site
 // rather than something you read. Their routes now 404 on purpose.
 const links = [
-  { href: "/greenville-works", label: "Reporting" },
+  { href: "/reporting", label: "Reporting" },
   { href: "/about", label: "About" },
 ];
 

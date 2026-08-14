@@ -48,39 +48,43 @@ export const site = {
   // and no "plain English" phrasing anywhere (dropped July 2026, it read as
   // unpolished).
   //
-  // REWRITTEN AUGUST 2026 for the consolidation, then AGAIN for the beat rewrite.
-  // Three content tracks became one publication about the South Carolina economy
-  // explained through its COMPANIES: how does this one actually make money, and
-  // what would break it. Written for the people who build and buy here, real
-  // estate entrepreneurs and developers first, and built on primary documents.
+  // THE SCOPE WIDENED August 14, 2026 (Alex's call, second pass same day). The
+  // publication is the go-to source for a clear picture of the REAL ESTATE AND
+  // BUSINESS landscape in South Carolina. Real estate and business are CO-EQUAL
+  // now; the earlier "real estate is a bonus, not a requirement" framing is dead,
+  // and company teardowns are one recurring form rather than the whole beat.
   // See scripts/publication/SPEC.md.
   //
-  // "Who pays for South Carolina's growth." lasted two days. It was written for
-  // the accountability beat (going back and checking announced promises against
-  // the record) that Alex read and rejected as not interesting to him, and it
-  // survived the spec rewrite by accident. It leans watchdog for a publication
-  // that explains businesses.
+  // THE TAGLINE IS ALEX'S OWN WORDS AND IS VERBATIM. Do not "improve" it into a
+  // sentence, and do not expand the ampersand. It is deliberately a plain label
+  // rather than a slogan: it names the territory the way a masthead names a beat,
+  // and it survives the publication getting a real name later. Two prior taglines
+  // died of being slogan-shaped, so the bar here is mechanical description.
   //
-  // "Better real estate decisions." (July 21, 2026) went because it no longer
-  // covered the work: a piece on how a distributor makes its margin is
-  // off-mission under it, and stretching every business story until it lands on
-  // a property decision is how the writing gets weak. Earlier, for the record:
-  // "Questions worth asking." (July 11, an orphaned pun on the retired
-  // AI-prompts positioning), "Growth is good." (one day), and "Where real estate
-  // meets technology."
+  // Retired, for the record: "How South Carolina actually makes money." (two
+  // days, too narrow once real estate became co-equal), "Who pays for South
+  // Carolina's growth." (two days, accountability-beat leftover that read as
+  // watchdog), "Better real estate decisions." (July 21), "Questions worth
+  // asking." (July 11, an orphaned pun on the retired AI-prompts positioning),
+  // "Growth is good." (one day), "Where real estate meets technology."
   //
   // The publication is deliberately still UNNAMED, so `name` stays "Alex Prompts"
   // as a placeholder. When the name lands it changes HERE and every surface
   // follows, which is the entire point of this file.
-  tagline: "How South Carolina actually makes money.",
+  //
+  // The oneLiner and description carry the HOUSE STANCE, which is the thing to
+  // preserve if you rewrite them: claims circulating in this market are the raw
+  // material, the record is the test, and the piece reports what the evidence
+  // supports without telling the reader what to do about it.
+  tagline: "SC Real Estate & Business",
   oneLiner:
-    "Alex Steryous takes one South Carolina company apart at a time, using filings, permits, and county records, to explain how it makes money and what would break it.",
+    "Alex Steryous tests what people in South Carolina say about real estate and business against filings, permits, deeds, and county records.",
   description:
-    "Every expansion in South Carolina arrives with a ribbon cutting, a rendering, and a " +
-    "jobs number, and almost nobody writes how the company makes money, who its customers " +
-    "are, or why it picked that site. Alex Steryous takes one company apart at a time, " +
-    "using filings, permits, job postings, incentive agreements, and county records. " +
-    "Written for the people who build and buy in South Carolina.",
+    "People in South Carolina real estate and business say a lot of things. Greenville is " +
+    "turning into a luxury market. A corridor is overbuilt. An employer is about to expand. " +
+    "Alex Steryous takes those claims, and the companies and deals behind them, and tests " +
+    "them against filings, permits, deeds, job postings, and county records, then reports " +
+    "what the evidence actually supports.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */

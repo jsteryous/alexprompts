@@ -182,18 +182,29 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
   return `${base}/${post.slug}`;
 }
 
-/** Short, human label for a post's section, for a card badge. Labels match the
- *  nav (July 2026 clarity pass): "Real Estate" stays a compact topic chip, the
- *  works track reads "SC Technology" (statewide since July 10, 2026), the brief
- *  carries its product name (the internal tags/URLs keep the Greenville names). */
+/** Short, human label for a post's section, for a card badge.
+ *
+ *  RELABELLED August 14, 2026 with the scope widening. The `works` track read
+ *  "SC Technology", which was accurate when that engine covered technology and
+ *  capital, and is wrong now that it is the live section of a publication about
+ *  South Carolina real estate AND business. It reads "Business" to match the
+ *  tagline. The three archived tracks keep topical labels so a reader scanning
+ *  the mixed /reporting list can tell a 2026 weekly brief from a new piece.
+ *
+ *  A known rough edge: a real-estate-led piece written by the current engine
+ *  still carries the `greenville works` tag and so badges as "Business". Fixing
+ *  it properly means the engine tagging by subject rather than by engine, which
+ *  is worth doing once real-estate-led pieces are actually shipping. Do not fix
+ *  it by routing new pieces to the `greenville` tag; that would file them under
+ *  the archived /real-estate section. */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
     ? "Real Estate"
     : section === "works"
-      ? "SC Technology"
+      ? "Business"
       : section === "briefing"
-        ? "Upstate Brief"
+        ? "Weekly Brief"
         : "Newsletter";
 }
 

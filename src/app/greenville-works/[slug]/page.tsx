@@ -43,10 +43,10 @@ export default async function GreenvilleWorksPostPage({ params }: Props) {
     <ArticleView
       post={post}
       section={{
-        label: "SC Technology",
+        label: "Business",
         basePath: "/greenville-works",
         blurb:
-          "I dig into the technology and capital reshaping South Carolina, one system at a time, and what it means for where we live, work, and invest. Subscribe and the next one lands in your inbox.",
+          "I take what people in South Carolina say about real estate and business and check it against the record. Subscribe and the next one lands in your inbox.",
       }}
     />
   );

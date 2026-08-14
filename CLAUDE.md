@@ -309,10 +309,35 @@ under `scripts/_archive/` — do not revive it.
 
 > **CONSOLIDATION, August 12 to 14, 2026. Read `scripts/publication/SPEC.md` first; it
 > outranks this section wherever the two disagree.** Three content tracks became ONE
-> publication about **the South Carolina economy explained through its COMPANIES**, built on
-> primary documents, cadence about every two weeks and published ON FINDING. The question
-> every issue answers is **how does this company actually make money, and what would break
-> it**, and the hard rule is that every issue produces at least one number nobody had computed.
+> publication whose goal is to be **the go-to source for a clear picture of the REAL ESTATE
+> AND BUSINESS landscape in South Carolina**, built on primary documents, cadence about every
+> two weeks and published ON FINDING. The question every issue answers is **is this true, and
+> what does the record actually show**, and the hard rule is that every issue produces at least
+> one number nobody had computed. Tagline is **`SC Real Estate & Business`** (Alex's own words,
+> verbatim, do not "improve" it into a sentence).
+>
+> **REAL ESTATE AND BUSINESS ARE CO-EQUAL** (widened August 14, 2026). The earlier framing was
+> companies-only with "real estate is a bonus, not a requirement"; that is dead. A piece may be
+> a pure real-estate market question with no company in it. The company teardown ("how does
+> this company actually make money, and what would break it") is the sharpest recurring FORM
+> and is preferred when a good company is available, not the whole beat.
+>
+> **CLAIMS ARE RAW MATERIAL, and this is the signature mechanism.** An opinion held by someone
+> in this market is a fact about the market, so what people say is actively collected and then
+> tested against the record. Both halves get published: what is believed, and what is true.
+> Alex logs what he hears in **`scripts/publication/claims.md`**, which the scout prefers over
+> claims it finds online. Seeded with a working realtor's "Greenville is becoming the luxury
+> market, land and home prices are just that expensive."
+>
+> **ASSESS, DO NOT ADVISE.** The posture is the intelligence analyst's, not the columnist's,
+> and the distinction is the easiest thing on the site to get wrong. **A piece DOES reach a
+> conclusion** about whether the evidence supports a claim; that is the product, and refusing
+> to land is not neutrality. **A piece does NOT advocate**: no recommendation about what to
+> buy, sell, hold, or build, and no editorializing about whether any of it is good for the
+> state. Other people's opinions are subject matter, quoted and attributed and tested. Alex's
+> own read may inform WHICH claim is worth testing; it never substitutes for the test. Do not
+> collapse this into "a buyer reads it this way, a seller reads it that way", which is the
+> both-sides mush that emptied the old weekly brief.
 >
 > **The beat moved once, on August 12.** The first spec was an ACCOUNTABILITY beat, going back
 > and checking announced promises against the record. Alex read it and said it was not
@@ -355,6 +380,17 @@ under `scripts/_archive/` — do not revive it.
 > **Nav is `Reporting | About` plus Subscribe and the Buying or Selling CTA.** The three
 > content tracks stopped being peers; `/briefing` and `/real-estate` keep every published
 > piece and moved to the footer under "Archives".
+>
+> **`/reporting` is a NEW route (August 14, 2026) and it is what "Reporting" points at.** It
+> lists EVERY published piece regardless of tag, because the tab used to point at
+> `/greenville-works` and so showed one engine's output while hiding the real-estate work.
+> **Article URLs are untouched by it**: a piece still lives at `/greenville-works/<slug>`,
+> `/real-estate/<slug>`, `/briefing/<slug>`, or `/archive/<slug>`, and `/reporting` links each
+> card through `postHref()`. The per-section indexes still exist and are still reachable from
+> article breadcrumbs. `/greenville-works` was relabelled **"Business"** (it read "SC
+> Technology", accurate for the old tech-and-capital track, wrong for the live section of a
+> real-estate-and-business publication); its route and the `greenville works` tag are
+> deliberately unchanged, since every published article URL hangs off them.
 >
 > **What follows is STALE where it describes the old three-track nav, the old five-section
 > homepage, the nine tools, and the "Better real estate decisions." tagline.** Kept for

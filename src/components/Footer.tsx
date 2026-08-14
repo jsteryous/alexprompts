@@ -28,7 +28,7 @@ export default function Footer() {
         <nav className="flex flex-wrap gap-x-10 gap-y-6">
           <div className="flex flex-col gap-2">
             <span className="theme-text-muted type-eyebrow mb-1">Read</span>
-            <Link href="/greenville-works" className="theme-link text-sm">
+            <Link href="/reporting" className="theme-link text-sm">
               Reporting
             </Link>
             <Link href="/subscribe" className="theme-link text-sm">

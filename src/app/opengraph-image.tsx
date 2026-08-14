@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: Better real estate decisions.";
+export const alt = "Alex Prompts: SC Real Estate & Business";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,7 +23,7 @@ export default function OgImage() {
         {/* Top label */}
         <div
           style={{
-            color: "#818cf8",
+            color: "#d97066",
             fontSize: 13,
             fontWeight: 700,
             letterSpacing: "0.18em",
@@ -34,7 +34,7 @@ export default function OgImage() {
             gap: 10,
           }}
         >
-          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#818cf8" }} />
+          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#d97066" }} />
           ALEX PROMPTS
         </div>
 
@@ -52,7 +52,7 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Better real estate decisions.
+          SC Real Estate &amp; Business
         </div>
 
         {/* Sub */}
@@ -65,8 +65,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          Honest writing on Greenville real estate and the technology reshaping it,
-          plus free tools for buyers, sellers, and investors.
+          What people in this market say, checked against filings, permits,
+          deeds, and county records.
         </div>
 
         {/* Bottom bar */}
@@ -88,23 +88,23 @@ export default function OgImage() {
               display: "flex",
               alignItems: "center",
               gap: 10,
-              background: "rgba(129,140,248,0.1)",
-              border: "1px solid rgba(129,140,248,0.25)",
-              borderRadius: 8,
+              background: "rgba(217,112,102,0.12)",
+              border: "1px solid rgba(217,112,102,0.3)",
+              borderRadius: 0,
               padding: "8px 16px",
             }}
           >
-            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8" }} />
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#d97066" }} />
             <span
               style={{
-                color: "#a5b4fc",
+                color: "#e8a49c",
                 fontSize: 12,
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
             >
-              GREENVILLE, SC
+              SOUTH CAROLINA
             </span>
           </div>
         </div>

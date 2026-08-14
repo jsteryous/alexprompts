@@ -38,7 +38,7 @@ const CONTACT_EMAIL = "jsteryous@gmail.com";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "A publication about how South Carolina companies actually make money, built from filings, permits, job postings, and county records, and written for the people who build and buy here.",
+    "A clear picture of real estate and business in South Carolina. Claims from the market, tested against filings, permits, deeds, and county records, reported without a recommendation attached.",
   alternates: { canonical: `${site.url}/about` },
 };
 
@@ -73,18 +73,19 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-6">About</Eyebrow>
           <h1 className="theme-text-primary type-display mb-7">
-            Announcements are not information.
+            Most of what circulates in this market is unchecked.
           </h1>
           <p className="theme-text-secondary type-body-lg mb-5">
-            A company announces three hundred jobs. The story runs, the ribbon gets cut,
-            and the coverage stops there. Almost nobody writes down what the company
-            actually sells, who pays it, why it chose that site, or what would have to go
-            wrong for the whole thing to come apart.
+            Greenville is turning into a luxury market. That corridor is overbuilt. This
+            employer is about to expand and that one is quietly pulling back. You hear it
+            at closings, in listing appointments, and on every local forum, and some of it
+            is true. Some of it is folklore that got repeated confidently enough to sound
+            like data.
           </p>
           <p className="theme-text-secondary type-body-lg">
-            That gap is the entire reason this exists. Every other week I take one South
-            Carolina company apart and answer the only question that really matters about
-            a business, which is how it makes money and what would break it.
+            Nobody is doing the boring work of sorting the two, so that is the work here.
+            The goal is narrow and it is the whole thing: to be a reliable picture of the
+            real estate and business landscape in South Carolina.
           </p>
         </div>
       </section>
@@ -95,13 +96,15 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">The method</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            Everything here starts with a document.
+            A claim starts it. A document settles it.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
+            A piece usually begins with something someone said, because what this market
+            believes is worth taking seriously enough to check. Then it goes to the record.
             The claim that a company is growing is worth nothing by itself. The forty
             engineering roles it posted in six months is worth something, because you can
-            go and count them. So every characterization in a piece is anchored to
-            something you could pull up yourself.
+            go and count them. Every characterization in a piece is anchored to something
+            you could pull up yourself.
           </p>
           <ul className="space-y-4 mb-8">
             <li>
@@ -122,7 +125,8 @@ export default function AboutPage() {
               <h3 className="theme-text-primary type-title mb-1">Permits, deeds, and leases</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
                 Square footage, what was paid, who holds the paper, and when it was
-                signed. A building is a commitment that is hard to walk back quietly.
+                signed. A building is a commitment that is hard to walk back quietly, and
+                a deed is the rare document where the price is not a negotiating position.
               </p>
             </li>
             <li>
@@ -141,8 +145,50 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Who it is for. Alex's note: speak to the reader. This is that. ── */}
+      {/* ── The stance. This section exists because the distinction it draws is
+          the easiest thing on the site to get wrong in a rewrite. A piece DOES
+          reach a conclusion about whether the evidence supports a claim; that is
+          the product. What it withholds is advocacy, meaning a recommendation
+          about what the reader should do or a personal preference about whether
+          something is good for the state. Assess, do not advise. Do not let this
+          collapse back into "a buyer reads it this way, a seller reads it that
+          way", which is the both-sides mush that emptied the old weekly brief. ── */}
       <section className="theme-section py-20 md:py-28">
+        <div className="max-w-2xl mx-auto px-6">
+          <Eyebrow className="mb-5">The stance</Eyebrow>
+          <h2 className="theme-text-primary type-h2 mb-6">
+            Assessments, not advice.
+          </h2>
+          <div className="theme-prose prose max-w-none">
+            <p>
+              An opinion held by someone in this market is a fact about the market, and it
+              is often the most useful thing in the room. A broker who thinks a submarket
+              has turned is telling you something real about how the people setting prices
+              are behaving, whether or not the underlying claim holds up. So those views
+              get quoted, attributed, and taken seriously here.
+            </p>
+            <p>
+              They also get checked. If the evidence supports a claim, the piece says so.
+              If it does not, the piece says that just as plainly, because refusing to
+              reach a conclusion is not neutrality, it is just a waste of the reader&rsquo;s
+              time. Where the record genuinely cannot settle the question, that gets said
+              too, and it is said once rather than hedged through every paragraph.
+            </p>
+            <p>
+              What you will not find is a recommendation. No calls on what you should buy,
+              sell, hold, or build, and no editorializing about whether any of it is good
+              for South Carolina. You are the one with the deal in front of you and the
+              context I do not have. The job here is to hand you an accurate picture of the
+              ground and let you make the call on it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Who it is for. Alex's note: speak to the reader. This is that.
+          Same surface as the stance section above, so a hairline marks the
+          break rather than a third background colour. ── */}
+      <section className="theme-section border-t theme-border py-20 md:py-28">
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">Who it is for</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
@@ -151,18 +197,18 @@ export default function AboutPage() {
           <div className="theme-prose prose max-w-none">
             <p>
               Developers, real estate entrepreneurs, and the people who work around a
-              deal. If you are trying to decide what a site is worth, who is realistically
-              going to lease it, or whether the employer three miles away is expanding or
-              quietly shrinking, the company behind the announcement will tell you more
-              than the announcement ever does.
+              deal, which means the loan officer, the closing attorney, the agent, and the
+              banker. If you are deciding what a site is worth, who is realistically going
+              to lease it, or whether the employer three miles away is expanding or quietly
+              pulling back, you are the reader.
             </p>
             <p>
-              Local business coverage answers the question of what happened. It rarely
-              answers the question you are actually holding, which is whether the thing is
-              durable. A company that looks enormous can rest on two customers. A company
-              nobody has heard of can be the reason a whole corridor has water and power.
-              Those are the facts that move a decision, and they are sitting in public
-              records that nobody reads.
+              Local coverage answers the question of what happened. It rarely answers the
+              question you are actually holding, which is whether the thing is durable. A
+              company that looks enormous can rest on two customers. A submarket everyone
+              calls hot can be carried by a handful of sales at the top. Those are the
+              facts that move a decision, and most of them are sitting in public records
+              nobody reads.
             </p>
             <p>
               It covers South Carolina rather than one county, because capital does not
@@ -206,6 +252,15 @@ export default function AboutPage() {
                   actually decided things inside it, and what would make them change
                   course, all before I ever picked up the phone. This is the same work
                   with the sales call removed and the sourcing written down.
+                </p>
+                {/* Independence stated WITHOUT the phrase "I do not practice",
+                    which is banned site-wide: it disqualifies Alex at the exact
+                    moment a reader is deciding whether he can help. See the
+                    strategic-direction note in the root CLAUDE.md. */}
+                <p>
+                  Being in the business is useful for hearing what people are saying. Not
+                  having a deal riding on any of it is useful for writing down what the
+                  records actually show.
                 </p>
                 <p>
                   I also read about this material in my own time and always have. Solar,

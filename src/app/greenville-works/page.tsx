@@ -4,12 +4,21 @@ import { site } from "@/lib/site";
 import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
+/**
+ * The BUSINESS section index. Relabelled from "SC Technology" August 14, 2026
+ * with the scope widening; the route and the `greenville works` tag are
+ * deliberately unchanged, because every published article URL hangs off them.
+ *
+ * This page is no longer the nav's Reporting target. /reporting lists every
+ * piece across every tag and is the broad view; this is the narrow one, reached
+ * from article breadcrumbs, the sitemap, and search.
+ */
 export const metadata: Metadata = {
-  title: "SC Technology",
+  title: "Business",
   description:
-    "The technology and capital reshaping South Carolina, and an honest look at whether each " +
-    "one makes us more prosperous. Data centers, the power grid, fiber, manufacturing and " +
-    "automation, the port, and who is buying and building.",
+    "How South Carolina companies actually make money, who pays them, why they sit where " +
+    "they sit, and what would break them. Built from filings, permits, job postings, and " +
+    "county records.",
   alternates: { canonical: `${site.url}/greenville-works` },
 };
 
@@ -22,18 +31,20 @@ export default async function GreenvilleWorksPage() {
     <>
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
-          <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            SC Technology
+          <span
+            className="theme-label type-eyebrow inline-block border-t-2 pt-2 mb-6"
+            style={{ borderColor: "var(--accent)" }}
+          >
+            Business
           </span>
-          <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            The technology and capital reshaping South Carolina
+          <h1 className="theme-text-primary type-h1 mb-5">
+            How the companies here actually make money
           </h1>
-          <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            I want to know what actually makes South Carolina more prosperous, and which
-            technology helps us get there. So I take one system at a time, a data center, the
-            power grid, fiber, automation on a factory floor, the port, or the capital behind a
-            wave of buying, work out how it really works, and weigh honestly whether it leaves
-            us better off. I skip the hype and name the trade-offs.
+          <p className="theme-text-muted type-body-lg max-w-xl">
+            A company announces three hundred jobs and the coverage stops there. These pieces
+            take one South Carolina business apart instead: what it really sells, who pays it
+            and why they keep paying, why it sits where it sits, and what would break it.
+            Built from filings, permits, job postings, and county records.
           </p>
         </div>
       </section>

@@ -15,18 +15,58 @@
 
 ## What it is
 
-One publication, written by Alex, about **the South Carolina economy, explained through its
-companies.**
+One publication, written by Alex, whose goal is to be **the go-to source for a clear picture of
+the real estate and business landscape in South Carolina.**
 
-Local business coverage in this state announces things. A company is expanding, three hundred
-jobs, a ribbon cutting, a rendering. Almost nobody writes what the company actually does, how
-it makes money, who its customers are, why it sits where it sits, or what would break it.
+> **SCOPE WIDENED August 14, 2026, Alex's call.** This file previously read "the South Carolina
+> economy, explained through its companies," and the scout carried "REAL ESTATE IS A BONUS, NOT
+> A REQUIREMENT." **Real estate and business are now CO-EQUAL subjects.** The company teardown
+> is one recurring form, and it is still the best one, but a piece may be a pure real-estate
+> market question with no single company in it. The tagline is `SC Real Estate & Business`.
+>
+> The widening also introduced the publication's most distinctive mechanism, below: **what
+> people in this market believe is raw material.**
+
+Two things are true at once here, and the publication lives on both. Local business coverage
+announces things and never explains them: a company is expanding, three hundred jobs, a ribbon
+cutting, a rendering, and almost nobody writes what the company actually does, how it makes
+money, who its customers are, or what would break it. And the real estate side runs on
+confident assertion: Greenville is turning into a luxury market, that corridor is overbuilt,
+this employer is about to expand. Some of that is true and some of it is folklore repeated
+until it sounded like data, and almost nobody sorts the two.
 
 ## The question every issue answers
 
-**How does this company actually make money, and what would break it?**
+**Is this true, and what does the record actually show?**
 
-That is the beat. Not a profile. The machine underneath.
+Applied to a company, that resolves to the sharpest version of the question and the one to
+prefer when a company is available: **how does this company actually make money, and what would
+break it?** Not a profile. The machine underneath.
+
+Applied to a market claim, it resolves to: **who says this, what would have to be true for it
+to hold, and does the record support it?**
+
+## Claims are raw material
+
+The signature mechanism, and the reason the publication is not just another explainer.
+
+**An opinion held by someone in this market is a fact about the market.** A broker who believes
+a submarket has turned is telling you something real about how the people who set prices are
+behaving, whether or not the underlying claim survives contact with the record. Both halves are
+worth publishing: what is believed, and what is true.
+
+So claims are actively COLLECTED, not stumbled upon. Alex hears them at closings, on listing
+appointments, and in his sphere; more sit in public view on local forums, in trade press, in
+broker commentary, and in what economic development people say on the record. The example that
+prompted this, from a working realtor: *Greenville is becoming the luxury market, land and home
+prices are just that expensive.* That is a genuinely testable claim. Price distribution over
+time, the share of sales above a threshold, land cost per acre, and the price points of new
+construction all bear on it, and none of them are hard to reach.
+
+The claim gets attributed, taken seriously, and then checked. Attribution can be a named person
+who agreed to be named, an unnamed but characterized source ("a broker who has been listing in
+this submarket for a decade"), or a public statement, and it must never be a strawman built to
+be knocked down. If a claim turns out to be right, saying so plainly is a finding.
 
 Three parts of it are reliably more interesting than a reader expects. **What they actually
 sell** is usually stranger than the public story (the well-known product is often not where
@@ -149,7 +189,22 @@ reporting back.
 - **Specificity is the humor.** Not jokes, details. "A dentist from Charlotte" is funny. "An
   out-of-state investor" is nothing. Almost everything that reads as wit is precision.
 - **Stop one beat early.** Explaining the punchline is the most common way good material dies.
-- **Have opinions and say them plainly.** A narrator who never evaluates is furniture.
+- **Assess, do not advise** (revised August 14, 2026; this line previously read "have opinions
+  and say them plainly," which was too blunt an instruction and invited the wrong thing). The
+  posture is the intelligence analyst's, not the columnist's. Read the two halves together,
+  because dropping either one breaks the publication:
+  - **You DO reach a conclusion.** Whether the evidence supports a claim is the product, and
+    saying "the record does not support this" is a verdict the piece is obligated to deliver.
+    Refusing to land is not neutrality, it is wasting the reader's time. **This does not revive
+    the dead no-verdict rule**; see the reversal below, which still stands.
+  - **You do NOT advocate.** No recommendation about what the reader should buy, sell, hold, or
+    build, and no editorializing about whether any of it is good for South Carolina. The reader
+    has the deal in front of them and context you do not have. Hand them an accurate picture of
+    the ground and let them make the call.
+  - **Other people's opinions are subject matter**, quoted and attributed and then tested. See
+    "Claims are raw material" above. Alex's own read of the market may inform which claim is
+    worth testing; it never substitutes for the test, and it does not get published as the
+    finding.
 - **Be visibly curious.** "I did not expect this" is one of the best sentences in nonfiction.
 - **Vary rhythm in both directions.** Long, long, then four words.
 - **Start in the middle.** No throat-clearing, no scene-setting, no summary of what is coming.
@@ -167,7 +222,13 @@ reporting back.
    engineered for excerpting, which guaranteed a boring lead every issue. The first sentence
    is now the most INTERESTING sentence, not the most quotable one.
 3. **The no-verdict rule is DEAD.** "A buyer reads it this way, a seller reads it that way" is
-   the both-sides mush that emptied the briefs. A piece arrives somewhere.
+   the both-sides mush that emptied the briefs. A piece arrives somewhere. **Do not confuse
+   this with "assess, do not advise" above; they are not in tension and the difference is the
+   single easiest thing on this page to get wrong.** The verdict a piece must deliver is about
+   the EVIDENCE ("the sales data does not support the luxury-market read, and here is what it
+   does show"). What is withheld is the RECOMMENDATION ("so hold off on that submarket"). A
+   piece that refuses to say whether a claim holds has failed. A piece that tells the reader
+   what to do has overreached.
 
 ### Unchanged
 
@@ -255,7 +316,13 @@ only the inventory and the shapes are replaced.
    South Carolina companies worth taking apart: major employers, quiet giants, the ones
    attached to a recent capital move, the ones nobody can explain. Alex can seed it; the scout
    must also be able to harvest candidates so it never runs dry.
-2. **Seven new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
+1b. **`claims.md`, the second input** (added August 14, 2026 with the scope widening). Things
+   Alex has actually heard people in this market say, logged with who said it and when. **This
+   is the highest-value file in the engine and the only one that requires him**, because a claim
+   heard first-hand at a closing beats anything the scout can find on a forum: it is current,
+   it is attributable, and he can speak to the context. Seeded with the realtor's luxury-market
+   claim. The scout prefers these over claims it finds itself.
+2. **Eight new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
    Each is a genuinely different analytical question, so one company supports several pieces
    across years, which is what keeps the generator from draining:
    - **THE REVENUE QUESTION** — what do they actually sell? The obvious answer is often wrong.
@@ -264,6 +331,12 @@ only the inventory and the shapes are replaced.
    - **THE BREAK** — concentration, a single input, a contract cycle, a technology shift.
    - **WHY HERE** — the site, the incentives, the port, the labor shed. Real estate lives here.
    - **THE QUIET GIANT** — enormous or critical, and nobody has heard of them.
+   - **THE CLAIM** (added August 14, 2026 with the scope widening) — is the thing everybody in
+     this market repeats actually true? The one shape that needs no company, and where pure
+     real-estate questions live. It keeps the publication current without making it a news
+     scout, since a claim is usually live now but is tested against durable records. Cap it at
+     roughly one issue in three: it is the easiest shape to produce and the least defensible
+     when done lazily.
    - **THE COMPETITIVE QUESTION** (added August 14, 2026) — who are they beating, and who is
      beating them? The rival the public would name and the rival that actually threatens the
      company are rarely the same one. Added because the first six shapes explain a company in
