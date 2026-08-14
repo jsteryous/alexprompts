@@ -198,12 +198,34 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Current per-route rhythm, all conforming: `/` PAGE·DARK·light·light·DARK, `/about`
   PAGE·DARK·light·light·DARK·light·DARK, `/briefing` PAGE·light·DARK, `ToolShell`
   PAGE·light·DARK·DARK, `ArticleView` PAGE·light·DARK.
-- **Tokens:** Apple-style **cool-neutral** base (light bg `#f5f5f7`, surface `#ffffff`,
-  text `#1d1d1f`, muted `#6e6e73`; dark bg near-black neutral `#101012`, surface `#1c1c1e`,
-  text `#f5f5f7`) with a **refined indigo accent** (`#4f46e5` light / `#818cf8` dark). The
-  neutrals are true-cool on purpose so nothing clashes with the accent or the `tone-*`
-  chips — do NOT reintroduce a warm/cream base (the old dental cream+green is gone) or mix
-  warm greys in. All neutrals live in `globals.css` tokens; retune there, never per-page.
+- **Tokens (retuned in the August 2026 NEWSPAPER PASS):** near-neutral **paper** base
+  (light bg `#fafaf9`, surface `#ffffff`, text `#16161a`, muted `#6b6b73`; dark bg
+  `#101012`, surface `#1a1a1e`, text `#f5f5f7`) with an **editorial oxblood accent**
+  (`#9a2323` light / `#d97066` dark, lifted in dark mode because oxblood dies on
+  near-black). The old Apple grey `#f5f5f7` base read as an app shell and the indigo
+  `#4f46e5` was the most "tech startup" element in the palette; both are gone. The base is
+  still essentially neutral, so do NOT warm it into cream (the old dental cream+green is
+  gone) or mix warm greys in. All neutrals live in `globals.css` tokens; retune there,
+  never per-page.
+- **Borders are STRUCTURE, shadows are gone.** `--border` went from `rgba(0,0,0,0.08)` to
+  `0.14` and `--border-strong` from `0.14` to `0.32`, because rules now do the separating
+  work that card shadows used to. `--shadow-card` is `none` and `--shadow-soft` is a 1px
+  hairline; both tokens are KEPT (many components reference them) but render as nothing.
+  `.theme-card` lost its `backdrop-filter: blur(18px)` and is now a transparent ruled box,
+  and `.theme-header` lost its blur. Do not add a drop shadow or a backdrop-filter back.
+- **Corners are squared globally.** The whole Tailwind v4 radius scale (`--radius-xs`
+  through `--radius-4xl`) is set to `0px` in `@theme`, so the ~90 existing `rounded-*`
+  utilities across 30 files keep compiling and render square. Retune there, never
+  per-component. `rounded-full` is deliberately excluded (Tailwind hardcodes it, and the
+  round controls like `DarkModeToggle` should stay circular).
+- **Type is an EDITORIAL SPLIT.** `--font-serif` (a system stack: Charter → Iowan → Sitka →
+  Cambria → Georgia) carries the reading surface: every `.type-display/h1/h2/h3/title`
+  heading AND `.theme-prose` body copy. `--font-sans` (Geist) is CHROME only: nav,
+  `.type-eyebrow`, `.type-small`, buttons, fields, badges, tables, and `figcaption`. The
+  serif is a system stack on purpose — `next/font/google` breaks the Turbopack build, and a
+  webfont would cost an LCP round trip. Headline sizes were stepped up (display now clamps
+  to `4.5rem`) because the large-headline-to-small-body ratio is most of the newspaper
+  effect. Prose links are underlined ink, not bare accent colour.
 - **Type scale = single source of truth.** `@theme` defines `--text-display/h1/h2/h3/title/
   body-lg/body/small/eyebrow` (fluid `clamp()`), consumed via the `.type-*` utility classes
   (size + line-height + weight + tracking together; color still comes from `theme-text-*`).
@@ -218,9 +240,20 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - Sections `py-20 md:py-28`, max-width `max-w-5xl`/`max-w-6xl`, articles `max-w-2xl`.
 - Article body: `prose theme-prose max-w-none` + `dangerouslySetInnerHTML` (first-party
   author content from the gated publish flow).
-- Direction: **Apple-quiet** — generous whitespace, strong type scale, minimal decoration.
-  The one signature flourish is the terminal-caret motif (`.caret`, faint `.prompt-watermark`).
-  Keep gradients/blur/textures restrained; do not add back the dotted-grid page texture.
+- Direction: **clean-cut newspaper** (August 2026, replaced "Apple-quiet"). Serif headlines
+  and body, sans furniture, hairline rules, squared corners, flat blocks of ink, generous
+  whitespace, zero decoration. **THE TERMINAL-CARET MOTIF IS DELETED**, not deprecated:
+  `.caret` (the blinking `▌` after the wordmark in `Nav`), `.prompt-watermark` (the giant
+  faint `>` behind the homepage lede), and `PostCover`'s branded `>` placeholder panel were
+  the last artefacts of the retired "Alex Prompts" AI-prompt positioning. The classes are
+  removed from `globals.css` so the affordance to re-add them does not exist, the same way
+  `.theme-section-muted` was handled. **Do not reintroduce a caret, chevron, blink, or `>`
+  anywhere** — a publication's mark is its name set in type. `PostCover`'s no-cover state is
+  now a silent ruled plate. Two rule utilities exist for structure: `.rule-masthead` (3px,
+  once per view, under the nameplate) and `.rule-section` (hairline between same-surface
+  blocks). **No gradients**: `.theme-page`'s accent bloom and `.theme-section-contrast`'s
+  radial glow were both removed (print has no glow, and a radial gradient behind a masthead
+  reads as a SaaS landing page). Do not add back the dotted-grid page texture either.
 - **Cover library images are the homepage LCP** (`public/greenville/library/`). They MUST stay
   web-sized: max 1400px wide, roughly 300KB, JPEG q≈75 (batch-resized July 10, 2026 from the
   original 0.5–1.3MB Wikimedia files; originals were only in scratch, the repo keeps the sized

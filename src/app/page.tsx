@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, socials } from "@/lib/site";
+import { site } from "@/lib/site";
 import { getFeedPosts, postHref, sectionLabel, formatDate, type ArchivePost } from "@/lib/posts";
-import { liveTools, audienceLabel, toolHref } from "@/lib/tools";
-import { ToolIcon } from "@/components/ToolIcon";
+import { liveTools, toolHref } from "@/lib/tools";
 import { PostCover } from "@/components/PostCover";
 import { SubscribeForm } from "@/components/SubscribeForm";
 
@@ -18,6 +17,27 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
+/**
+ * THE FRONT PAGE (restructured August 2026, the consolidation).
+ *
+ * The homepage now does ONE job: convince a qualified stranger to hand over an
+ * email address. It used to do five (a content feed, a mission statement, a
+ * tools spotlight, a follow row, and a subscribe CTA buried at the very
+ * bottom), which is four too many and put the single most important element
+ * below four screens of scrolling.
+ *
+ * The order is deliberate and it is the newsletter convention: say what this is
+ * and ask, THEN show the work. The standfirst is a compact masthead statement
+ * rather than a marketing hero, and the archive underneath it is the argument
+ * that the promise is real.
+ *
+ * REMOVED and not to be re-added without a reason: the "mission" contrast panel
+ * (folded into the standfirst, since a mission stated twice on one page is
+ * stated badly) and the "Where to find us" social card grid (the footer already
+ * carries every handle, and on a site whose owned list is the asset, a row of
+ * links to other people's platforms was pointing the one job off-site).
+ */
+
 function ArrowIcon({ className = "" }: { className?: string }) {
   return (
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className={className}>
@@ -26,22 +46,15 @@ function ArrowIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function SubscribeButton({ className = "" }: { className?: string }) {
-  return (
-    <Link
-      href="/subscribe"
-      className={`theme-cta-accent inline-flex items-center gap-2 font-semibold rounded-xl ${className}`}
-    >
-      Subscribe free
-      <ArrowIcon />
-    </Link>
-  );
-}
-
+/** Section kicker. The faint "> " that used to prefix every one of these was
+ *  part of the retired AI-prompt motif and was removed in the August 2026
+ *  newspaper pass (see globals.css). A kicker is a rule and a word. */
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span className={`theme-label type-eyebrow inline-block ${className}`}>
-      <span className="opacity-50">{"> "}</span>
+    <span
+      className={`theme-label type-eyebrow inline-block border-t-2 pt-2 ${className}`}
+      style={{ borderColor: "var(--accent)" }}
+    >
       {children}
     </span>
   );
@@ -51,56 +64,49 @@ function FeaturedStory({ post }: { post: ArchivePost }) {
   return (
     <Link
       href={postHref(post)}
-      className="theme-card border theme-border rounded-2xl overflow-hidden block group"
+      className="block group border-b theme-border pb-10"
     >
       <PostCover
         src={post.cover_image}
         alt={post.title}
         priority
         sizes="(max-width: 1024px) 100vw, 976px"
-        className="aspect-[2/1] w-full border-b theme-border"
+        className="aspect-[2/1] w-full mb-7"
       />
-      <div className="p-8 md:p-10">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-            {sectionLabel(post)}
-          </span>
-          {post.published_at && (
-            <time className="theme-text-muted text-xs uppercase tracking-widest">
-              {formatDate(post.published_at)}
-            </time>
-          )}
-        </div>
-        <h3 className="theme-text-primary type-h2 mb-4 group-hover:opacity-80">
-          {post.title}
-        </h3>
-        {post.summary && (
-          <p className="theme-text-secondary type-body-lg max-w-3xl mb-5">
-            {post.summary}
-          </p>
-        )}
-        <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
-          Read it <ArrowIcon className="w-3.5 h-3.5" />
+      <div className="flex items-center gap-3 mb-4">
+        <span className="theme-badge type-eyebrow px-2 py-1">
+          {sectionLabel(post)}
         </span>
+        {post.published_at && (
+          <time className="theme-text-muted type-eyebrow">
+            {formatDate(post.published_at)}
+          </time>
+        )}
       </div>
+      <h2 className="theme-text-primary type-h1 mb-4 max-w-4xl group-hover:opacity-80">
+        {post.title}
+      </h2>
+      {post.summary && (
+        <p className="theme-text-secondary type-body-lg max-w-3xl mb-5">
+          {post.summary}
+        </p>
+      )}
+      <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
+        Read it <ArrowIcon className="w-3.5 h-3.5" />
+      </span>
     </Link>
   );
 }
 
 function EmptyLead() {
   return (
-    <div className="theme-card border theme-border rounded-2xl p-8 md:p-12 text-center">
-      <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-        First walkthrough incoming
-      </span>
-      <h3 className="theme-text-primary type-h2 mt-5 mb-4">
-        The first walkthrough is on its way.
-      </h3>
-      <p className="theme-text-secondary type-body-lg max-w-xl mx-auto mb-7">
-        Subscribe now and the very first one lands in your inbox the day it ships.
-        You will get one clear walkthrough at a time, and nothing else.
+    <div className="border-b theme-border pb-10">
+      <h2 className="theme-text-primary type-h1 mb-4">
+        The first issue is on its way.
+      </h2>
+      <p className="theme-text-secondary type-body-lg max-w-2xl">
+        Subscribe above and it lands in your inbox the day it ships.
       </p>
-      <SubscribeButton className="px-7 py-3.5" />
     </div>
   );
 }
@@ -111,61 +117,80 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Lead: fresh reads first (newsletter issues + local real-estate posts) ── */}
-      <section className="theme-page relative overflow-hidden pt-32 pb-16 md:pb-20">
-        <span
-          className="prompt-watermark absolute -right-8 top-8 text-[16rem] md:text-[20rem] hidden sm:block select-none"
-          aria-hidden
-        >
-          {">"}
-        </span>
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <Eyebrow className="mb-6">Fresh from Alex Prompts</Eyebrow>
+      {/* ── Standfirst + the ask ───────────────────────────────────────────
+          The one job. Compact on purpose: a masthead statement, two short
+          paragraphs, and the form. Everything below this is the evidence that
+          the promise is worth taking. ── */}
+      <section className="theme-page pt-32 pb-14 md:pb-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-start">
+            <div className="max-w-2xl">
+              <Eyebrow className="mb-6">{site.tagline}</Eyebrow>
+              <h1 className="theme-text-primary type-display mb-6">
+                Somebody should go back and check.
+              </h1>
+              <p className="theme-text-secondary type-body-lg mb-4">
+                Every project in South Carolina arrives with a press release, a rendering,
+                and a jobs number. The reporter moves on, the council turns over, and the
+                promise sits there unaudited.
+              </p>
+              <p className="theme-text-secondary type-body-lg">
+                I go back through the permits, the grant agreements, the minutes, and the
+                county records to find out what actually happened, then write up what I
+                find. Written by {site.author}, who is a licensed real estate agent in
+                South Carolina.
+              </p>
+            </div>
+
+            <div className="theme-card-contrast border theme-border p-7 md:p-8">
+              <SubscribeForm source="home-standfirst" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The work ── */}
+      <section className="theme-section py-14 md:py-16 border-t theme-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <Eyebrow className="mb-8">Latest</Eyebrow>
           {featured ? <FeaturedStory post={featured} /> : <EmptyLead />}
 
           {rest.length > 0 && (
             <>
-              <div className="flex items-end justify-between mt-12 mb-6 gap-4">
-                <h2 className="theme-text-primary type-h3">
-                  More to read
-                </h2>
+              <div className="flex items-end justify-between mt-10 mb-6 gap-4">
+                <h2 className="theme-text-primary type-h3">More to read</h2>
                 <Link href="/archive" className="theme-link inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
                   Full archive <ArrowIcon className="w-3.5 h-3.5" />
                 </Link>
               </div>
-              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <ul className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                 {rest.map((p) => (
                   <li key={p.id}>
-                    <Link
-                      href={postHref(p)}
-                      className="theme-card border theme-border rounded-xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity"
-                    >
+                    <Link href={postHref(p)} className="h-full flex flex-col group">
                       <PostCover
                         src={p.cover_image}
                         alt={p.title}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 312px"
-                        className="aspect-[16/9] w-full border-b theme-border"
+                        className="aspect-[16/9] w-full mb-4"
                       />
-                      <div className="p-6 flex flex-col flex-1">
-                        <div className="flex items-center gap-2.5 mb-3">
-                          <span className="theme-badge text-[0.65rem] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded">
-                            {sectionLabel(p)}
-                          </span>
-                          {p.published_at && (
-                            <time className="theme-text-muted text-xs uppercase tracking-widest">
-                              {formatDate(p.published_at)}
-                            </time>
-                          )}
-                        </div>
-                        <h3 className="theme-text-primary type-title mb-2">
-                          {p.title}
-                        </h3>
-                        {p.summary && (
-                          <p className="theme-text-muted type-small line-clamp-3">
-                            {p.summary}
-                          </p>
+                      <div className="flex items-center gap-2.5 mb-2.5">
+                        <span className="theme-badge type-eyebrow px-1.5 py-0.5">
+                          {sectionLabel(p)}
+                        </span>
+                        {p.published_at && (
+                          <time className="theme-text-muted type-eyebrow">
+                            {formatDate(p.published_at)}
+                          </time>
                         )}
                       </div>
+                      <h3 className="theme-text-primary type-title mb-2 group-hover:opacity-80">
+                        {p.title}
+                      </h3>
+                      {p.summary && (
+                        <p className="theme-text-muted type-small line-clamp-3">
+                          {p.summary}
+                        </p>
+                      )}
                     </Link>
                   </li>
                 ))}
@@ -175,129 +200,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── The mission (headline tracks site.tagline; /about keeps the full story). The
-           closer names the handoff on purpose: "the call stays yours" alone told the reader
-           they never need anyone, which is the one thing the referral model needs. ── */}
-      <section className="theme-section-contrast py-16 md:py-20 border-t theme-border">
+      {/* ── Tools: a side door, deliberately demoted ──────────────────────
+          These used to be a nine-card grid with icons and audience badges,
+          which made them look like the point. They are not the point; they
+          are a useful surface that catches someone who arrived to run a
+          number. One line and a row of links. ── */}
+      <section className="theme-section py-12 md:py-14 border-t theme-border">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div className="max-w-2xl">
-              <span className="theme-label type-eyebrow inline-block mb-4">
-                The mission
-              </span>
-              <h2 className="theme-text-primary type-h2 mb-4">
-                Better real estate decisions.
-              </h2>
-              <p className="theme-text-primary type-body-lg font-medium mb-4">
-                Alex Prompts helps South Carolinians make smarter real estate decisions,
-                with honest writing on the market, the technology reshaping it, and free
-                tools to run the numbers yourself.
-              </p>
-              <p className="theme-text-contrast-muted type-body-lg mb-4">
-                Most media tells people what to think.
-              </p>
-              <p className="theme-text-contrast-muted type-body-lg">
-                Alex Prompts gives you the facts and the trade-offs, so the call stays
-                yours. The last decision is who is in your corner, and that is the one I
-                help with directly.
-              </p>
-            </div>
-            <Link
-              href="/about"
-              className="theme-cta inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm whitespace-nowrap self-start md:self-auto"
-            >
-              Meet Alex <ArrowIcon className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Tools spotlight: actual, usable tools right on the homepage ── */}
-      <section className="theme-section py-16 md:py-20 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex items-end justify-between gap-4 mb-8">
-            <div className="max-w-2xl">
-              <Eyebrow className="mb-4">Tools, no sign-up</Eyebrow>
-              <h2 className="theme-text-primary type-h2 mb-3">
-                Useful the second you land.
-              </h2>
-              <p className="theme-text-muted type-body-lg">
-                Free real-estate tools Alex engineered himself. The calculators run entirely
-                in your browser, and the data tools are built on public county records.
-              </p>
-            </div>
-            <Link href="/tools" className="theme-link hidden sm:inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap">
-              All tools <ArrowIcon className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <Eyebrow className="mb-5">Free tools, no sign-up</Eyebrow>
+          <p className="theme-text-muted type-body max-w-2xl mb-5">
+            Calculators that run entirely in your browser, and data tools built on public
+            county records. All free, all built here.
+          </p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
             {liveTools().map((t) => (
               <li key={t.slug}>
                 <Link
                   href={toolHref(t)}
                   {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="theme-card border theme-border rounded-xl p-6 h-full flex flex-col group hover:opacity-90 transition-opacity"
+                  className="theme-link type-body underline decoration-1 underline-offset-4"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="inline-flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
-                      style={{ background: "var(--accent-soft)" }}
-                    >
-                      <ToolIcon slug={t.slug} className="theme-label w-6 h-6" />
-                    </span>
-                    <span className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
-                      {audienceLabel[t.audience]}
-                    </span>
-                  </div>
-                  <h3 className="theme-text-primary type-title mb-2">{t.title}</h3>
-                  <p className="theme-text-muted type-small flex-1">{t.blurb}</p>
-                  <span className="theme-text-primary inline-flex items-center gap-1.5 text-sm font-semibold mt-4">
-                    {t.cta} <ArrowIcon className="w-3.5 h-3.5" />
-                  </span>
+                  {t.title}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* ── Follow ── */}
-      <section id="follow" className="theme-section py-16 md:py-24 border-t theme-border">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="mb-8">
-            <Eyebrow className="mb-4">Where to find us</Eyebrow>
-            <h2 className="theme-text-primary type-h2 max-w-2xl">
-              Follow along during the week, or get it all in your inbox.
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {socials.map((s) => (
-              <a
-                key={s.key}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="theme-card-strong border theme-border rounded-xl p-6 flex flex-col gap-1 hover:opacity-90 transition-opacity"
-              >
-                <span className="theme-text-primary text-base font-semibold">{s.label}</span>
-                <span className="theme-text-muted text-sm">{s.handle}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Subscribe CTA: the owned list, led by the concrete Monday promise.
-          The Upstate Brief only goes out on the owned list (never Substack), so
-          this captures on-site instead of bouncing to a third party. ── */}
-      <section className="theme-section-contrast py-24 md:py-32">
-        <div className="max-w-2xl mx-auto px-6">
-          <SubscribeForm
-            source="home-cta"
-            heading="Get the Upstate Brief every Monday"
-            blurb="The week in Upstate real estate in a five-minute read. Rates, what sold, what got approved, and what to watch, every number linked to its source. Free, and you can leave any time."
-            cta="Subscribe free"
-          />
         </div>
       </section>
     </>

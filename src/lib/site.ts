@@ -43,26 +43,36 @@ export const site = {
   email: "hello@alexprompts.com", // TODO(alex): confirm contact inbox
   url: SITE_URL,
 
-  // The brand spine. What the site actually is: honest writing on Greenville
-  // real estate and on technology, plus the free tools Alex built. No hype, no
-  // doom, and no "plain English" phrasing anywhere (dropped July 2026, it read
-  // as unpolished). These strings drive the page titles, the meta descriptions,
-  // the OG cards, and the footer, so keep them true and tight.
-  // The slogan (July 21, 2026, was "Questions worth asking." from July 11, before
-  // that "Growth is good." for a day, and "Where real estate meets technology."):
-  // an outcome-forward promise that signals what the site is FOR. It spans everyone
-  // who makes a real-estate decision (buyer, seller, loan officer, agent) and points
-  // at the reader's benefit, not the brand's referral mechanic. The old
-  // "Questions worth asking." was a pun on the AI-prompts brand the site no longer
-  // runs, so it was retired. Keep the homepage mission headline in sync with this.
-  tagline: "Better real estate decisions.",
+  // The brand spine. These strings drive the page titles, the meta descriptions,
+  // the OG cards, and the footer, so keep them true and tight. No hype, no doom,
+  // and no "plain English" phrasing anywhere (dropped July 2026, it read as
+  // unpolished).
+  //
+  // REWRITTEN AUGUST 2026 for the consolidation. Three content tracks became one
+  // publication about WHO PAYS FOR SOUTH CAROLINA'S GROWTH, written for the
+  // professional (loan officer, closing attorney, agent, banker, developer) whose
+  // living depends on knowing the market, and built on primary documents. See
+  // scripts/publication/SPEC.md.
+  //
+  // "Better real estate decisions." (July 21, 2026) was retired because it no
+  // longer covers the work: a piece comparing two states' incentive grants is
+  // off-mission under it, and stretching every growth story until it lands on a
+  // property decision is how the writing gets weak. Earlier taglines, for the
+  // record: "Questions worth asking." (July 11, an orphaned pun on the retired
+  // AI-prompts positioning), "Growth is good." (one day), and "Where real estate
+  // meets technology."
+  //
+  // The publication is deliberately still UNNAMED, so `name` stays "Alex Prompts"
+  // as a placeholder. When the name lands it changes HERE and every surface
+  // follows, which is the entire point of this file.
+  tagline: "Who pays for South Carolina's growth.",
   oneLiner:
-    "Alex Prompts is where Alex Steryous writes about Greenville real estate and the technology reshaping it, and shares the free tools he builds along the way.",
+    "Alex Steryous goes back through South Carolina's permits, grant agreements, and county records to find out what actually got built.",
   description:
-    "Alex Prompts is Alex Steryous's site for clear, honest writing on Greenville, " +
-    "South Carolina real estate and the technology reshaping it, plus a suite of free " +
-    "real-estate tools he engineered himself. No hype and no doom, just a straight look " +
-    "at what is actually happening and why it matters.",
+    "Every project in South Carolina arrives with a press release, a rendering, and a " +
+    "jobs number, and almost nobody goes back to check what happened. Alex Steryous does, " +
+    "using the permits, the grant agreements, the minutes, and the county records, and " +
+    "writes up what he finds. Plus a set of free real-estate tools he built himself.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */

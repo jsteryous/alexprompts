@@ -16,10 +16,16 @@ import { newsletterUrl } from "@/lib/site";
 
 type State = "idle" | "submitting" | "done" | "error";
 
+// The default promise was rewritten in the August 2026 consolidation. It used to
+// read "Get the Upstate Brief every Monday", which is now false on both counts:
+// the weekly brief was retired (it published weekly against monthly-refreshing
+// data and shipped the same figures three weeks running) and the publication that
+// replaced it runs about every other week, on finding. This default appears on
+// every tool page and every article, so it is the promise most readers see.
 export function SubscribeForm({
   source,
-  heading = "Get the Upstate Brief every Monday",
-  blurb = "The week in Upstate real estate in a five-minute read, plus the Greenville guides and technology pieces when they ship. None of it hits Substack. Free, and you can leave any time.",
+  heading = "Every other week, one promise checked",
+  blurb = "South Carolina announces a lot. I go back through the permits, the grant agreements, and the county records to find out what actually happened, then write up what I find. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {
@@ -85,12 +91,17 @@ export function SubscribeForm({
     );
   }
 
+  // Left-aligned and on the type scale since the August 2026 newspaper pass.
+  // It was centred with ad-hoc `text-2xl md:text-3xl`, which meant the heading
+  // rendered SANS on a page whose every other heading is serif, and a centred
+  // block of copy is a marketing convention rather than an editorial one. The
+  // block itself still centres in wide containers; only the text is flush left.
   return (
-    <div className="max-w-md mx-auto text-center">
+    <div className="max-w-md mx-auto">
       {heading && (
-        <h2 className="theme-text-primary text-2xl md:text-3xl font-bold tracking-tight mb-3">{heading}</h2>
+        <h2 className="theme-text-primary type-h3 mb-3">{heading}</h2>
       )}
-      {blurb && <p className="theme-text-contrast-muted text-base mb-6 leading-relaxed">{blurb}</p>}
+      {blurb && <p className="theme-text-contrast-muted type-small mb-6 leading-relaxed">{blurb}</p>}
       <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2.5">
         <label className="sr-only" htmlFor={`sub-${source}`}>
           Email address
@@ -108,7 +119,7 @@ export function SubscribeForm({
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="theme-cta-accent font-semibold px-6 py-3 rounded-xl disabled:opacity-60 whitespace-nowrap"
+          className="theme-cta-accent font-semibold px-6 py-3 disabled:opacity-60 whitespace-nowrap"
         >
           {state === "submitting" ? "Sending..." : cta}
         </button>

@@ -7,11 +7,25 @@ import { site } from "@/lib/site";
 
 // Nav clarity rule (July 2026): every label states its promise in the visitor's
 // words. The newsletter archive lives in the footer only, so the nav stays short.
+//
+// COLLAPSED AUGUST 2026 for the consolidation. The nav used to carry three
+// content tracks as peers (Upstate Brief, Moving to Greenville, SC Technology),
+// which was honest when there were three engines and is now a menu of two
+// retired sections. They keep their routes and their published work, and they
+// moved to the footer under "Archives".
+//
+// "Reporting" is a PLACEHOLDER label for the one live section, chosen because it
+// is plain and institutional and says what the thing is. The publication is
+// deliberately unnamed until a few issues exist (see scripts/publication/SPEC.md),
+// and this label is the first thing that should change when the name lands.
+//
+// The ROUTE stays /greenville-works. Renaming it would break inbound links, the
+// sitemap, every published article URL, and the `greenville works` tag the engine
+// writes, for no reader benefit. Section labels have been changed independently
+// of routes here before ("Greenville Works" -> "SC Technology", July 2026).
 const links = [
-  { href: "/briefing", label: "Upstate Brief" },
+  { href: "/greenville-works", label: "Reporting" },
   { href: "/tools", label: "Tools" },
-  { href: "/real-estate", label: "Moving to Greenville" },
-  { href: "/greenville-works", label: "SC Technology" },
   { href: "/about", label: "About" },
 ];
 
@@ -52,23 +66,34 @@ export default function Nav() {
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="theme-text-primary text-[15px] font-semibold tracking-tight inline-flex items-center">
+        {/* The nameplate. Serif and set larger than the section links, the way
+            a masthead outranks its rail. The blinking `▌` caret that used to
+            trail the name was deleted in the August 2026 newspaper pass along
+            with the rest of the AI-prompt motif; a publication's mark is its
+            name set in type. Do not add a glyph back. */}
+        <Link
+          href="/"
+          className="theme-text-primary type-title inline-flex items-center whitespace-nowrap"
+        >
           {site.name}
-          <span className="caret" aria-hidden>▌</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="theme-link text-sm">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="theme-link type-eyebrow hover:theme-text-primary"
+            >
               {link.label}
             </Link>
           ))}
-          <Link href="/subscribe" className="theme-link text-sm">
+          <Link href="/subscribe" className="theme-link type-eyebrow">
             Subscribe
           </Link>
           <Link
             href={primaryCta.href}
-            className="theme-cta-accent text-sm font-medium px-4 py-2 rounded-lg"
+            className="theme-cta-accent type-eyebrow px-3.5 py-2.5"
           >
             {primaryCta.label}
           </Link>
@@ -110,7 +135,7 @@ export default function Nav() {
           </Link>
           <Link
             href={primaryCta.href}
-            className="theme-cta-accent text-sm font-medium px-4 py-2.5 rounded-lg text-center mt-2"
+            className="theme-cta-accent text-sm font-medium px-4 py-2.5 text-center mt-2"
             onClick={() => setOpen(false)}
           >
             {primaryCta.label}

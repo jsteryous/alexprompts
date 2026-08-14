@@ -3,50 +3,95 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-accent: #6366f1;
-  --color-accent-dark: #4f46e5;
+  --color-accent: #9a2323;
+  --color-accent-dark: #7f1d1d;
+
+  /* ── Typefaces ────────────────────────────────────────────────────────────
+     EDITORIAL SPLIT (August 2026 newspaper pass). Serif carries the reading
+     surface, headlines and article body, because that is what makes a page
+     read as a publication rather than an app. Sans stays for CHROME only:
+     nav, labels, buttons, form fields, badges, tables.
+
+     The serif is a SYSTEM STACK on purpose. `next/font/google` breaks the
+     Turbopack build (see src/CLAUDE.md), and a webfont would cost an LCP
+     round trip on the one page that has to load fast. Charter and Iowan ship
+     on Apple, Sitka and Cambria on Windows, Georgia everywhere, so every
+     visitor gets a real book serif with zero network cost. */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, ui-serif, "Times New Roman", serif;
 
   /* ── Type scale (single source of truth) ──────────────────────────────────
      Fluid sizes so type breathes without per-breakpoint overrides. Consume
-     via the .type-* utilities below rather than ad-hoc text-3xl/md:text-4xl. */
-  --text-display: clamp(2.5rem, 1.7rem + 3.4vw, 3.75rem);
-  --text-h1: clamp(2rem, 1.5rem + 2.2vw, 3rem);
-  --text-h2: clamp(1.75rem, 1.45rem + 1.5vw, 2.25rem);
+     via the .type-* utilities below rather than ad-hoc text-3xl/md:text-4xl.
+     Headline sizes stepped UP in the newspaper pass: a masthead-era front
+     page runs a much larger lede headline against much smaller body copy
+     than an app landing page does, and that ratio is most of the effect. */
+  --text-display: clamp(2.75rem, 1.7rem + 4.4vw, 4.5rem);
+  --text-h1: clamp(2.125rem, 1.5rem + 2.7vw, 3.375rem);
+  --text-h2: clamp(1.75rem, 1.45rem + 1.6vw, 2.375rem);
   --text-h3: clamp(1.25rem, 1.12rem + 0.6vw, 1.5rem);
-  --text-title: 1.125rem;
+  --text-title: 1.1875rem;
   --text-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
   --text-body: 1rem;
   --text-small: 0.875rem;
-  --text-eyebrow: 0.75rem;
+  --text-eyebrow: 0.6875rem;
+
+  /* ── Corners: squared off ─────────────────────────────────────────────────
+     Print has no rounded corners. Rather than edit ~90 `rounded-*` utilities
+     across 30 files (and re-fight them on every new component), the whole
+     Tailwind radius scale is retuned to 0 HERE, which is the same
+     one-place-not-per-page rule the palette follows. Every existing
+     `rounded-lg` / `rounded-xl` keeps compiling and simply renders square.
+
+     `rounded-full` is deliberately NOT in this list: it is hardcoded by
+     Tailwind rather than tokenised, and it is doing real work on the round
+     controls (the dark-mode toggle, avatars), which stay circular. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
 :root {
-  /* Cool-neutral base (Apple system grays). No warm cream. */
-  --background: #f5f5f7;
-  --background-rgb: 245, 245, 247;
-  --foreground: #1d1d1f;
-  --foreground-soft: #424245;
-  --foreground-muted: #6e6e73;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --surface: rgba(255, 255, 255, 0.72);
+  /* PAPER base (August 2026 newspaper pass). Near-neutral off-white rather
+     than the old Apple grey #f5f5f7: a page should read as stock, and grey
+     reads as an app shell. Still essentially neutral, so the tone-* chips and
+     the accent do not clash. Do not warm this into cream. */
+  --background: #fafaf9;
+  --background-rgb: 250, 250, 249;
+  --foreground: #16161a;
+  --foreground-soft: #3d3d44;
+  --foreground-muted: #6b6b73;
+  /* Rules are STRUCTURE here, not decoration, so they are darker than the old
+     near-invisible hairlines. This is what replaces the card shadows. */
+  --border: rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.32);
+  --surface: #ffffff;
   --surface-strong: #ffffff;
   --surface-muted: rgba(0, 0, 0, 0.035);
-  --surface-inverse: #1d1d1f;
-  --surface-inverse-2: #2c2c2e;
-  --surface-highlight: rgba(79, 70, 229, 0.1);
+  --surface-inverse: #16161a;
+  --surface-inverse-2: #232329;
+  --surface-highlight: rgba(154, 35, 35, 0.07);
   --surface-warn: rgba(217, 119, 6, 0.12);
-  --surface-accent: #4f46e5;
-  --accent: #4f46e5;
-  --accent-strong: #4338ca;
-  --accent-soft: rgba(79, 70, 229, 0.12);
+  /* Editorial oxblood. The indigo it replaced was the single most
+     "tech startup" element in the palette; a newspaper's second colour is
+     ink-red and it is used sparingly, for rules and eyebrows, not for fills. */
+  --surface-accent: #9a2323;
+  --accent: #9a2323;
+  --accent-strong: #7f1d1d;
+  --accent-soft: rgba(154, 35, 35, 0.1);
   --accent-contrast: #ffffff;
   --warn: #b56a17;
   --warn-soft: rgba(245, 158, 11, 0.18);
-  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.05);
-  --header-bg: rgba(255, 255, 255, 0.72);
+  /* Print has no drop shadows. Both are kept as tokens (many components
+     reference them) but reduced to nearly nothing; rules carry separation. */
+  --shadow-soft: 0 1px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card: none;
+  --header-bg: #fafaf9;
 
   /* Semantic tone tokens — status/severity signals.
      Use .tone-* utilities instead of hardcoded bg-red-50 / text-amber-600 / etc. */
@@ -86,25 +131,27 @@ html.dark {
   --foreground: #f5f5f7;
   --foreground-soft: #c7c7cc;
   --foreground-muted: #86868b;
-  --border: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --surface: rgba(28, 28, 30, 0.72);
-  --surface-strong: #1c1c1e;
+  --border: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.34);
+  --surface: #1a1a1e;
+  --surface-strong: #1a1a1e;
   --surface-muted: rgba(255, 255, 255, 0.05);
-  --surface-inverse: #0a0a0b;
+  --surface-inverse: #08080a;
   --surface-inverse-2: #141416;
-  --surface-highlight: rgba(129, 140, 248, 0.14);
+  --surface-highlight: rgba(217, 112, 102, 0.12);
   --surface-warn: rgba(245, 158, 11, 0.12);
-  --surface-accent: #6366f1;
-  --accent: #818cf8;
-  --accent-strong: #a5b4fc;
-  --accent-soft: rgba(129, 140, 248, 0.16);
-  --accent-contrast: #0a0a0b;
+  /* Oxblood has to lift a long way to stay legible on near-black, so dark
+     mode runs a muted brick rather than the light mode's deep ink-red. */
+  --surface-accent: #b8443a;
+  --accent: #d97066;
+  --accent-strong: #e8938a;
+  --accent-soft: rgba(217, 112, 102, 0.16);
+  --accent-contrast: #08080a;
   --warn: #efb55f;
   --warn-soft: rgba(245, 158, 11, 0.18);
-  --shadow-soft: 0 28px 84px rgba(0, 0, 0, 0.5);
-  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.4);
-  --header-bg: rgba(16, 16, 18, 0.72);
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-card: none;
+  --header-bg: #101012;
 
   --tone-hot-bg:         rgba(127, 29, 29, 0.28);
   --tone-hot-fg:         #fca5a5;
@@ -180,9 +227,12 @@ button {
 
 .theme-page {
   position: relative;
-  /* One barely-there accent bloom. No dotted grid, no second wash. */
-  background:
-    radial-gradient(1100px 560px at 82% 8%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 60%);
+  /* Flat stock. The accent bloom was removed in the August 2026 newspaper
+     pass: print has no glow, and a radial gradient behind a masthead is the
+     single fastest way to make a publication read as a SaaS landing page.
+     The class stays as the per-route wrapper and the hook if the base ever
+     gains a treatment. Do not put a gradient back. */
+  background: transparent;
 }
 
 /* Intentionally transparent. It is a semantic marker meaning "this section
@@ -201,28 +251,27 @@ button {
      the light-mode page values renders light-on-light inside this dark panel. */
   --background: #101012;
   --surface-strong: #1c1c1e;
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --accent: #818cf8;
-  --accent-strong: #a5b4fc;
-  --accent-contrast: #0a0a0b;
-  background:
-    radial-gradient(900px 480px at 50% 0%, rgba(99, 102, 241, 0.12), transparent 60%),
-    var(--surface-inverse);
+  --border: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.36);
+  --accent: #d97066;
+  --accent-strong: #e8938a;
+  --accent-contrast: #08080a;
+  background: var(--surface-inverse);
   color: var(--foreground);
 }
 
+/* Cards are RULED, not floating (August 2026 newspaper pass). The blur and
+   the drop shadow are gone: a backdrop-filter reads as an app surface, and
+   print separates content with a line. Callers still pass `border` plus the
+   class, so a card is now a hairline box on stock. */
 .theme-card {
-  background: var(--surface);
+  background: transparent;
   border-color: var(--border);
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(18px);
 }
 
 .theme-card-strong {
   background: var(--surface-strong);
   border-color: var(--border);
-  box-shadow: var(--shadow-card);
 }
 
 .theme-card-muted {
@@ -236,14 +285,13 @@ button {
   --foreground-muted: #86868b;
   --background: #101012;
   --surface-strong: #1c1c1e;
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --accent: #818cf8;
-  --accent-strong: #a5b4fc;
-  --accent-contrast: #0a0a0b;
+  --border: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.36);
+  --accent: #d97066;
+  --accent-strong: #e8938a;
+  --accent-contrast: #08080a;
   background: var(--surface-inverse-2);
   border-color: var(--border);
-  box-shadow: var(--shadow-soft);
   color: var(--foreground);
 }
 
@@ -252,15 +300,15 @@ button {
    dark-mode override above and become light-on-light. */
 .theme-section-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted),
 .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-card-accent, .theme-card-warn, .theme-card-muted) {
-  --foreground: #1d1d1f;
-  --foreground-soft: #424245;
-  --foreground-muted: #6e6e73;
-  --background: #f5f5f7;
+  --foreground: #16161a;
+  --foreground-soft: #3d3d44;
+  --foreground-muted: #6b6b73;
+  --background: #fafaf9;
   --surface-strong: #ffffff;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --accent: #4f46e5;
-  --accent-strong: #4338ca;
+  --border: rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.32);
+  --accent: #9a2323;
+  --accent-strong: #7f1d1d;
   color: var(--foreground);
 }
 
@@ -278,11 +326,11 @@ html.dark .theme-card-contrast :where(.theme-card, .theme-card-strong, .theme-ca
   --foreground-muted: #86868b;
   --background: #101012;
   --surface-strong: #1c1c1e;
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --accent: #818cf8;
-  --accent-strong: #a5b4fc;
-  --accent-contrast: #0a0a0b;
+  --border: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.36);
+  --accent: #d97066;
+  --accent-strong: #e8938a;
+  --accent-contrast: #08080a;
 }
 
 html.dark .theme-section-contrast :where(.theme-card-muted),
@@ -292,7 +340,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
 
 .theme-card-accent {
   background: var(--surface-highlight);
-  border-color: rgba(99, 102, 241, 0.22);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 .theme-card-warn {
@@ -300,10 +348,12 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   border-color: rgba(245, 158, 11, 0.24);
 }
 
+/* The masthead. Opaque stock, no blur: a frosted-glass bar is the most
+   recognisably "app" element on a page, and a newspaper's nameplate sits
+   flat on the sheet with a rule under it. */
 .theme-header {
   background: var(--header-bg);
-  border-color: var(--border);
-  backdrop-filter: blur(20px);
+  border-color: var(--border-strong);
 }
 
 .theme-border {
@@ -342,31 +392,32 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   color: var(--foreground);
 }
 
+/* Buttons are flat blocks of ink. The lift-on-hover and the coloured glow
+   both went in the newspaper pass; opacity alone carries the hover. */
 .theme-cta {
   background: var(--foreground);
   color: var(--background);
-  box-shadow: 0 14px 32px rgba(20, 22, 26, 0.18);
 }
 
 .theme-cta:hover {
-  transform: translateY(-1px);
-  opacity: 0.94;
+  opacity: 0.86;
 }
 
 .theme-cta-accent {
   background: var(--accent);
   color: var(--accent-contrast);
-  box-shadow: 0 16px 34px rgba(79, 70, 229, 0.24);
 }
 
 .theme-cta-accent:hover {
   background: var(--accent-strong);
 }
 
+/* Section kickers. Squared off, not pill-shaped, and ruled rather than
+   filled, so they read as a standfirst label instead of a UI chip. */
 .theme-badge {
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 .theme-warn-badge {
@@ -397,7 +448,7 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   background: var(--surface-strong);
   border: 1px solid var(--border-strong);
   color: var(--foreground);
-  border-radius: 0.625rem;
+  border-radius: 0;
 }
 
 .theme-field::placeholder {
@@ -421,16 +472,41 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   background: color-mix(in srgb, var(--surface-inverse) 78%, var(--background) 22%);
 }
 
+/* The reading surface. Serif body at a book measure, because this is the one
+   place on the site a person spends five minutes. */
 .theme-prose {
-  color: var(--foreground-soft);
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.65;
 }
 
 .theme-prose :where(h1, h2, h3, h4, strong) {
   color: var(--foreground);
 }
 
+.theme-prose :where(h2, h3) {
+  letter-spacing: -0.012em;
+}
+
+/* Underlined, ink-coloured links, the print convention. The old bare accent
+   colour made a paragraph with three citations look like a nav bar. */
 .theme-prose :where(a) {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.theme-prose :where(a):hover {
   color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Pull quotes read as display type, not as a muted aside. */
+.theme-prose :where(blockquote p) {
+  font-style: normal;
 }
 
 .theme-prose :where(code) {
@@ -447,9 +523,10 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   color: var(--foreground-muted);
 }
 
-/* Images mirrored from Substack (markdown images + raw <figure> blocks). */
+/* Images mirrored from Substack (markdown images + raw <figure> blocks).
+   Square corners: a rounded photo is a card, a squared one is a plate. */
 .theme-prose :where(img) {
-  border-radius: 12px;
+  border-radius: 0;
   width: 100%;
   height: auto;
 }
@@ -458,51 +535,64 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   margin: 2rem 0;
 }
 
+/* Captions are SANS and left-aligned, the press convention: it separates the
+   furniture from the story and stops a caption reading as body copy. */
 .theme-prose :where(figcaption) {
   margin-top: 0.6rem;
-  text-align: center;
-  font-size: 0.875rem;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--foreground-muted);
 }
 
 /* ── Type scale utilities ─────────────────────────────────────────────────────
-   One class sets size + line-height + weight + tracking together, so headings
-   stay consistent site-wide. Color still comes from the theme-text-* utilities;
-   these are size/rhythm only. */
+   One class sets family + size + line-height + weight + tracking together, so
+   headings stay consistent site-wide. Color still comes from the theme-text-*
+   utilities; these are family/size/rhythm only.
+
+   HEADLINES ARE SERIF (August 2026 newspaper pass). The display faces carry
+   the publication's voice, so they run the book serif and set tighter and
+   heavier than the old sans scale did. The UI chrome utilities below
+   (.type-small, .type-eyebrow) stay sans on purpose. */
 .type-display {
+  font-family: var(--font-serif);
   font-size: var(--text-display);
-  line-height: 1.04;
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.024em;
+}
+
+.type-h1 {
+  font-family: var(--font-serif);
+  font-size: var(--text-h1);
+  line-height: 1.06;
   font-weight: 700;
   letter-spacing: -0.022em;
 }
 
-.type-h1 {
-  font-size: var(--text-h1);
-  line-height: 1.08;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
 .type-h2 {
+  font-family: var(--font-serif);
   font-size: var(--text-h2);
-  line-height: 1.13;
+  line-height: 1.12;
   font-weight: 700;
   letter-spacing: -0.018em;
 }
 
 .type-h3 {
+  font-family: var(--font-serif);
   font-size: var(--text-h3);
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.012em;
 }
 
 .type-title {
+  font-family: var(--font-serif);
   font-size: var(--text-title);
-  line-height: 1.4;
-  font-weight: 600;
-  letter-spacing: -0.006em;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.008em;
 }
 
 .type-body-lg {
@@ -520,36 +610,34 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   line-height: 1.5;
 }
 
+/* Section kickers and datelines. Stays SANS: it is furniture, not voice. */
 .type-eyebrow {
   font-size: var(--text-eyebrow);
   line-height: 1;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
 }
 
-/* ── Brand motif: the terminal prompt caret ───────────────────────────────── */
-@keyframes ap-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* ── Masthead + rules ─────────────────────────────────────────────────────────
+   THE TERMINAL-CARET MOTIF IS GONE (August 2026). `.caret` (a blinking `▌`
+   beside the wordmark) and `.prompt-watermark` (a giant faint `>` behind the
+   homepage lede) were the last artefacts of the retired "Alex Prompts"
+   AI-prompt positioning. They are DELETED rather than deprecated, like
+   `.theme-section-muted` before them, so the affordance to re-add them does
+   not exist. Do not reintroduce a caret, a chevron, a blink, or a `>`
+   anywhere. A publication's mark is its name set in type.                    */
+
+/* The nameplate rule: the heavy line under a masthead. Use on the wordmark
+   block, never more than once per view. */
+.rule-masthead {
+  border-bottom: 3px solid var(--foreground);
 }
 
-.caret {
-  display: inline-block;
-  color: var(--accent);
-  margin-left: 0.04em;
-  font-weight: 500;
-  animation: ap-blink 1.1s steps(1) infinite;
-}
-
-/* A faint oversized ">" watermark for hero/section backgrounds. */
-.prompt-watermark {
-  font-weight: 800;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.04;
-  user-select: none;
-  pointer-events: none;
+/* The section rule: a hairline that separates two same-surface blocks. This
+   is the sanctioned alternative to a third background or a card shadow. */
+.rule-section {
+  border-top: 1px solid var(--border);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -561,9 +649,5 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   a,
   button {
     transition: none;
-  }
-
-  .caret {
-    animation: none;
   }
 }

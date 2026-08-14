@@ -60,43 +60,36 @@ export function PostCover({
   priority?: boolean;
   sizes?: string;
 }) {
-  const optimizable = src ? optimizableSrc(src) : null;
+  // NO COVER, NO SLOT (August 2026 newspaper pass). This used to render a
+  // branded ">" panel, then briefly a blank plate, and the blank plate was
+  // worse: it reserved a few hundred pixels of nothing above the headline and
+  // read as a broken image. Not every story in a paper carries art, and one
+  // that doesn't simply leads with its headline. Callers pass the aspect box
+  // via `className`, so returning null collapses the slot cleanly.
+  if (!src) return null;
+
+  const optimizable = optimizableSrc(src);
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      {src ? (
-        optimizable ? (
-          <Image
-            src={optimizable}
-            alt={alt}
-            fill
-            sizes={sizes}
-            priority={priority}
-            className="object-cover"
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={src}
-            alt={alt}
-            loading={priority ? "eager" : "lazy"}
-            fetchPriority={priority ? "high" : "auto"}
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        )
+      {optimizable ? (
+        <Image
+          src={optimizable}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+        />
       ) : (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ background: "var(--accent-soft)" }}
-        >
-          <span
-            className="theme-label select-none font-extrabold leading-none"
-            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", opacity: 0.22 }}
-            aria-hidden
-          >
-            {">"}
-          </span>
-        </div>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       )}
     </div>
   );

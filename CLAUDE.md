@@ -307,7 +307,40 @@ under `scripts/_archive/` — do not revive it.
 
 ## Site structure
 
-- `/` — **content-first landing.** Leads with the writing, not a brochure: **fresh from
+> **CONSOLIDATION, August 12, 2026. Read `scripts/publication/SPEC.md` first; it outranks
+> this section wherever the two disagree.** Three content tracks became ONE publication about
+> **who pays for South Carolina's growth**, written for the PROFESSIONAL (loan officer,
+> closing attorney, agent, banker, developer) rather than the buyer, built on primary
+> documents, cadence about every two weeks and published ON FINDING. The signature move is
+> **going back and checking** what was promised against what the records show.
+> `scripts/briefing/` and the `scripts/greenville/` evergreen track STOP PRODUCING; their
+> published work and routes stay live and reachable from the footer under "Archives". The
+> engine evolves from `scripts/tech/`, so new pieces still carry the `greenville works` tag
+> and land at `/greenville-works` (**the route is deliberately unchanged**; renaming it would
+> break every published URL, the sitemap, and the tag the engine writes).
+> **The publication is deliberately UNNAMED** until a few issues exist, so `site.name` is
+> still "Alex Prompts" as a placeholder and the nav label for the live section is the
+> placeholder **"Reporting"**. Those two strings are the first things to change when the name
+> lands. Also settled: SEO is no longer a growth lever (zero-click search plus AI Overviews),
+> so the evergreen how-to guides are dead as a CATEGORY, not merely deprioritized.
+>
+> **What follows is STALE where it describes the old three-track nav, the old five-section
+> homepage, and the "Better real estate decisions." tagline.** Kept for history; it gets
+> rewritten in one pass when the publication is named.
+
+- `/` — **the front page (RESTRUCTURED August 2026).** Does ONE job, convince a qualified
+  stranger to hand over an email address, in three sections: **standfirst + the ask** (a
+  compact masthead statement, the headline "Somebody should go back and check.", two
+  paragraphs, and an inline `SubscribeForm`, all above the fold) → **the work** (featured
+  latest + a "More to read" grid from `getFeedPosts`) → **tools**, demoted from a nine-card
+  icon grid to one line and a row of text links, because they are a side door and not the
+  point. **REMOVED:** the "mission" contrast panel (folded into the standfirst, since a
+  mission stated twice on one page is stated badly) and the "Where to find us" social card
+  grid (the footer carries every handle, and a row of links to other people's platforms was
+  pointing the one job off-site). Do not re-add either without a reason.
+
+- **HISTORY, the pre-consolidation landing:** it was a **content-first landing.** Led with the
+  writing, not a brochure: **fresh from
   Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
   section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
   REWRITTEN BY ALEX July 11, 2026, then REWORKED July 21, 2026 to track the "Better real estate
