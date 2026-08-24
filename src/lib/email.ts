@@ -4,7 +4,7 @@
  * Provider is Resend, called over its plain REST API (no SDK dependency) so the
  * sender stays swappable and the build stays lean. Configure with two env vars:
  *   - RESEND_API_KEY  — the API key (never exposed to the client)
- *   - EMAIL_FROM      — a verified sender, e.g. "Alex Prompts <alex@alexprompts.com>"
+ *   - EMAIL_FROM      — a verified sender, e.g. "Rebrew <alex@rebrew.org>"
  *                       (MAIL_FROM is accepted as a legacy alias)
  *   - EMAIL_REPLY_TO  — optional reply-to address
  *

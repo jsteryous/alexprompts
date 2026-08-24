@@ -60,9 +60,19 @@ function optimizedImgAttribs(
   return out;
 }
 
+/**
+ * `breaks: true` makes a single Enter a real line break, the way every
+ * WYSIWYG editor (Substack included) behaves. CommonMark's default is to fold
+ * a soft newline into the surrounding paragraph, which silently ran hand-typed
+ * lines together in the /admin editor. Verified safe across the whole published
+ * corpus: the only mid-paragraph soft newlines that existed were list lead-ins
+ * (unaffected) and two lines that were meant to be separate all along.
+ */
+const MARKED_OPTS = { breaks: true } as const;
+
 export async function renderPostHtml(md: string): Promise<string> {
   let imageIndex = 0;
-  return sanitizeHtml(await marked(md ?? ""), {
+  return sanitizeHtml(await marked(md ?? "", MARKED_OPTS), {
     allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "h1", "h2"],
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,

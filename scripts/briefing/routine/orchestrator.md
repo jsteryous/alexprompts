@@ -138,9 +138,9 @@ STEP 5 delivery so Alex can paste the piece in manually; report the failure.
 STEP 5, DELIVER THE REVIEW PACKET. Build ONE document in this order. FIRST "PUBLISH MONDAY
 MORNING OR DELETE" with the action links (fill <id> from STEP 4; leave the token as the literal
 placeholder, since this routine does not hold PUBLISH_SECRET):
-    - Edit + publish: https://www.alexprompts.com/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
-    - One-click publish: https://www.alexprompts.com/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
-    - One-click broadcast (AFTER publishing): https://www.alexprompts.com/api/broadcast?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - Edit + publish: https://www.rebrew.org/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - One-click publish: https://www.rebrew.org/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - One-click broadcast (AFTER publishing): https://www.rebrew.org/api/broadcast?id=<id>&token=<YOUR_PUBLISH_SECRET>
   Then the VERIFICATION SUMMARY: copy the ## VERIFICATION LEDGER from /tmp/brief/final.md, and put
   its CORRECTED / UNCONFIRMED / FALSE lines FIRST under a "CHECK THESE" heading (these are the
   claims the verifier could not cleanly confirm and most need Alex's eye before publish), then the

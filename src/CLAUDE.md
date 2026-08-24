@@ -11,6 +11,13 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 - **Markdown:** `marked` + `sanitize-html`, factored into `src/lib/renderMarkdown.ts`
   (`renderPostHtml`). Shared by `ArticleView` and the `/admin` live-preview route
   (`/api/admin/preview`), so an editor preview is byte-identical to the published article.
+  **`breaks: true` since August 24, 2026**, in `renderMarkdown.ts` and `emailMarkdown.ts` both,
+  so a single Enter is a real line break the way it is in every WYSIWYG. CommonMark's default
+  folds a soft newline into the paragraph above, which silently ran hand-typed lines together in
+  a published article. Verified safe across the whole corpus before flipping: the only
+  mid-paragraph soft newlines that existed were list lead-ins (unaffected) and two lines that
+  were meant to be separate. Keep the two renderers in sync, since the inbox and the page have
+  to agree.
 - **Auth:** none public. `/admin` is the draft review hub: password login (= `PUBLISH_SECRET`)
   sets an httpOnly `ap_admin` cookie (`src/lib/adminAuth.ts`). `/review` is the legacy
   token-in-query editor (the engine's email links). Neither uses Supabase Auth.
@@ -160,10 +167,30 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   draft, Save (PATCH `blog_posts`), Publish (flip `status` to `PUBLISHED`, set `published_at`,
   revalidate the section). Auth is `PUBLISH_SECRET`: the `ap_admin` cookie (constant-time,
   rate-limited login) or the legacy query/body token. `GET /api/publish` is token-only (not
-  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked). The editor is
-  Substack-style (July 2026 rework): one centered article-width column, borderless
-  title/subtitle fields, a Write | Preview toggle whose preview is site-accurate
-  (`/api/admin/preview`), a ghost markdown toolbar, autosave for drafts (published posts save
+  CSRF-able); `POST /api/publish` takes the cookie (same-origin checked). **The editor body is
+  a WYSIWYG rich-text surface (TipTap/ProseMirror, August 24 2026), not a markdown textarea.**
+  It replaced the plain `<textarea>` + markdown toolbar after an article published with literal
+  `**` in the copy: the old toolbar wrapped the raw selection, and selecting a line by
+  triple-click or shift+down carries the line's trailing newline, so it wrote `**Heading\n**`,
+  which no markdown parser treats as bold. Formatting now works the way Substack's does, through
+  a **selection bubble** (highlight text, format in place) and a **slash menu** (`/` on an empty
+  line for heading, lists, quote, divider, image); markdown INPUT RULES still work, so typing
+  `## ` or `- ` does what it always did. There is deliberately **no persistent format toolbar**.
+  `src/app/review/RichText.tsx` is the surface and `src/app/review/Figure.tsx` adds captioned
+  images (a real `<figure>`/`<figcaption>`, which the site and email already render).
+  **`blog_posts.body_md` is still the source of truth and nothing downstream changed**: the
+  document loads through `mdToEditorHtml` and is handed back as markdown on every keystroke by
+  `editorHtmlToMd`, both in `src/lib/editorMarkdown.ts` (marked + turndown, running in the
+  browser). That module carries two rules worth knowing about, because both fix bugs that
+  reached readers: emphasis is emitted **one delimited run per line** (a delimiter may not span
+  a line break, which is the August 24 bug guarded at the serializer), and a list item's
+  TipTap-added wrapper `<p>` is unwrapped so lists stay tight. **`scripts/checks/editor-roundtrip.mjs`
+  is the gate** and runs in `npm run lint`: it asserts that loading and saving a post without
+  typing renders identically, against every row in the database plus fixtures in both
+  `marked`-shaped and TipTap-shaped HTML. If you change the bridge, that check is what tells you
+  whether you broke an engine-written body. Around the body, unchanged: one centered
+  article-width column, borderless title/subtitle fields, a Write | Preview toggle whose preview
+  is site-accurate (`/api/admin/preview`), autosave for drafts (published posts save
   manually so edits never go live mid-thought), Ctrl/Cmd+S, and image paste/drag/upload
   (`/api/admin/upload` → the public `post-images` Storage bucket, `body/` for inline images,
   `cover/` for covers). The **cover photo is editable at the top of the editor**: it shows
@@ -194,7 +221,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   it conflicts with the auto-injected file.
 - **`app/layout.tsx`** — root metadata + `WebSite`/`Person` JSON-LD from `site.ts`. The
   inline `<head>` script sets the `dark` class pre-hydration from the
-  `alexprompts-theme` localStorage key (must match `ThemeProvider.tsx`). Also renders
+  `alexprompts-theme` localStorage key (must match `ThemeProvider.tsx`; the key kept its old
+  name through the August 24, 2026 Rebrew rename ON PURPOSE, because renaming it would silently
+  reset every existing reader's light/dark choice for no gain). Also renders
   **`<Analytics />`** (`@vercel/analytics/next`) for **Vercel Web Analytics** (traffic, the
   page-view side of "is the SEO bet working"; lead attribution is the separate first-party
   path in `referral_leads`). It is **cookieless, stores no PII, and needs no consent banner**,
@@ -308,7 +337,7 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 
 ## SEO
 
-- Each page sets `title` (template `%s · Alex Prompts`), `description`, `openGraph`,
+- Each page sets `title` (template `%s · Rebrew`, from `site.name`), `description`, `openGraph`,
   `alternates.canonical`. `metadataBase` + canonicals come from `SITE_URL`.
 - **Every page route declares its OWN canonical, and a check enforces it**
   (`scripts/checks/canonicals.mjs`, wired to `npm run lint` and to `prebuild`, so a

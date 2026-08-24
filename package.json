@@ -7,13 +7,19 @@
     "prebuild": "npm run check:canonicals",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint && npm run check:canonicals",
-    "check:canonicals": "node scripts/checks/canonicals.mjs"
+    "lint": "eslint && npm run check:canonicals && npm run check:editor",
+    "check:canonicals": "node scripts/checks/canonicals.mjs",
+    "check:editor": "node scripts/checks/editor-roundtrip.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.1",
     "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/extension-image": "^3.30.3",
+    "@tiptap/extensions": "^3.30.3",
+    "@tiptap/pm": "^3.30.3",
+    "@tiptap/react": "^3.30.3",
+    "@tiptap/starter-kit": "^3.30.3",
     "@types/leaflet": "^1.9.21",
     "@vercel/analytics": "^2.0.1",
     "fast-xml-parser": "^5.9.0",
@@ -25,7 +31,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "sanitize-html": "^2.17.5",
-    "turndown": "^7.2.4"
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

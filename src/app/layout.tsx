@@ -15,18 +15,20 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  // Three of these used to name the free tools ("rental property calculator",
+  // "mortgage calculator", "free real estate tools"). All nine tools were
+  // deleted August 14, 2026, so those were advertising routes that now 404.
+  // Replaced with the beat the publication actually covers.
   keywords: [
+    "South Carolina real estate",
+    "South Carolina business",
     "Greenville SC real estate",
-    "moving to Greenville SC",
-    "cost of living in Greenville SC",
-    "Greenville SC neighborhoods",
-    "find a real estate agent Greenville SC",
-    "Greenville real estate agent referral",
     "Upstate South Carolina real estate",
-    "free real estate tools",
-    "rental property calculator",
-    "mortgage calculator",
-    "Alex Prompts",
+    "SC economic development incentives",
+    "South Carolina commercial real estate",
+    "moving to Greenville SC",
+    "Greenville SC neighborhoods",
+    "Rebrew",
     "Alex Steryous",
   ],
   openGraph: {
@@ -70,7 +72,7 @@ const jsonLd = {
       email: site.email,
       jobTitle: "Writer",
       description:
-        "Writes Alex Prompts, honest writing on Greenville, South Carolina real estate and the technology reshaping it, plus the free real-estate tools he builds himself.",
+        "Writes Rebrew, a publication on South Carolina real estate and business built on primary documents: whether a business is durable, what years of sales have done to a submarket, and which rule or tax structure is driving behavior that looks random.",
       sameAs: socials.map((s) => s.url),
     },
   ],

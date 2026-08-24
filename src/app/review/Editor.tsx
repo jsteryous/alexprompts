@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
 import type { EditorCover } from "@/lib/editorCover";
+import { mdToEditorHtml } from "@/lib/editorMarkdown";
+import RichText from "./RichText";
 
 interface Props {
   id: string;
@@ -110,13 +112,10 @@ export default function Editor({
   const [uploading, setUploading] = useState(false);
   const [coverUploading, setCoverUploading] = useState(false);
   const [message, setMessage] = useState<Msg>(null);
-  const [dragOver, setDragOver] = useState(false);
   const [coverDrag, setCoverDrag] = useState(false);
 
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const summaryRef = useRef<HTMLTextAreaElement>(null);
-  const bodyRef = useRef<HTMLTextAreaElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
   const coverFileRef = useRef<HTMLInputElement>(null);
 
   // What was last written to the database. Dirty means the state has drifted
@@ -147,12 +146,15 @@ export default function Editor({
       ? { url: libraryCover.url, credit: libraryCover.credit, custom: false as const }
       : null;
 
+  // The rich-text document is seeded ONCE from the stored markdown. `body`
+  // stays markdown from then on: RichText converts on every keystroke, so
+  // autosave, the word count, the preview, and the save payload are all
+  // unchanged from when this was a plain textarea.
+  const [initialHtml] = useState(() => mdToEditorHtml(initialBody));
+
   // Substack-style borderless fields grow with their content.
   useEffect(() => autosize(titleRef.current), [title]);
   useEffect(() => autosize(summaryRef.current), [summary]);
-  useEffect(() => {
-    if (mode === "write") autosize(bodyRef.current);
-  }, [body, mode]);
 
   // Live preview is rendered SERVER-SIDE through the same marked + sanitize-html
   // pipeline the article page uses, so what you see is how it renders on the site
@@ -224,10 +226,12 @@ export default function Editor({
     return () => clearTimeout(t);
   }, [title, summary, body, coverImage, coverCredit, dirty, saving, uploading, coverUploading, status]);
 
-  // Cmd/Ctrl+S saves instead of opening the browser save dialog.
+  // Cmd/Ctrl+S saves instead of opening the browser save dialog. Bold, italic,
+  // and link shortcuts are NOT here: TipTap binds Cmd+B/I/K itself, scoped to
+  // the editor, so a global handler would double-fire them.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+      if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === "s") {
         e.preventDefault();
         saveRef.current();
       }
@@ -303,120 +307,29 @@ export default function Editor({
     if (file) uploadCover(file);
   }
 
-  // ── text helpers ──────────────────────────────────────────────────────────
-  function insertAtCursor(text: string) {
-    const ta = bodyRef.current;
-    const start = ta ? ta.selectionStart : body.length;
-    const end = ta ? ta.selectionEnd : body.length;
-    const next = body.slice(0, start) + text + body.slice(end);
-    setBody(next);
-    requestAnimationFrame(() => {
-      if (!ta) return;
-      ta.focus();
-      const pos = start + text.length;
-      ta.setSelectionRange(pos, pos);
-    });
-  }
-
-  function wrap(before: string, after = before, placeholder = "text") {
-    const ta = bodyRef.current;
-    if (!ta) return;
-    const start = ta.selectionStart;
-    const end = ta.selectionEnd;
-    const sel = body.slice(start, end) || placeholder;
-    const next = body.slice(0, start) + before + sel + after + body.slice(end);
-    setBody(next);
-    requestAnimationFrame(() => {
-      ta.focus();
-      ta.setSelectionRange(start + before.length, start + before.length + sel.length);
-    });
-  }
-
-  function linePrefix(prefix: string) {
-    const ta = bodyRef.current;
-    if (!ta) return;
-    const start = ta.selectionStart;
-    const end = ta.selectionEnd;
-    const lineStart = body.lastIndexOf("\n", start - 1) + 1;
-    const block = body.slice(lineStart, end) || "text";
-    const prefixed = block
-      .split("\n")
-      .map((l) => prefix + l)
-      .join("\n");
-    const next = body.slice(0, lineStart) + prefixed + body.slice(end);
-    setBody(next);
-    requestAnimationFrame(() => {
-      ta.focus();
-      ta.setSelectionRange(lineStart, lineStart + prefixed.length);
-    });
-  }
-
-  function insertLink() {
-    const ta = bodyRef.current;
-    if (!ta) return;
-    const sel = body.slice(ta.selectionStart, ta.selectionEnd) || "link text";
-    const url = window.prompt("Link URL", "https://");
-    if (!url) return;
-    const start = ta.selectionStart;
-    const end = ta.selectionEnd;
-    const md = `[${sel}](${url})`;
-    setBody(body.slice(0, start) + md + body.slice(end));
-    requestAnimationFrame(() => {
-      ta.focus();
-      const pos = start + md.length;
-      ta.setSelectionRange(pos, pos);
-    });
-  }
-
   // ── body image upload ─────────────────────────────────────────────────────
-  async function uploadFiles(files: File[]) {
-    const images = files.filter((f) => f.type.startsWith("image/"));
-    if (!images.length) return;
+  // Handed to RichText, which owns paste, drop, and the slash menu's Image item
+  // and inserts the returned URL as a captionable figure.
+  async function uploadImage(file: File): Promise<string | null> {
+    if (!file.type.startsWith("image/")) return null;
     setMessage(null);
     setUploading(true);
-    for (const file of images) {
-      try {
-        const sized = await websizeImage(file, BODY_MAX_W);
-        const fd = new FormData();
-        fd.append("file", sized);
-        const resp = await fetch(`/api/admin/upload${authQuery}`, { method: "POST", body: fd });
-        const json = await resp.json().catch(() => ({}));
-        if (!resp.ok) {
-          setMessage({ kind: "err", text: json.error ?? `Upload failed (${resp.status})` });
-          continue;
-        }
-        insertAtCursor(`\n\n![](${json.url})\n\n`);
-      } catch (exc) {
-        setMessage({ kind: "err", text: (exc as Error).message });
+    try {
+      const sized = await websizeImage(file, BODY_MAX_W);
+      const fd = new FormData();
+      fd.append("file", sized);
+      const resp = await fetch(`/api/admin/upload${authQuery}`, { method: "POST", body: fd });
+      const json = await resp.json().catch(() => ({}));
+      if (!resp.ok) {
+        setMessage({ kind: "err", text: json.error ?? `Upload failed (${resp.status})` });
+        return null;
       }
-    }
-    setUploading(false);
-  }
-
-  function onPaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
-    const items = e.clipboardData?.items;
-    if (!items) return;
-    const files: File[] = [];
-    for (const it of items) {
-      if (it.kind === "file" && it.type.startsWith("image/")) {
-        const f = it.getAsFile();
-        if (f) files.push(f);
-      }
-    }
-    if (files.length) {
-      e.preventDefault();
-      uploadFiles(files);
-    }
-  }
-
-  function onDrop(e: React.DragEvent<HTMLTextAreaElement>) {
-    setDragOver(false);
-    const files = Array.from(e.dataTransfer?.files ?? []).filter((f) =>
-      f.type.startsWith("image/"),
-    );
-    if (files.length) {
-      e.preventDefault();
-      uploadFiles(files);
+      return json.url as string;
+    } catch (exc) {
+      setMessage({ kind: "err", text: (exc as Error).message });
+      return null;
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -636,9 +549,14 @@ export default function Editor({
           className="mt-3 w-full resize-none overflow-hidden bg-transparent text-lg md:text-xl theme-text-muted placeholder-[var(--foreground-muted)] focus:outline-none"
         />
 
-        {/* ── Write | Preview + formatting toolbar ─────────────────────────── */}
-        <div className="sticky top-14 z-10 mt-6 -mx-4 md:-mx-6 px-4 md:px-6 py-1.5 theme-header border-b theme-border flex flex-wrap items-center gap-1">
-          <div className="inline-flex rounded-full bg-[var(--surface-muted)] p-0.5 mr-2">
+        {/* ── Write | Preview ──────────────────────────────────────────────
+            No persistent formatting toolbar, deliberately: the Substack
+            composer formats through the selection bubble and the slash menu,
+            both of which live in RichText. Preview stays because it is the one
+            thing Substack cannot offer, a render through the SITE's own
+            pipeline. */}
+        <div className="sticky top-14 z-10 mt-6 -mx-4 md:-mx-6 px-4 md:px-6 py-1.5 theme-header border-b theme-border flex flex-wrap items-center gap-2">
+          <div className="inline-flex rounded-full bg-[var(--surface-muted)] p-0.5">
             {(["write", "preview"] as const).map((m) => (
               <button
                 key={m}
@@ -655,59 +573,20 @@ export default function Editor({
             ))}
           </div>
           {mode === "write" && (
-            <>
-              <ToolBtn label="B" title="Bold" bold onClick={() => wrap("**")} />
-              <ToolBtn label="i" title="Italic" italic onClick={() => wrap("*")} />
-              <Divider />
-              <ToolBtn label="H2" title="Heading" onClick={() => linePrefix("## ")} />
-              <ToolBtn label="H3" title="Subheading" onClick={() => linePrefix("### ")} />
-              <Divider />
-              <ToolBtn label="🔗" title="Link" onClick={insertLink} />
-              <ToolBtn label="❝" title="Quote" onClick={() => linePrefix("> ")} />
-              <ToolBtn label="•" title="Bullet list" onClick={() => linePrefix("- ")} />
-              <ToolBtn label="1." title="Numbered list" onClick={() => linePrefix("1. ")} />
-              <Divider />
-              <ToolBtn
-                label={uploading ? "Uploading…" : "🖼 Image"}
-                title="Insert image"
-                wide
-                disabled={uploading}
-                onClick={() => fileRef.current?.click()}
-              />
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/*"
-                multiple
-                className="hidden"
-                onChange={(e) => {
-                  const files = Array.from(e.target.files ?? []);
-                  e.target.value = "";
-                  uploadFiles(files);
-                }}
-              />
-            </>
+            <span className="text-xs theme-text-muted">
+              {uploading
+                ? "Uploading image…"
+                : "Select text to format. Type / on an empty line for blocks."}
+            </span>
           )}
         </div>
 
-        {/* ── Body: write or full-article preview ─────────────────────────── */}
+        {/* ── Body: rich text, or a render through the site's own pipeline ── */}
         {mode === "write" ? (
-          <textarea
-            ref={bodyRef}
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            onPaste={onPaste}
-            onDrop={onDrop}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragOver(true);
-            }}
-            onDragLeave={() => setDragOver(false)}
-            placeholder="Write in markdown. Paste or drop an image right in."
-            spellCheck
-            className={`mt-6 w-full min-h-[55vh] resize-none overflow-hidden bg-transparent text-[17px] leading-relaxed theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none rounded-lg ${
-              dragOver ? "ring-2 ring-[var(--accent)]" : ""
-            }`}
+          <RichText
+            initialHtml={initialHtml}
+            onChange={setBody}
+            onUploadImage={uploadImage}
           />
         ) : (
           <article className="mt-8">
@@ -743,40 +622,4 @@ function CoverBtn({
       {label}
     </button>
   );
-}
-
-function ToolBtn({
-  label,
-  title,
-  onClick,
-  bold,
-  italic,
-  wide,
-  disabled,
-}: {
-  label: string;
-  title: string;
-  onClick: () => void;
-  bold?: boolean;
-  italic?: boolean;
-  wide?: boolean;
-  disabled?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      title={title}
-      onClick={onClick}
-      disabled={disabled}
-      className={`h-8 ${wide ? "px-2.5" : "w-8"} inline-flex items-center justify-center text-sm theme-text-secondary rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] transition-colors disabled:opacity-40 ${
-        bold ? "font-bold" : ""
-      } ${italic ? "italic font-serif" : ""}`}
-    >
-      {label}
-    </button>
-  );
-}
-
-function Divider() {
-  return <span className="w-px h-5 bg-[var(--border-strong)] mx-1" aria-hidden />;
 }

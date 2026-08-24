@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { site } from "@/lib/site";
 
 export default function LoginForm() {
   const [password, setPassword] = useState("");
@@ -36,7 +37,7 @@ export default function LoginForm() {
         className="theme-card-strong border theme-border rounded-2xl p-10 max-w-sm w-full"
       >
         <span className="theme-label text-xs font-semibold uppercase tracking-widest">
-          Alex Prompts · Admin
+          {site.name} · Admin
         </span>
         <h1 className="text-xl font-bold theme-text-primary mt-2 mb-6">Log in</h1>
         <label className="block">

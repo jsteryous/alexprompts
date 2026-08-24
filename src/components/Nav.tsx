@@ -14,10 +14,14 @@ import { site } from "@/lib/site";
 // retired sections. They keep their routes and their published work, and they
 // moved to the footer under "Archives".
 //
-// "Reporting" is a PLACEHOLDER label for the one live section, chosen because it
-// is plain and institutional and says what the thing is. The publication is
-// deliberately unnamed until a few issues exist (see scripts/publication/SPEC.md),
-// and this label is the first thing that should change when the name lands.
+// "Reporting" labels the one live section. It started as a placeholder to be
+// replaced when the publication got a name, and the name landed August 24, 2026
+// (Rebrew, at rebrew.org), but the label was KEPT rather than swapped. The
+// placeholder reasoning does not survive the rename: the name belongs in the
+// wordmark, which now carries it, and a nav tab reading "Rebrew" next to a
+// wordmark reading "Rebrew" says nothing. "Reporting" still does the job a nav
+// label has to do, which is tell a stranger what is behind the link.
+// Open to Alex's taste, not a placeholder any more.
 //
 // August 14, 2026: Reporting POINTS AT /reporting, which lists every published
 // piece regardless of tag. It used to point at /greenville-works, so the site's

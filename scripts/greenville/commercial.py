@@ -53,7 +53,7 @@ import requests
 
 log = logging.getLogger(__name__)
 
-USER_AGENT = "alex-prompts-greenville/0.1 (+https://alexprompts.com)"
+USER_AGENT = "rebrew-greenville/0.1 (+https://rebrew.org)"
 HTTP_TIMEOUT = 30
 HTTP_RETRIES = 3          # the county service blips; a blip should not lose a run
 RETRY_BACKOFF = 2.0       # seconds, multiplied by the attempt number
