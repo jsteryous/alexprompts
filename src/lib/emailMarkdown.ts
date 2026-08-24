@@ -105,7 +105,7 @@ function buildTransforms(): sanitizeHtml.IOptions["transformTags"] {
  * defense-in-depth reason the site pipeline gives.
  */
 export async function renderEmailBody(md: string): Promise<string> {
-  return sanitizeHtml(await marked(md ?? ""), {
+  return sanitizeHtml(await marked(md ?? "", { breaks: true }), {
     allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "h1", "h2"],
     allowedAttributes: {
       // `style` is what carries all the formatting, so it must survive on every
