@@ -7,6 +7,7 @@ import LoginForm from "./LoginForm";
 import LogoutButton from "./LogoutButton";
 import PublishButton from "./PublishButton";
 import DeleteButton from "./DeleteButton";
+import { site } from "@/lib/site";
 
 // A gated editor, never a search result. robots.txt already disallows /admin;
 // this is the second layer, for the case where the URL gets linked from
@@ -168,7 +169,7 @@ function Shell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen">
       <div className="sticky top-0 z-10 theme-header border-b theme-border px-6 py-3 flex items-center justify-between">
         <span className="theme-label text-xs font-semibold uppercase tracking-widest">
-          Alex Prompts · Admin
+          {site.name} · Admin
         </span>
         <div className="flex items-center gap-3">
           <Link href="/" className="theme-link text-sm">

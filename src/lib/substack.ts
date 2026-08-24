@@ -165,7 +165,7 @@ export function parseSubstackFeed(xmlText: string): SubstackPost[] {
 /** Fetch + parse the live feed. Throws on a non-OK response. */
 export async function fetchSubstackPosts(feedUrl: string): Promise<SubstackPost[]> {
   const res = await fetch(feedUrl, {
-    headers: { "User-Agent": "alex-prompts-site/1.0 (+https://alexprompts.com)" },
+    headers: { "User-Agent": "rebrew-site/1.0 (+https://rebrew.org)" },
     cache: "no-store",
   });
   if (!res.ok) throw new Error(`feed responded ${res.status}`);

@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
+import { site } from "@/lib/site";
 
 export const runtime = "edge";
-export const alt = "Alex Prompts: SC Real Estate & Business";
+export const alt = `${site.name}: ${site.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +36,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#d97066" }} />
-          ALEX PROMPTS
+          {site.name}
         </div>
 
         {/* Main headline */}
@@ -79,8 +80,11 @@ export default function OgImage() {
             paddingTop: 28,
           }}
         >
+          {/* The host, printed on every share card. Derived from site.url so a
+              domain move cannot leave the card advertising the old one, with the
+              www stripped because a bare domain reads better on a share card. */}
           <div style={{ color: "#6b7280", fontSize: 15, letterSpacing: "0.02em" }}>
-            alexprompts.com
+            {new URL(site.url).host.replace(/^www\./, "")}
           </div>
 
           <div

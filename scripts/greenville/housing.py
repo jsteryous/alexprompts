@@ -56,7 +56,7 @@ import requests
 
 log = logging.getLogger(__name__)
 
-USER_AGENT = "alex-prompts-greenville/0.1 (+https://alexprompts.com)"
+USER_AGENT = "rebrew-greenville/0.1 (+https://rebrew.org)"
 HTTP_TIMEOUT = 60
 
 ZHVI_URL = (

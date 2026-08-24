@@ -330,6 +330,20 @@ under `scripts/_archive/` — do not revive it.
 
 ## Site structure
 
+> **THE THREE RULES (Alex, August 15, 2026). They govern the publication and outrank every
+> other editorial instruction in this repo, including the rest of this banner.**
+> **1. It must be a true story. 2. Make it as entertaining as possible without fabricating.
+> 3. Have fun.**
+> Rule 1 says STORY, which is a genre instruction: the spec had been written in the register of
+> an intelligence memo and that register was producing memos. ASSESS, DO NOT ADVISE still stands,
+> because it is about withholding recommendations, not about being dry. Rule 2 is a MAXIMUM and
+> not a threshold, so among candidates that clear every bar, take the one with the best story;
+> fabricating is the single hard line, and every sourcing, arithmetic, verifier, and legal rule
+> exists to let the writing run right up to it safely. Rule 3 is not decoration, since a bored
+> writer and a writer enjoying the material produce visibly different prose, and Alex reads this
+> publication as well as writing it. Carried at the top of `scripts/publication/SPEC.md` and in
+> the writer and editor passes.
+>
 > **CONSOLIDATION, August 12 to 14, 2026. Read `scripts/publication/SPEC.md` first; it
 > outranks this section wherever the two disagree.** Three content tracks became ONE
 > publication whose goal is to be **the go-to source for a clear picture of the REAL ESTATE
@@ -399,10 +413,19 @@ under `scripts/_archive/` — do not revive it.
 > engine evolves from `scripts/tech/`, so new pieces still carry the `greenville works` tag
 > and land at `/greenville-works` (**the route is deliberately unchanged**; renaming it would
 > break every published URL, the sitemap, and the tag the engine writes).
-> **The publication is deliberately UNNAMED** until a few issues exist, so `site.name` is
-> still "Alex Prompts" as a placeholder and the nav label for the live section is the
-> placeholder **"Reporting"**. Those two strings are the first things to change when the name
-> lands. Also settled: SEO is no longer a growth lever (zero-click search plus AI Overviews),
+> **THE PUBLICATION IS NAMED REBREW, at rebrew.org (August 24, 2026).** It ran unnamed from
+> the consolidation until then, with `site.name` = "Alex Prompts" and the nav label
+> "Reporting" standing in. `site.name` is now **"Rebrew"** and `SITE_URL` is
+> **`https://www.rebrew.org`** (www stays canonical, carried over from the old setup). The
+> nav label **"Reporting" was KEPT, not replaced**: it was a placeholder only because there
+> was no name to put in the wordmark, and now that the wordmark says Rebrew, a tab reading
+> "Rebrew" beside it would say nothing. It is a live taste call, not a placeholder.
+> **alexprompts.com is kept and 301s to rebrew.org** so every published article URL, every
+> subscriber holding an old link, and the engines' review links keep working; do not let it
+> lapse without redirecting the article paths. **Substack stays `alexprompts.substack.com`**
+> on purpose, because a Substack subdomain is its identity over there and the two mirrored
+> archive posts link to it absolutely; renaming it is a job on Substack with its own
+> redirect, then `NEXT_PUBLIC_SUBSTACK_URL`. Also settled: SEO is no longer a growth lever (zero-click search plus AI Overviews),
 > so the evergreen how-to guides are dead as a CATEGORY, not merely deprioritized.
 >
 > **THE NINE FREE TOOLS ARE DELETED (August 14, 2026), not hidden.** `/tools` and every
@@ -704,7 +727,7 @@ email.
 
 | Variable | Notes |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://www.alexprompts.com` — **www is canonical** (the apex 308-redirects to www at Vercel; www is the real serving host). Drives canonical/sitemap/robots/OG. If this env var is set in Vercel it must be the www URL (or unset, to use the code default). |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.rebrew.org` — **www is canonical** (the apex 308-redirects to www at Vercel; www is the real serving host). Drives canonical/sitemap/robots/OG. If this env var is set in Vercel it MUST be the www URL (or unset, to use the code default). **Check this one first after the August 24, 2026 domain move**: the local `.env.local` had been set to the bare apex `https://alexprompts.com`, which contradicts the www canonical, and if Vercel carries the same shape then every canonical on the live site points at a URL that redirects. |
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Used by `/api/publish`. |
 | `PUBLISH_SECRET` | Shared secret for `/review` + `/api/publish` + `/api/review/save`. |
@@ -717,11 +740,11 @@ email.
 | `CENSUS_API_KEY` | **Required for the area-scan "neighborhood profile."** The Census *data* API needs a free key (the geocoder does not); without it the profile degrades to hidden (the rest of the scan still works). The key is free with no billing account, so the zero-billing guarantee holds. Sign up: https://api.census.gov/data/key_signup.html |
 | `ANTHROPIC_API_KEY` | **OPTIONAL, and off by default.** The monthly Greenville cover-library grower (`scripts/greenville/cover_ingest.py`, run from `.github/workflows/greenville-covers.yml`) runs **free** with `--no-vision` and needs no key: it proposes license-clean, landscape, high-res Wikimedia Commons candidates in a PR, and the human review is the quality gate. Set this repo secret and drop `--no-vision` **only** if you want a cheap Claude Haiku **vision** pre-filter to score candidates first. That path is metered API usage (a few cents per run), so it is intentionally opt-in to preserve the site's zero-billing guarantee. Never used by the site at runtime. |
 | `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
-| `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Alex Prompts <alex@alexprompts.com>`. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
+| `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Rebrew <alex@rebrew.org>`. **After the domain move this cannot change until Resend verifies rebrew.org by DNS**; sending from an unverified domain fails, so verify first, then flip this.. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
 | `EMAIL_POSTAL_ADDRESS` | The physical mailing address printed in the owned-list email footer. **CAN-SPAM requires one on commercial email**, and it matters most for contacts Alex ADDED BY HAND off a sphere call rather than through the form. Unset = the line is simply omitted (no placeholder ever ships), which leaves the one compliance gap open, so set it before the list grows past Alex's own addresses. Use a PO box, not a home address. Read in `src/lib/emailTemplates.ts`. |
 | `SUBSCRIBE_RATE_LIMIT` | Optional. Per-IP signups/hour allowed on `/api/subscribe` (default 5). Plus a hardcoded per-address cap of 3 confirmation sends/hour. Soft, in-memory (`src/lib/rateLimit.ts`, resets on cold start); blunts signup spam and confirmation-email bombing. |
-| `LEADS_NOTIFY_TO` | Optional. Where `/api/refer` sends the referral-lead notification email. Falls back to `EMAIL_REPLY_TO`, then `site.email` (`hello@alexprompts.com`). Set this to the inbox Alex actually watches so a new lead pings him fast. The lead is stored in `referral_leads` regardless, so an unset/unverified inbox never loses a lead. |
+| `LEADS_NOTIFY_TO` | Optional. Where `/api/refer` sends the referral-lead notification email. Falls back to `EMAIL_REPLY_TO`, then `site.email` (`hello@rebrew.org`). Set this to the inbox Alex actually watches so a new lead pings him fast. The lead is stored in `referral_leads` regardless, so an unset/unverified inbox never loses a lead. |
 | `REFER_RATE_LIMIT` | Optional. Per-IP referral-form submits/hour on `/api/refer` (default 5). Soft, in-memory (same `rateLimit.ts` caveat). A real buyer submits once, so this only blunts abuse. |
 
 > The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
@@ -733,7 +756,9 @@ email.
 
 - **Platform:** Vercel (Hobby), auto-deploy on push to `main`.
 - **Repo:** https://github.com/jsteryous/alexprompts (renamed from `rebbadvisors-website`; the old URL still redirects).
-- **Production:** alexprompts.com (confirm DNS).
+- **Production:** rebrew.org, canonical host `www.rebrew.org` (Cloudflare DNS -> Vercel).
+  alexprompts.com stays attached to the same Vercel project as a redirect-only domain so
+  every published article URL keeps resolving.
 
 ```bash
 npm run dev | npm run build | npm run lint | npx vercel --prod

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "./Editor";
+import { site } from "@/lib/site";
 
 // Token-gated editor, never a search result. See the note in /admin/page.tsx.
 export const metadata: Metadata = {
@@ -74,7 +75,7 @@ function ErrorPage({ heading, body }: { heading: string; body: string }) {
         <h1 className="text-xl font-bold theme-text-primary mb-3">{heading}</h1>
         <p className="text-sm theme-text-muted">{body}</p>
         <Link href="/" className="theme-link inline-block mt-6 text-sm">
-          ← alexprompts.com
+          ← {new URL(site.url).host}
         </Link>
       </div>
     </div>

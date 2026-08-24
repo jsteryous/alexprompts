@@ -66,6 +66,17 @@ const nextConfig: NextConfig = {
         destination: "/find-a-pro",
         permanent: true,
       },
+      // The August 24 seller piece was written over an unrelated draft in the
+      // editor, so it published under that draft's slug about fee-in-lieu
+      // millage while the article underneath was about pricing a home to sell.
+      // It was live for a few hours and never went to the list, so this is
+      // insurance against a crawler that caught it rather than a real audience.
+      // Safe to drop once the domain move settles.
+      {
+        source: "/greenville-works/greenville-fee-in-lieu-millage-lock-reimbursement-cost",
+        destination: "/greenville-works/how-to-get-the-best-sale-price-as-a-home-seller",
+        permanent: true,
+      },
     ];
   },
 };

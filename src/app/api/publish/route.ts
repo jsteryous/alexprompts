@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { DEFAULT_SUBJECT, resolveLibraryCover } from "@/lib/greenvilleCovers";
 import { sectionOf } from "@/lib/posts";
 import { isAuthorized, tokenAuthorized } from "@/lib/adminAuth";
+import { site } from "@/lib/site";
 
 /** Public URL base for each section, so the confirmation link and the
  *  revalidation path match where the post actually lives. */
@@ -176,7 +177,7 @@ function html(heading: string, body: string, status: number) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>${heading} — Alex Prompts</title>
+  <title>${heading} — ${site.name}</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:system-ui,sans-serif;background:#f9fafb;min-height:100vh;
@@ -199,7 +200,7 @@ function html(heading: string, body: string, status: number) {
     <div class="icon">${icon}</div>
     <h1>${heading}</h1>
     <p>${body}</p>
-    <a class="back" href="/">← alexprompts.com</a>
+    <a class="back" href="/">← ${new URL(site.url).host}</a>
   </div>
 </body>
 </html>`;

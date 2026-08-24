@@ -29,7 +29,6 @@
  * hero; CC0 images have `credit: null` and need none. Full attribution with
  * source + license links lives in /public/greenville/library/CREDITS.md.
  */
-import { SITE_URL } from "@/lib/site";
 import coversData from "@/lib/greenvilleCovers.json";
 
 /** A curated cover: the committed file, its alt text, the on-page credit line
@@ -87,10 +86,24 @@ const GREENVILLE_HINTS = [
   "easley",
 ];
 
-/** The public, absolute URL for a library file. Absolute so it works as an Open
- *  Graph / Twitter card image, not only as an on-page <img>. */
+/** The public path for a library file, ROOT-RELATIVE.
+ *
+ *  It used to be absolute, on the reasoning that an Open Graph / Twitter card
+ *  image has to be a full URL. It does, but `layout.tsx` sets `metadataBase`,
+ *  and Next resolves a relative `openGraph.images` against it, so the card is
+ *  absolute by the time it ships either way.
+ *
+ *  Relative is the safer shape because this value is STORED in
+ *  `blog_posts.cover_image`, and an absolute URL bakes today's domain into every
+ *  row forever. `PostCover` also compares stored covers against `SITE_URL` to
+ *  decide what next/image may optimize, so a domain change would have silently
+ *  dropped every already-published post out of image optimization and onto a
+ *  cross-domain redirect. Its first branch takes anything starting with "/" as
+ *  same-origin, which is exactly this. (Changed August 24, 2026, ahead of the
+ *  move off alexprompts.com; the seven rows written under the old rule were
+ *  backfilled to match.) */
 function coverUrl(file: string): string {
-  return `${SITE_URL}/greenville/library/${file}`;
+  return `/greenville/library/${file}`;
 }
 
 /** Small stable hash of a seed string, for choosing one photo from a subject's

@@ -52,7 +52,7 @@ COVERS_JSON = REPO / "src" / "lib" / "greenvilleCovers.json"
 CREDITS_MD = LIBRARY_DIR / "CREDITS.md"
 
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
-USER_AGENT = "AlexPromptsCoverBot/1.0 (https://www.alexprompts.com; jsteryous@gmail.com)"
+USER_AGENT = "RebrewCoverBot/1.0 (https://www.rebrew.org; jsteryous@gmail.com)"
 VISION_MODEL = "claude-haiku-4-5"
 
 # Existing subjects -> the Commons searches that surface good candidates for them.

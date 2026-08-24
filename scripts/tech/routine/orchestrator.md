@@ -179,8 +179,8 @@ STEP 6, DELIVER THE REVIEW PACKET (the post is a DRAFT awaiting Alex). Build ONE
 in this order: FIRST "REVIEW + PUBLISH THIS DRAFT" with the two action links (fill <id> with the
 STEP 5 post id; leave the token as the literal placeholder, since this routine does not hold
 PUBLISH_SECRET and Alex fills or bookmarks it):
-    - Edit + publish: https://www.alexprompts.com/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
-    - One-click publish (if it reads clean): https://www.alexprompts.com/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - Edit + publish: https://www.rebrew.org/review?id=<id>&token=<YOUR_PUBLISH_SECRET>
+    - One-click publish (if it reads clean): https://www.rebrew.org/api/publish?id=<id>&token=<YOUR_PUBLISH_SECRET>
   Then the MUST-VERIFY list from /tmp/gw/pass1_brief.md, plus the standing line: "Not investment,
 legal, or financial advice. This Greenville Works piece is a DRAFT at /greenville-works — it is NOT
 live until you publish it. Spot-check the flagged numbers and claims against the sources, re-read

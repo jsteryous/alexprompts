@@ -1,5 +1,5 @@
 /**
- * Post data access — published Alex Prompts content stored in Supabase
+ * Post data access — published Rebrew content stored in Supabase
  * `blog_posts`. One table holds four kinds of content, split by tag:
  *   - tagged `greenville`       -> REAL-ESTATE post        (-> /real-estate)
  *   - tagged `greenville works` -> GREENVILLE WORKS piece  (-> /greenville-works)
