@@ -223,6 +223,25 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Two more Substack habits came with it: **Enter in the title moves to the subtitle and Enter in
   the subtitle moves into the body** (RichText hands its editor up through `onReady`), and a
   brand-new empty draft opens with the caret already in the title.
+  **THE COMPOSER'S LOOK (August 25, 2026), after Alex said it was "still not very close" to
+  Substack and it was checked in a real browser.** The cover no longer leads the page: it is a
+  text button until there is a photo, and the curated library pick rides on that button as a
+  thumbnail rather than as a full-bleed stock photo above an unwritten title. Preview moved from
+  a pill mid-page into the header. The header carries four controls where it had eight, with the
+  status and save state folded into one muted `Published · Saved` line and Save rendered only
+  when there is something to save. **The selection bubble and the block menu share one surface,
+  `.editor-pop` in `globals.css`**: a solid dark pill in light mode, a lifted panel in dark, with
+  white-alpha hover and active states that work on both. That is the Substack look, and it is
+  also the answer to a problem this design system creates for itself, since a near-white popover
+  floating over near-white body copy has nothing to separate it once drop shadows are banned. Do
+  not "fix" it back to `theme-header`. Three bugs the browser pass caught and fixed: a wrapped
+  title clipped under the subtitle (the textarea measured itself before the web font swapped, so
+  it re-measures on `document.fonts.ready` and on resize), a body placeholder that never drew
+  (TipTap marks the empty node and leaves the CSS to the app, which did not exist, so a blank
+  article opened with no prompt), and Enter in the subtitle not reaching the body (focus the DOM
+  node FIRST and let the TipTap command only place the caret, since the command throws on a
+  hot-reloaded instance and killed everything after it; the tick is a timer, never
+  `requestAnimationFrame`, which browsers pause in a background tab).
   **DARK MODE (fixed August 1, 2026).** These routes render outside `Nav`/`Footer`, and every one
   of them had hardcoded `bg-white` / `bg-gray-50` / `text-gray-*` / `text-black`, so `/admin`, the
   login screen, `/admin/edit/[id]`, `/review`, and the shared `Editor` all stayed white when the

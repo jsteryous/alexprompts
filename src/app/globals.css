@@ -569,6 +569,59 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   line-height: 1.75;
 }
 
+/* Floating editor menus: the selection bubble and the block menu.
+   Substack draws both as one solid dark pill, and that contrast is what makes
+   a menu readable while it floats over body copy. It also solves the problem
+   this design system creates for itself by banning drop shadows: a near-white
+   popover on a near-white page has nothing separating it from the text. In
+   dark mode the page is already near-black, so the popover lifts instead of
+   inverting. The hover and active states are white alphas either way, which
+   read correctly on both surfaces. */
+.editor-pop {
+  background: var(--surface-inverse);
+  color: #f2f2f4;
+  border: 1px solid transparent;
+}
+
+html.dark .editor-pop {
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+  color: var(--foreground);
+}
+
+.editor-pop button {
+  color: color-mix(in srgb, currentColor 82%, transparent);
+}
+
+.editor-pop button:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: currentColor;
+}
+
+.editor-pop button[data-active="true"] {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.editor-pop [data-row="active"] {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.editor-pop input {
+  color: inherit;
+}
+
+.editor-pop input::placeholder {
+  color: color-mix(in srgb, currentColor 50%, transparent);
+}
+
+.editor-pop .pop-sep {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.editor-pop .pop-hint {
+  color: color-mix(in srgb, currentColor 55%, transparent);
+}
+
 /* ── Type scale utilities ─────────────────────────────────────────────────────
    One class sets family + size + line-height + weight + tracking together, so
    headings stay consistent site-wide. Color still comes from the theme-text-*

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import type { Editor as TiptapEditor } from "@tiptap/react";
 import type { EditorCover } from "@/lib/editorCover";
 import { mdToEditorHtml } from "@/lib/editorMarkdown";
-import { SECTIONS, retagForSection, type SectionKey } from "@/lib/editorSections";
+import { retagForSection, type SectionKey } from "@/lib/editorSections";
 import { sectionOf } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 import { isPlaceholderSlug, slugify } from "@/lib/slug";
@@ -506,25 +506,17 @@ export default function Editor({
           >
             ← Drafts
           </Link>
-          <span
-            className={`text-xs px-2 py-0.5 rounded font-medium uppercase shrink-0 ${
-              published ? "tone-good" : "tone-warm"
-            }`}
-          >
-            {status}
-          </span>
-          <button
-            type="button"
-            onClick={() => setSettingsOpen(true)}
-            className="hidden sm:inline text-xs theme-text-muted hover:text-[var(--foreground)] shrink-0 transition-colors"
-            title="Section and URL"
-          >
-            {SECTIONS[section].label}
-          </button>
-          <span
-            className={`text-xs shrink-0 ${dirty && !saving ? "tone-warm-text font-medium" : "theme-text-muted"}`}
-          >
-            {saveState}
+          {/* One line, not three chips. Substack says where you are and whether
+              it is saved, and nothing else; the section moved into Settings,
+              which is the only place it can be changed anyway. */}
+          <span className="text-xs shrink-0 theme-text-muted">
+            <span className={published ? "tone-good-text font-medium" : "tone-warm-text font-medium"}>
+              {published ? "Published" : "Draft"}
+            </span>
+            <span className="px-1.5" aria-hidden>
+              ·
+            </span>
+            <span className={dirty && !saving ? "tone-warm-text font-medium" : ""}>{saveState}</span>
           </span>
           {message && (
             <span
@@ -560,14 +552,16 @@ export default function Editor({
           >
             Settings
           </button>
-          <button
-            type="button"
-            onClick={save}
-            disabled={!dirty || saving}
-            className="text-sm font-medium theme-text-secondary hover:text-[var(--foreground)] px-3 py-2 rounded-lg hover:bg-[var(--surface-muted)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {saving ? "Saving…" : "Save"}
-          </button>
+          {(dirty || saving) && (
+            <button
+              type="button"
+              onClick={save}
+              disabled={saving}
+              className="text-sm font-medium theme-text-secondary hover:text-[var(--foreground)] px-3 py-2 rounded-lg hover:bg-[var(--surface-muted)] transition-colors disabled:opacity-40"
+            >
+              {saving ? "Saving…" : "Save"}
+            </button>
+          )}
           {!published ? (
             <button
               type="button"

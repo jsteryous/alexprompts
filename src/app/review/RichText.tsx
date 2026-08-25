@@ -113,11 +113,8 @@ function BubbleBtn({
       // and collapse the very range this button is about to format.
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
-      className={`h-8 min-w-8 px-1.5 inline-flex items-center justify-center rounded transition-colors ${
-        active
-          ? "bg-[var(--surface-muted)] text-[var(--accent)]"
-          : "theme-text-secondary hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)]"
-      }`}
+      data-active={active ? "true" : undefined}
+      className="h-9 min-w-9 px-2 inline-flex items-center justify-center rounded-md transition-colors"
     >
       {children}
     </button>
@@ -553,7 +550,7 @@ export default function RichText({
 
       {bubble && (
         <div
-          className="absolute z-30 -translate-x-1/2 -translate-y-full theme-header border theme-border rounded-lg flex items-center gap-0.5 p-1"
+          className="editor-pop absolute z-30 -translate-x-1/2 -translate-y-full rounded-lg flex items-center gap-0.5 p-1"
           style={{ top: bubble.top, left: bubble.left }}
         >
           {linkOpen ? (
@@ -571,7 +568,7 @@ export default function RichText({
                   }
                 }}
                 placeholder="Paste or type a link"
-                className="w-56 bg-transparent text-sm theme-text-primary focus:outline-none px-1 py-1"
+                className="w-56 bg-transparent text-sm focus:outline-none px-1 py-1"
               />
               <BubbleBtn title="Apply link" onClick={applyLink}>
                 <span className="text-xs font-semibold px-1">Apply</span>
@@ -610,7 +607,7 @@ export default function RichText({
               >
                 <Icon d={I.link} />
               </BubbleBtn>
-              <span className="w-px h-5 bg-[var(--border-strong)] mx-1" aria-hidden />
+              <span className="pop-sep w-px h-5 mx-1.5" aria-hidden />
               <BubbleBtn
                 title="Heading"
                 active={editor.isActive("heading", { level: 2 })}
@@ -647,7 +644,7 @@ export default function RichText({
       {menu && matches.length > 0 && (
         <div
           data-block-menu
-          className="absolute z-30 w-64 theme-header border theme-border rounded-lg py-1"
+          className="editor-pop absolute z-30 w-64 rounded-lg py-1.5"
           style={{ top: menu.top, left: menu.left }}
         >
           {matches.map((item, i) => (
@@ -657,13 +654,12 @@ export default function RichText({
               onMouseDown={(e) => e.preventDefault()}
               onMouseEnter={() => setSlashIndex(i)}
               onClick={() => runSlash(item)}
-              className={`w-full text-left px-3 py-1.5 flex items-center gap-2.5 transition-colors ${
-                i === slashIndex ? "bg-[var(--surface-muted)]" : ""
-              }`}
+              data-row={i === slashIndex ? "active" : undefined}
+              className="w-full text-left px-3 py-2 flex items-center gap-2.5 rounded-none transition-colors"
             >
-              <Icon d={item.icon} className="theme-text-muted shrink-0" />
-              <span className="text-sm theme-text-primary">{item.label}</span>
-              <span className="text-xs theme-text-muted ml-auto">{item.hint}</span>
+              <Icon d={item.icon} className="shrink-0 opacity-70" />
+              <span className="text-sm">{item.label}</span>
+              <span className="pop-hint text-xs ml-auto">{item.hint}</span>
             </button>
           ))}
         </div>
