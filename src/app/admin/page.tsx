@@ -7,6 +7,7 @@ import LoginForm from "./LoginForm";
 import LogoutButton from "./LogoutButton";
 import PublishButton from "./PublishButton";
 import DeleteButton from "./DeleteButton";
+import NewPostButton from "./NewPostButton";
 import { site } from "@/lib/site";
 
 // A gated editor, never a search result. robots.txt already disallows /admin;
@@ -82,9 +83,15 @@ export default async function AdminPage() {
           Drafts awaiting review ({drafts.length})
         </h2>
         {drafts.length === 0 ? (
-          <p className="text-sm theme-text-muted">
-            Nothing waiting. The engines will drop new drafts here as they run.
-          </p>
+          <div className="theme-card-strong border theme-border rounded-xl p-8 text-center">
+            <p className="text-sm theme-text-muted mb-4">
+              Nothing waiting. The engines drop their drafts here as they run, and you can
+              start one yourself.
+            </p>
+            <div className="flex justify-center">
+              <NewPostButton />
+            </div>
+          </div>
         ) : (
           <ul className="space-y-3">
             {drafts.map((p) => (
@@ -128,7 +135,7 @@ function PostRow({ post, draft }: { post: Row; draft: boolean }) {
           <span className="text-xs theme-text-muted">{date}</span>
         </div>
         <p className="text-sm font-semibold theme-text-primary truncate">
-          {post.title ?? "(untitled)"}
+          {post.title?.trim() || "Untitled"}
         </p>
         <p className="text-xs theme-text-muted truncate">{post.slug}</p>
       </div>
@@ -176,6 +183,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             ← Site
           </Link>
           <LogoutButton />
+          <NewPostButton />
         </div>
       </div>
       <div className="max-w-3xl mx-auto px-6 py-12">{children}</div>

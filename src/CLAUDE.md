@@ -173,9 +173,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   `**` in the copy: the old toolbar wrapped the raw selection, and selecting a line by
   triple-click or shift+down carries the line's trailing newline, so it wrote `**Heading\n**`,
   which no markdown parser treats as bold. Formatting now works the way Substack's does, through
-  a **selection bubble** (highlight text, format in place) and a **slash menu** (`/` on an empty
-  line for heading, lists, quote, divider, image); markdown INPUT RULES still work, so typing
-  `## ` or `- ` does what it always did. There is deliberately **no persistent format toolbar**.
+  a **selection bubble** (highlight text, format in place), a **slash menu** (`/` on an empty
+  line for heading, lists, quote, divider, image), and the **gutter "+"** that appears in the left
+  margin beside an empty line and opens that same menu for someone who never learns to type a
+  slash (md and up only; there is no margin to park it in on a phone); markdown INPUT RULES still
+  work, so typing `## ` or `- ` does what it always did. There is deliberately **no persistent format toolbar**.
   `src/app/review/RichText.tsx` is the surface and `src/app/review/Figure.tsx` adds captioned
   images (a real `<figure>`/`<figcaption>`, which the site and email already render).
   **`blog_posts.body_md` is still the source of truth and nothing downstream changed**: the
@@ -198,6 +200,29 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   upload/drop/URL his own photo (stored in `cover_image` + optional `cover_credit` via
   `/api/review/save`, which `/api/publish` and the finalize cron both respect and never
   overwrite), edit the credit line, or remove it to fall back to the library.
+  **WRITING FROM SCRATCH (August 25, 2026).** `/admin` has a **"Write Article"** button (header,
+  and again in the empty drafts state) that POSTs to **`/api/admin/create`**, which mints an empty
+  DRAFT row and returns its id; the button then opens `/admin/edit/<id>`, so a new piece is one
+  click and lands in the same composer the engines' drafts land in. The row is created with an
+  empty title and body and a **placeholder slug** (`untitled-xxxxxx`, since `blog_posts.slug` is
+  NOT NULL UNIQUE) and the `greenville works` tag, which is where the publication's live work
+  goes. `src/lib/slug.ts` owns slugs for the whole repo now (`slugify`, `isValidSlug`,
+  `placeholderSlug`, `isPlaceholderSlug`); `substack.ts` imports it instead of carrying its own
+  copy. Three rules make this work end to end and each one is enforced on the server, not only in
+  the UI: **the URL follows the title** while the slug is still the placeholder and stops the
+  moment it is edited by hand (an engine draft arrives with a real slug, so it is never rewritten);
+  **an empty title or body saves but does not publish** (`/api/review/save` allows it on a DRAFT so
+  autosave can store a half-written piece, `/api/publish` refuses it, and the editor disables the
+  Publish button with the reason in its tooltip); and **slug and section are DRAFT-ONLY**, because a
+  published post owns a live, probably indexed URL that its section is the first half of. Section
+  and URL live in a **post-settings drawer** (`review/PostSettings.tsx`, opened from the header,
+  Escape or the backdrop closes it) driven by `src/lib/editorSections.ts`, whose `retagForSection`
+  swaps the one section tag and keeps every topical tag (tags render as badges on the article).
+  Autosave now records a payload that the server REJECTED and will not retry it until the document
+  changes, which is what stops a taken slug from looping a failed save every 2.5 seconds.
+  Two more Substack habits came with it: **Enter in the title moves to the subtitle and Enter in
+  the subtitle moves into the body** (RichText hands its editor up through `onReady`), and a
+  brand-new empty draft opens with the caret already in the title.
   **DARK MODE (fixed August 1, 2026).** These routes render outside `Nav`/`Footer`, and every one
   of them had hardcoded `bg-white` / `bg-gray-50` / `text-gray-*` / `text-black`, so `/admin`, the
   login screen, `/admin/edit/[id]`, `/review`, and the shared `Editor` all stayed white when the

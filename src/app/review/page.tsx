@@ -58,6 +58,7 @@ export default async function ReviewPage({ searchParams }: Props) {
         initialBody={post.body_md ?? ""}
         status={post.status ?? "DRAFT"}
         slug={post.slug ?? ""}
+        initialTags={post.tags ?? []}
         backHref="/admin"
         livePath={`${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`}
         initialCoverImage={post.cover_image ?? null}

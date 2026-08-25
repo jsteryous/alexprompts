@@ -1,9 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import type { Editor as TiptapEditor } from "@tiptap/react";
 import type { EditorCover } from "@/lib/editorCover";
 import { mdToEditorHtml } from "@/lib/editorMarkdown";
+import { SECTIONS, retagForSection, type SectionKey } from "@/lib/editorSections";
+import { sectionOf } from "@/lib/posts";
+import { SITE_URL } from "@/lib/site";
+import { isPlaceholderSlug, slugify } from "@/lib/slug";
+import PostSettings from "./PostSettings";
 import RichText from "./RichText";
 
 interface Props {
@@ -15,7 +21,11 @@ interface Props {
   initialSummary: string;
   initialBody: string;
   status: string;
+  /** The row's stored URL slug. A draft started by hand arrives with a
+   *  placeholder (`untitled-xxxxxx`) that the title takes over. */
   slug: string;
+  /** The row's stored tags, which decide the section it publishes to. */
+  initialTags?: string[];
   /** Where the back arrow points. Defaults to the /admin drafts list. */
   backHref?: string;
   /** Public URL of the post (e.g. /real-estate/<slug>), for the View link. */
@@ -95,6 +105,8 @@ export default function Editor({
   initialSummary,
   initialBody,
   status,
+  slug: initialSlug,
+  initialTags = [],
   backHref = "/admin",
   livePath,
   initialCoverImage = null,
@@ -106,6 +118,9 @@ export default function Editor({
   const [body, setBody] = useState(initialBody);
   const [coverImage, setCoverImage] = useState<string | null>(initialCoverImage);
   const [coverCredit, setCoverCredit] = useState<string | null>(initialCoverCredit);
+  const [slug, setSlug] = useState(initialSlug);
+  const [tags, setTags] = useState<string[]>(initialTags);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("write");
   const [saving, startSave] = useTransition();
   const [publishing, startPublish] = useTransition();
@@ -117,6 +132,37 @@ export default function Editor({
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const summaryRef = useRef<HTMLTextAreaElement>(null);
   const coverFileRef = useRef<HTMLInputElement>(null);
+  const bodyRef = useRef<TiptapEditor | null>(null);
+
+  const published = status === "PUBLISHED";
+  const section = useMemo<SectionKey>(() => sectionOf({ tags }), [tags]);
+  const host = new URL(SITE_URL).host;
+
+  // The URL follows the title while the slug is still the minted placeholder,
+  // so a piece started from the Write Article button gets a real address just
+  // by being given a name. Editing the slug by hand, or opening an
+  // engine-written draft (which arrives with a real slug), stops that for good.
+  const slugAuto = useRef(!published && isPlaceholderSlug(initialSlug));
+  useEffect(() => {
+    if (!slugAuto.current) return;
+    const next = slugify(title);
+    if (next) setSlug(next);
+  }, [title]);
+
+  function editSlug(next: string) {
+    slugAuto.current = false;
+    setSlug(next.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-"));
+  }
+
+  function moveSection(next: SectionKey) {
+    setTags((prev) => retagForSection(prev, next));
+  }
+
+  // The exact payload of the last save that FAILED. Autosave re-runs whenever
+  // `saving` flips back to false, so without this a save the server keeps
+  // refusing (a slug another post already holds, most likely) would retry every
+  // 2.5 seconds forever. Retry once the document actually changes, not before.
+  const failedRef = useRef<string | null>(null);
 
   // What was last written to the database. Dirty means the state has drifted
   // from it; autosave and the header indicator both key off this.
@@ -126,13 +172,17 @@ export default function Editor({
     body: initialBody,
     coverImage: initialCoverImage,
     coverCredit: initialCoverCredit,
+    slug: initialSlug,
+    tags: JSON.stringify(initialTags),
   });
   const dirty =
     title !== savedState.title ||
     summary !== savedState.summary ||
     body !== savedState.body ||
     coverImage !== savedState.coverImage ||
-    coverCredit !== savedState.coverCredit;
+    coverCredit !== savedState.coverCredit ||
+    slug !== savedState.slug ||
+    JSON.stringify(tags) !== savedState.tags;
 
   // Query suffix that carries the token for the /review flow; the /admin flow
   // relies on the cookie instead, so it stays empty.
@@ -184,7 +234,15 @@ export default function Editor({
   // ── save / publish ────────────────────────────────────────────────────────
   function save() {
     if (saving) return;
-    const snapshot = { title, summary, body, coverImage, coverCredit };
+    const snapshot = {
+      title,
+      summary,
+      body,
+      coverImage,
+      coverCredit,
+      slug,
+      tags: JSON.stringify(tags),
+    };
     setMessage(null);
     startSave(async () => {
       try {
@@ -199,15 +257,20 @@ export default function Editor({
             body_md: snapshot.body,
             cover_image: snapshot.coverImage,
             cover_credit: snapshot.coverCredit,
+            slug: snapshot.slug,
+            tags,
           }),
         });
         const json = await resp.json().catch(() => ({}));
         if (!resp.ok) {
+          failedRef.current = JSON.stringify(snapshot);
           setMessage({ kind: "err", text: json.error ?? `Save failed (${resp.status})` });
           return;
         }
+        failedRef.current = null;
         setSavedState(snapshot);
       } catch (exc) {
+        failedRef.current = JSON.stringify(snapshot);
         setMessage({ kind: "err", text: (exc as Error).message });
       }
     });
@@ -221,10 +284,33 @@ export default function Editor({
   // Substack-style autosave, DRAFTS ONLY: a published post saves manually so an
   // edit never goes live (and revalidates) mid-thought.
   useEffect(() => {
-    if (status === "PUBLISHED" || !dirty || saving || uploading || coverUploading) return;
+    if (published || !dirty || saving || uploading || coverUploading) return;
+    const pending = JSON.stringify({
+      title,
+      summary,
+      body,
+      coverImage,
+      coverCredit,
+      slug,
+      tags: JSON.stringify(tags),
+    });
+    if (failedRef.current === pending) return;
     const t = setTimeout(() => saveRef.current(), 2500);
     return () => clearTimeout(t);
-  }, [title, summary, body, coverImage, coverCredit, dirty, saving, uploading, coverUploading, status]);
+  }, [
+    title,
+    summary,
+    body,
+    coverImage,
+    coverCredit,
+    slug,
+    tags,
+    dirty,
+    saving,
+    uploading,
+    coverUploading,
+    published,
+  ]);
 
   // Cmd/Ctrl+S saves instead of opening the browser save dialog. Bold, italic,
   // and link shortcuts are NOT here: TipTap binds Cmd+B/I/K itself, scoped to
@@ -238,6 +324,15 @@ export default function Editor({
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // A draft started from Write Article opens with the caret in the title, the
+  // way a new Substack post does. An engine draft opens untouched, so the page
+  // does not scroll itself to the top of an article Alex is here to read.
+  useEffect(() => {
+    if (!initialTitle && !initialBody) titleRef.current?.focus();
+    // Mount only: this is where the caret STARTS, not where it is kept.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function publish() {
@@ -334,6 +429,18 @@ export default function Editor({
   }
 
   const words = body.split(/\s+/).filter(Boolean).length;
+  // What still has to be true before this can go live. The publish route
+  // refuses an empty piece anyway; saying so here is friendlier than a red bar
+  // after the click.
+  const blocker = !title.trim()
+    ? "Give it a title first"
+    : !body.trim()
+      ? "Write something first"
+      : !slug.trim()
+        ? "Give it a URL in settings"
+        : dirty
+          ? "Save first, then publish"
+          : null;
   const saveState = saving
     ? "Saving…"
     : dirty
@@ -358,11 +465,19 @@ export default function Editor({
           </Link>
           <span
             className={`text-xs px-2 py-0.5 rounded font-medium uppercase shrink-0 ${
-              status === "PUBLISHED" ? "tone-good" : "tone-warm"
+              published ? "tone-good" : "tone-warm"
             }`}
           >
             {status}
           </span>
+          <button
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+            className="hidden sm:inline text-xs theme-text-muted hover:text-[var(--foreground)] shrink-0 transition-colors"
+            title="Section and URL"
+          >
+            {SECTIONS[section].label}
+          </button>
           <span
             className={`text-xs shrink-0 ${dirty && !saving ? "tone-warm-text font-medium" : "theme-text-muted"}`}
           >
@@ -384,19 +499,27 @@ export default function Editor({
           </span>
           <button
             type="button"
+            onClick={() => setSettingsOpen(true)}
+            className="text-sm font-medium theme-text-secondary hover:text-[var(--foreground)] px-3 py-2 rounded-lg hover:bg-[var(--surface-muted)] transition-colors"
+            title="Post settings"
+          >
+            Settings
+          </button>
+          <button
+            type="button"
             onClick={save}
             disabled={!dirty || saving}
             className="text-sm font-medium theme-text-secondary hover:text-[var(--foreground)] px-3 py-2 rounded-lg hover:bg-[var(--surface-muted)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {saving ? "Saving…" : "Save"}
           </button>
-          {status !== "PUBLISHED" ? (
+          {!published ? (
             <button
               type="button"
               onClick={publish}
-              disabled={dirty || publishing}
+              disabled={Boolean(blocker) || publishing}
               className="inline-flex items-center gap-2 bg-green-500 text-black font-semibold text-sm px-4 md:px-5 py-2 rounded-lg hover:bg-green-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              title={dirty ? "Save first, then publish" : "Publish"}
+              title={blocker ?? "Publish"}
             >
               {publishing ? "Publishing…" : "Publish →"}
             </button>
@@ -535,6 +658,14 @@ export default function Editor({
           rows={1}
           value={title}
           onChange={(e) => setTitle(e.target.value.replace(/\n/g, " "))}
+          onKeyDown={(e) => {
+            // Enter walks down the page instead of doing nothing: title to
+            // subtitle to body, which is the opening move in Substack.
+            if (e.key === "Enter") {
+              e.preventDefault();
+              summaryRef.current?.focus();
+            }
+          }}
           placeholder="Title"
           spellCheck
           className="w-full resize-none overflow-hidden bg-transparent text-3xl md:text-4xl font-bold tracking-tight theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none"
@@ -544,6 +675,13 @@ export default function Editor({
           rows={1}
           value={summary}
           onChange={(e) => setSummary(e.target.value.replace(/\n/g, " "))}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              setMode("write");
+              bodyRef.current?.commands.focus("start");
+            }
+          }}
           placeholder="Add a subtitle…"
           spellCheck
           className="mt-3 w-full resize-none overflow-hidden bg-transparent text-lg md:text-xl theme-text-muted placeholder-[var(--foreground-muted)] focus:outline-none"
@@ -587,6 +725,9 @@ export default function Editor({
             initialHtml={initialHtml}
             onChange={setBody}
             onUploadImage={uploadImage}
+            onReady={(ed) => {
+              bodyRef.current = ed;
+            }}
           />
         ) : (
           <article className="mt-8">
@@ -599,6 +740,17 @@ export default function Editor({
           </article>
         )}
       </div>
+
+      <PostSettings
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        section={section}
+        onSection={moveSection}
+        slug={slug}
+        onSlug={editSlug}
+        locked={published}
+        host={host}
+      />
     </>
   );
 }

@@ -31,12 +31,24 @@ async function publishPost(id: string): Promise<PublishResult> {
 
   const { data: rows, error: fetchErr } = await client
     .from("blog_posts")
-    .select("id, title, slug, status, tags, cover_image, image_address")
+    .select("id, title, slug, status, tags, body_md, cover_image, image_address")
     .eq("id", id)
     .single();
 
   if (fetchErr || !rows) {
     return { ok: false, status: 404, heading: "Not found", message: `No post found with ID: ${id}` };
+  }
+
+  // A draft started by hand can be empty, since autosave has to be able to
+  // store it mid-sentence. Publishing one is a different matter: an empty title
+  // ships an untitled card and an empty body ships a blank page.
+  if (rows.status !== "PUBLISHED" && (!rows.title?.trim() || !rows.body_md?.trim())) {
+    return {
+      ok: false,
+      status: 400,
+      heading: "Not ready",
+      message: "This draft still needs a title and a body.",
+    };
   }
 
   const section = sectionOf(rows);

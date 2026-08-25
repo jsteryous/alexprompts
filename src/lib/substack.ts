@@ -12,6 +12,7 @@
  */
 import { XMLParser } from "fast-xml-parser";
 import TurndownService from "turndown";
+import { slugify } from "@/lib/slug";
 
 export interface SubstackPost {
   slug: string;
@@ -93,14 +94,6 @@ function asText(v: unknown): string {
     return String((v as Record<string, unknown>)["#text"] ?? "");
   }
   return "";
-}
-
-function slugify(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
-    .slice(0, 80);
 }
 
 function slugFromLink(link: string, title: string): string {

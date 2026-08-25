@@ -17,10 +17,12 @@ import { Figure } from "./Figure";
  * `scripts/checks/editor-roundtrip.mjs` proves it is lossless against every row
  * in the database.
  *
- * Three interactions carry the Substack feel, in order of how much they matter:
+ * Four interactions carry the Substack feel, in order of how much they matter:
  * markdown input rules (typing `## ` still makes a heading, so muscle memory
- * survives), the selection bubble (highlight text, format it in place), and the
- * slash menu (`/` on an empty line for blocks).
+ * survives), the selection bubble (highlight text, format it in place), the
+ * slash menu (`/` on an empty line for blocks), and the gutter "+" beside an
+ * empty line, which opens that same menu for someone who never learns to type
+ * a slash.
  */
 
 interface Props {
@@ -31,6 +33,9 @@ interface Props {
   onChange: (md: string) => void;
   /** Uploads a file and resolves to its public URL, or null on failure. */
   onUploadImage: (file: File) => Promise<string | null>;
+  /** Handed the live editor once, so the page around it can move the caret in
+   *  (the subtitle field passes it down on Enter). */
+  onReady?: (editor: TiptapEditor) => void;
   placeholder?: string;
 }
 
@@ -119,6 +124,16 @@ function BubbleBtn({
   );
 }
 
+/** An open block menu: where it sits, what it is filtering on, and how many
+ *  characters of typed trigger to remove before running the command. */
+type BlockMenu = {
+  top: number;
+  left: number;
+  query: string;
+  from: number;
+  chars: number;
+};
+
 type SlashItem = {
   label: string;
   hint: string;
@@ -171,6 +186,7 @@ export default function RichText({
   initialHtml,
   onChange,
   onUploadImage,
+  onReady,
   placeholder,
 }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -179,20 +195,24 @@ export default function RichText({
   // prop. Route them through refs that an effect keeps current.
   const onChangeRef = useRef(onChange);
   const uploadRef = useRef(onUploadImage);
+  const readyRef = useRef(onReady);
   useEffect(() => {
     onChangeRef.current = onChange;
     uploadRef.current = onUploadImage;
-  }, [onChange, onUploadImage]);
+    readyRef.current = onReady;
+  }, [onChange, onUploadImage, onReady]);
 
   const [bubble, setBubble] = useState<{ top: number; left: number } | null>(null);
   const [linkOpen, setLinkOpen] = useState(false);
   const [linkValue, setLinkValue] = useState("");
-  const [slash, setSlash] = useState<{
-    top: number;
-    left: number;
-    query: string;
-    from: number;
-  } | null>(null);
+  const [slash, setSlash] = useState<BlockMenu | null>(null);
+  // The same list, opened from the gutter "+" instead of a typed "/". Kept in
+  // its own state because `detect` below closes the typed menu on every
+  // keystroke that stops matching, and that must not reach into this one.
+  const [picker, setPicker] = useState<BlockMenu | null>(null);
+  // Vertical offset of the gutter "+", or null when the caret is not on an
+  // empty paragraph. Substack shows the same affordance in the same place.
+  const [plusTop, setPlusTop] = useState<number | null>(null);
   const [slashIndex, setSlashIndex] = useState(0);
   // Tracks whether the menu is already open, so re-detecting on each keystroke
   // does not reset the highlighted row out from under the arrow keys.
@@ -201,6 +221,10 @@ export default function RichText({
     slashOpenRef.current = false;
     setSlash((prev) => (prev === null ? prev : null));
   }, []);
+  const closeMenus = useCallback(() => {
+    closeSlash();
+    setPicker(null);
+  }, [closeSlash]);
 
   const editorRef = useRef<TiptapEditor | null>(null);
 
@@ -272,6 +296,7 @@ export default function RichText({
   []);
   useEffect(() => {
     editorRef.current = editor;
+    if (editor) readyRef.current?.(editor);
   }, [editor]);
 
   // Position the selection bubble. Hand-rolled rather than
@@ -340,13 +365,15 @@ export default function RichText({
         left: coords.left - box.left,
         query: m[1].toLowerCase(),
         from: $from.pos - m[0].length,
+        chars: m[0].length,
       };
       setSlash((prev) =>
         prev &&
         prev.top === next.top &&
         prev.left === next.left &&
         prev.query === next.query &&
-        prev.from === next.from
+        prev.from === next.from &&
+        prev.chars === next.chars
           ? prev
           : next,
       );
@@ -364,30 +391,94 @@ export default function RichText({
     };
   }, [editor, closeSlash]);
 
+  // Where the gutter "+" sits: beside the caret's line whenever that line is an
+  // empty paragraph. Substack puts the block affordance exactly there, and it is
+  // what makes the slash menu discoverable to someone who never types "/".
+  useEffect(() => {
+    if (!editor) return;
+    function track() {
+      if (!editor) return;
+      const { $from, empty } = editor.state.selection;
+      const wrap = wrapRef.current;
+      if (
+        !wrap ||
+        !empty ||
+        $from.parent.type.name !== "paragraph" ||
+        $from.parent.content.size > 0
+      ) {
+        setPlusTop(null);
+        return;
+      }
+      const coords = editor.view.coordsAtPos($from.pos);
+      const top = coords.top - wrap.getBoundingClientRect().top;
+      setPlusTop((prev) => (prev === top ? prev : top));
+    }
+    function hide() {
+      setPlusTop(null);
+    }
+    editor.on("selectionUpdate", track);
+    editor.on("update", track);
+    editor.on("focus", track);
+    editor.on("blur", hide);
+    return () => {
+      editor.off("selectionUpdate", track);
+      editor.off("update", track);
+      editor.off("focus", track);
+      editor.off("blur", hide);
+    };
+  }, [editor]);
+
+  // Whichever menu is open. They are never both open: opening one closes the
+  // other, and the typed menu only exists while a "/" is on the line.
+  const menu = slash ?? picker;
+
+  function openPicker() {
+    if (!editor) return;
+    const { $from } = editor.state.selection;
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const coords = editor.view.coordsAtPos($from.pos);
+    const box = wrap.getBoundingClientRect();
+    closeSlash();
+    setSlashIndex(0);
+    setPicker({
+      top: coords.bottom - box.top + 8,
+      left: coords.left - box.left,
+      query: "",
+      from: $from.pos,
+      chars: 0,
+    });
+  }
+
   const matches = useMemo(
-    () => (slash ? SLASH_ITEMS.filter((it) => it.label.toLowerCase().includes(slash.query)) : []),
-    [slash],
+    () => (menu ? SLASH_ITEMS.filter((it) => it.label.toLowerCase().includes(menu.query)) : []),
+    [menu],
   );
 
   const runSlash = useCallback(
     (item: SlashItem) => {
-      if (!editor || !slash) return;
-      // Clear the "/query" the user typed before running the command.
-      editor
-        .chain()
-        .focus()
-        .deleteRange({ from: slash.from, to: slash.from + slash.query.length + 1 })
-        .run();
-      closeSlash();
+      if (!editor || !menu) return;
+      // Clear the "/query" that opened the menu before running the command.
+      // The gutter "+" types nothing, so it clears nothing (chars is 0).
+      if (menu.chars > 0) {
+        editor
+          .chain()
+          .focus()
+          .deleteRange({ from: menu.from, to: menu.from + menu.chars })
+          .run();
+      } else {
+        editor.chain().focus().run();
+      }
+      closeMenus();
       if (item.label === "Image") fileRef.current?.click();
       else item.run(editor);
     },
-    [editor, slash, closeSlash],
+    [editor, menu, closeMenus],
   );
 
-  // Slash-menu keyboard nav, captured before the editor sees the key.
+  // Block-menu keyboard nav, captured before the editor sees the key.
   useEffect(() => {
-    if (!slash || !matches.length) return;
+    if (!menu || !matches.length) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
@@ -399,12 +490,25 @@ export default function RichText({
         runSlash(matches[slashIndex]);
       } else if (e.key === "Escape") {
         e.preventDefault();
-        closeSlash();
+        closeMenus();
       }
     }
     window.addEventListener("keydown", onKey, true);
     return () => window.removeEventListener("keydown", onKey, true);
-  }, [slash, matches, slashIndex, runSlash, closeSlash]);
+  }, [menu, matches, slashIndex, runSlash, closeMenus]);
+
+  // A click anywhere else dismisses the gutter menu. The typed one needs no
+  // such thing: it closes itself as soon as the line stops matching.
+  useEffect(() => {
+    if (!picker) return;
+    function onDown(e: MouseEvent) {
+      const el = e.target as HTMLElement | null;
+      if (el?.closest("[data-block-menu]")) return;
+      setPicker(null);
+    }
+    window.addEventListener("mousedown", onDown);
+    return () => window.removeEventListener("mousedown", onDown);
+  }, [picker]);
 
   function applyLink() {
     if (!editor) return;
@@ -429,6 +533,23 @@ export default function RichText({
   return (
     <div ref={wrapRef} className="relative mt-8">
       <EditorContent editor={editor} />
+
+      {/* The gutter "+": Substack's block affordance, parked in the left margin
+          beside an empty line. Hidden on narrow screens, where there is no
+          margin to park it in and the slash menu is the whole story. */}
+      {plusTop !== null && (
+        <button
+          type="button"
+          data-block-menu
+          title="Add a block"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={openPicker}
+          className="hidden md:flex absolute -left-11 h-7 w-7 items-center justify-center rounded-full border theme-border theme-text-muted hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors"
+          style={{ top: plusTop }}
+        >
+          <span className="text-base leading-none">+</span>
+        </button>
+      )}
 
       {bubble && (
         <div
@@ -523,10 +644,11 @@ export default function RichText({
         </div>
       )}
 
-      {slash && matches.length > 0 && (
+      {menu && matches.length > 0 && (
         <div
+          data-block-menu
           className="absolute z-30 w-64 theme-header border theme-border rounded-lg py-1"
-          style={{ top: slash.top, left: slash.left }}
+          style={{ top: menu.top, left: menu.left }}
         >
           {matches.map((item, i) => (
             <button

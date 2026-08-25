@@ -73,6 +73,7 @@ export default async function AdminEditPage({ params }: Props) {
         initialBody={post.body_md ?? ""}
         status={post.status ?? "DRAFT"}
         slug={post.slug ?? ""}
+        initialTags={post.tags ?? []}
         backHref="/admin"
         livePath={livePath}
         initialCoverImage={post.cover_image ?? null}
