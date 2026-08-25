@@ -626,7 +626,38 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
    AI-prompt positioning. They are DELETED rather than deprecated, like
    `.theme-section-muted` before them, so the affordance to re-add them does
    not exist. Do not reintroduce a caret, a chevron, a blink, or a `>`
-   anywhere. A publication's mark is its name set in type.                    */
+   anywhere. That ban is about the AI-prompt motif and it stands as written.
+
+   IT IS NOT A BAN ON THE PUBLICATION'S OWN MARK. August 25, 2026 added the
+   coffee-cup-and-house mark to the masthead (src/components/Mark.tsx) and to
+   the tab (src/app/icon.svg). A mark that stands for the publication is a
+   different object from a terminal affectation inherited from a retired
+   positioning, which is why one belongs and the other does not.            */
+
+/* THE NAMEPLATE. The wordmark is the publication'''s mark, so it is set larger
+   than the rest of the header chrome the way a masthead outranks its own rail.
+   It carries its own class rather than borrowing .type-title, which also sets
+   the card headings on /about, /find-a-pro, and the homepage grid: enlarging
+   that shared token would have inflated all of them too. Tracking runs tighter
+   than the body serif because display type at this size needs the optical
+   correction to avoid looking loose. */
+/* The mark beside the wordmark, in the editorial accent rather than in ink.
+   It reads from --accent and NOT from a literal, which matters: the token is
+   oxblood #9a2323 on paper and lifts to #d97066 in dark mode, because oxblood
+   dies against near-black. A hardcoded red would go muddy in one of the two
+   themes. Same family as the favicon plate, which is fixed at #9a2323 because
+   a browser tab has no theme to read. */
+.wordmark-mark {
+  color: var(--accent);
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
 
 /* The nameplate rule: the heavy line under a masthead. Use on the wordmark
    block, never more than once per view. */

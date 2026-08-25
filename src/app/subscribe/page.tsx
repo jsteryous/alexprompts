@@ -5,8 +5,8 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 export const metadata: Metadata = {
   title: "Subscribe",
   description:
-    "A clear picture of real estate and business in South Carolina, about every other week. " +
-    "How companies here are really doing, where the market is heading, and what is driving it.",
+    "A clear picture of Greenville real estate, about every other week. How the market is " +
+    "really moving, where prices have been heading, and what is driving it.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
@@ -28,8 +28,8 @@ export default function SubscribePage() {
       <div className="max-w-2xl mx-auto px-6">
         <SubscribeForm
           source="subscribe-page"
-          heading="A clear read on SC real estate and business"
-          blurb="About every other week, one piece on how businesses in South Carolina are actually doing, where the market has been heading over years rather than quarters, or what is really driving a decision everybody else reported as news. Built on public records, with every number sourced. Free, and you can leave any time."
+          heading="A clear read on Greenville real estate"
+          blurb="About every other week, one piece on how the Greenville market is actually moving, where prices have been heading over years rather than quarters, or what is really driving a decision everybody else reported as news. Built on public records, with every number sourced. Free, and you can leave any time."
           cta="Subscribe free"
         />
       </div>

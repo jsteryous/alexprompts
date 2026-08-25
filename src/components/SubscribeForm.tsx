@@ -23,14 +23,15 @@ type State = "idle" | "submitting" | "done" | "error";
 // replaced it runs about every other week, on finding. This default appears on
 // every article, so it is the promise most readers see.
 //
-// Rewritten twice more as the beat settled: once for the company beat, then again
-// when the scope widened to real estate AND business. Keep this in sync with
-// site.ts and the homepage standfirst; all three say the same thing at different
-// lengths, and a subscriber promised one beat and sent another unsubscribes.
+// Rewritten as the beat settled: once for the company beat, again when the scope
+// widened to real estate AND business, and again on August 25, 2026 when it
+// narrowed to GREENVILLE REAL ESTATE. Keep this in sync with site.ts and the
+// homepage standfirst; all three say the same thing at different lengths, and a
+// subscriber promised one beat and sent another unsubscribes.
 export function SubscribeForm({
   source,
-  heading = "A clear read on SC real estate and business",
-  blurb = "Every other week, one piece on how businesses here are actually doing, where the market has been heading, or what is really driving a decision everybody else reported as news. Built on public records. Free, and you can leave any time.",
+  heading = "A clear read on Greenville real estate",
+  blurb = "Every other week, one piece on how the Greenville market is actually moving, where prices have been heading over years rather than quarters, or what is really driving a decision everybody else reported as news. Built on public records. Free, and you can leave any time.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

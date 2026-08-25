@@ -16,9 +16,8 @@ import { PostCover } from "@/components/PostCover";
 export const metadata: Metadata = {
   title: "Business",
   description:
-    "How South Carolina companies actually make money, who pays them, why they sit where " +
-    "they sit, and what would break them. Built from filings, permits, job postings, and " +
-    "county records.",
+    "How Greenville companies actually make money, who pays them, why they sit where they " +
+    "sit, and what would break them. Built from the public record.",
   alternates: { canonical: `${site.url}/greenville-works` },
 };
 
@@ -41,10 +40,10 @@ export default async function GreenvilleWorksPage() {
             How the companies here actually make money
           </h1>
           <p className="theme-text-muted type-body-lg max-w-xl">
-            A company announces three hundred jobs and the coverage stops there. These pieces
-            take one South Carolina business apart instead: what it really sells, who pays it
-            and why they keep paying, why it sits where it sits, and what would break it.
-            Built from filings, permits, job postings, and county records.
+            A company announces three hundred jobs and the coverage stops there. These
+            pieces take one Greenville business apart instead. What it really sells, who
+            keeps paying it and why, and what would break it. It comes out of the public
+            record.
           </p>
         </div>
       </section>
@@ -86,8 +85,8 @@ export default async function GreenvilleWorksPage() {
             <div className="theme-card border theme-border rounded-xl p-10 text-center">
               <p className="theme-text-secondary text-lg mb-2">The first pieces are on the way.</p>
               <p className="theme-text-muted text-sm">
-                Each one takes a single change reshaping South Carolina apart and shows what it
-                means for where we live, work, and invest.
+                Each one takes a single change reshaping Greenville apart and shows what it
+                means for where we live and invest.
               </p>
             </div>
           )}

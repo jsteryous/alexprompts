@@ -306,7 +306,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   the last artefacts of the retired "Alex Prompts" AI-prompt positioning. The classes are
   removed from `globals.css` so the affordance to re-add them does not exist, the same way
   `.theme-section-muted` was handled. **Do not reintroduce a caret, chevron, blink, or `>`
-  anywhere** — a publication's mark is its name set in type. `PostCover`'s no-cover state is
+  anywhere** — that ban is about the AI-prompt motif and it still stands. It is **not** a ban
+  on the publication's own mark: **August 25, 2026 added the coffee-cup-and-house mark**, drawn
+  once in `src/components/Mark.tsx` (currentColor, sized in `em` so it tracks the fluid
+  `.wordmark`, doorway cut as a real `fillRule="evenodd"` hole so it needs no background
+  colour) and again as a plated asset in `src/app/icon.svg` for the tab, with
+  `favicon.ico` + `apple-icon.png` rasterized from that same file. Same drawing, two dresses:
+  the tab carries its own oxblood plate because that background is not ours, the masthead
+  inherits ink because that one is. `PostCover`'s no-cover state is
   now a silent ruled plate. Two rule utilities exist for structure: `.rule-masthead` (3px,
   once per view, under the nameplate) and `.rule-section` (hairline between same-surface
   blocks). **No gradients**: `.theme-page`'s accent bloom and `.theme-section-contrast`'s

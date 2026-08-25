@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { site } from "@/lib/site";
+import Mark from "@/components/Mark";
 
 // Nav clarity rule (July 2026): every label states its promise in the visitor's
 // words. The newsletter archive lives in the footer only, so the nav stays short.
@@ -78,15 +79,24 @@ export default function Nav() {
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* The nameplate. Serif and set larger than the section links, the way
-            a masthead outranks its rail. The blinking `▌` caret that used to
-            trail the name was deleted in the August 2026 newspaper pass along
-            with the rest of the AI-prompt motif; a publication's mark is its
-            name set in type. Do not add a glyph back. */}
+        {/* The nameplate: the coffee-cup-and-house mark, then the name, set
+            larger than the section links the way a masthead outranks its rail.
+            The mark is sized in `em` so it tracks the fluid wordmark rather
+            than fighting it, and it draws in currentColor so it flips with the
+            theme for nothing.
+
+            The blinking `▌` caret that used to trail the name was deleted in
+            the August 2026 newspaper pass along with the rest of the AI-prompt
+            motif, and THAT ban stands unchanged: no caret, no chevron, no
+            blink, no `>`. A publication's own mark is a different object from a
+            terminal affectation borrowed from a retired positioning, which is
+            why one came back on August 25, 2026 and the other stays gone.
+            See src/components/Mark.tsx. */}
         <Link
           href="/"
-          className="theme-text-primary type-title inline-flex items-center whitespace-nowrap"
+          className="theme-text-primary wordmark inline-flex items-center gap-2.5 whitespace-nowrap"
         >
+          <Mark className="wordmark-mark w-[1.12em] h-[1.12em] shrink-0" />
           {site.name}
         </Link>
 

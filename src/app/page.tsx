@@ -55,6 +55,22 @@ export const revalidate = 300;
  * believe is ONE input, not the job, and building the front page on it made the
  * publication sound smaller than it is. Do not put it back at the top.
  *
+ * PLAINED AND NARROWED TO GREENVILLE, August 25, 2026, on Alex's instruction
+ * ("we write about greenville real estate. just put things in plain wording").
+ * The headline had been "A clear picture of real estate and business in South
+ * Carolina.", which restated the eyebrow above it almost word for word, ran to
+ * five lines of display type, and was a fragment in a house style that bans
+ * them. The narrowing is not a demotion of the business beat, it is a
+ * correction to what the archive actually is: 34 of 36 published pieces mention
+ * Greenville. If the statewide ambition in CLAUDE.md becomes real in the
+ * published work, widen this line then and not before.
+ *
+ * NOT IN THIS COPY ON PURPOSE: academic research, and sales performance. Alex
+ * asked for both in the same instruction. Zero of the 36 published pieces cite
+ * an academic source and zero touch sales performance, so the claim would have
+ * been false on the front page of a publication whose first rule is that it is
+ * a true story. Add the line when a piece earns it.
+ *
  * That draft was also the site's worst prose, and the reasons are worth keeping
  * because they recur. It opened on an abstract noun ("Checking is the work
  * here."), it paid off in a tidy tricolon ("what the evidence supports, what it
@@ -150,22 +166,26 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-start">
             <div className="max-w-2xl">
-              <Eyebrow className="mb-6">{site.tagline}</Eyebrow>
+              {/* NO EYEBROW HERE, deliberately. It rendered site.tagline, and once
+                  that narrowed to "Greenville Real Estate" on August 25, 2026 it
+                  said the same words as the headline directly beneath it, once at
+                  11px and once at 72px, which reads as a mistake rather than as
+                  structure. The headline is now the masthead statement and does
+                  the eyebrow's job. Every other Eyebrow on the page still earns
+                  its rule because it labels a section the reader is arriving at. */}
               <h1 className="theme-text-primary type-display mb-6">
-                A clear picture of real estate and business in South Carolina.
+                Articles here cover Greenville real estate.
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                Finding out that a company added three hundred jobs is easy. Finding out
-                whether that company is healthy takes actual work, and so does learning what
-                five years of sales did to the submarket around it, or why the money landed
-                here instead of Charlotte.
+                Most of what gets written about this market is a headline number with
+                nothing behind it. I go to the county record and work out what the number
+                actually means.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                I write about the second part. How businesses in South Carolina are really
-                doing, where the market has been heading over years rather than quarters,
-                and the incentives behind decisions that look like preference until you find
-                the tax rule. It comes out of public records, and I say where every number
-                came from.
+                That covers how homes are really selling here, and where prices have been
+                heading over years rather than quarters. When a deal looks arbitrary, there
+                is usually a tax rule underneath it, and finding that rule is the
+                interesting part.
               </p>
             </div>
 

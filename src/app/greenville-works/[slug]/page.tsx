@@ -46,7 +46,7 @@ export default async function GreenvilleWorksPostPage({ params }: Props) {
         label: "Business",
         basePath: "/greenville-works",
         blurb:
-          "How businesses in South Carolina are actually doing, where the market has been heading, and what is driving both. Subscribe and the next one lands in your inbox.",
+          "How Greenville businesses are actually doing, where the market has been heading, and what is driving both. Subscribe and the next one lands in your inbox.",
       }}
     />
   );

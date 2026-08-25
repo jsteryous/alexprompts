@@ -11,10 +11,18 @@
  * of those were always meant to change here first, which is the entire point of
  * this file.
  *
- * The beat is unchanged by the rename: a clear picture of the REAL ESTATE AND
- * BUSINESS landscape in South Carolina, built on primary documents, with real
- * estate and business co-equal. See scripts/publication/SPEC.md, which outranks
- * this comment wherever the two disagree.
+ * NARROWED TO GREENVILLE, August 25, 2026, on Alex's instruction ("we write
+ * about greenville real estate ... it's a real narrowing, take the whole
+ * masthead to greenville"). The beat is Greenville real estate, built on
+ * primary documents. This replaces the August 14 statewide "REAL ESTATE AND
+ * BUSINESS landscape in South Carolina" scope with real estate and business
+ * co-equal.
+ *
+ * The narrowing is a correction to the archive, not an ambition being trimmed:
+ * 34 of the 36 published pieces mention Greenville, none is statewide in any
+ * meaningful way, and the front page had been promising a territory the work
+ * did not cover. scripts/publication/SPEC.md still carries the older statewide
+ * language and is now BEHIND this file on scope; reconcile it there.
  *
  * The old host stays alive. alexprompts.com 301s to rebrew.org so every
  * published article URL, every subscriber who has the old link, and the engines'
@@ -65,12 +73,20 @@ export const site = {
   // and no "plain English" phrasing anywhere (dropped July 2026, it read as
   // unpolished).
   //
-  // THE SCOPE WIDENED August 14, 2026 (Alex's call, second pass same day). The
-  // publication is the go-to source for a clear picture of the REAL ESTATE AND
-  // BUSINESS landscape in South Carolina. Real estate and business are CO-EQUAL
-  // now; the earlier "real estate is a bonus, not a requirement" framing is dead,
-  // and company teardowns are one recurring form rather than the whole beat.
-  // See scripts/publication/SPEC.md.
+  // THE SCOPE NARROWED August 25, 2026 (Alex's call) to GREENVILLE REAL ESTATE.
+  // It had widened on August 14 to the real estate and business landscape of the
+  // whole state, with the two co-equal. That was aspirational: the published
+  // archive is a Greenville publication (34 of 36 pieces), so the masthead was
+  // naming a beat the work did not cover.
+  //
+  // Business is not banned from the publication and company teardowns remain a
+  // good form. It simply stopped being half of the STATED territory, because a
+  // masthead names what a reader will reliably get. Alex is separately starting
+  // to write on sales performance as it bears on realtors and land acquisition;
+  // that is deliberately NOT in this copy yet, at his instruction, because no
+  // published piece covers it. Add it when one does.
+  // See scripts/publication/SPEC.md, which still carries the older statewide
+  // language and is behind this file on scope.
   //
   // THE TAGLINE IS ALEX'S OWN WORDS AND IS VERBATIM. Do not "improve" it into a
   // sentence, and do not expand the ampersand. It is deliberately a plain label
@@ -78,7 +94,8 @@ export const site = {
   // and it survives the publication getting a real name later. Two prior taglines
   // died of being slogan-shaped, so the bar here is mechanical description.
   //
-  // Retired, for the record: "How South Carolina actually makes money." (two
+  // Retired, for the record: "SC Real Estate & Business" (August 14 to 25, 2026,
+  // killed by the Greenville narrowing), "How South Carolina actually makes money." (two
   // days, too narrow once real estate became co-equal), "Who pays for South
   // Carolina's growth." (two days, accountability-beat leftover that read as
   // watchdog), "Better real estate decisions." (July 21), "Questions worth
@@ -90,20 +107,18 @@ export const site = {
   // the tagline carries the whole job of naming the territory.
   //
   // WHAT THE COPY IS FOR: a reader should learn immediately that they can get an
-  // insightful picture of how South Carolina businesses are doing, what the
-  // long-term trends are, and what the real estate market is doing and WHY.
+  // insightful picture of what the Greenville market is really doing and WHY.
   // TRENDS and INCENTIVES are the spine. A draft that led on testing what people
   // in the market claim was cut August 14, 2026; that is one input, not the job,
   // and leading with it made the publication sound smaller than it is.
-  tagline: "SC Real Estate & Business",
+  tagline: "Greenville Real Estate",
   oneLiner:
-    "Alex Steryous writes about how South Carolina businesses are actually doing, where the real estate market has been heading, and the incentives driving both.",
+    "Alex Steryous writes about how the Greenville real estate market is actually moving, where prices have been heading over years rather than quarters, and the incentives driving both.",
   description:
-    "Plenty of places report that a company added three hundred jobs or that a subdivision " +
-    "got approved. Alex Steryous writes the layer underneath: whether a business is durable, " +
-    "what years of sales have really done to a submarket, and which rule or tax structure is " +
-    "driving behavior that otherwise looks random. Built on public records, with every " +
-    "number sourced.",
+    "Plenty of places report that prices went up or that a subdivision got approved. Alex " +
+    "Steryous writes the layer underneath: what years of sales have really done to a " +
+    "Greenville submarket, and which rule or tax structure is driving behavior that " +
+    "otherwise looks random. Built on public records, with every number sourced.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */

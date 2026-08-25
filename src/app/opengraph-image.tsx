@@ -53,7 +53,7 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          SC Real Estate &amp; Business
+          Greenville Real Estate
         </div>
 
         {/* Sub */}
@@ -66,8 +66,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          How South Carolina businesses are actually doing, where the market is
-          heading, and what is driving both.
+          How the Greenville market is actually moving, where prices have been
+          heading over years rather than quarters, and why.
         </div>
 
         {/* Bottom bar */}

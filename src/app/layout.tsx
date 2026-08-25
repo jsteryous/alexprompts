@@ -20,14 +20,13 @@ export const metadata: Metadata = {
   // deleted August 14, 2026, so those were advertising routes that now 404.
   // Replaced with the beat the publication actually covers.
   keywords: [
-    "South Carolina real estate",
-    "South Carolina business",
     "Greenville SC real estate",
-    "Upstate South Carolina real estate",
-    "SC economic development incentives",
-    "South Carolina commercial real estate",
-    "moving to Greenville SC",
+    "Greenville real estate market",
+    "Greenville SC home prices",
+    "Greenville County property records",
     "Greenville SC neighborhoods",
+    "moving to Greenville SC",
+    "Upstate South Carolina real estate",
     "Rebrew",
     "Alex Steryous",
   ],
@@ -72,7 +71,7 @@ const jsonLd = {
       email: site.email,
       jobTitle: "Writer",
       description:
-        "Writes Rebrew, a publication on South Carolina real estate and business built on primary documents: whether a business is durable, what years of sales have done to a submarket, and which rule or tax structure is driving behavior that looks random.",
+        "Writes Rebrew, a publication on Greenville real estate built on primary documents: what years of sales have done to a submarket, and which rule or tax structure is driving behavior that looks random.",
       sameAs: socials.map((s) => s.url),
     },
   ],

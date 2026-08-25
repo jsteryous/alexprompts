@@ -38,7 +38,7 @@ const CONTACT_EMAIL = "jsteryous@gmail.com";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "A clear picture of real estate and business in South Carolina. Claims from the market, tested against filings, permits, deeds, and county records, reported without a recommendation attached.",
+    "A clear picture of Greenville real estate. Claims from the market, tested against the county record, reported without a recommendation attached.",
   alternates: { canonical: `${site.url}/about` },
 };
 
@@ -76,11 +76,11 @@ export default function AboutPage() {
             Knowing what is actually going on here is harder than it should be.
           </h1>
           <p className="theme-text-secondary type-body-lg mb-5">
-            South Carolina produces a lot of announcements. A company expands, a
-            subdivision gets approved, a quarter comes in up or down. What is missing is
-            the layer underneath, where you find out whether a business is durable, what a
-            market has really done over five years instead of one quarter, and which rule
-            or tax break is driving behavior that otherwise looks like taste.
+            Greenville produces a lot of announcements. A subdivision gets approved, a
+            quarter comes in up or down, an employer says it is expanding. What is missing
+            is the layer underneath, where you find out what a submarket has really done
+            over five years instead of one quarter, and which rule or tax break is driving
+            behavior that otherwise looks like taste.
           </p>
           <p className="theme-text-secondary type-body-lg">
             That layer is what this is for. I started writing it because I wanted to read
@@ -170,7 +170,7 @@ export default function AboutPage() {
             <p>
               What you will not get is a recommendation. Nothing about what you should buy,
               sell, hold, or build, and no speeches about whether any of it is good for
-              South Carolina. You have the deal in front of you and the context I do not.
+              Greenville. You have the deal in front of you and the context I do not.
               My job stops at handing you an accurate picture of the ground.
             </p>
             <p>
@@ -208,8 +208,10 @@ export default function AboutPage() {
               questions is sitting in public records that nobody reads.
             </p>
             <p>
-              It covers South Carolina rather than one county, because capital does not
-              stop at a county line. The Upstate is home and wins the close calls.
+              It covers Greenville rather than the whole state, because a market is a
+              local thing and the record that settles it is held at the county. Where a
+              statewide rule or a piece of outside capital is what moves the local
+              ground, that is in scope, and it gets covered for what it does here.
             </p>
           </div>
         </div>

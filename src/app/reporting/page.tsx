@@ -26,8 +26,8 @@ import { PostCover } from "@/components/PostCover";
 export const metadata: Metadata = {
   title: "Reporting",
   description:
-    "Every piece, newest first. How South Carolina businesses are actually doing, where the " +
-    "real estate market is heading, and what is driving both.",
+    "Every piece, newest first. How the Greenville market is actually moving, where prices " +
+    "have been heading, and what is driving it.",
   alternates: { canonical: `${site.url}/reporting` },
 };
 
@@ -50,10 +50,10 @@ export default async function ReportingPage() {
             Everything, newest first.
           </h1>
           <p className="theme-text-muted type-body-lg max-w-xl">
-            Real estate and business in South Carolina. Some pieces take a single company
-            apart. Others follow a trend back a few years, or work out what is really
-            driving a market that looks like it moved on its own. The older weekly briefs
-            and area guides are in here too.
+            Greenville real estate. Some pieces follow a trend back a few years. Others
+            take a single company apart, or work out what is really driving a market that
+            looks like it moved on its own. The older weekly briefs and area guides are in
+            here too.
           </p>
         </div>
       </section>
