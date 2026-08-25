@@ -188,13 +188,10 @@ export default function Editor({
   // relies on the cookie instead, so it stays empty.
   const authQuery = token ? `?token=${encodeURIComponent(token)}` : "";
 
-  // The cover the article will actually publish with right now: the custom one
-  // when set, otherwise the curated library pick.
-  const displayCover = coverImage
-    ? { url: coverImage, credit: coverCredit, custom: true as const }
-    : libraryCover
-      ? { url: libraryCover.url, credit: libraryCover.credit, custom: false as const }
-      : null;
+  // The cover shown at the top of the composer is Alex's OWN photo only. The
+  // curated library pick is real (it is what /api/publish stamps) but it is not
+  // a choice he made, so it appears as a thumbnail on the add button instead of
+  // as a full-bleed photo above an unwritten title.
 
   // The rich-text document is seeded ONCE from the stored markdown. `body`
   // stays markdown from then on: RichText converts on every keystroke, so
@@ -205,6 +202,22 @@ export default function Editor({
   // Substack-style borderless fields grow with their content.
   useEffect(() => autosize(titleRef.current), [title]);
   useEffect(() => autosize(summaryRef.current), [summary]);
+
+  // Measuring at mount alone is not enough. The first measure runs before the
+  // web font has swapped in and before a resize changes where the text wraps,
+  // and a title that later wraps to two lines keeps its one-line height, which
+  // clips the second line under the subtitle. Re-measure when the fonts are
+  // ready and on every resize.
+  useEffect(() => {
+    function fit() {
+      autosize(titleRef.current);
+      autosize(summaryRef.current);
+    }
+    fit();
+    document.fonts?.ready.then(fit).catch(() => {});
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, []);
 
   // Live preview is rendered SERVER-SIDE through the same marked + sanitize-html
   // pipeline the article page uses, so what you see is how it renders on the site
@@ -334,6 +347,36 @@ export default function Editor({
     // Mount only: this is where the caret STARTS, not where it is kept.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Move the caret from the subtitle into the body.
+  //
+  // The DOM node is focused FIRST and the TipTap command only places the caret
+  // afterwards, because the command is the half that can fail: on an instance
+  // torn down by a hot reload it throws, and anything after it in the same
+  // callback never runs. Focusing the element first means the worst case is a
+  // caret at the wrong end of the body rather than a keystroke landing back in
+  // the subtitle. The timer (not requestAnimationFrame, which browsers pause in
+  // a background tab) gives a just-mounted editor a tick to exist, for the case
+  // where this fires right after switching back from Preview.
+  function focusBody() {
+    setMode("write");
+    setTimeout(() => {
+      const ed = bodyRef.current;
+      let dom: HTMLElement | null = null;
+      try {
+        dom = (ed?.view?.dom as HTMLElement | undefined) ?? null;
+      } catch {
+        /* an editor torn down under us; fall back to the DOM below */
+      }
+      dom = dom ?? document.querySelector<HTMLElement>(".ProseMirror");
+      dom?.focus();
+      try {
+        ed?.commands.focus("start");
+      } catch {
+        /* the element already has focus, which is the part that matters */
+      }
+    }, 0);
+  }
 
   function publish() {
     setMessage(null);
@@ -495,8 +538,20 @@ export default function Editor({
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <span className="hidden md:inline text-xs theme-text-muted pr-2">
-            {words.toLocaleString()} words
+            {uploading ? "Uploading image…" : `${words.toLocaleString()} words`}
           </span>
+          <button
+            type="button"
+            onClick={() => setMode(mode === "write" ? "preview" : "write")}
+            className={`text-sm font-medium px-3 py-2 rounded-lg transition-colors ${
+              mode === "preview"
+                ? "theme-text-primary bg-[var(--surface-muted)]"
+                : "theme-text-secondary hover:text-[var(--foreground)] hover:bg-[var(--surface-muted)]"
+            }`}
+            title="See it the way the site renders it"
+          >
+            Preview
+          </button>
           <button
             type="button"
             onClick={() => setSettingsOpen(true)}
@@ -535,37 +590,40 @@ export default function Editor({
       </div>
 
       {/* One centered, article-width column, like the Substack composer. */}
-      <div className="max-w-2xl mx-auto px-4 md:px-6 py-10 pb-32">
-        {/* ── Cover photo ─────────────────────────────────────────────────── */}
-        <section className="mb-8">
-          {displayCover ? (
-            <figure>
+      <div className="max-w-[44rem] mx-auto px-4 md:px-6 pt-14 md:pt-16 pb-40">
+        {/* ── Cover photo ───────────────────────────────────────────────────
+            Substack keeps the cover out of the writer's way: a text button
+            above the title until there is a photo, then the photo itself with
+            its controls on hover. The old version led with a dashed 4:1 frame
+            and carried a caption row, a link row, and a credit field on the
+            page at all times, which is three rows of furniture above the first
+            word of the piece. */}
+        <section className={coverImage ? "mb-10" : "mb-6"}>
+          {coverImage ? (
+            <figure
+              className="group"
+              onDragOver={(e) => {
+                e.preventDefault();
+                setCoverDrag(true);
+              }}
+              onDragLeave={() => setCoverDrag(false)}
+              onDrop={onCoverDrop}
+            >
               <div
-                className={`relative group rounded-xl overflow-hidden border transition-colors ${
-                  coverDrag ? "border-[var(--accent)] border-2" : "theme-border"
+                className={`relative overflow-hidden transition-colors ${
+                  coverDrag ? "outline outline-2 outline-[var(--accent)]" : ""
                 }`}
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setCoverDrag(true);
-                }}
-                onDragLeave={() => setCoverDrag(false)}
-                onDrop={onCoverDrop}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={displayCover.url}
-                  alt=""
-                  className="aspect-[2/1] w-full object-cover"
-                />
-                {/* Hover actions, mirroring Substack's image menu. */}
-                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 opacity-0 group-hover:opacity-100 group-hover:bg-black/35 transition-all">
+                <img src={coverImage} alt="" className="aspect-[2/1] w-full object-cover" />
+                <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 group-hover:bg-black/35 transition-all">
                   <CoverBtn
-                    label={coverUploading ? "Uploading…" : "Change photo"}
+                    label={coverUploading ? "Uploading…" : "Change"}
                     disabled={coverUploading}
                     onClick={() => coverFileRef.current?.click()}
                   />
-                  <CoverBtn label="Image URL" onClick={coverFromUrl} />
-                  {displayCover.custom && <CoverBtn label="Remove" onClick={resetCover} />}
+                  <CoverBtn label="URL" onClick={coverFromUrl} />
+                  <CoverBtn label="Remove" onClick={resetCover} />
                 </div>
                 {coverUploading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-[var(--background)]/60 text-sm font-medium theme-text-secondary">
@@ -573,53 +631,19 @@ export default function Editor({
                   </div>
                 )}
               </div>
-              <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
-                <span className="text-xs theme-text-muted">
-                  {displayCover.custom
-                    ? "Your cover. Publishes exactly as shown."
-                    : `${libraryCover?.label ?? "Auto cover"}. Drop or upload a photo to use your own.`}
-                </span>
-                <span className="flex gap-3 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => coverFileRef.current?.click()}
-                    className="theme-link underline underline-offset-2"
-                  >
-                    Change
-                  </button>
-                  <button
-                    type="button"
-                    onClick={coverFromUrl}
-                    className="theme-link underline underline-offset-2"
-                  >
-                    URL
-                  </button>
-                  {displayCover.custom && (
-                    <button
-                      type="button"
-                      onClick={resetCover}
-                      className="theme-text-muted hover:text-[var(--tone-hot-fg)] underline underline-offset-2"
-                    >
-                      Remove
-                    </button>
-                  )}
-                </span>
-              </figcaption>
-              {displayCover.custom ? (
-                <input
-                  type="text"
-                  value={coverCredit ?? ""}
-                  onChange={(e) => setCoverCredit(e.target.value || null)}
-                  placeholder="Photo credit (optional, shows under the hero)"
-                  className="mt-1 w-full text-xs theme-text-muted bg-transparent border-b border-transparent focus:border-[var(--border-strong)] focus:outline-none py-1 placeholder-[var(--foreground-muted)]"
-                />
-              ) : (
-                displayCover.credit && (
-                  <p className="mt-1 text-xs theme-text-muted">{displayCover.credit}</p>
-                )
-              )}
+              <input
+                type="text"
+                value={coverCredit ?? ""}
+                onChange={(e) => setCoverCredit(e.target.value || null)}
+                placeholder="Add a photo credit"
+                className="mt-2 w-full text-xs theme-text-muted bg-transparent focus:outline-none py-0.5 placeholder-[var(--foreground-muted)]"
+              />
             </figure>
           ) : (
+            /* No cover of his own yet. The curated library will stamp one at
+               publish time, so the thumbnail says WHICH one without letting a
+               stock photo be the first thing on the page above an unwritten
+               title. Clicking anywhere here, or dropping a photo, replaces it. */
             <button
               type="button"
               onClick={() => coverFileRef.current?.click()}
@@ -630,13 +654,30 @@ export default function Editor({
               onDragLeave={() => setCoverDrag(false)}
               onDrop={onCoverDrop}
               disabled={coverUploading}
-              className={`w-full aspect-[4/1] rounded-xl border-2 border-dashed flex items-center justify-center text-sm transition-colors ${
+              className={`group flex items-center gap-3 text-sm rounded-lg px-2 py-1.5 -ml-2 transition-colors ${
                 coverDrag
-                  ? "border-[var(--accent)] text-[var(--accent)] bg-[var(--accent-soft)]"
-                  : "theme-border theme-text-muted hover:border-[var(--border-strong)] hover:text-[var(--foreground-soft)]"
+                  ? "text-[var(--accent)] bg-[var(--accent-soft)]"
+                  : "theme-text-muted hover:text-[var(--foreground-soft)] hover:bg-[var(--surface-muted)]"
               }`}
             >
-              {coverUploading ? "Uploading…" : "＋ Add a cover photo (click or drop an image)"}
+              {libraryCover ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={libraryCover.url}
+                    alt=""
+                    className="h-10 w-20 object-cover shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span>
+                    {coverUploading ? "Uploading…" : "Auto cover. Click or drop a photo to use your own."}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span aria-hidden className="text-base leading-none">+</span>
+                  <span>{coverUploading ? "Uploading…" : "Add a cover image"}</span>
+                </>
+              )}
             </button>
           )}
           <input
@@ -668,7 +709,7 @@ export default function Editor({
           }}
           placeholder="Title"
           spellCheck
-          className="w-full resize-none overflow-hidden bg-transparent text-3xl md:text-4xl font-bold tracking-tight theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none"
+          className="w-full resize-none overflow-hidden bg-transparent text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] theme-text-primary placeholder-[var(--foreground-muted)] focus:outline-none"
         />
         <textarea
           ref={summaryRef}
@@ -678,46 +719,13 @@ export default function Editor({
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              setMode("write");
-              bodyRef.current?.commands.focus("start");
+              focusBody();
             }
           }}
           placeholder="Add a subtitle…"
           spellCheck
-          className="mt-3 w-full resize-none overflow-hidden bg-transparent text-lg md:text-xl theme-text-muted placeholder-[var(--foreground-muted)] focus:outline-none"
+          className="mt-4 w-full resize-none overflow-hidden bg-transparent text-xl md:text-2xl leading-snug theme-text-muted placeholder-[var(--foreground-muted)] focus:outline-none"
         />
-
-        {/* ── Write | Preview ──────────────────────────────────────────────
-            No persistent formatting toolbar, deliberately: the Substack
-            composer formats through the selection bubble and the slash menu,
-            both of which live in RichText. Preview stays because it is the one
-            thing Substack cannot offer, a render through the SITE's own
-            pipeline. */}
-        <div className="sticky top-14 z-10 mt-6 -mx-4 md:-mx-6 px-4 md:px-6 py-1.5 theme-header border-b theme-border flex flex-wrap items-center gap-2">
-          <div className="inline-flex rounded-full bg-[var(--surface-muted)] p-0.5">
-            {(["write", "preview"] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                onClick={() => setMode(m)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full capitalize transition-colors ${
-                  mode === m
-                    ? "bg-[var(--surface-strong)] theme-text-primary shadow-sm"
-                    : "theme-link"
-                }`}
-              >
-                {m}
-              </button>
-            ))}
-          </div>
-          {mode === "write" && (
-            <span className="text-xs theme-text-muted">
-              {uploading
-                ? "Uploading image…"
-                : "Select text to format. Type / on an empty line for blocks."}
-            </span>
-          )}
-        </div>
 
         {/* ── Body: rich text, or a render through the site's own pipeline ── */}
         {mode === "write" ? (

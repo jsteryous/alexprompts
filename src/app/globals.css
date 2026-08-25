@@ -546,6 +546,29 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   color: var(--foreground-muted);
 }
 
+/* ── The draft composer ───────────────────────────────────────────────────────
+   TipTap's Placeholder extension only marks the empty node (a class plus a
+   `data-placeholder` attribute); drawing it is the app's job. Without this a
+   blank article, which is exactly what /admin's Write Article button opens,
+   showed an empty page with no prompt at all. `is-empty` covers the caption
+   slot on a figure too, so a photo with no caption says so. */
+.ProseMirror .is-editor-empty:first-child::before,
+.ProseMirror figcaption.is-empty::before {
+  content: attr(data-placeholder);
+  color: var(--foreground-muted);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Substack's composer sets its body a little larger and looser than the
+   published page, because a writer stares at it for an hour. Everything else
+   about the surface stays theme-prose, so what you type is what ships. */
+.ProseMirror.theme-prose {
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+
 /* ── Type scale utilities ─────────────────────────────────────────────────────
    One class sets family + size + line-height + weight + tracking together, so
    headings stay consistent site-wide. Color still comes from the theme-text-*
