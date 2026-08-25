@@ -1,5 +1,36 @@
 # The publication — spec
 
+## THE THREE RULES
+
+**Alex, August 15, 2026. These govern. Everything else in this file is implementation, and where
+any of it fights these, these win.**
+
+1. **It must be a true story.**
+2. **Make it as entertaining as possible without fabricating.**
+3. **Have fun.**
+
+Three things about them are worth pinning down, because each one is doing work that the rest of
+this file had been getting wrong.
+
+**Rule 1 says STORY.** Not analysis, not assessment, not a brief. This spec is written almost
+entirely in the register of an intelligence memo, down to the line that says the posture is the
+analyst's and not the columnist's, and that line stays because it is about not handing out
+recommendations. But the register was never the point of it, and the register is what had been
+producing memos. A story has somebody in it, something that turns, and a reason to keep reading.
+Assess without advising, and tell it as a story while you do.
+
+**Rule 2 is a maximum, not a threshold.** It does not say "make sure it is interesting enough." It
+says push it as far as the true facts allow and stop exactly there. The stopping point is the only
+hard line in this document: **not fabricating.** Every other rule in this spec, the sourcing, the
+arithmetic, the verifier, the legal gate, exists to keep rule 2 honest. They are not competing
+values. They are the fence that lets you run at the fence.
+
+**Rule 3 is not decoration.** A writer having a good time and a writer executing a compliance
+checklist produce recognisably different prose, and a reader can tell within two sentences which
+one they are holding. If a subject is boring you while you write it, that is information about the
+subject, and the engine is built to stop rather than ship. Alex is a reader of this publication and
+not only its author, so his boredom is the most reliable instrument available.
+
 > **Status: FOUNDING SPEC. Rewritten August 12, 2026** around the COMPANY beat, replacing the
 > first draft of this file (same date), which was built on an accountability beat, going back
 > and checking announced promises against the record. Alex read that plan and said it was not
@@ -170,6 +201,31 @@ The choice governs everything else:
 The companies covered are these readers' prospects, borrowers, and the employers behind their
 buyers, which is why a business beat serves them better than a housing-stats beat did.
 
+> **THE SIZE CORRECTION, August 14, 2026, after the first run.** The engine's first piece was a
+> teardown of ScanSource, a Fortune 1000 company headquartered in Greenville. It was well built
+> and every figure traced to a filing. Alex read it and said a developer or a bank's portfolio
+> manager would not care, and that what would actually help is **the smaller companies, the ones
+> looking to grow who might be in need of loans.**
+>
+> He is right, and the failure was in SELECTION, not in writing. `companies.md` was built to pick
+> for NOTABILITY (large, critical, unexplained), which is a media instinct. The reader's instinct
+> is the opposite, because their business is with whoever is transacting. ScanSource does not need
+> a loan, is nobody's tenant, and is not filling anyone's subdivision. It is large, mature, and
+> shrinking.
+>
+> **Three changes followed.** The inventory now selects for **GROWING and CAPITAL-HUNGRY** rather
+> than big and unexplained, with size treated as a disqualifier more often than a qualifier. The
+> scout's bar 4 became **THE TRANSACTING TEST**: would this subject plausibly appear in the
+> reader's own pipeline, as a borrower, a tenant, a counterparty, a site, or the employer filling
+> a submarket. And **UCC filings moved to Tier 1** in `sources.md`, because a UCC-1 is filed when
+> a lender takes a security interest, which makes that database a running public record of which
+> South Carolina companies just borrowed money and against what. That is the reader's own question
+> asked of the whole state, and nobody local mines it.
+>
+> Alex named a second thing in the same breath, and it became **shape 11, THE GROWTH MAP**: which
+> areas are experiencing the most growth and why, residential AND commercial. Growth there is
+> measured in units and square feet and businesses, never in prices, and the WHY is the assignment.
+
 **What we gave up:** direct buyer leads from content. That path ran through search, and search
 is gone (zero-click, AI Overviews). Do not try to serve both readers.
 
@@ -196,6 +252,59 @@ cannot compute an original number without having gathered the inputs.
 The engine already carries the mechanism: THE ARITHMETIC RULE in `pass1_researcher.md`. Every
 input separately sourced, the steps shown, the result labeled a calculation and never as
 though an agency published it, and every calculated figure auto-added to MUST-VERIFY.
+
+### The other hard rule: it has to be worth reading
+
+**Added August 2026, after Alex asked why the pipeline could not produce anything entertaining.**
+The honest answer was structural and it is worth writing down, because the same mistake will be
+easy to make again.
+
+Count the ways this engine could kill a run before this rule existed. Six bars and five gates in
+the scout, five kill conditions in the researcher, a verifier over every claim, a legal gate and a
+rejection path in the editor. **Every single one of them tested whether the piece was WRONG. Not
+one tested whether it was worth reading.** A pipeline built that way does the obvious thing. It
+ships work that is correct and dull, indefinitely, and it never notices, because nothing in it is
+watching for that.
+
+The ScanSource run is the worked example. It cleared every gate, every figure traced to a filing,
+and Alex read it and was bored. Correct was never the binding constraint. Nobody was ever going to
+publish an invented number; the engine had eleven filters guarding a failure that was not going to
+happen and none guarding the one that did.
+
+So there is now a **TELLABLE TEST**, and it is bar 7 in the scout. Would a reader repeat this to
+somebody over lunch without being asked? Write the expected answer as one plain sentence and read
+it back. If it is what any reasonably informed person would have guessed, the question dies,
+however well sourced and however squarely it lands in the reader's pipeline.
+
+**This does not trade off against usefulness, and reading it that way gets both wrong.** The most
+useful fact available is nearly always the surprising one, because the unsurprising one is already
+priced into what the reader believes and changes nothing when they read it. A piece that tells a
+developer what they already assumed has not served them, it has agreed with them at length. Every
+time this engine chose correct over interesting, it gave up usefulness in the same motion.
+
+Three companion changes shipped with it, and each fixes a different link in the same chain.
+
+**The angle pass may move the lede.** It used to be forbidden outright, in wording that told the
+pass that hunting for a better story "feels like editorial judgment" and to override the feeling,
+which is a strange thing to tell an editor. The cost was that the engine could never arrive
+anywhere better than the guess the scout made before a single document was read, and finding a
+different story than the one you went looking for is how most good nonfiction happens. Promotion
+is now allowed under three conditions (clearly better on the tellable test, carried by the brief's
+own evidence, and the original question still answered inside the piece) and it is declared in a
+PROMOTION field so it stays a decision somebody can check. Undeclared drift is still a rejection.
+
+**The researcher brings back ODD SPECIFICS.** The writer had been told for months that specificity
+is the humor and that a dentist from Charlotte is funny while an out-of-state investor is nothing,
+and then handed a brief containing figures, quotes, and sources. A dentist from Charlotte is none
+of those three. It is a name and a mailing address on a deed, and no pass had ever been asked to
+go get one, so the writer had an instruction to be vivid and nothing to be vivid about. The brief
+now carries three to eight sourced particulars, and an empty block is read as a signal that the
+research ran on summaries rather than on the record.
+
+**The writer's style rules are labelled a floor.** Fourteen prohibitions with seven positive
+instructions produces a writer optimising for not being wrong, and the reliable output of that is
+prose nobody can fault and nobody finishes. Every prohibition stays. They are now framed as the
+price of admission rather than as the goal.
 
 ### Two disciplines that keep it from becoming a press release
 
@@ -375,7 +484,17 @@ only the inventory and the shapes are replaced.
    heard first-hand at a closing beats anything the scout can find on a forum: it is current,
    it is attributable, and he can speak to the context. Seeded with the realtor's luxury-market
    claim. The scout prefers these over claims it finds itself.
-2. **Ten new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
+1c. **`sources.md`, the third input** (added August 14, 2026). Every source the engine can reach,
+   sorted by HOW OFTEN IT CHANGES and split into CADENCE sources and DEPTH sources, because that
+   split is what THE REFRESH GATE tests against. The highest-value entry in it is the FILOT
+   ordinance stream: every negotiated fee-in-lieu-of-tax deal in South Carolina requires a county
+   council ordinance, three readings, and a public hearing under Title 12 Chapter 44, so what a
+   company was given and what it committed to is public, dated, and continuous. That is INCENTIVES
+   EXPLAIN BEHAVIOR with a documented feed behind it, and dividing an incentive by a jobs
+   commitment is an original number in one step.
+2. **Eleven new question SHAPES** in `pass0_scout.md`, replacing the five infrastructure shapes.
+   (Ten at first; **THE GROWTH MAP was added as shape 11 on August 14, 2026**, see the correction
+   note under "The reader" below.)
    Each is a genuinely different analytical question, so one company supports several pieces
    across years, which is what keeps the generator from draining:
    - **THE REVENUE QUESTION** — what do they actually sell? The obvious answer is often wrong.
@@ -401,11 +520,21 @@ only the inventory and the shapes are replaced.
      ground), and the sequencing matters: it is the payoff for having done the companies, never
      the opening move. Asserting a landscape read before the underlying work exists is precisely
      the standing problem that killed the governor's-desk alternative.
-3. **Two new gates**, alongside the existing FEASIBILITY and PREMISE gates:
+3. **Three new gates**, alongside the existing FEASIBILITY and PREMISE gates:
    - **ACCESS INDEPENDENCE.** If the question cannot be answered from public sources, it fails
      before production. This is what prevents a stalled pipeline and the soft filler that
      follows one.
    - **THE BREAK GATE.** If the shape cannot reach a defensible "what would break it," kill it.
+   - **THE REFRESH GATE** (added August 14, 2026, and it has a new companion file,
+     `sources.md`). Name the source and declare it CADENCE or DEPTH. A depth source carries ONE
+     piece and is then spent; a second question against it is killed even when it looks strong,
+     because reshaping a question does not change the evidence underneath it. **This is the fix
+     for the failure that killed two engines.** The Upstate Brief shipped byte-identical figures
+     three weeks running because a weekly slot was pointed at monthly data, and the commercial
+     deed analysis measures 14-year patterns that barely move, so it supports a landmark and not
+     a series. Neither dataset was bad. Publishing repeatedly against a source that had stopped
+     changing was the defect, and no writing pass can fix it, which is why it belongs at topic
+     selection.
 4. **A verifier pass**, ported from `scripts/briefing/routine/pass2b_verifier.md`, the
    best-built pass in the repo. Reshape it: the briefing version splits committed-dataset
    figures from external web claims, and here every claim is external, so the whole draft is
@@ -450,20 +579,36 @@ Nothing is deleted; published work keeps its URLs.
 
 ## Open items
 
-- ~~**The tagline is off-beat.**~~ RESOLVED August 14, 2026. It is now **"How South Carolina
-  actually makes money."**, which is the issue-level question ("how does this company actually
-  make money") raised to the publication level. The homepage standfirst and the `SubscribeForm`
-  default promise were moved onto the company beat in the same pass; all three live in
-  `src/lib/site.ts`, `src/app/page.tsx`, and `src/components/SubscribeForm.tsx` and must stay in
-  sync, because a subscriber promised one beat and sent another unsubscribes.
+- ~~**The tagline is off-beat.**~~ RESOLVED August 14, 2026. It is **`SC Real Estate &
+  Business`**, Alex's own words verbatim, and it is what ships in `src/lib/site.ts`. An earlier
+  revision of this item recorded the tagline as "How South Carolina actually makes money.", which
+  was superseded within the same day by the scope widening to co-equal real estate and business
+  and never shipped. The homepage standfirst and the `SubscribeForm` default promise live in
+  `src/app/page.tsx` and `src/components/SubscribeForm.tsx` and must stay in sync with it,
+  because a subscriber promised one beat and sent another unsubscribes.
 - **The publication is unnamed**, so `site.name` is still "Alex Prompts" and the nav label for
   the live section is the placeholder "Reporting". Both change in one place when the name
   lands. Revisit after three or four issues.
-- **Nothing has shipped under this spec yet.** The engine work in "The engine" above is written
-  down but not built past the scout: `companies.md` and `pass0_scout.md` exist, and the
-  researcher, angle, writer, verifier, editor, and orchestrator have not been ported from
-  `scripts/tech/`. Until they are, no issue can run, and every decision recorded here is
-  untested against a real piece. This is the next thing to do and it is worth more than any
-  further site work.
+- ~~**The engine is not built past the scout.**~~ BUILT August 14, 2026. The full pipeline is
+  ported and lives in `scripts/publication/routine/`: `orchestrator.md`, `pass0_scout.md`,
+  `pass1_researcher.md`, `pass2_angle.md`, `pass3_writer.md`, `pass3b_verifier.md`,
+  `pass4_editor.md`, plus `README.md`, and `ledger.md` at the package root. Four things landed
+  that the old engines did not have. **KILL EXITS CLEAN** is a table at the top of the
+  orchestrator with every kill condition enumerated, and a kill produces no draft, no email, and
+  no commit. **The one hard rule is a KILL CONDITION in the researcher and a GATE in the editor**,
+  because quoting a figure is roughly ten times easier than computing one and that asymmetry
+  needed a gate rather than a preference. **The verifier is a separate agent from the editor**,
+  reshaped from the briefing version, which had a committed dataset to exempt and this
+  publication does not, so the whole draft is in scope and the original number is verified
+  hardest. **Zero pending drafts allowed**, tightened from the old engine's tolerance of one,
+  since a queue of unreviewed drafts is how a backlog becomes pressure to ship.
+- **Nothing has shipped under this spec yet.** The engine can run now, but every decision
+  recorded here is still untested against a real piece. The first run is the thing that tells us
+  which of these rules were right.
+- **Three scheduled cloud routines still need disabling** (the greenville evergreen nightly, the
+  Monday briefing, and the monthly Greenville Works run), and the publication routine needs
+  scheduling in their place. That is a change in the Claude scheduler, not in the repo. An
+  evergreen guide published on August 14, 2026, under a spec that calls the category dead,
+  because the nightly engine was still running.
 - **The route stays `/greenville-works`** and new pieces keep the `greenville works` tag.
   Renaming breaks every published URL, the sitemap, and the tag the engine writes.

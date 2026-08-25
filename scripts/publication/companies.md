@@ -16,18 +16,49 @@ confirmed does not appear in the piece. Do not quote this file.
 
 ## What earns a place
 
-A company belongs here when at least one of these is true:
+> **CORRECTED August 14, 2026, and this is the most important change this file has had.** The
+> first version selected for NOTABILITY: large, critical, unexplained, a household name with an
+> industrial reality underneath. That produced a well-built teardown of ScanSource, a Fortune
+> 1000 company, and Alex read it and said what a developer or a bank's portfolio manager actually
+> needs is **the smaller companies, the ones looking to grow who might be in need of loans.**
+>
+> He is right and the reason is structural. ScanSource does not need a loan from Southern First.
+> It is not anyone's tenant, it is not filling anyone's subdivision, and it is not going to lease
+> 20,000 square feet next spring. **It is large, mature, and shrinking, which is three strikes
+> against the only reader this publication has.** Picking famous companies is a media instinct.
+> The reader's instinct is the opposite, because their business is with whoever is transacting.
+>
+> **The new principle: select for GROWING and CAPITAL-HUNGRY, not for big and unexplained.**
 
-- **Nobody can explain it.** Large or critical, and the average person in its own city cannot
-  tell you what it sells. These are the best subjects on the list.
+A company belongs here when the first test passes and at least one of the others does.
+
+**THE FIRST TEST, and it is a gate.** Is this company expanding, borrowing, hiring, leasing, or
+buying, and would a banker, a landlord, or a developer plausibly have a reason to want to
+understand it? If the honest answer is no, it does not belong here no matter how interesting it
+is. A mature company that is not transacting is a magazine subject, not a subject for this
+publication.
+
+Then at least one of:
+
+- **It is growing and nobody has noticed yet.** The best entries on this list. Small enough that
+  no one has written about it, big enough that its growth shows up in a public record.
+- **It needs capital and the record shows it.** A UCC filing against equipment or receivables, a
+  new mortgage on a building, an SBA loan, a lease at a size that implies a raise. This is the
+  vein that most directly serves the reader.
+- **It sits on something physical and specific.** A plant, a berth, a rail spur, a campus, a
+  building it just bought. Gives the piece a place and the real estate angle something real.
 - **The obvious story is probably wrong.** The thing it is known for is not where the money is.
-- **It sits on something physical and specific.** A plant, a port berth, a rail spur, a campus,
-  a substation. Gives the piece a place and gives the real estate angle something real.
+  Still a good test, but on a company that passes the first gate.
 - **Its position is genuinely contested.** A model under pressure, a concentration risk, a
   technology shift arriving.
 
-A company does NOT belong here just because it is big, or because it announced something. Size
-without a puzzle is a directory entry.
+**Size is a disqualifier more often than a qualifier now.** A company with an investor relations
+page is already covered by people paid to cover it, and the marginal value of another explainer is
+low. The company with twelve trucks and a new note against them is covered by nobody.
+
+A public company is still the easiest to write, so it remains a reasonable ON-RAMP when the
+inventory is thin, but it is no longer the preferred subject. If a run cannot find a growing
+private company it can document, that is a signal to take a GROWTH MAP question instead.
 
 ## Entry format
 
@@ -195,19 +226,39 @@ LIKELY SHAPES: the customer question, the constraint
 
 ## Harvesting new entries
 
-The scout must be able to add to this list, or the inventory becomes the ceiling. Four
-reliable veins:
+The scout must be able to add to this list, or the inventory becomes the ceiling. **Reordered
+August 14, 2026 to put the growth-and-capital veins first**, since the largest-employer vein is
+what produced the ScanSource miss.
 
-1. **The state's largest employers by county.** Most of these are known names. The interesting
-   ones are the names that are not.
-2. **Incentive and economic-development announcements.** Not to check whether the promise was
-   kept, which is a different publication we decided against, but because an announcement names
-   a company and says what it does, which is a lead.
-3. **Public filings with a South Carolina address.** Anything filing with an SC principal office
-   is by definition access-independent and therefore always writable.
-4. **The buildings.** `src/data/commercialSales.json` holds Greenville County commercial deed
-   records. A company that just bought a large building is a company doing something, and the
-   deed gives the piece a physical anchor for free.
+1. **UCC filings.** The single best vein and the most under-used, at
+   `https://ucconline.sc.gov/UCCFiling/UCCMainPage.aspx`. A UCC-1 financing statement gets filed
+   when a lender takes a security interest, so this database is a continuously updated public
+   record of **which South Carolina companies just borrowed money and what they pledged.** That is
+   the reader's own question, asked of the whole state, searchable by debtor. A company that just
+   pledged its equipment is a company doing something, and the filing names the lender too.
+2. **Building permits and certificates of occupancy.** Who is building what, where, and at what
+   declared value. Monthly, jurisdiction by jurisdiction. Commercial permits name the business.
+3. **New business filings.** SC Secretary of State, continuous. Useful both for a genuinely new
+   company and for identifying the human behind an LLC on a deed.
+4. **Leases and deeds.** `src/data/commercialSales.json` holds Greenville County commercial deed
+   records. A company that just bought or took a large building is a company doing something, and
+   the deed gives the piece a physical anchor for free.
+5. **Job postings at small companies.** A twenty-person firm posting six roles is growing fast in
+   a way that no announcement will ever cover.
+6. **FILOT ordinances and incentive agreements.** Mid-size expansions, with the terms attached.
+   Not to check whether the promise was kept, which is a different publication we decided against,
+   but because the ordinance names a company, an investment, and a jobs commitment.
+7. **Public filings with a South Carolina address.** Always writable, because everything material
+   is disclosed. Demoted to an on-ramp rather than a preferred vein; see the correction above.
 
 When adding an entry, fill every field. An entry without a SOURCE FOOTHOLD is a name, not a
 lead, and it will waste a run when the scout picks it and the feasibility gate kills it.
+
+## A note on the existing entries
+
+The entries below were written under the old notability principle and most of them are large,
+mature companies. **They are not deleted**, because several still pass the first gate under a
+different shape (Nephron is building, Scout Motors has not made a vehicle yet, the two banks are
+lending), and because a big company remains a legitimate on-ramp when the inventory is thin. But
+**the list is now unbalanced and the fix is to add small growing companies to it**, harvested
+from veins 1 through 6, rather than to keep working down what is here.

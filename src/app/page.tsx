@@ -143,10 +143,10 @@ function EmptyLead() {
   return (
     <div className="border-b theme-border pb-10">
       <h2 className="theme-text-primary type-h1 mb-4">
-        The first issue is on its way.
+        Articles are as frequent as possible while maintaining a high-quality standard.
       </h2>
       <p className="theme-text-secondary type-body-lg max-w-2xl">
-        Subscribe above and it lands in your inbox the day it ships.
+        Subscribe to stay informed and better understand sales performance.
       </p>
     </div>
   );
@@ -174,18 +174,13 @@ export default async function HomePage() {
                   the eyebrow's job. Every other Eyebrow on the page still earns
                   its rule because it labels a section the reader is arriving at. */}
               <h1 className="theme-text-primary type-display mb-6">
-                Articles here cover Greenville real estate.
+                Greenville Real Estate & Sales
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                Most of what gets written about this market is a headline number with
-                nothing behind it. I go to the county record and work out what the number
-                actually means.
+                Articles cover Greenville Real Estate. We draw upon academic research to understand the market and improve sales performance.
               </p>
               <p className="theme-text-secondary type-body-lg">
-                That covers how homes are really selling here, and where prices have been
-                heading over years rather than quarters. When a deal looks arbitrary, there
-                is usually a tax rule underneath it, and finding that rule is the
-                interesting part.
+                Looking to buy or sell? Let&apos;s talk.
               </p>
             </div>
 

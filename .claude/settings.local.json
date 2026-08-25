@@ -314,7 +314,20 @@
       "Bash(sed -i 's/## THE SEVEN SHAPES/## THE EIGHT SHAPES/; s/They come in seven recognizable shapes\\\\./They come in eight recognizable shapes./; s/Cross each against the seven shapes/Cross each against the eight shapes/; s/SHAPE: <which of the seven shapes it came from>/SHAPE: <which of the eight shapes it came from>/' scripts/publication/routine/pass0_scout.md)",
       "Bash(sed -i 's/it crosses against the seven question shapes/it crosses against the eight question shapes/; s/LIKELY SHAPES: which of the seven question shapes fit best/LIKELY SHAPES: which of the eight question shapes fit best/' scripts/publication/companies.md)",
       "Bash(sed -i 's/## THE EIGHT SHAPES/## THE TEN SHAPES/; s/They come in eight recognizable shapes\\\\./They come in ten recognizable shapes./; s/Cross each against the eight shapes/Cross each against the ten shapes/; s/SHAPE: <which of the eight shapes it came from>/SHAPE: <which of the ten shapes it came from>/; s/See SHAPE 8 and the section below\\\\./See SHAPE 10 and the section below./' scripts/publication/routine/pass0_scout.md)",
-      "Bash(sed -i 's/it crosses against the eight question shapes/it crosses against the ten question shapes/; s/LIKELY SHAPES: which of the eight question shapes fit best/LIKELY SHAPES: which of the ten question shapes fit best/' scripts/publication/companies.md)"
+      "Bash(sed -i 's/it crosses against the eight question shapes/it crosses against the ten question shapes/; s/LIKELY SHAPES: which of the eight question shapes fit best/LIKELY SHAPES: which of the ten question shapes fit best/' scripts/publication/companies.md)",
+      "WebFetch(domain:efts.sec.gov)",
+      "WebFetch(domain:www.sec.gov)",
+      "WebFetch(domain:www.scansource.com)",
+      "Bash(pdftotext -layout /c/Users/alexs/.claude/projects/C--Users-alexs-dev-alexprompts/1b998cfa-a4e9-4ccb-b580-021c424c7501/tool-results/webfetch-1786737110926-55lafl.pdf /c/Users/alexs/AppData/Local/Temp/claude/C--Users-alexs-dev-alexprompts/1b998cfa-a4e9-4ccb-b580-021c424c7501/scratchpad/scsc10k.txt)",
+      "WebFetch(domain:www.golaurens.com)",
+      "WebFetch(domain:www.yahoo.com)",
+      "WebFetch(domain:wyche.com)",
+      "WebFetch(domain:greenvillejournal.com)",
+      "WebFetch(domain:rfa.sc.gov)",
+      "WebFetch(domain:greenvillesc.portal.civicclerk.com)",
+      "WebFetch(domain:law.justia.com)",
+      "Bash(export PYTHONIOENCODING=utf-8)",
+      "WebFetch(domain:www.scacog.org)"
     ]
   }
 }
