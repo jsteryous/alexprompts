@@ -11,11 +11,6 @@ import { PostCover } from "@/components/PostCover";
 export interface ArticleSection {
   label: string; // "Sales" | "Real Estate" | "Upstate Brief" | "Archive"
   basePath: string; // "/sales" | "/real-estate" | "/briefing" | "/archive"
-  /** Section-specific line for the footer subscribe box. Omit it, which every
-   *  section now does, and the SubscribeForm default applies. That default is
-   *  the publication's one promise and it lives in a single file; a section
-   *  override is how the promise drifts. */
-  blurb?: string;
   /** Show the buy/sell CTA (links to /find-a-pro), both mid-article and at the
    *  close. On for the sections whose readers are buyers and sellers, which as of
    *  August 25, 2026 means /sales, /real-estate, and /briefing. Off for /archive
@@ -44,12 +39,6 @@ export default async function ArticleView({
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
-  // Undefined here means SubscribeForm falls back to its own default, which is
-  // the promise on the homepage and on /subscribe. The string that used to live
-  // here advertised Claude walkthroughs, a product retired in July 2026, and it
-  // was showing at the foot of every article in three of the four sections.
-  const subscribeBlurb = section.blurb;
-
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -151,7 +140,7 @@ export default async function ArticleView({
                 className="theme-prose prose max-w-none"
                 dangerouslySetInnerHTML={{ __html: midSplit.before }}
               />
-              <div className="my-12">
+              <div className="my-10">
                 <ReferralCta slug={post.slug} variant="inline" />
               </div>
               <div
@@ -166,7 +155,7 @@ export default async function ArticleView({
           {/* The referral CTA comes BEFORE the newsletter box on purpose: on a
               referral-first site, the buy/sell offer outranks audience growth. */}
           {section.showReferralCta && (
-            <div className="mt-14">
+            <div className="mt-12">
               <ReferralCta slug={post.slug} />
             </div>
           )}
@@ -178,10 +167,16 @@ export default async function ArticleView({
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
             {site.name}
           </span>
+          {/* Deliberately BARE: no heading, no blurb, just the field and the
+              button under the wordmark. Alex's call, August 26, 2026, in the
+              same pass that reduced the buy/sell CTA to one line. A reader who
+              has just finished the piece has already had the pitch; the pitch
+              was the piece. The full promise still leads on /subscribe and on
+              the homepage, where a stranger meets it cold and needs it. */}
           <SubscribeForm
             source={`article:${sectionOf(post)}`}
-            heading="Get the next one in your inbox."
-            blurb={subscribeBlurb}
+            heading=""
+            blurb=""
             cta="Subscribe free"
           />
         </div>

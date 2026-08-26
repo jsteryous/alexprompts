@@ -88,16 +88,17 @@ export function confirmEmail(confirmUrl: string): { subject: string; html: strin
  * so a lead that starts in an inbox still lands in `referral_leads` with its
  * attribution intact and shows up in `supabase/queries.sql`.
  */
+/**
+ * The buy/sell line, in the inbox. ONE QUIET LINE as of August 26, 2026, kept
+ * verbatim in sync with `ReferralCta` on the site (Alex: "the cta should just be
+ * subtle"). It was a bordered grey panel with a heading, a paragraph, and a
+ * filled button, which is a lot of chrome to put under an article somebody is
+ * already reading in full.
+ */
 function referralBlock(referralUrl: string): string {
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
-      <tr><td style="background:#f7f7fb;border:1px solid ${BORDER};border-radius:12px;padding:22px 24px;">
-        <div style="font-size:17px;font-weight:700;color:${INK};margin:0 0 8px;">Thinking of making a move?</div>
-        <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:${MUTED};">
-          Let me know if you&rsquo;re thinking about selling, or if you&rsquo;re looking to buy!
-        </p>
-        <div>${btn(referralUrl, "Get in touch")}</div>
-      </td></tr>
-    </table>`;
+  return `<p style="margin:26px 0 4px;padding-top:18px;border-top:1px solid ${BORDER};font-size:15px;line-height:1.6;">
+      <a href="${referralUrl}" style="color:${ACCENT};text-decoration:underline;font-weight:600;">Buying or Selling? Let&rsquo;s talk.</a>
+    </p>`;
 }
 
 /**

@@ -179,8 +179,12 @@ export default async function HomePage() {
                   structure. The headline is now the masthead statement and does
                   the eyebrow's job. Every other Eyebrow on the page still earns
                   its rule because it labels a section the reader is arriving at. */}
-              <h1 className="theme-text-primary type-display mb-6">
-                What's brewing in RE. Research & Data on Real Estate & Sales Performance
+              {/* type-h1, not type-display. Dropped a step on August 26, 2026
+                  at Alex's call. The headline grew from four words to a
+                  two-sentence masthead statement, and a 4.5rem display size that
+                  worked on a short line turns a long one into a wall. */}
+              <h1 className="theme-text-primary type-h1 mb-6">
+                What&apos;s brewing in RE. Research &amp; Data on Real Estate &amp; Sales Performance
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
                 Articles cover Greenville Real Estate. We draw upon academic research to understand the market and improve sales performance.
