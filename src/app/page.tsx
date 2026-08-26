@@ -184,10 +184,10 @@ export default async function HomePage() {
                   two-sentence masthead statement, and a 4.5rem display size that
                   worked on a short line turns a long one into a wall. */}
               <h1 className="theme-text-primary type-h1 mb-6">
-                What&apos;s brewing in RE. Research &amp; Data on Real Estate &amp; Sales Performance
+                What&apos;s brewing in Real Estate. 
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
-                Articles cover Greenville Real Estate. We draw upon academic research to understand the market and improve sales performance.
+                Research &amp; Data on Real Estate &amp; Sales Performance
               </p>
               <p className="theme-text-secondary type-body-lg">
                 Looking to buy or sell? Let&apos;s talk.
