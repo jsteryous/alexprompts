@@ -7,19 +7,21 @@
  * match `PostType` so the two never drift.
  */
 import type { PostType } from "@/lib/posts";
-import { BRIEFING_TAG, REALESTATE_TAG, WORKS_TAG } from "@/lib/posts";
+import { BRIEFING_TAG, REALESTATE_TAG, SALES_TAG } from "@/lib/posts";
 
 export type SectionKey = PostType;
 
 export const SECTIONS: Record<SectionKey, { label: string; base: string; tag: string | null }> = {
-  works: { label: "Business", base: "/greenville-works", tag: WORKS_TAG },
+  sales: { label: "Sales", base: "/sales", tag: SALES_TAG },
   realestate: { label: "Real Estate", base: "/real-estate", tag: REALESTATE_TAG },
+  // Archives. Nothing new is filed here, but the keys stay so an existing post
+  // can be edited without the settings drawer offering to move it somewhere else.
   briefing: { label: "Upstate Brief", base: "/briefing", tag: BRIEFING_TAG },
   newsletter: { label: "Archive", base: "/archive", tag: null },
 };
 
 /** Every tag that decides a section, so a section change can swap exactly one. */
-const SECTION_TAGS = [REALESTATE_TAG, WORKS_TAG, BRIEFING_TAG];
+const SECTION_TAGS = [REALESTATE_TAG, SALES_TAG, BRIEFING_TAG];
 
 /**
  * Move a post to `next`, keeping every tag that is not a section tag. Tags are

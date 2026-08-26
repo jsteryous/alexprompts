@@ -1,33 +1,42 @@
 /**
  * Post data access — published Rebrew content stored in Supabase
  * `blog_posts`. One table holds four kinds of content, split by tag:
- *   - tagged `greenville`       -> REAL-ESTATE post        (-> /real-estate)
- *   - tagged `greenville works` -> GREENVILLE WORKS piece  (-> /greenville-works)
- *   - tagged `briefing`         -> UPSTATE BRIEF issue     (-> /briefing)
- *   - everything else           -> NEWSLETTER issue        (-> /archive)
+ *   - tagged `sales`      -> SALES piece         (-> /sales)
+ *   - tagged `greenville` -> REAL ESTATE piece   (-> /real-estate)
+ *   - tagged `briefing`   -> UPSTATE BRIEF issue (-> /briefing, archived)
+ *   - everything else     -> NEWSLETTER issue    (-> /archive, archived)
  * Returns [] / null when env is unset so the site builds and renders without a
  * database (empty lists, not a crash).
  */
 import { createClient } from "@supabase/supabase-js";
 import { SITE_URL } from "@/lib/site";
 
-/** Content kind, derived from tags. Each post lives at exactly one section. The
- *  `works` key is the internal discriminator for the "Greenville Works" section
- *  (route /greenville-works), set by the scripts/tech routine; `briefing` is the
- *  weekly Upstate Brief (route /briefing), set by the scripts/briefing routine. */
-export type PostType = "newsletter" | "realestate" | "works" | "briefing";
+/** Content kind, derived from tags. Each post lives at exactly one section.
+ *
+ *  TWO LIVE SECTIONS as of August 25, 2026: `sales` and `realestate`. The
+ *  `briefing` and `newsletter` keys are archives, kept because six weekly briefs
+ *  and two newsletter issues are published under them and their URLs must keep
+ *  resolving. Nothing new is filed there.
+ *
+ *  The `works` key and its `greenville works` tag are GONE. That tag named the
+ *  ENGINE that wrote a piece rather than the subject a reader cares about, which
+ *  is why a sales-performance article ended up badged "Business". A section is a
+ *  promise to a reader, so it is named for the subject now. */
+export type PostType = "newsletter" | "realestate" | "sales" | "briefing";
 
 /** A post tagged this (case-insensitive) is a Greenville real-estate post. Set by
  *  the scripts/greenville routine. */
 export const REALESTATE_TAG = "greenville";
 
-/** A post tagged this (case-insensitive) is a Greenville Works piece (how the
- *  region is changing: development, infrastructure, utilities, manufacturing,
- *  transportation, and technology when it touches the Upstate). Set by the
- *  scripts/tech routine. The tag is `greenville works`; the route is
- *  `/greenville-works`. Distinct from REALESTATE_TAG (`greenville`) so the two
- *  sections never collide. */
-export const WORKS_TAG = "greenville works";
+/** A post tagged this (case-insensitive) is a SALES piece: how a sale actually
+ *  gets made, and what the research on sales performance shows. The tag is
+ *  `sales` and the route is `/sales`.
+ *
+ *  RENAMED from `greenville works` (route `/greenville-works`) on August 25,
+ *  2026, at Alex's call. Old article URLs are preserved by permanent redirects
+ *  in next.config.ts, so the two data-center pieces that moved to the real
+ *  estate section are redirected individually, ahead of the catch-all. */
+export const SALES_TAG = "sales";
 
 /** A post tagged this (case-insensitive) is a weekly Upstate Brief issue (the
  *  Monday briefing: rates, what sold, projects and permits, one thing to watch).
@@ -63,20 +72,23 @@ export function isRealEstate(post: { tags: string[] | null }): boolean {
   return hasTag(post, REALESTATE_TAG);
 }
 
-export function isWorks(post: { tags: string[] | null }): boolean {
-  return hasTag(post, WORKS_TAG);
+export function isSales(post: { tags: string[] | null }): boolean {
+  return hasTag(post, SALES_TAG);
 }
 
 export function isBriefing(post: { tags: string[] | null }): boolean {
   return hasTag(post, BRIEFING_TAG);
 }
 
-/** The single section a post belongs to. Real-estate wins over Greenville Works,
- *  which wins over the brief, if tags somehow overlap; everything untagged falls
- *  through to the newsletter. */
+/** The single section a post belongs to. Sales wins over real estate, which wins
+ *  over the brief, if tags somehow overlap; everything untagged falls through to
+ *  the newsletter.
+ *
+ *  Sales is checked FIRST on purpose. A sales piece about housing may reasonably
+ *  carry `greenville` as a topic tag, and it should still live under /sales. */
 export function sectionOf(post: { tags: string[] | null }): PostType {
+  if (isSales(post)) return "sales";
   if (isRealEstate(post)) return "realestate";
-  if (isWorks(post)) return "works";
   if (isBriefing(post)) return "briefing";
   return "newsletter";
 }
@@ -174,8 +186,8 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
   const base =
     section === "realestate"
       ? "/real-estate"
-      : section === "works"
-        ? "/greenville-works"
+      : section === "sales"
+        ? "/sales"
         : section === "briefing"
           ? "/briefing"
           : "/archive";
@@ -184,25 +196,19 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
 
 /** Short, human label for a post's section, for a card badge.
  *
- *  RELABELLED August 14, 2026 with the scope widening. The `works` track read
- *  "SC Technology", which was accurate when that engine covered technology and
- *  capital, and is wrong now that it is the live section of a publication about
- *  South Carolina real estate AND business. It reads "Business" to match the
- *  tagline. The three archived tracks keep topical labels so a reader scanning
- *  the mixed /reporting list can tell a 2026 weekly brief from a new piece.
- *
- *  A known rough edge: a real-estate-led piece written by the current engine
- *  still carries the `greenville works` tag and so badges as "Business". Fixing
- *  it properly means the engine tagging by subject rather than by engine, which
- *  is worth doing once real-estate-led pieces are actually shipping. Do not fix
- *  it by routing new pieces to the `greenville` tag; that would file them under
- *  the archived /real-estate section. */
+ *  TWO LIVE LABELS as of August 25, 2026: "Sales" and "Real Estate". The rough
+ *  edge this file used to carry is fixed at the root rather than papered over:
+ *  the section tag named the ENGINE ("greenville works"), so a piece about sales
+ *  leaderboards badged as "Business". Tags name the SUBJECT now, which is the
+ *  fix that comment asked for. The two archive tracks keep topical labels so a
+ *  reader scanning the mixed /reporting list can tell a 2026 weekly brief from a
+ *  new piece. */
 export function sectionLabel(post: { tags: string[] | null }): string {
   const section = sectionOf(post);
   return section === "realestate"
     ? "Real Estate"
-    : section === "works"
-      ? "Business"
+    : section === "sales"
+      ? "Sales"
       : section === "briefing"
         ? "Weekly Brief"
         : "Newsletter";

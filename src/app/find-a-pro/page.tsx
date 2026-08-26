@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Buying or selling in Greenville, SC, or moving here from somewhere else? Tell me what " +
     "you are working on and I will help you figure out the real numbers, the right timing, " +
-    "and what has to happen first. It costs you nothing.",
+    "and what has to happen first.",
   alternates: { canonical: `${site.url}/find-a-pro` },
 };
 
@@ -52,8 +52,8 @@ const trust = [
     body: "I am local here in the Upstate and I know it well. If you are moving in from another state or heading out of one, I can help with that side too. My help is not limited to my zip code.",
   },
   {
-    title: "Free to you, and no pressure",
-    body: "You never pay me anything, and there is no obligation at the end of the conversation. Ask your questions, get the real answer, and decide on your own timeline.",
+    title: "No pressure, either way",
+    body: "There is no obligation at the end of the conversation. Ask your questions, get the real answer, and decide on your own timeline.",
   },
 ];
 
@@ -76,10 +76,10 @@ export default function FindAProPage() {
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed text-center mx-auto">
             I am a licensed real estate agent in South Carolina, and I write most of what is on
-            this site, so I spend my week in the actual Greenville numbers. Tell me what you are
-            trying to do, here or in whatever city you are moving to, and I will help you get the
-            real answer on what it costs, what it is worth, and what has to happen first. It costs
-            you nothing.
+            this site, so I spend my week in the Greenville numbers and in the research on how
+            houses actually sell. Tell me what you are trying to do, here or in whatever city you
+            are moving to, and I will help you get the real answer on what it costs, what it is
+            worth, and what has to happen first.
           </p>
 
           <div
@@ -89,8 +89,8 @@ export default function FindAProPage() {
             <div className="text-center max-w-lg mx-auto mb-8">
               <h2 className="theme-text-primary type-h3 mb-2">Tell me what you need</h2>
               <p className="theme-text-muted text-base leading-relaxed">
-                Takes about a minute. The more you share, the better the match. No obligation, and I
-                will not add you to any list.
+                Takes about a minute. The more you share, the more useful the first call is. No
+                obligation, and I will not add you to any list.
               </p>
             </div>
             <ReferralForm source="find-a-pro" />

@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
  *  revalidation path match where the post actually lives. */
 const SECTION_BASE = {
   realestate: "/real-estate",
-  works: "/greenville-works",
+  sales: "/sales",
   briefing: "/briefing",
   newsletter: "/archive",
 } as const;

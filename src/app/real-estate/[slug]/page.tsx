@@ -43,11 +43,9 @@ export default async function RealEstatePostPage({ params }: Props) {
     <ArticleView
       post={post}
       section={{
-        label: "Moving to Greenville",
+        label: "Real Estate",
         basePath: "/real-estate",
         showReferralCta: true,
-        blurb:
-          "I write honest guides to buying, selling, and living in Greenville, South Carolina, grounded in real local data. Subscribe and I will send the next one straight to your inbox.",
       }}
     />
   );

@@ -314,8 +314,11 @@ only, not financial, legal, or investment advice.* line with the "current as of 
 
 ## METADATA AND IMAGE
 
-Confirm the tags line is exactly `greenville works` (optionally one plain topic tag after it) and
-never the bare word `greenville`, which would misroute the post into the real-estate section.
+Confirm the tags line starts with exactly ONE section tag, either `sales` or `greenville`
+(optionally one plain topic tag after it), and never both. `sales` is how a sale gets made and the
+research behind it; `greenville` is the market and the property in it. The old `greenville works`
+tag is dead as of August 25, 2026 and routes nowhere, so a piece carrying it lands in the newsletter
+archive by accident.
 
 Confirm the `## IMAGE` block has exactly one of the two allowed values. For an Upstate piece, one
 `subject:` key from the vocabulary (`downtown-falls`, `liberty-bridge`, `reedy-river`, `north-main`,

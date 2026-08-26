@@ -6,9 +6,20 @@ computes at least one number nobody had computed before, and writes it up.
 Read `scripts/publication/SPEC.md` first. It is the definition of what gets written and it
 outranks any older engine doc you may find in the repo.
 
-The publication is deliberately UNNAMED. New pieces carry the `greenville works` tag and land at
-`/greenville-works`, and **that route and tag are deliberately unchanged**, because renaming would
-break every published URL, the sitemap, and the tag the engine writes. Do not "fix" them.
+The publication is named **Rebrew**, at rebrew.org.
+
+**THERE ARE TWO SECTIONS AND YOU TAG BY SUBJECT** (August 25, 2026). The `greenville works` tag is
+GONE. It named the ENGINE that wrote a piece rather than the thing a reader is looking for, which is
+how an article about sales leaderboards ended up badged "Business". Pick one:
+
+- `sales` -> **/sales**. How a sale actually gets made, and what the research on sales performance
+  shows. Pricing and positioning a house, what moves a buyer, how salespeople really behave.
+- `greenville` -> **/real-estate**. The Greenville market and the property in it. Prices,
+  neighborhoods, what is getting built, who is buying, land and power.
+
+A piece belongs to exactly ONE. When it could go either way, ask which question the reader arrived
+with: how do I sell this well (sales), or what is this market doing (real estate). Old
+`/greenville-works` URLs are kept alive by permanent redirects, so nothing published broke.
 
 You run in the cloud with a fresh checkout and zero prior context. Each pass's spec lives in its
 own file under `scripts/publication/routine/`. When a step says to, read that file and hand its
@@ -77,27 +88,30 @@ Four cheap checks so the engine never repeats itself and never outruns Alex.
    STEP 7 so Alex knows one is ready to be graded in a future piece.
 
 2. **THE LIVE SITE.** Using the Supabase connector, query:
-   `select title, slug, status, tags, created_at, published_at from blog_posts where 'greenville works' = any(tags) order by created_at desc limit 20;`
+   `select title, slug, status, tags, created_at, published_at from blog_posts where 'sales' = any(tags) or 'greenville' = any(tags) order by created_at desc limit 20;`
    Append the titles to /tmp/pub/done.txt. If the connector is unavailable, note it and continue on
    the ledger alone, but you MUST then publish as a DRAFT in STEP 6 regardless (which is already
    the mode), and say so in STEP 7.
 
 3. **THE GUARDS.** From the check 2 result, apply three, in order. Each is a clean stop.
-   - **SAME-DAY DUPE.** If the most recent `greenville works` row was created today, STOP. Report
+   The guards count BOTH sections together, since they are about this engine's cadence and not
+   about either section's.
+   - **SAME-DAY DUPE.** If the most recent row from check 2 was created today, STOP. Report
      "NO RUN (already ran today)".
-   - **DRAFT BACKPRESSURE.** If ANY `greenville works` row has status DRAFT, STOP. Report "NO RUN
+   - **DRAFT BACKPRESSURE.** If ANY row from check 2 has status DRAFT, STOP. Report "NO RUN
      (draft pending review)". Unlike the old weekly engine, which tolerated one, this publication
      allows ZERO pending drafts, because it publishes on finding and a queue of unreviewed drafts is
      how a backlog turns into pressure to ship.
-   - **CADENCE GUARD.** If the most recent PUBLISHED `greenville works` row published fewer than 10
+   - **CADENCE GUARD.** If the most recent PUBLISHED row from check 2 published fewer than 10
      days ago, STOP. Report "NO RUN (cadence)". Target is about every two weeks; 10 days is the
      floor, not the target, and finding nothing worth publishing for a month is acceptable.
 
 4. **PUBLISHED PAGES (for the writer's internal links).** Query:
-   `select slug, title, tags from blog_posts where status = 'PUBLISHED' and ('greenville' = any(tags) or 'greenville works' = any(tags) or 'briefing' = any(tags));`
+   `select slug, title, tags from blog_posts where status = 'PUBLISHED' and ('sales' = any(tags) or 'greenville' = any(tags) or 'briefing' = any(tags));`
    Write one line per row to /tmp/pub/published_pages.txt as `<path> | <title>`, where the path is
-   `/greenville-works/<slug>` for a `greenville works` row, `/real-estate/<slug>` for a `greenville`
-   row, and `/briefing/<slug>` for a `briefing` row. If the query fails, write an empty file and
+   `/sales/<slug>` for a `sales` row, `/real-estate/<slug>` for a `greenville` row, and
+   `/briefing/<slug>` for a `briefing` row. A row carrying both `sales` and `greenville` is a sales
+   row, which is the order the site resolves it in. If the query fails, write an empty file and
    continue; the writer then links no sibling pieces.
 
 ## STEP 1, PASS 0, THE SCOUT
@@ -193,9 +207,10 @@ take ## ARTICLE as the body. Using the Supabase connector, INSERT one row into `
   hand-picked licensed library in `src/lib/greenvilleCovers.ts`, no API key), or a geocodable
   `location:` string for a piece anchored elsewhere in South Carolina. ALWAYS store one of the two;
   never leave it null.
-- `tags` = a Postgres text array that MUST include `greenville works` and must NOT include the bare
-  `greenville` (which would misroute it into the real-estate section) or `guide`. You MAY add one
-  plain topic tag after it.
+- `tags` = a Postgres text array whose FIRST entry is the section tag the writer chose, either
+  `sales` or `greenville`, and never both, since a post lives in exactly one section. Never
+  `greenville works`, which no longer routes anywhere, and never `guide`. You MAY add one plain
+  topic tag after the section tag.
 - `source_url` = METADATA source_url (omit the column if it is not in the schema)
 - `author` = 'Alex Steryous'
 - `status` = 'DRAFT'

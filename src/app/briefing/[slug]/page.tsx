@@ -49,8 +49,6 @@ export default async function BriefingPostPage({ params }: Props) {
         // referral funnel serves, so it carries the buy/sell offer. It shipped
         // without one until July 30, 2026.
         showReferralCta: true,
-        blurb:
-          "The Upstate Brief is a five-minute Monday read on Upstate real estate. Rates, what sold, what got approved, and what to watch. Subscribe and it lands in your inbox every Monday morning.",
       }}
     />
   );

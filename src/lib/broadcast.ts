@@ -70,13 +70,14 @@ export async function broadcastPost(
   const bodyHtml = bodyMd ? await renderEmailBody(bodyMd) : null;
 
   // Mirror the site's per-section choice rather than inventing a new policy:
-  // `ArticleView` sets showReferralCta for /real-estate and /briefing (both are
-  // written for buyers and sellers), leaving it off /greenville-works and
-  // /archive. Keep this condition in sync with those section props.
+  // `ArticleView` sets showReferralCta for /sales, /real-estate, and /briefing.
+  // Sales was added August 25, 2026 with the section rename: it now carries the
+  // seller-facing research, and the August 24 piece had a buy/sell link pasted
+  // into its body BY HAND because the section did not render one. /archive is the
+  // only section left without it. Keep this in sync with those section props.
   const tags: string[] = Array.isArray(post.tags) ? post.tags : [];
   const showReferral =
-    (tags.includes("greenville") || tags.includes("briefing")) &&
-    !tags.includes("greenville works");
+    tags.includes("sales") || tags.includes("greenville") || tags.includes("briefing");
   const referralUrl = showReferral
     ? `${SITE_URL}/find-a-pro?ref=${encodeURIComponent(post.slug)}` +
       `&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list#connect`

@@ -4,11 +4,18 @@ import { site } from "@/lib/site";
 import { getPublishedPosts, formatDate } from "@/lib/posts";
 import { PostCover } from "@/components/PostCover";
 
+/**
+ * THE REAL ESTATE section index, one of the two live sections as of August 25,
+ * 2026 (the other is /sales). It was titled "Moving to Greenville, SC", which
+ * described the relocation guides that make up most of the archive here but is
+ * too narrow for a section that now also holds the market and development
+ * pieces. The route and the `greenville` tag are unchanged.
+ */
 export const metadata: Metadata = {
-  title: "Moving to Greenville, SC",
+  title: "Real Estate",
   description:
-    "Honest guides to moving to and buying in Greenville, South Carolina. Neighborhoods, " +
-    "prices, commutes, property taxes, and the real trade-offs, grounded in current local data.",
+    "The Greenville market and what is actually happening to it. Neighborhoods, prices, " +
+    "property taxes, what is getting built, and the trade-offs, grounded in local data.",
   alternates: { canonical: `${site.url}/real-estate` },
 };
 
@@ -22,16 +29,16 @@ export default async function RealEstatePage() {
       <section className="theme-page theme-border pt-32 pb-16 border-b">
         <div className="max-w-3xl mx-auto px-6">
           <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
-            Greenville, SC
+            Real Estate
           </span>
           <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
-            Honest guides to moving to and buying in Greenville
+            The Greenville market, and what is really happening to it
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            Where to live, what it really costs, and how buying here actually works. Every
-            guide is grounded in current local data with sources you can check, and every
-            figure is dated because prices move. When you are ready for a human in your
-            corner, tell me what you are working on and I will help.
+            Where to live, what it really costs, what is getting built, and how buying here
+            actually works. Every figure is dated, because prices move, and every source is
+            one you can go and check. When you are ready for a human in your corner, tell me
+            what you are working on and I will help.
           </p>
         </div>
       </section>

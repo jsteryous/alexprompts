@@ -53,7 +53,7 @@ export default function OgImage() {
             alignItems: "center",
           }}
         >
-          Greenville Real Estate
+          {site.tagline}
         </div>
 
         {/* Sub */}
@@ -66,8 +66,8 @@ export default function OgImage() {
             marginBottom: 52,
           }}
         >
-          How the Greenville market is actually moving, where prices have been
-          heading over years rather than quarters, and why.
+          We read the research on real estate and sales performance and share
+          what we find interesting.
         </div>
 
         {/* Bottom bar */}
@@ -108,7 +108,7 @@ export default function OgImage() {
                 textTransform: "uppercase",
               }}
             >
-              SOUTH CAROLINA
+              GREENVILLE, SC
             </span>
           </div>
         </div>

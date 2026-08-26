@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { broadcastPost } from "@/lib/broadcast";
 import { renderCover } from "@/lib/greenvilleImage";
-import { BRIEFING_TAG, REALESTATE_TAG, WORKS_TAG, sectionOf } from "@/lib/posts";
+import { BRIEFING_TAG, REALESTATE_TAG, SALES_TAG, sectionOf } from "@/lib/posts";
 
 /**
  * GET /api/finalize-greenville
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
     .from("blog_posts")
     .select("id, slug, tags, cover_image, image_address, last_broadcast_at")
     .eq("status", "PUBLISHED")
-    .overlaps("tags", [REALESTATE_TAG, WORKS_TAG, BRIEFING_TAG])
+    .overlaps("tags", [REALESTATE_TAG, SALES_TAG, BRIEFING_TAG])
     .gte("published_at", since)
     .or("cover_image.is.null,last_broadcast_at.is.null")
     .order("published_at", { ascending: false });
@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
     // /briefing for an Upstate Brief issue.
     const section = sectionOf(p);
     const base =
-      section === "works" ? "/greenville-works" : section === "briefing" ? "/briefing" : "/real-estate";
+      section === "sales" ? "/sales" : section === "briefing" ? "/briefing" : "/real-estate";
     r.section = base;
 
     // Sub-step 1: resolve + set the cover, when it is missing and we have a pin.

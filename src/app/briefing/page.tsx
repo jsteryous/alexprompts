@@ -30,10 +30,10 @@ export default async function BriefingPage() {
             The week in Upstate real estate, in five minutes
           </h1>
           <p className="theme-text-muted text-lg max-w-xl leading-relaxed">
-            Every Monday morning I publish one brief with the week in local real estate. Where
+            Every Monday morning I published one brief with the week in local real estate. Where
             mortgage rates landed, what actually sold in Greenville County and at what price per
             foot, which projects moved through the county, and one concrete thing worth watching.
-            Every number links to its source, and a quiet week says so instead of padding.
+            The brief stopped running in August 2026 and every issue is still here.
           </p>
         </div>
       </section>
@@ -88,13 +88,7 @@ export default async function BriefingPage() {
           first-time visitor sees real content before being asked to subscribe. */}
       <section className="theme-section-contrast py-14 border-t theme-border">
         <div className="max-w-2xl mx-auto px-6">
-          <SubscribeForm
-            source="briefing-index"
-            heading="Get it in your inbox on Mondays"
-            blurb="One email every Monday morning with the full brief. Free, and you can leave any time."
-            cta="Subscribe free"
-            showSubstackLink={false}
-          />
+          <SubscribeForm source="briefing-index" cta="Subscribe free" showSubstackLink={false} />
         </div>
       </section>
     </>

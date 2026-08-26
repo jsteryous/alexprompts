@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const SECTION_BASE: Record<string, string> = {
   realestate: "/real-estate",
-  works: "/greenville-works",
+  sales: "/sales",
   briefing: "/briefing",
   newsletter: "/archive",
 };

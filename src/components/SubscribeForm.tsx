@@ -24,14 +24,22 @@ type State = "idle" | "submitting" | "done" | "error";
 // every article, so it is the promise most readers see.
 //
 // Rewritten as the beat settled: once for the company beat, again when the scope
-// widened to real estate AND business, and again on August 25, 2026 when it
-// narrowed to GREENVILLE REAL ESTATE. Keep this in sync with site.ts and the
-// homepage standfirst; all three say the same thing at different lengths, and a
-// subscriber promised one beat and sent another unsubscribes.
+// widened to real estate AND business, again on August 25, 2026 when it narrowed
+// to GREENVILLE REAL ESTATE, and again that afternoon when Alex added sales
+// performance and handed over the exact sentence to use. THE BLURB IS HIS WORDS,
+// VERBATIM, including the contraction, which is the one place on the site that
+// carries one apart from the buy/sell CTA. He asked for the previous version to
+// be removed entirely rather than trimmed: it ran four sentences, promised a
+// cadence, and explained the sourcing, where the thing a stranger needs is what
+// we read and what they get. Do not grow it back.
+//
+// Keep this in sync with site.ts and the homepage standfirst; all three say the
+// same thing at different lengths, and a subscriber promised one beat and sent
+// another unsubscribes.
 export function SubscribeForm({
   source,
-  heading = "A clear read on Greenville real estate",
-  blurb = "Every other week, one piece on how the Greenville market is actually moving, where prices have been heading over years rather than quarters, or what is really driving a decision everybody else reported as news. Built on public records. Free, and you can leave any time.",
+  heading = "Research & data on real estate and sales performance",
+  blurb = "We read research papers about real estate and sales performance and share what we find interesting. Subscribe if you’d like to learn with us.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

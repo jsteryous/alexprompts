@@ -46,9 +46,10 @@ export const revalidate = 300;
  * left stranded when the beat moved underneath it.
  *
  * WHAT THE COPY IS FOR, and the thing to preserve if you rewrite it: a reader
- * should learn in one screen that they can get an insightful picture of how
- * South Carolina businesses are doing, what the long-term trends are, and what
- * the real estate market is doing and WHY. Trends and incentives are the spine.
+ * should learn in one screen that this reads the research on real estate and on
+ * sales performance and puts it next to what the Greenville market is actually
+ * doing. Buyers and sellers are who it is aimed at, and the questions it answers
+ * are what a good agent does and how a sale gets positioned.
  *
  * An August 14, 2026 draft led on claim-testing ("people in this market say
  * things... checking is the work here") and Alex cut it: testing what people
@@ -65,11 +66,16 @@ export const revalidate = 300;
  * Greenville. If the statewide ambition in CLAUDE.md becomes real in the
  * published work, widen this line then and not before.
  *
- * NOT IN THIS COPY ON PURPOSE: academic research, and sales performance. Alex
- * asked for both in the same instruction. Zero of the 36 published pieces cite
- * an academic source and zero touch sales performance, so the claim would have
- * been false on the front page of a publication whose first rule is that it is
- * a true story. Add the line when a piece earns it.
+ * ACADEMIC RESEARCH AND SALES PERFORMANCE ARE THE PROMISE, put here by Alex
+ * himself on August 25, 2026. An earlier version of this comment argued for
+ * holding both out on the grounds that no published piece covered them. That was
+ * out of date by two days and it should have been checked against the database
+ * rather than against an older comment. The two most recent pieces ARE the beat:
+ * "How to get the best sale price as a home seller" (August 24, summarized as
+ * what academic research on housing markets says about sale prices) and
+ * "Comparison is the thief of joy...and sales results" (August 25, four cited
+ * studies on whether sales leaderboards work, including a three-year field
+ * experiment on 1,750 commissioned sellers). The front page describes live work.
  *
  * That draft was also the site's worst prose, and the reasons are worth keeping
  * because they recur. It opened on an abstract noun ("Checking is the work
@@ -174,7 +180,7 @@ export default async function HomePage() {
                   the eyebrow's job. Every other Eyebrow on the page still earns
                   its rule because it labels a section the reader is arriving at. */}
               <h1 className="theme-text-primary type-display mb-6">
-                Greenville Real Estate & Sales
+                What's brewing in RE. Research & Data on Real Estate & Sales Performance
               </h1>
               <p className="theme-text-secondary type-body-lg mb-4">
                 Articles cover Greenville Real Estate. We draw upon academic research to understand the market and improve sales performance.

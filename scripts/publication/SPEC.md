@@ -610,5 +610,9 @@ Nothing is deleted; published work keeps its URLs.
   scheduling in their place. That is a change in the Claude scheduler, not in the repo. An
   evergreen guide published on August 14, 2026, under a spec that calls the category dead,
   because the nightly engine was still running.
-- **The route stays `/greenville-works`** and new pieces keep the `greenville works` tag.
-  Renaming breaks every published URL, the sitemap, and the tag the engine writes.
+- **TWO SECTIONS, TAGGED BY SUBJECT** (August 25, 2026, Alex's call, superseding the note that
+  used to sit here saying the route and tag were frozen). `sales` -> `/sales` is how a sale
+  actually gets made and what the research shows; `greenville` -> `/real-estate` is the market and
+  the property in it. The `greenville works` tag and the `/greenville-works` route are RETIRED.
+  Every old URL is preserved by permanent redirects in next.config.ts, including the two
+  data-center pieces that moved to Real Estate rather than Sales.

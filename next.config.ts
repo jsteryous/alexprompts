@@ -74,7 +74,36 @@ const nextConfig: NextConfig = {
       // Safe to drop once the domain move settles.
       {
         source: "/greenville-works/greenville-fee-in-lieu-millage-lock-reimbursement-cost",
-        destination: "/greenville-works/how-to-get-the-best-sale-price-as-a-home-seller",
+        destination: "/sales/how-to-get-the-best-sale-price-as-a-home-seller",
+        permanent: true,
+      },
+
+      // THE SECTION RENAME, August 25, 2026: /greenville-works became /sales,
+      // tag and route together, because the old tag named the engine that wrote
+      // a piece instead of the subject a reader is looking for.
+      //
+      // ORDER MATTERS HERE. Next matches these top to bottom, so the two
+      // data-center pieces, which moved to Real Estate rather than Sales because
+      // they are about land and power, must be listed BEFORE the catch-all. If
+      // they fall through to it they land on /sales/<slug>, which 404s.
+      {
+        source: "/greenville-works/greenville-grid-data-center-power-who-pays-tariff",
+        destination: "/real-estate/greenville-grid-data-center-power-who-pays-tariff",
+        permanent: true,
+      },
+      {
+        source: "/greenville-works/northmark-data-center-kohler-spartanburg-upstate-power",
+        destination: "/real-estate/northmark-data-center-kohler-spartanburg-upstate-power",
+        permanent: true,
+      },
+      {
+        source: "/greenville-works/:slug",
+        destination: "/sales/:slug",
+        permanent: true,
+      },
+      {
+        source: "/greenville-works",
+        destination: "/sales",
         permanent: true,
       },
     ];

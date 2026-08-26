@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthorized } from "@/lib/adminAuth";
-import { BRIEFING_TAG, REALESTATE_TAG, WORKS_TAG } from "@/lib/posts";
+import { BRIEFING_TAG, REALESTATE_TAG, SALES_TAG } from "@/lib/posts";
 import { placeholderSlug } from "@/lib/slug";
 import { site } from "@/lib/site";
 
@@ -23,7 +23,7 @@ import { site } from "@/lib/site";
  */
 
 const SECTION_TAGS: Record<string, string[]> = {
-  works: [WORKS_TAG],
+  sales: [SALES_TAG],
   realestate: [REALESTATE_TAG],
   briefing: [BRIEFING_TAG],
   newsletter: [],
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
 
   let token: string | undefined;
-  let section = "works";
+  let section = "sales";
   try {
     const b = await req.json().catch(() => ({}));
     if (typeof b?.token === "string") token = b.token;

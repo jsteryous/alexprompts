@@ -26,8 +26,8 @@ import { PostCover } from "@/components/PostCover";
 export const metadata: Metadata = {
   title: "Reporting",
   description:
-    "Every piece, newest first. How the Greenville market is actually moving, where prices " +
-    "have been heading, and what is driving it.",
+    "Every piece, newest first. Research and data on the Greenville market and on how sales " +
+    "actually get made.",
   alternates: { canonical: `${site.url}/reporting` },
 };
 
@@ -50,10 +50,10 @@ export default async function ReportingPage() {
             Everything, newest first.
           </h1>
           <p className="theme-text-muted type-body-lg max-w-xl">
-            Greenville real estate. Some pieces follow a trend back a few years. Others
-            take a single company apart, or work out what is really driving a market that
-            looks like it moved on its own. The older weekly briefs and area guides are in
-            here too.
+            Greenville real estate and sales performance. Some pieces start with a research
+            paper and work out whether it holds up here. Others follow a local trend back a
+            few years, or take a single company apart. The older weekly briefs and area
+            guides are in here too.
           </p>
         </div>
       </section>
@@ -102,8 +102,8 @@ export default async function ReportingPage() {
                 The first pieces are on the way.
               </p>
               <p className="theme-text-muted type-body">
-                Each one takes something people in this market believe, or a company behind
-                it, and checks it against the record.
+                Each one starts with a paper or a number and works out what it means for a
+                house in Greenville.
               </p>
             </div>
           )}

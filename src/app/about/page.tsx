@@ -32,13 +32,21 @@ const CONTACT_EMAIL = "jsteryous@gmail.com";
  *    moved out of the hero and down into the byline block, which is where a
  *    masthead puts a face.
  *
+ * REPOINTED AT THE RESEARCH August 25, 2026, when Alex set the beat as
+ * Greenville real estate and sales performance, backed by academic research and
+ * data. The method section had been four bullets of filings, job postings,
+ * permits, and incentive agreements, which is the company-teardown beat and not
+ * what the front page now promises. "Who it is for" said developers and real
+ * estate entrepreneurs; it says buyers, sellers, and agents now, because that is
+ * who Alex named. The record did not go away, it moved down to third.
+ *
  * Copy rules: uncontracted (site-wide), no em or en dashes, no fragments.
  */
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "A clear picture of Greenville real estate. Claims from the market, tested against the county record, reported without a recommendation attached.",
+    "We read research papers about real estate and sales performance and share what we find interesting, next to what the Greenville numbers are actually doing.",
   alternates: { canonical: `${site.url}/about` },
 };
 
@@ -73,18 +81,18 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6">
           <Eyebrow className="mb-6">About</Eyebrow>
           <h1 className="theme-text-primary type-display mb-7">
-            Knowing what is actually going on here is harder than it should be.
+            Most real estate advice is somebody&apos;s opinion.
           </h1>
           <p className="theme-text-secondary type-body-lg mb-5">
-            Greenville produces a lot of announcements. A subdivision gets approved, a
-            quarter comes in up or down, an employer says it is expanding. What is missing
-            is the layer underneath, where you find out what a submarket has really done
-            over five years instead of one quarter, and which rule or tax break is driving
-            behavior that otherwise looks like taste.
+            There is a real body of research on how houses sell. Economists have measured
+            what a listing price does to the final number and how long a house sits when it
+            starts too high. Some of the most interesting work is on the agent&apos;s own
+            incentives, which do not point in quite the same direction as the seller&apos;s.
+            Almost none of that reaches the person who is about to make the decision.
           </p>
           <p className="theme-text-secondary type-body-lg">
-            That layer is what this is for. I started writing it because I wanted to read
-            it.
+            We read that work, put it next to what the Greenville numbers are doing, and
+            write up what is interesting. I started because I wanted to read it.
           </p>
         </div>
       </section>
@@ -95,43 +103,38 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">The method</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            It all comes out of the record.
+            Read the study, then check it here.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-6">
-            The word that a company is growing is worth nothing by itself. The forty
-            engineering roles it posted in six months is worth something, because you can
-            go and count them. Everything in a piece is anchored to something you could
-            pull up yourself, and most of it is more interesting than people expect once
-            you line it up over a few years.
+            An opinion about how to price a house is worth very little on its own. A study
+            that went and measured it across thousands of real sales is worth quite a lot,
+            because somebody counted. The useful question is whether a finding like that
+            survives contact with this market, and that is what most pieces here are
+            doing.
           </p>
           <ul className="space-y-4 mb-8">
             <li>
-              <h3 className="theme-text-primary type-title mb-1">Filings and disclosures</h3>
+              <h3 className="theme-text-primary type-title mb-1">Published research</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
-                What a public company is required to tell its shareholders is usually far
-                more candid than what it tells a newspaper.
+                Work from the real estate, marketing, and economics journals, where a
+                finding had to get past a referee before it got printed. Every piece says
+                which study it is drawing on, so you can go and read it.
               </p>
             </li>
             <li>
-              <h3 className="theme-text-primary type-title mb-1">Job postings, counted over time</h3>
+              <h3 className="theme-text-primary type-title mb-1">Greenville sales data</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
-                Hiring is a company stating its plans in public without meaning to. What
-                it is staffing up tells you which line of business it actually believes in.
+                What houses here actually listed for, what they closed at, and how long
+                they sat, lined up over years rather than quarters. A median can sit
+                perfectly still on top of a market that changed completely underneath it.
               </p>
             </li>
             <li>
-              <h3 className="theme-text-primary type-title mb-1">Permits, deeds, and leases</h3>
+              <h3 className="theme-text-primary type-title mb-1">The county record</h3>
               <p className="theme-text-contrast-muted type-body leading-relaxed">
-                Square footage, what was paid, who holds the paper, and when it was
-                signed. A building is a commitment that is hard to walk back quietly, and
-                a deed is the rare document where the price is not a negotiating position.
-              </p>
-            </li>
-            <li>
-              <h3 className="theme-text-primary type-title mb-1">Incentive agreements and minutes</h3>
-              <p className="theme-text-contrast-muted type-body leading-relaxed">
-                The terms behind an announcement, including what the company promised in
-                exchange and what happens if it does not deliver.
+                Deeds, permits, and plats, for the pieces that turn on who bought what and
+                when. A deed is the rare document where the price is not a negotiating
+                position.
               </p>
             </li>
           </ul>
@@ -174,9 +177,15 @@ export default function AboutPage() {
               My job stops at handing you an accurate picture of the ground.
             </p>
             <p>
+              Best practice is a finding, not an instruction. If the research says a house
+              that starts well over comparable sales tends to close for less and sit
+              longer, that goes in exactly as it was measured, and what you do about your
+              own house is still yours to decide.
+            </p>
+            <p>
               Opinions from people in the business show up here too, because what an
               experienced broker believes is itself a fact about the market and worth
-              knowing. Those get attributed and then checked against the same records as
+              knowing. Those get attributed and then checked against the same evidence as
               everything else.
             </p>
           </div>
@@ -190,28 +199,27 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">Who it is for</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            People who build and buy here.
+            Buyers, sellers, and the agents who are good at this.
           </h2>
           <div className="theme-prose prose max-w-none">
             <p>
-              Developers, real estate entrepreneurs, and the people who work around a
-              deal, which means the loan officer, the closing attorney, the agent, and the
-              banker. If you are deciding what a site is worth, who is realistically going
-              to lease it, or whether the employer three miles away is expanding or quietly
-              pulling back, you are the reader.
+              If you are about to buy or sell a house in Greenville, almost everything
+              written for you is either a listing site or a person with a stake in what you
+              decide. The research is not written for you either, since it is written for
+              other academics and priced accordingly. This sits in between.
             </p>
             <p>
-              Local coverage answers what happened. It rarely answers the question you are
-              actually holding, which is whether the thing is durable. A company that looks
-              enormous can rest on two customers. A submarket everyone calls hot can be
-              carried by a handful of sales at the top. Most of what settles those
-              questions is sitting in public records that nobody reads.
+              Agents read it too, and a fair number of them are the reason a piece gets
+              written. Quite a lot of what separates a good one from an average one has
+              been measured, from how a house gets positioned before it ever goes live to
+              what happens to a price after the first two weeks, and very little of that
+              turns up in a training course.
             </p>
             <p>
-              It covers Greenville rather than the whole state, because a market is a
-              local thing and the record that settles it is held at the county. Where a
-              statewide rule or a piece of outside capital is what moves the local
-              ground, that is in scope, and it gets covered for what it does here.
+              It covers Greenville rather than the whole country, because a market is a
+              local thing and a national average can be wrong here in both directions.
+              Where a finding comes out of a study of somewhere else, which most of them
+              do, the piece says so and then goes looking for whether it holds up here.
             </p>
           </div>
         </div>
@@ -246,11 +254,11 @@ export default function AboutPage() {
                   and I live in Greenville.
                 </p>
                 <p>
-                  The part of that background which matters here is the discovery. For
-                  eight years the job was to work out how a company made money, who
-                  actually decided things inside it, and what would make them change
-                  course, all before I ever picked up the phone. This is the same work
-                  with the sales call removed and the sourcing written down.
+                  The part of that background that matters here is the selling. For eight
+                  years the job was to work out why one deal closes and a nearly identical
+                  one does not, which is the same question the sales research asks with far
+                  better data than I ever had. Reading that work against what I saw in the
+                  field is most of the reason this exists.
                 </p>
                 {/* Independence stated WITHOUT the phrase "I do not practice",
                     which is banned site-wide: it disqualifies Alex at the exact
@@ -262,9 +270,9 @@ export default function AboutPage() {
                   records actually show.
                 </p>
                 <p>
-                  I also read about this material in my own time and always have. Solar,
-                  subsea cable, port automation, whatever is genuinely changing how things
-                  get built. Writing it down is mostly an excuse to keep going.
+                  I read this material in my own time and always have. Journal articles,
+                  working papers, whatever somebody took the trouble to measure properly.
+                  Writing it up is mostly an excuse to keep going.
                 </p>
               </div>
             </div>
@@ -283,10 +291,10 @@ export default function AboutPage() {
             Tips and documents are welcome.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-5">
-            If you work at one of these companies, or next door to one, you know things
-            the public record does not show. I am glad to keep a source out of a piece.
-            Corrections are welcome too, and if something here is wrong I will fix it
-            where everyone can see it.
+            If you have come across a paper worth reading, or you have seen something in
+            the field that the research seems to miss, send it over. That goes double for
+            anyone who lists and sells for a living. Corrections are welcome too, and if
+            something here is wrong I will fix it where everyone can see it.
           </p>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-9">
             And if you are looking to buy or thinking of selling, let me know.

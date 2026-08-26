@@ -367,7 +367,7 @@ Name where the piece lives and the site renders the cover.
 - title: <the headline>
 - slug: <kebab-case-slug, includes the place or company>
 - summary: <one sentence under 200 chars, for the post card and meta description>
-- tags: greenville works
+- tags: <sales | greenville>   (sales = how a sale gets made; greenville = the market and the property in it)
 - source_url: <the primary source url from the brief's SOURCES>
 
 ## IMAGE

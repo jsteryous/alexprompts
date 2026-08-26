@@ -9,22 +9,25 @@ import { PostCover } from "@/components/PostCover";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
-  label: string; // "Archive" | "Real Estate" | "Greenville Works"
-  basePath: string; // "/archive" | "/real-estate" | "/greenville-works"
-  /** Section-specific line for the footer subscribe box. Falls back to the
-   *  general Claude blurb when omitted. */
+  label: string; // "Sales" | "Real Estate" | "Upstate Brief" | "Archive"
+  basePath: string; // "/sales" | "/real-estate" | "/briefing" | "/archive"
+  /** Section-specific line for the footer subscribe box. Omit it, which every
+   *  section now does, and the SubscribeForm default applies. That default is
+   *  the publication's one promise and it lives in a single file; a section
+   *  override is how the promise drifts. */
   blurb?: string;
   /** Show the buy/sell CTA (links to /find-a-pro), both mid-article and at the
-   *  close. On for the sections whose readers are buyers and sellers:
-   *  /real-estate and /briefing. Off for /archive and /greenville-works, whose
-   *  readers came for something else. */
+   *  close. On for the sections whose readers are buyers and sellers, which as of
+   *  August 25, 2026 means /sales, /real-estate, and /briefing. Off for /archive
+   *  alone, whose readers came for the newsletter. */
   showReferralCta?: boolean;
 }
 
 /**
- * Shared renderer for a single post, used by /archive/[slug], /real-estate/[slug],
- * and /greenville-works/[slug]. The routes differ only in which `section` (and which post type)
- * they pass; the heavy markdown -> sanitize -> JSON-LD pipeline lives here once.
+ * Shared renderer for a single post, used by /sales/[slug], /real-estate/[slug],
+ * /briefing/[slug], and /archive/[slug]. The routes differ only in which `section`
+ * (and which post type) they pass; the heavy markdown -> sanitize -> JSON-LD
+ * pipeline lives here once.
  */
 export default async function ArticleView({
   post,
@@ -41,9 +44,11 @@ export default async function ArticleView({
   const authorName = post.author ?? site.author;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
-  const subscribeBlurb =
-    section.blurb ??
-    "I send clear walkthroughs, free. Each one is a real thing you can do with Claude, shown step by step, with nothing assumed and no jargon left undefined.";
+  // Undefined here means SubscribeForm falls back to its own default, which is
+  // the promise on the homepage and on /subscribe. The string that used to live
+  // here advertised Claude walkthroughs, a product retired in July 2026, and it
+  // was showing at the foot of every article in three of the four sections.
+  const subscribeBlurb = section.blurb;
 
   const articleJsonLd = {
     "@context": "https://schema.org",

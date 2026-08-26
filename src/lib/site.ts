@@ -81,18 +81,28 @@ export const site = {
   //
   // Business is not banned from the publication and company teardowns remain a
   // good form. It simply stopped being half of the STATED territory, because a
-  // masthead names what a reader will reliably get. Alex is separately starting
-  // to write on sales performance as it bears on realtors and land acquisition;
-  // that is deliberately NOT in this copy yet, at his instruction, because no
-  // published piece covers it. Add it when one does.
+  // masthead names what a reader will reliably get.
+  //
+  // SALES PERFORMANCE WAS ADDED August 25, 2026, on Alex's instruction: "we
+  // discuss real estate, specifically in greenville, and sales performance
+  // (often linked to real estate sales) backed by academic research and data."
+  // The publishing had already moved first: the August 24 and August 25 pieces
+  // are both research reads, one on what the housing research says about getting
+  // the best sale price and one on whether sales leaderboards actually work. This
+  // file was the last thing still describing the old beat.
+  //
+  // What the reader is promised: research and data on the Greenville market and
+  // on how sales actually get made, written up for buyers and sellers who want to
+  // know what a good agent does and how a sale gets positioned.
   // See scripts/publication/SPEC.md, which still carries the older statewide
   // language and is behind this file on scope.
   //
-  // THE TAGLINE IS ALEX'S OWN WORDS AND IS VERBATIM. Do not "improve" it into a
-  // sentence, and do not expand the ampersand. It is deliberately a plain label
-  // rather than a slogan: it names the territory the way a masthead names a beat,
-  // and it survives the publication getting a real name later. Two prior taglines
-  // died of being slogan-shaped, so the bar here is mechanical description.
+  // THE TAGLINE IS A PLAIN LABEL, not a slogan. Do not "improve" it into a
+  // sentence and do not expand the ampersand. It names the territory the way a
+  // masthead names a beat, and two prior taglines died of being slogan-shaped,
+  // so the bar here is mechanical description. The first half was Alex's own
+  // words; the second half was added with sales performance on August 25, 2026
+  // and tracks the headline he wrote on the front page.
   //
   // Retired, for the record: "SC Real Estate & Business" (August 14 to 25, 2026,
   // killed by the Greenville narrowing), "How South Carolina actually makes money." (two
@@ -111,14 +121,13 @@ export const site = {
   // TRENDS and INCENTIVES are the spine. A draft that led on testing what people
   // in the market claim was cut August 14, 2026; that is one input, not the job,
   // and leading with it made the publication sound smaller than it is.
-  tagline: "Greenville Real Estate",
+  tagline: "Greenville Real Estate & Sales Performance",
   oneLiner:
-    "Alex Steryous writes about how the Greenville real estate market is actually moving, where prices have been heading over years rather than quarters, and the incentives driving both.",
+    "Research and data on Greenville real estate and on sales performance, read and written up by Alex Steryous.",
   description:
-    "Plenty of places report that prices went up or that a subdivision got approved. Alex " +
-    "Steryous writes the layer underneath: what years of sales have really done to a " +
-    "Greenville submarket, and which rule or tax structure is driving behavior that " +
-    "otherwise looks random. Built on public records, with every number sourced.",
+    "We read research papers about real estate and sales performance and share what we find " +
+    "interesting. What the Greenville numbers are doing, what the evidence says about " +
+    "positioning a sale, and what good agents actually do.",
 } as const;
 
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */
