@@ -51,3 +51,6 @@ __pycache__/
 
 # Image source originals (processed copies live in public/)
 /pics/
+
+# brand/email preview output (scripts/brand/preview-email.mjs)
+/.preview/

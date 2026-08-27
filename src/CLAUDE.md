@@ -25,8 +25,13 @@ See root `CLAUDE.md` for brand, voice, and env vars.
 ## Project Structure — key couplings
 
 - **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, author, tagline,
-  oneLiner, description, email, url), `socials` (the follow row + footer + JSON-LD
-  `sameAs`), and `newsletterUrl`. `SITE_URL` reads `NEXT_PUBLIC_SITE_URL`. **Editing
+  **headline**, oneLiner, description, email, url), `socials` (the follow row + footer +
+  JSON-LD `sameAs`), and `newsletterUrl`. **`site.headline` is the masthead statement**
+  ("What's brewing in Real Estate.", added August 26, 2026). It lives here rather than on the
+  homepage because it is the one line connecting the NAME to the BEAT: "Rebrew" says nothing
+  about real estate alone, and the coffee-cup-and-house mark says it only to someone who
+  already gets the joke, so this is where the pun pays off. The homepage and the share card
+  both read it; the card used to carry a hand-typed near-copy that had already drifted. `SITE_URL` reads `NEXT_PUBLIC_SITE_URL`. **Editing
   handles/domain here updates every surface.** The Claude-for-real-estate teaching exports
   (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`) were deleted in July
   2026 with the voice-3 removal; do not reintroduce them. Holds one `TODO(alex)`: confirm the
@@ -344,6 +349,42 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   Prefer `.type-h2` etc. over ad-hoc `text-3xl md:text-4xl font-bold tracking-tight`. The
   homepage and `/about` are fully converted (both were rebuilt August 2026); other pages
   migrate over time.
+- **Off-Tailwind surfaces read `src/lib/brand.ts`, NOT their own hexes** (added August 26,
+  2026). Three surfaces cannot reach the CSS custom properties: **email**
+  (`emailTemplates.ts`, `emailMarkdown.ts` — clients strip `<style>`, classes, and external
+  CSS), the **share card** (`app/opengraph-image.tsx` — satori at the edge, no stylesheet),
+  and the **standalone result pages** (`htmlPage.ts`, used by `/api/subscribe/confirm`,
+  `/api/unsubscribe`, and `/api/publish`'s one-click link). Each used to hardcode its own
+  palette and they drifted exactly as you would expect: the August 2026 newspaper pass moved
+  the site to oxblood/serif/square and **email kept shipping the retired system for weeks**
+  (indigo `#4f46e5`, 16px rounded cards, grey `#f4f4f6`, sans reading surface), so a
+  subscriber clicking through from a broadcast watched the brand change under them. `brand.ts`
+  mirrors the `globals.css` tokens as raw values; the light set covers email and the result
+  pages (neither has a reliable theme signal), and a small `*_DARK` set exists for the share
+  card, which is a deliberately dark surface like `.theme-section-contrast`. **If the palette
+  moves in `globals.css`, move it in `brand.ts` in the same commit.**
+- **The editorial split and the link rule apply to email too.** A broadcast ships the FULL
+  article, so it is the one email that most needs the reading surface to match: serif body and
+  headings, sans for eyebrows/buttons/footers/tables/`figcaption`. Prose links are **ink with
+  an accent-tinted underline**, not bare accent — the same call `globals.css` makes for
+  `.theme-prose a`, and it matters more here, because these pieces carry a dozen citations and
+  every one of them was rendering as bright indigo. `<figure>`/`<figcaption>` are in
+  sanitize-html's defaults and so were passing through **unstyled**, making a caption
+  indistinguishable from body copy; they are styled now.
+- **Font stacks in `brand.ts` use SINGLE quotes, and that is load-bearing.** They are
+  interpolated into `style="..."` attributes; a double-quoted family name closes the attribute
+  early, the browser discards the whole declaration, and **every** font in the message falls
+  back to the client default (Times in most mail clients). It looks like a design choice and is
+  invisible in a diff. This shipped once and was caught only by rendering the email and looking
+  at it.
+- **`node scripts/brand/preview-email.mjs` renders every email + result page to HTML** you can
+  open in a browser, with no send and no Resend config. It also fails on retired design values
+  (indigo, `border-radius`, the old greys) and on truncated `font-family` attributes. A browser
+  flatters email HTML, so confirm anything risky with a real test send
+  (`/api/broadcast?id=<postId>&test=you@example.com`). `scripts/brand/make-email-mark.mjs`
+  regenerates `public/email/mark.png`, the hosted mark the email nameplate uses (email clients
+  do not render inline SVG; the nameplate pairs it with a live type wordmark so it still reads
+  with images off, which is Outlook's default).
 - **Dark mode:** class-based (`html.dark`). `ThemeProvider` → `localStorage` key
   `alexprompts-theme`. `suppressHydrationWarning` on `<html>` + the inline `layout.tsx`
   script prevent the flash.
