@@ -147,10 +147,11 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   deep-dives the `scripts/tech` routine creates. Both engines **auto-publish live** (status
   `PUBLISHED`, with a verify email for after-the-fact spot-check + unpublish at `/review`; a run
   falls back to DRAFT only when dedup is unavailable), and the `/api/finalize-greenville` cron
-  fills each post's cover from the curated Greenville library and broadcasts it to the owned list.
+  broadcasts each one to the owned list. **It no longer fills covers: there is no automatic cover
+  anywhere (August 27, 2026), so a post carries the photo Alex chose in the editor or none at all.**
   Both `/real-estate` and `/greenville-works` index pages render a `PostCover` thumbnail per row
-  (branded `>` placeholder until the cover lands); the curated photo also shows as the article
-  hero (`ArticleView` renders `cover_image` when the body has no lead image), the homepage feed
+  (branded `>` placeholder when there is no cover); a cover Alex set shows as the article hero
+  (`ArticleView` renders `cover_image` when the body has no lead image), the homepage feed
   card, and the share/OG card.
 - **`Nav.tsx` + `Footer.tsx`** — return `null` on `/review` and `/admin` (gated editors; the
   fixed nav covered their sticky Publish button). Both derive links from `site.ts`. Nav CTA is
@@ -195,11 +196,20 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   is site-accurate (`/api/admin/preview`), autosave for drafts (published posts save
   manually so edits never go live mid-thought), Ctrl/Cmd+S, and image paste/drag/upload
   (`/api/admin/upload` → the public `post-images` Storage bucket, `body/` for inline images,
-  `cover/` for covers). The **cover photo is editable at the top of the editor**: it shows
-  the exact 2/1 hero crop with the curated-library auto pick labeled as such, and Alex can
-  upload/drop/URL his own photo (stored in `cover_image` + optional `cover_credit` via
-  `/api/review/save`, which `/api/publish` and the finalize cron both respect and never
-  overwrite), edit the credit line, or remove it to fall back to the library.
+  `cover/` for covers). The **cover photo is editable at the top of the editor**: it shows the
+  exact 2/1 hero crop, and Alex can upload/drop/URL his own photo (stored in `cover_image` +
+  optional `cover_credit` via `/api/review/save`), edit the credit line, or remove it.
+  **NO AUTO-COVER (August 27, 2026).** The editor used to preview the curated-library photo that
+  `/api/publish` would stamp on a coverless row, and the finalize cron did the same thing a day
+  later for anything that slipped through. Both are gone, along with `src/lib/editorCover.ts`: a
+  piece Alex has just read through must not go live under a stock photo he never picked. An empty
+  cover slot is now a decision, and it survives to the live page as the branded `>` placeholder.
+  The curated library went with it, at Alex's instruction ("i always have to find my own pics
+  anyway"): `src/lib/greenvilleCovers.ts` + `.json`, `src/lib/greenvilleImage.ts`, the eleven
+  photos in `public/greenville/library/`, `scripts/greenville/cover_ingest.py`, and the monthly
+  `.github/workflows/greenville-covers.yml` PR that grew it are all deleted. Seven published posts
+  were carrying an auto-assigned library photo; their `cover_image` and `cover_credit` were
+  cleared in the same pass, so they render the `PostCover` placeholder until he picks one.
   **WRITING FROM SCRATCH (August 25, 2026).** `/admin` has a **"Write Article"** button (header,
   and again in the empty drafts state) that POSTs to **`/api/admin/create`**, which mints an empty
   DRAFT row and returns its id; the button then opens `/admin/edit/<id>`, so a new piece is one
@@ -225,8 +235,9 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   brand-new empty draft opens with the caret already in the title.
   **THE COMPOSER'S LOOK (August 25, 2026), after Alex said it was "still not very close" to
   Substack and it was checked in a real browser.** The cover no longer leads the page: it is a
-  text button until there is a photo, and the curated library pick rides on that button as a
-  thumbnail rather than as a full-bleed stock photo above an unwritten title. Preview moved from
+  text button until there is a photo, rather than a full-bleed frame above an unwritten title.
+  (It briefly showed the curated library pick as a thumbnail on that button; the auto-cover was
+  deleted August 27, 2026, so the button is now just "+ Add a cover image".) Preview moved from
   a pill mid-page into the header. The header carries four controls where it had eight, with the
   status and save state folded into one muted `Published · Saved` line and Save rendered only
   when there is something to save. **The selection bubble and the block menu share one surface,
@@ -363,17 +374,14 @@ See root `CLAUDE.md` for brand, voice, and env vars.
   blocks). **No gradients**: `.theme-page`'s accent bloom and `.theme-section-contrast`'s
   radial glow were both removed (print has no glow, and a radial gradient behind a masthead
   reads as a SaaS landing page). Do not add back the dotted-grid page texture either.
-- **Cover library images are the homepage LCP** (`public/greenville/library/`). They MUST stay
-  web-sized: max 1400px wide, roughly 300KB, JPEG q≈75 (batch-resized July 10, 2026 from the
-  original 0.5–1.3MB Wikimedia files; originals were only in scratch, the repo keeps the sized
-  ones). The monthly `cover_ingest` PR re-encodes every photo to this spec automatically before
-  committing (the `websize()` step, added July 13, 2026 after the first run shipped 1920px/1MB
-  files), so PR review is about looks and attribution, not file size — but if a library photo
-  ever arrives oversized anyway, downsize it BEFORE merging. `next.config.ts` `headers()` gives
-  `/greenville/library/*` a 30-day
-  Cache-Control (Vercel's `/public` default is max-age=0). **July 11, 2026, the mobile-LCP
-  pass:** `PostCover` now routes same-origin covers (the library) AND Supabase-hosted covers
-  (old streetview PNGs) through **`next/image`** (responsive srcset, AVIF/WebP, ~50–75KB at
+- **A cover photo is the homepage LCP**, so keep the ones you upload web-sized: max 1400px
+  wide, roughly 300KB, JPEG q≈75. Nothing enforces this any more. The committed Greenville
+  library under `public/greenville/library/`, its `cover_ingest` re-encoding PR, and the
+  `next.config.ts` `headers()` rule that gave it a 30-day Cache-Control were all deleted
+  August 27, 2026 with the auto-cover, so every cover is now an editor upload living in
+  Supabase Storage and sized by whoever picked it. **July 11, 2026, the mobile-LCP
+  pass:** `PostCover` routes same-origin covers AND Supabase-hosted covers
+  (editor uploads, old streetview PNGs) through **`next/image`** (responsive srcset, AVIF/WebP, ~50–75KB at
   phone widths instead of the full file), keeping a plain `<img>` only for other remote hosts
   (Substack CDN, whose hosts vary and would 400 an un-whitelisted `next/image`). Callers pass
   `sizes` matching their layout plus `priority` on whatever is above the fold (the homepage

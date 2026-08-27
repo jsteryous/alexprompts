@@ -410,10 +410,10 @@ ALTER TABLE blog_posts
 ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS cover_image text;
 
--- Cover attribution line, shown under the article hero. Set by the Greenville finalize
--- cron when it picks a curated CC-BY library photo (src/lib/greenvilleCovers.ts), e.g.
--- "Photo: Antony-22, CC BY-SA 4.0, via Wikimedia Commons". NULL for CC0 library images,
--- Substack covers, and Google Street-View/map covers (which carry their own watermark).
+-- Cover attribution line, shown under the article hero. Typed by Alex in the editor under
+-- the photo he uploaded, e.g. "Photo: Antony-22, CC BY-SA 4.0, via Wikimedia Commons".
+-- Usually NULL. Nothing writes it automatically: the curated CC-BY library that used to
+-- fill it was deleted August 27, 2026 along with the auto-cover.
 -- Reads tolerate this column being absent (42703), so the site works before it is added.
 ALTER TABLE blog_posts
   ADD COLUMN IF NOT EXISTS cover_credit text;

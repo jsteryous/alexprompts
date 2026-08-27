@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import { isAdmin } from "@/lib/adminAuth";
-import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "@/app/review/Editor";
 
@@ -29,7 +28,7 @@ async function getPost(id: string) {
   const client = createClient(url, key);
   const { data } = await client
     .from("blog_posts")
-    .select("id, title, slug, summary, body_md, status, tags, cover_image, cover_credit, image_address")
+    .select("id, title, slug, summary, body_md, status, tags, cover_image, cover_credit")
     .eq("id", id)
     .single();
   return data;
@@ -78,7 +77,6 @@ export default async function AdminEditPage({ params }: Props) {
         livePath={livePath}
         initialCoverImage={post.cover_image ?? null}
         initialCoverCredit={post.cover_credit ?? null}
-        libraryCover={resolveEditorCover({ ...post, cover_image: null })}
       />
     </div>
   );

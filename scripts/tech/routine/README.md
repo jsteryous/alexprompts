@@ -197,12 +197,11 @@ Alex reviews and publishes each piece himself, either from the emailed `/review`
   engine uses (`downtown-falls` the default, plus `liberty-bridge`, `reedy-river`, `north-main`,
   `west-end`, `swamp-rabbit-trail`, `travelers-rest`); for a piece anchored elsewhere in South
   Carolina (statewide since July 10, 2026) it gives a geocodable `location:` string instead. The
-  orchestrator stores that value in `blog_posts.image_address` and leaves `cover_image` null. On
-  publish, `/api/publish` maps a subject (or any Greenville-area string) to a hand-picked, licensed
-  photo from the **curated Greenville library** (`src/lib/greenvilleCovers.ts`, served from
-  `/public`, no API key, no cost) and writes `cover_image` immediately (the draft editors preview
-  the same photo via `src/lib/editorCover.ts`); a non-Upstate `location:` gets a Google Street View
-  or map cover from the daily `/api/finalize-greenville` cron instead (needs `GOOGLE_MAPS_KEY`).
+  orchestrator stores that value in `blog_posts.image_address` and leaves `cover_image` null.
+  **NO AUTO-COVER since August 27, 2026:** `/api/publish` used to map that subject to a photo from
+  a curated Greenville library and stamp it on the row, with a Google Street View or map fallback
+  from the daily cron for a non-Upstate `location:`. All of it is deleted, so `image_address` is
+  now just a note and a cover is a photo Alex uploads in the editor.
   `ArticleView` renders it as the article hero, and the `/greenville-works` index shows it as a
   per-row thumbnail (the shared `PostCover`, which draws a branded `>` placeholder until the cover
   lands), the same as the `/real-estate` index; the photo also shows on the homepage feed card and

@@ -1,30 +1,27 @@
 import { createClient } from "@supabase/supabase-js";
-import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { broadcastPost } from "@/lib/broadcast";
-import { renderCover } from "@/lib/greenvilleImage";
 import { BRIEFING_TAG, REALESTATE_TAG, SALES_TAG, sectionOf } from "@/lib/posts";
 
 /**
  * GET /api/finalize-greenville
  *
- * The reconciler for the nightly Greenville routines. Both the /real-estate
- * (scripts/greenville), Greenville Works (scripts/tech), and Upstate Brief
- * (scripts/briefing) Claude agents run in a sandbox that can only reach the world
- * through MCP connectors, so each publishes its blog_posts row (via the Supabase
- * MCP) but cannot render the cover image or send the owned-list broadcast, both of
- * which need normal egress. This job, on Vercel, does those two mechanical steps
- * for any recently published post in those sections that still needs them. All
- * three use the same curated Greenville photo library for the cover, so the render
- * path is identical. The daily run is at 13:00 UTC (vercel.json) so a brief Alex
- * publishes Monday morning ET still broadcasts the same day (Hobby allows only 2
- * crons, so one daily run does double duty; the review packet's one-click
- * broadcast link is the primary same-minute path).
+ * The broadcast reconciler for the content routines. The Claude agents run in a
+ * sandbox that can only reach the world through MCP connectors, so each publishes
+ * its blog_posts row (via the Supabase MCP) but cannot send the owned-list
+ * broadcast, which needs normal egress. This job, on Vercel, does that one
+ * mechanical step for any recently published post that has not had it. The daily
+ * run is at 13:00 UTC (vercel.json) so a piece Alex publishes in the morning ET
+ * still broadcasts the same day (Hobby allows only 2 crons; the review packet's
+ * one-click broadcast link is the primary same-minute path).
  *
- * It is idempotent and self-healing: two independent sub-steps, each guarded by a
- * null check, so a failed render never blocks the email and a missed run is picked
- * up next time. Scoped to the last few days so a genuinely place-less post (cover
- * stays null forever) does not churn indefinitely.
+ * It used to render the cover photo here too, from the curated Greenville library.
+ * That step is gone: there is no automatic cover anywhere any more, so a post
+ * carries the photo Alex chose in the editor or none at all.
+ *
+ * It is idempotent and self-healing: the send is guarded by a null check on
+ * last_broadcast_at, so a missed run is picked up next time. Scoped to the last
+ * few days so the query stays small.
  *
  * Auth: Vercel Cron (Authorization: Bearer <CRON_SECRET>) or a manual run with
  * ?token=<PUBLISH_SECRET>. Wired as a daily cron in vercel.json, after the routine.
@@ -34,10 +31,9 @@ export const maxDuration = 60;
 
 /** How far back to reconcile, measured from when a post went live (published_at),
  *  not when the agent created the draft. Draft-first means a post can sit in review
- *  for days before Alex publishes it, and the cover + broadcast must fire once it
- *  does, so the window tracks publish time and is generous. A post published longer
- *  ago than this that still has no cover is treated as permanently place-less and
- *  left alone. */
+ *  for days before Alex publishes it, and the broadcast must fire once it does, so
+ *  the window tracks publish time and is generous. A post published longer ago than
+ *  this that never went out is left alone. */
 const WINDOW_DAYS = 7;
 
 export async function GET(req: NextRequest) {
@@ -62,11 +58,11 @@ export async function GET(req: NextRequest) {
 
   const { data: posts, error } = await db
     .from("blog_posts")
-    .select("id, slug, tags, cover_image, image_address, last_broadcast_at")
+    .select("id, slug, tags, last_broadcast_at")
     .eq("status", "PUBLISHED")
     .overlaps("tags", [REALESTATE_TAG, SALES_TAG, BRIEFING_TAG])
     .gte("published_at", since)
-    .or("cover_image.is.null,last_broadcast_at.is.null")
+    .is("last_broadcast_at", null)
     .order("published_at", { ascending: false });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
@@ -74,45 +70,16 @@ export async function GET(req: NextRequest) {
 
   for (const p of posts ?? []) {
     const r: Record<string, unknown> = { slug: p.slug };
-    // Route the revalidation to the post's own section: /real-estate for a
-    // `greenville` post, /greenville-works for a `greenville works` piece,
-    // /briefing for an Upstate Brief issue.
+    // Report the post's own section: /real-estate for a `greenville` post,
+    // /sales for a sales-performance piece, /briefing for an archived brief.
     const section = sectionOf(p);
-    const base =
+    r.section =
       section === "sales" ? "/sales" : section === "briefing" ? "/briefing" : "/real-estate";
-    r.section = base;
 
-    // Sub-step 1: resolve + set the cover, when it is missing and we have a pin.
-    // renderCover prefers the curated library (no key needed) and only falls back
-    // to Google, which throws a clear error if its key is missing.
-    if (!p.cover_image && p.image_address) {
-      try {
-        const { cover, coverKind, credit } = await renderCover(p.image_address, p.slug);
-        // Write the cover and, when present, its credit. cover_credit may not be
-        // migrated yet (42703 = undefined_column); degrade to cover-only so the
-        // image still lands before the column exists.
-        const patch = credit ? { cover_image: cover, cover_credit: credit } : { cover_image: cover };
-        let upErr = (await db.from("blog_posts").update(patch).eq("id", p.id)).error;
-        if (upErr?.code === "42703" && credit) {
-          upErr = (await db.from("blog_posts").update({ cover_image: cover }).eq("id", p.id)).error;
-          if (!upErr) r.credit = "skipped: cover_credit column missing";
-        }
-        if (upErr) throw new Error(upErr.message);
-        r.image = `set (${coverKind})`;
-        revalidatePath(`${base}/${p.slug}`);
-        revalidatePath(base);
-      } catch (e) {
-        r.image = `failed: ${(e as Error).message}`;
-      }
-    } else if (!p.cover_image) {
-      r.image = "no image_address to render";
-    }
-
-    // Sub-step 2: broadcast to the owned list, when it has not gone out yet.
-    if (!p.last_broadcast_at) {
-      const { body } = await broadcastPost(db, p.id as string);
-      r.broadcast = body;
-    }
+    // Broadcast to the owned list. The query above already narrowed this to
+    // posts that have never had one.
+    const { body } = await broadcastPost(db, p.id as string);
+    r.broadcast = body;
 
     results.push(r);
   }

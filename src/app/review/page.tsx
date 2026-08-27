@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
-import { resolveEditorCover } from "@/lib/editorCover";
 import { sectionOf } from "@/lib/posts";
 import Editor from "./Editor";
 import { site } from "@/lib/site";
@@ -29,7 +28,7 @@ async function getPost(id: string) {
   const client = createClient(url, key);
   const { data } = await client
     .from("blog_posts")
-    .select("id, title, slug, summary, body_md, status, created_at, topic, tags, cover_image, cover_credit, image_address")
+    .select("id, title, slug, summary, body_md, status, created_at, topic, tags, cover_image, cover_credit")
     .eq("id", id)
     .single();
   return data;
@@ -63,7 +62,6 @@ export default async function ReviewPage({ searchParams }: Props) {
         livePath={`${SECTION_BASE[sectionOf(post)]}/${post.slug ?? ""}`}
         initialCoverImage={post.cover_image ?? null}
         initialCoverCredit={post.cover_credit ?? null}
-        libraryCover={resolveEditorCover({ ...post, cover_image: null })}
       />
     </div>
   );

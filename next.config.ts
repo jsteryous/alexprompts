@@ -16,12 +16,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  // Same-origin covers (the committed library photos) render through
-  // next/image (see PostCover), which needs no remotePatterns because the
-  // component normalizes them to root-relative paths first. AVIF first for
-  // the smallest LCP bytes on mobile; a month of optimizer cache matches the
-  // library's own immutable-cache header and keeps transformation counts well
-  // inside the Vercel Hobby free tier (zero-billing guarantee).
+  // Covers now live in Supabase Storage (Alex uploads his own in the editor;
+  // the committed Greenville photo library was deleted August 27, 2026 with the
+  // auto-cover). AVIF first for the smallest LCP bytes on mobile, and a month
+  // of optimizer cache keeps transformation counts well inside the Vercel Hobby
+  // free tier (zero-billing guarantee).
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2592000,
@@ -34,25 +33,6 @@ const nextConfig: NextConfig = {
           },
         ]
       : [],
-  },
-  async headers() {
-    return [
-      // The curated cover library is committed, web-sized (<=1400px, ~300KB)
-      // and effectively immutable (new photos land under new filenames via the
-      // monthly ingest PR). Vercel serves /public files with max-age=0 by
-      // default, which fails Lighthouse's cache-lifetime audit and refetches
-      // the homepage LCP image on every visit; a month of caching fixes both
-      // while stale-while-revalidate covers the rare in-place replacement.
-      {
-        source: "/greenville/library/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=2592000, stale-while-revalidate=86400",
-          },
-        ],
-      },
-    ];
   },
   async redirects() {
     return [
