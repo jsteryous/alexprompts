@@ -182,10 +182,14 @@ export default async function HomePage() {
               {/* type-h1, not type-display. Dropped a step on August 26, 2026
                   at Alex's call. The headline grew from four words to a
                   two-sentence masthead statement, and a 4.5rem display size that
-                  worked on a short line turns a long one into a wall. */}
-              <h1 className="theme-text-primary type-h1 mb-6">
-                What&apos;s brewing in Real Estate. 
-              </h1>
+                  worked on a short line turns a long one into a wall.
+
+                  The line itself moved into `site.headline` later that day. It
+                  is the sentence that connects the name to the beat, which makes
+                  it brand rather than page copy, and the share card introduces
+                  the publication with the same words now instead of a hand-typed
+                  near-copy that had already drifted. */}
+              <h1 className="theme-text-primary type-h1 mb-6">{site.headline}</h1>
               <p className="theme-text-secondary type-body-lg mb-4">
                 Research &amp; Data on Real Estate &amp; Sales Performance
               </p>

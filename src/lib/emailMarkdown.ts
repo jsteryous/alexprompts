@@ -19,24 +19,52 @@ import { SITE_URL } from "@/lib/site";
  * rendered HTML, so we never hand-parse markup.
  */
 
-const INK = "#0a0c10";
-const MUTED = "#555";
-const ACCENT = "#4f46e5";
-const BORDER = "#e5e7eb";
-const SUBTLE = "#f4f4f6";
+/**
+ * REBUILT ON THE BRAND, August 26, 2026, alongside `emailTemplates.ts`. This
+ * file was still rendering the retired pre-newspaper-pass system: indigo links,
+ * a sans-serif reading surface, and rounded images. Colours and typefaces now
+ * come from `lib/brand.ts`, which mirrors globals.css.
+ *
+ * TWO CHANGES ARE SUBSTANTIVE RATHER THAN COSMETIC, and both come straight from
+ * decisions the site already made and email had never inherited:
+ *
+ *   1. THE BODY IS SERIF. The site's editorial split puts `.theme-prose` in the
+ *      Charter stack because that is what makes a page read as a publication.
+ *      A broadcast IS the article, in full, so it is the one email that most
+ *      needs the reading surface to match. Sans stays on the furniture below.
+ *
+ *   2. PROSE LINKS ARE INK, NOT ACCENT. globals.css moved `.theme-prose a` to
+ *      underlined ink with an accent-tinted underline because "the old bare
+ *      accent colour made a paragraph with three citations look like a nav
+ *      bar." That reasoning is stronger here, not weaker: these pieces are
+ *      sourced against primary documents and routinely carry a dozen links, and
+ *      in the inbox every one of them was rendering as bright indigo. The
+ *      accent-tinted underline degrades safely: clients that do not support
+ *      `text-decoration-color` (older Outlook) simply draw an ink underline,
+ *      which is still the print convention and still correct.
+ */
+import { ACCENT, INK, INK_MUTED, RULE, RULE_STRONG, SANS, SERIF, WASH } from "@/lib/brand";
+
+/** The accent at 55% over white, matching `.theme-prose a`'s underline tint in
+ *  globals.css. Precomputed because email CSS has no `color-mix()`. */
+const ACCENT_UNDERLINE = "#c78686";
 
 /**
  * Per-tag inline styles. Sizes are a touch larger than the site's because inbox
  * reading skews mobile and Gmail's own body text sits at 16px. Margins are
  * bottom-only: `margin-top` collapse is inconsistent across Outlook versions,
  * so stacking one direction keeps rhythm predictable.
+ *
+ * Headings step DOWN from the email's own <h1> in `emailTemplates.ts`. A body
+ * `##` that renders at the same size as the article title flattens the hierarchy
+ * the writer built.
  */
 const STYLES: Record<string, string> = {
-  p: `margin:0 0 18px;font-size:16px;line-height:1.65;color:${INK};`,
-  h1: `margin:26px 0 12px;font-size:22px;font-weight:700;line-height:1.3;color:${INK};`,
-  h2: `margin:30px 0 12px;font-size:19px;font-weight:700;line-height:1.35;color:${INK};`,
-  h3: `margin:24px 0 10px;font-size:16px;font-weight:700;line-height:1.4;color:${INK};`,
-  h4: `margin:20px 0 8px;font-size:15px;font-weight:700;color:${INK};`,
+  p: `margin:0 0 18px;font-family:${SERIF};font-size:17px;line-height:1.62;color:${INK};`,
+  h1: `margin:30px 0 12px;font-family:${SERIF};font-size:23px;font-weight:700;line-height:1.25;letter-spacing:-0.012em;color:${INK};`,
+  h2: `margin:32px 0 12px;font-family:${SERIF};font-size:20px;font-weight:700;line-height:1.3;letter-spacing:-0.012em;color:${INK};`,
+  h3: `margin:26px 0 10px;font-family:${SERIF};font-size:17px;font-weight:700;line-height:1.4;color:${INK};`,
+  h4: `margin:22px 0 8px;font-family:${SERIF};font-size:16px;font-weight:700;color:${INK};`,
   // The gap AFTER a list is deliberately much larger than the gap BETWEEN its
   // items (26px vs 6px). The engines write a bulleted run and then a closing
   // contrast sentence as a plain paragraph, e.g. five ZIPs that gained the most
@@ -45,22 +73,39 @@ const STYLES: Record<string, string> = {
   // has no sibling selector to special-case it, so the ratio does the work.
   ul: `margin:0 0 26px;padding-left:22px;`,
   ol: `margin:0 0 26px;padding-left:22px;`,
-  li: `margin:0 0 6px;font-size:16px;line-height:1.6;color:${INK};`,
-  blockquote: `margin:0 0 18px;padding:2px 0 2px 16px;border-left:3px solid ${BORDER};color:${MUTED};font-style:italic;`,
-  a: `color:${ACCENT};text-decoration:underline;`,
+  li: `margin:0 0 6px;font-family:${SERIF};font-size:17px;line-height:1.58;color:${INK};`,
+  // A pull quote reads as display type on the site, not as a muted aside
+  // (`.theme-prose blockquote p` explicitly un-italicises it), so the italic is
+  // gone here too. The rule on the left is the strong one, since rules are
+  // structure in this system.
+  blockquote: `margin:0 0 22px;padding:2px 0 2px 18px;border-left:3px solid ${RULE_STRONG};font-family:${SERIF};color:${INK_MUTED};`,
+  // Ink with an accent-tinted underline. See the note at the top of this file:
+  // a sourced piece carries a dozen citations, and rendering them all in the
+  // brand colour turns a paragraph into a nav bar.
+  a: `color:${INK};text-decoration:underline;text-decoration-color:${ACCENT_UNDERLINE};text-underline-offset:2px;`,
   strong: `font-weight:700;color:${INK};`,
   b: `font-weight:700;color:${INK};`,
   em: `font-style:italic;`,
   i: `font-style:italic;`,
-  hr: `border:0;border-top:1px solid ${BORDER};margin:26px 0;`,
-  img: `display:block;width:100%;max-width:100%;height:auto;border-radius:10px;margin:0 0 18px;`,
+  hr: `border:0;border-top:1px solid ${RULE_STRONG};margin:30px 0;`,
+  // Square. A rounded photo is a card and a squared one is a plate, which is the
+  // same call `.theme-prose img` makes on the site.
+  img: `display:block;width:100%;max-width:100%;height:auto;margin:0 0 10px;`,
+  // Substack-mirrored posts arrive as real <figure>/<figcaption> pairs, and both
+  // tags are in sanitize-html's defaults, so they were passing through UNSTYLED:
+  // a caption rendered as ordinary body copy, indistinguishable from the
+  // sentence above it. Sans, small, muted, and flush left is the press
+  // convention and what the site already does.
+  figure: `margin:0 0 24px;`,
+  figcaption: `margin:0;font-family:${SANS};font-size:13px;line-height:1.5;color:${INK_MUTED};text-align:left;`,
   // No published post uses a pipe table today, but the engines are free to emit
   // one, and an unstyled email table collapses into unreadable run-on text.
-  table: `width:100%;border-collapse:collapse;margin:0 0 18px;font-size:15px;`,
-  th: `text-align:left;padding:8px 10px;border-bottom:2px solid ${BORDER};color:${INK};font-weight:700;`,
-  td: `padding:8px 10px;border-bottom:1px solid ${BORDER};color:${INK};vertical-align:top;`,
-  code: `font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:${SUBTLE};padding:2px 5px;border-radius:4px;`,
-  pre: `margin:0 0 18px;padding:14px;background:${SUBTLE};border-radius:8px;overflow-x:auto;font-size:14px;`,
+  // Sans, because a table is furniture rather than a reading surface.
+  table: `width:100%;border-collapse:collapse;margin:0 0 22px;font-family:${SANS};font-size:14px;`,
+  th: `text-align:left;padding:8px 10px;border-bottom:2px solid ${RULE_STRONG};color:${INK};font-weight:700;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;`,
+  td: `padding:8px 10px;border-bottom:1px solid ${RULE};color:${INK};vertical-align:top;`,
+  code: `font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:${WASH};color:${ACCENT};padding:2px 5px;`,
+  pre: `margin:0 0 22px;padding:14px;background:${WASH};overflow-x:auto;font-size:14px;`,
 };
 
 /** Make a root-relative URL absolute. Mail clients have no page origin to

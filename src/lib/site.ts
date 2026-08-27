@@ -122,6 +122,24 @@ export const site = {
   // in the market claim was cut August 14, 2026; that is one input, not the job,
   // and leading with it made the publication sound smaller than it is.
   tagline: "Greenville Real Estate & Sales Performance",
+
+  // THE MASTHEAD STATEMENT. Alex's line, written on the front page August 26,
+  // 2026, and moved here the same day so it stops being homepage-only copy.
+  //
+  // It belongs in this file because it is doing brand work, not page work: it
+  // is the one line that connects the NAME to the BEAT. "Rebrew" says nothing
+  // about real estate on its own, and the coffee-cup-and-house mark
+  // (src/components/Mark.tsx) says it only to someone who already gets the
+  // joke. This sentence is where the pun pays off, so every surface that
+  // introduces the publication cold should be able to reach it. The share card
+  // does; the homepage does. Both now read it from here rather than each
+  // keeping a copy, which is how the old subscribe-page promise drifted a week
+  // behind the beat.
+  //
+  // Keep the period. It is a statement, not a headline fragment, and the house
+  // style bans fragments.
+  headline: "What’s brewing in Real Estate.",
+
   oneLiner:
     "Research and data on Greenville real estate and on sales performance, read and written up by Alex Steryous.",
   description:
