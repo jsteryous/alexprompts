@@ -1,5 +1,26 @@
 # Scripts — Alex Prompts content engine
 
+> **THE LIVE ENGINE IS `scripts/research/` (August 27, 2026). Read `scripts/research/SPEC.md`
+> first; it outranks this file and `scripts/publication/SPEC.md` wherever they disagree.**
+>
+> One research paper per week: what it asked, the trick that let it find out, what it found,
+> whether it has held up, and what its effect size is worth in Greenville dollars. Draft-first
+> into `blog_posts`, reviewed at rebrew.org/admin, tagged `sales` or `greenville`.
+>
+> It exists because the site has promised since August 25, 2026 that *"We read research papers
+> about real estate and sales performance and share what we find interesting"* and nothing in
+> the repo did that. `scripts/publication/` was built for company teardowns off county records
+> and its scout was never repointed at the new beat.
+>
+> **`scripts/publication/` STOPS PRODUCING, but three of its passes are still LIVE and shared:**
+> `pass3_writer.md`, `pass3b_verifier.md`, and `pass4_editor.md`. They hold the house voice, the
+> four tells, the legal gate, and the fair-housing line, and the research engine hands each one
+> to its sub-agent together with a short delta from `scripts/research/routine/`. **Do not delete
+> them, and do not fork a second copy of them**, which is how the voice rules drift.
+>
+> Everything below this banner describes the earlier three-engine setup and is HISTORY. The
+> voice rules in it are still correct and still enforced.
+
 See root `CLAUDE.md` for env vars and deployment. The dental/legacy pipeline
 (prospects discovery, LLC→human enrichment, AI blog insights, all their GitHub
 workflows) was retired in June 2026 and lives under **`scripts/_archive/`** —
