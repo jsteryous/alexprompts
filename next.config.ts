@@ -1,16 +1,5 @@
 import type { NextConfig } from "next";
-
-// The one remote host the image optimizer may fetch: the site's own Supabase
-// Storage (admin-editor body images, the old streetview covers). Derived from
-// env so a project move follows automatically; when the env is unset the
-// render pipeline also skips the rewrite, so the two stay consistent.
-const supabaseHost = (() => {
-  try {
-    return new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").hostname;
-  } catch {
-    return undefined;
-  }
-})();
+import { OPTIMIZABLE_IMAGE_HOSTS } from "./src/lib/imageHosts";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -24,15 +13,13 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2592000,
-    remotePatterns: supabaseHost
-      ? [
-          {
-            protocol: "https" as const,
-            hostname: supabaseHost,
-            pathname: "/storage/v1/object/public/**",
-          },
-        ]
-      : [],
+    // Whatever src/lib/imageHosts.ts trusts, so this file and the two render
+    // paths cannot drift apart again. Pathname is left open because a stock
+    // host organizes its URLs however it likes; the hostname is the control.
+    remotePatterns: OPTIMIZABLE_IMAGE_HOSTS.map((hostname) => ({
+      protocol: "https" as const,
+      hostname,
+    })),
   },
   async redirects() {
     return [

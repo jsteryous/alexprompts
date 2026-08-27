@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isOptimizableHost } from "@/lib/imageHosts";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -12,23 +13,17 @@ import { SITE_URL } from "@/lib/site";
  *
  * Two rendering paths, chosen by where the cover lives:
  * - SAME-ORIGIN covers (any root-relative or SITE_URL-absolute path) and
- *   SUPABASE covers (the editor uploads and the old streetview PNGs,
- *   whitelisted in next.config remotePatterns) go through next/image, which
- *   serves a responsive srcset in AVIF/WebP. This is the mobile-LCP fix: a
- *   phone gets a ~60KB variant sized to its viewport instead of a full-size
- *   JPEG (or a multi-MB streetview PNG).
- * - Other REMOTE covers (the Substack CDN) stay a plain <img>: their hosts
+ *   covers on a TRUSTED REMOTE HOST (src/lib/imageHosts.ts: Pexels, Wikimedia,
+ *   the site's Supabase Storage) go through next/image, which serves a
+ *   responsive srcset in AVIF/WebP. This is the mobile-LCP fix: a phone gets a
+ *   ~60KB variant sized to its viewport instead of the original. It matters
+ *   more than it sounds. Until August 27, 2026 only Supabase was trusted here
+ *   while eighteen published posts carried Pexels covers, so the homepage was
+ *   sending 14MB of full-resolution JPEG to draw three thumbnails.
+ * - Any OTHER remote cover (the Substack CDN) stays a plain <img>: those hosts
  *   vary, and an un-whitelisted host would make next/image throw at request
  *   time, so the plain tag is the resilient choice there.
  */
-
-const SUPABASE_HOST = (() => {
-  try {
-    return new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").hostname;
-  } catch {
-    return null;
-  }
-})();
 
 /** Cover URL -> a src next/image can optimize (root-relative path for
  *  same-origin, the absolute URL for the whitelisted Supabase host); null
@@ -40,7 +35,7 @@ function optimizableSrc(src: string): string | null {
     const site = new URL(SITE_URL);
     const strip = (h: string) => h.replace(/^www\./, "");
     if (strip(url.hostname) === strip(site.hostname)) return url.pathname;
-    if (SUPABASE_HOST && url.hostname === SUPABASE_HOST) return src;
+    if (isOptimizableHost(url.hostname)) return src;
   } catch {
     return null;
   }
