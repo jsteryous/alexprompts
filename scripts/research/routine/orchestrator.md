@@ -170,10 +170,11 @@ the body. Using the Supabase connector, INSERT one row into `blog_posts`:
 - `slug` = METADATA slug (if that slug exists, append `-<YYYY-MM-DD>`)
 - `summary` = METADATA summary
 - `body_md` = the full `## ARTICLE` markdown
-- `cover_image` = NULL. The site fills it from `image_address` the moment Alex publishes.
-- `image_address` = the `## IMAGE` value. A curated subject key for an Upstate piece (it maps to the
-  licensed library in `src/lib/greenvilleCovers.ts`, no API key), or a geocodable `location:` string
-  for a piece anchored elsewhere. ALWAYS store one of the two; never leave it null.
+- `cover_image` = NULL. **There is no automatic cover.** Nothing downstream fills one in, so the
+  piece ships with the photo Alex picks in the editor or with no photo at all. Never stamp one on
+  his behalf.
+- `image_address` = the `## IMAGE` value, stored as a note about what the piece is anchored to. It
+  no longer renders a cover, so it is metadata and nothing more.
 - `tags` = a Postgres text array whose FIRST entry is the section tag the angle chose, either `sales`
   or `greenville`, never both, since a post lives in exactly one section. Never `greenville works`,
   which no longer routes anywhere. You MAY add one plain topic tag after the section tag.

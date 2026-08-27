@@ -11,12 +11,12 @@ import { SITE_URL } from "@/lib/site";
  * that layout so the browser picks the right variant.
  *
  * Two rendering paths, chosen by where the cover lives:
- * - SAME-ORIGIN covers (the committed /greenville/library photos, stored as
- *   SITE_URL-absolute URLs) and SUPABASE covers (the old streetview PNGs,
+ * - SAME-ORIGIN covers (any root-relative or SITE_URL-absolute path) and
+ *   SUPABASE covers (the editor uploads and the old streetview PNGs,
  *   whitelisted in next.config remotePatterns) go through next/image, which
  *   serves a responsive srcset in AVIF/WebP. This is the mobile-LCP fix: a
- *   phone gets a ~60KB variant sized to its viewport instead of the full
- *   1400px ~300KB JPEG (or a multi-MB streetview PNG).
+ *   phone gets a ~60KB variant sized to its viewport instead of a full-size
+ *   JPEG (or a multi-MB streetview PNG).
  * - Other REMOTE covers (the Substack CDN) stay a plain <img>: their hosts
  *   vary, and an un-whitelisted host would make next/image throw at request
  *   time, so the plain tag is the resilient choice there.

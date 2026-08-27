@@ -150,13 +150,10 @@ markdown as the body. Using the Supabase connector, INSERT one row into blog_pos
     publishes (the agent's sandbox cannot render an image; the daily /api/finalize-greenville cron
     is the backstop). The article then shows that photo as its hero (ArticleView renders
     cover_image when the body has no lead image).
-  - image_address = the ## IMAGE value. For an Upstate/Greenville piece this is a curated subject
-    key (e.g. 'downtown-falls') that maps to a hand-picked, licensed Greenville library photo
-    (src/lib/greenvilleCovers.ts), the SAME library the /real-estate pieces use, no API key needed.
-    For a piece anchored elsewhere in South Carolina the writer gives a geocodable `location:`
-    string instead (e.g. 'Port of Charleston, Charleston, SC'), which the finalize cron renders as
-    a Street View or map cover via the Google fallback. ALWAYS store one of the two; never leave
-    image_address null.
+  - image_address = the ## IMAGE value, stored as a note about what the piece is anchored to.
+    NOTE (August 27, 2026): there is no automatic cover any more. This value renders nothing, the
+    curated Greenville library and the Google Street View fallback are both deleted, and a cover is
+    whatever photo Alex uploads in the editor. Leave cover_image NULL and never stamp one for him.
   - tags = a Postgres text array that MUST include "greenville works" and must NOT include
     "guide" or the bare "greenville", e.g. '{"greenville works"}' (the "greenville works" tag is
     what routes the post to /greenville-works via sectionOf in src/lib/posts.ts; a bare

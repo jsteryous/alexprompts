@@ -1,10 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { DEFAULT_SUBJECT, resolveLibraryCover } from "@/lib/greenvilleCovers";
 import { sectionOf } from "@/lib/posts";
 import { isAuthorized, tokenAuthorized } from "@/lib/adminAuth";
-import { site } from "@/lib/site";
+import { htmlPage } from "@/lib/htmlPage";
 
 /** Public URL base for each section, so the confirmation link and the
  *  revalidation path match where the post actually lives. */
@@ -31,7 +30,7 @@ async function publishPost(id: string): Promise<PublishResult> {
 
   const { data: rows, error: fetchErr } = await client
     .from("blog_posts")
-    .select("id, title, slug, status, tags, body_md, cover_image, image_address")
+    .select("id, title, slug, status, tags, body_md, cover_image")
     .eq("id", id)
     .single();
 
@@ -68,24 +67,11 @@ async function publishPost(id: string): Promise<PublishResult> {
     return { ok: false, status: 500, heading: "Database error", message: updateErr.message };
   }
 
-  // Set the curated library cover NOW, not at the next daily finalize run, so
-  // the article never sits live cover-less. resolveLibraryCover is pure (a
-  // committed /public URL, no key, no upload). All three local sections are
-  // Greenville pieces, so a row missing image_address still earns the
-  // city-level default. Best-effort in its own update: a cover failure must
-  // never block publish, and the finalize cron stays the backstop (it also
-  // handles the rare non-Greenville pin that needs the Google fallback).
-  let coverSet = Boolean(rows.cover_image); // a custom cover set in the editor counts
-  if (section !== "newsletter" && !rows.cover_image) {
-    const lib = resolveLibraryCover(rows.image_address ?? DEFAULT_SUBJECT, rows.slug);
-    if (lib) {
-      const { error: coverErr } = await client
-        .from("blog_posts")
-        .update({ cover_image: lib.url, cover_credit: lib.credit })
-        .eq("id", id);
-      coverSet = !coverErr;
-    }
-  }
+  // No automatic cover. Publishing used to stamp a photo from the curated
+  // Greenville library on any row that had none, which meant a piece Alex had
+  // just read through could go live under a stock photo he never picked. The
+  // cover is now whatever he set in the editor, and an empty one stays empty.
+  const coverSet = Boolean(rows.cover_image);
 
   // Bust the ISR cache so the section index + the post show the new issue
   // immediately (otherwise it waits up to the 300s revalidate window).
@@ -94,13 +80,13 @@ async function publishPost(id: string): Promise<PublishResult> {
 
   // Local-section posts get their owned-list broadcast from the daily finalize
   // cron once they are PUBLISHED; newsletter posts do not (those come from
-  // Substack). The cover is normally set above at publish time.
+  // Substack).
   const finalizeNote =
     section === "newsletter"
       ? ""
       : coverSet
-        ? " The cover photo is set; the subscriber email goes out with the daily finalize cron."
-        : " The cover photo and the subscriber email are sent by the daily finalize cron within a day.";
+        ? " The subscriber email goes out with the daily finalize cron."
+        : " It goes live without a cover photo; the subscriber email goes out with the daily finalize cron.";
 
   return { ok: true, already: false, title: rows.title, path, finalizeNote };
 }
@@ -114,21 +100,21 @@ export async function GET(req: NextRequest) {
   const token = searchParams.get("token");
 
   if (!process.env.PUBLISH_SECRET) {
-    return html("Configuration error", "PUBLISH_SECRET is not set on the server.", 500);
+    return htmlPage("Configuration error", "PUBLISH_SECRET is not set on the server.", 500);
   }
   if (!id) {
-    return html("Missing parameters", "The link is incomplete. Check the email.", 400);
+    return htmlPage("Missing parameters", "The link is incomplete. Check the email.", 400);
   }
   if (!tokenAuthorized(token)) {
-    return html("Unauthorized", "Invalid token. This link may have been tampered with.", 403);
+    return htmlPage("Unauthorized", "Invalid token. This link may have been tampered with.", 403);
   }
 
   const r = await publishPost(id);
-  if (!r.ok) return html(r.heading, r.message, r.status);
+  if (!r.ok) return htmlPage(r.heading, r.message, r.status);
   if (r.already) {
-    return html("Already published", `"${r.title}" is already live at <a href="${r.path}" style="color:#4f46e5">${r.path}</a>.`, 200);
+    return htmlPage("Already published", `"${r.title}" is already live at <a href="${r.path}">${r.path}</a>.`, 200);
   }
-  return html("Published", `"${r.title}" is now live at <a href="${r.path}" style="color:#4f46e5">${r.path}</a>.${r.finalizeNote}`, 200);
+  return htmlPage("Published", `"${r.title}" is now live at <a href="${r.path}">${r.path}</a>.${r.finalizeNote}`, 200);
 }
 
 // POST /api/publish  { id, token? }
@@ -178,47 +164,3 @@ function sameOrigin(req: NextRequest): boolean {
   }
 }
 
-// ── Minimal HTML response page ────────────────────────────────────────────────
-function html(heading: string, body: string, status: number) {
-  const isOk = status === 200;
-  const icon = isOk ? "✓" : "✗";
-  const color = isOk ? "#16a34a" : "#dc2626";
-
-  const markup = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>${heading} — ${site.name}</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:system-ui,sans-serif;background:#f9fafb;min-height:100vh;
-         display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;
-          padding:40px 48px;max-width:480px;width:100%;text-align:center}
-    .icon{width:56px;height:56px;border-radius:50%;background:${color}15;
-          display:flex;align-items:center;justify-content:center;
-          margin:0 auto 20px;font-size:24px;color:${color}}
-    h1{font-size:22px;font-weight:700;color:#0a0a0a;margin-bottom:10px}
-    p{font-size:15px;color:#555;line-height:1.6}
-    .back{display:inline-block;margin-top:28px;font-size:13px;
-          color:#0a0a0a;text-decoration:none;border:1px solid #e5e7eb;
-          padding:8px 18px;border-radius:8px}
-    .back:hover{border-color:#aaa}
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="icon">${icon}</div>
-    <h1>${heading}</h1>
-    <p>${body}</p>
-    <a class="back" href="/">← ${new URL(site.url).host}</a>
-  </div>
-</body>
-</html>`;
-
-  return new NextResponse(markup, {
-    status,
-    headers: { "Content-Type": "text/html" },
-  });
-}

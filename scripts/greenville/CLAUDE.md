@@ -167,11 +167,9 @@ python -m greenville.collect --limit 15
   `src/data/greenvilleRecords.json`. No secrets (same public county ArcGIS service). Nothing on
   the site imports this file, so a refresh can never break a page; it feeds story selection.
   Weekly is generous given the findings are multi-year patterns. **Live since July 2026.**
-- **`.github/workflows/greenville-covers.yml`** (MONTHLY) runs `greenville.cover_ingest` to grow
-  the cover library from Wikimedia Commons and opens a PR with the new photos. Runs **FREE by
-  default** (`--no-vision`, no key needed); the human PR review is the quality gate. Set the
-  `ANTHROPIC_API_KEY` secret and drop `--no-vision` ONLY for the optional Claude-vision
-  pre-filter. See the Images section above.
+- **`.github/workflows/greenville-covers.yml`** (MONTHLY) grew the cover library from Wikimedia
+  Commons and opened a PR with the new photos. **DELETED August 27, 2026** with the auto-cover,
+  along with `greenville/cover_ingest.py` and the library itself. See the Images section below.
 - **`.github/workflows/collect-greenville.yml`** (news signal) is **RETIRED** (the news track is
   gone; nothing reads its `signal-latest.json`). Its daily schedule was removed July 2026 so it no
   longer pushes noise commits; it is now `workflow_dispatch`-only, kept for reversibility.
@@ -212,66 +210,21 @@ python -m greenville.collect --limit 15
 - **X** has no auto-poster (no X connector); the routine drafts the X post and emails it for
   manual posting.
 
-## Images (a curated Greenville photo library, set after publish, off the agent)
+## Images (DELETED August 27, 2026 — there is no auto-cover)
 
-The cover is NOT set by the routine. The cloud agent reaches the world only through MCP
-connectors (Supabase, Gmail), so it cannot fetch a photo or call the Storage API over HTTP.
-These pieces are, in effect, marketing Greenville to people deciding whether to move here, so
-the cover should be a beautiful, iconic Greenville photo (Falls Park, downtown, the Reedy),
-not a geocoded street corner or a red-pin map. So the writer names a SUBJECT and the site
-picks a hand-curated photo:
+This track used to name a `subject:` in its `## IMAGE` block, which `/api/publish` and the
+`/api/finalize-greenville` cron turned into a hand-curated Greenville photo. Alex killed the
+whole mechanism ("i always have to find my own pics anyway"). Deleted: `src/lib/greenvilleCovers`
+(`.ts` + `.json`), `src/lib/greenvilleImage.ts`, `src/lib/editorCover.ts`, the eleven photos in
+`public/greenville/library/` and their `CREDITS.md`, `scripts/greenville/cover_ingest.py`, and the
+monthly `.github/workflows/greenville-covers.yml` PR that grew the library. The Google Street View
+and static-map fallback went with it, so `GOOGLE_MAPS_KEY` is now unused.
 
-1. **The evergreen writer names a subject** (`pass_evergreen.md` emits a `## IMAGE` block with a
-   `subject:` key from a fixed vocabulary: `downtown-falls` the default, `liberty-bridge`,
-   `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`, `travelers-rest`). It may give a
-   fallback `location:` string only when no subject fits (rare).
-2. **The orchestrator stores that value** in `blog_posts.image_address` on the row it publishes
-   (STEP 3), leaving `cover_image` NULL.
-3. **The publish route sets the cover the moment Alex publishes** (July 2026; `/api/publish`
-   calls `resolveLibraryCover` from `src/lib/greenvilleCovers.ts` directly, a pure lookup of a
-   committed `/public` URL, no key, no upload), so a local post never sits live cover-less
-   waiting on the daily cron. A row missing `image_address` still gets the city-level default.
-   The draft editors (`/admin/edit/[id]` + `/review`) show the same resolved photo as a preview
-   while the post is still a DRAFT (`src/lib/editorCover.ts`).
-4. **The finalize cron is the backstop** (`/api/finalize-greenville`, daily; see
-   `src/lib/greenvilleImage.ts` -> `renderCover`, which consults the same library). Its cascade:
-   (a) the **curated library** first (any Greenville-area address resolves to at least the
-   city-level default); (b) a **Google Street View** photo of the geocoded point only for a
-   non-Greenville pin; (c) a **map-with-pin** as the last resort. It sets `cover_image`, and for
-   a CC-BY library photo also writes the attribution to `cover_credit` (shown under the article
-   hero; CC0 photos and Google covers need none). Idempotent: it only acts while `cover_image`
-   is NULL, within a 7-day window from publish, then ages out. With publish-time covers it
-   effectively only handles the Google fallback and missed runs.
-
-**The library data** lives in `src/lib/greenvilleCovers.json` (subject -> a list of photos), which
-`src/lib/greenvilleCovers.ts` reads. Multiple photos per subject rotate by a per-post seed (the
-slug), so posts on the same subject do not all share one hero.
-
-**Growing it, by hand.** Add a landscape, watermark-free, licensed Greenville photo to
-`public/greenville/library/`, append it to the subject's array in `greenvilleCovers.json`, add its
-attribution to `public/greenville/library/CREDITS.md`, and (only if it is a NEW subject) list it in
-the writer's `## IMAGE` vocabulary in `pass_evergreen.md`.
-
-**Growing it, autonomously (`cover_ingest.py`).** A monthly GitHub Action
-(`.github/workflows/greenville-covers.yml`) runs `python -m greenville.cover_ingest`: for each
-existing subject it searches Wikimedia Commons for new freely-licensed, landscape, high-res
-candidates it does not already have, commits the best ones into the library, appends them to
-`greenvilleCovers.json` + `CREDITS.md` (attribution pulled from the Commons metadata), and **opens a
-PR**. It only grows existing subjects (never invents one). **The PR is the quality gate:** a human
-skims the images and drops any watermarked or weak ones before merge.
-
-**It runs FREE by default** (`--no-vision`, no key), to keep the site's zero-billing guarantee. The
-script also has an OPTIONAL Claude **vision** pre-filter (Haiku: attractive? on-subject? no
-watermark/overlaid text?) that scores each candidate before it reaches the PR. That path is metered
-Anthropic API usage (a few cents per run), so it is opt-in: set the `ANTHROPIC_API_KEY` repo secret
-and remove `--no-vision` from the workflow. Flags: `--dry-run` (list candidates, no writes), and
-`--no-vision` / `--max-new` / `--per-subject` / `--subject`. Commons' Greenville depth is finite, so
-expect a few good photos per run, not dozens.
-
-**Keys.** The curated-library path needs NO key (the photos are served from `/public`). Only the
-Google fallback uses `GOOGLE_PLACES_API_KEY` / `GOOGLE_MAPS_KEY` (Maps Static, Geocoding, Street
-View Static) plus `SUPABASE_SERVICE_KEY` for its upload, and it now effectively never runs for a
-Greenville piece. See memory [[greenville-lead-image-cascade]].
+A cover is a photo Alex uploads in the editor, or nothing at all, in which case the page renders
+`PostCover`'s branded `>` placeholder. `image_address` is still written by the engines as a note
+about what a piece is anchored to, but it renders nothing. The seven published posts that were
+carrying an auto-assigned library photo had `cover_image` and `cover_credit` cleared in the same
+pass. See memory [[greenville-lead-image-cascade]], which this supersedes.
 
 ## Guardrails (enforced in the routine passes)
 

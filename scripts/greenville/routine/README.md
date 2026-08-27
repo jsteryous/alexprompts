@@ -65,8 +65,10 @@ writer names a curated **SUBJECT** (the `## IMAGE` block: `downtown-falls` the d
 `liberty-bridge`, `reedy-river`, `north-main`, `west-end`, `swamp-rabbit-trail`, `travelers-rest`,
 or a fallback `location:` only when no subject fits), the orchestrator stores it in
 `blog_posts.image_address` (leaving `cover_image` NULL), and **after Alex publishes** the site's
-**`/api/finalize-greenville`** cron picks the cover (`src/lib/greenvilleImage.ts` →
-`src/lib/greenvilleCovers.ts`): a hand-curated, freely-licensed photo from the committed Greenville
+**`/api/finalize-greenville`** cron used to pick the cover (`src/lib/greenvilleImage.ts` →
+`src/lib/greenvilleCovers.ts`, both DELETED August 27, 2026 with the auto-cover; the cron only
+broadcasts now, and a cover is Alex's own upload in the editor or nothing): a hand-curated,
+freely-licensed photo from the committed Greenville
 library under `public/greenville/library/` matched to the subject (the normal path, no API key),
 falling back to a **Google Street View** photo or a **map-with-pin** only for an off-map,
 non-Greenville pin. It writes `cover_image` and, for a CC-BY library photo, `cover_credit`.

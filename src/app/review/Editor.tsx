@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import type { Editor as TiptapEditor } from "@tiptap/react";
-import type { EditorCover } from "@/lib/editorCover";
 import { mdToEditorHtml } from "@/lib/editorMarkdown";
 import { retagForSection, type SectionKey } from "@/lib/editorSections";
 import { sectionOf } from "@/lib/posts";
@@ -30,12 +29,11 @@ interface Props {
   backHref?: string;
   /** Public URL of the post (e.g. /real-estate/<slug>), for the View link. */
   livePath?: string;
-  /** The custom cover stored on the row, when Alex has set one himself. */
+  /** The cover stored on the row, which is the one Alex chose himself. There
+   *  is no automatic cover anywhere downstream: a piece ships with this photo
+   *  or with none. */
   initialCoverImage?: string | null;
   initialCoverCredit?: string | null;
-  /** The curated library photo the post falls back to when no custom cover is
-   *  set (resolved server-side; the photo /api/publish will stamp). */
-  libraryCover?: EditorCover | null;
 }
 
 type Msg = { kind: "ok" | "err"; text: string } | null;
@@ -111,7 +109,6 @@ export default function Editor({
   livePath,
   initialCoverImage = null,
   initialCoverCredit = null,
-  libraryCover = null,
 }: Props) {
   const [title, setTitle] = useState(initialTitle);
   const [summary, setSummary] = useState(initialSummary);
@@ -188,10 +185,9 @@ export default function Editor({
   // relies on the cookie instead, so it stays empty.
   const authQuery = token ? `?token=${encodeURIComponent(token)}` : "";
 
-  // The cover shown at the top of the composer is Alex's OWN photo only. The
-  // curated library pick is real (it is what /api/publish stamps) but it is not
-  // a choice he made, so it appears as a thumbnail on the add button instead of
-  // as a full-bleed photo above an unwritten title.
+  // The cover is Alex's own photo or nothing at all. Publishing no longer
+  // stamps a stock photo from the curated library, so an empty slot here is a
+  // decision that survives to the live page rather than a gap something fills.
 
   // The rich-text document is seeded ONCE from the stored markdown. `body`
   // stays markdown from then on: RichText converts on every keystroke, so
@@ -634,10 +630,9 @@ export default function Editor({
               />
             </figure>
           ) : (
-            /* No cover of his own yet. The curated library will stamp one at
-               publish time, so the thumbnail says WHICH one without letting a
-               stock photo be the first thing on the page above an unwritten
-               title. Clicking anywhere here, or dropping a photo, replaces it. */
+            /* No cover yet, and nothing will add one later. A quiet text
+               button, the way Substack does it, so an empty slot never becomes
+               furniture above an unwritten title. Click it, or drop a photo. */
             <button
               type="button"
               onClick={() => coverFileRef.current?.click()}
@@ -654,24 +649,8 @@ export default function Editor({
                   : "theme-text-muted hover:text-[var(--foreground-soft)] hover:bg-[var(--surface-muted)]"
               }`}
             >
-              {libraryCover ? (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={libraryCover.url}
-                    alt=""
-                    className="h-10 w-20 object-cover shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"
-                  />
-                  <span>
-                    {coverUploading ? "Uploading…" : "Auto cover. Click or drop a photo to use your own."}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span aria-hidden className="text-base leading-none">+</span>
-                  <span>{coverUploading ? "Uploading…" : "Add a cover image"}</span>
-                </>
-              )}
+              <span aria-hidden className="text-base leading-none">+</span>
+              <span>{coverUploading ? "Uploading…" : "Add a cover image"}</span>
             </button>
           )}
           <input
