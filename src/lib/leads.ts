@@ -43,6 +43,18 @@ export interface LeadInput {
   utmSource: string | null;
   utmMedium: string | null;
   utmCampaign: string | null;
+  /**
+   * SMS consent record (10DLC / TCPA). TCPA puts the burden of proving consent
+   * on the sender, so the boolean alone is not enough: the row also carries WHEN
+   * it was given, the IP it came from, and the EXACT wording that was on screen
+   * at the time. The wording is stamped server-side from src/lib/legal.ts, never
+   * taken from the request body. When consent is absent these are all null and
+   * the person must not be texted.
+   */
+  smsConsent: boolean;
+  smsConsentAt: string | null;
+  smsConsentIp: string | null;
+  smsConsentText: string | null;
 }
 
 /** Insert one referral lead. Throws on a database error so the route can 500. */
@@ -64,6 +76,10 @@ export async function insertLead(lead: LeadInput): Promise<void> {
     utm_source: lead.utmSource,
     utm_medium: lead.utmMedium,
     utm_campaign: lead.utmCampaign,
+    sms_consent: lead.smsConsent,
+    sms_consent_at: lead.smsConsentAt,
+    sms_consent_ip: lead.smsConsentIp,
+    sms_consent_text: lead.smsConsentText,
   });
   if (error) throw new Error(error.message);
 }

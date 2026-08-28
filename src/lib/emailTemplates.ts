@@ -258,6 +258,7 @@ export function leadNotifyEmail(lead: {
   utmSource?: string | null;
   utmMedium?: string | null;
   utmCampaign?: string | null;
+  smsConsent?: boolean;
 }): { subject: string; html: string; text: string } {
   const who = lead.name?.trim() || lead.email;
   const subject = `New lead: ${who}`;
@@ -266,6 +267,13 @@ export function leadNotifyEmail(lead: {
     ["Name", lead.name],
     ["Email", lead.email],
     ["Phone", lead.phone],
+    // Spelled out rather than left blank, because the expensive mistake here is
+    // texting someone who never agreed. A number with no consent gets a loud
+    // row saying so; a lead with no number at all gets nothing.
+    [
+      "Texting",
+      lead.phone ? (lead.smsConsent ? "Consented, OK to text" : "NO consent, do not text") : null,
+    ],
     ["Looking to", prettyIntent(lead.intent)],
     ["Market", lead.location],
     ["Moving from", lead.movingFrom],

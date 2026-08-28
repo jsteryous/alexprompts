@@ -128,3 +128,27 @@ select
 from referral_leads
 where status = 'new'
 order by created_at asc;
+
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- 9. The texting list. Who has actually consented to receive an SMS.
+--
+-- Check this BEFORE sending anything, including a one-off manual text. A phone
+-- number in the phone column is not permission; sms_consent = true is. The
+-- consent_shown column is the exact wording that was on the screen when they
+-- agreed, which is what proves consent if it is ever questioned, so if a row
+-- has consent with no wording stored, treat it as unproven and leave it alone.
+--
+-- Unlike the queries above, this one does NOT exclude status = 'dead': someone
+-- who went cold as a lead may still have a live texting consent, and the two
+-- have nothing to do with each other.
+-- ─────────────────────────────────────────────────────────────────────────────
+select
+  created_at::date  as arrived,
+  name, phone, intent, location, status,
+  sms_consent_at    as consented_at,
+  sms_consent_ip    as consented_ip,
+  sms_consent_text  as consent_shown
+from referral_leads
+where sms_consent
+order by created_at desc;

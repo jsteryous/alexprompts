@@ -92,6 +92,7 @@ const files = {
     timeframe: "3_months",
     message: "Relocating for work in the spring and want to understand pricing before we list.",
     refSlug: "greenville-sale-prices",
+    smsConsent: true,
   }).html,
   "5-page-confirmed.html": H.resultPageMarkup(
     "You are on the list",

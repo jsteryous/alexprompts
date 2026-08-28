@@ -5,6 +5,7 @@ import { sendEmail } from "@/lib/email";
 import { leadNotifyEmail } from "@/lib/emailTemplates";
 import { rateLimited } from "@/lib/rateLimit";
 import { site } from "@/lib/site";
+import { SMS_CONSENT_TEXT } from "@/lib/legal";
 
 // POST /api/refer  { name?, email, phone?, intent?, location?, movingFrom?, timeframe?, message?, source? }
 // Public, referral-lead capture for /find-a-pro. Stores a qualified lead in
@@ -65,10 +66,19 @@ export async function POST(req: NextRequest) {
   const intentRaw = str(body.intent, 20);
   const timeframeRaw = str(body.timeframe, 20);
 
+  // SMS consent. The client sends a boolean and nothing else: the wording is
+  // stamped here from src/lib/legal.ts, because a consent record assembled from
+  // request-body strings proves nothing about what the person actually saw.
+  // Consent with no phone number is meaningless, so it is not recorded, which
+  // keeps the table from carrying rows that claim a texting right over an empty
+  // number.
+  const phone = str(body.phone, 40);
+  const smsConsent = body.smsConsent === true && !!phone;
+
   const lead = {
     name: str(body.name, 120),
     email,
-    phone: str(body.phone, 40),
+    phone,
     intent: (INTENTS as string[]).includes(intentRaw ?? "") ? (intentRaw as LeadIntent) : null,
     location: str(body.location, 160),
     movingFrom: str(body.movingFrom, 160),
@@ -83,6 +93,10 @@ export async function POST(req: NextRequest) {
     utmSource: str(body.utmSource, 120),
     utmMedium: str(body.utmMedium, 120),
     utmCampaign: str(body.utmCampaign, 120),
+    smsConsent,
+    smsConsentAt: smsConsent ? new Date().toISOString() : null,
+    smsConsentIp: smsConsent ? clientIp(req) : null,
+    smsConsentText: smsConsent ? SMS_CONSENT_TEXT : null,
   };
 
   try {

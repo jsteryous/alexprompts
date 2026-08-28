@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { SMS_CONSENT_TEXT } from "@/lib/legal";
 
 /** First-party attribution captured once on mount from the URL and referrer, so we
  *  can see which article or channel drove a lead without any third-party analytics. */
@@ -49,6 +51,11 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
   const [location, setLocation] = useState("");
   const [timeframe, setTimeframe] = useState("");
   const [message, setMessage] = useState("");
+  // Unchecked by default and never required to submit, which is not a style
+  // choice: 10DLC vetting rejects a pre-checked box or one bundled into the
+  // submit action, and TCPA does not let consent to be texted be the price of
+  // getting an answer. Do not add it to the submit-button validation.
+  const [smsConsent, setSmsConsent] = useState(false);
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
   const attribution = useRef<Attribution | null>(null);
@@ -86,6 +93,10 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
           timeframe: timeframe || undefined,
           message,
           source,
+          // Only the boolean crosses the wire. The server stamps the consent
+          // wording from src/lib/legal.ts, because a consent record the client
+          // could have written says nothing about what was on screen.
+          smsConsent,
           ...attribution.current,
         }),
       });
@@ -245,6 +256,33 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
           placeholder="Price range, must-haves, where you're moving from, whatever helps."
           className="theme-field w-full px-4 py-3 text-sm resize-y"
         />
+      </label>
+
+      {/* SMS consent. The wording comes from src/lib/legal.ts so that the string
+          shown here, the string on /terms, and the string stored on the lead row
+          are the same string. Every clause in it is checked by carrier vetting,
+          so it is rendered whole rather than summarized, and the two links sit
+          outside it because consent is only informed if the terms are one click
+          away at the moment it is given. */}
+      <label className="flex gap-3 items-start">
+        <input
+          type="checkbox"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          className="mt-1 h-4 w-4 shrink-0 accent-[var(--accent)]"
+        />
+        <span className="theme-text-muted text-xs leading-relaxed">
+          {SMS_CONSENT_TEXT} Optional, and leaving it unchecked does not change the answer you get.
+          See the{" "}
+          <Link href="/privacy" className="theme-link underline">
+            Privacy Policy
+          </Link>{" "}
+          and the{" "}
+          <Link href="/terms#sms" className="theme-link underline">
+            SMS terms
+          </Link>
+          .
+        </span>
       </label>
 
       <button

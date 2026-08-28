@@ -474,3 +474,27 @@ ALTER TABLE referral_leads
 -- Which articles drive leads: group by ref_slug over this index.
 CREATE INDEX IF NOT EXISTS referral_leads_ref_slug_idx
   ON referral_leads (ref_slug);
+
+-- SMS consent record (August 27, 2026), for 10DLC registration and TCPA defense.
+-- A phone number in `phone` is NOT permission to text it. Permission is this
+-- block, and only a row with sms_consent = true may be texted.
+--
+-- The three companion columns are the point. TCPA puts the burden of proving
+-- consent on the sender, so a bare boolean is worth very little a year later:
+-- sms_consent_at and sms_consent_ip say when and from where, and
+-- sms_consent_text stores the EXACT wording that was on the screen at the time,
+-- stamped server-side from src/lib/legal.ts. The consent copy will be reworded
+-- eventually, and older rows keep the sentence their owner actually agreed to.
+--
+-- If someone replies STOP, set sms_consent = false. Do not delete the row: the
+-- opt-out itself is a record worth keeping.
+ALTER TABLE referral_leads
+  ADD COLUMN IF NOT EXISTS sms_consent      boolean NOT NULL DEFAULT false,
+  ADD COLUMN IF NOT EXISTS sms_consent_at   timestamptz,
+  ADD COLUMN IF NOT EXISTS sms_consent_ip   text,
+  ADD COLUMN IF NOT EXISTS sms_consent_text text;
+
+-- The texting list: who may be messaged, newest first.
+CREATE INDEX IF NOT EXISTS referral_leads_sms_consent_idx
+  ON referral_leads (sms_consent, created_at DESC)
+  WHERE sms_consent;
