@@ -1,22 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { SMS_CONSENT_TEXT } from "@/lib/legal";
-
-/** First-party attribution captured once on mount from the URL and referrer, so we
- *  can see which article or channel drove a lead without any third-party analytics. */
-interface Attribution {
-  refSlug: string | null;
-  referrer: string | null;
-  landingPath: string | null;
-  utmSource: string | null;
-  utmMedium: string | null;
-  utmCampaign: string | null;
-}
+import { useAttribution } from "@/lib/attribution";
 
 /**
- * The /find-a-pro conversion form. Unlike SubscribeForm (email-only newsletter
+ * The /buying-or-selling conversion form. Unlike SubscribeForm (email-only newsletter
  * double opt-in), this captures a QUALIFIED buyer or seller (intent + market +
  * timeframe) and POSTs to /api/refer, which stores it and emails Alex. The extra
  * fields are the difference between a warm follow-up and a cold one, so the small
@@ -43,7 +33,7 @@ const TIMEFRAMES = [
   { value: "exploring", label: "Just exploring for now" },
 ];
 
-export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
+export function ReferralForm({ source = "buying-or-selling" }: { source?: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -58,22 +48,10 @@ export function ReferralForm({ source = "find-a-pro" }: { source?: string }) {
   const [smsConsent, setSmsConsent] = useState(false);
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
-  const attribution = useRef<Attribution | null>(null);
-
-  // Capture attribution once, on mount. The in-article CTA passes ?ref=<slug>;
-  // document.referrer and any utm_* params cover organic, social, and paid.
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const val = (k: string) => params.get(k)?.trim() || null;
-    attribution.current = {
-      refSlug: val("ref"),
-      referrer: document.referrer || null,
-      landingPath: window.location.pathname || null,
-      utmSource: val("utm_source"),
-      utmMedium: val("utm_medium"),
-      utmCampaign: val("utm_campaign"),
-    };
-  }, []);
+  // The in-article CTA passes ?ref=<slug>; document.referrer and any utm_*
+  // params cover organic, social, and paid. Shared with QuickContact so the two
+  // capture surfaces post the same field names (src/lib/attribution.ts).
+  const attribution = useAttribution();
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();

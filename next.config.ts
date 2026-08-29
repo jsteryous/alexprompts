@@ -23,14 +23,25 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // The connector was renamed from "Find an Agent" to "Find a Pro" (broader
-      // than agents: it fronts a vetted bench of agents, loan officers, and closing
-      // attorneys). Permanent redirect keeps every old link alive: in-article CTAs,
-      // engine-written closing lines, external shares, and the ?ref= attribution
-      // query survives the hop.
+      // THE BUY/SELL PAGE HAS HAD THREE PATHS: /find-an-agent, then /find-a-pro,
+      // then /buying-or-selling as of August 28, 2026. Both old ones point at the
+      // live path DIRECTLY rather than hopping through each other, since a chain
+      // costs a round trip and Google follows only so many.
+      //
+      // The last move was not cosmetic. "Find a pro" named the referral mechanism,
+      // and no user-facing surface may name it (see the root CLAUDE.md); a URL is
+      // user-facing, since it sits in the address bar, in a shared link, and in the
+      // email footer. Permanent redirects keep every old link alive: in-article
+      // CTAs, engine-written closing lines, the SMS terms, external shares, and
+      // the ?ref= attribution query, which Next carries across the hop.
       {
         source: "/find-an-agent",
-        destination: "/find-a-pro",
+        destination: "/buying-or-selling",
+        permanent: true,
+      },
+      {
+        source: "/find-a-pro",
+        destination: "/buying-or-selling",
         permanent: true,
       },
       // The August 24 seller piece was written over an unrelated draft in the

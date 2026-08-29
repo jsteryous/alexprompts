@@ -20,10 +20,13 @@ export const metadata: Metadata = {
  * your mobile number" section below is that commitment, and it must not be
  * softened or removed.
  *
- * DELIBERATELY NOT LINKED from the nav, the footer, or the sitemap. It is a
- * compliance document with a stable URL to paste into a registration form, not
- * part of the publication. The one place a reader meets it is next to the SMS
- * consent checkbox on the referral form, which is where it actually matters,
+ * LINKED FROM THE FOOTER since August 28, 2026, and deliberately still out of
+ * the nav and the sitemap. It had been reachable only from the SMS consent
+ * checkbox on the referral form, on the reasoning that a compliance document
+ * with a stable URL to paste into a registration form is not part of the
+ * publication. That reasoning holds for the nav and misses for the footer: a
+ * reader looks for a privacy link in the fine print, and the 10DLC campaign
+ * wants the policy reachable from any page. The consent-checkbox link stays,
  * because consent is only informed if the terms are reachable at the moment it
  * is given.
  *
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
  * policy is required to make, and it is not the never-explain-the-business-model
  * rule breaking down: that rule governs marketing copy, and this page says
  * nothing about how anyone gets paid. The fee disclosure stays where it is, in
- * the fine print on /find-a-pro.
+ * the fine print on /buying-or-selling.
  */
 export default function PrivacyPage() {
   return (
@@ -41,12 +44,12 @@ export default function PrivacyPage() {
         <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
           Legal
         </span>
-        <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-3">
+        <h1 className="theme-text-primary type-h1 mb-3">
           Privacy Policy
         </h1>
         <p className="theme-text-muted type-small mb-12">Last updated {LEGAL_UPDATED}.</p>
 
-        <div className="theme-prose">
+        <div className="theme-prose prose max-w-none">
           <p>
             {site.name} is a publication written by {site.author} about Greenville real estate and
             sales performance. This page explains what information the site collects, why it
@@ -54,30 +57,45 @@ export default function PrivacyPage() {
             text messages sent from it.
           </p>
 
+          {/* Every bold label below ends with an explicit {" "} rather than a
+              literal space. A JSX text run that also contains an HTML entity
+              (&rsquo;, &ldquo;) gets split at the entity, and the leading space
+              after </strong> is trimmed with it, so the label collides with the
+              first word. It shipped that way on three bullets, one of them the
+              Privacy line in the SMS terms that carrier vetting reads. The
+              explicit space cannot be trimmed, so it is used on all of them
+              rather than only the ones that break today. */}
           <h2>What is collected</h2>
           <p>
-            Almost nothing happens here unless you type it in. There is no third-party analytics on
-            this site, no advertising network, and no tracking pixel following you from page to
-            page. What exists is the following.
+            Almost nothing happens here unless you type it in. There is no advertising network on
+            this site, and no tracking pixel following you around the web. Here is everything that
+            is collected.
           </p>
           <ul>
             <li>
-              <strong>Newsletter signups.</strong> Your email address and the date you confirmed it.
-              Nothing else is required.
+              <strong>Newsletter signups.</strong>{" "}Signing up stores your email address and the date
+              you confirmed it. Nothing else is required.
             </li>
             <li>
-              <strong>The buying or selling form.</strong> Your name, your email address, your phone
-              number if you choose to give one, whether you are buying or selling, the market you
-              are asking about, your rough timeframe, and anything you write in the notes field.
+              <strong>The buying or selling form.</strong>{" "}The form asks for your name and email
+              address, whether you are buying or selling, the market you are asking about, and your
+              rough timeframe. A phone number is optional, and so is anything you write in the notes
+              field.
             </li>
             <li>
-              <strong>Where you came from.</strong> The page you submitted the form from, the site
-              that linked you here, and any campaign tag carried in the link. This is recorded on
-              your submission so it is possible to tell which article brought someone in. It is not
-              tied to you across other websites, because it cannot be.
+              <strong>Where you came from.</strong>{" "}Your submission records the page you sent it
+              from, the site that linked you here, and any campaign tag the link carried. That is
+              how it is possible to tell which article brought someone in, and none of it follows
+              you across other websites.
             </li>
             <li>
-              <strong>Ordinary server logs.</strong> The hosting provider records requests, IP
+              <strong>Page views.</strong>{" "}Vercel, which hosts the site, counts visits to each page
+              along with the country, the browser, and the site that linked you. It sets no cookie
+              and it keeps no name, email address, or IP address, so a visit cannot be traced back
+              to you or followed onto another website.
+            </li>
+            <li>
+              <strong>Ordinary server logs.</strong>{" "}The hosting provider records requests, IP
               addresses included, the way every web server does.
             </li>
           </ul>
@@ -120,7 +138,7 @@ export default function PrivacyPage() {
           <p>Your information is never sold. It is shared in exactly three situations.</p>
           <ul>
             <li>
-              <strong>Service providers who run the site.</strong> The database, the email delivery,
+              <strong>Service providers who run the site.</strong>{" "}The database, the email delivery,
               the hosting, and the text message delivery are handled by outside companies acting on
               instructions. They may process the data only to provide that service, never for their
               own purposes.
@@ -133,8 +151,8 @@ export default function PrivacyPage() {
               transferred.
             </li>
             <li>
-              <strong>When the law requires it.</strong> A valid legal demand, or a situation
-              involving fraud or somebody&rsquo;s safety.
+              <strong>When the law requires it.</strong>{" "}A valid legal demand can compel
+              disclosure, and so can a situation involving fraud or somebody&rsquo;s safety.
             </li>
           </ul>
 

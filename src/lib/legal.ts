@@ -19,7 +19,7 @@
  */
 
 /** Human date shown at the top of /privacy and /terms. Bump when the text changes. */
-export const LEGAL_UPDATED = "August 27, 2026";
+export const LEGAL_UPDATED = "August 28, 2026";
 
 /**
  * The exact sentence next to the consent checkbox on the referral form.

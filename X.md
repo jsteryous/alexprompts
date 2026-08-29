@@ -36,7 +36,7 @@ the subject is.
    data-center developers, plant operations leaders, economic development staff. Competent
    records analysis is what gets them to follow, reply, and take a DM.
 3. **To the referral funnel**, an executive relocating into that same ecosystem is exactly the
-   lead `/find-a-pro` wants.
+   lead `/buying-or-selling` wants.
 
 So X is not a portfolio a hiring manager might audit some day. It is a prospecting motion that
 happens to leave a portfolio behind. Optimize for the reply, not the impression count.

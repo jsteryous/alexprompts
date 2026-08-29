@@ -5,7 +5,7 @@ week, not nightly) that runs ONE
 track: an **evergreen local-SEO** engine for the Greenville, SC market. On each scheduled run it
 writes ONE substantial, data-grounded local resource article (a relocation, neighborhood,
 cost-of-living, first-time-buyer, or local-investor guide), publishes it live to `/real-estate`,
-and ends it with a short, warm offer of Alex's help (linked to `/find-a-pro`; the copy NEVER
+and ends it with a short, warm offer of Alex's help (linked to `/buying-or-selling`; the copy NEVER
 explains that Alex refers or matches leads, and never says he does not practice. See the root
 `CLAUDE.md` strategic-direction note, tightened August 1, 2026). This is the search
 library that actually ranks and compounds on winnable local long-tail queries ("moving to

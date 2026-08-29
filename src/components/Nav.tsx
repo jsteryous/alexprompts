@@ -60,16 +60,21 @@ const links = [
  * and vendors instead of buyers and sellers. Keep the subject in the label.
  *
  * Why it is the button and Subscribe is not (swapped August 1, 2026): referral
- * revenue is the north star and /find-a-pro is the site's #1 conversion surface,
+ * revenue is the north star and /buying-or-selling is the site's #1 conversion surface,
  * but it used to render as the fifth of six identical text links while the
  * audience-growth CTA got the only visual emphasis. The hierarchy contradicted
  * the strategy. Subscribe keeps a nav text link and still has dedicated capture
  * on /subscribe, every article, the briefing index, and every tool page.
  *
- * The ROUTE stays /find-a-pro. Renaming it would break inbound links, the
- * sitemap, and the ref= attribution already stored in referral_leads.
+ * THE ROUTE MOVED August 28, 2026, from /find-a-pro to /buying-or-selling, so
+ * the URL finally says what the label says. "Find a pro" named the mechanism,
+ * which is the one thing no user-facing surface is allowed to name (see the root
+ * CLAUDE.md), and a URL is user-facing: it sits in the address bar, in a shared
+ * link, and in the email footer. The old path is a permanent redirect in
+ * next.config.ts, and Next carries the query string across a redirect, so the
+ * ?ref= attribution on every published article's CTA still lands intact.
  */
-const primaryCta = { href: "/find-a-pro", label: "Buying or Selling?" };
+const primaryCta = { href: "/buying-or-selling", label: "Buying or Selling?" };
 
 export default function Nav() {
   const [open, setOpen] = useState(false);

@@ -7,7 +7,7 @@ underneath: whether a business is durable, what years of sales have really done 
 submarket, and which rule or tax structure is driving behavior that otherwise looks random.
 
 - **Site:** Next.js 16 home base. The front page, `/reporting` (every published piece),
-  `/about` (the masthead), and `/find-a-pro`.
+  `/about` (the masthead), and `/buying-or-selling`.
 - **Publishing engine:** `scripts/publication/` — a Claude routine that researches a piece
   against public records, drafts it, checks its own facts, and inserts a DRAFT that Alex
   reviews and publishes at `/admin`. Cadence is about every two weeks, published on finding.

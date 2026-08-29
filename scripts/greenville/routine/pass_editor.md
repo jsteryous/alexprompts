@@ -124,7 +124,7 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
 - Confirm the H2 subheads are clear and descriptive, that internal links to the site's own tools,
   hub, and related guides are present where they genuinely help (three to five, not stuffed), and
   that the piece closes with the short, warm offer of help. Site-internal links must
-  be root-relative (`/tools/...`, `/real-estate/...`, `/greenville-works/...`, `/find-a-pro`). Keep
+  be root-relative (`/tools/...`, `/real-estate/...`, `/greenville-works/...`, `/buying-or-selling`). Keep
   the writer's links to sibling guides (the writer chose them from a verified list of live pages you
   do not have); do not add new sibling-guide links yourself.
 - **THE BUSINESS MODEL NEVER APPEARS IN THE PROSE. This is a hard gate, not a preference** (added
@@ -136,7 +136,7 @@ Talk about the housing and the facts, not the people. When unsure, cut it.
   and it makes a buyer feel brokered. Alex is a licensed South Carolina agent offering his own
   help; he handles what comes next in person. If the close breaks this, rewrite it to the shape in
   the writer's spec: one sentence tying the topic to the decision, then a direct first-person
-  invitation that NAMES BOTH BUYING AND SELLING with `/find-a-pro` linked on the invitation words,
+  invitation that NAMES BOTH BUYING AND SELLING with `/buying-or-selling` linked on the invitation words,
   then optionally one friction-lowering sentence or a pointer to `/real-estate`. The URL may appear
   as a link target and nowhere else in the prose.
 - Confirm the close actually ASKS the buy-or-sell question. A close that only offers help in the

@@ -84,8 +84,8 @@ The sections, in order:
    reporting points to, never an invented personal verdict (Alex adds his own take in review).
 
 Standing footer: the not-advice line, plus one quiet buy-or-sell invitation in Alex's first person,
-with `/find-a-pro` linked on the invitation words ("If this week has you thinking about buying or
-selling around here, [let me know](/find-a-pro)."). **NEVER EXPLAIN THE BUSINESS MODEL** (August 1,
+with `/buying-or-selling` linked on the invitation words ("If this week has you thinking about buying or
+selling around here, [let me know](/buying-or-selling)."). **NEVER EXPLAIN THE BUSINESS MODEL** (August 1,
 2026): that line never says Alex will refer, match, connect, or introduce the reader to an agent,
 never calls an agent vetted or hand-picked, never says the help is free or at no cost, and never
 says Alex does not practice. It used to read "I connect people with vetted local agents at no

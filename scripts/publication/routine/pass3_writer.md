@@ -285,9 +285,9 @@ line lives in the site footer and chrome, not in the prose.
 
 A real invitation appears ONLY where the piece genuinely touches a transaction decision, which
 will be a small minority of pieces. When it does: one short first-person line naming both sides,
-with `/find-a-pro` linked on the invitation words themselves, placed in the BODY and never in the
+with `/buying-or-selling` linked on the invitation words themselves, placed in the BODY and never in the
 final two paragraphs. "If this has you thinking about buying around here, or about selling, [tell
-me what you're working on](/find-a-pro)."
+me what you're working on](/buying-or-selling)."
 
 **Default to leaving it out.** A piece about how a company makes money carries no invitation. A
 published piece once carried a buy-or-sell line inside an explainer about a utility tariff docket,
@@ -298,7 +298,7 @@ off, or introduce the reader to an agent, never calls an agent vetted or hand-pi
 the help is free or at no cost, and never says you do not practice or do not take clients. All of
 it describes how you get paid rather than what the reader is trying to do. You are a licensed
 South Carolina agent offering your own help, and you handle what comes next in person. The URL
-`/find-a-pro` may appear as a link target and nowhere else in the prose.
+`/buying-or-selling` may appear as a link target and nowhere else in the prose.
 
 ## STYLE
 

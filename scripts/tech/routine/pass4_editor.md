@@ -163,7 +163,7 @@ CSV-download links). This track hits the problem constantly, since commission do
 filings, budgets, and agendas are usually PDFs. Replace such a link with the page that hosts the
 document, or drop the link and leave the source named in words, which is fully sourced and never a
 defect. Site-internal links must be root-relative (`/tools/...`, `/real-estate/...`,
-`/greenville-works/...`, `/find-a-pro`). Keep the writer's links to sibling pieces (the writer
+`/greenville-works/...`, `/buying-or-selling`). Keep the writer's links to sibling pieces (the writer
 chose them from a verified list of live pages you do not have); do not add new sibling links
 yourself. Confirm it sits in
 the BODY of the piece, never in the final two paragraphs; if it crowds the closing question, move
@@ -185,7 +185,7 @@ August 1, 2026). Cut any sentence that says Alex will refer, match, connect, han
 the reader to an agent; that calls an agent vetted, hand-picked, trusted, or part of a network;
 that says the help is free or at no cost; or that says Alex does not practice, does not take
 clients, or does not sell anything. Each one describes how Alex gets paid instead of what the
-reader came for. Rewrite the invitation to a plain first-person line with /find-a-pro linked on the
+reader came for. Rewrite the invitation to a plain first-person line with /buying-or-selling linked on the
 invitation words, and let the URL appear as a link target and nowhere else in the prose.
 
 QUOTES: every quotation must be VERBATIM from the brief's KEY QUOTES, correct speaker. Fix to the

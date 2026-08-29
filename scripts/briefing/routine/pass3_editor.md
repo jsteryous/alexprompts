@@ -210,9 +210,9 @@ the reader to an agent; that calls an agent vetted, hand-picked, trusted, or par
 that says the help is free or at no cost; or that says Alex does not practice, does not take
 clients, or does not sell anything. Each one describes how Alex gets paid instead of what the
 reader came for, and it makes a buyer feel brokered. Rewrite the close to a direct first-person
-invitation that NAMES BOTH BUYING AND SELLING, with /find-a-pro linked on the invitation words, for
+invitation that NAMES BOTH BUYING AND SELLING, with /buying-or-selling linked on the invitation words, for
 example "If this week has you thinking about buying, or about listing, [tell me what you are
-working on](/find-a-pro) and I will help." A close that names buying without naming selling is a
+working on](/buying-or-selling) and I will help." A close that names buying without naming selling is a
 miss, because a seller has to work out for themselves that the offer includes them. The URL may
 appear as a link target and nowhere else in the prose.
 

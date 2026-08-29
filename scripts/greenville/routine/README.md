@@ -5,7 +5,7 @@ local-SEO** engine for the Greenville, SC market. Each eligible night it writes 
 data-grounded local resource article for a winnable long-tail local query (relocation,
 neighborhood, cost-of-living, first-time-buyer, local-investor), inserts it as a **DRAFT** for
 `/real-estate`, drafts an X post, and closes with a short, warm offer of Alex's help (linked to
-`/find-a-pro`, never explaining the referral mechanism; see the root `CLAUDE.md` note).
+`/buying-or-selling`, never explaining the referral mechanism; see the root `CLAUDE.md` note).
 This is the compounding search library. **Draft-first (July 2026):** Alex reviews every piece at
 `/review` (or `/admin`) and publishes it himself; nothing goes live, gets a cover, or is broadcast
 until he does. The cadence guard keeps it to about two a week.
@@ -37,7 +37,7 @@ The orchestrator runs up to three passes per night:
    Zillow, local publishers), and writes an 800 to 1400 word local resource article in house
    voice. Strict fair-housing rules (describe housing by objective attributes, never steer a
    protected class), internal links to the site's tools, and a short offer-of-help close (linked
-   to `/find-a-pro` on the invitation words, and it NEVER explains the referral mechanism; see the
+   to `/buying-or-selling` on the invitation words, and it NEVER explains the referral mechanism; see the
    NEVER EXPLAIN THE BUSINESS MODEL rule at the top of the pass). Emits its own `## METADATA` and
    `## IMAGE` blocks.
 2. **`pass_editor.md`** — the de-generic quality gate, run as a fresh clean-room sub-agent on the

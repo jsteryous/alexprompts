@@ -713,7 +713,7 @@ html.dark .editor-pop {
 /* THE NAMEPLATE. The wordmark is the publication'''s mark, so it is set larger
    than the rest of the header chrome the way a masthead outranks its own rail.
    It carries its own class rather than borrowing .type-title, which also sets
-   the card headings on /about, /find-a-pro, and the homepage grid: enlarging
+   the card headings on /about, /buying-or-selling, and the homepage grid: enlarging
    that shared token would have inflated all of them too. Tracking runs tighter
    than the body serif because display type at this size needs the optical
    correction to avoid looking loose. */

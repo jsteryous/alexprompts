@@ -14,7 +14,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 
 > **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
 > site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
-> vetted agents for a referral fee** (`/find-a-pro`). Alex is a licensed SC agent who does
+> vetted agents for a referral fee** (`/buying-or-selling`). Alex is a licensed SC agent who does
 > not practice, so he captures the intent and hands it off. **THE ENTIRE MECHANISM IS INTERNAL
 > CONTEXT. It never appears in user-facing copy, on the site or in an article** (finished August 1,
 > 2026, extending the July 30 removal of "I do not practice"). Nothing anywhere may say Alex will
@@ -28,7 +28,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > introduction himself, in that conversation, once he knows what they need.** State what he IS
 > ("licensed real estate agent in South Carolina"), keep the buy/sell invitation short and warm
 > ("let me know if you are looking to buy or thinking of selling"), and let the one-line licensee
-> disclosure in the `/find-a-pro` fine print be the only mention of a fee anywhere. The three
+> disclosure in the `/buying-or-selling` fine print be the only mention of a fee anywhere. The three
 > engines carry this as a NEVER EXPLAIN THE BUSINESS MODEL rule in their writer passes and as a
 > hard cut-gate in their editor passes. This SUPERSEDES the earlier
 > "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
@@ -39,7 +39,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > Content runs on **two tracks**, now prioritized by their contribution to referral leads:
 > 1. **The lead engine: evergreen local-SEO real-estate guides** (`scripts/greenville/` →
 >    `/real-estate`, about 2/week). This is the track that carries buyer/relocation intent and
->    funnels to `/find-a-pro`. It is the priority; it is a slow-compounding SEO bet on a new
+>    funnels to `/buying-or-selling`. It is the priority; it is a slow-compounding SEO bet on a new
 >    domain (6 to 18 months), so pair it with the relationship channel below.
 > 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
 >    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
@@ -85,7 +85,7 @@ This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md`
 > honest writing on **Greenville real estate** and on **how the Upstate is
 > changing** (Greenville Works), plus the free **real-estate tools** he built. Its primary
 > goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
-> vetted agents for a referral fee (see `/find-a-pro`). A **build-in-public portfolio** that
+> vetted agents for a referral fee (see `/buying-or-selling`). A **build-in-public portfolio** that
 > showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
 > the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline/slogan:
 > *"Better real estate decisions."* since July 21, 2026, was *"Questions worth asking."* from
@@ -276,7 +276,7 @@ the strategic-direction and two-track notes above.
 - **`greenville/`** — the **local Greenville, SC** engine. A nightly **self-sourcing evergreen
   local-SEO** engine: each eligible night (about two a week) it writes one substantial,
   data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/find-a-pro`. **Draft-first** (July 2026): it
+  query and funneling relocation/buyer leads to `/buying-or-selling`. **Draft-first** (July 2026): it
   inserts a DRAFT and Alex publishes it at `/review`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
   mirroring Greenville Works) when the bank is empty. The old daily both-sides **news** track was retired
@@ -294,7 +294,7 @@ the strategic-direction and two-track notes above.
   2026 with the Upstate as home turf; roads/water/subdivisions only as a
   secondary beat that carries a tech/capital/real-estate through-line) in
   **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
-  and funnels relocation/buyer leads to `/find-a-pro` where the topic fits, then inserts a
+  and funnels relocation/buyer leads to `/buying-or-selling` where the topic fits, then inserts a
   **DRAFT** `blog_posts` row tagged `greenville works` for **`/greenville-works`** (**draft-first**
   as of July 2026, was live; the review email carries the post id + a `/review` link Alex uses to
   publish, same manual flow as the Greenville engine). Its job is twofold: unify the
@@ -596,9 +596,16 @@ under `scripts/_archive/` — do not revive it.
   Greenville | SC Technology | Buying or Selling | About** (**"Find an Agent" became "Buying or
   Selling" July 30, 2026**: the old label named the mechanism and assumed the visitor had already
   decided they wanted an agent, when the site's actual job is to help buyers and sellers first
-  and hand the lead off second. The ROUTE stays `/find-a-pro` because renaming it would break
-  inbound links, the sitemap, and the `ref=` attribution already stored in `referral_leads`. The
-  same reframe hit the footer link, the `/find-a-pro` eyebrow and headline, and the `ReferralCta`
+  and hand the lead off second. The ROUTE held at `/find-a-pro` for four more weeks, on the
+  grounds that renaming it would break inbound links, the sitemap, and the `ref=` attribution
+  already stored in `referral_leads`. **It MOVED to `/buying-or-selling` on August 28, 2026**,
+  because "find a pro" named the referral mechanism and a URL is user-facing copy: it sits in
+  the address bar, in a shared link, and in the email footer, where it contradicted the one rule
+  the rest of the page follows. Nothing broke. `/find-a-pro` and `/find-an-agent` are both
+  permanent redirects in `next.config.ts`, pointing straight at the live path rather than
+  through each other, and Next carries the query string across a redirect, so the `?ref=` on
+  every published article's CTA still attributes. The
+  same reframe hit the footer link, the `/buying-or-selling` eyebrow and headline, and the `ReferralCta`
   copy, which no longer opens on "Real estate referrals". **August 1, 2026 finished the job**: the
   page `<title>` still read "Find an Agent" (so the BROWSER TAB said it even though the nav did
   not), and the body still explained the mechanism. Title is now "Buying or Selling", the H1 is
@@ -606,7 +613,7 @@ under `scripts/_archive/` — do not revive it.
   through / I stay in your corner, the trust cards lost "A vetted bench, not a coin flip" and the
   commission-split card, and the `ReferralForm` submit button went from "Connect me with a pro" to
   "Send it over"; routes and tags unchanged;
-  `/briefing`, `/real-estate`, `/greenville-works`, `/find-a-pro`; the tech tab became "SC
+  `/briefing`, `/real-estate`, `/greenville-works`, `/buying-or-selling`; the tech tab became "SC
   Technology" July 10 with the statewide widening), and the `/archive`
   newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match
   ("Upstate Brief", "SC Technology"; the real-estate badge stays the compact topic chip
@@ -618,7 +625,47 @@ under `scripts/_archive/` — do not revive it.
   list, every confirmed subscriber gets every broadcast (Brief + Greenville guides + SC
   Technology), no per-category segmentation by design. Substack is demoted to the form's
   secondary link.
-- `/find-a-pro` — the **real-estate referral connector** (added July 2026, replaced the
+- `/contact` — a plain contact page (added August 28, 2026). **Footer only, deliberately not in
+  the nav**, since the nav carries one button and that button is the buy/sell page. It exists
+  because the other two contact surfaces each assume they know why you are writing: `/about`
+  ends on a tips ask you have to scroll a masthead to reach, and `/buying-or-selling` is a
+  qualifying form for a transaction. Anyone with a document, a correction, or a question that is
+  not a transaction had nowhere obvious to land, and a stranger checking whether a site is run by
+  a real person looks for exactly this page. **No form on it, on purpose**: anything
+  transactional is linked to `/buying-or-selling` rather than duplicated there, and everything
+  else is email, which is the right primitive when a tip usually arrives as an attachment.
+  `CONTACT_EMAIL` and `LINKEDIN_URL` now live in `src/lib/site.ts` so this page and `/about`
+  cannot drift; the address is the working gmail one until `hello@rebrew.org` exists and is
+  verified in Resend.
+- `/best-real-estate-agents-greenville-sc` — the **search landing page** (added August 29,
+  2026), and the site's SECOND conversion surface. It targets the commercial query "best real
+  estate agents in Greenville, SC", which is typed by someone about to buy or sell who has not
+  picked anyone yet. Everything ranking for it is a directory selling its slots or a brokerage
+  sorting its own roster by volume, so the page gives the honest answer instead: **no ranked
+  list exists**, here is what separates a good agent from an average one, and here is how to
+  check each of it yourself. It **does not name or rank real agents** and must never grow a
+  "top ten"; inventing one would fabricate, which is the publication's one hard line. The same
+  NEVER EXPLAIN THE BUSINESS MODEL rule applies as everywhere else, and it does not claim Alex
+  is one of the best agents in Greenville, since the credibility it trades on is the reading
+  and the record checking. Substance carries four checks (the Levitt and Syverson finding that
+  agent-owned homes sell for about 3.7 percent more, the last-five-closings ask, the comps that
+  were thrown out, the public license record) plus a five-question FAQ that also drives the
+  `FAQPage` JSON-LD from **one array**, so the structured data cannot drift from the visible
+  copy. **Sourcing is attribution in words with no external links at all**, which the house
+  style treats as complete; a rotted link is worst on the page a stranger uses to judge whether
+  the site is real. The ask is `components/QuickContact.tsx`, a deliberately tiny form (one
+  intent tap, name, email) that POSTs to the same `/api/refer` and `referral_leads` as the full
+  `ReferralForm`, rendered twice with different `source` values
+  (`best-agents-greenville-hero` / `-close`) so the attribution queries can tell the placements
+  apart. **No phone field on purpose**: collecting a number drags the 10DLC consent paragraph
+  into a form whose only virtue is being short. It is NOT a competitor to `/buying-or-selling`:
+  that page is the nav destination for someone who has already decided, this one is written for
+  the search, and it links there for anyone who wants to say more up front. Not in the nav (the
+  nav carries one button); reached from the sitemap, from search, and from one contextual link
+  under the `/buying-or-selling` form. Note this is a **conversion landing page, not a revived
+  evergreen SEO guide** — that category is still dead (see the consolidation banner).
+- `/buying-or-selling` — the **real-estate referral connector** (added July 2026 at
+  `/find-a-pro`, renamed August 28, 2026; replaced the
   removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
   became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
   the play is to capture legit buyer/seller intent and **refer it to active agents for a
@@ -629,7 +676,7 @@ under `scripts/_archive/` — do not revive it.
   July 2026 from a light email capture into a real conversion page: honest first-person copy +
   a "How this works" 3-step + trust cards (all of which were rewritten August 1, 2026 to stop
   explaining the referral mechanism; see the strategic-direction note above, and the copy-rule
-  comment at the top of `src/app/find-a-pro/page.tsx`), and a **qualifying lead form** (`ReferralForm`) that
+  comment at the top of `src/app/buying-or-selling/page.tsx`), and a **qualifying lead form** (`ReferralForm`) that
   captures intent (buy/sell/both), market, timeframe, and contact, then POSTs to **`/api/refer`**.
   That route stores a row in the Supabase **`referral_leads`** table (service key, RLS-denied to
   anon, NOT the newsletter `subscribers` list, so no double opt-in for a hot lead) and emails Alex
@@ -643,6 +690,30 @@ under `scripts/_archive/` — do not revive it.
   reads the publication RSS feed, converts each post's HTML to markdown via
   `src/lib/substack.ts` (turndown; images kept as `<figure>`/`<figcaption>`), and upserts
   rows as `PUBLISHED`. So posting on Substack populates the site with no manual step.
+- `/api/booking` — the **Cal.com webhook** (added August 29, 2026). A booked call is a lead,
+  and until this existed it was a lead that only ever appeared on Alex's calendar: every
+  conversion query in `supabase/queries.sql` reads `referral_leads`, so a booking that never
+  landed there was invisible to the only numbers that say whether any of this works. A
+  `BOOKING_CREATED` event becomes a `referral_leads` row with `source = "cal-booking"` and
+  `timeframe = "asap"` (somebody who put a time on a calendar is not just exploring), and Alex
+  gets `leadNotifyEmail` in its **booking variant**: subject "Call booked: <name>", the call
+  time in Eastern as the first row, and a different opening line, because a form lead needs a
+  reply while it is warm and a booked call needs him to show up. **Signature required**, see
+  `CAL_WEBHOOK_SECRET` in the env table. **Only `BOOKING_CREATED` is handled**; everything else
+  gets an honest `200 {status:"ignored"}`, because a non-2xx makes Cal.com retry and eventually
+  disable the webhook, and because `BOOKING_RESCHEDULED` would double-count one person who is
+  already in the table. **Idempotent**: the Cal booking uid is written into the lead's `message`
+  as a `cal:<uid>` marker and `leadExistsWithMarker()` checks for it before inserting, so a
+  retry after a successful write cannot duplicate the lead. It lives in `message` rather than
+  its own column on purpose, since a new column is a migration someone has to remember to apply
+  and the failure mode of forgetting is silent duplicates. **It never sets `sms_consent`**: a
+  number given to a scheduler so Alex can call at an agreed time is not permission to text, and
+  this route has no consent checkbox to point at. Attribution from `BookCall`'s `?ref=`/`utm_*`
+  passthrough is read out of the payload's `metadata` and `responses` **best-effort**, because
+  what Cal.com does with query params it does not recognise is not contractual; when they are
+  missing the row still records `source = "cal-booking"`, which answers the question the button
+  was built for. Cal.com's own "Ping" test button exercises the signature path without writing
+  anything.
 - `/admin` — the **draft review hub** (not in nav; the primary way Alex reviews drafts).
   Log in once with a password (= `PUBLISH_SECRET`); `/api/admin/login` sets an httpOnly
   `ap_admin` cookie (rate-limited, constant-time compare), so the secret never rides in a URL.
@@ -689,7 +760,7 @@ email.
   24 published posts is 19KB, about 19% of Gmail's ~102KB clip threshold, so there is wide
   headroom. Full-content sends widen the card to 600px and, on the `greenville` track only
   (mirroring `ArticleView`'s `showReferralCta`), append the referral offer linking to
-  `/find-a-pro?ref=<slug>&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list`, so an
+  `/buying-or-selling?ref=<slug>&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list`, so an
   inbox-originated lead still attributes in `supabase/queries.sql`.
   `blog_posts.last_broadcast_at`
   stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
@@ -705,7 +776,7 @@ email.
   `cluster` column is ignored (taxonomy dropped); other dental tables
   (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
   the old project — unused by this site.
-- **`referral_leads`** is the **`/find-a-pro` conversion table** (the site's #1 revenue
+- **`referral_leads`** is the **`/buying-or-selling` conversion table** (the site's #1 revenue
   path). Service-key only (RLS denies anon), deliberately separate from `subscribers`: a person
   who fills out the referral form is a HOT lead asking to be contacted, not a newsletter signup,
   so there is no double opt-in. Columns: `name`, `email`, `phone`, `intent` (buying/selling/both),
@@ -738,6 +809,9 @@ email.
 | `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
 | `CENSUS_API_KEY` | **Required for the area-scan "neighborhood profile."** The Census *data* API needs a free key (the geocoder does not); without it the profile degrades to hidden (the rest of the scan still works). The key is free with no billing account, so the zero-billing guarantee holds. Sign up: https://api.census.gov/data/key_signup.html |
 | `ANTHROPIC_API_KEY` | **UNUSED since August 27, 2026 — delete the repo secret if it was ever set.** Its only consumer was the optional Haiku vision pre-filter in the monthly cover-library grower (`scripts/greenville/cover_ingest.py` + `.github/workflows/greenville-covers.yml`), both deleted with the auto-cover. Never used by the site at runtime. |
+| `NEXT_PUBLIC_BOOKING_URL` | **The one-click call.** A Cal.com, Calendly, or Google Calendar appointment-schedule link. When set, a "Book a 15-minute call" button renders above the form on `/best-real-estate-agents-greenville-sc` and `/buying-or-selling` and the surrounding copy switches to lead on the call; **unset = the button does not render at all** and both pages read exactly as they did before, so a missing booking page can never ship a dead button. Deliberately a LINK OUT and not an embed: every scheduler embeds via a third-party script, and this site runs none, which is why its cookieless Vercel Analytics needs no consent banner. Public by design, hence `NEXT_PUBLIC_`. See `src/lib/booking.ts`. Bookings do NOT land in `referral_leads` on their own; that needs the provider's booking-created webhook pointed at a route we have not built yet. |
+| `NEXT_PUBLIC_PHONE_NUMBER` | Optional. Shown as a `tel:` link under the booking button, in human format (`(864) 555-0123`); `telHref()` strips it to digits. Rendered as VISIBLE TEXT rather than hidden behind a "call now" label, so a desktop visitor whose machine cannot open `tel:` can read it and dial by hand. Unset = the line is omitted. |
+| `CAL_WEBHOOK_SECRET` | **Required for `/api/booking` to work at all.** The shared secret pasted into the Cal.com webhook (Settings → Developer → Webhooks). Cal.com signs the raw request body with HMAC-SHA256 and sends the hex digest as `x-cal-signature-256`; the route recomputes it and compares in constant time. **Unset = the route returns 503 and bookings never reach `referral_leads`**, which is deliberate: this URL is guessable and writes to the leads table with no human in front of it, so refusing everything beats accepting anonymous writes. If bookings stop arriving, check this first. |
 | `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
 | `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Rebrew <alex@rebrew.org>`. **After the domain move this cannot change until Resend verifies rebrew.org by DNS**; sending from an unverified domain fails, so verify first, then flip this.. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |

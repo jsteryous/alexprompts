@@ -258,7 +258,7 @@ final two paragraphs.
 refer, match, connect, hand off, or introduce the reader to an agent; calling an agent vetted,
 hand-picked, trusted, or part of a network; saying the help is free or at no cost; or saying Alex
 does not practice or does not take clients. Each describes how Alex gets paid instead of what the
-reader came for. The URL `/find-a-pro` appears as a link target and nowhere else in the prose.
+reader came for. The URL `/buying-or-selling` appears as a link target and nowhere else in the prose.
 
 ## LINKS
 
@@ -275,7 +275,7 @@ named in words, which is fully sourced and never a defect.
 Strip any on sight.
 
 Site-internal links must be root-relative (`/real-estate/...`, `/greenville-works/...`,
-`/briefing/...`, `/reporting`, `/find-a-pro`). Keep the writer's links to sibling pieces, which
+`/briefing/...`, `/reporting`, `/buying-or-selling`). Keep the writer's links to sibling pieces, which
 came from a verified list of live pages you do not have. Do not add new sibling links yourself.
 
 ## STYLE

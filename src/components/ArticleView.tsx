@@ -11,7 +11,7 @@ import { PostCover } from "@/components/PostCover";
 export interface ArticleSection {
   label: string; // "Sales" | "Real Estate" | "Upstate Brief" | "Archive"
   basePath: string; // "/sales" | "/real-estate" | "/briefing" | "/archive"
-  /** Show the buy/sell CTA (links to /find-a-pro), both mid-article and at the
+  /** Show the buy/sell CTA (links to /buying-or-selling), both mid-article and at the
    *  close. On for the sections whose readers are buyers and sellers, which as of
    *  August 25, 2026 means /sales, /real-estate, and /briefing. Off for /archive
    *  alone, whose readers came for the newsletter. */

@@ -39,12 +39,12 @@ reference only, nothing there runs on a schedule anymore.
 > Do NOT revive it. The two LOCAL Greenville engines below are the whole content operation now.
 >
 > **NEVER EXPLAIN THE BUSINESS MODEL (August 1, 2026), all three live engines.** Every piece may
-> offer Alex's help and link `/find-a-pro`, but no article may say he will refer, match, connect,
+> offer Alex's help and link `/buying-or-selling`, but no article may say he will refer, match, connect,
 > hand off, or introduce the reader to an agent; may call an agent "vetted" or "hand-picked"; may
 > say the help is "free" or "at no cost to you"; or may say he does not practice or does not take
 > clients. Each writer pass carries the rule and each editor pass carries a hard cut-gate for it.
 > The close is a plain first-person invitation ("let me know if you are looking to buy or thinking
-> of selling"), and `/find-a-pro` appears as a link target and nowhere else in the prose. See the
+> of selling"), and `/buying-or-selling` appears as a link target and nowhere else in the prose. See the
 > root `CLAUDE.md` strategic-direction note.
 >
 > **A LINK OPENS A PAGE, NEVER A DOWNLOAD (August 10, 2026), all three live engines.** No article
@@ -110,7 +110,7 @@ reference only, nothing there runs on a schedule anymore.
   the engineering constraint, and a topic whose technology could be swapped out without changing the
   story fails the bank's bar 7) in Alex's own first-person voice, grounds
   it with web search, above all names the honest trade-offs, and funnels relocation/buyer leads
-  to `/find-a-pro` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
+  to `/buying-or-selling` where the topic fits, then inserts a **DRAFT** `blog_posts` row tagged
   `greenville works` for `/greenville-works` (draft-first as of July 2026, was live; a review
   email carries the post id + a `/review` link Alex uses to publish). See `tech/routine/README.md`,
   the two-track note in the root `CLAUDE.md`, and memory `publishing-draft-first`.
@@ -138,7 +138,7 @@ reference only, nothing there runs on a schedule anymore.
 - **`greenville/`** — the local Greenville engine; documented in `scripts/greenville/CLAUDE.md`.
   A nightly **self-sourcing evergreen local-SEO** engine: each eligible night (about two a week)
   it writes one substantial, data-grounded local guide targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/find-a-pro`. It prefers the optional
+  query and funneling relocation/buyer leads to `/buying-or-selling`. It prefers the optional
   `greenville/topics.md` bank and scouts its own topic (`pass0_scout.md`, like Greenville Works) when the
   bank is empty. The old daily both-sides **news** track was retired July 2026 (its passes +
   collector remain, unwired). The separate `commercial.py` collector (buyers-list data) stays.

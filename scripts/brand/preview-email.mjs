@@ -76,7 +76,7 @@ const files = {
     ...post,
     bodyHtml,
     bodyMd: md,
-    referralUrl: "https://www.rebrew.org/find-a-pro?ref=preview",
+    referralUrl: "https://www.rebrew.org/buying-or-selling?ref=preview",
   }).html,
   "2-teaser.html": T.postBroadcastEmail(post).html,
   "3-confirm.html": T.confirmEmail(

@@ -52,7 +52,7 @@ CTA. It took the weekly slot from Greenville Works (now occasional/monthly).
 2. **`pass2_writer.md`** — renders the fact sheet into the fixed template (open on the week's lead
    number, then The Upstate vs the country / Buyer or seller's market / Where the leverage is /
    Around town / Rates and money / What I'd watch, then one quiet buy-or-sell invitation linked to
-   `/find-a-pro` and the not-advice footer), no word cap (usefulness sets the length; the no-filler rule is
+   `/buying-or-selling` and the not-advice footer), no word cap (usefulness sets the length; the no-filler rule is
    the only control), house style, inline source links. The two
    leverage sections split by **altitude** (narrowed July 27, 2026): "Buyer or seller's market" is
    the comparison to the COUNTRY, in four to six sentences of prose with no bullets, each headline

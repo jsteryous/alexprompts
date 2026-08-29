@@ -148,6 +148,22 @@ export const site = {
     "positioning a sale, and what good agents actually do.",
 } as const;
 
+/**
+ * The inbox a reader actually reaches, and the profile they can look him up on.
+ *
+ * `site.email` above is the brand address on the new domain, and it is still a
+ * TODO: it has to exist and be verified in Resend before anything is sent from
+ * it. Until that day, every "write to me" surface points here instead, at the
+ * address that works. /about and /contact both read it, so the two cannot drift,
+ * and there is one line to change once hello@rebrew.org is live.
+ *
+ * LinkedIn is deliberately NOT in `socials` below. That array drives the follow
+ * row and the JSON-LD sameAs, which are about following the publication, and
+ * LinkedIn is where a person looks up Alex and writes to him.
+ */
+export const CONTACT_EMAIL = "jsteryous@gmail.com";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/alex-steryous-404266182/";
+
 /** Social + newsletter links. The "follow everywhere" row + footer derive from this. */
 export const socials = [
   {

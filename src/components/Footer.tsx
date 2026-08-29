@@ -54,8 +54,15 @@ export default function Footer() {
             <Link href="/about" className="theme-link text-sm">
               About
             </Link>
-            <Link href="/find-a-pro" className="theme-link text-sm">
+            <Link href="/buying-or-selling" className="theme-link text-sm">
               Buying or Selling?
+            </Link>
+            {/* Footer only, on purpose. The nav has room for one button and
+                that button is the buy/sell page; a reader with a tip or a
+                correction looks in the footer, which is where every
+                publication puts this. */}
+            <Link href="/contact" className="theme-link text-sm">
+              Contact
             </Link>
             {socials.map((s) => (
               <a
@@ -72,10 +79,25 @@ export default function Footer() {
         </nav>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6">
+      {/* The fine-print row. Legal sits here rather than up in the link
+          columns because that is where a reader looks for it, and because the
+          10DLC campaign wants the privacy policy reachable from any page on
+          the site. Both pages were unlinked from everything until August 28,
+          2026, on the reasoning that they are compliance documents rather than
+          part of the publication. They still stay out of the nav and the
+          sitemap. */}
+      <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <p className="theme-text-muted text-xs">
           &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
         </p>
+        <nav className="flex items-center gap-5">
+          <Link href="/privacy" className="theme-link text-xs">
+            Privacy
+          </Link>
+          <Link href="/terms" className="theme-link text-xs">
+            Terms
+          </Link>
+        </nav>
       </div>
     </footer>
   );

@@ -19,7 +19,7 @@ once:
 - That traffic carries the exact intent that feeds the referral goal. Someone searching "moving
   to Greenville SC neighborhoods" or "how to find a real estate agent in Greenville" is a
   relocation or transaction lead, and every evergreen piece ends by pointing them to
-  `/find-a-pro`, the site's #1 conversion surface.
+  `/buying-or-selling`, the site's #1 conversion surface.
 
 Greenville Works (`scripts/tech/`) is a separate, lower-priority credibility track and is NOT the
 SEO lead play. This bank is where the site actually competes for search that turns into referrals.
@@ -159,7 +159,7 @@ A topic without a clean tool fit simply omits the line.
     wins: seller intent is a referral just like buyer intent, and this query is durable and
     under-served honestly. Ground it: typical days-on-market and price levels (Zillow/Redfin cited),
     SC seller closing costs and the deed-recording fee, commission and net-proceeds framing. Ends at
-    `/find-a-pro` for a listing agent. Information, not financial advice.
+    `/buying-or-selling` for a listing agent. Information, not financial advice.
 
 - **Is now a good time to buy a house in Greenville, SC? How to think about it**
   - target_query: "is it a good time to buy a house in Greenville SC"

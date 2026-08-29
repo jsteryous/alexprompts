@@ -21,9 +21,10 @@ export const metadata: Metadata = {
  * rates line, HELP, STOP, the carrier liability line, and a link to the privacy
  * policy. Do not cut any of them for brevity.
  *
- * Like /privacy, this is DELIBERATELY NOT LINKED from the nav, the footer, or
- * the sitemap. It is reachable from the SMS consent checkbox on the referral
- * form, which is the moment it needs to be reachable.
+ * Like /privacy, this is linked from the footer as of August 28, 2026, and is
+ * deliberately still out of the nav and the sitemap. It is also reachable from
+ * the SMS consent checkbox on the referral form, which is the moment it most
+ * needs to be reachable.
  */
 export default function TermsPage() {
   return (
@@ -32,17 +33,25 @@ export default function TermsPage() {
         <span className="theme-label inline-block text-xs font-semibold uppercase tracking-widest mb-4">
           Legal
         </span>
-        <h1 className="theme-text-primary text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-3">
+        <h1 className="theme-text-primary type-h1 mb-3">
           Terms
         </h1>
         <p className="theme-text-muted type-small mb-12">Last updated {LEGAL_UPDATED}.</p>
 
-        <div className="theme-prose">
+        <div className="theme-prose prose max-w-none">
           <p>
             {site.name} is a publication written by {site.author}. Using the site means you accept
             what is on this page. If you do not, the right move is to stop using it.
           </p>
 
+          {/* Every bold label below ends with an explicit {" "} rather than a
+              literal space. A JSX text run that also contains an HTML entity
+              (&rsquo;, &ldquo;) gets split at the entity, and the leading space
+              after </strong> is trimmed with it, so the label collides with the
+              first word. It shipped that way on three bullets, one of them the
+              Privacy line in the SMS terms that carrier vetting reads. The
+              explicit space cannot be trimmed, so it is used on all of them
+              rather than only the ones that break today. */}
           <h2>What the writing is and is not</h2>
           <p>
             Everything published here is research and analysis for general information. It is not
@@ -83,53 +92,58 @@ export default function TermsPage() {
             is not an endorsement of it.
           </p>
 
-          <h2 id="sms">SMS messaging terms</h2>
+          {/* scroll-mt clears the fixed header. /terms#sms is the URL pasted into
+              10DLC campaign registration, so the reviewer who follows it has to
+              land on this heading rather than under it. */}
+          <h2 id="sms" className="scroll-mt-24">
+            SMS messaging terms
+          </h2>
           <p>
             These terms cover the text messages sent by {site.name} to people who ask for them on
             the buying or selling form.
           </p>
           <ul>
             <li>
-              <strong>Program.</strong> {site.name} sends text messages to people who submit the
+              <strong>Program.</strong>{" "}{site.name} sends text messages to people who submit the
               buying or selling form at{" "}
-              <Link href="/find-a-pro">{site.url.replace(/^https?:\/\//, "")}/find-a-pro</Link> and
+              <Link href="/buying-or-selling">{site.url.replace(/^https?:\/\//, "")}/buying-or-selling</Link> and
               check the box asking for them. The messages are a conversation with {site.author}{" "}
               about the buying or selling question you sent in, which means scheduling a call,
               answering what you asked, and following up on it.
             </li>
             <li>
-              <strong>How you opt in.</strong> By checking the consent box on that form, which is
-              unchecked by default and never required in order to send the form. The wording you
-              agree to is this: &ldquo;{SMS_CONSENT_TEXT}&rdquo;
+              <strong>How you opt in.</strong>{" "}You check the consent box on that form. It is
+              unchecked by default, and checking it is never required in order to send the form.
+              The wording you agree to is this: &ldquo;{SMS_CONSENT_TEXT}&rdquo;
             </li>
             <li>
-              <strong>Message frequency.</strong> Frequency varies, because these are replies in a
+              <strong>Message frequency.</strong>{" "}Frequency varies, because these are replies in a
               conversation rather than a broadcast.
             </li>
             <li>
-              <strong>Cost.</strong> Message and data rates may apply. {site.name} does not charge
+              <strong>Cost.</strong>{" "}Message and data rates may apply. {site.name} does not charge
               for the messages, but your mobile carrier may charge you for sending or receiving
               them under your plan.
             </li>
             <li>
-              <strong>How to stop.</strong> Reply STOP to any message and the messages end. You will
+              <strong>How to stop.</strong>{" "}Reply STOP to any message and the messages end. You will
               get one confirmation that you have been unsubscribed, and after that nothing further
               unless you opt in again.
             </li>
             <li>
-              <strong>How to get help.</strong> Reply HELP to any message, or email{" "}
+              <strong>How to get help.</strong>{" "}Reply HELP to any message, or email{" "}
               <a href={`mailto:${SMS_HELP_EMAIL}`}>{SMS_HELP_EMAIL}</a>.
             </li>
             <li>
-              <strong>Carriers.</strong> Mobile carriers are not liable for delayed or undelivered
+              <strong>Carriers.</strong>{" "}Mobile carriers are not liable for delayed or undelivered
               messages. Delivery depends on your carrier and your device, and it is not guaranteed.
             </li>
             <li>
-              <strong>Age.</strong> You must be 18 or older, and the owner of the mobile number you
-              give or authorized to consent for it.
+              <strong>Age.</strong>{" "}You must be 18 or older, and you must either own the mobile
+              number you give or be authorized to consent for it.
             </li>
             <li>
-              <strong>Privacy.</strong> Mobile numbers and opt-in consent are never shared or sold
+              <strong>Privacy.</strong>{" "}Mobile numbers and opt-in consent are never shared or sold
               for anyone else&rsquo;s marketing. See the <Link href="/privacy">Privacy Policy</Link>{" "}
               for the full commitment.
             </li>

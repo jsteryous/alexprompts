@@ -25,7 +25,7 @@ import Link from "next/link";
  * take clients. Both framings make a buyer feel handed off before they have even
  * said hello. Alex qualifies the person first and handles the introduction
  * himself once he knows what they need. The only surviving mention of a fee is
- * the licensee disclosure in the /find-a-pro fine print.
+ * the licensee disclosure in the /buying-or-selling fine print.
  *
  * It renders TWICE per article and both placements look the same now, because a
  * line that is quiet enough to sit under the last paragraph is also quiet enough
@@ -33,7 +33,7 @@ import Link from "next/link";
  * it: `inline` is interrupting prose so it is closed on both sides, `full` is
  * ending the piece so it only needs a rule above.
  *
- * It links to /find-a-pro rather than embedding a form, so capture lives in one
+ * It links to /buying-or-selling rather than embedding a form, so capture lives in one
  * place and articles stay light. Keep this copy in sync with `referralBlock()`
  * in emailTemplates.ts, which is the same line in the inbox.
  */
@@ -42,15 +42,15 @@ export function ReferralCta({
   variant = "full",
   copy = "Buying or Selling? Let’s talk.",
 }: {
-  /** The article slug this CTA sits on, carried into /find-a-pro as ?ref= for
+  /** The article slug this CTA sits on, carried into /buying-or-selling as ?ref= for
    *  first-party attribution (which article drove the lead). */
   slug?: string;
   variant?: "full" | "inline";
   copy?: string;
 }) {
   const href = slug
-    ? `/find-a-pro?ref=${encodeURIComponent(slug)}#connect`
-    : "/find-a-pro#connect";
+    ? `/buying-or-selling?ref=${encodeURIComponent(slug)}#connect`
+    : "/buying-or-selling#connect";
 
   const inline = variant === "inline";
 

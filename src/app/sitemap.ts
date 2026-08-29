@@ -12,9 +12,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/sales`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/archive`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/real-estate`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
-    { url: `${SITE_URL}/find-a-pro`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/buying-or-selling`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    // The Greenville agents landing page. Ranked above /buying-or-selling because
+    // it is the one written for a search rather than for the nav.
+    {
+      url: `${SITE_URL}/best-real-estate-agents-greenville-sc`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     { url: `${SITE_URL}/subscribe`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.4 },
   ];
 
   // Each post lives at exactly one route, by tag: sales pieces under /sales,

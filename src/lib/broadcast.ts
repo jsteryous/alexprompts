@@ -79,7 +79,7 @@ export async function broadcastPost(
   const showReferral =
     tags.includes("sales") || tags.includes("greenville") || tags.includes("briefing");
   const referralUrl = showReferral
-    ? `${SITE_URL}/find-a-pro?ref=${encodeURIComponent(post.slug)}` +
+    ? `${SITE_URL}/buying-or-selling?ref=${encodeURIComponent(post.slug)}` +
       `&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list#connect`
     : null;
 

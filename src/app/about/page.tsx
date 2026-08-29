@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { site } from "@/lib/site";
-
-const LINKEDIN_URL = "https://www.linkedin.com/in/alex-steryous-404266182/";
-const CONTACT_EMAIL = "jsteryous@gmail.com";
+import { site, CONTACT_EMAIL, LINKEDIN_URL } from "@/lib/site";
 
 /**
  * THE MASTHEAD (rewritten August 2026, the consolidation).

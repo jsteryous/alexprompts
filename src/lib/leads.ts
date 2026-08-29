@@ -6,7 +6,7 @@
  * This is the site's #1 revenue path: a buyer/seller/relocation lead Alex refers
  * to a vetted agent for a fee. It is deliberately separate from the newsletter
  * `subscribers` list (src/lib/subscribers.ts): a person filling out
- * /find-a-pro is a HOT lead asking to be contacted, not a newsletter signup,
+ * /buying-or-selling is a HOT lead asking to be contacted, not a newsletter signup,
  * so there is no double opt-in. /api/refer stores the row here and emails Alex a
  * notification; storing succeeds even when email is not configured.
  */
@@ -55,6 +55,36 @@ export interface LeadInput {
   smsConsentAt: string | null;
   smsConsentIp: string | null;
   smsConsentText: string | null;
+}
+
+/**
+ * True when a lead already carries `marker` in its message.
+ *
+ * This exists for the scheduler webhook (/api/booking) and nothing else. Cal.com
+ * retries a delivery it did not get a 2xx for, and a retry after a successful
+ * insert would put the same booked call in the table twice, which quietly
+ * corrupts every conversion rate in supabase/queries.sql. The webhook writes the
+ * Cal booking uid into the message text and checks for it here first.
+ *
+ * The uid lives in `message` rather than in a column of its own on purpose: a
+ * dedicated column means a migration Alex has to remember to apply before the
+ * route works, and the failure mode of forgetting would be silent duplicates.
+ * This table is small and the scan is cheap. If bookings ever outgrow that,
+ * promote it to its own indexed column.
+ *
+ * Returns false when the lookup itself fails. Losing a real booking is worse
+ * than storing a duplicate one, so an unreachable database falls through to the
+ * insert rather than swallowing the lead.
+ */
+export async function leadExistsWithMarker(marker: string): Promise<boolean> {
+  const db = admin();
+  const { data, error } = await db
+    .from("referral_leads")
+    .select("id")
+    .ilike("message", `%${marker}%`)
+    .limit(1);
+  if (error) return false;
+  return (data ?? []).length > 0;
 }
 
 /** Insert one referral lead. Throws on a database error so the route can 500. */
