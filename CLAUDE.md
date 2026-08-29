@@ -670,8 +670,18 @@ under `scripts/_archive/` — do not revive it.
   email, Google sign-in returns an email and never a number, and the Contact Picker API is
   Android Chrome only. The lever is autofill, so keep the `autocomplete` tokens (`tel`,
   `email`) and `inputMode` intact; they are what makes the OS keychain offer to fill both
-  fields. **No SMS consent checkbox, so these leads may be CALLED and not TEXTED**: `/api/refer`
-  stores them with `sms_consent = false` and the notification says so outright. It is NOT a competitor to `/buying-or-selling`:
+  fields. **It carries the SMS consent checkbox** (added
+  hours after it shipped without one, at Alex's call, because a text gets answered faster than
+  a call and one tap is cheap against that). It reuses `SMS_CONSENT_TEXT` from
+  `src/lib/legal.ts` and the same rules the full form follows: unchecked by default, never
+  required to submit, wording rendered whole because every clause is checked during carrier
+  vetting, and the links to `/privacy` and `/terms#sms` outside the string so the stored copy
+  matches the screen byte for byte. It is **always visible rather than revealed once a phone
+  number is typed**, which is the worse UX and the right call: a vetting reviewer has to see the
+  opt-in without knowing to type anything first, and the already-registered form on
+  `/buying-or-selling` shows it unconditionally. The client posts only the boolean and
+  `/api/refer` stamps the wording server-side, dropping consent entirely when no phone came with
+  it, so the table never claims a texting right over an empty number. It is NOT a competitor to `/buying-or-selling`:
   that page is the nav destination for someone who has already decided, this one is written for
   the search, and it links there for anyone who wants to say more up front. Not in the nav (the
   nav carries one button); reached from the sitemap, from search, and from one contextual link

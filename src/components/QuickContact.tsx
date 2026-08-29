@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useAttribution } from "@/lib/attribution";
+import { SMS_CONSENT_TEXT } from "@/lib/legal";
 
 /**
  * THE SHORTEST POSSIBLE ASK: a number, an address, or both, and one button.
@@ -30,15 +32,31 @@ import { useAttribution } from "@/lib/attribution";
  * 29, 2026, what the database permits (supabase/schema.sql relaxed
  * referral_leads.email to nullable for exactly this).
  *
- * NO SMS CONSENT CHECKBOX, and therefore NO TEXTING. A phone number typed into
- * this box is permission to call, not permission to send marketing texts:
- * 10DLC and TCPA want an explicit, separately-checked opt-in carrying the
- * wording in src/lib/legal.ts, and that wording is a paragraph, which would
- * undo the only thing this form is for. So /api/refer stores these leads with
- * sms_consent = false and the notification email says "NO consent, do not text"
- * in as many words. Do NOT add a phone field to any surface and quietly assume
- * texting rights. If Alex wants to text these leads, the checkbox comes back
- * here, deliberately, with its full wording.
+ * THE SMS CONSENT CHECKBOX IS THE ONE PIECE OF FRICTION THAT EARNS ITS PLACE.
+ * A phone number typed into this box is permission to call, not permission to
+ * text: 10DLC and TCPA want an explicit, separately-checked opt-in carrying the
+ * exact wording in src/lib/legal.ts. It shipped without one on August 29, 2026
+ * and Alex asked for it back the same day, which is the right call, because a
+ * text gets answered faster than a call and one tap is cheap next to that.
+ *
+ * Four rules govern it and none of them is stylistic:
+ *   - UNCHECKED by default. Carrier vetting rejects a pre-checked box.
+ *   - NEVER required to submit, and never bundled into the button. Consent to
+ *     be texted cannot be the price of getting an answer.
+ *   - The wording renders WHOLE, not summarized. Every clause in it is checked
+ *     during vetting: the brand name, what the messages are about, the rates
+ *     line, the frequency line, and the STOP and HELP keywords.
+ *   - It is ALWAYS VISIBLE, not revealed once a phone number is typed. Hiding
+ *     it until it applies is better UX and it is what I would otherwise do, but
+ *     a vetting reviewer opening this page has to see the opt-in without
+ *     knowing to type anything first, and the already-registered form on
+ *     /buying-or-selling shows it unconditionally. The two flows agreeing is
+ *     worth more than the saved line.
+ *
+ * The client posts only the boolean. /api/refer stamps the wording server-side
+ * from src/lib/legal.ts and drops the consent entirely when no phone number
+ * came with it, so the table never carries a texting right over an empty
+ * number, and a year from now the row still says what was on screen.
  *
  * The longer ReferralForm on /buying-or-selling still exists and still asks for
  * intent, area, timeframe, and a message, because somebody who navigated there
@@ -51,6 +69,9 @@ type State = "idle" | "submitting" | "done" | "error";
 export function QuickContact({ source }: { source: string }) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  // Unchecked by default and never part of the submit validation. See the note
+  // above: both of those are compliance requirements, not preferences.
+  const [smsConsent, setSmsConsent] = useState(false);
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
   const attribution = useAttribution();
@@ -79,6 +100,10 @@ export function QuickContact({ source }: { source: string }) {
           // conversation if they are headed somewhere else.
           location: "Greenville, SC",
           source,
+          // Only the boolean crosses the wire. The server stamps the consent
+          // wording, because a consent record the client could have written
+          // says nothing about what was actually on screen.
+          smsConsent,
           ...attribution.current,
         }),
       });
@@ -126,9 +151,13 @@ export function QuickContact({ source }: { source: string }) {
         </div>
         <p className="theme-text-primary font-semibold text-lg mb-1">Got it, thank you.</p>
         <p className="theme-text-muted type-small leading-relaxed max-w-md mx-auto">
-          {phone.trim()
-            ? "I will reach out within a day to hear what you are working on."
-            : "I will write back within a day to hear what you are working on."}
+          {/* Says back what they actually agreed to, so nobody is surprised by
+              the channel the reply arrives on. */}
+          {phone.trim() && smsConsent
+            ? "I will text or call you within a day to hear what you are working on."
+            : phone.trim()
+              ? "I will call you within a day to hear what you are working on."
+              : "I will write back within a day to hear what you are working on."}
         </p>
       </div>
     );
@@ -162,6 +191,32 @@ export function QuickContact({ source }: { source: string }) {
           />
         </label>
       </div>
+
+      {/* The consent block. The wording comes from src/lib/legal.ts so that what
+          is shown here, what /terms repeats, and what gets stored on the lead
+          row are one string. The two links sit OUTSIDE it, which keeps the
+          stored copy plain text matching the screen byte for byte, and puts the
+          terms one tap away at the moment consent is given. */}
+      <label className="flex gap-3 items-start mb-5">
+        <input
+          type="checkbox"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--accent)]"
+        />
+        <span className="theme-text-muted text-xs leading-relaxed">
+          {SMS_CONSENT_TEXT} Optional, and leaving it unchecked does not change the answer you
+          get. See the{" "}
+          <Link href="/privacy" className="theme-link underline">
+            Privacy Policy
+          </Link>{" "}
+          and the{" "}
+          <Link href="/terms#sms" className="theme-link underline">
+            SMS terms
+          </Link>
+          .
+        </span>
+      </label>
 
       <button
         type="submit"
