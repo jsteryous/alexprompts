@@ -439,7 +439,7 @@ CREATE TABLE IF NOT EXISTS referral_leads (
   id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   created_at   timestamptz NOT NULL DEFAULT now(),
   name         text,
-  email        text        NOT NULL,
+  email        text,                 -- nullable since Aug 29, 2026: see below
   phone        text,
   intent       text,                 -- buying | selling | both
   location     text,                 -- the market they are buying/selling in (or moving to)
@@ -493,6 +493,18 @@ ALTER TABLE referral_leads
   ADD COLUMN IF NOT EXISTS sms_consent_at   timestamptz,
   ADD COLUMN IF NOT EXISTS sms_consent_ip   text,
   ADD COLUMN IF NOT EXISTS sms_consent_text text;
+
+-- EITHER A PHONE OR AN EMAIL, not necessarily both (August 29, 2026).
+--
+-- `email` was NOT NULL until the quick contact form shipped. That form asks for
+-- a phone number and an email and requires only ONE of them, because the whole
+-- point of it is to be answerable in two taps, and making an email address
+-- mandatory loses the person who would rather just be called. /api/refer
+-- enforces "at least one", so a row with neither cannot be written; the database
+-- simply stopped assuming which one it will be.
+--
+-- Already applied to the live project. Re-running is harmless.
+ALTER TABLE referral_leads ALTER COLUMN email DROP NOT NULL;
 
 -- The texting list: who may be messaged, newest first.
 CREATE INDEX IF NOT EXISTS referral_leads_sms_consent_idx

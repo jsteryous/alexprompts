@@ -654,11 +654,24 @@ under `scripts/_archive/` — do not revive it.
   copy. **Sourcing is attribution in words with no external links at all**, which the house
   style treats as complete; a rotted link is worst on the page a stranger uses to judge whether
   the site is real. The ask is `components/QuickContact.tsx`, a deliberately tiny form (one
-  intent tap, name, email) that POSTs to the same `/api/refer` and `referral_leads` as the full
+  phone, email) that POSTs to the same `/api/refer` and `referral_leads` as the full
   `ReferralForm`, rendered twice with different `source` values
   (`best-agents-greenville-hero` / `-close`) so the attribution queries can tell the placements
-  apart. **No phone field on purpose**: collecting a number drags the 10DLC consent paragraph
-  into a form whose only virtue is being short. It is NOT a competitor to `/buying-or-selling`:
+  apart. **EITHER FIELD IS ENOUGH** and the pair is what is required, enforced in the form, in
+  `/api/refer`, and by `referral_leads.email` becoming nullable on August 29, 2026: demanding an
+  email loses the person who would rather be called, and demanding a phone loses the one who is
+  not ready to be. **A CAL.COM BOOKING BUTTON WAS BUILT AND DELETED THE SAME DAY** (`BookCall`,
+  `src/lib/booking.ts`, `/api/booking`, and the `NEXT_PUBLIC_BOOKING_URL` /
+  `CAL_WEBHOOK_SECRET` env vars, all removed at Alex's call: "I just want someone's number or
+  email quickly and easily"). Do not rebuild it without a reason: a scheduler asks a stranger
+  who is still comparing to commit to a calendar slot, which is a bigger ask than the one this
+  page is making, and it costs a third-party script or a hop off the site. **There is no fewer
+  than two taps here and no button can beat it**: no browser hands over a visitor's phone or
+  email, Google sign-in returns an email and never a number, and the Contact Picker API is
+  Android Chrome only. The lever is autofill, so keep the `autocomplete` tokens (`tel`,
+  `email`) and `inputMode` intact; they are what makes the OS keychain offer to fill both
+  fields. **No SMS consent checkbox, so these leads may be CALLED and not TEXTED**: `/api/refer`
+  stores them with `sms_consent = false` and the notification says so outright. It is NOT a competitor to `/buying-or-selling`:
   that page is the nav destination for someone who has already decided, this one is written for
   the search, and it links there for anyone who wants to say more up front. Not in the nav (the
   nav carries one button); reached from the sitemap, from search, and from one contextual link
@@ -690,30 +703,6 @@ under `scripts/_archive/` — do not revive it.
   reads the publication RSS feed, converts each post's HTML to markdown via
   `src/lib/substack.ts` (turndown; images kept as `<figure>`/`<figcaption>`), and upserts
   rows as `PUBLISHED`. So posting on Substack populates the site with no manual step.
-- `/api/booking` — the **Cal.com webhook** (added August 29, 2026). A booked call is a lead,
-  and until this existed it was a lead that only ever appeared on Alex's calendar: every
-  conversion query in `supabase/queries.sql` reads `referral_leads`, so a booking that never
-  landed there was invisible to the only numbers that say whether any of this works. A
-  `BOOKING_CREATED` event becomes a `referral_leads` row with `source = "cal-booking"` and
-  `timeframe = "asap"` (somebody who put a time on a calendar is not just exploring), and Alex
-  gets `leadNotifyEmail` in its **booking variant**: subject "Call booked: <name>", the call
-  time in Eastern as the first row, and a different opening line, because a form lead needs a
-  reply while it is warm and a booked call needs him to show up. **Signature required**, see
-  `CAL_WEBHOOK_SECRET` in the env table. **Only `BOOKING_CREATED` is handled**; everything else
-  gets an honest `200 {status:"ignored"}`, because a non-2xx makes Cal.com retry and eventually
-  disable the webhook, and because `BOOKING_RESCHEDULED` would double-count one person who is
-  already in the table. **Idempotent**: the Cal booking uid is written into the lead's `message`
-  as a `cal:<uid>` marker and `leadExistsWithMarker()` checks for it before inserting, so a
-  retry after a successful write cannot duplicate the lead. It lives in `message` rather than
-  its own column on purpose, since a new column is a migration someone has to remember to apply
-  and the failure mode of forgetting is silent duplicates. **It never sets `sms_consent`**: a
-  number given to a scheduler so Alex can call at an agreed time is not permission to text, and
-  this route has no consent checkbox to point at. Attribution from `BookCall`'s `?ref=`/`utm_*`
-  passthrough is read out of the payload's `metadata` and `responses` **best-effort**, because
-  what Cal.com does with query params it does not recognise is not contractual; when they are
-  missing the row still records `source = "cal-booking"`, which answers the question the button
-  was built for. Cal.com's own "Ping" test button exercises the signature path without writing
-  anything.
 - `/admin` — the **draft review hub** (not in nav; the primary way Alex reviews drafts).
   Log in once with a password (= `PUBLISH_SECRET`); `/api/admin/login` sets an httpOnly
   `ap_admin` cookie (rate-limited, constant-time compare), so the secret never rides in a URL.
@@ -809,9 +798,6 @@ email.
 | `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
 | `CENSUS_API_KEY` | **Required for the area-scan "neighborhood profile."** The Census *data* API needs a free key (the geocoder does not); without it the profile degrades to hidden (the rest of the scan still works). The key is free with no billing account, so the zero-billing guarantee holds. Sign up: https://api.census.gov/data/key_signup.html |
 | `ANTHROPIC_API_KEY` | **UNUSED since August 27, 2026 — delete the repo secret if it was ever set.** Its only consumer was the optional Haiku vision pre-filter in the monthly cover-library grower (`scripts/greenville/cover_ingest.py` + `.github/workflows/greenville-covers.yml`), both deleted with the auto-cover. Never used by the site at runtime. |
-| `NEXT_PUBLIC_BOOKING_URL` | **The one-click call.** A Cal.com, Calendly, or Google Calendar appointment-schedule link. When set, a "Book a 15-minute call" button renders above the form on `/best-real-estate-agents-greenville-sc` and `/buying-or-selling` and the surrounding copy switches to lead on the call; **unset = the button does not render at all** and both pages read exactly as they did before, so a missing booking page can never ship a dead button. Deliberately a LINK OUT and not an embed: every scheduler embeds via a third-party script, and this site runs none, which is why its cookieless Vercel Analytics needs no consent banner. Public by design, hence `NEXT_PUBLIC_`. See `src/lib/booking.ts`. Bookings do NOT land in `referral_leads` on their own; that needs the provider's booking-created webhook pointed at a route we have not built yet. |
-| `NEXT_PUBLIC_PHONE_NUMBER` | Optional. Shown as a `tel:` link under the booking button, in human format (`(864) 555-0123`); `telHref()` strips it to digits. Rendered as VISIBLE TEXT rather than hidden behind a "call now" label, so a desktop visitor whose machine cannot open `tel:` can read it and dial by hand. Unset = the line is omitted. |
-| `CAL_WEBHOOK_SECRET` | **Required for `/api/booking` to work at all.** The shared secret pasted into the Cal.com webhook (Settings → Developer → Webhooks). Cal.com signs the raw request body with HMAC-SHA256 and sends the hex digest as `x-cal-signature-256`; the route recomputes it and compares in constant time. **Unset = the route returns 503 and bookings never reach `referral_leads`**, which is deliberate: this URL is guessable and writes to the leads table with no human in front of it, so refusing everything beats accepting anonymous writes. If bookings stop arriving, check this first. |
 | `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
 | `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Rebrew <alex@rebrew.org>`. **After the domain move this cannot change until Resend verifies rebrew.org by DNS**; sending from an unverified domain fails, so verify first, then flip this.. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
 | `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |

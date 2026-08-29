@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { bookingUrl } from "@/lib/booking";
 import { ReferralForm } from "@/components/ReferralForm";
-import { BookCall } from "@/components/BookCall";
 
 export const metadata: Metadata = {
   title: "Buying or Selling?",
@@ -61,13 +59,6 @@ const trust = [
 ];
 
 export default function FindAProPage() {
-  // A booked call beats a form for anyone already decided, and this page is
-  // where the decided ones land. It sits ABOVE the form rather than replacing
-  // it: a scheduler converts the committed and loses everyone who is not ready
-  // to pick a slot, so the page keeps both. Renders nothing until
-  // NEXT_PUBLIC_BOOKING_URL is set (see src/lib/booking.ts).
-  const canBook = bookingUrl() !== null;
-
   return (
     <>
       {/* Form first: a curious visitor can act immediately and scroll for the rest. */}
@@ -103,14 +94,6 @@ export default function FindAProPage() {
                 obligation, and I will not add you to any list.
               </p>
             </div>
-            {canBook && (
-              <div className="max-w-xl mx-auto mb-8 pb-8 border-b theme-border">
-                <BookCall />
-                <p className="theme-text-muted type-small leading-relaxed mt-6 text-center">
-                  Or fill this out and I will come back to you with the first questions answered.
-                </p>
-              </div>
-            )}
             <ReferralForm source="buying-or-selling" />
           </div>
 

@@ -4,54 +4,67 @@ import { useState } from "react";
 import { useAttribution } from "@/lib/attribution";
 
 /**
- * The one-click capture. One tap, two fields, one button, and it is the whole
- * point of the Greenville agents landing page.
+ * THE SHORTEST POSSIBLE ASK: a number, an address, or both, and one button.
  *
- * WHY IT IS NOT ReferralForm. That form asks for intent, name, email, phone,
- * area, timeframe, a message, and an SMS consent decision, which is the right
- * trade on /buying-or-selling: somebody who navigated there has already decided
- * to start a conversation, and every extra field makes Alex's first call better.
- * A visitor who arrived from a search for "best real estate agents in Greenville
- * SC" has decided nothing yet. They are comparing, and an eight-field form at
- * that moment is a wall. This asks for the two things that make a reply possible
- * plus the one tap that makes the reply useful.
+ * WHY IT IS NOT FEWER TAPS THAN THIS. Nothing a page can do will hand Alex a
+ * visitor's phone number or email on a single click. No browser exposes it.
+ * Sign-in with Google returns an email and a name and never a phone number, and
+ * it buys that with an OAuth consent screen that reads as a data grab to a
+ * stranger who is comparing agents. The Contact Picker API exists but is Android
+ * Chrome only. So the floor is: the person supplies one identifier, and the job
+ * of this component is to make supplying it cost as close to nothing as the
+ * platform allows.
  *
- * NO PHONE FIELD, on purpose. Collecting a number drags the 10DLC consent
- * checkbox and its paragraph of carrier-mandated wording into a form whose only
- * virtue is that it is short (see src/lib/legal.ts). Anyone who wants a call can
- * say so in the reply, and /buying-or-selling is linked for a reader who would
- * rather give the whole picture up front.
+ * That is what every decision here is for. Two fields and no more. Both carry
+ * the autocomplete tokens the OS keychain matches on (`tel`, `email`), so on a
+ * phone this is a tap, an autofill chip, a tap, and Send. `inputMode` puts the
+ * number pad up for the phone field instead of the alphabet. There is no name
+ * field, because a phone number is worth more than a name and Alex can ask for
+ * a name in the first sentence he says to them.
  *
- * Same endpoint, same table, same attribution as the full form, so a lead from
- * here lands in referral_leads next to every other one and shows up in
- * supabase/queries.sql unchanged. `source` distinguishes the two placements on
- * the page, which is how we learn whether the form above the fold or the one at
- * the bottom does the work.
+ * EITHER ONE IS ENOUGH, and that is the point of the whole redesign. Requiring
+ * an email address loses the person who would rather just be called, which in
+ * this business is a good lead. Requiring a phone loses the one who is not ready
+ * to be called yet. So both fields are optional individually and the button
+ * enforces the pair, which is also what /api/refer enforces and, since August
+ * 29, 2026, what the database permits (supabase/schema.sql relaxed
+ * referral_leads.email to nullable for exactly this).
  *
- * Copy rule, same as everywhere: it never explains the referral mechanism. It
- * offers a conversation with a person (root CLAUDE.md).
+ * NO SMS CONSENT CHECKBOX, and therefore NO TEXTING. A phone number typed into
+ * this box is permission to call, not permission to send marketing texts:
+ * 10DLC and TCPA want an explicit, separately-checked opt-in carrying the
+ * wording in src/lib/legal.ts, and that wording is a paragraph, which would
+ * undo the only thing this form is for. So /api/refer stores these leads with
+ * sms_consent = false and the notification email says "NO consent, do not text"
+ * in as many words. Do NOT add a phone field to any surface and quietly assume
+ * texting rights. If Alex wants to text these leads, the checkbox comes back
+ * here, deliberately, with its full wording.
+ *
+ * The longer ReferralForm on /buying-or-selling still exists and still asks for
+ * intent, area, timeframe, and a message, because somebody who navigated there
+ * has already decided and the extra fields make Alex's first call better. This
+ * one is for the visitor who has decided nothing.
  */
 
 type State = "idle" | "submitting" | "done" | "error";
-type Intent = "buying" | "selling" | "both";
-
-const INTENTS: { value: Intent; label: string }[] = [
-  { value: "buying", label: "Buying" },
-  { value: "selling", label: "Selling" },
-  { value: "both", label: "Both" },
-];
 
 export function QuickContact({ source }: { source: string }) {
-  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [intent, setIntent] = useState<Intent | "">("");
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
   const attribution = useAttribution();
 
+  const hasContact = phone.trim().length > 0 || email.trim().length > 0;
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (state === "submitting") return;
+    if (!hasContact) {
+      setState("error");
+      setError("Give me a phone number or an email and I will take it from there.");
+      return;
+    }
     setState("submitting");
     setError("");
     try {
@@ -59,12 +72,11 @@ export function QuickContact({ source }: { source: string }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
+          phone,
           email,
-          intent: intent || undefined,
-          // Not asked for on the form, but true of nearly everyone who lands
-          // here, and it saves Alex a question on the first reply. He can
-          // correct it in the conversation if they are headed somewhere else.
+          // Not asked for, but true of nearly everyone who lands here, and it
+          // saves Alex a question on the first call. He can correct it in the
+          // conversation if they are headed somewhere else.
           location: "Greenville, SC",
           source,
           ...attribution.current,
@@ -76,13 +88,15 @@ export function QuickContact({ source }: { source: string }) {
       } else if (res.status === 429) {
         setState("error");
         setError("Too many tries. Give it a minute and try again.");
+      } else if (json.error === "invalid_email") {
+        setState("error");
+        setError("That email does not look right. A phone number works too.");
+      } else if (json.error === "need_contact") {
+        setState("error");
+        setError("Give me a phone number or an email and I will take it from there.");
       } else {
         setState("error");
-        setError(
-          json.error === "invalid_email"
-            ? "That email does not look right."
-            : "Something went wrong. Try again, or email me directly.",
-        );
+        setError("Something went wrong. Try again, or email me directly.");
       }
     } catch {
       setState("error");
@@ -112,48 +126,26 @@ export function QuickContact({ source }: { source: string }) {
         </div>
         <p className="theme-text-primary font-semibold text-lg mb-1">Got it, thank you.</p>
         <p className="theme-text-muted type-small leading-relaxed max-w-md mx-auto">
-          I read every one of these myself, and I will write back within a day or two to hear
-          what you are working on. If it is urgent, reply to my email as soon as it lands.
+          {phone.trim()
+            ? "I will reach out within a day to hear what you are working on."
+            : "I will write back within a day to hear what you are working on."}
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={submit} className="text-left">
-      <div className="mb-4">
-        <span className="theme-text-primary type-small font-semibold block mb-2">I am</span>
-        <div className="grid grid-cols-3 gap-2">
-          {INTENTS.map((opt) => {
-            const active = intent === opt.value;
-            return (
-              <button
-                key={opt.value}
-                type="button"
-                onClick={() => setIntent(opt.value)}
-                aria-pressed={active}
-                className={`border px-3 py-2.5 text-sm font-medium transition ${
-                  active
-                    ? "theme-cta-accent border-transparent"
-                    : "theme-card-strong theme-border theme-text-secondary"
-                }`}
-              >
-                {opt.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
+    <form onSubmit={submit} className="text-left" noValidate>
       <div className="grid gap-3 sm:grid-cols-2 mb-4">
         <label className="block">
-          <span className="theme-text-primary type-small font-semibold block mb-1.5">Name</span>
+          <span className="theme-text-primary type-small font-semibold block mb-1.5">Phone</span>
           <input
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoComplete="name"
+            type="tel"
+            inputMode="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="(864) 555-0123"
+            autoComplete="tel"
             className="theme-field w-full px-4 py-3 text-sm"
           />
         </label>
@@ -161,7 +153,7 @@ export function QuickContact({ source }: { source: string }) {
           <span className="theme-text-primary type-small font-semibold block mb-1.5">Email</span>
           <input
             type="email"
-            required
+            inputMode="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
@@ -176,8 +168,12 @@ export function QuickContact({ source }: { source: string }) {
         disabled={state === "submitting"}
         className="theme-cta-accent font-semibold px-6 py-3.5 disabled:opacity-60 w-full"
       >
-        {state === "submitting" ? "Sending..." : "Get in touch"}
+        {state === "submitting" ? "Sending..." : "Send it to me"}
       </button>
+
+      <p className="theme-text-muted text-xs leading-relaxed mt-3 text-center">
+        Either one is enough. No newsletter, and I am the only person who sees it.
+      </p>
 
       {state === "error" && <p className="tone-hot-text type-small mt-3">{error}</p>}
     </form>

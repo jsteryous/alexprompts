@@ -28,7 +28,9 @@ export type LeadTimeframe = "asap" | "3_months" | "6_months" | "exploring";
 
 export interface LeadInput {
   name: string | null;
-  email: string;
+  /** Nullable since August 29, 2026: a lead may give a phone number instead.
+   *  /api/refer guarantees at least one of `email` and `phone` is present. */
+  email: string | null;
   phone: string | null;
   intent: LeadIntent | null;
   location: string | null;
@@ -55,36 +57,6 @@ export interface LeadInput {
   smsConsentAt: string | null;
   smsConsentIp: string | null;
   smsConsentText: string | null;
-}
-
-/**
- * True when a lead already carries `marker` in its message.
- *
- * This exists for the scheduler webhook (/api/booking) and nothing else. Cal.com
- * retries a delivery it did not get a 2xx for, and a retry after a successful
- * insert would put the same booked call in the table twice, which quietly
- * corrupts every conversion rate in supabase/queries.sql. The webhook writes the
- * Cal booking uid into the message text and checks for it here first.
- *
- * The uid lives in `message` rather than in a column of its own on purpose: a
- * dedicated column means a migration Alex has to remember to apply before the
- * route works, and the failure mode of forgetting would be silent duplicates.
- * This table is small and the scan is cheap. If bookings ever outgrow that,
- * promote it to its own indexed column.
- *
- * Returns false when the lookup itself fails. Losing a real booking is worse
- * than storing a duplicate one, so an unreachable database falls through to the
- * insert rather than swallowing the lead.
- */
-export async function leadExistsWithMarker(marker: string): Promise<boolean> {
-  const db = admin();
-  const { data, error } = await db
-    .from("referral_leads")
-    .select("id")
-    .ilike("message", `%${marker}%`)
-    .limit(1);
-  if (error) return false;
-  return (data ?? []).length > 0;
 }
 
 /** Insert one referral lead. Throws on a database error so the route can 500. */

@@ -7,7 +7,8 @@ import { rateLimited } from "@/lib/rateLimit";
 import { site } from "@/lib/site";
 import { SMS_CONSENT_TEXT } from "@/lib/legal";
 
-// POST /api/refer  { name?, email, phone?, intent?, location?, movingFrom?, timeframe?, message?, source? }
+// POST /api/refer  { name?, email?, phone?, intent?, location?, movingFrom?, timeframe?, message?, source? }
+// At least one of `email` and `phone` is required; everything else is optional.
 // Public, referral-lead capture for /buying-or-selling. Stores a qualified lead in
 // Supabase `referral_leads` (service key, server-side) and emails Alex a
 // notification so he can follow up warm. NOT the newsletter: no double opt-in.
@@ -58,10 +59,31 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "bad_request" }, { status: 400 });
   }
 
+  // EITHER A PHONE OR AN EMAIL, as of August 29, 2026. The quick contact form on
+  // the Greenville page asks for both and requires one, because its whole job is
+  // to be answerable in two taps and a mandatory email address loses the person
+  // who would rather just be called. The full form on /buying-or-selling still
+  // marks email required in its own markup; this route is the floor under both.
+  //
+  // The database column was NOT NULL until the same day (see supabase/schema.sql).
+  // The pair is what has to be non-empty, so validate it here rather than
+  // leaving Postgres to reject a row nobody validated.
   const email = normalizeEmail(body.email);
-  if (!email) {
-    return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
+  const phoneRaw = str(body.phone, 40);
+  if (!email && !phoneRaw) {
+    // Order matters. Somebody who typed a malformed address and nothing else has
+    // to be told the address is wrong; answering "give me a phone or an email"
+    // to a person looking at the email they just typed is nonsense. Only a
+    // genuinely empty submission gets the generic message.
+    const typedSomething = !!str(body.email, 200);
+    return NextResponse.json(
+      { ok: false, error: typedSomething ? "invalid_email" : "need_contact" },
+      { status: 400 },
+    );
   }
+  // A malformed email alongside a usable phone number is not worth blocking on.
+  // The number is enough to make the call, and the empty email column is a
+  // truthful record of what was actually given.
 
   const intentRaw = str(body.intent, 20);
   const timeframeRaw = str(body.timeframe, 20);
@@ -72,7 +94,7 @@ export async function POST(req: NextRequest) {
   // Consent with no phone number is meaningless, so it is not recorded, which
   // keeps the table from carrying rows that claim a texting right over an empty
   // number.
-  const phone = str(body.phone, 40);
+  const phone = phoneRaw;
   const smsConsent = body.smsConsent === true && !!phone;
 
   const lead = {
@@ -113,7 +135,9 @@ export async function POST(req: NextRequest) {
     subject: mail.subject,
     html: mail.html,
     text: mail.text,
-    replyTo: email,
+    // Only when there is one. Hitting reply on a phone-only lead should do
+    // nothing rather than send mail to an address that was never given.
+    ...(email ? { replyTo: email } : {}),
   });
 
   return NextResponse.json({

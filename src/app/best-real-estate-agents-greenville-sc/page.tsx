@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site, CONTACT_EMAIL } from "@/lib/site";
 import { getPublishedPosts, postHref, sectionLabel, formatDate } from "@/lib/posts";
-import { bookingUrl } from "@/lib/booking";
 import { QuickContact } from "@/components/QuickContact";
-import { BookCall } from "@/components/BookCall";
 
 /**
  * THE GREENVILLE AGENTS LANDING PAGE, and the site's second conversion surface.
@@ -192,6 +190,22 @@ const jsonLd = {
   ],
 };
 
+/**
+ * A prefilled mailto, which is the one path on this page that is genuinely a
+ * single tap. The subject and the opening line are already written, so the
+ * visitor only has to hit send, and an email carries their address by
+ * construction: no form, no typing, nothing to validate. It is the fallback
+ * rather than the headline because a `mailto:` does nothing at all on a desktop
+ * with no mail client registered, which is common enough that it cannot be the
+ * only way through.
+ */
+const MAILTO =
+  `mailto:${CONTACT_EMAIL}` +
+  `?subject=${encodeURIComponent("Greenville real estate")}` +
+  `&body=${encodeURIComponent(
+    "Hi Alex,\n\nI found your page on Greenville agents. Here is what I am working on:\n\n",
+  )}`;
+
 function ArrowIcon({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -215,12 +229,6 @@ export default async function BestAgentsGreenvillePage() {
   // build where the Greenville tag has nothing recent.
   const realEstate = await getPublishedPosts(4, "realestate");
   const posts = realEstate.length > 0 ? realEstate : await getPublishedPosts(4);
-  // With a booking page configured, the call IS the offer and the form drops to
-  // being the net underneath it. Without one, the form is the offer and the copy
-  // has to say so, because a heading promising a call above nothing but a text
-  // box is a broken promise. NEXT_PUBLIC_* is inlined at build, so a server
-  // component can read it (see src/lib/booking.ts).
-  const canBook = bookingUrl() !== null;
 
   return (
     <>
@@ -265,26 +273,15 @@ export default async function BestAgentsGreenvillePage() {
             id="connect"
             className="theme-card-strong border theme-border p-6 sm:p-8 scroll-mt-24"
           >
-            <h2 className="theme-text-primary type-h3 mb-2">
-              {canBook ? "Talk it through with me." : "Tell me what you are working on."}
-            </h2>
+            <h2 className="theme-text-primary type-h3 mb-2">Leave me a way to reach you.</h2>
             <p className="theme-text-muted type-small leading-relaxed mb-6">
-              {canBook
-                ? "Pick a time and I will call you. Fifteen minutes, no pitch, and you get a straight answer on where you stand before you commit to anything."
-                : "One tap and two fields. It comes straight to me, I read every one of these myself, and I answer them."}
+              A phone number or an email, whichever you prefer. It comes straight to me and I
+              will get back to you within a day with a straight answer on where you stand.
             </p>
-            <BookCall />
-            {canBook && (
-              <div className="theme-border border-t mt-8 pt-6">
-                <p className="theme-text-muted type-small leading-relaxed mb-5">
-                  Would rather not pick a slot yet? Send it over and I will write back.
-                </p>
-              </div>
-            )}
             <QuickContact source="best-agents-greenville-hero" />
             <p className="theme-text-muted type-small leading-relaxed mt-6">
               Would rather write it out? Email me at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="theme-link underline">
+              <a href={MAILTO} className="theme-link underline">
                 {CONTACT_EMAIL}
               </a>
               . If you want to give me the whole picture up front, the{" "}
@@ -390,11 +387,6 @@ export default async function BestAgentsGreenvillePage() {
               timing, and whatever has to happen first. No pitch, and no obligation at the end of
               it.
             </p>
-            {canBook && (
-              <div className="mb-8">
-                <BookCall />
-              </div>
-            )}
             <QuickContact source="best-agents-greenville-close" />
           </div>
 

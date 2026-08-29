@@ -237,25 +237,16 @@ export function postBroadcastEmail(opts: {
   return { subject, html, text };
 }
 
-/** Internal notification to Alex when a lead arrives, from the form or the booking page.
+/** Internal notification to Alex when a referral lead comes in via /buying-or-selling.
  *  This goes to Alex, not the lead, so it is plain and information-dense: it leads
  *  with the qualifying details so he can follow up warm within a day.
  *
  *  The table is set in SANS throughout, deliberately breaking the editorial split.
  *  It is not a reading surface, it is a record, and the site sets its tables and
- *  labels in sans for exactly the same reason.
- *
- *  TWO KINDS OF LEAD, ONE TEMPLATE (August 29, 2026). `kind: "booking"` is a call
- *  somebody scheduled on the booking page, arriving through the Cal.com webhook
- *  at /api/booking rather than through a form. It gets its own subject line and
- *  its own opening sentence, because the two need opposite things from Alex: a
- *  form lead needs a reply while it is warm, and a booked call is already on his
- *  calendar and needs him to show up for it. Telling him "someone filled out the
- *  form" about a call at 2pm tomorrow would be actively misleading, which is why
- *  this branches rather than shipping a second near-copy of the template. */
+ *  labels in sans for exactly the same reason. */
 export function leadNotifyEmail(lead: {
   name: string | null;
-  email: string;
+  email: string | null;
   phone: string | null;
   intent: string | null;
   location: string | null;
@@ -268,21 +259,13 @@ export function leadNotifyEmail(lead: {
   utmMedium?: string | null;
   utmCampaign?: string | null;
   smsConsent?: boolean;
-  /** "booking" when this arrived from the scheduler webhook rather than a form. */
-  kind?: "form" | "booking";
-  /** The scheduled call time, already formatted in Alex's timezone. */
-  when?: string | null;
 }): { subject: string; html: string; text: string } {
-  const who = lead.name?.trim() || lead.email;
-  const booking = lead.kind === "booking";
-  // The subject line is the entire notification for anyone reading it on a phone
-  // lock screen, so it has to say which of the two things happened.
-  const subject = booking ? `Call booked: ${who}` : `New lead: ${who}`;
+  // A lead can now arrive with a phone number and no email, so the subject line
+  // falls back through everything it has before giving up.
+  const who = lead.name?.trim() || lead.email || lead.phone || "someone";
+  const subject = `New lead: ${who}`;
 
   const rows: Array<[string, string | null]> = [
-    // First on purpose. When the call is already scheduled, the time is the one
-    // thing Alex has to act on.
-    ["Call time", booking ? (lead.when ?? null) : null],
     ["Name", lead.name],
     ["Email", lead.email],
     ["Phone", lead.phone],
@@ -313,17 +296,17 @@ export function leadNotifyEmail(lead: {
     .join("");
 
   const html = shell(
-    `${headline(booking ? "Call booked" : "New lead", 24)}
-     <p style="margin:0 0 20px;font-family:${SANS};font-size:14px;line-height:1.6;color:${INK_MUTED};">${
-       booking
-         ? "Somebody booked a call with you. It is on your calendar already, and what they gave the booking form is below."
-         : "Someone filled out the form. Reach out while it is warm."
-     }</p>
+    `${headline("New lead", 24)}
+     <p style="margin:0 0 20px;font-family:${SANS};font-size:14px;line-height:1.6;color:${INK_MUTED};">Someone filled out the form. Reach out while it is warm.</p>
      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;border-top:1px solid ${RULE_STRONG};">${rowsHtml}</table>
-     <p style="margin:24px 0 0;">${btn(`mailto:${escapeHtml(lead.email)}`, booking ? "Email them before the call" : "Reply to this lead")}</p>`,
-    booking
-      ? `Booked through the scheduling page linked from ${hostOf(site.url)}.`
-      : `Sent from the form at ${hostOf(site.url)}/buying-or-selling.`,
+     ${
+       // No email address means no reply button. A phone-only lead gets called,
+       // and a dead mailto: link would be worse than no button at all.
+       lead.email
+         ? `<p style="margin:24px 0 0;">${btn(`mailto:${escapeHtml(lead.email)}`, "Reply to this lead")}</p>`
+         : ""
+     }`,
+    `Sent from the form at ${hostOf(site.url)}/buying-or-selling.`,
   );
 
   const text = rows
@@ -331,7 +314,7 @@ export function leadNotifyEmail(lead: {
     .map(([label, v]) => `${label}: ${v}`)
     .join("\n");
 
-  return { subject, html, text: `${booking ? "Call booked" : "New lead"}\n\n${text}` };
+  return { subject, html, text: `New lead\n\n${text}` };
 }
 
 /** A human one-line "where did this lead come from" for the notification, from the
