@@ -550,10 +550,22 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
    TipTap's Placeholder extension only marks the empty node (a class plus a
    `data-placeholder` attribute); drawing it is the app's job. Without this a
    blank article, which is exactly what /admin's Write Article button opens,
-   showed an empty page with no prompt at all. `is-empty` covers the caption
-   slot on a figure too, so a photo with no caption says so. */
-.ProseMirror .is-editor-empty:first-child::before,
-.ProseMirror figcaption.is-empty::before {
+   showed an empty page with no prompt at all.
+
+   It marks the node the CARET is in, not only the first one, so an empty line
+   halfway down a piece carries its own hint the way Substack's does. The rule
+   used to key off `is-editor-empty:first-child`, which is the class for an
+   empty DOCUMENT, so every line after the first drew nothing.
+
+   The figure selector looks odd and is load-bearing. A caption lives inside a
+   `figure` node, and a node decoration lands on that node's outermost element,
+   so the class and the attribute both go on the `<figure>` and never on the
+   `<figcaption>` the old selector was looking for. Drawing it on the figure
+   itself would print the words over the photo, so the class is read from the
+   parent and the text from the caption's own `data-placeholder`, which
+   `Figure.tsx` renders. */
+.ProseMirror p.is-empty::before,
+.ProseMirror figure.is-empty > figcaption::before {
   content: attr(data-placeholder);
   color: var(--foreground-muted);
   float: left;
