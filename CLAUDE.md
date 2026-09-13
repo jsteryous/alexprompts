@@ -1,834 +1,357 @@
-# Alex Prompts
+# Rebrew
 
-This file is loaded everywhere. Domain-specific context is in nested `CLAUDE.md` files:
-- **`src/CLAUDE.md`** — frontend tech stack, project-structure couplings, design system, SEO.
-- **`scripts/CLAUDE.md`** — the content engines: the Greenville local real-estate
-  engine (`greenville/`), Greenville Works (`tech/`), and the weekly Upstate Brief
-  (`briefing/`), all draft-first. (The national Saturday engine `ai_news/` was killed July
-  2026 and archived to `scripts/_archive/`.)
-- **`BRAND.md`** — the StoryBrand BrandScript (villain = the noise, hero = the reader, guide
-  = Alex). Drives all *positioning* copy (site, welcome email, bios, CTAs). Stays OUT of the
-  truth-seeking writer method by design.
+Domain context lives in nested files:
+- **`src/CLAUDE.md`** — frontend stack, routes, design system, the admin editor, SEO.
+- **`scripts/CLAUDE.md`** — the content engine.
+- **`scripts/research/SPEC.md`** — the LIVE engine's spec. Outranks both of the above.
+- **`BRAND.md`** — the StoryBrand BrandScript. Drives positioning copy (site, welcome
+  email, bios, CTAs). Deliberately OUT of the truth-seeking writer method.
+
+> **THE THREE RULES (Alex, August 15, 2026). They outrank every other editorial
+> instruction in this repo, including the rest of this file.**
+> **1. It must be a true story. 2. Make it as entertaining as possible without
+> fabricating. 3. Have fun.**
+>
+> Rule 1 says STORY, which is a genre instruction: the spec had been written in the
+> register of an intelligence memo and that register was producing memos. Rule 2 is a
+> MAXIMUM, not a threshold, so among candidates that clear every bar, take the one with
+> the best story. Fabricating is the single hard line, and every sourcing, arithmetic,
+> verifier, and legal rule exists to let the writing run right up to it safely. Rule 3 is
+> not decoration: a bored writer and a writer enjoying the material produce visibly
+> different prose, and Alex reads this publication as well as writing it.
 
 ## What this is
 
-> **STRATEGIC DIRECTION (July 2026, revised): the north star is REFERRAL REVENUE.** The
-> site's real job is to generate **inbound relocation/buyer/seller leads that Alex refers to
-> vetted agents for a referral fee** (`/buying-or-selling`). Alex is a licensed SC agent who does
-> not practice, so he captures the intent and hands it off. **THE ENTIRE MECHANISM IS INTERNAL
-> CONTEXT. It never appears in user-facing copy, on the site or in an article** (finished August 1,
-> 2026, extending the July 30 removal of "I do not practice"). Nothing anywhere may say Alex will
-> refer, match, connect, hand off, or introduce the reader to an agent; may call an agent "vetted,"
-> "hand-picked," "trusted," or "in my network"; may say the help is "free" or "at no cost to you";
-> or may say he does not practice or does not take clients. Two different failures, one cause:
-> "I do not practice" disqualifies Alex at the exact moment the reader is deciding whether he can
-> help, and "I will connect you with a vetted agent" makes the reader feel brokered before they have
-> said hello. Both describe how Alex gets paid instead of what the reader came for.
-> **The site's job is to earn a conversation with a qualified buyer or seller. Alex handles the
-> introduction himself, in that conversation, once he knows what they need.** State what he IS
-> ("licensed real estate agent in South Carolina"), keep the buy/sell invitation short and warm
-> ("let me know if you are looking to buy or thinking of selling"), and let the one-line licensee
-> disclosure in the `/buying-or-selling` fine print be the only mention of a fee anywhere. The three
-> engines carry this as a NEVER EXPLAIN THE BUSINESS MODEL rule in their writer passes and as a
-> hard cut-gate in their editor passes. This SUPERSEDES the earlier
-> "tech-sales portfolio first" framing: the portfolio is now a **secondary, opportunistic
-> benefit**, not the driver. The `/about` page still works as a hiring-manager front door if
-> Alex happens to share the site on a job board, but the site is no longer built *for* hiring
-> managers. See memory `alexprompts-portfolio-pivot` and `content-two-track-strategy`.
+**Rebrew**, at **rebrew.org**, is Alex Steryous's publication on **Greenville real estate
+and sales performance**. Tagline: `Greenville Real Estate & Sales Performance`. Masthead
+headline: "What's brewing in Real Estate." Brand single-source-of-truth is
+**`src/lib/site.ts`**; edit handles and domain there and every surface follows.
+
+The beat narrowed to **Greenville** on August 25, 2026 ("it's a real narrowing, take the
+whole masthead to greenville"). That was a correction to the archive, not an ambition
+being trimmed: 34 of 36 published pieces mention Greenville and none was meaningfully
+statewide, so the front page had been promising territory the work did not cover.
+
+The promise, in Alex's own words, is that *"We read research papers about real estate and
+sales performance and share what we find interesting."* The reader should land here and
+immediately get an insightful read on how the market is moving and why. **Alex is a reader
+of this publication, not only its author.** If a question would bore him, that is real
+information about the question.
+
+### The north star is REFERRAL REVENUE
+
+Alex is a licensed SC agent with a full-time job. The site's job is to earn a conversation
+with a qualified buyer or seller, which he then refers to an active agent for a fee
+(`/buying-or-selling`). Relocation leads to any market count.
+
+> **NEVER EXPLAIN THE BUSINESS MODEL. THE ENTIRE MECHANISM IS INTERNAL CONTEXT and never
+> appears in user-facing copy, on the site or in an article.**
 >
-> Content runs on **two tracks**, now prioritized by their contribution to referral leads:
-> 1. **The lead engine: evergreen local-SEO real-estate guides** (`scripts/greenville/` →
->    `/real-estate`, about 2/week). This is the track that carries buyer/relocation intent and
->    funnels to `/buying-or-selling`. It is the priority; it is a slow-compounding SEO bet on a new
->    domain (6 to 18 months), so pair it with the relationship channel below.
-> 2. **The credibility/authority layer: Greenville Works** (`scripts/tech/` →
->    `/greenville-works`, first-person deep-dives in Alex's own voice, about 1/week (scaled back
->    from 1 to 2 via a code cadence guard, July 2026); renamed from the national "Lab" tech track
->    in July 2026; **statewide South Carolina since July 10, 2026**, user-facing label "SC
->    Technology"). Each takes ONE thing where **technology or capital is reshaping South
->    Carolina** apart (data centers, the power grid and energy, fiber and connectivity,
->    manufacturing and automation at big employers, the port and logistics, who is buying and
->    with whose capital, and property technology
->    where it touches buying/selling/investing; the Upstate is home turf and wins ties),
->    explains how it works, and names the honest
->    trade-offs. That **tech-and-capital-meets-real-estate intersection is the niche** and the
->    differentiator (sharpened July 8, 2026; **deep-tech core sharpened July 15, 2026**: every piece
->    centers on a real technology or engineered system and takes its workings apart one level deeper
->    than local coverage, with capital and politics as the lens, never the whole subject); roads, water and sewer capacity, subdivisions, and
->    rezonings are only a secondary, occasional beat, allowed when they carry a real tech, capital,
->    or real-estate through-line. It builds local topical authority and makes Alex look legit, but
->    it does NOT directly capture leads, so it is the lower-priority track, deliberately slowed:
->    it gave up its weekly slot to the Upstate Brief in July 2026 and now runs about MONTHLY
->    (a scheduler change; the engine is untouched).
-> 3. **The sphere artifact: the Upstate Brief** (`scripts/briefing/` → `/briefing`, added
->    July 9, 2026). ONE fixed-format Monday briefing read in five minutes. **Written for BUYERS
->    and SELLERS** (settled July 27, 2026), which is the same audience the referral funnel serves:
->    where the market stands, a buyer-versus-seller leverage read, **which ZIPs in Greenville
->    County have the room to negotiate** (the submarket cut), local development news, rates, and one
->    thing to watch. The professionals in Alex's sphere (loan officers, attorneys, agents) read that
->    same brief and forward it to their own clients, so there is no second version and no investor
->    audience. It exists for DISTRIBUTION: it is the recurring deliverable for Alex's sphere calls
->    ("want me to add you to the Monday brief?"), the concrete promise behind the owned-list
->    subscribe CTA, and it is Monday-perishable (publish Monday morning or delete; never late).
->    The two commercial-deed sections it launched with were cut July 27, 2026 (months-stale data,
->    wrong audience). See `scripts/briefing/SPEC.md` and memory `upstate-brief-weekly-engine`.
+> Nothing anywhere may say Alex will refer, match, connect, hand off, or introduce the
+> reader to an agent; may call an agent "vetted," "hand-picked," "trusted," or "in my
+> network"; may say the help is "free" or "at no cost to you"; or may say he does not
+> practice or does not take clients.
 >
-> **Referral revenue does not come from the blog alone.** Organic SEO is the long game; the
-> faster channel is Alex's **sphere of influence** (mortgage loan officers, estate attorneys,
-> the solid agents he already knows). The site is the credibility layer that makes those
-> conversations land, and the Upstate Brief is the recurring excuse to be in their inbox. The public site copy below still presents the brand as
-> Claude-for-real-estate; re-messaging the site is a separate, later call.
-
-> **CURRENT POSITIONING (July 2026): Alex Steryous's personal site.** The old "Claude for
-> real-estate agents and investors" teaching framing (the "voice 3" how-to product) was
-> **removed in July 2026**. The site is now Alex's personal place with two kinds of content,
-> honest writing on **Greenville real estate** and on **how the Upstate is
-> changing** (Greenville Works), plus the free **real-estate tools** he built. Its primary
-> goal is the **referral connector**: capture buyer/seller/relocation leads and hand them to
-> vetted agents for a referral fee (see `/buying-or-selling`). A **build-in-public portfolio** that
-> showcases Alex to hiring managers (see `/about`) is a secondary, opportunistic benefit, not
-> the site's job. The brand single-source-of-truth is **`src/lib/site.ts`** (tagline/slogan:
-> *"Better real estate decisions."* since July 21, 2026, was *"Questions worth asking."* from
-> July 11, "Growth is good." for one day before that, and "Where real estate meets technology."
-> earlier; the slogan is now outcome-forward (it signals what the site is FOR and spans every
-> reader who makes a real-estate decision, buyer/seller/loan officer/agent) and headlines the OG
-> share card. "Questions worth asking." was a pun on the retired AI-prompts positioning, so it
-> was dropped; the homepage mission headline was reworked to match the new slogan the same day;
-> the phrase "in plain English" was dropped from
-> ALL site copy July 9, 2026 because Alex found it unpolished — do not reintroduce it in
-> user-facing copy). Do **not** reintroduce the
-> single-tool, how-to-use-Claude teaching positioning, and do **not** revive the old
-> frontier-tech-news framing. See memory `alexprompts-portfolio-pivot`,
-> `content-two-track-strategy`, and `greenville-evergreen-seo-track`.
-
-**Alex Prompts** is a personal media brand by Alex Steryous. It publishes on **Substack (the
-newsletter and home base), YouTube, TikTok, and X**. The job is the referral lead stream
-described in the strategic direction note above; building an audience is the supporting
-longer-term goal, and the tech-sales portfolio is an opportunistic side benefit via `/about`.
-
-**The content is RESEARCH + analysis, not how-to.** (The old third mode, "HOW-TO education"
-that taught agents to point Claude at their work, was the removed voice 3; do not bring it
-back.) The two live tracks are the real-estate vertical proof and the Greenville Works local-change track:
-1. **RESEARCH + analysis** — answering the hard questions about real estate, development, and
-   investment, for the same reader. The Saturday national video + article (`scripts/ai_news/`)
-   has Claude research one useful, evergreen question against real public data; the Greenville
-   local engine (`scripts/greenville/`) writes evergreen local-SEO guides to winnable long-tail
-   queries (its old both-sides news track was retired July 2026). These make the audience
-   smarter; they do not replace the how-to.
-
-**The name is a double meaning:** the *AI prompts*, and *prompting real discussion*. Every
-piece (article, video, TikTok, X post) exists to stimulate discussion. It asks a simple
-question that turns out to be hard, the kind that gets opinionated people to say what they
-actually think.
-
-### Editorial framework (the POV behind the RESEARCH + analysis content)
-
-This is the method for the analysis pieces. NOTE: the **Saturday national research engine was
-killed July 5, 2026** (archived to `scripts/_archive/ai_news/`), and the Greenville local news
-track was retired July 2026, so the two methods below are kept as **reference for the research
-discipline** (honesty, hunt-the-confounder, steelman) that the LIVE local engines still inherit,
-not as descriptions of running engines. The how-to teaching approach for the site + newsletter is
-a SEPARATE thing and lives in `src/lib/site.ts` `principles` (start from a real outcome, assume
-nothing, skip the hype, leave you able to do it again). Do not conflate the two.
-
-The **Saturday research method** (retired, `scripts/_archive/ai_news/`), in order:
-1. **Pick a real question** — one useful, evergreen, decision-relevant question, anchored in
-   a real place or decision (Greenville, North Main, a real asset class).
-2. **Research it with real data** — pull primary public sources (Census, FRED, FHFA, Zillow,
-   county records, peer-reviewed studies); state every figure with its source and caveat.
-3. **Hunt the confounder** — never read a correlation as a cause; name the selection effects
-   and what a clean answer would require; separate confirmed from contested from unknown.
-4. **A grounded take, then a prompt** — a clear, calibrated read (NOT investment, legal, or
-   financial advice) plus the concrete practitioner takeaway, then the hard question worth
-   arguing about.
-
-The **Greenville news method** (`scripts/greenville/`), in order: inform clearly (what
-happened, plain English, no hype/doom); read the builders, then pressure-test; steelman the
-skeptic; a grounded take, then the prompt.
-
-The stance, stated honestly:
-- **Contrarian / Thiel-esque:** the crowd, including real-estate and tech media, swings
-  between "AI makes agents obsolete" doom and "it's a fad" dismissal, and is confidently
-  wrong often enough that the consensus is worth doubting. The house lean is that AI
-  *reshapes and raises the bar* for the agent's and investor's work rather than ending it,
-  and the pros who adopt it win. Held loosely and always paired with the steelman.
-- **Held in honest tension.** Take the strongest "agents are obsolete" case seriously
-  (iBuyers, AI valuation, direct-to-consumer tools), never wave it off. Resolve it by
-  asking a better question (obsolete for which task, on what timeline, replaced by whom),
-  not by cheering or panicking.
-- Grounded optimism, never blind optimism. The hard parts are real and named.
-
-### Brand strategy (the model the site is built around)
-
-- **Short-form video is the discovery engine** (TikTok / YouTube Shorts / Reels / X).
-  The **newsletter is the capture** (Substack). The website is the **home base**: it
-  converts a curious viewer into a follower and an email subscriber, and hosts the
-  issue archive.
-- **The site optimizes for audience growth first** — the dominant CTA is *Subscribe*
-  (email is the owned asset), with *Follow* secondary. Not paid subscriptions or
-  sponsorships yet; those come once there is an audience.
-- **Substack stays the newsletter home.** Issues are written/sent there. The site
-  *mirrors* them into `/archive` for credibility and a controllable link. **SEO is a
-  passive bonus, not the bet** — a new domain will not out-rank TechCrunch/The Verge on
-  news queries for a long time, so we do not optimize hard for it. (If we ever want the
-  site to be the SEO source of truth, add a `canonical_url` column to `blog_posts` and
-  point article canonicals at the site instead of Substack.)
-
-## Voice (mirror of the live engine writer passes — keep in sync)
-
-The canonical voice rules live in the live engines' writer/editor passes
-(`scripts/tech/routine/pass3_writer.md` for Greenville Works' first-person voice,
-`scripts/greenville/routine/pass_evergreen.md` for the evergreen guides). The retired Saturday
-engine's `pass3_writer.md` carried the same house style but now lives under
-`scripts/_archive/ai_news/`. Site copy must match these rules:
-
-- **No em dashes or en dashes, ever.** Use periods, commas, or restructure. (The routine
-  enforces this in its passes; the website has no automated backstop, so do not introduce
-  dashes in copy.)
-- **No sentence fragments.** Every sentence has a subject and a verb, never a clipped burst for effect.
-- **Flowing, complete sentences**, the way a person explains something out loud. Vary sentence length
-  naturally, **and in BOTH directions** (tightened August 3, 2026): a run of long clause-heavy
-  sentences of similar length is as much a machine tell as a run of clipped ones, and it is the more
-  common failure. Put a short sentence next to a long one on purpose. Short is allowed and often
-  better; the test is a subject and a finite verb, not a word count, so this is not a licence for
-  fragments. Clarity carries the weight, not punchiness or staccato.
-- **Never narrate the process** (August 3, 2026, all three engines). No piece tells the reader what
-  the pipeline tried, what it could not reach, or what it fell back to ("the usual host was
-  unreachable," "the MLS indicators were not available this week," "I could not confirm"). A human
-  columnist never writes these, because a human never experiences a failed fetch; they go to the
-  other source and come back with the number. This was the strongest LLM fingerprint in a shipped
-  Upstate Brief. A limitation that lives in the WORLD may be stated once, attached to the figure it
-  affects ("no one publishes this figure, so treat it as approximate"); one that exists only because
-  a retrieval attempt failed is cut. Human newsletters hide the plumbing. Two companion rules ship
-  with it: **one caveat per section** (hedging density reads as machine diligence, not editorial
-  confidence) and **state a figure once** (repeating "24.2% vs 1.9%" three times is model
-  reinforcement). See `scripts/CLAUDE.md` and memory `never-narrate-the-process`.
-- **Clippable leads** (added July 27, 2026, all three engines). The opening sentence and the first
-  sentence under each heading are written to survive being lifted out and pasted into X or Nextdoor:
-  they stand alone, name the place and the thing measured, lead with the plain-language meaning and
-  then stack two or three figures that earn it, keep a short source tag inside ("per the Greenville
-  MLS"), and target under 200 characters. The model sentence is *"Greenville homebuyers have more
-  leverage than a year ago: inventory is up 12%, homes are taking 52 days to sell (vs. 43), and the
-  median sale price is still $330K, per the Greenville MLS."* This does NOT relax the rule above:
-  those are complete sentences, not fragments, and the rest of the prose still flows. **Compress the
-  prose, never the evidence** is the governing rule; cutting a figure, a baseline, or the source tag
-  to hit a character count is a failure, not good editing. A colon introducing a genuine list of
-  figures is correct here and is not the banned drumroll. State the market MECHANIC the figures
-  measure ("more leverage"), never a verdict ("the market is loosening faster than the country") or
-  advice ("buyers should offer under asking").
-- **A link opens a page, never a download** (added August 10, 2026, all three engines). No link in
-  an article may point at a data file, meaning a URL ending in `.csv`, `.xls`, `.xlsx`, `.pdf`,
-  `.zip`, or `.json`. The August 10 Upstate Brief shipped with roughly a dozen figures linked to raw
-  Zillow CSVs and its lead figure linked to a half-megabyte ShowingTime PDF, so a reader who clicked
-  the words "61 homes" got a file download instead of a page. That reads as a broken site and it
-  makes real sourcing look like a bug. The fix is a split the engines now carry in their data and
-  their passes: the **verify URL** is the exact file a number came out of, it stays internal, and it
-  is what the verifier re-opens to ground-truth the figure; the **cite URL** is the human landing
-  page a reader may click (for every Zillow series that is `https://www.zillow.com/research/data/`,
-  which also documents them). Where a source publishes only a document, as GGAR's monthly indicators
-  and most county budgets and agendas do, the figure is **attributed in words with no link at all**,
-  which is complete sourcing and never a defect. Two companion rules ship with it: **one link per
-  source per piece**, at first mention (eleven figures pointing at one landing page reads as machine
-  output; a columnist cites a source once), and **attribution is required, a link is not**.
-- **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff" construction; a colon only introduces a genuine list. Restructure into a full sentence where you can.
-- **THE FOUR TELLS** (added August 14, 2026, after Alex read a homepage draft and said "it is so
-  obviously written by AI"). These are structural, not lexical, which is why they survive every
-  banned-word list. The offending paragraph was: *"Checking is the work here. I take the claims
-  moving around this market, and the companies and deals underneath them, and test them against
-  filings, permits, deeds, job postings, and county records. You get what the evidence supports,
-  what it does not, and where it is genuinely unclear."* Every sentence in it is true and the
-  paragraph is still unusable.
-  1. **The abstract-noun opener.** "Checking is the work here." Naming an activity as a subject
-     and predicating it is a construction almost nobody uses out loud. Start with a person doing
-     something, or with the concrete thing.
-  2. **The tricolon payoff.** "What the evidence supports, what it does not, and where it is
-     genuinely unclear." Three balanced parallel items closing a sentence is the single loudest
-     tell in the language. A list of three is fine when it is a real list of real things; it is
-     a tell when the three are rhetorically balanced and land as a flourish. **Break it: use
-     two, or four, or make one item a different shape from the others.**
-  3. **The noun pile as proof.** "Filings, permits, deeds, job postings, and county records."
-     Stacking five source types performs rigor instead of demonstrating it. Name one or two, or
-     name the specific document that actually mattered.
-  4. **Uniform sentence shape.** Not just length, which the existing rhythm rule covers, but
-     SHAPE: three sentences in a row that each open with a subject and run to a compound object.
-     Vary the construction, not only the word count.
-  The general test: read it aloud. If it sounds like it is being read from a card rather than
-  said, it is one of these four.
-- Open cold and concrete. Lead with a fact, a scene, or a number.
-- Plain English. Translate any jargon in one sentence a smart 15-year-old understands.
-- **Grounded optimism.** Steelman the strongest opposing view before resolving.
-- Banned fluff: "in an unprecedented move," "sent ripples," "the AI landscape,"
-  "game-changer," "a new era," etc.
-
-## The content engines (`scripts/greenville/` + `scripts/tech/` + `scripts/briefing/`)
-
-See `scripts/CLAUDE.md`. **Claude routines only — Gemini was removed.** Three live engines, all
-LOCAL to Greenville: the evergreen `/real-estate` lead engine, Greenville Works (the
-local-change credibility track), and the weekly Upstate Brief (the sphere/distribution
-artifact). All are **draft-first** (they insert DRAFT; Alex reviews and
-publishes at `/review`; see memory `publishing-draft-first`). The old national Saturday research
-engine (`ai_news/`) was **KILLED July 5, 2026** and archived to `scripts/_archive/ai_news/`. See
-the strategic-direction and two-track notes above.
-
-- **`_archive/ai_news/`** — the **RETIRED** national Saturday research engine (killed July 5,
-  2026; couldn't out-rank national queries and had no distribution). Archived, reversible, nothing
-  scheduled. Its weekly cloud-agent routine must also be deleted in the Claude scheduler.
-- **`greenville/`** — the **local Greenville, SC** engine. A nightly **self-sourcing evergreen
-  local-SEO** engine: each eligible night (about two a week) it writes one substantial,
-  data-grounded local guide (`/real-estate`) + an X post, targeting a winnable long-tail local
-  query and funneling relocation/buyer leads to `/buying-or-selling`. **Draft-first** (July 2026): it
-  inserts a DRAFT and Alex publishes it at `/review`. It prefers the optional
-  `greenville/topics.md` bank and scouts its own topic with web search (`pass0_scout.md`,
-  mirroring Greenville Works) when the bank is empty. The old daily both-sides **news** track was retired
-  July 2026 (its passes + Google-News collector remain in the repo, unwired, so it is
-  reversible); the separate `commercial.py` collector for the buyers-list stays live. See
-  `scripts/greenville/CLAUDE.md`.
-- **`tech/`** — the **Greenville Works engine** (the local-change track; renamed from the
-  national "Lab" tech track in July 2026, directory kept as `tech/`). No collector; it is
-  **self-sourcing**: an optional steering bank (`tech/topics.md`, Alex seeds `queued` topics)
-  plus a web-search scout (`pass0_scout.md`) that picks its own topic when the bank is empty,
-  so it runs autonomously without going dry. Routine (`tech/routine/`, orchestrator plus
-  isolated passes: scout → researcher → angle → writer → editor) takes ONE thing where
-  **technology or capital is reshaping South Carolina** apart (a data center, the grid, fiber,
-  automation at a factory, the port, who is buying and why, proptech; statewide since July 10,
-  2026 with the Upstate as home turf; roads/water/subdivisions only as a
-  secondary beat that carries a tech/capital/real-estate through-line) in
-  **Alex's own first-person voice**, grounds it with web search, names the honest trade-offs,
-  and funnels relocation/buyer leads to `/buying-or-selling` where the topic fits, then inserts a
-  **DRAFT** `blog_posts` row tagged `greenville works` for **`/greenville-works`** (**draft-first**
-  as of July 2026, was live; the review email carries the post id + a `/review` link Alex uses to
-  publish, same manual flow as the Greenville engine). Its job is twofold: unify the
-  site around one local promise (better SEO and referral leads) and still prove Alex can take a
-  real system apart and translate it into what it means for a business. Target cadence about
-  1/week, set by the CLOUD SCHEDULE (one night, e.g. Sunday), with a STEP 0B safety guard as a
-  backstop only (skip on a same-day duplicate run, or when 2+ Greenville Works drafts are already
-  awaiting review): it is the lower-priority credibility track now that referral revenue is the
-  north star and the `/real-estate` evergreen engine is the lead engine. **July 9, 2026: its
-  weekly slot went to the Upstate Brief; reschedule the Works cloud routine to about MONTHLY**
-  (engine untouched). See `scripts/tech/routine/README.md`.
-- **`briefing/`** — the **Upstate Brief engine** (added July 9, 2026). A **Mondays-only** cloud
-  routine (schedule ~08:00 UTC, after the Sunday 22:00 UTC housing-data refresh) that writes
-  ONE fixed-format weekly briefing for `/briefing` (tag `briefing`), **for buyers and sellers**:
-  the Upstate vs the country, a buyer-versus-seller leverage read, **Where the leverage is** (the
-  ZIP-level submarket cut across Greenville County: the spread, the movers, one rotating angle),
-  around town, rates from primary sources, one concrete watch indicator. No
-  scout or angle pass (the format is the angle), but it does add a dedicated **verifier** between
-  the writer and the editor that re-opens every external web source and cuts what will not confirm:
-  collector → writer → verifier → editor, then a **DRAFT** insert and a review packet whose links
-  include the one-click `/api/broadcast` send. Cross-week dedup recalls recent published briefs from
-  Supabase. **The commercial-deed sections were CUT July 27, 2026** ("Who's buying" + "What traded":
-  a third of the brief on months-stale data for an investor audience the brief does not serve);
-  `commercialSales.json` still powers `/tools/buyers-list` and must not come back into the brief.
-  **Monday-perishable:** Alex publishes + broadcasts Monday morning or deletes the draft; the
-  orchestrator refuses to run while a briefing DRAFT is pending. Optional steer file
-  `briefing/watchlist.md`. See `scripts/briefing/SPEC.md` + `scripts/briefing/routine/README.md`.
-
-The two RE engines were reoriented from the old frontier-tech-news brand in June 2026; the
-Lab was added July 2026 for the portfolio pivot, then refocused into Greenville Works later in
-July 2026 to unify the site around the local vertical. The legacy dental pipeline is retired
-under `scripts/_archive/` — do not revive it.
-
-## Site structure
-
-> **THE THREE RULES (Alex, August 15, 2026). They govern the publication and outrank every
-> other editorial instruction in this repo, including the rest of this banner.**
-> **1. It must be a true story. 2. Make it as entertaining as possible without fabricating.
-> 3. Have fun.**
-> Rule 1 says STORY, which is a genre instruction: the spec had been written in the register of
-> an intelligence memo and that register was producing memos. ASSESS, DO NOT ADVISE still stands,
-> because it is about withholding recommendations, not about being dry. Rule 2 is a MAXIMUM and
-> not a threshold, so among candidates that clear every bar, take the one with the best story;
-> fabricating is the single hard line, and every sourcing, arithmetic, verifier, and legal rule
-> exists to let the writing run right up to it safely. Rule 3 is not decoration, since a bored
-> writer and a writer enjoying the material produce visibly different prose, and Alex reads this
-> publication as well as writing it. Carried at the top of `scripts/publication/SPEC.md` and in
-> the writer and editor passes.
+> Two failures, one cause. "I do not practice" disqualifies Alex at the exact moment the
+> reader is deciding whether he can help. "I will connect you with a vetted agent" makes
+> the reader feel brokered before they have said hello. Both describe how Alex gets paid
+> instead of what the reader came for.
 >
-> **CONSOLIDATION, August 12 to 14, 2026. Read `scripts/publication/SPEC.md` first; it
-> outranks this section wherever the two disagree.** Three content tracks became ONE
-> publication whose goal is to be **the go-to source for a clear picture of the REAL ESTATE
-> AND BUSINESS landscape in South Carolina**, built on primary documents, cadence about every
-> two weeks and published ON FINDING. The question every issue answers is **is this true, and
-> what does the record actually show**, and the hard rule is that every issue produces at least
-> one number nobody had computed. Tagline is **`SC Real Estate & Business`** (Alex's own words,
-> verbatim, do not "improve" it into a sentence).
->
-> **REAL ESTATE AND BUSINESS ARE CO-EQUAL** (widened August 14, 2026). The earlier framing was
-> companies-only with "real estate is a bonus, not a requirement"; that is dead. A piece may be
-> a pure real-estate market question with no company in it. The company teardown ("how does
-> this company actually make money, and what would break it") is the sharpest recurring FORM
-> and is preferred when a good company is available, not the whole beat.
->
-> **WHAT "A CLEAR PICTURE" MEANS, concretely.** A reader comes here to learn **how South
-> Carolina businesses are actually doing, what the long-term trends are, and what the real
-> estate market is doing and WHY.** Alex's own test, and the best one available: he lands on
-> his own site and immediately gets an insightful read on those three things. **He is a reader
-> of this publication, not only its author.** If a question would bore him, that is real
-> information about the question.
->
-> **TWO STANDING COMMITMENTS** carry that promise, and they apply to every subject. **YEARS,
-> NOT QUARTERS**: a quarterly move is noise and is what everyone else already published, so the
-> default horizon is long, and note that a median can sit perfectly still on top of a
-> distribution that changed completely underneath. **INCENTIVES EXPLAIN BEHAVIOR**: when a
-> market or a company does something that looks arbitrary or like a matter of taste, there is
-> usually a tax structure, financing term, subsidy, assessment schedule, or zoning threshold
-> underneath making it rational, and finding it is the highest-value move available.
->
-> **CLAIMS ARE ONE INPUT, NOT THE BEAT.** An opinion held by someone in this market is a fact
-> about the market, so what people say gets collected and tested against the record. Alex logs
-> what he hears in **`scripts/publication/claims.md`** (seeded with a working realtor's
-> "Greenville is becoming the luxury market, land and home prices are just that expensive"),
-> and the scout prefers those over claims it finds online. **But it runs at about one issue in
-> three and it is never the front-page promise.** An August 14, 2026 draft made claim-testing
-> the site's headline mechanism and Alex cut it: "the point isn't all about people's opinions,
-> that's just one little part of it." Leading with it made the publication sound smaller than
-> it is.
->
-> **ASSESS, DO NOT ADVISE.** The posture is the intelligence analyst's, not the columnist's,
-> and the distinction is the easiest thing on the site to get wrong. **A piece DOES reach a
-> conclusion** about whether the evidence supports a claim; that is the product, and refusing
-> to land is not neutrality. **A piece does NOT advocate**: no recommendation about what to
-> buy, sell, hold, or build, and no editorializing about whether any of it is good for the
-> state. Other people's opinions are subject matter, quoted and attributed and tested. Alex's
-> own read may inform WHICH claim is worth testing; it never substitutes for the test. Do not
-> collapse this into "a buyer reads it this way, a seller reads it that way", which is the
-> both-sides mush that emptied the old weekly brief.
->
-> **The beat moved once, on August 12.** The first spec was an ACCOUNTABILITY beat, going back
-> and checking announced promises against the record. Alex read it and said it was not
-> interesting to him and that he would rather the beat be business. That criterion is decisive
-> and is not to be re-argued: he writes this for years. Some site copy shipped on the old beat
-> before the rewrite caught up (the tagline "Who pays for South Carolina's growth.", the
-> homepage headline "Somebody should go back and check."); all of it was moved to the company
-> beat on August 14. If you find prose anywhere that sounds like a watchdog auditing promises,
-> it is a leftover and it is wrong.
->
-> **The reader is the DEVELOPER and the real estate entrepreneur** (narrowed August 14, 2026
-> from the whole professional bench), with the loan officer, closing attorney, agent, banker,
-> and economic-development professional behind them. They still read and forward it; they are
-> just not what the piece is aimed at. Alex is NOT a developer and no copy may imply he is:
-> the authority comes from the documents, not the byline.
-> `scripts/briefing/` and the `scripts/greenville/` evergreen track STOP PRODUCING; their
-> published work and routes stay live and reachable from the footer under "Archives". The
-> engine evolves from `scripts/tech/`, so new pieces still carry the `greenville works` tag
-> and land at `/greenville-works` (**the route is deliberately unchanged**; renaming it would
-> break every published URL, the sitemap, and the tag the engine writes).
-> **THE PUBLICATION IS NAMED REBREW, at rebrew.org (August 24, 2026).** It ran unnamed from
-> the consolidation until then, with `site.name` = "Alex Prompts" and the nav label
-> "Reporting" standing in. `site.name` is now **"Rebrew"** and `SITE_URL` is
-> **`https://www.rebrew.org`** (www stays canonical, carried over from the old setup). The
-> nav label **"Reporting" was KEPT, not replaced**: it was a placeholder only because there
-> was no name to put in the wordmark, and now that the wordmark says Rebrew, a tab reading
-> "Rebrew" beside it would say nothing. It is a live taste call, not a placeholder.
-> **alexprompts.com is kept and 301s to rebrew.org** so every published article URL, every
-> subscriber holding an old link, and the engines' review links keep working; do not let it
-> lapse without redirecting the article paths. **Substack stays `alexprompts.substack.com`**
-> on purpose, because a Substack subdomain is its identity over there and the two mirrored
-> archive posts link to it absolutely; renaming it is a job on Substack with its own
-> redirect, then `NEXT_PUBLIC_SUBSTACK_URL`. Also settled: SEO is no longer a growth lever (zero-click search plus AI Overviews),
-> so the evergreen how-to guides are dead as a CATEGORY, not merely deprioritized.
->
-> **THE NINE FREE TOOLS ARE DELETED (August 14, 2026), not hidden.** `/tools` and every
-> `/tools/<slug>` route 404s now, and `src/lib/tools.ts`, `src/components/tools/`,
-> `ToolShell`, `ToolIcon`, `areaScan.ts`, `wireSafety.ts`, `/api/area-scan`, and
-> `/api/area-autocomplete` are gone from the repo. They served the consumer buyer, the
-> audience this publication stopped serving, and a calculator suite under a masthead reads as
-> a lead-gen site rather than something you read. **This removes the operation's only paid API
-> surface**, so `GOOGLE_PLACES_API_KEY`, `CENSUS_API_KEY`, `AREA_SCAN_DAILY_CAP`, and
-> `AREA_SCAN_RATE_LIMIT` are now unused by the site (the env table below is stale on this).
-> `scripts/greenville/commercial.py` and `src/data/commercialSales.json` SURVIVE as engine
-> research input even though nothing in `src/` imports the dataset any more; do not delete the
-> collector for looking orphaned. `src/lib/rateLimit.ts` also stays (subscribe, refer, admin
-> login).
->
-> **Nav is `Reporting | About` plus Subscribe and the Buying or Selling CTA.** The three
-> content tracks stopped being peers; `/briefing` and `/real-estate` keep every published
-> piece and moved to the footer under "Archives".
->
-> **`/reporting` is a NEW route (August 14, 2026) and it is what "Reporting" points at.** It
-> lists EVERY published piece regardless of tag, because the tab used to point at
-> `/greenville-works` and so showed one engine's output while hiding the real-estate work.
-> **Article URLs are untouched by it**: a piece still lives at `/greenville-works/<slug>`,
-> `/real-estate/<slug>`, `/briefing/<slug>`, or `/archive/<slug>`, and `/reporting` links each
-> card through `postHref()`. The per-section indexes still exist and are still reachable from
-> article breadcrumbs. `/greenville-works` was relabelled **"Business"** (it read "SC
-> Technology", accurate for the old tech-and-capital track, wrong for the live section of a
-> real-estate-and-business publication); its route and the `greenville works` tag are
-> deliberately unchanged, since every published article URL hangs off them.
->
-> **What follows is STALE where it describes the old three-track nav, the old five-section
-> homepage, the nine tools, and the "Better real estate decisions." tagline.** Kept for
-> history; it gets rewritten in one pass when the publication is named.
+> State what he IS ("licensed real estate agent in South Carolina"), keep the invitation
+> short and warm ("let me know if you are looking to buy or thinking of selling"), and let
+> the one-line licensee disclosure in the `/buying-or-selling` fine print be the only
+> mention of a fee anywhere. The engines carry this as a writer rule and a hard editor
+> cut-gate. See memory `no-referral-mechanism-in-copy`.
 
-- `/` — **the front page (RESTRUCTURED August 2026).** Does ONE job, convince a qualified
-  stranger to hand over an email address, in three sections: **standfirst + the ask** (a
-  compact masthead statement, the headline "Somebody should go back and check.", two
-  paragraphs, and an inline `SubscribeForm`, all above the fold) → **the work** (featured
-  latest + a "More to read" grid from `getFeedPosts`) → **tools**, demoted from a nine-card
-  icon grid to one line and a row of text links, because they are a side door and not the
-  point. **REMOVED:** the "mission" contrast panel (folded into the standfirst, since a
-  mission stated twice on one page is stated badly) and the "Where to find us" social card
-  grid (the footer carries every handle, and a row of links to other people's platforms was
-  pointing the one job off-site). Do not re-add either without a reason.
+**Distribution, not the site, is the bottleneck.** Organic SEO is dead as a growth lever
+(zero-click search plus AI Overviews), which is why the evergreen how-to guides are dead
+as a CATEGORY rather than merely deprioritized. The faster channel is Alex's **sphere of
+influence**: mortgage loan officers, estate attorneys, the solid agents he already knows.
+Warm intros close far better than cold. The site is the credibility layer that makes those
+conversations land. See memory `referral-funnel-traction`.
 
-- **HISTORY, the pre-consolidation landing:** it was a **content-first landing.** Led with the
-  writing, not a brochure: **fresh from
-  Alex Prompts** (featured latest issue + recent, driven by `getFeedPosts`) is the lead
-  section → **the mission** (July 10, 2026: replaced the "behind the site" tech-stack blurb;
-  REWRITTEN BY ALEX July 11, 2026, then REWORKED July 21, 2026 to track the "Better real estate
-  decisions." slogan: headline **"Better real estate decisions."** (same as the slogan,
-  deliberately), then the ONE-sentence mission (emphasized) "Alex Prompts helps South
-  Carolinians make smarter real estate decisions, with honest writing on the market, the
-  technology reshaping it, and free tools to run the numbers yourself.", then two closing
-  paragraphs ("Most media tells people what to think." / "Alex Prompts gives you the facts and
-  the trade-offs, so the call stays yours. The last decision is who is in your corner, and that
-  is the one I help with directly."). **The closer was extended July 29, 2026 to name the
-  handoff.** It used to end at "so the call stays yours", which read as a promise that the reader
-  never needs anyone, the one thing a referral business cannot tell people; the mission was
-  fulfillable without the reader ever making contact. The fix frames the introduction as the LAST
-  step of the decision rather than a bolted-on CTA, and it is honest because Alex is licensed and
-  does not compete for the client. The final clause is deliberately first person (the rest of the
-  block is third person) so a reader sees a person doing the handoff, not a form. Note the whole
-  site's copy is UNCONTRACTED ("who is", never "who's"); there is not one contraction anywhere in
-  `src/`, so keep it that way. The earlier
-  pro-growth manifesto ("Grow or die." then briefly "Growth is good." / "from no to how" /
-  "Stagnation is death.") was REMOVED from the homepage that same day; the pro-growth stance
-  still drives the engines' editorial method (see memory `pro-growth-editorial-stance`) but is
-  no longer stated as the homepage mission — the mission sentence always LEADS and the
-  explanation never repeats it; keeps the Meet Alex → `/about` link; the full under-the-hood
-  teardown still lives on `/about`; see memory `pro-growth-editorial-stance`) → **tools spotlight** (the live tools,
-  clickable, driven by `liveTools()`, framed as engineering) → follow → subscribe. The old "Start here" hero/pillars, the "helps anyone" grid, the "how
-  every guide works" strip, the manifesto, and the "what you'll do with Claude"
-  (`realEstateOutcomes`) grid were all **removed** (the last one in July 2026 with the voice-3
-  removal). The teaching-content exports they used (`tools`, `principles`, `realEstateOutcomes`,
-  `outcomes`, `manifesto`) were **deleted from `site.ts`**; do not reintroduce them. The
-  *Subscribe* CTA still rides along. Content is free, money model is later.
-- `/tools` + `/tools/<slug>` — **DELETED August 14, 2026. All nine tools are gone and these
-  routes 404.** See the consolidation banner at the top of this section. The paragraph below is
-  HISTORY, kept because it records what existed and why each tool cost nothing to run; do not
-  read it as a description of the live site, and do not rebuild any of it without a reason that
-  survives the "this publication is not a lead-gen site" test. HISTORY:
-  **free, no-sign-up tools for the audience**, the single
-  source being `src/lib/tools.ts` (`toolCatalog`), which is the ONLY authority on what is
-  live; check it before describing the tools anywhere in copy or docs. **Nine live as of July
-  27, 2026:** `deal-analyzer` (rental cash flow / cap rate / cash-on-cash), `mortgage`
-  (payment + affordability), `property-tax` (SC estimator), `schools` (Greenville lookup),
-  `cost-of-living` (BEA RPP compare), `wire-safety` (wire-fraud check), `buyers-list`
-  (Greenville County commercial sales: buyer/LLC, price, date, address), `area-scan` (Google
-  Places neighborhood/saturation), and `taraform` (the external CRM at taraform.org, no local
-  route). (The `listing-prompt` builder was removed July 21, 2026: it served agents, the
-  audience the site dropped with voice-3, so it did not fit the referral-revenue north star.
-  Three pieces of live copy still advertised it until July 27; when a tool ships or is
-  removed, grep `src/` for its name.) Every tool but `area-scan` costs nothing to run:
-  most are pure client-side with no API, and `buyers-list` reads a committed JSON dataset
-  (`src/data/commercialSales.json`) built by `scripts/greenville/commercial.py` from the
-  county's free public ArcGIS service, so that page is statically generated. **`area-scan`
-  went LIVE (it was registered `soon`), and it is the one tool that calls a paid Google API.**
-  Alex confirmed the console-side daily quotas on July 27, 2026, and those quotas, not the
-  code, are what cap billing. The code still fails safe: with `GOOGLE_PLACES_API_KEY` unset,
-  `src/lib/areaScan.ts` returns `not_configured` and the page renders a clean "not configured"
-  panel. Every tool page wraps in `components/ToolShell.tsx` (header + honest not-advice
-  note + soft subscribe capture). The registry feeds the hub, the homepage spotlight, nav,
-  footer, and sitemap, so a tool ships in one place and appears everywhere.
-- `/about` — **REWRITTEN August 14, 2026 as the publication's MASTHEAD.** It opens on the
-  reader's problem ("Announcements are not information."), spends its credibility section on
-  the METHOD (filings, job postings counted over time, permits and deeds, incentive agreements
-  and minutes) rather than on Alex, names who it is for, reaches the author last and briefly,
-  and closes by asking for tips and documents plus the short warm buy/sell invitation. **Three
-  things were deleted and must not return.** (1) The "under the hood" section that told readers
-  "a set of AI agents I wrote research a real Greenville story, draft it, check their own facts,
-  and publish straight to the site" — on a publication whose whole value is that a person read
-  the primary documents, that is fatal on contact. The engine still drafts and Alex still
-  reviews and publishes; that is a workflow detail, not a masthead claim. (2) The business
-  model, stated outright as "a sales funnel for real estate leads" and "a lead generator",
-  which also violates the NEVER EXPLAIN THE BUSINESS MODEL rule. (3) The credibility pitch, per
-  Alex's instruction to speak to the reader instead of hyping him; the eight years of BD, sales,
-  and land acquisition appear once, as the reason he knows how to do this work, never as a
-  boast. The "want a site like this?" side offer went too. The paragraph below is HISTORY:
-  the **opportunistic hiring-manager front door** (if Alex shares the site on a
-  job board he can link resumes/LinkedIn straight here, not to `/`). It is no longer what the
-  site is *for* (referral revenue is the north star), but it costs nothing to keep and catches
-  a hiring manager when one happens to look. Who Alex is (salesperson, ~8 yrs BD/sales, aiming
-  back into tech sales), why he built
-  the site, an "Under the hood" technical teardown of how the site works (self-publishing AI
-  agents, the double-opt-in email system, the tools + auto-rendered covers, built solo inside
-  free tiers) framed as proof he is a self-taught builder who genuinely enjoys tech, then a
-  LinkedIn + email connect CTA. Fully custom copy (no longer renders `site.ts` teaching
-  exports). Serves everyone, not only hiring managers, so it never literally addresses them.
-- `/greenville-works` + `/greenville-works/[slug]` — **Greenville Works**, the local-change
-  track. **User-facing label is "SC Technology"** (July 10, 2026; was "Upstate Technology" from
-  the July 9 nav clarity pass, and briefly "Technology" earlier that same day): the nav tab,
-  footer link, homepage feed badge, the page `<title>`, the index eyebrow, the article
-  breadcrumb, and the `/admin` badge all say SC Technology; "Greenville Works" survives as the
-  engine/series name in docs and the tag.
-  URLs, the `greenville works` tag, and internal `works` keys are UNCHANGED (added July 2026 as the "Lab" for the portfolio pivot, then renamed and refocused
-  from national tech to Greenville-local later that month, then niche-sharpened to the
-  tech-and-capital-meets-real-estate intersection July 8, 2026, then **widened to STATEWIDE South
-  Carolina July 10, 2026** because the Upstate alone may not carry the cadence and Alex wants the
-  whole state's tech story; the Upstate stays home turf and wins ties). First-person deep-dives
-  that take ONE thing where **technology or capital is reshaping South Carolina** apart (data
-  centers, the grid and energy, fiber, manufacturing and automation, the port and logistics, who
-  is buying and with whose capital, proptech; roads/water/subdivisions only as a secondary beat
-  with a real through-line), explain how it works, show what it means for where we live, work,
-  and invest, and name the honest trade-offs. Backed by Supabase `blog_posts` tagged
-  `greenville works` (a tag-routed section in `src/lib/posts.ts` `sectionOf`, internal
-  `PostType` key `works`, distinct from the `greenville` real-estate tag), written as a **DRAFT**
-  by the `scripts/tech/` routine (**draft-first** as of July 2026, was live) and published by Alex
-  at `/review` after he reviews the emailed piece. **NO AUTO-COVER (August 27, 2026):** publishing
-  used to stamp a photo from a curated Greenville library on any coverless row, and the
-  `/api/finalize-greenville` cron did the same a day later as a backstop. Both are deleted, along
-  with the library itself, because a piece Alex has just read through must not go live under a
-  stock photo he never picked. A cover is now his own upload in the editor, or nothing; the cron
-  still **broadcasts the piece to the owned email list** exactly once. A cover he sets
-  shows as the article hero, an index thumbnail (`PostCover`, with the branded `>` placeholder
-  when there is no cover), the homepage feed card, and the share/OG card. The `getFeedPosts`
-  homepage stream includes Greenville Works posts.
-- `/briefing` + `/briefing/[slug]` — the **Upstate Brief** (added July 9, 2026): one
-  fixed-format Monday post with the week in Upstate real estate in five minutes. Tag-routed via
-  `sectionOf` (tag `briefing`, internal `PostType` key `briefing`, section label "Briefing");
-  written as a DRAFT by `scripts/briefing/`, published + broadcast by Alex Monday morning
-  (one-click broadcast link in the packet; the 13:00 UTC finalize cron is the backstop for
-  cover + broadcast). The index page carries its own owned-list `SubscribeForm` because the
-  brief never goes to Substack. In nav as "Upstate Brief". This is the site's subscribe promise
-  ("Get the Upstate Brief every Monday") and the deliverable for Alex's sphere calls.
-- **Nav clarity pass (July 9, 2026, "if you confuse you lose"):** every nav label states its
-  promise in the visitor's words. The nav reads **Upstate Brief | Tools | Moving to
-  Greenville | SC Technology | Buying or Selling | About** (**"Find an Agent" became "Buying or
-  Selling" July 30, 2026**: the old label named the mechanism and assumed the visitor had already
-  decided they wanted an agent, when the site's actual job is to help buyers and sellers first
-  and hand the lead off second. The ROUTE held at `/find-a-pro` for four more weeks, on the
-  grounds that renaming it would break inbound links, the sitemap, and the `ref=` attribution
-  already stored in `referral_leads`. **It MOVED to `/buying-or-selling` on August 28, 2026**,
-  because "find a pro" named the referral mechanism and a URL is user-facing copy: it sits in
-  the address bar, in a shared link, and in the email footer, where it contradicted the one rule
-  the rest of the page follows. Nothing broke. `/find-a-pro` and `/find-an-agent` are both
-  permanent redirects in `next.config.ts`, pointing straight at the live path rather than
-  through each other, and Next carries the query string across a redirect, so the `?ref=` on
-  every published article's CTA still attributes. The
-  same reframe hit the footer link, the `/buying-or-selling` eyebrow and headline, and the `ReferralCta`
-  copy, which no longer opens on "Real estate referrals". **August 1, 2026 finished the job**: the
-  page `<title>` still read "Find an Agent" (so the BROWSER TAB said it even though the nav did
-  not), and the body still explained the mechanism. Title is now "Buying or Selling", the H1 is
-  "Buying or selling? Tell me what you are working on.", the three steps are tell me / we talk it
-  through / I stay in your corner, the trust cards lost "A vetted bench, not a coin flip" and the
-  commission-split card, and the `ReferralForm` submit button went from "Connect me with a pro" to
-  "Send it over"; routes and tags unchanged;
-  `/briefing`, `/real-estate`, `/greenville-works`, `/buying-or-selling`; the tech tab became "SC
-  Technology" July 10 with the statewide widening), and the `/archive`
-  newsletter mirror was DROPPED from the nav (footer only). Homepage card badges match
-  ("Upstate Brief", "SC Technology"; the real-estate badge stays the compact topic chip
-  "Real Estate" since investor/tax guides fit it better than "Moving to Greenville"). The
-  `/real-estate` index hero was also rewritten then; it had still carried the retired news
-  track's "both sides" copy. **July 10, 2026: the nav's Subscribe CTA now points at
-  `/subscribe`** (a dedicated owned-list capture page) instead of Substack, since the
-  subscribe promise (the Monday Brief) only ships on the owned list; the owned list is ONE
-  list, every confirmed subscriber gets every broadcast (Brief + Greenville guides + SC
-  Technology), no per-category segmentation by design. Substack is demoted to the form's
-  secondary link.
-- `/contact` — a plain contact page (added August 28, 2026). **Footer only, deliberately not in
-  the nav**, since the nav carries one button and that button is the buy/sell page. It exists
-  because the other two contact surfaces each assume they know why you are writing: `/about`
-  ends on a tips ask you have to scroll a masthead to reach, and `/buying-or-selling` is a
-  qualifying form for a transaction. Anyone with a document, a correction, or a question that is
-  not a transaction had nowhere obvious to land, and a stranger checking whether a site is run by
-  a real person looks for exactly this page. **No form on it, on purpose**: anything
-  transactional is linked to `/buying-or-selling` rather than duplicated there, and everything
-  else is email, which is the right primitive when a tip usually arrives as an attachment.
-  `CONTACT_EMAIL` and `LINKEDIN_URL` now live in `src/lib/site.ts` so this page and `/about`
-  cannot drift; the address is the working gmail one until `hello@rebrew.org` exists and is
-  verified in Resend.
-- `/best-real-estate-agents-greenville-sc` — the **search landing page** (added August 29,
-  2026), and the site's SECOND conversion surface. It targets the commercial query "best real
-  estate agents in Greenville, SC", which is typed by someone about to buy or sell who has not
-  picked anyone yet. Everything ranking for it is a directory selling its slots or a brokerage
-  sorting its own roster by volume, so the page gives the honest answer instead: **no ranked
-  list exists**, here is what separates a good agent from an average one, and here is how to
-  check each of it yourself. It **does not name or rank real agents** and must never grow a
-  "top ten"; inventing one would fabricate, which is the publication's one hard line. The same
-  NEVER EXPLAIN THE BUSINESS MODEL rule applies as everywhere else, and it does not claim Alex
-  is one of the best agents in Greenville, since the credibility it trades on is the reading
-  and the record checking. Substance carries four checks (the Levitt and Syverson finding that
-  agent-owned homes sell for about 3.7 percent more, the last-five-closings ask, the comps that
-  were thrown out, the public license record) plus a five-question FAQ that also drives the
-  `FAQPage` JSON-LD from **one array**, so the structured data cannot drift from the visible
-  copy. **Sourcing is attribution in words with no external links at all**, which the house
-  style treats as complete; a rotted link is worst on the page a stranger uses to judge whether
-  the site is real. The ask is `components/QuickContact.tsx`, a deliberately tiny form (one
-  phone, email) that POSTs to the same `/api/refer` and `referral_leads` as the full
-  `ReferralForm`, rendered twice with different `source` values
-  (`best-agents-greenville-hero` / `-close`) so the attribution queries can tell the placements
-  apart. **EITHER FIELD IS ENOUGH** and the pair is what is required, enforced in the form, in
-  `/api/refer`, and by `referral_leads.email` becoming nullable on August 29, 2026: demanding an
-  email loses the person who would rather be called, and demanding a phone loses the one who is
-  not ready to be. **A CAL.COM BOOKING BUTTON WAS BUILT AND DELETED THE SAME DAY** (`BookCall`,
-  `src/lib/booking.ts`, `/api/booking`, and the `NEXT_PUBLIC_BOOKING_URL` /
-  `CAL_WEBHOOK_SECRET` env vars, all removed at Alex's call: "I just want someone's number or
-  email quickly and easily"). Do not rebuild it without a reason: a scheduler asks a stranger
-  who is still comparing to commit to a calendar slot, which is a bigger ask than the one this
-  page is making, and it costs a third-party script or a hop off the site. **There is no fewer
-  than two taps here and no button can beat it**: no browser hands over a visitor's phone or
-  email, Google sign-in returns an email and never a number, and the Contact Picker API is
-  Android Chrome only. The lever is autofill, so keep the `autocomplete` tokens (`tel`,
-  `email`) and `inputMode` intact; they are what makes the OS keychain offer to fill both
-  fields. **It carries the SMS consent checkbox** (added
-  hours after it shipped without one, at Alex's call, because a text gets answered faster than
-  a call and one tap is cheap against that). It reuses `SMS_CONSENT_TEXT` from
-  `src/lib/legal.ts` and the same rules the full form follows: unchecked by default, never
-  required to submit, wording rendered whole because every clause is checked during carrier
-  vetting, and the links to `/privacy` and `/terms#sms` outside the string so the stored copy
-  matches the screen byte for byte. It is **always visible rather than revealed once a phone
-  number is typed**, which is the worse UX and the right call: a vetting reviewer has to see the
-  opt-in without knowing to type anything first, and the already-registered form on
-  `/buying-or-selling` shows it unconditionally. The client posts only the boolean and
-  `/api/refer` stamps the wording server-side, dropping consent entirely when no phone came with
-  it, so the table never claims a texting right over an empty number. It is NOT a competitor to `/buying-or-selling`:
-  that page is the nav destination for someone who has already decided, this one is written for
-  the search, and it links there for anyone who wants to say more up front. Not in the nav (the
-  nav carries one button); reached from the sitemap, from search, and from one contextual link
-  under the `/buying-or-selling` form. Note this is a **conversion landing page, not a revived
-  evergreen SEO guide** — that category is still dead (see the consolidation banner).
-- `/buying-or-selling` — the **real-estate referral connector** (added July 2026 at
-  `/find-a-pro`, renamed August 28, 2026; replaced the
-  removed `/guides`; briefly shipped as a `/for-sale` listings tab, reshaped once the goal
-  became clear). Alex is a licensed SC agent but has a full-time job and does NOT practice, so
-  the play is to capture legit buyer/seller intent and **refer it to active agents for a
-  referral fee** (referrals are not local: relocation leads to any market count, which fits the
-  national Alex Prompts audience). Deliberately NOT a listings page: a new domain cannot
-  out-rank the portals on listing searches, and Alex cannot service clients. **This page is the
-  site's #1 conversion surface** now that referral revenue is the north star. It was rebuilt
-  July 2026 from a light email capture into a real conversion page: honest first-person copy +
-  a "How this works" 3-step + trust cards (all of which were rewritten August 1, 2026 to stop
-  explaining the referral mechanism; see the strategic-direction note above, and the copy-rule
-  comment at the top of `src/app/buying-or-selling/page.tsx`), and a **qualifying lead form** (`ReferralForm`) that
-  captures intent (buy/sell/both), market, timeframe, and contact, then POSTs to **`/api/refer`**.
-  That route stores a row in the Supabase **`referral_leads`** table (service key, RLS-denied to
-  anon, NOT the newsletter `subscribers` list, so no double opt-in for a hot lead) and emails Alex
-  a notification (`leadNotifyEmail`) so he can follow up warm. The store succeeds even when Resend
-  is unconfigured (the row is the source of truth). **Requires the `referral_leads` table from
-  `supabase/schema.sql` to be applied.** (The eXp BoldTrail IDX site
-  Alex set up is not used here; if he goes referral-only to save active dues he loses it, and
-  this model does not need it.)
-- `/archive` + `/archive/[slug]` — issue archive, backed by Supabase `blog_posts`.
-  **Auto-mirrored from Substack:** `/api/sync-substack` (daily Vercel cron, `vercel.json`)
-  reads the publication RSS feed, converts each post's HTML to markdown via
-  `src/lib/substack.ts` (turndown; images kept as `<figure>`/`<figcaption>`), and upserts
-  rows as `PUBLISHED`. So posting on Substack populates the site with no manual step.
-- `/admin` — the **draft review hub** (not in nav; the primary way Alex reviews drafts).
-  Log in once with a password (= `PUBLISH_SECRET`); `/api/admin/login` sets an httpOnly
-  `ap_admin` cookie (rate-limited, constant-time compare), so the secret never rides in a URL.
-  `/admin` lists every DRAFT `blog_posts` row with Edit (`/admin/edit/[id]`, the shared
-  `review/Editor`) + one-click Publish, plus recently published. Auth lives in
-  `src/lib/adminAuth.ts`. This replaces the fragile `/review?token=` flow (URL-special chars in
-  the secret broke it) but that flow still works.
-- `/review` — token-gated draft editor (not in nav), the legacy per-draft link the engine
-  emails carry (`/review?id=..&token=..`). `/api/publish` + `/api/review/save` drive the manual
-  publish flow (flip `blog_posts.status` to `PUBLISHED`, revalidate the section). `GET
-  /api/publish?token=` is the routine's one-click email publish (token-only, never the cookie, so
-  it is not CSRF-able); `POST /api/publish` is the cookie-authed `/admin` publish. Kept for
-  engine-generated drafts; the Substack mirror is the live path for newsletter posts.
+## Editorial posture
 
-**`src/lib/site.ts` is the brand single-source-of-truth** (name, author, tagline, oneLiner,
-description, email, url, `socials`, `newsletterUrl`). The Claude-for-real-estate teaching
-exports (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`) were **deleted
-in July 2026** with the voice-3 removal; do not reintroduce them. Edit handles/domain there and
-nav/footer/JSON-LD/sitemap update together. One `TODO(alex)` remains: confirm the contact
-email.
+**ASSESS, DO NOT ADVISE.** The posture is the intelligence analyst's, not the columnist's,
+and it is the easiest thing on the site to get wrong. A piece **DOES** reach a conclusion
+about whether the evidence supports a claim; that is the product, and refusing to land is
+not neutrality. A piece does **NOT** advocate: no recommendation about what to buy, sell,
+hold, or build, and no editorializing about whether any of it is good for the state. Other
+people's opinions are subject matter, quoted and attributed and tested. Do not collapse
+this into "a buyer reads it this way, a seller reads it that way," which is the both-sides
+mush that emptied the old weekly brief.
+
+**YEARS, NOT QUARTERS.** A quarterly move is noise and is what everyone else already
+published, so the default horizon is long. Note that a median can sit perfectly still on
+top of a distribution that changed completely underneath.
+
+**INCENTIVES EXPLAIN BEHAVIOR.** When a market or a company does something that looks
+arbitrary or like a matter of taste, there is usually a tax structure, financing term,
+subsidy, assessment schedule, or zoning threshold underneath making it rational. Finding
+it is the highest-value move available.
+
+**Pro-growth, held honestly.** The stance is pro growth, investment, and business, and it
+drives the ENGINES (the verdict ledger, the prosperity question), not the homepage copy.
+Steelman the strongest opposing view, then arrive at an honest conclusion, then end on a
+genuinely earned question. See memory `pro-growth-editorial-stance`.
+
+**Claims are one input, not the beat.** An opinion held by someone in this market is a
+fact about the market, so what people say gets collected and tested against the record
+(`scripts/publication/claims.md`). But it runs at about one issue in three and it is
+**never the front-page promise**: a draft that made claim-testing the site's headline
+mechanism was cut because it made the publication sound smaller than it is.
+
+**The reader** is the developer and the real estate entrepreneur, with the loan officer,
+closing attorney, agent, banker, and economic-development professional behind them. Alex
+is NOT a developer and no copy may imply he is: the authority comes from the documents,
+not the byline. He is also a new agent with little transaction experience, so never write
+veteran-agent or sales-mastery copy.
+
+## Voice
+
+The canonical rules live in the live writer/editor passes
+(`scripts/publication/routine/pass3_writer.md`, `pass3b_verifier.md`, `pass4_editor.md`,
+shared
+with the research engine). Site copy must match them.
+
+- **No em dashes or en dashes, ever.** Use periods, commas, or restructure. The engines
+  enforce this; the website has no automated backstop, so do not introduce them in copy.
+- **No sentence fragments.** Every sentence has a subject and a finite verb, never a
+  clipped burst for effect.
+- **Vary sentence length in BOTH directions.** A run of long clause-heavy sentences of
+  similar length is as much a machine tell as a run of clipped ones, and it is the more
+  common failure. Put a short sentence next to a long one on purpose. The test is a
+  subject and a finite verb, not a word count.
+- **Use colons sparingly.** Avoid the colon-as-drumroll and the "Label: payoff"
+  construction. A colon only introduces a genuine list.
+- **Site copy is UNCONTRACTED** ("who is", never "who's"). The one deliberate exception is
+  `ReferralCta`, where Alex wrote the contractions himself. Do not "fix" them.
+- **Banned fluff:** "in an unprecedented move," "sent ripples," "the AI landscape,"
+  "game-changer," "a new era." Also banned from site copy since July 2026: **"in plain
+  English"** (Alex found it unpolished).
+- Open cold and concrete: a fact, a scene, or a number. Translate any jargon in one
+  sentence a smart 15-year-old understands.
+
+### THE FOUR TELLS
+
+Added August 14, 2026, after Alex read a homepage draft and said "it is so obviously
+written by AI." These are STRUCTURAL, not lexical, which is why they survive every
+banned-word list. The offending paragraph was:
+
+> *"Checking is the work here. I take the claims moving around this market, and the
+> companies and deals underneath them, and test them against filings, permits, deeds, job
+> postings, and county records. You get what the evidence supports, what it does not, and
+> where it is genuinely unclear."*
+
+Every sentence in it is true and the paragraph is still unusable.
+
+1. **The abstract-noun opener.** "Checking is the work here." Naming an activity as a
+   subject and predicating it is a construction almost nobody uses out loud. Start with a
+   person doing something, or with the concrete thing.
+2. **The tricolon payoff.** "What the evidence supports, what it does not, and where it is
+   genuinely unclear." Three balanced parallel items closing a sentence is the single
+   loudest tell in the language. A list of three is fine when it is a real list of real
+   things; it is a tell when the three are rhetorically balanced and land as a flourish.
+   **Break it: use two, or four, or make one item a different shape.**
+3. **The noun pile as proof.** "Filings, permits, deeds, job postings, and county records."
+   Stacking five source types performs rigor instead of demonstrating it. Name one or two,
+   or name the specific document that actually mattered.
+4. **Uniform sentence shape.** Not just length, which the rhythm rule covers, but SHAPE:
+   three sentences in a row that each open with a subject and run to a compound object.
+
+The general test: read it aloud. If it sounds like it is being read from a card rather
+than said, it is one of these. A fifth, added September 2026: **the neat inversion as a
+paragraph closer** ("not X, but Y"). See memory `the-four-ai-tells` and
+`anti-slop-is-a-rewrite-not-a-rulebook` — example SENTENCES in a prompt get copied verbatim
+into the output, and long banned lists produce rule-following prose; the fix is fewer rules
+plus a real rewrite pass.
+
+### NEVER NARRATE THE PROCESS
+
+No piece tells the reader what the pipeline tried, what it could not reach, or what it fell
+back to: "the usual host was unreachable," "the MLS indicators were not available this
+week," "I could not confirm." A human columnist never writes these because a human never
+experiences a failed fetch; they go to the other source and come back with the number. This
+was the strongest LLM fingerprint in a shipped brief, stronger than any word choice.
+
+**The line:** a limitation that lives in the WORLD may be stated once, attached to the
+figure it affects ("no one publishes this figure, so treat it as approximate"), because any
+reader who went looking would meet the same wall. A limitation that exists only because a
+retrieval attempt failed is cut without replacement. Retrieval friction goes to the review
+packet under SOURCING NOTES, which is where Alex reads about the machinery.
+
+Two companion rules ship with it: **one caveat per section** (hedging density reads as
+machine diligence, not editorial confidence) and **state a figure once** (repeating
+"24.2% vs 1.9%" three times is model reinforcement). See memory `never-narrate-the-process`.
+
+### A LINK OPENS A PAGE, NEVER A DOWNLOAD
+
+No link in an article may point at a data file, meaning a URL ending in `.csv`, `.xls`,
+`.xlsx`, `.pdf`, `.zip`, or `.json`. A brief once shipped with a dozen figures linked to
+raw Zillow CSVs and its lead figure linked to a half-megabyte PDF, so a reader who clicked
+"61 homes" got a file download. That reads as a broken site and makes real sourcing look
+like a bug.
+
+The fix is a split the engines carry in their data and their passes. The **verify URL** is
+the exact file a number came out of; it stays internal and is what the verifier re-opens to
+ground-truth the figure. The **cite URL** is the human landing page a reader may click (for
+every Zillow series that is `https://www.zillow.com/research/data/`). Where a source
+publishes only a document, as GGAR's monthly indicators and most county budgets and agendas
+do, the figure is **attributed in words with no link at all**, which is complete sourcing
+and never a defect.
+
+Two companion rules: **one link per source per piece**, at first mention (eleven figures
+pointing at one landing page reads as machine output), and **attribution is required, a
+link is not**. See memory `links-open-pages-never-downloads`.
+
+### CLIPPABLE LEADS
+
+The opening sentence and the first sentence under each heading are written to survive being
+lifted out and pasted into X or Nextdoor. They stand alone, name the place and the thing
+measured, lead with the plain-language meaning and then stack two or three figures that
+earn it, keep a short source tag inside ("per the Greenville MLS"), and target under 200
+characters. The model sentence:
+
+> *"Greenville homebuyers have more leverage than a year ago: inventory is up 12%, homes
+> are taking 52 days to sell (vs. 43), and the median sale price is still $330K, per the
+> Greenville MLS."*
+
+These are complete sentences, not fragments, and the rest of the prose still flows. A colon
+introducing a genuine list of figures is correct here and is not the banned drumroll.
+
+**Compress the prose, never the evidence** is the governing rule: cutting a figure, a
+baseline, or the source tag to hit a character count is a failure, not good editing. State
+the market MECHANIC the figures measure ("more leverage"), never a verdict ("the market is
+loosening faster than the country") or advice ("buyers should offer under asking").
+
+### Other writing rules baked into the passes
+
+No signpost transitions. First person on judgment, not on effort. Show the seams when
+numbers conflict. Be pointed on the standard, not on the verdict. For a guide aimed at
+non-professionals, state **how it works and who pays BEFORE any research**, and hedge only
+the contested part. CTA placement differs by track on purpose. See memories
+`writing-style-coaching-rules` and `guide-writing-money-and-plumbing-first`.
+
+## The content engine
+
+See `scripts/CLAUDE.md`, and `scripts/research/SPEC.md` first. **Claude routines only;
+Gemini was removed June 2026.** Everything is **draft-first**: a routine inserts a DRAFT
+`blog_posts` row and Alex reviews and publishes at `/admin`. See memory
+`publishing-draft-first`.
+
+**`scripts/research/` is the live engine.** One research paper per issue: what it asked,
+the trick that let it find out, what it found, whether it has held up, and the model it
+leaves you holding. Tagged `sales` or `greenville`.
+
+**`scripts/publication/` stops producing, but three of its passes are LIVE and shared**:
+`routine/pass3_writer.md`, `routine/pass3b_verifier.md`, `routine/pass4_editor.md`. They
+hold the house voice, the
+four tells, the legal gate, and the fair-housing line. The research engine hands each one
+to its sub-agent with a short delta. **Do not delete them and do not fork a second copy**,
+which is how the voice rules drift.
+
+Dormant but present: `greenville/` (its `commercial.py` collector still refreshes
+`src/data/commercialSales.json` as research input, so do not delete it for looking
+orphaned), `tech/`, `briefing/`. Retired to `scripts/_archive/`: the national Saturday
+engine `ai_news/` and the legacy dental pipeline. Do not revive either.
+
+**The article routines are CLOUD routines, not repo cron**, and their prompts live only in
+the routine. A run that finishes in 1 to 3 minutes is a stand-down, not work. See memory
+`cloud-routine-lineup`.
 
 ## Supabase
 
-- Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, RLS-guarded).
-  `SUPABASE_SERVICE_KEY` for the publish route, the Substack sync, and the owned email list.
-- **`subscribers`** is the **owned email list** (the asset we control, separate from
-  Substack). Service-key only (RLS denies anon). Double opt-in: a signup is `pending` with
-  a `confirm_token`, the email link flips it to `confirmed`, and only confirmed rows get
-  broadcasts. `unsub_token` is the per-recipient unsubscribe token. Driven by
-  `src/lib/subscribers.ts` + `/api/subscribe`, `/api/subscribe/confirm`, `/api/unsubscribe`.
-  Sending is `/api/broadcast?id=<postId>` (Resend via `src/lib/email.ts`), authed with
-  `PUBLISH_SECRET` via an `Authorization: Bearer` header (preferred) or `?token=` for a manual
-  click, and it emails a published post to the list. This is the channel for **site-only content**
-  (Greenville `/real-estate`, Greenville Works `/greenville-works`, the Upstate Brief
-  `/briefing`) that never goes to Substack. Useful params: `&test=you@example.com` sends ONE
-  preview and touches neither the list nor the stamp, `&dry=1` reports the recipient count
-  without sending, `&force=1` resends. **July 29, 2026: broadcasts carry the FULL ARTICLE**
-  (the Morning Brew model), not a title-plus-summary teaser. A click-through is friction on a
-  five-minute read, and the list is sphere professionals whose habit is the whole point.
-  `src/lib/emailMarkdown.ts` renders `body_md` to inline-styled email HTML; it is deliberately
-  SEPARATE from the site's `renderMarkdown.ts` because email clients drop classes and `<style>`
-  blocks, and because the site rewrites images to relative `/_next/image` URLs that cannot
-  resolve in an inbox. Rendered once per send, not per recipient. Worst case measured across all
-  24 published posts is 19KB, about 19% of Gmail's ~102KB clip threshold, so there is wide
-  headroom. Full-content sends widen the card to 600px and, on the `greenville` track only
-  (mirroring `ArticleView`'s `showReferralCta`), append the referral offer linking to
-  `/buying-or-selling?ref=<slug>&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list`, so an
-  inbox-originated lead still attributes in `supabase/queries.sql`.
-  `blog_posts.last_broadcast_at`
-  stamps a sent post so a re-trigger does not double-send (override with `&force=1`). The
-  on-site capture is `components/SubscribeForm.tsx` (in `ToolShell` + `ArticleView`); Substack
-  stays available as a secondary link. **Requires the `subscribers` table + `last_broadcast_at`
-  column from `supabase/schema.sql` to be applied.**
-- **`blog_posts`** is the only content table the site uses. Columns used: `id`, `title`,
-  `slug`, `summary`, `body_md`, `cover_image`, `tags`, `status` (`DRAFT`/`PUBLISHED`),
-  `published_at`, `created_at`, `author`. Public SELECT via RLS on `status = PUBLISHED`.
-  `cover_image` holds the post card hero (set during the Substack sync from the RSS
-  `<enclosure>`); reads fall back to the first body image when it is null, so the site
-  works even before the column is added. The dental
-  `cluster` column is ignored (taxonomy dropped); other dental tables
-  (`market_signals`, `enriched_leads`, `website_prospects`, `clients`) are leftovers from
-  the old project — unused by this site.
-- **`referral_leads`** is the **`/buying-or-selling` conversion table** (the site's #1 revenue
-  path). Service-key only (RLS denies anon), deliberately separate from `subscribers`: a person
-  who fills out the referral form is a HOT lead asking to be contacted, not a newsletter signup,
-  so there is no double opt-in. Columns: `name`, `email`, `phone`, `intent` (buying/selling/both),
-  `location`, `moving_from`, `timeframe`, `message`, `source`, `status` (new/contacted/placed/dead),
-  `contacted_at`, plus **first-party attribution** (Phase 4, no third-party analytics): `ref_slug`
-  (the article slug the in-article `ReferralCta` carried in `?ref=`), `referrer` (document.referrer),
-  `landing_path`, and `utm_source`/`utm_medium`/`utm_campaign`. `ReferralForm` captures these on
-  mount and posts them; `/api/refer` stores them and the notification (`leadNotifyEmail`) shows a
-  "Came from" line (article > campaign > referrer). The attribution queries live in
-  **`supabase/queries.sql`** (read-only, paste into the Supabase SQL editor): leads by article,
-  every published guide *including the zero-lead ones*, channel mix, capture surface, the funnel
-  by intent, weekly trend, response time, and the open work queue. All of them exclude
-  `status = 'dead'`, which is where test rows go, so a test submit never inflates a rate.
-  Written by `/api/refer` (via `src/lib/leads.ts`), which also emails Alex a notification. **Requires
-  the `referral_leads` table + attribution columns from `supabase/schema.sql` to be applied.**
+Env: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, RLS-guarded);
+`SUPABASE_SERVICE_KEY` for publish, sync, and the owned list. Project is "Taraform"
+(`ykuenmwfxecmmqichwit`). See memory `supabase-project-and-owned-list`.
 
-## Environment Variables
+**`blog_posts`** is the only content table the site uses. Columns: `id`, `title`, `slug`,
+`summary`, `body_md`, `cover_image`, `cover_credit`, `tags`, `status` (`DRAFT`/`PUBLISHED`),
+`published_at`, `created_at`, `author`, `last_broadcast_at`. Public SELECT via RLS on
+`status = PUBLISHED`. **`body_md` is the source of truth** for the site, the broadcast
+email, and every engine. Sections are split by tag, see `src/lib/posts.ts` `sectionOf`.
+Leftover dental tables (`market_signals`, `enriched_leads`, `website_prospects`, `clients`)
+are unused.
+
+**`subscribers`** is the **owned email list**, the asset we control, separate from
+Substack. Service-key only. Double opt-in: a signup is `pending` with a `confirm_token`,
+the email link flips it to `confirmed`, and only confirmed rows get broadcasts.
+`unsub_token` is the per-recipient unsubscribe token. Driven by `src/lib/subscribers.ts`
+plus `/api/subscribe`, `/api/subscribe/confirm`, `/api/unsubscribe`.
+
+Sending is **`/api/broadcast?id=<postId>`** (Resend via `src/lib/email.ts`), authed with
+`PUBLISH_SECRET` as a Bearer header or a `token` query param. It is the channel for
+site-only content that never goes to Substack. Params: `test=you@example.com` sends one
+preview and touches neither the list nor the stamp, `dry=1` reports the recipient count,
+`force=1` resends past the `last_broadcast_at` stamp.
+
+**Broadcasts carry the FULL ARTICLE** (the Morning Brew model), not a teaser: a
+click-through is friction on a five-minute read, and the list is sphere professionals whose
+habit is the whole point. `src/lib/emailMarkdown.ts` renders `body_md` to inline-styled
+email HTML and is deliberately SEPARATE from the site's `renderMarkdown.ts`, because email
+clients drop classes and style blocks and the site rewrites images to relative
+`/_next/image` URLs that cannot resolve in an inbox. Rendered once per send. Worst case
+measured across the corpus is 19KB, about 19% of Gmail's ~102KB clip threshold. One list
+gets ALL broadcasts; there is no per-category segmentation by design.
+
+**`referral_leads`** is the `/buying-or-selling` conversion table and the site's #1 revenue
+path. Service-key only, deliberately separate from `subscribers`: someone filling in the
+referral form is a HOT lead asking to be contacted, not a newsletter signup, so there is no
+double opt-in. Columns: `name`, `email` (nullable), `phone`, `intent`, `location`,
+`moving_from`, `timeframe`, `message`, `source`, `status` (new/contacted/placed/dead),
+`contacted_at`, plus first-party attribution (`ref_slug`, `referrer`, `landing_path`,
+`utm_source`, `utm_medium`, `utm_campaign`). Written by `/api/refer` via `src/lib/leads.ts`,
+which also emails Alex a notification with a "Came from" line. The store succeeds even when
+Resend is unconfigured; the row is the source of truth.
+
+**A phone OR an email is enough**, and the pair is what is required. Demanding an email
+loses the person who would rather be called; demanding a phone loses the one who is not
+ready to be. Enforced in the form, in `/api/refer`, and by `email` being nullable.
+
+Attribution queries live in **`supabase/queries.sql`** (read-only, paste into the Supabase
+SQL editor): leads by article including the zero-lead guides, channel mix, capture surface,
+funnel by intent, weekly trend, response time, open work queue. All exclude
+`status = 'dead'`, which is where test rows go, so a test submit never inflates a rate.
+
+**Requires `blog_posts`, `subscribers`, and `referral_leads` from `supabase/schema.sql` to
+be applied.**
+
+## Environment variables
 
 | Variable | Notes |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://www.rebrew.org` — **www is canonical** (the apex 308-redirects to www at Vercel; www is the real serving host). Drives canonical/sitemap/robots/OG. If this env var is set in Vercel it MUST be the www URL (or unset, to use the code default). **Check this one first after the August 24, 2026 domain move**: the local `.env.local` had been set to the bare apex `https://alexprompts.com`, which contradicts the www canonical, and if Vercel carries the same shape then every canonical on the live site points at a URL that redirects. |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.rebrew.org` — **www is canonical** (the apex 308-redirects to www at Vercel). Drives canonical/sitemap/robots/OG. If set in Vercel it MUST be the www URL, or unset to use the code default. |
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
-| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key — never commit. Used by `/api/publish`. |
-| `PUBLISH_SECRET` | Shared secret for `/review` + `/api/publish` + `/api/review/save`. |
-| `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication base (subdomain or custom domain, NOT the `/@handle` profile). Drives the Subscribe button (`/subscribe`) and the archive RSS mirror (`/feed`). Defaults to `https://alexprompts.substack.com` — confirm. |
-| `SUBSTACK_FEED_URL` | Optional override for the feed URL. Defaults to `${NEXT_PUBLIC_SUBSTACK_URL}/feed`. |
-| `CRON_SECRET` | Authorizes the Vercel cron calls to **both** `/api/sync-substack` and `/api/finalize-greenville` (Vercel auto-sends it as `Authorization: Bearer …` on any cron whenever this env var is set). You invent the value (any random string); if it is unset the scheduled calls 401 and silently do nothing. Manual runs bypass it with `?token=${PUBLISH_SECRET}`. Production scope only. |
-| `GOOGLE_PLACES_API_KEY` | Server-only key for the `/tools/area-scan` tool **only**. Uses **Places API (New) only** — Text Search (geocode the address) + Nearby Search (counts) + Autocomplete, so no separate Geocoding API setup is needed. Restrict this key to Places API (New) in the console. Never exposed to the client. **Unset = the tool renders a clean "not configured" state**, so the site runs fine without it. Set hard per-API daily QUOTAs (`SearchTextRequest`, `SearchNearbyRequest`, `AutocompletePlacesRequest`) below the free tier — that quota, not the code, is what prevents any invoice. **This is a SEPARATE key from `GOOGLE_MAPS_KEY`** (below); the two are split so each is quota-capped to just the APIs it needs. |
-| `GOOGLE_MAPS_KEY` | **UNUSED since August 27, 2026 — delete it from the deploy env.** It was the Street View / static-map fallback for auto-covers (`src/lib/greenvilleImage.ts`, run from the `/api/finalize-greenville` cron). The auto-cover and the whole curated photo library are gone, and nothing in the repo reads this key any more. |
-| `AREA_SCAN_DAILY_CAP` / `AREA_SCAN_RATE_LIMIT` | Optional. Soft, in-memory backstops in `src/lib/areaScan.ts` (default 250 Google calls/day, 6 scans/min/IP). Best-effort on serverless (reset on cold start); the console quota is the real cap. |
-| `CENSUS_API_KEY` | **Required for the area-scan "neighborhood profile."** The Census *data* API needs a free key (the geocoder does not); without it the profile degrades to hidden (the rest of the scan still works). The key is free with no billing account, so the zero-billing guarantee holds. Sign up: https://api.census.gov/data/key_signup.html |
-| `ANTHROPIC_API_KEY` | **UNUSED since August 27, 2026 — delete the repo secret if it was ever set.** Its only consumer was the optional Haiku vision pre-filter in the monthly cover-library grower (`scripts/greenville/cover_ingest.py` + `.github/workflows/greenville-covers.yml`), both deleted with the auto-cover. Never used by the site at runtime. |
-| `RESEND_API_KEY` | Server-only key for the **owned email list** (`src/lib/email.ts`). Powers the double opt-in confirmation and the `/api/broadcast` sends. **Unset = capture still works** (subscribers are stored) but no email goes out, and `/api/subscribe` returns `note: "email_not_configured"`. Resend's sending domain must be verified by DNS before mail actually delivers; free tier ~100 emails/day, 2 req/s. |
-| `EMAIL_FROM` | The verified sender for owned-list email, e.g. `Rebrew <alex@rebrew.org>`. **After the domain move this cannot change until Resend verifies rebrew.org by DNS**; sending from an unverified domain fails, so verify first, then flip this.. Required alongside `RESEND_API_KEY` for sending. **Legacy alias `MAIL_FROM` is also accepted** (`EMAIL_FROM` wins if both are set) — some deploy envs still use the old `MAIL_FROM` name; prefer `EMAIL_FROM` for new setup. |
-| `EMAIL_REPLY_TO` | Optional reply-to address for owned-list email. |
-| `EMAIL_POSTAL_ADDRESS` | The physical mailing address printed in the owned-list email footer. **CAN-SPAM requires one on commercial email**, and it matters most for contacts Alex ADDED BY HAND off a sphere call rather than through the form. Unset = the line is simply omitted (no placeholder ever ships), which leaves the one compliance gap open, so set it before the list grows past Alex's own addresses. Use a PO box, not a home address. Read in `src/lib/emailTemplates.ts`. |
-| `SUBSCRIBE_RATE_LIMIT` | Optional. Per-IP signups/hour allowed on `/api/subscribe` (default 5). Plus a hardcoded per-address cap of 3 confirmation sends/hour. Soft, in-memory (`src/lib/rateLimit.ts`, resets on cold start); blunts signup spam and confirmation-email bombing. |
-| `LEADS_NOTIFY_TO` | Optional. Where `/api/refer` sends the referral-lead notification email. Falls back to `EMAIL_REPLY_TO`, then `site.email` (`hello@rebrew.org`). Set this to the inbox Alex actually watches so a new lead pings him fast. The lead is stored in `referral_leads` regardless, so an unset/unverified inbox never loses a lead. |
-| `REFER_RATE_LIMIT` | Optional. Per-IP referral-form submits/hour on `/api/refer` (default 5). Soft, in-memory (same `rateLimit.ts` caveat). A real buyer submits once, so this only blunts abuse. |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key, never commit. |
+| `PUBLISH_SECRET` | Shared secret for the `/admin` login, `/review`, `/api/publish`, `/api/review/save`, `/api/broadcast`. |
+| `NEXT_PUBLIC_SUBSTACK_URL` | Substack base (subdomain, NOT the profile page). Defaults to `https://alexprompts.substack.com`, deliberately unchanged by the Rebrew rename: the subdomain is the publication's identity over there, and renaming is a job on Substack with its own redirect. |
+| `SUBSTACK_FEED_URL` | Optional override. Defaults to the Substack base plus `/feed`. |
+| `CRON_SECRET` | Authorizes the Vercel cron calls to `/api/sync-substack` and `/api/finalize-greenville`. You invent the value; Vercel sends it as an `Authorization: Bearer` header. Unset means the scheduled calls 401 silently. Manual runs bypass it with the publish secret. Production scope only. |
+| `RESEND_API_KEY` | Server-only key for the owned list (`src/lib/email.ts`). **Unset means capture still works** (subscribers are stored) but no mail goes out. The sending domain must be DNS-verified in Resend. Free tier is ~100 emails/day, 2 req/s. |
+| `EMAIL_FROM` | Verified sender, e.g. `Rebrew <alex@rebrew.org>`. **Cannot change until Resend verifies rebrew.org by DNS**; sending from an unverified domain fails. Legacy alias `MAIL_FROM` is accepted and `EMAIL_FROM` wins. |
+| `EMAIL_REPLY_TO` | Optional reply-to for owned-list mail. |
+| `EMAIL_POSTAL_ADDRESS` | Physical address printed in the email footer. **CAN-SPAM requires one**, and it matters most for contacts Alex added by hand off a sphere call. Unset means the line is omitted, since no placeholder ever ships, which leaves that gap open. Use a PO box, not a home address. |
+| `LEADS_NOTIFY_TO` | Where `/api/refer` sends the lead notification. Falls back to `EMAIL_REPLY_TO`, then `site.email`. Set it to the inbox Alex actually watches. The lead is stored regardless, so an unset inbox never loses one. |
+| `SUBSCRIBE_RATE_LIMIT` / `REFER_RATE_LIMIT` | Optional per-IP hourly caps (default 5 each), plus a hardcoded 3 confirmation sends per hour per address. Soft and in-memory (`src/lib/rateLimit.ts`), so they reset on a cold start. |
 
-> The dental scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`, etc.) belong only
-> to `scripts/_archive/` and are not needed to run this site or the `ai_news` engine.
-> (`GOOGLE_PLACES_API_KEY` is now also used by the site's area-scan tool, above; the
-> retired archive used the same name for its own Places scraping.)
+**Dead. Delete these from the deploy env:** `GOOGLE_PLACES_API_KEY`, `CENSUS_API_KEY`,
+`AREA_SCAN_DAILY_CAP`, `AREA_SCAN_RATE_LIMIT` (the nine tools were deleted August 14, 2026,
+which removed the operation's only paid API surface), plus `GOOGLE_MAPS_KEY` and
+`ANTHROPIC_API_KEY` (the auto-cover and its photo library went August 27, 2026). The dental
+scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`) belong only to `scripts/_archive/`.
 
 ## Deployment
 
 - **Platform:** Vercel (Hobby), auto-deploy on push to `main`.
-- **Repo:** https://github.com/jsteryous/alexprompts (renamed from `rebbadvisors-website`; the old URL still redirects).
-- **Production:** rebrew.org, canonical host `www.rebrew.org` (Cloudflare DNS -> Vercel).
-  alexprompts.com stays attached to the same Vercel project as a redirect-only domain so
-  every published article URL keeps resolving.
+- **Repo:** https://github.com/jsteryous/alexprompts
+- **Production:** rebrew.org, canonical host `www.rebrew.org` (Cloudflare DNS to Vercel).
+  **alexprompts.com stays attached as a redirect-only domain** so every published article
+  URL keeps resolving. Do not let it lapse without redirecting the article paths.
 
 ```bash
 npm run dev | npm run build | npm run lint | npx vercel --prod
 ```
+
+`npm run lint` runs eslint plus two gates that also fail the Vercel build:
+`check:canonicals` (every page route declares its own canonical) and `check:editor` (the
+WYSIWYG markdown round trip is lossless against every row in the database).
