@@ -22,7 +22,10 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 
 - **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, author, tagline,
   `headline`, oneLiner, description, email, url), `socials` (the footer and JSON-LD
-  `sameAs`), `newsletterUrl`, `CONTACT_EMAIL`, `LINKEDIN_URL`. `SITE_URL` reads
+  `sameAs`), `newsletterUrl`, and `CONTACT_EMAIL`, which is an ALIAS for `site.email`
+  rather than a second address (`LINKEDIN_URL` and the personal Gmail both came off
+  September 18, 2026 when Alex asked for his personal information off the site, and a
+  personal profile link does not go back on a masthead). `SITE_URL` reads
   `NEXT_PUBLIC_SITE_URL`. **`site.headline`** is the masthead statement, "What's brewing in
   Real Estate." It lives here because it is the one line connecting the NAME to the BEAT:
   "Rebrew" says nothing about real estate alone, and the coffee-cup-and-house mark says it
@@ -138,18 +141,24 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   commit to a calendar slot, which is a bigger ask than this page is making. It is a
   conversion landing page, NOT a revived evergreen SEO guide; that category is dead. Not in
   the nav.
-- **`/about`** — the **masthead**, not a resume. Opens on the reader's problem
-  ("Announcements are not information."), spends its credibility section on the METHOD
-  rather than on Alex, names who it is for, reaches the author last and briefly, and closes
-  by asking for tips and documents plus the short warm buy/sell invitation. **Three things
-  were deleted and must not return.** (1) The "under the hood" section saying AI agents
-  research, draft, fact-check, and publish to the site: on a publication whose whole value
-  is that a person read the primary documents, that is fatal on contact. The engine still
-  drafts and Alex still reviews and publishes; that is a workflow detail, not a masthead
-  claim. (2) The business model, stated outright. (3) The credibility pitch, per Alex's
-  instruction to speak to the reader instead of hyping him. The eight years of BD, sales,
-  and land acquisition appear once, as the reason he knows how to do this work, never as a
-  boast.
+- **`/about`** — the **masthead**, not a resume. Four sections: the reader's problem
+  ("Most real estate advice is somebody's opinion."), a credibility section spent on the
+  METHOD rather than on Alex, the assess-do-not-advise stance, and a closing block that
+  reaches the author briefly and then asks for tips and documents plus the short warm
+  buy/sell invitation. **Three things were deleted in August 2026 and must not return.**
+  (1) The "under the hood" section saying AI agents research, draft, fact-check, and
+  publish to the site: on a publication whose whole value is that a person read the
+  primary documents, that is fatal on contact. The engine still drafts and Alex still
+  reviews and publishes; that is a workflow detail, not a masthead claim. (2) The
+  business model, stated outright. (3) The credibility pitch, per Alex's instruction to
+  speak to the reader instead of hyping him. **SCALED DOWN AND DEPERSONALIZED September
+  18, 2026** ("take my personal information off the site"): six sections became four,
+  "Who it is for" compressed into one paragraph of the opening statement, and the photo
+  (`public/alex.jpg`, deleted from the repo), the career history (eight years of BD,
+  sales, and land acquisition), the personal Gmail, and the LinkedIn link all came off.
+  What survives of the author is the byline and the South Carolina license, which the
+  licensee disclosures need anyway. The authority here comes from the documents, so do
+  not restore a face and a resume to the top of the masthead.
 - **`/tools` and `/tools/<slug>` 404.** All nine free tools were **deleted** August 14, 2026,
   along with `src/lib/tools.ts`, `src/components/tools/`, `ToolShell`, `ToolIcon`,
   `areaScan.ts`, `wireSafety.ts`, `/api/area-scan`, and `/api/area-autocomplete`. They served

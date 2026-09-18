@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, CONTACT_EMAIL, LINKEDIN_URL } from "@/lib/site";
+import { site, CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "How to reach Alex Steryous: send a paper, a document, or a correction, or start a " +
+    "How to reach Rebrew: send a paper, a document, or a correction, or start a " +
     "buying or selling conversation.",
   alternates: { canonical: `${site.url}/contact` },
 };
@@ -74,23 +74,17 @@ export default function ContactPage() {
           instead. It asks the few things I need in order to be useful on the first call.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5"
-          >
-            {CONTACT_EMAIL}
-            <ArrowIcon />
-          </a>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="theme-link inline-flex items-center gap-2 font-medium px-5 py-3.5 text-sm"
-          >
-            Connect on LinkedIn <ArrowIcon className="w-3.5 h-3.5" />
-          </a>
-        </div>
+        {/* One button, one address. The "Connect on LinkedIn" link that used to
+            sit beside it was removed September 18, 2026 with the rest of Alex's
+            personal information, and LINKEDIN_URL no longer exists in site.ts.
+            A reader who wants a person reaches one by writing to them. */}
+        <a
+          href={`mailto:${CONTACT_EMAIL}`}
+          className="theme-cta-accent inline-flex items-center gap-2 font-semibold px-7 py-3.5"
+        >
+          {CONTACT_EMAIL}
+          <ArrowIcon />
+        </a>
       </div>
     </section>
   );

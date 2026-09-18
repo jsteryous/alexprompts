@@ -63,8 +63,11 @@ export function substackFeedUrl(): string {
 export const site = {
   name: "Rebrew",
   author: "Alex Steryous",
-  // TODO(alex): this inbox has to actually exist and be verified in Resend
-  // before the next broadcast goes out. See the note on SUBSTACK_URL below.
+  // The brand inbox, live and receiving as of September 2026. It is now the ONLY
+  // address on the site: the personal Gmail that every "write to me" surface used
+  // to point at came off in the September 18, 2026 pass. SENDING from it is a
+  // separate question and still depends on rebrew.org passing DNS verification in
+  // Resend, which is what EMAIL_FROM governs. Receiving does not.
   email: "hello@rebrew.org",
   url: SITE_URL,
 
@@ -149,22 +152,43 @@ export const site = {
 } as const;
 
 /**
- * The inbox a reader actually reaches, and the profile they can look him up on.
+ * The one address on the site.
  *
- * `site.email` above is the brand address on the new domain, and it is still a
- * TODO: it has to exist and be verified in Resend before anything is sent from
- * it. Until that day, every "write to me" surface points here instead, at the
- * address that works. /about and /contact both read it, so the two cannot drift,
- * and there is one line to change once hello@rebrew.org is live.
+ * This used to be a personal Gmail, kept here because the brand inbox was not
+ * live yet. Both facts changed on September 18, 2026: hello@rebrew.org receives
+ * mail, and Alex asked for his personal information off the site. So this is now
+ * an alias for `site.email` rather than a second address, which means there is
+ * exactly one inbox to change and no way for the two to drift apart.
  *
- * LinkedIn is deliberately NOT in `socials` below. That array drives the follow
- * row and the JSON-LD sameAs, which are about following the publication, and
- * LinkedIn is where a person looks up Alex and writes to him.
+ * Keep the alias rather than rewriting the three call sites to `site.email`.
+ * /about, /contact, and the best-agents landing page each mean "the address a
+ * reader writes to", which is a different idea from "the address the publication
+ * signs its legal pages with", even while the two resolve to the same string.
+ *
+ * LINKEDIN_URL was deleted in the same pass. The follow row and the JSON-LD
+ * sameAs read `socials` below, which never contained it, so nothing else broke.
+ * Do not add a personal profile link back to a masthead: the authority on this
+ * site comes from the documents, not the byline.
  */
-export const CONTACT_EMAIL = "jsteryous@gmail.com";
-export const LINKEDIN_URL = "https://www.linkedin.com/in/alex-steryous-404266182/";
+export const CONTACT_EMAIL = site.email;
 
-/** Social + newsletter links. The "follow everywhere" row + footer derive from this. */
+/**
+ * Social + newsletter links. The "follow everywhere" row, the footer, and the
+ * JSON-LD `sameAs` in layout.tsx all derive from this array.
+ *
+ * X AND TIKTOK MOVED TO @rebrewx, September 18, 2026, on Alex's instruction.
+ * They had been @steryously and @alex_prompts, which were personal handles from
+ * before the publication had a name. Both URLs are CONSTRUCTED from the handle,
+ * since neither platform was to hand when the change came through and both build
+ * a profile URL deterministically (x.com/<handle>, tiktok.com/@<handle>). If
+ * either profile is not claimed yet, the footer link and the sameAs entry point
+ * at a 404, so confirm both resolve.
+ *
+ * YOUTUBE IS DELIBERATELY UNTOUCHED at @alex_prompts. Alex named X and TikTok and
+ * only those two. Do not "finish the job" here on your own: a YouTube handle
+ * change breaks every existing link to the channel and is a job to do on YouTube
+ * first, then reflect here.
+ */
 export const socials = [
   {
     key: "substack",
@@ -182,14 +206,14 @@ export const socials = [
   {
     key: "tiktok",
     label: "TikTok",
-    handle: "@alex_prompts",
-    url: "https://www.tiktok.com/@alex_prompts",
+    handle: "@rebrewx",
+    url: "https://www.tiktok.com/@rebrewx",
   },
   {
     key: "x",
     label: "X",
-    handle: "@steryously",
-    url: "https://x.com/steryously",
+    handle: "@rebrewx",
+    url: "https://x.com/rebrewx",
   },
 ] as const;
 

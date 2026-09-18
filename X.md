@@ -1,4 +1,4 @@
-# X (@steryously) — the posting spine
+# X (@rebrewx) — the posting spine
 
 What goes on X, what does not, and why. This is the positioning layer for one channel, so it
 sits beside `BRAND.md` and follows the same rule: it frames the work, it never bends the
