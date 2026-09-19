@@ -29,7 +29,6 @@ export const metadata: Metadata = {
     "what a good real estate agent does",
     "moving to Greenville SC",
     "Rebrew",
-    "Alex Steryous",
   ],
   openGraph: {
     title: `${site.name}: ${site.tagline}`,
@@ -53,6 +52,11 @@ export const metadata: Metadata = {
   // Every public page declares its own, enforced by `npm run check:canonicals`.
 };
 
+// The publisher node used to be a Person, named for the author. Alex asked for
+// his name off the site (September 19, 2026), and a personal name is not
+// something the JSON-LD can quietly drop while still being accurate, so the
+// publisher is an Organization instead. Nothing downstream needed the Person
+// type specifically; WebSite.publisher only ever needed an @id to resolve.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -62,17 +66,16 @@ const jsonLd = {
       name: site.name,
       url: site.url,
       description: site.description,
-      publisher: { "@id": `${site.url}/#person` },
+      publisher: { "@id": `${site.url}/#organization` },
     },
     {
-      "@type": "Person",
-      "@id": `${site.url}/#person`,
-      name: site.author,
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
       url: site.url,
       email: site.email,
-      jobTitle: "Writer",
       description:
-        "Writes Rebrew, which reads the research on real estate and sales performance and puts it next to what the Greenville numbers are actually doing.",
+        "Reads the research on real estate and sales performance and puts it next to what the Greenville numbers are actually doing.",
       sameAs: socials.map((s) => s.url),
     },
   ],

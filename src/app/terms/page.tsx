@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { site, LICENSEE_NAME } from "@/lib/site";
 import { LEGAL_UPDATED, SMS_CONSENT_TEXT, SMS_HELP_EMAIL } from "@/lib/legal";
 
 export const metadata: Metadata = {
@@ -40,8 +40,8 @@ export default function TermsPage() {
 
         <div className="theme-prose prose max-w-none">
           <p>
-            {site.name} is a publication written by {site.author}. Using the site means you accept
-            what is on this page. If you do not, the right move is to stop using it.
+            {site.name} is a publication. Using the site means you accept what is on this page. If
+            you do not, the right move is to stop using it.
           </p>
 
           {/* Every bold label below ends with an explicit {" "} rather than a
@@ -62,7 +62,7 @@ export default function TermsPage() {
             circumstances.
           </p>
           <p>
-            {site.author} holds an active South Carolina real estate license with eXp Realty. Any
+            {LICENSEE_NAME} holds an active South Carolina real estate license with eXp Realty. Any
             listing, market, or transaction commentary is written as a licensee in South Carolina
             and is not an offer to represent you.
           </p>
@@ -107,8 +107,8 @@ export default function TermsPage() {
               <strong>Program.</strong>{" "}{site.name} sends text messages to people who submit the
               buying or selling form at{" "}
               <Link href="/buying-or-selling">{site.url.replace(/^https?:\/\//, "")}/buying-or-selling</Link> and
-              check the box asking for them. The messages are a conversation with {site.author}{" "}
-              about the buying or selling question you sent in, which means scheduling a call,
+              check the box asking for them. The messages are a conversation with {LICENSEE_NAME}
+              {" "}about the buying or selling question you sent in, which means scheduling a call,
               answering what you asked, and following up on it.
             </li>
             <li>
@@ -151,7 +151,7 @@ export default function TermsPage() {
 
           <h2>Liability</h2>
           <p>
-            To the extent the law allows, {site.name} and {site.author} are not liable for any
+            To the extent the law allows, {site.name} and {LICENSEE_NAME} are not liable for any
             indirect, incidental, or consequential loss arising from your use of the site or from a
             decision you made after reading it. You are responsible for your own real estate and
             financial decisions.
@@ -171,7 +171,7 @@ export default function TermsPage() {
 
           <h2>Contact</h2>
           <p>
-            {site.author}, {site.name}. Email <a href={`mailto:${site.email}`}>{site.email}</a>.
+            {site.name}. Email <a href={`mailto:${site.email}`}>{site.email}</a>.
           </p>
         </div>
       </div>

@@ -41,7 +41,7 @@ STEP 3, PUBLISH TO THE WEBSITE (LIVE). Parse the ## METADATA block from /tmp/gv/
   - image_address = the ## IMAGE subject key (preferred, e.g. `liberty-bridge`) or the fallback location string. The finalize cron maps a curated subject (or any Greenville-area location) to a hand-picked library photo, falling back to a Street View / map only for an off-map pin, and sets cover_credit for CC-BY photos. This is effectively always present on this track.
   - tags = a Postgres text array '{"greenville","evergreen"}'. It MUST include "greenville" so the /real-estate section filter, the cadence guard/dedup, and the finalize cron (cover + broadcast) find it, and must NOT include "guide". The "evergreen" tag is what the STEP 1 cadence guard and dedup count.
   - source_url = METADATA source_url (omit this column if it does not exist in the schema)
-  - author = 'Alex Steryous'
+  - author = 'Rebrew' (never a personal name; Alex asked for his name off the site September 19, 2026)
   - status = 'DRAFT'  (PUBLISH MODE review; see top. The post stays a DRAFT until Alex publishes it at /review. A DRAFT is never broadcast, since the finalize cron only touches PUBLISHED rows.)
   - published_at = NULL  (set when Alex publishes at /review, not now)
   - created_at = now()

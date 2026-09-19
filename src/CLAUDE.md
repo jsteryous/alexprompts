@@ -20,19 +20,24 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 
 ## Key couplings
 
-- **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, author, tagline,
-  `headline`, oneLiner, description, email, url), `socials` (the footer and JSON-LD
-  `sameAs`), `newsletterUrl`, and `CONTACT_EMAIL`, which is an ALIAS for `site.email`
-  rather than a second address (`LINKEDIN_URL` and the personal Gmail both came off
-  September 18, 2026 when Alex asked for his personal information off the site, and a
-  personal profile link does not go back on a masthead). `SITE_URL` reads
-  `NEXT_PUBLIC_SITE_URL`. **`site.headline`** is the masthead statement, "What's brewing in
-  Real Estate." It lives here because it is the one line connecting the NAME to the BEAT:
-  "Rebrew" says nothing about real estate alone, and the coffee-cup-and-house mark says it
-  only to someone who already gets the joke. The homepage and the share card both read it;
-  the card used to carry a hand-typed near-copy that had already drifted. **Editing handles
-  or domain here updates every surface.** Do not reintroduce the deleted teaching exports
-  (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`).
+- **`src/lib/site.ts`** — brand single-source-of-truth: `site` (name, tagline, `headline`,
+  oneLiner, description, email, url), `socials` (the footer and JSON-LD `sameAs`),
+  `newsletterUrl`, and `CONTACT_EMAIL`, which is an ALIAS for `site.email` rather than a
+  second address (`LINKEDIN_URL` and the personal Gmail both came off September 18, 2026
+  when Alex asked for his personal information off the site, and a personal profile link
+  does not go back on a masthead). `SITE_URL` reads `NEXT_PUBLIC_SITE_URL`. **`site.author`
+  is DELETED** (September 19, 2026, "make sure any mention of me is off the site"); every
+  surface that read it now reads `site.name` instead. **`LICENSEE_NAME`** is the one
+  surviving export of his actual name, read only by the four South Carolina
+  licensee-disclosure blocks on `/terms`, `/buying-or-selling`, and the best-agents landing
+  page, which state license law requires to name the real licensee. Do not import
+  `LICENSEE_NAME` anywhere else. **`site.headline`** is the masthead statement, "What's
+  brewing in Real Estate." It lives here because it is the one line connecting the NAME to
+  the BEAT: "Rebrew" says nothing about real estate alone, and the coffee-cup-and-house
+  mark says it only to someone who already gets the joke. The homepage and the share card
+  both read it; the card used to carry a hand-typed near-copy that had already drifted.
+  **Editing handles or domain here updates every surface.** Do not reintroduce the deleted
+  teaching exports (`tools`, `principles`, `realEstateOutcomes`, `outcomes`, `manifesto`).
 - **`src/lib/posts.ts`** — archive data access: `getPublishedPosts(limit?, type?)`,
   `getPost(slug, type?)`, `getFeedPosts`, `formatDate()`, `sectionOf()`, `postHref()`.
   One `blog_posts` table, **four sections split by tag**, and `sectionOf()` is the single
@@ -156,9 +161,15 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   "Who it is for" compressed into one paragraph of the opening statement, and the photo
   (`public/alex.jpg`, deleted from the repo), the career history (eight years of BD,
   sales, and land acquisition), the personal Gmail, and the LinkedIn link all came off.
-  What survives of the author is the byline and the South Carolina license, which the
-  licensee disclosures need anyway. The authority here comes from the documents, so do
-  not restore a face and a resume to the top of the masthead.
+  **THE NAME CAME OFF TOO, Sept 19, 2026** ("make sure any mention of me is off the
+  site"): `site.author` is deleted from `src/lib/site.ts`, and every surface that read
+  it (footer copyright, this page's byline, the article-page byline default, the SEO
+  keywords list, the homepage `Person` JSON-LD, now an `Organization`) reads `site.name`
+  ("Rebrew") instead. The one exception is `LICENSEE_NAME` (also in `site.ts`), which the
+  four South Carolina licensee-disclosure blocks on `/terms`, `/buying-or-selling`, and
+  the best-agents landing page import, because state license law requires the actual
+  licensed name there. The authority here comes from the documents, so do not restore a
+  face, a resume, or a personal byline to the top of the masthead.
 - **`/tools` and `/tools/<slug>` 404.** All nine free tools were **deleted** August 14, 2026,
   along with `src/lib/tools.ts`, `src/components/tools/`, `ToolShell`, `ToolIcon`,
   `areaScan.ts`, `wireSafety.ts`, `/api/area-scan`, and `/api/area-autocomplete`. They served

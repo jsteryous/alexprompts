@@ -50,10 +50,21 @@ import { site, CONTACT_EMAIL } from "@/lib/site";
  * WHAT THE DEPERSONALIZING IS FOR, so a later pass does not read it as modesty
  * and helpfully undo it: the authority on this site comes from the documents,
  * and a masthead that leads with a face and a resume invites a reader to audit
- * the writer instead of the evidence. The surfaces that still name Alex do so
- * because something outside the design requires it. The byline, the copyright
- * line, and the licensee disclosures on /buying-or-selling and /terms are not
- * decoration.
+ * the writer instead of the evidence.
+ *
+ * ---- THE NAME CAME OFF TOO, September 19, 2026 ----
+ *
+ * Alex: "make sure any mention of me is off the site." The byline here and in
+ * the footer, the article-page byline default, the SEO keywords list, and the
+ * homepage JSON-LD all named him and now read `site.name` ("Rebrew") instead;
+ * `site.author` is deleted. The "Who writes it" heading below reads "I write
+ * Rebrew." rather than naming him. The ONE exception is the South Carolina
+ * licensee disclosure on /terms, /buying-or-selling, and the best-agents
+ * landing page, which state law requires to name the actual licensed person:
+ * those import `LICENSEE_NAME` from src/lib/site.ts, never `site.author`,
+ * which no longer exists. Do not add his name back anywhere else on this
+ * reasoning that the disclosure already names him; the disclosure is the one
+ * place it is legally required, not a license to reintroduce it elsewhere.
  *
  * WHAT ELSE MOVED in the scale-down. "Who it is for" lost its own section and
  * survives as the third paragraph of the opening statement, because two
@@ -220,7 +231,7 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Eyebrow className="mb-5">Who writes it</Eyebrow>
           <h2 className="theme-text-primary type-h2 mb-6">
-            {site.name} is written by {site.author}.
+            I write {site.name}.
           </h2>
           <p className="theme-text-contrast-muted type-body-lg leading-relaxed mb-5">
             I am a licensed real estate agent in South Carolina, and I have read this

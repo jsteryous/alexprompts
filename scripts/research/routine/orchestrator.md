@@ -179,7 +179,7 @@ the body. Using the Supabase connector, INSERT one row into `blog_posts`:
   or `greenville`, never both, since a post lives in exactly one section. Never `greenville works`,
   which no longer routes anywhere. You MAY add one plain topic tag after the section tag.
 - `source_url` = METADATA source_url, the paper's landing page (omit the column if not in the schema)
-- `author` = 'Alex Steryous'
+- `author` = 'Rebrew' (never a personal name; Alex asked for his name off the site September 19, 2026)
 - `status` = 'DRAFT'
 - `published_at` = NULL
 - `created_at` = now()

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { site, LICENSEE_NAME } from "@/lib/site";
 import { ReferralForm } from "@/components/ReferralForm";
 
 export const metadata: Metadata = {
@@ -144,9 +144,12 @@ export default function FindAProPage() {
 
           {/* Licensee disclosure, not marketing copy. It stays because Alex holds
               an active SC license and may be compensated on a closed transaction;
-              it is deliberately the only place on the site that mentions a fee. */}
+              it is deliberately the only place on the site that mentions a fee.
+              Reads LICENSEE_NAME, not site.author (deleted September 19, 2026):
+              SC license law requires the actual licensed name here even though
+              his name came off every marketing surface the same day. */}
           <p className="theme-text-muted text-xs leading-relaxed mt-10 max-w-xl">
-            {site.author} is a licensed real estate agent with eXp Realty in South Carolina. I may
+            {LICENSEE_NAME} is a licensed real estate agent with eXp Realty in South Carolina. I may
             be compensated by a referral fee when a transaction closes, at no cost to you. This page
             is information only and is not financial, legal, or investment advice.
           </p>

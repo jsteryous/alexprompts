@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, CONTACT_EMAIL } from "@/lib/site";
+import { site, CONTACT_EMAIL, LICENSEE_NAME } from "@/lib/site";
 import { getPublishedPosts, postHref, sectionLabel, formatDate } from "@/lib/posts";
 import { QuickContact } from "@/components/QuickContact";
 
@@ -203,7 +203,7 @@ const MAILTO =
   `mailto:${CONTACT_EMAIL}` +
   `?subject=${encodeURIComponent("Greenville real estate")}` +
   `&body=${encodeURIComponent(
-    "Hi Alex,\n\nI found your page on Greenville agents. Here is what I am working on:\n\n",
+    "Hi,\n\nI found your page on Greenville agents. Here is what I am working on:\n\n",
   )}`;
 
 function ArrowIcon({ className = "" }: { className?: string }) {
@@ -261,7 +261,7 @@ export default async function BestAgentsGreenvillePage() {
             that seller out of a price that was never going to work.
           </p>
           <p className="theme-text-muted type-body-lg leading-relaxed mb-10">
-            I am {site.author}. I hold a real estate license in South Carolina and I write{" "}
+            I hold a real estate license in South Carolina and I write{" "}
             {site.name}, where I read the research on how houses actually sell and put it next to
             what the Greenville numbers are doing. Below is what separates a good agent from an
             average one, and how to check any of it yourself without taking anyone&apos;s word for
@@ -392,9 +392,10 @@ export default async function BestAgentsGreenvillePage() {
 
           {/* Licensee disclosure, not marketing copy, and worded exactly as it is
               on /buying-or-selling. It stays because Alex holds an active SC
-              license, and it is deliberately the only place a fee is mentioned. */}
+              license, and it is deliberately the only place a fee is mentioned.
+              Reads LICENSEE_NAME, not site.author (deleted September 19, 2026). */}
           <p className="theme-text-muted text-xs leading-relaxed mt-10 max-w-xl">
-            {site.author} is a licensed real estate agent with eXp Realty in South Carolina. I may
+            {LICENSEE_NAME} is a licensed real estate agent with eXp Realty in South Carolina. I may
             be compensated by a referral fee when a transaction closes, at no cost to you. This page
             is information only and is not financial, legal, or investment advice.
           </p>

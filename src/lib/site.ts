@@ -62,7 +62,6 @@ export function substackFeedUrl(): string {
 
 export const site = {
   name: "Rebrew",
-  author: "Alex Steryous",
   // The brand inbox, live and receiving as of September 2026. It is now the ONLY
   // address on the site: the personal Gmail that every "write to me" surface used
   // to point at came off in the September 18, 2026 pass. SENDING from it is a
@@ -144,7 +143,7 @@ export const site = {
   headline: "What’s brewing in Real Estate.",
 
   oneLiner:
-    "Research and data on Greenville real estate and on sales performance, read and written up by Alex Steryous.",
+    "Research and data on Greenville real estate and on sales performance.",
   description:
     "We read research papers about real estate and sales performance and share what we find " +
     "interesting. What the Greenville numbers are doing, what the evidence says about " +
@@ -171,6 +170,19 @@ export const site = {
  * site comes from the documents, not the byline.
  */
 export const CONTACT_EMAIL = site.email;
+
+/**
+ * The actual licensed name, September 19, 2026. `site` used to carry an
+ * `author` field set to this same string and every "written by" surface read
+ * it: the footer, /about, the article byline default, the SEO keywords list,
+ * and the homepage Person JSON-LD. Alex asked for his name off the site, so
+ * all of that now reads `site.name` ("Rebrew") instead, and this constant is
+ * split out for the one thing that cannot follow: South Carolina real estate
+ * advertising rules require a licensee disclosure to name the actual licensed
+ * person. The four surfaces that legally need it import THIS, never
+ * `site.author` (deleted), and nothing else should.
+ */
+export const LICENSEE_NAME = "Alex Steryous";
 
 /**
  * Social + newsletter links. The "follow everywhere" row, the footer, and the

@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <span className="theme-text-muted type-eyebrow mb-1">Alex</span>
+            <span className="theme-text-muted type-eyebrow mb-1">Connect</span>
             <Link href="/about" className="theme-link text-sm">
               About
             </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
           sitemap. */}
       <div className="max-w-6xl mx-auto px-6 pb-8 border-t theme-border pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <p className="theme-text-muted text-xs">
-          &copy; {new Date().getFullYear()} {site.name}. Written by {site.author}.
+          &copy; {new Date().getFullYear()} {site.name}.
         </p>
         <nav className="flex items-center gap-5">
           <Link href="/privacy" className="theme-link text-xs">

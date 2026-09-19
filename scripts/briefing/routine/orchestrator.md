@@ -128,7 +128,7 @@ Supabase connector, INSERT one row into blog_posts:
     topic tag. It must NOT include the bare "greenville" and NOT "greenville works"; either
     would misroute the post out of /briefing (sectionOf in src/lib/posts.ts routes by tag and
     those two win).
-  - author = 'Alex Steryous'
+  - author = 'Rebrew' (never a personal name; Alex asked for his name off the site September 19, 2026)
   - status = 'DRAFT'
   - published_at = NULL (set when Alex publishes)
   - created_at = now()

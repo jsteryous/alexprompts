@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       summary: null,
       tags: SECTION_TAGS[section],
       status: "DRAFT",
-      author: site.author,
+      author: site.name,
     })
     .select("id")
     .single();

@@ -51,8 +51,8 @@ export default function PrivacyPage() {
 
         <div className="theme-prose prose max-w-none">
           <p>
-            {site.name} is a publication written by {site.author} about Greenville real estate and
-            sales performance. This page explains what information the site collects, why it
+            {site.name} is a publication about Greenville real estate and sales performance. This
+            page explains what information the site collects, why it
             collects it, and who else ever sees it. It covers {site.url}, along with the emails and
             text messages sent from it.
           </p>
@@ -187,7 +187,7 @@ export default function PrivacyPage() {
 
           <h2>Contact</h2>
           <p>
-            {site.author}, {site.name}. Email <a href={`mailto:${site.email}`}>{site.email}</a>.
+            {site.name}. Email <a href={`mailto:${site.email}`}>{site.email}</a>.
           </p>
         </div>
       </div>

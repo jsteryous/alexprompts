@@ -161,7 +161,7 @@ markdown as the body. Using the Supabase connector, INSERT one row into blog_pos
     tag after it (for example "infrastructure", "development", "energy", "transportation"), never
     the bare word "greenville".
   - source_url = METADATA source_url (omit this column if it does not exist in the schema)
-  - author = 'Alex Steryous'
+  - author = 'Rebrew' (never a personal name; Alex asked for his name off the site September 19, 2026)
   - status = 'DRAFT'  (PUBLISH MODE review; see top. The post stays a DRAFT until Alex publishes
     it at /review.)
   - published_at = NULL  (set when Alex publishes at /review, not now)

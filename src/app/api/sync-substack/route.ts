@@ -88,7 +88,7 @@ export async function GET(req: NextRequest) {
       body_md: p.body_md,
       cover_image: p.cover_image,
       tags: p.tags ?? [],
-      author: p.author ?? site.author,
+      author: p.author ?? site.name,
       published_at: p.published_at,
       status: "PUBLISHED" as const,
     };

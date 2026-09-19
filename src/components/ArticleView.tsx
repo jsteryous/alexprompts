@@ -36,7 +36,10 @@ export default async function ArticleView({
   // Sections that carry the buy/sell offer get it mid-article too, not only at
   // the end, so a skimmer cannot miss it. Null on short or flat pieces.
   const midSplit = section.showReferralCta ? splitAtMidHeading(bodyHtml) : null;
-  const authorName = post.author ?? site.author;
+  // Falls back to the publication name, not a personal name (September 19,
+  // 2026): site.author is deleted, and the DB's per-row author column was
+  // bulk-updated off "Alex Steryous" at the same time.
+  const authorName = post.author ?? site.name;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
   const articleJsonLd = {
@@ -46,7 +49,7 @@ export default async function ArticleView({
     description: post.summary ?? undefined,
     datePublished: published,
     dateModified: published,
-    author: { "@type": "Person", name: authorName, url: site.url },
+    author: { "@type": "Organization", name: authorName, url: site.url },
     publisher: { "@type": "Organization", name: site.name, url: site.url },
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
   };
