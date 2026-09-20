@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13 23:58 UTC",
+  "generated_at": "2026-09-20 23:58 UTC",
   "source": "Zillow Research (ZHVI, ZORI, and market-vitals metrics), metro level plus ZIP-level submarkets",
   "source_urls": {
     "zhvi": "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
@@ -14,225 +14,225 @@
   "metro": "Greenville, SC",
   "home_value": {
     "metric": "ZHVI (typical home value, all homes, smoothed & seasonally adjusted)",
-    "latest_month": "2026-07-31",
+    "latest_month": "2026-08-31",
     "greenville": {
-      "latest": 315006,
+      "latest": 314151,
       "mom_pct": -0.1,
-      "yoy_pct": 1.8
+      "yoy_pct": 1.7
     },
     "national": {
-      "latest": 371774,
-      "mom_pct": 0.0,
-      "yoy_pct": 1.0
+      "latest": 368697,
+      "mom_pct": 0.1,
+      "yoy_pct": 1.2
     },
     "series": [
       {
-        "month": "2024-08-31",
-        "value": 308879
-      },
-      {
         "month": "2024-09-30",
-        "value": 308815
+        "value": 308161
       },
       {
         "month": "2024-10-31",
-        "value": 308666
+        "value": 308013
       },
       {
         "month": "2024-11-30",
-        "value": 308517
+        "value": 307864
       },
       {
         "month": "2024-12-31",
-        "value": 308738
+        "value": 308085
       },
       {
         "month": "2025-01-31",
-        "value": 309258
+        "value": 308604
       },
       {
         "month": "2025-02-28",
-        "value": 309672
+        "value": 309016
       },
       {
         "month": "2025-03-31",
-        "value": 309533
+        "value": 308878
       },
       {
         "month": "2025-04-30",
-        "value": 309288
+        "value": 308633
       },
       {
         "month": "2025-05-31",
-        "value": 309360
+        "value": 308705
       },
       {
         "month": "2025-06-30",
-        "value": 309466
+        "value": 308810
       },
       {
         "month": "2025-07-31",
-        "value": 309562
+        "value": 308906
       },
       {
         "month": "2025-08-31",
-        "value": 309534
+        "value": 308879
       },
       {
         "month": "2025-09-30",
-        "value": 310088
+        "value": 309431
       },
       {
         "month": "2025-10-31",
-        "value": 310796
+        "value": 310138
       },
       {
         "month": "2025-11-30",
-        "value": 311700
+        "value": 311040
       },
       {
         "month": "2025-12-31",
-        "value": 312434
+        "value": 311772
       },
       {
         "month": "2026-01-31",
-        "value": 313125
+        "value": 312462
       },
       {
         "month": "2026-02-28",
-        "value": 313992
+        "value": 313327
       },
       {
         "month": "2026-03-31",
-        "value": 314909
+        "value": 314242
       },
       {
         "month": "2026-04-30",
-        "value": 315574
+        "value": 314906
       },
       {
         "month": "2026-05-31",
-        "value": 315628
+        "value": 314960
       },
       {
         "month": "2026-06-30",
-        "value": 315317
+        "value": 314649
       },
       {
         "month": "2026-07-31",
-        "value": 315006
+        "value": 314339
+      },
+      {
+        "month": "2026-08-31",
+        "value": 314151
       }
     ]
   },
   "rent": {
     "metric": "ZORI (typical asking rent, all homes + multifamily, smoothed)",
-    "latest_month": "2026-07-31",
+    "latest_month": "2026-08-31",
     "greenville": {
-      "latest": 1577,
-      "mom_pct": 0.5,
-      "yoy_pct": 2.3
+      "latest": 1569,
+      "mom_pct": 0.2,
+      "yoy_pct": 2.4
     },
     "national": {
-      "latest": 1962,
-      "mom_pct": 0.3,
-      "yoy_pct": 2.3
+      "latest": 1948,
+      "mom_pct": 0.2,
+      "yoy_pct": 2.5
     },
     "series": [
       {
-        "month": "2024-08-31",
-        "value": 1502
-      },
-      {
         "month": "2024-09-30",
-        "value": 1495
+        "value": 1486
       },
       {
         "month": "2024-10-31",
-        "value": 1499
+        "value": 1489
       },
       {
         "month": "2024-11-30",
-        "value": 1506
+        "value": 1496
       },
       {
         "month": "2024-12-31",
-        "value": 1517
+        "value": 1507
       },
       {
         "month": "2025-01-31",
-        "value": 1528
+        "value": 1519
       },
       {
         "month": "2025-02-28",
-        "value": 1539
+        "value": 1530
       },
       {
         "month": "2025-03-31",
-        "value": 1543
+        "value": 1534
       },
       {
         "month": "2025-04-30",
-        "value": 1545
+        "value": 1535
       },
       {
         "month": "2025-05-31",
-        "value": 1542
+        "value": 1532
       },
       {
         "month": "2025-06-30",
-        "value": 1542
+        "value": 1533
       },
       {
         "month": "2025-07-31",
-        "value": 1542
+        "value": 1532
       },
       {
         "month": "2025-08-31",
-        "value": 1542
+        "value": 1532
       },
       {
         "month": "2025-09-30",
-        "value": 1541
+        "value": 1530
       },
       {
         "month": "2025-10-31",
-        "value": 1540
+        "value": 1529
       },
       {
         "month": "2025-11-30",
-        "value": 1537
+        "value": 1525
       },
       {
         "month": "2025-12-31",
-        "value": 1539
+        "value": 1528
       },
       {
         "month": "2026-01-31",
-        "value": 1540
+        "value": 1530
       },
       {
         "month": "2026-02-28",
-        "value": 1550
+        "value": 1540
       },
       {
         "month": "2026-03-31",
-        "value": 1553
+        "value": 1543
       },
       {
         "month": "2026-04-30",
-        "value": 1555
+        "value": 1545
       },
       {
         "month": "2026-05-31",
-        "value": 1558
+        "value": 1548
       },
       {
         "month": "2026-06-30",
-        "value": 1568
+        "value": 1558
       },
       {
         "month": "2026-07-31",
-        "value": 1577
+        "value": 1566
+      },
+      {
+        "month": "2026-08-31",
+        "value": 1569
       }
     ]
   },
@@ -240,26 +240,22 @@
     "days_to_pending": {
       "metric": "Median days to pending (list to under contract)",
       "unit": "days",
-      "latest_month": "2026-07-31",
+      "latest_month": "2026-08-31",
       "greenville": {
-        "latest": 27,
-        "prior_month": 22,
-        "prior_year": 19,
-        "mom_pct": 22.7,
-        "yoy_pct": 42.1
+        "latest": 31,
+        "prior_month": 27,
+        "prior_year": 23,
+        "mom_pct": 14.8,
+        "yoy_pct": 34.8
       },
       "national": {
-        "latest": 21,
-        "prior_month": 18,
-        "prior_year": 20,
-        "mom_pct": 16.7,
-        "yoy_pct": 5.0
+        "latest": 24,
+        "prior_month": 21,
+        "prior_year": 24,
+        "mom_pct": 14.3,
+        "yoy_pct": 0.0
       },
       "series": [
-        {
-          "month": "2024-07-31",
-          "value": 15
-        },
         {
           "month": "2024-08-31",
           "value": 16
@@ -355,32 +351,32 @@
         {
           "month": "2026-07-31",
           "value": 27
+        },
+        {
+          "month": "2026-08-31",
+          "value": 31
         }
       ]
     },
     "inventory": {
       "metric": "For-sale inventory (active listings)",
       "unit": "homes",
-      "latest_month": "2026-07-31",
+      "latest_month": "2026-08-31",
       "greenville": {
-        "latest": 4590,
-        "prior_month": 4503,
-        "prior_year": 3784,
-        "mom_pct": 1.9,
-        "yoy_pct": 21.3
+        "latest": 4673,
+        "prior_month": 4592,
+        "prior_year": 3888,
+        "mom_pct": 1.8,
+        "yoy_pct": 20.2
       },
       "national": {
-        "latest": 1389936,
-        "prior_month": 1355524,
-        "prior_year": 1373264,
-        "mom_pct": 2.5,
-        "yoy_pct": 1.2
+        "latest": 1406231,
+        "prior_month": 1390707,
+        "prior_year": 1380205,
+        "mom_pct": 1.1,
+        "yoy_pct": 1.9
       },
       "series": [
-        {
-          "month": "2024-07-31",
-          "value": 3161
-        },
         {
           "month": "2024-08-31",
           "value": 3226
@@ -475,33 +471,33 @@
         },
         {
           "month": "2026-07-31",
-          "value": 4590
+          "value": 4592
+        },
+        {
+          "month": "2026-08-31",
+          "value": 4673
         }
       ]
     },
     "new_listings": {
       "metric": "New listings for the month",
       "unit": "homes",
-      "latest_month": "2026-07-31",
+      "latest_month": "2026-08-31",
       "greenville": {
-        "latest": 1257,
-        "prior_month": 1360,
-        "prior_year": 1244,
-        "mom_pct": -7.6,
-        "yoy_pct": 1.0
+        "latest": 1206,
+        "prior_month": 1258,
+        "prior_year": 1175,
+        "mom_pct": -4.1,
+        "yoy_pct": 2.6
       },
       "national": {
-        "latest": 404817,
-        "prior_month": 417850,
-        "prior_year": 402901,
-        "mom_pct": -3.1,
-        "yoy_pct": 0.5
+        "latest": 382816,
+        "prior_month": 404914,
+        "prior_year": 372086,
+        "mom_pct": -5.5,
+        "yoy_pct": 2.9
       },
       "series": [
-        {
-          "month": "2024-07-31",
-          "value": 1175
-        },
         {
           "month": "2024-08-31",
           "value": 1126
@@ -596,33 +592,33 @@
         },
         {
           "month": "2026-07-31",
-          "value": 1257
+          "value": 1258
+        },
+        {
+          "month": "2026-08-31",
+          "value": 1206
         }
       ]
     },
     "price_cut_share": {
       "metric": "Share of active listings with a price cut",
       "unit": "percent",
-      "latest_month": "2026-07-31",
+      "latest_month": "2026-08-31",
       "greenville": {
-        "latest": 31.4,
-        "prior_month": 30.4,
-        "prior_year": 31.3,
-        "mom_pct": 3.5,
-        "yoy_pct": 0.6
+        "latest": 32.1,
+        "prior_month": 31.4,
+        "prior_year": 31.4,
+        "mom_pct": 2.3,
+        "yoy_pct": 2.2
       },
       "national": {
-        "latest": 25.6,
-        "prior_month": 24.4,
+        "latest": 26.4,
+        "prior_month": 25.6,
         "prior_year": 26.6,
-        "mom_pct": 5.0,
-        "yoy_pct": -3.7
+        "mom_pct": 3.2,
+        "yoy_pct": -0.8
       },
       "series": [
-        {
-          "month": "2024-07-31",
-          "value": 30.1
-        },
         {
           "month": "2024-08-31",
           "value": 31.0
@@ -718,32 +714,32 @@
         {
           "month": "2026-07-31",
           "value": 31.4
+        },
+        {
+          "month": "2026-08-31",
+          "value": 32.1
         }
       ]
     },
     "sale_to_list": {
       "metric": "Mean sale-to-list ratio",
       "unit": "percent",
-      "latest_month": "2026-06-30",
+      "latest_month": "2026-07-31",
       "greenville": {
-        "latest": 98.1,
-        "prior_month": 98.0,
+        "latest": 97.9,
+        "prior_month": 98.1,
         "prior_year": 98.1,
-        "mom_pct": 0.0,
-        "yoy_pct": -0.0
+        "mom_pct": -0.1,
+        "yoy_pct": -0.1
       },
       "national": {
-        "latest": 98.9,
-        "prior_month": 98.6,
+        "latest": 99.0,
+        "prior_month": 98.9,
         "prior_year": 98.9,
-        "mom_pct": 0.3,
-        "yoy_pct": -0.0
+        "mom_pct": 0.1,
+        "yoy_pct": 0.1
       },
       "series": [
-        {
-          "month": "2024-06-30",
-          "value": 98.3
-        },
         {
           "month": "2024-07-31",
           "value": 98.2
@@ -778,7 +774,7 @@
         },
         {
           "month": "2025-03-31",
-          "value": 97.5
+          "value": 97.4
         },
         {
           "month": "2025-04-30",
@@ -802,7 +798,7 @@
         },
         {
           "month": "2025-09-30",
-          "value": 97.5
+          "value": 97.6
         },
         {
           "month": "2025-10-31",
@@ -839,6 +835,10 @@
         {
           "month": "2026-06-30",
           "value": 98.1
+        },
+        {
+          "month": "2026-07-31",
+          "value": 97.9
         }
       ]
     }
@@ -848,7 +848,7 @@
     "state": "SC",
     "level": "ZIP code (Zillow Zip-level series)",
     "min_inventory": 25,
-    "latest_month": "2026-07-31",
+    "latest_month": "2026-08-31",
     "source_urls": {
       "home_value": "https://files.zillowstatic.com/research/public_csvs/zhvi/Zip_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
       "inventory": "https://files.zillowstatic.com/research/public_csvs/invt_fs/Zip_invt_fs_uc_sfrcondo_sm_month.csv",
@@ -862,36 +862,36 @@
         "city": "Simpsonville",
         "thin": false,
         "home_value": {
-          "latest": 406993,
-          "prior_month": 407025,
-          "prior_year": 398916,
-          "mom_pct": -0.0,
-          "yoy_pct": 2.0,
-          "latest_month": "2026-07-31"
+          "latest": 401728,
+          "prior_month": 402115,
+          "prior_year": 395161,
+          "mom_pct": -0.1,
+          "yoy_pct": 1.7,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 345,
-          "prior_month": 339,
-          "prior_year": 278,
-          "mom_pct": 1.8,
-          "yoy_pct": 24.1,
-          "latest_month": "2026-07-31"
+          "latest": 355,
+          "prior_month": 345,
+          "prior_year": 291,
+          "mom_pct": 2.9,
+          "yoy_pct": 22.0,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 23,
-          "prior_month": 18,
-          "prior_year": 14,
-          "mom_pct": 27.8,
-          "yoy_pct": 64.3,
-          "latest_month": "2026-07-31"
+          "latest": 26,
+          "prior_month": 23,
+          "prior_year": 15,
+          "mom_pct": 13.0,
+          "yoy_pct": 73.3,
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 33.3,
-          "prior_month": 31.6,
-          "prior_year": 32.2,
-          "mom_pct": 5.5,
-          "yoy_pct": 3.3,
-          "latest_month": "2026-07-31"
+          "latest": 34.8,
+          "prior_month": 33.3,
+          "prior_year": 34.3,
+          "mom_pct": 4.6,
+          "yoy_pct": 1.5,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -899,36 +899,36 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 301088,
-          "prior_month": 301166,
-          "prior_year": 289783,
-          "mom_pct": -0.0,
-          "yoy_pct": 3.9,
-          "latest_month": "2026-07-31"
+          "latest": 302456,
+          "prior_month": 302214,
+          "prior_year": 291673,
+          "mom_pct": 0.1,
+          "yoy_pct": 3.7,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 217,
-          "prior_month": 215,
-          "prior_year": 181,
-          "mom_pct": 0.9,
-          "yoy_pct": 19.9,
-          "latest_month": "2026-07-31"
+          "latest": 228,
+          "prior_month": 217,
+          "prior_year": 182,
+          "mom_pct": 5.1,
+          "yoy_pct": 25.3,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 25,
-          "prior_month": 23,
-          "prior_year": 19,
-          "mom_pct": 8.7,
-          "yoy_pct": 31.6,
-          "latest_month": "2026-07-31"
+          "latest": 27,
+          "prior_month": 25,
+          "prior_year": 24,
+          "mom_pct": 8.0,
+          "yoy_pct": 12.5,
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 32.4,
-          "prior_month": 32.2,
-          "prior_year": 36.4,
-          "mom_pct": 0.6,
-          "yoy_pct": -10.9,
-          "latest_month": "2026-07-31"
+          "latest": 32.7,
+          "prior_month": 32.3,
+          "prior_year": 34.9,
+          "mom_pct": 1.1,
+          "yoy_pct": -6.4,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -936,73 +936,36 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 385156,
-          "prior_month": 385258,
-          "prior_year": 379458,
-          "mom_pct": -0.0,
-          "yoy_pct": 1.5,
-          "latest_month": "2026-07-31"
+          "latest": 385872,
+          "prior_month": 385433,
+          "prior_year": 380386,
+          "mom_pct": 0.1,
+          "yoy_pct": 1.4,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 209,
-          "prior_month": 213,
+          "latest": 206,
+          "prior_month": 209,
           "prior_year": 178,
-          "mom_pct": -1.9,
-          "yoy_pct": 17.4,
-          "latest_month": "2026-07-31"
+          "mom_pct": -1.4,
+          "yoy_pct": 15.7,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 29,
-          "prior_month": 20,
-          "prior_year": 18,
-          "mom_pct": 45.0,
-          "yoy_pct": 61.1,
-          "latest_month": "2026-07-31"
+          "latest": 31,
+          "prior_month": 29,
+          "prior_year": 27,
+          "mom_pct": 6.9,
+          "yoy_pct": 14.8,
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 34.5,
-          "prior_month": 33.4,
-          "prior_year": 32.6,
-          "mom_pct": 3.3,
-          "yoy_pct": 5.8,
-          "latest_month": "2026-07-31"
-        }
-      },
-      {
-        "zip": "29650",
-        "city": "Greer",
-        "thin": false,
-        "home_value": {
-          "latest": 375360,
-          "prior_month": 375432,
-          "prior_year": 371086,
-          "mom_pct": -0.0,
-          "yoy_pct": 1.2,
-          "latest_month": "2026-07-31"
-        },
-        "inventory": {
-          "latest": 187,
-          "prior_month": 174,
-          "prior_year": 149,
-          "mom_pct": 7.5,
-          "yoy_pct": 25.5,
-          "latest_month": "2026-07-31"
-        },
-        "days_to_pending": {
-          "latest": 18,
-          "prior_month": 14,
-          "prior_year": 14,
-          "mom_pct": 28.6,
-          "yoy_pct": 28.6,
-          "latest_month": "2026-07-31"
-        },
-        "price_cut_share": {
-          "latest": 33.4,
-          "prior_month": 32.1,
-          "prior_year": 36.8,
-          "mom_pct": 4.0,
-          "yoy_pct": -9.3,
-          "latest_month": "2026-07-31"
+          "latest": 33.5,
+          "prior_month": 34.5,
+          "prior_year": 32.5,
+          "mom_pct": -3.0,
+          "yoy_pct": 3.0,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1010,36 +973,73 @@
         "city": "Taylors",
         "thin": false,
         "home_value": {
-          "latest": 314871,
-          "prior_month": 315099,
-          "prior_year": 309616,
-          "mom_pct": -0.1,
-          "yoy_pct": 1.7,
-          "latest_month": "2026-07-31"
+          "latest": 311117,
+          "prior_month": 311220,
+          "prior_year": 306261,
+          "mom_pct": -0.0,
+          "yoy_pct": 1.6,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 185,
-          "prior_month": 176,
-          "prior_year": 181,
-          "mom_pct": 5.1,
-          "yoy_pct": 2.2,
-          "latest_month": "2026-07-31"
+          "latest": 197,
+          "prior_month": 185,
+          "prior_year": 195,
+          "mom_pct": 6.5,
+          "yoy_pct": 1.0,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 20,
-          "prior_month": 15,
+          "latest": 21,
+          "prior_month": 20,
           "prior_year": 19,
-          "mom_pct": 33.3,
-          "yoy_pct": 5.3,
-          "latest_month": "2026-07-31"
+          "mom_pct": 5.0,
+          "yoy_pct": 10.5,
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 33.7,
-          "prior_month": 33.0,
-          "prior_year": 36.3,
-          "mom_pct": 2.2,
-          "yoy_pct": -7.2,
-          "latest_month": "2026-07-31"
+          "latest": 34.4,
+          "prior_month": 33.7,
+          "prior_year": 36.1,
+          "mom_pct": 1.9,
+          "yoy_pct": -4.9,
+          "latest_month": "2026-08-31"
+        }
+      },
+      {
+        "zip": "29650",
+        "city": "Greer",
+        "thin": false,
+        "home_value": {
+          "latest": 371676,
+          "prior_month": 371822,
+          "prior_year": 368051,
+          "mom_pct": -0.0,
+          "yoy_pct": 1.0,
+          "latest_month": "2026-08-31"
+        },
+        "inventory": {
+          "latest": 190,
+          "prior_month": 187,
+          "prior_year": 152,
+          "mom_pct": 1.6,
+          "yoy_pct": 25.0,
+          "latest_month": "2026-08-31"
+        },
+        "days_to_pending": {
+          "latest": 26,
+          "prior_month": 18,
+          "prior_year": 18,
+          "mom_pct": 44.4,
+          "yoy_pct": 44.4,
+          "latest_month": "2026-08-31"
+        },
+        "price_cut_share": {
+          "latest": 34.3,
+          "prior_month": 33.4,
+          "prior_year": 36.6,
+          "mom_pct": 2.7,
+          "yoy_pct": -6.3,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1047,73 +1047,36 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 358466,
-          "prior_month": 358080,
-          "prior_year": 349726,
-          "mom_pct": 0.1,
-          "yoy_pct": 2.5,
-          "latest_month": "2026-07-31"
+          "latest": 359125,
+          "prior_month": 358144,
+          "prior_year": 349631,
+          "mom_pct": 0.3,
+          "yoy_pct": 2.7,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
           "latest": 182,
-          "prior_month": 181,
-          "prior_year": 136,
-          "mom_pct": 0.6,
-          "yoy_pct": 33.8,
-          "latest_month": "2026-07-31"
+          "prior_month": 182,
+          "prior_year": 146,
+          "mom_pct": 0.0,
+          "yoy_pct": 24.7,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
           "latest": 26,
-          "prior_month": 21,
+          "prior_month": 26,
           "prior_year": null,
-          "mom_pct": 23.8,
+          "mom_pct": 0.0,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 33.4,
-          "prior_month": 30.6,
+          "latest": 35.7,
+          "prior_month": 33.3,
           "prior_year": 32.1,
-          "mom_pct": 9.1,
-          "yoy_pct": 3.9,
-          "latest_month": "2026-07-31"
-        }
-      },
-      {
-        "zip": "29615",
-        "city": "Greenville",
-        "thin": false,
-        "home_value": {
-          "latest": 441900,
-          "prior_month": 442132,
-          "prior_year": 433973,
-          "mom_pct": -0.1,
-          "yoy_pct": 1.8,
-          "latest_month": "2026-07-31"
-        },
-        "inventory": {
-          "latest": 173,
-          "prior_month": 177,
-          "prior_year": 133,
-          "mom_pct": -2.3,
-          "yoy_pct": 30.1,
-          "latest_month": "2026-07-31"
-        },
-        "days_to_pending": {
-          "latest": 37,
-          "prior_month": 25,
-          "prior_year": null,
-          "mom_pct": 48.0,
-          "yoy_pct": null,
-          "latest_month": "2026-07-31"
-        },
-        "price_cut_share": {
-          "latest": 33.4,
-          "prior_month": 34.2,
-          "prior_year": 33.2,
-          "mom_pct": -2.6,
-          "yoy_pct": 0.5,
-          "latest_month": "2026-07-31"
+          "mom_pct": 7.0,
+          "yoy_pct": 11.2,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1121,36 +1084,73 @@
         "city": "Simpsonville",
         "thin": false,
         "home_value": {
-          "latest": 347523,
-          "prior_month": 347667,
-          "prior_year": 342630,
-          "mom_pct": -0.0,
-          "yoy_pct": 1.4,
-          "latest_month": "2026-07-31"
+          "latest": 343277,
+          "prior_month": 343733,
+          "prior_year": 339459,
+          "mom_pct": -0.1,
+          "yoy_pct": 1.1,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 170,
-          "prior_month": 163,
-          "prior_year": 163,
-          "mom_pct": 4.3,
-          "yoy_pct": 4.3,
-          "latest_month": "2026-07-31"
+          "latest": 181,
+          "prior_month": 171,
+          "prior_year": 175,
+          "mom_pct": 5.8,
+          "yoy_pct": 3.4,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 26,
-          "prior_month": 25,
+          "latest": 27,
+          "prior_month": 26,
           "prior_year": null,
-          "mom_pct": 4.0,
+          "mom_pct": 3.8,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 36.9,
+          "latest": 37.3,
           "prior_month": 36.9,
-          "prior_year": 30.9,
-          "mom_pct": 0.2,
-          "yoy_pct": 19.5,
-          "latest_month": "2026-07-31"
+          "prior_year": 33.9,
+          "mom_pct": 1.2,
+          "yoy_pct": 10.1,
+          "latest_month": "2026-08-31"
+        }
+      },
+      {
+        "zip": "29615",
+        "city": "Greenville",
+        "thin": false,
+        "home_value": {
+          "latest": 441305,
+          "prior_month": 440939,
+          "prior_year": 434075,
+          "mom_pct": 0.1,
+          "yoy_pct": 1.7,
+          "latest_month": "2026-08-31"
+        },
+        "inventory": {
+          "latest": 164,
+          "prior_month": 173,
+          "prior_year": 146,
+          "mom_pct": -5.2,
+          "yoy_pct": 12.3,
+          "latest_month": "2026-08-31"
+        },
+        "days_to_pending": {
+          "latest": 38,
+          "prior_month": 37,
+          "prior_year": null,
+          "mom_pct": 2.7,
+          "yoy_pct": null,
+          "latest_month": "2026-08-31"
+        },
+        "price_cut_share": {
+          "latest": 31.8,
+          "prior_month": 33.4,
+          "prior_year": 31.7,
+          "mom_pct": -4.7,
+          "yoy_pct": 0.4,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1158,36 +1158,36 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 267906,
-          "prior_month": 268374,
-          "prior_year": 264383,
-          "mom_pct": -0.2,
-          "yoy_pct": 1.3,
-          "latest_month": "2026-07-31"
+          "latest": 267457,
+          "prior_month": 267520,
+          "prior_year": 264369,
+          "mom_pct": -0.0,
+          "yoy_pct": 1.2,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
           "latest": 139,
-          "prior_month": 133,
-          "prior_year": 102,
-          "mom_pct": 4.5,
-          "yoy_pct": 36.3,
-          "latest_month": "2026-07-31"
+          "prior_month": 139,
+          "prior_year": 110,
+          "mom_pct": 0.0,
+          "yoy_pct": 26.4,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 24,
-          "prior_month": 21,
+          "latest": 27,
+          "prior_month": 24,
           "prior_year": null,
-          "mom_pct": 14.3,
+          "mom_pct": 12.5,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 34.7,
-          "prior_month": 33.7,
-          "prior_year": 24.6,
-          "mom_pct": 3.1,
-          "yoy_pct": 41.4,
-          "latest_month": "2026-07-31"
+          "latest": 34.3,
+          "prior_month": 34.7,
+          "prior_year": 27.1,
+          "mom_pct": -1.2,
+          "yoy_pct": 26.5,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1195,36 +1195,36 @@
         "city": "Piedmont",
         "thin": false,
         "home_value": {
-          "latest": 306196,
-          "prior_month": 306673,
-          "prior_year": 298165,
+          "latest": 305136,
+          "prior_month": 305755,
+          "prior_year": 297527,
           "mom_pct": -0.2,
-          "yoy_pct": 2.7,
-          "latest_month": "2026-07-31"
+          "yoy_pct": 2.6,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 136,
-          "prior_month": 137,
-          "prior_year": 100,
+          "latest": 135,
+          "prior_month": 136,
+          "prior_year": 104,
           "mom_pct": -0.7,
-          "yoy_pct": 36.0,
-          "latest_month": "2026-07-31"
+          "yoy_pct": 29.8,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 27,
-          "prior_month": 25,
+          "latest": 33,
+          "prior_month": 27,
           "prior_year": null,
-          "mom_pct": 8.0,
+          "mom_pct": 22.2,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 31.4,
-          "prior_month": 29.5,
-          "prior_year": 34.8,
-          "mom_pct": 6.5,
-          "yoy_pct": -9.8,
-          "latest_month": "2026-07-31"
+          "latest": 31.2,
+          "prior_month": 31.4,
+          "prior_year": 34.3,
+          "mom_pct": -0.6,
+          "yoy_pct": -8.8,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1232,36 +1232,29 @@
         "city": "Travelers Rest",
         "thin": false,
         "home_value": {
-          "latest": 353771,
-          "prior_month": 354160,
-          "prior_year": 345589,
-          "mom_pct": -0.1,
-          "yoy_pct": 2.4,
-          "latest_month": "2026-07-31"
+          "latest": 352935,
+          "prior_month": 353535,
+          "prior_year": 345422,
+          "mom_pct": -0.2,
+          "yoy_pct": 2.2,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 132,
-          "prior_month": 131,
-          "prior_year": 97,
-          "mom_pct": 0.8,
-          "yoy_pct": 36.1,
-          "latest_month": "2026-07-31"
+          "latest": 135,
+          "prior_month": 132,
+          "prior_year": 98,
+          "mom_pct": 2.3,
+          "yoy_pct": 37.8,
+          "latest_month": "2026-08-31"
         },
-        "days_to_pending": {
-          "latest": 25,
-          "prior_month": 24,
-          "prior_year": null,
-          "mom_pct": 4.2,
-          "yoy_pct": null,
-          "latest_month": "2026-07-31"
-        },
+        "days_to_pending": null,
         "price_cut_share": {
-          "latest": 32.5,
-          "prior_month": 31.6,
-          "prior_year": 27.2,
-          "mom_pct": 2.8,
-          "yoy_pct": 19.5,
-          "latest_month": "2026-07-31"
+          "latest": 32.1,
+          "prior_month": 32.5,
+          "prior_year": 30.8,
+          "mom_pct": -1.2,
+          "yoy_pct": 4.3,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1269,29 +1262,36 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 220891,
-          "prior_month": 220840,
-          "prior_year": 210343,
+          "latest": 219588,
+          "prior_month": 219493,
+          "prior_year": 209646,
           "mom_pct": 0.0,
-          "yoy_pct": 5.0,
-          "latest_month": "2026-07-31"
+          "yoy_pct": 4.7,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 111,
-          "prior_month": 112,
+          "latest": 116,
+          "prior_month": 111,
           "prior_year": 89,
-          "mom_pct": -0.9,
-          "yoy_pct": 24.7,
-          "latest_month": "2026-07-31"
+          "mom_pct": 4.5,
+          "yoy_pct": 30.3,
+          "latest_month": "2026-08-31"
         },
-        "days_to_pending": null,
+        "days_to_pending": {
+          "latest": 26,
+          "prior_month": null,
+          "prior_year": null,
+          "mom_pct": null,
+          "yoy_pct": null,
+          "latest_month": "2026-08-31"
+        },
         "price_cut_share": {
-          "latest": 34.5,
-          "prior_month": 33.7,
-          "prior_year": 34.3,
-          "mom_pct": 2.4,
-          "yoy_pct": 0.6,
-          "latest_month": "2026-07-31"
+          "latest": 34.2,
+          "prior_month": 34.5,
+          "prior_year": 38.3,
+          "mom_pct": -0.7,
+          "yoy_pct": -10.6,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1299,36 +1299,36 @@
         "city": "Fountain Inn",
         "thin": false,
         "home_value": {
-          "latest": 307187,
-          "prior_month": 308008,
-          "prior_year": 304010,
+          "latest": 308898,
+          "prior_month": 309920,
+          "prior_year": 306037,
           "mom_pct": -0.3,
-          "yoy_pct": 1.0,
-          "latest_month": "2026-07-31"
+          "yoy_pct": 0.9,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 107,
-          "prior_month": 104,
+          "latest": 106,
+          "prior_month": 107,
           "prior_year": 96,
-          "mom_pct": 2.9,
-          "yoy_pct": 11.5,
-          "latest_month": "2026-07-31"
+          "mom_pct": -0.9,
+          "yoy_pct": 10.4,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": {
-          "latest": 45,
-          "prior_month": null,
+          "latest": 44,
+          "prior_month": 45,
           "prior_year": null,
-          "mom_pct": null,
+          "mom_pct": -2.2,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "price_cut_share": {
-          "latest": 31.7,
-          "prior_month": 31.9,
-          "prior_year": 32.2,
-          "mom_pct": -0.4,
-          "yoy_pct": -1.3,
-          "latest_month": "2026-07-31"
+          "latest": 33.6,
+          "prior_month": 31.6,
+          "prior_year": 34.3,
+          "mom_pct": 6.3,
+          "yoy_pct": -2.0,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1336,29 +1336,29 @@
         "city": "Landrum",
         "thin": false,
         "home_value": {
-          "latest": 318822,
-          "prior_month": 319899,
-          "prior_year": 321922,
-          "mom_pct": -0.3,
+          "latest": 324014,
+          "prior_month": 324532,
+          "prior_year": 327178,
+          "mom_pct": -0.2,
           "yoy_pct": -1.0,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 105,
-          "prior_month": 110,
-          "prior_year": 90,
-          "mom_pct": -4.5,
-          "yoy_pct": 16.7,
-          "latest_month": "2026-07-31"
+          "latest": 104,
+          "prior_month": 105,
+          "prior_year": 93,
+          "mom_pct": -1.0,
+          "yoy_pct": 11.8,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": {
-          "latest": 22.2,
-          "prior_month": 19.8,
-          "prior_year": 21.5,
-          "mom_pct": 12.0,
-          "yoy_pct": 3.1,
-          "latest_month": "2026-07-31"
+          "latest": 24.0,
+          "prior_month": 22.2,
+          "prior_year": 18.6,
+          "mom_pct": 8.4,
+          "yoy_pct": 29.3,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1366,29 +1366,29 @@
         "city": "Greenville",
         "thin": false,
         "home_value": {
-          "latest": 562314,
-          "prior_month": 564259,
-          "prior_year": 560401,
-          "mom_pct": -0.3,
-          "yoy_pct": 0.3,
-          "latest_month": "2026-07-31"
+          "latest": 571927,
+          "prior_month": 572318,
+          "prior_year": 568847,
+          "mom_pct": -0.1,
+          "yoy_pct": 0.5,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 78,
-          "prior_month": 81,
+          "latest": 76,
+          "prior_month": 78,
           "prior_year": 75,
-          "mom_pct": -3.7,
-          "yoy_pct": 4.0,
-          "latest_month": "2026-07-31"
+          "mom_pct": -2.6,
+          "yoy_pct": 1.3,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": {
-          "latest": 28.1,
-          "prior_month": 26.2,
-          "prior_year": 26.2,
-          "mom_pct": 7.5,
-          "yoy_pct": 7.3,
-          "latest_month": "2026-07-31"
+          "latest": 26.8,
+          "prior_month": 28.1,
+          "prior_year": 24.4,
+          "mom_pct": -4.7,
+          "yoy_pct": 9.8,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1396,29 +1396,29 @@
         "city": "Pelzer",
         "thin": false,
         "home_value": {
-          "latest": 274199,
-          "prior_month": 274144,
-          "prior_year": 264415,
-          "mom_pct": 0.0,
-          "yoy_pct": 3.7,
-          "latest_month": "2026-07-31"
+          "latest": 272756,
+          "prior_month": 272823,
+          "prior_year": 262651,
+          "mom_pct": -0.0,
+          "yoy_pct": 3.8,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 61,
-          "prior_month": 56,
-          "prior_year": 51,
-          "mom_pct": 8.9,
-          "yoy_pct": 19.6,
-          "latest_month": "2026-07-31"
+          "latest": 62,
+          "prior_month": 61,
+          "prior_year": 54,
+          "mom_pct": 1.6,
+          "yoy_pct": 14.8,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": {
-          "latest": 30.6,
-          "prior_month": 33.9,
-          "prior_year": 32.5,
-          "mom_pct": -10.0,
-          "yoy_pct": -6.1,
-          "latest_month": "2026-07-31"
+          "latest": 26.1,
+          "prior_month": 30.6,
+          "prior_year": 28.0,
+          "mom_pct": -14.5,
+          "yoy_pct": -6.6,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1426,29 +1426,29 @@
         "city": "Mauldin",
         "thin": false,
         "home_value": {
-          "latest": 297743,
-          "prior_month": 298273,
-          "prior_year": 293449,
-          "mom_pct": -0.2,
-          "yoy_pct": 1.5,
-          "latest_month": "2026-07-31"
+          "latest": 294819,
+          "prior_month": 294740,
+          "prior_year": 290154,
+          "mom_pct": 0.0,
+          "yoy_pct": 1.6,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 60,
-          "prior_month": 61,
-          "prior_year": 42,
-          "mom_pct": -1.6,
-          "yoy_pct": 42.9,
-          "latest_month": "2026-07-31"
+          "latest": 59,
+          "prior_month": 60,
+          "prior_year": 40,
+          "mom_pct": -1.7,
+          "yoy_pct": 47.5,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": {
-          "latest": 29.0,
-          "prior_month": 33.0,
-          "prior_year": 44.1,
-          "mom_pct": -12.1,
-          "yoy_pct": -34.2,
-          "latest_month": "2026-07-31"
+          "latest": 26.8,
+          "prior_month": 29.0,
+          "prior_year": 40.3,
+          "mom_pct": -7.7,
+          "yoy_pct": -33.6,
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1456,29 +1456,29 @@
         "city": "Marietta",
         "thin": false,
         "home_value": {
-          "latest": 225262,
-          "prior_month": 225611,
-          "prior_year": 221088,
-          "mom_pct": -0.2,
-          "yoy_pct": 1.9,
-          "latest_month": "2026-07-31"
+          "latest": 224639,
+          "prior_month": 225419,
+          "prior_year": 221551,
+          "mom_pct": -0.3,
+          "yoy_pct": 1.4,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 26,
-          "prior_month": 25,
-          "prior_year": 21,
-          "mom_pct": 4.0,
-          "yoy_pct": 23.8,
-          "latest_month": "2026-07-31"
+          "latest": 27,
+          "prior_month": 26,
+          "prior_year": 23,
+          "mom_pct": 3.8,
+          "yoy_pct": 17.4,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": {
-          "latest": 35.3,
-          "prior_month": 33.6,
+          "latest": 36.3,
+          "prior_month": 35.3,
           "prior_year": null,
-          "mom_pct": 5.1,
+          "mom_pct": 2.7,
           "yoy_pct": null,
-          "latest_month": "2026-07-31"
+          "latest_month": "2026-08-31"
         }
       },
       {
@@ -1486,20 +1486,20 @@
         "city": "Cleveland",
         "thin": true,
         "home_value": {
-          "latest": 214838,
-          "prior_month": 215218,
-          "prior_year": 225038,
-          "mom_pct": -0.2,
-          "yoy_pct": -4.5,
-          "latest_month": "2026-07-31"
+          "latest": 229975,
+          "prior_month": 230847,
+          "prior_year": 239313,
+          "mom_pct": -0.4,
+          "yoy_pct": -3.9,
+          "latest_month": "2026-08-31"
         },
         "inventory": {
-          "latest": 14,
-          "prior_month": 12,
+          "latest": 16,
+          "prior_month": 14,
           "prior_year": 12,
-          "mom_pct": 16.7,
-          "yoy_pct": 16.7,
-          "latest_month": "2026-07-31"
+          "mom_pct": 14.3,
+          "yoy_pct": 33.3,
+          "latest_month": "2026-08-31"
         },
         "days_to_pending": null,
         "price_cut_share": null
