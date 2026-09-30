@@ -2,14 +2,16 @@
 
 import { useEffect } from "react";
 import { SECTIONS, type SectionKey } from "@/lib/editorSections";
+import { TOPICS, type TopicKey } from "@/lib/topics";
 
 /**
  * Post settings, the way Substack's composer keeps them: out of the writing
- * surface entirely, behind one button, holding only the two things the prose
- * cannot say for itself. Which section the piece belongs to, and what its URL
- * will be.
+ * surface entirely, behind one button, holding only what the prose cannot say
+ * for itself. Which section the piece belongs to, what its URL will be, and
+ * which /reporting tab it shows under.
  *
- * Both are DRAFT-ONLY. A published post owns a live URL, and its section is
+ * The topic is editable at any time, since it moves no URL. Section and URL are
+ * DRAFT-ONLY. A published post owns a live URL, and its section is
  * the first half of that URL, so the fields lock once it is out.
  * /api/review/save enforces the same rule server-side.
  */
@@ -18,6 +20,8 @@ export default function PostSettings({
   onClose,
   section,
   onSection,
+  topic,
+  onTopic,
   slug,
   onSlug,
   locked,
@@ -27,6 +31,8 @@ export default function PostSettings({
   onClose: () => void;
   section: SectionKey;
   onSection: (s: SectionKey) => void;
+  topic: TopicKey | null;
+  onTopic: (t: TopicKey | null) => void;
   slug: string;
   onSlug: (s: string) => void;
   locked: boolean;
@@ -101,6 +107,38 @@ export default function PostSettings({
                 );
               })}
             </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold theme-text-primary mb-1">Topic</h3>
+            <p className="text-xs theme-text-muted mb-3">
+              The tab it shows under on Reporting. Changing it never moves the URL.
+            </p>
+            <div className="grid grid-cols-2 gap-1.5">
+              {TOPICS.map((t) => {
+                const active = t.key === topic;
+                return (
+                  <button
+                    key={t.key}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => onTopic(active ? null : t.key)}
+                    className={`text-left px-3 py-2.5 rounded-lg border text-sm font-medium theme-text-primary transition-colors ${
+                      active
+                        ? "border-[var(--accent)] bg-[var(--accent-soft)]"
+                        : "theme-border hover:border-[var(--border-strong)]"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
+            {!topic && (
+              <p className="text-xs theme-text-muted mt-2">
+                No topic yet, so it appears only under All.
+              </p>
+            )}
           </div>
 
           <div>

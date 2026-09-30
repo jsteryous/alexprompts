@@ -126,4 +126,5 @@ Quote the paper sparingly and exactly. Never tidy a quotation.
 
 Exactly the house output format, unchanged: `## METADATA`, `## IMAGE`, `## ARTICLE`, `## X`,
 `## CLIPS`. Set `source_url` to the paper's landing page, not the PDF, and `tags` to the single
-section tag the angle chose.
+section tag the angle chose followed by one `topic:` tab tag (`topic:real-estate`,
+`topic:finance`, `topic:urban-economics`, or `topic:lifestyle`).

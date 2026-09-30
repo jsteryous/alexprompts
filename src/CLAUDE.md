@@ -82,7 +82,19 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   with no type filter, linking each card through `postHref()`. It exists because the tab
   used to point at a single section, which made the site's main tab a filter on one engine's
   output and hid the rest. **It creates no new article URLs and must not**; the per-section
-  `[slug]` routes are where posts live. `sectionLabel()` badges distinguish rows.
+  `[slug]` routes are where posts live. Rows badge with their topic label, falling back to
+  `sectionLabel()` for a post with no topic.
+- **`/reporting/<topic>`** — the four TOPIC TABS (September 30, 2026, Alex's call): Real
+  Estate, Finance, Urban Economics, Lifestyle, defined once in **`src/lib/topics.ts`** and
+  rendered by `reporting/ReportingView.tsx` with an "All" tab back to `/reporting`. Four
+  static routes (`dynamicParams = false`), each its own canonical and sitemap entry. **A topic
+  is not a section.** It is stored as one `topic:<key>` tag beside the section tag, it picks
+  a tab and nothing else, and so it may change on a PUBLISHED post: `/api/review/save`
+  accepts a tag edit on a live post as long as `sectionOf()` comes out the same. The prefix
+  keeps it clear of plain topical tags (`energy`, the old `real estate`), and `ArticleView`
+  shows the label in place of the raw tag. **Sales pieces file under Real Estate**, since
+  Alex is moving off sales content and expects what is left to converge with real estate. A
+  post with no topic appears only under All. The picker is in the editor's settings drawer.
 - **`/archive`, `/real-estate`, `/sales`, `/briefing`** plus their `[slug]` routes — the four
   section indexes. All four `[slug]` pages render the shared `components/ArticleView.tsx`
   (markdown, sanitize, `Article` and `BreadcrumbList` JSON-LD), differing only in the
@@ -225,7 +237,9 @@ it on a DRAFT so autosave can store a half-written piece, `/api/publish` refuses
 editor disables Publish with the reason in its tooltip); and **slug and section are
 DRAFT-ONLY**, because a published post owns a live, probably indexed URL. Section and URL
 live in a settings drawer (`review/PostSettings.tsx`) driven by `src/lib/editorSections.ts`,
-whose `retagForSection` swaps the one section tag and keeps every topical tag. Autosave
+whose `retagForSection` swaps the one section tag and keeps every topical tag. The same
+drawer holds the **Topic** picker (`retagForTopic` in `src/lib/topics.ts`), which stays
+editable after publishing because a topic moves no URL. Autosave
 records a payload the server REJECTED and will not retry it until the document changes,
 which is what stops a taken slug looping a failed save every 2.5 seconds.
 

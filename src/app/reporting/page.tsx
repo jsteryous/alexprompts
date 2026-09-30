@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { site } from "@/lib/site";
-import { getPublishedPosts, postHref, sectionLabel, formatDate } from "@/lib/posts";
-import { PostCover } from "@/components/PostCover";
+import { getPublishedPosts } from "@/lib/posts";
+import { ReportingView } from "./ReportingView";
 
 /**
  * REPORTING — every published piece, one list (added August 14, 2026).
@@ -21,6 +20,10 @@ import { PostCover } from "@/components/PostCover";
  *
  * The per-section index pages still exist and are still linked from the footer
  * under "Archives". They are now the narrow view and this is the broad one.
+ *
+ * TOPIC TABS (September 30, 2026). Real Estate, Finance, Urban Economics, and
+ * Lifestyle sit above the list as links to /reporting/<topic>, which filter on a
+ * `topic:` tag (lib/topics.ts). A topic never moves a post's URL.
  */
 
 export const metadata: Metadata = {
@@ -37,78 +40,16 @@ export default async function ReportingPage() {
   const posts = await getPublishedPosts();
 
   return (
-    <>
-      <section className="theme-page theme-border pt-32 pb-14 border-b">
-        <div className="max-w-3xl mx-auto px-6">
-          <span
-            className="theme-label type-eyebrow inline-block border-t-2 pt-2 mb-6"
-            style={{ borderColor: "var(--accent)" }}
-          >
-            Reporting
-          </span>
-          <h1 className="theme-text-primary type-h1 mb-5">
-            Everything, newest first.
-          </h1>
-          <p className="theme-text-muted type-body-lg max-w-xl">
-            Greenville real estate and sales performance. Some pieces start with a research
-            paper and work out whether it holds up here. Others follow a local trend back a
-            few years, or take a single company apart. The older weekly briefs and area
-            guides are in here too.
-          </p>
-        </div>
-      </section>
-
-      <section className="theme-section py-16">
-        <div className="max-w-3xl mx-auto px-6">
-          {posts.length > 0 ? (
-            <ul className="divide-y theme-border">
-              {posts.map((p) => (
-                <li key={p.id} className="py-7 first:pt-0">
-                  <Link
-                    href={postHref(p)}
-                    className="group grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-5"
-                  >
-                    <PostCover
-                      src={p.cover_image}
-                      alt={p.title}
-                      sizes="(max-width: 640px) 100vw, 192px"
-                      className="aspect-[16/9] w-full border theme-border"
-                    />
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="theme-badge type-eyebrow px-2 py-1">
-                          {sectionLabel(p)}
-                        </span>
-                        {p.published_at && (
-                          <time className="theme-text-muted type-eyebrow">
-                            {formatDate(p.published_at)}
-                          </time>
-                        )}
-                      </div>
-                      <h2 className="theme-text-primary type-h3 mb-2 group-hover:opacity-80">
-                        {p.title}
-                      </h2>
-                      {p.summary && (
-                        <p className="theme-text-muted type-body leading-relaxed">{p.summary}</p>
-                      )}
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="border theme-border p-10">
-              <p className="theme-text-secondary type-body-lg mb-2">
-                The first pieces are on the way.
-              </p>
-              <p className="theme-text-muted type-body">
-                Each one starts with a paper or a number and works out what it means for a
-                house in Greenville.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-    </>
+    <ReportingView
+      posts={posts}
+      active={null}
+      heading="Everything, newest first."
+      intro={
+        "Greenville real estate and sales performance. Some pieces start with a research " +
+        "paper and work out whether it holds up here. Others follow a local trend back a " +
+        "few years, or take a single company apart. The older weekly briefs and area " +
+        "guides are in here too."
+      }
+    />
   );
 }

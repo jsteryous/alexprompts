@@ -177,7 +177,10 @@ the body. Using the Supabase connector, INSERT one row into `blog_posts`:
   no longer renders a cover, so it is metadata and nothing more.
 - `tags` = a Postgres text array whose FIRST entry is the section tag the angle chose, either `sales`
   or `greenville`, never both, since a post lives in exactly one section. Never `greenville works`,
-  which no longer routes anywhere. You MAY add one plain topic tag after the section tag.
+  which no longer routes anywhere. Then add exactly ONE `/reporting` tab tag, the one a reader
+  would look under: `topic:real-estate`, `topic:finance`, `topic:urban-economics`, or
+  `topic:lifestyle`. A sales piece takes `topic:real-estate`. You MAY add one plain topic tag
+  after those two.
 - `source_url` = METADATA source_url, the paper's landing page (omit the column if not in the schema)
 - `author` = 'Rebrew' (never a personal name; Alex asked for his name off the site September 19, 2026)
 - `status` = 'DRAFT'

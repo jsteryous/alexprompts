@@ -6,6 +6,7 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 import { ReferralCta } from "@/components/ReferralCta";
 import { splitAtMidHeading } from "@/lib/articleCta";
 import { PostCover } from "@/components/PostCover";
+import { isTopicTag, topicLabel, topicOf } from "@/lib/topics";
 
 /** Which section the article lives in, for breadcrumb + canonical + back-link. */
 export interface ArticleSection {
@@ -39,6 +40,13 @@ export default async function ArticleView({
   // Falls back to the publication name, not a personal name (September 19,
   // 2026): site.author is deleted, and the DB's per-row author column was
   // bulk-updated off "Alex Steryous" at the same time.
+  // A `topic:` tag (lib/topics.ts) is storage for the /reporting tab, so the
+  // badge shows its label and never the raw tag.
+  const topic = topicOf(post);
+  const badges = [
+    ...(topic ? [topicLabel(topic)] : []),
+    ...(post.tags ?? []).filter((t) => !isTopicTag(t)),
+  ].filter((t, i, all) => all.findIndex((u) => u.toLowerCase() === t.toLowerCase()) === i);
   const authorName = post.author ?? site.name;
   const published = post.published_at ?? null;
   const canonical = `${site.url}${section.basePath}/${post.slug}`;
@@ -75,9 +83,9 @@ export default async function ArticleView({
             <Link href={section.basePath} className="hover:opacity-80">{section.label}</Link>
           </nav>
 
-          {post.tags && post.tags.length > 0 && (
+          {badges.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.map((tag) => (
+              {badges.map((tag) => (
                 <span key={tag} className="theme-badge text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded">
                   {tag}
                 </span>

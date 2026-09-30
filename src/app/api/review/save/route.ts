@@ -148,7 +148,9 @@ export async function POST(req: NextRequest) {
       tags.length !== (existing.tags ?? []).length ||
       tags.some((t, i) => t !== (existing.tags ?? [])[i]);
     if (changed) {
-      if (!isDraft) {
+      // A topic tag (lib/topics.ts) only picks a /reporting tab, so a published
+      // post may change it. Anything that would move the section may not.
+      if (!isDraft && sectionOf({ tags }) !== sectionOf(existing)) {
         return NextResponse.json(
           { error: "A published post keeps its section. Unpublish it first." },
           { status: 409 },
@@ -181,6 +183,7 @@ export async function POST(req: NextRequest) {
     const base = SECTION_BASE[sectionOf(existing)] ?? "/archive";
     revalidatePath(base);
     revalidatePath(`${base}/${existing.slug}`);
+    revalidatePath("/reporting");
   }
 
   return NextResponse.json({ ok: true });

@@ -77,6 +77,7 @@ async function publishPost(id: string): Promise<PublishResult> {
   // immediately (otherwise it waits up to the 300s revalidate window).
   revalidatePath(base);
   revalidatePath(path);
+  revalidatePath("/reporting");
 
   // Local-section posts get their owned-list broadcast from the daily finalize
   // cron once they are PUBLISHED; newsletter posts do not (those come from

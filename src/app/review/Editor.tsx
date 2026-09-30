@@ -6,6 +6,7 @@ import type { Editor as TiptapEditor } from "@tiptap/react";
 import { mdToEditorHtml } from "@/lib/editorMarkdown";
 import { retagForSection, type SectionKey } from "@/lib/editorSections";
 import { sectionOf } from "@/lib/posts";
+import { retagForTopic, topicOf, type TopicKey } from "@/lib/topics";
 import { SITE_URL } from "@/lib/site";
 import { isPlaceholderSlug, slugify } from "@/lib/slug";
 import PostSettings from "./PostSettings";
@@ -153,6 +154,11 @@ export default function Editor({
 
   function moveSection(next: SectionKey) {
     setTags((prev) => retagForSection(prev, next));
+  }
+
+  const topic = useMemo(() => topicOf({ tags }), [tags]);
+  function setTopic(next: TopicKey | null) {
+    setTags((prev) => retagForTopic(prev, next));
   }
 
   // The exact payload of the last save that FAILED. Autosave re-runs whenever
@@ -727,6 +733,8 @@ export default function Editor({
         onClose={() => setSettingsOpen(false)}
         section={section}
         onSection={moveSection}
+        topic={topic}
+        onTopic={setTopic}
         slug={slug}
         onSlug={editSlug}
         locked={published}
