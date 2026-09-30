@@ -16,7 +16,8 @@ type Props = {
   params: Promise<{ topic: string }>;
 };
 
-const INTROS: Record<TopicKey, string> = {
+/** Meta descriptions only. The tabs themselves show no intro (Alex, Sept 30, 2026). */
+const DESCRIPTIONS: Record<TopicKey, string> = {
   "real-estate":
     "These pieces follow what Greenville homes and buildings sell for, and who is buying them.",
   finance:
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isTopicKey(topic)) return {};
   return {
     title: `${topicLabel(topic)} Reporting`,
-    description: INTROS[topic],
+    description: DESCRIPTIONS[topic],
     alternates: { canonical: `${site.url}/reporting/${topic}` },
   };
 }
@@ -57,7 +58,6 @@ export default async function ReportingTopicPage({ params }: Props) {
       posts={posts}
       active={topic}
       heading={topicLabel(topic)}
-      intro={INTROS[topic]}
     />
   );
 }

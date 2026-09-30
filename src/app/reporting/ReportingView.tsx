@@ -17,7 +17,8 @@ export function ReportingView({
   posts: ArchivePost[];
   active: TopicKey | null;
   heading: string;
-  intro: string;
+  /** Only the unfiltered page carries one; the topic tabs are heading-only. */
+  intro?: string;
 }) {
   const tabs: { href: string; label: string; key: TopicKey | null }[] = [
     { href: "/reporting", label: "All", key: null },
@@ -34,8 +35,8 @@ export function ReportingView({
           >
             Reporting
           </span>
-          <h1 className="theme-text-primary type-h1 mb-5">{heading}</h1>
-          <p className="theme-text-muted type-body-lg max-w-xl mb-10">{intro}</p>
+          <h1 className={`theme-text-primary type-h1 ${intro ? "mb-5" : "mb-10"}`}>{heading}</h1>
+          {intro && <p className="theme-text-muted type-body-lg max-w-xl mb-10">{intro}</p>}
 
           <nav aria-label="Topics" className="flex flex-wrap gap-2">
             {tabs.map((t) => {

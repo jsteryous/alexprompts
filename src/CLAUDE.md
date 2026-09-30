@@ -86,7 +86,8 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   `sectionLabel()` for a post with no topic.
 - **`/reporting/<topic>`** — the four TOPIC TABS (September 30, 2026, Alex's call): Real
   Estate, Finance, Urban Economics, Lifestyle, defined once in **`src/lib/topics.ts`** and
-  rendered by `reporting/ReportingView.tsx` with an "All" tab back to `/reporting`. Four
+  rendered by `reporting/ReportingView.tsx` with an "All" tab back to `/reporting`. A tab shows
+  its heading and no intro paragraph (Alex cut them the same day). Four
   static routes (`dynamicParams = false`), each its own canonical and sitemap entry. **A topic
   is not a section.** It is stored as one `topic:<key>` tag beside the section tag, it picks
   a tab and nothing else, and so it may change on a PUBLISHED post: `/api/review/save`
