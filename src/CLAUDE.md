@@ -70,10 +70,11 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 ## Routes
 
 - **`/`** — the front page (`revalidate = 300`). Does ONE job, convince a qualified stranger
-  to hand over an email address, in two sections: **standfirst plus the ask** (masthead
-  statement, headline, two paragraphs on the beat, and an inline `SubscribeForm`, all above
-  the fold), then **the work** (featured latest plus a "More to read" grid from
-  `getFeedPosts`). The standfirst copy must stay in sync with `site.ts` and the
+  to hand over an email address, in three sections: **the standfirst** (masthead statement
+  and two short lines), then **the work** (featured latest plus a "More to read" grid from
+  `getFeedPosts`), then **the ask** (an inline `SubscribeForm`, source `home-bottom`). The
+  form sat beside the standfirst until October 1, 2026, when Alex moved it to the bottom
+  because on a phone it filled the first screen ahead of any article. The standfirst copy must stay in sync with `site.ts` and the
   `SubscribeForm` default promise. Deliberately removed and not to be re-added without a
   reason: the mission contrast panel (a mission stated twice on one page is stated badly),
   the "Where to find us" social grid (the footer carries every handle, and a row of links to

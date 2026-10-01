@@ -324,7 +324,7 @@ be applied.**
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose; RLS controls access. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key, never commit. |
 | `PUBLISH_SECRET` | Shared secret for the `/admin` login, `/review`, `/api/publish`, `/api/review/save`, `/api/broadcast`. |
-| `NEXT_PUBLIC_SUBSTACK_URL` | Substack base (subdomain, NOT the profile page). Defaults to `https://alexprompts.substack.com`, deliberately unchanged by the Rebrew rename: the subdomain is the publication's identity over there, and renaming is a job on Substack with its own redirect. |
+| `NEXT_PUBLIC_SUBSTACK_URL` | Substack base (subdomain, NOT the profile page). Defaults to `https://rebrew.substack.com` (moved from `alexprompts.substack.com` October 1, 2026). If set in Vercel, it MUST be the rebrew subdomain or unset, or the old value wins. |
 | `SUBSTACK_FEED_URL` | Optional override. Defaults to the Substack base plus `/feed`. |
 | `CRON_SECRET` | Authorizes the Vercel cron calls to `/api/sync-substack` and `/api/finalize-greenville`. You invent the value; Vercel sends it as an `Authorization: Bearer` header. Unset means the scheduled calls 401 silently. Manual runs bypass it with the publish secret. Production scope only. |
 | `RESEND_API_KEY` | Server-only key for the owned list (`src/lib/email.ts`). **Unset means capture still works** (subscribers are stored) but no mail goes out. The sending domain must be DNS-verified in Resend. Free tier is ~100 emails/day, 2 req/s. |
