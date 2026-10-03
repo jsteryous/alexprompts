@@ -352,6 +352,7 @@ scraper vars (`ROD_*`, `PDL_API_KEY`, `TESSERACT_CMD`) belong only to `scripts/_
 npm run dev | npm run build | npm run lint | npx vercel --prod
 ```
 
-`npm run lint` runs eslint plus two gates that also fail the Vercel build:
+`npm run lint` also runs `check:deal` (the `/check-a-deal` math matches its worked example).
+It runs eslint plus two gates that also fail the Vercel build:
 `check:canonicals` (every page route declares its own canonical) and `check:editor` (the
 WYSIWYG markdown round trip is lossless against every row in the database).

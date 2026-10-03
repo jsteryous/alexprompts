@@ -31,6 +31,9 @@ export default function Footer() {
             <Link href="/reporting" className="theme-link text-sm">
               Reporting
             </Link>
+            <Link href="/check-a-deal" className="theme-link text-sm">
+              Check a Deal
+            </Link>
             <Link href="/subscribe" className="theme-link text-sm">
               Subscribe
             </Link>

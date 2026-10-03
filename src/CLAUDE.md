@@ -131,7 +131,7 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   required to submit, and `/api/refer` stamps the wording server-side and drops consent
   entirely when no phone came with it, so the table never claims a texting right over an
   empty number.
-- **Nav is `Reporting | About`** plus Subscribe and the `Buying or Selling?` CTA. Every nav
+- **Nav is `Reporting | Check a Deal | About`** plus Subscribe and the `Buying or Selling?` CTA. Every nav
   label states its promise in the visitor's words ("if you confuse you lose"). "Reporting"
   started as a placeholder for the unnamed publication and was **KEPT** after the Rebrew
   rename rather than swapped: now that the wordmark says Rebrew, a tab reading "Rebrew"
@@ -184,6 +184,17 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   the best-agents landing page import, because state license law requires the actual
   licensed name there. The authority here comes from the documents, so do not restore a
   face, a resume, or a personal byline to the top of the masthead.
+- **`/check-a-deal`** — ONE underwriting calculator for the investor reader (October 3,
+  2026, Alex: the site's job is to keep people out of bad investments by thinking about a
+  deal the way a lender does). Five checks in a lender's order (DSCR against 1.25, cash-on-
+  cash against the reader's own hurdle, cap rate against the loan constant, one extra vacant
+  month, share of return resting on appreciation), and **the WEAKEST one sets the verdict**,
+  so a deal cannot pass on appreciation while failing on cash flow. Then the same math runs
+  backward: the highest price that clears every check, the price at DSCR 1.25, the down
+  payment and rent that would get there. Math is pure in **`src/lib/dealCheck.ts`**, and
+  `scripts/checks/deal-check.mjs` (in `npm run lint`) asserts it against Alex's worked
+  $280,000 example. The deal lives in the query string so a link shares it. In the nav. It
+  is NOT the deleted tools suite coming back; do not grow it into one.
 - **`/tools` and `/tools/<slug>` 404.** All nine free tools were **deleted** August 14, 2026,
   along with `src/lib/tools.ts`, `src/components/tools/`, `ToolShell`, `ToolIcon`,
   `areaScan.ts`, `wireSafety.ts`, `/api/area-scan`, and `/api/area-autocomplete`. They served
