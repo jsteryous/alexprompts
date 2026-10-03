@@ -40,7 +40,8 @@ the passes below, and they are still correct for every engine in this directory.
   the Greenville Works local-change track (its route is now `/sales`); `briefing/` was the
   Monday Upstate Brief. Neither is scheduled. `briefing/SPEC.md` still documents the format
   if it is ever revived.
-- **`checks/`** — the two build gates, both wired into `npm run lint` and one into
+- **`checks/`** — `deal-check.mjs` (the `/check-a-deal` math reproduces the worked
+  example; runs in `npm run lint`) plus the two build gates, both wired into `npm run lint` and one into
   `prebuild`: `canonicals.mjs` (every page route declares its own canonical) and
   `editor-roundtrip.mjs` (the WYSIWYG markdown round trip is lossless against every row in
   the database plus fixtures in both `marked`-shaped and TipTap-shaped HTML). If you change

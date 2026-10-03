@@ -7,9 +7,10 @@
     "prebuild": "npm run check:canonicals",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint && npm run check:canonicals && npm run check:editor",
+    "lint": "eslint && npm run check:canonicals && npm run check:deal && npm run check:editor",
     "check:canonicals": "node scripts/checks/canonicals.mjs",
-    "check:editor": "node scripts/checks/editor-roundtrip.mjs"
+    "check:editor": "node scripts/checks/editor-roundtrip.mjs",
+    "check:deal": "node --experimental-strip-types --no-warnings scripts/checks/deal-check.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.0",

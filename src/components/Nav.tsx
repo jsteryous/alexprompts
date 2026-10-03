@@ -37,8 +37,13 @@ import Mark from "@/components/Mark";
 // for the consumer buyer, which is the audience this publication stopped
 // serving, and a calculator suite under a masthead reads as a lead-gen site
 // rather than something you read. Their routes now 404 on purpose.
+//
+// "Check a Deal" (October 3, 2026) is NOT those tools coming back. It is one
+// underwriting check for the investor reader, added when Alex set the site's
+// job as keeping people out of bad purchases. See src/app/check-a-deal/page.tsx.
 const links = [
   { href: "/reporting", label: "Reporting" },
+  { href: "/check-a-deal", label: "Check a Deal" },
   { href: "/about", label: "About" },
 ];
 
