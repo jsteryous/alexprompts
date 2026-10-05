@@ -128,7 +128,7 @@ one preview, `dry=1` reports the count, `force=1` resends.
 | `EMAIL_POSTAL_ADDRESS` | Footer address; CAN-SPAM requires one. Use a PO box. |
 | `LEADS_NOTIFY_TO` | Inbox for `/api/refer` notifications. |
 | `CRON_SECRET` | Authorizes the Vercel crons (`/api/sync-substack`, `/api/finalize-greenville`). |
-| `NEXT_PUBLIC_SUBSTACK_URL` / `SUBSTACK_FEED_URL` | Substack mirror into `/archive`. |
+| `NEXT_PUBLIC_SUBSTACK_URL` / `SUBSTACK_FEED_URL` | Substack mirror into `/archive`. Base defaults to `https://rebrew.substack.com` (moved from `alexprompts.substack.com` October 1, 2026); if set in Vercel it must be the rebrew subdomain or unset. |
 | `SUBSCRIBE_RATE_LIMIT` / `REFER_RATE_LIMIT` | Soft per-IP hourly caps. |
 
 Payment keys (Stripe or a commerce platform) do not exist yet. When they arrive they are

@@ -46,14 +46,14 @@ export const SITE_URL =
 
 // Substack publication base (NOT the profile page). Drives the Subscribe button
 // (-> /subscribe) and the archive RSS mirror (-> /feed, see lib/substack.ts).
-// STILL alexprompts.substack.com after the Rebrew rename, on purpose: a Substack
-// publication's subdomain is its identity over there, the two mirrored archive
-// posts link to it by absolute URL, and renaming it is a job to do on Substack
-// with its own redirect, not a string to flip here. Override with
-// NEXT_PUBLIC_SUBSTACK_URL once that is done. One place, and the button + sync
-// both pick it up.
+// MOVED TO rebrew.substack.com October 1, 2026, on Alex's instruction ("substack
+// hyperlink should be at rebrew"). It had stayed alexprompts.substack.com after
+// the site rename because the subdomain is the publication's identity over
+// there. NEXT_PUBLIC_SUBSTACK_URL still overrides this, so if Vercel sets it to
+// the old subdomain, that value wins and must be changed or unset. One place,
+// and the button + sync both pick it up.
 export const SUBSTACK_URL =
-  process.env.NEXT_PUBLIC_SUBSTACK_URL?.replace(/\/$/, "") ?? "https://alexprompts.substack.com";
+  process.env.NEXT_PUBLIC_SUBSTACK_URL?.replace(/\/$/, "") ?? "https://rebrew.substack.com";
 
 /** RSS feed the archive mirror reads. Server-only; override with SUBSTACK_FEED_URL. */
 export function substackFeedUrl(): string {

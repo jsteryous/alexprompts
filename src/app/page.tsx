@@ -25,10 +25,12 @@ export const revalidate = 300;
  * bottom), which is four too many and put the single most important element
  * below four screens of scrolling.
  *
- * The order is deliberate and it is the newsletter convention: say what this is
- * and ask, THEN show the work. The standfirst is a compact masthead statement
- * rather than a marketing hero, and the archive underneath it is the argument
- * that the promise is real.
+ * The order: say what this is, show the work, THEN ask. The form used to sit
+ * beside the standfirst (the newsletter convention), but on a phone that put a
+ * full screen of signup box between the headline and the first article. Alex
+ * moved it to the bottom on October 1, 2026 ("content should be immediate").
+ * The standfirst is a compact masthead statement rather than a marketing hero,
+ * and the archive underneath it is the argument that the promise is real.
  *
  * REMOVED and not to be re-added without a reason: the "mission" contrast panel
  * (folded into the standfirst, since a mission stated twice on one page is
@@ -168,9 +170,9 @@ export default async function HomePage() {
           The one job. Compact on purpose: a masthead statement, two short
           paragraphs, and the form. Everything below this is the evidence that
           the promise is worth taking. ── */}
-      <section className="theme-page pt-32 pb-14 md:pb-16">
+      <section className="theme-page pt-28 md:pt-32 pb-10 md:pb-12">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-start">
+          <div>
             <div className="max-w-2xl">
               {/* NO EYEBROW HERE, deliberately. It rendered site.tagline, and once
                   that narrowed to "Greenville Real Estate" on August 25, 2026 it
@@ -196,10 +198,6 @@ export default async function HomePage() {
               <p className="theme-text-secondary type-body-lg">
                 Looking to buy or sell? Let&apos;s talk.
               </p>
-            </div>
-
-            <div className="theme-card-contrast border theme-border p-7 md:p-8">
-              <SubscribeForm source="home-standfirst" />
             </div>
           </div>
         </div>
@@ -256,6 +254,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── The ask, at the bottom ─────────────────────────────────────────
+          Moved here October 1, 2026 at Alex's call. On a phone the form sat
+          between the headline and the first article and filled the whole first
+          screen, so a visitor met a signup box before any reading. The work
+          comes first now; a reader who scrolled the feed has seen the evidence
+          and is the one worth asking. ── */}
+      <section className="theme-page py-14 md:py-16 border-t theme-border">
+        <div className="max-w-2xl mx-auto px-6">
+          <div className="theme-card-contrast border theme-border p-7 md:p-8">
+            <SubscribeForm source="home-bottom" />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
