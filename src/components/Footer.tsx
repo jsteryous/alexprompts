@@ -10,8 +10,7 @@ import { site } from "@/lib/site";
  *
  * Archive is /reporting, which lists everything published under the earlier
  * beats (Greenville real estate and sales performance). Those pieces keep their
- * URLs. /buying-or-selling stays linked here because it is still a live page
- * with a licensee disclosure; whether it stays at all is Alex's open decision.
+ * URLs. /buying-or-selling was removed October 7, 2026 and redirects home.
  * Privacy and Terms must stay reachable from every page for SMS carrier vetting.
  * The social handles came off with the reframe; they still feed the JSON-LD
  * sameAs in layout.tsx through `socials` in site.ts.
@@ -20,7 +19,6 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/reporting", label: "Archive" },
   { href: "/contact", label: "Contact" },
-  { href: "/buying-or-selling", label: "Buying or Selling" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
 ];

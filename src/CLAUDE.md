@@ -97,20 +97,11 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   section indexes. All four `[slug]` pages render the shared `components/ArticleView.tsx`
   (markdown, sanitize, `Article` and `BreadcrumbList` JSON-LD), differing only in the
   `section` prop and the post `type` they request. Canonical is self-referential per section.
-- **`/buying-or-selling`** — the referral connector and the site's **#1 conversion surface**.
-  Honest first-person copy, a "How this works" three-step (tell me, we talk it through, I
-  stay in your corner), trust cards, and the qualifying `ReferralForm` that POSTs to
-  `/api/refer`. Deliberately NOT a listings page: a new domain cannot out-rank the portals
-  on listing searches. **Read the copy-rule comment at the top of the page file**, and the
-  NEVER EXPLAIN THE BUSINESS MODEL rule in the root `CLAUDE.md`. It moved from `/find-a-pro`
-  on August 28, 2026 because a URL is user-facing copy: it sits in the address bar, in a
-  shared link, and in the email footer, where "find a pro" named the referral mechanism and
-  contradicted the rest of the page. `/find-a-pro` and `/find-an-agent` are both permanent
-  redirects pointing straight at the live path rather than through each other, and Next
-  carries the query string across a redirect, so the `?ref=` on every published article's
-  CTA still attributes.
-- **`/contact`** — footer only, deliberately not in the nav, which carries one button and
-  that button is the buy/sell page. It exists because the other two contact surfaces each
+- **`/buying-or-selling`** — **REMOVED October 7, 2026** ("get rid of buying or selling").
+  The page and `ReferralForm` are deleted; `/buying-or-selling`, `/find-a-pro` and
+  `/find-an-agent` all 308 to `/` (query strings carry across). Every `[slug]` section now
+  sets `showReferralCta: false` and `broadcast.ts` sends no buy/sell block.
+- **`/contact`** — footer only. It exists because the other two contact surfaces each
   assume they know why you are writing: `/about` ends on a tips ask you have to scroll a
   masthead to reach, and `/buying-or-selling` is a qualifying form for a transaction. A
   stranger checking whether a site is run by a real person looks for exactly this page.
@@ -129,8 +120,8 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   empty number.
 - **Nav is the name in serif plus `About | Subscribe`** (October 7, 2026). No mark, no
   button, no hamburger: two short links fit beside the name on any phone. Subscribe goes to
-  Substack. The footer is one centered row: About, Archive (`/reporting`), Contact, Buying or
-  Selling, Privacy, Terms. `Nav.tsx` and `Footer.tsx` return `null` on `/review` and
+  Substack. The footer is one centered row: About, Archive (`/reporting`), Contact, Privacy,
+  Terms. `Nav.tsx` and `Footer.tsx` return `null` on `/review` and
   `/admin`, whose sticky action bars the fixed nav used to cover.
 - **`/best-real-estate-agents-greenville-sc`** — the search landing page and the site's
   SECOND conversion surface, targeting a commercial query typed by someone about to buy or

@@ -284,11 +284,7 @@ export default async function BestAgentsGreenvillePage() {
               <a href={MAILTO} className="theme-link underline">
                 {CONTACT_EMAIL}
               </a>
-              . If you want to give me the whole picture up front, the{" "}
-              <Link href="/buying-or-selling" className="theme-link underline">
-                buying or selling page
-              </Link>{" "}
-              asks a few more questions.
+              .
             </p>
           </div>
         </div>

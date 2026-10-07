@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Terms",
   description:
     "Terms of use for Rebrew, including the SMS messaging terms for the text messages sent " +
-    "from the buying or selling form.",
+    "from the contact form.",
   alternates: { canonical: `${site.url}/terms` },
 };
 
@@ -100,13 +100,13 @@ export default function TermsPage() {
           </h2>
           <p>
             These terms cover the text messages sent by {site.name} to people who ask for them on
-            the buying or selling form.
+            the contact form.
           </p>
           <ul>
             <li>
               <strong>Program.</strong>{" "}{site.name} sends text messages to people who submit the
-              buying or selling form at{" "}
-              <Link href="/buying-or-selling">{site.url.replace(/^https?:\/\//, "")}/buying-or-selling</Link> and
+              contact form at{" "}
+              <Link href="/best-real-estate-agents-greenville-sc">{site.url.replace(/^https?:\/\//, "")}/best-real-estate-agents-greenville-sc</Link> and
               check the box asking for them. The messages are a conversation with {LICENSEE_NAME}
               {" "}about the buying or selling question you sent in, which means scheduling a call,
               answering what you asked, and following up on it.

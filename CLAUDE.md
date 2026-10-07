@@ -10,8 +10,12 @@
 > are posts tagged `story` (`getStories` in `src/lib/posts.ts`); the Substack sync tags
 > posts published on or after October 7, 2026 automatically. Earlier work keeps its URLs
 > and is listed on `/reporting`, which the footer calls the Archive. Drafts come from the
-> weekly cloud routine "Rebrew weekly story draft". The store section below predates this
-> reframe and was not discussed again; ask Alex before acting on it.
+> weekly cloud routine "Rebrew weekly story draft". **`/buying-or-selling` was removed the
+> same day** ("get rid of buying or selling"): the page and its form are deleted, the path
+> and its two older aliases 308 to `/`, and the in-article and email buy/sell CTAs are off.
+> The best-agents landing page and its QuickContact form remain, and the SMS terms and
+> privacy page now describe that form. The store section below predates this reframe and
+> was not discussed again; ask Alex before acting on it.
 
 > **THE PIVOT (October 5, 2026).** Rebrew is becoming a **store**: classy, high-quality
 > office decor and men's goods with a finance and real estate theme, for bankers and the
@@ -87,7 +91,7 @@ first sales channel, before any search traffic exists.
 
 **Open decisions (ask Alex, do not assume):** whether the name stays Rebrew or the store
 gets its own (Rebrew reads as real estate today); what replaces the tagline and masthead;
-whether `/buying-or-selling` and the referral funnel stay live; which platform hosts
+which platform hosts
 checkout.
 
 ## Copy and voice
@@ -172,7 +176,8 @@ June to September 2026. Its machinery is still in the repo and parts still run:
 
 - **Content routes stay live:** `/reporting` (with the Real Estate, Finance, Urban
   Economics, and Lifestyle tabs), `/real-estate`, `/sales`, `/briefing`, `/archive`,
-  `/about`, `/buying-or-selling`, `/best-real-estate-agents-greenville-sc`. Their docs are
+  `/about`, `/best-real-estate-agents-greenville-sc` (`/buying-or-selling` was removed
+  October 7, 2026 and redirects home). Their docs are
   in **`src/CLAUDE.md`**, which also holds the design system (clean-cut newspaper, oxblood
   accent, serif reading surface, squared corners, two surfaces only) and the `/admin`
   editor. The design system carries over to the store unless Alex changes it.
@@ -189,7 +194,7 @@ June to September 2026. Its machinery is still in the repo and parts still run:
 - **Rules that still bind while those pages are live:** never explain the referral
   business model in user-facing copy (no "I will connect you with a vetted agent," no
   "free," no "I do not practice"); the South Carolina licensee disclosure stays on
-  `/terms`, `/buying-or-selling`, and the agents page; a link never points at a data file
+  `/terms` and the agents page; a link never points at a data file
   (`.csv`, `.pdf`, `.xlsx`, and so on).
 - Alex's three editorial rules (August 15, 2026) governed every article: **1. It must be a
   true story. 2. Make it as entertaining as possible without fabricating. 3. Have fun.**

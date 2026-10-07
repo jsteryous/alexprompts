@@ -77,10 +77,8 @@ export default function PrivacyPage() {
               you confirmed it. Nothing else is required.
             </li>
             <li>
-              <strong>The buying or selling form.</strong>{" "}The form asks for your name and email
-              address, whether you are buying or selling, the market you are asking about, and your
-              rough timeframe. A phone number is optional, and so is anything you write in the notes
-              field.
+              <strong>The contact form.</strong>{" "}The form asks for a phone number or an email
+              address, whichever you prefer.
             </li>
             <li>
               <strong>Where you came from.</strong>{" "}Your submission records the page you sent it

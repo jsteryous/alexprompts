@@ -45,7 +45,8 @@ export default async function RealEstatePostPage({ params }: Props) {
       section={{
         label: "Real Estate",
         basePath: "/real-estate",
-        showReferralCta: true,
+        // The buy/sell CTA came off October 7, 2026 with the page it linked to.
+        showReferralCta: false,
       }}
     />
   );

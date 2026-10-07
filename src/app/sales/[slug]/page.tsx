@@ -52,7 +52,8 @@ export default async function SalesPostPage({ params }: Props) {
         // best sale price had a buy/sell link pasted into its body by hand
         // because nothing rendered one. That is the section telling you what it
         // needs.
-        showReferralCta: true,
+        // The buy/sell CTA came off October 7, 2026 with the page it linked to.
+        showReferralCta: false,
       }}
     />
   );

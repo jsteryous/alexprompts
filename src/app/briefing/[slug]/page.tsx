@@ -48,7 +48,8 @@ export default async function BriefingPostPage({ params }: Props) {
         // The brief is written for buyers and sellers, which is exactly who the
         // referral funnel serves, so it carries the buy/sell offer. It shipped
         // without one until July 30, 2026.
-        showReferralCta: true,
+        // The buy/sell CTA came off October 7, 2026 with the page it linked to.
+        showReferralCta: false,
       }}
     />
   );

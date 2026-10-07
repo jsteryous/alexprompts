@@ -34,14 +34,23 @@ const nextConfig: NextConfig = {
       // email footer. Permanent redirects keep every old link alive: in-article
       // CTAs, engine-written closing lines, the SMS terms, external shares, and
       // the ?ref= attribution query, which Next carries across the hop.
+      // THE BUY/SELL PAGE WAS REMOVED October 7, 2026 ("get rid of buying or
+      // selling"), when the site became a story publication. Its path and both
+      // older ones now land on the homepage, so every in-article CTA, old email
+      // link and shared URL still resolves instead of 404ing.
+      {
+        source: "/buying-or-selling",
+        destination: "/",
+        permanent: true,
+      },
       {
         source: "/find-an-agent",
-        destination: "/buying-or-selling",
+        destination: "/",
         permanent: true,
       },
       {
         source: "/find-a-pro",
-        destination: "/buying-or-selling",
+        destination: "/",
         permanent: true,
       },
       // The August 24 seller piece was written over an unrelated draft in the

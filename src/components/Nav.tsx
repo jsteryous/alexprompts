@@ -17,8 +17,7 @@ import { site, newsletterUrl } from "@/lib/site";
  * tied the name to real estate, which is no longer the beat; the drawing
  * survives in Mark.tsx and the favicon until a new mark is chosen), the
  * "Reporting" tab (the old work is the footer's Archive now), and the
- * "Buying or Selling?" button (/buying-or-selling stays live and is linked
- * from the footer).
+ * "Buying or Selling?" button (the page itself was removed October 7, 2026).
  *
  * Subscribe goes to Substack, the primary channel since October 2026.
  */

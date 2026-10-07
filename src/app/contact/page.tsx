@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { site, CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -61,17 +60,10 @@ export default function ContactPage() {
           Email reaches me directly, and I read all of it. Write about anything you have seen in
           the Greenville market, or about anything on this site.
         </p>
-        <p className="theme-text-muted type-body-lg leading-relaxed mb-5">
+        <p className="theme-text-muted type-body-lg leading-relaxed mb-9">
           Send along a paper or a set of numbers if you think it is worth a look. Attachments are
           welcome. If something here is wrong, tell me and I will fix it where everyone can see
           it.
-        </p>
-        <p className="theme-text-muted type-body-lg leading-relaxed mb-9">
-          If you are looking to buy or thinking of selling, start on the{" "}
-          <Link href="/buying-or-selling" className="theme-link underline">
-            buying or selling page
-          </Link>{" "}
-          instead. It asks the few things I need in order to be useful on the first call.
         </p>
 
         {/* One button, one address. The "Connect on LinkedIn" link that used to

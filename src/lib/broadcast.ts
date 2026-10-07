@@ -76,8 +76,10 @@ export async function broadcastPost(
   // into its body BY HAND because the section did not render one. /archive is the
   // only section left without it. Keep this in sync with those section props.
   const tags: string[] = Array.isArray(post.tags) ? post.tags : [];
+  // Off since October 7, 2026: /buying-or-selling was removed, so no section
+  // carries the buy/sell CTA any more. The tag test is kept for the record.
   const showReferral =
-    tags.includes("sales") || tags.includes("greenville") || tags.includes("briefing");
+    false && (tags.includes("sales") || tags.includes("greenville") || tags.includes("briefing"));
   const referralUrl = showReferral
     ? `${SITE_URL}/buying-or-selling?ref=${encodeURIComponent(post.slug)}` +
       `&utm_source=email&utm_medium=broadcast&utm_campaign=owned-list#connect`
