@@ -1,55 +1,70 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { site } from "@/lib/site";
-import { getPublishedPosts } from "@/lib/posts";
-import { ReportingView } from "./ReportingView";
-
-/**
- * REPORTING — every published piece, one list (added August 14, 2026).
- *
- * The nav's "Reporting" tab used to point at /greenville-works, which showed
- * only posts carrying the `greenville works` tag. That made the site's main
- * section a filter on one engine's output rather than the publication's body of
- * work, and it hid the real-estate pieces from the one tab a reader clicks.
- *
- * This page filters on nothing. It lists every PUBLISHED post regardless of tag,
- * and links each one through postHref() so it lands on its own canonical route.
- * That matters: the ARTICLE urls are untouched by this page existing. A piece
- * still lives at /greenville-works/<slug>, /real-estate/<slug>, /briefing/<slug>,
- * or /archive/<slug>, so nothing published breaks and the engines keep writing
- * the tags they already write.
- *
- * The per-section index pages still exist and are still linked from the footer
- * under "Archives". They are now the narrow view and this is the broad one.
- *
- * TOPIC TABS (September 30, 2026). Real Estate, Finance, Urban Economics, and
- * Lifestyle sit above the list as links to /reporting/<topic>, which filter on a
- * `topic:` tag (lib/topics.ts). A topic never moves a post's URL.
- */
+import { getPublishedPosts, postHref, formatDate } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: "Reporting",
-  description:
-    "Every piece, newest first. Research and data on the Greenville market and on how sales " +
-    "actually get made.",
+  title: "Archive",
+  description: "Everything Rebrew has published, newest first.",
   alternates: { canonical: `${site.url}/reporting` },
 };
 
 export const revalidate = 300;
 
-export default async function ReportingPage() {
+/**
+ * THE ARCHIVE, linked from the footer. Every published post, newest first, as a
+ * plain list of date, title and summary in the same minimalist style as the
+ * homepage.
+ *
+ * NO CATEGORIES (October 7, 2026, Alex's call). The Real Estate, Finance, Urban
+ * Economics and Lifestyle tabs, their /reporting/<topic> routes and the section
+ * badges are gone; the old topic URLs redirect here. The `topic:` tags still sit
+ * on the rows and the editor can still set them, but nothing public reads them.
+ *
+ * The path stays /reporting so links to it keep working. It creates no article
+ * URLs; each post still lives at its own section route via postHref().
+ */
+export default async function ArchivePage() {
   const posts = await getPublishedPosts();
 
   return (
-    <ReportingView
-      posts={posts}
-      active={null}
-      heading="Everything, newest first."
-      intro={
-        "Greenville real estate and sales performance. Some pieces start with a research " +
-        "paper and work out whether it holds up here. Others follow a local trend back a " +
-        "few years, or take a single company apart. The older weekly briefs and area " +
-        "guides are in here too."
-      }
-    />
+    <section className="theme-page pt-36 md:pt-44 pb-24">
+      <div className="max-w-2xl mx-auto px-6">
+        <header className="text-center mb-16">
+          <h1 className="font-serif italic theme-text-primary text-[2.25rem] md:text-[2.75rem] leading-tight tracking-tight">
+            Archive
+          </h1>
+          <div className="mx-auto mt-8 h-px w-12 bg-[var(--accent)]" aria-hidden="true" />
+        </header>
+
+        {posts.length > 0 ? (
+          <ol className="border-t theme-border">
+            {posts.map((p) => (
+              <li key={p.id} className="border-b theme-border">
+                <Link href={postHref(p)} className="group block py-8">
+                  {p.published_at && (
+                    <time className="theme-text-muted type-eyebrow block mb-3">
+                      {formatDate(p.published_at)}
+                    </time>
+                  )}
+                  <h2 className="font-serif theme-text-primary text-[1.375rem] md:text-[1.5rem] leading-snug group-hover:opacity-70">
+                    {p.title}
+                  </h2>
+                  {p.summary && (
+                    <p className="font-serif theme-text-secondary text-[1rem] leading-relaxed mt-2">
+                      {p.summary}
+                    </p>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="font-serif theme-text-secondary text-center text-[1.1875rem]">
+            Nothing here yet.
+          </p>
+        )}
+      </div>
+    </section>
   );
 }

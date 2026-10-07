@@ -74,25 +74,12 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   stories (`getStories()`, posts tagged `story`) as a plain list of date, title and
   summary, and one Subscribe link to Substack at the bottom. No cover images, badges, grid,
   or calls to action above the stories. Empty state reads "The first story is on its way."
-- **`/reporting`** — the footer's **Archive** (no longer in the nav) for everything published
-  under the earlier beats. Lists EVERY published post via `getPublishedPosts()`
-  with no type filter, linking each card through `postHref()`. It exists because the tab
-  used to point at a single section, which made the site's main tab a filter on one engine's
-  output and hid the rest. **It creates no new article URLs and must not**; the per-section
-  `[slug]` routes are where posts live. Rows badge with their topic label, falling back to
-  `sectionLabel()` for a post with no topic.
-- **`/reporting/<topic>`** — the four TOPIC TABS (September 30, 2026, Alex's call): Real
-  Estate, Finance, Urban Economics, Lifestyle, defined once in **`src/lib/topics.ts`** and
-  rendered by `reporting/ReportingView.tsx` with an "All" tab back to `/reporting`. A tab shows
-  its heading and no intro paragraph (Alex cut them the same day). Four
-  static routes (`dynamicParams = false`), each its own canonical and sitemap entry. **A topic
-  is not a section.** It is stored as one `topic:<key>` tag beside the section tag, it picks
-  a tab and nothing else, and so it may change on a PUBLISHED post: `/api/review/save`
-  accepts a tag edit on a live post as long as `sectionOf()` comes out the same. The prefix
-  keeps it clear of plain topical tags (`energy`, the old `real estate`), and `ArticleView`
-  shows the label in place of the raw tag. **Sales pieces file under Real Estate**, since
-  Alex is moving off sales content and expects what is left to converge with real estate. A
-  post with no topic appears only under All. The picker is in the editor's settings drawer.
+- **`/reporting`** — the footer's **Archive**: every published post, newest first, as a plain
+  list of date, title and summary in the homepage's minimalist style. **No categories**
+  (October 7, 2026, Alex's call): the topic tabs, `ReportingView.tsx`, the
+  `/reporting/<topic>` routes (now 308 to `/reporting`) and the badges on article pages are
+  gone. `topic:` tags and `src/lib/topics.ts` survive only for the editor's picker; nothing
+  public reads them. It creates no article URLs; posts live at their section routes.
 - **`/archive`, `/real-estate`, `/sales`, `/briefing`** plus their `[slug]` routes — the four
   section indexes. All four `[slug]` pages render the shared `components/ArticleView.tsx`
   (markdown, sanitize, `Article` and `BreadcrumbList` JSON-LD), differing only in the

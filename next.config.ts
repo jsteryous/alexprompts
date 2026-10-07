@@ -38,6 +38,13 @@ const nextConfig: NextConfig = {
       // selling"), when the site became a story publication. Its path and both
       // older ones now land on the homepage, so every in-article CTA, old email
       // link and shared URL still resolves instead of 404ing.
+      // The archive's topic tabs were removed October 7, 2026; each old tab
+      // lands on the one undivided archive.
+      {
+        source: "/reporting/:topic",
+        destination: "/reporting",
+        permanent: true,
+      },
       {
         source: "/buying-or-selling",
         destination: "/",

@@ -123,7 +123,7 @@ Existing tables, unchanged by the pivot:
 
 - **`blog_posts`**: every article. Public SELECT via RLS on `status = PUBLISHED`.
   `body_md` is the source of truth. Sections split by tag (`src/lib/posts.ts`
-  `sectionOf`); `/reporting` tabs split by `topic:` tag (`src/lib/topics.ts`).
+  `sectionOf`). `topic:` tags remain on rows but nothing public reads them.
 - **`subscribers`**: the owned email list, double opt-in, service-key only. Becomes the
   store's customer list; a confirmed subscriber can be told about new inventory.
 - **`referral_leads`**: past submissions from the removed buy/sell forms. Nothing writes
@@ -176,8 +176,8 @@ every row in the database). A new product or shop route must declare its canonic
 Rebrew ran as a research publication on Greenville real estate and sales performance from
 June to September 2026. Its machinery is still in the repo and parts still run:
 
-- **Content routes stay live:** `/reporting` (with the Real Estate, Finance, Urban
-  Economics, and Lifestyle tabs), `/real-estate`, `/sales`, `/briefing`, `/archive`,
+- **Content routes stay live:** `/reporting` (the Archive, with no categories since
+  October 7, 2026), `/real-estate`, `/sales`, `/briefing`, `/archive`,
   `/about` (`/buying-or-selling` and the best-agents page were removed October 7, 2026
   and redirect home). Their docs are
   in **`src/CLAUDE.md`**, which also holds the design system (clean-cut newspaper, oxblood
