@@ -1,5 +1,18 @@
 # Rebrew
 
+> **THE REFRAME (October 7, 2026). The website is a story publication.**
+> Slogan: **"Just good stories."** Internal mission (never printed as a mission
+> statement): **to share the most entertaining stories of incredible people or events.**
+> True, timeless stories of people and things that lasted: history, bravery, adversity
+> overcome, and the money, building and craft behind them. Not local, not news. The site
+> is **minimalist and timeless**: serif type on paper, one column, the slogan, a plain
+> list of story titles, one Subscribe link (to Substack, the primary channel). Stories
+> are posts tagged `story` (`getStories` in `src/lib/posts.ts`); the Substack sync tags
+> posts published on or after October 7, 2026 automatically. Earlier work keeps its URLs
+> and is listed on `/reporting`, which the footer calls the Archive. Drafts come from the
+> weekly cloud routine "Rebrew weekly story draft". The store section below predates this
+> reframe and was not discussed again; ask Alex before acting on it.
+
 > **THE PIVOT (October 5, 2026).** Rebrew is becoming a **store**: classy, high-quality
 > office decor and men's goods with a finance and real estate theme, for bankers and the
 > people around them. The publication made no money (3 subscribers, 0 referral leads in

@@ -33,13 +33,16 @@ type State = "idle" | "submitting" | "done" | "error";
 // cadence, and explained the sourcing, where the thing a stranger needs is what
 // we read and what they get. Do not grow it back.
 //
+// REFRAMED October 7, 2026 to the "Just good stories." brand; the default
+// heading is the slogan and the blurb is site.oneLiner said as an offer.
+//
 // Keep this in sync with site.ts and the homepage standfirst; all three say the
 // same thing at different lengths, and a subscriber promised one beat and sent
 // another unsubscribes.
 export function SubscribeForm({
   source,
-  heading = "Research & data on real estate and sales performance",
-  blurb = "We read research papers about real estate and sales performance and share what we find interesting. Subscribe if you’d like to learn with us.",
+  heading = "Just good stories.",
+  blurb = "True stories of incredible people and events, sent by email when they are ready.",
   cta = "Subscribe",
   showSubstackLink = true,
 }: {

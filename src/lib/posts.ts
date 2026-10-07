@@ -179,6 +179,22 @@ export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
   return getPublishedPosts(limit);
 }
 
+/** Tag that marks a post as one of the stories (October 7, 2026 reframe). The
+ *  homepage lists only these. Everything published under the earlier beats
+ *  stays at its URL and is listed on /reporting, which the footer calls the
+ *  Archive. A story carries no section tag, so it lives under /archive/<slug>. */
+export const STORY_TAG = "story";
+
+export function isStory(post: { tags: string[] | null }): boolean {
+  return hasTag(post, STORY_TAG);
+}
+
+/** The stories, newest first. */
+export async function getStories(limit?: number): Promise<ArchivePost[]> {
+  const rows = (await getPublishedPosts()).filter(isStory);
+  return limit ? rows.slice(0, limit) : rows;
+}
+
 /** The canonical route a post lives at, derived from its section. Used by the
  *  homepage feed, which mixes sections and must link each card to the right page. */
 export function postHref(post: { tags: string[] | null; slug: string }): string {

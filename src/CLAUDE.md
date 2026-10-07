@@ -69,17 +69,13 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 
 ## Routes
 
-- **`/`** — the front page (`revalidate = 300`). Does ONE job, convince a qualified stranger
-  to hand over an email address, in three sections: **the standfirst** (masthead statement
-  and two short lines), then **the work** (featured latest plus a "More to read" grid from
-  `getFeedPosts`), then **the ask** (an inline `SubscribeForm`, source `home-bottom`). The
-  form sat beside the standfirst until October 1, 2026, when Alex moved it to the bottom
-  because on a phone it filled the first screen ahead of any article. The standfirst copy must stay in sync with `site.ts` and the
-  `SubscribeForm` default promise. Deliberately removed and not to be re-added without a
-  reason: the mission contrast panel (a mission stated twice on one page is stated badly),
-  the "Where to find us" social grid (the footer carries every handle, and a row of links to
-  other people's platforms pointed the one job off-site), and the tools row.
-- **`/reporting`** — the nav's target. Lists EVERY published post via `getPublishedPosts()`
+- **`/`** — the front page (`revalidate = 300`), reframed October 7, 2026 to **"Just good
+  stories."** Minimalist on purpose: the slogan in serif italic, a short accent rule, the
+  stories (`getStories()`, posts tagged `story`) as a plain list of date, title and
+  summary, and one Subscribe link to Substack at the bottom. No cover images, badges, grid,
+  or calls to action above the stories. Empty state reads "The first story is on its way."
+- **`/reporting`** — the footer's **Archive** (no longer in the nav) for everything published
+  under the earlier beats. Lists EVERY published post via `getPublishedPosts()`
   with no type filter, linking each card through `postHref()`. It exists because the tab
   used to point at a single section, which made the site's main tab a filter on one engine's
   output and hid the rest. **It creates no new article URLs and must not**; the per-section
@@ -131,11 +127,10 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   required to submit, and `/api/refer` stamps the wording server-side and drops consent
   entirely when no phone came with it, so the table never claims a texting right over an
   empty number.
-- **Nav is `Reporting | About`** plus Subscribe and the `Buying or Selling?` CTA. Every nav
-  label states its promise in the visitor's words ("if you confuse you lose"). "Reporting"
-  started as a placeholder for the unnamed publication and was **KEPT** after the Rebrew
-  rename rather than swapped: now that the wordmark says Rebrew, a tab reading "Rebrew"
-  beside it would say nothing. `Nav.tsx` and `Footer.tsx` return `null` on `/review` and
+- **Nav is the name in serif plus `About | Subscribe`** (October 7, 2026). No mark, no
+  button, no hamburger: two short links fit beside the name on any phone. Subscribe goes to
+  Substack. The footer is one centered row: About, Archive (`/reporting`), Contact, Buying or
+  Selling, Privacy, Terms. `Nav.tsx` and `Footer.tsx` return `null` on `/review` and
   `/admin`, whose sticky action bars the fixed nav used to cover.
 - **`/best-real-estate-agents-greenville-sc`** — the search landing page and the site's
   SECOND conversion surface, targeting a commercial query typed by someone about to buy or

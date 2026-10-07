@@ -11,27 +11,20 @@ import { site, socials } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name}: ${site.tagline}`,
+    default: `${site.name}. ${site.tagline}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
-  // Three of these used to name the free tools ("rental property calculator",
-  // "mortgage calculator", "free real estate tools"). All nine tools were
-  // deleted August 14, 2026, so those were advertising routes that now 404.
-  // Replaced with the beat the publication actually covers.
   keywords: [
-    "Greenville SC real estate",
-    "Greenville real estate market",
-    "Greenville SC home prices",
-    "real estate research",
-    "sales performance research",
-    "how to price a house",
-    "what a good real estate agent does",
-    "moving to Greenville SC",
+    "true stories",
+    "history stories",
+    "stories of great men",
+    "stories of bravery",
+    "business history",
     "Rebrew",
   ],
   openGraph: {
-    title: `${site.name}: ${site.tagline}`,
+    title: `${site.name}. ${site.tagline}`,
     description: site.description,
     type: "website",
     url: site.url,
@@ -39,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name}: ${site.tagline}`,
+    title: `${site.name}. ${site.tagline}`,
     description: site.oneLiner,
   },
   // NO `alternates.canonical` here, deliberately (August 2026). Next.js merges
@@ -75,7 +68,7 @@ const jsonLd = {
       url: site.url,
       email: site.email,
       description:
-        "Reads the research on real estate and sales performance and puts it next to what the Greenville numbers are actually doing.",
+        site.description,
       sameAs: socials.map((s) => s.url),
     },
   ],

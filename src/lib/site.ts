@@ -70,84 +70,33 @@ export const site = {
   email: "hello@rebrew.org",
   url: SITE_URL,
 
-  // The brand spine. These strings drive the page titles, the meta descriptions,
-  // the OG cards, and the footer, so keep them true and tight. No hype, no doom,
-  // and no "plain English" phrasing anywhere (dropped July 2026, it read as
-  // unpolished).
+  // THE REFRAME, October 7, 2026, in Alex's words.
+  //   Slogan: "Just good stories."
+  //   Internal mission: to share the most entertaining stories of incredible
+  //   people or events.
+  // The mission is INTERNAL. It steers what gets written and never appears on
+  // the site as a mission statement; the slogan does that job in three words.
   //
-  // THE SCOPE NARROWED August 25, 2026 (Alex's call) to GREENVILLE REAL ESTATE.
-  // It had widened on August 14 to the real estate and business landscape of the
-  // whole state, with the two co-equal. That was aspirational: the published
-  // archive is a Greenville publication (34 of 36 pieces), so the masthead was
-  // naming a beat the work did not cover.
+  // The stories are true, timeless, and about people or things that lasted:
+  // history, bravery, adversity overcome, and the money, building and craft
+  // behind them. Not local, not news. Earlier beats, for the record: Greenville
+  // real estate and sales performance (August to October 2026), SC real estate
+  // and business, and the retired AI-prompts positioning. Their published work
+  // stays at its URLs and is listed under the Archive.
   //
-  // Business is not banned from the publication and company teardowns remain a
-  // good form. It simply stopped being half of the STATED territory, because a
-  // masthead names what a reader will reliably get.
-  //
-  // SALES PERFORMANCE WAS ADDED August 25, 2026, on Alex's instruction: "we
-  // discuss real estate, specifically in greenville, and sales performance
-  // (often linked to real estate sales) backed by academic research and data."
-  // The publishing had already moved first: the August 24 and August 25 pieces
-  // are both research reads, one on what the housing research says about getting
-  // the best sale price and one on whether sales leaderboards actually work. This
-  // file was the last thing still describing the old beat.
-  //
-  // What the reader is promised: research and data on the Greenville market and
-  // on how sales actually get made, written up for buyers and sellers who want to
-  // know what a good agent does and how a sale gets positioned.
-  // See scripts/publication/SPEC.md, which still carries the older statewide
-  // language and is behind this file on scope.
-  //
-  // THE TAGLINE IS A PLAIN LABEL, not a slogan. Do not "improve" it into a
-  // sentence and do not expand the ampersand. It names the territory the way a
-  // masthead names a beat, and two prior taglines died of being slogan-shaped,
-  // so the bar here is mechanical description. The first half was Alex's own
-  // words; the second half was added with sales performance on August 25, 2026
-  // and tracks the headline he wrote on the front page.
-  //
-  // Retired, for the record: "SC Real Estate & Business" (August 14 to 25, 2026,
-  // killed by the Greenville narrowing), "How South Carolina actually makes money." (two
-  // days, too narrow once real estate became co-equal), "Who pays for South
-  // Carolina's growth." (two days, accountability-beat leftover that read as
-  // watchdog), "Better real estate decisions." (July 21), "Questions worth
-  // asking." (July 11, an orphaned pun on the retired AI-prompts positioning),
-  // "Growth is good." (one day), "Where real estate meets technology."
-  //
-  // The tagline is deliberately NOT the name and does not repeat it. "Rebrew"
-  // says nothing about the beat on its own, which is normal for a masthead, so
-  // the tagline carries the whole job of naming the territory.
-  //
-  // WHAT THE COPY IS FOR: a reader should learn immediately that they can get an
-  // insightful picture of what the Greenville market is really doing and WHY.
-  // TRENDS and INCENTIVES are the spine. A draft that led on testing what people
-  // in the market claim was cut August 14, 2026; that is one input, not the job,
-  // and leading with it made the publication sound smaller than it is.
-  tagline: "Greenville Real Estate & Sales Performance",
+  // Keep the tagline exactly as Alex wrote it, period included. It is a
+  // complete sentence in spirit and the house style bans dressing it up.
+  tagline: "Just good stories.",
 
-  // THE MASTHEAD STATEMENT. Alex's line, written on the front page August 26,
-  // 2026, and moved here the same day so it stops being homepage-only copy.
-  //
-  // It belongs in this file because it is doing brand work, not page work: it
-  // is the one line that connects the NAME to the BEAT. "Rebrew" says nothing
-  // about real estate on its own, and the coffee-cup-and-house mark
-  // (src/components/Mark.tsx) says it only to someone who already gets the
-  // joke. This sentence is where the pun pays off, so every surface that
-  // introduces the publication cold should be able to reach it. The share card
-  // does; the homepage does. Both now read it from here rather than each
-  // keeping a copy, which is how the old subscribe-page promise drifted a week
-  // behind the beat.
-  //
-  // Keep the period. It is a statement, not a headline fragment, and the house
-  // style bans fragments.
-  headline: "What’s brewing in Real Estate.",
+  // The homepage statement. Same words as the tagline on purpose: the slogan is
+  // the whole pitch, and a second line saying it again at more length would be
+  // the redundancy a minimalist page exists to avoid.
+  headline: "Just good stories.",
 
-  oneLiner:
-    "Research and data on Greenville real estate and on sales performance.",
+  oneLiner: "True stories of incredible people and events.",
   description:
-    "We read research papers about real estate and sales performance and share what we find " +
-    "interesting. What the Greenville numbers are doing, what the evidence says about " +
-    "positioning a sale, and what good agents actually do.",
+    "Rebrew tells true stories of incredible people and events, and of the " +
+    "things they built that lasted.",
 } as const;
 
 /**

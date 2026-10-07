@@ -4,9 +4,7 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 
 export const metadata: Metadata = {
   title: "Subscribe",
-  description:
-    "We read research papers about real estate and sales performance and share what we find " +
-    "interesting. Subscribe if you would like to learn with us.",
+  description: "True stories of incredible people and events, sent by email when they are ready.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
