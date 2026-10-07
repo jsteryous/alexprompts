@@ -13,8 +13,10 @@
 > weekly cloud routine "Rebrew weekly story draft". **`/buying-or-selling` was removed the
 > same day** ("get rid of buying or selling"): the page and its form are deleted, the path
 > and its two older aliases 308 to `/`, and the in-article and email buy/sell CTAs are off.
-> The best-agents landing page and its QuickContact form remain, and the SMS terms and
-> privacy page now describe that form. The store section below predates this reframe and
+> **The best-agents landing page went too**, with QuickContact, `/api/refer`, `leads.ts`,
+> `attribution.ts`, the SMS consent strings and the `/terms#sms` section: the site now
+> collects nothing but newsletter emails. `/best-real-estate-agents-greenville-sc` 308s to
+> `/`. `referral_leads` still holds past submissions, and `/privacy` says so. The store section below predates this reframe and
 > was not discussed again; ask Alex before acting on it.
 
 > **THE PIVOT (October 5, 2026).** Rebrew is becoming a **store**: classy, high-quality
@@ -124,7 +126,8 @@ Existing tables, unchanged by the pivot:
   `sectionOf`); `/reporting` tabs split by `topic:` tag (`src/lib/topics.ts`).
 - **`subscribers`**: the owned email list, double opt-in, service-key only. Becomes the
   store's customer list; a confirmed subscriber can be told about new inventory.
-- **`referral_leads`**: the `/buying-or-selling` form. Service-key only.
+- **`referral_leads`**: past submissions from the removed buy/sell forms. Nothing writes
+  to it any more. Service-key only.
 
 No product, order, or inventory tables exist yet. **Add them only when the storefront is
 being built**, in `supabase/schema.sql`, with RLS on from the first migration.
@@ -143,7 +146,6 @@ one preview, `dry=1` reports the count, `force=1` resends.
 | `PUBLISH_SECRET` | `/admin` login, `/review`, `/api/publish`, `/api/review/save`, `/api/broadcast`. |
 | `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_REPLY_TO` | Owned-list mail. Unset key means capture works but nothing sends. |
 | `EMAIL_POSTAL_ADDRESS` | Footer address; CAN-SPAM requires one. Use a PO box. |
-| `LEADS_NOTIFY_TO` | Inbox for `/api/refer` notifications. |
 | `CRON_SECRET` | Authorizes the Vercel crons (`/api/sync-substack`, `/api/finalize-greenville`). |
 | `NEXT_PUBLIC_SUBSTACK_URL` / `SUBSTACK_FEED_URL` | Substack mirror into `/archive`. Base defaults to `https://rebrew.substack.com` (moved from `alexprompts.substack.com` October 1, 2026); if set in Vercel it must be the rebrew subdomain or unset. |
 | `SUBSCRIBE_RATE_LIMIT` / `REFER_RATE_LIMIT` | Soft per-IP hourly caps. |
@@ -176,8 +178,8 @@ June to September 2026. Its machinery is still in the repo and parts still run:
 
 - **Content routes stay live:** `/reporting` (with the Real Estate, Finance, Urban
   Economics, and Lifestyle tabs), `/real-estate`, `/sales`, `/briefing`, `/archive`,
-  `/about`, `/best-real-estate-agents-greenville-sc` (`/buying-or-selling` was removed
-  October 7, 2026 and redirects home). Their docs are
+  `/about` (`/buying-or-selling` and the best-agents page were removed October 7, 2026
+  and redirect home). Their docs are
   in **`src/CLAUDE.md`**, which also holds the design system (clean-cut newspaper, oxblood
   accent, serif reading surface, squared corners, two surfaces only) and the `/admin`
   editor. The design system carries over to the store unless Alex changes it.
@@ -194,7 +196,7 @@ June to September 2026. Its machinery is still in the repo and parts still run:
 - **Rules that still bind while those pages are live:** never explain the referral
   business model in user-facing copy (no "I will connect you with a vetted agent," no
   "free," no "I do not practice"); the South Carolina licensee disclosure stays on
-  `/terms` and the agents page; a link never points at a data file
+  `/terms`; a link never points at a data file
   (`.csv`, `.pdf`, `.xlsx`, and so on).
 - Alex's three editorial rules (August 15, 2026) governed every article: **1. It must be a
   true story. 2. Make it as entertaining as possible without fabricating. 3. Have fun.**

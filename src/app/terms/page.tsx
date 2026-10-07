@@ -1,30 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { site, LICENSEE_NAME } from "@/lib/site";
-import { LEGAL_UPDATED, SMS_CONSENT_TEXT, SMS_HELP_EMAIL } from "@/lib/legal";
+import { LEGAL_UPDATED } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description:
-    "Terms of use for Rebrew, including the SMS messaging terms for the text messages sent " +
-    "from the contact form.",
+  description: "Terms of use for Rebrew.",
   alternates: { canonical: `${site.url}/terms` },
 };
 
 /**
- * Terms of use, with the SMS terms as a named section at #sms.
- *
- * The #sms anchor is the point of the page. A 10DLC campaign registration asks
- * for a messaging terms URL separately from the privacy policy URL, so paste
- * ${site.url}/terms#sms into that field. Everything in that section is checked
- * by carrier vetting: the brand name, what the messages are, the frequency, the
- * rates line, HELP, STOP, the carrier liability line, and a link to the privacy
- * policy. Do not cut any of them for brevity.
- *
- * Like /privacy, this is linked from the footer as of August 28, 2026, and is
- * deliberately still out of the nav and the sitemap. It is also reachable from
- * the SMS consent checkbox on the referral form, which is the moment it most
- * needs to be reachable.
+ * Terms of use. The SMS messaging terms that used to sit at #sms were removed
+ * on October 7, 2026 with the last form that collected text-message consent.
+ * Linked from the footer, deliberately out of the nav and the sitemap.
  */
 export default function TermsPage() {
   return (
@@ -92,69 +79,11 @@ export default function TermsPage() {
             is not an endorsement of it.
           </p>
 
-          {/* scroll-mt clears the fixed header. /terms#sms is the URL pasted into
-              10DLC campaign registration, so the reviewer who follows it has to
-              land on this heading rather than under it. */}
-          <h2 id="sms" className="scroll-mt-24">
-            SMS messaging terms
-          </h2>
-          <p>
-            These terms cover the text messages sent by {site.name} to people who ask for them on
-            the contact form.
-          </p>
-          <ul>
-            <li>
-              <strong>Program.</strong>{" "}{site.name} sends text messages to people who submit the
-              contact form at{" "}
-              <Link href="/best-real-estate-agents-greenville-sc">{site.url.replace(/^https?:\/\//, "")}/best-real-estate-agents-greenville-sc</Link> and
-              check the box asking for them. The messages are a conversation with {LICENSEE_NAME}
-              {" "}about the buying or selling question you sent in, which means scheduling a call,
-              answering what you asked, and following up on it.
-            </li>
-            <li>
-              <strong>How you opt in.</strong>{" "}You check the consent box on that form. It is
-              unchecked by default, and checking it is never required in order to send the form.
-              The wording you agree to is this: &ldquo;{SMS_CONSENT_TEXT}&rdquo;
-            </li>
-            <li>
-              <strong>Message frequency.</strong>{" "}Frequency varies, because these are replies in a
-              conversation rather than a broadcast.
-            </li>
-            <li>
-              <strong>Cost.</strong>{" "}Message and data rates may apply. {site.name} does not charge
-              for the messages, but your mobile carrier may charge you for sending or receiving
-              them under your plan.
-            </li>
-            <li>
-              <strong>How to stop.</strong>{" "}Reply STOP to any message and the messages end. You will
-              get one confirmation that you have been unsubscribed, and after that nothing further
-              unless you opt in again.
-            </li>
-            <li>
-              <strong>How to get help.</strong>{" "}Reply HELP to any message, or email{" "}
-              <a href={`mailto:${SMS_HELP_EMAIL}`}>{SMS_HELP_EMAIL}</a>.
-            </li>
-            <li>
-              <strong>Carriers.</strong>{" "}Mobile carriers are not liable for delayed or undelivered
-              messages. Delivery depends on your carrier and your device, and it is not guaranteed.
-            </li>
-            <li>
-              <strong>Age.</strong>{" "}You must be 18 or older, and you must either own the mobile
-              number you give or be authorized to consent for it.
-            </li>
-            <li>
-              <strong>Privacy.</strong>{" "}Mobile numbers and opt-in consent are never shared or sold
-              for anyone else&rsquo;s marketing. See the <Link href="/privacy">Privacy Policy</Link>{" "}
-              for the full commitment.
-            </li>
-          </ul>
-
           <h2>Liability</h2>
           <p>
             To the extent the law allows, {site.name} and {LICENSEE_NAME} are not liable for any
             indirect, incidental, or consequential loss arising from your use of the site or from a
-            decision you made after reading it. You are responsible for your own real estate and
-            financial decisions.
+            decision you made after reading it. You are responsible for your own decisions.
           </p>
 
           <h2>Governing law</h2>
@@ -165,8 +94,7 @@ export default function TermsPage() {
 
           <h2>Changes</h2>
           <p>
-            These terms change from time to time, and the date at the top changes with them. A
-            change to the SMS section goes to everyone receiving messages before it takes effect.
+            These terms change from time to time, and the date at the top changes with them.
           </p>
 
           <h2>Contact</h2>

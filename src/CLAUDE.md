@@ -111,41 +111,16 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 - **`/subscribe`** — the owned-list capture page and the nav's Subscribe target. It used to
   point at Substack; the site's promise ships on the owned list, so Substack is demoted to
   the form's secondary link.
-- **`/privacy`, `/terms`** — required for 10DLC SMS vetting. `SMS_CONSENT_TEXT` lives in
-  `src/lib/legal.ts` and is rendered **whole**, because every clause is checked during
-  carrier vetting; the links to `/privacy` and `/terms#sms` sit OUTSIDE the string so the
-  stored copy matches the screen byte for byte. Consent is unchecked by default, never
-  required to submit, and `/api/refer` stamps the wording server-side and drops consent
-  entirely when no phone came with it, so the table never claims a texting right over an
-  empty number.
+- **`/privacy`, `/terms`** — rewritten October 7, 2026 when the last form came off. The SMS
+  terms (`/terms#sms`) and the SMS consent strings are gone; the site collects only
+  newsletter emails. `/privacy` still covers the past submissions kept in `referral_leads`.
 - **Nav is the name in serif plus `About | Subscribe`** (October 7, 2026). No mark, no
   button, no hamburger: two short links fit beside the name on any phone. Subscribe goes to
   Substack. The footer is one centered row: About, Archive (`/reporting`), Contact, Privacy,
   Terms. `Nav.tsx` and `Footer.tsx` return `null` on `/review` and
   `/admin`, whose sticky action bars the fixed nav used to cover.
-- **`/best-real-estate-agents-greenville-sc`** — the search landing page and the site's
-  SECOND conversion surface, targeting a commercial query typed by someone about to buy or
-  sell who has not picked anyone yet. Everything ranking for it is a directory selling its
-  slots or a brokerage sorting its own roster, so the page gives the honest answer instead:
-  **no ranked list exists**, here is what separates a good agent from an average one, and
-  here is how to check each of it yourself. It **does not name or rank real agents and must
-  never grow a "top ten"**, since inventing one would fabricate. It does not claim Alex is
-  one of the best agents in Greenville. Four substantive checks plus a five-question FAQ
-  that also drives the `FAQPage` JSON-LD **from one array**, so the structured data cannot
-  drift from the visible copy. **Sourcing is attribution in words with no external links at
-  all**, which the house style treats as complete; a rotted link is worst on the page a
-  stranger uses to judge whether the site is real. The ask is `components/QuickContact.tsx`,
-  a deliberately tiny form (one phone, one email) POSTing to the same `/api/refer`, rendered
-  twice with different `source` values so attribution can tell the placements apart. **There
-  is no fewer than two taps here and no button can beat it**: no browser hands over a
-  visitor's phone or email, Google sign-in returns an email and never a number, and the
-  Contact Picker API is Android Chrome only. The lever is autofill, so keep the
-  `autocomplete` (`tel`, `email`) and `inputMode` tokens intact. A Cal.com booking button was
-  built and deleted the same day ("I just want someone's number or email quickly and
-  easily"); do not rebuild it, since a scheduler asks a stranger who is still comparing to
-  commit to a calendar slot, which is a bigger ask than this page is making. It is a
-  conversion landing page, NOT a revived evergreen SEO guide; that category is dead. Not in
-  the nav.
+- **`/best-real-estate-agents-greenville-sc`** — **REMOVED October 7, 2026** with
+  `QuickContact` and `/api/refer`; 308s to `/`.
 - **`/about`** — the **masthead**, not a resume. Four sections: the reader's problem
   ("Most real estate advice is somebody's opinion."), a credibility section spent on the
   METHOD rather than on Alex, the assess-do-not-advise stance, and a closing block that

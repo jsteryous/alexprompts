@@ -43,6 +43,13 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // The Greenville agents landing page and its contact form went the same
+      // day, the last of the buy/sell funnel.
+      {
+        source: "/best-real-estate-agents-greenville-sc",
+        destination: "/",
+        permanent: true,
+      },
       {
         source: "/find-an-agent",
         destination: "/",
