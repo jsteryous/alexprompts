@@ -6,6 +6,7 @@ import {
   editionDateLine,
   editionHref,
   roman,
+  safeImage,
   safeUrl,
   volumeOf,
 } from "@/lib/editions";
@@ -51,6 +52,44 @@ function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: bool
         </p>
       )}
     </>
+  );
+}
+
+/**
+ * An illustration, printed the way a broadsheet of 1860 printed one: in ink,
+ * inside a ruled frame, with a caption beneath and the credit in small type.
+ * The grayscale and contrast filter is what lets a modern photograph sit on
+ * the period page; `paper-plate` in globals.css carries it.
+ */
+function Plate({ item, eager = false }: { item: PaperItem; eager?: boolean }) {
+  const img = safeImage(item.image);
+  if (!img) return null;
+  return (
+    <figure className="break-inside-avoid border border-[var(--foreground)] p-1.5 mb-4">
+      {/* Remote, openly licensed pictures from Commons or the Library of Congress;
+          next/image would need every such host whitelisted. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={img.url}
+        alt={img.caption}
+        loading={eager ? "eager" : "lazy"}
+        className="paper-plate w-full h-auto max-h-[28rem] object-cover"
+      />
+      {img.caption && (
+        <figcaption className="theme-text-primary text-center italic text-[0.9375rem] leading-snug mt-2" style={fell}>
+          {img.caption}
+        </figcaption>
+      )}
+      <p className="theme-text-muted text-center text-[0.6875rem] leading-snug mt-1">
+        {img.source ? (
+          <a href={img.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+            {img.credit}
+          </a>
+        ) : (
+          img.credit
+        )}
+      </p>
+    </figure>
   );
 }
 
@@ -164,6 +203,11 @@ export default function EditionView({
                 </div>
               ))}
             </header>
+            {safeImage(lead.image) && (
+              <div className="max-w-3xl mx-auto">
+                <Plate item={lead} eager />
+              </div>
+            )}
             <div className="paper-columns md:columns-2 lg:columns-3">
               <Paragraphs item={lead} dropCap />
             </div>
@@ -177,11 +221,13 @@ export default function EditionView({
               <Block>
                 <Department title="Telegraphic Dispatches" />
                 <Headline item={c.dispatches![0]} />
+                <Plate item={c.dispatches![0]} />
                 <Paragraphs item={c.dispatches![0]} />
               </Block>
               {c.dispatches!.slice(1).map((d, i) => (
                 <Block key={i}>
                   <Headline item={d} />
+                  <Plate item={d} />
                   <Paragraphs item={d} />
                 </Block>
               ))}

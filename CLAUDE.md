@@ -20,6 +20,14 @@
 > **Analytics:** Vercel Web Analytics is not enabled on the project, so every page beacons
 > `/api/hit` (`components/PageHit.tsx`), which counts views per day, path and referring host
 > in `page_hits` through the `record_hit` function. No cookie, IP or identifier is stored.
+> **Illustrations** (`image` on a lead or dispatch, `safeImage` in `editions.ts`) print only
+> from Wikimedia Commons or the Library of Congress, with a credit, after the press confirms
+> on the file page that the picture shows exactly the named subject under a reusable licence.
+> The press also emails Alex three ready-to-post social lines per number. The weekly review
+> writes a note to `intelligencer_notes`, which the press reads first: that is the learning
+> loop. `scripts/intelligencer/MAINTAINER.md` is a fortnightly code-improvement routine
+> prompt that needs the repo, Supabase and Gmail attached, so Alex creates it in the UI;
+> its changes are logged in `scripts/intelligencer/CHANGELOG.md`.
 > The "Just good stories" posts below keep their URLs and live in the Archive.
 
 > **THE REFRAME (October 7, 2026). The website is a story publication.**

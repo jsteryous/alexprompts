@@ -22,6 +22,43 @@ export interface PaperItem {
   paragraphs?: string[];
   /** Letters to the Editor sign off with this. */
   signed?: string;
+  /** An illustration. Printed only when its URL is on an allowed host. */
+  image?: PaperImage;
+}
+
+/**
+ * An illustration for a lead or a dispatch (October 14, 2026).
+ *
+ * Only openly licensed or public domain pictures are printed, and only from
+ * hosts that serve them for reuse: Wikimedia Commons and the Library of
+ * Congress. The press routine must confirm on the file page that the picture
+ * shows exactly the named subject and that its licence allows reuse, and it
+ * writes the author and licence into `credit`. A news agency photograph is
+ * never used. The page prints every picture as an engraving would have been,
+ * in ink on paper, so a modern photograph sits in the period page.
+ */
+export interface PaperImage {
+  url?: string;
+  /** What the picture shows, in the paper's voice, and true. */
+  caption?: string;
+  /** Author and licence, e.g. "Photograph by Jane Doe, CC BY-SA 4.0, via Wikimedia Commons". */
+  credit?: string;
+  /** The file page the picture and its licence were checked on. */
+  source?: string;
+}
+
+const IMAGE_HOSTS = /^(upload\.wikimedia\.org|commons\.wikimedia\.org|tile\.loc\.gov|www\.loc\.gov)$/;
+
+/** The picture's URL when it is https on an allowed host and carries a credit; otherwise null. */
+export function safeImage(img: PaperImage | undefined): { url: string; caption: string; credit: string; source: string | null } | null {
+  if (!img?.url || !img.credit) return null;
+  try {
+    const u = new URL(img.url);
+    if (u.protocol !== "https:" || !IMAGE_HOSTS.test(u.hostname)) return null;
+    return { url: u.toString(), caption: img.caption ?? "", credit: img.credit, source: safeUrl(img.source) };
+  } catch {
+    return null;
+  }
 }
 
 export interface PaperAd {
@@ -44,6 +81,8 @@ export interface EditionContent {
   miscellany?: PaperItem[];
   advertisements?: PaperAd[];
   sources?: PaperSource[];
+  /** Ready-to-post lines for social media, written by the press. Not printed. */
+  social?: string[];
 }
 
 export interface Edition {

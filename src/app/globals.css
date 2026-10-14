@@ -797,3 +797,8 @@ html.dark .editor-pop {
   line-height: 0.82;
   padding: 0.06em 0.08em 0 0;
 }
+/* A photograph printed in ink: no colour, a little more contrast, and a faint
+   warmth, so a modern picture sits on the period page. */
+.paper-plate {
+  filter: grayscale(1) contrast(1.15) sepia(0.12);
+}

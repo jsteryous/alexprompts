@@ -548,3 +548,13 @@ returns void language sql security definer set search_path = public as $$
 $$;
 revoke all on function public.record_hit(text, text) from public, anon, authenticated;
 grant execute on function public.record_hit(text, text) to service_role;
+
+-- The desk's running notes (October 14, 2026): what the weekly circulation
+-- review learned, read by the press before each number. Service only.
+create table if not exists public.intelligencer_notes (
+  id bigserial primary key,
+  created_at timestamptz not null default now(),
+  author text not null default 'circulation',
+  note text not null
+);
+alter table public.intelligencer_notes enable row level security;
