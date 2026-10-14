@@ -41,11 +41,11 @@ function Body({ clip, excerpt }: { clip: Clip; excerpt: Excerpt | null }) {
     const size = excerpt.text.length < 90 ? 46 : excerpt.text.length < 180 ? 38 : excerpt.text.length < 280 ? 32 : 27;
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1, justifyContent: "center", width: innerW }}>
-        <div style={{ display: "flex", fontFamily: "Fell", fontStyle: "italic", fontSize: size, lineHeight: 1.28, textAlign: "center" }}>
+        <div style={{ display: "flex", fontFamily: "Head", fontStyle: "italic", fontSize: size, lineHeight: 1.28, textAlign: "center" }}>
           {`“${excerpt.text}”`}
         </div>
         {clip.headline && (
-          <div style={{ display: "flex", fontFamily: "Fell", fontSize: 20, letterSpacing: 2, marginTop: 22, textTransform: "uppercase", opacity: 0.75 }}>
+          <div style={{ display: "flex", fontFamily: "Head", fontWeight: 700, fontSize: 18, letterSpacing: 2, marginTop: 22, textTransform: "uppercase", opacity: 0.75 }}>
             {fit(`From “${clip.headline.replace(/\.$/, "")}”`, 70)}
           </div>
         )}
@@ -61,14 +61,14 @@ function Body({ clip, excerpt }: { clip: Clip; excerpt: Excerpt | null }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexGrow: 1, width: innerW }}>
       {clip.headline && (
-        <div style={{ display: "flex", fontFamily: "Fell", fontSize: clip.headline.length > 48 ? 34 : 42, lineHeight: 1.08, textTransform: "uppercase", textAlign: "center", marginBottom: 14 }}>
+        <div style={{ display: "flex", fontFamily: "Banner", fontWeight: 700, fontSize: clip.headline.length > 48 ? 38 : 48, lineHeight: 1.02, textTransform: "uppercase", textAlign: "center", marginBottom: 14 }}>
           {fit(clip.headline.replace(/\.$/, ""), 90)}
         </div>
       )}
       <div
         style={{
           display: "flex",
-          fontFamily: clip.kind === "ad" ? "Fell" : "News",
+          fontFamily: clip.kind === "ad" ? "Head" : "News",
           fontStyle: clip.kind === "ad" ? "italic" : "normal",
           fontSize: clip.kind === "ad" ? size + 4 : size,
           lineHeight: 1.38,
@@ -78,7 +78,7 @@ function Body({ clip, excerpt }: { clip: Clip; excerpt: Excerpt | null }) {
         {shown}
       </div>
       {clip.signed && shown === text && (
-        <div style={{ display: "flex", alignSelf: "flex-end", fontFamily: "Fell", fontStyle: "italic", fontSize: 22, marginTop: 10 }}>{clip.signed}</div>
+        <div style={{ display: "flex", alignSelf: "flex-end", fontFamily: "Head", fontStyle: "italic", fontSize: 22, marginTop: 10 }}>{clip.signed}</div>
       )}
     </div>
   );
@@ -122,13 +122,13 @@ export async function GET(req: Request) {
         >
           <div style={{ display: "flex", fontFamily: "Black", fontSize: 40, lineHeight: 1 }}>The Rebrew Intelligencer</div>
           <div style={{ display: "flex", width: "100%", height: 3, background: INK, marginTop: 10 }} />
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-between", fontFamily: "Fell", fontSize: 16, letterSpacing: 2, padding: "5px 0", textTransform: "uppercase" }}>
+          <div style={{ display: "flex", width: "100%", justifyContent: "space-between", fontFamily: "Head", fontWeight: 700, fontSize: 16, letterSpacing: 2, padding: "5px 0", textTransform: "uppercase" }}>
             <span>{clip.department}</span>
             <span>{`No. ${edition.number}  ·  ${editionDateLine(edition.slug)}`}</span>
           </div>
           <div style={{ display: "flex", width: "100%", height: 1, background: INK, marginBottom: 20 }} />
           <Body clip={clip} excerpt={excerpt} />
-          <div style={{ display: "flex", fontFamily: "Fell", fontStyle: "italic", fontSize: 18, marginTop: 12, opacity: 0.8 }}>
+          <div style={{ display: "flex", fontFamily: "Head", fontStyle: "italic", fontSize: 18, marginTop: 12, opacity: 0.8 }}>
             Clipped from The Rebrew Intelligencer  ·  rebrew.org
           </div>
         </div>

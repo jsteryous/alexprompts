@@ -75,9 +75,11 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   its own `opengraph-image.tsx` (blackletter nameplate plus the lead headline, fonts fetched
   from Google Fonts at render and falling back if that fails); `/editions` is Back Issues.
   All `revalidate = 300`, so a new row appears within five minutes with no deploy. The
-  nameplate and headline faces (UnifrakturMaguntia, IM Fell English) load by a plain
-  stylesheet `<link>` in `EditionView`, never `next/font/google`; body copy stays on the
-  system serif. `.paper-*` classes in `globals.css` set the ruled columns and drop cap.
+  period faces (1945 typography, October 14, 2026: UnifrakturMaguntia nameplate, Oswald
+  banner and story heads as `--font-banner`, Libre Bodoni decks, departments, letters and
+  ads as `--font-head`) load from `src/lib/paperFonts.ts` by a plain stylesheet `<link>`,
+  never `next/font/google`; share images load the same faces in `src/lib/ogFonts.ts`.
+  Body copy stays on the system serif. `.paper-*` classes in `globals.css` set the ruled columns and drop cap.
   The readers in `src/lib/editions.ts` are defensive because the routine writes the JSON.
 - **`/clip/[slug]/[item]` and `/api/clip-image`** — CLIP AND SHARE (October 14, 2026).
   `src/lib/clips.ts` owns the item ids (`lead`, `market`, `editorial`, `dispatch-N`,

@@ -69,24 +69,24 @@ to the log with its hypothesis and the measure it should move.
    readers come back three mornings a week. Moves: subscribers, weekly views. Also point the
    nav's Subscribe link at `/subscribe` (the owned list) instead of Substack, so every
    sign-up is ours and countable.
-2. **1945 typography.** The headlines are set in IM Fell, an eighteenth-century face. A 1945
-   daily ran banner heads in heavy condensed type and body copy in a sturdy news serif.
-   Keep the blackletter nameplate. Apply to the paper, the clip page and image, and the
-   office. Hypothesis: the page reads as the era it claims, and reads faster. Moves: time on
-   page is not measured, so judge by clip opens and Alex's reaction.
-3. **"Real or Ashby?"** A game on each number: six headlines, some true from the news and
+2. **"Real or Ashby?"** A game on each number: six headlines, some true from the news and
    some invented by the Editor, and the reader guesses which. A shareable result grid in the
    Wordle style, with no spoilers. Real headlines come from the printed news; invented ones
    are labelled as inventions once answered. Hypothesis: the paper's premise (the truth
    sounds made up) is most shareable as a game. Moves: views from outside, clip opens.
-4. **A share prompt after reading.** At the foot of each number, the single funniest line
+3. **A share prompt after reading.** At the foot of each number, the single funniest line
    pre-clipped, with one tap to share it.
-5. **Forwardable edition emails.** A "Forward to a friend who needs this" line and a
+4. **Forwardable edition emails.** A "Forward to a friend who needs this" line and a
    sign-up link in every edition email.
-6. **The office grows.** A new object whenever a new running gag earns one.
+5. **The office grows.** A new object whenever a new running gag earns one.
 
 ## Log
 
 - **2026-10-14.** Strategy written. Baseline zero. The paper moved to a 1945 voice, clip and
   share went live, and the Editor's office went live. The Publisher routine took over from
   the fortnightly maintainer, with this file as its brief.
+- **2026-10-14 (session, at Alex's request).** Shipped 1945 typography, taken off the backlog
+  out of order: Oswald for banner and story heads, Libre Bodoni for decks, departments,
+  letters and ads, the blackletter nameplate kept, body on the system serif. Applied to the
+  paper, the clip page and image, the edition share card and the office. Hypothesis: the
+  page reads as the era it claims. No measure moves on its own; judge by clip opens.

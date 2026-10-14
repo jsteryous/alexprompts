@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { PAPER_FONTS_HREF } from "@/lib/paperFonts";
 import { getOfficeData } from "@/lib/office";
 import OfficeScene from "@/components/office/OfficeScene";
 
@@ -26,10 +27,9 @@ export default async function OfficePage() {
   const data = await getOfficeData();
   return (
     <section className="theme-page pt-24 md:pt-28 pb-20">
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap"
+        href={PAPER_FONTS_HREF}
         precedence="default"
       />
       <div className="max-w-6xl mx-auto px-3 md:px-6">

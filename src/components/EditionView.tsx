@@ -12,6 +12,7 @@ import {
 } from "@/lib/editions";
 import { DEPARTMENTS, clipId } from "@/lib/clips";
 import ClipLayer from "@/components/ClipLayer";
+import { PAPER_FONTS_HREF } from "@/lib/paperFonts";
 
 /**
  * THE REBREW INTELLIGENCER, rendered as a broadsheet (October 14, 2026).
@@ -25,17 +26,18 @@ import ClipLayer from "@/components/ClipLayer";
  * Every item is wrapped in <Clippable> so a reader can clip it out and share
  * it (src/lib/clips.ts, components/ClipLayer.tsx, /clip/<date>/<item>).
  *
- * Fonts: the nameplate is UnifrakturMaguntia and the headlines IM Fell English,
+ * Fonts (src/lib/paperFonts.ts): the nameplate is UnifrakturMaguntia, banner and
+ * story headlines Oswald, decks, departments, letters and ads Libre Bodoni,
  * loaded from Google Fonts with a plain stylesheet link (next/font/google breaks
  * the Turbopack build, see src/CLAUDE.md). Both fall back to the site serif, so
  * the page reads correctly before or without them. Body copy stays on the
  * system serif for legibility.
  */
 
-const FONTS =
-  "https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap";
+const FONTS = PAPER_FONTS_HREF;
 
-const fell = { fontFamily: "'IM Fell English', var(--font-serif)" } as const;
+const head = { fontFamily: "var(--font-head)" } as const;
+const banner = { fontFamily: "var(--font-banner)" } as const;
 
 function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: boolean }) {
   return (
@@ -52,7 +54,7 @@ function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: bool
         </p>
       ))}
       {item.signed && (
-        <p className="paper-body text-right italic" style={fell}>
+        <p className="paper-body text-right italic" style={head}>
           {item.signed}
         </p>
       )}
@@ -81,7 +83,7 @@ function Plate({ item, eager = false }: { item: PaperItem; eager?: boolean }) {
         className="paper-plate w-full h-auto max-h-[28rem] object-cover"
       />
       {img.caption && (
-        <figcaption className="theme-text-primary text-center italic text-[0.9375rem] leading-snug mt-2" style={fell}>
+        <figcaption className="theme-text-primary text-center italic text-[0.9375rem] leading-snug mt-2" style={head}>
           {img.caption}
         </figcaption>
       )}
@@ -103,15 +105,15 @@ function Headline({ item, size = "md" }: { item: PaperItem; size?: "md" | "sm" }
   return (
     <header className="text-center mb-3">
       <h3
-        className={`theme-text-primary uppercase leading-tight tracking-wide ${
-          size === "md" ? "text-[1.1875rem]" : "text-[1rem]"
+        className={`theme-text-primary uppercase font-bold leading-[1.08] tracking-[0.01em] ${
+          size === "md" ? "text-[1.375rem]" : "text-[1.125rem]"
         }`}
-        style={fell}
+        style={banner}
       >
         {item.headline}
       </h3>
       {(item.decks ?? []).map((d, i) => (
-        <p key={i} className="theme-text-secondary text-[0.9375rem] leading-snug mt-1 italic" style={fell}>
+        <p key={i} className="theme-text-secondary text-[0.9375rem] leading-snug mt-1 italic" style={head}>
           {d}
         </p>
       ))}
@@ -124,8 +126,8 @@ function Headline({ item, size = "md" }: { item: PaperItem; size?: "md" | "sm" }
 function Department({ title }: { title: string }) {
   return (
     <h2
-      className="theme-text-primary text-center uppercase tracking-[0.18em] text-[0.875rem] border-y-2 border-[var(--foreground)] py-1.5 mb-4"
-      style={fell}
+      className="theme-text-primary text-center uppercase font-bold tracking-[0.2em] text-[0.8125rem] border-y-2 border-[var(--foreground)] py-1.5 mb-4"
+      style={head}
     >
       {title}
     </h2>
@@ -178,7 +180,7 @@ export default function EditionView({
           >
             The Rebrew Intelligencer
           </h1>
-          <p className="theme-text-secondary italic text-[0.9375rem] md:text-[1.0625rem]" style={fell}>
+          <p className="theme-text-secondary italic text-[0.9375rem] md:text-[1.0625rem]" style={head}>
             Every item of news herein is true. The opinions, the advertisements and the Editor are inventions.
           </p>
           <div className="mt-4 border-t-[3px] border-[var(--foreground)]" />
@@ -199,8 +201,8 @@ export default function EditionView({
             <Clippable id={clipId("lead")}>
             <header className="text-center max-w-4xl mx-auto mb-6">
               <h2
-                className="theme-text-primary uppercase leading-[1.05] tracking-wide text-[1.875rem] sm:text-[2.5rem] md:text-[3.25rem]"
-                style={fell}
+                className="theme-text-primary uppercase font-bold leading-[0.98] tracking-[0.005em] text-[2.25rem] sm:text-[3.25rem] md:text-[4.25rem]"
+                style={banner}
               >
                 {lead.headline ?? edition.headline}
               </h2>
@@ -210,10 +212,10 @@ export default function EditionView({
                   <p
                     className={`theme-text-primary leading-snug ${
                       i === 0
-                        ? "uppercase tracking-wide text-[1.0625rem] md:text-[1.375rem]"
+                        ? "uppercase font-bold tracking-wide text-[1.0625rem] md:text-[1.375rem]"
                         : "italic text-[1rem] md:text-[1.1875rem] theme-text-secondary"
                     }`}
-                    style={fell}
+                    style={head}
                   >
                     {d}
                   </p>
@@ -322,7 +324,7 @@ export default function EditionView({
                 <Clippable key={i} id={clipId("ad", i)} className="border-2 border-[var(--foreground)] p-1">
                   <div className="border theme-border px-4 py-5 text-center h-full">
                     {ad.headline && (
-                      <p className="theme-text-primary uppercase leading-tight tracking-wide text-[1.125rem]" style={fell}>
+                      <p className="theme-text-primary uppercase font-bold leading-[1.05] text-[1.375rem]" style={banner}>
                         {ad.headline}
                       </p>
                     )}
@@ -330,7 +332,7 @@ export default function EditionView({
                       <p
                         key={j}
                         className={`theme-text-secondary leading-snug mt-2 ${j === 0 ? "italic" : "text-[0.9375rem]"}`}
-                        style={fell}
+                        style={head}
                       >
                         <span data-clip-p={j}>{line}</span>
                       </p>

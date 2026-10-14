@@ -17,20 +17,26 @@ type SatoriFont = { name: string; data: ArrayBuffer; style: "normal" | "italic";
 
 let cached: Promise<SatoriFont[]> | null = null;
 
-/** Black (blackletter nameplate), Fell (headlines, italics) and News (body). */
+/**
+ * Black (the blackletter nameplate), Banner (Oswald bold, headlines), Head
+ * (Libre Bodoni, roman bold and italic: decks, credits, ads) and News (body).
+ * The same faces as src/lib/paperFonts.ts, so a share image matches the page.
+ */
 export function paperFonts(): Promise<SatoriFont[]> {
   cached ??= Promise.all([
     googleFont("UnifrakturMaguntia"),
-    googleFont("IM+Fell+English"),
-    googleFont("IM+Fell+English:ital@1"),
+    googleFont("Oswald:wght@700"),
+    googleFont("Libre+Bodoni:wght@700"),
+    googleFont("Libre+Bodoni:ital@1"),
     googleFont("Noticia+Text"),
-  ]).then(([black, fell, fellItalic, news]) => {
+  ]).then(([black, banner, headBold, headItalic, news]) => {
     const out: SatoriFont[] = [];
     if (black) out.push({ name: "Black", data: black, style: "normal", weight: 400 });
-    if (fell) out.push({ name: "Fell", data: fell, style: "normal", weight: 400 });
-    if (fellItalic) out.push({ name: "Fell", data: fellItalic, style: "italic", weight: 400 });
+    if (banner) out.push({ name: "Banner", data: banner, style: "normal", weight: 700 });
+    if (headBold) out.push({ name: "Head", data: headBold, style: "normal", weight: 700 });
+    if (headItalic) out.push({ name: "Head", data: headItalic, style: "italic", weight: 400 });
     if (news) out.push({ name: "News", data: news, style: "normal", weight: 400 });
-    if (out.length < 4) cached = null; // try again next time rather than caching a partial set
+    if (out.length < 5) cached = null; // try again next time rather than caching a partial set
     return out;
   });
   return cached;

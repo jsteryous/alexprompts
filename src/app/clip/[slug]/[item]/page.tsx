@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@/lib/site";
+import { PAPER_FONTS_HREF } from "@/lib/paperFonts";
 import { getEdition, editionDateLine } from "@/lib/editions";
 import { clipImagePath, clipPath, findClip, parseExcerpt, tornEdge } from "@/lib/clips";
 import ClipShare from "@/components/ClipShare";
@@ -56,10 +57,9 @@ export default async function ClipPage(props: Props) {
   return (
     <section className="theme-page pt-28 md:pt-36 pb-24">
       {/* The same period faces EditionView loads; next/font/google breaks Turbopack (src/CLAUDE.md). */}
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap"
+        href={PAPER_FONTS_HREF}
         precedence="default"
       />
       <div className="max-w-2xl mx-auto px-4">
