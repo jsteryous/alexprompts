@@ -80,7 +80,14 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   system serif. `.paper-*` classes in `globals.css` set the ruled columns and drop cap.
   The readers in `src/lib/editions.ts` are defensive because the routine writes the JSON.
 - **`/api/hit`** — first-party pageview counter beaconed by `components/PageHit.tsx` from the
-  root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap.
+  root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap. Paths
+  and referrers are reduced to fixed labels before storage, because routines read the table
+  and a stranger controls both strings. A new route that should be counted goes into
+  `STATIC_PATHS` there AND into the `page_hits_path_known` check constraint.
+- **`/api/intelligencer/press`** — the press routine's only door (see the root `CLAUDE.md`).
+  Bearer `INTELLIGENCER_PRESS_SECRET`, constant-time compare, 10 bad attempts an hour per IP.
+  `validate()` rebuilds the edition from known fields only, so a new field in `EditionContent`
+  must be added there too or it is silently dropped.
 - **The story front page below is SUPERSEDED as of October 14, 2026**, kept for the record.
 - **`/`** — the front page (`revalidate = 300`), reframed October 7, 2026 to **"Just good
   stories."** Minimalist on purpose: the slogan in serif italic, a short accent rule, the

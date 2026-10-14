@@ -28,6 +28,16 @@
 > loop. `scripts/intelligencer/MAINTAINER.md` is a fortnightly code-improvement routine
 > prompt that needs the repo, Supabase and Gmail attached, so Alex creates it in the UI;
 > its changes are logged in `scripts/intelligencer/CHANGELOG.md`.
+> **The press holds no database or mail access (October 14, 2026).** It reads the open web,
+> so it talks to the site only through **`/api/intelligencer/press`**, authed by
+> `INTELLIGENCER_PRESS_SECRET` (set in Vercel and in the press's own cloud environment).
+> GET returns today's date, the last four numbers, views per number and the desk notes; POST
+> prints one number for today after the server rebuilds the JSON field by field (length caps,
+> http(s) links only, `safeImage` for pictures, dashes refused) and then emails the link and
+> social lines to `PRESS_NOTIFY_EMAIL` through Resend. A hijacked press can at worst print one
+> bad number a day. **`page_hits` holds no free text:** `/api/hit` stores only known route
+> shapes (article slugs collapse to `/<section>/*`) and a fixed list of referrer labels, and
+> two `NOT VALID` check constraints enforce the same at the database for every new row.
 > The "Just good stories" posts below keep their URLs and live in the Archive.
 
 > **THE REFRAME (October 7, 2026). The website is a story publication.**
@@ -179,6 +189,8 @@ one preview, `dry=1` reports the count, `force=1` resends.
 | `CRON_SECRET` | Authorizes the Vercel crons (`/api/sync-substack`, `/api/finalize-greenville`). |
 | `NEXT_PUBLIC_SUBSTACK_URL` / `SUBSTACK_FEED_URL` | Substack mirror into `/archive`. Base defaults to `https://rebrew.substack.com` (moved from `alexprompts.substack.com` October 1, 2026); if set in Vercel it must be the rebrew subdomain or unset. |
 | `SUBSCRIBE_RATE_LIMIT` / `REFER_RATE_LIMIT` | Soft per-IP hourly caps. |
+| `INTELLIGENCER_PRESS_SECRET` | At least 24 characters. The press routine's only credential, for `/api/intelligencer/press`. Same value in the press's cloud environment. Unset means the route answers 503. |
+| `PRESS_NOTIFY_EMAIL` | Where the site sends each new number's link and social lines. Server-side only, so the press cannot change the recipient. |
 
 Payment keys (Stripe or a commerce platform) do not exist yet. When they arrive they are
 server-only and never committed.
