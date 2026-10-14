@@ -42,6 +42,11 @@ export default function AboutPage() {
             A new number comes out on Tuesday, Thursday and Saturday mornings.
           </p>
           <p>
+            The name asks what is brewing. It began as a paper about real estate, and the RE
+            at the front of it still stands for that, though the Editor now reports on
+            whatever is brewing anywhere.
+          </p>
+          <p>
             The news is true. Every figure, name and date in the dispatches is checked
             against the sources listed at the foot of each number. The Editor, Mr. C. P.
             Ashby, is an invention, and so are his household, his rival across the street,

@@ -7,7 +7,7 @@
 > Thursday, Saturday), printed as a big-city American daily of 1945 (the paper began in an 1860 voice with No. 1
 > and moved to 1945 the same day because 1860 read as dated). **The news is true and
 > sourced; the Editor (C. P. Ashby), his household, the rival Evening Clarion, the letters
-> and the advertisements are inventions**, and the masthead, the colophon and `/about` all
+> and the advertisements are inventions**, and the colophon, the email footer and `/about` all
 > say so, along with the fact that a machine writes it. Editions are rows in Supabase
 > `intelligencer_editions` (JSON `content`, shape in `src/lib/editions.ts`), rendered by
 > `src/components/EditionView.tsx` at `/` (latest), `/edition/<YYYY-MM-DD>` and

@@ -91,3 +91,9 @@ to the log with its hypothesis and the measure it should move.
   owned list, and the sign-up promise is the paper three mornings a week. Hypothesis:
   subscribing is now worth doing and readers come back. Moves: confirmed subscribers, and
   views of new numbers in the first hours after 5:47 a.m.
+- **2026-10-14** (session, Alex's direction). **The paper is Christian**, presumptively and without preaching:
+  John 8:32 on the masthead (replacing the explicit "inventions" line, which stays in the colophon, the email footer
+  and /about), the Ashbys keep the Lord's Day, Saturday's number carries "For the Lord's Day." (one KJV verse), the
+  joke is on the Editor's pride and never on the faith. **No relevance-chasing:** no trends or memes to look current.
+  **The press must explain surprises** (No. 1 said nobody could explain Citi's fall; the reason was one search away).
+  The name: RE for real estate, and what's brewing; said once on /about.

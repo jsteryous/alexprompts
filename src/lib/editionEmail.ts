@@ -81,7 +81,7 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
 <tr><td style="padding:26px 30px 8px;text-align:center;color:${INK};">
   <p style="margin:0;font-family:${HEAD};font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${MUTED};">No. ${edition.number} &middot; Price: Free</p>
   <p style="margin:8px 0 0;font-family:${BLACKLETTER};font-size:40px;line-height:1.05;color:${INK};">The Rebrew Intelligencer</p>
-  <p style="margin:8px 0 0;font-family:${HEAD};font-style:italic;font-size:13px;color:${SOFT};">Every item of news herein is true. The opinions, the advertisements and the Editor are inventions.</p>
+  <p style="margin:8px 0 0;font-family:${HEAD};font-style:italic;font-size:13px;color:${SOFT};">And ye shall know the truth, and the truth shall make you free. John 8:32</p>
   ${rule(3, "14px 0 0")}
   <p style="margin:6px 0;font-family:${HEAD};font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">${esc(date)}</p>
   ${rule(1, "0")}

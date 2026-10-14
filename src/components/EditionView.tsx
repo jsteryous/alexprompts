@@ -182,7 +182,7 @@ export default function EditionView({
             The Rebrew Intelligencer
           </h1>
           <p className="theme-text-secondary italic text-[0.9375rem] md:text-[1.0625rem]" style={head}>
-            Every item of news herein is true. The opinions, the advertisements and the Editor are inventions.
+            And ye shall know the truth, and the truth shall make you free. John 8:32
           </p>
           <div className="mt-4 border-t-[3px] border-[var(--foreground)]" />
           <div className="flex items-center justify-between gap-3 py-1.5 type-eyebrow theme-text-primary">

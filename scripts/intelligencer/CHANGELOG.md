@@ -14,3 +14,6 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
 - **2026-10-14** (session). The press must explain surprises: when a result runs against its obvious reading (Citi beat
   and fell, and No. 1 said nobody could account for it), it searches for the reason and prints it, attributed. Live in the
   routine. Desk note 2 asks No. 2 for a "Further to" item on Citi.
+- **2026-10-14** (session). John 8:32 replaces the "inventions" line under the nameplate (page, email, share card);
+  the disclosure stays in the colophon, the email footer and /about. PRESS.md gains the paper's faith and Saturday's
+  "For the Lord's Day."; /about says what the name means.

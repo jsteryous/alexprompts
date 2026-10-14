@@ -61,7 +61,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           {headline}
         </div>
         <div style={{ display: "flex", fontSize: 22, fontStyle: "italic" }}>
-          Every item of news herein is true. rebrew.org
+          And ye shall know the truth, and the truth shall make you free. John 8:32
         </div>
       </div>
     ),
