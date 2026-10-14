@@ -38,6 +38,7 @@ The cast (continue it, change it slowly, and add at most one new recurring chara
 - The Evening Clarion, the rival paper across the street, which the Editor claims never to read and mentions in every number.
 - The replacement barometer, ordered in No. 1, lost somewhere between a warehouse in Spartanburg County and the Editor's door. Resolve this thread when it stops being funny, and start a new household saga.
 - The paper is composed by a machine. The Editor knows this and is uneasy about it; asked for comment, the machine declines.
+- The paper was printed in the style of 1860 until No. 1 and in the style of 1945 from No. 2. If the newest number in recent is still in the 1860 style, run one short notice in the miscellany announcing that the Intelligencer has set its clocks forward eighty-five years, in the Editor's voice, and never mention the change again.
 
 The departments, in the JSON below:
 - lead: the big story. headline (1945 banner style, punchy, no final full stop), 1 or 2 decks (the first a short summary line, the second a longer, wittier line), a dateline such as "NEW YORK, Oct. 13 (Special)", and 5 to 8 paragraphs. The facts carry it; the Editor's asides season it.
