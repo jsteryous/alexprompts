@@ -961,3 +961,167 @@ html.dark .editor-pop {
   text-align: center;
   opacity: 0.8;
 }
+
+/* ── The Editor's office (October 14, 2026) ───────────────────────────────
+   /office, drawn in components/office/OfficeScene.tsx. The drawing and its
+   panels are newsprint and ink in both themes, because they are objects in a
+   1945 room, not site chrome. Objects lift when pointed at, with a hard print
+   offset rather than a soft shadow. */
+.office-title {
+  font-family: "UnifrakturMaguntia", var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  color: var(--foreground);
+}
+.office-sub {
+  margin-top: 0.6rem;
+  font-family: "IM Fell English", var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--foreground-soft);
+}
+.office-frame {
+  position: relative;
+  border: 3px solid var(--foreground);
+  background: #ebe1c5;
+}
+.office-svg { display: block; width: 100%; height: auto; }
+.office-obj {
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+.office-obj:hover,
+.office-obj:focus-visible {
+  transform: translateY(-7px);
+  filter: drop-shadow(0 7px 0 rgba(29, 25, 18, 0.28));
+}
+.office-obj:focus-visible { filter: drop-shadow(0 0 0 #9a2323) drop-shadow(0 7px 0 rgba(154, 35, 35, 0.6)); }
+.office-note-a, .office-note-b { animation: office-float 3.2s ease-in-out infinite; }
+.office-note-b { animation-delay: 1.4s; }
+@keyframes office-float {
+  0%, 100% { transform: translateY(0); opacity: 0.35; }
+  50% { transform: translateY(-14px); opacity: 0.85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .office-obj, .office-note-a, .office-note-b { transition: none; animation: none; }
+}
+.office-tag {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  transform: translate(14px, 14px);
+  display: flex;
+  flex-direction: column;
+  max-width: 15rem;
+  padding: 0.45rem 0.7rem;
+  background: #fbf6e6;
+  color: #1d1912;
+  border: 2px solid #1d1912;
+  font-family: "IM Fell English", var(--font-serif);
+  line-height: 1.25;
+}
+.office-tag b { font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }
+.office-tag span { font-style: italic; font-size: 0.9rem; }
+
+.office-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  margin-top: 1.25rem;
+}
+.office-list button {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+  font-family: "IM Fell English", var(--font-serif);
+  line-height: 1.25;
+}
+.office-list button:hover { border-color: var(--foreground); }
+.office-list b { font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.85rem; }
+.office-list span { font-style: italic; font-size: 0.95rem; opacity: 0.8; }
+
+.office-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+@media (min-width: 768px) {
+  .office-scrim { align-items: stretch; }
+}
+.office-panel {
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #efe5c8;
+  color: #1d1912;
+  border-top: 4px solid #1d1912;
+  padding: 1.25rem 1.25rem 2rem;
+  font-family: var(--font-serif);
+  line-height: 1.55;
+}
+@media (min-width: 768px) {
+  .office-panel { width: 28rem; max-height: none; border-top: 0; border-left: 4px solid #1d1912; padding: 5.5rem 1.75rem 2rem; }
+}
+.office-panel p { margin-bottom: 0.8rem; }
+.office-panel a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #9a2323; }
+.office-panel-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid #1d1912;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.office-panel-top h2 { font-family: "IM Fell English", var(--font-serif); text-transform: uppercase; letter-spacing: 0.08em; font-size: 1.05rem; }
+.office-panel-top button { font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.office-kicker { font-family: "IM Fell English", var(--font-serif); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: #9a2323; margin-bottom: 0.3rem !important; }
+.office-head { font-family: "IM Fell English", var(--font-serif); font-size: 1.35rem; line-height: 1.15; margin-bottom: 0.6rem; }
+.office-fine { font-size: 0.85rem; opacity: 0.8; }
+.office-empty { font-style: italic; opacity: 0.85; }
+.office-big { font-family: "IM Fell English", var(--font-serif); font-size: 3.4rem; line-height: 1; margin-bottom: 0.2rem !important; }
+.office-button {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.55rem 1rem;
+  border: 2px solid #1d1912;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+.office-button:hover { background: #1d1912; color: #efe5c8; }
+.office-snippets { list-style: none; padding: 0; display: grid; gap: 0.9rem; }
+.office-snippets li { border-left: 3px solid #9a2323; padding-left: 0.75rem; }
+.office-snippets a { text-decoration: none !important; font-style: italic; }
+.office-snippets a:hover { text-decoration: underline !important; }
+.office-snippets span, .office-clipped span { display: block; font-size: 0.8rem; opacity: 0.7; margin-top: 0.15rem; }
+.office-clipped { padding-left: 1.2rem; display: grid; gap: 0.8rem; }
+.office-issues { list-style: none; padding: 0; }
+.office-issues li { border-bottom: 1px solid rgba(29, 25, 18, 0.25); padding: 0.45rem 0; }
+.office-issues a { text-decoration: none !important; }
+.office-issues span { font-family: "IM Fell English", var(--font-serif); color: #9a2323; margin-right: 0.4rem; }
+.office-item { margin-bottom: 1.2rem; }
+.office-table { width: 100%; border-collapse: collapse; margin-bottom: 0.6rem; }
+.office-table th, .office-table td { padding: 0.4rem 0; border-bottom: 1px solid rgba(29, 25, 18, 0.25); }
+.office-table th { text-align: left; font-weight: 400; }
+.office-table td { text-align: right; font-family: "Courier New", monospace; font-weight: 700; }
+.office-bars { display: grid; gap: 0.7rem; margin: 0.6rem 0 0.2rem; }
+.office-bars > div { display: grid; grid-template-columns: 7.5rem 1fr; align-items: center; column-gap: 0.6rem; }
+.office-bars > div span { font-size: 0.9rem; }
+.office-bars b { display: block; height: 1.1rem; background: #9a2323; border: 2px solid #1d1912; min-width: 2px; }
+.office-bars em { grid-column: 2; font-size: 0.85rem; }
+.office-countdown { display: flex; gap: 0.9rem; margin: 0.6rem 0 1rem; }
+.office-countdown span { display: flex; flex-direction: column; align-items: center; font-family: "Courier New", monospace; font-weight: 700; font-size: 2rem; line-height: 1; padding: 0.4rem 0.5rem; border: 2px solid #1d1912; background: #fbf6e6; min-width: 3.4rem; }
+.office-countdown small { font-family: var(--font-sans); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }

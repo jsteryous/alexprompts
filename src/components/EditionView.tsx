@@ -185,7 +185,9 @@ export default function EditionView({
           <div className="flex items-center justify-between gap-3 py-1.5 type-eyebrow theme-text-primary">
             <span className="hidden sm:inline">Greenville, South Carolina</span>
             <span className="mx-auto sm:mx-0">{editionDateLine(edition.slug)}</span>
-            <span className="hidden sm:inline">C. P. Ashby, Editor</span>
+            <Link href="/office" className="hidden sm:inline hover:underline underline-offset-4">
+              C. P. Ashby, Editor
+            </Link>
           </div>
           <div className="border-t border-[var(--foreground)]" />
           <div className="mt-[3px] border-t border-[var(--foreground)]" />

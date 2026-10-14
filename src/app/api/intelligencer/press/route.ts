@@ -4,7 +4,7 @@ import { timingSafeEqual } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rateLimit";
 import { sendEmail } from "@/lib/email";
-import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem } from "@/lib/editions";
+import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem, type Ticker } from "@/lib/editions";
 
 /**
  * THE PRESS'S ONE DOOR (October 14, 2026).
@@ -159,6 +159,31 @@ function item(v: unknown, field: string, opts: { image?: boolean } = {}): PaperI
   return out;
 }
 
+function num(v: unknown, field: string, min: number, max: number): number | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (typeof v !== "number" || !Number.isFinite(v) || v < min || v > max) {
+    throw new Invalid(`${field} must be a number between ${min} and ${max}`);
+  }
+  return Math.round(v * 100) / 100;
+}
+
+/** The closes as numbers, in ranges no real close will leave for decades. */
+function ticker(v: unknown): Ticker | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (typeof v !== "object" || Array.isArray(v)) throw new Invalid("ticker must be an object");
+  const o = v as Record<string, unknown>;
+  const session = str(o.session, "ticker.session", 10);
+  if (session && !/^\d{4}-\d{2}-\d{2}$/.test(session)) throw new Invalid("ticker.session must be YYYY-MM-DD");
+  const t: Ticker = {
+    session,
+    dow: num(o.dow, "ticker.dow", 1000, 1_000_000),
+    sp500: num(o.sp500, "ticker.sp500", 100, 100_000),
+    nasdaq: num(o.nasdaq, "ticker.nasdaq", 500, 500_000),
+  };
+  for (const k of Object.keys(t) as (keyof Ticker)[]) if (t[k] === undefined) delete t[k];
+  return Object.keys(t).length ? t : undefined;
+}
+
 function items(v: unknown, field: string, maxItems: number, opts: { image?: boolean } = {}): PaperItem[] | undefined {
   if (v === undefined || v === null) return undefined;
   if (!Array.isArray(v)) throw new Invalid(`${field} must be an array`);
@@ -182,6 +207,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
     amusements: items(c.amusements, "amusements", 3),
     miscellany: items(c.miscellany, "miscellany", 5),
     social: strs(c.social, "social", 3, 300),
+    ticker: ticker(c.ticker),
   };
   if (!content.lead?.paragraphs?.length) throw new Invalid("lead.paragraphs is required");
   if (!content.dispatches?.length) throw new Invalid("dispatches is required");

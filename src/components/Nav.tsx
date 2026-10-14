@@ -24,6 +24,10 @@ import { site, newsletterUrl } from "@/lib/site";
  * October 14, 2026: "Back Numbers" (/editions) joined the bar when the front
  * page became The Rebrew Intelligencer. About hides below `sm` so the bar
  * still fits a 390px phone beside the name; the footer carries it there.
+ *
+ * October 14, 2026: "The Office" (/office, the Editor's office) leads the bar,
+ * since it is the way into everything else. Back Issues hides below `sm` to
+ * keep the phone bar to two links; the stack of papers in the office reaches it.
  */
 export default function Nav() {
   const pathname = usePathname();
@@ -40,7 +44,10 @@ export default function Nav() {
         </Link>
 
         <nav className="flex items-center gap-6 md:gap-8">
-          <Link href="/editions" className="theme-link type-eyebrow whitespace-nowrap">
+          <Link href="/office" className="theme-link type-eyebrow whitespace-nowrap">
+            The Office
+          </Link>
+          <Link href="/editions" className="theme-link type-eyebrow whitespace-nowrap hidden sm:inline">
             Back Issues
           </Link>
           <Link href="/about" className="theme-link type-eyebrow hidden sm:inline">

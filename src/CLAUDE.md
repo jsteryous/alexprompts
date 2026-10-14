@@ -91,6 +91,15 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   tap-to-arm on touch screens, and the share sheet (`components/ClipShare.tsx`). The clip
   page is `noindex` (it is a doorway to the number) and its `og:image` is the clipping.
   **Never let a clip carry text in the URL**: the image and page rebuild it from the row.
+- **`/office`** — THE EDITOR'S OFFICE (October 14, 2026). `src/lib/office.ts` assembles
+  everything (cast files by regex over every number, sentence-split with abbreviation
+  guards so "Mrs. Ashby" survives, each line a `clipPath` with offsets; most-clipped from
+  `page_hits` with the service key; `content.ticker` for the coffee can and ticker;
+  `nextPressRun()` in New York time). `components/office/OfficeScene.tsx` draws the room
+  in one SVG (viewBox 1600x1000) with one `<Obj>` per object, a hover tag, a list of every
+  object under the drawing for phones and keyboards, and a newsprint panel per object.
+  The drawing and panels keep their newsprint palette in dark mode on purpose (an object,
+  not chrome). `.office-*` styles live at the end of `globals.css`.
 - **`/api/hit`** — first-party pageview counter beaconed by `components/PageHit.tsx` from the
   root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap. Paths
   and referrers are reduced to fixed labels before storage, because routines read the table

@@ -15,7 +15,17 @@
 > (and any line a reader highlights) can be clipped to `/clip/<date>/<item>?l=<p>.<start>.<end>`,
 > whose link preview is a torn-newsprint image from `/api/clip-image`. A clip is an address,
 > never a copy: the text is rebuilt from the printed number (`src/lib/clips.ts`), so nobody
-> can forge a clipping in the paper's name. The cloud routine **"Rebrew
+> can forge a clipping in the paper's name. **The Editor's office (`/office`, first in the nav):**
+> Mr. Ashby's 1945 office drawn in SVG (`components/office/OfficeScene.tsx`); every object
+> opens something from the paper, assembled by `src/lib/office.ts`: cast files built by
+> searching every number for Thaddeus, Mrs. Ashby, Fenwick, the Clarion and the barometer
+> (each line links to its clipping), the month's most-clipped items from `page_hits`, the
+> Coffee Can Index against the S&P 500 from `content.ticker` (closes the press writes as
+> numbers, validated at the press door), and a countdown to the next press run. The room
+> keeps itself up; add a new running gag by adding its regex to `CAST` and an object.
+> **Claude runs this site (Alex, October 14, 2026):** routines and Claude sessions own the
+> product and the creative calls; the standing goal is attention, clicks and sharing,
+> within reason and never at the cost of the truth and taste rules. The cloud routine **"Rebrew
 > Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
 > and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
 > (the cast bible and the taste rules live there). **"Intelligencer circulation report"**

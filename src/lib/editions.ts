@@ -71,6 +71,19 @@ export interface PaperSource {
   url?: string;
 }
 
+/**
+ * The latest session's closes as numbers (October 14, 2026), written by the
+ * press beside the prose market column so the Editor's office can chart them
+ * without parsing sentences. Optional: No. 1 predates it.
+ */
+export interface Ticker {
+  /** The trading day the closes are from, YYYY-MM-DD. */
+  session?: string;
+  dow?: number;
+  sp500?: number;
+  nasdaq?: number;
+}
+
 export interface EditionContent {
   lead?: PaperItem;
   dispatches?: PaperItem[];
@@ -83,6 +96,7 @@ export interface EditionContent {
   sources?: PaperSource[];
   /** Ready-to-post lines for social media, written by the press. Not printed. */
   social?: string[];
+  ticker?: Ticker;
 }
 
 export interface Edition {
@@ -128,6 +142,19 @@ export async function getEdition(slug: string): Promise<Edition | null> {
     .eq("slug", slug)
     .maybeSingle();
   return (data as Edition | null) ?? null;
+}
+
+/** The newest numbers with their content, for the Editor's office. */
+export async function getRecentEditions(limit = 60): Promise<Edition[]> {
+  const sb = client();
+  if (!sb) return [];
+  const { data } = await sb
+    .from(TABLE)
+    .select("number, slug, headline, summary, content, published_at")
+    .eq("status", "published")
+    .order("number", { ascending: false })
+    .limit(limit);
+  return (data as Edition[] | null) ?? [];
 }
 
 export async function listEditions(): Promise<EditionListing[]> {
