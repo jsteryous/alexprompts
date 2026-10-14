@@ -40,9 +40,14 @@
 > on the file page that the picture shows exactly the named subject under a reusable licence.
 > The press also emails Alex three ready-to-post social lines per number. The weekly review
 > writes a note to `intelligencer_notes`, which the press reads first: that is the learning
-> loop. `scripts/intelligencer/MAINTAINER.md` is a fortnightly code-improvement routine
-> prompt that needs the repo, Supabase and Gmail attached, so Alex creates it in the UI;
-> its changes are logged in `scripts/intelligencer/CHANGELOG.md`.
+> loop. **The Publisher** (`trig_01KyzXyjKpxfY6zYz9NwEtNQ`, Mondays 6:13 a.m. ET, prompt
+> `scripts/intelligencer/PUBLISHER.md`, replacing the fortnightly maintainer October 14,
+> 2026) owns the site week to week: it measures against `scripts/intelligencer/STRATEGY.md`
+> (goal, measures, dated targets, rules for changing course, ranked backlog), appends to
+> `SCOREBOARD.md`, steers the press with a note, builds and ships the top bet, logs it in
+> `STRATEGY.md` and `CHANGELOG.md`, and emails Alex a short report with one ask. **A Claude
+> session that changes direction should update `STRATEGY.md`**, because that file is the
+> Publisher's brief.
 > **The press holds no database or mail access (October 14, 2026).** It reads the open web,
 > so it talks to the site only through **`/api/intelligencer/press`**, authed by
 > `INTELLIGENCER_PRESS_SECRET` (set in Vercel and in the press's own cloud environment).
