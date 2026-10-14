@@ -83,7 +83,7 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   The readers in `src/lib/editions.ts` are defensive because the routine writes the JSON.
 - **`/clip/[slug]/[item]` and `/api/clip-image`** — CLIP AND SHARE (October 14, 2026).
   `src/lib/clips.ts` owns the item ids (`lead`, `market`, `editorial`, `dispatch-N`,
-  `letter-N`, `amusement-N`, `around-N`, `ad-N`, positional and stable because a printed
+  `odd-N` (Strange but True, `content.oddities`, added October 14, 2026), `letter-N`, `amusement-N`, `around-N`, `ad-N`, positional and stable because a printed
   number is never edited), the department names `EditionView` prints, the `?l=` excerpt
   parser (paragraph and character offsets, widened to whole words, capped at 420
   characters) and the seeded torn edge. `EditionView` wraps each item in `<Clippable>`

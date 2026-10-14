@@ -260,6 +260,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   const content: EditionContent = {
     lead: item(c.lead, "lead", { image: true }),
     dispatches: items(c.dispatches, "dispatches", 6, { image: true }),
+    oddities: items(c.oddities, "oddities", 5),
     markets: item(c.markets, "markets"),
     editorial: item(c.editorial, "editorial"),
     letters: letterItems(c.letters),

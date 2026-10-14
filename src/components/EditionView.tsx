@@ -259,6 +259,18 @@ export default function EditionView({
             </>
           )}
 
+          {(c.oddities ?? []).length > 0 && (
+            <Block>
+              <Department title={DEPARTMENTS.odd} />
+              {c.oddities!.map((o, i) => (
+                <Clippable key={i} id={clipId("odd", i)} className={i > 0 ? "mt-5" : ""}>
+                  <Headline item={o} size="sm" />
+                  <Paragraphs item={o} />
+                </Clippable>
+              ))}
+            </Block>
+          )}
+
           {c.markets && (
             <Block>
               <Department title={DEPARTMENTS.market} />

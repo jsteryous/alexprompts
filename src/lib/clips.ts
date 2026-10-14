@@ -19,6 +19,7 @@ import type { Edition, PaperItem } from "@/lib/editions";
 export const DEPARTMENTS = {
   lead: "Page One",
   dispatch: "By Wire",
+  odd: "Strange but True",
   market: "Wall Street",
   editorial: "The Editor's Desk",
   letter: "Letters to the Editor",
@@ -65,6 +66,7 @@ export function clipsOf(edition: Edition): Clip[] {
   const out: (Clip | null)[] = [
     fromItem("lead", c.lead),
     ...(c.dispatches ?? []).map((d, i) => fromItem("dispatch", d, i)),
+    ...(c.oddities ?? []).map((o, i) => fromItem("odd", o, i)),
     fromItem("market", c.markets),
     fromItem("editorial", c.editorial),
     ...(c.letters ?? []).map((l, i) => fromItem("letter", l, i)),
@@ -79,7 +81,7 @@ export function clipsOf(edition: Edition): Clip[] {
   return out.filter((x): x is Clip => x !== null);
 }
 
-const ID = /^(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})$/;
+const ID = /^(lead|market|editorial|(dispatch|odd|letter|amusement|around|ad)-\d{1,2})$/;
 
 export function findClip(edition: Edition, id: string): Clip | null {
   if (!ID.test(id)) return null;

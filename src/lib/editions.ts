@@ -92,6 +92,8 @@ export interface Ticker {
 export interface EditionContent {
   lead?: PaperItem;
   dispatches?: PaperItem[];
+  /** Short true stories that need no joke. Clipped as `odd-N`. */
+  oddities?: PaperItem[];
   markets?: PaperItem;
   editorial?: PaperItem;
   letters?: PaperItem[];

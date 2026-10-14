@@ -100,3 +100,6 @@ to the log with its hypothesis and the measure it should move.
 - **2026-10-14** (session, Alex's direction). Alex and Claude talk in Notion, not email: his desk page is read every
   week (his notes are owner direction, and the Publisher may push back), the report is a subpage there, and the only
   email is a two-line Monday nudge with the link.
+- **2026-10-14** (session). Bet on the writing and on true oddities as the share unit. Hypothesis: a true strange story
+  shared alone travels further than a quip, and news with no invented asides is safe to clip. Moves: clip opens
+  (watch `/clip/*/odd-*`) and views from outside. If oddities draw no clips by Nov 15, try them as the email's lead.

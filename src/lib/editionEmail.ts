@@ -61,6 +61,7 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
   const headline = (lead?.headline ?? edition.headline).replace(/\.$/, "");
   const leadParas = paras(lead, 2);
   const dispatches = (c.dispatches ?? []).map((d, i) => ({ d, href: `${url}#${clipId("dispatch", i)}` }));
+  const odd = (c.oddities ?? [])[0];
   const letter = (c.letters ?? [])[0];
   const ad = (c.advertisements ?? [])[0];
   const date = editionDateLine(edition.slug);
@@ -122,6 +123,17 @@ ${
     : ""
 }
 ${
+  odd
+    ? `<tr><td style="padding:0 30px;color:${INK};">
+  ${kicker("Strange but true")}
+  ${odd.headline ? `<p style="margin:0 0 8px;font-family:${BANNER};font-weight:700;font-size:16px;text-transform:uppercase;">${esc(odd.headline.replace(/\.$/, ""))}</p>` : ""}
+  ${paras(odd, 3)
+    .map((p) => `<p style="margin:0 0 10px;font-family:${BODY};font-size:16px;line-height:1.6;">${esc(p)}</p>`)
+    .join("")}
+</td></tr>`
+    : ""
+}
+${
   letter
     ? `<tr><td style="padding:0 30px;color:${INK};">
   ${kicker("A letter to the Editor")}
@@ -174,6 +186,7 @@ ${
     `Read the whole number: ${url}`,
     "",
     ...(dispatches.length ? ["ALSO IN THIS NUMBER", ...dispatches.map(({ d, href }) => `${(d.headline ?? "").replace(/\.$/, "")}: ${href}`), ""] : []),
+    ...(odd ? ["STRANGE BUT TRUE", ...(odd.headline ? [odd.headline] : []), ...paras(odd, 3), ""] : []),
     ...(letter ? ["A LETTER TO THE EDITOR", ...paras(letter, 4), ...(letter.signed ? [letter.signed] : []), ""] : []),
     "Know someone who would enjoy this? Forward it. They can sign up at " + `${SITE_URL}/subscribe`,
     "",

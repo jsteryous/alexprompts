@@ -24,3 +24,8 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   notes), with a two-line Gmail nudge; its limits now name the colophon, not the masthead, and include the letters form.
 - **2026-10-14** (session). Circulation report paused (routine disabled): the Publisher measures the same numbers and
   reports in Notion, so Alex gets one weekly report, not two.
+- **2026-10-14** (session). The writing. No. 1 closed eight news paragraphs on an Editor quip and ran two gags twice, so
+  the press now keeps every invented person out of the news (any item may be clipped alone and must be true end to end),
+  each gag runs once a number, the lead is 4 to 6 paragraphs and dispatches 2. New department **Strange but True**
+  (`content.oddities`, clip ids `odd-N`): 2 or 3 verified odd true stories, printed after the wire and sent in full in the
+  subscribers' email.
