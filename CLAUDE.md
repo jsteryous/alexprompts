@@ -55,7 +55,14 @@
 > prints one number for today after the server rebuilds the JSON field by field (length caps,
 > http(s) links only, `safeImage` for pictures, dashes refused) and then emails the link and
 > social lines to `PRESS_NOTIFY_EMAIL` through Resend. A hijacked press can at worst print one
-> bad number a day. **`page_hits` holds no free text:** `/api/hit` stores only known route
+> bad number a day. **Subscribers get every number by email (October 14, 2026):** after the
+> press has its answer, the door runs `broadcastEdition` (`src/lib/editionEmail.ts`) in
+> `after()`, sending a short newspaper (banner, the lead's opening, the other headlines, one
+> letter, one ad, a forward line, unsubscribe) to every confirmed `subscribers` row and
+> stamping `intelligencer_editions.emailed_at` so a number never goes twice. Manual previews,
+> counts and resends: `/api/intelligencer/broadcast?slug=<date>&test=|dry=1|force=1`
+> (PUBLISH_SECRET). The nav's Subscribe and a box at the foot of every number point at
+> `/subscribe`, the owned list; Substack does not carry the Intelligencer. **`page_hits` holds no free text:** `/api/hit` stores only known route
 > shapes (article slugs collapse to `/<section>/*`) and a fixed list of referrer labels, and
 > two `NOT VALID` check constraints enforce the same at the database for every new row.
 > The "Just good stories" posts below keep their URLs and live in the Archive.

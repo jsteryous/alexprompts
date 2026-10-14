@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { site, newsletterUrl } from "@/lib/site";
+import { site } from "@/lib/site";
 
 /**
  * The masthead bar, reframed October 7, 2026 ("Just good stories.").
@@ -19,7 +19,9 @@ import { site, newsletterUrl } from "@/lib/site";
  * "Reporting" tab (the old work is the footer's Archive now), and the
  * "Buying or Selling?" button (the page itself was removed October 7, 2026).
  *
- * Subscribe goes to Substack, the primary channel since October 2026.
+ * Subscribe goes to /subscribe, the owned list, since October 14, 2026: every
+ * confirmed subscriber gets each number of the Intelligencer by email, and
+ * Substack does not carry it.
  *
  * October 14, 2026: "Back Numbers" (/editions) joined the bar when the front
  * page became The Rebrew Intelligencer. About hides below `sm` so the bar
@@ -53,14 +55,9 @@ export default function Nav() {
           <Link href="/about" className="theme-link type-eyebrow hidden sm:inline">
             About
           </Link>
-          <a
-            href={newsletterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="theme-link type-eyebrow"
-          >
+          <Link href="/subscribe" className="theme-link type-eyebrow">
             Subscribe
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

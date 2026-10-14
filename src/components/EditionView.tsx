@@ -12,6 +12,7 @@ import {
 } from "@/lib/editions";
 import { DEPARTMENTS, clipId } from "@/lib/clips";
 import ClipLayer from "@/components/ClipLayer";
+import { SubscribeForm } from "@/components/SubscribeForm";
 import { PAPER_FONTS_HREF } from "@/lib/paperFonts";
 
 /**
@@ -343,6 +344,13 @@ export default function EditionView({
             </div>
           </section>
         )}
+
+        {/* ── Delivery: every number by email (src/lib/editionEmail.ts) ── */}
+        <section className="mt-10 pt-8 border-t-2 border-[var(--foreground)]">
+          <div className="max-w-xl mx-auto">
+            <SubscribeForm source="edition" cta="Deliver it" />
+          </div>
+        </section>
 
         {/* ── Authorities consulted, and the colophon ───────────────── */}
         <footer className="mt-10 pt-5 border-t-[3px] border-double border-[var(--foreground)]">

@@ -63,22 +63,17 @@ forwarding, share-worthy formats, anything a reader would send a friend) rank hi
 Ranked. The Publisher builds the top bet it can finish and prove in one run, then moves it
 to the log with its hypothesis and the measure it should move.
 
-1. **Deliver each number by email to confirmed subscribers.** When the press prints, the
-   site sends the number (or its best three items with a link) to the owned list through
-   the existing Resend broadcast path. Hypothesis: subscribing becomes worth doing and
-   readers come back three mornings a week. Moves: subscribers, weekly views. Also point the
-   nav's Subscribe link at `/subscribe` (the owned list) instead of Substack, so every
-   sign-up is ours and countable.
-2. **"Real or Ashby?"** A game on each number: six headlines, some true from the news and
+1. **"Real or Ashby?"** A game on each number: six headlines, some true from the news and
    some invented by the Editor, and the reader guesses which. A shareable result grid in the
    Wordle style, with no spoilers. Real headlines come from the printed news; invented ones
    are labelled as inventions once answered. Hypothesis: the paper's premise (the truth
    sounds made up) is most shareable as a game. Moves: views from outside, clip opens.
-3. **A share prompt after reading.** At the foot of each number, the single funniest line
+2. **A share prompt after reading.** At the foot of each number, the single funniest line
    pre-clipped, with one tap to share it.
-4. **Forwardable edition emails.** A "Forward to a friend who needs this" line and a
-   sign-up link in every edition email.
-5. **The office grows.** A new object whenever a new running gag earns one.
+3. **Subscriber growth loops.** The edition email already carries a forward line. Next: a
+   sign-up prompt on clip pages and in the office, and a "forwarded to you?" line at the top
+   of the email for readers who did not sign up themselves. Moves: subscribers.
+4. **The office grows.** A new object whenever a new running gag earns one.
 
 ## Log
 
@@ -90,3 +85,9 @@ to the log with its hypothesis and the measure it should move.
   letters and ads, the blackletter nameplate kept, body on the system serif. Applied to the
   paper, the clip page and image, the edition share card and the office. Hypothesis: the
   page reads as the era it claims. No measure moves on its own; judge by clip opens.
+- **2026-10-14 (session, at Alex's request).** Shipped bet 1, every number by email to the
+  confirmed list: the press door sends it in after() once a number prints, stamped in
+  `emailed_at`; the nav's Subscribe and a box at the foot of every number now point at the
+  owned list, and the sign-up promise is the paper three mornings a week. Hypothesis:
+  subscribing is now worth doing and readers come back. Moves: confirmed subscribers, and
+  views of new numbers in the first hours after 5:47 a.m.

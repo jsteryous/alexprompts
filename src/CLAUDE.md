@@ -138,9 +138,11 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   **No form on it, on purpose**: anything transactional links to `/buying-or-selling`, and
   everything else is email, which is the right primitive when a tip usually arrives as an
   attachment.
-- **`/subscribe`** — the owned-list capture page and the nav's Subscribe target. It used to
-  point at Substack; the site's promise ships on the owned list, so Substack is demoted to
-  the form's secondary link.
+- **`/subscribe`** — the owned-list capture page and the nav's Subscribe target (again, as of
+  October 14, 2026, after a spell pointing at Substack). Confirmed subscribers get every
+  number of the Intelligencer by email (`src/lib/editionEmail.ts`); the SubscribeForm default
+  now promises exactly that, and its Substack link is off by default because Substack does
+  not carry the paper. Every edition ends with the same form (`source="edition"`).
 - **`/privacy`, `/terms`** — rewritten October 7, 2026 when the last form came off. The SMS
   terms (`/terms#sms`) and the SMS consent strings are gone; the site collects only
   newsletter emails. `/privacy` still covers the past submissions kept in `referral_leads`.

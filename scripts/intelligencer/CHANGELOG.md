@@ -9,3 +9,5 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   and SCOREBOARD.md as its record. Backlog: edition email to subscribers, 1945 typography, Real or Ashby?
 - **2026-10-14** (session). 1945 typography: Oswald banner heads, Libre Bodoni decks and departments, blackletter nameplate
   kept. Paper, clip page and image, share card and office (src/lib/paperFonts.ts, src/lib/ogFonts.ts).
+- **2026-10-14** (session). Every number by email to confirmed subscribers (src/lib/editionEmail.ts, sent from the press door
+  in after()); Subscribe now points at the owned list; a sign-up box closes every number.

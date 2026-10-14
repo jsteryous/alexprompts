@@ -1,9 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { timingSafeEqual } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rateLimit";
 import { sendEmail } from "@/lib/email";
+import { broadcastEdition } from "@/lib/editionEmail";
+
+/** Room for the subscriber send that runs in after() once the press has its answer. */
+export const maxDuration = 300;
 import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem, type Ticker } from "@/lib/editions";
 
 /**
@@ -304,5 +308,12 @@ export async function POST(req: Request) {
     emailed = result.ok ? "sent" : `failed: ${result.error ?? "unknown"}`;
   }
 
-  return NextResponse.json({ number, slug, url: link, emailed }, { status: 201 });
+  // Then the subscribers, after the press has its answer: a send to the whole list
+  // can take a while, and the press must never wait on it or retry because of it.
+  after(async () => {
+    const result = await broadcastEdition(sb, slug);
+    if (!result.body.ok) console.error("[press] subscriber email:", JSON.stringify(result.body));
+  });
+
+  return NextResponse.json({ number, slug, url: link, emailed, subscribers: "sending" }, { status: 201 });
 }

@@ -568,3 +568,7 @@ alter table public.page_hits add constraint page_hits_path_known
   check (path ~ '^/(|editions|office|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
 alter table public.page_hits add constraint page_hits_referrer_known
   check (referrer in ('', 'other', 'google', 'bing', 'duckduckgo', 'x', 'facebook', 'instagram', 'linkedin', 'reddit', 'threads', 'bluesky', 'substack', 'hackernews', 'youtube', 'tiktok', 'email', 'ai-assistant')) not valid;
+
+-- The Intelligencer by email (October 14, 2026): stamped once a printed number has
+-- gone to the confirmed list (src/lib/editionEmail.ts), so it never goes out twice.
+alter table public.intelligencer_editions add column if not exists emailed_at timestamptz;

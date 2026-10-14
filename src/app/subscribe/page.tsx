@@ -4,7 +4,7 @@ import { SubscribeForm } from "@/components/SubscribeForm";
 
 export const metadata: Metadata = {
   title: "Subscribe",
-  description: "True stories of incredible people and events, sent by email when they are ready.",
+  description: "The Rebrew Intelligencer by email: the real news, printed as a 1945 newspaper, three mornings a week. Free.",
   alternates: { canonical: `${site.url}/subscribe` },
 };
 
@@ -27,7 +27,7 @@ export default function SubscribePage() {
   return (
     <section className="theme-page pt-36 pb-24 min-h-[70vh]">
       <div className="max-w-2xl mx-auto px-6">
-        <SubscribeForm source="subscribe-page" cta="Subscribe free" />
+        <SubscribeForm source="subscribe-page" cta="Deliver it" />
       </div>
     </section>
   );

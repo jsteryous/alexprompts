@@ -36,15 +36,20 @@ type State = "idle" | "submitting" | "done" | "error";
 // REFRAMED October 7, 2026 to the "Just good stories." brand; the default
 // heading is the slogan and the blurb is site.oneLiner said as an offer.
 //
+// REFRAMED October 14, 2026 to The Rebrew Intelligencer: every confirmed
+// subscriber now gets each number by email (src/lib/editionEmail.ts), so the
+// promise is the paper, three mornings a week. The Substack link is off by
+// default because Substack does not carry the Intelligencer.
+//
 // Keep this in sync with site.ts and the homepage standfirst; all three say the
 // same thing at different lengths, and a subscriber promised one beat and sent
 // another unsubscribes.
 export function SubscribeForm({
   source,
-  heading = "Just good stories.",
-  blurb = "True stories of incredible people and events, sent by email when they are ready.",
+  heading = "Have the Intelligencer delivered.",
+  blurb = "The real news, printed as a 1945 newspaper, in your inbox Tuesday, Thursday and Saturday mornings. Free.",
   cta = "Subscribe",
-  showSubstackLink = true,
+  showSubstackLink = false,
 }: {
   source: string;
   heading?: string;
