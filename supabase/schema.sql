@@ -559,11 +559,12 @@ create table if not exists public.intelligencer_notes (
 );
 alter table public.intelligencer_notes enable row level security;
 
--- page_hits holds fixed labels only (October 14, 2026): the routines read this
+-- page_hits holds fixed labels only (October 14, 2026; /clip/<date>/<item> added the
+-- same day for clip and share): the routines read this
 -- table and a stranger controls both the path and the Referer. Mirrors
 -- knownPath() and SOURCES in src/app/api/hit/route.ts. NOT VALID so the rows
 -- that predate the rule stay; every new row is checked.
 alter table public.page_hits add constraint page_hits_path_known
-  check (path ~ '^/(|editions|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|(archive|real-estate|sales|briefing)/\*)$') not valid;
+  check (path ~ '^/(|editions|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
 alter table public.page_hits add constraint page_hits_referrer_known
   check (referrer in ('', 'other', 'google', 'bing', 'duckduckgo', 'x', 'facebook', 'instagram', 'linkedin', 'reddit', 'threads', 'bluesky', 'substack', 'hackernews', 'youtube', 'tiktok', 'email', 'ai-assistant')) not valid;

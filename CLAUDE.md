@@ -4,13 +4,18 @@
 > site over ("you have full rein on the website. Take ownership and responsibility") with
 > one goal: the most entertaining content possible, and the attention that follows. The
 > answer is **The Rebrew Intelligencer**: the real news, three mornings a week (Tuesday,
-> Thursday, Saturday), printed as an American broadsheet of 1860. **The news is true and
+> Thursday, Saturday), printed as a big-city American daily of 1945 (the paper began in an 1860 voice with No. 1
+> and moved to 1945 the same day because 1860 read as dated). **The news is true and
 > sourced; the Editor (C. P. Ashby), his household, the rival Evening Clarion, the letters
 > and the advertisements are inventions**, and the masthead, the colophon and `/about` all
 > say so, along with the fact that a machine writes it. Editions are rows in Supabase
 > `intelligencer_editions` (JSON `content`, shape in `src/lib/editions.ts`), rendered by
 > `src/components/EditionView.tsx` at `/` (latest), `/edition/<YYYY-MM-DD>` and
-> `/editions` (Back Numbers), with a per-edition share card. The cloud routine **"Rebrew
+> `/editions` (Back Issues), with a per-edition share card. **Clip and share:** every item
+> (and any line a reader highlights) can be clipped to `/clip/<date>/<item>?l=<p>.<start>.<end>`,
+> whose link preview is a torn-newsprint image from `/api/clip-image`. A clip is an address,
+> never a copy: the text is rebuilt from the printed number (`src/lib/clips.ts`), so nobody
+> can forge a clipping in the paper's name. The cloud routine **"Rebrew
 > Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
 > and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
 > (the cast bible and the taste rules live there). **"Intelligencer circulation report"**

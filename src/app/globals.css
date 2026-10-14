@@ -802,3 +802,162 @@ html.dark .editor-pop {
 .paper-plate {
   filter: grayscale(1) contrast(1.15) sepia(0.12);
 }
+
+/* ── Clip and share (October 14, 2026) ─────────────────────────────────────
+   components/ClipLayer.tsx adds .clip-ready to the paper once it is running, so
+   the scissors only appear where clipping works. Hover draws a dashed cut line
+   and a scissors cursor; a tap on a touch screen arms the item instead
+   (.clip-armed). An item reached from a clip page by its #id flashes once. */
+.clip-target {
+  position: relative;
+  scroll-margin-top: 6rem;
+}
+.clip-ready .clip-target.clip-armed,
+.clip-ready .clip-target:target {
+  outline: 1.5px dashed var(--foreground);
+  outline-offset: 8px;
+}
+.clip-ready .clip-target:target {
+  animation: clip-found 2.4s ease-out 1 forwards;
+}
+@keyframes clip-found {
+  0%, 40% { outline-color: var(--accent); }
+  100% { outline-color: transparent; }
+}
+@media (hover: hover) {
+  .clip-ready .clip-target:hover {
+    outline: 1.5px dashed var(--foreground);
+    outline-offset: 8px;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='6' cy='6' r='3' fill='%23fff'/%3E%3Ccircle cx='6' cy='18' r='3' fill='%23fff'/%3E%3Cpath d='M8.1 8.1 20 20M8.1 15.9 20 4'/%3E%3C/svg%3E") 6 12, pointer;
+  }
+  .clip-ready .clip-target:hover::before {
+    content: "\2702";
+    position: absolute;
+    top: -1.2rem;
+    left: -0.5rem;
+    padding: 0 0.3rem;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--foreground);
+    background: var(--background);
+    pointer-events: none;
+  }
+}
+.clip-tab {
+  position: absolute;
+  z-index: 40;
+  transform: translate(-50%, calc(-100% - 8px));
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.8rem;
+  color: var(--background);
+  background: var(--foreground);
+}
+.clip-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+}
+.clip-sheet-panel {
+  width: 100%;
+  max-width: 44rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border-strong);
+  background: var(--background);
+}
+
+/* The clipping on its own page (/clip/<date>/<item>): yellowed newsprint in
+   both themes, because it is an object lying on the page, with the torn edge
+   drawn by an inline clip-path from tornEdge() in src/lib/clips.ts. */
+.clip-paper {
+  background: #efe5c8;
+  color: #1d1912;
+  padding: 3rem 2.25rem 2.5rem;
+}
+@media (min-width: 640px) {
+  .clip-paper { padding: 3.5rem 3.5rem 3rem; }
+}
+.clip-nameplate {
+  font-family: "UnifrakturMaguntia", var(--font-serif);
+  font-size: 2.1rem;
+  line-height: 1;
+}
+.clip-rule-heavy { border-top: 3px solid currentColor; margin-top: 0.6rem; }
+.clip-rule { border-top: 1px solid currentColor; margin-bottom: 1.5rem; }
+.clip-dateline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0;
+  font-family: "IM Fell English", var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.clip-headline {
+  font-family: "IM Fell English", var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.clip-body {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  text-align: justify;
+  hyphens: auto;
+  margin-bottom: 0.8rem;
+}
+.clip-dateline-inline {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.8125em;
+}
+.clip-ad-line {
+  font-family: "IM Fell English", var(--font-serif);
+  font-style: italic;
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.clip-signed {
+  font-family: "IM Fell English", var(--font-serif);
+  font-style: italic;
+  text-align: right;
+}
+.clip-excerpt {
+  font-family: "IM Fell English", var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.3;
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+}
+.clip-from {
+  font-family: "IM Fell English", var(--font-serif);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.75;
+}
+.clip-credit {
+  margin-top: 2rem;
+  font-family: "IM Fell English", var(--font-serif);
+  font-style: italic;
+  font-size: 0.875rem;
+  text-align: center;
+  opacity: 0.8;
+}

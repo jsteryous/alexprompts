@@ -10,6 +10,8 @@ import {
   safeUrl,
   volumeOf,
 } from "@/lib/editions";
+import { DEPARTMENTS, clipId } from "@/lib/clips";
+import ClipLayer from "@/components/ClipLayer";
 
 /**
  * THE REBREW INTELLIGENCER, rendered as a broadsheet (October 14, 2026).
@@ -19,6 +21,9 @@ import {
  * rest of the paper flowing down newspaper columns (one on a phone, three on a
  * desk). Advertisements sit in ruled boxes, and the sources the news was checked
  * against close the page, because every item of news in it is true.
+ *
+ * Every item is wrapped in <Clippable> so a reader can clip it out and share
+ * it (src/lib/clips.ts, components/ClipLayer.tsx, /clip/<date>/<item>).
  *
  * Fonts: the nameplate is UnifrakturMaguntia and the headlines IM Fell English,
  * loaded from Google Fonts with a plain stylesheet link (next/font/google breaks
@@ -43,7 +48,7 @@ function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: bool
           {item.dateline && i === 0 && (
             <span className="font-semibold tracking-wide uppercase text-[0.8125em]">{item.dateline}. </span>
           )}
-          {p}
+          <span data-clip-p={i}>{p}</span>
         </p>
       ))}
       {item.signed && (
@@ -127,6 +132,15 @@ function Department({ title }: { title: string }) {
   );
 }
 
+/** One clippable item: the scissors (components/ClipLayer.tsx) find it by `data-clip`, and a clip page links back to it by id. */
+function Clippable({ id, className = "", children }: { id: string; className?: string; children: React.ReactNode }) {
+  return (
+    <div id={id} data-clip={id} className={`clip-target ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 function Block({ children }: { children: React.ReactNode }) {
   return <section className="break-inside-avoid-column mb-7">{children}</section>;
 }
@@ -148,7 +162,7 @@ export default function EditionView({
     .filter((s) => s.url);
 
   return (
-    <article className="theme-page pt-24 md:pt-28 pb-20">
+    <article className="theme-page pt-24 md:pt-28 pb-20" data-clip-root>
       <link rel="stylesheet" href={FONTS} precedence="default" />
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* ── Nameplate ─────────────────────────────────────────────── */}
@@ -180,6 +194,7 @@ export default function EditionView({
         {/* ── The lead ──────────────────────────────────────────────── */}
         {lead && (
           <section className="mt-8 md:mt-10 pb-8 border-b-2 border-[var(--foreground)]">
+            <Clippable id={clipId("lead")}>
             <header className="text-center max-w-4xl mx-auto mb-6">
               <h2
                 className="theme-text-primary uppercase leading-[1.05] tracking-wide text-[1.875rem] sm:text-[2.5rem] md:text-[3.25rem]"
@@ -211,6 +226,7 @@ export default function EditionView({
             <div className="paper-columns md:columns-2 lg:columns-3">
               <Paragraphs item={lead} dropCap />
             </div>
+            </Clippable>
           </section>
         )}
 
@@ -219,16 +235,20 @@ export default function EditionView({
           {(c.dispatches ?? []).length > 0 && (
             <>
               <Block>
-                <Department title="By Wire" />
-                <Headline item={c.dispatches![0]} />
-                <Plate item={c.dispatches![0]} />
-                <Paragraphs item={c.dispatches![0]} />
+                <Department title={DEPARTMENTS.dispatch} />
+                <Clippable id={clipId("dispatch", 0)}>
+                  <Headline item={c.dispatches![0]} />
+                  <Plate item={c.dispatches![0]} />
+                  <Paragraphs item={c.dispatches![0]} />
+                </Clippable>
               </Block>
               {c.dispatches!.slice(1).map((d, i) => (
                 <Block key={i}>
-                  <Headline item={d} />
-                  <Plate item={d} />
-                  <Paragraphs item={d} />
+                  <Clippable id={clipId("dispatch", i + 1)}>
+                    <Headline item={d} />
+                    <Plate item={d} />
+                    <Paragraphs item={d} />
+                  </Clippable>
                 </Block>
               ))}
             </>
@@ -236,52 +256,56 @@ export default function EditionView({
 
           {c.markets && (
             <Block>
-              <Department title="Wall Street" />
-              <Headline item={c.markets} />
-              <Paragraphs item={c.markets} />
+              <Department title={DEPARTMENTS.market} />
+              <Clippable id={clipId("market")}>
+                <Headline item={c.markets} />
+                <Paragraphs item={c.markets} />
+              </Clippable>
             </Block>
           )}
 
           {c.editorial && (
             <Block>
-              <Department title="The Editor's Desk" />
-              <Headline item={c.editorial} />
-              <Paragraphs item={c.editorial} />
+              <Department title={DEPARTMENTS.editorial} />
+              <Clippable id={clipId("editorial")}>
+                <Headline item={c.editorial} />
+                <Paragraphs item={c.editorial} />
+              </Clippable>
             </Block>
           )}
 
           {(c.letters ?? []).length > 0 && (
             <Block>
-              <Department title="Letters to the Editor" />
+              <Department title={DEPARTMENTS.letter} />
               {c.letters!.map((l, i) => (
-                <div key={i} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
+                <Clippable key={i} id={clipId("letter", i)} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
                   <Headline item={l} size="sm" />
                   <Paragraphs item={l} />
-                </div>
+                </Clippable>
               ))}
             </Block>
           )}
 
           {(c.amusements ?? []).length > 0 && (
             <Block>
-              <Department title="Stage, Screen and Radio" />
+              <Department title={DEPARTMENTS.amusement} />
               {c.amusements!.map((a, i) => (
-                <div key={i} className={i > 0 ? "mt-5" : ""}>
+                <Clippable key={i} id={clipId("amusement", i)} className={i > 0 ? "mt-5" : ""}>
                   <Headline item={a} size="sm" />
                   <Paragraphs item={a} />
-                </div>
+                </Clippable>
               ))}
             </Block>
           )}
 
           {(c.miscellany ?? []).length > 0 && (
             <Block>
-              <Department title="Around Town" />
+              <Department title={DEPARTMENTS.around} />
               {c.miscellany!.map((m, i) => (
-                <div key={i} className={i > 0 ? "mt-5" : ""}>
+                <Clippable key={i} id={clipId("around", i)} className={i > 0 ? "mt-5" : ""}>
                   <Headline item={m} size="sm" />
                   <Paragraphs item={m} />
-                </div>
+                </Clippable>
               ))}
             </Block>
           )}
@@ -293,7 +317,7 @@ export default function EditionView({
             <Department title="Advertisements" />
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {c.advertisements!.map((ad, i) => (
-                <div key={i} className="border-2 border-[var(--foreground)] p-1">
+                <Clippable key={i} id={clipId("ad", i)} className="border-2 border-[var(--foreground)] p-1">
                   <div className="border theme-border px-4 py-5 text-center h-full">
                     {ad.headline && (
                       <p className="theme-text-primary uppercase leading-tight tracking-wide text-[1.125rem]" style={fell}>
@@ -306,11 +330,11 @@ export default function EditionView({
                         className={`theme-text-secondary leading-snug mt-2 ${j === 0 ? "italic" : "text-[0.9375rem]"}`}
                         style={fell}
                       >
-                        {line}
+                        <span data-clip-p={j}>{line}</span>
                       </p>
                     ))}
                   </div>
-                </div>
+                </Clippable>
               ))}
             </div>
           </section>
@@ -360,6 +384,7 @@ export default function EditionView({
           </nav>
         </footer>
       </div>
+      <ClipLayer slug={edition.slug} number={edition.number} />
     </article>
   );
 }

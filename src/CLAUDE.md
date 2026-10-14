@@ -73,12 +73,24 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   see the root `CLAUDE.md`). `/` renders the latest row of `intelligencer_editions` through
   `components/EditionView.tsx`; `/edition/<YYYY-MM-DD>` is each number's permanent URL with
   its own `opengraph-image.tsx` (blackletter nameplate plus the lead headline, fonts fetched
-  from Google Fonts at render and falling back if that fails); `/editions` is Back Numbers.
+  from Google Fonts at render and falling back if that fails); `/editions` is Back Issues.
   All `revalidate = 300`, so a new row appears within five minutes with no deploy. The
   nameplate and headline faces (UnifrakturMaguntia, IM Fell English) load by a plain
   stylesheet `<link>` in `EditionView`, never `next/font/google`; body copy stays on the
   system serif. `.paper-*` classes in `globals.css` set the ruled columns and drop cap.
   The readers in `src/lib/editions.ts` are defensive because the routine writes the JSON.
+- **`/clip/[slug]/[item]` and `/api/clip-image`** — CLIP AND SHARE (October 14, 2026).
+  `src/lib/clips.ts` owns the item ids (`lead`, `market`, `editorial`, `dispatch-N`,
+  `letter-N`, `amusement-N`, `around-N`, `ad-N`, positional and stable because a printed
+  number is never edited), the department names `EditionView` prints, the `?l=` excerpt
+  parser (paragraph and character offsets, widened to whole words, capped at 420
+  characters) and the seeded torn edge. `EditionView` wraps each item in `<Clippable>`
+  (`data-clip` plus an `id` anchor) and each paragraph's text in `data-clip-p`, so offsets
+  never count the dateline. `components/ClipLayer.tsx` is the scissors: hover cut line and
+  cursor (CSS under `.clip-ready`), "Clip this line" on a selection inside one paragraph,
+  tap-to-arm on touch screens, and the share sheet (`components/ClipShare.tsx`). The clip
+  page is `noindex` (it is a doorway to the number) and its `og:image` is the clipping.
+  **Never let a clip carry text in the URL**: the image and page rebuild it from the row.
 - **`/api/hit`** — first-party pageview counter beaconed by `components/PageHit.tsx` from the
   root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap. Paths
   and referrers are reduced to fixed labels before storage, because routines read the table
