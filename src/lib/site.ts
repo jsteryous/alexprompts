@@ -90,20 +90,21 @@ export const site = {
   // THE INTELLIGENCER, October 14, 2026. Alex gave the site over ("you have
   // full rein ... take ownership") with one goal, entertainment and attention,
   // and the front page became The Rebrew Intelligencer: the real news, printed
-  // three mornings a week as an 1860s broadsheet. The true stories keep their
+  // three mornings a week as a 1945 big-city daily (it began as an 1860s
+  // broadsheet and moved to 1945 on October 14, 2026, to read faster). The true stories keep their
   // URLs and live in the Archive. The tagline below describes the paper.
-  tagline: "The news of the day, as it would have been printed in 1860.",
+  tagline: "The news of the day, as it would have been printed in 1945.",
 
   // The homepage statement. Same words as the tagline on purpose: the slogan is
   // the whole pitch, and a second line saying it again at more length would be
   // the redundancy a minimalist page exists to avoid.
   headline: "The Rebrew Intelligencer",
 
-  oneLiner: "The real news, three mornings a week, printed as an 1860s broadsheet.",
+  oneLiner: "The real news, three mornings a week, printed as a 1945 newspaper.",
   description:
-    "The Rebrew Intelligencer prints the real news of the day as an 1860s " +
-    "broadsheet would have, with telegraphic dispatches, a money column, " +
-    "letters to the Editor and patent medicine advertisements.",
+    "The Rebrew Intelligencer prints the real news of the day as a big-city " +
+    "daily of 1945 would have, with wire news, a Wall Street column, letters " +
+    "to the Editor and advertisements for remedies nobody should take.",
 } as const;
 
 /**

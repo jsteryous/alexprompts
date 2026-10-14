@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const edition = await getEdition(slug);
   if (!edition) return { alternates: { canonical: `${site.url}/edition/${slug}` } };
   const title = `${edition.headline} (No. ${edition.number})`;
-  const description = edition.summary ?? "The Rebrew Intelligencer: the real news, printed as an 1860s broadsheet.";
+  const description = edition.summary ?? "The Rebrew Intelligencer: the real news, printed as a 1945 newspaper.";
   return {
     title,
     description,

@@ -6,7 +6,7 @@ import { listEditions, editionDateLine, editionHref } from "@/lib/editions";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Back Numbers",
+  title: "Back Issues",
   description: "Every number of The Rebrew Intelligencer, newest first.",
   alternates: { canonical: `${site.url}/editions` },
 };
@@ -18,7 +18,7 @@ export default async function EditionsPage() {
     <section className="theme-page pt-32 md:pt-40 pb-24">
       <div className="max-w-2xl mx-auto px-6">
         <h1 className="font-serif theme-text-primary text-center text-[2.25rem] md:text-[2.75rem] leading-tight">
-          Back Numbers
+          Back Issues
         </h1>
         <p className="font-serif theme-text-secondary text-center mt-3 mb-12">
           Every number of The Rebrew Intelligencer, newest first.

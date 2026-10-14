@@ -15,8 +15,8 @@ export const revalidate = 300;
  *
  * Alex handed the site over with one goal, the most entertaining content
  * possible and the attention that follows it, and the answer was The Rebrew
- * Intelligencer: the real news, three mornings a week, printed as an 1860s
- * broadsheet. The front page always shows the latest number; each number also
+ * Intelligencer: the real news, three mornings a week, printed as a 1945
+ * big-city daily (it began as an 1860s broadsheet). The front page always shows the latest number; each number also
  * keeps its own URL at /edition/<date>, and /editions lists them all.
  *
  * Editions are rows in `intelligencer_editions`, written by the cloud routine

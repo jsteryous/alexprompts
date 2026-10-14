@@ -41,7 +41,7 @@ export default function Nav() {
 
         <nav className="flex items-center gap-6 md:gap-8">
           <Link href="/editions" className="theme-link type-eyebrow whitespace-nowrap">
-            Back Numbers
+            Back Issues
           </Link>
           <Link href="/about" className="theme-link type-eyebrow hidden sm:inline">
             About

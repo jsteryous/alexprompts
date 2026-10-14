@@ -56,7 +56,7 @@ function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: bool
 }
 
 /**
- * An illustration, printed the way a broadsheet of 1860 printed one: in ink,
+ * An illustration, printed the way a 1940s daily ran a news photograph:
  * inside a ruled frame, with a caption beneath and the credit in small type.
  * The grayscale and contrast filter is what lets a modern photograph sit on
  * the period page; `paper-plate` in globals.css carries it.
@@ -115,7 +115,7 @@ function Headline({ item, size = "md" }: { item: PaperItem; size?: "md" | "sm" }
   );
 }
 
-/** A department heading, like "TELEGRAPHIC DISPATCHES", set between rules. */
+/** A department heading, like "BY WIRE", set between rules. */
 function Department({ title }: { title: string }) {
   return (
     <h2
@@ -156,7 +156,7 @@ export default function EditionView({
           <div className="flex items-center justify-between gap-3 type-eyebrow theme-text-muted border-b theme-border pb-2">
             <span>Vol. {roman(volumeOf(edition.slug))}. No. {edition.number}.</span>
             <span className="hidden sm:inline">Published Tuesdays, Thursdays &amp; Saturdays</span>
-            <span>Price, Gratis.</span>
+            <span>Price: Free</span>
           </div>
           <h1
             className="theme-text-primary leading-none mt-5 mb-3 text-[2.6rem] sm:text-[4rem] md:text-[5.5rem]"
@@ -219,7 +219,7 @@ export default function EditionView({
           {(c.dispatches ?? []).length > 0 && (
             <>
               <Block>
-                <Department title="Telegraphic Dispatches" />
+                <Department title="By Wire" />
                 <Headline item={c.dispatches![0]} />
                 <Plate item={c.dispatches![0]} />
                 <Paragraphs item={c.dispatches![0]} />
@@ -236,7 +236,7 @@ export default function EditionView({
 
           {c.markets && (
             <Block>
-              <Department title="Money and Commerce" />
+              <Department title="Wall Street" />
               <Headline item={c.markets} />
               <Paragraphs item={c.markets} />
             </Block>
@@ -264,7 +264,7 @@ export default function EditionView({
 
           {(c.amusements ?? []).length > 0 && (
             <Block>
-              <Department title="Society and Amusements" />
+              <Department title="Stage, Screen and Radio" />
               {c.amusements!.map((a, i) => (
                 <div key={i} className={i > 0 ? "mt-5" : ""}>
                   <Headline item={a} size="sm" />
@@ -276,7 +276,7 @@ export default function EditionView({
 
           {(c.miscellany ?? []).length > 0 && (
             <Block>
-              <Department title="Local Miscellany" />
+              <Department title="Around Town" />
               {c.miscellany!.map((m, i) => (
                 <div key={i} className={i > 0 ? "mt-5" : ""}>
                   <Headline item={m} size="sm" />
@@ -320,7 +320,7 @@ export default function EditionView({
         <footer className="mt-10 pt-5 border-t-[3px] border-double border-[var(--foreground)]">
           {sources.length > 0 && (
             <div className="mb-6">
-              <h2 className="type-eyebrow theme-text-muted mb-2">Authorities consulted for this number</h2>
+              <h2 className="type-eyebrow theme-text-muted mb-2">Sources for this edition</h2>
               <ol className="columns-1 md:columns-2 gap-8 text-[0.8125rem] theme-text-secondary list-decimal pl-5">
                 {sources.map((s, i) => (
                   <li key={i} className="break-inside-avoid mb-1">
@@ -348,7 +348,7 @@ export default function EditionView({
               ) : null}
             </span>
             <Link href="/editions" className="theme-link">
-              All back numbers
+              All back issues
             </Link>
             <span>
               {next ? (

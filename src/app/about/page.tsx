@@ -36,8 +36,8 @@ export default function AboutPage() {
 
         <div className="font-serif theme-text-secondary text-[1.125rem] md:text-[1.1875rem] leading-[1.75] space-y-6">
           <p>
-            The Rebrew Intelligencer prints the real news of the day the way an American
-            broadsheet of 1860 would have printed it, with telegraphic dispatches, a money
+            The Rebrew Intelligencer prints the real news of the day the way a big-city
+            American daily of 1945 would have printed it, with wire news, a Wall Street
             column, letters to the Editor and advertisements for remedies nobody should take.
             A new number comes out on Tuesday, Thursday and Saturday mornings.
           </p>

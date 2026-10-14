@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "The Rebrew Intelligencer",
-    "news as an 1860s newspaper",
-    "Victorian newspaper",
+    "news as a 1945 newspaper",
+    "1940s newspaper",
     "satirical newspaper",
     "true stories",
     "Rebrew",
