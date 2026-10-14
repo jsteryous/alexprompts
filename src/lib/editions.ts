@@ -22,6 +22,11 @@ export interface PaperItem {
   paragraphs?: string[];
   /** Letters to the Editor sign off with this. */
   signed?: string;
+  /**
+   * A letter from a real reader (src/lib/letters.ts). Set only by the press door
+   * when it copies a stored letter, never by the press itself; the page marks it.
+   */
+  reader?: boolean;
   /** An illustration. Printed only when its URL is on an allowed host. */
   image?: PaperImage;
 }

@@ -17,3 +17,6 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
 - **2026-10-14** (session). John 8:32 replaces the "inventions" line under the nameplate (page, email, share card);
   the disclosure stays in the colophon, the email footer and /about. PRESS.md gains the paper's faith and Saturday's
   "For the Lord's Day."; /about says what the name means.
+- **2026-10-14** (session). Letters to the Editor from real readers: /letters (form, no links, 1,500 characters) stores
+  to `intelligencer_letters` and emails Alex; the press door shows unprinted letters (never the email) and prints one by
+  `reader_letter_id`, copying the reader's words exactly and marking it "From a reader". Every number links to /letters.

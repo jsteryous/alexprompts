@@ -48,6 +48,10 @@
 > `STRATEGY.md` and `CHANGELOG.md`, and emails Alex a short report with one ask. **A Claude
 > session that changes direction should update `STRATEGY.md`**, because that file is the
 > Publisher's brief.
+> **Letters from real readers (October 14, 2026):** `/letters` posts to `/api/letters`, which stores the letter in
+> `intelligencer_letters` and emails `PRESS_NOTIFY_EMAIL`; the press door's GET lists unprinted letters (no email
+> addresses) and POST prints one by `reader_letter_id`, the server copying the words exactly and setting `reader: true`
+> (marked "From a reader" on the page), so the press can answer a letter but never alter or forge one. See `src/lib/letters.ts`.
 > **The press holds no database or mail access (October 14, 2026).** It reads the open web,
 > so it talks to the site only through **`/api/intelligencer/press`**, authed by
 > `INTELLIGENCER_PRESS_SECRET` (set in Vercel and in the press's own cloud environment).

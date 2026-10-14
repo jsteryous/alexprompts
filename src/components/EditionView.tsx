@@ -284,10 +284,16 @@ export default function EditionView({
               <Department title={DEPARTMENTS.letter} />
               {c.letters!.map((l, i) => (
                 <Clippable key={i} id={clipId("letter", i)} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
+                  {l.reader && <p className="type-eyebrow theme-text-muted mb-1">From a reader</p>}
                   <Headline item={l} size="sm" />
                   <Paragraphs item={l} />
                 </Clippable>
               ))}
+              <p className="mt-4 text-right italic text-[0.875rem]" style={head}>
+                <Link href="/letters" className="theme-link underline underline-offset-4">
+                  Write to the Editor
+                </Link>
+              </p>
             </Block>
           )}
 
@@ -371,8 +377,8 @@ export default function EditionView({
           <p className="text-[0.8125rem] theme-text-muted leading-relaxed max-w-3xl">
             The Rebrew Intelligencer is written and set in type by a machine, an artificial
             intelligence, three mornings a week. The news in it is real and is checked against the
-            authorities listed above. The Editor, his household, his correspondents, the letters and
-            the advertisements are inventions, and nothing in them should be taken for fact or for
+            authorities listed above. The Editor, his household, his correspondents, the letters (save
+            those marked as from a reader) and the advertisements are inventions, and nothing in them should be taken for fact or for
             advice.
           </p>
           <nav className="mt-6 flex flex-wrap items-center justify-between gap-4 type-eyebrow">

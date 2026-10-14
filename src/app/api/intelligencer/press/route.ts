@@ -8,6 +8,7 @@ import { broadcastEdition } from "@/lib/editionEmail";
 
 /** Room for the subscriber send that runs in after() once the press has its answer. */
 export const maxDuration = 300;
+import { LETTER_WINDOW_DAYS, READER_LETTERS_PER_NUMBER, letterParagraphs, undash } from "@/lib/letters";
 import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem, type Ticker } from "@/lib/editions";
 
 /**
@@ -23,7 +24,8 @@ import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem, 
  *
  *   GET   what the press needs to write the next number: today's date in New
  *         York, whether today is already printed, the last four numbers, views
- *         per number, and the desk notes. Nothing else in the database.
+ *         per number, the desk notes, and unprinted letters from readers.
+ *         Nothing else in the database.
  *   POST  one number for today. The server picks the number and the date, so a
  *         second number for the same day is refused by the unique slug. The
  *         JSON is rebuilt field by field with length caps, links must be http(s),
@@ -84,10 +86,14 @@ export async function GET(req: Request) {
 
   const today = todayNY();
   const since = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
-  const [recent, hits, notes] = await Promise.all([
+  const lettersSince = new Date(Date.now() - LETTER_WINDOW_DAYS * 86400000).toISOString();
+  const [recent, hits, notes, letters] = await Promise.all([
     sb.from(TABLE).select("number, slug, headline, content").order("number", { ascending: false }).limit(4),
     sb.from("page_hits").select("path, views").gte("day", since),
     sb.from("intelligencer_notes").select("created_at, note").order("id", { ascending: false }).limit(5),
+    // Never the reader's email: the press sees only what could be printed.
+    sb.from("intelligencer_letters").select("id, created_at, signed, body")
+      .eq("status", "new").gte("created_at", lettersSince).order("id", { ascending: true }).limit(8),
   ]);
 
   // Views per number, plus the front page, which always shows the newest.
@@ -106,6 +112,7 @@ export async function GET(req: Request) {
     recent: editions,
     views_last_14_days: views,
     notes: notes.data ?? [],
+    reader_letters: letters.data ?? [],
   });
 }
 
@@ -195,6 +202,54 @@ function items(v: unknown, field: string, maxItems: number, opts: { image?: bool
   return v.map((x, i) => item(x, `${field}[${i}]`, opts)!);
 }
 
+/**
+ * Letters: invented ones are ordinary items; a reader's letter is named by
+ * `reader_letter_id` with the press's headline and an optional Editor's `reply`,
+ * and its words are filled in from the database in POST (resolveReaderLetters).
+ */
+type LetterDraft = PaperItem & { readerLetterId?: number; reply?: string };
+
+function letterItems(v: unknown): LetterDraft[] | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (!Array.isArray(v)) throw new Invalid("letters must be an array");
+  if (v.length > 4) throw new Invalid("letters has more than 4 entries");
+  const out = v.map((x, i): LetterDraft => {
+    const o = (x ?? {}) as Record<string, unknown>;
+    if (o.reader_letter_id === undefined || o.reader_letter_id === null) {
+      if (o.reader !== undefined) throw new Invalid(`letters[${i}].reader is set by the site, not the press`);
+      return item(x, `letters[${i}]`)!;
+    }
+    const id = o.reader_letter_id;
+    if (typeof id !== "number" || !Number.isInteger(id) || id < 1) throw new Invalid(`letters[${i}].reader_letter_id must be a letter id`);
+    let reply = str(o.reply, `letters[${i}].reply`, 300);
+    if (reply) reply = `[${reply.replace(/^\[|\]$/g, "").trim()}]`;
+    return { headline: str(o.headline, `letters[${i}].headline`, 200, true), readerLetterId: id, reply };
+  });
+  const readers = out.filter((l) => l.readerLetterId);
+  if (readers.length > READER_LETTERS_PER_NUMBER) throw new Invalid(`at most ${READER_LETTERS_PER_NUMBER} reader letters per number`);
+  if (new Set(readers.map((l) => l.readerLetterId)).size !== readers.length) throw new Invalid("a reader letter appears twice");
+  return out;
+}
+
+/** Copies each named reader's letter in exactly as written and signed. */
+async function resolveReaderLetters(sb: SupabaseClient, letters: LetterDraft[] | undefined): Promise<number[]> {
+  const ids = (letters ?? []).flatMap((l) => (l.readerLetterId ? [l.readerLetterId] : []));
+  if (!ids.length) return [];
+  const { data } = await sb.from("intelligencer_letters").select("id, body, signed").in("id", ids).eq("status", "new");
+  const byId = new Map((data ?? []).map((r) => [r.id as number, r]));
+  for (const l of letters!) {
+    if (!l.readerLetterId) continue;
+    const row = byId.get(l.readerLetterId);
+    if (!row) throw new Invalid(`reader letter ${l.readerLetterId} is not an unprinted letter`);
+    l.paragraphs = [...letterParagraphs(row.body), ...(l.reply ? [l.reply] : [])];
+    l.signed = undash(row.signed);
+    l.reader = true;
+    delete l.readerLetterId;
+    delete l.reply;
+  }
+  return ids;
+}
+
 /** Rebuilds the edition from known fields only; anything else is dropped. */
 function validate(body: unknown): { headline: string; summary: string; content: EditionContent } {
   if (!body || typeof body !== "object") throw new Invalid("body must be a JSON object");
@@ -207,7 +262,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
     dispatches: items(c.dispatches, "dispatches", 6, { image: true }),
     markets: item(c.markets, "markets"),
     editorial: item(c.editorial, "editorial"),
-    letters: items(c.letters, "letters", 4),
+    letters: letterItems(c.letters),
     amusements: items(c.amusements, "amusements", 3),
     miscellany: items(c.miscellany, "miscellany", 5),
     social: strs(c.social, "social", 3, 300),
@@ -267,6 +322,14 @@ export async function POST(req: Request) {
   const sb = admin();
   if (!sb) return NextResponse.json({ error: "database not configured" }, { status: 503 });
 
+  let readerLetterIds: number[];
+  try {
+    readerLetterIds = await resolveReaderLetters(sb, parsed.content.letters);
+  } catch (e) {
+    if (e instanceof Invalid) return NextResponse.json({ error: e.message }, { status: 400 });
+    throw e;
+  }
+
   const slug = todayNY();
   const { data: last } = await sb.from(TABLE).select("number, slug").order("number", { ascending: false }).limit(1).maybeSingle();
   if (last?.slug === slug) return NextResponse.json({ error: "already printed today", slug }, { status: 409 });
@@ -283,6 +346,10 @@ export async function POST(req: Request) {
   if (error) {
     const status = error.code === "23505" ? 409 : 500;
     return NextResponse.json({ error: status === 409 ? "already printed today" : "insert failed" }, { status });
+  }
+
+  if (readerLetterIds.length) {
+    await sb.from("intelligencer_letters").update({ status: "printed", printed_in: slug }).in("id", readerLetterIds);
   }
 
   revalidatePath("/");

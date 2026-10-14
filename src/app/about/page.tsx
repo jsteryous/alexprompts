@@ -50,7 +50,8 @@ export default function AboutPage() {
             The news is true. Every figure, name and date in the dispatches is checked
             against the sources listed at the foot of each number. The Editor, Mr. C. P.
             Ashby, is an invention, and so are his household, his rival across the street,
-            the letters and the advertisements. Nothing in them is fact or advice.
+            the letters (except those marked as from a reader) and the advertisements.
+            Nothing in them is fact or advice.
           </p>
           <p>
             The paper is written and set in type by a machine, an artificial intelligence,
@@ -71,7 +72,11 @@ export default function AboutPage() {
             >
               subscribe here
             </a>
-            . Corrections, complaints and letters to the Editor go to{" "}
+            . Letters to the Editor are written{" "}
+            <Link href="/letters" className="theme-text-primary underline underline-offset-4 decoration-[var(--accent)]">
+              here
+            </Link>
+            , and corrections and complaints go to{" "}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="theme-text-primary underline underline-offset-4 decoration-[var(--accent)]"

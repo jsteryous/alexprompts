@@ -565,10 +565,25 @@ alter table public.intelligencer_notes enable row level security;
 -- knownPath() and SOURCES in src/app/api/hit/route.ts. NOT VALID so the rows
 -- that predate the rule stay; every new row is checked.
 alter table public.page_hits add constraint page_hits_path_known
-  check (path ~ '^/(|editions|office|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
+  check (path ~ '^/(|editions|office|letters|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
 alter table public.page_hits add constraint page_hits_referrer_known
   check (referrer in ('', 'other', 'google', 'bing', 'duckduckgo', 'x', 'facebook', 'instagram', 'linkedin', 'reddit', 'threads', 'bluesky', 'substack', 'hackernews', 'youtube', 'tiktok', 'email', 'ai-assistant')) not valid;
 
 -- The Intelligencer by email (October 14, 2026): stamped once a printed number has
 -- gone to the confirmed list (src/lib/editionEmail.ts), so it never goes out twice.
 alter table public.intelligencer_editions add column if not exists emailed_at timestamptz;
+
+-- Letters to the Editor from real readers (October 14, 2026), written at /letters
+-- through /api/letters. Service key only. The press sees unprinted letters through
+-- its door and prints one by id; the server copies the reader's words exactly, so
+-- the press can neither alter a letter nor pass off its own as a reader's.
+create table if not exists public.intelligencer_letters (
+  id bigserial primary key,
+  created_at timestamptz not null default now(),
+  body text not null check (char_length(body) between 40 and 1500),
+  signed text not null check (char_length(signed) between 2 and 80),
+  email text check (email is null or char_length(email) <= 254),
+  status text not null default 'new' check (status in ('new', 'printed', 'declined')),
+  printed_in text
+);
+alter table public.intelligencer_letters enable row level security;

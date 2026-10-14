@@ -24,7 +24,7 @@ const BOT = /bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|quora|wh
  */
 const STATIC_PATHS = new Set([
   "/", "/editions", "/about", "/reporting", "/archive", "/real-estate", "/sales",
-  "/briefing", "/contact", "/privacy", "/terms", "/subscribe", "/office",
+  "/briefing", "/contact", "/privacy", "/terms", "/subscribe", "/office", "/letters",
 ]);
 const SECTIONS = new Set(["archive", "real-estate", "sales", "briefing"]);
 
