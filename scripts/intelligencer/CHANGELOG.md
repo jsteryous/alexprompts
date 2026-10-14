@@ -22,3 +22,5 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   `reader_letter_id`, copying the reader's words exactly and marking it "From a reader". Every number links to /letters.
 - **2026-10-14** (session). The Publisher reads Alex's Notion desk and reports there (subpage plus callouts under his
   notes), with a two-line Gmail nudge; its limits now name the colophon, not the masthead, and include the letters form.
+- **2026-10-14** (session). Circulation report paused (routine disabled): the Publisher measures the same numbers and
+  reports in Notion, so Alex gets one weekly report, not two.

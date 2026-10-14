@@ -1,3 +1,5 @@
+<!-- PAUSED 2026-10-14: the Monday Publisher measures the same numbers and reports in Notion. The routine trig_017z59c2rJKARMYZtdE1A4Yh is disabled, not deleted. -->
+
 Write this week's circulation report for THE REBREW INTELLIGENCER (www.rebrew.org) and email it to jsteryous@gmail.com. Do not touch any code repository. This run reads, sends one email, and writes one note for the press (step NOTE below); it makes no other database write. Load Supabase execute_sql and Gmail send_message with ToolSearch if they are deferred. Supabase project id: ykuenmwfxecmmqichwit.
 
 READ

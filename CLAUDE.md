@@ -29,7 +29,7 @@
 > Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
 > and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
 > (the cast bible and the taste rules live there). **"Intelligencer circulation report"**
-> (`trig_017z59c2rJKARMYZtdE1A4Yh`, Sundays 7:52 a.m. ET) emails Alex the week's numbers;
+> (`trig_017z59c2rJKARMYZtdE1A4Yh`, Sundays 7:52 a.m. ET; **paused October 14, 2026**, folded into the Publisher's Notion report) emailed Alex the week's numbers;
 > prompt in `scripts/intelligencer/CIRCULATION.md`. Both need the Supabase connector (and
 > the report Gmail) attached in the claude.ai Routines UI; the API could not attach them.
 > **Analytics:** Vercel Web Analytics is not enabled on the project, so every page beacons
