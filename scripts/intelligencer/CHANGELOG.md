@@ -20,3 +20,5 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
 - **2026-10-14** (session). Letters to the Editor from real readers: /letters (form, no links, 1,500 characters) stores
   to `intelligencer_letters` and emails Alex; the press door shows unprinted letters (never the email) and prints one by
   `reader_letter_id`, copying the reader's words exactly and marking it "From a reader". Every number links to /letters.
+- **2026-10-14** (session). The Publisher reads Alex's Notion desk and reports there (subpage plus callouts under his
+  notes), with a two-line Gmail nudge; its limits now name the colophon, not the masthead, and include the letters form.

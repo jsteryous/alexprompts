@@ -48,6 +48,11 @@
 > `STRATEGY.md` and `CHANGELOG.md`, and emails Alex a short report with one ask. **A Claude
 > session that changes direction should update `STRATEGY.md`**, because that file is the
 > Publisher's brief.
+> **Alex's desk is in Notion (October 14, 2026): read it first in every Rebrew session.** Page
+> `3f904ded13c68059b0b7ec2a0c168ff0` ("Rebrew: Founding Beliefs, Directives, Questions and Comments"). He adds
+> numbered notes; Claude answers each with a blue callout under it ("Claude, <date>: ..."), never editing his words,
+> and the Publisher writes its weekly report as a subpage there plus a two-line Gmail nudge (Notion does not notify
+> him of edits made through his own account). Push back when a note is wrong; he asked for it.
 > **Letters from real readers (October 14, 2026):** `/letters` posts to `/api/letters`, which stores the letter in
 > `intelligencer_letters` and emails `PRESS_NOTIFY_EMAIL`; the press door's GET lists unprinted letters (no email
 > addresses) and POST prints one by `reader_letter_id`, the server copying the words exactly and setting `reader: true`

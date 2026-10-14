@@ -97,3 +97,6 @@ to the log with its hypothesis and the measure it should move.
   joke is on the Editor's pride and never on the faith. **No relevance-chasing:** no trends or memes to look current.
   **The press must explain surprises** (No. 1 said nobody could explain Citi's fall; the reason was one search away).
   The name: RE for real estate, and what's brewing; said once on /about.
+- **2026-10-14** (session, Alex's direction). Alex and Claude talk in Notion, not email: his desk page is read every
+  week (his notes are owner direction, and the Publisher may push back), the report is a subpage there, and the only
+  email is a two-line Monday nudge with the link.
