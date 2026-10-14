@@ -11,3 +11,6 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   kept. Paper, clip page and image, share card and office (src/lib/paperFonts.ts, src/lib/ogFonts.ts).
 - **2026-10-14** (session). Every number by email to confirmed subscribers (src/lib/editionEmail.ts, sent from the press door
   in after()); Subscribe now points at the owned list; a sign-up box closes every number.
+- **2026-10-14** (session). The press must explain surprises: when a result runs against its obvious reading (Citi beat
+  and fell, and No. 1 said nobody could account for it), it searches for the reason and prints it, attributed. Live in the
+  routine. Desk note 2 asks No. 2 for a "Further to" item on Citi.
