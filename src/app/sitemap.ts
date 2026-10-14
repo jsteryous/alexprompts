@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/posts";
+import { listEditions } from "@/lib/editions";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+    { url: `${SITE_URL}/editions`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/reporting`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/briefing`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/sales`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
@@ -49,8 +51,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const editionRoutes: MetadataRoute.Sitemap = (await listEditions()).map((e) => ({
+    url: `${SITE_URL}/edition/${e.slug}`,
+    lastModified: new Date(e.published_at),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticRoutes,
+    ...editionRoutes,
     ...issueRoutes,
     ...realEstateRoutes,
     ...salesRoutes,

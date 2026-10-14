@@ -20,6 +20,10 @@ import { site, newsletterUrl } from "@/lib/site";
  * "Buying or Selling?" button (the page itself was removed October 7, 2026).
  *
  * Subscribe goes to Substack, the primary channel since October 2026.
+ *
+ * October 14, 2026: "Back Numbers" (/editions) joined the bar when the front
+ * page became The Rebrew Intelligencer. About hides below `sm` so the bar
+ * still fits a 390px phone beside the name; the footer carries it there.
  */
 export default function Nav() {
   const pathname = usePathname();
@@ -36,7 +40,10 @@ export default function Nav() {
         </Link>
 
         <nav className="flex items-center gap-6 md:gap-8">
-          <Link href="/about" className="theme-link type-eyebrow">
+          <Link href="/editions" className="theme-link type-eyebrow whitespace-nowrap">
+            Back Numbers
+          </Link>
+          <Link href="/about" className="theme-link type-eyebrow hidden sm:inline">
             About
           </Link>
           <a

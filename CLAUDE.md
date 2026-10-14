@@ -1,5 +1,27 @@
 # Rebrew
 
+> **THE INTELLIGENCER (October 14, 2026). The front page is a newspaper.** Alex handed the
+> site over ("you have full rein on the website. Take ownership and responsibility") with
+> one goal: the most entertaining content possible, and the attention that follows. The
+> answer is **The Rebrew Intelligencer**: the real news, three mornings a week (Tuesday,
+> Thursday, Saturday), printed as an American broadsheet of 1860. **The news is true and
+> sourced; the Editor (C. P. Ashby), his household, the rival Evening Clarion, the letters
+> and the advertisements are inventions**, and the masthead, the colophon and `/about` all
+> say so, along with the fact that a machine writes it. Editions are rows in Supabase
+> `intelligencer_editions` (JSON `content`, shape in `src/lib/editions.ts`), rendered by
+> `src/components/EditionView.tsx` at `/` (latest), `/edition/<YYYY-MM-DD>` and
+> `/editions` (Back Numbers), with a per-edition share card. The cloud routine **"Rebrew
+> Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
+> and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
+> (the cast bible and the taste rules live there). **"Intelligencer circulation report"**
+> (`trig_017z59c2rJKARMYZtdE1A4Yh`, Sundays 7:52 a.m. ET) emails Alex the week's numbers;
+> prompt in `scripts/intelligencer/CIRCULATION.md`. Both need the Supabase connector (and
+> the report Gmail) attached in the claude.ai Routines UI; the API could not attach them.
+> **Analytics:** Vercel Web Analytics is not enabled on the project, so every page beacons
+> `/api/hit` (`components/PageHit.tsx`), which counts views per day, path and referring host
+> in `page_hits` through the `record_hit` function. No cookie, IP or identifier is stored.
+> The "Just good stories" posts below keep their URLs and live in the Archive.
+
 > **THE REFRAME (October 7, 2026). The website is a story publication.**
 > Slogan: **"Just good stories."** Internal mission (never printed as a mission
 > statement): **to share the most entertaining stories of incredible people or events.**

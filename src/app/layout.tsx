@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import PageHit from "@/components/PageHit";
 import { site, socials } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,11 +17,11 @@ export const metadata: Metadata = {
   },
   description: site.description,
   keywords: [
+    "The Rebrew Intelligencer",
+    "news as an 1860s newspaper",
+    "Victorian newspaper",
+    "satirical newspaper",
     "true stories",
-    "history stories",
-    "stories of great men",
-    "stories of bravery",
-    "business history",
     "Rebrew",
   ],
   openGraph: {
@@ -103,6 +104,9 @@ export default function RootLayout({
             Serves first-party from /_vercel/insights; enable it for the project in
             the Vercel dashboard (Hobby free tier). No-op locally / when disabled. */}
         <Analytics />
+        {/* First-party, cookieless pageview counts into Supabase page_hits,
+            which the Intelligencer routines read. See app/api/hit/route.ts. */}
+        <PageHit />
       </body>
     </html>
   );

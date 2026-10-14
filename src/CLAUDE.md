@@ -69,6 +69,19 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
 
 ## Routes
 
+- **`/`, `/edition/[slug]`, `/editions`** — **The Rebrew Intelligencer** (October 14, 2026;
+  see the root `CLAUDE.md`). `/` renders the latest row of `intelligencer_editions` through
+  `components/EditionView.tsx`; `/edition/<YYYY-MM-DD>` is each number's permanent URL with
+  its own `opengraph-image.tsx` (blackletter nameplate plus the lead headline, fonts fetched
+  from Google Fonts at render and falling back if that fails); `/editions` is Back Numbers.
+  All `revalidate = 300`, so a new row appears within five minutes with no deploy. The
+  nameplate and headline faces (UnifrakturMaguntia, IM Fell English) load by a plain
+  stylesheet `<link>` in `EditionView`, never `next/font/google`; body copy stays on the
+  system serif. `.paper-*` classes in `globals.css` set the ruled columns and drop cap.
+  The readers in `src/lib/editions.ts` are defensive because the routine writes the JSON.
+- **`/api/hit`** — first-party pageview counter beaconed by `components/PageHit.tsx` from the
+  root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap.
+- **The story front page below is SUPERSEDED as of October 14, 2026**, kept for the record.
 - **`/`** — the front page (`revalidate = 300`), reframed October 7, 2026 to **"Just good
   stories."** Minimalist on purpose: the slogan in serif italic, a short accent rule, the
   stories (`getStories()`, posts tagged `story`) as a plain list of date, title and

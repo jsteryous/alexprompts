@@ -510,3 +510,41 @@ ALTER TABLE referral_leads ALTER COLUMN email DROP NOT NULL;
 CREATE INDEX IF NOT EXISTS referral_leads_sms_consent_idx
   ON referral_leads (sms_consent, created_at DESC)
   WHERE sms_consent;
+
+-- ── The Rebrew Intelligencer (October 14, 2026) ─────────────────────────────
+-- One row per number of the paper. `content` is the JSON shape in
+-- src/lib/editions.ts, written by the "Rebrew Intelligencer press" routine.
+create table if not exists public.intelligencer_editions (
+  id bigserial primary key,
+  number integer not null unique,
+  slug text not null unique check (slug ~ '^\d{4}-\d{2}-\d{2}$'),
+  headline text not null,
+  summary text,
+  content jsonb not null,
+  status text not null default 'published' check (status in ('draft','published')),
+  published_at timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);
+alter table public.intelligencer_editions enable row level security;
+create policy "Public read published editions" on public.intelligencer_editions
+  for select using (status = 'published');
+
+-- First-party, cookieless pageview counts (src/app/api/hit/route.ts). No IP,
+-- cookie or identifier: a daily count per path and referring host. Service only.
+create table if not exists public.page_hits (
+  day date not null,
+  path text not null,
+  referrer text not null default '',
+  views integer not null default 0,
+  primary key (day, path, referrer)
+);
+alter table public.page_hits enable row level security;
+
+create or replace function public.record_hit(p_path text, p_referrer text)
+returns void language sql security definer set search_path = public as $$
+  insert into public.page_hits (day, path, referrer, views)
+  values ((now() at time zone 'America/New_York')::date, left(p_path, 160), left(coalesce(p_referrer, ''), 100), 1)
+  on conflict (day, path, referrer) do update set views = public.page_hits.views + 1;
+$$;
+revoke all on function public.record_hit(text, text) from public, anon, authenticated;
+grant execute on function public.record_hit(text, text) to service_role;

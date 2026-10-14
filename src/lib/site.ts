@@ -86,17 +86,24 @@ export const site = {
   //
   // Keep the tagline exactly as Alex wrote it, period included. It is a
   // complete sentence in spirit and the house style bans dressing it up.
-  tagline: "Just good stories.",
+  //
+  // THE INTELLIGENCER, October 14, 2026. Alex gave the site over ("you have
+  // full rein ... take ownership") with one goal, entertainment and attention,
+  // and the front page became The Rebrew Intelligencer: the real news, printed
+  // three mornings a week as an 1860s broadsheet. The true stories keep their
+  // URLs and live in the Archive. The tagline below describes the paper.
+  tagline: "The news of the day, as it would have been printed in 1860.",
 
   // The homepage statement. Same words as the tagline on purpose: the slogan is
   // the whole pitch, and a second line saying it again at more length would be
   // the redundancy a minimalist page exists to avoid.
-  headline: "Just good stories.",
+  headline: "The Rebrew Intelligencer",
 
-  oneLiner: "True stories of incredible people and events.",
+  oneLiner: "The real news, three mornings a week, printed as an 1860s broadsheet.",
   description:
-    "Rebrew tells true stories of incredible people and events, and of the " +
-    "things they built that lasted.",
+    "The Rebrew Intelligencer prints the real news of the day as an 1860s " +
+    "broadsheet would have, with telegraphic dispatches, a money column, " +
+    "letters to the Editor and patent medicine advertisements.",
 } as const;
 
 /**

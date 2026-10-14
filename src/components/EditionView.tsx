@@ -1,0 +1,319 @@
+import Link from "next/link";
+import {
+  type Edition,
+  type EditionListing,
+  type PaperItem,
+  editionDateLine,
+  editionHref,
+  roman,
+  safeUrl,
+  volumeOf,
+} from "@/lib/editions";
+
+/**
+ * THE REBREW INTELLIGENCER, rendered as a broadsheet (October 14, 2026).
+ *
+ * The page is a period newspaper: a blackletter nameplate, a dateline between
+ * double rules, a lead story with stacked decks across the full width, then the
+ * rest of the paper flowing down newspaper columns (one on a phone, three on a
+ * desk). Advertisements sit in ruled boxes, and the sources the news was checked
+ * against close the page, because every item of news in it is true.
+ *
+ * Fonts: the nameplate is UnifrakturMaguntia and the headlines IM Fell English,
+ * loaded from Google Fonts with a plain stylesheet link (next/font/google breaks
+ * the Turbopack build, see src/CLAUDE.md). Both fall back to the site serif, so
+ * the page reads correctly before or without them. Body copy stays on the
+ * system serif for legibility.
+ */
+
+const FONTS =
+  "https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap";
+
+const fell = { fontFamily: "'IM Fell English', var(--font-serif)" } as const;
+
+function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: boolean }) {
+  return (
+    <>
+      {(item.paragraphs ?? []).map((p, i) => (
+        <p
+          key={i}
+          className={`paper-body ${dropCap && i === 0 ? "paper-dropcap" : ""}`}
+        >
+          {item.dateline && i === 0 && (
+            <span className="font-semibold tracking-wide uppercase text-[0.8125em]">{item.dateline}. </span>
+          )}
+          {p}
+        </p>
+      ))}
+      {item.signed && (
+        <p className="paper-body text-right italic" style={fell}>
+          {item.signed}
+        </p>
+      )}
+    </>
+  );
+}
+
+function Headline({ item, size = "md" }: { item: PaperItem; size?: "md" | "sm" }) {
+  if (!item.headline) return null;
+  return (
+    <header className="text-center mb-3">
+      <h3
+        className={`theme-text-primary uppercase leading-tight tracking-wide ${
+          size === "md" ? "text-[1.1875rem]" : "text-[1rem]"
+        }`}
+        style={fell}
+      >
+        {item.headline}
+      </h3>
+      {(item.decks ?? []).map((d, i) => (
+        <p key={i} className="theme-text-secondary text-[0.9375rem] leading-snug mt-1 italic" style={fell}>
+          {d}
+        </p>
+      ))}
+      <div className="mx-auto mt-2 w-10 border-t theme-border" aria-hidden="true" />
+    </header>
+  );
+}
+
+/** A department heading, like "TELEGRAPHIC DISPATCHES", set between rules. */
+function Department({ title }: { title: string }) {
+  return (
+    <h2
+      className="theme-text-primary text-center uppercase tracking-[0.18em] text-[0.875rem] border-y-2 border-[var(--foreground)] py-1.5 mb-4"
+      style={fell}
+    >
+      {title}
+    </h2>
+  );
+}
+
+function Block({ children }: { children: React.ReactNode }) {
+  return <section className="break-inside-avoid-column mb-7">{children}</section>;
+}
+
+export default function EditionView({
+  edition,
+  prev,
+  next,
+}: {
+  edition: Edition;
+  prev?: EditionListing | null;
+  next?: EditionListing | null;
+}) {
+  const c = edition.content ?? {};
+  const lead = c.lead;
+  const decks = lead?.decks ?? [];
+  const sources = (c.sources ?? [])
+    .map((s) => ({ title: s.title ?? s.url ?? "", url: safeUrl(s.url) }))
+    .filter((s) => s.url);
+
+  return (
+    <article className="theme-page pt-24 md:pt-28 pb-20">
+      <link rel="stylesheet" href={FONTS} precedence="default" />
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        {/* ── Nameplate ─────────────────────────────────────────────── */}
+        <header className="text-center">
+          <div className="flex items-center justify-between gap-3 type-eyebrow theme-text-muted border-b theme-border pb-2">
+            <span>Vol. {roman(volumeOf(edition.slug))}. No. {edition.number}.</span>
+            <span className="hidden sm:inline">Published Tuesdays, Thursdays &amp; Saturdays</span>
+            <span>Price, Gratis.</span>
+          </div>
+          <h1
+            className="theme-text-primary leading-none mt-5 mb-3 text-[2.6rem] sm:text-[4rem] md:text-[5.5rem]"
+            style={{ fontFamily: "'UnifrakturMaguntia', var(--font-serif)" }}
+          >
+            The Rebrew Intelligencer
+          </h1>
+          <p className="theme-text-secondary italic text-[0.9375rem] md:text-[1.0625rem]" style={fell}>
+            Every item of news herein is true. The opinions, the advertisements and the Editor are inventions.
+          </p>
+          <div className="mt-4 border-t-[3px] border-[var(--foreground)]" />
+          <div className="flex items-center justify-between gap-3 py-1.5 type-eyebrow theme-text-primary">
+            <span className="hidden sm:inline">Greenville, South Carolina</span>
+            <span className="mx-auto sm:mx-0">{editionDateLine(edition.slug)}</span>
+            <span className="hidden sm:inline">C. P. Ashby, Editor</span>
+          </div>
+          <div className="border-t border-[var(--foreground)]" />
+          <div className="mt-[3px] border-t border-[var(--foreground)]" />
+        </header>
+
+        {/* ── The lead ──────────────────────────────────────────────── */}
+        {lead && (
+          <section className="mt-8 md:mt-10 pb-8 border-b-2 border-[var(--foreground)]">
+            <header className="text-center max-w-4xl mx-auto mb-6">
+              <h2
+                className="theme-text-primary uppercase leading-[1.05] tracking-wide text-[1.875rem] sm:text-[2.5rem] md:text-[3.25rem]"
+                style={fell}
+              >
+                {lead.headline ?? edition.headline}
+              </h2>
+              {decks.map((d, i) => (
+                <div key={i}>
+                  <div className="mx-auto my-2.5 w-16 border-t theme-border" aria-hidden="true" />
+                  <p
+                    className={`theme-text-primary leading-snug ${
+                      i === 0
+                        ? "uppercase tracking-wide text-[1.0625rem] md:text-[1.375rem]"
+                        : "italic text-[1rem] md:text-[1.1875rem] theme-text-secondary"
+                    }`}
+                    style={fell}
+                  >
+                    {d}
+                  </p>
+                </div>
+              ))}
+            </header>
+            <div className="paper-columns md:columns-2 lg:columns-3">
+              <Paragraphs item={lead} dropCap />
+            </div>
+          </section>
+        )}
+
+        {/* ── The rest of the paper ─────────────────────────────────── */}
+        <div className="paper-columns mt-8 md:columns-2 lg:columns-3">
+          {(c.dispatches ?? []).length > 0 && (
+            <>
+              <Block>
+                <Department title="Telegraphic Dispatches" />
+                <Headline item={c.dispatches![0]} />
+                <Paragraphs item={c.dispatches![0]} />
+              </Block>
+              {c.dispatches!.slice(1).map((d, i) => (
+                <Block key={i}>
+                  <Headline item={d} />
+                  <Paragraphs item={d} />
+                </Block>
+              ))}
+            </>
+          )}
+
+          {c.markets && (
+            <Block>
+              <Department title="Money and Commerce" />
+              <Headline item={c.markets} />
+              <Paragraphs item={c.markets} />
+            </Block>
+          )}
+
+          {c.editorial && (
+            <Block>
+              <Department title="The Editor's Desk" />
+              <Headline item={c.editorial} />
+              <Paragraphs item={c.editorial} />
+            </Block>
+          )}
+
+          {(c.letters ?? []).length > 0 && (
+            <Block>
+              <Department title="Letters to the Editor" />
+              {c.letters!.map((l, i) => (
+                <div key={i} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
+                  <Headline item={l} size="sm" />
+                  <Paragraphs item={l} />
+                </div>
+              ))}
+            </Block>
+          )}
+
+          {(c.amusements ?? []).length > 0 && (
+            <Block>
+              <Department title="Society and Amusements" />
+              {c.amusements!.map((a, i) => (
+                <div key={i} className={i > 0 ? "mt-5" : ""}>
+                  <Headline item={a} size="sm" />
+                  <Paragraphs item={a} />
+                </div>
+              ))}
+            </Block>
+          )}
+
+          {(c.miscellany ?? []).length > 0 && (
+            <Block>
+              <Department title="Local Miscellany" />
+              {c.miscellany!.map((m, i) => (
+                <div key={i} className={i > 0 ? "mt-5" : ""}>
+                  <Headline item={m} size="sm" />
+                  <Paragraphs item={m} />
+                </div>
+              ))}
+            </Block>
+          )}
+        </div>
+
+        {/* ── Advertisements ────────────────────────────────────────── */}
+        {(c.advertisements ?? []).length > 0 && (
+          <section className="mt-4 pt-6 border-t-2 border-[var(--foreground)]">
+            <Department title="Advertisements" />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {c.advertisements!.map((ad, i) => (
+                <div key={i} className="border-2 border-[var(--foreground)] p-1">
+                  <div className="border theme-border px-4 py-5 text-center h-full">
+                    {ad.headline && (
+                      <p className="theme-text-primary uppercase leading-tight tracking-wide text-[1.125rem]" style={fell}>
+                        {ad.headline}
+                      </p>
+                    )}
+                    {(ad.lines ?? []).map((line, j) => (
+                      <p
+                        key={j}
+                        className={`theme-text-secondary leading-snug mt-2 ${j === 0 ? "italic" : "text-[0.9375rem]"}`}
+                        style={fell}
+                      >
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Authorities consulted, and the colophon ───────────────── */}
+        <footer className="mt-10 pt-5 border-t-[3px] border-double border-[var(--foreground)]">
+          {sources.length > 0 && (
+            <div className="mb-6">
+              <h2 className="type-eyebrow theme-text-muted mb-2">Authorities consulted for this number</h2>
+              <ol className="columns-1 md:columns-2 gap-8 text-[0.8125rem] theme-text-secondary list-decimal pl-5">
+                {sources.map((s, i) => (
+                  <li key={i} className="break-inside-avoid mb-1">
+                    <a href={s.url!} target="_blank" rel="noopener noreferrer" className="underline decoration-[var(--border-strong)] underline-offset-2 hover:decoration-[var(--accent)]">
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+          <p className="text-[0.8125rem] theme-text-muted leading-relaxed max-w-3xl">
+            The Rebrew Intelligencer is written and set in type by a machine, an artificial
+            intelligence, three mornings a week. The news in it is real and is checked against the
+            authorities listed above. The Editor, his household, his correspondents, the letters and
+            the advertisements are inventions, and nothing in them should be taken for fact or for
+            advice.
+          </p>
+          <nav className="mt-6 flex flex-wrap items-center justify-between gap-4 type-eyebrow">
+            <span>
+              {prev ? (
+                <Link href={editionHref(prev)} className="theme-link">
+                  Previous number
+                </Link>
+              ) : null}
+            </span>
+            <Link href="/editions" className="theme-link">
+              All back numbers
+            </Link>
+            <span>
+              {next ? (
+                <Link href={editionHref(next)} className="theme-link">
+                  Next number
+                </Link>
+              ) : null}
+            </span>
+          </nav>
+        </footer>
+      </div>
+    </article>
+  );
+}

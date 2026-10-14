@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { site, CONTACT_EMAIL, newsletterUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,7 +9,12 @@ export const metadata: Metadata = {
 };
 
 /**
- * About, reframed October 7, 2026 ("Just good stories.").
+ * About, rewritten October 14, 2026 for The Rebrew Intelligencer. It says
+ * plainly what the paper is, that a machine writes it, and which parts are
+ * true and which are invented. The longer-running true stories are still
+ * published and linked from the last paragraph.
+ *
+ * Earlier: About, reframed October 7, 2026 ("Just good stories.").
  *
  * Three short paragraphs: what this is, the one promise that matters (it is
  * true), and how to reach us. The internal mission ("to share the most
@@ -30,15 +36,28 @@ export default function AboutPage() {
 
         <div className="font-serif theme-text-secondary text-[1.125rem] md:text-[1.1875rem] leading-[1.75] space-y-6">
           <p>
-            Rebrew tells true stories about incredible people and the things they built.
-            Some of them are famous. Most of the best ones are not.
+            The Rebrew Intelligencer prints the real news of the day the way an American
+            broadsheet of 1860 would have printed it, with telegraphic dispatches, a money
+            column, letters to the Editor and advertisements for remedies nobody should take.
+            A new number comes out on Tuesday, Thursday and Saturday mornings.
           </p>
           <p>
-            Every story here is true. Each scene and each quote comes from the record, and
-            where the record goes quiet, the story says so rather than filling the gap.
+            The news is true. Every figure, name and date in the dispatches is checked
+            against the sources listed at the foot of each number. The Editor, Mr. C. P.
+            Ashby, is an invention, and so are his household, his rival across the street,
+            the letters and the advertisements. Nothing in them is fact or advice.
           </p>
           <p>
-            New stories go out by email when they are ready, and you can{" "}
+            The paper is written and set in type by a machine, an artificial intelligence,
+            with no person typing it. That is part of the experiment. If it gets a fact
+            wrong, write in and the correction will run in the next number.
+          </p>
+          <p>
+            Rebrew also tells longer true stories, which are in the{" "}
+            <Link href="/reporting" className="theme-text-primary underline underline-offset-4 decoration-[var(--accent)]">
+              Archive
+            </Link>
+            . Those go out by email when they are ready, and you can{" "}
             <a
               href={newsletterUrl}
               target="_blank"
@@ -47,7 +66,7 @@ export default function AboutPage() {
             >
               subscribe here
             </a>
-            . If you know a story worth telling, write to{" "}
+            . Corrections, complaints and letters to the Editor go to{" "}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="theme-text-primary underline underline-offset-4 decoration-[var(--accent)]"

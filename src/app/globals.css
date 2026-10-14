@@ -770,3 +770,30 @@ html.dark .editor-pop {
     transition: none;
   }
 }
+
+/* ── The Rebrew Intelligencer (October 14, 2026) ──────────────────────────
+   The broadsheet at / and /edition/[slug] (components/EditionView.tsx).
+   Newspaper columns are ruled with a hairline, body copy is justified and
+   hyphenated the way a composing room would set it, and the lead opens on a
+   drop capital. Colors come from the theme tokens, so dark mode holds. */
+.paper-columns {
+  column-gap: 2rem;
+  column-rule: 1px solid var(--border);
+}
+.paper-body {
+  font-family: var(--font-serif);
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  margin-bottom: 0.75rem;
+}
+.paper-dropcap::first-letter {
+  float: left;
+  font-family: "IM Fell English", var(--font-serif);
+  font-size: 3.6em;
+  line-height: 0.82;
+  padding: 0.06em 0.08em 0 0;
+}
