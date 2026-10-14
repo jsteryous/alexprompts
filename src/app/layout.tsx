@@ -5,7 +5,6 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
-import DarkModeToggle from "@/components/DarkModeToggle";
 import PageHit from "@/components/PageHit";
 import { site, socials } from "@/lib/site";
 
@@ -98,7 +97,6 @@ export default function RootLayout({
           <Nav />
           <main>{children}</main>
           <Footer />
-          <DarkModeToggle />
         </ThemeProvider>
         {/* Vercel Web Analytics: cookieless, no PII, no consent banner needed.
             Serves first-party from /_vercel/insights; enable it for the project in

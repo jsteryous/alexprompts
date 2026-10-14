@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
+import DarkModeToggle from "./DarkModeToggle";
 
 /**
  * The masthead bar, reframed October 7, 2026 ("Just good stories.").
@@ -15,7 +16,7 @@ import { site } from "@/lib/site";
  *
  * Retired here and kept out deliberately: the coffee-cup-and-house mark (it
  * tied the name to real estate, which is no longer the beat; the drawing
- * survives in Mark.tsx and the favicon until a new mark is chosen), the
+ * survives in Mark.tsx; the favicon became the nameplate's blackletter R on October 14, 2026), the
  * "Reporting" tab (the old work is the footer's Archive now), and the
  * "Buying or Selling?" button (the page itself was removed October 7, 2026).
  *
@@ -30,6 +31,9 @@ import { site } from "@/lib/site";
  * October 14, 2026: "The Office" (/office, the Editor's office) leads the bar,
  * since it is the way into everything else. Back Issues hides below `sm` to
  * keep the phone bar to two links; the stack of papers in the office reaches it.
+ *
+ * October 14, 2026: the light and dim switch moved here from a floating button
+ * that sat on top of the paper's text on a phone.
  */
 export default function Nav() {
   const pathname = usePathname();
@@ -45,7 +49,7 @@ export default function Nav() {
           {site.name}
         </Link>
 
-        <nav className="flex items-center gap-6 md:gap-8">
+        <nav className="flex items-center gap-5 md:gap-8">
           <Link href="/office" className="theme-link type-eyebrow whitespace-nowrap">
             The Office
           </Link>
@@ -58,6 +62,7 @@ export default function Nav() {
           <Link href="/subscribe" className="theme-link type-eyebrow">
             Subscribe
           </Link>
+          <DarkModeToggle />
         </nav>
       </div>
     </header>

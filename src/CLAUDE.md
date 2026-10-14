@@ -424,9 +424,10 @@ affordance to re-add them does not exist. **Do not reintroduce a caret, chevron,
 It is **not** a ban on the publication's own mark. The **coffee-cup-and-house** mark is
 drawn once in `src/components/Mark.tsx` (currentColor, sized in `em` so it tracks the fluid
 `.wordmark`, doorway cut as a real `fillRule="evenodd"` hole so it needs no background) and
-again as a plated asset in `src/app/icon.svg`, with `favicon.ico` and `apple-icon.png`
-rasterized from that file. Same drawing, two dresses: the tab carries its own oxblood plate
-because that background is not ours, the masthead inherits ink because that one is.
+used in the email mark. **The favicon is no longer that drawing** (October 14, 2026):
+`src/app/icon.svg` is the blackletter R from the Intelligencer's nameplate
+(UnifrakturMaguntia, SIL OFL, outlined to a path) in ink on a newsprint plate, with
+`favicon.ico` (16/32/48) and `apple-icon.png` (180) rasterized from it.
 `PostCover`'s no-cover state is a silent ruled plate. Two rule utilities carry structure:
 `.rule-masthead` (3px, once per view, under the nameplate) and `.rule-section` (hairline
 between same-surface blocks).
