@@ -19,7 +19,7 @@
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Edition, PaperItem } from "@/lib/editions";
-import { editionDateLine } from "@/lib/editions";
+import { editionDateLine, safeImage } from "@/lib/editions";
 import { clipId } from "@/lib/clips";
 import { emailConfigured, sendEmail } from "@/lib/email";
 import { getConfirmedSubscribers } from "@/lib/subscribers";
@@ -60,6 +60,7 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
   const lead = c.lead;
   const headline = (lead?.headline ?? edition.headline).replace(/\.$/, "");
   const leadParas = paras(lead, 2);
+  const plate = safeImage(lead?.image);
   const dispatches = (c.dispatches ?? []).map((d, i) => ({ d, href: `${url}#${clipId("dispatch", i)}` }));
   const odd = (c.oddities ?? [])[0];
   const letter = (c.letters ?? [])[0];
@@ -88,6 +89,12 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
   ${rule(1, "0")}
 </td></tr>
 <tr><td style="padding:18px 30px 4px;color:${INK};">
+  ${
+    plate
+      ? `<a href="${url}"><img src="${esc(plate.url)}" alt="${esc(plate.caption)}" width="540" style="display:block;width:100%;max-width:540px;height:auto;border:1px solid ${INK};margin:0 auto 6px;" /></a>
+  ${plate.caption ? `<p style="margin:0 0 16px;text-align:center;font-family:${HEAD};font-style:italic;font-size:14px;color:${SOFT};">${esc(plate.caption)}</p>` : ""}`
+      : ""
+  }
   <h1 style="margin:0;text-align:center;font-family:${BANNER};font-weight:700;font-size:34px;line-height:1.02;text-transform:uppercase;">${esc(headline)}</h1>
   ${(lead?.decks ?? [])
     .slice(0, 1)

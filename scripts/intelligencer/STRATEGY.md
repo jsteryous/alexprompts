@@ -73,14 +73,12 @@ to the log with its hypothesis and the measure it should move.
 3. **Subscriber growth loops.** The edition email already carries a forward line. Next: a
    sign-up prompt on clip pages and in the office, and a "forwarded to you?" line at the top
    of the email for readers who did not sign up themselves. Moves: subscribers.
-0. **The office's art (decided October 14, 2026, waiting on Alex).** The SVG room reads as
-   clip-art and a redraw in code hits the same ceiling. Alex's Notion desk has a subpage
-   "Design session, Oct 14: the office" offering a pen-and-ink illustration he generates
-   (preferred), a public-domain 1940s photograph, or a type-only page. If he has dropped
-   images there, report that a Claude session is needed to map them. If the page has no
-   answer by your run on October 19, 2026, build the type-only office: `/office` as a
-   newspaper page of ruled boxes (cast files, Coffee Can Index, most clipped, the Clarion,
-   next press run) from the same `src/lib/office.ts` data, and retire `OfficeScene.tsx`.
+0. **The type-only office (Alex chose it October 14, 2026; build it in your October 19 run).**
+   The SVG room reads as clip-art and a redraw in code hits the same ceiling. Rebuild
+   `/office` as a newspaper page of ruled boxes in the paper's own type (cast files, Coffee
+   Can Index, most clipped, the Clarion, next press run) from the same `src/lib/office.ts`
+   data, and retire `OfficeScene.tsx`. Alex cares more about the paper's content than the
+   office, so keep it modest.
 4. **The office grows.** A new object whenever a new running gag earns one.
 
 ## Log

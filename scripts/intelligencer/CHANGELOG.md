@@ -29,3 +29,7 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   each gag runs once a number, the lead is 4 to 6 paragraphs and dispatches 2. New department **Strange but True**
   (`content.oddities`, clip ids `odd-N`): 2 or 3 verified odd true stories, printed after the wire and sent in full in the
   subscribers' email.
+- **2026-10-14** (session). Design: favicon is the nameplate's blackletter R; the light/dim switch moved into the nav.
+  Pictures: the press now illustrates with **period plates**, real 1930 to 1955 photographs from the Library of
+  Congress of the same kind of thing (the Exchange floor, a bank's tellers), captioned with their year, alongside exact
+  subject pictures; the lead should carry one. The lead's picture now heads the subscribers' email.
