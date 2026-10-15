@@ -118,7 +118,7 @@ function Headline({ item, size = "md" }: { item: PaperItem; size?: "md" | "sm" }
         {item.headline}
       </h3>
       {(item.decks ?? []).map((d, i) => (
-        <p key={i} className="theme-text-secondary text-[0.9375rem] leading-snug mt-1 italic" style={head}>
+        <p key={i} className="theme-text-secondary text-[1.0625rem] md:text-[0.9375rem] leading-snug mt-1 italic" style={head}>
           {d}
         </p>
       ))}
