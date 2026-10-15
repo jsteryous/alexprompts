@@ -795,6 +795,24 @@ html.dark .editor-pop {
 .paper-plate {
   filter: grayscale(1) contrast(1.15) sepia(0.12);
 }
+/* The news film's still (components/FilmPlate.tsx): a plate with a play mark. */
+.film-still { display: block; cursor: pointer; padding: 0; border: 0; }
+.film-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.55rem 1rem;
+  background: rgba(29, 25, 18, 0.82);
+  color: #efe5c8;
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.film-play span { margin-left: 0.35rem; }
+.film-still:hover .film-play, .film-still:focus-visible .film-play { background: #9a2323; }
 
 /* ── Clip and share (October 14, 2026) ─────────────────────────────────────
    components/ClipLayer.tsx adds .clip-ready to the paper once it is running, so
@@ -975,6 +993,8 @@ html.dark .editor-pop {
 }
 .office-frame {
   position: relative;
+  max-width: 46rem;
+  margin: 0 auto;
   border: 3px solid var(--foreground);
   background: #ebe1c5;
 }
@@ -1036,7 +1056,8 @@ html.dark .editor-pop {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  margin-top: 1.25rem;
+  max-width: 46rem;
+  margin: 1.25rem auto 0;
 }
 .office-list button {
   display: flex;

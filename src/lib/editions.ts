@@ -29,6 +29,39 @@ export interface PaperItem {
   reader?: boolean;
   /** An illustration. Printed only when its URL is on an allowed host. */
   image?: PaperImage;
+  /** A news film of the actual event, embedded from YouTube. Takes the place of `image`. */
+  video?: PaperVideo;
+}
+
+/**
+ * A news film (October 15, 2026). Openly licensed photographs of this week's
+ * events almost never exist, and copying a news photograph invites a bill from
+ * the agency, but the local station's own report is usually on YouTube, and
+ * YouTube lets anyone embed it. The press door confirms the film exists and
+ * may be embedded through YouTube's oEmbed, and writes the channel's name into
+ * `credit` itself, so the press cannot misattribute it.
+ */
+export interface PaperVideo {
+  /** The eleven-character YouTube video id. */
+  youtube?: string;
+  caption?: string;
+  /** The channel, as YouTube reports it. Set by the press door. */
+  credit?: string;
+  source?: string;
+}
+
+const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
+
+/** The film's id, caption, credit and still when the id is well formed; otherwise null. */
+export function safeVideo(v: PaperVideo | undefined): { id: string; caption: string; credit: string; source: string; still: string } | null {
+  if (!v?.youtube || !YOUTUBE_ID.test(v.youtube)) return null;
+  return {
+    id: v.youtube,
+    caption: v.caption ?? "",
+    credit: v.credit ?? "YouTube",
+    source: `https://www.youtube.com/watch?v=${v.youtube}`,
+    still: `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg`,
+  };
 }
 
 /**

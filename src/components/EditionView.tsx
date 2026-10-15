@@ -8,10 +8,12 @@ import {
   roman,
   safeImage,
   safeUrl,
+  safeVideo,
   volumeOf,
 } from "@/lib/editions";
 import { DEPARTMENTS, clipId } from "@/lib/clips";
 import ClipLayer from "@/components/ClipLayer";
+import FilmPlate from "@/components/FilmPlate";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { PAPER_FONTS_HREF } from "@/lib/paperFonts";
 
@@ -70,6 +72,8 @@ function Paragraphs({ item, dropCap = false }: { item: PaperItem; dropCap?: bool
  * the period page; `paper-plate` in globals.css carries it.
  */
 function Plate({ item, eager = false }: { item: PaperItem; eager?: boolean }) {
+  const film = safeVideo(item.video);
+  if (film) return <FilmPlate {...film} headStyle={head} />;
   const img = safeImage(item.image);
   if (!img) return null;
   return (
@@ -223,7 +227,7 @@ export default function EditionView({
                 </div>
               ))}
             </header>
-            {safeImage(lead.image) && (
+            {(safeImage(lead.image) || safeVideo(lead.video)) && (
               <div className="max-w-3xl mx-auto">
                 <Plate item={lead} eager />
               </div>

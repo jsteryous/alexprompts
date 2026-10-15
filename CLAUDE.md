@@ -37,7 +37,7 @@
 > **Analytics:** Vercel Web Analytics is not enabled on the project, so every page beacons
 > `/api/hit` (`components/PageHit.tsx`), which counts views per day, path and referring host
 > in `page_hits` through the `record_hit` function. No cookie, IP or identifier is stored.
-> **Illustrations** (`image` on a lead, a dispatch or an oddity; the press door refuses a lead with no picture unless the press sends a `picture_note`; `safeImage` in `editions.ts`) print only
+> **Illustrations** (`image` on a lead, a dispatch or an oddity; the press door refuses a lead with no picture unless the press sends a `picture_note`; `safeImage` in `editions.ts`; since October 15, 2026 an item may instead carry a `video`, a YouTube news film of the actual event, which the press door checks through YouTube oEmbed and credits to the channel itself, rendered as a grey still until played by `components/FilmPlate.tsx`, because openly licensed photos of this week's events almost never exist and copied news photos draw agency bills) print only
 > from Wikimedia Commons or the Library of Congress, with a credit, after the press confirms
 > on the file page that the picture shows exactly the named subject under a reusable licence.
 > The press also emails Alex three ready-to-post social lines per number. The weekly review

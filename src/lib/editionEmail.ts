@@ -19,7 +19,7 @@
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Edition, PaperItem } from "@/lib/editions";
-import { editionDateLine, safeImage } from "@/lib/editions";
+import { editionDateLine, safeImage, safeVideo } from "@/lib/editions";
 import { clipId } from "@/lib/clips";
 import { emailConfigured, sendEmail } from "@/lib/email";
 import { getConfirmedSubscribers } from "@/lib/subscribers";
@@ -60,7 +60,9 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
   const lead = c.lead;
   const headline = (lead?.headline ?? edition.headline).replace(/\.$/, "");
   const leadParas = paras(lead, 2);
-  const plate = safeImage(lead?.image);
+  const film = safeVideo(lead?.video);
+  // A film cannot play in an email, so its still stands in and links to the page.
+  const plate = safeImage(lead?.image) ?? (film ? { url: film.still, caption: film.caption, credit: `${film.credit}, on YouTube`, source: url } : null);
   const dispatches = (c.dispatches ?? []).map((d, i) => ({ d, href: `${url}#${clipId("dispatch", i)}` }));
   const odd = (c.oddities ?? [])[0];
   const letter = (c.letters ?? [])[0];

@@ -9,7 +9,7 @@ import { broadcastEdition } from "@/lib/editionEmail";
 /** Room for the subscriber send that runs in after() once the press has its answer. */
 export const maxDuration = 300;
 import { LETTER_WINDOW_DAYS, READER_LETTERS_PER_NUMBER, letterParagraphs, undash } from "@/lib/letters";
-import { safeImage, safeUrl, type EditionContent, type PaperAd, type PaperItem, type Ticker } from "@/lib/editions";
+import { safeImage, safeUrl, safeVideo, type EditionContent, type PaperAd, type PaperItem, type Ticker } from "@/lib/editions";
 
 /**
  * THE PRESS'S ONE DOOR (October 14, 2026).
@@ -166,6 +166,17 @@ function item(v: unknown, field: string, opts: { image?: boolean } = {}): PaperI
     }
     out.image = image;
   }
+  if (o.video !== undefined && o.video !== null) {
+    if (!opts.image) throw new Invalid(`${field} may not carry a film`);
+    if (out.image) throw new Invalid(`${field} may carry an image or a film, not both`);
+    const raw = o.video as Record<string, unknown>;
+    const video = {
+      youtube: str(raw.youtube, `${field}.video.youtube`, 20, true),
+      caption: str(raw.caption, `${field}.video.caption`, 300, true),
+    };
+    if (!safeVideo(video)) throw new Invalid(`${field}.video.youtube must be an eleven-character YouTube video id`);
+    out.video = video;
+  }
   for (const k of Object.keys(out) as (keyof PaperItem)[]) if (out[k] === undefined) delete out[k];
   return out;
 }
@@ -274,14 +285,14 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   // The lead, one dispatch and one oddity may each carry a picture. No. 2 went out
   // bare because the prompt let the press skip the search without trying, so the door
   // now refuses a lead with no picture unless the press says what it searched for.
-  const dispatchPictures = (content.dispatches ?? []).filter((i) => i.image).length;
-  const oddPictures = (content.oddities ?? []).filter((i) => i.image).length;
+  const dispatchPictures = (content.dispatches ?? []).filter((i) => i.image || i.video).length;
+  const oddPictures = (content.oddities ?? []).filter((i) => i.image || i.video).length;
   if (dispatchPictures > 1) throw new Invalid("at most one dispatch may carry a picture");
   if (oddPictures > 1) throw new Invalid("at most one oddity may carry a picture");
   const pictureNote = str(b.picture_note, "picture_note", 600, false);
-  if (!content.lead?.image && !pictureNote) {
+  if (!content.lead?.image && !content.lead?.video && !pictureNote) {
     throw new Invalid(
-      "the lead needs an image (see ILLUSTRATIONS). If no picture passed after three searches, send picture_note naming the searches and why each failed",
+      "the lead needs an image or a video (see ILLUSTRATIONS). If no picture passed after three searches, send picture_note naming the searches and why each failed",
     );
   }
 
@@ -315,6 +326,30 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   return { headline, summary, content, pictureNote: pictureNote || undefined };
 }
 
+/**
+ * Asks YouTube whether each film exists and may be embedded, and writes the
+ * channel's name as the credit. oEmbed answers 401 or 404 for a private,
+ * deleted or unembeddable film.
+ */
+async function checkFilms(content: EditionContent): Promise<void> {
+  const items = [content.lead, ...(content.dispatches ?? []), ...(content.oddities ?? [])];
+  for (const item of items) {
+    const v = item?.video;
+    if (!v?.youtube) continue;
+    const watch = `https://www.youtube.com/watch?v=${v.youtube}`;
+    let res: Response;
+    try {
+      res = await fetch(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(watch)}`, { signal: AbortSignal.timeout(8000) });
+    } catch {
+      throw new Invalid(`could not reach YouTube to check film ${v.youtube}; try again`);
+    }
+    if (!res.ok) throw new Invalid(`film ${v.youtube} is private, deleted or may not be embedded (YouTube answered ${res.status})`);
+    const info = (await res.json()) as { author_name?: string };
+    v.credit = undash((info.author_name ?? "YouTube").slice(0, 120));
+    v.source = watch;
+  }
+}
+
 function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
 }
@@ -333,6 +368,13 @@ export async function POST(req: Request) {
 
   const sb = admin();
   if (!sb) return NextResponse.json({ error: "database not configured" }, { status: 503 });
+
+  try {
+    await checkFilms(parsed.content);
+  } catch (e) {
+    if (e instanceof Invalid) return NextResponse.json({ error: e.message }, { status: 400 });
+    throw e;
+  }
 
   let readerLetterIds: number[];
   try {
