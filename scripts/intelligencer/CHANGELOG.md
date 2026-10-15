@@ -33,3 +33,10 @@ The maintainer routine (prompt in `MAINTAINER.md`) appends one dated entry per c
   Pictures: the press now illustrates with **period plates**, real 1930 to 1955 photographs from the Library of
   Congress of the same kind of thing (the Exchange floor, a bank's tellers), captioned with their year, alongside exact
   subject pictures; the lead should carry one. The lead's picture now heads the subscribers' email.
+- **2026-10-15** (session). Alex found No. 2 redundant: "the electronic brain" three times, The Market restating the lead,
+  the gasoline dispatch restating it again, and index names spelled out every time. One cause: nothing in PRESS.md said a
+  number says each thing once, and the voice paragraph handed the press fixed coinages to reuse. Now a period coinage is a
+  joke spent on first use (plain name after, no reuse across recent numbers), names are the ones readers use (the Dow,
+  the S&P 500, the Fed), departments never repeat each other, The Market is left out when the lead is the market (the
+  ticker still goes), and the final read checks for anything said twice. Live in the routine. Scissors cursor and glyphs
+  removed from clipping; the dashed cut line stays.

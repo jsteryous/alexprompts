@@ -88,8 +88,8 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   parser (paragraph and character offsets, widened to whole words, capped at 420
   characters) and the seeded torn edge. `EditionView` wraps each item in `<Clippable>`
   (`data-clip` plus an `id` anchor) and each paragraph's text in `data-clip-p`, so offsets
-  never count the dateline. `components/ClipLayer.tsx` is the scissors: hover cut line and
-  cursor (CSS under `.clip-ready`), "Clip this line" on a selection inside one paragraph,
+  never count the dateline. `components/ClipLayer.tsx` is the clipper: hover cut line and
+  pointer cursor (CSS under `.clip-ready`; no scissors cursor or glyph, Alex disliked it), "Clip this line" on a selection inside one paragraph,
   tap-to-arm on touch screens, and the share sheet (`components/ClipShare.tsx`). The clip
   page is `noindex` (it is a doorway to the number) and its `og:image` is the clipping.
   **Never let a clip carry text in the URL**: the image and page rebuild it from the row.

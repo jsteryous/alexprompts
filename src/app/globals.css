@@ -821,8 +821,8 @@ html.dark .editor-pop {
 
 /* ── Clip and share (October 14, 2026) ─────────────────────────────────────
    components/ClipLayer.tsx adds .clip-ready to the paper once it is running, so
-   the scissors only appear where clipping works. Hover draws a dashed cut line
-   and a scissors cursor; a tap on a touch screen arms the item instead
+   the cut line only appears where clipping works. Hover draws a dashed cut line
+   (no scissors cursor: Alex disliked it, October 15, 2026); a tap on a touch screen arms the item instead
    (.clip-armed). An item reached from a clip page by its #id flashes once. */
 .clip-target {
   position: relative;
@@ -844,19 +844,7 @@ html.dark .editor-pop {
   .clip-ready .clip-target:hover {
     outline: 1.5px dashed var(--foreground);
     outline-offset: 8px;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='6' cy='6' r='3' fill='%23fff'/%3E%3Ccircle cx='6' cy='18' r='3' fill='%23fff'/%3E%3Cpath d='M8.1 8.1 20 20M8.1 15.9 20 4'/%3E%3C/svg%3E") 6 12, pointer;
-  }
-  .clip-ready .clip-target:hover::before {
-    content: "\2702";
-    position: absolute;
-    top: -1.2rem;
-    left: -0.5rem;
-    padding: 0 0.3rem;
-    font-size: 1rem;
-    line-height: 1;
-    color: var(--foreground);
-    background: var(--background);
-    pointer-events: none;
+    cursor: pointer;
   }
 }
 .clip-tab {

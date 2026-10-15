@@ -8,8 +8,9 @@ import ClipShare from "@/components/ClipShare";
  * the page marks with `data-clip="<id>"` becomes clippable:
  *
  * - With a mouse, hovering an item draws a dashed cut line around it and turns
- *   the cursor into scissors (CSS, keyed off `.clip-ready` so readers without
- *   JavaScript never see scissors that do nothing). A click clips the item.
+ *   a pointer cursor (CSS, keyed off `.clip-ready` so readers without
+ *   JavaScript never see a cut line that does nothing). No scissors cursor or
+ *   glyph: Alex disliked it (October 15, 2026). A click clips the item.
  * - Highlighting words inside one paragraph (`data-clip-p="<n>"`) raises a
  *   "Clip this line" tab over the selection, which clips just those words.
  * - On a touch screen, a tap arms an item and shows a Clip tab at its corner,
@@ -145,7 +146,7 @@ export default function ClipLayer({ slug, number }: { slug: string; number: numb
             window.getSelection()?.removeAllRanges();
           }}
         >
-          <span aria-hidden="true">✂</span> {tab.label}
+          {tab.label}
         </button>
       )}
 
