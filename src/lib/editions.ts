@@ -32,7 +32,8 @@ export interface PaperItem {
 }
 
 /**
- * An illustration for a lead or a dispatch (October 14, 2026).
+ * An illustration for a lead, a dispatch or an oddity (October 14, 2026; oddities
+ * October 15).
  *
  * Only openly licensed or public domain pictures are printed, and only from
  * hosts that serve them for reuse: Wikimedia Commons and the Library of

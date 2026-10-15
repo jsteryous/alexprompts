@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 /**
  * THE EDITOR'S OFFICE (October 14, 2026). The paper's world as a room to poke
- * around in. Every object is drawn in components/office/OfficeScene.tsx and fed
+ * around in: a real 1941 photograph with clickable spots (components/office/OfficeScene.tsx), fed
  * from the printed numbers by src/lib/office.ts, so the room keeps itself up.
  */
 export default async function OfficePage() {

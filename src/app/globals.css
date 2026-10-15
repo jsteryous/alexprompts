@@ -978,28 +978,41 @@ html.dark .editor-pop {
   border: 3px solid var(--foreground);
   background: #ebe1c5;
 }
-.office-svg { display: block; width: 100%; height: auto; }
-.office-obj {
+.office-photo { position: relative; }
+.office-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) sepia(0.18) contrast(1.06);
+}
+/* A spot shows a dashed cut line when found, like the scissors on a clipping.
+   Hidden spots show nothing but the pointer: they are the Easter eggs. */
+.office-spot {
+  position: absolute;
+  padding: 0;
+  background: transparent;
+  border: 2px dashed transparent;
   cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.office-spot:hover,
+.office-spot:focus-visible {
   outline: none;
-  transform-box: fill-box;
-  transform-origin: center bottom;
-  transition: transform 0.18s ease, filter 0.18s ease;
+  border-color: #9a2323;
+  background: rgba(239, 229, 200, 0.14);
 }
-.office-obj:hover,
-.office-obj:focus-visible {
-  transform: translateY(-7px);
-  filter: drop-shadow(0 7px 0 rgba(29, 25, 18, 0.28));
+.office-spot-hidden:hover { border-color: transparent; background: transparent; }
+.office-credit {
+  padding: 0.4rem 0.75rem;
+  border-top: 1px solid var(--foreground);
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: center;
+  color: #1d1912;
 }
-.office-obj:focus-visible { filter: drop-shadow(0 0 0 #9a2323) drop-shadow(0 7px 0 rgba(154, 35, 35, 0.6)); }
-.office-note-a, .office-note-b { animation: office-float 3.2s ease-in-out infinite; }
-.office-note-b { animation-delay: 1.4s; }
-@keyframes office-float {
-  0%, 100% { transform: translateY(0); opacity: 0.35; }
-  50% { transform: translateY(-14px); opacity: 0.85; }
-}
+.office-credit a { text-decoration: underline; text-underline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
-  .office-obj, .office-note-a, .office-note-b { transition: none; animation: none; }
+  .office-spot { transition: none; }
 }
 .office-tag {
   position: absolute;

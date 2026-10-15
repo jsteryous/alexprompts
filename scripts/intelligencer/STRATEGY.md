@@ -73,13 +73,9 @@ to the log with its hypothesis and the measure it should move.
 3. **Subscriber growth loops.** The edition email already carries a forward line. Next: a
    sign-up prompt on clip pages and in the office, and a "forwarded to you?" line at the top
    of the email for readers who did not sign up themselves. Moves: subscribers.
-0. **The type-only office (Alex chose it October 14, 2026; build it in your October 19 run).**
-   The SVG room reads as clip-art and a redraw in code hits the same ceiling. Rebuild
-   `/office` as a newspaper page of ruled boxes in the paper's own type (cast files, Coffee
-   Can Index, most clipped, the Clarion, next press run) from the same `src/lib/office.ts`
-   data, and retire `OfficeScene.tsx`. Alex cares more about the paper's content than the
-   office, so keep it modest.
-4. **The office grows.** A new object whenever a new running gag earns one.
+4. **The office grows.** The room is a real 1941 photograph (done October 15, 2026, at Alex's
+   request instead of the type-only page). A new spot whenever a new running gag earns one, and
+   a few more hidden ones (`hidden: true` in `SPOTS`): Alex wants Easter eggs that are hard to find.
 
 ## Log
 

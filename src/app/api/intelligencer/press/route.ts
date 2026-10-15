@@ -251,7 +251,7 @@ async function resolveReaderLetters(sb: SupabaseClient, letters: LetterDraft[] |
 }
 
 /** Rebuilds the edition from known fields only; anything else is dropped. */
-function validate(body: unknown): { headline: string; summary: string; content: EditionContent } {
+function validate(body: unknown): { headline: string; summary: string; content: EditionContent; pictureNote?: string } {
   if (!body || typeof body !== "object") throw new Invalid("body must be a JSON object");
   const b = body as Record<string, unknown>;
   const c = (b.content ?? {}) as Record<string, unknown>;
@@ -260,7 +260,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   const content: EditionContent = {
     lead: item(c.lead, "lead", { image: true }),
     dispatches: items(c.dispatches, "dispatches", 6, { image: true }),
-    oddities: items(c.oddities, "oddities", 5),
+    oddities: items(c.oddities, "oddities", 5, { image: true }),
     markets: item(c.markets, "markets"),
     editorial: item(c.editorial, "editorial"),
     letters: letterItems(c.letters),
@@ -271,8 +271,19 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   };
   if (!content.lead?.paragraphs?.length) throw new Invalid("lead.paragraphs is required");
   if (!content.dispatches?.length) throw new Invalid("dispatches is required");
-  const pictures = [content.lead, ...(content.dispatches ?? [])].filter((i) => i?.image).length;
-  if (pictures > 2) throw new Invalid("at most two pictures per number");
+  // The lead, one dispatch and one oddity may each carry a picture. No. 2 went out
+  // bare because the prompt let the press skip the search without trying, so the door
+  // now refuses a lead with no picture unless the press says what it searched for.
+  const dispatchPictures = (content.dispatches ?? []).filter((i) => i.image).length;
+  const oddPictures = (content.oddities ?? []).filter((i) => i.image).length;
+  if (dispatchPictures > 1) throw new Invalid("at most one dispatch may carry a picture");
+  if (oddPictures > 1) throw new Invalid("at most one oddity may carry a picture");
+  const pictureNote = str(b.picture_note, "picture_note", 600, false);
+  if (!content.lead?.image && !pictureNote) {
+    throw new Invalid(
+      "the lead needs an image (see ILLUSTRATIONS). If no picture passed after three searches, send picture_note naming the searches and why each failed",
+    );
+  }
 
   if (c.advertisements !== undefined) {
     if (!Array.isArray(c.advertisements) || c.advertisements.length > 6) {
@@ -301,7 +312,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   const headline = str(b.headline, "headline", 160, true)!.replace(/\.$/, "");
   const summary = str(b.summary, "summary", 400, true)!;
   if (JSON.stringify(content).length > 150_000) throw new Invalid("the number is too long");
-  return { headline, summary, content };
+  return { headline, summary, content, pictureNote: pictureNote || undefined };
 }
 
 function escapeHtml(s: string): string {
@@ -362,7 +373,7 @@ export async function POST(req: Request) {
   const link = `https://www.rebrew.org/edition/${slug}`;
   let emailed = "skipped: PRESS_NOTIFY_EMAIL not set";
   if (to) {
-    const lines = parsed.content.social ?? [];
+    const lines = [...(parsed.content.social ?? []), ...(parsed.pictureNote ? [`No lead picture: ${parsed.pictureNote}`] : [])];
     const result = await sendEmail({
       to,
       subject: `Intelligencer No. ${number}: ${parsed.headline}`,

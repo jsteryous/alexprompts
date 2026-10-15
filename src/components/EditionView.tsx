@@ -265,6 +265,7 @@ export default function EditionView({
               {c.oddities!.map((o, i) => (
                 <Clippable key={i} id={clipId("odd", i)} className={i > 0 ? "mt-5" : ""}>
                   <Headline item={o} size="sm" />
+                  <Plate item={o} />
                   <Paragraphs item={o} />
                 </Clippable>
               ))}

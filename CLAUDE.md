@@ -16,13 +16,15 @@
 > whose link preview is a torn-newsprint image from `/api/clip-image`. A clip is an address,
 > never a copy: the text is rebuilt from the printed number (`src/lib/clips.ts`), so nobody
 > can forge a clipping in the paper's name. **The Editor's office (`/office`, first in the nav):**
-> Mr. Ashby's 1945 office drawn in SVG (`components/office/OfficeScene.tsx`); every object
+> Mr. Ashby's office, a real 1941 Library of Congress photograph (`public/office/office-1941.jpg`,
+> replaced the SVG drawing October 15, 2026) with clickable spots (`SPOTS` in
+> `components/office/OfficeScene.tsx`, some hidden as Easter eggs); every spot
 > opens something from the paper, assembled by `src/lib/office.ts`: cast files built by
 > searching every number for Thaddeus, Mrs. Ashby, Fenwick, the Clarion and the barometer
 > (each line links to its clipping), the month's most-clipped items from `page_hits`, the
 > Coffee Can Index against the S&P 500 from `content.ticker` (closes the press writes as
 > numbers, validated at the press door), and a countdown to the next press run. The room
-> keeps itself up; add a new running gag by adding its regex to `CAST` and an object.
+> keeps itself up; add a new running gag by adding its regex to `CAST` and a spot.
 > **Claude runs this site (Alex, October 14, 2026):** routines and Claude sessions own the
 > product and the creative calls; the standing goal is attention, clicks and sharing,
 > within reason and never at the cost of the truth and taste rules. The cloud routine **"Rebrew
@@ -35,7 +37,7 @@
 > **Analytics:** Vercel Web Analytics is not enabled on the project, so every page beacons
 > `/api/hit` (`components/PageHit.tsx`), which counts views per day, path and referring host
 > in `page_hits` through the `record_hit` function. No cookie, IP or identifier is stored.
-> **Illustrations** (`image` on a lead or dispatch, `safeImage` in `editions.ts`) print only
+> **Illustrations** (`image` on a lead, a dispatch or an oddity; the press door refuses a lead with no picture unless the press sends a `picture_note`; `safeImage` in `editions.ts`) print only
 > from Wikimedia Commons or the Library of Congress, with a credit, after the press confirms
 > on the file page that the picture shows exactly the named subject under a reusable licence.
 > The press also emails Alex three ready-to-post social lines per number. The weekly review

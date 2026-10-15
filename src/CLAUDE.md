@@ -97,11 +97,12 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   everything (cast files by regex over every number, sentence-split with abbreviation
   guards so "Mrs. Ashby" survives, each line a `clipPath` with offsets; most-clipped from
   `page_hits` with the service key; `content.ticker` for the coffee can and ticker;
-  `nextPressRun()` in New York time). `components/office/OfficeScene.tsx` draws the room
-  in one SVG (viewBox 1600x1000) with one `<Obj>` per object, a hover tag, a list of every
-  object under the drawing for phones and keyboards, and a newsprint panel per object.
-  The drawing and panels keep their newsprint palette in dark mode on purpose (an object,
-  not chrome). `.office-*` styles live at the end of `globals.css`.
+  `nextPressRun()` in New York time). `components/office/OfficeScene.tsx` shows the room
+  as a real 1941 photograph (Gottscho-Schleisner, Library of Congress, since October 15, 2026;
+  the SVG drawing read as clip art) with percent-positioned spots (`SPOTS`), a hover tag, a list
+  of every visible spot under the photograph for phones, and a newsprint panel per object.
+  Spots with `hidden: true` are Easter eggs: no outline on hover and left out of the list.
+  The frame and panels keep their newsprint palette in dark mode on purpose. `.office-*` styles live at the end of `globals.css`.
 - **`/api/hit`** — first-party pageview counter beaconed by `components/PageHit.tsx` from the
   root layout. Service key, `record_hit` RPC, bot user agents skipped, soft per-IP cap. Paths
   and referrers are reduced to fixed labels before storage, because routines read the table
