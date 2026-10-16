@@ -15,7 +15,7 @@ let firstView = true;
 export default function PageHit() {
   const pathname = usePathname();
   useEffect(() => {
-    if (!pathname || pathname.startsWith("/admin") || pathname.startsWith("/review")) return;
+    if (!pathname) return;
     const payload = JSON.stringify({ path: pathname, ref: firstView ? document.referrer : "" });
     firstView = false;
     try {

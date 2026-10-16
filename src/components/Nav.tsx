@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -14,9 +13,8 @@ import DarkModeToggle from "./DarkModeToggle";
  * button. Two short links also fit beside the name on the narrowest phone, so
  * there is no hamburger menu to open.
  *
- * Retired here and kept out deliberately: the coffee-cup-and-house mark (it
- * tied the name to real estate, which is no longer the beat; the drawing
- * survives in Mark.tsx; the favicon became the nameplate's blackletter R on October 14, 2026), the
+ * Retired here and kept out deliberately: the coffee-cup-and-house mark (the
+ * favicon became the nameplate's blackletter R on October 14, 2026), the
  * "Reporting" tab (the old work is the footer's Archive now), and the
  * "Buying or Selling?" button (the page itself was removed October 7, 2026).
  *
@@ -36,9 +34,6 @@ import DarkModeToggle from "./DarkModeToggle";
  * that sat on top of the paper's text on a phone.
  */
 export default function Nav() {
-  const pathname = usePathname();
-  if (pathname?.startsWith("/review") || pathname?.startsWith("/admin")) return null;
-
   return (
     <header className="theme-header fixed top-0 left-0 right-0 z-50 border-b">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">

@@ -4,7 +4,7 @@ import { isOptimizableHost } from "@/lib/imageHosts";
 
 /**
  * The one markdown -> sanitized HTML pipeline for post bodies. Shared by the
- * article renderer (ArticleView) and the /admin editor preview, so what an
+ * article renderer (ArticleView), so what an
  * editor previews is byte-identical to what ships. sanitize-html is pure JS
  * (no jsdom), so it loads cleanly in the serverless runtime. body_md is
  * first-party, but we sanitize anyway as defense-in-depth against a tampered
@@ -56,7 +56,7 @@ function optimizedImgAttribs(
  * `breaks: true` makes a single Enter a real line break, the way every
  * WYSIWYG editor (Substack included) behaves. CommonMark's default is to fold
  * a soft newline into the surrounding paragraph, which silently ran hand-typed
- * lines together in the /admin editor. Verified safe across the whole published
+ * lines together. Verified safe across the whole published
  * corpus: the only mid-paragraph soft newlines that existed were list lead-ins
  * (unaffected) and two lines that were meant to be separate all along.
  */

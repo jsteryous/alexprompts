@@ -1,5 +1,0 @@
-# Alex Prompts weekly signal collector (scripts/ai_news/).
-# Just the collector now: the Claude routine writes the draft, so no Gemini.
-python-dotenv==1.0.1
-requests==2.32.3
-defusedxml>=0.7.1   # safe RSS parsing (XXE / billion-laughs hardening)

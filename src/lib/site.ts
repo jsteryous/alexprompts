@@ -45,7 +45,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.rebrew.org";
 
 // Substack publication base (NOT the profile page). Drives the Subscribe button
-// (-> /subscribe) and the archive RSS mirror (-> /feed, see lib/substack.ts).
+// (-> /subscribe) on the old archive pages.
 // MOVED TO rebrew.substack.com October 1, 2026, on Alex's instruction ("substack
 // hyperlink should be at rebrew"). It had stayed alexprompts.substack.com after
 // the site rename because the subdomain is the publication's identity over
@@ -55,10 +55,6 @@ export const SITE_URL =
 export const SUBSTACK_URL =
   process.env.NEXT_PUBLIC_SUBSTACK_URL?.replace(/\/$/, "") ?? "https://rebrew.substack.com";
 
-/** RSS feed the archive mirror reads. Server-only; override with SUBSTACK_FEED_URL. */
-export function substackFeedUrl(): string {
-  return process.env.SUBSTACK_FEED_URL?.replace(/\/$/, "") ?? `${SUBSTACK_URL}/feed`;
-}
 
 export const site = {
   name: "Rebrew",

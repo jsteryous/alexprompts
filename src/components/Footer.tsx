@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
 
 /**
@@ -11,7 +10,6 @@ import { site } from "@/lib/site";
  * Archive is /reporting, which lists everything published under the earlier
  * beats (Greenville real estate and sales performance). Those pieces keep their
  * URLs. /buying-or-selling was removed October 7, 2026 and redirects home.
- * Privacy and Terms must stay reachable from every page for SMS carrier vetting.
  * The social handles came off with the reframe; they still feed the JSON-LD
  * sameAs in layout.tsx through `socials` in site.ts.
  */
@@ -24,9 +22,6 @@ const links = [
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
-  if (pathname?.startsWith("/review") || pathname?.startsWith("/admin")) return null;
-
   return (
     <footer className="border-t theme-border">
       <div className="max-w-5xl mx-auto px-6 py-12 text-center">

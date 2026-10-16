@@ -31,7 +31,7 @@ export default async function ArticleView({
   post: FullPost;
   section: ArticleSection;
 }) {
-  // Shared markdown -> sanitized HTML pipeline (also used by the /admin preview).
+  // Shared markdown -> sanitized HTML pipeline.
   const bodyHtml = await renderPostHtml(post.body_md ?? "");
   // Sections that carry the buy/sell offer get it mid-article too, not only at
   // the end, so a skimmer cannot miss it. Null on short or flat pieces.

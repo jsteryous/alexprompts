@@ -69,13 +69,10 @@ to the log with its hypothesis and the measure it should move.
    the Morgue's character files, so it is also the first step of bet 2. Plot is not scripted: stable cast, one slow
    arc a season, written down before it is printed.
 0b. **Distribution (October 16, 2026; 91 views last week, 3 from outside).** In order: "You're in the paper" notes
-   to the subjects of items (one per item, from hello@, never in Alex's name; **waits on Alex's yes**); the
+   to the subjects of items (one per item, from hello@, never in Alex's name; **Alex said yes October 16**, build it next); the
    forwarded-to-you line and sign-up prompts (bet 3); a Bluesky account the press posts the best clipping to (Alex
    creates the account); NewsArticle markup and Upstate real estate items that answer local searches; Substack
    cross-posting only if those fail. Nextdoor is out (partnered newsrooms only, and Alex will not post there).
-0c. **Cleanup session after No. 3 prints.** Delete the admin editor, the old research engines and the four
-   data-collection GitHub Actions (they redeploy daily), and rewrite CLAUDE.md to describe only the paper, so no
-   routine acts on the October 5 store plan. Keep every published URL resolving.
 1. **Who's who.** A cast page a new reader can find from every number (Alex wants it: "an about us
    page with portrait pics and bios"). **On hold at Alex's word (October 16, 2026):** real photographs
    of real people are out as faces for invented characters, and he will not have it look cheap. He may
@@ -140,3 +137,7 @@ to the log with its hypothesis and the measure it should move.
   and outlined once on arrival. Answered Alex's Notion notes 13 to 15 and new 1 to 6: Greenville stays home, three a
   week stays until the Nov 15 numbers say otherwise, the paper is always free, and the canon, distribution and
   cleanup bets went to the top of the backlog.
+- **2026-10-16** (session, Alex: "clean up codebase"). Removed the admin editor and `/review`, the publish and post
+  broadcast endpoints, the Substack sync and Greenville crons, the research and publication engines, the four
+  data-collection GitHub Actions, `BRAND.md`, `X.md` and 14 unused packages; CLAUDE.md now describes only the paper.
+  The 37 Archive articles keep their URLs. Alex approved "You're in the paper"; it is the next build.

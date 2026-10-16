@@ -168,33 +168,6 @@ export async function getPublishedPosts(limit?: number, type?: PostType): Promis
   return limit ? rows.slice(0, limit) : rows;
 }
 
-/**
- * The homepage "fresh" feed: newsletter issues, Greenville real-estate posts, AND
- * Greenville Works pieces, newest first, merged into one stream. Every published post
- * belongs to one of those three sections, so the feed is simply all of them. This is
- * what the homepage shows so the latest real-estate post or Greenville Works piece can
- * lead alongside the newsletter, not only `/archive` issues.
- */
-export async function getFeedPosts(limit?: number): Promise<ArchivePost[]> {
-  return getPublishedPosts(limit);
-}
-
-/** Tag that marks a post as one of the stories (October 7, 2026 reframe). The
- *  homepage lists only these. Everything published under the earlier beats
- *  stays at its URL and is listed on /reporting, which the footer calls the
- *  Archive. A story carries no section tag, so it lives under /archive/<slug>. */
-export const STORY_TAG = "story";
-
-export function isStory(post: { tags: string[] | null }): boolean {
-  return hasTag(post, STORY_TAG);
-}
-
-/** The stories, newest first. */
-export async function getStories(limit?: number): Promise<ArchivePost[]> {
-  const rows = (await getPublishedPosts()).filter(isStory);
-  return limit ? rows.slice(0, limit) : rows;
-}
-
 /** The canonical route a post lives at, derived from its section. Used by the
  *  homepage feed, which mixes sections and must link each card to the right page. */
 export function postHref(post: { tags: string[] | null; slug: string }): string {
@@ -208,26 +181,6 @@ export function postHref(post: { tags: string[] | null; slug: string }): string 
           ? "/briefing"
           : "/archive";
   return `${base}/${post.slug}`;
-}
-
-/** Short, human label for a post's section, for a card badge.
- *
- *  TWO LIVE LABELS as of August 25, 2026: "Sales" and "Real Estate". The rough
- *  edge this file used to carry is fixed at the root rather than papered over:
- *  the section tag named the ENGINE ("greenville works"), so a piece about sales
- *  leaderboards badged as "Business". Tags name the SUBJECT now, which is the
- *  fix that comment asked for. The two archive tracks keep topical labels so a
- *  reader scanning the mixed /reporting list can tell a 2026 weekly brief from a
- *  new piece. */
-export function sectionLabel(post: { tags: string[] | null }): string {
-  const section = sectionOf(post);
-  return section === "realestate"
-    ? "Real Estate"
-    : section === "sales"
-      ? "Sales"
-      : section === "briefing"
-        ? "Weekly Brief"
-        : "Newsletter";
 }
 
 /**

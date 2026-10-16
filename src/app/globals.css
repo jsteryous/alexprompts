@@ -535,94 +535,6 @@ html.dark .theme-card-contrast :where(.theme-card-muted) {
   color: var(--foreground-muted);
 }
 
-/* ── The draft composer ───────────────────────────────────────────────────────
-   TipTap's Placeholder extension only marks the empty node (a class plus a
-   `data-placeholder` attribute); drawing it is the app's job. Without this a
-   blank article, which is exactly what /admin's Write Article button opens,
-   showed an empty page with no prompt at all.
-
-   It marks the node the CARET is in, not only the first one, so an empty line
-   halfway down a piece carries its own hint the way Substack's does. The rule
-   used to key off `is-editor-empty:first-child`, which is the class for an
-   empty DOCUMENT, so every line after the first drew nothing.
-
-   The figure selector looks odd and is load-bearing. A caption lives inside a
-   `figure` node, and a node decoration lands on that node's outermost element,
-   so the class and the attribute both go on the `<figure>` and never on the
-   `<figcaption>` the old selector was looking for. Drawing it on the figure
-   itself would print the words over the photo, so the class is read from the
-   parent and the text from the caption's own `data-placeholder`, which
-   `Figure.tsx` renders. */
-.ProseMirror p.is-empty::before,
-.ProseMirror figure.is-empty > figcaption::before {
-  content: attr(data-placeholder);
-  color: var(--foreground-muted);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}
-
-/* Substack's composer sets its body a little larger and looser than the
-   published page, because a writer stares at it for an hour. Everything else
-   about the surface stays theme-prose, so what you type is what ships. */
-.ProseMirror.theme-prose {
-  font-size: 1.25rem;
-  line-height: 1.75;
-}
-
-/* Floating editor menus: the selection bubble and the block menu.
-   Substack draws both as one solid dark pill, and that contrast is what makes
-   a menu readable while it floats over body copy. It also solves the problem
-   this design system creates for itself by banning drop shadows: a near-white
-   popover on a near-white page has nothing separating it from the text. In
-   dark mode the page is already near-black, so the popover lifts instead of
-   inverting. The hover and active states are white alphas either way, which
-   read correctly on both surfaces. */
-.editor-pop {
-  background: var(--surface-inverse);
-  color: #f2f2f4;
-  border: 1px solid transparent;
-}
-
-html.dark .editor-pop {
-  background: var(--surface-strong);
-  border-color: var(--border-strong);
-  color: var(--foreground);
-}
-
-.editor-pop button {
-  color: color-mix(in srgb, currentColor 82%, transparent);
-}
-
-.editor-pop button:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: currentColor;
-}
-
-.editor-pop button[data-active="true"] {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.editor-pop [data-row="active"] {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.editor-pop input {
-  color: inherit;
-}
-
-.editor-pop input::placeholder {
-  color: color-mix(in srgb, currentColor 50%, transparent);
-}
-
-.editor-pop .pop-sep {
-  background: rgba(255, 255, 255, 0.22);
-}
-
-.editor-pop .pop-hint {
-  color: color-mix(in srgb, currentColor 55%, transparent);
-}
-
 /* ── Type scale utilities ─────────────────────────────────────────────────────
    One class sets family + size + line-height + weight + tracking together, so
    headings stay consistent site-wide. Color still comes from the theme-text-*
@@ -705,11 +617,8 @@ html.dark .editor-pop {
    not exist. Do not reintroduce a caret, a chevron, a blink, or a `>`
    anywhere. That ban is about the AI-prompt motif and it stands as written.
 
-   IT IS NOT A BAN ON THE PUBLICATION'S OWN MARK. August 25, 2026 added the
-   coffee-cup-and-house mark to the masthead (src/components/Mark.tsx) and to
-   the tab (src/app/icon.svg). A mark that stands for the publication is a
-   different object from a terminal affectation inherited from a retired
-   positioning, which is why one belongs and the other does not.            */
+   It is not a ban on the paper's own marks, such as the blackletter R
+   favicon (src/app/icon.svg).                                               */
 
 /* THE NAMEPLATE. The wordmark is the publication'''s mark, so it is set larger
    than the rest of the header chrome the way a masthead outranks its own rail.
@@ -718,16 +627,6 @@ html.dark .editor-pop {
    that shared token would have inflated all of them too. Tracking runs tighter
    than the body serif because display type at this size needs the optical
    correction to avoid looking loose. */
-/* The mark beside the wordmark, in the editorial accent rather than in ink.
-   It reads from --accent and NOT from a literal, which matters: the token is
-   oxblood #9a2323 on paper and lifts to #d97066 in dark mode, because oxblood
-   dies against near-black. A hardcoded red would go muddy in one of the two
-   themes. Same family as the favicon plate, which is fixed at #9a2323 because
-   a browser tab has no theme to read. */
-.wordmark-mark {
-  color: var(--accent);
-}
-
 .wordmark {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
