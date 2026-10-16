@@ -16,7 +16,7 @@
 > whose link preview is a torn-newsprint image from `/api/clip-image`. A clip is an address,
 > never a copy: the text is rebuilt from the printed number (`src/lib/clips.ts`), so nobody
 > can forge a clipping in the paper's name. **The Editor's office (`/office`, first in the nav):**
-> Mr. Langston's office, a real 1941 Library of Congress photograph (`public/office/office-1941.jpg`,
+> Mr. Langston's office, a 1941 Library of Congress photograph (`public/office/office-1941.jpg`, retouched by Alex October 16 with clippings, radio, telephone and the Clarion across the street,
 > replaced the SVG drawing October 15, 2026) with clickable spots (`SPOTS` in
 > `components/office/OfficeScene.tsx`, some hidden as Easter eggs); every spot
 > opens something from the paper, assembled by `src/lib/office.ts`: cast files built by

@@ -98,7 +98,7 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   guards so "Mrs. Langston" survives, each line a `clipPath` with offsets; most-clipped from
   `page_hits` with the service key; `content.ticker` for the coffee can and ticker;
   `nextPressRun()` in New York time). `components/office/OfficeScene.tsx` shows the room
-  as a real 1941 photograph (Gottscho-Schleisner, Library of Congress, since October 15, 2026;
+  as a real 1941 photograph (Gottscho-Schleisner, Library of Congress, since October 15, 2026; Alex's retouched copy with the clippings, radio, telephone, coffee can and the Clarion added since October 16, credited as retouched;
   the SVG drawing read as clip art) with percent-positioned spots (`SPOTS`), a hover tag, a list
   of every visible spot under the photograph for phones, and a newsprint panel per object.
   Spots with `hidden: true` are Easter eggs: no outline on hover and left out of the list.

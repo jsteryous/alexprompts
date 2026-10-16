@@ -1015,6 +1015,13 @@ html.dark .editor-pop {
   background: rgba(239, 229, 200, 0.14);
 }
 .office-spot-hidden:hover { border-color: transparent; background: transparent; }
+/* On arrival every visible spot shows its cut line once and fades, so a reader
+   sees what can be opened without the room wearing labels. Hidden spots never do. */
+.office-spot:not(.office-spot-hidden) { animation: office-reveal 2.6s ease 0.5s 1; }
+@keyframes office-reveal {
+  0%, 100% { border-color: transparent; }
+  20%, 60% { border-color: rgba(154, 35, 35, 0.85); }
+}
 .office-credit {
   padding: 0.4rem 0.75rem;
   border-top: 1px solid var(--foreground);
@@ -1025,7 +1032,7 @@ html.dark .editor-pop {
 }
 .office-credit a { text-decoration: underline; text-underline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
-  .office-spot { transition: none; }
+  .office-spot { transition: none; animation: none !important; }
 }
 .office-tag {
   position: absolute;

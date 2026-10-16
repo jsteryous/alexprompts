@@ -9,7 +9,10 @@ import { SP500_END_1997 } from "@/lib/office";
  * THE EDITOR'S OFFICE (October 14, 2026; a real photograph since October 15).
  * The room is a 1941 private office in Hartford, photographed by
  * Gottscho-Schleisner (Library of Congress, no known restrictions), which
- * Mr. Langston has borrowed. The SVG drawing it replaced read as clip art; Alex
+ * Mr. Langston has borrowed. Since October 16 it is Alex's retouched copy, with
+ * the clippings, radio, telephone, portrait, coffee can and the Clarion across
+ * the street added, so the things to click are things in the room; the credit
+ * says it was retouched. The SVG drawing it replaced read as clip art; Alex
  * liked the period photographs. Each spot on the photograph opens something
  * from the paper, assembled by src/lib/office.ts, so the room changes with
  * every number. Spots marked `hidden` show nothing until the pointer finds
@@ -33,36 +36,36 @@ type Key =
   | "radio";
 
 const LABELS: Record<Key, { name: string; hint: string }> = {
-  typewriter: { name: "The desk", hint: "Today's paper" },
+  typewriter: { name: "The paper on the desk", hint: "Today's number" },
   calendar: { name: "The door to the press room", hint: "When the next number comes out" },
-  coffee: { name: "The cabinet", hint: "The coffee can, against the market" },
+  coffee: { name: "The coffee can", hint: "The Editor's savings, against the market" },
   ticker: { name: "The ticker's plug", hint: "The latest closes" },
   barometer: { name: "The empty nail", hint: "Where the barometer hung" },
   hatcher: { name: "The portrait", hint: "The Hatcher file" },
-  phone: { name: "The visitor's chair", hint: "Where Dewey sits with his telephone" },
+  phone: { name: "The telephone", hint: "Dewey, on the line again" },
   note: { name: "The blotter", hint: "Notes from Mrs. Langston" },
   window: { name: "The window", hint: "The Evening Clarion, across the street" },
-  corkboard: { name: "The bare wall", hint: "The most-clipped clippings" },
-  stack: { name: "The desk drawers", hint: "Every back issue" },
-  radio: { name: "The armchair by the window", hint: "Stage, screen and radio" },
+  corkboard: { name: "The clippings on the wall", hint: "The most-clipped items this month" },
+  stack: { name: "The filing cabinet", hint: "Every back issue" },
+  radio: { name: "The radio", hint: "Stage, screen and radio" },
   candlestick: { name: "The Editor's chair", hint: "The Editor's latest opinion" },
 };
 
 /** Each spot as a box on the photograph, in per cent of its width and height. */
 const SPOTS: { k: Key; l: number; t: number; w: number; h: number; hidden?: boolean }[] = [
-  { k: "corkboard", l: 6, t: 20, w: 24, h: 34 },
-  { k: "window", l: 39.5, t: 13, w: 11, h: 45 },
-  { k: "hatcher", l: 75, t: 34.5, w: 6, h: 14 },
-  { k: "calendar", l: 85, t: 15, w: 11, h: 61 },
-  { k: "coffee", l: 69.5, t: 50, w: 13.5, h: 24 },
-  { k: "radio", l: 56, t: 56.5, w: 13, h: 9.5 },
-  { k: "candlestick", l: 9.5, t: 60, w: 7, h: 30 },
-  { k: "note", l: 30, t: 63, w: 15, h: 6 },
-  { k: "typewriter", l: 16.5, t: 69, w: 27, h: 6 },
-  { k: "stack", l: 16.5, t: 75, w: 26, h: 20 },
-  { k: "phone", l: 53, t: 66, w: 18, h: 29 },
-  { k: "barometer", l: 63, t: 27.5, w: 2.5, h: 3.5, hidden: true },
-  { k: "ticker", l: 63.3, t: 46.5, w: 2.2, h: 3.5, hidden: true },
+  { k: "corkboard", l: 8, t: 27.5, w: 18, h: 19.5 },
+  { k: "window", l: 38, t: 12, w: 12, h: 44 },
+  { k: "hatcher", l: 72.8, t: 27.5, w: 5.8, h: 12.5 },
+  { k: "calendar", l: 88.5, t: 25, w: 9.5, h: 51 },
+  { k: "coffee", l: 66, t: 44, w: 15.5, h: 28 },
+  { k: "radio", l: 19, t: 53, w: 6.5, h: 5.5 },
+  { k: "candlestick", l: 4.5, t: 61, w: 8, h: 34 },
+  { k: "note", l: 31.5, t: 64.8, w: 13.5, h: 5 },
+  { k: "typewriter", l: 26.8, t: 70, w: 13.4, h: 4.8 },
+  { k: "phone", l: 54.5, t: 62, w: 5, h: 5.6 },
+  { k: "stack", l: 89.5, t: 80, w: 10.5, h: 20 },
+  { k: "barometer", l: 56.3, t: 24, w: 2.5, h: 3.5, hidden: true },
+  { k: "ticker", l: 84.8, t: 38, w: 2, h: 3, hidden: true },
 ];
 
 const ORDER: Key[] = [
@@ -83,9 +86,9 @@ function nyParts(iso: string) {
 function Photo({ onOpen, onHover }: { onOpen: (k: Key) => void; onHover: (k: Key | null, e?: React.MouseEvent) => void }) {
   return (
     <div className="office-photo">
-      {/* A local copy of a public domain photograph; next/image adds nothing at this size. */}
+      {/* A retouched copy of a public domain photograph, served as a plain file. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/office/office-1941.jpg" alt="A 1941 private office: a desk, two leather armchairs, a tall curtained window, a cabinet, a framed picture and a door." width={560} height={396} />
+      <img src="/office/office-1941.jpg" alt="A 1941 private office: a desk stacked with newspapers, leather chairs, a radio, a telephone, clippings pinned to the walls, a framed portrait, a cabinet with a coffee can, and a window onto the Evening Clarion across the street." width={1491} height={1055} />
       {SPOTS.map((s) => (
         <button
           key={s.k}
@@ -346,7 +349,7 @@ export default function OfficeScene({ data }: { data: OfficeData }) {
       <div ref={frame} className="office-frame">
         <Photo onOpen={setOpen} onHover={onHover} />
         <p className="office-credit">
-          A private office in Hartford, Connecticut, 1941, which Mr. Langston has borrowed.{" "}
+          A private office in Hartford, Connecticut, 1941, which Mr. Langston has borrowed and furnished. Retouched from a photograph by{" "}
           <a href="https://www.loc.gov/item/2018740583/" target="_blank" rel="noopener noreferrer">
             Gottscho-Schleisner, Library of Congress
           </a>
