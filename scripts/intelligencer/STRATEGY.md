@@ -69,7 +69,7 @@ to the log with its hypothesis and the measure it should move.
    the Morgue's character files, so it is also the first step of bet 2. Plot is not scripted: stable cast, one slow
    arc a season, written down before it is printed.
 0b. **Distribution (October 16, 2026; 91 views last week, 3 from outside).** In order: "You're in the paper" notes
-   to the subjects of items (**built October 16**, off until Alex has seen one dry run; see the log); the
+   to the subjects of items (**built and switched on October 16**; see the log); the
    forwarded-to-you line and sign-up prompts (bet 3); a Bluesky account the press posts the best clipping to (Alex
    creates the account); NewsArticle markup and Upstate real estate items that answer local searches; Substack
    cross-posting only if those fail. Nextdoor is out (partnered newsrooms only, and Alex will not post there).
@@ -146,7 +146,8 @@ to the log with its hypothesis and the measure it should move.
   address it publishes and the page it is on; after the number prints, the site sends each one fixed note from
   hello@rebrew.org with the clipping link and an offer to print a correction. Guards: the press picks no words; the
   address must be on the contact page's domain and never a free mail service; one note per address ever, one per domain
-  a month; never an item about harm, a lawsuit or an embarrassment. **Off until `INTELLIGENCER_NOTICES=on` in Vercel**:
-  No. 3 (Oct 17) is a dry run whose "would go to" lines appear in Alex's press email; turn it on once they look right.
+  a month; never an item about harm, a lawsuit or an embarrassment. **Alex switched it on the same day**
+  (`INTELLIGENCER_NOTICES=on` in Vercel, "just turn it on now"), so No. 3 (Oct 17) sends the first notes; each one is
+  listed in Alex's press email. Any other value stops them.
   Hello@rebrew.org now forwards to Alex (Cloudflare had no routing rule) and is off Resend's suppression list.
   Hypothesis: the subject of an item shares it. Moves: views from outside and clip opens of noted items.
