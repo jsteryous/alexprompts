@@ -58,6 +58,15 @@ readers arrive, so every report asks him for one specific, low-effort share (whi
 where, and the line to post with it). Bets that earn distribution without him (email
 forwarding, share-worthy formats, anything a reader would send a friend) rank high.
 
+## Standing duty: the canon
+
+Every run, before the bet, keep the canon (`src/lib/canon.ts`), the press's memory of the invented world. Read the
+week's editorials, letters, Around Town and advertisements. When one established a lasting fact about a character (a
+name, an age, a possession, a place, an event), add it to that character's `fixed` list with its number; when a thread
+opened or closed, update `threads`; when a new recurring character appeared, add an entry with a `pattern`. If anything
+printed contradicted the canon, say so in the press note. Never script the news, and change the arc only with a reason
+in the log. The record of printed sentences builds itself; do not copy it into the file. Commit it with the week's work.
+
 ## The backlog
 
 Ranked. The Publisher builds the top bet it can finish and prove in one run, then moves it
