@@ -24,13 +24,13 @@
 > (each line links to its clipping), the month's most-clipped items from `page_hits`, the
 > Coffee Can Index against the S&P 500 from `content.ticker` (closes the press writes as
 > numbers, validated at the press door), and a countdown to the next press run. The room
-> keeps itself up; add a new running gag by adding its regex to `CAST` and a spot.
+> keeps itself up; add a new running gag by giving it a `pattern` in the canon (`src/lib/canon.ts`) and a spot.
 > **Claude runs this site (Alex, October 14, 2026):** routines and Claude sessions own the
 > product and the creative calls; the standing goal is attention, clicks and sharing,
 > within reason and never at the cost of the truth and taste rules. The cloud routine **"Rebrew
 > Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
 > and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
-> (the cast bible and the taste rules live there). **"Intelligencer circulation report"**
+> (the taste rules and the cast's characters live there; **the canon**, the fixed facts, open threads and the season's arc, is `src/lib/canon.ts`, sent to the press by the door's GET with a record of every sentence ever printed about each character, since the press otherwise sees only the last four numbers). **"Intelligencer circulation report"**
 > (`trig_017z59c2rJKARMYZtdE1A4Yh`, Sundays 7:52 a.m. ET; **paused October 14, 2026**, folded into the Publisher's Notion report) emailed Alex the week's numbers;
 > prompt in `scripts/intelligencer/CIRCULATION.md`. Both need the Supabase connector (and
 > the report Gmail) attached in the claude.ai Routines UI; the API could not attach them.

@@ -63,7 +63,7 @@ forwarding, share-worthy formats, anything a reader would send a friend) rank hi
 Ranked. The Publisher builds the top bet it can finish and prove in one run, then moves it
 to the log with its hypothesis and the measure it should move.
 
-0. **The canon (first, because it protects the writing).** The press sees only the last four numbers, so the
+0. **The canon (built October 16, 2026; see the log).** The press sees only the last four numbers, so the
    cast will contradict itself by December (Alex, Notion new 6). A written canon in the repo: fixed facts per
    character and a running log of what the paper has said about each, read by the press before every number. It is
    the Morgue's character files, so it is also the first step of bet 2. Plot is not scripted: stable cast, one slow
@@ -151,3 +151,13 @@ to the log with its hypothesis and the measure it should move.
   listed in Alex's press email. Any other value stops them.
   Hello@rebrew.org now forwards to Alex (Cloudflare had no routing rule) and is off Resend's suppression list.
   Hypothesis: the subject of an item shares it. Moves: views from outside and clip opens of noted items.
+- **2026-10-16** (session). **Built the canon**, backlog 0 (Alex, Notion new 6). `src/lib/canon.ts` holds the fixed
+  facts per character (taken from what Nos. 1 and 2 actually printed: the Packard in the ditch, the walk to Pelzer, the
+  barometer signed for at the Clarion, the editorial "we"), the open threads and the season's arc. The press door's GET
+  now sends it with a record of every sentence ever printed about each character and every headline of the Editor's
+  departments, built from all numbers, so the press no longer forgets anything older than four numbers. The office's
+  cast files use the same patterns. The Publisher keeps the fixed facts current each week. **Autumn arc: the coffee
+  tin.** The Editor trusts no bank; by Christmas he opens a passbook account, calls it his own idea, and keeps one tin
+  for the church's Christmas collection. Written for the readers this paper has (bankers and lenders), at most once a
+  week. Hypothesis: a cast that never contradicts itself is one a reader can follow, and following is what brings a
+  reader back. No measure moves on its own; the Publisher checks each week's numbers against the canon.

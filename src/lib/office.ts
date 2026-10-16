@@ -15,6 +15,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { getRecentEditions, type Edition, type PaperItem, type Ticker } from "@/lib/editions";
 import { clipPath, clipsOf, findClip } from "@/lib/clips";
+import { CANON, sentences } from "@/lib/canon";
 
 export interface Snippet {
   text: string;
@@ -24,35 +25,10 @@ export interface Snippet {
 
 export type CastKey = "dewey" | "mrsLangston" | "hatcher" | "clarion" | "barometer";
 
-const CAST: Record<CastKey, RegExp> = {
-  dewey: /\bDewey\b/,
-  mrsLangston: /\bMrs\.? Langston\b/,
-  hatcher: /\bHatcher\b/,
-  clarion: /\b(?:Clarion|Whitfield)\b/,
-  barometer: /\bbarometer\b/i,
-};
-
-/** Words that end in a full stop without ending a sentence. */
-const ABBREVIATION = /(?:^|[\s(“"])(Mr|Mrs|Ms|Dr|St|Mt|Jr|Sr|No|Co|Inc|Gov|Sen|Rep|Gen|Lt|Capt|Prof|Rev|U\.S|[A-Z])$/;
-
-/** Sentence spans in a paragraph, so a snippet can link to its exact words. */
-function sentences(p: string): { start: number; end: number }[] {
-  const out: { start: number; end: number }[] = [];
-  let start = 0;
-  for (let i = 0; i < p.length; i++) {
-    if (!".!?".includes(p[i])) continue;
-    if (p[i] === "." && ABBREVIATION.test(p.slice(Math.max(0, i - 6), i))) continue;
-    let end = i + 1;
-    while (end < p.length && /["”’)\].!?]/.test(p[end])) end++;
-    if (end < p.length && !/\s/.test(p[end])) continue;
-    out.push({ start, end });
-    start = end;
-    while (start < p.length && /\s/.test(p[start])) start++;
-    i = start - 1;
-  }
-  if (start < p.length && p.slice(start).trim()) out.push({ start, end: p.length });
-  return out;
-}
+/** The cast files follow the canon's patterns, so one list names the cast everywhere. */
+const CAST = Object.fromEntries(
+  CANON.cast.filter((c) => c.pattern).map((c) => [c.key, c.pattern as RegExp]),
+) as Record<CastKey, RegExp>;
 
 function castFiles(editions: Edition[], perPerson = 10): Record<CastKey, Snippet[]> {
   const files = Object.fromEntries(Object.keys(CAST).map((k) => [k, [] as Snippet[]])) as Record<CastKey, Snippet[]>;

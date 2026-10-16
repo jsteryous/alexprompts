@@ -5,6 +5,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rateLimit";
 import { sendEmail } from "@/lib/email";
 import { broadcastEdition } from "@/lib/editionEmail";
+import { CANON, canonRecord, type InventedParts } from "@/lib/canon";
 import { noticesEnabled, parseNotices, sendNotices, type Notice } from "@/lib/notices";
 
 /** Room for the subscriber send that runs in after() once the press has its answer. */
@@ -88,8 +89,12 @@ export async function GET(req: Request) {
   const today = todayNY();
   const since = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
   const lettersSince = new Date(Date.now() - LETTER_WINDOW_DAYS * 86400000).toISOString();
-  const [recent, hits, notes, letters] = await Promise.all([
+  const [recent, invented, hits, notes, letters] = await Promise.all([
     sb.from(TABLE).select("number, slug, headline, content").order("number", { ascending: false }).limit(4),
+    // Every number, but only the Editor's departments: the canon's record and spent list.
+    sb.from(TABLE).select(
+      "number, editorial:content->editorial, letters:content->letters, miscellany:content->miscellany, advertisements:content->advertisements",
+    ),
     sb.from("page_hits").select("path, views").gte("day", since),
     sb.from("intelligencer_notes").select("created_at, note").order("id", { ascending: false }).limit(5),
     // Never the reader's email: the press sees only what could be printed.
@@ -106,6 +111,7 @@ export async function GET(req: Request) {
   }
 
   const editions = recent.data ?? [];
+  const { record, spent } = canonRecord((invented.data ?? []) as InventedParts[]);
   return NextResponse.json({
     today,
     printed_today: editions.some((e) => e.slug === today),
@@ -114,6 +120,12 @@ export async function GET(req: Request) {
     views_last_14_days: views,
     notes: notes.data ?? [],
     reader_letters: letters.data ?? [],
+    canon: {
+      ...CANON,
+      cast: CANON.cast.map(({ key, name, fixed }) => ({ key, name, fixed })),
+      record,
+      spent,
+    },
   });
 }
 
