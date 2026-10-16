@@ -43,13 +43,15 @@ export interface SendOptions {
   /** Extra headers, e.g. List-Unsubscribe for broadcasts. */
   headers?: Record<string, string>;
   replyTo?: string;
+  /** A different verified sender on the same domain, e.g. the paper's hello@. */
+  from?: string;
 }
 
 /** Send one email. Returns { ok:false, error:"not_configured" } when env is unset
  *  so callers can keep a pending subscriber row without treating it as a failure. */
 export async function sendEmail(opts: SendOptions): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = fromAddress();
+  const from = opts.from ?? fromAddress();
   if (!apiKey || !from) return { ok: false, error: "not_configured" };
 
   try {

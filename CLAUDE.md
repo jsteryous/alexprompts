@@ -73,7 +73,7 @@
 > stamping `intelligencer_editions.emailed_at` so a number never goes twice. Manual previews,
 > counts and resends: `/api/intelligencer/broadcast?slug=<date>&test=|dry=1|force=1`
 > (PUBLISH_SECRET). The nav's Subscribe and a box at the foot of every number point at
-> `/subscribe`, the owned list; Substack does not carry the Intelligencer. **`page_hits` holds no free text:** `/api/hit` stores only known route
+> `/subscribe`, the owned list; Substack does not carry the Intelligencer. **"You're in the paper" (October 16, 2026):** the press may send `notices` (item, organization, its published address, the page it is on); `src/lib/notices.ts` validates them and, in `after()`, sends each one fixed note from hello@rebrew.org, logged in `intelligencer_notices` (one per address ever, one per domain a month, 3 a number). Nothing sends unless `INTELLIGENCER_NOTICES=on`. **`page_hits` holds no free text:** `/api/hit` stores only known route
 > shapes (article slugs collapse to `/<section>/*`) and a fixed list of referrer labels, and
 > two `NOT VALID` check constraints enforce the same at the database for every new row.
 
@@ -115,6 +115,7 @@ submissions from the old site and nothing writes to it; `/privacy` says so.
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key, never commit. |
 | `INTELLIGENCER_PRESS_SECRET` | The press routine's only credential, for `/api/intelligencer/press`. Same value in the press's cloud environment. Unset means 503. |
 | `PRESS_NOTIFY_EMAIL` | Where the site sends each number's link and social lines, and each reader's letter. |
+| `INTELLIGENCER_NOTICES` | `on` lets the press door send "You're in the paper" notes. Anything else is a dry run reported in the press email. |
 | `PUBLISH_SECRET` | Auth for `/api/intelligencer/broadcast` (previews, counts, resends). |
 | `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_REPLY_TO`, `EMAIL_POSTAL_ADDRESS` | Subscriber mail. |
 | `SUBSCRIBE_RATE_LIMIT` | Soft per-IP hourly cap. |

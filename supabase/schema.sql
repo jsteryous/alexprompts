@@ -587,3 +587,24 @@ create table if not exists public.intelligencer_letters (
   printed_in text
 );
 alter table public.intelligencer_letters enable row level security;
+
+-- "You're in the paper" notes (October 16, 2026): when the press names the
+-- organization an item is about and its published contact address, the press door
+-- sends that address one fixed note with the clipping (src/lib/notices.ts). Service
+-- key only. The unique email means one note per address, ever; the door also sends
+-- at most one note per domain in 30 days.
+create table if not exists public.intelligencer_notices (
+  id bigserial primary key,
+  created_at timestamptz not null default now(),
+  slug text not null,
+  item text not null,
+  subject text not null check (char_length(subject) between 2 and 120),
+  email text not null unique check (char_length(email) <= 254),
+  domain text not null,
+  contact_page text not null,
+  status text not null default 'queued' check (status in ('queued', 'sent', 'failed')),
+  sent_at timestamptz,
+  error text
+);
+create index if not exists intelligencer_notices_domain on public.intelligencer_notices (domain, created_at);
+alter table public.intelligencer_notices enable row level security;

@@ -5,6 +5,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rateLimit";
 import { sendEmail } from "@/lib/email";
 import { broadcastEdition } from "@/lib/editionEmail";
+import { noticesEnabled, parseNotices, sendNotices, type Notice } from "@/lib/notices";
 
 /** Room for the subscriber send that runs in after() once the press has its answer. */
 export const maxDuration = 300;
@@ -262,7 +263,14 @@ async function resolveReaderLetters(sb: SupabaseClient, letters: LetterDraft[] |
 }
 
 /** Rebuilds the edition from known fields only; anything else is dropped. */
-function validate(body: unknown): { headline: string; summary: string; content: EditionContent; pictureNote?: string } {
+function validate(body: unknown): {
+  headline: string;
+  summary: string;
+  content: EditionContent;
+  pictureNote?: string;
+  notices: Notice[];
+  noticesRefused: string[];
+} {
   if (!body || typeof body !== "object") throw new Invalid("body must be a JSON object");
   const b = body as Record<string, unknown>;
   const c = (b.content ?? {}) as Record<string, unknown>;
@@ -324,7 +332,10 @@ function validate(body: unknown): { headline: string; summary: string; content: 
   const headline = str(b.headline, "headline", 160, true)!.replace(/\.$/, "");
   const summary = str(b.summary, "summary", 400, true)!;
   if (JSON.stringify(content).length > 150_000) throw new Invalid("the number is too long");
-  return { headline, summary, content, pictureNote: pictureNote || undefined };
+  // "You're in the paper" notes (src/lib/notices.ts): a bad one is dropped and
+  // reported, never a reason to refuse the number.
+  const { notices, refused: noticesRefused } = parseNotices(b.notices, content);
+  return { headline, summary, content, pictureNote: pictureNote || undefined, notices, noticesRefused };
 }
 
 /**
@@ -415,8 +426,15 @@ export async function POST(req: Request) {
   const to = process.env.PRESS_NOTIFY_EMAIL;
   const link = `https://www.rebrew.org/edition/${slug}`;
   let emailed = "skipped: PRESS_NOTIFY_EMAIL not set";
+  const sendingNotices = noticesEnabled() ? parsed.notices : [];
   if (to) {
-    const lines = [...(parsed.content.social ?? []), ...(parsed.pictureNote ? [`No lead picture: ${parsed.pictureNote}`] : [])];
+    const lines = [
+      ...(parsed.content.social ?? []),
+      ...(parsed.pictureNote ? [`No lead picture: ${parsed.pictureNote}`] : []),
+      ...parsed.notices.map((n) =>
+        `${sendingNotices.length ? "Note going" : "Note NOT sent (INTELLIGENCER_NOTICES is off), would go"} to ${n.subject}, ${n.email} (found at ${n.contactPage}), for ${n.item}.`),
+      ...parsed.noticesRefused.map((r) => `Note refused: ${r}`),
+    ];
     const result = await sendEmail({
       to,
       subject: `Intelligencer No. ${number}: ${parsed.headline}`,
@@ -435,7 +453,19 @@ export async function POST(req: Request) {
   after(async () => {
     const result = await broadcastEdition(sb, slug);
     if (!result.body.ok) console.error("[press] subscriber email:", JSON.stringify(result.body));
+    if (sendingNotices.length) console.log("[press] notices:", JSON.stringify(await sendNotices(sb, slug, sendingNotices)));
   });
 
-  return NextResponse.json({ number, slug, url: link, emailed, subscribers: "sending" }, { status: 201 });
+  return NextResponse.json(
+    {
+      number,
+      slug,
+      url: link,
+      emailed,
+      subscribers: "sending",
+      notices: noticesEnabled() ? `${sendingNotices.length} sending` : `off (${parsed.notices.length} would send)`,
+      notices_refused: parsed.noticesRefused,
+    },
+    { status: 201 },
+  );
 }
