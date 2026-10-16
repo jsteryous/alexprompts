@@ -129,6 +129,8 @@ export interface EditionContent {
   /** Short true stories that need no joke. Clipped as `odd-N`. */
   oddities?: PaperItem[];
   markets?: PaperItem;
+  /** What's Brewing in Real Estate (October 16, 2026): one true real estate item. Clipped as `realty`. */
+  realty?: PaperItem;
   editorial?: PaperItem;
   letters?: PaperItem[];
   amusements?: PaperItem[];

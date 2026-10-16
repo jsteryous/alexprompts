@@ -273,6 +273,7 @@ function validate(body: unknown): { headline: string; summary: string; content: 
     dispatches: items(c.dispatches, "dispatches", 6, { image: true }),
     oddities: items(c.oddities, "oddities", 5, { image: true }),
     markets: item(c.markets, "markets"),
+    realty: item(c.realty, "realty"),
     editorial: item(c.editorial, "editorial"),
     letters: letterItems(c.letters),
     amusements: items(c.amusements, "amusements", 3),

@@ -32,7 +32,7 @@ function knownPath(raw: string): string | null {
   const path = raw.toLowerCase().replace(/\/+$/, "") || "/";
   if (STATIC_PATHS.has(path)) return path;
   if (/^\/edition\/\d{4}-\d{2}-\d{2}$/.test(path)) return path;
-  if (/^\/clip\/\d{4}-\d{2}-\d{2}\/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})$/.test(path)) return path;
+  if (/^\/clip\/\d{4}-\d{2}-\d{2}\/(lead|market|realty|editorial|(dispatch|odd|letter|amusement|around|ad)-\d{1,2})$/.test(path)) return path;
   const m = path.match(/^\/([a-z-]+)\/[a-z0-9-]{1,150}$/);
   if (m && SECTIONS.has(m[1])) return `/${m[1]}/*`;
   return null;

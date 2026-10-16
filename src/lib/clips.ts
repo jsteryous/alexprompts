@@ -21,6 +21,7 @@ export const DEPARTMENTS = {
   dispatch: "By Wire",
   odd: "Strange but True",
   market: "Wall Street",
+  realty: "What's Brewing in Real Estate",
   editorial: "The Editor's Desk",
   letter: "Letters to the Editor",
   amusement: "Stage, Screen and Radio",
@@ -68,6 +69,7 @@ export function clipsOf(edition: Edition): Clip[] {
     ...(c.dispatches ?? []).map((d, i) => fromItem("dispatch", d, i)),
     ...(c.oddities ?? []).map((o, i) => fromItem("odd", o, i)),
     fromItem("market", c.markets),
+    fromItem("realty", c.realty),
     fromItem("editorial", c.editorial),
     ...(c.letters ?? []).map((l, i) => fromItem("letter", l, i)),
     ...(c.amusements ?? []).map((a, i) => fromItem("amusement", a, i)),
@@ -81,7 +83,7 @@ export function clipsOf(edition: Edition): Clip[] {
   return out.filter((x): x is Clip => x !== null);
 }
 
-const ID = /^(lead|market|editorial|(dispatch|odd|letter|amusement|around|ad)-\d{1,2})$/;
+const ID = /^(lead|market|realty|editorial|(dispatch|odd|letter|amusement|around|ad)-\d{1,2})$/;
 
 export function findClip(edition: Edition, id: string): Clip | null {
   if (!ID.test(id)) return null;

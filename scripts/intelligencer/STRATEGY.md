@@ -63,13 +63,14 @@ forwarding, share-worthy formats, anything a reader would send a friend) rank hi
 Ranked. The Publisher builds the top bet it can finish and prove in one run, then moves it
 to the log with its hypothesis and the measure it should move.
 
-1. **"Real or Ashby?"** A game on each number: six headlines, some true from the news and
-   some invented by the Editor, and the reader guesses which. A shareable result grid in the
-   Wordle style, with no spoilers. Real headlines come from the printed news; invented ones
-   are labelled as inventions once answered. Hypothesis: the paper's premise (the truth
-   sounds made up) is most shareable as a game. Moves: views from outside, clip opens.
-2. **A share prompt after reading.** At the foot of each number, the single funniest line
-   pre-clipped, with one tap to share it.
+1. **Who's who.** A cast page a new reader can find from every number (Alex wants it: "an about us
+   page with portrait pics and bios"). Waits on two decisions in Alex's Notion desk: the characters'
+   names (note 9, he may rename the Editor) and the portraits (Claude pushed back on real photographs
+   of real people as faces for invented characters). Do not build it before both are settled.
+2. **The Morgue.** A 1945 paper's morgue was its clipping library and file room. A hidden one, reached
+   from the office, holding each character's file (which doubles as the press's memory of the cast),
+   the Spike (pieces the Editor wrote that the copy desk killed) and lore added over time. Alex's
+   Easter-egg idea (Notion note 5), built carefully and after the writing, never cheaply.
 3. **Subscriber growth loops.** The edition email already carries a forward line. Next: a
    sign-up prompt on clip pages and in the office, and a "forwarded to you?" line at the top
    of the email for readers who did not sign up themselves. Moves: subscribers.
@@ -105,3 +106,12 @@ to the log with its hypothesis and the measure it should move.
 - **2026-10-14** (session). Bet on the writing and on true oddities as the share unit. Hypothesis: a true strange story
   shared alone travels further than a quip, and news with no invented asides is safe to clip. Moves: clip opens
   (watch `/clip/*/odd-*`) and views from outside. If oddities draw no clips by Nov 15, try them as the email's lead.
+- **2026-10-16** (session, Alex's Notion notes 5 to 12). **Dropped "Real or Ashby?"** (Alex unsure, and a game
+  that mixes invented headlines with the true ones teaches readers to doubt the true news, which is the one thing
+  the paper must never do) and **the share prompt** (Alex: no). **New department, What's Brewing in Real Estate**
+  (`content.realty`, clip `realty`), one true item every number for the bankers, lenders and brokers who are the
+  paper's readers, Greenville and Upstate deals preferred. Hypothesis: it is the one department nobody else writes
+  in this voice for this reader. Moves: clip opens of `realty`. The press also now treats a story's value as the
+  detail the headlines skipped, not being first, so a big story up to four days old still runs; the Editor does things
+  his own way and knows the Founders; ads read like earnest 1945 ones. Fixed: `/clip/*/odd-*` views were refused by
+  the database and `/api/hit` since October 14, so oddity clips were never counted.

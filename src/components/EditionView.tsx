@@ -286,6 +286,16 @@ export default function EditionView({
             </Block>
           )}
 
+          {c.realty && (
+            <Block>
+              <Department title={DEPARTMENTS.realty} />
+              <Clippable id={clipId("realty")}>
+                <Headline item={c.realty} />
+                <Paragraphs item={c.realty} />
+              </Clippable>
+            </Block>
+          )}
+
           {c.editorial && (
             <Block>
               <Department title={DEPARTMENTS.editorial} />

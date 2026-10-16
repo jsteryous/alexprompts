@@ -64,6 +64,7 @@ export function editionEmail(edition: Edition, unsubUrl: string): { subject: str
   // A film cannot play in an email, so its still stands in and links to the page.
   const plate = safeImage(lead?.image) ?? (film ? { url: film.still, caption: film.caption, credit: `${film.credit}, on YouTube`, source: url } : null);
   const dispatches = (c.dispatches ?? []).map((d, i) => ({ d, href: `${url}#${clipId("dispatch", i)}` }));
+  if (c.realty) dispatches.push({ d: c.realty, href: `${url}#${clipId("realty")}` });
   const odd = (c.oddities ?? [])[0];
   const letter = (c.letters ?? [])[0];
   const ad = (c.advertisements ?? [])[0];

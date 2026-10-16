@@ -565,7 +565,7 @@ alter table public.intelligencer_notes enable row level security;
 -- knownPath() and SOURCES in src/app/api/hit/route.ts. NOT VALID so the rows
 -- that predate the rule stay; every new row is checked.
 alter table public.page_hits add constraint page_hits_path_known
-  check (path ~ '^/(|editions|office|letters|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|editorial|(dispatch|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
+  check (path ~ '^/(|editions|office|letters|about|reporting|archive|real-estate|sales|briefing|contact|privacy|terms|subscribe|edition/\d{4}-\d{2}-\d{2}|clip/\d{4}-\d{2}-\d{2}/(lead|market|realty|editorial|(dispatch|odd|letter|amusement|around|ad)-\d{1,2})|(archive|real-estate|sales|briefing)/\*)$') not valid;
 alter table public.page_hits add constraint page_hits_referrer_known
   check (referrer in ('', 'other', 'google', 'bing', 'duckduckgo', 'x', 'facebook', 'instagram', 'linkedin', 'reddit', 'threads', 'bluesky', 'substack', 'hackernews', 'youtube', 'tiktok', 'email', 'ai-assistant')) not valid;
 
