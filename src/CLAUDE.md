@@ -95,7 +95,7 @@ See the root `CLAUDE.md` for brand, voice, engines, Supabase, and env vars.
   **Never let a clip carry text in the URL**: the image and page rebuild it from the row.
 - **`/office`** — THE EDITOR'S OFFICE (October 14, 2026). `src/lib/office.ts` assembles
   everything (cast files by regex over every number, sentence-split with abbreviation
-  guards so "Mrs. Ashby" survives, each line a `clipPath` with offsets; most-clipped from
+  guards so "Mrs. Langston" survives, each line a `clipPath` with offsets; most-clipped from
   `page_hits` with the service key; `content.ticker` for the coffee can and ticker;
   `nextPressRun()` in New York time). `components/office/OfficeScene.tsx` shows the room
   as a real 1941 photograph (Gottscho-Schleisner, Library of Congress, since October 15, 2026;

@@ -6,7 +6,7 @@
 > answer is **The Rebrew Intelligencer**: the real news, three mornings a week (Tuesday,
 > Thursday, Saturday), printed as a big-city American daily of 1945 (the paper began in an 1860 voice with No. 1
 > and moved to 1945 the same day because 1860 read as dated). **The news is true and
-> sourced; the Editor (C. P. Ashby), his household, the rival Evening Clarion, the letters
+> sourced; the Editor (J. T. Langston), his household, the rival Evening Clarion, the letters
 > and the advertisements are inventions**, and the colophon, the email footer and `/about` all
 > say so, along with the fact that a machine writes it. Editions are rows in Supabase
 > `intelligencer_editions` (JSON `content`, shape in `src/lib/editions.ts`), rendered by
@@ -16,11 +16,11 @@
 > whose link preview is a torn-newsprint image from `/api/clip-image`. A clip is an address,
 > never a copy: the text is rebuilt from the printed number (`src/lib/clips.ts`), so nobody
 > can forge a clipping in the paper's name. **The Editor's office (`/office`, first in the nav):**
-> Mr. Ashby's office, a real 1941 Library of Congress photograph (`public/office/office-1941.jpg`,
+> Mr. Langston's office, a real 1941 Library of Congress photograph (`public/office/office-1941.jpg`,
 > replaced the SVG drawing October 15, 2026) with clickable spots (`SPOTS` in
 > `components/office/OfficeScene.tsx`, some hidden as Easter eggs); every spot
 > opens something from the paper, assembled by `src/lib/office.ts`: cast files built by
-> searching every number for Thaddeus, Mrs. Ashby, Fenwick, the Clarion and the barometer
+> searching every number for Thaddeus, Mrs. Langston, Fenwick, the Clarion and the barometer
 > (each line links to its clipping), the month's most-clipped items from `page_hits`, the
 > Coffee Can Index against the S&P 500 from `content.ticker` (closes the press writes as
 > numbers, validated at the press door), and a countdown to the next press run. The room

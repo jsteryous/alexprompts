@@ -8,7 +8,7 @@ export const revalidate = 300;
 
 const title = "The Editor's Office";
 const description =
-  "Mr. C. P. Ashby is out. Have a look around his office: the coffee can, the missing barometer, Fenwick's portrait and everything else from the pages of The Rebrew Intelligencer.";
+  "Mr. J. T. Langston is out. Have a look around his office: the coffee can, the missing barometer, Fenwick's portrait and everything else from the pages of The Rebrew Intelligencer.";
 
 export const metadata: Metadata = {
   title,
@@ -35,7 +35,7 @@ export default async function OfficePage() {
       <div className="max-w-6xl mx-auto px-3 md:px-6">
         <header className="text-center mb-5 md:mb-7">
           <h1 className="office-title">The Editor&apos;s Office</h1>
-          <p className="office-sub">Mr. Ashby is out. Have a look around. Everything in here comes from the paper.</p>
+          <p className="office-sub">Mr. Langston is out. Have a look around. Everything in here comes from the paper.</p>
         </header>
         <OfficeScene data={data} />
       </div>

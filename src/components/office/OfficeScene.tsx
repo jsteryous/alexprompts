@@ -9,7 +9,7 @@ import { SP500_END_1997 } from "@/lib/office";
  * THE EDITOR'S OFFICE (October 14, 2026; a real photograph since October 15).
  * The room is a 1941 private office in Hartford, photographed by
  * Gottscho-Schleisner (Library of Congress, no known restrictions), which
- * Mr. Ashby has borrowed. The SVG drawing it replaced read as clip art; Alex
+ * Mr. Langston has borrowed. The SVG drawing it replaced read as clip art; Alex
  * liked the period photographs. Each spot on the photograph opens something
  * from the paper, assembled by src/lib/office.ts, so the room changes with
  * every number. Spots marked `hidden` show nothing until the pointer finds
@@ -40,7 +40,7 @@ const LABELS: Record<Key, { name: string; hint: string }> = {
   barometer: { name: "The empty nail", hint: "Where the barometer hung" },
   fenwick: { name: "The portrait", hint: "The Fenwick file" },
   phone: { name: "The visitor's chair", hint: "Where Thaddeus sits with his telephone" },
-  note: { name: "The blotter", hint: "Notes from Mrs. Ashby" },
+  note: { name: "The blotter", hint: "Notes from Mrs. Langston" },
   window: { name: "The window", hint: "The Evening Clarion, across the street" },
   corkboard: { name: "The bare wall", hint: "The most-clipped clippings" },
   stack: { name: "The desk drawers", hint: "Every back issue" },
@@ -253,7 +253,7 @@ function Panel({ k, data }: { k: Key; data: OfficeData }) {
       return <Snippets items={data.cast.thaddeus} empty="Thaddeus has not broken anything yet this week. Give him time." />;
 
     case "note":
-      return <Snippets items={data.cast.mrsAshby} empty="Mrs. Ashby has said nothing for the record, which the Editor finds more alarming than anything she could say." />;
+      return <Snippets items={data.cast.mrsLangston} empty="Mrs. Langston has said nothing for the record, which the Editor finds more alarming than anything she could say." />;
 
     case "window":
       return <Snippets items={data.cast.clarion} empty="The Clarion's lights are off. The Editor claims not to have noticed." />;
@@ -346,7 +346,7 @@ export default function OfficeScene({ data }: { data: OfficeData }) {
       <div ref={frame} className="office-frame">
         <Photo onOpen={setOpen} onHover={onHover} />
         <p className="office-credit">
-          A private office in Hartford, Connecticut, 1941, which Mr. Ashby has borrowed.{" "}
+          A private office in Hartford, Connecticut, 1941, which Mr. Langston has borrowed.{" "}
           <a href="https://www.loc.gov/item/2018740583/" target="_blank" rel="noopener noreferrer">
             Gottscho-Schleisner, Library of Congress
           </a>

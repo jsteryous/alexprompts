@@ -64,9 +64,9 @@ Ranked. The Publisher builds the top bet it can finish and prove in one run, the
 to the log with its hypothesis and the measure it should move.
 
 1. **Who's who.** A cast page a new reader can find from every number (Alex wants it: "an about us
-   page with portrait pics and bios"). Waits on two decisions in Alex's Notion desk: the characters'
-   names (note 9, he may rename the Editor) and the portraits (Claude pushed back on real photographs
-   of real people as faces for invented characters). Do not build it before both are settled.
+   page with portrait pics and bios"). **On hold at Alex's word (October 16, 2026):** real photographs
+   of real people are out as faces for invented characters, and he will not have it look cheap. He may
+   supply AI portraits himself. Do not build it until he does.
 2. **The Morgue.** A 1945 paper's morgue was its clipping library and file room. A hidden one, reached
    from the office, holding each character's file (which doubles as the press's memory of the cast),
    the Spike (pieces the Editor wrote that the copy desk killed) and lore added over time. Alex's
@@ -115,3 +115,6 @@ to the log with its hypothesis and the measure it should move.
   detail the headlines skipped, not being first, so a big story up to four days old still runs; the Editor does things
   his own way and knows the Founders; ads read like earnest 1945 ones. Fixed: `/clip/*/odd-*` views were refused by
   the database and `/api/hit` since October 14, so oddity clips were never counted.
+- **2026-10-16** (session, Alex). The Editor is now **Mr. James T. Langston** ("something more relatable"), in the
+  code, the press and the two printed numbers (only No. 2 named Mrs. Ashby). Who's who is on hold until Alex has
+  portraits that look legitimate.

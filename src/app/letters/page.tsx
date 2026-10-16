@@ -4,7 +4,7 @@ import { LetterForm } from "@/components/LetterForm";
 
 export const metadata: Metadata = {
   title: "Letters to the Editor",
-  description: "Write to Mr. C. P. Ashby, Editor of The Rebrew Intelligencer. The best letters are printed, with his reply.",
+  description: "Write to Mr. J. T. Langston, Editor of The Rebrew Intelligencer. The best letters are printed, with his reply.",
   alternates: { canonical: `${site.url}/letters` },
 };
 
@@ -23,7 +23,7 @@ export default function LettersPage() {
         <div className="mx-auto mt-8 mb-10 h-px w-12 bg-[var(--accent)]" aria-hidden="true" />
         <div className="font-serif theme-text-secondary text-[1.0625rem] leading-[1.7] space-y-4 mb-10">
           <p>
-            Mr. Ashby reads every letter that reaches his desk, and prints the best of them beside his
+            Mr. Langston reads every letter that reaches his desk, and prints the best of them beside his
             reply. Write about the news, about something the paper got wrong, or about any modern
             nuisance you would like explained to a man of 1945.
           </p>

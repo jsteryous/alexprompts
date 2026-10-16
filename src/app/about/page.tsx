@@ -49,7 +49,7 @@ export default function AboutPage() {
           <p>
             The news is true. Every figure, name and date in the dispatches is checked
             against the sources listed at the foot of each number. The Editor, Mr. C. P.
-            Ashby, is an invention, and so are his household, his rival across the street,
+            Langston, is an invention, and so are his household, his rival across the street,
             the letters (except those marked as from a reader) and the advertisements.
             Nothing in them is fact or advice.
           </p>

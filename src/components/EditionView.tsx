@@ -193,7 +193,7 @@ export default function EditionView({
             <span className="hidden sm:inline">Greenville, South Carolina</span>
             <span className="mx-auto sm:mx-0">{editionDateLine(edition.slug)}</span>
             <Link href="/office" className="hidden sm:inline hover:underline underline-offset-4">
-              C. P. Ashby, Editor
+              J. T. Langston, Editor
             </Link>
           </div>
           <div className="border-t border-[var(--foreground)]" />

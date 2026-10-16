@@ -3,7 +3,7 @@
  * show, assembled from the printed numbers so the room changes with every
  * edition and nobody has to keep it up by hand.
  *
- * - The cast files (Thaddeus, Mrs. Ashby, Fenwick, the Evening Clarion, the
+ * - The cast files (Thaddeus, Mrs. Langston, Fenwick, the Evening Clarion, the
  *   barometer) are every sentence that names them, newest first, each linked to
  *   its clipping. A newcomer can catch up on the running jokes in two minutes.
  * - The corkboard is the month's most-clipped items, counted from real views of
@@ -22,11 +22,11 @@ export interface Snippet {
   number: number;
 }
 
-export type CastKey = "thaddeus" | "mrsAshby" | "fenwick" | "clarion" | "barometer";
+export type CastKey = "thaddeus" | "mrsLangston" | "fenwick" | "clarion" | "barometer";
 
 const CAST: Record<CastKey, RegExp> = {
   thaddeus: /\bThaddeus\b/,
-  mrsAshby: /\bMrs\.? Ashby\b/,
+  mrsLangston: /\bMrs\.? Langston\b/,
   fenwick: /\bFenwick\b/,
   clarion: /\bClarion\b/,
   barometer: /\bbarometer\b/i,
