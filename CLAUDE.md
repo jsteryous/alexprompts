@@ -20,7 +20,7 @@
 > replaced the SVG drawing October 15, 2026) with clickable spots (`SPOTS` in
 > `components/office/OfficeScene.tsx`, some hidden as Easter eggs); every spot
 > opens something from the paper, assembled by `src/lib/office.ts`: cast files built by
-> searching every number for Thaddeus, Mrs. Langston, Fenwick, the Clarion and the barometer
+> searching every number for Dewey, Mrs. Langston, Hatcher, the Clarion and the barometer
 > (each line links to its clipping), the month's most-clipped items from `page_hits`, the
 > Coffee Can Index against the S&P 500 from `content.ticker` (closes the press writes as
 > numbers, validated at the press door), and a countdown to the next press run. The room

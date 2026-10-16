@@ -3,7 +3,7 @@
  * show, assembled from the printed numbers so the room changes with every
  * edition and nobody has to keep it up by hand.
  *
- * - The cast files (Thaddeus, Mrs. Langston, Fenwick, the Evening Clarion, the
+ * - The cast files (Dewey, Mrs. Langston, Hatcher, the Evening Clarion, the
  *   barometer) are every sentence that names them, newest first, each linked to
  *   its clipping. A newcomer can catch up on the running jokes in two minutes.
  * - The corkboard is the month's most-clipped items, counted from real views of
@@ -22,13 +22,13 @@ export interface Snippet {
   number: number;
 }
 
-export type CastKey = "thaddeus" | "mrsLangston" | "fenwick" | "clarion" | "barometer";
+export type CastKey = "dewey" | "mrsLangston" | "hatcher" | "clarion" | "barometer";
 
 const CAST: Record<CastKey, RegExp> = {
-  thaddeus: /\bThaddeus\b/,
+  dewey: /\bDewey\b/,
   mrsLangston: /\bMrs\.? Langston\b/,
-  fenwick: /\bFenwick\b/,
-  clarion: /\bClarion\b/,
+  hatcher: /\bHatcher\b/,
+  clarion: /\b(?:Clarion|Whitfield)\b/,
   barometer: /\bbarometer\b/i,
 };
 
@@ -139,7 +139,7 @@ export function nextPressRun(now = new Date()): Date {
   return new Date(now.getTime() + 2 * 86400000);
 }
 
-/** The S&P 500's close on the last trading day of 1997, the year before Fenwick. */
+/** The S&P 500's close on the last trading day of 1997, the year before Hatcher. */
 export const SP500_END_1997 = 970.43;
 
 export interface OfficeData {

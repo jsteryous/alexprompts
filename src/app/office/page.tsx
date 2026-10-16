@@ -8,7 +8,7 @@ export const revalidate = 300;
 
 const title = "The Editor's Office";
 const description =
-  "Mr. J. T. Langston is out. Have a look around his office: the coffee can, the missing barometer, Fenwick's portrait and everything else from the pages of The Rebrew Intelligencer.";
+  "Mr. J. T. Langston is out. Have a look around his office: the coffee can, the missing barometer, Hatcher's portrait and everything else from the pages of The Rebrew Intelligencer.";
 
 export const metadata: Metadata = {
   title,

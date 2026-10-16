@@ -21,7 +21,7 @@ type Key =
   | "window"
   | "calendar"
   | "barometer"
-  | "fenwick"
+  | "hatcher"
   | "corkboard"
   | "stack"
   | "candlestick"
@@ -38,8 +38,8 @@ const LABELS: Record<Key, { name: string; hint: string }> = {
   coffee: { name: "The cabinet", hint: "The coffee can, against the market" },
   ticker: { name: "The ticker's plug", hint: "The latest closes" },
   barometer: { name: "The empty nail", hint: "Where the barometer hung" },
-  fenwick: { name: "The portrait", hint: "The Fenwick file" },
-  phone: { name: "The visitor's chair", hint: "Where Thaddeus sits with his telephone" },
+  hatcher: { name: "The portrait", hint: "The Hatcher file" },
+  phone: { name: "The visitor's chair", hint: "Where Dewey sits with his telephone" },
   note: { name: "The blotter", hint: "Notes from Mrs. Langston" },
   window: { name: "The window", hint: "The Evening Clarion, across the street" },
   corkboard: { name: "The bare wall", hint: "The most-clipped clippings" },
@@ -52,7 +52,7 @@ const LABELS: Record<Key, { name: string; hint: string }> = {
 const SPOTS: { k: Key; l: number; t: number; w: number; h: number; hidden?: boolean }[] = [
   { k: "corkboard", l: 6, t: 20, w: 24, h: 34 },
   { k: "window", l: 39.5, t: 13, w: 11, h: 45 },
-  { k: "fenwick", l: 75, t: 34.5, w: 6, h: 14 },
+  { k: "hatcher", l: 75, t: 34.5, w: 6, h: 14 },
   { k: "calendar", l: 85, t: 15, w: 11, h: 61 },
   { k: "coffee", l: 69.5, t: 50, w: 13.5, h: 24 },
   { k: "radio", l: 56, t: 56.5, w: 13, h: 9.5 },
@@ -66,7 +66,7 @@ const SPOTS: { k: Key; l: number; t: number; w: number; h: number; hidden?: bool
 ];
 
 const ORDER: Key[] = [
-  "typewriter", "calendar", "coffee", "fenwick", "phone", "note",
+  "typewriter", "calendar", "coffee", "hatcher", "phone", "note",
   "window", "corkboard", "radio", "candlestick", "stack",
 ];
 
@@ -175,7 +175,7 @@ function Panel({ k, data }: { k: Key; data: OfficeData }) {
         <>
           <p>
             The Editor keeps his savings in this can, on the grounds that a can has never been sold a share in a branch
-            line. Here is how that has gone since 1998, the year of Fenwick.
+            line. Here is how that has gone since 1998, the year of Hatcher.
           </p>
           {gain !== null ? (
             <div className="office-bars">
@@ -238,19 +238,19 @@ function Panel({ k, data }: { k: Key; data: OfficeData }) {
         </>
       );
 
-    case "fenwick": {
+    case "hatcher": {
       const days = Math.floor((Date.now() - Date.UTC(1998, 0, 1)) / 86400000);
       return (
         <>
           <p className="office-big">{days.toLocaleString("en-US")}</p>
           <p className="office-fine">days, at the least, that the Editor has held this grudge.</p>
-          <Snippets items={data.cast.fenwick} empty="Fenwick has kept a low profile. The Editor finds this suspicious." />
+          <Snippets items={data.cast.hatcher} empty="Hatcher has kept a low profile. The Editor finds this suspicious." />
         </>
       );
     }
 
     case "phone":
-      return <Snippets items={data.cast.thaddeus} empty="Thaddeus has not broken anything yet this week. Give him time." />;
+      return <Snippets items={data.cast.dewey} empty="Dewey has not broken anything yet this week. Give him time." />;
 
     case "note":
       return <Snippets items={data.cast.mrsLangston} empty="Mrs. Langston has said nothing for the record, which the Editor finds more alarming than anything she could say." />;

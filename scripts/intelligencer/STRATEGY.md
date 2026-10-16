@@ -118,3 +118,7 @@ to the log with its hypothesis and the measure it should move.
 - **2026-10-16** (session, Alex). The Editor is now **Mr. James T. Langston** ("something more relatable"), in the
   code, the press and the two printed numbers (only No. 2 named Mrs. Ashby). Who's who is on hold until Alex has
   portraits that look legitimate.
+- **2026-10-16** (session, Alex). The rest of the cast renamed: the nephew is **Dewey**, the man who sold the branch
+  line share is **Virgil Hatcher**, and the Clarion gains an editor, **Mr. Royce Whitfield**, this week's one new
+  character, offstage and at most weekly. **Mrs. Langston's first name is never printed** (Alex: the mystery can
+  carry). Changed in the code, the office's cast files, the press and both printed numbers.
