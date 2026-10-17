@@ -281,6 +281,7 @@ function validate(body: unknown): {
   pictureNote?: string;
   notices: Notice[];
   noticesRefused: string[];
+  noticesNote?: string;
 } {
   if (!body || typeof body !== "object") throw new Invalid("body must be a JSON object");
   const b = body as Record<string, unknown>;
@@ -346,7 +347,16 @@ function validate(body: unknown): {
   // "You're in the paper" notes (src/lib/notices.ts): a bad one is dropped and
   // reported, never a reason to refuse the number.
   const { notices, refused: noticesRefused } = parseNotices(b.notices, content);
-  return { headline, summary, content, pictureNote: pictureNote || undefined, notices, noticesRefused };
+  // No. 3 sent none without looking for a single address, and an empty array read
+  // the same as a search that found nothing. As with the lead's picture, a number
+  // that offers no notice must say who was considered and why each was skipped.
+  const noticesNote = str(b.notices_note, "notices_note", 1200, false);
+  if (!notices.length && !noticesRefused.length && !noticesNote) {
+    throw new Invalid(
+      "send notices (see YOU'RE IN THE PAPER), or notices_note naming each organization you considered and why it was skipped",
+    );
+  }
+  return { headline, summary, content, pictureNote: pictureNote || undefined, notices, noticesRefused, noticesNote: noticesNote || undefined };
 }
 
 /**
@@ -414,6 +424,7 @@ export async function POST(req: Request) {
     headline: parsed.headline,
     summary: parsed.summary,
     content: parsed.content,
+    notices_note: parsed.noticesNote ?? null,
     status: "published",
   });
   if (error) {
