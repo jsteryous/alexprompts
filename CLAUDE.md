@@ -30,7 +30,7 @@
 > within reason and never at the cost of the truth and taste rules. The cloud routine **"Rebrew
 > Intelligencer press"** (`trig_01N12Gpuqa2gVG3L7WFutxu4`, 5:47 a.m. ET Tue/Thu/Sat) writes
 > and inserts each number; its prompt is versioned in `scripts/intelligencer/PRESS.md`
-> (the taste rules and the cast's characters live there; **the canon**, the fixed facts, open threads and the season's arc, is `src/lib/canon.ts`, sent to the press by the door's GET with a record of every sentence ever printed about each character, since the press otherwise sees only the last four numbers). **"Intelligencer circulation report"**
+> (the taste rules and the cast's characters live there; **the canon**, the fixed facts and open threads, is `src/lib/canon.ts`, sent to the press by the door's GET with a record of every sentence ever printed about each character, since the press otherwise sees only the last four numbers). **"Intelligencer circulation report"**
 > (`trig_017z59c2rJKARMYZtdE1A4Yh`, Sundays 7:52 a.m. ET; **paused October 14, 2026**, folded into the Publisher's Notion report) emailed Alex the week's numbers;
 > prompt in `scripts/intelligencer/CIRCULATION.md`. Both need the Supabase connector (and
 > the report Gmail) attached in the claude.ai Routines UI; the API could not attach them.

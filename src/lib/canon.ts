@@ -6,7 +6,7 @@
  * The press door's GET sends three things:
  *
  * - `CANON`, written by hand: the fixed facts about each character and place,
- *   the open threads, and the season's one slow arc. A Claude session or the
+ *   and the open threads. A Claude session or the
  *   Publisher edits it here; the press only reads it.
  * - the record, built from every printed number: each sentence in the Editor's
  *   departments that names a cast member, oldest first. It never forgets, and
@@ -38,7 +38,6 @@ export const CANON: {
   world: string[];
   cast: CanonEntry[];
   threads: CanonThread[];
-  arc: { season: string; name: string; outline: string[] };
 } = {
   world: [
     "The paper is printed today, in 2026, in the voice of a 1945 Greenville daily. Its people live in the present and talk like 1945; nobody in the paper is a time traveller and nobody remarks on the gap.",
@@ -119,16 +118,6 @@ export const CANON: {
       note: "Mrs. Langston is going over to the Clarion for it. Resolve it soon, ideally as the occasion that first names Mr. Royce Whitfield, then close it for good and let The Weather run a real forecast.",
     },
   ],
-  arc: {
-    season: "Autumn 2026 (to Christmas)",
-    name: "The coffee tin",
-    outline: [
-      "The Editor keeps his savings in a coffee tin because he trusts no bank, which the paper's readers (bankers and lenders) will enjoy. Mrs. Langston, quietly, would like it in a bank.",
-      "Through the autumn the question comes up no more than once a week, in the editorial or Around Town: a run on the tin's contents for the Packard's repair, Dewey proposing a bank on his telephone, the Editor touring a Greenville bank (invented, never a real one) and finding the vault insufficiently railroad-proof.",
-      "By Christmas the Editor opens a passbook account, announces it as his own idea, and keeps one tin on the desk for the church's Christmas collection.",
-      "This is the outline, not a script. The news always comes first, and the arc can wait a number or bend to a better joke the news offers, as long as it ends where it is written.",
-    ],
-  },
 };
 
 /** Words that end in a full stop without ending a sentence. */

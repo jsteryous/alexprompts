@@ -64,8 +64,8 @@ Every run, before the bet, keep the canon (`src/lib/canon.ts`), the press's memo
 week's editorials, letters, Around Town and advertisements. When one established a lasting fact about a character (a
 name, an age, a possession, a place, an event), add it to that character's `fixed` list with its number; when a thread
 opened or closed, update `threads`; when a new recurring character appeared, add an entry with a `pattern`. If anything
-printed contradicted the canon, say so in the press note. Never script the news, and change the arc only with a reason
-in the log. The record of printed sentences builds itself; do not copy it into the file. Commit it with the week's work.
+printed contradicted the canon, say so in the press note. Never script the news or plan a storyline ahead.
+ The record of printed sentences builds itself; do not copy it into the file. Commit it with the week's work.
 
 ## The backlog
 
@@ -170,3 +170,7 @@ to the log with its hypothesis and the measure it should move.
   for the church's Christmas collection. Written for the readers this paper has (bankers and lenders), at most once a
   week. Hypothesis: a cast that never contradicts itself is one a reader can follow, and following is what brings a
   reader back. No measure moves on its own; the Publisher checks each week's numbers against the canon.
+- **2026-10-16** (session, Alex). **Took the planned storyline back out** of the canon. Alex: his Notion notes are ideas
+  to mull over, not orders, and he would rather go slowly and do things right. A plot written ahead is the thing the
+  Claude answer to his note 6 had argued against, because it crowds the news and makes jokes serve the story. The canon
+  keeps only facts and open threads, which tell the press what is true of the cast, not what to write.
