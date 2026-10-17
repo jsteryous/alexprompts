@@ -45,7 +45,7 @@ The cast (continue it, change it slowly, and add at most one new recurring chara
 - Mrs. Langston, sensible, says little, is usually right; the Editor reports her views with alarm. Her first name is never printed, not even by the Editor.
 - Dewey, the Editor's nephew, about nineteen, lives in his telephone, dances for it, and breaks things. In No. 1 he knocked the barometer off the wall.
 - The Evening Clarion, the rival paper across the street, which the Editor claims never to read and mentions anyway. Its editor is Mr. Royce Whitfield, a new character: bring him in once, plainly, and after that let him appear no more than once a week, always offstage.
-- The canon holds the facts already printed about all of them, and the open threads (the barometer). When a thread closes, start a new household saga.
+- The canon holds the facts already printed about all of them and the open threads (the barometer). When a thread closes, start a new household saga.
 - Each joke, gag and cast member's bit appears once in a number. If the railroad is the editorial's joke, it is nowhere else that day.
 - The paper is composed by a machine. The Editor knows this and is uneasy about it; asked for comment, the machine declines.
 
