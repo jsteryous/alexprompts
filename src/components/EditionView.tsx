@@ -306,23 +306,27 @@ export default function EditionView({
             </Block>
           )}
 
-          {(c.letters ?? []).length > 0 && (
-            <Block>
-              <Department title={DEPARTMENTS.letter} />
-              {c.letters!.map((l, i) => (
-                <Clippable key={i} id={clipId("letter", i)} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
-                  {l.reader && <p className="type-eyebrow theme-text-muted mb-1">From a reader</p>}
-                  <Headline item={l} size="sm" />
-                  <Paragraphs item={l} />
-                </Clippable>
-              ))}
-              <p className="mt-4 text-right italic text-[0.875rem]" style={head}>
-                <Link href="/letters" className="theme-link underline underline-offset-4">
-                  Write to the Editor
-                </Link>
-              </p>
-            </Block>
-          )}
+          {/* Always printed, letters or none: it is the only door to /letters inside a number. */}
+          <Block>
+            <Department title={DEPARTMENTS.letter} />
+            {(c.letters ?? []).map((l, i) => (
+              <Clippable key={i} id={clipId("letter", i)} className={i > 0 ? "mt-5 pt-4 border-t theme-border" : ""}>
+                {l.reader && <p className="type-eyebrow theme-text-muted mb-1">From a reader</p>}
+                <Headline item={l} size="sm" />
+                <Paragraphs item={l} />
+              </Clippable>
+            ))}
+            <p
+              className={`text-center italic text-[0.9375rem] theme-text-primary ${(c.letters ?? []).length ? "mt-5 pt-4 border-t theme-border" : ""}`}
+              style={head}
+            >
+              Have a word for Mr. Langston?{" "}
+              <Link href="/letters" className="theme-link underline underline-offset-4 not-italic font-semibold">
+                Write to the Editor
+              </Link>
+              . Any letter the paper prints runs word for word.
+            </p>
+          </Block>
 
           {(c.amusements ?? []).length > 0 && (
             <Block>

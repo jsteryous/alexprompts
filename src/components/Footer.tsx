@@ -15,6 +15,7 @@ import { site } from "@/lib/site";
  */
 const links = [
   { href: "/about", label: "About" },
+  { href: "/letters", label: "Letters" },
   { href: "/reporting", label: "Archive" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },

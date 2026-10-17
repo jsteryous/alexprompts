@@ -81,7 +81,7 @@ See the root `CLAUDE.md` for the paper, the routines, Supabase and env vars.
 - **`/about`, `/contact`, `/privacy`, `/terms`.** The site collects only newsletter emails
   and readers' letters; `/privacy` also covers the past submissions kept in `referral_leads`.
 - **Nav:** the name, then The Office, Back Issues, About, Subscribe and the light and dim
-  switch. **Footer:** About, Archive, Contact, Privacy, Terms.
+  switch. **Footer:** About, Letters, Archive, Contact, Privacy, Terms. Every number also prints the Letters department with a "Write to the Editor" invitation, even when it carries no letters.
 
 ## Design system
 
