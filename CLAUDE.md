@@ -40,7 +40,7 @@
 > **Illustrations** (`image` on a lead, a dispatch or an oddity; the press door refuses a lead with no picture unless the press sends a `picture_note`; `safeImage` in `editions.ts`; since October 15, 2026 an item may instead carry a `video`, a YouTube news film of the actual event, which the press door checks through YouTube oEmbed and credits to the channel itself, rendered as a grey still until played by `components/FilmPlate.tsx`, because openly licensed photos of this week's events almost never exist and copied news photos draw agency bills) print only
 > from Wikimedia Commons or the Library of Congress, with a credit, after the press confirms
 > on the file page that the picture shows exactly the named subject under a reusable licence.
-> The press also emails Alex three ready-to-post social lines per number. The weekly review
+> The press no longer emails Alex a separate note (October 17, 2026, at his request; the subscriber email is his copy). The weekly review
 > writes a note to `intelligencer_notes`, which the press reads first: that is the learning
 > loop. **The Publisher** (`trig_01KyzXyjKpxfY6zYz9NwEtNQ`, Mondays 6:13 a.m. ET, prompt
 > `scripts/intelligencer/PUBLISHER.md`, replacing the fortnightly maintainer October 14,
@@ -64,8 +64,7 @@
 > `INTELLIGENCER_PRESS_SECRET` (set in Vercel and in the press's own cloud environment).
 > GET returns today's date, the last four numbers, views per number and the desk notes; POST
 > prints one number for today after the server rebuilds the JSON field by field (length caps,
-> http(s) links only, `safeImage` for pictures, dashes refused) and then emails the link and
-> social lines to `PRESS_NOTIFY_EMAIL` through Resend. A hijacked press can at worst print one
+> http(s) links only, `safeImage` for pictures, dashes refused). A hijacked press can at worst print one
 > bad number a day. **Subscribers get every number by email (October 14, 2026):** after the
 > press has its answer, the door runs `broadcastEdition` (`src/lib/editionEmail.ts`) in
 > `after()`, sending a short newspaper (banner, the lead's opening, the other headlines, one
@@ -114,8 +113,8 @@ submissions from the old site and nothing writes to it; `/privacy` says so.
 | `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public; RLS controls access. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | Service key, never commit. |
 | `INTELLIGENCER_PRESS_SECRET` | The press routine's only credential, for `/api/intelligencer/press`. Same value in the press's cloud environment. Unset means 503. |
-| `PRESS_NOTIFY_EMAIL` | Where the site sends each number's link and social lines, and each reader's letter. |
-| `INTELLIGENCER_NOTICES` | `on` lets the press door send "You're in the paper" notes. Anything else is a dry run reported in the press email. |
+| `PRESS_NOTIFY_EMAIL` | Where the site sends each reader's letter. |
+| `INTELLIGENCER_NOTICES` | `on` lets the press door send "You're in the paper" notes. Anything else is a dry run, reported in the press door's response. |
 | `PUBLISH_SECRET` | Auth for `/api/intelligencer/broadcast` (previews, counts, resends). |
 | `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_REPLY_TO`, `EMAIL_POSTAL_ADDRESS` | Subscriber mail. |
 | `SUBSCRIBE_RATE_LIMIT` | Soft per-IP hourly cap. |

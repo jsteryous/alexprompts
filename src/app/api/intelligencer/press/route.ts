@@ -3,7 +3,6 @@ import { revalidatePath } from "next/cache";
 import { timingSafeEqual } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rateLimit";
-import { sendEmail } from "@/lib/email";
 import { broadcastEdition } from "@/lib/editionEmail";
 import { CANON, canonRecord, type InventedParts } from "@/lib/canon";
 import { noticesEnabled, parseNotices, sendNotices, type Notice } from "@/lib/notices";
@@ -32,8 +31,8 @@ import { safeImage, safeUrl, safeVideo, type EditionContent, type PaperAd, type 
  *         second number for the same day is refused by the unique slug. The
  *         JSON is rebuilt field by field with length caps, links must be http(s),
  *         pictures must pass `safeImage`, and dashes are refused so the house
- *         rule holds. Then the site emails Alex the link and the social lines
- *         through Resend, to PRESS_NOTIFY_EMAIL, an address the press cannot set.
+ *         rule holds. Alex is not sent a separate note (October 17, 2026): he
+ *         reads the number in the subscriber email like everyone else.
  *
  * So a hijacked press can, at worst, print one bad number in a day.
  */
@@ -374,10 +373,6 @@ async function checkFilms(content: EditionContent): Promise<void> {
   }
 }
 
-function escapeHtml(s: string): string {
-  return s.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
-}
-
 export async function POST(req: Request) {
   const refused = gate(req);
   if (refused) return refused;
@@ -434,31 +429,10 @@ export async function POST(req: Request) {
   revalidatePath("/editions");
   revalidatePath(`/edition/${slug}`);
 
-  // Tell Alex. The address comes from the server's own environment, never the request.
-  const to = process.env.PRESS_NOTIFY_EMAIL;
   const link = `https://www.rebrew.org/edition/${slug}`;
-  let emailed = "skipped: PRESS_NOTIFY_EMAIL not set";
+  // No separate note to Alex (he asked October 17, 2026); the subscriber email is his copy.
+  const emailed = "off: Alex reads the subscriber email";
   const sendingNotices = noticesEnabled() ? parsed.notices : [];
-  if (to) {
-    const lines = [
-      ...(parsed.content.social ?? []),
-      ...(parsed.pictureNote ? [`No lead picture: ${parsed.pictureNote}`] : []),
-      ...parsed.notices.map((n) =>
-        `${sendingNotices.length ? "Note going" : "Note NOT sent (INTELLIGENCER_NOTICES is off), would go"} to ${n.subject}, ${n.email} (found at ${n.contactPage}), for ${n.item}.`),
-      ...parsed.noticesRefused.map((r) => `Note refused: ${r}`),
-    ];
-    const result = await sendEmail({
-      to,
-      subject: `Intelligencer No. ${number}: ${parsed.headline}`,
-      text: [link, "", ...lines.flatMap((l) => [l, ""])].join("\n"),
-      html:
-        `<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;max-width:640px">` +
-        `<p><a href="${link}">${escapeHtml(link)}</a></p>` +
-        lines.map((l) => `<p>${escapeHtml(l)}</p>`).join("") +
-        `</div>`,
-    });
-    emailed = result.ok ? "sent" : `failed: ${result.error ?? "unknown"}`;
-  }
 
   // Then the subscribers, after the press has its answer: a send to the whole list
   // can take a while, and the press must never wait on it or retry because of it.
